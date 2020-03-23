@@ -9,6 +9,8 @@ import java.util.TimerTask;
 
 public class BlockUpdate extends Thread {
 Block block;
+boolean toggle;
+
 public Timer time;
 
     BlockUpdate(Block block) {
@@ -25,6 +27,7 @@ public Timer time;
             public void run() {
 
 
+            toggle = de.ft.robocontrol.utils.CheckKollision.checkmousewithcar(block);
 
                     System.out.println(block.getIndex()+ " " +de.ft.robocontrol.utils.CheckKollision.checkmousewithcar(block));
                     //System.out.println(block.getIndex());

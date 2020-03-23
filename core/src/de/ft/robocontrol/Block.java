@@ -1,8 +1,6 @@
 package de.ft.robocontrol;
 
 
-import java.util.Timer;
-
 public class Block {
     private int x;
     private int y;
@@ -69,5 +67,10 @@ public class Block {
             System.out.println("mist");
 
         }
+    }
+
+
+    public boolean getmousecollision() {
+        return blockupdate.toggle;
     }
 }

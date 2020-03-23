@@ -16,6 +16,7 @@ public class MainGame extends ApplicationAdapter {
 	ShapeRenderer shapeRenderer;
 	SpriteBatch batch;
 	Texture img_block;
+	Texture img_selected;
 
 	public static ArrayList<Block> blocks = new ArrayList<Block>();
 
@@ -32,6 +33,7 @@ public class MainGame extends ApplicationAdapter {
 		batch = new SpriteBatch();
 
 		img_block=new Texture("block.png");
+		img_selected=new Texture("block_selected.png");
 
 		/*
 		for(int i=0;i < blocks.length;i=i+1){
@@ -71,10 +73,18 @@ for(int i=0;i<3;i=i+1) {
 		shapeRenderer.end();
 
 */
+
+
 		batch.begin();
+
+
 		for(int b=0;b<blocks.size();b=b+1) {
 			Block block = blocks.get(b);
-			batch.draw(img_block,block.getX(), block.getY(), block.getW(), block.getH());
+			if(!blocks.get(b).blockupdate.toggle) {
+				batch.draw(img_block, block.getX(), block.getY(), block.getW(), block.getH());
+			}else{
+				batch.draw(img_selected, block.getX(), block.getY(), block.getW(), block.getH());
+			}
 
 		}
 		batch.end();
