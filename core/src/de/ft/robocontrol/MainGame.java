@@ -10,11 +10,15 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
+import java.util.ArrayList;
+
 public class MainGame extends ApplicationAdapter {
 	ShapeRenderer shapeRenderer;
 	SpriteBatch batch;
-	Texture img;
- public static Block[] blocks = new Block[10];
+	Texture img_block;
+
+	public static ArrayList<Block> blocks = new ArrayList<Block>();
+
 	public static OrthographicCamera cam;
 	public static Viewport viewport;
 
@@ -27,6 +31,8 @@ public class MainGame extends ApplicationAdapter {
 		viewport = new ScreenViewport(cam);
 		batch = new SpriteBatch();
 
+		img_block=new Texture("block.png");
+
 		/*
 		for(int i=0;i < blocks.length;i=i+1){
 			System.out.println("eine runde"+i);
@@ -38,12 +44,13 @@ public class MainGame extends ApplicationAdapter {
 
 		}
 		 */
-int i=0;
-		blocks[i]=new Block(i,i*100,100,100,30);
 
 
+for(int i=0;i<3;i=i+1) {
+	blocks.add(new Block(i, i * 150, 100, 150, 30));
+}
 
-		img = new Texture("badlogic.jpg");
+
 		cam.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
 
 
@@ -57,12 +64,19 @@ int i=0;
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.setProjectionMatrix(cam.combined);
+
+/*
 		shapeRenderer.setProjectionMatrix(cam.combined);
 		shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-		shapeRenderer.rect(blocks[0].getX(),blocks[0].getY(),blocks[0].getW(),blocks[0].getH());
 		shapeRenderer.end();
-		batch.begin();
 
+*/
+		batch.begin();
+		for(int b=0;b<blocks.size();b=b+1) {
+			Block block = blocks.get(b);
+			batch.draw(img_block,block.getX(), block.getY(), block.getW(), block.getH());
+
+		}
 		batch.end();
 
 	}
@@ -72,7 +86,7 @@ int i=0;
 	public void resize(int width, int height) {
 		super.resize(width, height);
 
-		blocks[0].delete();
+		//blocks[0].delete();
 
 		viewport.update(width, height);
 	}
@@ -81,6 +95,6 @@ int i=0;
 	@Override
 	public void dispose () {
 		batch.dispose();
-		img.dispose();
+		img_block.dispose();
 	}
 }
