@@ -26,7 +26,7 @@ public Timer time;
 
 
 
-                    System.out.println(de.ft.robocontrol.utils.CheckKollision.checkmousewithcar(block));
+                    System.out.println(block.getIndex()+ " " +de.ft.robocontrol.utils.CheckKollision.checkmousewithcar(block));
                     //System.out.println(block.getIndex());
 
 
