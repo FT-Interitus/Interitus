@@ -11,6 +11,7 @@ public class Block {
     private int w;
     private int h;
     private int index;
+    private boolean moving=false;
     BlockUpdate blockupdate;
    private Block left = null;
    private Block right = null;
@@ -22,6 +23,15 @@ public class Block {
         this.index = index;
         blockupdate = new BlockUpdate(this);
         blockupdate.start();
+    }
+
+
+    public boolean isMoving() {
+        return moving;
+    }
+
+    public void setMoving(boolean moving) {
+        this.moving = moving;
     }
 
     public void setMarked(boolean marked) {
