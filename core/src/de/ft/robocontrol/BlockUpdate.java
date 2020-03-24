@@ -3,7 +3,9 @@ package de.ft.robocontrol;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import de.ft.robocontrol.utils.CheckKollision;
 import de.ft.robocontrol.utils.PositionSaver;
+import javafx.scene.control.CheckBox;
 import jdk.tools.jaotc.Main;
 
 import java.util.Timer;
@@ -66,6 +68,16 @@ public Timer time;
                 if(block.isMoving() && Gdx.input.isButtonPressed(0)){
                      block.setX((int)(MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x-Var.unterschiedsave.x));
                         block.setY((int)(MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).y-Var.unterschiedsave.y));
+
+
+                      if(block.getLeft()!=null) {
+                          block.getLeft().setRight(null);
+                      }
+                      if(block.getRight()!=null) {
+                          block.getRight().setLeft(null);
+                      }
+                    block.setRight(null);
+                    block.setLeft(null);
                 }else if(block.isMoving()){
                     Var.ismoving=false;
                     block.setMoving(false);
@@ -81,7 +93,37 @@ public Timer time;
                 }
 
 
+    if(Var.marked&&!block.isMarked()) {
 
+        if(CheckKollision.checkblockwithduplicate(Var.markedblock, block)) {
+            if (Var.markedblock.isMoving()) {
+                System.out.println("Kollision!");
+
+
+                block.setShowdupulicate(true);
+
+
+            } else {
+
+
+
+
+            if(block.getRight()!=Var.markedblock&&Var.markedblock.getLeft()!=block) {
+
+                System.out.println("test");
+                block.setShowdupulicate(false);
+                block.setRight(Var.markedblock);
+                Var.markedblock.setY(block.getY());
+                Var.markedblock.setX(block.getX_dup());
+            }
+
+
+            }
+        }else{
+            block.setShowdupulicate(false);
+        }
+
+    }
 
 
 

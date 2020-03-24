@@ -12,6 +12,8 @@ public class Block {
     private int w;
     private int h;
     private int index;
+    private boolean showdupulicate;
+    private int x_dup;
     private boolean moving=false;
    private BlockUpdate blockupdate;
    private Block left = null;
@@ -21,14 +23,27 @@ public class Block {
         this.y=y;
         this.w=w;
         this.h=h;
+        this.x_dup = this.x + this.w;
+
         this.index = index;
         blockupdate = new BlockUpdate(this);
         blockupdate.start();
     }
 
+    public int getX_dup() {
+        return x_dup;
+    }
 
     public boolean isMoving() {
         return moving;
+    }
+
+    public boolean isShowdupulicate() {
+        return showdupulicate;
+    }
+
+    public void setShowdupulicate(boolean showdupulicate) {
+        this.showdupulicate = showdupulicate;
     }
 
     public void setMoving(boolean moving) {
@@ -36,6 +51,7 @@ public class Block {
     }
 
     public void setMarked(boolean marked) {
+
         this.marked = marked;
     }
 
@@ -76,6 +92,7 @@ public class Block {
 
     public void setX(int x) {
         this.x = x;
+        this.x_dup = this.x + this.w;
     }
 
     public int getX() {
@@ -103,6 +120,7 @@ public class Block {
     public void setPosition(int x, int y){
         this.x=x;
         this.y=y;
+        this.x_dup = this.x + this.w;
     }
 
 
@@ -163,8 +181,13 @@ public class Block {
 
 
         if(this.isMarked()) {
-            batch.draw(MainGame.img_marked,this.getX(),this.getY(),this.getW(),this.getH());
+            batch.draw(MainGame.img_marked, this.getX(), this.getY(), this.getW(), this.getH());
+        }
+if(this.isShowdupulicate()) {
+    batch.setColor(1,1,1,0.5f);
+    batch.draw(MainGame.img_block, this.x_dup, this.y, this.getW(), this.getH());
+    batch.setColor(1,1,1,1);
+}
 
 
-    }
 }}

@@ -58,12 +58,12 @@ public class MainGame extends ApplicationAdapter {
 		 */
 
 
-for(int i=0;i<5;i=i+1) {
+for(int i=0;i<1;i=i+1) {
 	blocks.add(new Block(i, i * 150, 100, 150, 70));
 
 
 }
-blocks.get(0).setRight(blocks.get(1));
+//blocks.get(0).setRight(blocks.get(1));
 
 
 		cam.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
@@ -83,7 +83,7 @@ blocks.get(0).setRight(blocks.get(1));
 		//System.out.println(Var.mousepressedold);
 		//System.out.println(blocks.get(1).getLeft());
 		cam.update();
-		Gdx.gl.glClearColor(0.1f, 0, 0, 1);
+		Gdx.gl.glClearColor(1,1,1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.setProjectionMatrix(cam.combined);
 
