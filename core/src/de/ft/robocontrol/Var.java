@@ -11,4 +11,7 @@ public class Var {
 
     public static boolean ismoving=false;
 
+    public static boolean marked=false;
+
+
 }

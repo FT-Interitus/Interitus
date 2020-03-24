@@ -35,16 +35,19 @@ public Timer time;
             toggle = de.ft.robocontrol.utils.CheckKollision.checkmousewithblock(block);
 
 
-            if(toggle) {
-              //  block.mouseisonablock = true;
-            }
 
-            if(de.ft.robocontrol.utils.CheckKollision.checkmousewithblock(block,Var.mousepressedold)&&Gdx.input.isButtonPressed(0) && Var.ismoving==false){
+
+            if(de.ft.robocontrol.utils.CheckKollision.checkmousewithblock(block,Var.mousepressedold)&&Gdx.input.isButtonPressed(0) && Var.ismoving==false&&!block.isMarked()&&!Var.marked&&Var.markedblock==null){
+                Var.marked=true;
                 block.setMarked(true);
-
+               Var.markedblock = block;
                 Var.unterschiedsave = new Vector2(MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x  -  block.getX(),MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).y  -  block.getY());
 
+            }
 
+
+
+            if( Var.ismoving==false&&!block.isMoving()&&block.isMarked()){
                 int feld=2;
                 if(Math.abs(Var.mousepressedold.x-MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x)>feld  ||  Math.abs(Var.mousepressedold.y-MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).y)>feld){
                     if(block.isMoving()==false  && Var.ismoving==false) {
@@ -56,25 +59,25 @@ public Timer time;
                     }
 
 
-
-
                 }
-
-
 
             }
 
                 if(block.isMoving() && Gdx.input.isButtonPressed(0)){
-                    block.setX((int)(MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x-Var.unterschiedsave.x));
-                    block.setY((int)(MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).y-Var.unterschiedsave.y));
+                     block.setX((int)(MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x-Var.unterschiedsave.x));
+                        block.setY((int)(MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).y-Var.unterschiedsave.y));
                 }else if(block.isMoving()){
                     Var.ismoving=false;
                     block.setMoving(false);
+
+
                 }
 
 
-            if(de.ft.robocontrol.utils.CheckKollision.checkmousewithblock(block,Var.mousepressedold)==false&&Gdx.input.isButtonPressed(0) && !block.isMoving()){
+            if(de.ft.robocontrol.utils.CheckKollision.checkmousewithblock(block)==false&& Gdx.input.isButtonJustPressed(0) && !block.isMoving()&&block.isMarked()){
                 block.setMarked(false);
+                Var.marked=false;
+                Var.markedblock = null;
                 }
 
 
