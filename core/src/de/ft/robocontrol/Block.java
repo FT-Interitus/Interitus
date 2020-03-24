@@ -2,6 +2,7 @@ package de.ft.robocontrol;
 
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import jdk.tools.jaotc.Main;
 
 public class Block {
     private boolean marked=false;
@@ -35,8 +36,10 @@ public class Block {
         if(this.left!=left) {
             this.left = left;
         }
-        if(left.getRight()!=this) {
-            left.setRight(this);
+        if(left!=null) {
+            if (left.getRight() != this) {
+                left.setRight(this);
+            }
         }
     }
 
@@ -44,8 +47,11 @@ public class Block {
         if(this.right!=right) {
             this.right = right;
         }
-        if(right.getLeft()!=this) {
-            right.setLeft(this);
+
+        if(right!=null) {
+            if (right.getLeft() != this) {
+                right.setLeft(this);
+            }
         }
     }
 
@@ -67,7 +73,9 @@ public class Block {
 
     public void setY(int y) {
         this.y = y;
+
     }
+
 
     public int getY() {
         return y;
@@ -96,6 +104,10 @@ public class Block {
         return index;
     }
 
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
     public void delete() {
 
         if(left!=null) {
@@ -117,6 +129,13 @@ public class Block {
             System.out.println("mist");
 
         }
+        int temp = MainGame.blocks.indexOf(this);
+        MainGame.blocks.remove(MainGame.blocks.indexOf(this));
+        for(int i = 0;i<MainGame.blocks.size()-temp;i++) {
+            MainGame.blocks.get(i).setIndex(MainGame.blocks.get(i).getIndex()-1);
+            System.out.println("Noch nicht abgestürtzt!");
+        }
+
     }
 
 

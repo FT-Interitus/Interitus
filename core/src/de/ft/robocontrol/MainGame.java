@@ -2,6 +2,7 @@ package de.ft.robocontrol;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -11,7 +12,10 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.ft.robocontrol.utils.PositionSaver;
 
+import java.security.Key;
 import java.util.ArrayList;
+
+import static com.badlogic.gdx.Gdx.input;
 
 public class MainGame extends ApplicationAdapter {
 	ShapeRenderer shapeRenderer;
@@ -51,6 +55,8 @@ public class MainGame extends ApplicationAdapter {
 
 for(int i=0;i<3;i=i+1) {
 	blocks.add(new Block(i, i * 150, 100, 150, 30));
+
+
 }
 blocks.get(0).setRight(blocks.get(1));
 
@@ -68,6 +74,7 @@ blocks.get(0).setRight(blocks.get(1));
 		PositionSaver.save();
 
 
+
 		System.out.println(Var.mousepressedold);
 		//System.out.println(blocks.get(1).getLeft());
 		cam.update();
@@ -82,6 +89,10 @@ blocks.get(0).setRight(blocks.get(1));
 
 */
 
+		if(input.isKeyJustPressed(Input.Keys.INSERT)){
+			blocks.add(new Block(blocks.size(), 100, 200, 150, 30));
+			System.out.println(blocks.size());
+		}
 
 
 
@@ -90,11 +101,20 @@ blocks.get(0).setRight(blocks.get(1));
 			blocks.get(i).draw(batch);
 			batch.end();
 			if(blocks.get(i).isMarked()){
+
+
 				shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 				shapeRenderer.ellipse(blocks.get(i).getX(),blocks.get(i).getY(),10,10);
 				shapeRenderer.end();
+
+				if(input.isKeyJustPressed(Input.Keys.FORWARD_DEL)){
+					blocks.get(i).delete();
+				}
+
+
 			}
-			System.out.println(blocks.get(i).isMarked() + "  id: "+blocks.get(i).getIndex());
+			//System.out.println(blocks.get(i).isMarked() + "  id: "+blocks.get(i).getIndex());
+
 		}
 		/*
 

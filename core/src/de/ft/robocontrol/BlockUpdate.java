@@ -37,6 +37,12 @@ public Timer time;
             if(de.ft.robocontrol.utils.CheckKollision.checkmousewithblock(block,Var.mousepressedold)&&Gdx.input.isButtonPressed(0)){
                 block.setMarked(true);
             }
+            if(de.ft.robocontrol.utils.CheckKollision.checkmousewithblock(block,Var.mousepressedold)==false&&Gdx.input.isButtonPressed(0)){
+                block.setMarked(false);
+                }
+
+
+          //block.setIndex( MainGame.blocks.indexOf(block));
 
 /*
 
