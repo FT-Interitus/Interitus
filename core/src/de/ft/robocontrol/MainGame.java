@@ -57,7 +57,7 @@ public class MainGame extends ApplicationAdapter {
 
 
 for(int i=0;i<5;i=i+1) {
-	blocks.add(new Block(i, i * 150, 100, 150, 30));
+	blocks.add(new Block(i, i * 150, 100, 150, 70));
 
 
 }
