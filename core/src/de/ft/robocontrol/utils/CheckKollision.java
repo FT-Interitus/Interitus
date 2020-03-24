@@ -35,5 +35,19 @@ public class CheckKollision {
         return object((int) block.getX(), (int) block.getY(), (int) block.getH(), (int) block.getW(), (int) mousepos.x, (int)mousepos.y,  (int) mousesize, (int) mousesize);
 
     }
+
+
+    public static boolean checkblockwithblock(Block b1,Block b2) {
+
+        if(b1!=b2) {
+            return object(b1.getX(), b1.getY(), b1.getH(), b1.getW(), b2.getX(), b2.getY(), b2.getH(), b2.getW());
+        }else{
+            System.out.println("Check with the unique same block");
+            return true;
+
+        }
+
+    }
+
     }
 
