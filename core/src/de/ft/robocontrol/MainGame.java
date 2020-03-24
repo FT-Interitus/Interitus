@@ -21,7 +21,8 @@ public class MainGame extends ApplicationAdapter {
 	ShapeRenderer shapeRenderer;
 	public static SpriteBatch batch;
 	public static Texture img_block;
-	public static Texture img_selected;
+	public static Texture img_mouseover;
+	public static Texture img_marked;
 
 	public static ArrayList<Block> blocks = new ArrayList<Block>();
 
@@ -38,7 +39,9 @@ public class MainGame extends ApplicationAdapter {
 		batch = new SpriteBatch();
 
 		img_block=new Texture("block.png");
-		img_selected=new Texture("block_selected.png");
+		img_mouseover=new Texture("block_mouseover.png");
+		img_marked=new Texture("block_marked.png");
+
 
 		/*
 		for(int i=0;i < blocks.length;i=i+1){
@@ -53,7 +56,7 @@ public class MainGame extends ApplicationAdapter {
 		 */
 
 
-for(int i=0;i<3;i=i+1) {
+for(int i=0;i<5;i=i+1) {
 	blocks.add(new Block(i, i * 150, 100, 150, 30));
 
 
@@ -78,7 +81,7 @@ blocks.get(0).setRight(blocks.get(1));
 		System.out.println(Var.mousepressedold);
 		//System.out.println(blocks.get(1).getLeft());
 		cam.update();
-		Gdx.gl.glClearColor(1, 0, 0, 1);
+		Gdx.gl.glClearColor(0.1f, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.setProjectionMatrix(cam.combined);
 
@@ -102,10 +105,9 @@ blocks.get(0).setRight(blocks.get(1));
 			batch.end();
 			if(blocks.get(i).isMarked()){
 
-
-				shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-				shapeRenderer.ellipse(blocks.get(i).getX(),blocks.get(i).getY(),10,10);
-				shapeRenderer.end();
+				batch.begin();
+				batch.draw(img_marked,blocks.get(i).getX(),blocks.get(i).getY(),blocks.get(i).getW(),blocks.get(i).getH());
+				batch.end();
 
 				if(input.isKeyJustPressed(Input.Keys.FORWARD_DEL)){
 					blocks.get(i).delete();

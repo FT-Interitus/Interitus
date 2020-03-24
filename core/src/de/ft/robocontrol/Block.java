@@ -147,7 +147,7 @@ public class Block {
         if(!this.blockupdate.toggle) {
             batch.draw(MainGame.img_block, this.getX(), this.getY(), this.getW(), this.getH());
         }else{
-            batch.draw(MainGame.img_selected, this.getX(), this.getY(), this.getW(), this.getH());
+            batch.draw(MainGame.img_mouseover, this.getX(), this.getY(), this.getW(), this.getH());
         }
     }
 }
