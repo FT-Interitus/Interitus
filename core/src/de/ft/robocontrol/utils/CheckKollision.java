@@ -10,7 +10,7 @@ import de.ft.robocontrol.MainGame;
 
 public class CheckKollision {
 
-    private static int mousesize=1;
+    private static int mousesize=0;
 
     public static boolean object(int obj1_x, int obj1_y, int obj1_h, int obj1_w, int obj2_x, int obj2_y, int obj2_h, int obj2_w) {
 

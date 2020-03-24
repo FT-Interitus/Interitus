@@ -14,6 +14,7 @@ import de.ft.robocontrol.utils.PositionSaver;
 
 import java.security.Key;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import static com.badlogic.gdx.Gdx.input;
 
@@ -58,6 +59,11 @@ public class MainGame extends ApplicationAdapter {
 
 for(int i=0;i<5;i=i+1) {
 	blocks.add(new Block(i, i * 150, 100, 150, 30));
+	try {
+		TimeUnit.MILLISECONDS.sleep(15);
+	} catch (InterruptedException e) {
+		e.printStackTrace();
+	}
 
 
 }
