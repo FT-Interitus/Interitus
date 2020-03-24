@@ -58,12 +58,7 @@ public class MainGame extends ApplicationAdapter {
 
 
 for(int i=0;i<5;i=i+1) {
-	blocks.add(new Block(i, i * 150, 100, 150, 30));
-	try {
-		TimeUnit.MILLISECONDS.sleep(15);
-	} catch (InterruptedException e) {
-		e.printStackTrace();
-	}
+	blocks.add(new Block(i, i * 150, 100, 150, 70));
 
 
 }
