@@ -10,4 +10,5 @@ public class Var {
     public static Vector2 unterschiedsave;
 
     public static boolean ismoving=false;
+
 }

@@ -35,6 +35,10 @@ public Timer time;
             toggle = de.ft.robocontrol.utils.CheckKollision.checkmousewithblock(block);
 
 
+            if(toggle) {
+              //  block.mouseisonablock = true;
+            }
+
             if(de.ft.robocontrol.utils.CheckKollision.checkmousewithblock(block,Var.mousepressedold)&&Gdx.input.isButtonPressed(0) && Var.ismoving==false){
                 block.setMarked(true);
 

@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import jdk.tools.jaotc.Main;
 
 public class Block {
+
     private boolean marked=false;
     private int x;
     private int y;
@@ -12,7 +13,7 @@ public class Block {
     private int h;
     private int index;
     private boolean moving=false;
-    BlockUpdate blockupdate;
+   private BlockUpdate blockupdate;
    private Block left = null;
    private Block right = null;
     public Block(int index,int x,int y,int w,int h){

@@ -7,7 +7,6 @@ import de.ft.robocontrol.MainGame;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.vSyncEnabled = false;
 		config.height=800;
 		config.width=1300;
 		new LwjglApplication(new MainGame(), config);
