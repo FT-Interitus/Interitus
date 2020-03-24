@@ -56,9 +56,9 @@ public class MainGame extends ApplicationAdapter {
 		 */
 
 
-for(int i=0;i<6;i=i+1) {
+for(int i=0;i<5;i=i+1) {
 	blocks.add(new Block(i, i * 150, 100, 150, 30));
-System.out.println(i);
+
 
 }
 blocks.get(0).setRight(blocks.get(1));
@@ -81,7 +81,7 @@ blocks.get(0).setRight(blocks.get(1));
 		//System.out.println(Var.mousepressedold);
 		//System.out.println(blocks.get(1).getLeft());
 		cam.update();
-		Gdx.gl.glClearColor(1,0.8f, 0.7f, 1);
+		Gdx.gl.glClearColor(0.1f, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.setProjectionMatrix(cam.combined);
 
@@ -98,17 +98,10 @@ blocks.get(0).setRight(blocks.get(1));
 		}
 
 
-		Block temp = null;
-
 
 		for(int i=0;i<blocks.size();i=i+1){
 			batch.begin();
-
-			if(blocks.get(i).isMarked()) {
-				temp = blocks.get(i);
-			}else{
-				blocks.get(i).draw(batch);
-			}
+			blocks.get(i).draw(batch);
 			batch.end();
 			if(blocks.get(i).isMarked()){
 
@@ -122,14 +115,6 @@ blocks.get(0).setRight(blocks.get(1));
 			}
 			//System.out.println(blocks.get(i).isMarked() + "  id: "+blocks.get(i).getIndex());
 
-		}
-
-
-
-		if(temp!=null) {
-			batch.begin();
-			temp.draw(batch);
-			batch.end();
 		}
 		/*
 

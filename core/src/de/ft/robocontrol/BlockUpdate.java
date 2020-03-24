@@ -3,7 +3,6 @@ package de.ft.robocontrol;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import de.ft.robocontrol.utils.CheckKollision;
 import de.ft.robocontrol.utils.PositionSaver;
 import jdk.tools.jaotc.Main;
 
@@ -19,7 +18,6 @@ boolean toggle;
 
 public Timer time;
 
-
     BlockUpdate(Block block) {
         this.block=block;
 
@@ -28,8 +26,6 @@ public Timer time;
     @Override
     public void run() {
         time = new Timer();
-
-
 
         time.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -42,8 +38,6 @@ public Timer time;
             if(toggle) {
               //  block.mouseisonablock = true;
             }
-
-
 
             if(de.ft.robocontrol.utils.CheckKollision.checkmousewithblock(block,Var.mousepressedold)&&Gdx.input.isButtonPressed(0) && Var.ismoving==false){
                 block.setMarked(true);
@@ -76,25 +70,12 @@ public Timer time;
                 }else if(block.isMoving()){
                     Var.ismoving=false;
                     block.setMoving(false);
-
-                    for(int i =0; i<MainGame.blocks.size(); i++) {
-
-
-                        Block b = MainGame.blocks.get(i);
-                        if(b!=block) {
-                            System.out.println(CheckKollision.checkblockwithblock(b, block));
-                        }
-                    }
-
-
                 }
 
 
             if(de.ft.robocontrol.utils.CheckKollision.checkmousewithblock(block,Var.mousepressedold)==false&&Gdx.input.isButtonPressed(0) && !block.isMoving()){
                 block.setMarked(false);
                 }
-
-
 
 
 
