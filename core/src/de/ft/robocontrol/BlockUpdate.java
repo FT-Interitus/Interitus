@@ -3,6 +3,7 @@ package de.ft.robocontrol;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import de.ft.robocontrol.utils.PositionSaver;
 import jdk.tools.jaotc.Main;
 
 import java.util.Timer;
@@ -36,10 +37,15 @@ public Timer time;
 
             if(de.ft.robocontrol.utils.CheckKollision.checkmousewithblock(block,Var.mousepressedold)&&Gdx.input.isButtonPressed(0)){
                 block.setMarked(true);
+                int feld=5;
+                if(Math.abs(Var.mousepressedold.x-MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x)>feld  ||  Math.abs(Var.mousepressedold.y-MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).y)>feld){
+                    System.out.println("moved");
+                }
             }
             if(de.ft.robocontrol.utils.CheckKollision.checkmousewithblock(block,Var.mousepressedold)==false&&Gdx.input.isButtonPressed(0)){
                 block.setMarked(false);
                 }
+
 
 
           //block.setIndex( MainGame.blocks.indexOf(block));

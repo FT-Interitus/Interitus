@@ -78,7 +78,7 @@ blocks.get(0).setRight(blocks.get(1));
 
 
 
-		System.out.println(Var.mousepressedold);
+		//System.out.println(Var.mousepressedold);
 		//System.out.println(blocks.get(1).getLeft());
 		cam.update();
 		Gdx.gl.glClearColor(0.1f, 0, 0, 1);
