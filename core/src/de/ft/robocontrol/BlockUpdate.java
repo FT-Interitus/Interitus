@@ -60,9 +60,12 @@ public Timer time;
 
             }
 
-                if(block.isMoving()){
+                if(block.isMoving() && Gdx.input.isButtonPressed(0)){
                     block.setX((int)(MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x-Var.unterschiedsave.x));
                     block.setY((int)(MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).y-Var.unterschiedsave.y));
+                }else if(block.isMoving()){
+                    Var.ismoving=false;
+                    block.setMoving(false);
                 }
 
 
