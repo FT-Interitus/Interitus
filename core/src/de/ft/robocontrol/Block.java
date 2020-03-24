@@ -146,8 +146,14 @@ public class Block {
     public void draw(SpriteBatch batch) {
         if(!this.blockupdate.toggle) {
             batch.draw(MainGame.img_block, this.getX(), this.getY(), this.getW(), this.getH());
-        }else{
-            batch.draw(MainGame.img_mouseover, this.getX(), this.getY(), this.getW(), this.getH());
-        }
+        }  else{
+        batch.draw(MainGame.img_mouseover, this.getX(), this.getY(), this.getW(), this.getH());
     }
-}
+
+
+        if(this.isMarked()) {
+            batch.draw(MainGame.img_marked,this.getX(),this.getY(),this.getW(),this.getH());
+
+
+    }
+}}

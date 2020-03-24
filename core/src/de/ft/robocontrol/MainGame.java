@@ -105,9 +105,7 @@ blocks.get(0).setRight(blocks.get(1));
 			batch.end();
 			if(blocks.get(i).isMarked()){
 
-				batch.begin();
-				batch.draw(img_marked,blocks.get(i).getX(),blocks.get(i).getY(),blocks.get(i).getW(),blocks.get(i).getH());
-				batch.end();
+
 
 				if(input.isKeyJustPressed(Input.Keys.FORWARD_DEL)){
 					blocks.get(i).delete();
