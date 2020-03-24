@@ -67,7 +67,7 @@ public Timer time;
                 }
 
 
-            if(de.ft.robocontrol.utils.CheckKollision.checkmousewithblock(block,Var.mousepressedold)==false&&Gdx.input.isButtonPressed(0)){
+            if(de.ft.robocontrol.utils.CheckKollision.checkmousewithblock(block,Var.mousepressedold)==false&&Gdx.input.isButtonPressed(0) && !block.isMoving()){
                 block.setMarked(false);
                 }
 
