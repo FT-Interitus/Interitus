@@ -9,14 +9,15 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import de.ft.robocontrol.utils.PositionSaver;
 
 import java.util.ArrayList;
 
 public class MainGame extends ApplicationAdapter {
 	ShapeRenderer shapeRenderer;
-	SpriteBatch batch;
-	Texture img_block;
-	Texture img_selected;
+	public static SpriteBatch batch;
+	public static Texture img_block;
+	public static Texture img_selected;
 
 	public static ArrayList<Block> blocks = new ArrayList<Block>();
 
@@ -51,6 +52,7 @@ public class MainGame extends ApplicationAdapter {
 for(int i=0;i<3;i=i+1) {
 	blocks.add(new Block(i, i * 150, 100, 150, 30));
 }
+blocks.get(0).setRight(blocks.get(1));
 
 
 		cam.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
@@ -62,6 +64,12 @@ for(int i=0;i<3;i=i+1) {
 
 	@Override
 	public void render () {
+
+		PositionSaver.save();
+
+
+		System.out.println(Var.mousepressedold);
+		//System.out.println(blocks.get(1).getLeft());
 		cam.update();
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -75,8 +83,20 @@ for(int i=0;i<3;i=i+1) {
 */
 
 
-		batch.begin();
 
+
+		for(int i=0;i<blocks.size();i=i+1){
+			batch.begin();
+			blocks.get(i).draw(batch);
+			batch.end();
+			if(blocks.get(i).isMarked()){
+				shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+				shapeRenderer.ellipse(blocks.get(i).getX(),blocks.get(i).getY(),10,10);
+				shapeRenderer.end();
+			}
+			System.out.println(blocks.get(i).isMarked() + "  id: "+blocks.get(i).getIndex());
+		}
+		/*
 
 		for(int b=0;b<blocks.size();b=b+1) {
 			Block block = blocks.get(b);
@@ -87,7 +107,9 @@ for(int i=0;i<3;i=i+1) {
 			}
 
 		}
-		batch.end();
+		*/
+
+
 
 	}
 

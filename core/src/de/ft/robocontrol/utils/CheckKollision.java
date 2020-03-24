@@ -2,6 +2,7 @@ package de.ft.robocontrol.utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.ft.robocontrol.Block;
@@ -17,11 +18,19 @@ public class CheckKollision {
 
     }
 
-    public static boolean checkmousewithcar(Block block) {
+    public static boolean checkmousewithblock(Block block) {
 
 
             return object((int) block.getX(), (int) block.getY(), (int) block.getH(), (int) block.getW(), (int)MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x, (int) MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).y, (int) 10, (int) 10);
 
         }
+
+
+    public static boolean checkmousewithblock(Block block, Vector2 mousepos) {
+
+
+        return object((int) block.getX(), (int) block.getY(), (int) block.getH(), (int) block.getW(), (int) mousepos.x, (int)mousepos.y,  (int) 10, (int) 10);
+
+    }
     }
 
