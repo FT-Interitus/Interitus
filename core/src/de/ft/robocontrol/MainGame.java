@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import de.ft.robocontrol.utils.PositionSaver;
 
 import java.security.Key;
+
 import java.util.ArrayList;
 
 import static com.badlogic.gdx.Gdx.input;
@@ -98,10 +99,17 @@ blocks.get(0).setRight(blocks.get(1));
 		}
 
 
-
+		Block Temp = null;
 		for(int i=0;i<blocks.size();i=i+1){
 			batch.begin();
-			blocks.get(i).draw(batch);
+
+
+			if(blocks.get(i).isMarked()) {
+				Temp = blocks.get(i);
+			}else{
+				blocks.get(i).draw(batch);
+			}
+
 			batch.end();
 			if(blocks.get(i).isMarked()){
 
@@ -112,6 +120,14 @@ blocks.get(0).setRight(blocks.get(1));
 				}
 
 
+			}
+
+
+			if(Temp!=null) {
+
+				batch.begin();
+				Temp.draw(batch);
+				batch.end();
 			}
 			//System.out.println(blocks.get(i).isMarked() + "  id: "+blocks.get(i).getIndex());
 
