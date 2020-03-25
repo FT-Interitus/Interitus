@@ -96,31 +96,56 @@ public Timer time;
 
     if(Var.marked&&!block.isMarked()) {
 
-        if(CheckKollision.checkblockwithduplicate(Var.markedblock, block)) {
+        if(CheckKollision.checkblockwithduplicate(Var.markedblock, block,0)) {
             if (Var.markedblock.isMoving()) {
                 System.out.println("Kollision!");
 
-                block.setShowdupulicate(true);
+                block.setShowdupulicate_rechts(true);
 
 
             } else {
 
 
-
-
             if(block.getRight()!=Var.markedblock&&Var.markedblock.getLeft()!=block) {
 
                 System.out.println("test");
-                block.setShowdupulicate(false);
+                block.setShowdupulicate_rechts(false);
                 block.setRight(Var.markedblock);
                 Var.markedblock.setY(block.getY());
-                Var.markedblock.setX(block.getX_dup());
+                Var.markedblock.setX(block.getX_dup_rechts());
             }
 
 
             }
         }else{
-            block.setShowdupulicate(false);
+            block.setShowdupulicate_rechts(false);
+        }
+
+
+
+        if(CheckKollision.checkblockwithduplicate(Var.markedblock, block,1)) {
+            if (Var.markedblock.isMoving()) {
+                System.out.println("Kollision!");
+
+                block.setShowdupulicate_links(true);
+
+
+            } else {
+
+
+                if(block.getRight()!=Var.markedblock&&Var.markedblock.getLeft()!=block) {
+
+                    System.out.println("test");
+                    block.setShowdupulicate_links(false);
+                    block.setLeft(Var.markedblock);
+                    Var.markedblock.setY(block.getY());
+                    Var.markedblock.setX(block.getX_dup_links());
+                }
+
+
+            }
+        }else{
+            block.setShowdupulicate_links(false);
         }
 
     }

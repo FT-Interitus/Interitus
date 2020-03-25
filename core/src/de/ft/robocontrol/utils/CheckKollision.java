@@ -36,9 +36,12 @@ public class CheckKollision {
 
     }
 
-    public static boolean checkblockwithduplicate(Block normal, Block duplicate) {
-        return object(normal.getX(), normal.getY(), normal.getH(), normal.getW(), duplicate.getX_dup(), duplicate.getY(), duplicate.getH(), duplicate.getW());
-
+    public static boolean checkblockwithduplicate(Block normal, Block duplicate,int rl) {
+        if(rl==0) {
+            return object(normal.getX(), normal.getY(), normal.getH(), normal.getW(), duplicate.getX_dup_rechts(), duplicate.getY(), duplicate.getH(), duplicate.getW());
+        }else{
+            return object(normal.getX(), normal.getY(), normal.getH(), normal.getW(), duplicate.getX_dup_links(), duplicate.getY(), duplicate.getH(), duplicate.getW());
+        }
     }
 
     }

@@ -13,8 +13,10 @@ public class Block {
     private int w;
     private int h;
     private int index;
-    private boolean showdupulicate;
-    private int x_dup;
+    private boolean showdupulicate_rechts;
+    private boolean showdupulicate_links;
+    private int x_dup_rechts;
+    private int x_dup_links;
     private boolean moving=false;
    private BlockUpdate blockupdate;
    private Block left = null;
@@ -24,27 +26,40 @@ public class Block {
         this.y=y;
         this.w=w;
         this.h=h;
-        this.x_dup = this.x + this.w;
+        this.x_dup_rechts = this.x + this.w;
+        this.x_dup_links = this.x-this.w;
 
         this.index = index;
         blockupdate = new BlockUpdate(this);
         blockupdate.start();
     }
 
-    public int getX_dup() {
-        return x_dup;
+    public int getX_dup_rechts() {
+        return x_dup_rechts;
+    }
+
+    public int getX_dup_links() {
+        return x_dup_links;
     }
 
     public boolean isMoving() {
         return moving;
     }
 
-    public boolean isShowdupulicate() {
-        return showdupulicate;
+    public boolean isShowdupulicate_rechts() {
+        return showdupulicate_rechts;
     }
 
-    public void setShowdupulicate(boolean showdupulicate) {
-        this.showdupulicate = showdupulicate;
+    public boolean isShowdupulicate_links() {
+        return showdupulicate_links;
+    }
+
+    public void setShowdupulicate_rechts(boolean showdupulicate_rechts) {
+        this.showdupulicate_rechts = showdupulicate_rechts;
+    }
+
+    public void setShowdupulicate_links(boolean showdupulicate_links) {
+        this.showdupulicate_links = showdupulicate_links;
     }
 
     public void setMoving(boolean moving) {
@@ -93,7 +108,8 @@ public class Block {
 
     public void setX(int x) {
         this.x = x;
-        this.x_dup = this.x + this.w;
+        this.x_dup_rechts = this.x + this.w;
+        this.x_dup_links = this.x - this.w;
     }
 
     public int getX() {
@@ -121,7 +137,8 @@ public class Block {
     public void setPosition(int x, int y){
         this.x=x;
         this.y=y;
-        this.x_dup = this.x + this.w;
+        this.x_dup_rechts = this.x + this.w;
+        this.x_dup_links = this.x - this.w;
     }
 
 
@@ -187,20 +204,27 @@ public class Block {
         if(this.isMarked()) {
             batch.draw(MainGame.img_marked, this.getX(), this.getY(), this.getW(), this.getH());
         }
-if(this.isShowdupulicate()) {
+if(this.isShowdupulicate_rechts()) {
     batch.setColor(1,1,1,0.5f);
-    batch.draw(MainGame.img_block, this.x_dup, this.y, this.getW(), this.getH());
+    batch.draw(MainGame.img_block, this.x_dup_rechts, this.y, this.getW(), this.getH());
     batch.setColor(1,1,1,1);
 }
 
-if(this.getLeft()!=null){
-    batch.end();
-    shape.begin(ShapeRenderer.ShapeType.Filled);
-    shape.setColor(1f,0.4f,0.4f,0.4f);
-    shape.ellipse(this.getX()-6,this.getY()+this.getH()/2-6,12,12);
-    shape.end();
-    batch.begin();
-}
+        if(this.isShowdupulicate_links()) {
+            batch.setColor(1,1,1,0.5f);
+            batch.draw(MainGame.img_block, this.x_dup_links, this.y, this.getW(), this.getH());
+            batch.setColor(1,1,1,1);
+        }
+
+        if(this.getLeft()!=null){
+            batch.end();
+            shape.begin(ShapeRenderer.ShapeType.Filled);
+            shape.setColor(1f,0.4f,0.4f,0.4f);
+            shape.ellipse(this.getX()-6,this.getY()+this.getH()/2-6,12,12);
+            shape.end();
+            batch.begin();
+        }
+
         if(this.getRight()!=null){
             batch.end();
             shape.begin(ShapeRenderer.ShapeType.Filled);
@@ -209,6 +233,7 @@ if(this.getLeft()!=null){
             shape.end();
             batch.begin();
         }
+
 
 
 }}
