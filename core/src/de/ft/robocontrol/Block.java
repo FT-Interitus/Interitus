@@ -2,6 +2,7 @@ package de.ft.robocontrol;
 
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import jdk.tools.jaotc.Main;
 
 public class Block {
@@ -176,13 +177,12 @@ public class Block {
         return blockupdate.toggle;
     }
 
-    public void draw(SpriteBatch batch) {
+    public void draw(SpriteBatch batch, ShapeRenderer shape) {
         if(!this.blockupdate.toggle) {
             batch.draw(MainGame.img_block, this.getX(), this.getY(), this.getW(), this.getH());
         }  else{
         batch.draw(MainGame.img_mouseover, this.getX(), this.getY(), this.getW(), this.getH());
     }
-
 
         if(this.isMarked()) {
             batch.draw(MainGame.img_marked, this.getX(), this.getY(), this.getW(), this.getH());
@@ -192,6 +192,23 @@ if(this.isShowdupulicate()) {
     batch.draw(MainGame.img_block, this.x_dup, this.y, this.getW(), this.getH());
     batch.setColor(1,1,1,1);
 }
+
+if(this.getLeft()!=null){
+    batch.end();
+    shape.begin(ShapeRenderer.ShapeType.Filled);
+    shape.setColor(1f,0.4f,0.4f,0.4f);
+    shape.ellipse(this.getX()-6,this.getY()+this.getH()/2-6,12,12);
+    shape.end();
+    batch.begin();
+}
+        if(this.getRight()!=null){
+            batch.end();
+            shape.begin(ShapeRenderer.ShapeType.Filled);
+            shape.setColor(1f,0.4f,0.4f,0.4f);
+            shape.ellipse(this.getX()-6+this.getW(),this.getY()+this.getH()/2-6,12,12);
+            shape.end();
+            batch.begin();
+        }
 
 
 }}

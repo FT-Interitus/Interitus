@@ -109,7 +109,7 @@ for(int i=0;i<7;i=i+1) {
 */
 
 		if(input.isKeyJustPressed(Input.Keys.INSERT)){
-			blocks.add(new Block(blocks.size(), 100, 200, 150, 30));
+			blocks.add(new Block(blocks.size(), 100, 200, 150, 70));
 			System.out.println(blocks.size());
 		}
 
@@ -192,7 +192,7 @@ if(!Var.isloading) {
 		if (blocks.get(i).isMarked()) {
 			Temp = blocks.get(i);
 		} else {
-			blocks.get(i).draw(batch);
+			blocks.get(i).draw(batch,shapeRenderer);
 		}
 
 		batch.end();
@@ -210,7 +210,7 @@ if(!Var.isloading) {
 		if (Temp != null) {
 
 			batch.begin();
-			Temp.draw(batch);
+			Temp.draw(batch,shapeRenderer);
 			batch.end();
 		}
 		//System.out.println(blocks.get(i).isMarked() + "  id: "+blocks.get(i).getIndex());
