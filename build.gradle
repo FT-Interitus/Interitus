@@ -19,6 +19,7 @@ allprojects {
 
     version = '1.0'
     ext {
+        visuiVersion = '1.4.2'
         appName = "Robocontrol"
         gdxVersion = '1.9.10'
         roboVMVersion = '2.3.8'
@@ -57,6 +58,7 @@ project(":core") {
 
 
     dependencies {
+        compile "com.kotcrab.vis:vis-ui:$visuiVersion"
         compile 'org.json:json:20171018'
         api "com.badlogicgames.gdx:gdx:$gdxVersion"
         api "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
