@@ -62,6 +62,7 @@ public class UI {
                             File selectedFile = fileChooser.getSelectedFile();
                             System.out.println("Selected file: " + selectedFile.getAbsolutePath());
                             FileHandle handle = Gdx.files.internal(selectedFile.getAbsolutePath());
+                            Var.path = selectedFile.getAbsolutePath();
                             JSONParaser.load(handle);
 
                         }
@@ -95,9 +96,14 @@ public class UI {
                                 System.out.println("Save as file: " + fileToSave.getAbsolutePath()+".rac");
 
                                 if(fileToSave.getAbsolutePath().contains(".rac")) {
-
+                                    Var.path = fileToSave.getAbsolutePath();
                                     JSONParaser.writerarray(Gdx.files.absolute(fileToSave.getAbsolutePath()));
+                                }else{
+                                    Var.path = fileToSave.getAbsolutePath()+".rac";
+                                    JSONParaser.writerarray(Gdx.files.absolute(fileToSave.getAbsolutePath()+".rac"));
                                 }
+                                System.out.println(Var.path);
+
                             }
                         }
                         //SAVE DATA
@@ -128,8 +134,11 @@ public class UI {
                             System.out.println("Save as file: " + fileToSave.getAbsolutePath()+".rac");
 
                             if(fileToSave.getAbsolutePath().contains(".rac")) {
-
+                                Var.path = fileToSave.getAbsolutePath();
                                 JSONParaser.writerarray(Gdx.files.absolute(fileToSave.getAbsolutePath()));
+                            }else{
+                                Var.path = fileToSave.getAbsolutePath()+".rac";
+                                JSONParaser.writerarray(Gdx.files.absolute(fileToSave.getAbsolutePath()+".rac"));
                             }
                         }
                     }

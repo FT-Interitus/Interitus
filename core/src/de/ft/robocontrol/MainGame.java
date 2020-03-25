@@ -201,6 +201,7 @@ for(int i=0;i<1;i=i+1) {
 							Var.path = fileToSave.getAbsolutePath()+".rac";
 							JSONParaser.writerarray(Gdx.files.absolute(fileToSave.getAbsolutePath()+".rac"));
 						}
+						System.out.println(Var.path);
 				}
 			};
 			//SAVE DATA
