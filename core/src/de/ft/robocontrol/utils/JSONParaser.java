@@ -120,7 +120,7 @@ static public void writer(String object, String setAttribute, FileHandle handle)
 
 
                 handle.writeString(obj.toString(),false);
-                System.out.println(MainGame.blocks.get(1).getLeft());
+                //System.out.println(MainGame.blocks.get(1).getLeft());
 
             }
         };

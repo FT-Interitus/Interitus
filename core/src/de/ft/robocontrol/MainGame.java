@@ -160,8 +160,9 @@ for(int i=0;i<1;i=i+1) {
 						 File selectedFile = fileChooser.getSelectedFile();
 						 System.out.println("Selected file: " + selectedFile.getAbsolutePath());
 						 FileHandle handle = Gdx.files.internal(selectedFile.getAbsolutePath());
-						 JSONParaser.load(handle);
 						 Var.path = selectedFile.getAbsolutePath();
+						 JSONParaser.load(handle);
+
 					 }
 				 }
 			 } ;
@@ -182,7 +183,7 @@ for(int i=0;i<1;i=i+1) {
 
 
 					JFileChooser fileChooser = new JFileChooser();
-					fileChooser.setDialogTitle("Projekt-Ordner wählen");
+					fileChooser.setDialogTitle("Speichern unter...");
 
 					int userSelection = fileChooser.showSaveDialog(saver);
 					fileChooser.setMultiSelectionEnabled(false);
@@ -193,9 +194,12 @@ for(int i=0;i<1;i=i+1) {
 						System.out.println("Save as file: " + fileToSave.getAbsolutePath()+".rac");
 
 						if(fileToSave.getAbsolutePath().contains(".rac")) {
-
-							JSONParaser.writerarray(Gdx.files.absolute(fileToSave.getAbsolutePath()));
 							Var.path = fileToSave.getAbsolutePath();
+							JSONParaser.writerarray(Gdx.files.absolute(fileToSave.getAbsolutePath()));
+
+						}else{
+							Var.path = fileToSave.getAbsolutePath()+".rac";
+							JSONParaser.writerarray(Gdx.files.absolute(fileToSave.getAbsolutePath()+".rac"));
 						}
 				}
 			};
