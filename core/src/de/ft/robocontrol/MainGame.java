@@ -9,15 +9,26 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.kotcrab.vis.ui.VisUI;
+import com.kotcrab.vis.ui.util.dialog.Dialogs;
+import com.kotcrab.vis.ui.widget.Menu;
+import com.kotcrab.vis.ui.widget.MenuBar;
+import com.kotcrab.vis.ui.widget.MenuItem;
+import com.kotcrab.vis.ui.widget.PopupMenu;
 import de.ft.robocontrol.utils.JSONParaser;
 import de.ft.robocontrol.utils.PositionSaver;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.*;
+
+import java.awt.Component;
 import java.io.File;
 
 import java.util.ArrayList;
@@ -37,6 +48,9 @@ public class MainGame extends ApplicationAdapter {
 	public static Viewport viewport;
 	private Component saver;
 
+
+	public static Stage stage;
+	public static MenuBar menuBar;
 	//BlockUpdate bu[] = new BlockUpdate[0];
 
 	@Override
@@ -50,6 +64,30 @@ public class MainGame extends ApplicationAdapter {
 		img_mouseover=new Texture("block_mouseover.png");
 		img_marked=new Texture("block_marked.png");
 
+		VisUI.load(VisUI.SkinScale.X1);
+		stage = new Stage(viewport);
+		final Table root = new Table();
+		root.setFillParent(true);
+		stage.addActor(root);
+		Gdx.input.setInputProcessor(stage);
+
+
+		menuBar = new MenuBar();
+		menuBar.setMenuListener(new MenuBar.MenuBarListener() {
+			@Override
+			public void menuOpened (Menu menu) {
+				System.out.println("Opened menu: " + menu.getTitle());
+			}
+
+			@Override
+			public void menuClosed (Menu menu) {
+				System.out.println("Closed menu: " + menu.getTitle());
+			}
+		});
+
+		root.add(menuBar.getTable()).expandX().fillX().row();
+		root.add().expand().fill();
+		UI.createMenus();
 
 		/*
 		for(int i=0;i < blocks.length;i=i+1){
@@ -79,15 +117,14 @@ for(int i=0;i<1;i=i+1) {
 
 
 
-
-
-
 	}
+
 
 
 
 	@Override
 	public void render () {
+
 
 		PositionSaver.save();
 
@@ -101,6 +138,8 @@ for(int i=0;i<1;i=i+1) {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.setProjectionMatrix(cam.combined);
 
+		stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 60f));
+		stage.draw();
 /*
 		shapeRenderer.setProjectionMatrix(cam.combined);
 		shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
@@ -240,6 +279,9 @@ if(!Var.isloading) {
 		super.resize(width, height);
 
 		//blocks[0].delete();
+		stage.getViewport().update(width, height, true);
+
+
 
 		viewport.update(width, height);
 	}
