@@ -3,6 +3,7 @@ package de.ft.robocontrol;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -10,8 +11,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import de.ft.robocontrol.utils.JSONReader;
 import de.ft.robocontrol.utils.PositionSaver;
 
+import javax.swing.*;
+import java.awt.*;
+import java.io.File;
 import java.security.Key;
 
 import java.util.ArrayList;
@@ -30,8 +35,9 @@ public class MainGame extends ApplicationAdapter {
 
 	public static OrthographicCamera cam;
 	public static Viewport viewport;
+	private Component saver;
 
- 	//BlockUpdate bu[] = new BlockUpdate[0];
+	//BlockUpdate bu[] = new BlockUpdate[0];
 
 	@Override
 	public void create () {
@@ -69,6 +75,13 @@ for(int i=0;i<1;i=i+1) {
 		cam.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
 
 
+
+
+
+
+
+
+
 	}
 
 
@@ -97,6 +110,49 @@ for(int i=0;i<1;i=i+1) {
 		if(input.isKeyJustPressed(Input.Keys.INSERT)){
 			blocks.add(new Block(blocks.size(), 100, 200, 150, 30));
 			System.out.println(blocks.size());
+		}
+
+		if(input.isKeyJustPressed(Input.Keys.S)) {
+
+
+			JFileChooser fileChooser = new JFileChooser();
+			fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+			int result = fileChooser.showOpenDialog(saver);
+			if (result == JFileChooser.APPROVE_OPTION) {
+				File selectedFile = fileChooser.getSelectedFile();
+				System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+				FileHandle handle = Gdx.files.internal(selectedFile.getAbsolutePath());
+				JSONReader.reader("Test", "Test2", 1, handle);
+			}
+
+
+			//SAVE DATA
+/*
+			JFileChooser fileChooser = new JFileChooser();
+			fileChooser.setDialogTitle("Projekt-Ordner wählen");
+
+			int userSelection = fileChooser.showSaveDialog(saver);
+
+			if (userSelection == JFileChooser.APPROVE_OPTION) {
+				File fileToSave = fileChooser.getSelectedFile();
+				System.out.println("Save as file: " + fileToSave.getAbsolutePath());
+			}
+
+
+ */
+
+
+			//GET FOLDER
+			/*
+			JFileChooser fileChooser = new JFileChooser();
+			fileChooser.setDialogTitle("Projekt-Ordner wählen");
+			fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+			if (fileChooser.showOpenDialog(MainGame) == JFileChooser.CUSTOM_DIALOG) {
+				File file = fileChooser.getSelectedFile();
+				// load from file
+			}
+
+			 */
 		}
 
 

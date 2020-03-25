@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.robocontrol.utils.CheckKollision;
 import de.ft.robocontrol.utils.PositionSaver;
-import javafx.scene.control.CheckBox;
+
 import jdk.tools.jaotc.Main;
 
 import java.util.Timer;
