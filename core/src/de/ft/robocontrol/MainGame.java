@@ -3,6 +3,7 @@ package de.ft.robocontrol;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -14,6 +15,8 @@ import de.ft.robocontrol.utils.JSONParaser;
 import de.ft.robocontrol.utils.PositionSaver;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.io.File;
 
@@ -61,7 +64,7 @@ public class MainGame extends ApplicationAdapter {
 		 */
 
 
-for(int i=0;i<1;i=i+1) {
+for(int i=0;i<10;i=i+1) {
 	blocks.add(new Block(i, i * 150, 100, 150, 70));
 
 
@@ -109,18 +112,24 @@ for(int i=0;i<1;i=i+1) {
 			System.out.println(blocks.size());
 		}
 
-		if(input.isKeyJustPressed(Input.Keys.S)) {
-/*
-
+		if(input.isKeyJustPressed(Input.Keys.O)) {
 			JFileChooser fileChooser = new JFileChooser();
 			fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+			fileChooser.setFileFilter(new FileNameExtensionFilter("Projektdatei (.rac)", "rac"));
 			int result = fileChooser.showOpenDialog(saver);
 			if (result == JFileChooser.APPROVE_OPTION) {
 				File selectedFile = fileChooser.getSelectedFile();
 				System.out.println("Selected file: " + selectedFile.getAbsolutePath());
 				FileHandle handle = Gdx.files.internal(selectedFile.getAbsolutePath());
-				JSONReader.reader("Test", "Test2", 1, handle);
+				JSONParaser.load(handle);
+
 			}
+		}
+
+		if(input.isKeyJustPressed(Input.Keys.S)) {
+/*
+
+
 
 
  */
@@ -138,7 +147,10 @@ for(int i=0;i<1;i=i+1) {
 				File fileToSave = fileChooser.getSelectedFile();
 				System.out.println("Save as file: " + fileToSave.getAbsolutePath()+".rac");
 
-				JSONParaser.writerarray(Gdx.files.absolute(fileToSave.getAbsolutePath()));
+				if(fileToSave.getAbsolutePath().contains(".rac")) {
+
+					JSONParaser.writerarray(Gdx.files.absolute(fileToSave.getAbsolutePath()));
+				}
 
 			}
 
