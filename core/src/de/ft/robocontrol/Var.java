@@ -18,4 +18,5 @@ public class Var {
     public static boolean isloading=false;
 
 
+    public static String path = "";
 }

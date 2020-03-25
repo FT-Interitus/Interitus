@@ -9,23 +9,18 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.kotcrab.vis.ui.VisUI;
-import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import com.kotcrab.vis.ui.widget.Menu;
 import com.kotcrab.vis.ui.widget.MenuBar;
-import com.kotcrab.vis.ui.widget.MenuItem;
-import com.kotcrab.vis.ui.widget.PopupMenu;
+import de.ft.robocontrol.UI.UI;
 import de.ft.robocontrol.utils.JSONParaser;
 import de.ft.robocontrol.utils.PositionSaver;
 
 import javax.swing.*;
-import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import java.awt.Component;
@@ -46,7 +41,7 @@ public class MainGame extends ApplicationAdapter {
 
 	public static OrthographicCamera cam;
 	public static Viewport viewport;
-	private Component saver;
+	public static Component saver;
 
 
 	public static Stage stage;
@@ -166,7 +161,7 @@ for(int i=0;i<1;i=i+1) {
 						 System.out.println("Selected file: " + selectedFile.getAbsolutePath());
 						 FileHandle handle = Gdx.files.internal(selectedFile.getAbsolutePath());
 						 JSONParaser.load(handle);
-
+						 Var.path = selectedFile.getAbsolutePath();
 					 }
 				 }
 			 } ;
@@ -184,6 +179,8 @@ for(int i=0;i<1;i=i+1) {
 			Thread save = new Thread() {
 				@Override
 				public void run() {
+
+
 					JFileChooser fileChooser = new JFileChooser();
 					fileChooser.setDialogTitle("Projekt-Ordner wählen");
 
@@ -198,6 +195,7 @@ for(int i=0;i<1;i=i+1) {
 						if(fileToSave.getAbsolutePath().contains(".rac")) {
 
 							JSONParaser.writerarray(Gdx.files.absolute(fileToSave.getAbsolutePath()));
+							Var.path = fileToSave.getAbsolutePath();
 						}
 				}
 			};
