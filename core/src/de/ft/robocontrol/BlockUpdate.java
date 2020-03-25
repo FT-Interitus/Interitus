@@ -96,7 +96,7 @@ public Timer time;
 
     if(Var.marked&&!block.isMarked()) {
 
-        if(CheckKollision.checkblockwithduplicate(Var.markedblock, block,0)) {
+        if(CheckKollision.checkblockwithduplicate(Var.markedblock, block,0)&&block.getRight()==null) {
             if (Var.markedblock.isMoving()) {
                 System.out.println("Kollision!");
 
@@ -106,7 +106,7 @@ public Timer time;
             } else {
 
 
-            if(block.getRight()!=Var.markedblock&&Var.markedblock.getLeft()!=block) {
+            if(block.getRight()!=Var.markedblock&&Var.markedblock.getLeft()!=block&&block.getRight()==null) {
 
                 System.out.println("test");
                 block.setShowdupulicate_rechts(false);
@@ -123,7 +123,7 @@ public Timer time;
 
 
 
-        if(CheckKollision.checkblockwithduplicate(Var.markedblock, block,1)) {
+        if(CheckKollision.checkblockwithduplicate(Var.markedblock, block,1)&&block.getLeft()==null) {
             if (Var.markedblock.isMoving()) {
                 System.out.println("Kollision!");
 
@@ -133,7 +133,7 @@ public Timer time;
             } else {
 
 
-                if(block.getRight()!=Var.markedblock&&Var.markedblock.getLeft()!=block) {
+                if(block.getRight()!=Var.markedblock&&Var.markedblock.getLeft()!=block&&block.getLeft()==null) {
 
                     System.out.println("test");
                     block.setShowdupulicate_links(false);
