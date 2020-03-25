@@ -64,7 +64,7 @@ public class MainGame extends ApplicationAdapter {
 		 */
 
 
-for(int i=0;i<10;i=i+1) {
+for(int i=0;i<7;i=i+1) {
 	blocks.add(new Block(i, i * 150, 100, 150, 70));
 
 
@@ -113,17 +113,23 @@ for(int i=0;i<10;i=i+1) {
 		}
 
 		if(input.isKeyJustPressed(Input.Keys.O)) {
-			JFileChooser fileChooser = new JFileChooser();
-			fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
-			fileChooser.setFileFilter(new FileNameExtensionFilter("Projektdatei (.rac)", "rac"));
-			int result = fileChooser.showOpenDialog(saver);
-			if (result == JFileChooser.APPROVE_OPTION) {
-				File selectedFile = fileChooser.getSelectedFile();
-				System.out.println("Selected file: " + selectedFile.getAbsolutePath());
-				FileHandle handle = Gdx.files.internal(selectedFile.getAbsolutePath());
-				JSONParaser.load(handle);
+			 Thread open = new Thread() {
+				 @Override
+				 public void run() {
+					 JFileChooser fileChooser = new JFileChooser();
+					 fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+					 fileChooser.setFileFilter(new FileNameExtensionFilter("Projektdatei (.rac)", "rac"));
+					 int result = fileChooser.showOpenDialog(saver);
+					 if (result == JFileChooser.APPROVE_OPTION) {
+						 File selectedFile = fileChooser.getSelectedFile();
+						 System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+						 FileHandle handle = Gdx.files.internal(selectedFile.getAbsolutePath());
+						 JSONParaser.load(handle);
 
-			}
+					 }
+				 }
+			 } ;
+			open.start();
 		}
 
 		if(input.isKeyJustPressed(Input.Keys.S)) {
@@ -134,28 +140,33 @@ for(int i=0;i<10;i=i+1) {
 
  */
 
+			Thread save = new Thread() {
+				@Override
+				public void run() {
+					JFileChooser fileChooser = new JFileChooser();
+					fileChooser.setDialogTitle("Projekt-Ordner wählen");
+
+					int userSelection = fileChooser.showSaveDialog(saver);
+					fileChooser.setMultiSelectionEnabled(false);
+
+
+					if (userSelection == JFileChooser.APPROVE_OPTION) {
+						File fileToSave = fileChooser.getSelectedFile();
+						System.out.println("Save as file: " + fileToSave.getAbsolutePath()+".rac");
+
+						if(fileToSave.getAbsolutePath().contains(".rac")) {
+
+							JSONParaser.writerarray(Gdx.files.absolute(fileToSave.getAbsolutePath()));
+						}
+				}
+			};
 			//SAVE DATA
 
-			JFileChooser fileChooser = new JFileChooser();
-			fileChooser.setDialogTitle("Projekt-Ordner wählen");
-
-			int userSelection = fileChooser.showSaveDialog(saver);
-			fileChooser.setMultiSelectionEnabled(false);
 
 
-			if (userSelection == JFileChooser.APPROVE_OPTION) {
-				File fileToSave = fileChooser.getSelectedFile();
-				System.out.println("Save as file: " + fileToSave.getAbsolutePath()+".rac");
+			};
 
-				if(fileToSave.getAbsolutePath().contains(".rac")) {
-
-					JSONParaser.writerarray(Gdx.files.absolute(fileToSave.getAbsolutePath()));
-				}
-
-			}
-
-
-
+			save.start();
 
 
 			//GET FOLDER
@@ -171,40 +182,40 @@ for(int i=0;i<10;i=i+1) {
 			 */
 		}
 
+if(!Var.isloading) {
+	Block Temp = null;
+	for (int i = 0; i < blocks.size(); i = i + 1) {
+		batch.begin();
 
-		Block Temp = null;
-		for(int i=0;i<blocks.size();i=i+1){
-			batch.begin();
+
+		if (blocks.get(i).isMarked()) {
+			Temp = blocks.get(i);
+		} else {
+			blocks.get(i).draw(batch);
+		}
+
+		batch.end();
+		if (blocks.get(i).isMarked()) {
 
 
-			if(blocks.get(i).isMarked()) {
-				Temp = blocks.get(i);
-			}else{
-				blocks.get(i).draw(batch);
+			if (input.isKeyJustPressed(Input.Keys.FORWARD_DEL)) {
+				blocks.get(i).delete();
 			}
 
-			batch.end();
-			if(blocks.get(i).isMarked()){
-
-
-
-				if(input.isKeyJustPressed(Input.Keys.FORWARD_DEL)){
-					blocks.get(i).delete();
-				}
-
-
-			}
-
-
-			if(Temp!=null) {
-
-				batch.begin();
-				Temp.draw(batch);
-				batch.end();
-			}
-			//System.out.println(blocks.get(i).isMarked() + "  id: "+blocks.get(i).getIndex());
 
 		}
+
+
+		if (Temp != null) {
+
+			batch.begin();
+			Temp.draw(batch);
+			batch.end();
+		}
+		//System.out.println(blocks.get(i).isMarked() + "  id: "+blocks.get(i).getIndex());
+
+	}
+}
 		/*
 
 		for(int b=0;b<blocks.size();b=b+1) {

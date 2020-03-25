@@ -138,6 +138,10 @@ public class Block {
     }
 
     public void delete() {
+        Var.markedblock=null;
+        Var.marked=false;
+        Var.ismoving=false;
+
 
         if(left!=null) {
             left.setRight(null);
@@ -151,7 +155,7 @@ public class Block {
         right = null;
 
         try {
-            System.out.println("cancel eigentlich");
+            //System.out.println("cancel eigentlich");
             blockupdate.time.cancel();
 
         }catch (Exception e) {
@@ -162,7 +166,7 @@ public class Block {
         MainGame.blocks.remove(MainGame.blocks.indexOf(this));
         for(int i = 0;i<MainGame.blocks.size()-temp;i++) {
             MainGame.blocks.get(i).setIndex(MainGame.blocks.get(i).getIndex()-1);
-            System.out.println("Noch nicht abgestürtzt!");
+            //System.out.println("Noch nicht abgestürtzt!");
         }
 
     }

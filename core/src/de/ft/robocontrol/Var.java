@@ -13,5 +13,7 @@ public class Var {
 
     public static boolean marked=false;
 
+    public static boolean isloading=false;
+
 
 }
