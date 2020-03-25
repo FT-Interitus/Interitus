@@ -3,7 +3,6 @@ package de.ft.robocontrol;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -11,16 +10,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import de.ft.robocontrol.utils.JSONReader;
+import de.ft.robocontrol.utils.JSONParaser;
 import de.ft.robocontrol.utils.PositionSaver;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
-import java.security.Key;
 
 import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 import static com.badlogic.gdx.Gdx.input;
 
@@ -113,7 +110,7 @@ for(int i=0;i<1;i=i+1) {
 		}
 
 		if(input.isKeyJustPressed(Input.Keys.S)) {
-
+/*
 
 			JFileChooser fileChooser = new JFileChooser();
 			fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
@@ -126,20 +123,27 @@ for(int i=0;i<1;i=i+1) {
 			}
 
 
+ */
+
 			//SAVE DATA
-/*
+
 			JFileChooser fileChooser = new JFileChooser();
 			fileChooser.setDialogTitle("Projekt-Ordner wählen");
 
 			int userSelection = fileChooser.showSaveDialog(saver);
+			fileChooser.setMultiSelectionEnabled(false);
+
 
 			if (userSelection == JFileChooser.APPROVE_OPTION) {
 				File fileToSave = fileChooser.getSelectedFile();
-				System.out.println("Save as file: " + fileToSave.getAbsolutePath());
+				System.out.println("Save as file: " + fileToSave.getAbsolutePath()+".rac");
+
+				JSONParaser.writerarray(Gdx.files.absolute(fileToSave.getAbsolutePath()));
+
 			}
 
 
- */
+
 
 
 			//GET FOLDER
