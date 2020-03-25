@@ -38,8 +38,8 @@ public Timer time;
 
 
 
-
             if(de.ft.robocontrol.utils.CheckKollision.checkmousewithblock(block,Var.mousepressedold)&&Gdx.input.isButtonPressed(0) && Var.ismoving==false&&!block.isMarked()&&!Var.marked&&Var.markedblock==null){
+                System.out.println("marked");
                 Var.marked=true;
                 block.setMarked(true);
                Var.markedblock = block;
@@ -49,7 +49,7 @@ public Timer time;
 
 
 
-            if( Var.ismoving==false&&!block.isMoving()&&block.isMarked()){
+            if( Var.ismoving==false&&!block.isMoving()&&block.isMarked() && Gdx.input.isButtonPressed(0)){
                 int feld=2;
                 if(Math.abs(Var.mousepressedold.x-MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x)>feld  ||  Math.abs(Var.mousepressedold.y-MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).y)>feld){
                     if(block.isMoving()==false  && Var.ismoving==false) {
@@ -87,7 +87,7 @@ public Timer time;
                 }
 
 
-            if(de.ft.robocontrol.utils.CheckKollision.checkmousewithblock(block)==false&& Gdx.input.isButtonJustPressed(0) && !block.isMoving()&&block.isMarked()){
+            if(de.ft.robocontrol.utils.CheckKollision.checkmousewithblock(block)==false&& Gdx.input.isButtonPressed(0) && !block.isMoving()&&block.isMarked()){
                 block.setMarked(false);
                 Var.marked=false;
                 Var.markedblock = null;
@@ -99,7 +99,6 @@ public Timer time;
         if(CheckKollision.checkblockwithduplicate(Var.markedblock, block)) {
             if (Var.markedblock.isMoving()) {
                 System.out.println("Kollision!");
-
 
                 block.setShowdupulicate(true);
 
