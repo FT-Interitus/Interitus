@@ -11,12 +11,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Logger;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.widget.Menu;
 import com.kotcrab.vis.ui.widget.MenuBar;
 import de.ft.robocontrol.UI.UI;
+import de.ft.robocontrol.data.LoadSave;
 import de.ft.robocontrol.utils.JSONParaser;
 import de.ft.robocontrol.utils.PositionSaver;
 
@@ -44,9 +46,9 @@ public class MainGame extends ApplicationAdapter {
 	public static Component saver;
 
 
-	public static Stage stage;
-	public static MenuBar menuBar;
+
 	//BlockUpdate bu[] = new BlockUpdate[0];
+public static Logger logger;
 
 	@Override
 	public void create () {
@@ -59,30 +61,13 @@ public class MainGame extends ApplicationAdapter {
 		img_mouseover=new Texture("block_mouseover.png");
 		img_marked=new Texture("block_marked.png");
 
-		VisUI.load(VisUI.SkinScale.X1);
-		stage = new Stage(viewport);
-		final Table root = new Table();
-		root.setFillParent(true);
-		stage.addActor(root);
-		Gdx.input.setInputProcessor(stage);
 
 
-		menuBar = new MenuBar();
-		menuBar.setMenuListener(new MenuBar.MenuBarListener() {
-			@Override
-			public void menuOpened (Menu menu) {
-				System.out.println("Opened menu: " + menu.getTitle());
-			}
+		logger = new Logger("MainLog", 0);
 
-			@Override
-			public void menuClosed (Menu menu) {
-				System.out.println("Closed menu: " + menu.getTitle());
-			}
-		});
 
-		root.add(menuBar.getTable()).expandX().fillX().row();
-		root.add().expand().fill();
-		UI.createMenus();
+		UI.init();
+
 
 		/*
 		for(int i=0;i < blocks.length;i=i+1){
@@ -130,12 +115,11 @@ for(int i=0;i<1;i=i+1) {
 		//System.out.println(blocks.get(1).getLeft());
 		cam.update();
 		//Gdx.gl.glClearColor(1,1,1, 1);
-		Gdx.gl.glClearColor(0,0,0, 1);
+		Gdx.gl.glClearColor(1,1,1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.setProjectionMatrix(cam.combined);
 
-		stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 60f));
-		stage.draw();
+		UI.update();
 /*
 		shapeRenderer.setProjectionMatrix(cam.combined);
 		shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
@@ -145,72 +129,23 @@ for(int i=0;i<1;i=i+1) {
 
 		if(input.isKeyJustPressed(Input.Keys.INSERT)){
 			blocks.add(new Block(blocks.size(), 100, 200, 150, 70));
-			System.out.println(blocks.size());
+			logger.debug("Create new block");
 		}
 
 		if(input.isKeyJustPressed(Input.Keys.O)) {
-			 Thread open = new Thread() {
-				 @Override
-				 public void run() {
-					 JFileChooser fileChooser = new JFileChooser();
-					 fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
-					 fileChooser.setFileFilter(new FileNameExtensionFilter("Projektdatei (.rac)", "rac"));
-					 int result = fileChooser.showOpenDialog(saver);
-					 if (result == JFileChooser.APPROVE_OPTION) {
-						 File selectedFile = fileChooser.getSelectedFile();
-						 System.out.println("Selected file: " + selectedFile.getAbsolutePath());
-						 FileHandle handle = Gdx.files.internal(selectedFile.getAbsolutePath());
-						 Var.path = selectedFile.getAbsolutePath();
-						 JSONParaser.load(handle);
-
-					 }
-				 }
-			 } ;
-			open.start();
+			LoadSave.open();
 		}
 
 		if(input.isKeyJustPressed(Input.Keys.S)) {
-/*
+			LoadSave.saveas();
+			/*
 
 
 
 
  */
 
-			Thread save = new Thread() {
-				@Override
-				public void run() {
 
-
-					JFileChooser fileChooser = new JFileChooser();
-					fileChooser.setDialogTitle("Speichern unter...");
-
-					int userSelection = fileChooser.showSaveDialog(saver);
-					fileChooser.setMultiSelectionEnabled(false);
-
-
-					if (userSelection == JFileChooser.APPROVE_OPTION) {
-						File fileToSave = fileChooser.getSelectedFile();
-						System.out.println("Save as file: " + fileToSave.getAbsolutePath()+".rac");
-
-						if(fileToSave.getAbsolutePath().contains(".rac")) {
-							Var.path = fileToSave.getAbsolutePath();
-							JSONParaser.writerarray(Gdx.files.absolute(fileToSave.getAbsolutePath()));
-
-						}else{
-							Var.path = fileToSave.getAbsolutePath()+".rac";
-							JSONParaser.writerarray(Gdx.files.absolute(fileToSave.getAbsolutePath()+".rac"));
-						}
-						System.out.println(Var.path);
-				}
-			};
-			//SAVE DATA
-
-
-
-			};
-
-			save.start();
 
 
 			//GET FOLDER
@@ -283,11 +218,9 @@ if(!Var.isloading) {
 		super.resize(width, height);
 
 		//blocks[0].delete();
-		stage.getViewport().update(width, height, true);
-
-
-
+		UI.updateView(width, height);
 		viewport.update(width, height);
+
 	}
 
 
