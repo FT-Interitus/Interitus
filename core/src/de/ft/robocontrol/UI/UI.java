@@ -25,10 +25,12 @@ import de.ft.robocontrol.data.user.DataSaver;
 import de.ft.robocontrol.data.user.LoadSave;
 
 import java.sql.DatabaseMetaData;
+import java.util.ArrayList;
 
 public class UI {
     public static Stage stage;
     private static MenuBar menuBar;
+   public static MenuItem recent;
 
     public static void initdragui() {
 
@@ -72,6 +74,9 @@ public static void update() {
     stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 60f));
 
     stage.draw();
+
+    recent.setSubMenu(createSubMenu(Data.filename.size(),GetStringArray(Data.filename)));
+
 }
 
     private static void createMenus () {
@@ -80,9 +85,9 @@ public static void update() {
         Menu windowMenu = new Menu("Ansicht");
         Menu helpMenu = new Menu("Hilfe");
 
-        MenuItem subMenuItem = new MenuItem("Letzte Öffnen");
+        recent = new MenuItem("Letzte Öffnen");
 
-        subMenuItem.setSubMenu(createSubMenu());
+        //recent.setSubMenu(createSubMenu());
 
         fileMenu.addItem(new MenuItem("Neu", new ChangeListener() {
             @Override
@@ -155,7 +160,7 @@ public static void update() {
 
 
 
-        fileMenu.addItem(subMenuItem);
+        fileMenu.addItem(recent);
         fileMenu.addItem(new MenuItem("Öffnen", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -247,6 +252,7 @@ public static void update() {
         editMenu.addItem(new MenuItem("Einfügen").setShortcut("Strg+V"));
 
 
+
         windowMenu.addItem(new MenuItem("menuitem #9"));
         windowMenu.addItem(new MenuItem("menuitem #10"));
         windowMenu.addItem(new MenuItem("menuitem #11"));
@@ -266,14 +272,29 @@ public static void update() {
        menuBar.addMenu(helpMenu);
     }
 
-    private static PopupMenu createSubMenu() {
+    public static PopupMenu createSubMenu(int count, String[] projects) {
         PopupMenu menu = new PopupMenu();
-        menu.addItem(new MenuItem("submenuitem #1"));
-        menu.addItem(new MenuItem("submenuitem #2"));
-        menu.addSeparator();
-        menu.addItem(new MenuItem("submenuitem #3"));
-        menu.addItem(new MenuItem("submenuitem #4"));
-        return menu;
+
+        for(int i = 0; i<count;i++) {
+            menu.addItem(new MenuItem(projects[i]));
+        }
+            return menu;
+    }
+
+    public static String[] GetStringArray(ArrayList<String> arr)
+    {
+
+        // declaration and initialise String Array
+        String str[] = new String[arr.size()];
+
+        // ArrayList to Array Conversion
+        for (int j = 0; j < arr.size(); j++) {
+
+            // Assign each value to String array
+            str[j] = arr.get(j);
+        }
+
+        return str;
     }
 
     public static void updateView(int width, int height) {

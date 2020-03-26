@@ -45,6 +45,12 @@ public class LoadSave {
                     }
                     System.out.println(DataManager.path);
 
+                    if(Data.filename.size()>9) {
+                        Data.filename.remove(0);
+
+                    }
+                    Data.filename.add(fileChooser.getName());
+                    Data.path.add(fileToSave.getAbsolutePath());
                     DataManager.saved();
 
                 }
@@ -76,6 +82,13 @@ public class LoadSave {
                     DataLoader.load(handle);
                     DataManager.saved();
                     DataManager.filename = selectedFile.getName();
+
+                    if(Data.filename.size()>9) {
+                        Data.filename.remove(0);
+
+                    }
+                    Data.filename.add(fileChooser.getName());
+                    Data.path.add(selectedFile.getAbsolutePath());
 
                 }
             }

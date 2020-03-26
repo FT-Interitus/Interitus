@@ -40,7 +40,6 @@ static public void writer(String object, String setAttribute, FileHandle handle)
 
 
 
-    System.out.println(obj);
 
 
 }

@@ -60,9 +60,10 @@ public static Logger logger;
 		Gdx.graphics.setTitle("New File");
 		DataManager.filename = "New File";
 
-
-		UI.init();
+//Achtung hier ist die Reihenfolge richtig
 		Data.init();
+		UI.init();
+
 
 
 		/*
