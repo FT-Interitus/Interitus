@@ -95,35 +95,39 @@ public Timer time;
                 Var.marked=false;
                 Var.markedblock = null;
                 }
-if(block.isShowdupulicate_rechts()) {
-
-    if (Var.markedblock.getX() > block.getX() + block.getW() && Var.markedblock.getY()<block.getY()) {
-
-        try {
-
-            int xx = block.getW() - (Var.markedblock.getX() - block.getX_dup_rechts());
-            int yy = (Var.markedblock.getY() + Var.markedblock.getH()) - block.getY();
-            System.out.println("y: " + yy + "x: " + xx + "flache: "+ yy*xx);
-        } catch (NullPointerException e) {
-
-        }
 
 
-    }else{
+
+                if(block.isShowdupulicate_rechts()) {
 
 
-        try {
+                        try {
 
-            int xx = block.getW()-((block.getW() - (Var.markedblock.getX() - block.getX_dup_rechts()))-block.getW());
-            int yy = block.getH()-(((Var.markedblock.getY() + Var.markedblock.getH()) - block.getY())-block.getH());
-            System.out.println("y: " + yy + "x: " + xx + "flache: "+ yy*xx);
-        } catch (NullPointerException e) {
+                           System.out.println(CheckKollision.flache(block.getX_dup_rechts(),block.getY(),block.getW(),block.getH(),Var.markedblock.getX(),Var.markedblock.getY()));
 
-        }
+                        } catch (NullPointerException e) {
+
+                        }
 
 
-    }
-}
+                }
+
+
+                if(block.isShowdupulicate_links()) {
+
+
+                    try {
+
+                        System.out.println(CheckKollision.flache(block.getX_dup_links(),block.getY(),block.getW(),block.getH(),Var.markedblock.getX(),Var.markedblock.getY()));
+
+                    } catch (NullPointerException e) {
+
+                    }
+
+
+                }
+
+
 
     if(Var.marked&&!block.isMarked()) {
 

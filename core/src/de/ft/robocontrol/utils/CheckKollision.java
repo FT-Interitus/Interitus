@@ -43,5 +43,24 @@ public class CheckKollision {
         }
     }
 
+
+    public static int flache(int x,int y,int w,int h,int xm,int ym){
+        int flache=0;
+
+        int xx = w - (xm - x);
+        int yy = (ym + h - y);
+        if(xx>w){
+            xx=w-(xx-w);
+        }
+        if(yy>h){
+            yy=h-(yy-h);
+        }
+
+        //System.out.println("y: " + yy + "x: " + xx + "flache: "+ yy*xx);
+        flache=xx*yy;
+        return flache;
+    }
+
+
     }
 
