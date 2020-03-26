@@ -30,7 +30,7 @@ public class LoadSave {
 
                 if (userSelection == JFileChooser.APPROVE_OPTION) {
                     File fileToSave = fileChooser.getSelectedFile();
-                    System.out.println("Save as file: " + fileToSave.getAbsolutePath());
+                    System.out.println("Save as file: " + fileToSave.getName());
 
 
                     if(fileToSave.getAbsolutePath().contains(".rac")) {
@@ -49,7 +49,13 @@ public class LoadSave {
                         Data.filename.remove(0);
 
                     }
-                    Data.filename.add(fileChooser.getName());
+
+                    if(!(Data.filename.indexOf(fileToSave.getName())==-1)) {
+                        Data.filename.remove(Data.filename.indexOf(fileToSave.getName()));
+                        Data.path.remove(Data.filename.indexOf(fileToSave.getName()));
+                    }
+                    Data.filename.add(fileToSave.getName());
+
                     Data.path.add(fileToSave.getAbsolutePath());
                     DataManager.saved();
 
@@ -75,7 +81,7 @@ public class LoadSave {
                 int result = fileChooser.showOpenDialog(MainGame.saver);
                 if (result == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile();
-                    System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+                    System.out.println("Selected file: " + selectedFile.getName());
                     FileHandle handle = Gdx.files.internal(selectedFile.getAbsolutePath());
                     DataManager.path = selectedFile.getAbsolutePath();
                     DataManager.filename = selectedFile.getName();
@@ -87,7 +93,14 @@ public class LoadSave {
                         Data.filename.remove(0);
 
                     }
-                    Data.filename.add(fileChooser.getName());
+                    if(Data.filename.indexOf(selectedFile.getName())>-1) {
+                        int temp =Data.filename.indexOf(selectedFile.getName());
+                        Data.filename.remove(temp);
+                        Data.path.remove(temp);
+                    }
+
+
+                    Data.filename.add(selectedFile.getName());
                     Data.path.add(selectedFile.getAbsolutePath());
 
                 }
