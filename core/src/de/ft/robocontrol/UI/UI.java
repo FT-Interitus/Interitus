@@ -25,8 +25,11 @@ import de.ft.robocontrol.data.user.DataManager;
 import de.ft.robocontrol.data.user.DataSaver;
 import de.ft.robocontrol.data.user.LoadSave;
 
+import java.io.File;
 import java.sql.DatabaseMetaData;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class UI {
     public static Stage stage;
@@ -105,6 +108,30 @@ public class UI {
         root.add(menuBar.getTable()).expandX().fillX().row();
         root.add().expand().fill();
         createMenus();
+
+
+       Thread test = new Thread(){
+
+           @Override
+           public void run() {
+               Timer time = new Timer();
+               time.scheduleAtFixedRate(new TimerTask() {
+                   @Override
+                   public void run() {
+                       for(int i = 0; i<Data.path.size();i++) {
+                           if(!(new File(Data.path.get(i)).exists())) {
+                               Data.path.remove(i);
+                               Data.filename.remove(i);
+                           }
+                       }
+                   }
+               },0,500);
+           }
+       };
+
+       test.start();
+
+
     }
 public static void update() {
     stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 60f));
@@ -151,7 +178,6 @@ public static void update() {
                                                 for (int i = 0; i < MainGame.blocks.size(); i = i + 1) {
                                                     MainGame.blocks.get(i).delete();
                                                 }
-
                                                 DataManager.saved();
                                                 DataManager.filename = "New File";
                                                 DataManager.path = "";
@@ -215,6 +241,13 @@ public static void update() {
                                 @Override
                                 public void result (Integer result) {
                                     if (result == nothing) {
+                                        for (int i = 0; i < MainGame.blocks.size(); i = i + 1) {
+                                            MainGame.blocks.get(i).delete();
+                                        }
+                                        MainGame.blocks.clear();
+                                        DataManager.saved();
+                                        DataManager.filename = "New File";
+                                        DataManager.path = "";
                                         LoadSave.open();
                                     }
 
@@ -317,8 +350,49 @@ public static void update() {
             menu.addItem(new MenuItem(projects[i-1], new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
-                    FileHandle handle = Gdx.files.absolute(Data.path.get(finalI));
-                    DataLoader.load(handle);
+                    String[] möglichkeiten = {"Verwerfen", "Speichern", "Abbrechen"};
+                    final int nothing = 1;
+                    final int everything = 2;
+                    final int something = 3;
+
+                    Dialogs.showConfirmDialog(stage, "Ungespeicherte Änderungen", "\nWenn du eine neue Datei öffnest werden womögich Änderungen verworfen.\n",
+                            möglichkeiten, new Integer[]{nothing, everything, something},
+                            new ConfirmDialogListener<Integer>() {
+                                @Override
+                                public void result (Integer result) {
+                                    if (result == nothing) {
+                                        for (int i = 0; i < MainGame.blocks.size(); i = i + 1) {
+                                            MainGame.blocks.get(i).delete();
+                                        }
+                                        MainGame.blocks.clear();
+                                        DataManager.saved();
+                                        DataManager.filename = "New File";
+                                        DataManager.path = "";
+
+                                        FileHandle handle = Gdx.files.absolute(Data.path.get(finalI));
+                                        DataLoader.load(handle);
+
+                                    }
+
+                                    if (result == everything) {
+                                        if (DataManager.path != "") {
+                                            FileHandle handle = Gdx.files.external(DataManager.path);
+                                            DataSaver.save(handle);
+                                            DataManager.saved();
+                                        } else {
+                                            LoadSave.saveas();
+                                        }
+                                    }
+
+                                    if (result == something) {
+
+
+                                    }
+                                }
+                            });
+
+
+
 
                 }
             }));
