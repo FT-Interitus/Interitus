@@ -5,6 +5,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.robocontrol.MainGame;
 import de.ft.robocontrol.Var;
+import de.ft.robocontrol.data.programm.Data;
+import de.ft.robocontrol.data.user.DataManager;
 import de.ft.robocontrol.utils.CheckKollision;
 
 import java.util.Timer;
@@ -58,6 +60,7 @@ public Timer time;
                         //System.out.println((int)MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x-block.getX());
                         block.setMoving(true);
                         Var.ismoving=true;
+                        DataManager.change();
                     }
 
 
@@ -66,6 +69,7 @@ public Timer time;
             }
 
                 if(block.isMoving() && Gdx.input.isButtonPressed(0)){
+                    DataManager.change();
                      block.setX((int)(MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x-Var.unterschiedsave.x));
                         block.setY((int)(MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).y-Var.unterschiedsave.y));
 

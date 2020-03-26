@@ -14,10 +14,12 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import de.ft.robocontrol.Block.Block;
 import de.ft.robocontrol.UI.UI;
 import de.ft.robocontrol.data.programm.Data;
+import de.ft.robocontrol.data.user.DataManager;
 import de.ft.robocontrol.utils.PositionSaver;
 
 import java.awt.Component;
 
+import java.sql.DatabaseMetaData;
 import java.util.ArrayList;
 
 import static com.badlogic.gdx.Gdx.input;
@@ -55,7 +57,8 @@ public static Logger logger;
 
 		logger = new Logger("MainLog", 0);
 
-
+		Gdx.graphics.setTitle("New File");
+		DataManager.filename = "New File";
 
 
 		UI.init();
@@ -113,8 +116,7 @@ for(int i=0;i<1;i=i+1) {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.setProjectionMatrix(cam.combined);
 
-		UI.update();
-		UI.updatedragui(shapeRenderer);
+
 /*
 		shapeRenderer.setProjectionMatrix(cam.combined);
 		shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
@@ -124,9 +126,9 @@ for(int i=0;i<1;i=i+1) {
 
 		if(input.isKeyJustPressed(Input.Keys.INSERT)){
 			blocks.add(new Block(blocks.size(), 100, 200, 150, 70));
-			logger.debug("Create new block");
+			DataManager.change();
 		}
-
+		UI.updatedragui(shapeRenderer);
 
 if(!Var.isloading) {
 	Block Temp = null;
@@ -178,6 +180,7 @@ if(!Var.isloading) {
 		}
 		*/
 
+		UI.update();
 
 
 	}

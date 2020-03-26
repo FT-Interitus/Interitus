@@ -9,6 +9,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class Data {
+
+
     public static void init() {
        File folder = new File(System.getProperty("user.home")+"/.racd");
        Path path = folder.toPath();
@@ -18,5 +20,10 @@ public class Data {
            catch (IOException e) { e.printStackTrace();}
        }
     }
+
+
+
+
+
 
 }

@@ -9,15 +9,22 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.kotcrab.vis.ui.VisUI;
+import com.kotcrab.vis.ui.util.dialog.ConfirmDialogListener;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
+import com.kotcrab.vis.ui.util.dialog.InputDialogAdapter;
+import com.kotcrab.vis.ui.util.dialog.OptionDialogAdapter;
 import com.kotcrab.vis.ui.widget.Menu;
 import com.kotcrab.vis.ui.widget.MenuBar;
 import com.kotcrab.vis.ui.widget.MenuItem;
 import com.kotcrab.vis.ui.widget.PopupMenu;
 import de.ft.robocontrol.MainGame;
 import de.ft.robocontrol.Var;
+import de.ft.robocontrol.data.programm.Data;
+import de.ft.robocontrol.data.user.DataManager;
 import de.ft.robocontrol.data.user.DataSaver;
 import de.ft.robocontrol.data.user.LoadSave;
+
+import java.sql.DatabaseMetaData;
 
 public class UI {
     public static Stage stage;
@@ -83,14 +90,66 @@ public static void update() {
                 final Thread clear =new Thread() {
                     @Override
                     public void run() {
-                        for(int i = 0; i< MainGame.blocks.size(); i=i+1){
-                            MainGame.blocks.get(i).delete();
+
+                        if(DataManager.changes) {
+
+                            String[] möglichkeiten = {"Verwerfen", "Speichern", "Abbrechen"};
+
+
+                            final int nothing = 1;
+                            final int everything = 2;
+                            final int something = 3;
+
+                            //confirmdialog may return result of any type, here we are just using ints
+                            Dialogs.showConfirmDialog(stage, "Ungespeicherte Änderungen", "\nWenn du eine leere Datei öffnest werden womögich Änderungen verworfen.\n",
+                                    möglichkeiten, new Integer[]{nothing, everything, something},
+                                    new ConfirmDialogListener<Integer>() {
+                                        @Override
+                                        public void result(Integer result) {
+                                            if (result == nothing) {
+                                                for (int i = 0; i < MainGame.blocks.size(); i = i + 1) {
+                                                    MainGame.blocks.get(i).delete();
+                                                }
+
+                                                DataManager.saved();
+                                                DataManager.filename = "New File";
+                                                DataManager.path = "";
+                                                MainGame.blocks.clear();
+                                            }
+
+                                            if (result == everything) {
+                                                if (DataManager.path != "") {
+                                                    FileHandle handle = Gdx.files.external(DataManager.path);
+                                                    DataSaver.save(handle);
+                                                    DataManager.saved();
+                                                } else {
+                                                    LoadSave.saveas();
+                                                }
+
+                                            }
+
+                                            if (result == something) {
+
+                                            }
+                                        }
+                                    });
+
+                        }else {
+
+
+                            for (int i = 0; i < MainGame.blocks.size(); i = i + 1) {
+                                MainGame.blocks.get(i).delete();
+                            }
+                            DataManager.saved();
+                            DataManager.filename = "New File";
+                            DataManager.path = "";
+                            MainGame.blocks.clear();
                         }
                     }
                 };
                 clear.start();
-                Var.path = "";
-                MainGame.blocks.clear();
+
+
             }
         }).setShortcut("Strg+N"));
 
@@ -100,16 +159,60 @@ public static void update() {
         fileMenu.addItem(new MenuItem("Öffnen", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                LoadSave.open();
+                if(DataManager.changes) {
+                    String[] möglichkeiten ={"Verwerfen","Speichern","Abbrechen"};
+
+
+                    final int nothing = 1;
+                    final int everything = 2;
+                    final int something = 3;
+
+                    //confirmdialog may return result of any type, here we are just using ints
+                    Dialogs.showConfirmDialog(stage, "Ungespeicherte Änderungen", "\nWenn du eine neue Datei öffnest werden womögich Änderungen verworfen.\n",
+                            möglichkeiten, new Integer[]{nothing, everything, something},
+                            new ConfirmDialogListener<Integer>() {
+                                @Override
+                                public void result (Integer result) {
+                                    if (result == nothing) {
+                                        LoadSave.open();
+                                    }
+
+                                    if (result == everything) {
+                                        if (DataManager.path != "") {
+                                            FileHandle handle = Gdx.files.external(DataManager.path);
+                                            DataSaver.save(handle);
+                                            DataManager.saved();
+                                        } else {
+                                            LoadSave.saveas();
+                                        }
+                                    }
+
+                                    if (result == something) {
+
+
+                                    }
+                                }
+                            });
+
+
+
+
+
+
+                }else{
+                    LoadSave.open();
+                }
+
 
             }
         }).setShortcut("Strg+O"));
         fileMenu.addItem(new MenuItem("Speichern", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                if(Var.path !="") {
-                    FileHandle handle = Gdx.files.internal(Var.path);
+                if(DataManager.path !="") {
+                    FileHandle handle = Gdx.files.absolute(DataManager.path);
                     DataSaver.save(handle);
+                    DataManager.saved();
                 }else {
                     LoadSave.saveas();
                 }

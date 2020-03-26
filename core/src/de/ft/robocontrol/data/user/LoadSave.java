@@ -4,10 +4,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import de.ft.robocontrol.MainGame;
 import de.ft.robocontrol.Var;
+import de.ft.robocontrol.data.programm.Data;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
+import java.sql.DatabaseMetaData;
 
 import static de.ft.robocontrol.MainGame.saver;
 
@@ -30,15 +32,21 @@ public class LoadSave {
                     File fileToSave = fileChooser.getSelectedFile();
                     System.out.println("Save as file: " + fileToSave.getAbsolutePath());
 
+
                     if(fileToSave.getAbsolutePath().contains(".rac")) {
-                        Var.path = fileToSave.getAbsolutePath();
+                        DataManager.path = fileToSave.getAbsolutePath();
                         DataSaver.save(Gdx.files.absolute(fileToSave.getAbsolutePath()));
+                        DataManager.filename = fileToSave.getName();
 
                     }else{
-                        Var.path = fileToSave.getAbsolutePath()+".rac";
+                        DataManager.path = fileToSave.getAbsolutePath()+".rac";
                         DataSaver.save(Gdx.files.absolute(fileToSave.getAbsolutePath()+".rac"));
+                        DataManager.filename = fileToSave.getName()+".rac";
                     }
-                    System.out.println(Var.path);
+                    System.out.println(DataManager.path);
+
+                    DataManager.saved();
+
                 }
             };
             //SAVE DATA
@@ -63,8 +71,11 @@ public class LoadSave {
                     File selectedFile = fileChooser.getSelectedFile();
                     System.out.println("Selected file: " + selectedFile.getAbsolutePath());
                     FileHandle handle = Gdx.files.internal(selectedFile.getAbsolutePath());
-                    Var.path = selectedFile.getAbsolutePath();
+                    DataManager.path = selectedFile.getAbsolutePath();
+                    DataManager.filename = selectedFile.getName();
                     DataLoader.load(handle);
+                    DataManager.saved();
+                    DataManager.filename = selectedFile.getName();
 
                 }
             }
