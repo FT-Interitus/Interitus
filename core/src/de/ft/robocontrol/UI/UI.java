@@ -20,6 +20,7 @@ import com.kotcrab.vis.ui.widget.PopupMenu;
 import de.ft.robocontrol.MainGame;
 import de.ft.robocontrol.Var;
 import de.ft.robocontrol.data.programm.Data;
+import de.ft.robocontrol.data.user.DataLoader;
 import de.ft.robocontrol.data.user.DataManager;
 import de.ft.robocontrol.data.user.DataSaver;
 import de.ft.robocontrol.data.user.LoadSave;
@@ -301,8 +302,17 @@ public static void update() {
     public static PopupMenu createSubMenu(int count, String[] projects) {
         PopupMenu menu = new PopupMenu();
 
-        for(int i = 0; i<count;i++) {
-            menu.addItem(new MenuItem(projects[i]));
+        for(int i = count; i>0;i--) {
+
+            final int finalI = i-1;
+            menu.addItem(new MenuItem(projects[i-1], new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    FileHandle handle = Gdx.files.absolute(Data.path.get(finalI));
+                    DataLoader.load(handle);
+
+                }
+            }));
         }
             return menu;
     }
@@ -315,6 +325,7 @@ public static void update() {
 
         // ArrayList to Array Conversion
         for (int j = 0; j < arr.size(); j++) {
+
 
             // Assign each value to String array
             str[j] = arr.get(j);

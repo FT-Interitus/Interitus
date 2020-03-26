@@ -13,7 +13,7 @@ public class DataLoader {
             @Override
             public void run() {
                 for(int i = 0; i< MainGame.blocks.size(); i=i+1){
-                    MainGame.blocks.get(i).delete();
+                    MainGame.blocks.get(i-1).delete();
                 }
             }
         };
