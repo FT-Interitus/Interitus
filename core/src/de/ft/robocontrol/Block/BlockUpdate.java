@@ -143,7 +143,7 @@ public Timer time;
             } else {
 
 
-            if(block.getRight()!=Var.markedblock&&Var.markedblock.getLeft()!=block&&block.getRight()==null) {
+            if(block.getRight()!=Var.markedblock&&Var.markedblock.getLeft()!=block&&block.getRight()==null && Var.biggestblock==block) {
 
                 System.out.println("test");
                 block.setShowdupulicate_rechts(false);
@@ -170,7 +170,7 @@ public Timer time;
             } else {
 
 
-                if(block.getRight()!=Var.markedblock&&Var.markedblock.getLeft()!=block&&block.getLeft()==null) {
+                if(block.getRight()!=Var.markedblock&&Var.markedblock.getLeft()!=block&&block.getLeft()==null && Var.biggestblock==block) {
 
 
                     block.setShowdupulicate_links(false);
