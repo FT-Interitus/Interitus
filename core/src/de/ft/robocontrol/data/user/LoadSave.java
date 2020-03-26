@@ -1,10 +1,9 @@
-package de.ft.robocontrol.data;
+package de.ft.robocontrol.data.user;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import de.ft.robocontrol.MainGame;
 import de.ft.robocontrol.Var;
-import de.ft.robocontrol.utils.JSONParaser;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -21,6 +20,7 @@ public class LoadSave {
 
                 JFileChooser fileChooser = new JFileChooser();
                 fileChooser.setDialogTitle("Speichern unter...");
+                fileChooser.setFileFilter(new FileNameExtensionFilter("Projektdatei (.rac)", "rac"));
 
                 int userSelection = fileChooser.showSaveDialog(saver);
                 fileChooser.setMultiSelectionEnabled(false);
@@ -32,11 +32,11 @@ public class LoadSave {
 
                     if(fileToSave.getAbsolutePath().contains(".rac")) {
                         Var.path = fileToSave.getAbsolutePath();
-                        JSONParaser.writerarray(Gdx.files.absolute(fileToSave.getAbsolutePath()));
+                        DataSaver.save(Gdx.files.absolute(fileToSave.getAbsolutePath()));
 
                     }else{
                         Var.path = fileToSave.getAbsolutePath()+".rac";
-                        JSONParaser.writerarray(Gdx.files.absolute(fileToSave.getAbsolutePath()+".rac"));
+                        DataSaver.save(Gdx.files.absolute(fileToSave.getAbsolutePath()+".rac"));
                     }
                     System.out.println(Var.path);
                 }
@@ -56,7 +56,7 @@ public class LoadSave {
             @Override
             public void run() {
                 JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+
                 fileChooser.setFileFilter(new FileNameExtensionFilter("Projektdatei (.rac)", "rac"));
                 int result = fileChooser.showOpenDialog(MainGame.saver);
                 if (result == JFileChooser.APPROVE_OPTION) {
@@ -64,7 +64,7 @@ public class LoadSave {
                     System.out.println("Selected file: " + selectedFile.getAbsolutePath());
                     FileHandle handle = Gdx.files.internal(selectedFile.getAbsolutePath());
                     Var.path = selectedFile.getAbsolutePath();
-                    JSONParaser.load(handle);
+                    DataLoader.load(handle);
 
                 }
             }

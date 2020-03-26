@@ -1,15 +1,12 @@
-package de.ft.robocontrol;
+package de.ft.robocontrol.Block;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import de.ft.robocontrol.MainGame;
+import de.ft.robocontrol.Var;
 import de.ft.robocontrol.utils.CheckKollision;
-import de.ft.robocontrol.utils.PositionSaver;
 
-import jdk.tools.jaotc.Main;
-
-import java.io.IOException;
-import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -40,7 +37,7 @@ public Timer time;
 
 
 
-            if(de.ft.robocontrol.utils.CheckKollision.checkmousewithblock(block,Var.mousepressedold)&&Gdx.input.isButtonPressed(0) && Var.ismoving==false&&!block.isMarked()&&!Var.marked&&Var.markedblock==null){
+            if(de.ft.robocontrol.utils.CheckKollision.checkmousewithblock(block, Var.mousepressedold)&&Gdx.input.isButtonPressed(0) && Var.ismoving==false&&!block.isMarked()&&!Var.marked&&Var.markedblock==null){
                 MainGame.logger.debug("Marked Block" + block.getIndex());
                 Var.marked=true;
                 block.setMarked(true);

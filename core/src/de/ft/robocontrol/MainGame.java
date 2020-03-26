@@ -3,30 +3,20 @@ package de.ft.robocontrol;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Logger;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.kotcrab.vis.ui.VisUI;
-import com.kotcrab.vis.ui.widget.Menu;
-import com.kotcrab.vis.ui.widget.MenuBar;
+import de.ft.robocontrol.Block.Block;
 import de.ft.robocontrol.UI.UI;
-import de.ft.robocontrol.data.LoadSave;
-import de.ft.robocontrol.utils.JSONParaser;
+import de.ft.robocontrol.data.programm.Data;
 import de.ft.robocontrol.utils.PositionSaver;
 
-import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
 import java.awt.Component;
-import java.io.File;
 
 import java.util.ArrayList;
 
@@ -66,7 +56,10 @@ public static Logger logger;
 		logger = new Logger("MainLog", 0);
 
 
+
+
 		UI.init();
+		Data.init();
 
 
 		/*
@@ -114,12 +107,14 @@ for(int i=0;i<1;i=i+1) {
 		//System.out.println(Var.mousepressedold);
 		//System.out.println(blocks.get(1).getLeft());
 		cam.update();
+
 		//Gdx.gl.glClearColor(1,1,1, 1);
 		Gdx.gl.glClearColor(1,1,1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.setProjectionMatrix(cam.combined);
 
 		UI.update();
+		UI.updatedragui(shapeRenderer);
 /*
 		shapeRenderer.setProjectionMatrix(cam.combined);
 		shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
@@ -132,34 +127,6 @@ for(int i=0;i<1;i=i+1) {
 			logger.debug("Create new block");
 		}
 
-		if(input.isKeyJustPressed(Input.Keys.O)) {
-			LoadSave.open();
-		}
-
-		if(input.isKeyJustPressed(Input.Keys.S)) {
-			LoadSave.saveas();
-			/*
-
-
-
-
- */
-
-
-
-
-			//GET FOLDER
-			/*
-			JFileChooser fileChooser = new JFileChooser();
-			fileChooser.setDialogTitle("Projekt-Ordner wählen");
-			fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-			if (fileChooser.showOpenDialog(MainGame) == JFileChooser.CUSTOM_DIALOG) {
-				File file = fileChooser.getSelectedFile();
-				// load from file
-			}
-
-			 */
-		}
 
 if(!Var.isloading) {
 	Block Temp = null;
@@ -179,6 +146,9 @@ if(!Var.isloading) {
 
 			if (input.isKeyJustPressed(Input.Keys.FORWARD_DEL)) {
 				blocks.get(i).delete();
+			}
+			if(input.isKeyJustPressed(Input.Keys.SPACE)) {
+				cam.position.set(cam.position.x=+5,cam.position.y+=5, 0);
 			}
 
 

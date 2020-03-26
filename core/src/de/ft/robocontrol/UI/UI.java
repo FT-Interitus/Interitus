@@ -2,6 +2,8 @@ package de.ft.robocontrol.UI;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -14,17 +16,25 @@ import com.kotcrab.vis.ui.widget.MenuItem;
 import com.kotcrab.vis.ui.widget.PopupMenu;
 import de.ft.robocontrol.MainGame;
 import de.ft.robocontrol.Var;
-import de.ft.robocontrol.data.LoadSave;
-import de.ft.robocontrol.utils.JSONParaser;
-import sun.rmi.rmic.Main;
-
-import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import java.io.File;
+import de.ft.robocontrol.data.user.DataSaver;
+import de.ft.robocontrol.data.user.LoadSave;
 
 public class UI {
-    private static Stage stage;
+    public static Stage stage;
     private static MenuBar menuBar;
+
+    public static void initdragui() {
+
+    }
+
+    public static void updatedragui(ShapeRenderer renderer) {
+        renderer.begin(ShapeRenderer.ShapeType.Filled);
+        renderer.setColor(new Color(0,0,0,1));
+        renderer.rect(0, 0,Gdx.graphics.getWidth()+100,125);
+        renderer.end();
+
+    }
+
     public static void init() {
         VisUI.load(VisUI.SkinScale.X1);
         stage = new Stage(MainGame.viewport);
@@ -53,6 +63,7 @@ public class UI {
     }
 public static void update() {
     stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 60f));
+
     stage.draw();
 }
 
@@ -78,6 +89,7 @@ public static void update() {
                     }
                 };
                 clear.start();
+                Var.path = "";
                 MainGame.blocks.clear();
             }
         }).setShortcut("Strg+N"));
@@ -97,7 +109,7 @@ public static void update() {
             public void changed(ChangeEvent event, Actor actor) {
                 if(Var.path !="") {
                     FileHandle handle = Gdx.files.internal(Var.path);
-                    JSONParaser.writerarray(handle);
+                    DataSaver.save(handle);
                 }else {
                     LoadSave.saveas();
                 }

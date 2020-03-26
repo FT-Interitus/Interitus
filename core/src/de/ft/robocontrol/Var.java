@@ -1,6 +1,7 @@
 package de.ft.robocontrol;
 
 import com.badlogic.gdx.math.Vector2;
+import de.ft.robocontrol.Block.Block;
 
 public class Var {
 
