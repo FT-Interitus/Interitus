@@ -1,6 +1,7 @@
 package de.ft.robocontrol;
 
 import com.badlogic.gdx.math.Vector2;
+import de.ft.robocontrol.Block.Block;
 
 public class Var {
 
@@ -18,4 +19,5 @@ public class Var {
     public static boolean isloading=false;
 
 
+    public static volatile String path = "";
 }

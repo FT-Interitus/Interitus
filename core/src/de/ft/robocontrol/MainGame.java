@@ -3,33 +3,20 @@ package de.ft.robocontrol;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Logger;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.kotcrab.vis.ui.VisUI;
-import com.kotcrab.vis.ui.util.dialog.Dialogs;
-import com.kotcrab.vis.ui.widget.Menu;
-import com.kotcrab.vis.ui.widget.MenuBar;
-import com.kotcrab.vis.ui.widget.MenuItem;
-import com.kotcrab.vis.ui.widget.PopupMenu;
-import de.ft.robocontrol.utils.JSONParaser;
+import de.ft.robocontrol.Block.Block;
+import de.ft.robocontrol.UI.UI;
+import de.ft.robocontrol.data.programm.Data;
 import de.ft.robocontrol.utils.PositionSaver;
 
-import javax.swing.*;
-import javax.swing.filechooser.FileFilter;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
 import java.awt.Component;
-import java.io.File;
 
 import java.util.ArrayList;
 
@@ -46,12 +33,12 @@ public class MainGame extends ApplicationAdapter {
 
 	public static OrthographicCamera cam;
 	public static Viewport viewport;
-	private Component saver;
+	public static Component saver;
 
 
-	public static Stage stage;
-	public static MenuBar menuBar;
+
 	//BlockUpdate bu[] = new BlockUpdate[0];
+public static Logger logger;
 
 	@Override
 	public void create () {
@@ -64,30 +51,16 @@ public class MainGame extends ApplicationAdapter {
 		img_mouseover=new Texture("block_mouseover.png");
 		img_marked=new Texture("block_marked.png");
 
-		VisUI.load(VisUI.SkinScale.X1);
-		stage = new Stage(viewport);
-		final Table root = new Table();
-		root.setFillParent(true);
-		stage.addActor(root);
-		Gdx.input.setInputProcessor(stage);
 
 
-		menuBar = new MenuBar();
-		menuBar.setMenuListener(new MenuBar.MenuBarListener() {
-			@Override
-			public void menuOpened (Menu menu) {
-				System.out.println("Opened menu: " + menu.getTitle());
-			}
+		logger = new Logger("MainLog", 0);
 
-			@Override
-			public void menuClosed (Menu menu) {
-				System.out.println("Closed menu: " + menu.getTitle());
-			}
-		});
 
-		root.add(menuBar.getTable()).expandX().fillX().row();
-		root.add().expand().fill();
-		UI.createMenus();
+
+
+		UI.init();
+		Data.init();
+
 
 		/*
 		for(int i=0;i < blocks.length;i=i+1){
@@ -134,13 +107,14 @@ for(int i=0;i<1;i=i+1) {
 		//System.out.println(Var.mousepressedold);
 		//System.out.println(blocks.get(1).getLeft());
 		cam.update();
+
 		//Gdx.gl.glClearColor(1,1,1, 1);
-		Gdx.gl.glClearColor(0,0,0, 1);
+		Gdx.gl.glClearColor(1,1,1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.setProjectionMatrix(cam.combined);
 
-		stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 60f));
-		stage.draw();
+		UI.update();
+		UI.updatedragui(shapeRenderer);
 /*
 		shapeRenderer.setProjectionMatrix(cam.combined);
 		shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
@@ -150,78 +124,9 @@ for(int i=0;i<1;i=i+1) {
 
 		if(input.isKeyJustPressed(Input.Keys.INSERT)){
 			blocks.add(new Block(blocks.size(), 100, 200, 150, 70));
-			System.out.println(blocks.size());
+			logger.debug("Create new block");
 		}
 
-		if(input.isKeyJustPressed(Input.Keys.O)) {
-			 Thread open = new Thread() {
-				 @Override
-				 public void run() {
-					 JFileChooser fileChooser = new JFileChooser();
-					 fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
-					 fileChooser.setFileFilter(new FileNameExtensionFilter("Projektdatei (.rac)", "rac"));
-					 int result = fileChooser.showOpenDialog(saver);
-					 if (result == JFileChooser.APPROVE_OPTION) {
-						 File selectedFile = fileChooser.getSelectedFile();
-						 System.out.println("Selected file: " + selectedFile.getAbsolutePath());
-						 FileHandle handle = Gdx.files.internal(selectedFile.getAbsolutePath());
-						 JSONParaser.load(handle);
-
-					 }
-				 }
-			 } ;
-			open.start();
-		}
-
-		if(input.isKeyJustPressed(Input.Keys.S)) {
-/*
-
-
-
-
- */
-
-			Thread save = new Thread() {
-				@Override
-				public void run() {
-					JFileChooser fileChooser = new JFileChooser();
-					fileChooser.setDialogTitle("Projekt-Ordner wählen");
-
-					int userSelection = fileChooser.showSaveDialog(saver);
-					fileChooser.setMultiSelectionEnabled(false);
-
-
-					if (userSelection == JFileChooser.APPROVE_OPTION) {
-						File fileToSave = fileChooser.getSelectedFile();
-						System.out.println("Save as file: " + fileToSave.getAbsolutePath()+".rac");
-
-						if(fileToSave.getAbsolutePath().contains(".rac")) {
-
-							JSONParaser.writerarray(Gdx.files.absolute(fileToSave.getAbsolutePath()));
-						}
-				}
-			};
-			//SAVE DATA
-
-
-
-			};
-
-			save.start();
-
-
-			//GET FOLDER
-			/*
-			JFileChooser fileChooser = new JFileChooser();
-			fileChooser.setDialogTitle("Projekt-Ordner wählen");
-			fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-			if (fileChooser.showOpenDialog(MainGame) == JFileChooser.CUSTOM_DIALOG) {
-				File file = fileChooser.getSelectedFile();
-				// load from file
-			}
-
-			 */
-		}
 
 if(!Var.isloading) {
 	Block Temp = null;
@@ -241,6 +146,9 @@ if(!Var.isloading) {
 
 			if (input.isKeyJustPressed(Input.Keys.FORWARD_DEL)) {
 				blocks.get(i).delete();
+			}
+			if(input.isKeyJustPressed(Input.Keys.SPACE)) {
+				cam.position.set(cam.position.x=+5,cam.position.y+=5, 0);
 			}
 
 
@@ -280,11 +188,9 @@ if(!Var.isloading) {
 		super.resize(width, height);
 
 		//blocks[0].delete();
-		stage.getViewport().update(width, height, true);
-
-
-
+		UI.updateView(width, height);
 		viewport.update(width, height);
+
 	}
 
 

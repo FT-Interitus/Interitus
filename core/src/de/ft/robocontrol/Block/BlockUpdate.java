@@ -1,14 +1,12 @@
-package de.ft.robocontrol;
+package de.ft.robocontrol.Block;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import de.ft.robocontrol.MainGame;
+import de.ft.robocontrol.Var;
 import de.ft.robocontrol.utils.CheckKollision;
-import de.ft.robocontrol.utils.PositionSaver;
 
-import jdk.tools.jaotc.Main;
-
-import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -39,8 +37,8 @@ public Timer time;
 
 
 
-            if(de.ft.robocontrol.utils.CheckKollision.checkmousewithblock(block,Var.mousepressedold)&&Gdx.input.isButtonPressed(0) && Var.ismoving==false&&!block.isMarked()&&!Var.marked&&Var.markedblock==null){
-                System.out.println("marked");
+            if(de.ft.robocontrol.utils.CheckKollision.checkmousewithblock(block, Var.mousepressedold)&&Gdx.input.isButtonPressed(0) && Var.ismoving==false&&!block.isMarked()&&!Var.marked&&Var.markedblock==null){
+                MainGame.logger.debug("Marked Block" + block.getIndex());
                 Var.marked=true;
                 block.setMarked(true);
                Var.markedblock = block;
@@ -55,9 +53,9 @@ public Timer time;
                 if(Math.abs(Var.mousepressedold.x-MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x)>feld  ||  Math.abs(Var.mousepressedold.y-MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).y)>feld){
                     if(block.isMoving()==false  && Var.ismoving==false) {
                         Var.unterschiedsave = new Vector2(MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x  -  block.getX(),MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).y  -  block.getY());
-                        System.out.println("moved");
+
                         //block.setX(    (int)MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x );
-                        System.out.println((int)MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x-block.getX());
+                        //System.out.println((int)MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x-block.getX());
                         block.setMoving(true);
                         Var.ismoving=true;
                     }
@@ -200,7 +198,7 @@ if(block.isShowdupulicate_rechts()) {
 
         if(CheckKollision.checkblockwithduplicate(Var.markedblock, block,1)&&block.getLeft()==null) {
             if (Var.markedblock.isMoving()) {
-                System.out.println("Kollision!");
+
 
                 block.setShowdupulicate_links(true);
 
@@ -210,7 +208,7 @@ if(block.isShowdupulicate_rechts()) {
 
                 if(block.getRight()!=Var.markedblock&&Var.markedblock.getLeft()!=block&&block.getLeft()==null) {
 
-                    System.out.println("test");
+
                     block.setShowdupulicate_links(false);
                     block.setLeft(Var.markedblock);
                     Var.markedblock.setY(block.getY());

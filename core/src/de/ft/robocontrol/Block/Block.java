@@ -1,9 +1,10 @@
-package de.ft.robocontrol;
+package de.ft.robocontrol.Block;
 
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import jdk.tools.jaotc.Main;
+import de.ft.robocontrol.MainGame;
+import de.ft.robocontrol.Var;
 
 public class Block {
 
