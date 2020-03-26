@@ -91,16 +91,9 @@ public Timer time;
                 Var.marked=false;
                 Var.markedblock = null;
                 }
-
-
-
-
-
-
-
 if(block.isShowdupulicate_rechts()) {
 
-    if (Var.markedblock.getX() > block.getX_dup_rechts() && Var.markedblock.getY()<block.getY()) {
+    if (Var.markedblock.getX() > block.getX() + block.getW() && Var.markedblock.getY()<block.getY()) {
 
         try {
 
@@ -127,45 +120,6 @@ if(block.isShowdupulicate_rechts()) {
 
     }
 }
-
-
-
-
-                if(block.isShowdupulicate_links()) {
-
-                    if (Var.markedblock.getX() > block.getX_dup_links() && Var.markedblock.getY()<block.getY()) {
-
-                        try {
-
-                            int xx = block.getW() - (Var.markedblock.getX() - block.getX_dup_links());
-                            int yy = (Var.markedblock.getY() + Var.markedblock.getH()) - block.getY();
-                            System.out.println("y: " + yy + "x: " + xx + "flache: "+ yy*xx);
-                        } catch (NullPointerException e) {
-
-                        }
-
-
-                    }else{
-
-
-                        try {
-
-                            int xx = ((block.getW() - (Var.markedblock.getX() - block.getX_dup_links())));
-                            int yy = (((Var.markedblock.getY() + Var.markedblock.getH()) - block.getY()));
-                            System.out.println("y: " + yy + "x: " + xx + "flache: "+ yy*xx);
-                        } catch (NullPointerException e) {
-
-                        }
-
-
-                    }
-                }
-
-
-
-
-
-
 
     if(Var.marked&&!block.isMarked()) {
 

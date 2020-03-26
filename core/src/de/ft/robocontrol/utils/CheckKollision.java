@@ -6,7 +6,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.robocontrol.Block.Block;
 import de.ft.robocontrol.MainGame;
-import de.ft.robocontrol.Var;
 
 public class CheckKollision {
 
@@ -43,10 +42,6 @@ public class CheckKollision {
             return object(normal.getX(), normal.getY(), normal.getH(), normal.getW(), duplicate.getX_dup_links()+duplicate.getW()-60, duplicate.getY(), duplicate.getH(), 60);
         }
     }
-
-
-
-
 
     }
 
