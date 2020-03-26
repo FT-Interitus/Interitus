@@ -57,8 +57,8 @@ public class UI {
 
     public static void updatedragui(ShapeRenderer renderer) {
         renderer.begin(ShapeRenderer.ShapeType.Filled);
-        renderer.setColor(new Color(0,0,0,1));
-        renderer.rect(0, 0,Gdx.graphics.getWidth()+100,125);
+
+
 
 
         renderer.setColor(new Color(1,1,1,1));
@@ -66,6 +66,9 @@ public class UI {
         int abstandvonRand=10;
         abgerundetesRechteck(renderer,abstandvonRand,125+abstandvonRand,Gdx.graphics.getWidth()-abstandvonRand*2,Gdx.graphics.getHeight()-125+abstandvonRand-45-abstandvonRand,10);
 
+
+        renderer.setColor(new Color(0,0,0,1));
+        abgerundetesRechteck(renderer,abstandvonRand,abstandvonRand,Gdx.graphics.getWidth()-abstandvonRand*2,125-abstandvonRand,10);
 
         renderer.end();
 
