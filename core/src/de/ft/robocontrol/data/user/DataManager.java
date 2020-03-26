@@ -16,6 +16,6 @@ public class DataManager {
 
     public static void saved() {
         changes = false;
-        Gdx.graphics.setTitle(filename);
+       // Gdx.graphics.setTitle(filename);
     }
 }
