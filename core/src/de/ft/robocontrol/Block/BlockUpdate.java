@@ -90,6 +90,36 @@ public Timer time;
                 }
 
 
+
+                if(block.isShowdupulicate_links() || block.isShowdupulicate_rechts()){
+                    if(Var.showduplicat.indexOf(block)==-1){
+                        Var.showduplicat.add(block);
+                    }
+                }else{
+                    Var.showduplicat.remove(block);
+                    Var.biggestblock=null;
+                }
+
+                System.out.println(Var.showduplicat.size());
+                int biggestvalue=0;
+                int biggestindex=-1;
+                for(int i=0;i<Var.showduplicat.size();i++){
+
+                    if(Var.showduplicat.get(i).getFlaeche()>biggestvalue){
+                        biggestvalue=Var.showduplicat.get(i).getFlaeche();
+                        biggestindex=i;
+                    }
+                }
+                try {
+                    Var.biggestblock = Var.showduplicat.get(biggestindex);
+                }catch(IndexOutOfBoundsException e){
+
+                }
+
+
+
+
+
             if(de.ft.robocontrol.utils.CheckKollision.checkmousewithblock(block)==false&& Gdx.input.isButtonPressed(0) && !block.isMoving()&&block.isMarked()){
                 block.setMarked(false);
                 Var.marked=false;
@@ -98,34 +128,6 @@ public Timer time;
 
 
 
-                if(block.isShowdupulicate_rechts()) {
-
-
-                        try {
-
-                           System.out.println(CheckKollision.flache(block.getX_dup_rechts(),block.getY(),block.getW(),block.getH(),Var.markedblock.getX(),Var.markedblock.getY()));
-
-                        } catch (NullPointerException e) {
-
-                        }
-
-
-                }
-
-
-                if(block.isShowdupulicate_links()) {
-
-
-                    try {
-
-                        System.out.println(CheckKollision.flache(block.getX_dup_links(),block.getY(),block.getW(),block.getH(),Var.markedblock.getX(),Var.markedblock.getY()));
-
-                    } catch (NullPointerException e) {
-
-                    }
-
-
-                }
 
 
 

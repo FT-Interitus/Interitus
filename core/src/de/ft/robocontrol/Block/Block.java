@@ -5,10 +5,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import de.ft.robocontrol.MainGame;
 import de.ft.robocontrol.Var;
+import de.ft.robocontrol.utils.CheckKollision;
 
 public class Block {
 
     private boolean marked=false;
+    private boolean biggestarea=false;
     private int x;
     private int y;
     private int w;
@@ -205,16 +207,18 @@ public class Block {
         if(this.isMarked()) {
             batch.draw(MainGame.img_marked, this.getX(), this.getY(), this.getW(), this.getH());
         }
-if(this.isShowdupulicate_rechts()) {
-    batch.setColor(1,1,1,0.5f);
-    batch.draw(MainGame.img_block, this.x_dup_rechts, this.y, this.getW(), this.getH());
-    batch.setColor(1,1,1,1);
-}
+        if(Var.biggestblock==this) {
+            if (this.isShowdupulicate_rechts()) {
+                batch.setColor(1, 1, 1, 0.5f);
+                batch.draw(MainGame.img_block, this.x_dup_rechts, this.y, this.getW(), this.getH());
+                batch.setColor(1, 1, 1, 1);
+            }
 
-        if(this.isShowdupulicate_links()) {
-            batch.setColor(1,1,1,0.5f);
-            batch.draw(MainGame.img_block, this.x_dup_links, this.y, this.getW(), this.getH());
-            batch.setColor(1,1,1,1);
+            if (this.isShowdupulicate_links()) {
+                batch.setColor(1, 1, 1, 0.5f);
+                batch.draw(MainGame.img_block, this.x_dup_links, this.y, this.getW(), this.getH());
+                batch.setColor(1, 1, 1, 1);
+            }
         }
 
         if(this.getLeft()!=null){
@@ -234,7 +238,48 @@ if(this.isShowdupulicate_rechts()) {
             shape.end();
             batch.begin();
         }
+        if(this==Var.biggestblock) {
+            batch.end();
+            shape.begin(ShapeRenderer.ShapeType.Filled);
+            shape.rect(x, y, 20, 20);
+            shape.end();
+            batch.begin();
+        }
 
 
 
-}}
+}
+
+
+public int getFlaeche(){
+        int flaeche=0;
+    if(this.isShowdupulicate_rechts()) {
+
+        try {
+
+            flaeche=(CheckKollision.flache(this.getX_dup_rechts(),this.getY(),this.getW(),this.getH(),Var.markedblock.getX(),Var.markedblock.getY()));
+
+        } catch (NullPointerException e) {
+
+        }
+
+
+    }
+
+
+    if(this.isShowdupulicate_links()) {
+        try {
+
+            flaeche=(CheckKollision.flache(this.getX_dup_links(),this.getY(),this.getW(),this.getH(),Var.markedblock.getX(),Var.markedblock.getY()));
+
+        } catch (NullPointerException e) {
+
+        }
+
+    }
+    return flaeche;
+}
+
+
+
+}

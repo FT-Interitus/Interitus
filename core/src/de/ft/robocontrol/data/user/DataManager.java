@@ -1,6 +1,7 @@
 package de.ft.robocontrol.data.user;
 
 import com.badlogic.gdx.Gdx;
+import de.ft.robocontrol.MainGame;
 
 public class DataManager {
     public static boolean changes = false;
@@ -9,7 +10,7 @@ public class DataManager {
     public static void change() {
         if(!changes) {
             changes = true;
-            Gdx.graphics.setTitle(filename+ "*");
+            //Gdx.graphics.setTitle(filename+ "*");
         }
     }
 
