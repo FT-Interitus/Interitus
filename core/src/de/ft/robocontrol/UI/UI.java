@@ -61,14 +61,16 @@ public class UI {
 
 
 
-        renderer.setColor(new Color(1,1,1,1));
+        renderer.setColor(new Color(0.15f,0.15f,0.15f,1));
 
         int abstandvonRand=10;
         abgerundetesRechteck(renderer,abstandvonRand,125+abstandvonRand,Gdx.graphics.getWidth()-abstandvonRand*2,Gdx.graphics.getHeight()-125+abstandvonRand-45-abstandvonRand,10);
 
 
-        renderer.setColor(new Color(0,0,0,1));
-        abgerundetesRechteck(renderer,abstandvonRand,abstandvonRand,Gdx.graphics.getWidth()-abstandvonRand*2,125-abstandvonRand,10);
+        renderer.setColor(new Color(0.2f,0.1f,0.1f,1));
+        abgerundetesRechteck(renderer,abstandvonRand,abstandvonRand,Gdx.graphics.getWidth()-abstandvonRand*2-300,125-abstandvonRand,10);
+        renderer.setColor(new Color(0.2f,0.2f,0.2f,1));
+        abgerundetesRechteck(renderer,Gdx.graphics.getWidth()-300,abstandvonRand,300-abstandvonRand,125-abstandvonRand,10);
 
         renderer.end();
 
