@@ -36,10 +36,36 @@ public class UI {
 
     }
 
+    public static void abgerundetesRechteck(ShapeRenderer renderer,int x, int y, int w, int h, int r){
+        w=w-r*2;
+        h=h-r*2;
+        renderer.circle(x+r,y+r,r);
+        renderer.circle(x+r+w,y+r,r);
+        renderer.circle(x+r,y+r+h,r);
+        renderer.circle(x+r+w,y+r+h,r);
+
+        renderer.rect(x+r,y,w,40);
+        renderer.rect(x+r,y+h,w,r*2);
+        renderer.rect(x,y+r,r*2,h);
+        renderer.rect(x+w,y+r,r*2,h);
+
+        renderer.rect(x+r,y+r,w,h);
+    }
+
+
+
     public static void updatedragui(ShapeRenderer renderer) {
         renderer.begin(ShapeRenderer.ShapeType.Filled);
         renderer.setColor(new Color(0,0,0,1));
         renderer.rect(0, 0,Gdx.graphics.getWidth()+100,125);
+
+
+        renderer.setColor(new Color(1,1,1,1));
+
+        int abstandvonRand=10;
+        abgerundetesRechteck(renderer,abstandvonRand,125+abstandvonRand,Gdx.graphics.getWidth()-abstandvonRand*2,Gdx.graphics.getHeight()-125+abstandvonRand-45-abstandvonRand,10);
+
+
         renderer.end();
 
     }
