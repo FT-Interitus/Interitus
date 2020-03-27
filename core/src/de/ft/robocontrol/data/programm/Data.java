@@ -6,6 +6,7 @@ import de.ft.robocontrol.Block.Block;
 import de.ft.robocontrol.UI.UI;
 import jdk.nashorn.internal.parser.JSONParser;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -45,33 +46,35 @@ public class Data {
        }else {
 
 
+            try {
 
+                FileHandle re = Gdx.files.absolute(System.getProperty("user.home") + "/.racd/recent.json");
 
-               FileHandle re = Gdx.files.absolute(System.getProperty("user.home")+"/.racd/recent.json");
-
-                if(re.readString()=="") {
+                if (re.readString() == "") {
                     re.writeString("{}", false);
                     return;
                 }
 
-                 JSONObject obj =  new JSONObject(re.readString());
+                JSONObject obj = new JSONObject(re.readString());
 
                 int i = 0;
-                while(obj.has("path"+i)) {
+                while (obj.has("path" + i)) {
                     i++;
                 }
 
 
-                for(int a = 0; a<i; a++) {
-                    Data.path.add(obj.getString("path"+a));
-                    Data.filename.add(obj.getString("filename"+a));
+                for (int a = 0; a < i; a++) {
+                    Data.path.add(obj.getString("path" + a));
+                    Data.filename.add(obj.getString("filename" + a));
                 }
 
 
-            //     System.out.println(obj.get("path"));
+                //     System.out.println(obj.get("path"));
 
 
+            }catch (JSONException e) {
 
+            }
 
        }
 

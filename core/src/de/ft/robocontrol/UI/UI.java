@@ -93,6 +93,7 @@ public class UI {
         root.add(menuBar.getTable()).expandX().fillX().row();
         root.add().expand().fill();
         de.ft.robocontrol.UI.MenuBar.createMenus();
+        Settings.init();
 
 
         Thread UIthread = new Thread() {
