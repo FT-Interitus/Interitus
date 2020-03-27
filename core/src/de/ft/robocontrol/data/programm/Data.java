@@ -6,6 +6,7 @@ import de.ft.robocontrol.Block.Block;
 import de.ft.robocontrol.UI.UI;
 import jdk.nashorn.internal.parser.JSONParser;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -53,8 +54,8 @@ public class Data {
                     re.writeString("{}", false);
                     return;
                 }
-
-                 JSONObject obj =  new JSONObject(re.readString());
+try {
+    JSONObject obj = new JSONObject(re.readString());
 
                 int i = 0;
                 while(obj.has("path"+i)) {
@@ -67,7 +68,7 @@ public class Data {
                     Data.filename.add(obj.getString("filename"+a));
                 }
 
-
+}catch(JSONException e){}
             //     System.out.println(obj.get("path"));
 
 
