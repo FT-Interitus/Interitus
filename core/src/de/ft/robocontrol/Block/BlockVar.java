@@ -4,7 +4,11 @@ import com.badlogic.gdx.math.Vector2;
 
 import java.util.ArrayList;
 
-public class GlobalBlockVar {
+public class BlockVar {
+
+    public static ArrayList<Block> blocks = new ArrayList<Block>();
+
+
     public static Block markedblock = null;
     public static Vector2 mousepressedold=new Vector2(1,1);
 
