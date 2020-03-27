@@ -12,6 +12,7 @@ import com.kotcrab.vis.ui.widget.MenuItem;
 import de.ft.robocontrol.MainGame;
 import de.ft.robocontrol.Settings;
 import de.ft.robocontrol.data.programm.Data;
+import de.ft.robocontrol.data.user.changes.SaveChanges;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ import static de.ft.robocontrol.UI.MenuBar.createSubMenu;
 public class UI {
     public static Stage stage;
     public static MenuItem recent;
+    public static MenuItem revert;
     protected static MenuBar menuBar;
    protected static SettingsUI set;
     public static void initdragui() {
@@ -121,6 +123,9 @@ public class UI {
                 time.scheduleAtFixedRate(new TimerTask() {
                     @Override
                     public void run() {
+
+
+                        ////////////recent//////////////////////////
                         for (int i = 0; i < Data.path.size(); i++) {
                             if (!(new File(Data.path.get(i)).exists())) {
                                 Data.path.remove(i);
@@ -132,6 +137,16 @@ public class UI {
                             recent.setDisabled(true);
                         } else {
                             recent.setDisabled(false);
+                        }
+
+                        ///////////////////////////////////
+
+
+                        /////////////revert//////////////
+                        if(SaveChanges.checkstack()) {
+                            revert.setDisabled(true);
+                        }else{
+                            revert.setDisabled(false);
                         }
 
                     }

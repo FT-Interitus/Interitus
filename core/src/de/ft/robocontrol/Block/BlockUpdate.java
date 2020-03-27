@@ -31,7 +31,6 @@ public Timer time;
         time.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                System.out.println("Mist");
 
             toggle = de.ft.robocontrol.utils.CheckKollision.checkmousewithblock(block);
 
@@ -56,7 +55,7 @@ public Timer time;
 
                         //block.setX(    (int)MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x );
                         //System.out.println((int)MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x-block.getX());
-                        DataManager.change(block);
+                        DataManager.change(block, false, false);
                         block.setMoving(true);
                         BlockVar.ismoving=true;
 

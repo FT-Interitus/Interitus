@@ -59,8 +59,26 @@ public class SettingsUI extends VisWindow {
                 }
             });
 
+
+
+           ActorLayout layout = new ActorLayout() {
+               @Override
+               public Actor convertToActor(Actor... widgets) {
+                   return null;
+               }
+
+               @Override
+               public Actor convertToActor(CellWidget<?>... widgets) {
+                   return null;
+               }
+           };
+
+
+       //    layout.convertToActor(new CreateTab());
+
             builder.append(darktoggle);
-            builder.row();
+            builder.append();
+
 /*
             builder.append(new VisLabel("title label"));
             builder.row();

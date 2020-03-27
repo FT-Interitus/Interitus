@@ -4,6 +4,7 @@ package de.ft.robocontrol.Block;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import de.ft.robocontrol.MainGame;
+import de.ft.robocontrol.data.user.changes.DataManager;
 import de.ft.robocontrol.utils.CheckKollision;
 
 public class Block {
@@ -79,6 +80,8 @@ public class Block {
     }
 
     public void setLeft(Block left) {
+
+
         if(this.left!=left) {
             this.left = left;
         }
@@ -87,18 +90,20 @@ public class Block {
                 left.setRight(this);
             }
         }
+
     }
 
     public void setRight(Block right) {
+
         if(this.right!=right) {
             this.right = right;
         }
-
         if(right!=null) {
             if (right.getLeft() != this) {
                 right.setLeft(this);
             }
         }
+
     }
 
     public Block getLeft() {
@@ -164,6 +169,8 @@ public class Block {
         BlockVar.marked=false;
         BlockVar.ismoving=false;
 
+
+        DataManager.change(this, false, true);
 
         if(left!=null) {
             left.setRight(null);
@@ -252,9 +259,6 @@ public class Block {
 }
 
 
-public Block getthis() {
-        return this;
-}
 
 public int getDublicatmarkedblockuberlappungsflache(){
         int flaeche=0;

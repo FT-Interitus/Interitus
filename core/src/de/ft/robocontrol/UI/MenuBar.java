@@ -201,10 +201,12 @@ public class MenuBar {
 
         // ---
 
-        editMenu.addItem(new MenuItem("Rückgänig", new ChangeListener() {
+        editMenu.addItem(UI.revert = new MenuItem("Rückgänig", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                SaveChanges.revert();
+                if(!SaveChanges.checkstack()) { //Test if Stack is empty
+                    SaveChanges.revert();
+                }
             }
         }).setShortcut("Strg+Z"));
         editMenu.addItem(new MenuItem("Wiederherstellen").setShortcut("Strg+Y"));

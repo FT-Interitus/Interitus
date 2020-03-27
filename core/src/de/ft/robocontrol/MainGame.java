@@ -128,9 +128,9 @@ for(int i=0;i<1;i=i+1) {
 */
 
 		if(input.isKeyJustPressed(Input.Keys.INSERT)){
-			DataManager.change(null);
-			BlockVar.blocks.add(new Block(BlockVar.blocks.size(), 100, 200, 150, 70));
 
+			BlockVar.blocks.add(new Block(BlockVar.blocks.size(), 100, 200, 150, 70));
+			DataManager.change(BlockVar.blocks.get(BlockVar.blocks.size()-1),true, false);
 		}
 		UI.updatedragui(shapeRenderer);
 

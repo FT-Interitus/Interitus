@@ -8,17 +8,12 @@ public class DataManager {
     public static boolean changes = false;
     public static String filename = "";
     public static volatile String path = "";
-    public static void change(Block block) {
+    public static void change(Block block, boolean created, boolean deleted) {
         if(!changes) {
             changes = true;
-            //Gdx.graphics.setTitle(filename+ "*");
-
-
-
-
-
+            //Gdx.graphics.setTitle(filename+ "*"); //TODO Windows problems
         }
-        SaveChanges.changedValue(block);
+        SaveChanges.changedValue(block,created,deleted);
     }
 
     public static void saved() {
