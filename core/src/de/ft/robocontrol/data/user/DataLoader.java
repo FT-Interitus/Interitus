@@ -14,7 +14,7 @@ public class DataLoader {
             @Override
             public void run() {
                 for(int i = 0; i< BlockVar.blocks.size(); i=i+1){
-                    BlockVar.blocks.get(i-1).delete();
+                    BlockVar.blocks.get(i).delete();
                 }
             }
         };
