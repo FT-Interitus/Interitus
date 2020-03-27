@@ -49,16 +49,19 @@ public class LoadSave {
 
                     }
 
-                    if(Data.path.indexOf(fileToSave.getAbsolutePath())>-1) {
+                    if(Data.filename.indexOf(fileToSave.getName())>-1) {
                         int temp =Data.filename.indexOf(fileToSave.getName());
                         Data.filename.remove(temp);
                         Data.path.remove(temp);
                     }
 
-                    Data.filename.add(fileToSave.getName());
 
+                    Data.filename.add(fileToSave.getName());
                     Data.path.add(fileToSave.getAbsolutePath());
+
                     DataManager.saved();
+
+
 
                 }
             };
