@@ -142,8 +142,29 @@ try {
     try {
         BlockVar.blockmitdergrostenuberlappungmitmarkiertemblock = BlockVar.uberlapptmitmarkedblock.get(biggestindex2);
     }catch(IndexOutOfBoundsException e){}
-System.out.println(BlockVar.blockmitdergrostenuberlappungmitmarkiertemblock);
 }catch (NullPointerException e){}
+
+
+if(block==BlockVar.blockmitdergrostenuberlappungmitmarkiertemblock && block.moved==false){
+    block.moved=true;
+    int a=BlockVar.blocks.indexOf(BlockVar.blockmitdergrostenuberlappungmitmarkiertemblock);
+System.out.println(a);
+    block.setX(block.getX()+block.getW());
+
+    try {
+
+        while (BlockVar.blocks.get(a).getRight().getIndex() != -1) {
+            System.out.println("pipi");
+
+            //block.getRight().setX(block.getRight().getX() + block.getW());
+
+            BlockVar.blocks.get(a).getRight().setX(BlockVar.blocks.get(a).getX()+BlockVar.blocks.get(a).getW());
+            a=BlockVar.blocks.indexOf(BlockVar.blocks.get(a).getRight());
+        }
+    }catch(NullPointerException e){}
+
+
+}
 
 
             if(de.ft.robocontrol.utils.CheckKollision.checkmousewithblock(block)==false&& Gdx.input.isButtonPressed(0) && !block.isMoving()&&block.isMarked()){
