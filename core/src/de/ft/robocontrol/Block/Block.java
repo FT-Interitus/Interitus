@@ -124,6 +124,7 @@ public class Block {
     }
 
 
+
     public int getY() {
         return y;
     }
@@ -249,6 +250,10 @@ public class Block {
 
 }
 
+
+public Block getthis() {
+        return this;
+}
 
 public int getDublicatmarkedblockuberlappungsflache(){
         int flaeche=0;
