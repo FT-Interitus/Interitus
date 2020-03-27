@@ -10,6 +10,7 @@ import com.kotcrab.vis.ui.widget.Menu;
 import com.kotcrab.vis.ui.widget.MenuBar;
 import com.kotcrab.vis.ui.widget.MenuItem;
 import de.ft.robocontrol.MainGame;
+import de.ft.robocontrol.Settings;
 import de.ft.robocontrol.data.programm.Data;
 
 import java.io.File;
@@ -49,7 +50,11 @@ public class UI {
         renderer.begin(ShapeRenderer.ShapeType.Filled);
 
 
-        renderer.setColor(new Color(0.15f, 0.15f, 0.15f, 1));
+        if(Settings.darkmode) {
+            renderer.setColor(new Color(0.15f, 0.15f, 0.15f, 1));
+        }else{
+            renderer.setColor(new Color(1f, 1f, 1f, 1));
+        }
 
         int abstandvonRand = 7;
         int unteneinteilung = 300;
@@ -58,10 +63,17 @@ public class UI {
 
         abgerundetesRechteck(renderer, abstandvonRand, untenhohe + abstandvonRand, Gdx.graphics.getWidth() - abstandvonRand * 2, Gdx.graphics.getHeight() - untenhohe + abstandvonRand - 45 - abstandvonRand, radius);
 
-
-        renderer.setColor(new Color(0.2f, 0.1f, 0.1f, 1));
+        if(Settings.darkmode) {
+            renderer.setColor(new Color(0.2f, 0.1f, 0.1f, 1));
+        }else{
+            renderer.setColor(new Color(1f, 1f, 1f, 1));
+        }
         abgerundetesRechteck(renderer, abstandvonRand, abstandvonRand, Gdx.graphics.getWidth() - abstandvonRand * 2 - unteneinteilung, untenhohe - abstandvonRand, radius);
-        renderer.setColor(new Color(0.2f, 0.2f, 0.2f, 1));
+        if(Settings.darkmode) {
+            renderer.setColor(new Color(0.2f, 0.2f, 0.2f, 1));
+        }else{
+            renderer.setColor(new Color(1f, 1f, 1f, 1));
+        }
         abgerundetesRechteck(renderer, Gdx.graphics.getWidth() - unteneinteilung, abstandvonRand, unteneinteilung - abstandvonRand, untenhohe - abstandvonRand, radius);
 
         renderer.end();

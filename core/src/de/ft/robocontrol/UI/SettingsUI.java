@@ -42,6 +42,7 @@ public class SettingsUI extends VisWindow {
             addCloseButton();
 
             final VisCheckBox darktoggle = new VisCheckBox("Schaltet den Dark-Mode an und aus");
+            darktoggle.setChecked(Settings.darkmode);
             darktoggle.addListener(new ChangeListener() {
                 @Override
                 public void changed (ChangeEvent event, Actor actor) {

@@ -101,7 +101,7 @@ public class Data {
                        se.writeString("{}", false);
                        return;
                    }
-                   JSONObject obj = new JSONObject(se);
+                   JSONObject obj = new JSONObject(se.readString());
 
                     Settings.darkmode = obj.getBoolean("dark");
                     //TODO weitere einstellugen Laden
