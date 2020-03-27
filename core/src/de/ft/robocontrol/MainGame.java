@@ -208,9 +208,13 @@ if(!Var.isloading) {
 		}
 		
 		BlockVar.blocks.clear();
+
+
 		
 		Data.close();
 		batch.dispose();
 		img_block.dispose();
+		Gdx.app.exit();
+		System.exit(0);
 	}
 }
