@@ -18,11 +18,13 @@ public class BlockVar {
 
     public static boolean marked=false;
 
-
+    public static ArrayList<Block> uberlapptmitmarkedblock = new ArrayList<Block>();
 
     public static ArrayList<Block> showduplicat = new ArrayList<Block>();
 
     public static Block biggestblock=null;
+
+
 
 
 }

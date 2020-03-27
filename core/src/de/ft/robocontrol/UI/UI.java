@@ -51,10 +51,10 @@ public class UI {
 
         renderer.setColor(new Color(0.15f, 0.15f, 0.15f, 1));
 
-        int abstandvonRand = 10;
+        int abstandvonRand = 7;
         int unteneinteilung = 300;
         int untenhohe = 125;
-        int radius = 10;
+        int radius = 3;
 
         abgerundetesRechteck(renderer, abstandvonRand, untenhohe + abstandvonRand, Gdx.graphics.getWidth() - abstandvonRand * 2, Gdx.graphics.getHeight() - untenhohe + abstandvonRand - 45 - abstandvonRand, radius);
 
