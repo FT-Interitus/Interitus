@@ -15,7 +15,7 @@ public class Manager {
   }
 
     public static void Copy(){
-        //TODO hier eventuelle Array anpassen
+        //TODO hier eventuelle Array anpassen wenn mehrere Makiert werden sollen
 
 
 

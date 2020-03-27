@@ -191,6 +191,13 @@ public class MenuBar {
             }
         }).setShortcut("Strg+Y"));
         editMenu.addSeparator();
+        editMenu.addItem(new MenuItem("Block löschen", new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+
+            }
+        }));
+
         editMenu.addItem(UI.copy =new MenuItem("Kopieren", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
