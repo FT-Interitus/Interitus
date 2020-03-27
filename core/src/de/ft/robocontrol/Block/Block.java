@@ -4,7 +4,6 @@ package de.ft.robocontrol.Block;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import de.ft.robocontrol.MainGame;
-import de.ft.robocontrol.Var;
 import de.ft.robocontrol.utils.CheckKollision;
 
 public class Block {
@@ -159,9 +158,9 @@ public class Block {
     }
 
     public void delete() {
-        GlobalBlockVar.markedblock=null;
-        GlobalBlockVar.marked=false;
-        GlobalBlockVar.ismoving=false;
+        BlockVar.markedblock=null;
+        BlockVar.marked=false;
+        BlockVar.ismoving=false;
 
 
         if(left!=null) {
@@ -183,10 +182,10 @@ public class Block {
             System.out.println("mist");
 
         }
-        int temp = MainGame.blocks.indexOf(this);
-        MainGame.blocks.remove(MainGame.blocks.indexOf(this));
-        for(int i = 0;i<MainGame.blocks.size()-temp;i++) {
-            MainGame.blocks.get(i).setIndex(MainGame.blocks.get(i).getIndex()-1);
+        int temp = BlockVar.blocks.indexOf(this);
+        BlockVar.blocks.remove(BlockVar.blocks.indexOf(this));
+        for(int i = 0;i<BlockVar.blocks.size()-temp;i++) {
+            BlockVar.blocks.get(i).setIndex(BlockVar.blocks.get(i).getIndex()-1);
             //System.out.println("Noch nicht abgestürtzt!");
         }
 
@@ -207,7 +206,7 @@ public class Block {
         if(this.isMarked()) {
             batch.draw(MainGame.img_marked, this.getX(), this.getY(), this.getW(), this.getH());
         }
-        if(GlobalBlockVar.biggestblock==this) {
+        if(BlockVar.biggestblock==this) {
             if (this.isShowdupulicate_rechts()) {
                 batch.setColor(1, 1, 1, 0.5f);
                 batch.draw(MainGame.img_block, this.x_dup_rechts, this.y, this.getW(), this.getH());
@@ -238,7 +237,7 @@ public class Block {
             shape.end();
             batch.begin();
         }
-        if(this==GlobalBlockVar.biggestblock) {
+        if(this== BlockVar.biggestblock) {
             batch.end();
             shape.begin(ShapeRenderer.ShapeType.Filled);
             shape.rect(x, y, 20, 20);
@@ -257,7 +256,7 @@ public int getFlaeche(){
 
         try {
 
-            flaeche=(CheckKollision.flache(this.getX_dup_rechts(),this.getY(),this.getW(),this.getH(),GlobalBlockVar.markedblock.getX(),GlobalBlockVar.markedblock.getY()));
+            flaeche=(CheckKollision.flache(this.getX_dup_rechts(),this.getY(),this.getW(),this.getH(), BlockVar.markedblock.getX(), BlockVar.markedblock.getY()));
 
         } catch (NullPointerException e) {
 
@@ -270,7 +269,7 @@ public int getFlaeche(){
     if(this.isShowdupulicate_links()) {
         try {
 
-            flaeche=(CheckKollision.flache(this.getX_dup_links(),this.getY(),this.getW(),this.getH(),GlobalBlockVar.markedblock.getX(),GlobalBlockVar.markedblock.getY()));
+            flaeche=(CheckKollision.flache(this.getX_dup_links(),this.getY(),this.getW(),this.getH(), BlockVar.markedblock.getX(), BlockVar.markedblock.getY()));
 
         } catch (NullPointerException e) {
 

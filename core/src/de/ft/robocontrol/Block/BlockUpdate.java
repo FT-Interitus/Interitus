@@ -37,27 +37,27 @@ public Timer time;
 
 
 
-            if(de.ft.robocontrol.utils.CheckKollision.checkmousewithblock(block, GlobalBlockVar.mousepressedold)&&Gdx.input.isButtonPressed(0) && GlobalBlockVar.ismoving==false&&!block.isMarked()&&!GlobalBlockVar.marked&&GlobalBlockVar.markedblock==null){
+            if(de.ft.robocontrol.utils.CheckKollision.checkmousewithblock(block, BlockVar.mousepressedold)&&Gdx.input.isButtonPressed(0) && BlockVar.ismoving==false&&!block.isMarked()&&!BlockVar.marked&&BlockVar.markedblock==null){
                 MainGame.logger.debug("Marked Block" + block.getIndex());
-                GlobalBlockVar.marked=true;
+                BlockVar.marked=true;
                 block.setMarked(true);
-               GlobalBlockVar.markedblock = block;
-                GlobalBlockVar.unterschiedsave = new Vector2(MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x  -  block.getX(),MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).y  -  block.getY());
+               BlockVar.markedblock = block;
+                BlockVar.unterschiedsave = new Vector2(MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x  -  block.getX(),MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).y  -  block.getY());
 
             }
 
 
 
-            if( GlobalBlockVar.ismoving==false&&!block.isMoving()&&block.isMarked() && Gdx.input.isButtonPressed(0)){
+            if( BlockVar.ismoving==false&&!block.isMoving()&&block.isMarked() && Gdx.input.isButtonPressed(0)){
                 int feld=2;
-                if(Math.abs(GlobalBlockVar.mousepressedold.x-MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x)>feld  ||  Math.abs(GlobalBlockVar.mousepressedold.y-MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).y)>feld){
-                    if(block.isMoving()==false  && GlobalBlockVar.ismoving==false) {
-                        GlobalBlockVar.unterschiedsave = new Vector2(MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x  -  block.getX(),MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).y  -  block.getY());
+                if(Math.abs(BlockVar.mousepressedold.x-MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x)>feld  ||  Math.abs(BlockVar.mousepressedold.y-MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).y)>feld){
+                    if(block.isMoving()==false  && BlockVar.ismoving==false) {
+                        BlockVar.unterschiedsave = new Vector2(MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x  -  block.getX(),MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).y  -  block.getY());
 
                         //block.setX(    (int)MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x );
                         //System.out.println((int)MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x-block.getX());
                         block.setMoving(true);
-                        GlobalBlockVar.ismoving=true;
+                        BlockVar.ismoving=true;
                         DataManager.change();
                     }
 
@@ -68,8 +68,8 @@ public Timer time;
 
                 if(block.isMoving() && Gdx.input.isButtonPressed(0)){
                     DataManager.change();
-                     block.setX((int)(MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x-GlobalBlockVar.unterschiedsave.x));
-                        block.setY((int)(MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).y-GlobalBlockVar.unterschiedsave.y));
+                     block.setX((int)(MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x-BlockVar.unterschiedsave.x));
+                        block.setY((int)(MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).y-BlockVar.unterschiedsave.y));
 
 
                       if(block.getLeft()!=null) {
@@ -81,7 +81,7 @@ public Timer time;
                     block.setRight(null);
                     block.setLeft(null);
                 }else if(block.isMoving()){
-                    GlobalBlockVar.ismoving=false;
+                    BlockVar.ismoving=false;
                     block.setMoving(false);
 
 
@@ -90,26 +90,26 @@ public Timer time;
 
 
                 if(block.isShowdupulicate_links() || block.isShowdupulicate_rechts()){
-                    if(GlobalBlockVar.showduplicat.indexOf(block)==-1){
-                        GlobalBlockVar.showduplicat.add(block);
+                    if(BlockVar.showduplicat.indexOf(block)==-1){
+                        BlockVar.showduplicat.add(block);
                     }
                 }else{
-                    GlobalBlockVar.showduplicat.remove(block);
-                    GlobalBlockVar.biggestblock=null;
+                    BlockVar.showduplicat.remove(block);
+                    BlockVar.biggestblock=null;
                 }
 
-            //    System.out.println(GlobalBlockVar.showduplicat.size());
+            //    System.out.println(BlockVar.showduplicat.size());
                 int biggestvalue=0;
                 int biggestindex=-1;
-                for(int i=0;i<GlobalBlockVar.showduplicat.size();i++){
+                for(int i=0;i<BlockVar.showduplicat.size();i++){
 
-                    if(GlobalBlockVar.showduplicat.get(i).getFlaeche()>biggestvalue){
-                        biggestvalue=GlobalBlockVar.showduplicat.get(i).getFlaeche();
+                    if(BlockVar.showduplicat.get(i).getFlaeche()>biggestvalue){
+                        biggestvalue=BlockVar.showduplicat.get(i).getFlaeche();
                         biggestindex=i;
                     }
                 }
                 try {
-                    GlobalBlockVar.biggestblock = GlobalBlockVar.showduplicat.get(biggestindex);
+                    BlockVar.biggestblock = BlockVar.showduplicat.get(biggestindex);
                 }catch(IndexOutOfBoundsException e){
 
                 }
@@ -120,8 +120,8 @@ public Timer time;
 
             if(de.ft.robocontrol.utils.CheckKollision.checkmousewithblock(block)==false&& Gdx.input.isButtonPressed(0) && !block.isMoving()&&block.isMarked()){
                 block.setMarked(false);
-                GlobalBlockVar.marked=false;
-                GlobalBlockVar.markedblock = null;
+                BlockVar.marked=false;
+                BlockVar.markedblock = null;
                 }
 
 
@@ -129,10 +129,10 @@ public Timer time;
 
 
 
-    if(GlobalBlockVar.marked&&!block.isMarked()) {
+    if(BlockVar.marked&&!block.isMarked()) {
 
-        if(CheckKollision.checkblockwithduplicate(GlobalBlockVar.markedblock, block,0)&&block.getRight()==null) {
-            if (GlobalBlockVar.markedblock.isMoving()) {
+        if(CheckKollision.checkblockwithduplicate(BlockVar.markedblock, block,0)&&block.getRight()==null) {
+            if (BlockVar.markedblock.isMoving()) {
                 System.out.println("Kollision!");
 
                 block.setShowdupulicate_rechts(true);
@@ -141,13 +141,13 @@ public Timer time;
             } else {
 
 
-            if(block.getRight()!=GlobalBlockVar.markedblock&&GlobalBlockVar.markedblock.getLeft()!=block&&block.getRight()==null && GlobalBlockVar.biggestblock==block) {
+            if(block.getRight()!=BlockVar.markedblock&&BlockVar.markedblock.getLeft()!=block&&block.getRight()==null && BlockVar.biggestblock==block) {
 
                 System.out.println("test");
                 block.setShowdupulicate_rechts(false);
-                block.setRight(GlobalBlockVar.markedblock);
-                GlobalBlockVar.markedblock.setY(block.getY());
-                GlobalBlockVar.markedblock.setX(block.getX_dup_rechts());
+                block.setRight(BlockVar.markedblock);
+                BlockVar.markedblock.setY(block.getY());
+                BlockVar.markedblock.setX(block.getX_dup_rechts());
             }
 
 
@@ -158,8 +158,8 @@ public Timer time;
 
 
 
-        if(CheckKollision.checkblockwithduplicate(GlobalBlockVar.markedblock, block,1)&&block.getLeft()==null) {
-            if (GlobalBlockVar.markedblock.isMoving()) {
+        if(CheckKollision.checkblockwithduplicate(BlockVar.markedblock, block,1)&&block.getLeft()==null) {
+            if (BlockVar.markedblock.isMoving()) {
 
 
                 block.setShowdupulicate_links(true);
@@ -168,13 +168,13 @@ public Timer time;
             } else {
 
 
-                if(block.getRight()!=GlobalBlockVar.markedblock&&GlobalBlockVar.markedblock.getLeft()!=block&&block.getLeft()==null && GlobalBlockVar.biggestblock==block) {
+                if(block.getRight()!=BlockVar.markedblock&&BlockVar.markedblock.getLeft()!=block&&block.getLeft()==null && BlockVar.biggestblock==block) {
 
 
                     block.setShowdupulicate_links(false);
-                    block.setLeft(GlobalBlockVar.markedblock);
-                    GlobalBlockVar.markedblock.setY(block.getY());
-                    GlobalBlockVar.markedblock.setX(block.getX_dup_links());
+                    block.setLeft(BlockVar.markedblock);
+                    BlockVar.markedblock.setY(block.getY());
+                    BlockVar.markedblock.setX(block.getX_dup_links());
                 }
 
 
@@ -215,7 +215,7 @@ public Timer time;
 
             if(!toggle && Gdx.input.isButtonPressed(0)&&!Var.indraganddrop){
                 block.setMarked(false);
-                GlobalBlockVar.markedblock = null;
+                BlockVar.markedblock = null;
             }
             */
 

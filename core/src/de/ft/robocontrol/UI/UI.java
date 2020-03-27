@@ -15,6 +15,7 @@ import com.kotcrab.vis.ui.widget.Menu;
 import com.kotcrab.vis.ui.widget.MenuBar;
 import com.kotcrab.vis.ui.widget.MenuItem;
 import com.kotcrab.vis.ui.widget.PopupMenu;
+import de.ft.robocontrol.Block.BlockVar;
 import de.ft.robocontrol.MainGame;
 import de.ft.robocontrol.Var;
 import de.ft.robocontrol.data.programm.Data;
@@ -182,13 +183,13 @@ public static void update() {
                                         @Override
                                         public void result(Integer result) {
                                             if (result == nothing) {
-                                                for (int i = 0; i < MainGame.blocks.size(); i = i + 1) {
-                                                    MainGame.blocks.get(i).delete();
+                                                for (int i = 0; i < BlockVar.blocks.size(); i = i + 1) {
+                                                    BlockVar.blocks.get(i).delete();
                                                 }
                                                 DataManager.saved();
                                                 DataManager.filename = "New File";
                                                 DataManager.path = "";
-                                                MainGame.blocks.clear();
+                                                BlockVar.blocks.clear();
                                             }
 
                                             if (result == everything) {
@@ -211,13 +212,13 @@ public static void update() {
                         }else {
 
 
-                            for (int i = 0; i < MainGame.blocks.size(); i = i + 1) {
-                                MainGame.blocks.get(i).delete();
+                            for (int i = 0; i < BlockVar.blocks.size(); i = i + 1) {
+                                BlockVar.blocks.get(i).delete();
                             }
                             DataManager.saved();
                             DataManager.filename = "New File";
                             DataManager.path = "";
-                            MainGame.blocks.clear();
+                            BlockVar.blocks.clear();
                         }
                     }
                 };
@@ -248,10 +249,10 @@ public static void update() {
                                 @Override
                                 public void result (Integer result) {
                                     if (result == nothing) {
-                                        for (int i = 0; i < MainGame.blocks.size(); i = i + 1) {
-                                            MainGame.blocks.get(i).delete();
+                                        for (int i = 0; i < BlockVar.blocks.size(); i = i + 1) {
+                                            BlockVar.blocks.get(i).delete();
                                         }
-                                        MainGame.blocks.clear();
+                                        BlockVar.blocks.clear();
                                         DataManager.saved();
                                         DataManager.filename = "New File";
                                         DataManager.path = "";
@@ -450,10 +451,10 @@ public static void update() {
                                     @Override
                                     public void result(Integer result) {
                                         if (result == nothing) {
-                                            for (int i = 0; i < MainGame.blocks.size(); i = i + 1) {
-                                                MainGame.blocks.get(i).delete();
+                                            for (int i = 0; i < BlockVar.blocks.size(); i = i + 1) {
+                                                BlockVar.blocks.get(i).delete();
                                             }
-                                            MainGame.blocks.clear();
+                                            BlockVar.blocks.clear();
                                             DataManager.saved();
                                             DataManager.filename = Data.filename.get(finalI);
                                             DataManager.path = Data.path.get(finalI);
@@ -482,10 +483,10 @@ public static void update() {
 
 
                     } else {
-                        for (int i = 0; i < MainGame.blocks.size(); i = i + 1) {
-                            MainGame.blocks.get(i).delete();
+                        for (int i = 0; i < BlockVar.blocks.size(); i = i + 1) {
+                            BlockVar.blocks.get(i).delete();
                         }
-                        MainGame.blocks.clear();
+                        BlockVar.blocks.clear();
                         DataManager.saved();
                         DataManager.filename = Data.filename.get(finalI);
                         DataManager.path = Data.path.get(finalI);

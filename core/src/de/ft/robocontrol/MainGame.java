@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.Logger;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.ft.robocontrol.Block.Block;
+import de.ft.robocontrol.Block.BlockVar;
 import de.ft.robocontrol.UI.UI;
 import de.ft.robocontrol.data.programm.Data;
 import de.ft.robocontrol.data.programm.DataManager;
@@ -30,7 +31,7 @@ public class MainGame extends ApplicationAdapter {
 	public static Texture img_mouseover;
 	public static Texture img_marked;
 
-	public static ArrayList<Block> blocks = new ArrayList<Block>();
+	
 
 	public static OrthographicCamera cam;
 	public static Viewport viewport;
@@ -66,24 +67,24 @@ public static Logger logger;
 
 
 		/*
-		for(int i=0;i < blocks.length;i=i+1){
+		for(int i=0;i < BlockVar.blocks.length;i=i+1){
 			System.out.println("eine runde"+i);
-			blocks[i]=new Block(i,i*100,100,100,30);
-			bu[i]=new BlockUpdate(blocks[i]);
+			BlockVar.blocks[i]=new Block(i,i*100,100,100,30);
+			bu[i]=new BlockUpdate(BlockVar.blocks[i]);
 			bu[i].start();
-			//blocks[i].setWH(100,30);
-			//blocks[i].setPosition(i*blocks[i].getW(),100);
+			//BlockVar.blocks[i].setWH(100,30);
+			//BlockVar.blocks[i].setPosition(i*BlockVar.blocks[i].getW(),100);
 
 		}
 		 */
 
 
 for(int i=0;i<1;i=i+1) {
-	blocks.add(new Block(i, i * 150, 100, 150, 70));
+	BlockVar.blocks.add(new Block(i, i * 150, 100, 150, 70));
 
 
 }
-//blocks.get(0).setRight(blocks.get(1));
+//BlockVar.blocks.get(0).setRight(BlockVar.blocks.get(1));
 
 
 		cam.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
@@ -108,7 +109,7 @@ for(int i=0;i<1;i=i+1) {
 
 
 		//System.out.println(Var.mousepressedold);
-		//System.out.println(blocks.get(1).getLeft());
+		//System.out.println(BlockVar.blocks.get(1).getLeft());
 		cam.update();
 
 		//Gdx.gl.glClearColor(1,1,1, 1);
@@ -125,29 +126,29 @@ for(int i=0;i<1;i=i+1) {
 */
 
 		if(input.isKeyJustPressed(Input.Keys.INSERT)){
-			blocks.add(new Block(blocks.size(), 100, 200, 150, 70));
+			BlockVar.blocks.add(new Block(BlockVar.blocks.size(), 100, 200, 150, 70));
 			DataManager.change();
 		}
 	//	UI.updatedragui(shapeRenderer);
 
 if(!Var.isloading) {
 	Block Temp = null;
-	for (int i = 0; i < blocks.size(); i = i + 1) {
+	for (int i = 0; i < BlockVar.blocks.size(); i = i + 1) {
 		batch.begin();
 
 
-		if (blocks.get(i).isMarked()) {
-			Temp = blocks.get(i);
+		if (BlockVar.blocks.get(i).isMarked()) {
+			Temp = BlockVar.blocks.get(i);
 		} else {
-			blocks.get(i).draw(batch,shapeRenderer);
+			BlockVar.blocks.get(i).draw(batch,shapeRenderer);
 		}
 
 		batch.end();
-		if (blocks.get(i).isMarked()) {
+		if (BlockVar.blocks.get(i).isMarked()) {
 
 
 			if (input.isKeyJustPressed(Input.Keys.FORWARD_DEL)) {
-				blocks.get(i).delete();
+				BlockVar.blocks.get(i).delete();
 			}
 			if(input.isKeyJustPressed(Input.Keys.SPACE)) {
 				cam.position.set(cam.position.x=+5,cam.position.y+=5, 0);
@@ -163,15 +164,15 @@ if(!Var.isloading) {
 			Temp.draw(batch,shapeRenderer);
 			batch.end();
 		}
-		//System.out.println(blocks.get(i).isMarked() + "  id: "+blocks.get(i).getIndex());
+		//System.out.println(BlockVar.blocks.get(i).isMarked() + "  id: "+BlockVar.blocks.get(i).getIndex());
 
 	}
 }
 		/*
 
-		for(int b=0;b<blocks.size();b=b+1) {
-			Block block = blocks.get(b);
-			if(!blocks.get(b).blockupdate.toggle) {
+		for(int b=0;b<BlockVar.blocks.size();b=b+1) {
+			Block block = BlockVar.blocks.get(b);
+			if(!BlockVar.blocks.get(b).blockupdate.toggle) {
 				batch.draw(img_block, block.getX(), block.getY(), block.getW(), block.getH());
 			}else{
 				batch.draw(img_selected, block.getX(), block.getY(), block.getW(), block.getH());
@@ -190,7 +191,7 @@ if(!Var.isloading) {
 	public void resize(int width, int height) {
 		super.resize(width, height);
 
-		//blocks[0].delete();
+		//BlockVar.blocks[0].delete();
 		UI.updateView(width, height);
 		viewport.update(width, height);
 
@@ -201,6 +202,13 @@ if(!Var.isloading) {
 
 	@Override
 	public void dispose () {
+		
+		for(int i = 0;i<BlockVar.blocks.size();i++) {
+			BlockVar.blocks.get(i).delete();
+		}
+		
+		BlockVar.blocks.clear();
+		
 		Data.close();
 		batch.dispose();
 		img_block.dispose();
