@@ -17,14 +17,8 @@ import de.ft.robocontrol.data.user.DataLoader;
 import de.ft.robocontrol.data.user.DataSaver;
 import de.ft.robocontrol.data.user.LoadSave;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-
 public class MenuBar {
-    protected static void createMenus () {
+    protected static void createMenus() {
         Menu fileMenu = new Menu("Datei");
         Menu editMenu = new Menu("Bearbeiten");
         Menu windowMenu = new Menu("Ansicht");
@@ -37,11 +31,11 @@ public class MenuBar {
         fileMenu.addItem(new MenuItem("Neu", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                final Thread clear =new Thread() {
+                final Thread clear = new Thread() {
                     @Override
                     public void run() {
 
-                        if(DataManager.changes) {
+                        if (DataManager.changes) {
 
                             String[] möglichkeiten = {"Verwerfen", "Speichern", "Abbrechen"};
 
@@ -83,7 +77,7 @@ public class MenuBar {
                                         }
                                     });
 
-                        }else {
+                        } else {
 
 
                             for (int i = 0; i < BlockVar.blocks.size(); i = i + 1) {
@@ -103,13 +97,12 @@ public class MenuBar {
         }).setShortcut("Strg+N"));
 
 
-
         fileMenu.addItem(UI.recent);
         fileMenu.addItem(new MenuItem("Öffnen", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                if(DataManager.changes) {
-                    String[] möglichkeiten ={"Verwerfen","Speichern","Abbrechen"};
+                if (DataManager.changes) {
+                    String[] möglichkeiten = {"Verwerfen", "Speichern", "Abbrechen"};
 
 
                     final int nothing = 1;
@@ -121,7 +114,7 @@ public class MenuBar {
                             möglichkeiten, new Integer[]{nothing, everything, something},
                             new ConfirmDialogListener<Integer>() {
                                 @Override
-                                public void result (Integer result) {
+                                public void result(Integer result) {
                                     if (result == nothing) {
                                         for (int i = 0; i < BlockVar.blocks.size(); i = i + 1) {
                                             BlockVar.blocks.get(i).delete();
@@ -151,11 +144,7 @@ public class MenuBar {
                             });
 
 
-
-
-
-
-                }else{
+                } else {
                     LoadSave.open();
                 }
 
@@ -165,11 +154,11 @@ public class MenuBar {
         fileMenu.addItem(new MenuItem("Speichern", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                if(DataManager.path !="") {
+                if (DataManager.path != "") {
                     FileHandle handle = Gdx.files.absolute(DataManager.path);
                     DataSaver.save(handle);
                     DataManager.saved();
-                }else {
+                } else {
                     LoadSave.saveas();
                 }
             }
@@ -177,7 +166,6 @@ public class MenuBar {
         fileMenu.addItem(new MenuItem("Speichern unter", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-
 
 
                 LoadSave.saveas();
@@ -203,7 +191,6 @@ public class MenuBar {
         editMenu.addItem(new MenuItem("Einfügen").setShortcut("Strg+V"));
 
 
-
         windowMenu.addItem(new MenuItem("menuitem #9"));
         windowMenu.addItem(new MenuItem("menuitem #10"));
         windowMenu.addItem(new MenuItem("menuitem #11"));
@@ -214,7 +201,7 @@ public class MenuBar {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
-                String[] möglichkeiten = {"Überprüfen","Abbrechen"};
+                String[] möglichkeiten = {"Überprüfen", "Abbrechen"};
                 final int yes = 1;
                 final int no = 2;
 
@@ -236,7 +223,7 @@ public class MenuBar {
 
         helpMenu.addItem(new MenuItem("Über", new ChangeListener() {
             @Override
-            public void changed (ChangeEvent event, Actor actor) {
+            public void changed(ChangeEvent event, Actor actor) {
                 Dialogs.showOKDialog(UI.stage, "Über", "Programm-Version: " + Var.PROGRAMM_VERSION);
             }
         }));
@@ -252,11 +239,11 @@ public class MenuBar {
     protected static PopupMenu createSubMenu(int count, final String[] projects) {
         PopupMenu menu = new PopupMenu();
 
-        for(int i = count; i>0;i--) {
+        for (int i = count; i > 0; i--) {
 
-            final int finalI = i-1;
+            final int finalI = i - 1;
 
-            menu.addItem(new MenuItem(projects[i-1], new ChangeListener() {
+            menu.addItem(new MenuItem(projects[i - 1], new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
 
@@ -325,5 +312,5 @@ public class MenuBar {
         }
         return menu;
     }
-    
+
 }
