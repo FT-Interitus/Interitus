@@ -250,7 +250,7 @@ public class Block {
 }
 
 
-public int getFlaeche(){
+public int getDublicatmarkedblockuberlappungsflache(){
         int flaeche=0;
     if(this.isShowdupulicate_rechts()) {
 
@@ -277,6 +277,13 @@ public int getFlaeche(){
 
     }
     return flaeche;
+}
+public int getBlockMarkedblockuberlappungsflache(){
+        int flaeche=0;
+        try {
+            flaeche = CheckKollision.flache(this.getX(), this.getY(), this.getW(), this.getH(), BlockVar.markedblock.getX(), BlockVar.markedblock.getY());
+        }catch (NullPointerException e){}
+        return flaeche;
 }
 
 

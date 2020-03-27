@@ -103,8 +103,8 @@ public Timer time;
                 int biggestindex=-1;
                 for(int i=0;i<BlockVar.showduplicat.size();i++){
 
-                    if(BlockVar.showduplicat.get(i).getFlaeche()>biggestvalue){
-                        biggestvalue=BlockVar.showduplicat.get(i).getFlaeche();
+                    if(BlockVar.showduplicat.get(i).getDublicatmarkedblockuberlappungsflache()>biggestvalue){
+                        biggestvalue=BlockVar.showduplicat.get(i).getDublicatmarkedblockuberlappungsflache();
                         biggestindex=i;
                     }
                 }
@@ -117,15 +117,24 @@ public Timer time;
 try {
 
 
-    if (CheckKollision.object(BlockVar.markedblock.getX(), BlockVar.markedblock.getY(),BlockVar.markedblock.getH() , BlockVar.markedblock.getW(), block.getX(), block.getY(), block.getH(), block.getW()) && BlockVar.markedblock!=block) {
-        System.out.println("überschneidung von markedblock und einem block");
+    if (CheckKollision.object(BlockVar.markedblock.getX(), BlockVar.markedblock.getY(),BlockVar.markedblock.getH() , BlockVar.markedblock.getW(), block.getX(), block.getY(), block.getH(), block.getW())&&BlockVar.markedblock!=block) {
+       // System.out.println("überschneidung von markedblock und einem block");
         if(BlockVar.uberlapptmitmarkedblock.indexOf(block)==-1) {
             BlockVar.uberlapptmitmarkedblock.add(block);
         }
     }else{
         BlockVar.uberlapptmitmarkedblock.remove(block);
     }
-    System.out.println("ubblock:  "+BlockVar.uberlapptmitmarkedblock.size());
+    //System.out.println("ubblock:  "+BlockVar.uberlapptmitmarkedblock.size());
+
+    int biggestvalue2=0;
+    for(int i=0;i<BlockVar.uberlapptmitmarkedblock.size();i++){
+        //if(BlockVar.uberlapptmitmarkedblock.get(i).)
+        if(BlockVar.markedblock!=block) {
+            System.out.println("flaeche   " + block.getBlockMarkedblockuberlappungsflache() + "size" + BlockVar.uberlapptmitmarkedblock.get(i).getIndex());
+        }
+
+    }
 
 }catch (NullPointerException e){}
 
@@ -135,11 +144,6 @@ try {
                 BlockVar.marked=false;
                 BlockVar.markedblock = null;
                 }
-                int biggestvalue2=0;
-            for(int i=0;i<BlockVar.uberlapptmitmarkedblock.size();i++){
-
-                //if(BlockVar.uberlapptmitmarkedblock.get(i).)
-            }
 
 
 
