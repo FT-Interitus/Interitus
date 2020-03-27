@@ -13,12 +13,13 @@ import com.kotcrab.vis.ui.building.utilities.Padding;
 import com.kotcrab.vis.ui.building.utilities.layouts.ActorLayout;
 import com.kotcrab.vis.ui.util.TableUtils;
 import com.kotcrab.vis.ui.widget.*;
+import de.ft.robocontrol.Settings;
 
-public class Settings extends VisWindow {
+public class SettingsUI extends VisWindow {
 
 
     final Padding padding = new Padding(2, 3);
-    public Settings () {
+    public SettingsUI() {
         super("Einstellungen");
         pack();
         setPosition(31, 35);
@@ -40,17 +41,23 @@ public class Settings extends VisWindow {
             closeOnEscape();
             addCloseButton();
 
-            final VisCheckBox debugViewCheckBox = new VisCheckBox("toggle debug view");
-            debugViewCheckBox.addListener(new ChangeListener() {
+            final VisCheckBox darktoggle = new VisCheckBox("Schaltet den Dark-Mode an und aus");
+            darktoggle.addListener(new ChangeListener() {
                 @Override
                 public void changed (ChangeEvent event, Actor actor) {
-                    setDebug(debugViewCheckBox.isChecked(), true);
+
+
+                    if(darktoggle.isChecked()) {
+                        Settings.darkmode = true;
+                    }else{
+                        Settings.darkmode = false;
+                    }
                 }
             });
 
-            builder.append(debugViewCheckBox);
+            builder.append(darktoggle);
             builder.row();
-
+/*
             builder.append(new VisLabel("title label"));
             builder.row();
 
@@ -67,6 +74,8 @@ public class Settings extends VisWindow {
             builder.append(new VisLabel("description"));
             builder.append(CellWidget.of(new VisTextField()).fillX().wrap());
             builder.row();
+
+
 
             //rest of content won't fit on screen with OneRowTableBuilder
             if (builder instanceof OneRowTableBuilder == false) {
@@ -86,6 +95,8 @@ public class Settings extends VisWindow {
 
                 builder.append(rowLayout, getCheckBoxArray(8));
             }
+
+ */
 
             Table table = builder.build();
             add(table).expand().fill();

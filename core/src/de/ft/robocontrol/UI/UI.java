@@ -6,8 +6,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.kotcrab.vis.ui.VisUI;
-import com.kotcrab.vis.ui.building.StandardTableBuilder;
-import com.kotcrab.vis.ui.building.utilities.Padding;
 import com.kotcrab.vis.ui.widget.Menu;
 import com.kotcrab.vis.ui.widget.MenuBar;
 import com.kotcrab.vis.ui.widget.MenuItem;
@@ -16,7 +14,6 @@ import de.ft.robocontrol.data.programm.Data;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -26,7 +23,7 @@ public class UI {
     public static Stage stage;
     public static MenuItem recent;
     protected static MenuBar menuBar;
-   protected static Settings set;
+   protected static SettingsUI set;
     public static void initdragui() {
 
     }
@@ -79,7 +76,7 @@ public class UI {
         stage.addActor(root);
         Gdx.input.setInputProcessor(stage);
 
-        set = new Settings();
+        set = new SettingsUI();
 
         menuBar = new MenuBar();
         menuBar.setMenuListener(new MenuBar.MenuBarListener() {
