@@ -31,9 +31,7 @@ public class MenuBar {
         fileMenu.addItem(new MenuItem("Neu", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                final Thread clear = new Thread() {
-                    @Override
-                    public void run() {
+
 
                         if (DataManager.changes) {
 
@@ -51,9 +49,16 @@ public class MenuBar {
                                         @Override
                                         public void result(Integer result) {
                                             if (result == nothing) {
-                                                for (int i = 0; i < BlockVar.blocks.size(); i = i + 1) {
-                                                    BlockVar.blocks.get(i).delete();
+                                                int temp =  BlockVar.blocks.size();
+                                                for (int i = 0; i < temp; i ++) {
+                                                    BlockVar.blocks.get(0).delete();
                                                 }
+                                                BlockVar.blocks.clear();
+                                                BlockVar.biggestblock = null;
+                                                BlockVar.markedblock = null;
+                                                BlockVar.ismoving = false;
+                                                BlockVar.showduplicat.clear();
+                                                BlockVar.blockmitdergrostenuberlappungmitmarkiertemblock = null;
                                                 DataManager.saved();
                                                 DataManager.filename = "New File";
                                                 DataManager.path = "";
@@ -88,9 +93,6 @@ public class MenuBar {
                             DataManager.path = "";
                             BlockVar.blocks.clear();
                         }
-                    }
-                };
-                clear.start();
 
 
             }
@@ -116,10 +118,19 @@ public class MenuBar {
                                 @Override
                                 public void result(Integer result) {
                                     if (result == nothing) {
-                                        for (int i = 0; i < BlockVar.blocks.size(); i = i + 1) {
-                                            BlockVar.blocks.get(i).delete();
+                                        int temp = BlockVar.blocks.size();
+
+                                        for (int i = 0; i < temp; i++) {
+                                            BlockVar.blocks.get(0).delete();
+
                                         }
                                         BlockVar.blocks.clear();
+                                        BlockVar.biggestblock = null;
+                                        BlockVar.markedblock = null;
+                                        BlockVar.ismoving = false;
+                                        BlockVar.showduplicat.clear();
+                                        BlockVar.blockmitdergrostenuberlappungmitmarkiertemblock = null;
+
                                         DataManager.saved();
                                         DataManager.filename = "New File";
                                         DataManager.path = "";

@@ -31,7 +31,7 @@ public Timer time;
         time.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-
+                System.out.println("Mist");
 
             toggle = de.ft.robocontrol.utils.CheckKollision.checkmousewithblock(block);
 
