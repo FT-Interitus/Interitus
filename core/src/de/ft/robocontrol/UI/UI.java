@@ -23,8 +23,10 @@ import de.ft.robocontrol.data.programm.DataManager;
 import de.ft.robocontrol.data.user.DataSaver;
 import de.ft.robocontrol.data.user.LoadSave;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -333,12 +335,90 @@ public static void update() {
         windowMenu.addSeparator();
         windowMenu.addItem(new MenuItem("menuitem #12"));
 
+        helpMenu.addItem(new MenuItem("Updates..", new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+
+                String[] möglichkeiten = {"Überprüfen","Abbrechen"};
+                final int yes = 1;
+                final int no = 2;
+
+
+                Dialogs.showConfirmDialog(stage, "Auf Updates prüfen", "\nSicher das du nach Updates prüfen willst?\n",
+                        möglichkeiten, new Integer[]{yes, no},
+                        new ConfirmDialogListener<Integer>() {
+                            @Override
+                            public void result(Integer result) {
+
+                                if (result == yes) {
+
+                                    BufferedReader br = null;
+                                    InputStreamReader isr = null;
+                                    URL url = null;
+
+                                    String urlString = "https://raw.githubusercontent.com/Coder246/roboupdater/master/version";
+
+                                    try {
+                                        url = new URL(urlString);
+                                    } catch (MalformedURLException e) {
+                                        Dialogs.showErrorDialog(stage, "Der Update-Server reagiert leider nicht oder du hast einfach keine Internetverbindung");
+                                    }
+
+
+
+
+                                    try {
+
+                                        isr = new InputStreamReader(url.openStream());
+
+
+                                    } catch (IOException e) {
+                                        Dialogs.showErrorDialog(stage, "Der Update-Server reagiert leider nicht oder du hast einfach keine Internetverbindung");
+                                    }
+
+                                    br = new BufferedReader(isr);
+
+
+
+                                    try {
+                                        double version_get = Double.parseDouble(br.readLine());
+                                        System.out.println(version_get);
+                                        if(version_get==Var.PROGRAMM_VERSION_ID) {
+                                            Dialogs.showOKDialog(stage, "Kein Update", "Du bist auf dem neusten Stand");
+
+                                        }else if(version_get<Var.PROGRAMM_VERSION_ID){
+                                            Dialogs.showErrorDialog(stage, "Bitte Kontaktiere die Herausgeber dieser Software! Hier liegt ein Fehler vor der alle Nutzer betrifft!");
+                                        }else if(version_get>Var.PROGRAMM_VERSION_ID){
+                                            Dialogs.showOKDialog(stage, "Update", "Hier liegt ein Update vor!"); //TODO hier update vorgang einleiten
+                                        }
+                                    } catch (IOException e) {
+                                        Dialogs.showErrorDialog(stage, "Der Update-Server reagiert leider nicht oder du hast einfach keine Internetverbindung");
+                                    }
+
+
+                                }
+
+
+
+
+
+                                if (result == no) {
+
+
+                                }
+
+                            }
+                        });
+            }
+        }));
+
         helpMenu.addItem(new MenuItem("Über", new ChangeListener() {
             @Override
             public void changed (ChangeEvent event, Actor actor) {
-                Dialogs.showOKDialog(stage, "Über", "Programm-Version: " + Var.GAME_VERSION);
+                Dialogs.showOKDialog(stage, "Über", "Programm-Version: " + Var.PROGRAMM_VERSION);
             }
         }));
+
 
        menuBar.addMenu(fileMenu);
        menuBar.addMenu(editMenu);
@@ -356,7 +436,7 @@ public static void update() {
             menu.addItem(new MenuItem(projects[i-1], new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
-                  
+
                     if (DataManager.changes) {
 
                         String[] möglichkeiten = {"Verwerfen", "Speichern", "Abbrechen"};

@@ -159,9 +159,9 @@ public class Block {
     }
 
     public void delete() {
-        Var.markedblock=null;
-        Var.marked=false;
-        Var.ismoving=false;
+        GlobalBlockVar.markedblock=null;
+        GlobalBlockVar.marked=false;
+        GlobalBlockVar.ismoving=false;
 
 
         if(left!=null) {
@@ -207,7 +207,7 @@ public class Block {
         if(this.isMarked()) {
             batch.draw(MainGame.img_marked, this.getX(), this.getY(), this.getW(), this.getH());
         }
-        if(Var.biggestblock==this) {
+        if(GlobalBlockVar.biggestblock==this) {
             if (this.isShowdupulicate_rechts()) {
                 batch.setColor(1, 1, 1, 0.5f);
                 batch.draw(MainGame.img_block, this.x_dup_rechts, this.y, this.getW(), this.getH());
@@ -238,7 +238,7 @@ public class Block {
             shape.end();
             batch.begin();
         }
-        if(this==Var.biggestblock) {
+        if(this==GlobalBlockVar.biggestblock) {
             batch.end();
             shape.begin(ShapeRenderer.ShapeType.Filled);
             shape.rect(x, y, 20, 20);
@@ -257,7 +257,7 @@ public int getFlaeche(){
 
         try {
 
-            flaeche=(CheckKollision.flache(this.getX_dup_rechts(),this.getY(),this.getW(),this.getH(),Var.markedblock.getX(),Var.markedblock.getY()));
+            flaeche=(CheckKollision.flache(this.getX_dup_rechts(),this.getY(),this.getW(),this.getH(),GlobalBlockVar.markedblock.getX(),GlobalBlockVar.markedblock.getY()));
 
         } catch (NullPointerException e) {
 
@@ -270,7 +270,7 @@ public int getFlaeche(){
     if(this.isShowdupulicate_links()) {
         try {
 
-            flaeche=(CheckKollision.flache(this.getX_dup_links(),this.getY(),this.getW(),this.getH(),Var.markedblock.getX(),Var.markedblock.getY()));
+            flaeche=(CheckKollision.flache(this.getX_dup_links(),this.getY(),this.getW(),this.getH(),GlobalBlockVar.markedblock.getX(),GlobalBlockVar.markedblock.getY()));
 
         } catch (NullPointerException e) {
 
