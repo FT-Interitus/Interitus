@@ -7,6 +7,7 @@ import de.ft.robocontrol.MainGame;
 import de.ft.robocontrol.utils.CheckKollision;
 
 public class Block {
+    public boolean seted=false;
     public boolean moved=false;
     private boolean marked=false;
     private boolean biggestarea=false;
