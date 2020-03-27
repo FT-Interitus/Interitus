@@ -117,25 +117,32 @@ public Timer time;
 try {
 
 
-    if (CheckKollision.object(BlockVar.markedblock.getX(), BlockVar.markedblock.getY(),BlockVar.markedblock.getH() , BlockVar.markedblock.getW(), block.getX(), block.getY(), block.getH(), block.getW())&&BlockVar.markedblock!=block) {
-       // System.out.println("überschneidung von markedblock und einem block");
-        if(BlockVar.uberlapptmitmarkedblock.indexOf(block)==-1) {
+    if (CheckKollision.object(BlockVar.markedblock.getX(), BlockVar.markedblock.getY(), BlockVar.markedblock.getH(), BlockVar.markedblock.getW(), block.getX(), block.getY(), block.getH(), block.getW()) && block!= BlockVar.markedblock) {
+        // System.out.println("überschneidung von markedblock und einem block");
+        if (BlockVar.uberlapptmitmarkedblock.indexOf(block) == -1) {
             BlockVar.uberlapptmitmarkedblock.add(block);
         }
-    }else{
+    } else {
         BlockVar.uberlapptmitmarkedblock.remove(block);
     }
-    //System.out.println("ubblock:  "+BlockVar.uberlapptmitmarkedblock.size());
+
+
 
     int biggestvalue2=0;
+    int biggestindex2=-1;
     for(int i=0;i<BlockVar.uberlapptmitmarkedblock.size();i++){
         //if(BlockVar.uberlapptmitmarkedblock.get(i).)
-        if(BlockVar.markedblock!=block) {
-            System.out.println("flaeche   " + block.getBlockMarkedblockuberlappungsflache() + "size" + BlockVar.uberlapptmitmarkedblock.get(i).getIndex());
-        }
 
+            //System.out.println("flaeche   " + BlockVar.uberlapptmitmarkedblock.get(i).getBlockMarkedblockuberlappungsflache() + "i:   " + i);
+            if(BlockVar.uberlapptmitmarkedblock.get(i).getBlockMarkedblockuberlappungsflache()>biggestvalue2){
+                biggestvalue2=BlockVar.uberlapptmitmarkedblock.get(i).getBlockMarkedblockuberlappungsflache();
+                biggestindex2=i;
+            }
     }
-
+    try {
+        BlockVar.blockmitdergrostenuberlappungmitmarkiertemblock = BlockVar.uberlapptmitmarkedblock.get(biggestindex2);
+    }catch(IndexOutOfBoundsException e){}
+System.out.println(BlockVar.blockmitdergrostenuberlappungmitmarkiertemblock);
 }catch (NullPointerException e){}
 
 

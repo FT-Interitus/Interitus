@@ -24,6 +24,8 @@ public class BlockVar {
 
     public static Block biggestblock=null;
 
+    public static Block blockmitdergrostenuberlappungmitmarkiertemblock=null;
+
 
 
 
