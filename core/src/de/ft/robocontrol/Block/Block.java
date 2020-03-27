@@ -186,7 +186,7 @@ public class Block {
         BlockVar.blocks.remove(BlockVar.blocks.indexOf(this));
         for(int i = 0;i<BlockVar.blocks.size()-temp;i++) {
             BlockVar.blocks.get(i).setIndex(BlockVar.blocks.get(i).getIndex()-1);
-            //System.out.println("Noch nicht abgestürtzt!");
+
         }
 
     }
