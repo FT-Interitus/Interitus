@@ -191,9 +191,28 @@ public class MenuBar {
             }
         }).setShortcut("Strg+Y"));
         editMenu.addSeparator();
-        editMenu.addItem(new MenuItem("Kopieren").setShortcut("Strg+C"));
-        editMenu.addItem(new MenuItem("Ausschneiden").setShortcut("Strg+X"));
-        editMenu.addItem(new MenuItem("Einfügen").setShortcut("Strg+V"));
+        editMenu.addItem(UI.copy =new MenuItem("Kopieren", new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                if(BlockVar.marked) {
+                    de.ft.robocontrol.data.user.clipboard.Manager.Copy();
+                }
+            }
+        }).setShortcut("Strg+C"));
+        editMenu.addItem(new MenuItem("Ausschneiden", new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+
+            }
+        }).setShortcut("Strg+X"));
+        editMenu.addItem(UI.paste = new MenuItem("Einfügen", new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                if(de.ft.robocontrol.data.user.clipboard.Manager.checkcopy()) {
+                    de.ft.robocontrol.data.user.clipboard.Manager.paste();
+                }
+            }
+        }).setShortcut("Strg+V"));
 
 
         windowMenu.addItem(new MenuItem("menuitem #9"));

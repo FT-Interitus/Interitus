@@ -10,7 +10,7 @@ public class RevertBlock {
     private int left_index;
     private int right_index;
     private boolean deleted;
-    public  RevertBlock(int x, int y, int w, int h, int index, boolean created, boolean deleted, int left_index, int right_index) {
+    public  RevertBlock(int x, int y, int w, int h, int index, boolean created, boolean deleted, int left_index, int right_index) {//TODO hier Blockart und Parameter übergeben
         this.x = x;
         this.y = y;
         this.w = w;

@@ -9,7 +9,10 @@ public class BlockVar {
     public static ArrayList<Block> blocks = new ArrayList<Block>();
 
 
+
+    //TODO Für multi select hier eventuel ArrayList
     public static Block markedblock = null;
+
     public static Vector2 mousepressedold=new Vector2(1,1);
 
     public static Vector2 unterschiedsave;

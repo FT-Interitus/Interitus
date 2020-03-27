@@ -23,9 +23,11 @@ import static de.ft.robocontrol.UI.MenuBar.createSubMenu;
 
 public class UI {
     public static Stage stage;
-    public static MenuItem recent;
-    public static MenuItem revert;
-    public static MenuItem redo;
+    protected static MenuItem recent;
+    protected static MenuItem revert;
+    protected static MenuItem redo;
+    protected static MenuItem copy;
+    protected static MenuItem paste;
     protected static MenuBar menuBar;
    protected static SettingsUI set;
     public static void initdragui() {
