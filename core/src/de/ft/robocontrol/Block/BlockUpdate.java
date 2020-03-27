@@ -114,8 +114,20 @@ public Timer time;
 
                 }
 
+try {
 
 
+    if (CheckKollision.object(BlockVar.markedblock.getX(), BlockVar.markedblock.getY(),BlockVar.markedblock.getH() , BlockVar.markedblock.getW(), block.getX(), block.getY(), block.getH(), block.getW()) && BlockVar.markedblock!=block) {
+        System.out.println("überschneidung von markedblock und einem block");
+        if(BlockVar.uberlapptmitmarkedblock.indexOf(block)==-1) {
+            BlockVar.uberlapptmitmarkedblock.add(block);
+        }
+    }else{
+        BlockVar.uberlapptmitmarkedblock.remove(block);
+    }
+    System.out.println("ubblock:  "+BlockVar.uberlapptmitmarkedblock.size());
+
+}catch (NullPointerException e){}
 
 
             if(de.ft.robocontrol.utils.CheckKollision.checkmousewithblock(block)==false&& Gdx.input.isButtonPressed(0) && !block.isMoving()&&block.isMarked()){
@@ -123,6 +135,11 @@ public Timer time;
                 BlockVar.marked=false;
                 BlockVar.markedblock = null;
                 }
+                int biggestvalue2=0;
+            for(int i=0;i<BlockVar.uberlapptmitmarkedblock.size();i++){
+
+                //if(BlockVar.uberlapptmitmarkedblock.get(i).)
+            }
 
 
 
@@ -133,7 +150,7 @@ public Timer time;
 
         if(CheckKollision.checkblockwithduplicate(BlockVar.markedblock, block,0)&&block.getRight()==null) {
             if (BlockVar.markedblock.isMoving()) {
-                System.out.println("Kollision!");
+                //System.out.println("Kollision!");
 
                 block.setShowdupulicate_rechts(true);
 
