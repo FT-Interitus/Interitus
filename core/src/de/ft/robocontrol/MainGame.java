@@ -15,12 +15,10 @@ import de.ft.robocontrol.Block.Block;
 import de.ft.robocontrol.Block.BlockVar;
 import de.ft.robocontrol.UI.UI;
 import de.ft.robocontrol.data.programm.Data;
-import de.ft.robocontrol.data.programm.DataManager;
+import de.ft.robocontrol.data.user.changes.DataManager;
 import de.ft.robocontrol.utils.PositionSaver;
 
 import java.awt.Component;
-
-import java.util.ArrayList;
 
 import static com.badlogic.gdx.Gdx.input;
 
@@ -130,8 +128,9 @@ for(int i=0;i<1;i=i+1) {
 */
 
 		if(input.isKeyJustPressed(Input.Keys.INSERT)){
+			DataManager.change(null);
 			BlockVar.blocks.add(new Block(BlockVar.blocks.size(), 100, 200, 150, 70));
-			DataManager.change();
+
 		}
 		UI.updatedragui(shapeRenderer);
 

@@ -12,10 +12,12 @@ import com.kotcrab.vis.ui.widget.PopupMenu;
 import de.ft.robocontrol.Block.BlockVar;
 import de.ft.robocontrol.Var;
 import de.ft.robocontrol.data.programm.Data;
-import de.ft.robocontrol.data.programm.DataManager;
+import de.ft.robocontrol.data.user.changes.DataManager;
 import de.ft.robocontrol.data.user.DataLoader;
 import de.ft.robocontrol.data.user.DataSaver;
 import de.ft.robocontrol.data.user.LoadSave;
+import de.ft.robocontrol.data.user.changes.SaveChanges;
+
 
 public class MenuBar {
     protected static void createMenus() {
@@ -31,9 +33,7 @@ public class MenuBar {
         fileMenu.addItem(new MenuItem("Neu", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                final Thread clear = new Thread() {
-                    @Override
-                    public void run() {
+
 
                         if (DataManager.changes) {
 
@@ -51,9 +51,16 @@ public class MenuBar {
                                         @Override
                                         public void result(Integer result) {
                                             if (result == nothing) {
-                                                for (int i = 0; i < BlockVar.blocks.size(); i = i + 1) {
-                                                    BlockVar.blocks.get(i).delete();
+                                                int temp =  BlockVar.blocks.size();
+                                                for (int i = 0; i < temp; i ++) {
+                                                    BlockVar.blocks.get(0).delete();
                                                 }
+                                                BlockVar.blocks.clear();
+                                                BlockVar.biggestblock = null;
+                                                BlockVar.markedblock = null;
+                                                BlockVar.ismoving = false;
+                                                BlockVar.showduplicat.clear();
+                                                BlockVar.blockmitdergrostenuberlappungmitmarkiertemblock = null;
                                                 DataManager.saved();
                                                 DataManager.filename = "New File";
                                                 DataManager.path = "";
@@ -88,9 +95,6 @@ public class MenuBar {
                             DataManager.path = "";
                             BlockVar.blocks.clear();
                         }
-                    }
-                };
-                clear.start();
 
 
             }
@@ -116,10 +120,19 @@ public class MenuBar {
                                 @Override
                                 public void result(Integer result) {
                                     if (result == nothing) {
-                                        for (int i = 0; i < BlockVar.blocks.size(); i = i + 1) {
-                                            BlockVar.blocks.get(i).delete();
+                                        int temp = BlockVar.blocks.size();
+
+                                        for (int i = 0; i < temp; i++) {
+                                            BlockVar.blocks.get(0).delete();
+
                                         }
                                         BlockVar.blocks.clear();
+                                        BlockVar.biggestblock = null;
+                                        BlockVar.markedblock = null;
+                                        BlockVar.ismoving = false;
+                                        BlockVar.showduplicat.clear();
+                                        BlockVar.blockmitdergrostenuberlappungmitmarkiertemblock = null;
+
                                         DataManager.saved();
                                         DataManager.filename = "New File";
                                         DataManager.path = "";
@@ -188,7 +201,12 @@ public class MenuBar {
 
         // ---
 
-        editMenu.addItem(new MenuItem("Rückgänig").setShortcut("Strg+Z"));
+        editMenu.addItem(new MenuItem("Rückgänig", new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                SaveChanges.revert();
+            }
+        }).setShortcut("Strg+Z"));
         editMenu.addItem(new MenuItem("Wiederherstellen").setShortcut("Strg+Y"));
         editMenu.addSeparator();
         editMenu.addItem(new MenuItem("Kopieren").setShortcut("Strg+C"));
