@@ -172,7 +172,12 @@ public class MenuBar {
             }
         }).setShortcut("Strg+shift+S"));
         fileMenu.addSeparator();
-        fileMenu.addItem(new MenuItem("Einstellungen"));
+        fileMenu.addItem(new MenuItem("Einstellungen", new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                UI.set.show();
+            }
+        }));
         fileMenu.addItem(new MenuItem("Beenden", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
