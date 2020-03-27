@@ -25,6 +25,7 @@ public class UI {
     public static Stage stage;
     public static MenuItem recent;
     public static MenuItem revert;
+    public static MenuItem redo;
     protected static MenuBar menuBar;
    protected static SettingsUI set;
     public static void initdragui() {
@@ -147,6 +148,15 @@ public class UI {
                             revert.setDisabled(true);
                         }else{
                             revert.setDisabled(false);
+                        }
+
+                        ///////UNDO
+
+
+                        if(SaveChanges.checkredostack()) {
+                            redo.setDisabled(true);
+                        }else{
+                            redo.setDisabled(false);
                         }
 
                     }

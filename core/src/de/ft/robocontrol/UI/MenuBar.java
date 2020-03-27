@@ -17,6 +17,7 @@ import de.ft.robocontrol.data.user.DataLoader;
 import de.ft.robocontrol.data.user.DataSaver;
 import de.ft.robocontrol.data.user.LoadSave;
 import de.ft.robocontrol.data.user.changes.SaveChanges;
+import de.ft.robocontrol.utils.ClearActOpenProgramm;
 
 
 public class MenuBar {
@@ -51,20 +52,7 @@ public class MenuBar {
                                         @Override
                                         public void result(Integer result) {
                                             if (result == nothing) {
-                                                int temp =  BlockVar.blocks.size();
-                                                for (int i = 0; i < temp; i ++) {
-                                                    BlockVar.blocks.get(0).delete();
-                                                }
-                                                BlockVar.blocks.clear();
-                                                BlockVar.biggestblock = null;
-                                                BlockVar.markedblock = null;
-                                                BlockVar.ismoving = false;
-                                                BlockVar.showduplicat.clear();
-                                                BlockVar.blockmitdergrostenuberlappungmitmarkiertemblock = null;
-                                                DataManager.saved();
-                                                DataManager.filename = "New File";
-                                                DataManager.path = "";
-                                                BlockVar.blocks.clear();
+                                                ClearActOpenProgramm.clear();
                                             }
 
                                             if (result == everything) {
@@ -120,22 +108,7 @@ public class MenuBar {
                                 @Override
                                 public void result(Integer result) {
                                     if (result == nothing) {
-                                        int temp = BlockVar.blocks.size();
 
-                                        for (int i = 0; i < temp; i++) {
-                                            BlockVar.blocks.get(0).delete();
-
-                                        }
-                                        BlockVar.blocks.clear();
-                                        BlockVar.biggestblock = null;
-                                        BlockVar.markedblock = null;
-                                        BlockVar.ismoving = false;
-                                        BlockVar.showduplicat.clear();
-                                        BlockVar.blockmitdergrostenuberlappungmitmarkiertemblock = null;
-
-                                        DataManager.saved();
-                                        DataManager.filename = "New File";
-                                        DataManager.path = "";
                                         LoadSave.open();
                                     }
 
@@ -209,7 +182,14 @@ public class MenuBar {
                 }
             }
         }).setShortcut("Strg+Z"));
-        editMenu.addItem(new MenuItem("Wiederherstellen").setShortcut("Strg+Y"));
+        editMenu.addItem(UI.redo =  new MenuItem("Wiederherstellen", new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                if(!SaveChanges.checkredostack()) {
+                    SaveChanges.redo();
+                }
+            }
+        }).setShortcut("Strg+Y"));
         editMenu.addSeparator();
         editMenu.addItem(new MenuItem("Kopieren").setShortcut("Strg+C"));
         editMenu.addItem(new MenuItem("Ausschneiden").setShortcut("Strg+X"));

@@ -5,29 +5,19 @@ import de.ft.robocontrol.Block.Block;
 import de.ft.robocontrol.Block.BlockVar;
 import de.ft.robocontrol.MainGame;
 import de.ft.robocontrol.Var;
+import de.ft.robocontrol.utils.ClearActOpenProgramm;
 import org.json.JSONObject;
 
 public class DataLoader {
     public static void load(final FileHandle handle) {
 
-        final Thread clear =new Thread() {
-            @Override
-            public void run() {
-                for(int i = 0; i< BlockVar.blocks.size(); i=i+1){
-                    BlockVar.blocks.get(i).delete();
-                }
-            }
-        };
+
 
 
         Thread laden = new Thread(){
             public void run(){
 
-
-                clear.start();
-
-
-                BlockVar.blocks.clear();
+                ClearActOpenProgramm.clear();
 
                 JSONObject obj = new JSONObject(handle.readString());
                 boolean goout=false;
