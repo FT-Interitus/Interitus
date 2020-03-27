@@ -3,13 +3,12 @@ package de.ft.robocontrol.data.user;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import de.ft.robocontrol.MainGame;
-import de.ft.robocontrol.Var;
 import de.ft.robocontrol.data.programm.Data;
+import de.ft.robocontrol.data.programm.DataManager;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
-import java.sql.DatabaseMetaData;
 
 import static de.ft.robocontrol.MainGame.saver;
 

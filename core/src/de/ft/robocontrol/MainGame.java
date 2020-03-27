@@ -14,12 +14,11 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import de.ft.robocontrol.Block.Block;
 import de.ft.robocontrol.UI.UI;
 import de.ft.robocontrol.data.programm.Data;
-import de.ft.robocontrol.data.user.DataManager;
+import de.ft.robocontrol.data.programm.DataManager;
 import de.ft.robocontrol.utils.PositionSaver;
 
 import java.awt.Component;
 
-import java.sql.DatabaseMetaData;
 import java.util.ArrayList;
 
 import static com.badlogic.gdx.Gdx.input;
@@ -113,7 +112,7 @@ for(int i=0;i<1;i=i+1) {
 		cam.update();
 
 		//Gdx.gl.glClearColor(1,1,1, 1);
-		Gdx.gl.glClearColor(1,0,0, 1);
+		Gdx.gl.glClearColor(1,1,1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.setProjectionMatrix(cam.combined);
 
@@ -129,7 +128,7 @@ for(int i=0;i<1;i=i+1) {
 			blocks.add(new Block(blocks.size(), 100, 200, 150, 70));
 			DataManager.change();
 		}
-		UI.updatedragui(shapeRenderer);
+	//	UI.updatedragui(shapeRenderer);
 
 if(!Var.isloading) {
 	Block Temp = null;
@@ -195,11 +194,14 @@ if(!Var.isloading) {
 		UI.updateView(width, height);
 		viewport.update(width, height);
 
+
 	}
+
 
 
 	@Override
 	public void dispose () {
+		Data.close();
 		batch.dispose();
 		img_block.dispose();
 	}

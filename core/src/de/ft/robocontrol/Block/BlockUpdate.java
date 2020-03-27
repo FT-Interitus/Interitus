@@ -5,8 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.robocontrol.MainGame;
 import de.ft.robocontrol.Var;
-import de.ft.robocontrol.data.programm.Data;
-import de.ft.robocontrol.data.user.DataManager;
+import de.ft.robocontrol.data.programm.DataManager;
 import de.ft.robocontrol.utils.CheckKollision;
 
 import java.util.Timer;

@@ -11,8 +11,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.util.dialog.ConfirmDialogListener;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
-import com.kotcrab.vis.ui.util.dialog.InputDialogAdapter;
-import com.kotcrab.vis.ui.util.dialog.OptionDialogAdapter;
 import com.kotcrab.vis.ui.widget.Menu;
 import com.kotcrab.vis.ui.widget.MenuBar;
 import com.kotcrab.vis.ui.widget.MenuItem;
@@ -21,12 +19,11 @@ import de.ft.robocontrol.MainGame;
 import de.ft.robocontrol.Var;
 import de.ft.robocontrol.data.programm.Data;
 import de.ft.robocontrol.data.user.DataLoader;
-import de.ft.robocontrol.data.user.DataManager;
+import de.ft.robocontrol.data.programm.DataManager;
 import de.ft.robocontrol.data.user.DataSaver;
 import de.ft.robocontrol.data.user.LoadSave;
 
 import java.io.File;
-import java.sql.DatabaseMetaData;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -341,15 +338,19 @@ public static void update() {
        menuBar.addMenu(helpMenu);
     }
 
-    public static PopupMenu createSubMenu(int count, String[] projects) {
+    public static PopupMenu createSubMenu(int count, final String[] projects) {
         PopupMenu menu = new PopupMenu();
 
         for(int i = count; i>0;i--) {
 
             final int finalI = i-1;
+
             menu.addItem(new MenuItem(projects[i-1], new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
+
+                if(DataManager.changes) {
+
                     String[] möglichkeiten = {"Verwerfen", "Speichern", "Abbrechen"};
                     final int nothing = 1;
                     final int everything = 2;
@@ -366,8 +367,8 @@ public static void update() {
                                         }
                                         MainGame.blocks.clear();
                                         DataManager.saved();
-                                        DataManager.filename = "New File";
-                                        DataManager.path = "";
+                                        DataManager.filename =  Data.filename.get(finalI);
+                                        DataManager.path = Data.path.get(finalI);
 
                                         FileHandle handle = Gdx.files.absolute(Data.path.get(finalI));
                                         DataLoader.load(handle);
@@ -392,6 +393,18 @@ public static void update() {
                             });
 
 
+                }else{
+                    for (int i = 0; i < MainGame.blocks.size(); i = i + 1) {
+                        MainGame.blocks.get(i).delete();
+                    }
+                    MainGame.blocks.clear();
+                    DataManager.saved();
+                    DataManager.filename = Data.filename.get(finalI);
+                    DataManager.path = Data.path.get(finalI);
+
+                    FileHandle handle = Gdx.files.absolute(Data.path.get(finalI));
+                    DataLoader.load(handle);
+                }
 
 
                 }
