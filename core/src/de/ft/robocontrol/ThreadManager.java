@@ -50,19 +50,6 @@ public class ThreadManager {
                     System.out.println("Test");
 
 
-                    try {
-                        if (!camfr.boundsInFrustum(((BlockUpdate) threads.get(i)).block.getX(), ((BlockUpdate) threads.get(i)).block.getY(), 0, ((BlockUpdate) threads.get(i)).block.getW(), ((BlockUpdate) threads.get(i)).block.getH(), 0)) {
-
-
-                                 //TODO threads.get(i).wait(1000)
-
-
-                                //((BlockUpdate) threads.get(i)).block.getBlockupdate().time.cancel();
-
-                        }
-                    }catch (Exception e) {
-                        e.printStackTrace();
-                    }
 
                 }
 
