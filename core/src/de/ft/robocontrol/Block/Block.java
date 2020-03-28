@@ -170,9 +170,10 @@ public class Block {
         BlockVar.marked=false;
         BlockVar.ismoving=false;
 
+        this.setIndex(-1);
 
         DataManager.change(this, false, true);
-
+/*
         if(left!=null) {
             left.setRight(null);
         }
@@ -180,14 +181,19 @@ public class Block {
         if(right!=null) {
             right.setLeft(null);
         }
+*/
 
+/*
         left = null;
         right = null;
 
+
+ */
         try {
             //System.out.println("cancel eigentlich");
+            blockupdate.block = null;
             blockupdate.time.cancel();
-
+            blockupdate.interrupt();
         }catch (Exception e) {
             System.out.println("mist");
 
@@ -197,6 +203,12 @@ public class Block {
         for(int i = 0;i<BlockVar.blocks.size()-temp;i++) {
             BlockVar.blocks.get(i).setIndex(BlockVar.blocks.get(i).getIndex()-1);
 
+        }
+
+        try{
+            BlockVar.blocks.remove(BlockVar.blocks.indexOf(this));
+        }catch (Exception e) {
+            System.out.println("Block schon überschrieben");
         }
 
     }

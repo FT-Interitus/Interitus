@@ -32,6 +32,20 @@ public Timer time;
             @Override
             public void run() {
 
+
+                if(block ==null) {
+                    time.cancel();
+                }
+                if(block.getIndex()==-1) {
+                    time.cancel();
+                    time.purge();
+                }
+
+try {
+    System.out.println("markedblock  " + BlockVar.markedblock.getIndex());
+}catch(NullPointerException e){}
+
+
                 toggle = de.ft.robocontrol.utils.CheckKollision.checkmousewithblock(block);
 
 

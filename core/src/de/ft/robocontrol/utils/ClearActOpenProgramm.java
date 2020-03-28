@@ -9,19 +9,30 @@ public class ClearActOpenProgramm {
     static final Thread clear =new Thread() {
         @Override
         public void run() {
-            for(int i = 0; i< BlockVar.blocks.size(); i=i+1){
-                BlockVar.blocks.get(i).delete();
-            }
+
         }
     };
     public static void clear() {
-        clear.start();
+
+
+         try {
+            while (BlockVar.blocks.size()!=-1) {
+                BlockVar.blocks.get(0).delete();
+            }
+
+        }catch (Exception e) {
+
+         }
+
         BlockVar.blocks.clear();
 
         BlockVar.biggestblock = null;
         BlockVar.markedblock = null;
         BlockVar.ismoving = false;
         BlockVar.showduplicat.clear();
+
+
+        BlockVar.uberlapptmitmarkedblock.clear();
         BlockVar.blockmitdergrostenuberlappungmitmarkiertemblock = null;
 
         DataManager.saved();
