@@ -1,6 +1,7 @@
 package de.ft.robocontrol.Block;
 
 
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import de.ft.robocontrol.MainGame;
@@ -205,7 +206,11 @@ public class Block {
         return blockupdate.toggle;
     }
 
-    public void draw(SpriteBatch batch, ShapeRenderer shape) {
+    public void draw(SpriteBatch batch, ShapeRenderer shape, BitmapFont font) {
+
+
+
+
         if(!this.blockupdate.toggle) {
             batch.draw(MainGame.img_block, this.getX(), this.getY(), this.getW(), this.getH());
         }  else{
@@ -255,7 +260,7 @@ public class Block {
         }
 
 
-
+        font.draw(batch, "index:  "+this.getIndex(), this.getX()+30, this.getY()+30);
 }
 
 

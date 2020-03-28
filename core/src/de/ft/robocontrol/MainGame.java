@@ -6,6 +6,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Logger;
@@ -24,6 +25,7 @@ import static com.badlogic.gdx.Gdx.input;
 
 public class MainGame extends ApplicationAdapter {
 	ShapeRenderer shapeRenderer;
+	BitmapFont font;
 	public static SpriteBatch batch;
 	public static Texture img_block;
 	public static Texture img_mouseover;
@@ -42,6 +44,7 @@ public static Logger logger;
 
 	@Override
 	public void create () {
+		font = new BitmapFont();
 		shapeRenderer=new ShapeRenderer();
 		cam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		viewport = new ScreenViewport(cam);
@@ -143,7 +146,7 @@ if(!Var.isloading) {
 		if (BlockVar.blocks.get(i).isMarked()) {
 			Temp = BlockVar.blocks.get(i);
 		} else {
-			BlockVar.blocks.get(i).draw(batch,shapeRenderer);
+			BlockVar.blocks.get(i).draw(batch,shapeRenderer,font);
 		}
 
 		batch.end();
@@ -164,7 +167,7 @@ if(!Var.isloading) {
 		if (Temp != null) {
 
 			batch.begin();
-			Temp.draw(batch,shapeRenderer);
+			Temp.draw(batch,shapeRenderer,font);
 			batch.end();
 		}
 		//System.out.println(BlockVar.blocks.get(i).isMarked() + "  id: "+BlockVar.blocks.get(i).getIndex());
