@@ -41,9 +41,7 @@ public Timer time;
                     time.purge();
                 }
 
-try {
-    System.out.println("markedblock  " + BlockVar.markedblock.getIndex());
-}catch(NullPointerException e){}
+
 
 
                 toggle = de.ft.robocontrol.utils.CheckKollision.checkmousewithblock(block);
@@ -201,8 +199,10 @@ block.seted=true;
                     System.out.println("jezt muss das ruckgangig gemacht werdn");
 
                     int b = BlockVar.blocks.indexOf(block);
+                    System.out.println(b);
+                   // block.setX(block.getX() - block.getW());
 
-                    block.setX(block.getX() - block.getW());
+                    BlockVar.blocks.get(b).setX(BlockVar.blocks.get(b).getX()-BlockVar.blocks.get(b).getW());
 
                     block.seted = false;
 
@@ -212,7 +212,7 @@ block.seted=true;
 
                             //block.getRight().setX(block.getRight().getX() + block.getW());
 
-                            BlockVar.blocks.get(b).getRight().setX(BlockVar.blocks.get(b).getX() - BlockVar.blocks.get(b).getW());
+                            BlockVar.blocks.get(b).getRight().setX(BlockVar.blocks.get(b).getRight().getX() - BlockVar.blocks.get(b).getW());
                             b = BlockVar.blocks.indexOf(BlockVar.blocks.get(b).getRight());
                         }
 
