@@ -117,8 +117,9 @@ public Timer time;
 try {
 
 
-    if (CheckKollision.object(BlockVar.markedblock.getX(), BlockVar.markedblock.getY(), BlockVar.markedblock.getH(), BlockVar.markedblock.getW(), block.getX(), block.getY(), block.getH(), block.getW())&&  CheckKollision.flache(BlockVar.markedblock.getX(),BlockVar.markedblock.getY(),BlockVar.markedblock.getW(),BlockVar.markedblock.getH(),block.getX(),block.getY()) > 4000  && block!= BlockVar.markedblock) {
+    if (CheckKollision.object(BlockVar.markedblock.getX(), BlockVar.markedblock.getY(), BlockVar.markedblock.getH(), BlockVar.markedblock.getW(), block.getX(), block.getY(), block.getH(), block.getW())&&  CheckKollision.flache(BlockVar.markedblock.getX(),BlockVar.markedblock.getY(),BlockVar.markedblock.getW(),BlockVar.markedblock.getH(),block.getX(),block.getY()) > 7000  && block!= BlockVar.markedblock) {
         // System.out.println("überschneidung von markedblock und einem block");
+
         if (BlockVar.uberlapptmitmarkedblock.indexOf(block) == -1) {
             block.moved=false;
 
@@ -127,9 +128,6 @@ try {
     } else {
         BlockVar.uberlapptmitmarkedblock.remove(block);
 
-        if(block.seted==true){
-            System.out.println("kaka");
-        }
 
     }
 
@@ -173,6 +171,7 @@ System.out.println(a);
             BlockVar.blocks.get(a).getRight().setX(BlockVar.blocks.get(a).getX()+BlockVar.blocks.get(a).getW());
             a=BlockVar.blocks.indexOf(BlockVar.blocks.get(a).getRight());
         }
+
     }catch(NullPointerException e){}
 
 

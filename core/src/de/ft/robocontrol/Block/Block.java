@@ -8,7 +8,7 @@ import de.ft.robocontrol.data.user.changes.DataManager;
 import de.ft.robocontrol.utils.CheckKollision;
 
 public class Block {
-    public boolean seted=false;
+    public boolean seted=true;
     public boolean moved=false;
     private boolean marked=false;
     private boolean biggestarea=false;
