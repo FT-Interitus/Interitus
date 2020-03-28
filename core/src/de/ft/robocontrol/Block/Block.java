@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import de.ft.robocontrol.MainGame;
+import de.ft.robocontrol.ThreadManager;
 import de.ft.robocontrol.data.user.changes.DataManager;
 import de.ft.robocontrol.utils.CheckKollision;
 
@@ -34,9 +35,18 @@ public class Block {
         this.x_dup_rechts = this.x + this.w;
         this.x_dup_links = this.x-this.w;
 
+
+
+
         this.index = index;
         blockupdate = new BlockUpdate(this);
         blockupdate.start();
+        ThreadManager.add(blockupdate, this);
+        ThreadManager.requeststart(0);
+    }
+
+    public BlockUpdate getBlockupdate() {
+        return blockupdate;
     }
 
     public int getX_dup_rechts() {
@@ -173,7 +183,7 @@ public class Block {
         this.setIndex(-1);
 
         DataManager.change(this, false, true);
-/*
+
         if(left!=null) {
             left.setRight(null);
         }
@@ -181,14 +191,13 @@ public class Block {
         if(right!=null) {
             right.setLeft(null);
         }
-*/
 
-/*
+
         left = null;
         right = null;
 
 
- */
+
         try {
             //System.out.println("cancel eigentlich");
             blockupdate.block = null;

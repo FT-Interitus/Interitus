@@ -197,6 +197,7 @@ public class MenuBar {
 
             }
         }));
+        editMenu.addSeparator();
 
         editMenu.addItem(UI.copy =new MenuItem("Kopieren", new ChangeListener() {
             @Override
