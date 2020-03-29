@@ -214,7 +214,7 @@ block.seted=true;
 
                             //block.getRight().setX(block.getRight().getX() + block.getW());
 
-                            BlockVar.blocks.get(b).getRight().setX(BlockVar.blocks.get(b).getX() - BlockVar.blocks.get(b).getW());
+                            BlockVar.blocks.get(b).getRight().setX(BlockVar.blocks.get(b).getRight().getX() - BlockVar.blocks.get(b).getW());
                             b = BlockVar.blocks.indexOf(BlockVar.blocks.get(b).getRight());
                         }
 
