@@ -160,11 +160,16 @@ for(int i=0;i<1;i=i+1) {
 						if (input.isKeyJustPressed(Input.Keys.FORWARD_DEL)) {
 							BlockVar.blocks.get(i).delete();
 						}
-						if (input.isKeyJustPressed(Input.Keys.SPACE)) {
-							cam.position.set(cam.position.x = +5, cam.position.y += 5, 0);
-						}
 
 
+					}
+
+					if (input.isKeyJustPressed(Input.Keys.SPACE)) {
+						cam.position.set(cam.position.x += 5, cam.position.y += 5, 0);
+					}
+
+					if (input.isKeyJustPressed(Input.Keys.U)) {
+						cam.position.set(cam.position.x -= 5, cam.position.y -= 5, 0);
 					}
 
 

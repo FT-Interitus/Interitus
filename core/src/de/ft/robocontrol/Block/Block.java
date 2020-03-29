@@ -321,6 +321,13 @@ public int getBlockMarkedblockuberlappungsflache(){
         }catch (NullPointerException e){}
         return flaeche;
 }
+public Thread allowedRestart() {
+    blockupdate = new BlockUpdate(this);
+    blockupdate.start();
+
+    return blockupdate;
+}
+
 
 
 

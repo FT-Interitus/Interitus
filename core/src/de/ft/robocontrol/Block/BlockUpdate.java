@@ -12,8 +12,9 @@ import java.util.TimerTask;
 
 
 public class BlockUpdate extends Thread {
-Block block;
+public  Block block;
 boolean toggle;
+public boolean isrunning = true;
 
 
 
