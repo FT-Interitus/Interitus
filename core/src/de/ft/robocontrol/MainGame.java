@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Logger;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import de.ft.robocontrol.Block.Block;
 import de.ft.robocontrol.Block.BlockVar;
 import de.ft.robocontrol.UI.UI;
@@ -42,6 +43,7 @@ public class MainGame extends ApplicationAdapter {
 	//BlockUpdate bu[] = new BlockUpdate[0];
 public static Logger logger;
 
+
 	@Override
 	public void create () {
 		font = new BitmapFont();
@@ -66,6 +68,7 @@ public static Logger logger;
 		UI.init();
 
 
+		ThreadManager.init();
 
 		/*
 		for(int i=0;i < BlockVar.blocks.length;i=i+1){
@@ -104,23 +107,24 @@ for(int i=0;i<1;i=i+1) {
 	public void render () {
 
 
-		PositionSaver.save();
+		try {
 
 
+			PositionSaver.save();
 
 
-		//System.out.println(Var.mousepressedold);
-		//System.out.println(BlockVar.blocks.get(1).getLeft());
-		cam.update();
+			//System.out.println(Var.mousepressedold);
+			//System.out.println(BlockVar.blocks.get(1).getLeft());
+			cam.update();
 
-		//Gdx.gl.glClearColor(1,1,1, 1);
-		if(Settings.darkmode) {
-			Gdx.gl.glClearColor(1, 0, 0, 1);
-		}else {
-			Gdx.gl.glClearColor(0.54f,0.533f,0.51f,1);
-		}
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.setProjectionMatrix(cam.combined);
+			//Gdx.gl.glClearColor(1,1,1, 1);
+			if (Settings.darkmode) {
+				Gdx.gl.glClearColor(1, 0, 0, 1);
+			} else {
+				Gdx.gl.glClearColor(0.54f, 0.533f, 0.51f, 1);
+			}
+			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+			batch.setProjectionMatrix(cam.combined);
 
 
 /*
@@ -130,50 +134,55 @@ for(int i=0;i<1;i=i+1) {
 
 */
 
-		if(input.isKeyJustPressed(Input.Keys.INSERT)){
+			if (input.isKeyJustPressed(Input.Keys.INSERT)) {
 
-			BlockVar.blocks.add(new Block(BlockVar.blocks.size(), 100, 200, 150, 70));
-			DataManager.change(BlockVar.blocks.get(BlockVar.blocks.size()-1),true, false);
-		}
-		UI.updatedragui(shapeRenderer);
-
-if(!Var.isloading) {
-	Block Temp = null;
-	for (int i = 0; i < BlockVar.blocks.size(); i = i + 1) {
-		batch.begin();
-
-
-		if (BlockVar.blocks.get(i).isMarked()) {
-			Temp = BlockVar.blocks.get(i);
-		} else {
-			BlockVar.blocks.get(i).draw(batch,shapeRenderer,font);
-		}
-
-		batch.end();
-		if (BlockVar.blocks.get(i).isMarked()) {
-
-
-			if (input.isKeyJustPressed(Input.Keys.FORWARD_DEL)) {
-				BlockVar.blocks.get(i).delete();
+				BlockVar.blocks.add(new Block(BlockVar.blocks.size(), 100, 200, 150, 70));
+				DataManager.change(BlockVar.blocks.get(BlockVar.blocks.size() - 1), true, false);
 			}
-			if(input.isKeyJustPressed(Input.Keys.SPACE)) {
-				cam.position.set(cam.position.x=+5,cam.position.y+=5, 0);
+			UI.updatedragui(shapeRenderer);
+
+			if (!Var.isloading) {
+				Block Temp = null;
+				for (int i = 0; i < BlockVar.blocks.size(); i = i + 1) {
+					batch.begin();
+
+
+					if (BlockVar.blocks.get(i).isMarked()) {
+						Temp = BlockVar.blocks.get(i);
+					} else {
+						BlockVar.blocks.get(i).draw(batch, shapeRenderer, font);
+					}
+
+					batch.end();
+					if (BlockVar.blocks.get(i).isMarked()) {
+
+
+						if (input.isKeyJustPressed(Input.Keys.FORWARD_DEL)) {
+							BlockVar.blocks.get(i).delete();
+						}
+
+
+					}
+
+					if (input.isKeyJustPressed(Input.Keys.SPACE)) {
+						cam.position.set(cam.position.x += 5, cam.position.y += 5, 0);
+					}
+
+					if (input.isKeyJustPressed(Input.Keys.U)) {
+						cam.position.set(cam.position.x -= 5, cam.position.y -= 5, 0);
+					}
+
+
+					if (Temp != null) {
+
+						batch.begin();
+						Temp.draw(batch, shapeRenderer, font);
+						batch.end();
+					}
+					//System.out.println(BlockVar.blocks.get(i).isMarked() + "  id: "+BlockVar.blocks.get(i).getIndex());
+
+				}
 			}
-
-
-		}
-
-
-		if (Temp != null) {
-
-			batch.begin();
-			Temp.draw(batch,shapeRenderer,font);
-			batch.end();
-		}
-		//System.out.println(BlockVar.blocks.get(i).isMarked() + "  id: "+BlockVar.blocks.get(i).getIndex());
-
-	}
-}
 		/*
 
 		for(int b=0;b<BlockVar.blocks.size();b=b+1) {
@@ -186,8 +195,17 @@ if(!Var.isloading) {
 
 		}
 		*/
+			UI.update();
 
-		UI.update();
+				if(input.isKeyJustPressed(Input.Keys.E)) {
+					throw new NullPointerException("Test");
+				}
+
+
+
+		}catch (Exception e) {
+			Dialogs.showErrorDialog(UI.stage, "Ein Fehler ist aufgetreten", e);
+		}
 
 
 	}

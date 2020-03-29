@@ -116,11 +116,9 @@ public class SaveChanges {
             redosave(BlockVar.blocks.get(revert.getIndex()),false, true);
             torevert.delete();
 
-
-
-
             return;
         }
+
         redosave(BlockVar.blocks.get(revert.getIndex()),false, false);
         if(revert.getX()!=torevert.getX()) {
             torevert.setX(revert.getX());
