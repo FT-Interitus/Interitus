@@ -170,6 +170,8 @@ try {
                 if (block == BlockVar.blockmitdergrostenuberlappungmitmarkiertemblock && block.moved == false) {
                     block.moved = true;
 
+
+
                     int a = BlockVar.blocks.indexOf(BlockVar.blockmitdergrostenuberlappungmitmarkiertemblock);
                     System.out.println(a);
                     block.setX(block.getX() + block.getW());
@@ -205,7 +207,6 @@ block.seted=true;
 
                     block.setX(block.getX() - block.getW());
 
-                    block.seted = false;
 
                     try {
 
