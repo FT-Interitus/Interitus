@@ -42,7 +42,6 @@ public class Block {
         blockupdate = new BlockUpdate(this);
         blockupdate.start();
         ThreadManager.add(blockupdate, this);
-        ThreadManager.requeststart(0);
     }
 
     public BlockUpdate getBlockupdate() {
@@ -180,10 +179,10 @@ public class Block {
         BlockVar.marked=false;
         BlockVar.ismoving=false;
 
-        this.setIndex(-1);
+
 
         DataManager.change(this, false, true);
-
+        this.setIndex(-1);
         if(left!=null) {
             left.setRight(null);
         }
@@ -195,6 +194,8 @@ public class Block {
 
         left = null;
         right = null;
+
+        ThreadManager.threads.remove(ThreadManager.threads.indexOf(this.blockupdate));
 
 
 

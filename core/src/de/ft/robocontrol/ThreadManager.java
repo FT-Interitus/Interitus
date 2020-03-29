@@ -10,7 +10,6 @@ import java.util.TimerTask;
 
 public class ThreadManager {
     public static ArrayList<Thread> threads = new ArrayList<Thread>();
-    public static ArrayList<Thread> tostart = new ArrayList<Thread>();
     public static ArrayList<Object> requestobj = new ArrayList<Object>();
 
 
@@ -23,13 +22,7 @@ public class ThreadManager {
         return createThread;
     }
 
-    public static int requeststart(int Threadid) {
 
-        tostart.add(threads.get(Threadid));
-
-
-        return 1;
-    }
 
 
     public synchronized static void init() {
