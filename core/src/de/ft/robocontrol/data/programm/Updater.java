@@ -1,6 +1,7 @@
 package de.ft.robocontrol.data.programm;
 
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
+import de.ft.robocontrol.Settings;
 import de.ft.robocontrol.UI.UI;
 import de.ft.robocontrol.Var;
 
@@ -24,7 +25,7 @@ public class Updater {
                 InputStreamReader isr = null;
                 URL url = null;
 
-                String urlString = "https://raw.githubusercontent.com/Coder246/roboupdater/master/version";
+                String urlString = Settings.updateurl;
 
                 try {
                     url = new URL(urlString);
