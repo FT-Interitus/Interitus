@@ -16,6 +16,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Set;
 import java.util.logging.FileHandler;
 
 public class Data {
@@ -104,6 +105,7 @@ public class Data {
                    JSONObject obj = new JSONObject(se.readString());
 
                     Settings.darkmode = obj.getBoolean("dark");
+                    Settings.updateurl = obj.getString("updateurl");
                     //TODO weitere einstellugen Laden
 
                }catch (JSONException e) {
@@ -147,7 +149,7 @@ public class Data {
         FileHandle settings = Gdx.files.absolute(System.getProperty("user.home")+"/.racd/settings.json");
         JSONObject settings_obj = new JSONObject(settings);
         settings_obj.put("dark", Settings.darkmode);
-
+        settings_obj.put("updateurl", Settings.updateurl);
         //TODO weitere Einstellugen speichern
         settings.writeString(settings_obj.toString(), false);
 

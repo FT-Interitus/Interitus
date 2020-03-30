@@ -3,6 +3,7 @@ package de.ft.robocontrol.UI;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.kotcrab.vis.ui.building.GridTableBuilder;
@@ -18,12 +19,14 @@ import de.ft.robocontrol.Settings;
 
 public class SettingsUI extends VisWindow {
 
+    public static VisTextField updateurlfield;
 
     final Padding padding = new Padding(2, 3);
     public SettingsUI() {
         super("Einstellungen");
         pack();
         setPosition(31, 35);
+
 
         new GridTableBuilder(4);
     }
@@ -40,9 +43,13 @@ public class SettingsUI extends VisWindow {
 
             RowLayout rowLayout = new RowLayout(new Padding(0, 0, 0, 5));
 
+
+
             setModal(true);
             closeOnEscape();
             addCloseButton();
+           // setScale(200,200);
+
 
             final VisCheckBox darktoggle = new VisCheckBox("Schaltet den Dark-Mode an und aus");
             darktoggle.setChecked(Settings.darkmode);
@@ -59,6 +66,16 @@ public class SettingsUI extends VisWindow {
                 }
             });
 
+             updateurlfield = new VisTextField(Settings.updateurl);
+            updateurlfield.setDisabled(true);
+
+
+            updateurlfield.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+
+                }
+            });
 
 
            ActorLayout layout = new ActorLayout() {
@@ -76,8 +93,17 @@ public class SettingsUI extends VisWindow {
 
        //    layout.convertToActor(new CreateTab());
 
+            builder.setTablePadding(new Padding(20,30,20,30));
+
             builder.append(darktoggle);
-            builder.append();
+           builder.row();
+           builder.append(new VisLabel(""));
+           builder.row();
+
+            builder.append(rowLayout,CellWidget.builder().fillX().expandX().expandX(),CellWidget.of(updateurlfield).expandX().fillX().wrap());
+            builder.row();
+
+
 
 /*
             builder.append(new VisLabel("title label"));

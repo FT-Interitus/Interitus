@@ -4,6 +4,7 @@ package de.ft.robocontrol.Block;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Frustum;
 import de.ft.robocontrol.MainGame;
 import de.ft.robocontrol.ThreadManager;
 import de.ft.robocontrol.data.user.changes.DataManager;
@@ -24,6 +25,7 @@ public class Block {
     private int x_dup_rechts;
     private int x_dup_links;
     private boolean moving=false;
+    Frustum camfr = MainGame.cam.frustum;
    private BlockUpdate blockupdate;
    private Block left = null;
    private Block right = null;
@@ -40,8 +42,18 @@ public class Block {
 
         this.index = index;
         blockupdate = new BlockUpdate(this);
-        blockupdate.start();
+
+        if(this.isVisible()) {
+            blockupdate.start();
+            BlockVar.visibleblocks.add(this);
+        }else{
+            blockupdate.isrunning = false;
+        }
         ThreadManager.add(blockupdate, this);
+    }
+
+    public boolean isVisible() {
+      return camfr.boundsInFrustum(this.getX(), this.getY(), 0, this.getW(), this.getH(), 0);
     }
 
     public BlockUpdate getBlockupdate() {
@@ -195,30 +207,36 @@ public class Block {
         left = null;
         right = null;
 
-        ThreadManager.threads.remove(ThreadManager.threads.indexOf(this.blockupdate));
-
+        if(ThreadManager.threads.indexOf(this.blockupdate)!=-1) { //Überprüfen ob Thread überhaupt läuft
+            ThreadManager.threads.remove(ThreadManager.threads.indexOf(this.blockupdate));
+        }
 
 
         try {
             //System.out.println("cancel eigentlich");
-            blockupdate.block = null;
+
             blockupdate.time.cancel();
             blockupdate.interrupt();
+            blockupdate.block = null;
         }catch (Exception e) {
             System.out.println("mist");
 
         }
         int temp = BlockVar.blocks.indexOf(this);
-        BlockVar.blocks.remove(BlockVar.blocks.indexOf(this));
-        for(int i = 0;i<BlockVar.blocks.size()-temp;i++) {
-            BlockVar.blocks.get(i).setIndex(BlockVar.blocks.get(i).getIndex()-1);
-
-        }
-
-        try{
+        if(BlockVar.blocks.indexOf(this)!=-1) { //das trifft nur nicht zu wenn das ganze programm gecleart wird
             BlockVar.blocks.remove(BlockVar.blocks.indexOf(this));
-        }catch (Exception e) {
-            System.out.println("Block schon überschrieben");
+
+            for (int i = 0; i < BlockVar.blocks.size() - temp; i++) {
+                BlockVar.blocks.get(i).setIndex(BlockVar.blocks.get(i).getIndex() - 1);
+
+            }
+
+
+            try {
+                BlockVar.blocks.remove(BlockVar.blocks.indexOf(this));
+            } catch (Exception e) {
+
+            }
         }
 
     }

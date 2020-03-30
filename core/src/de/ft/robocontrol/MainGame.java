@@ -83,12 +83,20 @@ public static Logger logger;
 		}
 		 */
 
+Thread test = new Thread() {
+	@Override
+	public void run() {
+		for(int i=0;i<999999;i=i+1) {
+			BlockVar.blocks.add(new Block(i, i * 150, 100, 150, 70));
 
-for(int i=0;i<1;i=i+1) {
-	BlockVar.blocks.add(new Block(i, i * 150, 100, 150, 70));
+			System.out.println(i);
+		}
+	}
+};
 
 
-}
+test.start();
+
 //BlockVar.blocks.get(0).setRight(BlockVar.blocks.get(1));
 
 
@@ -109,6 +117,7 @@ for(int i=0;i<1;i=i+1) {
 
 		try {
 
+			System.out.println(BlockVar.blocks.size());
 
 			PositionSaver.save();
 
@@ -143,44 +152,51 @@ for(int i=0;i<1;i=i+1) {
 
 			if (!Var.isloading) {
 				Block Temp = null;
-				for (int i = 0; i < BlockVar.blocks.size(); i = i + 1) {
-					batch.begin();
-
-
-					if (BlockVar.blocks.get(i).isMarked()) {
-						Temp = BlockVar.blocks.get(i);
-					} else {
-						BlockVar.blocks.get(i).draw(batch, shapeRenderer, font);
+				for (int i = 0; i < BlockVar.visibleblocks.size(); i = i + 1) {
+					try {
+						batch.begin();
+					}catch (IllegalStateException e) {
+						batch.end();
+						batch.begin();
 					}
 
-					batch.end();
-					if (BlockVar.blocks.get(i).isMarked()) {
+					try {
+						if (BlockVar.blocks.get(i).isMarked()) {
+							Temp = BlockVar.blocks.get(i);
+						} else {
+							BlockVar.blocks.get(i).draw(batch, shapeRenderer, font);
+						}
+
+						batch.end();
+						if (BlockVar.blocks.get(i).isMarked()) {
 
 
-						if (input.isKeyJustPressed(Input.Keys.FORWARD_DEL)) {
-							BlockVar.blocks.get(i).delete();
+							if (input.isKeyJustPressed(Input.Keys.FORWARD_DEL)) {
+								BlockVar.blocks.get(i).delete();
+							}
+
+
+						}
+
+						if (input.isKeyJustPressed(Input.Keys.SPACE)) {
+							cam.position.set(cam.position.x += 5, cam.position.y += 5, 0);
+						}
+
+						if (input.isKeyJustPressed(Input.Keys.U)) {
+							cam.position.set(cam.position.x -= 5, cam.position.y -= 5, 0);
 						}
 
 
+						if (Temp != null) {
+
+							batch.begin();
+							Temp.draw(batch, shapeRenderer, font);
+							batch.end();
+						}
+						//System.out.println(BlockVar.blocks.get(i).isMarked() + "  id: "+BlockVar.blocks.get(i).getIndex());
+					}catch (Exception e) {
+
 					}
-
-					if (input.isKeyJustPressed(Input.Keys.SPACE)) {
-						cam.position.set(cam.position.x += 5, cam.position.y += 5, 0);
-					}
-
-					if (input.isKeyJustPressed(Input.Keys.U)) {
-						cam.position.set(cam.position.x -= 5, cam.position.y -= 5, 0);
-					}
-
-
-					if (Temp != null) {
-
-						batch.begin();
-						Temp.draw(batch, shapeRenderer, font);
-						batch.end();
-					}
-					//System.out.println(BlockVar.blocks.get(i).isMarked() + "  id: "+BlockVar.blocks.get(i).getIndex());
-
 				}
 			}
 		/*
@@ -195,7 +211,7 @@ for(int i=0;i<1;i=i+1) {
 
 		}
 		*/
-			UI.update();
+
 
 				if(input.isKeyJustPressed(Input.Keys.E)) {
 					throw new NullPointerException("Test");
@@ -204,10 +220,10 @@ for(int i=0;i<1;i=i+1) {
 
 
 		}catch (Exception e) {
-			Dialogs.showErrorDialog(UI.stage, "Ein Fehler ist aufgetreten", e);
+			e.printStackTrace();
 		}
 
-
+		UI.update();
 	}
 
 

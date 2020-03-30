@@ -2,18 +2,26 @@ package de.ft.robocontrol.UI;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.kotcrab.vis.ui.VisUI;
+import com.kotcrab.vis.ui.util.dialog.ConfirmDialogListener;
+import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import com.kotcrab.vis.ui.widget.Menu;
 import com.kotcrab.vis.ui.widget.MenuBar;
 import com.kotcrab.vis.ui.widget.MenuItem;
+import de.ft.robocontrol.Block.BlockVar;
 import de.ft.robocontrol.MainGame;
 import de.ft.robocontrol.Settings;
 import de.ft.robocontrol.data.programm.Data;
+import de.ft.robocontrol.data.user.DataSaver;
+import de.ft.robocontrol.data.user.LoadSave;
+import de.ft.robocontrol.data.user.changes.DataManager;
 import de.ft.robocontrol.data.user.changes.SaveChanges;
+import de.ft.robocontrol.utils.CheckKollision;
 
 import java.io.File;
 import java.io.IOException;
@@ -129,39 +137,88 @@ public class UI {
                     @Override
                     public void run() {
 
-
                         ////////////recent//////////////////////////
-                        for (int i = 0; i < Data.path.size(); i++) {
-                            if (!(new File(Data.path.get(i)).exists())) {
-                                Data.path.remove(i);
-                                Data.filename.remove(i);
-                            }
-                        }
 
-                        if (Data.path.size() == 0) {
-                            recent.setDisabled(true);
-                        } else {
-                            recent.setDisabled(false);
-                        }
+
+
+                            for (int i = 0; i < Data.path.size(); i++) {
+                                if (!(new File(Data.path.get(i)).exists())) {
+                                    Data.path.remove(i);
+                                    Data.filename.remove(i);
+                                }
+                            }
+
+                            if (Data.path.size() == 0) {
+                                recent.setDisabled(true);
+                            } else {
+                                recent.setDisabled(false);
+                            }
+
+
 
                         ///////////////////////////////////
 
 
                         /////////////revert//////////////
-                        if(SaveChanges.checkstack()) {
-                            revert.setDisabled(true);
-                        }else{
-                            revert.setDisabled(false);
-                        }
+
+                            if (SaveChanges.checkstack()) {
+                                revert.setDisabled(true);
+                            } else {
+                                revert.setDisabled(false);
+                            }
 
                         ///////Redo//////////////
 
 
-                        if(SaveChanges.checkredostack()) {
-                            redo.setDisabled(true);
-                        }else{
-                            redo.setDisabled(false);
+
+
+                            if (SaveChanges.checkredostack()) {
+                                redo.setDisabled(true);
+                            } else {
+                                redo.setDisabled(false);
+                            }
+
+
+                        /////////Dangerous zone Settings////
+                        ///update url//
+
+                        try {
+                            if (Gdx.input.isButtonPressed(0) && CheckKollision.checkmousewithobject(((int) SettingsUI.updateurlfield.getX()), (int) SettingsUI.updateurlfield.getY(), (int) SettingsUI.updateurlfield.getWidth(), (int) SettingsUI.updateurlfield.getHeight(), BlockVar.mousepressedold)) {
+
+                                System.out.println("Hier bin ich");
+                                String[] möglichkeiten = {"Trotzdem fortfahren", "Abbrechen"};
+
+
+                                final int nothing = 1;
+                                final int everything = 2;
+
+
+                                //confirmdialog may return result of any type, here we are just using ints
+                                Dialogs.showConfirmDialog(UI.stage, "Kritische Einstellungen", "\nWenn du die Update-URL falsch änderst, kann es passieren, das das Programm sich nicht mehr updatet. Änderen musst du in der Regel nur etwas, falls du die Anweisung per Mail bekommen hast.\n",
+                                        möglichkeiten, new Integer[]{nothing, everything},
+                                        new ConfirmDialogListener<Integer>() {
+                                            @Override
+                                            public void result(Integer result) {
+                                                if (result == nothing) {
+
+
+                                                    SettingsUI.updateurlfield.setDisabled(false);
+
+                                                }
+
+                                                if (result == everything) {
+
+                                                }
+
+
+                                            }
+                                        });
+
+                            }
+                        }catch (Exception e) {
+                            System.out.println("Fehler wird noch behoben");
                         }
+
 
                     }
                 }, 0, 500);
