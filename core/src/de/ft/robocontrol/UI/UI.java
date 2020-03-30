@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.kotcrab.vis.ui.VisUI;
@@ -40,6 +41,8 @@ public class UI {
     protected static MenuItem paste;
     protected static MenuBar menuBar;
    protected static SettingsUI set;
+   private static Vector2 lastframecamposition = new Vector2(MainGame.cam.position.x, MainGame.cam.position.y);
+    static final Table root = new Table();
     public static void initdragui() {
 
     }
@@ -61,7 +64,7 @@ public class UI {
     }
 
 
-    public static void updatedragui(ShapeRenderer renderer) {
+    public static void updatedragui(ShapeRenderer renderer, boolean flaeche) {
         renderer.begin(ShapeRenderer.ShapeType.Filled);
 
 
@@ -76,29 +79,30 @@ public class UI {
         int untenhohe = 125;
         int radius = 3;
 
-        abgerundetesRechteck(renderer, abstandvonRand, untenhohe + abstandvonRand, Gdx.graphics.getWidth() - abstandvonRand * 2, Gdx.graphics.getHeight() - untenhohe + abstandvonRand - 45 - abstandvonRand, radius);
-
-        if(Settings.darkmode) {
-            renderer.setColor(new Color(0.2f, 0.1f, 0.1f, 1));
-        }else{
-            renderer.setColor(new Color(1f, 1f, 1f, 1));
+        if(flaeche==true) {
+            abgerundetesRechteck(renderer, abstandvonRand, untenhohe + abstandvonRand, Gdx.graphics.getWidth() - abstandvonRand * 2, Gdx.graphics.getHeight() - untenhohe + abstandvonRand - 45 - abstandvonRand, radius);
+        }else {
+            if (Settings.darkmode) {
+                renderer.setColor(new Color(0.2f, 0.1f, 0.1f, 1));
+            } else {
+                renderer.setColor(new Color(1f, 1f, 1f, 1));
+            }
+            abgerundetesRechteck(renderer, abstandvonRand, abstandvonRand, Gdx.graphics.getWidth() - abstandvonRand * 2 - unteneinteilung, untenhohe - abstandvonRand, radius);
+            if (Settings.darkmode) {
+                renderer.setColor(new Color(0.2f, 0.2f, 0.2f, 1));
+            } else {
+                renderer.setColor(new Color(1f, 1f, 1f, 1));
+            }
+            abgerundetesRechteck(renderer, Gdx.graphics.getWidth() - unteneinteilung, abstandvonRand, unteneinteilung - abstandvonRand, untenhohe - abstandvonRand, radius);
         }
-        abgerundetesRechteck(renderer, abstandvonRand, abstandvonRand, Gdx.graphics.getWidth() - abstandvonRand * 2 - unteneinteilung, untenhohe - abstandvonRand, radius);
-        if(Settings.darkmode) {
-            renderer.setColor(new Color(0.2f, 0.2f, 0.2f, 1));
-        }else{
-            renderer.setColor(new Color(1f, 1f, 1f, 1));
-        }
-        abgerundetesRechteck(renderer, Gdx.graphics.getWidth() - unteneinteilung, abstandvonRand, unteneinteilung - abstandvonRand, untenhohe - abstandvonRand, radius);
-
         renderer.end();
 
     }
 
     public static void init() {
         VisUI.load(VisUI.SkinScale.X1);
-        stage = new Stage(MainGame.viewport);
-        final Table root = new Table();
+        stage = new Stage(MainGame.viewport,MainGame.UIbatch);
+
         root.setFillParent(true);
         stage.addActor(root);
         Gdx.input.setInputProcessor(stage);
@@ -121,6 +125,7 @@ public class UI {
 
         root.add(menuBar.getTable()).expandX().fillX().row();
         root.add().expand().fill();
+
         de.ft.robocontrol.UI.MenuBar.createMenus();
 
 
@@ -136,6 +141,8 @@ public class UI {
                 time.scheduleAtFixedRate(new TimerTask() {
                     @Override
                     public void run() {
+
+
 
                         ////////////recent//////////////////////////
 
@@ -183,7 +190,7 @@ public class UI {
                         ///update url//
 
                         try {
-                            if (Gdx.input.isButtonPressed(0) && CheckKollision.checkmousewithobject(((int) SettingsUI.updateurlfield.getX()), (int) SettingsUI.updateurlfield.getY(), (int) SettingsUI.updateurlfield.getWidth(), (int) SettingsUI.updateurlfield.getHeight(), BlockVar.mousepressedold)) {
+                            if (Gdx.input.isButtonPressed(0) && CheckKollision.checkmousewithobject(((int) SettingsUI.updateurlfield.getX()), (int) SettingsUI.updateurlfield.getY(), (int) SettingsUI.updateurlfield.getHeight(), (int) SettingsUI.updateurlfield.getWidth(), BlockVar.mousepressedold)) {
 
                                 System.out.println("Hier bin ich");
                                 String[] möglichkeiten = {"Trotzdem fortfahren", "Abbrechen"};
@@ -232,6 +239,14 @@ public class UI {
 
     public static void update() {
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 60f));
+
+        //root.setPosition(0,0);
+
+
+       root.setPosition(MainGame.cam.position.x- ((float) Gdx.graphics.getWidth())/2,MainGame.cam.position.y - ((float) Gdx.graphics.getHeight())/2);
+
+
+
 
         stage.draw();
 

@@ -48,7 +48,6 @@ public class ClearActOpenProgramm {
 
         try {
             while (BlockVar.visibleblocks.size()!=0) {
-                System.out.println("Here 1 "+ BlockVar.visibleblocks.size());
                 BlockVar.visibleblocks.get(0).delete();
                 BlockVar.visibleblocks.remove(0);
 
