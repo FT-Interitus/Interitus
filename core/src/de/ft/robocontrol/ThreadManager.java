@@ -3,6 +3,7 @@ package de.ft.robocontrol;
 import com.badlogic.gdx.math.Frustum;
 import de.ft.robocontrol.Block.Block;
 import de.ft.robocontrol.Block.BlockUpdate;
+import de.ft.robocontrol.Block.BlockVar;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -40,15 +41,17 @@ public class ThreadManager {
 
                             try {
                                 Block block = ((BlockUpdate) threads.get(i)).block;
-                                if( !(camfr.boundsInFrustum(block.getX(), block.getY(), 0, block.getW(), block.getH(), 0))&&block.isMarked()==false){
+                                if( !(camfr.boundsInFrustum(block.getX(), block.getY(), 0, block.getW(), block.getH(), 0))&&block.isMarked()==false&&((BlockUpdate) threads.get(i)).isrunning == true){
                                     ((BlockUpdate) threads.get(i)).time.cancel();
                                     threads.get(i).interrupt();
                                     ((BlockUpdate) threads.get(i)).isrunning = false;
+                                    BlockVar.visibleblocks.remove(block);
+                                    System.out.println("Stop right");
                                 }
 
                                 if (camfr.boundsInFrustum(block.getX(), block.getY(), 0, block.getW(), block.getH(), 0) && ((BlockUpdate) threads.get(i)).isrunning == false) {
 
-
+                                    BlockVar.visibleblocks.add(block);
                                     threads.set(i, ((BlockUpdate) threads.get(i)).block.allowedRestart());
                                     ((BlockUpdate) threads.get(i)).isrunning = true;
                                 }
