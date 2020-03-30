@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Logger;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -27,13 +28,14 @@ import static com.badlogic.gdx.Gdx.input;
 
 public class MainGame extends ApplicationAdapter {
 	ShapeRenderer shapeRenderer;
+	public static SpriteBatch UIbatch;
 	BitmapFont font;
 	public static SpriteBatch batch;
 	public static Texture img_block;
 	public static Texture img_mouseover;
 	public static Texture img_marked;
 
-	
+
 
 	public static OrthographicCamera cam;
 	public static Viewport viewport;
@@ -52,6 +54,7 @@ public static Logger logger;
 		cam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		viewport = new ScreenViewport(cam);
 		batch = new SpriteBatch();
+		UIbatch = new SpriteBatch();
 
 		img_block=new Texture("block.png");
 		img_mouseover=new Texture("block_mouseover.png");
@@ -148,7 +151,7 @@ test.start();
 				BlockVar.blocks.add(new Block(BlockVar.blocks.size(), 100, 200, 150, 70));
 				DataManager.change(BlockVar.blocks.get(BlockVar.blocks.size() - 1), true, false);
 			}
-			UI.updatedragui(shapeRenderer);
+			UI.updatedragui(shapeRenderer, true);
 
 			if (!Var.isloading) {
 				Block Temp = null;
@@ -192,7 +195,10 @@ test.start();
 					}
 				}
 			}
-		/*
+
+			UI.updatedragui(shapeRenderer, false);
+			UI.update();
+			/*
 
 		for(int b=0;b<BlockVar.blocks.size();b=b+1) {
 			Block block = BlockVar.blocks.get(b);
@@ -205,19 +211,19 @@ test.start();
 		}
 		*/
 			if (input.isKeyJustPressed(Input.Keys.LEFT)) {
-				cam.position.set(cam.position.x -= 5, cam.position.y, 0);
+				cam.position.set(cam.position.x -= 20, cam.position.y, 0);
 			}
 
 			if (input.isKeyJustPressed(Input.Keys.RIGHT)) {
-				cam.position.set(cam.position.x += 5, cam.position.y, 0);
+				cam.position.set(cam.position.x += 20, cam.position.y, 0);
 			}
 
 			if (input.isKeyJustPressed(Input.Keys.UP)) {
-				cam.position.set(cam.position.x, cam.position.y += 5, 0);
+				cam.position.set(cam.position.x, cam.position.y += 20, 0);
 			}
 
 			if (input.isKeyJustPressed(Input.Keys.DOWN)) {
-				cam.position.set(cam.position.x, cam.position.y -= 5, 0);
+				cam.position.set(cam.position.x, cam.position.y -= 20, 0);
 			}
 
 				if(input.isKeyJustPressed(Input.Keys.E)) {
@@ -230,7 +236,7 @@ test.start();
 			e.printStackTrace();
 		}
 
-		UI.update();
+
 	}
 
 

@@ -192,7 +192,7 @@ public class Block {
 
 
 
-        int temp = this.getIndex();
+        final int temp = this.getIndex();
         DataManager.change(this, false, true);
         this.setIndex(-1);
         if(left!=null) {
@@ -226,11 +226,21 @@ public class Block {
         if(BlockVar.blocks.indexOf(this)!=-1) { //das trifft nur nicht zu wenn das ganze programm gecleart wird
             BlockVar.blocks.remove(BlockVar.blocks.indexOf(this));
             BlockVar.visibleblocks.remove(BlockVar.visibleblocks.indexOf(this));
-            for (int i = temp; i < BlockVar.blocks.size(); i++) {
-                System.out.println("Test "+i);
-                BlockVar.blocks.get(i).setIndex(BlockVar.blocks.get(i).getIndex() - 1);
 
-            }
+
+            Thread calcnew =new Thread() {
+                @Override
+                public void run() {
+                    for (int i = temp; i < BlockVar.blocks.size(); i++) {
+                        System.out.println("Test "+i);
+                        BlockVar.blocks.get(i).setIndex(BlockVar.blocks.get(i).getIndex() - 1);
+
+                    }
+                }
+            };
+
+            calcnew.start();
+
 
 
             try {
