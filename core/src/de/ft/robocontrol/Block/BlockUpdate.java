@@ -34,6 +34,8 @@ public Timer time;
             public void run() {
 
 
+
+
                 if(block ==null) {
                     time.cancel();
                 }
@@ -41,11 +43,6 @@ public Timer time;
                     time.cancel();
                     time.purge();
                 }
-
-try {
-    System.out.println("markedblock  " + BlockVar.markedblock.getIndex());
-}catch(NullPointerException e){}
-
 
                 toggle = de.ft.robocontrol.utils.CheckKollision.checkmousewithblock(block);
 
@@ -293,44 +290,6 @@ block.seted=true;
         }
 
     }
-
-
-
-
-          //block.setIndex( MainGame.blocks.indexOf(block));
-
-/*
-
-            if(toggle && Gdx.input.isButtonPressed(0) && !Var.indraganddrop){
-                block.setMarked(true);
-                Var.markedblock = block;
-                Var.indraganddrop = true;
-
-            }
-
-
-            if(!Gdx.input.isButtonPressed(0)) {
-                Var.indraganddrop=false;
-            }
-
-
-
-
-            if(toggle&&!block.isMarked()) {
-                Var.markedblock.setMarked(false);
-                block.setMarked(true);
-                Var.markedblock = block;
-            }
-
-            if(!toggle && Gdx.input.isButtonPressed(0)&&!Var.indraganddrop){
-                block.setMarked(false);
-                BlockVar.markedblock = null;
-            }
-            */
-
-
-                    //System.out.println(block.getIndex()+ " " +de.ft.robocontrol.utils.CheckKollision.checkmousewithcar(block));
-                    //System.out.println(block.getIndex());
 
 
                             }

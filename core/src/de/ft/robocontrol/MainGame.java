@@ -85,7 +85,7 @@ public static Logger logger;
 Thread test = new Thread() {
 	@Override
 	public void run() {
-		for(int i=0;i<999999;i=i+1) {
+		for(int i=0;i<12;i=i+1) {
 			BlockVar.blocks.add(new Block(i, i * 150, 100, 150, 70));
 
 			System.out.println(i);
@@ -117,8 +117,8 @@ test.start();
 
 		try {
 
-			System.out.println(BlockVar.blocks.size());
-
+			//System.out.println("Blöcke "+BlockVar.blocks.size()+" Sichtbare "+ BlockVar.visibleblocks.size());
+		//	System.out.println("cam Pos"+ cam.position);
 			PositionSaver.save();
 
 
@@ -161,30 +161,23 @@ test.start();
 					}
 
 					try {
-						if (BlockVar.blocks.get(i).isMarked()) {
-							Temp = BlockVar.blocks.get(i);
+						if (BlockVar.visibleblocks.get(i).isMarked()) {
+							Temp = BlockVar.visibleblocks.get(i);
 						} else {
-							BlockVar.blocks.get(i).draw(batch, shapeRenderer, font);
+							BlockVar.visibleblocks.get(i).draw(batch, shapeRenderer, font);
 						}
 
 						batch.end();
-						if (BlockVar.blocks.get(i).isMarked()) {
+						if (BlockVar.visibleblocks.get(i).isMarked()) {
 
 
 							if (input.isKeyJustPressed(Input.Keys.FORWARD_DEL)) {
-								BlockVar.blocks.get(i).delete();
+								BlockVar.visibleblocks.get(i).delete();
 							}
 
 
 						}
 
-						if (input.isKeyJustPressed(Input.Keys.SPACE)) {
-							cam.position.set(cam.position.x += 5, cam.position.y += 5, 0);
-						}
-
-						if (input.isKeyJustPressed(Input.Keys.U)) {
-							cam.position.set(cam.position.x -= 5, cam.position.y -= 5, 0);
-						}
 
 
 						if (Temp != null) {
@@ -211,7 +204,21 @@ test.start();
 
 		}
 		*/
+			if (input.isKeyJustPressed(Input.Keys.LEFT)) {
+				cam.position.set(cam.position.x -= 5, cam.position.y, 0);
+			}
 
+			if (input.isKeyJustPressed(Input.Keys.RIGHT)) {
+				cam.position.set(cam.position.x += 5, cam.position.y, 0);
+			}
+
+			if (input.isKeyJustPressed(Input.Keys.UP)) {
+				cam.position.set(cam.position.x, cam.position.y += 5, 0);
+			}
+
+			if (input.isKeyJustPressed(Input.Keys.DOWN)) {
+				cam.position.set(cam.position.x, cam.position.y -= 5, 0);
+			}
 
 				if(input.isKeyJustPressed(Input.Keys.E)) {
 					throw new NullPointerException("Test");

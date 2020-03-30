@@ -27,7 +27,7 @@ public class ThreadManager {
 
 
     public synchronized static void init() {
-        camfr = MainGame.cam.frustum;
+
 
         Thread init = new Thread() {
             @Override
@@ -36,16 +36,22 @@ public class ThreadManager {
                 timer.scheduleAtFixedRate(new TimerTask() {
                     @Override
                     public void run() {
+                        camfr = MainGame.cam.frustum;
 
-                        for (int i = 0; i < threads.size(); i++) {
 
+                        for (int i = 0; i < BlockVar.blocks.size(); i++) {
+                            //System.out.println("Test"+i);
+//                            System.out.println(camfr.boundsInFrustum(BlockVar.blocks.get(10).getX(), BlockVar.blocks.get(10).getY(), 0, BlockVar.blocks.get(10).getW(), BlockVar.blocks.get(10).getH(),0));
                             try {
                                 Block block = ((BlockUpdate) threads.get(i)).block;
-                                if( !(camfr.boundsInFrustum(block.getX(), block.getY(), 0, block.getW(), block.getH(), 0))&&block.isMarked()==false&&((BlockUpdate) threads.get(i)).isrunning == true){
+                                if( !(camfr.boundsInFrustum(block.getX(), block.getY(), 0, block.getW(), block.getH(), 0)) &&block.isMarked()==false&&((BlockUpdate) threads.get(i)).isrunning == true){
                                     ((BlockUpdate) threads.get(i)).time.cancel();
                                     threads.get(i).interrupt();
                                     ((BlockUpdate) threads.get(i)).isrunning = false;
                                     BlockVar.visibleblocks.remove(block);
+                                    if(i==10) {
+                                        System.out.println("stop");
+                                    }
                                 }
 
                                 if (camfr.boundsInFrustum(block.getX(), block.getY(), 0, block.getW(), block.getH(), 0) && ((BlockUpdate) threads.get(i)).isrunning == false) {
@@ -54,6 +60,9 @@ public class ThreadManager {
                                     System.out.println("here 2");
                                     threads.set(i, ((BlockUpdate) threads.get(i)).block.allowedRestart());
                                     ((BlockUpdate) threads.get(i)).isrunning = true;
+                                    if(i==10) {
+                                        System.out.println("stop");
+                                    }
                                 }
 
 

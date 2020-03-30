@@ -37,9 +37,6 @@ public class Block {
         this.x_dup_rechts = this.x + this.w;
         this.x_dup_links = this.x-this.w;
 
-
-
-
         this.index = index;
         blockupdate = new BlockUpdate(this);
 
@@ -50,6 +47,7 @@ public class Block {
             blockupdate.isrunning = false;
         }
         ThreadManager.add(blockupdate, this);
+
     }
 
     public boolean isVisible() {
@@ -193,6 +191,8 @@ public class Block {
 
 
 
+
+
         DataManager.change(this, false, true);
         this.setIndex(-1);
         if(left!=null) {
@@ -225,8 +225,9 @@ public class Block {
         int temp = BlockVar.blocks.indexOf(this);
         if(BlockVar.blocks.indexOf(this)!=-1) { //das trifft nur nicht zu wenn das ganze programm gecleart wird
             BlockVar.blocks.remove(BlockVar.blocks.indexOf(this));
-
-            for (int i = 0; i < BlockVar.blocks.size() - temp; i++) {
+            BlockVar.visibleblocks.remove(BlockVar.visibleblocks.indexOf(this));
+            for (int i = getIndex(); i < BlockVar.blocks.size(); i++) {
+                System.out.println("Test "+i);
                 BlockVar.blocks.get(i).setIndex(BlockVar.blocks.get(i).getIndex() - 1);
 
             }
