@@ -105,7 +105,7 @@ test.start();
 
 
 
-		//SerialConnection.serial();
+		SerialConnection.serial();
 	}
 
 
