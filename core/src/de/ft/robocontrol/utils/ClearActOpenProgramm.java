@@ -6,9 +6,7 @@ import de.ft.robocontrol.MainGame;
 import de.ft.robocontrol.Var;
 import de.ft.robocontrol.data.user.changes.DataManager;
 import de.ft.robocontrol.data.user.changes.SaveChanges;
-import sun.awt.X11.XSystemTrayPeer;
 
-import javax.management.monitor.CounterMonitor;
 import java.util.ArrayList;
 
 public class ClearActOpenProgramm {
