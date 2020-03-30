@@ -46,12 +46,12 @@ public class ThreadManager {
                                     threads.get(i).interrupt();
                                     ((BlockUpdate) threads.get(i)).isrunning = false;
                                     BlockVar.visibleblocks.remove(block);
-                                    System.out.println("Stop right");
                                 }
 
                                 if (camfr.boundsInFrustum(block.getX(), block.getY(), 0, block.getW(), block.getH(), 0) && ((BlockUpdate) threads.get(i)).isrunning == false) {
 
                                     BlockVar.visibleblocks.add(block);
+                                    System.out.println("here 2");
                                     threads.set(i, ((BlockUpdate) threads.get(i)).block.allowedRestart());
                                     ((BlockUpdate) threads.get(i)).isrunning = true;
                                 }

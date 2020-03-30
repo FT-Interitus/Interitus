@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class BlockVar {
 
     public static ArrayList<Block> blocks = new ArrayList<Block>();
-
+    public static ArrayList<Block> visibleblocks = new ArrayList<Block>();
 
 
     //TODO Für multi select hier eventuel ArrayList

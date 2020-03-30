@@ -137,39 +137,47 @@ public class UI {
                     @Override
                     public void run() {
 
-
                         ////////////recent//////////////////////////
-                        for (int i = 0; i < Data.path.size(); i++) {
-                            if (!(new File(Data.path.get(i)).exists())) {
-                                Data.path.remove(i);
-                                Data.filename.remove(i);
-                            }
-                        }
 
-                        if (Data.path.size() == 0) {
-                            recent.setDisabled(true);
-                        } else {
-                            recent.setDisabled(false);
-                        }
+
+
+                            for (int i = 0; i < Data.path.size(); i++) {
+                                if (!(new File(Data.path.get(i)).exists())) {
+                                    Data.path.remove(i);
+                                    Data.filename.remove(i);
+                                }
+                            }
+
+                            if (Data.path.size() == 0) {
+                                recent.setDisabled(true);
+                            } else {
+                                recent.setDisabled(false);
+                            }
+
+
 
                         ///////////////////////////////////
 
 
                         /////////////revert//////////////
-                        if(SaveChanges.checkstack()) {
-                            revert.setDisabled(true);
-                        }else{
-                            revert.setDisabled(false);
-                        }
+
+                            if (SaveChanges.checkstack()) {
+                                revert.setDisabled(true);
+                            } else {
+                                revert.setDisabled(false);
+                            }
 
                         ///////Redo//////////////
 
 
-                        if(SaveChanges.checkredostack()) {
-                            redo.setDisabled(true);
-                        }else{
-                            redo.setDisabled(false);
-                        }
+
+
+                            if (SaveChanges.checkredostack()) {
+                                redo.setDisabled(true);
+                            } else {
+                                redo.setDisabled(false);
+                            }
+
 
                         /////////Dangerous zone Settings////
                         ///update url//
