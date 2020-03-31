@@ -108,7 +108,7 @@ test.start();
 
 
 
-		SerialConnection.serial();
+		SerialConnection.searchArduino();
 	}
 
 

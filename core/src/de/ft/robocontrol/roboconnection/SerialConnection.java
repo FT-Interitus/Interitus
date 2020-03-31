@@ -1,6 +1,9 @@
 package de.ft.robocontrol.roboconnection;
 import com.fazecast.jSerialComm.*;
+
+import java.sql.Time;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class SerialConnection {
 
@@ -23,7 +26,7 @@ public class SerialConnection {
     }
 
 
-public static void serial() {
+public static void searchArduino() {
     // determine which serial port to use
 
     SerialPort ports[] = SerialPort.getCommPorts();
@@ -44,40 +47,28 @@ try {
         return;
     }
 
-    testport.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 0, 0);
+    testport.setBaudRate(9600);
+    testport.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 10, 0);
 
-
-
-    for(int a=0;a<100;a++) {
-        System.out.println("test:   " + empfangen(testport));
+long save=System.currentTimeMillis()+2000;
+boolean found=false;
+while(System.currentTimeMillis()<save && found==false){
+    if( empfangen(testport)==1234){
+        System.out.println("Arduino gefunden");
+        found=true;
     }
-}catch (ArrayIndexOutOfBoundsException e){}
+}
+
+
+
+
+
+}catch (ArrayIndexOutOfBoundsException e){System.out.println("mist");}
 
         System.out.println("-----------------------------------------------------------");
 
     }
-    Scanner s = new Scanner(System.in);
-    int chosenPort = s.nextInt();
 
-
-    // open and configure the port
-    SerialPort port = ports[chosenPort - 1];
-
-    if (port.openPort()) {
-        System.out.println("Successfully opened the port.");
-        System.out.println("baudrate:   "+port.getBaudRate());
-    } else {
-        System.out.println("Unable to open the port.");
-        return;
-    }
-
-
-    port.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 0, 0);
-
-    // enter into an infinite loop that reads from the port and updates the GUI
-    while(true) {
-        System.out.println(empfangen(port));
-    }
 }
 
 }
