@@ -79,7 +79,7 @@ public static TabbedPane tabbedPane;
             selectportlist.setItems("item 1", "item 2", "item 3", "item 4");
             VisTable selectboard = new VisTable(true);
             VisSelectBox<String> selectboardlist = new VisSelectBox<String>();
-            selectboardlist.setItems("item 1", "item 2", "item 3", "item 4");
+            selectboardlist.setItems("Arduino UNO", "Arduino MEGA");
             selectboard.pad(0,30,0,0);
 
             content.add(new VisLabel("Port:")).padLeft(30).padTop(50).padBottom(50);
