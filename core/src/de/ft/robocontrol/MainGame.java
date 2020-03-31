@@ -90,7 +90,7 @@ Thread test = new Thread() {
 	@Override
 	public void run() {
 		for(int i=0;i<12;i=i+1) {
-			BlockVar.blocks.add(new Block(i, i * 150, 100, 150, 70));
+			BlockVar.blocks.add(new Block(i, i * 150, 150, 150, 70));
 
 			System.out.println(i);
 		}
@@ -255,15 +255,15 @@ test.start();
 
 	@Override
 	public void dispose () {
-		
+
 		for(int i = 0;i<BlockVar.blocks.size();i++) {
 			BlockVar.blocks.get(i).delete();
 		}
-		
+
 		BlockVar.blocks.clear();
 
 
-		
+
 		Data.close();
 		batch.dispose();
 		img_block.dispose();
