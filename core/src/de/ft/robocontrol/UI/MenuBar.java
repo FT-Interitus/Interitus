@@ -167,7 +167,8 @@ public class MenuBar {
         fileMenu.addItem(new MenuItem("Beenden", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                System.exit(0);
+               System.exit(0);
+                //ConnectionWindow cw = new ConnectionWindow();
             }
         }).setShortcut("Alt+F4"));
 

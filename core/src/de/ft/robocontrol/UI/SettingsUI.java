@@ -15,6 +15,7 @@ import com.kotcrab.vis.ui.building.utilities.Padding;
 import com.kotcrab.vis.ui.building.utilities.layouts.ActorLayout;
 import com.kotcrab.vis.ui.util.TableUtils;
 import com.kotcrab.vis.ui.widget.*;
+import com.kotcrab.vis.ui.widget.tabbedpane.TabbedPane;
 import de.ft.robocontrol.Settings;
 
 public class SettingsUI extends VisWindow {
@@ -93,7 +94,10 @@ public class SettingsUI extends VisWindow {
 
        //    layout.convertToActor(new CreateTab());
 
+
             builder.setTablePadding(new Padding(20,30,20,30));
+
+
 
             builder.append(darktoggle);
            builder.row();
