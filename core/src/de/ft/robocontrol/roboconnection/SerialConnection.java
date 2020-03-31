@@ -22,7 +22,28 @@ public class SerialConnection {
         SerialPort ports[]=SerialPort.getCommPorts();
         String[] portsstrings = new String[ports.length];
         for(int i = 0; i<ports.length;i++) {
-            portsstrings[i] = ports[i].getDescriptivePortName();
+            portsstrings[i] = ports[i].getSystemPortName();
+
+
+            for (int a = 0; a < SerialConnection.Arduinos.size(); a++) {
+                System.out.println(SerialConnection.Arduinos.get(a).getSystemPortName() + "   asdfasdf   " + SerialConnection.getPorts()[i].getSystemPortName());
+                if (SerialConnection.Arduinos.get(a).getSystemPortName().equals(SerialConnection.getPorts()[i].getSystemPortName())) {
+                    System.out.println("software schon vorhanden");
+                    portsstrings[i] =portsstrings[i] + " (Authenifiziert)";
+                }
+            }
+
+            if (SerialConnection.getPorts()[i].getDescriptivePortName().contains("Arduino") || SerialConnection.getPorts()[i].getDescriptivePortName().contains("arduino")) {
+                portsstrings[i] =portsstrings[i] +  " (Arduino)";
+                if (SerialConnection.getPorts()[i].getDescriptivePortName().contains("Mega") || SerialConnection.getPorts()[i].getDescriptivePortName().contains("mega")) {
+                    portsstrings[i] =portsstrings[i] +  " (Arduino MEGA)";
+                } else if (SerialConnection.getPorts()[i].getDescriptivePortName().contains("uno") || SerialConnection.getPorts()[i].getDescriptivePortName().contains("UNO") || SerialConnection.getPorts()[i].getDescriptivePortName().contains("Uno")) {
+                    portsstrings[i] =portsstrings[i] +  " (Arduino UNO)";
+                }
+
+
+            }
+
         }
 
 
@@ -108,7 +129,7 @@ public static void searchArduino() {
 
 
             }
-            MainGame.UpdateConnectionWindowPortsList();
+            UIbridge.UpdateConnectionWindowPortsList();
         }
     };
 

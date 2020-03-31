@@ -24,6 +24,7 @@ import de.ft.robocontrol.UI.UI;
 import de.ft.robocontrol.data.programm.Data;
 import de.ft.robocontrol.data.user.changes.DataManager;
 import de.ft.robocontrol.roboconnection.SerialConnection;
+import de.ft.robocontrol.roboconnection.UIbridge;
 import de.ft.robocontrol.utils.ClearActOpenProgramm;
 import de.ft.robocontrol.utils.PositionSaver;
 
@@ -119,49 +120,12 @@ test.start();
 
 		SerialConnection.searchArduino();
 
-
+		UIbridge.UpdateConnectionWindowPortsList();
 	}
 
 
 
-	public static void UpdateConnectionWindowPortsList(){
-		ConnectionWindow.selectportlist.setItems();
-		for(int i = 0; i<SerialConnection.getPorts().length;i++) {
-			//list =list + SerialConnection.getPorts()[i].getSystemPortName().toString() +",";
-			//ConnectionWindow.selectportlist.setItems(SerialConnection.getPorts()[i].getSystemPortName());
-			//ConnectionWindow.selectportlist.setItems(ConnectionWindow.selectportlist.getItems() );
 
-			//ConnectionWindow.selectportlist.setItems(SerialConnection.getPorts()[0].getSystemPortName(),SerialConnection.getPorts()[1].getSystemPortName() );
-String ssv="";
-String arduinoerkannt="";
-System.out.println(SerialConnection.getPorts()[i].getDescriptivePortName());
-
-			for(int a=0;a<SerialConnection.Arduinos.size();a++){
-				System.out.println(SerialConnection.Arduinos.get(a).getSystemPortName() + "   asdfasdf   "+  SerialConnection.getPorts()[i].getSystemPortName());
-				if(SerialConnection.Arduinos.get(a).getSystemPortName().equals(SerialConnection.getPorts()[i].getSystemPortName())){
-					System.out.println("software schon vorhanden");
-					ssv=" (Authenifiziert)";
-				}
-			}
-
-			if(SerialConnection.getPorts()[i].getDescriptivePortName().contains("Arduino")  ||  SerialConnection.getPorts()[i].getDescriptivePortName().contains("arduino")){
-				arduinoerkannt=" (Arduino)";
-				if(SerialConnection.getPorts()[i].getDescriptivePortName().contains("Mega") || SerialConnection.getPorts()[i].getDescriptivePortName().contains("mega")){
-					arduinoerkannt=" (Arduino MEGA)";
-				}else if(SerialConnection.getPorts()[i].getDescriptivePortName().contains("uno") || SerialConnection.getPorts()[i].getDescriptivePortName().contains("UNO") || SerialConnection.getPorts()[i].getDescriptivePortName().contains("Uno")){
-					arduinoerkannt=" (Arduino UNO)";
-				}
-
-
-			}
-
-
-
-					ConnectionWindow.selectportlist.setItems(SerialConnection.getPortNames());
-
-
-		}
-	}
 
 
 
@@ -170,11 +134,9 @@ System.out.println(SerialConnection.getPorts()[i].getDescriptivePortName());
 	@Override
 	public void render () {
 
-if(SerialConnection.getPorts().length!=portsold) {
-	System.out.println("portsold");
-	UpdateConnectionWindowPortsList();
-portsold=SerialConnection.getPorts().length;
-}
+
+
+
 
 
 
