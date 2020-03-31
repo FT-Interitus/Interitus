@@ -1,15 +1,22 @@
 package de.ft.robocontrol.roboconnection;
 import com.fazecast.jSerialComm.*;
-import de.ft.robocontrol.Block.Block;
 
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 public class SerialConnection {
 
     public static ArrayList<SerialPort> Arduinos = new ArrayList<SerialPort>();
+
+
+
+    public static SerialPort[] getPorts(){
+        SerialPort ports[]=SerialPort.getCommPorts();
+
+        return ports;
+    }
+
+
 
     public static int empfangen(SerialPort sport){
         Scanner data = new Scanner(sport.getInputStream());

@@ -109,6 +109,7 @@ test.start();
 
 
 		SerialConnection.searchArduino();
+		System.out.println( "pasdf  "+SerialConnection.getPorts()[1].getSystemPortName());
 	}
 
 
