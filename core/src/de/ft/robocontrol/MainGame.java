@@ -148,6 +148,8 @@ System.out.println(SerialConnection.getPorts()[i].getDescriptivePortName());
 				arduinoerkannt=" (Arduino)";
 				if(SerialConnection.getPorts()[i].getDescriptivePortName().contains("Mega") || SerialConnection.getPorts()[i].getDescriptivePortName().contains("mega")){
 					arduinoerkannt=" (Arduino MEGA)";
+				}else if(SerialConnection.getPorts()[i].getDescriptivePortName().contains("uno") || SerialConnection.getPorts()[i].getDescriptivePortName().contains("UNO") || SerialConnection.getPorts()[i].getDescriptivePortName().contains("Uno")){
+					arduinoerkannt=" (Arduino UNO)";
 				}
 
 
