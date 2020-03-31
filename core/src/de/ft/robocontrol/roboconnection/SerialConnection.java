@@ -24,11 +24,7 @@ public class SerialConnection {
         String[] items = new String[SerialConnection.getPorts().length];
 
         for(int i = 0; i<SerialConnection.getPorts().length;i++) {
-            //list =list + SerialConnection.getPorts()[i].getSystemPortName().toString() +",";
-            //ConnectionWindow.selectportlist.setItems(SerialConnection.getPorts()[i].getSystemPortName());
-            //ConnectionWindow.selectportlist.setItems(ConnectionWindow.selectportlist.getItems() );
 
-            //ConnectionWindow.selectportlist.setItems(SerialConnection.getPorts()[0].getSystemPortName(),SerialConnection.getPorts()[1].getSystemPortName() );
             String ssv="";
             String arduinoerkannt="";
 
