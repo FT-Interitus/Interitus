@@ -37,7 +37,7 @@ public static TabbedPane tabbedPane;
                 container.add(tab.getContentTable()).expand().fill();
             }
         });
-        tabbedPane.add(new TestTab("Neue Verbindung"));
+        tabbedPane.add(new TestTab("Software Brennen"));
 
 
 

@@ -53,6 +53,8 @@ public class MainGame extends ApplicationAdapter {
 	//BlockUpdate bu[] = new BlockUpdate[0];
 public static Logger logger;
 
+public static int portsold=0;
+
 
 	@Override
 	public void create () {
@@ -118,9 +120,12 @@ test.start();
 		SerialConnection.searchArduino();
 
 
-		String list ="";
+	}
 
-ConnectionWindow.selectportlist.setItems();
+
+
+	public void UpdateConnectionWindowPortsList(){
+		ConnectionWindow.selectportlist.setItems();
 		for(int i = 0; i<SerialConnection.getPorts().length;i++) {
 			//list =list + SerialConnection.getPorts()[i].getSystemPortName().toString() +",";
 			//ConnectionWindow.selectportlist.setItems(SerialConnection.getPorts()[i].getSystemPortName());
@@ -160,11 +165,15 @@ ConnectionWindow.selectportlist.setItems();
 
 
 
+
 	@Override
 	public void render () {
 
-
-
+if(SerialConnection.getPorts().length!=portsold) {
+	System.out.println("portsold");
+	UpdateConnectionWindowPortsList();
+portsold=SerialConnection.getPorts().length;
+}
 
 
 
