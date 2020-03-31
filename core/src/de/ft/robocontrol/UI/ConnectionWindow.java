@@ -15,7 +15,9 @@ import de.ft.robocontrol.Var;
 public class ConnectionWindow extends VisWindow {
 public static VisLabel error;
 public static TabbedPane tabbedPane;
+public static VisTextButton devicemanagebutton = new VisTextButton("Software brennen");
   public static VisSelectBox<String> selectportlist;
+  public static VisSelectBox<String> selectboardlist;
 
     public ConnectionWindow() {
         super("Verbindungen");
@@ -83,11 +85,11 @@ public static TabbedPane tabbedPane;
 
             selectportlist.setItems("item 1", "item 2", "item 3", "item 4");
             VisTable selectboard = new VisTable(true);
-            VisSelectBox<String> selectboardlist = new VisSelectBox<String>();
+            selectboardlist = new VisSelectBox<String>();
             selectboardlist.setItems("Arduino UNO", "Arduino MEGA");
             selectboard.pad(0,30,0,0);
 
-            content.add(new VisTextButton("Software brennen")).padRight(-655);
+            content.add(devicemanagebutton).padRight(-655);
             content.row();
             content.add(new VisLabel("Port:")).padLeft(30).padTop(50).padBottom(50);
             content.add(selectportlist).padTop(50).padBottom(50).padLeft(20);

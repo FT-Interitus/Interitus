@@ -21,6 +21,7 @@ public class SerialConnection {
     public static String[] getPortNames(){
         SerialPort ports[]=SerialPort.getCommPorts();
         String[] portsstrings = new String[ports.length];
+
         for(int i = 0; i<ports.length;i++) {
             portsstrings[i] = ports[i].getSystemPortName();
 
@@ -29,7 +30,7 @@ public class SerialConnection {
                 System.out.println(SerialConnection.Arduinos.get(a).getSystemPortName() + "   asdfasdf   " + SerialConnection.getPorts()[i].getSystemPortName());
                 if (SerialConnection.Arduinos.get(a).getSystemPortName().equals(SerialConnection.getPorts()[i].getSystemPortName())) {
                     System.out.println("software schon vorhanden");
-                    portsstrings[i] =portsstrings[i] + " (Authenifiziert)";
+                    portsstrings[i] =portsstrings[i] + " (Authenifiziert)"; //TODO Das muss kann hier nicht stehen da wenn er Authenifiziert d.h. die Software vorhanden ist geht der Einrichtungs assistent sofort los
                 }
             }
 
