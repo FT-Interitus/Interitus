@@ -54,7 +54,6 @@ public class MainGame extends ApplicationAdapter {
 	//BlockUpdate bu[] = new BlockUpdate[0];
 public static Logger logger;
 
-public static int portsold=0;
 
 
 	@Override

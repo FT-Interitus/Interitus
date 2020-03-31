@@ -5,17 +5,39 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import de.ft.robocontrol.Block.Arduino;
 import de.ft.robocontrol.UI.ConnectionWindow;
 
+import java.sql.Time;
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class UIbridge {
     public static String selectedport;
     public static String selectedboard;
     public static void UpdateConnectionWindowPortsList() {
 
+        final int[] portsold = {0};
 
         Thread updater = new Thread() {
             @Override
             public void run() {
+
                 //Update ports
-                ConnectionWindow.selectportlist.setItems(SerialConnection.getPortNames());
+                Timer time = new Timer();
+
+                time.scheduleAtFixedRate(new TimerTask() {
+                    @Override
+                    public void run() {
+                        System.out.println(SerialConnection.getPorts().length);
+                        if(SerialConnection.getPorts().length!= portsold[0]) {
+                            System.out.println(SerialConnection.getPorts().length);
+                            portsold[0] =SerialConnection.getPorts().length;
+
+                            ConnectionWindow.selectportlist.setItems(SerialConnection.getPortNames());
+                        }
+
+                    }}, 0,200);
+
+
+
                 //Button Listener
                 ConnectionWindow.devicemanagebutton.addListener(new ChangeListener() {
                     @Override
