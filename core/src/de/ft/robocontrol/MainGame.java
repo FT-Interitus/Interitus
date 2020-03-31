@@ -127,7 +127,7 @@ test.start();
 
 
 	for(int i = 0; i<SerialConnection.getPorts().length;i++) {
-		list =list + SerialConnection.getPorts()[i].toString() +",";
+		list =list + SerialConnection.getPorts()[i].getSystemPortName().toString() +",";
 	}
 
 
