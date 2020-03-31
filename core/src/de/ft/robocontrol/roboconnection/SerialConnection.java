@@ -1,5 +1,6 @@
 package de.ft.robocontrol.roboconnection;
 import com.fazecast.jSerialComm.*;
+import de.ft.robocontrol.MainGame;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -98,7 +99,7 @@ public static void searchArduino() {
 
 
             }
-
+            MainGame.UpdateConnectionWindowPortsList();
         }
     };
 
