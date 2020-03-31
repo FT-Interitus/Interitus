@@ -134,6 +134,7 @@ test.start();
 			//ConnectionWindow.selectportlist.setItems(SerialConnection.getPorts()[0].getSystemPortName(),SerialConnection.getPorts()[1].getSystemPortName() );
 String ssv="";
 String arduinoerkannt="";
+System.out.println(SerialConnection.getPorts()[i].getDescriptivePortName());
 
 			for(int a=0;a<SerialConnection.Arduinos.size();a++){
 				System.out.println(SerialConnection.Arduinos.get(a).getSystemPortName() + "   asdfasdf   "+  SerialConnection.getPorts()[i].getSystemPortName());
@@ -153,31 +154,9 @@ String arduinoerkannt="";
 			}
 
 
-			switch (ConnectionWindow.selectportlist.getItems().size){
-				case 0:
-					ConnectionWindow.selectportlist.setItems(SerialConnection.getPorts()[i].getSystemPortName()+ssv+arduinoerkannt);
-					break;
-				case 1:
-					ConnectionWindow.selectportlist.setItems(ConnectionWindow.selectportlist.getItems().get(0),SerialConnection.getPorts()[i].getSystemPortName()+ssv+arduinoerkannt);
-					break;
 
-				case 2:
-					ConnectionWindow.selectportlist.setItems(ConnectionWindow.selectportlist.getItems().get(0),ConnectionWindow.selectportlist.getItems().get(1),SerialConnection.getPorts()[i].getSystemPortName()+ssv+arduinoerkannt);
-					break;
+					ConnectionWindow.selectportlist.setItems(SerialConnection.getPortNames());
 
-				case 3:
-					ConnectionWindow.selectportlist.setItems(ConnectionWindow.selectportlist.getItems().get(0),ConnectionWindow.selectportlist.getItems().get(1),ConnectionWindow.selectportlist.getItems().get(2),SerialConnection.getPorts()[i].getSystemPortName()+ssv+arduinoerkannt);
-					break;
-
-				case 4:
-					ConnectionWindow.selectportlist.setItems(ConnectionWindow.selectportlist.getItems().get(0),ConnectionWindow.selectportlist.getItems().get(1),ConnectionWindow.selectportlist.getItems().get(2),ConnectionWindow.selectportlist.getItems().get(3),SerialConnection.getPorts()[i].getSystemPortName()+ssv+arduinoerkannt);
-					break;
-
-				case 5:
-					ConnectionWindow.selectportlist.setItems(ConnectionWindow.selectportlist.getItems().get(0),ConnectionWindow.selectportlist.getItems().get(1),ConnectionWindow.selectportlist.getItems().get(2),ConnectionWindow.selectportlist.getItems().get(3),ConnectionWindow.selectportlist.getItems().get(4),SerialConnection.getPorts()[i].getSystemPortName()+ssv+arduinoerkannt);
-					break;
-
-			}
 
 		}
 	}

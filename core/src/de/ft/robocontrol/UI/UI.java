@@ -195,20 +195,6 @@ public class UI {
                             }
 
 
-                        /////////Dangerous zone Settings////
-                        ///update url//
-
-                        try {
-                            if (Gdx.input.isButtonPressed(0) && CheckKollision.checkmousewithobject(((int) SettingsUI.updateurlfield.getX()), (int) SettingsUI.updateurlfield.getY(), (int) SettingsUI.updateurlfield.getHeight(), (int) SettingsUI.updateurlfield.getWidth(), BlockVar.mousepressedold)) {
-
-                                System.out.println("Hier bin ich");
-
-
-                            }
-                        }catch (Exception e) {
-                            System.out.println("Fehler wird noch behoben");
-                        }
-
 
                     }
                 }, 0, 500);

@@ -3,12 +3,14 @@ package de.ft.robocontrol.UI;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Align;
 import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.util.TableUtils;
 import com.kotcrab.vis.ui.widget.*;
 import com.kotcrab.vis.ui.widget.tabbedpane.Tab;
 import com.kotcrab.vis.ui.widget.tabbedpane.TabbedPane;
 import com.kotcrab.vis.ui.widget.tabbedpane.TabbedPaneAdapter;
+import de.ft.robocontrol.Var;
 
 public class ConnectionWindow extends VisWindow {
 public static VisLabel error;
@@ -20,7 +22,7 @@ public static TabbedPane tabbedPane;
 
         TableUtils.setSpacingDefaults(this);
         centerWindow();
-        setResizable(true);
+        setResizable(false);
 
 
         addCloseButton();
@@ -37,7 +39,8 @@ public static TabbedPane tabbedPane;
                 container.add(tab.getContentTable()).expand().fill();
             }
         });
-        tabbedPane.add(new TestTab("Software Brennen"));
+        tabbedPane.add(new TestTab("Gerät hinzufügen"));
+
 
 
 
@@ -48,6 +51,8 @@ public static TabbedPane tabbedPane;
 
         setSize(300, 200);
         centerWindow();
+
+
 
     }
 
@@ -82,6 +87,8 @@ public static TabbedPane tabbedPane;
             selectboardlist.setItems("Arduino UNO", "Arduino MEGA");
             selectboard.pad(0,30,0,0);
 
+            content.add(new VisTextButton("Software brennen")).padRight(-655);
+            content.row();
             content.add(new VisLabel("Port:")).padLeft(30).padTop(50).padBottom(50);
             content.add(selectportlist).padTop(50).padBottom(50).padLeft(20);
             content.add(new VisLabel("Arduino:")).padLeft(20).padTop(50).padBottom(50);

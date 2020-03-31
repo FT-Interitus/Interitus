@@ -14,11 +14,20 @@ public class SerialConnection {
     public static SerialPort[] getPorts(){
         SerialPort ports[]=SerialPort.getCommPorts();
 
-
-
         return ports;
     }
 
+
+    public static String[] getPortNames(){
+        SerialPort ports[]=SerialPort.getCommPorts();
+        String[] portsstrings = new String[ports.length];
+        for(int i = 0; i<ports.length;i++) {
+            portsstrings[i] = ports[i].getDescriptivePortName();
+        }
+
+
+        return portsstrings;
+    }
 
 
     public static int empfangen(SerialPort sport){
