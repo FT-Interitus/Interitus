@@ -10,19 +10,25 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Logger;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.fazecast.jSerialComm.SerialPort;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import de.ft.robocontrol.Block.Block;
 import de.ft.robocontrol.Block.BlockVar;
+import de.ft.robocontrol.UI.ConnectionWindow;
 import de.ft.robocontrol.UI.UI;
 import de.ft.robocontrol.data.programm.Data;
 import de.ft.robocontrol.data.user.changes.DataManager;
 import de.ft.robocontrol.roboconnection.SerialConnection;
+import de.ft.robocontrol.utils.ClearActOpenProgramm;
 import de.ft.robocontrol.utils.PositionSaver;
 
 import java.awt.Component;
+import java.net.ServerSocket;
+import java.util.ArrayList;
 
 import static com.badlogic.gdx.Gdx.input;
 
@@ -109,7 +115,6 @@ test.start();
 
 
 		SerialConnection.searchArduino();
-		System.out.println( "pasdf  "+SerialConnection.getPorts()[1].getSystemPortName());
 	}
 
 
@@ -117,9 +122,18 @@ test.start();
 
 	@Override
 	public void render () {
-try {
-	System.out.println(SerialConnection.empfangen(SerialConnection.Arduinos.get(0)));
-}catch (Exception e){}
+
+		String list ="";
+
+
+	for(int i = 0; i<SerialConnection.getPorts().length;i++) {
+		list =list + SerialConnection.getPorts()[i].toString() +",";
+	}
+
+
+
+		ConnectionWindow.selectportlist.setItems(list);
+
 		try {
 
 			//System.out.println("Blöcke "+BlockVar.blocks.size()+" Sichtbare "+ BlockVar.visibleblocks.size());
@@ -258,11 +272,7 @@ try {
 	@Override
 	public void dispose () {
 
-		for(int i = 0;i<BlockVar.blocks.size();i++) {
-			BlockVar.blocks.get(i).delete();
-		}
-
-		BlockVar.blocks.clear();
+		ClearActOpenProgramm.clear();
 
 
 

@@ -13,6 +13,8 @@ public class SerialConnection {
     public static SerialPort[] getPorts(){
         SerialPort ports[]=SerialPort.getCommPorts();
 
+
+
         return ports;
     }
 

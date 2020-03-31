@@ -26,6 +26,7 @@ import de.ft.robocontrol.utils.CheckKollision;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -41,6 +42,7 @@ public class UI {
     protected static MenuItem paste;
     protected static MenuBar menuBar;
    protected static SettingsUI set;
+   public static ConnectionWindow connectionWindow;
    private static Vector2 lastframecamposition = new Vector2(MainGame.cam.position.x, MainGame.cam.position.y);
     static final Table root = new Table();
     public static void initdragui() {
@@ -124,8 +126,14 @@ public class UI {
             }
         });
 
+        connectionWindow = new ConnectionWindow();
+
+
         root.add(menuBar.getTable()).expandX().fillX().row();
-        root.add().expand().fill();
+        root.add().expand().fill().row();
+
+        root.add(connectionWindow);
+
 
         de.ft.robocontrol.UI.MenuBar.createMenus();
 
@@ -194,33 +202,7 @@ public class UI {
                             if (Gdx.input.isButtonPressed(0) && CheckKollision.checkmousewithobject(((int) SettingsUI.updateurlfield.getX()), (int) SettingsUI.updateurlfield.getY(), (int) SettingsUI.updateurlfield.getHeight(), (int) SettingsUI.updateurlfield.getWidth(), BlockVar.mousepressedold)) {
 
                                 System.out.println("Hier bin ich");
-                                String[] möglichkeiten = {"Trotzdem fortfahren", "Abbrechen"};
 
-
-                                final int nothing = 1;
-                                final int everything = 2;
-
-
-                                //confirmdialog may return result of any type, here we are just using ints
-                                Dialogs.showConfirmDialog(UI.stage, "Kritische Einstellungen", "\nWenn du die Update-URL falsch änderst, kann es passieren, das das Programm sich nicht mehr updatet. Änderen musst du in der Regel nur etwas, falls du die Anweisung per Mail bekommen hast.\n",
-                                        möglichkeiten, new Integer[]{nothing, everything},
-                                        new ConfirmDialogListener<Integer>() {
-                                            @Override
-                                            public void result(Integer result) {
-                                                if (result == nothing) {
-
-
-                                                    SettingsUI.updateurlfield.setDisabled(false);
-
-                                                }
-
-                                                if (result == everything) {
-
-                                                }
-
-
-                                            }
-                                        });
 
                             }
                         }catch (Exception e) {

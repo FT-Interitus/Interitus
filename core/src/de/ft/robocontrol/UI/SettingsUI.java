@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.kotcrab.vis.ui.building.GridTableBuilder;
@@ -14,14 +15,20 @@ import com.kotcrab.vis.ui.building.utilities.CellWidget;
 import com.kotcrab.vis.ui.building.utilities.Padding;
 import com.kotcrab.vis.ui.building.utilities.layouts.ActorLayout;
 import com.kotcrab.vis.ui.util.TableUtils;
+import com.kotcrab.vis.ui.util.dialog.ConfirmDialogListener;
+import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import com.kotcrab.vis.ui.widget.*;
 import com.kotcrab.vis.ui.widget.tabbedpane.TabbedPane;
 import de.ft.robocontrol.Settings;
+
+import java.util.Set;
 
 public class SettingsUI extends VisWindow {
 
     public static VisTextField updateurlfield;
 
+
+    private static boolean accepteddangerous = false;
     final Padding padding = new Padding(2, 3);
     public SettingsUI() {
         super("Einstellungen");
@@ -75,6 +82,7 @@ public class SettingsUI extends VisWindow {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
 
+                    Settings.updateurl = updateurlfield.getText();
                 }
             });
 
@@ -97,14 +105,70 @@ public class SettingsUI extends VisWindow {
 
             builder.setTablePadding(new Padding(20,30,20,30));
 
+        final VisCheckBox enabledangeroussettings;
+        enabledangeroussettings = new VisCheckBox("Freischalten");
+        enabledangeroussettings.setChecked(false);
+        enabledangeroussettings.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+
+                if(!enabledangeroussettings.isChecked()) {
+
+                    updateurlfield.setDisabled(true);
+                }else{
+
+                    if(accepteddangerous) {
+                        enabledangeroussettings.setChecked(true);
+                        updateurlfield.setDisabled(false);
+                    }else {
+                        String[] möglichkeiten = {"Trotzdem fortfahren", "Abbrechen"};
 
 
-            builder.append(darktoggle);
+                        final int nothing = 1;
+                        final int everything = 2;
+
+
+                        //confirmdialog may return result of any type, here we are just using ints
+                        Dialogs.showConfirmDialog(UI.stage, "Kritische Einstellungen", "\nWenn du die Update-URL falsch änderst, kann es passieren, das das Programm sich nicht mehr updatet.\n Änderen musst du in der Regel nur etwas, falls du die Anweisung per Mail bekommen hast.\n",
+                                möglichkeiten, new Integer[]{nothing, everything},
+                                new ConfirmDialogListener<Integer>() {
+                                    @Override
+                                    public void result(Integer result) {
+                                        if (result == nothing) {
+
+
+
+                                            accepteddangerous = true;
+                                            updateurlfield.setDisabled(false);
+
+                                        }
+
+                                        if (result == everything) {
+
+                                            enabledangeroussettings.setChecked(false);
+
+                                        }
+
+
+                                    }
+                                });
+                    }
+                }
+
+            }
+        });
+
+
+
+            builder.append(rowLayout, CellWidget.builder().fillX().expandX().wrap(),CellWidget.of(darktoggle).expandX().fillY().wrap());
            builder.row();
-           builder.append(new VisLabel(""));
+           builder.append(CellWidget.of(new Separator()).fillX().wrap());
+            builder.row();
+           builder.append(new VisLabel("Gefährliche Einstellungen"));
+           builder.append(rowLayout, CellWidget.builder().padding(new Padding(0,20,0,0)).wrap(), CellWidget.of(enabledangeroussettings).wrap());
            builder.row();
 
-            builder.append(rowLayout,CellWidget.builder().fillX().expandX().expandX(),CellWidget.of(updateurlfield).expandX().fillX().wrap());
+            builder.append(rowLayout,CellWidget.builder().fillX().expandX().expandX().width(500),CellWidget.of(updateurlfield).expandX().fillX().wrap());
             builder.row();
 
 
@@ -135,20 +199,20 @@ public class SettingsUI extends VisWindow {
                 builder.append(rowLayout, getCheckBoxArray(5));
                 builder.row();
 
-                builder.append(CellWidget.of(new Separator()).fillX().wrap());
+
                 builder.row();
 
                 builder.append(new VisLabel("second part"));
                 builder.row();
 
                 builder.append(new VisLabel("sliders"));
-                builder.append(rowLayout, getSlider(false), getSlider(false), getSlider(false), getSlider(true));
+              //  builder.append(rowLayout, getSlider(false), getSlider(false), getSlider(false), getSlider(true));
                 builder.row();
 
-                builder.append(rowLayout, getCheckBoxArray(8));
+              //  builder.append(rowLayout, getCheckBoxArray(8));
             }
 
- */
+*/
 
             Table table = builder.build();
             add(table).expand().fill();
