@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector3;
 import de.ft.robocontrol.MainGame;
 import de.ft.robocontrol.data.user.changes.DataManager;
 import de.ft.robocontrol.utils.CheckKollision;
+import de.ft.robocontrol.utils.PositionSaver;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -76,11 +77,19 @@ public Timer time;
 
                 }
 
+
+
                 if (block.isMoving() && Gdx.input.isButtonPressed(0)) {
 
                     block.setX((int) (MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x - BlockVar.unterschiedsave.x));
                     block.setY((int) (MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y - BlockVar.unterschiedsave.y));
 
+                    //Wenn der Mauszeiger die Ablagefläche berührt
+                   // if(CheckKollision.checkmousewithobject(,Gdx.input.getY())) {
+                   // gotodelete = true;
+                   // }else{
+                    //gotodelete = false;
+                    //}
 
                     if (block.getLeft() != null) {
                         block.getLeft().setRight(null);
@@ -294,6 +303,8 @@ block.seted=true;
         }
 
     }
+
+
 
 
                             }
