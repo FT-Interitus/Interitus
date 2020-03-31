@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.Logger;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.fazecast.jSerialComm.SerialPort;
+import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import de.ft.robocontrol.Block.Block;
 import de.ft.robocontrol.Block.BlockVar;
@@ -115,6 +116,45 @@ test.start();
 
 
 		SerialConnection.searchArduino();
+
+
+		String list ="";
+
+ConnectionWindow.selectportlist.setItems();
+		for(int i = 0; i<SerialConnection.getPorts().length;i++) {
+			//list =list + SerialConnection.getPorts()[i].getSystemPortName().toString() +",";
+			//ConnectionWindow.selectportlist.setItems(SerialConnection.getPorts()[i].getSystemPortName());
+			//ConnectionWindow.selectportlist.setItems(ConnectionWindow.selectportlist.getItems() );
+
+			//ConnectionWindow.selectportlist.setItems(SerialConnection.getPorts()[0].getSystemPortName(),SerialConnection.getPorts()[1].getSystemPortName() );
+
+			switch (ConnectionWindow.selectportlist.getItems().size){
+				case 0:
+					ConnectionWindow.selectportlist.setItems(SerialConnection.getPorts()[i].getSystemPortName());
+					break;
+				case 1:
+					ConnectionWindow.selectportlist.setItems(ConnectionWindow.selectportlist.getItems().get(0),SerialConnection.getPorts()[i].getSystemPortName());
+					break;
+
+				case 2:
+					ConnectionWindow.selectportlist.setItems(ConnectionWindow.selectportlist.getItems().get(0),ConnectionWindow.selectportlist.getItems().get(1),SerialConnection.getPorts()[i].getSystemPortName());
+					break;
+
+				case 3:
+					ConnectionWindow.selectportlist.setItems(ConnectionWindow.selectportlist.getItems().get(0),ConnectionWindow.selectportlist.getItems().get(1),ConnectionWindow.selectportlist.getItems().get(2),SerialConnection.getPorts()[i].getSystemPortName());
+					break;
+
+				case 4:
+					ConnectionWindow.selectportlist.setItems(ConnectionWindow.selectportlist.getItems().get(0),ConnectionWindow.selectportlist.getItems().get(1),ConnectionWindow.selectportlist.getItems().get(2),ConnectionWindow.selectportlist.getItems().get(3),SerialConnection.getPorts()[i].getSystemPortName());
+					break;
+
+				case 5:
+					ConnectionWindow.selectportlist.setItems(ConnectionWindow.selectportlist.getItems().get(0),ConnectionWindow.selectportlist.getItems().get(1),ConnectionWindow.selectportlist.getItems().get(2),ConnectionWindow.selectportlist.getItems().get(3),ConnectionWindow.selectportlist.getItems().get(4),SerialConnection.getPorts()[i].getSystemPortName());
+					break;
+
+			}
+
+		}
 	}
 
 
@@ -123,16 +163,11 @@ test.start();
 	@Override
 	public void render () {
 
-		String list ="";
-
-
-	for(int i = 0; i<SerialConnection.getPorts().length;i++) {
-		list =list + SerialConnection.getPorts()[i].getSystemPortName().toString() +",";
-	}
 
 
 
-		ConnectionWindow.selectportlist.setItems(list);
+
+
 
 		try {
 
