@@ -116,8 +116,9 @@ test.start();
 
 	@Override
 	public void render () {
-
-
+try {
+	System.out.println(SerialConnection.empfangen(SerialConnection.Arduinos.get(0)));
+}catch (Exception e){}
 		try {
 
 			//System.out.println("Blöcke "+BlockVar.blocks.size()+" Sichtbare "+ BlockVar.visibleblocks.size());
