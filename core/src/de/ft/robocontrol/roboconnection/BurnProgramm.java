@@ -14,7 +14,7 @@ public class BurnProgramm {
 private static String OS = System.getProperty("os.name").toLowerCase();
     protected static void burn(int arduino, String port, String file) {
         if(arduino==Arduino.UNO) { //TODO add platforms
-            platform = "atmega328p";
+            platform = "ATmega328P";
 
         }
 
@@ -75,7 +75,7 @@ private static String OS = System.getProperty("os.name").toLowerCase();
 
         port = "/dev/"+port;
         try {
-            Process pr = rt.exec("./libs/avrdude -Clibs/avrdude.conf -v -p"+ platform + " -cwiring -P"+port+" -b115200 -D -Uflash:w:libs/"+file+":i"); //TODO Progress
+            Process pr = rt.exec("./libs/avrdude -Clibs/avrdude.conf -v -p"+ platform + " -carduino -P"+port+" -b115200 -D -Uflash:w:libs/"+file+":i"); //TODO Progress
             System.out.println(pr.getInputStream());
 
 
