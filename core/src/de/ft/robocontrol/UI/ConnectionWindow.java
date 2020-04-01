@@ -54,7 +54,7 @@ public static VisTextButton devicemanagebutton = new VisTextButton("Software bre
 
         setModal(true);
         closeOnEscape();
-        addCloseButton();
+
        // setSize(300, 200);
      //   centerWindow();
 
