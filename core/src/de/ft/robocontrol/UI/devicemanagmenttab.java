@@ -4,11 +4,11 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.kotcrab.vis.ui.widget.VisList;
 import com.kotcrab.vis.ui.widget.tabbedpane.Tab;
 
-public class ConnectionTab extends Tab {
+public class devicemanagmenttab extends Tab {
     private String title;
     private Table content;
 
-    public ConnectionTab (String title) {
+    public devicemanagmenttab(String title) {
         super(false, false);
         this.title = title;
 

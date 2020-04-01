@@ -48,9 +48,9 @@ public static VisTextButton devicemanagebutton = new VisTextButton("Software bre
             }
         });
 
-        tabbedPane.add(new TestTab("Gerät hinzufügen"));
-        tabbedPane.add(new ConnectionTab("Gerät hinzufügen"));
 
+        tabbedPane.add(new devicemanagmenttab("Gerät hinzufügen"));
+        tabbedPane.add(new TestTab("+"));
 
 
 
@@ -107,7 +107,8 @@ pack();
             selectboard.pad(0,30,0,0);
 
             content.add(neuladen_button).padRight(0);
-            content.add(devicemanagebutton).padRight(-655);
+            content.add(devicemanagebutton).padRight(-500);
+
             content.row();
             content.add(new VisLabel("Port:")).padLeft(30).padTop(50).padBottom(50);
             content.add(selectportlist).padTop(50).padBottom(50).padLeft(20);

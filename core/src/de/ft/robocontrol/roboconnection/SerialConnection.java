@@ -16,6 +16,7 @@ public class SerialConnection {
     public static SerialPort[] getPorts(){
         SerialPort ports[]=SerialPort.getCommPorts();
 
+
         return ports;
     }
 
@@ -88,6 +89,7 @@ public static void searchArduino() {
             //System.out.println("Select a port:");
             int i = 1;
             ConnectionWindow.devicemanagebutton.setDisabled(true);
+            ConnectionWindow.devicemanagebutton.setText("Bitte Warten..");
             for (SerialPort port : ports) {
                // System.out.println(i++ + ". " + port.getSystemPortName());
                 //System.out.println(port.getDescriptivePortName() + "   deks");
@@ -137,6 +139,8 @@ public static void searchArduino() {
                         }
 
                     }
+
+
                     testport.closePort();
 
                 } catch (ArrayIndexOutOfBoundsException e) {
@@ -147,6 +151,7 @@ public static void searchArduino() {
             }
 
             ConnectionWindow.devicemanagebutton.setDisabled(false);
+            ConnectionWindow.devicemanagebutton.setText("Software brennen");
 
             ConnectionWindow.selectportlist.setItems(SerialConnection.getPortNames());
         }
