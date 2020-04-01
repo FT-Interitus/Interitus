@@ -6,6 +6,7 @@ import com.fazecast.jSerialComm.SerialPort;
 
 import de.ft.robocontrol.Block.Arduino;
 import de.ft.robocontrol.UI.ConnectionWindow;
+import de.ft.robocontrol.data.VerbindungsSpeicher;
 
 import java.io.Serializable;
 import java.sql.Connection;

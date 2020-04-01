@@ -134,7 +134,7 @@ test.start();
 	public void render () {
 
 
-System.out.println("ölkjasdf "+SerialConnection.Arduinos.size());
+//System.out.println("ölkjasdf "+SerialConnection.Arduinos.size());
 
 
 

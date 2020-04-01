@@ -2,6 +2,7 @@ package de.ft.robocontrol.roboconnection;
 
 import de.ft.robocontrol.Block.Arduino;
 import de.ft.robocontrol.UI.ConnectionWindow;
+import de.ft.robocontrol.data.VerbindungsSpeicher;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -175,6 +176,10 @@ private static String OS = System.getProperty("os.name").toLowerCase();
 
         if (output.contains("AVR device initialized")) {
             ConnectionWindow.error.setText("Brennen hat funktioniert, nun kannst du dein Gerät konfigurieren");
+            VerbindungsSpeicher.verbundungen.add(new VerbindungsSpeicher("Neue Verbindung"));
+
+
+
         } else {
             ConnectionWindow.error.setText("Unbekannter Fehler");
         }

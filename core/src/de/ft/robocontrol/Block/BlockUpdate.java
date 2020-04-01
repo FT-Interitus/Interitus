@@ -183,7 +183,7 @@ public Timer time;
 
 
                     int a = BlockVar.blocks.indexOf(BlockVar.blockmitdergrostenuberlappungmitmarkiertemblock);
-                    System.out.println(a);
+                    //System.out.println(a);
                     block.setX(block.getX() + block.getW());
 
                     block.seted = false;
@@ -205,13 +205,13 @@ public Timer time;
                 }
 
                 if (block.seted == false && BlockVar.biggestblock == block && !Gdx.input.isButtonPressed(0)){
-System.out.println("funzt");
+//System.out.println("funzt");
 block.seted=true;
             }
 
                 if(block.seted == false && BlockVar.biggestblock != block){
 
-                    System.out.println("jezt muss das ruckgangig gemacht werdn");
+                   // System.out.println("jezt muss das ruckgangig gemacht werdn");
 
                     int b = BlockVar.blocks.indexOf(block);
 
@@ -262,7 +262,7 @@ block.seted=true;
 
             if(block.getRight()!=BlockVar.markedblock&&BlockVar.markedblock.getLeft()!=block&&block.getRight()==null && BlockVar.biggestblock==block) {
 
-                System.out.println("test");
+                //System.out.println("test");
                 block.setShowdupulicate_rechts(false);
                 block.setRight(BlockVar.markedblock);
                 BlockVar.markedblock.setY(block.getY());
