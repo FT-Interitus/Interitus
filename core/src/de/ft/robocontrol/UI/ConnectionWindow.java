@@ -49,6 +49,7 @@ public static VisTextButton devicemanagebutton = new VisTextButton("Software bre
         });
 
         tabbedPane.add(new TestTab("Gerät hinzufügen"));
+        tabbedPane.add(new ConnectionTab("Gerät hinzufügen"));
 
 
 
@@ -66,6 +67,13 @@ public static VisTextButton devicemanagebutton = new VisTextButton("Software bre
 pack();
 
     }
+
+
+
+
+
+
+
 
 
 
