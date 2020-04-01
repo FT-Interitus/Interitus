@@ -50,11 +50,8 @@ public class UIbridge {
 
 
 
+
                         ConnectionWindow.error.setText("Wird gebrannt...");
-
-
-
-
 
 
                         String[] getrennt = ConnectionWindow.selectportlist.getSelected().split(" ");
@@ -62,13 +59,13 @@ public class UIbridge {
                         if(selectedboard.contains("MEGA"))
 
                         {
-                            BurnProgramm.burn(Arduino.MEGA, getrennt[0],"sketch_apr01a.ino.hex");
+                            BurnProgramm.burn(Arduino.MEGA, getrennt[0],"sketch_mega.hex");
                         }
 
                         if(selectedboard.contains("UNO"))
 
                         {
-                            BurnProgramm.burn(Arduino.UNO, getrennt[0],"sketch_apr01a.ino.hex");
+                            BurnProgramm.burn(Arduino.UNO, getrennt[0],"sketch_uno.hex");
                         }
 
 

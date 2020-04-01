@@ -75,7 +75,7 @@ private static String OS = System.getProperty("os.name").toLowerCase();
 
         port = "/dev/"+port;
         try {
-            Process pr = rt.exec("./libs/avrdude -Clibs/avrdude.conf -v -p"+ platform + " -carduino -P"+port+" -b115200 -D -Uflash:w:libs/"+file+":i"); //TODO Progress
+            Process pr = rt.exec("./libs/avrdude -Clibs/avrdude.conf -v -p"+ platform + " -cwiring -P"+port+" -b115200 -D -Uflash:w:libs/"+file+":i"); //TODO Progress
             System.out.println(pr.getInputStream());
 
 
@@ -177,7 +177,7 @@ private static String OS = System.getProperty("os.name").toLowerCase();
     public static void postproduktion(String output, String port) {
 
         if (output.contains("AVR device initialized")) {
-            ConnectionWindow.error.setText("Brunnen hat funktioniert, nun kannst du dein Gerät konfigurieren");
+            ConnectionWindow.error.setText("Brennen hat funktioniert, nun kannst du dein Gerät konfigurieren");
         } else {
             ConnectionWindow.error.setText("Unbekannter Fehler");
         }
