@@ -15,7 +15,7 @@ import javax.swing.event.ChangeListener;
 import static com.badlogic.gdx.scenes.scene2d.ui.Cell.defaults;
 
 
-public class ConnectionTab extends Tab {
+public class devicemanagmenttab extends Tab {
     private String title;
     private Table content;
 
@@ -52,7 +52,7 @@ public class ConnectionTab extends Tab {
     }
 
 
-    public ConnectionTab (String title) {
+    public devicemanagmenttab(String title) {
         super(false, false);
         this.title = title;
 

@@ -1,16 +1,12 @@
 package de.ft.robocontrol.UI;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.scenes.scene2d.ui.Cell;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.utils.Align;
 import com.kotcrab.vis.ui.VisUI;
-import com.kotcrab.vis.ui.util.TableUtils;
 import com.kotcrab.vis.ui.widget.*;
 import com.kotcrab.vis.ui.widget.tabbedpane.Tab;
 import com.kotcrab.vis.ui.widget.tabbedpane.TabbedPane;
 import com.kotcrab.vis.ui.widget.tabbedpane.TabbedPaneAdapter;
-import de.ft.robocontrol.Var;
 import de.ft.robocontrol.data.VerbindungsSpeicher;
 
 public class ConnectionWindow extends VisWindow {
@@ -29,7 +25,7 @@ public static VisTextButton devicemanagebutton = new VisTextButton("Software bre
 
   public void verbindungstabs(){
         for(int i=0;i<VerbindungsSpeicher.verbundungen.size();i++){
-            tabbedPane.add(new ConnectionTab(VerbindungsSpeicher.verbundungen.get(i).name));
+            tabbedPane.add(new devicemanagmenttab(VerbindungsSpeicher.verbundungen.get(i).name));
         }
     }
 
@@ -57,8 +53,9 @@ public static VisTextButton devicemanagebutton = new VisTextButton("Software bre
             }
         });
 
-        tabbedPane.add(new TestTab("Gerät hinzufügen"));
-        tabbedPane.add(new ConnectionTab("sd"));
+
+        tabbedPane.add(new devicemanagmenttab("TestDevice"));
+        tabbedPane.add(new TestTab("+"));
         verbindungstabs();
 
 
@@ -115,7 +112,7 @@ pack();
             selectboard.pad(0,30,0,0);
             content.add(neuladen_button).padRight(0);
 
-            content.add(devicemanagebutton).padRight(-655);
+            content.add(devicemanagebutton).padRight(-505);
             content.row();
             content.add(new VisLabel("Port:")).padLeft(30).padTop(50).padBottom(50);
             content.add(selectportlist).padTop(50).padBottom(50).padLeft(20);
