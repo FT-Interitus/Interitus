@@ -115,7 +115,7 @@ private static String OS = System.getProperty("os.name").toLowerCase();
             System.out.println(pr.getInputStream());
 
 
-            BufferedReader input = new BufferedReader(new InputStreamReader(pr.getInputStream()));
+            BufferedReader input = new BufferedReader(new InputStreamReader(pr.getErrorStream()));
             String line = null;
             String output = null;
 
