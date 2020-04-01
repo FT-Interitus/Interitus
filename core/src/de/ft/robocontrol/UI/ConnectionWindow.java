@@ -11,10 +11,11 @@ import com.kotcrab.vis.ui.widget.tabbedpane.Tab;
 import com.kotcrab.vis.ui.widget.tabbedpane.TabbedPane;
 import com.kotcrab.vis.ui.widget.tabbedpane.TabbedPaneAdapter;
 import de.ft.robocontrol.Var;
+import de.ft.robocontrol.data.VerbindungsSpeicher;
 
 public class ConnectionWindow extends VisWindow {
 public static VisLabel error;
-public static TabbedPane tabbedPane;
+//ublic static TabbedPane tabbedPane;
 public static VisTextButton devicemanagebutton = new VisTextButton("Software brennen");
 
     public static VisTextButton neuladen_button = new VisTextButton("Neuladen");
@@ -22,6 +23,15 @@ public static VisTextButton devicemanagebutton = new VisTextButton("Software bre
 
   public static VisSelectBox<String> selectportlist;
   public static VisSelectBox<String> selectboardlist;
+
+    TabbedPane.TabbedPaneStyle style = VisUI.getSkin().get(false ? "vertical" : "default", TabbedPane.TabbedPaneStyle.class);
+    TabbedPane tabbedPane = new TabbedPane(style);
+
+  public void verbindungstabs(){
+        for(int i=0;i<VerbindungsSpeicher.verbundungen.size();i++){
+            tabbedPane.add(new ConnectionTab(VerbindungsSpeicher.verbundungen.get(i).name));
+        }
+    }
 
     public ConnectionWindow() {
         super("Verbindungen");
@@ -38,8 +48,7 @@ public static VisTextButton devicemanagebutton = new VisTextButton("Software bre
         final VisTable container = new VisTable();
         container.pack();
 
-        TabbedPane.TabbedPaneStyle style = VisUI.getSkin().get(false ? "vertical" : "default", TabbedPane.TabbedPaneStyle.class);
-        TabbedPane tabbedPane = new TabbedPane(style);
+
         tabbedPane.addListener(new TabbedPaneAdapter() {
             @Override
             public void switchedTab (Tab tab) {
@@ -49,9 +58,8 @@ public static VisTextButton devicemanagebutton = new VisTextButton("Software bre
         });
 
         tabbedPane.add(new TestTab("Gerät hinzufügen"));
-        tabbedPane.add(new ConnectionTab("Neue Verbindung"+System.currentTimeMillis()));
-
-
+        tabbedPane.add(new ConnectionTab("sd"));
+        verbindungstabs();
 
 
             add(tabbedPane.getTable()).expandX().fillX();
