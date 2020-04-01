@@ -91,7 +91,7 @@ private static String OS = System.getProperty("os.name").toLowerCase();
             }
 
 
-            postproduktion(output);
+            postproduktion(output,port);
 
 
 
@@ -127,7 +127,7 @@ private static String OS = System.getProperty("os.name").toLowerCase();
             }
 
 
-            postproduktion(output);
+            postproduktion(output,port);
 
 
 
@@ -163,7 +163,7 @@ private static String OS = System.getProperty("os.name").toLowerCase();
             System.out.println(output);
 
 
-            postproduktion(output);
+            postproduktion(output,port);
 
 
 
@@ -175,7 +175,7 @@ private static String OS = System.getProperty("os.name").toLowerCase();
     }
 
 
-    public static void postproduktion(String output) {
+    public static void postproduktion(String output, String port) {
 
         if (output.contains("AVR device initialized")) {
             ConnectionWindow.error.setText("Brunnen hat funktioniert, nun kannst du dein Gerät konfigurieren");
@@ -198,6 +198,15 @@ private static String OS = System.getProperty("os.name").toLowerCase();
         if (output.contains("programmer is not responding")) {
             ConnectionWindow.error.setText("Brennen nicht erfolgreich hast du den richtigen Port und das richtige Board ausgewählt?");
         }
+
+        if(output.contains("Permission denied")) {
+            if(isUnix()) {
+                ConnectionWindow.error.setText("Keine Berechtigung! Führe den Befehl: sudo chmod a+rw "+ port+" aus.");
+            }else{
+                ConnectionWindow.error.setText("Keine Berechtigung starte den PC neu.");
+            }
+        }
+
     }
 
 
