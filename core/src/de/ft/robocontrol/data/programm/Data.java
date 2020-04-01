@@ -40,7 +40,7 @@ public class Data {
                e.printStackTrace();
            }
            try { Files.setAttribute(path,"dos:hidden", true ); }
-           catch (IOException e) { e.printStackTrace();}
+           catch (IOException e) {}
        }else{
 
 

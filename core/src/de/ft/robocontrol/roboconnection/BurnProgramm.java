@@ -26,18 +26,12 @@ private static String OS = System.getProperty("os.name").toLowerCase();
 
 
         if (isWindows()) {
-
       burnWindows(platform, port);
-
-
-
         } else if (isMac()) {
-            System.out.println("This is Mac");
+            brunApple(platform,port);
         } else if (isUnix()) {
             burnLinux(platform,port);
-            System.out.println("Linux");
-        } else if (isSolaris()) {
-            System.out.println("This is Solaris");
+
         } else {
             System.out.println("Your OS is not support!!");
         }
@@ -81,7 +75,7 @@ private static String OS = System.getProperty("os.name").toLowerCase();
 
         port = "/dev/"+port;
         try {
-            Process pr = rt.exec("./libs/avrdude -C libs/avrdude.conf -v -p "+ platform + " -cwiring -P"+port+" -b115200 -D Uflash:w:libs/sketch_mar31a.ino.hex"); //TODO Progress
+            Process pr = rt.exec("./libs/avrdude -Clibs/avrdude.conf -v -p"+ platform + " -cwiring -P"+port+" -b115200 -D -Uflash:w:libs/sketch_apr01a.ino.hex:i"); //TODO Progress
             System.out.println(pr.getInputStream());
 
 
@@ -117,7 +111,7 @@ private static String OS = System.getProperty("os.name").toLowerCase();
 
         port = ""+port;
         try {
-            Process pr = rt.exec("libs\\avrdude.exe -C libs\\avrdude.conf -v -p "+ platform + " -cwiring -P"+port+" -b115200 -D Uflash:w:libs\\sketch_mar31a.ino.hex"); //TODO Progress
+            Process pr = rt.exec("libs\\avrdude.exe -C libs\\avrdude.conf -v -p "+ platform + " -cwiring -P"+port+" -b115200 -D -Uflash:w:libs\\sketch_apr01a.ino.hex:i"); //TODO Progress
             System.out.println(pr.getInputStream());
 
 
@@ -131,6 +125,42 @@ private static String OS = System.getProperty("os.name").toLowerCase();
                 output = output + line;
 
             }
+
+
+            postproduktion(output);
+
+
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private static void brunApple(String platform, String port) {
+
+        Runtime rt = Runtime.getRuntime();
+
+
+
+        port = "/dev/"+port;
+        try {
+            Process pr = rt.exec("libs/avrdudeapple -C libs/avrdude.conf -v -p "+ platform + " -cwiring -P"+port+" -b115200 -D -Uflash:w:libs/sketch_apr01a.ino.hex:i"); //TODO Progress
+            System.out.println(pr.getInputStream());
+
+
+            BufferedReader input = new BufferedReader(new InputStreamReader(pr.getErrorStream()));
+            String line = null;
+            String output = null;
+
+            while ((line = input.readLine()) != null)
+            {
+                System.out.println(line);
+                output = output + line;
+
+            }
+            System.out.println(output);
 
 
             postproduktion(output);
