@@ -29,7 +29,7 @@ public class SerialConnection {
             String arduinoerkannt="";
 
             for(int a=0;a<SerialConnection.Arduinos.size();a++){
-                if(SerialConnection.Arduinos.get(a).getSystemPortName().equals(SerialConnection.getPorts()[i].getSystemPortName())){
+                if(SerialConnection.Arduinos.get(a).getDescriptivePortName().equals(SerialConnection.getPorts()[i].getDescriptivePortName())){
                     System.out.println("software schon vorhanden");
                     ssv=" (Authenifiziert)";
                 }
@@ -123,9 +123,14 @@ public static void searchArduino() {
                             Arduinos.add(testport);
                         }else {
                             for (int e = 0; e < Arduinos.size(); e++) {
-                                if (Arduinos.indexOf(testport) == -1) {
-                                    Arduinos.add(testport);
-                                }
+
+                                    if(Arduinos.get(e).getSystemPortName().equals(testport.getSystemPortName())){
+
+                                    }else{
+                                        Arduinos.add(testport);
+                                    }
+
+
                             }
                         }
 

@@ -7,6 +7,7 @@ import com.fazecast.jSerialComm.SerialPort;
 import de.ft.robocontrol.Block.Arduino;
 import de.ft.robocontrol.UI.ConnectionWindow;
 
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.Time;
 import java.util.ArrayList;
@@ -32,11 +33,27 @@ public class UIbridge {
                     @Override
                     public void run() {
                         System.out.println(SerialConnection.getPorts().length);
-                        if(SerialConnection.getPorts().length!= portsold[0]) {
-                            System.out.println(SerialConnection.getPorts().length);
+                        if(SerialConnection.getPorts().length > portsold[0]) {
                             portsold[0] =SerialConnection.getPorts().length;
                             SerialConnection.searchArduino();
                             ConnectionWindow.selectportlist.setItems(SerialConnection.getPortNames());
+                        }else if(SerialConnection.getPorts().length < portsold[0]){
+
+                            ConnectionWindow.selectportlist.setItems(SerialConnection.getPortNames());
+                            portsold[0] =SerialConnection.getPorts().length;
+
+                            for(int i=0;i<SerialConnection.Arduinos.size();i++){
+                                boolean found=false;
+                                for(int b=0;b<SerialConnection.getPorts().length;b++){
+                                    if(SerialConnection.Arduinos.get(i).getSystemPortName() == SerialConnection.getPorts()[b].getSystemPortName()){
+                                        found=true;
+                                    }
+                                }
+                                if(found==false){
+                                    SerialConnection.Arduinos.remove(i);
+                                }
+                            }
+
                         }
 
                     }}, 0,200);
