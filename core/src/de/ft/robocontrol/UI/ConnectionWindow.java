@@ -16,6 +16,10 @@ public class ConnectionWindow extends VisWindow {
 public static VisLabel error;
 public static TabbedPane tabbedPane;
 public static VisTextButton devicemanagebutton = new VisTextButton("Software brennen");
+
+    public static VisTextButton neuladen_button = new VisTextButton("Neuladen");
+
+
   public static VisSelectBox<String> selectportlist;
   public static VisSelectBox<String> selectboardlist;
 
@@ -43,6 +47,7 @@ public static VisTextButton devicemanagebutton = new VisTextButton("Software bre
                 container.add(tab.getContentTable()).expand().fill();
             }
         });
+
         tabbedPane.add(new TestTab("Gerät hinzufügen"));
 
 
@@ -93,6 +98,7 @@ pack();
             selectboardlist.setItems("Arduino UNO", "Arduino MEGA");
             selectboard.pad(0,30,0,0);
 
+            content.add(neuladen_button).padRight(0);
             content.add(devicemanagebutton).padRight(-655);
             content.row();
             content.add(new VisLabel("Port:")).padLeft(30).padTop(50).padBottom(50);

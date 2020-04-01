@@ -75,6 +75,40 @@ public class UIbridge {
                     }
                 });
 
+
+
+
+
+
+
+
+
+                ConnectionWindow.neuladen_button.addListener(new ChangeListener() {
+                    @Override
+                    public void changed(ChangeEvent event, Actor actor) {
+
+
+
+
+
+                        ConnectionWindow.error.setText("Neuladen...");
+
+
+
+                    SerialConnection.searchArduino();
+
+
+
+                    }
+                });
+
+
+
+
+
+
+
+
             }
         };
 

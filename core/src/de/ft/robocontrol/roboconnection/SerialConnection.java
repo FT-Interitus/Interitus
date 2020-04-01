@@ -29,7 +29,6 @@ public class SerialConnection {
             String arduinoerkannt="";
 
             for(int a=0;a<SerialConnection.Arduinos.size();a++){
-                System.out.println(SerialConnection.Arduinos.get(a).getSystemPortName() + "   asdfasdf   "+  SerialConnection.getPorts()[i].getSystemPortName());
                 if(SerialConnection.Arduinos.get(a).getSystemPortName().equals(SerialConnection.getPorts()[i].getSystemPortName())){
                     System.out.println("software schon vorhanden");
                     ssv=" (Authenifiziert)";
@@ -89,8 +88,8 @@ public static void searchArduino() {
             int i = 1;
             for (SerialPort port : ports) {
                 System.out.println(i++ + ". " + port.getSystemPortName());
-                System.out.println(port.getDescriptivePortName() + "   deks");
-                System.out.println("i     " + i);
+                //System.out.println(port.getDescriptivePortName() + "   deks");
+                //System.out.println("i     " + i);
                 try {
                     SerialPort testport = ports[i - 2];
 
@@ -113,11 +112,12 @@ public static void searchArduino() {
                             found = true;
                         }
                     }
-                    testport.closePort();
+
                     if (found == false) {
                         testport.closePort();
                     }
                     if (found == true) {
+
 
                         if(Arduinos.size()==0){
                             Arduinos.add(testport);
@@ -130,7 +130,7 @@ public static void searchArduino() {
                         }
 
                     }
-
+                    testport.closePort();
 
                 } catch (ArrayIndexOutOfBoundsException e) {
 
