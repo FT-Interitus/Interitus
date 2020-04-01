@@ -21,16 +21,18 @@ public static VisTextButton devicemanagebutton = new VisTextButton("Software bre
 
     public ConnectionWindow() {
         super("Verbindungen");
-
-        TableUtils.setSpacingDefaults(this);
-        centerWindow();
+        setPosition(310, 350);
+      //  TableUtils.setSpacingDefaults(this);
+       // centerWindow();
         setResizable(false);
-
+        pack();
+        centerWindow();
 
         addCloseButton();
         closeOnEscape();
 
         final VisTable container = new VisTable();
+        container.pack();
 
         TabbedPane.TabbedPaneStyle style = VisUI.getSkin().get(false ? "vertical" : "default", TabbedPane.TabbedPaneStyle.class);
         TabbedPane tabbedPane = new TabbedPane(style);
@@ -50,11 +52,13 @@ public static VisTextButton devicemanagebutton = new VisTextButton("Software bre
             row();
             add(container).expand().fill();
 
+        setModal(true);
+        closeOnEscape();
+        addCloseButton();
+       // setSize(300, 200);
+     //   centerWindow();
 
-        setSize(300, 200);
-        centerWindow();
-
-
+pack();
 
     }
 
@@ -72,7 +76,7 @@ public static VisTextButton devicemanagebutton = new VisTextButton("Software bre
 
 
 
-            error = new VisLabel("Fehler");
+            error = new VisLabel("");
             error.setColor(Color.RED);
             content = new VisTable();
 
@@ -83,7 +87,7 @@ public static VisTextButton devicemanagebutton = new VisTextButton("Software bre
 
 
 
-            selectportlist.setItems("item 1", "item 2", "item 3", "item 4");
+            selectportlist.setItems("");
             VisTable selectboard = new VisTable(true);
             selectboardlist = new VisSelectBox<String>();
             selectboardlist.setItems("Arduino UNO", "Arduino MEGA");
@@ -96,8 +100,9 @@ public static VisTextButton devicemanagebutton = new VisTextButton("Software bre
             content.add(new VisLabel("Arduino:")).padLeft(20).padTop(50).padBottom(50);
             content.add(selectboardlist).padLeft(20).padRight(30).padBottom(50).padTop(50);
            content.row();
-           content.add(error);
-           content.add(new Separator());
+           content.add(error).padRight(-400);
+
+
 
         }
 

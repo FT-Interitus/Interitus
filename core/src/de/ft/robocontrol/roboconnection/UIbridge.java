@@ -2,16 +2,21 @@ package de.ft.robocontrol.roboconnection;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.fazecast.jSerialComm.SerialPort;
+import com.sun.tools.javac.util.ArrayUtils;
 import de.ft.robocontrol.Block.Arduino;
 import de.ft.robocontrol.UI.ConnectionWindow;
 
+import java.sql.Connection;
 import java.sql.Time;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class UIbridge {
     public static String selectedport;
-    public static String selectedboard;
+    public static String selectedboard = "Arduino UNO";
     public static void UpdateConnectionWindowPortsList() {
 
         final int[] portsold = {0};
@@ -43,18 +48,31 @@ public class UIbridge {
                     @Override
                     public void changed(ChangeEvent event, Actor actor) {
 
-                        /*
-                        if(selectedboard.contains("MEGA"))  {
-                            BurnProgramm.burn(Arduino.MEGA,"/dev/ttyACM0" );
+
+
+                        ConnectionWindow.error.setText("Wird gebrannt...");
+
+
+
+
+
+
+                        String[] getrennt = ConnectionWindow.selectportlist.getSelected().split(" ");
+
+                        if(selectedboard.contains("MEGA"))
+
+                        {
+                            BurnProgramm.burn(Arduino.MEGA, getrennt[0]);
                         }
 
-                        if(selectedboard.contains("UNO")) {
-                            BurnProgramm.burn(Arduino.UNO,"/dev/ttyACM0");
+                        if(selectedboard.contains("UNO"))
+
+                        {
+                            BurnProgramm.burn(Arduino.UNO, getrennt[0]);
                         }
 
 
-                         */
-                        BurnProgramm.burn(Arduino.MEGA,"/dev/ttyACM0" ); //TODO change ports
+
 
 
                     }

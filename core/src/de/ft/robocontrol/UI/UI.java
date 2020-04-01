@@ -77,7 +77,13 @@ public class UI {
             renderer.setColor(new Color(1f, 1f, 1f, 1));
         }
 
-        int abstandvonRand = 7;
+
+
+
+        int abstandvonRand = Gdx.graphics.getWidth()/(Gdx.graphics.getWidth()/7);
+
+
+
         int unteneinteilung = 300;
         int untenhohe = 125;
         int radius = 3;
