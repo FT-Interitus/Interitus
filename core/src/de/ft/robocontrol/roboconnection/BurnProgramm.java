@@ -13,24 +13,26 @@ public class BurnProgramm {
    static String platform;
 private static String OS = System.getProperty("os.name").toLowerCase();
     protected static void burn(int arduino, String port, String file) {
+        String methode = null;
         if(arduino==Arduino.UNO) { //TODO add platforms
-            platform = "ATmega328P";
-
+            platform = "atmega328p";
+            methode ="arduino";
         }
 
             if (arduino == Arduino.MEGA) {
                 platform = "atmega2560";
+                methode ="wiring";
             }
 
 
 
 
         if (isWindows()) {
-      burnWindows(platform, port, file);
+      burnWindows(platform, port, file, methode);
         } else if (isMac()) {
-            brunApple(platform,port,file);
+            brunApple(platform,port,file,methode);
         } else if (isUnix()) {
-            burnLinux(platform,port,file);
+            burnLinux(platform,port,file,methode);
 
         } else {
             System.out.println("Your OS is not support!!");
@@ -57,17 +59,12 @@ private static String OS = System.getProperty("os.name").toLowerCase();
 
     }
 
-    private static boolean isSolaris() {
-
-        return (OS.indexOf("sunos") >= 0);
-
-    }
 
 
     //Burn start
 
 
-    private static void burnLinux(String platform, String port, String file) {
+    private static void burnLinux(String platform, String port, String file, String methode) {
 
         Runtime rt = Runtime.getRuntime();
 
@@ -75,7 +72,7 @@ private static String OS = System.getProperty("os.name").toLowerCase();
 
         port = "/dev/"+port;
         try {
-            Process pr = rt.exec("./libs/avrdude -Clibs/avrdude.conf -v -p"+ platform + " -cwiring -P"+port+" -b115200 -D -Uflash:w:libs/"+file+":i"); //TODO Progress
+            Process pr = rt.exec("./libs/avrdude -Clibs/avrdude.conf -v -p"+ platform + " -c "+methode+" -P"+port+" -b115200 -D -Uflash:w:libs/"+file+":i"); //TODO Progress
             System.out.println(pr.getInputStream());
 
 
@@ -103,7 +100,7 @@ private static String OS = System.getProperty("os.name").toLowerCase();
     }
 
 
-    private static void burnWindows(String platform, String port, String file) {
+    private static void burnWindows(String platform, String port, String file, String methode) {
 
         Runtime rt = Runtime.getRuntime();
 
@@ -111,7 +108,7 @@ private static String OS = System.getProperty("os.name").toLowerCase();
 
         port = ""+port;
         try {
-            Process pr = rt.exec("libs\\avrdude.exe -C libs\\avrdude.conf -v -p "+ platform + " -cwiring -P"+port+" -b115200 -D -Uflash:w:libs\\"+file+":i"); //TODO Progress
+            Process pr = rt.exec("libs\\avrdude.exe -C libs\\avrdude.conf -v -p "+ platform + " -c"+methode+" -P"+port+" -b115200 -D -Uflash:w:libs\\"+file+":i"); //TODO Progress
             System.out.println(pr.getInputStream());
 
 
@@ -137,7 +134,7 @@ private static String OS = System.getProperty("os.name").toLowerCase();
 
     }
 
-    private static void brunApple(String platform, String port,String file) {
+    private static void brunApple(String platform, String port,String file, String methode) {
 
         Runtime rt = Runtime.getRuntime();
 
@@ -145,7 +142,7 @@ private static String OS = System.getProperty("os.name").toLowerCase();
 
         port = "/dev/"+port;
         try {
-            Process pr = rt.exec("libs/avrdudeapple -C libs/avrdude.conf -v -p "+ platform + " -cwiring -P"+port+" -b115200 -D -Uflash:w:libs/"+file+":i"); //TODO Progress
+            Process pr = rt.exec("libs/avrdudeapple -C libs/avrdude.conf -v -p "+ platform + " -c"+methode+" -P"+port+" -b115200 -D -Uflash:w:libs/"+file+":i"); //TODO Progress
             System.out.println(pr.getInputStream());
 
 
