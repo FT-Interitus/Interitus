@@ -35,7 +35,7 @@ public class UIbridge {
                         if(SerialConnection.getPorts().length!= portsold[0]) {
                             System.out.println(SerialConnection.getPorts().length);
                             portsold[0] =SerialConnection.getPorts().length;
-
+                            SerialConnection.searchArduino();
                             ConnectionWindow.selectportlist.setItems(SerialConnection.getPortNames());
                         }
 

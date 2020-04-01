@@ -105,7 +105,7 @@ public static void searchArduino() {
                     testport.setBaudRate(230400);
                     testport.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 10, 0);
 
-                    long save = System.currentTimeMillis() + 2000;
+                    long save = System.currentTimeMillis() + 5000;
                     boolean found = false;
                     while (System.currentTimeMillis() < save && found == false) {
                         if (empfangen(testport) == 1234) {
@@ -113,6 +113,7 @@ public static void searchArduino() {
                             found = true;
                         }
                     }
+                    testport.closePort();
                     if (found == false) {
                         testport.closePort();
                     }
