@@ -62,13 +62,13 @@ public class UIbridge {
                         if(selectedboard.contains("MEGA"))
 
                         {
-                            BurnProgramm.burn(Arduino.MEGA, getrennt[0]);
+                            BurnProgramm.burn(Arduino.MEGA, getrennt[0],"sketch_apr01a.ino.hex");
                         }
 
                         if(selectedboard.contains("UNO"))
 
                         {
-                            BurnProgramm.burn(Arduino.UNO, getrennt[0]);
+                            BurnProgramm.burn(Arduino.UNO, getrennt[0],"sketch_apr01a.ino.hex");
                         }
 
 
