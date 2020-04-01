@@ -121,13 +121,13 @@ public Timer time;
                 int biggestindex = -1;
                 for (int i = 0; i < BlockVar.showduplicat.size(); i++) {
 
-                    try {           //TODO unerklärte Nullpointer bitte behebn
+                    try {           //TODO unerklärte Nullpointer bitte behebn //THORIE in der for wird der wert geändert
                         if (BlockVar.showduplicat.get(i).getDublicatmarkedblockuberlappungsflache() > biggestvalue) {
                             biggestvalue = BlockVar.showduplicat.get(i).getDublicatmarkedblockuberlappungsflache();
                             biggestindex = i;
                         }
                     }catch (Exception e) {
-                        e.printStackTrace();
+                       // e.printStackTrace();
                     }
                 }
                 try {

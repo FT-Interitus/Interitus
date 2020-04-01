@@ -3,6 +3,7 @@ import com.fazecast.jSerialComm.*;
 import de.ft.robocontrol.MainGame;
 import de.ft.robocontrol.UI.ConnectionWindow;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -86,6 +87,7 @@ public static void searchArduino() {
             SerialPort ports[] = SerialPort.getCommPorts();
             System.out.println("Select a port:");
             int i = 1;
+            ConnectionWindow.devicemanagebutton.setDisabled(true);
             for (SerialPort port : ports) {
                 System.out.println(i++ + ". " + port.getSystemPortName());
                 //System.out.println(port.getDescriptivePortName() + "   deks");
@@ -143,6 +145,9 @@ public static void searchArduino() {
 
 
             }
+
+            ConnectionWindow.devicemanagebutton.setDisabled(false);
+
             ConnectionWindow.selectportlist.setItems(SerialConnection.getPortNames());
         }
     };

@@ -98,7 +98,7 @@ pack();
             selectboardlist.setItems("Arduino UNO", "Arduino MEGA");
             selectboard.pad(0,30,0,0);
 
-            content.add(neuladen_button).padRight(0);
+           // content.add(neuladen_button).padRight(0);
             content.add(devicemanagebutton).padRight(-655);
             content.row();
             content.add(new VisLabel("Port:")).padLeft(30).padTop(50).padBottom(50);
