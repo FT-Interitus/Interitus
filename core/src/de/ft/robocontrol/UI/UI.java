@@ -119,27 +119,16 @@ public class UI {
         set = new SettingsUI();
 
         menuBar = new MenuBar();
-        menuBar.setMenuListener(new MenuBar.MenuBarListener() {
-            @Override
-            public void menuOpened(Menu menu) {
-                MainGame.logger.info("Opened menu: " + menu.getTitle());
 
-            }
-
-            @Override
-            public void menuClosed(Menu menu) {
-                MainGame.logger.info("Closed menu: " + menu.getTitle());
-            }
-        });
-
-        connectionWindow = new ConnectionWindow();
 
 
         root.add(menuBar.getTable()).expandX().fillX().row();
         root.add().expand().fill().row();
 
-        root.add(connectionWindow);
 
+        connectionWindow = new ConnectionWindow();
+
+        connectionWindow.show();//TODO ist hier nicht geplant muss noch verschoben werden
 
         de.ft.robocontrol.UI.MenuBar.createMenus();
 

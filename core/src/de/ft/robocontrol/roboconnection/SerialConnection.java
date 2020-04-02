@@ -138,6 +138,7 @@ public static void searchArduino() {
                             }
                         }
 
+
                     }
 
 
@@ -152,8 +153,10 @@ public static void searchArduino() {
 
             ConnectionWindow.devicemanagebutton.setDisabled(false);
             ConnectionWindow.devicemanagebutton.setText("Software brennen");
+            ConnectionWindow.error.setText("");
 
-            ConnectionWindow.selectportlist.setItems(SerialConnection.getPortNames());
+           ConnectionWindow.selectportlist.setItems(SerialConnection.getPortNames());
+            ConnectionWindow.update();
         }
     };
 

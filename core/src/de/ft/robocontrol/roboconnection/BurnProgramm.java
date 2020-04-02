@@ -210,6 +210,8 @@ private static String OS = System.getProperty("os.name").toLowerCase();
             }
         }
 
+        ConnectionWindow.update();
+
     }
 
 

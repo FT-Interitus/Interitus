@@ -4,8 +4,13 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.kotcrab.vis.ui.VisUI;
-import com.kotcrab.vis.ui.util.dialog.Dialogs;
-import com.kotcrab.vis.ui.util.dialog.OptionDialogAdapter;
+import com.kotcrab.vis.ui.building.GridTableBuilder;
+import com.kotcrab.vis.ui.building.OneRowTableBuilder;
+import com.kotcrab.vis.ui.building.StandardTableBuilder;
+import com.kotcrab.vis.ui.building.TableBuilder;
+import com.kotcrab.vis.ui.building.utilities.CellWidget;
+import com.kotcrab.vis.ui.building.utilities.Padding;
+import com.kotcrab.vis.ui.building.utilities.layouts.ActorLayout;
 import com.kotcrab.vis.ui.widget.*;
 import com.kotcrab.vis.ui.widget.tabbedpane.Tab;
 import com.kotcrab.vis.ui.widget.tabbedpane.TabbedPane;
@@ -21,83 +26,62 @@ public static VisLabel error;
 public static VisTextButton devicemanagebutton = new VisTextButton("Software brennen");
 
     public static VisTextButton neuladen_button = new VisTextButton("Neuladen");
-
-
-  public static VisSelectBox<String> selectportlist;
-  public static VisSelectBox<String> selectboardlist;
-
+    public static VisSelectBox<String> selectportlist;
+    public static VisSelectBox<String> selectboardlist;
+    public static connectionbuilder testBuilder;
+    final VisTable container = new VisTable();
+    final Padding padding = new Padding(2, 3);
     TabbedPane.TabbedPaneStyle style = VisUI.getSkin().get(false ? "vertical" : "default", TabbedPane.TabbedPaneStyle.class);
     TabbedPane tabbedPane = new TabbedPane(style);
 
-  public void verbindungstabs(){
-        for(int i=0;i<VerbindungsSpeicher.verbundungen.size();i++){
-            tabbedPane.add(new devicemanagmenttab(VerbindungsSpeicher.verbundungen.get(i).name));
-        }
-    }
-
     public ConnectionWindow() {
-        super("Verbindungen");
-        setPosition(310, 350);
-      //  TableUtils.setSpacingDefaults(this);
-       // centerWindow();
-        setResizable(false);
-        pack();
-        centerWindow();
-
-        addCloseButton();
-        closeOnEscape();
-
-        final VisTable container = new VisTable();
-        container.pack();
-
-
+        new GridTableBuilder(4);
         tabbedPane.addListener(new TabbedPaneAdapter() {
+
+
             @Override
-            public void switchedTab (Tab tab) {
+            public void switchedTab(Tab tab) {
                 container.clearChildren();
                 container.add(tab.getContentTable()).expand().fill();
+                try {
+                    testBuilder.pack();
+                } catch (Exception e) {
+
+                }
             }
         });
 
 
-        tabbedPane.add(new devicemanagmenttab("TestDevice"));
-        tabbedPane.add(new TestTab("+"));
-        verbindungstabs();
+    }
 
-
-            add(tabbedPane.getTable()).expandX().fillX();
-            row();
-            add(container).expand().fill();
-
-        setModal(true);
-        closeOnEscape();
-
-       // setSize(300, 200);
-     //   centerWindow();
-
-pack();
+    public static void update() {
+        try {
+            testBuilder.pack();
+        } catch (NullPointerException e) { //kann passieren wenn das Fenster noch nicht initialisiert wurde
+        }
 
     }
 
+    public void verbindungstabs() {
+        for (int i = 0; i < VerbindungsSpeicher.verbundungen.size(); i++) {
+            tabbedPane.insert(0, new Devicemanagmenttab(VerbindungsSpeicher.verbundungen.get(i).name));
+        }
+    }
 
-
-
-
-
-
-
-
+    public void show() {
+        testBuilder = new connectionbuilder("Verbindungen", new StandardTableBuilder(padding));
+        UI.stage.addActor(testBuilder);
+    }
 
     private class TestTab extends Tab {
         private String title;
         private Table content;
 
-        public TestTab (String title) {
+        public TestTab(String title) {
             super(false, false);
             this.title = title;
 
             VisList visList = new VisList();
-
 
 
             error = new VisLabel("");
@@ -106,42 +90,95 @@ pack();
 
             content.row();
             VisTable selectport = new VisTable(true);
-           selectportlist  = new VisSelectBox<String>();
-
-
+            selectportlist = new VisSelectBox<String>();
 
 
             selectportlist.setItems("");
             VisTable selectboard = new VisTable(true);
             selectboardlist = new VisSelectBox<String>();
             selectboardlist.setItems("Arduino UNO", "Arduino MEGA");
-            selectboard.pad(0,30,0,0);
+            selectboard.pad(0, 30, 0, 0);
             content.add(neuladen_button).padRight(0);
 
-            content.add(devicemanagebutton).padRight(-505);
+            content.add(devicemanagebutton).padRight(-440);
             content.row();
             content.add(new VisLabel("Port:")).padLeft(30).padTop(50).padBottom(50);
             content.add(selectportlist).padTop(50).padBottom(50).padLeft(20);
             content.add(new VisLabel("Arduino:")).padLeft(20).padTop(50).padBottom(50);
             content.add(selectboardlist).padLeft(20).padRight(30).padBottom(50).padTop(50);
-           content.row();
-           content.add(error).padRight(-400);
-
+            content.row();
+            content.add(error).padRight(-400);
 
 
         }
 
         @Override
-        public String getTabTitle () {
+        public String getTabTitle() {
             return title;
         }
 
         @Override
-        public Table getContentTable () {
+        public Table getContentTable() {
             return content;
         }
     }
 
+    private class connectionbuilder extends VisWindow {
+        public connectionbuilder(String name, TableBuilder builder) {
+            super(name);
 
 
+            setModal(true);
+            closeOnEscape();
+            addCloseButton();
+
+
+            builder.setTablePadding(new Padding(0, 0, 0, 0));
+
+
+            Devicemanagmenttab devtest = new Devicemanagmenttab("TestDevice");
+            TestTab tt = new TestTab("+");
+
+            tabbedPane.add(devtest);
+            tabbedPane.add(tt);
+
+
+            builder.append(CellWidget.of(tabbedPane.getTable()).expandX().fillX().wrap());
+            builder.row();
+
+            builder.append(container);
+
+
+            Table table = builder.build();
+            add(table).expand().fill();
+
+            pack();
+            centerWindow();
+        }
+
+
+    }
+
+    private class RowLayout implements ActorLayout {
+        private Padding padding;
+
+        public RowLayout(Padding padding) {
+            this.padding = padding;
+        }
+
+        @Override
+        public Actor convertToActor(Actor... widgets) {
+            return convertToActor(CellWidget.wrap(widgets));
+        }
+
+        @Override
+        public Actor convertToActor(CellWidget<?>... widgets) {
+            OneRowTableBuilder builder = new OneRowTableBuilder(padding);
+
+            for (CellWidget<?> widget : widgets)
+                builder.append(widget);
+
+            return builder.build();
+        }
+    }
 }

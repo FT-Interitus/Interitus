@@ -19,6 +19,8 @@ public class ClearActOpenProgramm {
         Var.isclearing = true;
         blockstoclear = (ArrayList<Block>) BlockVar.blocks.clone();
 
+        //TODO stop ThreadManager Thread
+
         clear = new Thread() {
             @Override
             public void run() {

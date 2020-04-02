@@ -37,10 +37,12 @@ public class UIbridge {
                         if(SerialConnection.getPorts().length > portsold[0]) {
                             portsold[0] =SerialConnection.getPorts().length;
                             SerialConnection.searchArduino();
-                            ConnectionWindow.selectportlist.setItems(SerialConnection.getPortNames());
+                            ConnectionWindow.selectportlist.setItems(SerialConnection.getPortNames()); //TODO hier Nullpointer bei zu schnellem ein und ausstecken des Arduinos
+                            ConnectionWindow.update();
                         }else if(SerialConnection.getPorts().length < portsold[0]){
 
                             ConnectionWindow.selectportlist.setItems(SerialConnection.getPortNames());
+                            ConnectionWindow.update();
                             portsold[0] =SerialConnection.getPorts().length;
 
                             for(int i=0;i<SerialConnection.Arduinos.size();i++){
