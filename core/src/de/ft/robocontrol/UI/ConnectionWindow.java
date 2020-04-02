@@ -149,10 +149,15 @@ public static VisTextButton devicemanagebutton = new VisTextButton("Software bre
             builder.append(container);
 
 
+
+
             Table table = builder.build();
+
             add(table).expand().fill();
+            table.setSize(300,300);
 
             pack();
+
             centerWindow();
         }
 

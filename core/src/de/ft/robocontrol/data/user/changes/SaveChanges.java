@@ -104,7 +104,7 @@ public class SaveChanges {
 
         if (revert.isCreated()) {
             redosave(BlockVar.blocks.get(revert.getIndex()), false, true);
-            torevert.delete();
+            torevert.delete(false);
 
             return;
         }
@@ -195,7 +195,7 @@ public class SaveChanges {
 
         if (revert.isCreated()) {
             changedValue(BlockVar.blocks.get(revert.getIndex()), false, true);
-            torevert.delete();
+            torevert.delete(false);
 
 
             return;

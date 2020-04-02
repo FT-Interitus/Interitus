@@ -292,10 +292,7 @@ public class MenuBar {
                                     @Override
                                     public void result(Integer result) {
                                         if (result == nothing) {
-                                            for (int i = 0; i < BlockVar.blocks.size(); i = i + 1) {
-                                                BlockVar.blocks.get(i).delete();
-                                            }
-                                            BlockVar.blocks.clear();
+                                           ClearActOpenProgramm.clear();
                                             DataManager.saved();
                                             DataManager.filename = Data.filename.get(finalI);
                                             DataManager.path = Data.path.get(finalI);
@@ -324,10 +321,8 @@ public class MenuBar {
 
 
                     } else {
-                        for (int i = 0; i < BlockVar.blocks.size(); i = i + 1) {
-                            BlockVar.blocks.get(i).delete();
-                        }
-                        BlockVar.blocks.clear();
+
+                        ClearActOpenProgramm.clear();
                         DataManager.saved();
                         DataManager.filename = Data.filename.get(finalI);
                         DataManager.path = Data.path.get(finalI);
