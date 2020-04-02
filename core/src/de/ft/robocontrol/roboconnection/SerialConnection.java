@@ -32,7 +32,7 @@ public class SerialConnection {
 
             for(int a=0;a<SerialConnection.Arduinos.size();a++){
                 if(SerialConnection.Arduinos.get(a).getDescriptivePortName().equals(SerialConnection.getPorts()[i].getDescriptivePortName())){
-                    //System.out.println("software schon vorhanden");
+                    System.out.println("software schon vorhanden");
                     ssv=" (Authenifiziert)";
                 }
             }
@@ -86,22 +86,22 @@ public static void searchArduino() {
         public void run() {
 
             SerialPort ports[] = SerialPort.getCommPorts();
-            //System.out.println("Select a port:");
+            System.out.println("Select a port:");
             int i = 1;
             ConnectionWindow.devicemanagebutton.setDisabled(true);
             ConnectionWindow.devicemanagebutton.setText("Bitte Warten..");
             for (SerialPort port : ports) {
-               // System.out.println(i++ + ". " + port.getSystemPortName());
-                //System.out.println(port.getDescriptivePortName() + "   deks");
-                //System.out.println("i     " + i);
+                System.out.println(i++ + ". " + port.getSystemPortName());
+                System.out.println(port.getDescriptivePortName() + "   deks");
+                System.out.println("i     " + i);
                 try {
                     SerialPort testport = ports[i]; //TODO Hier noch ein Fehler
 
                     if (testport.openPort()) {
-                       // System.out.println("Successfully opened the port.");
-                        //System.out.println("baudrate:   " + testport.getDescriptivePortName());
+                        System.out.println("Successfully opened the port.");
+                        System.out.println("baudrate:   " + testport.getDescriptivePortName());
                     } else {
-                       // System.out.println("Unable to open the port.");
+                       System.out.println("Unable to open the port.");
                         return;
                     }
 
@@ -112,7 +112,7 @@ public static void searchArduino() {
                     boolean found = false;
                     while (System.currentTimeMillis() < save && found == false) {
                         if (empfangen(testport) == 1234) {
-                            //System.out.println("Arduino gefunden");
+                            System.out.println("Arduino gefunden");
                             found = true;
                         }
                     }
