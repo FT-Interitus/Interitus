@@ -5,10 +5,13 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Frustum;
+import com.sun.org.apache.xalan.internal.lib.ExsltBase;
 import de.ft.robocontrol.MainGame;
 import de.ft.robocontrol.ThreadManager;
 import de.ft.robocontrol.data.user.changes.DataManager;
 import de.ft.robocontrol.utils.CheckKollision;
+
+import java.util.concurrent.ExecutionException;
 
 public class Block {
     public boolean seted = true;
@@ -183,7 +186,7 @@ public class Block {
         this.index = index;
     }
 
-    public void delete() {
+    public void delete(boolean complete) {
         BlockVar.markedblock = null;
         BlockVar.marked = false;
         BlockVar.ismoving = false;
@@ -220,7 +223,7 @@ public class Block {
 
         }
 
-        if (BlockVar.blocks.indexOf(this) != -1) { //das trifft nur nicht zu wenn das ganze programm gecleart wird
+        if (!complete) { //das trifft nur nicht zu wenn das ganze programm gecleart wird
             BlockVar.blocks.remove(this);
             BlockVar.visibleblocks.remove(this);
 
@@ -230,7 +233,11 @@ public class Block {
                 public void run() {
                     for (int i = temp; i < BlockVar.blocks.size(); i++) {
                         System.out.println("Test " + i);
-                        BlockVar.blocks.get(i).setIndex(BlockVar.blocks.get(i).getIndex() - 1);
+                        try {
+                            BlockVar.blocks.get(i).setIndex(BlockVar.blocks.get(i).getIndex() - 1);
+                        }catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
                     }
                 }

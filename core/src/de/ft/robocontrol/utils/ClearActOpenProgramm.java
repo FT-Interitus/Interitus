@@ -29,7 +29,7 @@ public class ClearActOpenProgramm {
 
                 try {
                     while (blockstoclear.size() != 0) {
-                        blockstoclear.get(0).delete();
+                        blockstoclear.get(0).delete(true);
                         blockstoclear.remove(0);
                         System.out.println(blockstoclear.size());
 
@@ -48,7 +48,7 @@ public class ClearActOpenProgramm {
 
         try {
             while (BlockVar.visibleblocks.size() != 0) {
-                BlockVar.visibleblocks.get(0).delete();
+                BlockVar.visibleblocks.get(0).delete(true);
                 BlockVar.visibleblocks.remove(0);
 
 

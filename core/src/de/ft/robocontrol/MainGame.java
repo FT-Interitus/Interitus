@@ -170,7 +170,7 @@ public class MainGame extends ApplicationAdapter {
 
 
                             if (input.isKeyJustPressed(Input.Keys.FORWARD_DEL)) {
-                                BlockVar.visibleblocks.get(i).delete();
+                                BlockVar.visibleblocks.get(i).delete(false);
                             }
 
 
