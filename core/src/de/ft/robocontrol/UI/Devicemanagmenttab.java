@@ -2,7 +2,13 @@ package de.ft.robocontrol.UI;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.FocusListener;
+import com.badlogic.gdx.utils.Align;
+import com.kotcrab.vis.ui.FocusManager;
+import com.kotcrab.vis.ui.util.InputValidator;
 import com.kotcrab.vis.ui.util.TableUtils;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import com.kotcrab.vis.ui.util.dialog.OptionDialogAdapter;
@@ -11,7 +17,9 @@ import com.kotcrab.vis.ui.widget.*;
 import com.kotcrab.vis.ui.widget.tabbedpane.Tab;
 
 import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import static com.badlogic.gdx.scenes.scene2d.ui.Cell.defaults;
 
@@ -20,7 +28,7 @@ public class Devicemanagmenttab extends Tab {
     private String title;
     private Table content;
 
-    public void TestFormValidator () {
+    public void TestFormValidator(final Devicemanagmenttab devicemanagmenttab) {
 
 
         content.defaults().padRight(1);
@@ -29,10 +37,10 @@ public class Devicemanagmenttab extends Tab {
         VisTextButton cancelButton = new VisTextButton("cancel");
         VisTextButton acceptButton = new VisTextButton("accept");
 
-        VisValidatableTextField Name = new VisValidatableTextField();
+        final VisValidatableTextField Name = new VisValidatableTextField();
 
 
-        VisLabel errorLabel = new VisLabel();
+        final VisLabel errorLabel = new VisLabel();
         errorLabel.setColor(Color.RED);
 
         VisTable buttonTable = new VisTable(true);
@@ -40,8 +48,36 @@ public class Devicemanagmenttab extends Tab {
         buttonTable.add(cancelButton);
         buttonTable.add(acceptButton);
 
-        content.add(new VisLabel("Name: "));
-        content.add(Name).expand().fill();
+
+        VisLabel device = new VisLabel();
+        device.setText("Name:");
+        Name.setText(getTabTitle());
+        Name.addValidator(new InputValidator() {
+
+            @Override
+            public boolean validateInput(String input) {
+
+                if(input.length()>14) {
+                    return false;
+                }else{
+                    return true;
+                }
+            }
+        });
+
+        Name.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+               // devicemanagmenttab.set
+            }
+        });
+        Name.isInputValid();
+
+
+
+
+        content.add(device).padLeft(-299);
+        content.add(Name).expand().fill().padLeft(-120);
         content.row();
 
 
@@ -61,9 +97,9 @@ public class Devicemanagmenttab extends Tab {
 
         VisList visList = new VisList();
         content = new VisTable();
-       VisTextButton button = new VisTextButton("button");
-       TestFormValidator();
-        content.add(button).padRight(0);
+    //   VisTextButton button = new VisTextButton("button");
+       TestFormValidator(this);
+       // content.add(button).padRight(0);
     }
 
     @Override
