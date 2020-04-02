@@ -95,7 +95,7 @@ public static void searchArduino() {
                 System.out.println(port.getDescriptivePortName() + "   deks");
                 System.out.println("i     " + i);
                 try {
-                    SerialPort testport = ports[i-2]; //TODO Hier noch ein Fehler
+                    SerialPort testport = ports[i]; //TODO Hier noch ein Fehler
 
                     if (testport.openPort()) {
                         System.out.println("Successfully opened the port.");

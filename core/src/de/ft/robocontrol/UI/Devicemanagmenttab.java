@@ -2,12 +2,9 @@ package de.ft.robocontrol.UI;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.kotcrab.vis.ui.util.TableUtils;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
-import com.kotcrab.vis.ui.util.dialog.OptionDialogAdapter;
 import com.kotcrab.vis.ui.util.form.SimpleFormValidator;
 import com.kotcrab.vis.ui.widget.*;
 import com.kotcrab.vis.ui.widget.tabbedpane.Tab;
@@ -23,7 +20,6 @@ public class Devicemanagmenttab extends Tab {
     private Table content;
 
     public void TestFormValidator () {
-
 
 
         content.defaults().padRight(1);
@@ -47,20 +43,6 @@ public class Devicemanagmenttab extends Tab {
         content.add(Name).expand().fill();
         content.row();
 
-
-       content.add(Dialogs.showOptionDialog(new Stage(), "Neue Verbindung Konfigurieren", "Möchtest du den Arduino als Gerät hinzufügen?", Dialogs.OptionDialogType.YES_NO, new OptionDialogAdapter() {
-            @Override
-            public void yes () {
-                content.add(Dialogs.showOKDialog(new Stage(), "Neue Verbindung Konfigurieren", "Du wirst jetzt durch einige einstellungen begleitet"));
-            }
-
-            @Override
-            public void no () {
-                content.add(Dialogs.showOKDialog(new Stage(), "Neue Abgebrochen", "Verbindung nicht hinzugefügt"));
-            }
-
-
-        }));
 
 
 

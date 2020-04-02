@@ -1,32 +1,20 @@
 package de.ft.robocontrol.UI;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.kotcrab.vis.ui.VisUI;
-import com.kotcrab.vis.ui.util.dialog.ConfirmDialogListener;
-import com.kotcrab.vis.ui.util.dialog.Dialogs;
-import com.kotcrab.vis.ui.widget.Menu;
 import com.kotcrab.vis.ui.widget.MenuBar;
 import com.kotcrab.vis.ui.widget.MenuItem;
-import de.ft.robocontrol.Block.BlockVar;
 import de.ft.robocontrol.MainGame;
 import de.ft.robocontrol.Settings;
 import de.ft.robocontrol.data.programm.Data;
-import de.ft.robocontrol.data.user.DataSaver;
-import de.ft.robocontrol.data.user.LoadSave;
-import de.ft.robocontrol.data.user.changes.DataManager;
 import de.ft.robocontrol.data.user.changes.SaveChanges;
-import de.ft.robocontrol.utils.CheckKollision;
 
 import java.io.File;
-import java.io.IOException;
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -34,17 +22,18 @@ import java.util.TimerTask;
 import static de.ft.robocontrol.UI.MenuBar.createSubMenu;
 
 public class UI {
+    static final Table root = new Table();
     public static Stage stage;
+    public static ConnectionWindow connectionWindow;
     protected static MenuItem recent;
     protected static MenuItem revert;
     protected static MenuItem redo;
     protected static MenuItem copy;
     protected static MenuItem paste;
     protected static MenuBar menuBar;
-   protected static SettingsUI set;
-   public static ConnectionWindow connectionWindow;
-   private static Vector2 lastframecamposition = new Vector2(MainGame.cam.position.x, MainGame.cam.position.y);
-    static final Table root = new Table();
+    protected static SettingsUI set;
+    private static Vector2 lastframecamposition = new Vector2(MainGame.cam.position.x, MainGame.cam.position.y);
+
     public static void initdragui() {
 
     }
@@ -66,31 +55,27 @@ public class UI {
     }
 
 
-
     public static void updatedragui(ShapeRenderer renderer, boolean flaeche) {
         renderer.begin(ShapeRenderer.ShapeType.Filled);
 
 
-        if(Settings.darkmode) {
+        if (Settings.darkmode) {
             renderer.setColor(new Color(0.15f, 0.15f, 0.15f, 1));
-        }else{
+        } else {
             renderer.setColor(new Color(1f, 1f, 1f, 1));
         }
 
 
-
-
-        int abstandvonRand = Gdx.graphics.getWidth()/(Gdx.graphics.getWidth()/7);
-
+        int abstandvonRand = Gdx.graphics.getWidth() / (Gdx.graphics.getWidth() / 7);
 
 
         int unteneinteilung = 300;
         int untenhohe = 125;
         int radius = 3;
 
-        if(flaeche==true) {
+        if (flaeche == true) {
             abgerundetesRechteck(renderer, abstandvonRand, untenhohe + abstandvonRand, Gdx.graphics.getWidth() - abstandvonRand * 2, Gdx.graphics.getHeight() - untenhohe + abstandvonRand - 45 - abstandvonRand, radius);
-        }else {
+        } else {
             if (Settings.darkmode) {
                 renderer.setColor(new Color(0.2f, 0.1f, 0.1f, 1));
             } else {
@@ -110,7 +95,7 @@ public class UI {
 
     public static void init() {
         VisUI.load(VisUI.SkinScale.X1);
-        stage = new Stage(MainGame.viewport,MainGame.UIbatch);
+        stage = new Stage(MainGame.viewport, MainGame.UIbatch);
 
         root.setFillParent(true);
         stage.addActor(root);
@@ -119,7 +104,6 @@ public class UI {
         set = new SettingsUI();
 
         menuBar = new MenuBar();
-
 
 
         root.add(menuBar.getTable()).expandX().fillX().row();
@@ -133,10 +117,6 @@ public class UI {
         de.ft.robocontrol.UI.MenuBar.createMenus();
 
 
-
-
-
-
         Thread UIthread = new Thread() {
 
             @Override
@@ -147,24 +127,21 @@ public class UI {
                     public void run() {
 
 
-
                         ////////////recent//////////////////////////
 
 
-
-                            for (int i = 0; i < Data.path.size(); i++) {
-                                if (!(new File(Data.path.get(i)).exists())) {
-                                    Data.path.remove(i);
-                                    Data.filename.remove(i);
-                                }
+                        for (int i = 0; i < Data.path.size(); i++) {
+                            if (!(new File(Data.path.get(i)).exists())) {
+                                Data.path.remove(i);
+                                Data.filename.remove(i);
                             }
+                        }
 
-                            if (Data.path.size() == 0) {
-                                recent.setDisabled(true);
-                            } else {
-                                recent.setDisabled(false);
-                            }
-
+                        if (Data.path.size() == 0) {
+                            recent.setDisabled(true);
+                        } else {
+                            recent.setDisabled(false);
+                        }
 
 
                         ///////////////////////////////////
@@ -172,23 +149,20 @@ public class UI {
 
                         /////////////revert//////////////
 
-                            if (SaveChanges.checkstack()) {
-                                revert.setDisabled(true);
-                            } else {
-                                revert.setDisabled(false);
-                            }
+                        if (SaveChanges.checkstack()) {
+                            revert.setDisabled(true);
+                        } else {
+                            revert.setDisabled(false);
+                        }
 
                         ///////Redo//////////////
 
 
-
-
-                            if (SaveChanges.checkredostack()) {
-                                redo.setDisabled(true);
-                            } else {
-                                redo.setDisabled(false);
-                            }
-
+                        if (SaveChanges.checkredostack()) {
+                            redo.setDisabled(true);
+                        } else {
+                            redo.setDisabled(false);
+                        }
 
 
                     }
@@ -207,14 +181,12 @@ public class UI {
         //root.setPosition(0,0);
 
 
-       root.setPosition(MainGame.cam.position.x- ((float) Gdx.graphics.getWidth())/2,MainGame.cam.position.y - ((float) Gdx.graphics.getHeight())/2);
-
-
+        root.setPosition(MainGame.cam.position.x - ((float) Gdx.graphics.getWidth()) / 2, MainGame.cam.position.y - ((float) Gdx.graphics.getHeight()) / 2);
 
 
         stage.draw();
 
-    recent.setSubMenu(createSubMenu(Data.filename.size(), GetStringArray(Data.filename)));
+        recent.setSubMenu(createSubMenu(Data.filename.size(), GetStringArray(Data.filename)));
 
     }
 

@@ -12,10 +12,10 @@ import com.kotcrab.vis.ui.widget.PopupMenu;
 import de.ft.robocontrol.Block.BlockVar;
 import de.ft.robocontrol.Var;
 import de.ft.robocontrol.data.programm.Data;
-import de.ft.robocontrol.data.user.changes.DataManager;
 import de.ft.robocontrol.data.user.DataLoader;
 import de.ft.robocontrol.data.user.DataSaver;
 import de.ft.robocontrol.data.user.LoadSave;
+import de.ft.robocontrol.data.user.changes.DataManager;
 import de.ft.robocontrol.data.user.changes.SaveChanges;
 import de.ft.robocontrol.utils.ClearActOpenProgramm;
 
@@ -36,49 +36,49 @@ public class MenuBar {
             public void changed(ChangeEvent event, Actor actor) {
 
 
-                        if (DataManager.changes) {
+                if (DataManager.changes) {
 
-                            String[] möglichkeiten = {"Verwerfen", "Speichern", "Abbrechen"};
+                    String[] möglichkeiten = {"Verwerfen", "Speichern", "Abbrechen"};
 
 
-                            final int nothing = 1;
-                            final int everything = 2;
-                            final int something = 3;
+                    final int nothing = 1;
+                    final int everything = 2;
+                    final int something = 3;
 
-                            //confirmdialog may return result of any type, here we are just using ints
-                            Dialogs.showConfirmDialog(UI.stage, "Ungespeicherte Änderungen", "\nWenn du eine leere Datei öffnest werden womögich Änderungen verworfen.\n",
-                                    möglichkeiten, new Integer[]{nothing, everything, something},
-                                    new ConfirmDialogListener<Integer>() {
-                                        @Override
-                                        public void result(Integer result) {
-                                            if (result == nothing) {
-                                                ClearActOpenProgramm.clear();
-                                            }
+                    //confirmdialog may return result of any type, here we are just using ints
+                    Dialogs.showConfirmDialog(UI.stage, "Ungespeicherte Änderungen", "\nWenn du eine leere Datei öffnest werden womögich Änderungen verworfen.\n",
+                            möglichkeiten, new Integer[]{nothing, everything, something},
+                            new ConfirmDialogListener<Integer>() {
+                                @Override
+                                public void result(Integer result) {
+                                    if (result == nothing) {
+                                        ClearActOpenProgramm.clear();
+                                    }
 
-                                            if (result == everything) {
-                                                if (DataManager.path != "") {
-                                                    FileHandle handle = Gdx.files.external(DataManager.path);
-                                                    DataSaver.save(handle);
-                                                    DataManager.saved();
-                                                } else {
-                                                    LoadSave.saveas();
-                                                }
-
-                                            }
-
-                                            if (result == something) {
-
-                                            }
+                                    if (result == everything) {
+                                        if (DataManager.path != "") {
+                                            FileHandle handle = Gdx.files.external(DataManager.path);
+                                            DataSaver.save(handle);
+                                            DataManager.saved();
+                                        } else {
+                                            LoadSave.saveas();
                                         }
-                                    });
 
-                        } else {
-                            try {
-                               ClearActOpenProgramm.clear();
-                            }catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
+                                    }
+
+                                    if (result == something) {
+
+                                    }
+                                }
+                            });
+
+                } else {
+                    try {
+                        ClearActOpenProgramm.clear();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
 
 
             }
@@ -89,7 +89,7 @@ public class MenuBar {
         fileMenu.addItem(new MenuItem("Öffnen", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                if(!Var.isclearing) {
+                if (!Var.isclearing) {
                     if (DataManager.changes) {
                         String[] möglichkeiten = {"Verwerfen", "Speichern", "Abbrechen"};
 
@@ -130,8 +130,8 @@ public class MenuBar {
                     } else {
                         LoadSave.open();
                     }
-                }else {
-                    Dialogs.showOKDialog(UI.stage,"Bitte Warten", "Das Programm ist gerade mit deinem zuletzt Geöffnetem Programm beschäftigt. Bitte warte noch bis es fertig ist" );
+                } else {
+                    Dialogs.showOKDialog(UI.stage, "Bitte Warten", "Das Programm ist gerade mit deinem zuletzt Geöffnetem Programm beschäftigt. Bitte warte noch bis es fertig ist");
                 }
 
 
@@ -167,7 +167,7 @@ public class MenuBar {
         fileMenu.addItem(new MenuItem("Beenden", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-               System.exit(0);
+                System.exit(0);
             }
         }).setShortcut("Alt+F4"));
 
@@ -177,15 +177,15 @@ public class MenuBar {
         editMenu.addItem(UI.revert = new MenuItem("Rückgänig", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                if(!SaveChanges.checkstack()) { //Test if Stack is empty
+                if (!SaveChanges.checkstack()) { //Test if Stack is empty
                     SaveChanges.revert();
                 }
             }
         }).setShortcut("Strg+Z"));
-        editMenu.addItem(UI.redo =  new MenuItem("Wiederherstellen", new ChangeListener() {
+        editMenu.addItem(UI.redo = new MenuItem("Wiederherstellen", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                if(!SaveChanges.checkredostack()) {
+                if (!SaveChanges.checkredostack()) {
                     SaveChanges.redo();
                 }
             }
@@ -199,10 +199,10 @@ public class MenuBar {
         }));
         editMenu.addSeparator();
 
-        editMenu.addItem(UI.copy =new MenuItem("Kopieren", new ChangeListener() {
+        editMenu.addItem(UI.copy = new MenuItem("Kopieren", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                if(BlockVar.marked) {
+                if (BlockVar.marked) {
                     de.ft.robocontrol.data.user.clipboard.Manager.Copy();
                 }
             }
@@ -216,7 +216,7 @@ public class MenuBar {
         editMenu.addItem(UI.paste = new MenuItem("Einfügen", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                if(de.ft.robocontrol.data.user.clipboard.Manager.checkcopy()) {
+                if (de.ft.robocontrol.data.user.clipboard.Manager.checkcopy()) {
                     de.ft.robocontrol.data.user.clipboard.Manager.paste();
                 }
             }

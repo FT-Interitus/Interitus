@@ -17,49 +17,43 @@ public class SavedBlock {
         this.index = index;
 
 
-
     }
-
-
 
 
     public int getH() {
         return h;
     }
 
-    public int getIndex() {
-        return index;
-    }
-
-
-
-    public int getW() {
-        return w;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
     public void setH(int h) {
         this.h = h;
+    }
+
+    public int getIndex() {
+        return index;
     }
 
     public void setIndex(int index) {
         this.index = index;
     }
 
+    public int getW() {
+        return w;
+    }
 
     public void setW(int w) {
         this.w = w;
     }
 
+    public int getX() {
+        return x;
+    }
+
     public void setX(int x) {
         this.x = x;
+    }
+
+    public int getY() {
+        return y;
     }
 
     public void setY(int y) {
