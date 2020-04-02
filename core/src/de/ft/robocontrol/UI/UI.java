@@ -140,6 +140,7 @@ public class UI {
 
         root.add(connectionWindow);
 
+      connectionWindow.show();
 
         de.ft.robocontrol.UI.MenuBar.createMenus();
 

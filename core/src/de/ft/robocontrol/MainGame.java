@@ -76,12 +76,7 @@ public static Logger logger;
 		Gdx.graphics.setTitle("New File");
 		DataManager.filename = "New File";
 
-//Achtung hier ist die Reihenfolge richtig
-		Data.init();
-		UI.init();
 
-
-		ThreadManager.init();
 
 		/*
 		for(int i=0;i < BlockVar.blocks.length;i=i+1){
@@ -114,7 +109,12 @@ test.start();
 
 		cam.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
 
+//Achtung hier ist die Reihenfolge richtig
+		Data.init();
+		UI.init();
 
+
+		ThreadManager.init();
 
 
 		SerialConnection.searchArduino();
@@ -278,6 +278,8 @@ test.start();
 	@Override
 	public void dispose () {
 
+
+		//TODO stop Thread Manager Thread
 		ClearActOpenProgramm.clear();
 
 
