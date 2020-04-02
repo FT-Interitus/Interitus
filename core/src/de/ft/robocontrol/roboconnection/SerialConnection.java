@@ -33,7 +33,7 @@ public class SerialConnection {
             for(int a=0;a<SerialConnection.Arduinos.size();a++){
                 if(SerialConnection.Arduinos.get(a).getDescriptivePortName().equals(SerialConnection.getPorts()[i].getDescriptivePortName())){
                     System.out.println("software schon vorhanden");
-                    ssv=" (Authenifiziert)";
+                    ssv=" (Authentifiziert)";
                 }
             }
 

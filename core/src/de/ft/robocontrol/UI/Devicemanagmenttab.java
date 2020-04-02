@@ -46,23 +46,12 @@ public class Devicemanagmenttab extends Tab {
 
 
 
-        content.add(Dialogs.showOptionDialog(UI.stage, "Neue Verbindung Konfigurieren", "Möchtest du den Arduino als Gerät hinzufügen?", Dialogs.OptionDialogType.YES_NO, new OptionDialogAdapter() {
-            @Override
-            public void yes () {
-                content.add(Dialogs.showOKDialog(UI.stage, "Neue Verbindung Konfigurieren", "Du wirst jetzt durch einige einstellungen begleitet"));
-            }
 
-            @Override
-            public void no () {
-                content.add(Dialogs.showOKDialog(UI.stage, "Neue Abgebrochen", "Verbindung nicht hinzugefügt"));
-            }
-
-
-        }));
 
         content.pack();
         content.setSize(content.getWidth() + 60, content.getHeight());
         content.setPosition(548, 85);
+
     }
 
 

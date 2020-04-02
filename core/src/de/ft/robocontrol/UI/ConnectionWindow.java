@@ -31,8 +31,8 @@ public static VisTextButton devicemanagebutton = new VisTextButton("Software bre
     public static connectionbuilder testBuilder;
     final VisTable container = new VisTable();
     final Padding padding = new Padding(2, 3);
-    TabbedPane.TabbedPaneStyle style = VisUI.getSkin().get(false ? "vertical" : "default", TabbedPane.TabbedPaneStyle.class);
-    TabbedPane tabbedPane = new TabbedPane(style);
+   public static TabbedPane.TabbedPaneStyle style = VisUI.getSkin().get(false ? "vertical" : "default", TabbedPane.TabbedPaneStyle.class);
+   public static TabbedPane tabbedPane = new TabbedPane(style);
 
     public ConnectionWindow() {
         new GridTableBuilder(4);
@@ -62,11 +62,6 @@ public static VisTextButton devicemanagebutton = new VisTextButton("Software bre
 
     }
 
-    public void verbindungstabs() {
-        for (int i = 0; i < VerbindungsSpeicher.verbundungen.size(); i++) {
-            tabbedPane.insert(0, new Devicemanagmenttab(VerbindungsSpeicher.verbundungen.get(i).name));
-        }
-    }
 
     public void show() {
         testBuilder = new connectionbuilder("Verbindungen", new StandardTableBuilder(padding));
@@ -160,6 +155,7 @@ public static VisTextButton devicemanagebutton = new VisTextButton("Software bre
 
             centerWindow();
         }
+
 
 
     }

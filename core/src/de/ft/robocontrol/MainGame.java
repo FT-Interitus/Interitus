@@ -70,19 +70,6 @@ public class MainGame extends ApplicationAdapter {
         DataManager.filename = "New File";
 
 
-
-		/*
-		for(int i=0;i < BlockVar.blocks.length;i=i+1){
-			System.out.println("eine runde"+i);
-			BlockVar.blocks[i]=new Block(i,i*100,100,100,30);
-			bu[i]=new BlockUpdate(BlockVar.blocks[i]);
-			bu[i].start();
-			//BlockVar.blocks[i].setWH(100,30);
-			//BlockVar.blocks[i].setPosition(i*BlockVar.blocks[i].getW(),100);
-
-		}
-		 */
-
         Thread test = new Thread() {
             @Override
             public void run() {
@@ -109,7 +96,7 @@ public class MainGame extends ApplicationAdapter {
 
         ThreadManager.init();
 
-
+///
         SerialConnection.searchArduino();
 
         UIbridge.UpdateConnectionWindowPortsList();

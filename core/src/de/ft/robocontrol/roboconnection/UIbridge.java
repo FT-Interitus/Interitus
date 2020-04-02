@@ -4,6 +4,8 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import de.ft.robocontrol.Block.Arduino;
 import de.ft.robocontrol.UI.ConnectionWindow;
+import de.ft.robocontrol.data.VerbindungsSpeicher;
+import sun.rmi.transport.Connection;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -11,6 +13,9 @@ import java.util.TimerTask;
 public class UIbridge {
     public static String selectedport;
     public static String selectedboard = "Arduino UNO";
+
+
+    public static boolean setup = false;
 
     public static void UpdateConnectionWindowPortsList() {
 
@@ -26,6 +31,31 @@ public class UIbridge {
                 time.scheduleAtFixedRate(new TimerTask() {
                     @Override
                     public void run() {
+
+
+                        try {
+                            if (!ConnectionWindow.devicemanagebutton.getText().toString().contains("Warten")) {
+                                if (ConnectionWindow.selectportlist.getSelected().contains("(Authentifiziert)")) {
+
+                                    if(true) {
+
+                                        ConnectionWindow.devicemanagebutton.setText("Konfigurieren"); //TODO heir prüfund ob der Arduino schon eingerichtet wurde
+                                        setup = true;
+                                    }else{
+                                        ConnectionWindow.devicemanagebutton.setText("Software brennen");
+                                    }
+                                } else {
+
+                                    ConnectionWindow.devicemanagebutton.setText("Software brennen");
+                                    setup = false;
+
+                                }
+                            }
+                        }catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+
                         System.out.println(SerialConnection.getPorts().length);
                         if (SerialConnection.getPorts().length > portsold[0]) {
                             portsold[0] = SerialConnection.getPorts().length;
@@ -62,18 +92,23 @@ public class UIbridge {
                     public void changed(ChangeEvent event, Actor actor) {
 
 
-                        ConnectionWindow.error.setText("Wird gebrannt...");
+                      if(!setup) {
+                          ConnectionWindow.error.setText("Wird gebrannt...");
 
 
-                        String[] getrennt = ConnectionWindow.selectportlist.getSelected().split(" ");
+                          String[] getrennt = ConnectionWindow.selectportlist.getSelected().split(" ");
 
-                        if (selectedboard.contains("MEGA")) {
-                            BurnProgramm.burn(Arduino.MEGA, getrennt[0], "sketch_mega.hex");
-                        }
+                          if (selectedboard.contains("MEGA")) {
+                              BurnProgramm.burn(Arduino.MEGA, getrennt[0], "sketch_mega.hex");
+                          }
 
-                        if (selectedboard.contains("UNO")) {
-                            BurnProgramm.burn(Arduino.UNO, getrennt[0], "sketch_uno.hex");
-                        }
+                          if (selectedboard.contains("UNO")) {
+                              BurnProgramm.burn(Arduino.UNO, getrennt[0], "sketch_uno.hex");
+                          }
+                      }else{
+                          VerbindungsSpeicher.verbundungen.add(new VerbindungsSpeicher("Neue Verbindung"));
+                          KnownDeviceManager.addnewdevice();
+                      }
 
 
                     }
@@ -104,6 +139,7 @@ public class UIbridge {
 
 
                 selectedboard = ConnectionWindow.selectboardlist.getSelected();
+
             }
         });
 
