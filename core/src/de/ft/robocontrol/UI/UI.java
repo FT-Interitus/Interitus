@@ -67,7 +67,7 @@ public class UI {
         }
 
 
-        int abstandvonRand =10;
+        int abstandvonRand =5;
 
 
         int unteneinteilung = 300;
