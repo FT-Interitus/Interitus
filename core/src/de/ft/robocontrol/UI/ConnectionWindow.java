@@ -1,13 +1,19 @@
 package de.ft.robocontrol.UI;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.kotcrab.vis.ui.VisUI;
+import com.kotcrab.vis.ui.util.dialog.Dialogs;
+import com.kotcrab.vis.ui.util.dialog.OptionDialogAdapter;
 import com.kotcrab.vis.ui.widget.*;
 import com.kotcrab.vis.ui.widget.tabbedpane.Tab;
 import com.kotcrab.vis.ui.widget.tabbedpane.TabbedPane;
 import com.kotcrab.vis.ui.widget.tabbedpane.TabbedPaneAdapter;
 import de.ft.robocontrol.data.VerbindungsSpeicher;
+
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 public class ConnectionWindow extends VisWindow {
 public static VisLabel error;
@@ -82,7 +88,7 @@ pack();
 
 
 
-    private static class TestTab extends Tab {
+    private class TestTab extends Tab {
         private String title;
         private Table content;
 
