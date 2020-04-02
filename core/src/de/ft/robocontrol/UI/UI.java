@@ -73,6 +73,9 @@ public class UI {
         int untenhohe = 125;
         int radius = 3;
 
+
+
+
         if (flaeche == true) {
             abgerundetesRechteck(renderer, abstandvonRand, untenhohe + abstandvonRand, Gdx.graphics.getWidth() - abstandvonRand * 2, Gdx.graphics.getHeight() - untenhohe + abstandvonRand - 45 - abstandvonRand, radius);
         } else {

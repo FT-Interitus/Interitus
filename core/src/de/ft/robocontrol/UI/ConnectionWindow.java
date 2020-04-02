@@ -20,7 +20,7 @@ import de.ft.robocontrol.data.VerbindungsSpeicher;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-public class ConnectionWindow extends VisWindow {
+public class ConnectionWindow {
 public static VisLabel error;
 //ublic static TabbedPane tabbedPane;
 public static VisTextButton devicemanagebutton = new VisTextButton("Software brennen");

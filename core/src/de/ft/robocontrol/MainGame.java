@@ -133,7 +133,6 @@ public class MainGame extends ApplicationAdapter {
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             batch.setProjectionMatrix(cam.combined);
 
-
 /*
 		shapeRenderer.setProjectionMatrix(cam.combined);
 		shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
@@ -240,6 +239,8 @@ public class MainGame extends ApplicationAdapter {
         //BlockVar.blocks[0].delete();
         UI.updateView(width, height);
         viewport.update(width, height);
+
+        
 
 
     }
