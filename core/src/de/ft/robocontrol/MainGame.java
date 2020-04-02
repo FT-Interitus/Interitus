@@ -261,10 +261,7 @@ h=height;
 
 
         //TODO stop Thread Manager Thread
-        ClearActOpenProgramm.clear();
 
-
-        Data.close();
         batch.dispose();
         img_block.dispose();
         Gdx.app.exit();

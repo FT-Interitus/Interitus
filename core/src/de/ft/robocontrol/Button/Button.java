@@ -1,8 +1,7 @@
 package de.ft.robocontrol.Button;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import de.ft.robocontrol.UI.UI;
+import de.ft.robocontrol.utils.RoundRectangle;
 
 public class Button {
     public int x;
@@ -17,7 +16,7 @@ public class Button {
     }
 
     public void draw(ShapeRenderer renderer){
-        UI.abgerundetesRechteck(renderer,this.x,this.y,this.w,this.h,5);
+        RoundRectangle.abgerundetesRechteck(renderer,this.x,this.y,this.w,this.h,5);
     }
 
     public void setY(int y) {
