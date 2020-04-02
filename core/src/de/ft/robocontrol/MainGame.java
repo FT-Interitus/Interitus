@@ -37,6 +37,12 @@ public class MainGame extends ApplicationAdapter {
     public static Component saver;
     //BlockUpdate bu[] = new BlockUpdate[0];
     public static Logger logger;
+
+
+    public static int w=0;
+    public static int h=0;
+
+
     ShapeRenderer shapeRenderer;
     BitmapFont font;
 
@@ -241,7 +247,8 @@ public class MainGame extends ApplicationAdapter {
         viewport.update(width, height);
 
         
-
+w=width;
+h=height;
 
     }
 

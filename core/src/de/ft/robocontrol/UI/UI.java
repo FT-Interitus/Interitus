@@ -11,6 +11,7 @@ import com.kotcrab.vis.ui.widget.MenuBar;
 import com.kotcrab.vis.ui.widget.MenuItem;
 import de.ft.robocontrol.MainGame;
 import de.ft.robocontrol.Settings;
+import de.ft.robocontrol.Var;
 import de.ft.robocontrol.data.programm.Data;
 import de.ft.robocontrol.data.user.changes.SaveChanges;
 
@@ -66,7 +67,7 @@ public class UI {
         }
 
 
-        int abstandvonRand = Gdx.graphics.getWidth() / (Gdx.graphics.getWidth() / 7);
+        int abstandvonRand =10;
 
 
         int unteneinteilung = 300;
@@ -75,22 +76,21 @@ public class UI {
 
 
 
-
         if (flaeche == true) {
-            abgerundetesRechteck(renderer, abstandvonRand, untenhohe + abstandvonRand, Gdx.graphics.getWidth() - abstandvonRand * 2, Gdx.graphics.getHeight() - untenhohe + abstandvonRand - 45 - abstandvonRand, radius);
+            abgerundetesRechteck(renderer, abstandvonRand, untenhohe + abstandvonRand, Var.w - abstandvonRand * 2, Var.h - untenhohe + abstandvonRand - 45 - abstandvonRand, radius);
         } else {
             if (Settings.darkmode) {
                 renderer.setColor(new Color(0.2f, 0.1f, 0.1f, 1));
             } else {
                 renderer.setColor(new Color(1f, 1f, 1f, 1));
             }
-            abgerundetesRechteck(renderer, abstandvonRand, abstandvonRand, Gdx.graphics.getWidth() - abstandvonRand * 2 - unteneinteilung, untenhohe - abstandvonRand, radius);
+            abgerundetesRechteck(renderer, abstandvonRand, abstandvonRand, Var.w - abstandvonRand * 2 - unteneinteilung, untenhohe - abstandvonRand, radius);
             if (Settings.darkmode) {
                 renderer.setColor(new Color(0.2f, 0.2f, 0.2f, 1));
             } else {
                 renderer.setColor(new Color(1f, 1f, 1f, 1));
             }
-            abgerundetesRechteck(renderer, Gdx.graphics.getWidth() - unteneinteilung, abstandvonRand, unteneinteilung - abstandvonRand, untenhohe - abstandvonRand, radius);
+            abgerundetesRechteck(renderer, Var.w - unteneinteilung, abstandvonRand, unteneinteilung - abstandvonRand, untenhohe - abstandvonRand, radius);
         }
         renderer.end();
 
