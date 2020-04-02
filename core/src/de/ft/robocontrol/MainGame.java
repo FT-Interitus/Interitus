@@ -215,9 +215,6 @@ public class MainGame extends ApplicationAdapter {
                 cam.position.set(cam.position.x, cam.position.y -= 20, 0);
             }
 
-            if (input.isKeyJustPressed(Input.Keys.E)) {
-                throw new NullPointerException("Test");
-            }
 
 
         } catch (Exception e) {
@@ -248,7 +245,7 @@ h=height;
 
 
         //TODO stop Thread Manager Thread
-
+        Data.close();
         batch.dispose();
         img_block.dispose();
         Gdx.app.exit();

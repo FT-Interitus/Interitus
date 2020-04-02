@@ -22,6 +22,7 @@ public class Data {
         File folder = new File(System.getProperty("user.home") + "/.racd");
         File recent = new File(System.getProperty("user.home") + "/.racd/recent.json");
         File settings = new File(System.getProperty("user.home") + "/.racd/settings.json");
+        File knowndevices = new File(System.getProperty("user.home") + "/.racd/devices.json");
         Path path = folder.toPath();
         if (!folder.exists()) {
 
@@ -31,6 +32,19 @@ public class Data {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
+            try {
+                settings.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                knowndevices.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
             try {
                 Files.setAttribute(path, "dos:hidden", true);
             } catch (IOException e) {
@@ -108,6 +122,38 @@ public class Data {
 
 
             }
+
+
+            if (!knowndevices.exists()) {
+                try {
+                    knowndevices.createNewFile();
+                    Gdx.files.absolute(settings.getAbsolutePath()).writeString("{}", false);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+
+                try {
+                    FileHandle se = Gdx.files.absolute(System.getProperty("user.home") + "/.racd/devices.json");
+                    if (se.readString() == "") {
+                        se.writeString("{}", false);
+                        return;
+                    }
+                    JSONObject obj = new JSONObject(se.readString());
+
+                   //////////// *.* = obj.getInt();/////////////
+
+                    //TODO device laden mit attributen
+
+                } catch (JSONException e) {
+
+                }
+
+
+            }
+
+
+
         }
 
 
@@ -141,6 +187,16 @@ public class Data {
         settings_obj.put("updateurl", Settings.updateurl);
         //TODO weitere Einstellugen speichern
         settings.writeString(settings_obj.toString(), false);
+
+        ////////////////////////////////////////////////////////////////////
+
+        FileHandle knowndevices = Gdx.files.absolute(System.getProperty("user.home") + "/.racd/devices.json");
+        JSONObject knowndevices_obj = new JSONObject(settings);
+
+      ///  knowndevices_obj.put("",Variable);///
+
+        //TODO attribute laden
+        knowndevices.writeString(knowndevices_obj.toString(), false);
 
     }
 
