@@ -19,7 +19,7 @@ public class ClearActOpenProgramm {
         Var.isclearing = true;
         blockstoclear = (ArrayList<Block>) BlockVar.blocks.clone();
 
-        //TODO sto ThreadManager Thread
+        //TODO stop ThreadManager Thread
 
         clear = new Thread() {
             @Override

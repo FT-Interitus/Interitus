@@ -168,7 +168,6 @@ public class MenuBar {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                System.exit(0);
-                //ConnectionWindow cw = new ConnectionWindow();
             }
         }).setShortcut("Alt+F4"));
 
