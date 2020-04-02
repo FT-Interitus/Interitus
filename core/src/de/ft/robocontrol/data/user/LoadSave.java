@@ -32,25 +32,25 @@ public class LoadSave {
                     System.out.println("Save as file: " + fileToSave.getName());
 
 
-                    if(fileToSave.getAbsolutePath().contains(".rac")) {
+                    if (fileToSave.getAbsolutePath().contains(".rac")) {
                         DataManager.path = fileToSave.getAbsolutePath();
                         DataSaver.save(Gdx.files.absolute(fileToSave.getAbsolutePath()));
                         DataManager.filename = fileToSave.getName();
 
-                    }else{
-                        DataManager.path = fileToSave.getAbsolutePath()+".rac";
-                        DataSaver.save(Gdx.files.absolute(fileToSave.getAbsolutePath()+".rac"));
-                        DataManager.filename = fileToSave.getName()+".rac";
+                    } else {
+                        DataManager.path = fileToSave.getAbsolutePath() + ".rac";
+                        DataSaver.save(Gdx.files.absolute(fileToSave.getAbsolutePath() + ".rac"));
+                        DataManager.filename = fileToSave.getName() + ".rac";
                     }
                     System.out.println(DataManager.path);
 
-                    if(Data.filename.size()>9) {
+                    if (Data.filename.size() > 9) {
                         Data.filename.remove(0);
 
                     }
 
-                    if(Data.filename.indexOf(fileToSave.getName())>-1) {
-                        int temp =Data.filename.indexOf(fileToSave.getName());
+                    if (Data.filename.indexOf(fileToSave.getName()) > -1) {
+                        int temp = Data.filename.indexOf(fileToSave.getName());
                         Data.filename.remove(temp);
                         Data.path.remove(temp);
                     }
@@ -62,11 +62,10 @@ public class LoadSave {
                     DataManager.saved();
 
 
-
                 }
-            };
-            //SAVE DATA
+            }
 
+            //SAVE DATA
 
 
         };
@@ -93,12 +92,12 @@ public class LoadSave {
                     DataManager.saved();
                     DataManager.filename = selectedFile.getName();
 
-                    if(Data.filename.size()>9) {
+                    if (Data.filename.size() > 9) {
                         Data.filename.remove(0);
 
                     }
-                    if(Data.path.indexOf(selectedFile.getAbsolutePath())>-1) {
-                        int temp =Data.filename.indexOf(selectedFile.getName());
+                    if (Data.path.indexOf(selectedFile.getAbsolutePath()) > -1) {
+                        int temp = Data.filename.indexOf(selectedFile.getName());
                         Data.filename.remove(temp);
                         Data.path.remove(temp);
                     }
@@ -109,7 +108,7 @@ public class LoadSave {
 
                 }
             }
-        } ;
+        };
         open.start();
     }
 }

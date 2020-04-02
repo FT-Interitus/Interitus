@@ -11,10 +11,11 @@ import de.ft.robocontrol.data.user.changes.DataManager;
 import de.ft.robocontrol.utils.CheckKollision;
 
 public class Block {
-    public boolean seted=true;
-    public boolean moved=false;
-    private boolean marked=false;
-    private boolean biggestarea=false;
+    public boolean seted = true;
+    public boolean moved = false;
+    Frustum camfr = MainGame.cam.frustum;
+    private boolean marked = false;
+    private boolean biggestarea = false;
     private int x;
     private int y;
     private int w;
@@ -24,26 +25,26 @@ public class Block {
     private boolean showdupulicate_links;
     private int x_dup_rechts;
     private int x_dup_links;
-    private boolean moving=false;
-    Frustum camfr = MainGame.cam.frustum;
-   private BlockUpdate blockupdate;
-   private Block left = null;
-   private Block right = null;
-    public Block(int index,int x,int y,int w,int h){
-        this.x=x;
-        this.y=y;
-        this.w=w;
-        this.h=h;
+    private boolean moving = false;
+    private BlockUpdate blockupdate;
+    private Block left = null;
+    private Block right = null;
+
+    public Block(int index, int x, int y, int w, int h) {
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
         this.x_dup_rechts = this.x + this.w;
-        this.x_dup_links = this.x-this.w;
+        this.x_dup_links = this.x - this.w;
 
         this.index = index;
         blockupdate = new BlockUpdate(this);
 
-        if(this.isVisible()) {
+        if (this.isVisible()) {
             blockupdate.start();
             BlockVar.visibleblocks.add(this);
-        }else{
+        } else {
             blockupdate.isrunning = false;
         }
         ThreadManager.add(blockupdate, this);
@@ -51,7 +52,7 @@ public class Block {
     }
 
     public boolean isVisible() {
-      return camfr.boundsInFrustum(this.getX(), this.getY(), 0, this.getW(), this.getH(), 0);
+        return camfr.boundsInFrustum(this.getX(), this.getY(), 0, this.getW(), this.getH(), 0);
     }
 
     public BlockUpdate getBlockupdate() {
@@ -70,24 +71,28 @@ public class Block {
         return moving;
     }
 
-    public boolean isShowdupulicate_rechts() {
-        return showdupulicate_rechts;
+    public void setMoving(boolean moving) {
+        this.moving = moving;
     }
 
-    public boolean isShowdupulicate_links() {
-        return showdupulicate_links;
+    public boolean isShowdupulicate_rechts() {
+        return showdupulicate_rechts;
     }
 
     public void setShowdupulicate_rechts(boolean showdupulicate_rechts) {
         this.showdupulicate_rechts = showdupulicate_rechts;
     }
 
+    public boolean isShowdupulicate_links() {
+        return showdupulicate_links;
+    }
+
     public void setShowdupulicate_links(boolean showdupulicate_links) {
         this.showdupulicate_links = showdupulicate_links;
     }
 
-    public void setMoving(boolean moving) {
-        this.moving = moving;
+    public boolean isMarked() {
+        return marked;
     }
 
     public void setMarked(boolean marked) {
@@ -95,17 +100,17 @@ public class Block {
         this.marked = marked;
     }
 
-    public boolean isMarked() {
-        return marked;
+    public Block getLeft() {
+        return left;
     }
 
     public void setLeft(Block left) {
 
 
-        if(this.left!=left) {
+        if (this.left != left) {
             this.left = left;
         }
-        if(left!=null) {
+        if (left != null) {
             if (left.getRight() != this) {
                 left.setRight(this);
             }
@@ -113,12 +118,16 @@ public class Block {
 
     }
 
+    public Block getRight() {
+        return right;
+    }
+
     public void setRight(Block right) {
 
-        if(this.right!=right) {
+        if (this.right != right) {
             this.right = right;
         }
-        if(right!=null) {
+        if (right != null) {
             if (right.getLeft() != this) {
                 right.setLeft(this);
             }
@@ -126,12 +135,8 @@ public class Block {
 
     }
 
-    public Block getLeft() {
-        return left;
-    }
-
-    public Block getRight() {
-        return right;
+    public int getX() {
+        return x;
     }
 
     public void setX(int x) {
@@ -140,19 +145,13 @@ public class Block {
         this.x_dup_links = this.x - this.w;
     }
 
-    public int getX() {
-        return x;
+    public int getY() {
+        return y;
     }
 
     public void setY(int y) {
         this.y = y;
 
-    }
-
-
-
-    public int getY() {
-        return y;
     }
 
     public int getH() {
@@ -163,17 +162,17 @@ public class Block {
         return w;
     }
 
-    public void setPosition(int x, int y){
-        this.x=x;
-        this.y=y;
+    public void setPosition(int x, int y) {
+        this.x = x;
+        this.y = y;
         this.x_dup_rechts = this.x + this.w;
         this.x_dup_links = this.x - this.w;
     }
 
 
-    public void setWH(int w,int h){
-        this.w=w;
-        this.h=h;
+    public void setWH(int w, int h) {
+        this.w = w;
+        this.h = h;
     }
 
     public int getIndex() {
@@ -185,21 +184,19 @@ public class Block {
     }
 
     public void delete() {
-        BlockVar.markedblock=null;
-        BlockVar.marked=false;
-        BlockVar.ismoving=false;
-
-
+        BlockVar.markedblock = null;
+        BlockVar.marked = false;
+        BlockVar.ismoving = false;
 
 
         final int temp = this.getIndex();
         DataManager.change(this, false, true);
         this.setIndex(-1);
-        if(left!=null) {
+        if (left != null) {
             left.setRight(null);
         }
 
-        if(right!=null) {
+        if (right != null) {
             right.setLeft(null);
         }
 
@@ -207,8 +204,8 @@ public class Block {
         left = null;
         right = null;
 
-        if(ThreadManager.threads.indexOf(this.blockupdate)!=-1) { //Überprüfen ob Thread überhaupt läuft
-            ThreadManager.threads.remove(ThreadManager.threads.indexOf(this.blockupdate));
+        if (ThreadManager.threads.indexOf(this.blockupdate) != -1) { //Überprüfen ob Thread überhaupt läuft
+            ThreadManager.threads.remove(this.blockupdate);
         }
 
 
@@ -218,21 +215,21 @@ public class Block {
             blockupdate.time.cancel();
             blockupdate.interrupt();
             blockupdate.block = null;
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.out.println("mist");
 
         }
 
-        if(BlockVar.blocks.indexOf(this)!=-1) { //das trifft nur nicht zu wenn das ganze programm gecleart wird
-            BlockVar.blocks.remove(BlockVar.blocks.indexOf(this));
-            BlockVar.visibleblocks.remove(BlockVar.visibleblocks.indexOf(this));
+        if (BlockVar.blocks.indexOf(this) != -1) { //das trifft nur nicht zu wenn das ganze programm gecleart wird
+            BlockVar.blocks.remove(this);
+            BlockVar.visibleblocks.remove(this);
 
 
-            Thread calcnew =new Thread() {
+            Thread calcnew = new Thread() {
                 @Override
                 public void run() {
                     for (int i = temp; i < BlockVar.blocks.size(); i++) {
-                        System.out.println("Test "+i);
+                        System.out.println("Test " + i);
                         BlockVar.blocks.get(i).setIndex(BlockVar.blocks.get(i).getIndex() - 1);
 
                     }
@@ -242,9 +239,8 @@ public class Block {
             calcnew.start();
 
 
-
             try {
-                BlockVar.blocks.remove(BlockVar.blocks.indexOf(this));
+                BlockVar.blocks.remove(this);
             } catch (Exception e) {
 
             }
@@ -260,18 +256,16 @@ public class Block {
     public void draw(SpriteBatch batch, ShapeRenderer shape, BitmapFont font) {
 
 
-
-
-        if(!this.blockupdate.toggle) {
+        if (!this.blockupdate.toggle) {
             batch.draw(MainGame.img_block, this.getX(), this.getY(), this.getW(), this.getH());
-        }  else{
-        batch.draw(MainGame.img_mouseover, this.getX(), this.getY(), this.getW(), this.getH());
-    }
+        } else {
+            batch.draw(MainGame.img_mouseover, this.getX(), this.getY(), this.getW(), this.getH());
+        }
 
-        if(this.isMarked()) {
+        if (this.isMarked()) {
             batch.draw(MainGame.img_marked, this.getX(), this.getY(), this.getW(), this.getH());
         }
-        if(BlockVar.biggestblock==this) {
+        if (BlockVar.biggestblock == this) {
             if (this.isShowdupulicate_rechts()) {
                 batch.setColor(1, 1, 1, 0.5f);
                 batch.draw(MainGame.img_block, this.x_dup_rechts, this.y, this.getW(), this.getH());
@@ -285,24 +279,24 @@ public class Block {
             }
         }
 
-        if(this.getLeft()!=null){
+        if (this.getLeft() != null) {
             batch.end();
             shape.begin(ShapeRenderer.ShapeType.Filled);
-            shape.setColor(1f,0.4f,0.4f,0.4f);
-            shape.ellipse(this.getX()-6,this.getY()+this.getH()/2-6,12,12);
+            shape.setColor(1f, 0.4f, 0.4f, 0.4f);
+            shape.ellipse(this.getX() - 6, this.getY() + this.getH() / 2 - 6, 12, 12);
             shape.end();
             batch.begin();
         }
 
-        if(this.getRight()!=null){
+        if (this.getRight() != null) {
             batch.end();
             shape.begin(ShapeRenderer.ShapeType.Filled);
-            shape.setColor(1f,0.4f,0.4f,0.4f);
-            shape.ellipse(this.getX()-6+this.getW(),this.getY()+this.getH()/2-6,12,12);
+            shape.setColor(1f, 0.4f, 0.4f, 0.4f);
+            shape.ellipse(this.getX() - 6 + this.getW(), this.getY() + this.getH() / 2 - 6, 12, 12);
             shape.end();
             batch.begin();
         }
-        if(this== BlockVar.biggestblock) {
+        if (this == BlockVar.biggestblock) {
             batch.end();
             shape.begin(ShapeRenderer.ShapeType.Filled);
             shape.rect(x, y, 20, 20);
@@ -311,54 +305,54 @@ public class Block {
         }
 
 
-        font.draw(batch, "index:  "+this.getIndex(), this.getX()+30, this.getY()+30);
-}
+        font.draw(batch, "index:  " + this.getIndex(), this.getX() + 30, this.getY() + 30);
+    }
 
 
+    public int getDublicatmarkedblockuberlappungsflache() {
+        int flaeche = 0;
+        if (this.isShowdupulicate_rechts()) {
 
-public int getDublicatmarkedblockuberlappungsflache(){
-        int flaeche=0;
-    if(this.isShowdupulicate_rechts()) {
+            try {
 
-        try {
+                flaeche = (CheckKollision.flache(this.getX_dup_rechts(), this.getY(), this.getW(), this.getH(), BlockVar.markedblock.getX(), BlockVar.markedblock.getY()));
 
-            flaeche=(CheckKollision.flache(this.getX_dup_rechts(),this.getY(),this.getW(),this.getH(), BlockVar.markedblock.getX(), BlockVar.markedblock.getY()));
+            } catch (NullPointerException e) {
 
-        } catch (NullPointerException e) {
+            }
+
 
         }
 
 
-    }
+        if (this.isShowdupulicate_links()) {
+            try {
 
+                flaeche = (CheckKollision.flache(this.getX_dup_links(), this.getY(), this.getW(), this.getH(), BlockVar.markedblock.getX(), BlockVar.markedblock.getY()));
 
-    if(this.isShowdupulicate_links()) {
-        try {
+            } catch (NullPointerException e) {
 
-            flaeche=(CheckKollision.flache(this.getX_dup_links(),this.getY(),this.getW(),this.getH(), BlockVar.markedblock.getX(), BlockVar.markedblock.getY()));
-
-        } catch (NullPointerException e) {
+            }
 
         }
-
+        return flaeche;
     }
-    return flaeche;
-}
-public int getBlockMarkedblockuberlappungsflache(){
-        int flaeche=0;
+
+    public int getBlockMarkedblockuberlappungsflache() {
+        int flaeche = 0;
         try {
             flaeche = CheckKollision.flache(this.getX(), this.getY(), this.getW(), this.getH(), BlockVar.markedblock.getX(), BlockVar.markedblock.getY());
-        }catch (NullPointerException e){}
+        } catch (NullPointerException e) {
+        }
         return flaeche;
-}
-public Thread allowedRestart() {
-    blockupdate = new BlockUpdate(this);
-    blockupdate.start();
+    }
 
-    return blockupdate;
-}
+    public Thread allowedRestart() {
+        blockupdate = new BlockUpdate(this);
+        blockupdate.start();
 
-
+        return blockupdate;
+    }
 
 
 }

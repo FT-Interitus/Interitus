@@ -2,23 +2,16 @@ package de.ft.robocontrol.roboconnection;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.fazecast.jSerialComm.SerialPort;
-
 import de.ft.robocontrol.Block.Arduino;
 import de.ft.robocontrol.UI.ConnectionWindow;
-import de.ft.robocontrol.data.VerbindungsSpeicher;
 
-import java.io.Serializable;
-import java.sql.Connection;
-import java.sql.Time;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class UIbridge {
     public static String selectedport;
     public static String selectedboard = "Arduino UNO";
+
     public static void UpdateConnectionWindowPortsList() {
 
         final int[] portsold = {0};
@@ -34,33 +27,33 @@ public class UIbridge {
                     @Override
                     public void run() {
                         System.out.println(SerialConnection.getPorts().length);
-                        if(SerialConnection.getPorts().length > portsold[0]) {
-                            portsold[0] =SerialConnection.getPorts().length;
+                        if (SerialConnection.getPorts().length > portsold[0]) {
+                            portsold[0] = SerialConnection.getPorts().length;
                             SerialConnection.searchArduino();
                             ConnectionWindow.selectportlist.setItems(SerialConnection.getPortNames()); //TODO hier Nullpointer bei zu schnellem ein und ausstecken des Arduinos
                             ConnectionWindow.update();
-                        }else if(SerialConnection.getPorts().length < portsold[0]){
+                        } else if (SerialConnection.getPorts().length < portsold[0]) {
 
                             ConnectionWindow.selectportlist.setItems(SerialConnection.getPortNames());
                             ConnectionWindow.update();
-                            portsold[0] =SerialConnection.getPorts().length;
+                            portsold[0] = SerialConnection.getPorts().length;
 
-                            for(int i=0;i<SerialConnection.Arduinos.size();i++){
-                                boolean found=false;
-                                for(int b=0;b<SerialConnection.getPorts().length;b++){
-                                    if(SerialConnection.Arduinos.get(i).getSystemPortName() == SerialConnection.getPorts()[b].getSystemPortName()){
-                                        found=true;
+                            for (int i = 0; i < SerialConnection.Arduinos.size(); i++) {
+                                boolean found = false;
+                                for (int b = 0; b < SerialConnection.getPorts().length; b++) {
+                                    if (SerialConnection.Arduinos.get(i).getSystemPortName() == SerialConnection.getPorts()[b].getSystemPortName()) {
+                                        found = true;
                                     }
                                 }
-                                if(found==false){
+                                if (found == false) {
                                     SerialConnection.Arduinos.remove(i);
                                 }
                             }
 
                         }
 
-                    }}, 0,200);
-
+                    }
+                }, 0, 200);
 
 
                 //Button Listener
@@ -69,38 +62,22 @@ public class UIbridge {
                     public void changed(ChangeEvent event, Actor actor) {
 
 
-
-
                         ConnectionWindow.error.setText("Wird gebrannt...");
 
 
                         String[] getrennt = ConnectionWindow.selectportlist.getSelected().split(" ");
 
-                        if(selectedboard.contains("MEGA"))
-
-                        {
-                            BurnProgramm.burn(Arduino.MEGA, getrennt[0],"sketch_mega.hex");
+                        if (selectedboard.contains("MEGA")) {
+                            BurnProgramm.burn(Arduino.MEGA, getrennt[0], "sketch_mega.hex");
                         }
 
-                        if(selectedboard.contains("UNO"))
-
-                        {
-                            BurnProgramm.burn(Arduino.UNO, getrennt[0],"sketch_uno.hex");
+                        if (selectedboard.contains("UNO")) {
+                            BurnProgramm.burn(Arduino.UNO, getrennt[0], "sketch_uno.hex");
                         }
-
-
-
 
 
                     }
                 });
-
-
-
-
-
-
-
 
 
                 ConnectionWindow.neuladen_button.addListener(new ChangeListener() {
@@ -108,25 +85,14 @@ public class UIbridge {
                     public void changed(ChangeEvent event, Actor actor) {
 
 
-
-
-
                         ConnectionWindow.error.setText("Neuladen...");
 
 
-
-                    SerialConnection.searchArduino();
-
+                        SerialConnection.searchArduino();
 
 
                     }
                 });
-
-
-
-
-
-
 
 
             }
@@ -137,8 +103,7 @@ public class UIbridge {
             public void changed(ChangeEvent event, Actor actor) {
 
 
-
-               selectedboard = ConnectionWindow.selectboardlist.getSelected();
+                selectedboard = ConnectionWindow.selectboardlist.getSelected();
             }
         });
 
@@ -148,7 +113,6 @@ public class UIbridge {
                 selectedport = ConnectionWindow.selectportlist.getSelected();
             }
         });
-
 
 
         updater.start();

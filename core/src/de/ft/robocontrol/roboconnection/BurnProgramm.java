@@ -8,33 +8,30 @@ import de.ft.robocontrol.data.VerbindungsSpeicher;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.Reader;
-import java.sql.Connection;
 
 public class BurnProgramm {
-   static String platform;
-private static String OS = System.getProperty("os.name").toLowerCase();
+    static String platform;
+    private static String OS = System.getProperty("os.name").toLowerCase();
+
     protected static void burn(int arduino, String port, String file) {
         String methode = null;
-        if(arduino==Arduino.UNO) { //TODO add platforms
+        if (arduino == Arduino.UNO) { //TODO add platforms
             platform = "atmega328p";
-            methode ="arduino";
+            methode = "arduino";
         }
 
-            if (arduino == Arduino.MEGA) {
-                platform = "atmega2560";
-                methode ="wiring";
-            }
-
-
+        if (arduino == Arduino.MEGA) {
+            platform = "atmega2560";
+            methode = "wiring";
+        }
 
 
         if (isWindows()) {
-      burnWindows(platform, port, file, methode);
+            burnWindows(platform, port, file, methode);
         } else if (isMac()) {
-            brunApple(platform,port,file,methode);
+            brunApple(platform, port, file, methode);
         } else if (isUnix()) {
-            burnLinux(platform,port,file,methode);
+            burnLinux(platform, port, file, methode);
 
         } else {
             System.out.println("Your OS is not support!!");
@@ -42,7 +39,7 @@ private static String OS = System.getProperty("os.name").toLowerCase();
 
     }
 
-//OS tesster
+    //OS tesster
     private static boolean isWindows() {
 
         return (OS.indexOf("win") >= 0);
@@ -57,10 +54,9 @@ private static String OS = System.getProperty("os.name").toLowerCase();
 
     private static boolean isUnix() {
 
-        return (OS.indexOf("nix") >= 0 || OS.indexOf("nux") >= 0 || OS.indexOf("aix") > 0 );
+        return (OS.indexOf("nix") >= 0 || OS.indexOf("nux") >= 0 || OS.indexOf("aix") > 0);
 
     }
-
 
 
     //Burn start
@@ -71,10 +67,9 @@ private static String OS = System.getProperty("os.name").toLowerCase();
         Runtime rt = Runtime.getRuntime();
 
 
-
-        port = "/dev/"+port;
+        port = "/dev/" + port;
         try {
-            Process pr = rt.exec("./libs/avrdude -Clibs/avrdude.conf -v -p"+ platform + " -c "+methode+" -P"+port+" -b115200 -D -Uflash:w:libs/"+file+":i"); //TODO Progress
+            Process pr = rt.exec("./libs/avrdude -Clibs/avrdude.conf -v -p" + platform + " -c " + methode + " -P" + port + " -b115200 -D -Uflash:w:libs/" + file + ":i"); //TODO Progress
             System.out.println(pr.getInputStream());
 
 
@@ -82,17 +77,14 @@ private static String OS = System.getProperty("os.name").toLowerCase();
             String line = null;
             String output = null;
 
-            while ((line = input.readLine()) != null)
-            {
+            while ((line = input.readLine()) != null) {
                 System.out.println(line);
                 output = output + line;
 
             }
 
 
-            postproduktion(output,port);
-
-
+            postproduktion(output, port);
 
 
         } catch (IOException e) {
@@ -107,10 +99,9 @@ private static String OS = System.getProperty("os.name").toLowerCase();
         Runtime rt = Runtime.getRuntime();
 
 
-
-        port = ""+port;
+        port = "" + port;
         try {
-            Process pr = rt.exec("libs\\avrdude.exe -C libs\\avrdude.conf -v -p "+ platform + " -c"+methode+" -P"+port+" -b115200 -D -Uflash:w:libs\\"+file+":i"); //TODO Progress
+            Process pr = rt.exec("libs\\avrdude.exe -C libs\\avrdude.conf -v -p " + platform + " -c" + methode + " -P" + port + " -b115200 -D -Uflash:w:libs\\" + file + ":i"); //TODO Progress
             System.out.println(pr.getInputStream());
 
 
@@ -118,16 +109,14 @@ private static String OS = System.getProperty("os.name").toLowerCase();
             String line = null;
             String output = null;
 
-            while ((line = input.readLine()) != null)
-            {
+            while ((line = input.readLine()) != null) {
                 System.out.println(line);
                 output = output + line;
 
             }
 
 
-            postproduktion(output,port);
-
+            postproduktion(output, port);
 
 
         } catch (IOException e) {
@@ -136,15 +125,14 @@ private static String OS = System.getProperty("os.name").toLowerCase();
 
     }
 
-    private static void brunApple(String platform, String port,String file, String methode) {
+    private static void brunApple(String platform, String port, String file, String methode) {
 
         Runtime rt = Runtime.getRuntime();
 
 
-
-        port = "/dev/"+port;
+        port = "/dev/" + port;
         try {
-            Process pr = rt.exec("libs/avrdudeapple -C libs/avrdude.conf -v -p "+ platform + " -c"+methode+" -P"+port+" -b115200 -D -Uflash:w:libs/"+file+":i"); //TODO Progress
+            Process pr = rt.exec("libs/avrdudeapple -C libs/avrdude.conf -v -p " + platform + " -c" + methode + " -P" + port + " -b115200 -D -Uflash:w:libs/" + file + ":i"); //TODO Progress
             System.out.println(pr.getInputStream());
 
 
@@ -152,8 +140,7 @@ private static String OS = System.getProperty("os.name").toLowerCase();
             String line = null;
             String output = null;
 
-            while ((line = input.readLine()) != null)
-            {
+            while ((line = input.readLine()) != null) {
                 System.out.println(line);
                 output = output + line;
 
@@ -161,9 +148,7 @@ private static String OS = System.getProperty("os.name").toLowerCase();
             System.out.println(output);
 
 
-            postproduktion(output,port);
-
-
+            postproduktion(output, port);
 
 
         } catch (IOException e) {
@@ -179,7 +164,6 @@ private static String OS = System.getProperty("os.name").toLowerCase();
             ConnectionWindow.error.setText("Brennen hat funktioniert, nun kannst du dein Gerät konfigurieren");
             VerbindungsSpeicher.verbundungen.add(new VerbindungsSpeicher("Neue Verbindung"));
             UI.connectionWindow.verbindungstabs();
-
 
 
         } else {
@@ -202,10 +186,10 @@ private static String OS = System.getProperty("os.name").toLowerCase();
             ConnectionWindow.error.setText("Brennen nicht erfolgreich hast du den richtigen Port und das richtige Board ausgewählt?");
         }
 
-        if(output.contains("Permission denied")) {
-            if(isUnix()) {
-                ConnectionWindow.error.setText("Keine Berechtigung! Führe den Befehl: sudo chmod a+rw "+ port+" aus.");
-            }else{
+        if (output.contains("Permission denied")) {
+            if (isUnix()) {
+                ConnectionWindow.error.setText("Keine Berechtigung! Führe den Befehl: sudo chmod a+rw " + port + " aus.");
+            } else {
                 ConnectionWindow.error.setText("Keine Berechtigung starte den PC neu.");
             }
         }
@@ -213,7 +197,6 @@ private static String OS = System.getProperty("os.name").toLowerCase();
         ConnectionWindow.update();
 
     }
-
 
 
 }

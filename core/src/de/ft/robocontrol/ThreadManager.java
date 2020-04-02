@@ -24,8 +24,6 @@ public class ThreadManager {
     }
 
 
-
-
     public synchronized static void init() {
 
 
@@ -44,7 +42,7 @@ public class ThreadManager {
 //                            System.out.println(camfr.boundsInFrustum(BlockVar.blocks.get(10).getX(), BlockVar.blocks.get(10).getY(), 0, BlockVar.blocks.get(10).getW(), BlockVar.blocks.get(10).getH(),0));
                             try {
                                 Block block = ((BlockUpdate) threads.get(i)).block;
-                                if( !(camfr.boundsInFrustum(block.getX(), block.getY(), 0, block.getW(), block.getH(), 0)) &&block.isMarked()==false&&((BlockUpdate) threads.get(i)).isrunning == true){
+                                if (!(camfr.boundsInFrustum(block.getX(), block.getY(), 0, block.getW(), block.getH(), 0)) && block.isMarked() == false && ((BlockUpdate) threads.get(i)).isrunning == true) {
                                     ((BlockUpdate) threads.get(i)).time.cancel();
                                     threads.get(i).interrupt();
                                     ((BlockUpdate) threads.get(i)).isrunning = false;

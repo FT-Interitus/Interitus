@@ -1,16 +1,9 @@
 package de.ft.robocontrol.UI;
 
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.kotcrab.vis.ui.util.TableUtils;
-import com.kotcrab.vis.ui.util.dialog.Dialogs;
-import com.kotcrab.vis.ui.util.form.SimpleFormValidator;
 import com.kotcrab.vis.ui.widget.*;
 import com.kotcrab.vis.ui.widget.tabbedpane.Tab;
-
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 import static com.badlogic.gdx.scenes.scene2d.ui.Cell.defaults;
 
@@ -19,7 +12,18 @@ public class Devicemanagmenttab extends Tab {
     private String title;
     private Table content;
 
-    public void TestFormValidator () {
+    public Devicemanagmenttab(String title) {
+        super(false, false);
+        this.title = title;
+
+        VisList visList = new VisList();
+        content = new VisTable();
+        VisTextButton button = new VisTextButton("button");
+        TestFormValidator();
+        content.add(button).padRight(0);
+    }
+
+    public void TestFormValidator() {
 
 
         content.defaults().padRight(1);
@@ -44,32 +48,18 @@ public class Devicemanagmenttab extends Tab {
         content.row();
 
 
-
-
         content.pack();
         content.setSize(content.getWidth() + 60, content.getHeight());
         content.setPosition(548, 85);
     }
 
-
-    public Devicemanagmenttab(String title) {
-        super(false, false);
-        this.title = title;
-
-        VisList visList = new VisList();
-        content = new VisTable();
-       VisTextButton button = new VisTextButton("button");
-       TestFormValidator();
-        content.add(button).padRight(0);
-    }
-
     @Override
-    public String getTabTitle () {
+    public String getTabTitle() {
         return title;
     }
 
     @Override
-    public Table getContentTable () {
+    public Table getContentTable() {
         return content;
     }
 }

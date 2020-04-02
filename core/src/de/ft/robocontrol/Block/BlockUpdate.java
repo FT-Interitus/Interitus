@@ -6,23 +6,19 @@ import com.badlogic.gdx.math.Vector3;
 import de.ft.robocontrol.MainGame;
 import de.ft.robocontrol.data.user.changes.DataManager;
 import de.ft.robocontrol.utils.CheckKollision;
-import de.ft.robocontrol.utils.PositionSaver;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 
 public class BlockUpdate extends Thread {
-public  Block block;
-boolean toggle;
-public boolean isrunning = true;
-
-
-
-public Timer time;
+    public Block block;
+    public boolean isrunning = true;
+    public Timer time;
+    boolean toggle;
 
     BlockUpdate(Block block) {
-        this.block=block;
+        this.block = block;
 
     }
 
@@ -35,12 +31,10 @@ public Timer time;
             public void run() {
 
 
-
-
-                if(block ==null) {
+                if (block == null) {
                     time.cancel();
                 }
-                if(block.getIndex()==-1) {
+                if (block.getIndex() == -1) {
                     time.cancel();
                     time.purge();
                 }
@@ -78,16 +72,15 @@ public Timer time;
                 }
 
 
-
                 if (block.isMoving() && Gdx.input.isButtonPressed(0)) {
 
                     block.setX((int) (MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x - BlockVar.unterschiedsave.x));
                     block.setY((int) (MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y - BlockVar.unterschiedsave.y));
 
                     //Wenn der Mauszeiger die Ablagefläche berührt
-                   // if(CheckKollision.checkmousewithobject(,Gdx.input.getY())) {
-                   // gotodelete = true;
-                   // }else{
+                    // if(CheckKollision.checkmousewithobject(,Gdx.input.getY())) {
+                    // gotodelete = true;
+                    // }else{
                     //gotodelete = false;
                     //}
 
@@ -126,8 +119,8 @@ public Timer time;
                             biggestvalue = BlockVar.showduplicat.get(i).getDublicatmarkedblockuberlappungsflache();
                             biggestindex = i;
                         }
-                    }catch (Exception e) {
-                       // e.printStackTrace();
+                    } catch (Exception e) {
+                        // e.printStackTrace();
                     }
                 }
                 try {
@@ -181,7 +174,6 @@ public Timer time;
                     block.moved = true;
 
 
-
                     int a = BlockVar.blocks.indexOf(BlockVar.blockmitdergrostenuberlappungmitmarkiertemblock);
                     //System.out.println(a);
                     block.setX(block.getX() + block.getW());
@@ -204,14 +196,14 @@ public Timer time;
 
                 }
 
-                if (block.seted == false && BlockVar.biggestblock == block && !Gdx.input.isButtonPressed(0)){
+                if (block.seted == false && BlockVar.biggestblock == block && !Gdx.input.isButtonPressed(0)) {
 //System.out.println("funzt");
-block.seted=true;
-            }
+                    block.seted = true;
+                }
 
-                if(block.seted == false && BlockVar.biggestblock != block){
+                if (block.seted == false && BlockVar.biggestblock != block) {
 
-                   // System.out.println("jezt muss das ruckgangig gemacht werdn");
+                    // System.out.println("jezt muss das ruckgangig gemacht werdn");
 
                     int b = BlockVar.blocks.indexOf(block);
 
@@ -232,83 +224,75 @@ block.seted=true;
                     }
 
 
-
-                    block.seted=true;
+                    block.seted = true;
                 }
 
 
-            if(de.ft.robocontrol.utils.CheckKollision.checkmousewithblock(block)==false&& Gdx.input.isButtonPressed(0) && !block.isMoving()&&block.isMarked()){
-                block.setMarked(false);
-                BlockVar.marked=false;
-                BlockVar.markedblock = null;
+                if (de.ft.robocontrol.utils.CheckKollision.checkmousewithblock(block) == false && Gdx.input.isButtonPressed(0) && !block.isMoving() && block.isMarked()) {
+                    block.setMarked(false);
+                    BlockVar.marked = false;
+                    BlockVar.markedblock = null;
                 }
 
 
+                if (BlockVar.marked && !block.isMarked()) {
+
+                    if (CheckKollision.checkblockwithduplicate(BlockVar.markedblock, block, 0) && block.getRight() == null) {
+                        if (BlockVar.markedblock.isMoving()) {
+                            //System.out.println("Kollision!");
+
+                            block.setShowdupulicate_rechts(true);
 
 
+                        } else {
 
 
-    if(BlockVar.marked&&!block.isMarked()) {
+                            if (block.getRight() != BlockVar.markedblock && BlockVar.markedblock.getLeft() != block && block.getRight() == null && BlockVar.biggestblock == block) {
 
-        if(CheckKollision.checkblockwithduplicate(BlockVar.markedblock, block,0)&&block.getRight()==null) {
-            if (BlockVar.markedblock.isMoving()) {
-                //System.out.println("Kollision!");
-
-                block.setShowdupulicate_rechts(true);
-
-
-            } else {
-
-
-            if(block.getRight()!=BlockVar.markedblock&&BlockVar.markedblock.getLeft()!=block&&block.getRight()==null && BlockVar.biggestblock==block) {
-
-                //System.out.println("test");
-                block.setShowdupulicate_rechts(false);
-                block.setRight(BlockVar.markedblock);
-                BlockVar.markedblock.setY(block.getY());
-                BlockVar.markedblock.setX(block.getX_dup_rechts());
-            }
-
-
-            }
-        }else{
-            block.setShowdupulicate_rechts(false);
-        }
-
-
-
-        if(CheckKollision.checkblockwithduplicate(BlockVar.markedblock, block,1)&&block.getLeft()==null) {  //TODO Fehler beheben
-            if (BlockVar.markedblock.isMoving()) {
-
-
-                block.setShowdupulicate_links(true);
-
-
-            } else {
-
-
-                if(block.getRight()!=BlockVar.markedblock&&BlockVar.markedblock.getLeft()!=block&&block.getLeft()==null && BlockVar.biggestblock==block) {
-
-
-                    block.setShowdupulicate_links(false);
-                    block.setLeft(BlockVar.markedblock);
-                    BlockVar.markedblock.setY(block.getY());
-                    BlockVar.markedblock.setX(block.getX_dup_links());
-                }
-
-
-            }
-        }else{
-            block.setShowdupulicate_links(false);
-        }
-
-    }
-
-
-
-
+                                //System.out.println("test");
+                                block.setShowdupulicate_rechts(false);
+                                block.setRight(BlockVar.markedblock);
+                                BlockVar.markedblock.setY(block.getY());
+                                BlockVar.markedblock.setX(block.getX_dup_rechts());
                             }
-        }, 0,20);
+
+
+                        }
+                    } else {
+                        block.setShowdupulicate_rechts(false);
+                    }
+
+
+                    if (CheckKollision.checkblockwithduplicate(BlockVar.markedblock, block, 1) && block.getLeft() == null) {  //TODO Fehler beheben
+                        if (BlockVar.markedblock.isMoving()) {
+
+
+                            block.setShowdupulicate_links(true);
+
+
+                        } else {
+
+
+                            if (block.getRight() != BlockVar.markedblock && BlockVar.markedblock.getLeft() != block && block.getLeft() == null && BlockVar.biggestblock == block) {
+
+
+                                block.setShowdupulicate_links(false);
+                                block.setLeft(BlockVar.markedblock);
+                                BlockVar.markedblock.setY(block.getY());
+                                BlockVar.markedblock.setX(block.getX_dup_links());
+                            }
+
+
+                        }
+                    } else {
+                        block.setShowdupulicate_links(false);
+                    }
+
+                }
+
+
+            }
+        }, 0, 20);
 
     }
 

@@ -30,13 +30,11 @@ public class Updater {
                 try {
                     url = new URL(urlString);
                 } catch (MalformedURLException e) {
-                    if(showincaseoffalse) {
+                    if (showincaseoffalse) {
 
                         Dialogs.showErrorDialog(UI.stage, "Der Update-Server reagiert leider nicht oder du hast einfach keine Internetverbindung");
                     }
                 }
-
-
 
 
                 try {
@@ -45,7 +43,7 @@ public class Updater {
 
 
                 } catch (IOException e) {
-                    if(showincaseoffalse) {
+                    if (showincaseoffalse) {
                         Dialogs.showErrorDialog(UI.stage, "Der Update-Server reagiert leider nicht oder du hast einfach keine Internetverbindung");
                     }
                 }
@@ -53,25 +51,23 @@ public class Updater {
                 br = new BufferedReader(isr);
 
 
-
                 try {
                     double version_get = Double.parseDouble(br.readLine());
                     System.out.println(version_get);
-                    if(version_get== Var.PROGRAMM_VERSION_ID) {
-                        if(showincaseoffalse) {
+                    if (version_get == Var.PROGRAMM_VERSION_ID) {
+                        if (showincaseoffalse) {
                             Dialogs.showOKDialog(UI.stage, "Kein Update", "Du bist auf dem neusten Stand");
                         }
 
-                    }else if(version_get<Var.PROGRAMM_VERSION_ID){
-                        if(showincaseoffalse) {
+                    } else if (version_get < Var.PROGRAMM_VERSION_ID) {
+                        if (showincaseoffalse) {
                             Dialogs.showErrorDialog(UI.stage, "Bitte Kontaktiere die Herausgeber dieser Software! Hier liegt ein Fehler vor der alle Nutzer betrifft!");
                         }
-                    }else if(version_get>Var.PROGRAMM_VERSION_ID){
+                    } else if (version_get > Var.PROGRAMM_VERSION_ID) {
                         Dialogs.showOKDialog(UI.stage, "Update", "Hier liegt ein Update vor!"); //TODO hier update vorgang einleiten
                     }
                 } catch (IOException e) {
-                    if(showincaseoffalse)
-                    {
+                    if (showincaseoffalse) {
                         Dialogs.showErrorDialog(UI.stage, "Der Update-Server reagiert leider nicht oder du hast einfach keine Internetverbindung");
                     }
                 }
