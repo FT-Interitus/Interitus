@@ -23,6 +23,9 @@ public class Button {
     private String text;
     private Texture image=null;
     private boolean touched;
+    private boolean visible=true;
+
+
 
     public Button(int x,int y,int w,int h){
         this.x=x;
@@ -95,66 +98,82 @@ return pressed;
     }
 
     public void draw(){
-        SpriteBatch batch=new SpriteBatch();
-        BitmapFont font=new BitmapFont();
-        if(image==null) {
-            ShapeRenderer s = new ShapeRenderer();
-            s.begin(ShapeRenderer.ShapeType.Filled);
-            RoundRectangle.abgerundetesRechteck(s, this.x, this.y, this.w, this.h, 5);
-            s.end();
-        }else{
-            batch.begin();
-            if(isMouseover()){
-                batch.setColor(1,1,1,0.5f);
-            }else{
-                batch.setColor(1,1,1,1);
+        if(isVisible()) {
+            SpriteBatch batch = new SpriteBatch();
+            BitmapFont font = new BitmapFont();
+            if (image == null) {
+                ShapeRenderer s = new ShapeRenderer();
+                s.begin(ShapeRenderer.ShapeType.Filled);
+                RoundRectangle.abgerundetesRechteck(s, this.x, this.y, this.w, this.h, 5);
+                s.end();
+            } else {
+                batch.begin();
+                if (isMouseover()) {
+                    batch.setColor(1, 1, 1, 0.5f);
+                } else {
+                    batch.setColor(1, 1, 1, 1);
+                }
+                if (isMouseover() && Gdx.input.isButtonPressed(0)) {
+                    batch.setColor(1, 0.5f, 0.5f, 1);
+                }
+                batch.draw(image, this.x, this.y, this.w, this.h);
+                batch.end();
             }
-            if(isMouseover() && Gdx.input.isButtonPressed(0)){
-                batch.setColor(1,0.5f,0.5f,1);
+            if (text != null) {
+                batch.begin();
+                font.draw(batch, this.text, x + w / 2 - (this.text.length() / 2) * 6, y + h / 2);
+                batch.end();
             }
-            batch.draw(image,this.x,this.y,this.w,this.h);
-            batch.end();
         }
-        if(text!=null) {
-            batch.begin();
-            font.draw(batch, this.text, x + w / 2 - (this.text.length() / 2) * 6, y + h / 2);
-            batch.end();
-        }
-
     }
 
-    public void buttonsetY(int y) {
-            this.y = y;
+    public int getX() {
+        return x;
     }
 
-    public void buttonsetX(int x) {
-        this.x = x;
+    public int getY() {
+        return y;
     }
 
-    public void buttonsetH(int h) {
-        this.h = h;
+    public int getH() {
+        return h;
     }
 
-    public void buttonsetW(int w) {
+    public int getW() {
+        return w;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public Texture getImage() {
+        return image;
+    }
+
+    public void setW(int w) {
         this.w = w;
     }
 
-    public int buttongetW() {
-        return this.w;
+    public void setH(int h) {
+        this.h = h;
     }
 
-    public int buttongetH() {
-        return this.h;
+    public void setX(int x) {
+        this.x = x;
     }
 
-    public int buttongetY() {
-        return this.y;
+    public void setY(int y) {
+        this.y = y;
     }
 
-    public int buttongetX() {
-        return this.x;
+    public void setVisible(boolean visible) {
+        this.visible = visible;
     }
 
+    public boolean isVisible() {
+        return visible;
+    }
 
     public class ClickListener extends EventObject {
         public ClickListener(Object source) {

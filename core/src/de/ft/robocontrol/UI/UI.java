@@ -88,9 +88,10 @@ public class UI {
         renderer.end();
 
 
-        testbutton.setBounds(Gdx.graphics.getWidth() - unteneinteilung,untenhohe-30,30,30);
+        testbutton.setBounds(Gdx.graphics.getWidth() - unteneinteilung+5,untenhohe-30-5,30,30);
         testbutton.setImage(img_button_verbindungadd);
         testbutton.draw();
+        testbutton.setVisible(true);
         if(testbutton.isjustPressed()){
             connectionWindow = new ConnectionWindow();
 
