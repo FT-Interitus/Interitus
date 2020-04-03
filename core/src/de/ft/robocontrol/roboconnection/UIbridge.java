@@ -5,7 +5,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import de.ft.robocontrol.Block.Arduino;
 import de.ft.robocontrol.UI.ConnectionWindow;
 import de.ft.robocontrol.data.VerbindungsSpeicher;
-import sun.rmi.transport.Connection;
 
 import java.util.Timer;
 import java.util.TimerTask;
