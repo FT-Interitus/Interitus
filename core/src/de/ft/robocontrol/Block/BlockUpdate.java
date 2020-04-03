@@ -43,7 +43,7 @@ public class BlockUpdate extends Thread {
 
 
                 if (de.ft.robocontrol.utils.CheckKollision.checkmousewithblock(block, BlockVar.mousepressedold) && Gdx.input.isButtonPressed(0) && BlockVar.ismoving == false && !block.isMarked() && !BlockVar.marked && BlockVar.markedblock == null) {
-                    MainGame.logger.debug("Marked Block" + block.getIndex());
+                  // MainGame.logger.debug("Marked Block" + block.getIndex());
                     BlockVar.marked = true;
                     block.setMarked(true);
                     BlockVar.markedblock = block;

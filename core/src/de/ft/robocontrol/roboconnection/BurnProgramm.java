@@ -1,6 +1,7 @@
 package de.ft.robocontrol.roboconnection;
 
 import de.ft.robocontrol.Block.Arduino;
+import de.ft.robocontrol.MainGame;
 import de.ft.robocontrol.UI.ConnectionWindow;
 import de.ft.robocontrol.UI.UI;
 import de.ft.robocontrol.data.VerbindungsSpeicher;
@@ -34,7 +35,7 @@ public class BurnProgramm {
             burnLinux(platform, port, file, methode);
 
         } else {
-            System.out.println("Your OS is not support!!");
+            MainGame.logger.severe("You OS is not supported");
         }
 
     }
@@ -70,7 +71,7 @@ public class BurnProgramm {
         port = "/dev/" + port;
         try {
             Process pr = rt.exec("./libs/avrdude -Clibs/avrdude.conf -v -p" + platform + " -c " + methode + " -P" + port + " -b115200 -D -Uflash:w:libs/" + file + ":i"); //TODO Progress
-            System.out.println(pr.getInputStream());
+
 
 
             BufferedReader input = new BufferedReader(new InputStreamReader(pr.getErrorStream()));
@@ -78,7 +79,7 @@ public class BurnProgramm {
             String output = null;
 
             while ((line = input.readLine()) != null) {
-                System.out.println(line);
+               MainGame.logger.finer( line);
                 output = output + line;
 
             }
@@ -102,7 +103,6 @@ public class BurnProgramm {
         port = "" + port;
         try {
             Process pr = rt.exec("libs\\avrdude.exe -C libs\\avrdude.conf -v -p " + platform + " -c" + methode + " -P" + port + " -b115200 -D -Uflash:w:libs\\" + file + ":i"); //TODO Progress
-            System.out.println(pr.getInputStream());
 
 
             BufferedReader input = new BufferedReader(new InputStreamReader(pr.getErrorStream()));
@@ -110,7 +110,7 @@ public class BurnProgramm {
             String output = null;
 
             while ((line = input.readLine()) != null) {
-                System.out.println(line);
+                MainGame.logger.finer( line);
                 output = output + line;
 
             }
@@ -133,7 +133,7 @@ public class BurnProgramm {
         port = "/dev/" + port;
         try {
             Process pr = rt.exec("libs/avrdudeapple -C libs/avrdude.conf -v -p " + platform + " -c" + methode + " -P" + port + " -b115200 -D -Uflash:w:libs/" + file + ":i"); //TODO Progress
-            System.out.println(pr.getInputStream());
+
 
 
             BufferedReader input = new BufferedReader(new InputStreamReader(pr.getErrorStream()));
@@ -141,11 +141,11 @@ public class BurnProgramm {
             String output = null;
 
             while ((line = input.readLine()) != null) {
-                System.out.println(line);
+                MainGame.logger.finer( line);
                 output = output + line;
 
             }
-            System.out.println(output);
+
 
 
             postproduktion(output, port);

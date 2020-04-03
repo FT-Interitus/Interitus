@@ -213,13 +213,12 @@ public class Block {
 
 
         try {
-            //System.out.println("cancel eigentlich");
 
             blockupdate.time.cancel();
             blockupdate.interrupt();
             blockupdate.block = null;
         } catch (Exception e) {
-            System.out.println("mist");
+           MainGame.logger.severe(e.getMessage());
 
         }
 
@@ -232,7 +231,6 @@ public class Block {
                 @Override
                 public void run() {
                     for (int i = temp; i < BlockVar.blocks.size(); i++) {
-                        System.out.println("Test " + i);
                         try {
                             BlockVar.blocks.get(i).setIndex(BlockVar.blocks.get(i).getIndex() - 1);
                         }catch (Exception e) {

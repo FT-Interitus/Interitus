@@ -84,7 +84,7 @@ public static void searchArduino() {
 
     Thread search = new Thread() {
         public void run() {
-
+//TODO hier System.out's rausschmeisen
             SerialPort ports[] = SerialPort.getCommPorts();
             System.out.println("Select a port:");
             int i = 1;
