@@ -114,7 +114,7 @@ public class Data {
 
                     Settings.darkmode = obj.getBoolean("dark");
                     Settings.updateurl = obj.getString("updateurl");
-                    Settings.logLevel = (Level)obj.get("loglevel");
+
                     //TODO weitere einstellugen Laden
 
                 } catch (JSONException e) {
@@ -186,7 +186,7 @@ public class Data {
         JSONObject settings_obj = new JSONObject(settings);
         settings_obj.put("dark", Settings.darkmode);
         settings_obj.put("updateurl", Settings.updateurl);
-        settings_obj.put("loglevel",Settings.logLevel);
+
         //TODO weitere Einstellugen speichern
         settings.writeString(settings_obj.toString(), false);
 
