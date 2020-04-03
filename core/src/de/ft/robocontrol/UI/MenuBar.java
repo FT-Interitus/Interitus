@@ -52,7 +52,7 @@ if(fullscreen==false) {
 }
 
             }
-        }).setShortcut("Strg+F"));
+        }).setShortcut("F11"));
 
 
 
