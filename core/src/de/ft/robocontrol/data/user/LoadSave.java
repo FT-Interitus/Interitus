@@ -2,6 +2,7 @@ package de.ft.robocontrol.data.user;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.utils.Logger;
 import de.ft.robocontrol.MainGame;
 import de.ft.robocontrol.data.programm.Data;
 import de.ft.robocontrol.data.user.changes.DataManager;
@@ -29,7 +30,7 @@ public class LoadSave {
 
                 if (userSelection == JFileChooser.APPROVE_OPTION) {
                     File fileToSave = fileChooser.getSelectedFile();
-                    System.out.println("Save as file: " + fileToSave.getName());
+                   MainGame.logger.fine("Save as file: " + fileToSave.getName());
 
 
                     if (fileToSave.getAbsolutePath().contains(".rac")) {
@@ -42,7 +43,7 @@ public class LoadSave {
                         DataSaver.save(Gdx.files.absolute(fileToSave.getAbsolutePath() + ".rac"));
                         DataManager.filename = fileToSave.getName() + ".rac";
                     }
-                    System.out.println(DataManager.path);
+                    MainGame.logger.fine(DataManager.path);
 
                     if (Data.filename.size() > 9) {
                         Data.filename.remove(0);
@@ -84,7 +85,8 @@ public class LoadSave {
                 int result = fileChooser.showOpenDialog(MainGame.saver);
                 if (result == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile();
-                    System.out.println("Selected file: " + selectedFile.getName());
+
+                    MainGame.logger.fine("Selected file: " + selectedFile.getName());
                     FileHandle handle = Gdx.files.internal(selectedFile.getAbsolutePath());
                     DataManager.path = selectedFile.getAbsolutePath();
                     DataManager.filename = selectedFile.getName();

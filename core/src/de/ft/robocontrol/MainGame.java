@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.utils.Logger;
+
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.ft.robocontrol.Block.Block;
@@ -24,8 +24,10 @@ import de.ft.robocontrol.utils.ClearActOpenProgramm;
 import de.ft.robocontrol.utils.PositionSaver;
 
 import java.awt.*;
+import java.util.logging.Logger;
 
 import static com.badlogic.gdx.Gdx.input;
+import static de.ft.robocontrol.Settings.*;
 
 public class MainGame extends ApplicationAdapter {
     public static SpriteBatch UIbatch;
@@ -38,6 +40,7 @@ public class MainGame extends ApplicationAdapter {
     public static Component saver;
     //BlockUpdate bu[] = new BlockUpdate[0];
     public static Logger logger;
+
 
 
     public static int w=0;
@@ -64,27 +67,30 @@ public class MainGame extends ApplicationAdapter {
         img_marked = new Texture("block_marked.png");
 
 
-        logger = new Logger("MainLog", 0);
+        logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+        logger.setLevel(logLevel);
 
         Gdx.graphics.setTitle("New File");
         DataManager.filename = "New File";
 
 
-        Thread test = new Thread() {
+        Thread blockdebugcreater = new Thread() {
             @Override
             public void run() {
                 for (int i = 0; i < 12; i = i + 1) {
                     BlockVar.blocks.add(new Block(i, i * 150, 150, 150, 70));
 
-                    System.out.println(i);
+                   MainGame.logger.finest(String.valueOf(i));
                 }
+
+                logger.info("Block creating done");
             }
         };
 
 
-        test.start();
+        blockdebugcreater.start();
 
-//BlockVar.blocks.get(0).setRight(BlockVar.blocks.get(1));
+
 
 
         cam.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
@@ -96,7 +102,7 @@ public class MainGame extends ApplicationAdapter {
 
         ThreadManager.init();
 
-///
+
         SerialConnection.searchArduino();
 
         UIbridge.UpdateConnectionWindowPortsList();
@@ -106,35 +112,25 @@ public class MainGame extends ApplicationAdapter {
     @Override
     public void render() {
 
-//System.out.println("ölkjasdf "+SerialConnection.Arduinos.size());
+
 
 
         try {
 
-            //System.out.println("Blöcke "+BlockVar.blocks.size()+" Sichtbare "+ BlockVar.visibleblocks.size());
-            //	System.out.println("cam Pos"+ cam.position);
+            logger.finest("Blöcke "+BlockVar.blocks.size()+" Sichtbare "+ BlockVar.visibleblocks.size());
+
             PositionSaver.save();
 
 
-            //System.out.println(Var.mousepressedold);
-            //System.out.println(BlockVar.blocks.get(1).getLeft());
             cam.update();
 
-            //Gdx.gl.glClearColor(1,1,1, 1);
-            if (Settings.darkmode) {
+            if (darkmode) {
                 Gdx.gl.glClearColor(1, 0, 0, 1);
             } else {
                 Gdx.gl.glClearColor(0.54f, 0.533f, 0.51f, 1);
             }
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             batch.setProjectionMatrix(cam.combined);
-
-/*
-		shapeRenderer.setProjectionMatrix(cam.combined);
-		shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-		shapeRenderer.end();
-
-*/
 
             if (input.isKeyJustPressed(Input.Keys.INSERT)) {
 
@@ -178,7 +174,9 @@ public class MainGame extends ApplicationAdapter {
                             Temp.draw(batch, shapeRenderer, font);
                             batch.end();
                         }
-                        //System.out.println(BlockVar.blocks.get(i).isMarked() + "  id: "+BlockVar.blocks.get(i).getIndex());
+
+                        logger.finer(BlockVar.blocks.get(i).isMarked() + "  id: "+BlockVar.blocks.get(i).getIndex());
+
                     } catch (Exception e) {
 
                     }
@@ -229,7 +227,7 @@ public class MainGame extends ApplicationAdapter {
     public void resize(int width, int height) {
         super.resize(width, height);
 
-        //BlockVar.blocks[0].delete();
+
         UI.updateView(width, height);
         viewport.update(width, height);
 

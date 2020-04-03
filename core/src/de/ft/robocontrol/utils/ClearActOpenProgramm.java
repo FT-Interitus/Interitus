@@ -1,7 +1,9 @@
 package de.ft.robocontrol.utils;
 
+import com.badlogic.gdx.utils.Logger;
 import de.ft.robocontrol.Block.Block;
 import de.ft.robocontrol.Block.BlockVar;
+import de.ft.robocontrol.MainGame;
 import de.ft.robocontrol.Var;
 import de.ft.robocontrol.data.user.changes.DataManager;
 import de.ft.robocontrol.data.user.changes.SaveChanges;
@@ -31,7 +33,7 @@ public class ClearActOpenProgramm {
                     while (blockstoclear.size() != 0) {
                         blockstoclear.get(0).delete(true);
                         blockstoclear.remove(0);
-                        System.out.println(blockstoclear.size());
+                       MainGame.logger.finer(String.valueOf(blockstoclear.size()));
 
                     }
                     Var.isclearing = false;
@@ -53,14 +55,14 @@ public class ClearActOpenProgramm {
 
 
             }
-            System.out.println("Finish");
+            MainGame.logger.info("Clearing Finished");
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(-121);
         }
 
         BlockVar.visibleblocks.clear();
-        System.out.println("size " + blockstoclear.size());
+
         BlockVar.blocks.clear();
 
         BlockVar.biggestblock = null;

@@ -2,6 +2,7 @@ package de.ft.robocontrol.data.programm;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import de.ft.robocontrol.MainGame;
 import de.ft.robocontrol.Settings;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.logging.Level;
 
 public class Data {
     public static ArrayList<String> path = new ArrayList<String>();
@@ -25,6 +27,7 @@ public class Data {
         File knowndevices = new File(System.getProperty("user.home") + "/.racd/devices.json");
         Path path = folder.toPath();
         if (!folder.exists()) {
+            MainGame.logger.config("Create Programm Data Folder");
 
             folder.mkdir();
             try {
@@ -86,9 +89,6 @@ public class Data {
                     }
 
 
-                    //     System.out.println(obj.get("path"));
-
-
                 } catch (JSONException e) {
 
                 }
@@ -114,7 +114,7 @@ public class Data {
 
                     Settings.darkmode = obj.getBoolean("dark");
                     Settings.updateurl = obj.getString("updateurl");
-                    Settings.loglevel = obj.getInt("loglevel");
+                    Settings.logLevel = (Level)obj.get("loglevel");
                     //TODO weitere einstellugen Laden
 
                 } catch (JSONException e) {
@@ -186,7 +186,7 @@ public class Data {
         JSONObject settings_obj = new JSONObject(settings);
         settings_obj.put("dark", Settings.darkmode);
         settings_obj.put("updateurl", Settings.updateurl);
-        settings_obj.put("loglevel",Settings.loglevel);
+        settings_obj.put("loglevel",Settings.logLevel);
         //TODO weitere Einstellugen speichern
         settings.writeString(settings_obj.toString(), false);
 
