@@ -102,6 +102,9 @@ public class UI {
             connectionWindow = new ConnectionWindow();
 
             connectionWindow.show();
+            if(!UIbridge.thread.isAlive()) {
+
+            }
             UIbridge.thread.start();
         }
 
