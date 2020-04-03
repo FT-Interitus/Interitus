@@ -22,21 +22,64 @@ public class Button {
     private int h;
     private String text;
     private Texture image=null;
-    private boolean toucheddown=false;
+    private boolean touched;
+
     public Button(int x,int y,int w,int h){
         this.x=x;
         this.y=y;
         this.w=w;
         this.h=h;
 
-
-
+    }
+    public Button(){
 
 
     }
 
+    public void setBounds(int x,int y,int w,int h){
+        this.x=x;
+        this.y=y;
+        this.w=w;
+        this.h=h;
+
+    }
+
+    public boolean isjustPressed(){
+         boolean pressed;
+        System.out.println(touched);
+        if(Gdx.input.isButtonPressed(0)) {
+            if (Gdx.input.getX() > x && Gdx.input.getX() < x + w && Gdx.input.getY() > Gdx.graphics.getHeight() - y - h && Gdx.input.getY() < Gdx.graphics.getHeight() - y) {
+                if(touched==false) {
+                    touched = true;
+                }
+            }
+
+        }
+        if(!Gdx.input.isButtonPressed(0) && touched){
+
+            pressed=true;
+touched=false;
+        }else{
+            pressed=false;
+        }
+
+
+return pressed;
+
+    }
+
+
     public boolean isPresseded(){
         if(Gdx.input.getX()>x && Gdx.input.getX()<x+w && Gdx.input.getY()>Gdx.graphics.getHeight()-y-h && Gdx.input.getY()<Gdx.graphics.getHeight()-y && Gdx.input.isButtonPressed(0)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+    public boolean isMouseover(){
+        if(Gdx.input.getX()>x && Gdx.input.getX()<x+w && Gdx.input.getY()>Gdx.graphics.getHeight()-y-h && Gdx.input.getY()<Gdx.graphics.getHeight()-y){
             return true;
         }else{
             return false;

@@ -38,6 +38,7 @@ public class UI {
     protected static MenuBar menuBar;
     protected static SettingsUI set;
     public static Texture img_button_verbindungadd;
+    protected static Button testbutton = new Button();
 
     private static Vector2 lastframecamposition = new Vector2(MainGame.cam.position.x, MainGame.cam.position.y);
 
@@ -87,11 +88,10 @@ public class UI {
         renderer.end();
 
 
-        Button testbutton = new Button(Gdx.graphics.getWidth() - unteneinteilung,untenhohe-30,30,30);
+        testbutton.setBounds(Gdx.graphics.getWidth() - unteneinteilung,untenhohe-30,30,30);
         testbutton.setImage(img_button_verbindungadd);
         testbutton.draw();
-        System.out.println("pressed "+testbutton.isPresseded());
-        if(testbutton.isPresseded()){
+        if(testbutton.isjustPressed()){
             connectionWindow = new ConnectionWindow();
 
             connectionWindow.show();
