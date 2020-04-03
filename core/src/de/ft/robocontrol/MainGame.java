@@ -219,6 +219,9 @@ public class MainGame extends ApplicationAdapter {
             e.printStackTrace();
         }
 
+Button d=new Button(50,50,100,100);
+        d.setImage(img_block);
+        d.draw();
 
     }
 
