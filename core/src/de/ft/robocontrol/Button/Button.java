@@ -104,6 +104,14 @@ return pressed;
             s.end();
         }else{
             batch.begin();
+            if(isMouseover()){
+                batch.setColor(1,1,1,0.5f);
+            }else{
+                batch.setColor(1,1,1,1);
+            }
+            if(isMouseover() && Gdx.input.isButtonPressed(0)){
+                batch.setColor(1,0.5f,0.5f,1);
+            }
             batch.draw(image,this.x,this.y,this.w,this.h);
             batch.end();
         }
@@ -112,6 +120,7 @@ return pressed;
             font.draw(batch, this.text, x + w / 2 - (this.text.length() / 2) * 6, y + h / 2);
             batch.end();
         }
+
     }
 
     public void buttonsetY(int y) {
