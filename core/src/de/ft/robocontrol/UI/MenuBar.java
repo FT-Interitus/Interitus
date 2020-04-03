@@ -1,6 +1,7 @@
 package de.ft.robocontrol.UI;
 
 import com.badlogic.gdx.Gdx;
+
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -10,6 +11,7 @@ import com.kotcrab.vis.ui.widget.Menu;
 import com.kotcrab.vis.ui.widget.MenuItem;
 import com.kotcrab.vis.ui.widget.PopupMenu;
 import de.ft.robocontrol.Block.BlockVar;
+import de.ft.robocontrol.MainGame;
 import de.ft.robocontrol.Var;
 import de.ft.robocontrol.data.programm.Data;
 import de.ft.robocontrol.data.user.DataLoader;
@@ -21,6 +23,7 @@ import de.ft.robocontrol.utils.ClearActOpenProgramm;
 
 
 public class MenuBar {
+    public static boolean fullscreen=false;
     protected static void createMenus() {
         Menu fileMenu = new Menu("Datei");
         Menu editMenu = new Menu("Bearbeiten");
@@ -30,6 +33,30 @@ public class MenuBar {
         UI.recent = new MenuItem("Letzte Öffnen");
 
         //recent.setSubMenu(createSubMenu());
+
+
+
+
+
+        windowMenu.addItem(new MenuItem("Vollbild", new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+if(fullscreen==false) {
+    Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
+    fullscreen=true;
+}else{
+    Gdx.graphics.setWindowedMode(Var.w, Var.h);
+    MainGame.batch.getProjectionMatrix().setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+    Gdx.gl.glViewport(0, 0, Gdx.graphics.getBackBufferWidth(), Gdx.graphics.getBackBufferHeight());
+    fullscreen=false;
+}
+
+            }
+        }).setShortcut("Strg+F"));
+
+
+
+
 
         fileMenu.addItem(new MenuItem("Neu", new ChangeListener() {
             @Override
@@ -223,11 +250,6 @@ public class MenuBar {
         }).setShortcut("Strg+V"));
 
 
-        windowMenu.addItem(new MenuItem("menuitem #9"));
-        windowMenu.addItem(new MenuItem("menuitem #10"));
-        windowMenu.addItem(new MenuItem("menuitem #11"));
-        windowMenu.addSeparator();
-        windowMenu.addItem(new MenuItem("menuitem #12"));
 
         helpMenu.addItem(new MenuItem("Updates..", new ChangeListener() {
             @Override
