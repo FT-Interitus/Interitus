@@ -14,7 +14,7 @@ public class UIbridge {
     public static String selectedport;
     public static String selectedboard = "Arduino UNO";
 
-
+   public static Thread thread;
     public static boolean setup = false;
 
     public static void UpdateConnectionWindowPortsList() {
@@ -86,29 +86,38 @@ public class UIbridge {
                 }, 0, 200);
 
 
+
+
+
+            }
+        };
+
+        thread = new Thread() {
+            @Override
+            public void run() {
                 //Button Listener
                 ConnectionWindow.devicemanagebutton.addListener(new ChangeListener() {
                     @Override
                     public void changed(ChangeEvent event, Actor actor) {
 
 
-                      if(!setup) {
-                          ConnectionWindow.error.setText("Wird gebrannt...");
+                        if(!setup) {
+                            ConnectionWindow.error.setText("Wird gebrannt...");
 
 
-                          String[] getrennt = ConnectionWindow.selectportlist.getSelected().split(" ");
+                            String[] getrennt = ConnectionWindow.selectportlist.getSelected().split(" ");
 
-                          if (selectedboard.contains("MEGA")) {
-                              BurnProgramm.burn(Arduino.MEGA, getrennt[0], "sketch_mega.hex");
-                          }
+                            if (selectedboard.contains("MEGA")) {
+                                BurnProgramm.burn(Arduino.MEGA, getrennt[0], "sketch_mega.hex");
+                            }
 
-                          if (selectedboard.contains("UNO")) {
-                              BurnProgramm.burn(Arduino.UNO, getrennt[0], "sketch_uno.hex");
-                          }
-                      }else{
-                          VerbindungsSpeicher.verbundungen.add(new VerbindungsSpeicher("Neue Verbindung"));
-                          KnownDeviceManager.addnewdevice();
-                      }
+                            if (selectedboard.contains("UNO")) {
+                                BurnProgramm.burn(Arduino.UNO, getrennt[0], "sketch_uno.hex");
+                            }
+                        }else{
+                            VerbindungsSpeicher.verbundungen.add(new VerbindungsSpeicher("Neue Verbindung"));
+                            KnownDeviceManager.addnewdevice();
+                        }
 
 
                     }
@@ -129,26 +138,28 @@ public class UIbridge {
                     }
                 });
 
+                ConnectionWindow.selectboardlist.addListener(new ChangeListener() {
+                    @Override
+                    public void changed(ChangeEvent event, Actor actor) {
+
+
+                        selectedboard = ConnectionWindow.selectboardlist.getSelected();
+
+                    }
+                });
+
+                ConnectionWindow.selectportlist.addListener(new ChangeListener() {
+                    @Override
+                    public void changed(ChangeEvent event, Actor actor) {
+                        selectedport = ConnectionWindow.selectportlist.getSelected();
+                    }
+                });
 
             }
         };
 
-        ConnectionWindow.selectboardlist.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
 
 
-                selectedboard = ConnectionWindow.selectboardlist.getSelected();
-
-            }
-        });
-
-        ConnectionWindow.selectportlist.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                selectedport = ConnectionWindow.selectportlist.getSelected();
-            }
-        });
 
 
         updater.start();

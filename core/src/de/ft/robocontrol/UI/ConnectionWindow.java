@@ -131,10 +131,9 @@ public static VisTextButton devicemanagebutton = new VisTextButton("Software bre
             builder.setTablePadding(new Padding(0, 0, 0, 0));
 
 
-            Devicemanagmenttab devtest = new Devicemanagmenttab("TestDevice");
             TestTab tt = new TestTab("+");
 
-            tabbedPane.add(devtest);
+
             tabbedPane.add(tt);
 
 

@@ -8,10 +8,18 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.kotcrab.vis.ui.widget.VisImageButton;
+import com.kotcrab.vis.ui.widget.VisTextButton;
 import de.ft.robocontrol.Block.Block;
 import de.ft.robocontrol.Block.BlockVar;
 import de.ft.robocontrol.Button.Button;
@@ -41,21 +49,23 @@ public class MainGame extends ApplicationAdapter {
     //BlockUpdate bu[] = new BlockUpdate[0];
     public static Logger logger;
 
+   public static BitmapFont font;
+
 
 
     public static int w=0;
     public static int h=0;
 
-
+public static Drawable d;
 
 
 
     ShapeRenderer shapeRenderer;
-    BitmapFont font;
+
 
     @Override
     public void create() {
-        font = new BitmapFont();
+font=  new BitmapFont();
         shapeRenderer = new ShapeRenderer();
         cam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         viewport = new ScreenViewport(cam);
@@ -111,9 +121,6 @@ public class MainGame extends ApplicationAdapter {
 
     @Override
     public void render() {
-
-
-
 
         try {
 
@@ -219,9 +226,8 @@ public class MainGame extends ApplicationAdapter {
             e.printStackTrace();
         }
 
-Button d=new Button(50,50,100,100);
-        d.setImage(img_block);
-        d.draw();
+
+
 
     }
 

@@ -21,7 +21,7 @@ public class KnownDeviceManager {
 
             @Override
             public void no () {
-                Dialogs.showOKDialog(UI.stage, "Neue Abgebrochen", "Verbindung nicht hinzugefügt");
+                Dialogs.showOKDialog(UI.stage, "Abgebrochen", "Verbindung nicht hinzugefügt");
             }
 
 

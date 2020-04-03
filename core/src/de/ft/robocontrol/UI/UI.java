@@ -2,6 +2,7 @@ package de.ft.robocontrol.UI;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -9,11 +10,13 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.widget.MenuBar;
 import com.kotcrab.vis.ui.widget.MenuItem;
+import de.ft.robocontrol.Button.Button;
 import de.ft.robocontrol.MainGame;
 import de.ft.robocontrol.Settings;
 import de.ft.robocontrol.Var;
 import de.ft.robocontrol.data.programm.Data;
 import de.ft.robocontrol.data.user.changes.SaveChanges;
+import de.ft.robocontrol.roboconnection.UIbridge;
 import de.ft.robocontrol.utils.RoundRectangle;
 
 import java.io.File;
@@ -34,6 +37,8 @@ public class UI {
     protected static MenuItem paste;
     protected static MenuBar menuBar;
     protected static SettingsUI set;
+    public static Texture img_button_verbindungadd;
+
     private static Vector2 lastframecamposition = new Vector2(MainGame.cam.position.x, MainGame.cam.position.y);
 
     public static void initdragui() {
@@ -42,7 +47,9 @@ public class UI {
 
 
     public static void updatedragui(ShapeRenderer renderer, boolean flaeche) {
+
         renderer.begin(ShapeRenderer.ShapeType.Filled);
+        img_button_verbindungadd=new Texture("button_verbindunghinzufügen.png");
 
 
         if (Settings.darkmode) {
@@ -79,6 +86,18 @@ public class UI {
         }
         renderer.end();
 
+
+        Button testbutton = new Button(Gdx.graphics.getWidth() - unteneinteilung,untenhohe-30,30,30);
+        testbutton.setImage(img_button_verbindungadd);
+        testbutton.draw();
+        System.out.println("pressed "+testbutton.isPresseded());
+        if(testbutton.isPresseded()){
+            connectionWindow = new ConnectionWindow();
+
+            connectionWindow.show();
+            UIbridge.thread.start();
+        }
+
     }
 
     public static void init() {
@@ -98,9 +117,7 @@ public class UI {
         root.add().expand().fill().row();
 
 
-        connectionWindow = new ConnectionWindow();
 
-        connectionWindow.show();//TODO ist hier nicht geplant muss noch verschoben werden
 
         de.ft.robocontrol.UI.MenuBar.createMenus();
 
