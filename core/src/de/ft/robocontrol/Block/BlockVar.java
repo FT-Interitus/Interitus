@@ -15,7 +15,7 @@ public class BlockVar {
 
     public static Vector2 mousepressedold = new Vector2(1, 1);
 
-    public static Vector2 unterschiedsave;
+    public static Vector2 unterschiedsave = new Vector2();
 
     public static boolean ismoving = false;
 

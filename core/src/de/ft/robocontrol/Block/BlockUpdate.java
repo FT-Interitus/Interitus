@@ -16,10 +16,18 @@ public class BlockUpdate extends Thread {
     public boolean isrunning = true;
     public Timer time;
     boolean toggle;
+    Vector2 temp1;
+    Vector2 temp2;
+    Vector3 temp3;
+    Vector3 temp4;
 
     BlockUpdate(Block block) {
         this.block = block;
 
+        temp1 = new Vector2(0,0);
+        temp2 = new Vector2(0,0);
+        temp3 = new Vector3(0,0,0);
+        temp4 = new Vector3(0,0,0);
     }
 
     @Override
@@ -49,19 +57,18 @@ public class BlockUpdate extends Thread {
                         BlockVar.marked = true;
                         block.setMarked(true);
                         BlockVar.markedblock = block;
-                        BlockVar.unterschiedsave = new Vector2(MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x - block.getX(), MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y - block.getY());
+                        BlockVar.unterschiedsave.set(MainGame.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x - block.getX(), MainGame.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y - block.getY());
 
                     }
 
 
                     if (BlockVar.ismoving == false && !block.isMoving() && block.isMarked() && Gdx.input.isButtonPressed(0)) {
                         int feld = 2;
-                        if (Math.abs(BlockVar.mousepressedold.x - MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x) > feld || Math.abs(BlockVar.mousepressedold.y - MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y) > feld) {
+                        if (Math.abs(BlockVar.mousepressedold.x - MainGame.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x) > feld || Math.abs(BlockVar.mousepressedold.y - MainGame.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y) > feld) {
                             if (block.isMoving() == false && BlockVar.ismoving == false) {
-                                BlockVar.unterschiedsave = new Vector2(MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x - block.getX(), MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y - block.getY());
+                                BlockVar.unterschiedsave.set(MainGame.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x - block.getX(), MainGame.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y - block.getY());
 
-                                //block.setX(    (int)MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x );
-                                //System.out.println((int)MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x-block.getX());
+
                                 DataManager.change(block, false, false);
                                 block.setMoving(true);
                                 BlockVar.ismoving = true;
@@ -76,8 +83,8 @@ public class BlockUpdate extends Thread {
 
                     if (block.isMoving() && Gdx.input.isButtonPressed(0)) {
 
-                        block.setX((int) (MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x - BlockVar.unterschiedsave.x));
-                        block.setY((int) (MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y - BlockVar.unterschiedsave.y));
+                        block.setX((int) (MainGame.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x - BlockVar.unterschiedsave.x));
+                        block.setY((int) (MainGame.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y - BlockVar.unterschiedsave.y));
 
                         //Wenn der Mauszeiger die Ablagefläche berührt
                         // if(CheckKollision.checkmousewithobject(,Gdx.input.getY())) {
@@ -156,7 +163,7 @@ public class BlockUpdate extends Thread {
 
                             //System.out.println("flaeche   " + BlockVar.uberlapptmitmarkedblock.get(i).getBlockMarkedblockuberlappungsflache() + "i:   " + i);
                             if (BlockVar.uberlapptmitmarkedblock.get(i).getBlockMarkedblockuberlappungsflache() > biggestvalue2) {
-                                biggestvalue2 = BlockVar.uberlapptmitmarkedblock.get(i).getBlockMarkedblockuberlappungsflache();
+                                biggestvalue2 = BlockVar.uberlapptmitmarkedblock.get(i).getBlockMarkedblockuberlappungsflache(); //TODO h
                                 biggestindex2 = i;
                             }
                         }

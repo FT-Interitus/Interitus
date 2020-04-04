@@ -90,7 +90,7 @@ return check.isPressed(x,y,w,h);
 
     public void draw(){
         if(isVisible()) {
-            SpriteBatch batch = new SpriteBatch();
+            SpriteBatch batch = new SpriteBatch();  //TODO WICHTIG HIER MUSS DAS NEW WEG //SO WIE IM SWITCH DA GEHT ES AUCH
             BitmapFont font = new BitmapFont();
             if (image == null) {
                 ShapeRenderer s = new ShapeRenderer();

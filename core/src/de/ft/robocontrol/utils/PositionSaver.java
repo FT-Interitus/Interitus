@@ -7,9 +7,12 @@ import de.ft.robocontrol.Block.BlockVar;
 import de.ft.robocontrol.MainGame;
 
 public class PositionSaver {
+    Vector2 saver = new Vector2();
+    static Vector3 pos = new Vector3();
+    static Vector3 pos2 = new Vector3();
     public static void save() {
         if (Gdx.input.isButtonJustPressed(0)) {
-            BlockVar.mousepressedold = new Vector2(MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x, MainGame.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y);
+            BlockVar.mousepressedold.set(MainGame.viewport.unproject(pos.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, MainGame.viewport.unproject(pos2.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y);
         }
     }
 }
