@@ -164,7 +164,7 @@ s.setInside(inside);
                 BlockVar.blocks.add(new Block(BlockVar.blocks.size(), 100, 200, 150, 70));
                 DataManager.change(BlockVar.blocks.get(BlockVar.blocks.size() - 1), true, false);
             }
-          //  UI.updatedragui(shapeRenderer, true);
+          UI.updatedragui(shapeRenderer, true);
 
             if (!Var.isloading) {
                 Block Temp = null;
@@ -210,7 +210,7 @@ s.setInside(inside);
                 }
             }
 
-          //  UI.updatedragui(shapeRenderer, false);
+           UI.updatedragui(shapeRenderer, false);
             UI.update();
 			/*
 
