@@ -31,6 +31,7 @@ public class TextField {
         this.h=h;
         background=new Texture("TextFieldBackground.png");
         Backgroundactive=new Texture("TextFieldBackgroundActive.png");
+        curser=new Texture("curser.png");
 
         Gdx.input.setInputProcessor(new InputAdapter() {
 
