@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import de.ft.robocontrol.input.check.Check;
 
 import java.util.Random;
 
@@ -31,6 +32,7 @@ public class Switch {
     private int multiplikatorecht=3;
     private float[] farbehebel={1,1,1,1};
     private Vector2 mousesave=new Vector2();
+    private Check check=new Check();
     Texture background;
 
     SpriteBatch b=new SpriteBatch();
@@ -65,43 +67,23 @@ public class Switch {
 
 
     public boolean isMouseover(){
+        if(!disable) {
 
-            if (Gdx.input.getX() > x && Gdx.input.getX() < x + w && Gdx.input.getY() > Gdx.graphics.getHeight() - y - h && Gdx.input.getY() < Gdx.graphics.getHeight() - y) {
-                return true;
-            } else {
-                return false;
-            }
-
+            return check.isMouseover(x,y,w,h);
+        }else{
+            return false;
+        }
     }
 
     public boolean isjustPressed(){
         boolean pressed=false;
+        if(!disable) {
 
-if(!disable) {
-    if (Gdx.input.isButtonPressed(0)) {
-        if (Gdx.input.getX() > x && Gdx.input.getX() < x + w && Gdx.input.getY() > Gdx.graphics.getHeight() - y - h && Gdx.input.getY() < Gdx.graphics.getHeight() - y) {
-            if (touched == false) {
-                mousesave.set(Gdx.input.getX(), Gdx.input.getY());
-                touched = true;
-            }
+            pressed=check.isjustPressed(x,y,w,h);
+
+        }else{
+            return false;
         }
-
-    }
-    if (!Gdx.input.isButtonPressed(0) && Math.abs(Gdx.input.getX() - mousesave.x) < 1 && Math.abs(Gdx.input.getY() - mousesave.y) < 1 && touched) {
-
-        pressed = true;
-        touched = false;
-    } else {
-        pressed = false;
-    }
-    if (Math.abs(Gdx.input.getX() - mousesave.x) > 1 && Math.abs(Gdx.input.getY() - mousesave.y) > 1 && touched && !Gdx.input.isButtonPressed(0)) {
-        pressed = false;
-        touched = false;
-    }
-
-}else{
-    pressed=false;
-}
 
         return pressed;
 

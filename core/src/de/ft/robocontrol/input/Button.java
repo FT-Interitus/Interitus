@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
+import de.ft.robocontrol.input.check.Check;
 import de.ft.robocontrol.utils.RoundRectangle;
 
 public class Button {
@@ -15,10 +16,12 @@ public class Button {
     private int h;
     private String text;
     private Texture image=null;
-    private boolean touched;
+
     private boolean visible=true;
     private boolean disable=false;
-    private Vector2 mousesave=new Vector2();
+
+    private Check check=new Check();
+
 
 
 
@@ -47,26 +50,7 @@ public class Button {
         boolean pressed=false;
 if(!disable) {
 
-    if (Gdx.input.isButtonPressed(0)) {
-        if (Gdx.input.getX() > x && Gdx.input.getX() < x + w && Gdx.input.getY() > Gdx.graphics.getHeight() - y - h && Gdx.input.getY() < Gdx.graphics.getHeight() - y) {
-            if (touched == false) {
-                mousesave.set(Gdx.input.getX(), Gdx.input.getY());
-                touched = true;
-            }
-        }
-
-    }
-    if (!Gdx.input.isButtonPressed(0) && Math.abs(Gdx.input.getX() - mousesave.x) < 1 && Math.abs(Gdx.input.getY() - mousesave.y) < 1 && touched) {
-
-        pressed = true;
-        touched = false;
-    } else {
-        pressed = false;
-    }
-    if (Math.abs(Gdx.input.getX() - mousesave.x) > 1 && Math.abs(Gdx.input.getY() - mousesave.y) > 1 && touched && !Gdx.input.isButtonPressed(0)) {
-        pressed = false;
-        touched = false;
-    }
+pressed=check.isjustPressed(x,y,w,h);
 
 }else{
     return false;
@@ -80,11 +64,7 @@ if(!disable) {
     public boolean isPresseded(){
         if(!disable) {
 
-            if (Gdx.input.getX() > x && Gdx.input.getX() < x + w && Gdx.input.getY() > Gdx.graphics.getHeight() - y - h && Gdx.input.getY() < Gdx.graphics.getHeight() - y && Gdx.input.isButtonPressed(0)) {
-                return true;
-            } else {
-                return false;
-            }
+return check.isPressed(x,y,w,h);
         }else{
             return false;
         }
@@ -94,11 +74,7 @@ if(!disable) {
     public boolean isMouseover(){
         if(!disable) {
 
-            if (Gdx.input.getX() > x && Gdx.input.getX() < x + w && Gdx.input.getY() > Gdx.graphics.getHeight() - y - h && Gdx.input.getY() < Gdx.graphics.getHeight() - y) {
-                return true;
-            } else {
-                return false;
-            }
+            return check.isMouseover(x,y,w,h);
         }else{
             return false;
         }

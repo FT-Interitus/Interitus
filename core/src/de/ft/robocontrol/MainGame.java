@@ -20,6 +20,7 @@ import de.ft.robocontrol.input.Switch;
 import de.ft.robocontrol.UI.UI;
 import de.ft.robocontrol.data.programm.Data;
 import de.ft.robocontrol.data.user.changes.DataManager;
+import de.ft.robocontrol.input.TextField;
 import de.ft.robocontrol.roboconnection.SerialConnection;
 import de.ft.robocontrol.roboconnection.UIbridge;
 import de.ft.robocontrol.utils.PositionSaver;
@@ -44,6 +45,8 @@ public class MainGame extends ApplicationAdapter {
 
    public static BitmapFont font;
     public static Switch s;
+    public static TextField textfieldtest;
+
     Texture background;
     Texture inside;
     Texture Backgroundgreen;
@@ -65,6 +68,7 @@ public static Drawable d;
 
     @Override
     public void create() {
+        textfieldtest=new TextField(500,600,100,25);
         ia=new IntegerAuswahl(400,400,50,25);
         s=new Switch(500,500);
 font=  new BitmapFont();
@@ -257,8 +261,8 @@ s.setInside(inside);
         s.setSize(1f);
         s.setWackelstärke(1);
         s.draw();
-        ia.setDisable(true);
         ia.draw();
+        textfieldtest.draw();
 
 
 
