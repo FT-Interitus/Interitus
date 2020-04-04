@@ -113,6 +113,7 @@ public class Switch {
     }
 
     public void draw(){
+
         update();
 
 
@@ -132,6 +133,7 @@ public class Switch {
 
 if(visible) {
     b.begin();
+    b.setColor(1,1,1,1);
     b.draw(background, x, y, w, h);
     b.draw(inside, x + multiplikator + switchpos, y + multiplikator, dm, dm);
     b.end();
