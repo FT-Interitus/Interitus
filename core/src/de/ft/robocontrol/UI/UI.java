@@ -43,10 +43,6 @@ public class UI {
 
     private static Vector2 lastframecamposition = new Vector2(MainGame.cam.position.x, MainGame.cam.position.y);
 
-    public static void initdragui() {
-
-    }
-
 
     public static void updatedragui(ShapeRenderer renderer, boolean flaeche) {
 
@@ -80,7 +76,7 @@ public class UI {
             }
             RoundRectangle.abgerundetesRechteck(renderer, abstandvonRand, abstandvonRand, Var.w - abstandvonRand * 2 - unteneinteilung, untenhohe - abstandvonRand, radius);
             if (Settings.darkmode) {
-                renderer.setColor(new Color(0.2f, 0.2f, 0.2f, 1));
+                renderer.setColor(new Color(0.2f, 0.2f, 0.2f, 1)); //TODO auslagern
             } else {
                 renderer.setColor(new Color(1f, 1f, 1f, 1));
             }
