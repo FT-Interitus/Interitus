@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeType;
 import de.ft.robocontrol.UI.Devicemanagmenttab;
 import de.ft.robocontrol.input.check.Check;
 
@@ -32,8 +31,29 @@ public class TextField {
         this.h=h;
         background=new Texture("TextFieldBackground.png");
         Backgroundactive=new Texture("TextFieldBackgroundActive.png");
-        curser=new Texture("curser.png");
+
+        Gdx.input.setInputProcessor(new InputAdapter() {
+
+            @Override
+            public boolean keyTyped (char key) {
+                if(active) {
+
+                    if(input.length()<=begrenzung) {
+                        input = input + Character.toString(key);
+                    }
+                }
+                return true;
+            }
+
+            @Override
+            public boolean touchDown (int x, int y, int pointer, int button) {
+
+                return true;
+            }
+        });
+
     }
+
 
     private void active(){
         if(check.isjustPressed(x,y,w,h)){
