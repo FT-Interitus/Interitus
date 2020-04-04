@@ -1,10 +1,8 @@
-package de.ft.robocontrol.Button;
+package de.ft.robocontrol.input;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
-import javax.swing.*;
 
 public class IntegerAuswahl {
     private int x,y,w,h;

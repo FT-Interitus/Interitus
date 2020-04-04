@@ -1,14 +1,11 @@
-package de.ft.robocontrol.Button;
+package de.ft.robocontrol.input;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.sun.tools.javac.Main;
-import de.ft.robocontrol.MainGame;
 
 import java.util.Random;
-import java.util.concurrent.ThreadPoolExecutor;
 
 public class Switch {
     private int x;

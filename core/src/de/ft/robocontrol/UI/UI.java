@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.widget.MenuBar;
 import com.kotcrab.vis.ui.widget.MenuItem;
-import de.ft.robocontrol.Button.Button;
+import de.ft.robocontrol.input.Button;
 import de.ft.robocontrol.MainGame;
 import de.ft.robocontrol.Settings;
 import de.ft.robocontrol.Var;
@@ -21,7 +21,6 @@ import de.ft.robocontrol.utils.RoundRectangle;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
