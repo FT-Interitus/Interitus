@@ -31,6 +31,7 @@ public class Switch {
     private float size=1;
     private int multiplikator=3;
     private int multiplikatorecht=3;
+    private float[] farbehebel={1,1,1,1};
     SpriteBatch b=new SpriteBatch();
     Texture background;
     Texture inside;
@@ -133,8 +134,9 @@ public class Switch {
 
 if(visible) {
     b.begin();
-    b.setColor(1,1,1,1);
+    b.setColor(1,1,1-1*(switchpos),1);
     b.draw(background, x, y, w, h);
+    b.setColor(farbehebel[0],farbehebel[1],farbehebel[2],farbehebel[3]);
     b.draw(inside, x + multiplikator + switchpos, y + multiplikator, dm, dm);
     b.end();
 }
@@ -251,4 +253,13 @@ if(wackeln==true) {
     public float getSize() {
         return size;
     }
+
+
+    public void setHebelColor(float r,float g,float b,float a){
+        farbehebel[0]=r;
+        farbehebel[1]=g;
+        farbehebel[2]=b;
+        farbehebel[3]=a;
+    }
+
 }

@@ -1,0 +1,276 @@
+<html>
+<head>
+<title>Switch.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cc7832;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #6897bb;}
+.s3 { color: #6a8759;}
+.s4 { color: #808080;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Switch.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">de.ft.robocontrol.Button</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">com.badlogic.gdx.Gdx</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.badlogic.gdx.graphics.Texture</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.badlogic.gdx.graphics.g2d.SpriteBatch</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">com.sun.tools.javac.Main</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">de.ft.robocontrol.MainGame</span><span class="s0">;</span>
+
+<span class="s0">import </span><span class="s1">java.util.Random</span><span class="s0">;</span>
+<span class="s0">import </span><span class="s1">java.util.concurrent.ThreadPoolExecutor</span><span class="s0">;</span>
+
+<span class="s0">public class </span><span class="s1">Switch {</span>
+    <span class="s0">private int </span><span class="s1">x</span><span class="s0">;</span>
+    <span class="s0">private int </span><span class="s1">y</span><span class="s0">;</span>
+    <span class="s0">private int </span><span class="s1">w=</span><span class="s2">50</span><span class="s0">;</span>
+    <span class="s0">private int </span><span class="s1">h=</span><span class="s2">25</span><span class="s0">;</span>
+    <span class="s0">private int </span><span class="s1">wecht=</span><span class="s2">50</span><span class="s0">;</span>
+    <span class="s0">private int </span><span class="s1">hecht=</span><span class="s2">25</span><span class="s0">;</span>
+    <span class="s0">private int </span><span class="s1">xecht</span><span class="s0">;</span>
+    <span class="s0">private int </span><span class="s1">yecht</span><span class="s0">;</span>
+    <span class="s0">private boolean </span><span class="s1">state=</span><span class="s0">false;</span>
+    <span class="s0">private boolean </span><span class="s1">ismoving=</span><span class="s0">false;</span>
+    <span class="s0">private int </span><span class="s1">switchpos=</span><span class="s2">0</span><span class="s0">;</span>
+    <span class="s0">private int </span><span class="s1">dm=</span><span class="s2">19</span><span class="s0">;</span>
+    <span class="s0">private int </span><span class="s1">dmecht=</span><span class="s2">19</span><span class="s0">;</span>
+    <span class="s0">private boolean </span><span class="s1">wackeln=</span><span class="s0">true;</span>
+    <span class="s0">private boolean </span><span class="s1">visible=</span><span class="s0">true;</span>
+    <span class="s0">private boolean </span><span class="s1">disable=</span><span class="s0">false;</span>
+    <span class="s0">private int </span><span class="s1">wackelstärke=</span><span class="s2">1</span><span class="s0">;</span>
+    <span class="s0">private long </span><span class="s1">wwwave=</span><span class="s2">0</span><span class="s0">;</span>
+    <span class="s0">private float </span><span class="s1">size=</span><span class="s2">1</span><span class="s0">;</span>
+    <span class="s0">private int </span><span class="s1">multiplikator=</span><span class="s2">3</span><span class="s0">;</span>
+    <span class="s0">private int </span><span class="s1">multiplikatorecht=</span><span class="s2">3</span><span class="s0">;</span>
+    <span class="s1">SpriteBatch b=</span><span class="s0">new </span><span class="s1">SpriteBatch()</span><span class="s0">;</span>
+    <span class="s1">Texture background</span><span class="s0">;</span>
+    <span class="s1">Texture inside</span><span class="s0">;</span>
+
+    <span class="s0">private boolean </span><span class="s1">touched</span><span class="s0">;</span>
+    <span class="s1">Random random = </span><span class="s0">new </span><span class="s1">Random()</span><span class="s0">;</span>
+
+    <span class="s0">public </span><span class="s1">Switch(</span><span class="s0">int </span><span class="s1">x</span><span class="s0">,int </span><span class="s1">y){</span>
+        <span class="s0">this</span><span class="s1">.x=x</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.y=y</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.xecht=x</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.yecht=y</span><span class="s0">;</span>
+
+        <span class="s1">background=</span><span class="s0">new </span><span class="s1">Texture(</span><span class="s3">&quot;switchbackground.png&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">inside=</span><span class="s0">new </span><span class="s1">Texture(</span><span class="s3">&quot;switchinside.png&quot;</span><span class="s1">)</span><span class="s0">;</span>
+    <span class="s1">}</span>
+    <span class="s0">public </span><span class="s1">Switch(){</span>
+        <span class="s1">background=</span><span class="s0">new </span><span class="s1">Texture(</span><span class="s3">&quot;switchbackground.png&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s1">inside=</span><span class="s0">new </span><span class="s1">Texture(</span><span class="s3">&quot;switchinside.png&quot;</span><span class="s1">)</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.xecht=x</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.yecht=y</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setBounds(</span><span class="s0">int </span><span class="s1">x</span><span class="s0">,int </span><span class="s1">y){</span>
+        <span class="s0">this</span><span class="s1">.x=x</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.y=y</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.xecht=x</span><span class="s0">;</span>
+        <span class="s0">this</span><span class="s1">.yecht=y</span><span class="s0">;</span>
+
+    <span class="s1">}</span>
+
+
+    <span class="s0">public boolean </span><span class="s1">isMouseover(){</span>
+
+            <span class="s0">if </span><span class="s1">(Gdx.input.getX() &gt; x &amp;&amp; Gdx.input.getX() &lt; x + w &amp;&amp; Gdx.input.getY() &gt; Gdx.graphics.getHeight() - y - h &amp;&amp; Gdx.input.getY() &lt; Gdx.graphics.getHeight() - y) {</span>
+                <span class="s0">return true;</span>
+            <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+                <span class="s0">return false;</span>
+            <span class="s1">}</span>
+
+    <span class="s1">}</span>
+
+    <span class="s0">public boolean </span><span class="s1">isjustPressed(){</span>
+        <span class="s0">boolean </span><span class="s1">pressed=</span><span class="s0">false;</span>
+
+            <span class="s1">System.out.println(touched)</span><span class="s0">;</span>
+            <span class="s0">if </span><span class="s1">(Gdx.input.isButtonPressed(</span><span class="s2">0</span><span class="s1">)) {</span>
+                <span class="s0">if </span><span class="s1">(Gdx.input.getX() &gt; x &amp;&amp; Gdx.input.getX() &lt; x + w &amp;&amp; Gdx.input.getY() &gt; Gdx.graphics.getHeight() - y - h &amp;&amp; Gdx.input.getY() &lt; Gdx.graphics.getHeight() - y) {</span>
+                    <span class="s0">if </span><span class="s1">(touched == </span><span class="s0">false</span><span class="s1">) {</span>
+                        <span class="s1">touched = </span><span class="s0">true;</span>
+                    <span class="s1">}</span>
+                <span class="s1">}</span>
+
+            <span class="s1">}</span>
+            <span class="s0">if </span><span class="s1">(!Gdx.input.isButtonPressed(</span><span class="s2">0</span><span class="s1">) &amp;&amp; touched) {</span>
+
+                <span class="s1">pressed = </span><span class="s0">true;</span>
+                <span class="s1">touched = </span><span class="s0">false;</span>
+            <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+                <span class="s1">pressed = </span><span class="s0">false;</span>
+            <span class="s1">}</span>
+
+
+        <span class="s0">return </span><span class="s1">pressed</span><span class="s0">;</span>
+
+    <span class="s1">}</span>
+
+    <span class="s0">private void </span><span class="s1">update(){</span>
+        <span class="s0">if</span><span class="s1">(isjustPressed()){</span>
+            <span class="s0">if</span><span class="s1">(disable==</span><span class="s0">false</span><span class="s1">) {</span>
+                <span class="s0">if </span><span class="s1">(state) {</span>
+                    <span class="s1">state = </span><span class="s0">false;</span>
+                <span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+                    <span class="s1">state = </span><span class="s0">true;</span>
+                <span class="s1">}</span>
+            <span class="s1">}</span><span class="s0">else</span><span class="s1">{</span>
+                <span class="s1">wwwave=System.currentTimeMillis()+</span><span class="s2">500</span><span class="s0">;</span>
+            <span class="s1">}</span>
+        <span class="s1">}</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">draw(){</span>
+
+        <span class="s1">update()</span><span class="s0">;</span>
+
+
+            <span class="s0">if</span><span class="s1">(System.currentTimeMillis()&lt;wwwave){</span>
+                <span class="s1">x = xecht + (wackelstärke*-</span><span class="s2">1 </span><span class="s1">+ random.nextInt(wackelstärke*</span><span class="s2">3</span><span class="s1">))</span><span class="s0">;</span>
+                <span class="s1">y = yecht + (wackelstärke*-</span><span class="s2">1 </span><span class="s1">+ random.nextInt(wackelstärke*</span><span class="s2">3</span><span class="s1">))</span><span class="s0">;</span>
+            <span class="s1">}</span><span class="s0">else</span><span class="s1">{</span>
+                <span class="s0">if</span><span class="s1">(wwwave!=</span><span class="s2">0</span><span class="s1">) {</span>
+                    <span class="s1">x = xecht</span><span class="s0">;</span>
+                    <span class="s1">y = yecht</span><span class="s0">;</span>
+                <span class="s1">wwwave=</span><span class="s2">0</span><span class="s0">;</span>
+                <span class="s1">}</span>
+
+            <span class="s1">}</span>
+
+
+
+<span class="s0">if</span><span class="s1">(visible) {</span>
+    <span class="s1">b.begin()</span><span class="s0">;</span>
+    <span class="s1">b.setColor(</span><span class="s2">1</span><span class="s0">,</span><span class="s2">1</span><span class="s0">,</span><span class="s2">1</span><span class="s1">-</span><span class="s2">1</span><span class="s1">*(switchpos)</span><span class="s0">,</span><span class="s2">1</span><span class="s1">)</span><span class="s0">;</span>
+    <span class="s1">b.draw(background</span><span class="s0">, </span><span class="s1">x</span><span class="s0">, </span><span class="s1">y</span><span class="s0">, </span><span class="s1">w</span><span class="s0">, </span><span class="s1">h)</span><span class="s0">;</span>
+    <span class="s1">b.setColor(</span><span class="s2">1</span><span class="s0">,</span><span class="s2">1</span><span class="s0">,</span><span class="s2">1</span><span class="s0">,</span><span class="s2">1</span><span class="s1">)</span><span class="s0">;</span>
+    <span class="s1">b.draw(inside</span><span class="s0">, </span><span class="s1">x + multiplikator + switchpos</span><span class="s0">, </span><span class="s1">y + multiplikator</span><span class="s0">, </span><span class="s1">dm</span><span class="s0">, </span><span class="s1">dm)</span><span class="s0">;</span>
+    <span class="s1">b.end()</span><span class="s0">;</span>
+<span class="s1">}</span>
+
+        <span class="s0">if</span><span class="s1">(state==</span><span class="s0">false </span><span class="s1">&amp;&amp; switchpos &gt;=</span><span class="s2">0</span><span class="s1">){</span>
+            <span class="s1">switchpos=switchpos-</span><span class="s2">1</span><span class="s0">;</span>
+            <span class="s1">ismoving=</span><span class="s0">true;</span>
+        <span class="s1">}</span><span class="s0">else if</span><span class="s1">(state==</span><span class="s0">true </span><span class="s1">&amp;&amp; switchpos &lt;= w-dm-multiplikator-multiplikator){</span>
+            <span class="s1">switchpos=switchpos+</span><span class="s2">1</span><span class="s0">;</span>
+            <span class="s1">ismoving=</span><span class="s0">true;</span>
+        <span class="s1">}</span><span class="s0">else</span><span class="s1">{</span>
+            <span class="s1">ismoving=</span><span class="s0">false;</span>
+        <span class="s1">}</span>
+<span class="s1">System.out.println(switchpos)</span><span class="s0">;</span>
+        <span class="s0">if</span><span class="s1">(ismoving==</span><span class="s0">true</span><span class="s1">){</span>
+
+            <span class="s4">//x=x+(-1+random.nextInt(3));</span>
+           <span class="s4">// y=y+(-1+random.nextInt(3));</span>
+
+<span class="s0">if</span><span class="s1">(wackeln==</span><span class="s0">true</span><span class="s1">) {</span>
+    <span class="s1">x = xecht + (wackelstärke*-</span><span class="s2">1 </span><span class="s1">+ random.nextInt(wackelstärke*</span><span class="s2">3</span><span class="s1">))</span><span class="s0">;</span>
+    <span class="s1">y = yecht + (wackelstärke*-</span><span class="s2">1 </span><span class="s1">+ random.nextInt(wackelstärke*</span><span class="s2">3</span><span class="s1">))</span><span class="s0">;</span>
+<span class="s1">}</span>
+
+        <span class="s1">}</span><span class="s0">else</span><span class="s1">{</span>
+            <span class="s1">x=xecht</span><span class="s0">;</span>
+            <span class="s1">y=yecht</span><span class="s0">;</span>
+
+        <span class="s1">}</span>
+
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setY(</span><span class="s0">int </span><span class="s1">y) {</span>
+        <span class="s0">this</span><span class="s1">.y = y</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setX(</span><span class="s0">int </span><span class="s1">x) {</span>
+        <span class="s0">this</span><span class="s1">.x = x</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setState(</span><span class="s0">boolean </span><span class="s1">state) {</span>
+        <span class="s0">this</span><span class="s1">.state = state</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setWackeln(</span><span class="s0">boolean </span><span class="s1">wackeln) {</span>
+        <span class="s0">this</span><span class="s1">.wackeln = wackeln</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public int </span><span class="s1">getW() {</span>
+        <span class="s0">return </span><span class="s1">w</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public int </span><span class="s1">getH() {</span>
+        <span class="s0">return </span><span class="s1">h</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public int </span><span class="s1">getY() {</span>
+        <span class="s0">return </span><span class="s1">y</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public int </span><span class="s1">getX() {</span>
+        <span class="s0">return </span><span class="s1">x</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public int </span><span class="s1">getXecht() {</span>
+        <span class="s0">return </span><span class="s1">xecht</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public int </span><span class="s1">getYecht() {</span>
+        <span class="s0">return </span><span class="s1">yecht</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public boolean </span><span class="s1">isIsmoving() {</span>
+        <span class="s0">return </span><span class="s1">ismoving</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public boolean </span><span class="s1">isWackeln() {</span>
+        <span class="s0">return </span><span class="s1">wackeln</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public boolean </span><span class="s1">isVisible() {</span>
+        <span class="s0">return </span><span class="s1">visible</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setVisible(</span><span class="s0">boolean </span><span class="s1">visible) {</span>
+        <span class="s0">this</span><span class="s1">.visible = visible</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setWackelstärke(</span><span class="s0">int </span><span class="s1">wackelstärke) {</span>
+        <span class="s0">this</span><span class="s1">.wackelstärke = wackelstärke</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public int </span><span class="s1">getWackelstärke() {</span>
+        <span class="s0">return </span><span class="s1">wackelstärke</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public boolean </span><span class="s1">isDisable() {</span>
+        <span class="s0">return </span><span class="s1">disable</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setDisable(</span><span class="s0">boolean </span><span class="s1">disable) {</span>
+        <span class="s0">this</span><span class="s1">.disable = disable</span><span class="s0">;</span>
+    <span class="s1">}</span>
+
+    <span class="s0">public void </span><span class="s1">setSize(</span><span class="s0">float </span><span class="s1">size) {</span>
+        <span class="s0">this</span><span class="s1">.size = size</span><span class="s0">;</span>
+        <span class="s1">w=(</span><span class="s0">int</span><span class="s1">)(wecht*size)</span><span class="s0">;</span>
+        <span class="s1">h=(</span><span class="s0">int</span><span class="s1">)(hecht*size)</span><span class="s0">;</span>
+        <span class="s1">dm=(</span><span class="s0">int</span><span class="s1">)(dmecht*size)</span><span class="s0">;</span>
+        <span class="s1">multiplikator=(</span><span class="s0">int</span><span class="s1">)(multiplikatorecht*size)</span><span class="s0">;</span>
+
+    <span class="s1">}</span>
+
+    <span class="s0">public float </span><span class="s1">getSize() {</span>
+        <span class="s0">return </span><span class="s1">size</span><span class="s0">;</span>
+    <span class="s1">}</span>
+<span class="s1">}</span>
+</pre>
+</body>
+</html>
