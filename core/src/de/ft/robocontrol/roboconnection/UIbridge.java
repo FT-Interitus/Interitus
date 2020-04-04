@@ -103,17 +103,32 @@ public class UIbridge {
 
                         if(!setup) {
                             ConnectionWindow.error.setText("Wird gebrannt...");
+                            ConnectionWindow.devicemanagebutton.setDisabled(true);
+                            ConnectionWindow.selectportlist.setDisabled(true);
+                            ConnectionWindow.selectboardlist.setDisabled(true);
+                            ConnectionWindow.neuladen_button.setDisabled(true);
+
+                            final String[] getrennt = ConnectionWindow.selectportlist.getSelected().split(" ");
+
+                           Thread burningThread = new Thread() {
+                               @Override
+                               public void run() {
+                                   if (selectedboard.contains("MEGA")) {
+                                       BurnProgramm.burn(Arduino.MEGA, getrennt[0], "sketch_mega.hex");
+                                   }
+
+                                   if (selectedboard.contains("UNO")) {
+                                       BurnProgramm.burn(Arduino.UNO, getrennt[0], "sketch_uno.hex");
+                                   }
+                               }
+                           };
+
+                           burningThread.start();
 
 
-                            String[] getrennt = ConnectionWindow.selectportlist.getSelected().split(" ");
 
-                            if (selectedboard.contains("MEGA")) {
-                                BurnProgramm.burn(Arduino.MEGA, getrennt[0], "sketch_mega.hex");
-                            }
 
-                            if (selectedboard.contains("UNO")) {
-                                BurnProgramm.burn(Arduino.UNO, getrennt[0], "sketch_uno.hex");
-                            }
+
                         }else{
                             VerbindungsSpeicher.verbundungen.add(new VerbindungsSpeicher("Neue Verbindung"));
                             KnownDeviceManager.addnewdevice();

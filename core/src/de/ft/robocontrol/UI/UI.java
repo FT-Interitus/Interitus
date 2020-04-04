@@ -21,6 +21,7 @@ import de.ft.robocontrol.utils.RoundRectangle;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -38,6 +39,7 @@ public class UI {
     protected static MenuBar menuBar;
     protected static SettingsUI set;
     public static Texture img_button_verbindungadd;
+    public static Texture img_button_verbindungadd_white;
     protected static Button testbutton = new Button();
 
     private static Vector2 lastframecamposition = new Vector2(MainGame.cam.position.x, MainGame.cam.position.y);
@@ -51,7 +53,7 @@ public class UI {
 
         renderer.begin(ShapeRenderer.ShapeType.Filled);
         img_button_verbindungadd=new Texture("button_verbindunghinzufügen.png");
-
+        img_button_verbindungadd_white=new Texture("button_verbindunghinzufügen_white.png");
 
         if (Settings.darkmode) {
             renderer.setColor(new Color(0.15f, 0.15f, 0.15f, 1));
@@ -89,7 +91,11 @@ public class UI {
 
 
         testbutton.setBounds(Gdx.graphics.getWidth() - unteneinteilung+5,untenhohe-30-5,30,30);
-        testbutton.setImage(img_button_verbindungadd);
+        if(Settings.darkmode) {
+            testbutton.setImage(img_button_verbindungadd);
+        }else {
+            testbutton.setImage(img_button_verbindungadd_white);
+        }
         testbutton.draw();
         testbutton.setVisible(true);
         if(Var.isdialogeopend) {
@@ -102,6 +108,9 @@ public class UI {
             connectionWindow = new ConnectionWindow();
 
             connectionWindow.show();
+            if(!UIbridge.thread.isAlive()) {
+
+            }
             UIbridge.thread.start();
         }
 

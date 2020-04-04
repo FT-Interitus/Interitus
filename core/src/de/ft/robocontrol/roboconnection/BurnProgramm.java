@@ -193,6 +193,11 @@ public class BurnProgramm {
                 ConnectionWindow.error.setText("Keine Berechtigung starte den PC neu.");
             }
         }
+        ConnectionWindow.devicemanagebutton.setDisabled(false);
+        ConnectionWindow.selectportlist.setDisabled(false);
+        ConnectionWindow.selectboardlist.setDisabled(false);
+        ConnectionWindow.neuladen_button.setDisabled(false);
+
 
         ConnectionWindow.update();
 

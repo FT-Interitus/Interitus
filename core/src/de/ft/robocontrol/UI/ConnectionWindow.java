@@ -66,7 +66,9 @@ public static VisTextButton devicemanagebutton = new VisTextButton("Software bre
 
 
     public void show() {
-        testBuilder = new connectionbuilder("Verbindungen", new StandardTableBuilder(padding));
+        if(testBuilder==null) {
+            testBuilder = new connectionbuilder("Verbindungen", new StandardTableBuilder(padding));
+        }
         UI.stage.addActor(testBuilder);
     }
 
