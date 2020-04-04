@@ -103,21 +103,6 @@ public class Switch {
                 pressed=false;
                 touched=false;
             }
-            if( Gdx.input.getX()!=mousesave.x && Gdx.input.getY()!=mousesave.y && Gdx.input.isButtonPressed(0)   && touched ){
-                System.out.println("pipipipipipkakakakakakakipipipipipi");
-                switchpos=(int)(Gdx.input.getX()-mousesave.x);
-                if(switchpos<=0){
-                    switchpos=0;
-                }
-                if(switchpos>=w-dm-multiplikator-multiplikator){
-                    switchpos=w-dm-multiplikator-multiplikator;
-                }
-            }
-            if(switchpos>13){
-                state=true;
-            }else{
-                state=false;
-            }
 
 
 
@@ -160,6 +145,7 @@ public class Switch {
 
 if(visible) {
     b.begin();
+System.out.println("piasdf  "+(1f/26f)*(float)switchpos);
     b.setColor(1,1,1,1-(1f/26f)*(float)switchpos);
     b.draw(background, x, y, w, h);
     b.setColor(1,1,1,(1f/26f)*(float)switchpos);
