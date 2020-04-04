@@ -45,30 +45,32 @@ public class Button {
 
     public boolean isjustPressed(){
         boolean pressed=false;
+if(!disable) {
 
-
-        if (Gdx.input.isButtonPressed(0)) {
-            if (Gdx.input.getX() > x && Gdx.input.getX() < x + w && Gdx.input.getY() > Gdx.graphics.getHeight() - y - h && Gdx.input.getY() < Gdx.graphics.getHeight() - y) {
-                if (touched == false) {
-                    mousesave.set(Gdx.input.getX(),Gdx.input.getY());
-                    touched = true;
-                }
+    if (Gdx.input.isButtonPressed(0)) {
+        if (Gdx.input.getX() > x && Gdx.input.getX() < x + w && Gdx.input.getY() > Gdx.graphics.getHeight() - y - h && Gdx.input.getY() < Gdx.graphics.getHeight() - y) {
+            if (touched == false) {
+                mousesave.set(Gdx.input.getX(), Gdx.input.getY());
+                touched = true;
             }
-
-        }
-        if (!Gdx.input.isButtonPressed(0) && Math.abs(Gdx.input.getX()-mousesave.x)<1 && Math.abs(Gdx.input.getY()-mousesave.y)<1 && touched) {
-
-            pressed = true;
-            touched = false;
-        } else {
-            pressed = false;
-        }
-        if( Math.abs(Gdx.input.getX()-mousesave.x)>1 && Math.abs(Gdx.input.getY()-mousesave.y)>1 && touched && !Gdx.input.isButtonPressed(0) ){
-            pressed=false;
-            touched=false;
         }
 
+    }
+    if (!Gdx.input.isButtonPressed(0) && Math.abs(Gdx.input.getX() - mousesave.x) < 1 && Math.abs(Gdx.input.getY() - mousesave.y) < 1 && touched) {
 
+        pressed = true;
+        touched = false;
+    } else {
+        pressed = false;
+    }
+    if (Math.abs(Gdx.input.getX() - mousesave.x) > 1 && Math.abs(Gdx.input.getY() - mousesave.y) > 1 && touched && !Gdx.input.isButtonPressed(0)) {
+        pressed = false;
+        touched = false;
+    }
+
+}else{
+    return false;
+}
 
         return pressed;
 

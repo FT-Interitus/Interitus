@@ -257,6 +257,7 @@ s.setInside(inside);
         s.setSize(1f);
         s.setWackelstärke(1);
         s.draw();
+        ia.setDisable(true);
         ia.draw();
 
 

@@ -17,6 +17,8 @@ public class IntegerAuswahl {
     private int value=0;
     private int grenzel=-999;
     private int grenzer=999;
+    private boolean visible=true;
+    private boolean disable=false;
 
     public IntegerAuswahl(int x, int y, int w, int h){
         this.x=x;
@@ -61,16 +63,16 @@ if(buttonposition==0) {
 }
     buttonOben.setImage(ButtonObenImage);
     buttonUnten.setImage(ButtonUntenImage);
-
-        b.begin();
-        b.draw(Textfeldmitte,x,y,w,h);
-        b.end();
-        buttonOben.draw();
-        buttonUnten.draw();
-        b.begin();
-        font.draw(b,""+value,x+5,y+font.getLineHeight());
-        b.end();
-
+if(visible) {
+    b.begin();
+    b.draw(Textfeldmitte, x, y, w, h);
+    b.end();
+    buttonOben.draw();
+    buttonUnten.draw();
+    b.begin();
+    font.draw(b, "" + value, x + 5, y + font.getLineHeight());
+    b.end();
+}
     }
 
     public void setGrenzen(int l,int r){
@@ -101,5 +103,24 @@ if(buttonposition==0) {
 
     public void setButtonposition(int buttonposition) {
         this.buttonposition = buttonposition;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
+
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setDisable(boolean disable) {
+        this.disable = disable;
+            buttonOben.setDisable(disable);
+            buttonUnten.setDisable(disable);
+
+    }
+
+    public boolean isDisable() {
+        return disable;
     }
 }
