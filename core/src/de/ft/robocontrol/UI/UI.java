@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.kotcrab.vis.ui.VisUI;
@@ -40,6 +41,7 @@ public class UI {
     public static Texture img_button_verbindungadd;
     public static Texture img_button_verbindungadd_white;
     protected static Button testbutton = new Button();
+    Vector3 pos = new Vector3();
 
     private static Vector2 lastframecamposition = new Vector2(MainGame.cam.position.x, MainGame.cam.position.y);
 
@@ -47,13 +49,11 @@ public class UI {
     public static void updatedragui(ShapeRenderer renderer, boolean flaeche) {
 
         renderer.begin(ShapeRenderer.ShapeType.Filled);
-        img_button_verbindungadd=new Texture("button_verbindunghinzufügen.png");
-        img_button_verbindungadd_white=new Texture("button_verbindunghinzufügen_white.png");
 
         if (Settings.darkmode) {
-            renderer.setColor(new Color(0.15f, 0.15f, 0.15f, 1));
+            renderer.setColor(Colors.darkmode_middle);
         } else {
-            renderer.setColor(new Color(1f, 1f, 1f, 1));
+            renderer.setColor(Colors.whitearea);
         }
 
 
@@ -70,15 +70,16 @@ public class UI {
             RoundRectangle.abgerundetesRechteck(renderer, abstandvonRand, untenhohe + abstandvonRand, Var.w - abstandvonRand * 2, Var.h - untenhohe + abstandvonRand - 45 - abstandvonRand, radius);
         } else {
             if (Settings.darkmode) {
-                renderer.setColor(new Color(0.2f, 0.1f, 0.1f, 1));
+                renderer.setColor(Colors.darkmode_blockbar);
+
             } else {
-                renderer.setColor(new Color(1f, 1f, 1f, 1));
+                renderer.setColor(Colors.whitearea);
             }
             RoundRectangle.abgerundetesRechteck(renderer, abstandvonRand, abstandvonRand, Var.w - abstandvonRand * 2 - unteneinteilung, untenhohe - abstandvonRand, radius);
             if (Settings.darkmode) {
-                renderer.setColor(new Color(0.2f, 0.2f, 0.2f, 1)); //TODO auslagern
+                renderer.setColor(Colors.darkmode_connections);
             } else {
-                renderer.setColor(new Color(1f, 1f, 1f, 1));
+                renderer.setColor(Colors.whitearea);
             }
             RoundRectangle.abgerundetesRechteck(renderer, Var.w - unteneinteilung, abstandvonRand, unteneinteilung - abstandvonRand, untenhohe - abstandvonRand, radius);
         }
