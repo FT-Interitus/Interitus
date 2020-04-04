@@ -3,6 +3,7 @@ package de.ft.robocontrol.Button;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.sun.tools.javac.Main;
 import de.ft.robocontrol.MainGame;
 
@@ -32,6 +33,7 @@ public class Switch {
     private int multiplikator=3;
     private int multiplikatorecht=3;
     private float[] farbehebel={1,1,1,1};
+    private Vector2 mousesave=new Vector2();
     SpriteBatch b=new SpriteBatch();
     Texture background;
     Texture inside;
@@ -84,18 +86,24 @@ public class Switch {
             if (Gdx.input.isButtonPressed(0)) {
                 if (Gdx.input.getX() > x && Gdx.input.getX() < x + w && Gdx.input.getY() > Gdx.graphics.getHeight() - y - h && Gdx.input.getY() < Gdx.graphics.getHeight() - y) {
                     if (touched == false) {
+                        mousesave.set(Gdx.input.getX(),Gdx.input.getY());
                         touched = true;
                     }
                 }
 
             }
-            if (!Gdx.input.isButtonPressed(0) && touched) {
+            if (!Gdx.input.isButtonPressed(0) && Math.abs(Gdx.input.getX()-mousesave.x)<1 && Math.abs(Gdx.input.getY()-mousesave.y)<1 && touched) {
 
                 pressed = true;
                 touched = false;
             } else {
                 pressed = false;
             }
+            if( Math.abs(Gdx.input.getX()-mousesave.x)>1 && Math.abs(Gdx.input.getY()-mousesave.y)>1 && touched && !Gdx.input.isButtonPressed(0) ){
+                pressed=false;
+                touched=false;
+            }
+
 
 
         return pressed;
