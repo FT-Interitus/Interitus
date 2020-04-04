@@ -282,7 +282,7 @@ if(wackeln==true) {
     }
 
     public void setBackgroundgreen(Texture backgroundgreen) {
-        Backgroundgreen = backgroundgreen;
+        this.Backgroundgreen = backgroundgreen;
     }
 
     public void setInside(Texture inside) {
