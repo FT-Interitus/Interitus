@@ -19,50 +19,55 @@ public class LoadSave {
             @Override
             public void run() {
 
-
-                JFileChooser fileChooser = new JFileChooser();
-                fileChooser.setDialogTitle("Speichern unter...");
-                fileChooser.setFileFilter(new FileNameExtensionFilter("Projektdatei (.rac)", "rac"));
-
-                int userSelection = fileChooser.showSaveDialog(saver);
-                fileChooser.setMultiSelectionEnabled(false);
+                try {
 
 
-                if (userSelection == JFileChooser.APPROVE_OPTION) {
-                    File fileToSave = fileChooser.getSelectedFile();
-                   MainGame.logger.fine("Save as file: " + fileToSave.getName());
+                    JFileChooser fileChooser = new JFileChooser();
+                    fileChooser.setDialogTitle("Speichern unter...");
+                    fileChooser.setFileFilter(new FileNameExtensionFilter("Projektdatei (.rac)", "rac"));
+
+                    int userSelection = fileChooser.showSaveDialog(saver);
+                    fileChooser.setMultiSelectionEnabled(false);
 
 
-                    if (fileToSave.getAbsolutePath().contains(".rac")) {
-                        DataManager.path = fileToSave.getAbsolutePath();
-                        DataSaver.save(Gdx.files.absolute(fileToSave.getAbsolutePath()));
-                        DataManager.filename = fileToSave.getName();
+                    if (userSelection == JFileChooser.APPROVE_OPTION) {
+                        File fileToSave = fileChooser.getSelectedFile();
+                        MainGame.logger.fine("Save as file: " + fileToSave.getName());
 
-                    } else {
-                        DataManager.path = fileToSave.getAbsolutePath() + ".rac";
-                        DataSaver.save(Gdx.files.absolute(fileToSave.getAbsolutePath() + ".rac"));
-                        DataManager.filename = fileToSave.getName() + ".rac";
+
+                        if (fileToSave.getAbsolutePath().contains(".rac")) {
+                            DataManager.path = fileToSave.getAbsolutePath();
+                            DataSaver.save(Gdx.files.absolute(fileToSave.getAbsolutePath()));
+                            DataManager.filename = fileToSave.getName();
+
+                        } else {
+                            DataManager.path = fileToSave.getAbsolutePath() + ".rac";
+                            DataSaver.save(Gdx.files.absolute(fileToSave.getAbsolutePath() + ".rac"));
+                            DataManager.filename = fileToSave.getName() + ".rac";
+                        }
+                        MainGame.logger.fine(DataManager.path);
+
+                        if (Data.filename.size() > 9) {
+                            Data.filename.remove(0);
+
+                        }
+
+                        if (Data.filename.indexOf(fileToSave.getName()) > -1) {
+                            int temp = Data.filename.indexOf(fileToSave.getName());
+                            Data.filename.remove(temp);
+                            Data.path.remove(temp);
+                        }
+
+
+                        Data.filename.add(fileToSave.getName());
+                        Data.path.add(fileToSave.getAbsolutePath());
+
+                        DataManager.saved();
+
+
                     }
-                    MainGame.logger.fine(DataManager.path);
-
-                    if (Data.filename.size() > 9) {
-                        Data.filename.remove(0);
-
-                    }
-
-                    if (Data.filename.indexOf(fileToSave.getName()) > -1) {
-                        int temp = Data.filename.indexOf(fileToSave.getName());
-                        Data.filename.remove(temp);
-                        Data.path.remove(temp);
-                    }
-
-
-                    Data.filename.add(fileToSave.getName());
-                    Data.path.add(fileToSave.getAbsolutePath());
-
-                    DataManager.saved();
-
-
+                }catch (Exception e) {
+                    e.printStackTrace();//for debug to find errors
                 }
             }
 

@@ -34,13 +34,15 @@ public class Switch {
     private int multiplikatorecht=3;
     private float[] farbehebel={1,1,1,1};
     private Vector2 mousesave=new Vector2();
-    SpriteBatch b=new SpriteBatch();
     Texture background;
-    Texture inside;
-    Texture Backgroundgreen;
+
+    SpriteBatch b=new SpriteBatch();
+
 
     private boolean touched;
     Random random = new Random();
+    private Texture Backgroundgreen;
+    private Texture inside;
 
     public Switch(int x,int y){
         this.x=x;
@@ -48,14 +50,10 @@ public class Switch {
         this.xecht=x;
         this.yecht=y;
 
-        background=new Texture("switchbackground.png");
-        inside=new Texture("switchinside.png");
-        Backgroundgreen=new Texture("switchbackgroundgreen.png");
+
     }
     public Switch(){
-        background=new Texture("switchbackground.png");
-        inside=new Texture("switchinside.png");
-        Backgroundgreen=new Texture("switchbackgroundgreen.png");
+
         this.xecht=x;
         this.yecht=y;
     }
@@ -82,7 +80,7 @@ public class Switch {
     public boolean isjustPressed(){
         boolean pressed=false;
 
-            System.out.println(touched);
+
             if (Gdx.input.isButtonPressed(0)) {
                 if (Gdx.input.getX() > x && Gdx.input.getX() < x + w && Gdx.input.getY() > Gdx.graphics.getHeight() - y - h && Gdx.input.getY() < Gdx.graphics.getHeight() - y) {
                     if (touched == false) {
@@ -145,7 +143,8 @@ public class Switch {
 
 if(visible) {
     b.begin();
-System.out.println("piasdf  "+(1f/26f)*(float)switchpos);
+
+
     b.setColor(1,1,1,1-(1f/26f)*(float)switchpos);
     b.draw(background, x, y, w, h);
     b.setColor(1,1,1,(1f/26f)*(float)switchpos);
@@ -165,7 +164,8 @@ System.out.println("piasdf  "+(1f/26f)*(float)switchpos);
         }else{
             ismoving=false;
         }
-System.out.println(switchpos);
+
+
         if(ismoving==true){
 
             //x=x+(-1+random.nextInt(3));

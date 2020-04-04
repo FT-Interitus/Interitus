@@ -26,24 +26,28 @@ public class ClearActOpenProgramm {
             @Override
             public void run() {
 
-                blockstoclear.removeAll(BlockVar.visibleblocks);
-
-
                 try {
-                    while (blockstoclear.size() != 0) {
-                        blockstoclear.get(0).delete(true);
-                        blockstoclear.remove(0);
-                       MainGame.logger.finer(String.valueOf(blockstoclear.size()));
 
+                    blockstoclear.removeAll(BlockVar.visibleblocks);
+
+
+                    try {
+                        while (blockstoclear.size() != 0) {
+                            blockstoclear.get(0).delete(true);
+                            blockstoclear.remove(0);
+                            MainGame.logger.finer(String.valueOf(blockstoclear.size()));
+
+                        }
+                        Var.isclearing = false;
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        System.exit(-1);
                     }
-                    Var.isclearing = false;
 
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    System.exit(-1);
+                }catch (Exception e) {
+                    e.printStackTrace(); //for debug to find errors
                 }
-
-
             }
         };
 

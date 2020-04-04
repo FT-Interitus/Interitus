@@ -147,45 +147,48 @@ public class UI {
                     @Override
                     public void run() {
 
+                        try {
 
-                        ////////////recent//////////////////////////
+                            ////////////recent//////////////////////////
 
 
-                        for (int i = 0; i < Data.path.size(); i++) {
-                            if (!(new File(Data.path.get(i)).exists())) {
-                                Data.path.remove(i);
-                                Data.filename.remove(i);
+                            for (int i = 0; i < Data.path.size(); i++) {
+                                if (!(new File(Data.path.get(i)).exists())) {
+                                    Data.path.remove(i);
+                                    Data.filename.remove(i);
+                                }
                             }
+
+                            if (Data.path.size() == 0) {
+                                recent.setDisabled(true);
+                            } else {
+                                recent.setDisabled(false);
+                            }
+
+
+                            ///////////////////////////////////
+
+
+                            /////////////revert//////////////
+
+                            if (SaveChanges.checkstack()) {
+                                revert.setDisabled(true);
+                            } else {
+                                revert.setDisabled(false);
+                            }
+
+                            ///////Redo//////////////
+
+
+                            if (SaveChanges.checkredostack()) {
+                                redo.setDisabled(true);
+                            } else {
+                                redo.setDisabled(false);
+                            }
+
+                        }catch (Exception e) {
+                            e.printStackTrace(); //for debug to find errors
                         }
-
-                        if (Data.path.size() == 0) {
-                            recent.setDisabled(true);
-                        } else {
-                            recent.setDisabled(false);
-                        }
-
-
-                        ///////////////////////////////////
-
-
-                        /////////////revert//////////////
-
-                        if (SaveChanges.checkstack()) {
-                            revert.setDisabled(true);
-                        } else {
-                            revert.setDisabled(false);
-                        }
-
-                        ///////Redo//////////////
-
-
-                        if (SaveChanges.checkredostack()) {
-                            redo.setDisabled(true);
-                        } else {
-                            redo.setDisabled(false);
-                        }
-
-
                     }
                 }, 0, 500);
             }
