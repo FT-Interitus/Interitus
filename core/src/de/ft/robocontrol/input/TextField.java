@@ -6,6 +6,7 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeType;
 import de.ft.robocontrol.UI.Devicemanagmenttab;
 import de.ft.robocontrol.input.check.Check;
 
@@ -19,6 +20,7 @@ public class TextField {
     private boolean active=false;
     private String input="default";
     private int begrenzung=10;
+    Texture curser;
     public TextField(int x,int y,int w,int h){
         this.x=x;
         this.y=y;
@@ -26,6 +28,7 @@ public class TextField {
         this.h=h;
         background=new Texture("TextFieldBackground.png");
         Backgroundactive=new Texture("TextFieldBackgroundActive.png");
+        curser=new Texture("curser.png");
     }
 
     private void active(){
@@ -57,7 +60,7 @@ public class TextField {
                 @Override
                 public boolean keyTyped (char key) {
                     if(active) {
-
+            
                         if(input.length()<=begrenzung) {
                             input = input + Character.toString(key);
                         }
@@ -86,8 +89,8 @@ public class TextField {
             b.draw(background,x,y,w,h);
 
         }
-        font.draw(b, input, x + 5, y + font.getLineHeight());
-
+        font.draw(b, input, x+5, y + font.getLineHeight());
+        //b.draw(curser,x,y);
         b.end();
     }
 }
