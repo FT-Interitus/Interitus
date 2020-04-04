@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeType;
 import de.ft.robocontrol.UI.Devicemanagmenttab;
@@ -19,8 +20,11 @@ public class TextField {
     Check check=new Check();
     private boolean active=false;
     private String input="default";
-    private int begrenzung=10;
+    private int begrenzung=-1;
+    private boolean cursorstate=true;
+    private long cursersave;
     Texture curser;
+    private static GlyphLayout glyphLayout = new GlyphLayout();
     public TextField(int x,int y,int w,int h){
         this.x=x;
         this.y=y;
@@ -60,8 +64,8 @@ public class TextField {
                 @Override
                 public boolean keyTyped (char key) {
                     if(active) {
-            
-                        if(input.length()<=begrenzung) {
+
+                        if(input.length()<=begrenzung || begrenzung==-1) {
                             input = input + Character.toString(key);
                         }
                     }
@@ -89,8 +93,31 @@ public class TextField {
             b.draw(background,x,y,w,h);
 
         }
-        font.draw(b, input, x+5, y + font.getLineHeight());
-        //b.draw(curser,x,y);
+      //  font.draw(b, input, x+5, y + font.getLineHeight());
+
+
+
+
+        glyphLayout.setText(font, input);
+        font.draw(b, glyphLayout, x+5, y +glyphLayout.height+h/2-glyphLayout.height/2);
+        System.out.println(glyphLayout.width);
+
+if(active && cursorstate) {
+    b.draw(curser, x + glyphLayout.width + 6, y + 4, 2, 17);
+}
+
         b.end();
+
+
+if(System.currentTimeMillis()>cursersave){
+    if(cursorstate){
+        cursorstate=false;
+    }else{
+        cursorstate=true;
+    }
+    cursersave=System.currentTimeMillis()+500;
+}
+
+
     }
 }
