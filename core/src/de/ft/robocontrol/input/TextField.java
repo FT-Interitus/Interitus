@@ -26,6 +26,27 @@ public class TextField {
         this.h=h;
         background=new Texture("TextFieldBackground.png");
         Backgroundactive=new Texture("TextFieldBackgroundActive.png");
+
+
+        Gdx.input.setInputProcessor(new InputAdapter() {
+
+            @Override
+            public boolean keyTyped (char key) {
+                if(active) {
+
+                    if(input.length()<=begrenzung) {
+                        input = input + Character.toString(key);
+                    }
+                }
+                return true;
+            }
+
+            @Override
+            public boolean touchDown (int x, int y, int pointer, int button) {
+
+                return true;
+            }
+        });
     }
 
     private void active(){
@@ -52,25 +73,7 @@ public class TextField {
             }
         }
 
-            Gdx.input.setInputProcessor(new InputAdapter() {
 
-                @Override
-                public boolean keyTyped (char key) {
-                    if(active) {
-
-                        if(input.length()<=begrenzung) {
-                            input = input + Character.toString(key);
-                        }
-                    }
-                    return true;
-                }
-
-                @Override
-                public boolean touchDown (int x, int y, int pointer, int button) {
-
-                    return true;
-                }
-            });
 
 
 
