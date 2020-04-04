@@ -53,7 +53,13 @@ public class MainGame extends ApplicationAdapter {
 
    public static BitmapFont font;
     public static Switch s;
-    public static IntegerAuswahl ia;
+    Texture background;
+    Texture inside;
+    Texture Backgroundgreen;
+
+    Texture background_white;
+    Texture inside_white;
+    Texture Backgroundgreen_white;
 
 
     public static int w=0;
@@ -81,6 +87,13 @@ font=  new BitmapFont();
         img_mouseover = new Texture("block_mouseover.png");
         img_marked = new Texture("block_marked.png");
 
+        background=new Texture("switchbackground.png");
+        inside=new Texture("switchinside.png");
+        Backgroundgreen=new Texture("switchbackgroundgreen.png");
+
+        background_white=new Texture("switchbackground_white.png");
+        inside_white=new Texture("switchinside.png");
+        Backgroundgreen_white=new Texture("switchbackground_whitegreen.png");
 
         logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
         logger.setLevel(logLevel);
@@ -88,17 +101,24 @@ font=  new BitmapFont();
         Gdx.graphics.setTitle("New File");
         DataManager.filename = "New File";
 
-
+s.setBackground(background);
+s.setBackgroundgreen(Backgroundgreen);
+s.setInside(inside);
         Thread blockdebugcreater = new Thread() {
             @Override
             public void run() {
-                for (int i = 0; i < 12; i = i + 1) {
-                    BlockVar.blocks.add(new Block(i, i * 150, 150, 150, 70));
+                try {
 
-                   MainGame.logger.finest(String.valueOf(i));
+                    for (int i = 0; i < 12; i = i + 1) {
+                        BlockVar.blocks.add(new Block(i, i * 150, 150, 150, 70));
+
+                        MainGame.logger.finest(String.valueOf(i));
+                    }
+
+                    logger.info("Block creating done");
+                }catch (Exception e) {
+                    e.printStackTrace(); //for debug to find errors
                 }
-
-                logger.info("Block creating done");
             }
         };
 
@@ -129,7 +149,7 @@ font=  new BitmapFont();
 
         try {
 
-            logger.finest("Blöcke "+BlockVar.blocks.size()+" Sichtbare "+ BlockVar.visibleblocks.size());
+            //logger.finest("Blöcke "+BlockVar.blocks.size()+" Sichtbare "+ BlockVar.visibleblocks.size());
 
             PositionSaver.save();
 
@@ -232,12 +252,22 @@ font=  new BitmapFont();
         }
 
 
+        if(darkmode) {
+            s.setBackground(background);
+            s.setBackgroundgreen(Backgroundgreen);
+            s.setInside(inside);
+        }else{
+            s.setBackground(background_white);
+            s.setBackgroundgreen(Backgroundgreen_white);
+            s.setInside(inside_white);
+        }
 
         //s.setSize(1);
         s.setSize(1f);
         s.setWackelstärke(1);
         s.draw();
         ia.draw();
+
 
 
     }
@@ -251,7 +281,7 @@ font=  new BitmapFont();
         UI.updateView(width, height);
         viewport.update(width, height);
 
-        
+
 w=width;
 h=height;
 

@@ -54,7 +54,7 @@ public class Button {
     public boolean isjustPressed(){
         boolean pressed=false;
 
-        System.out.println(touched);
+
         if (Gdx.input.isButtonPressed(0)) {
             if (Gdx.input.getX() > x && Gdx.input.getX() < x + w && Gdx.input.getY() > Gdx.graphics.getHeight() - y - h && Gdx.input.getY() < Gdx.graphics.getHeight() - y) {
                 if (touched == false) {
