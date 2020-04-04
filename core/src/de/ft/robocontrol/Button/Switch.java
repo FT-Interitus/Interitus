@@ -35,6 +35,7 @@ public class Switch {
     SpriteBatch b=new SpriteBatch();
     Texture background;
     Texture inside;
+    Texture Backgroundgreen;
 
     private boolean touched;
     Random random = new Random();
@@ -47,10 +48,12 @@ public class Switch {
 
         background=new Texture("switchbackground.png");
         inside=new Texture("switchinside.png");
+        Backgroundgreen=new Texture("switchbackgroundgreen.png");
     }
     public Switch(){
         background=new Texture("switchbackground.png");
         inside=new Texture("switchinside.png");
+        Backgroundgreen=new Texture("switchbackgroundgreen.png");
         this.xecht=x;
         this.yecht=y;
     }
@@ -134,8 +137,12 @@ public class Switch {
 
 if(visible) {
     b.begin();
-    b.setColor(1,1,1-1*(switchpos),1);
+System.out.println("piasdf  "+(1f/26f)*(float)switchpos);
+    b.setColor(1,1,1,1-(1f/26f)*(float)switchpos);
     b.draw(background, x, y, w, h);
+    b.setColor(1,1,1,(1f/26f)*(float)switchpos);
+    b.draw(Backgroundgreen, x, y, w, h);
+
     b.setColor(farbehebel[0],farbehebel[1],farbehebel[2],farbehebel[3]);
     b.draw(inside, x + multiplikator + switchpos, y + multiplikator, dm, dm);
     b.end();
@@ -262,4 +269,15 @@ if(wackeln==true) {
         farbehebel[3]=a;
     }
 
+    public void setBackground(Texture background) {
+        this.background = background;
+    }
+
+    public void setBackgroundgreen(Texture backgroundgreen) {
+        Backgroundgreen = backgroundgreen;
+    }
+
+    public void setInside(Texture inside) {
+        this.inside = inside;
+    }
 }
