@@ -24,6 +24,8 @@ public class Button {
     private Texture image=null;
     private boolean touched;
     private boolean visible=true;
+    private boolean disable=false;
+
 
 
 
@@ -48,33 +50,40 @@ public class Button {
     }
 
     public boolean isjustPressed(){
-         boolean pressed;
-        System.out.println(touched);
-        if(Gdx.input.isButtonPressed(0)) {
-            if (Gdx.input.getX() > x && Gdx.input.getX() < x + w && Gdx.input.getY() > Gdx.graphics.getHeight() - y - h && Gdx.input.getY() < Gdx.graphics.getHeight() - y) {
-                if(touched==false) {
-                    touched = true;
+         boolean pressed=false;
+        if(!disable) {
+
+            System.out.println(touched);
+            if (Gdx.input.isButtonPressed(0)) {
+                if (Gdx.input.getX() > x && Gdx.input.getX() < x + w && Gdx.input.getY() > Gdx.graphics.getHeight() - y - h && Gdx.input.getY() < Gdx.graphics.getHeight() - y) {
+                    if (touched == false) {
+                        touched = true;
+                    }
                 }
+
+            }
+            if (!Gdx.input.isButtonPressed(0) && touched) {
+
+                pressed = true;
+                touched = false;
+            } else {
+                pressed = false;
             }
 
         }
-        if(!Gdx.input.isButtonPressed(0) && touched){
-
-            pressed=true;
-touched=false;
-        }else{
-            pressed=false;
-        }
-
-
 return pressed;
 
     }
 
 
     public boolean isPresseded(){
-        if(Gdx.input.getX()>x && Gdx.input.getX()<x+w && Gdx.input.getY()>Gdx.graphics.getHeight()-y-h && Gdx.input.getY()<Gdx.graphics.getHeight()-y && Gdx.input.isButtonPressed(0)){
-            return true;
+        if(!disable) {
+
+            if (Gdx.input.getX() > x && Gdx.input.getX() < x + w && Gdx.input.getY() > Gdx.graphics.getHeight() - y - h && Gdx.input.getY() < Gdx.graphics.getHeight() - y && Gdx.input.isButtonPressed(0)) {
+                return true;
+            } else {
+                return false;
+            }
         }else{
             return false;
         }
@@ -82,8 +91,13 @@ return pressed;
 
 
     public boolean isMouseover(){
-        if(Gdx.input.getX()>x && Gdx.input.getX()<x+w && Gdx.input.getY()>Gdx.graphics.getHeight()-y-h && Gdx.input.getY()<Gdx.graphics.getHeight()-y){
-            return true;
+        if(!disable) {
+
+            if (Gdx.input.getX() > x && Gdx.input.getX() < x + w && Gdx.input.getY() > Gdx.graphics.getHeight() - y - h && Gdx.input.getY() < Gdx.graphics.getHeight() - y) {
+                return true;
+            } else {
+                return false;
+            }
         }else{
             return false;
         }
@@ -115,6 +129,9 @@ return pressed;
                 }
                 if (isMouseover() && Gdx.input.isButtonPressed(0)) {
                     batch.setColor(1, 0.5f, 0.5f, 1);
+                }
+                if(isDisable()){
+                    batch.setColor(1,1,1,0.2f);
                 }
                 batch.draw(image, this.x, this.y, this.w, this.h);
                 batch.end();
@@ -175,17 +192,13 @@ return pressed;
         return visible;
     }
 
-    public class ClickListener extends EventObject {
-        public ClickListener(Object source) {
-            super(source);
-        }
+    public boolean isDisable() {
+        return disable;
     }
 
-    public interface ClickEvent {
-        public void ButtonClicked(ClickListener e);
+    public void setDisable(boolean disable) {
+        this.disable = disable;
     }
-
-
 }
 
 

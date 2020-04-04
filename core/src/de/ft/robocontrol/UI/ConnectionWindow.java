@@ -15,6 +15,7 @@ import com.kotcrab.vis.ui.widget.*;
 import com.kotcrab.vis.ui.widget.tabbedpane.Tab;
 import com.kotcrab.vis.ui.widget.tabbedpane.TabbedPane;
 import com.kotcrab.vis.ui.widget.tabbedpane.TabbedPaneAdapter;
+import de.ft.robocontrol.Var;
 import de.ft.robocontrol.data.VerbindungsSpeicher;
 
 import javax.swing.event.ChangeEvent;
@@ -51,6 +52,7 @@ public static VisTextButton devicemanagebutton = new VisTextButton("Software bre
             }
         });
 
+        Var.isdialogeopend=true;
 
     }
 

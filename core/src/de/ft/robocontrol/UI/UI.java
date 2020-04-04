@@ -92,6 +92,12 @@ public class UI {
         testbutton.setImage(img_button_verbindungadd);
         testbutton.draw();
         testbutton.setVisible(true);
+        if(Var.isdialogeopend) {
+            testbutton.setDisable(true);
+
+        }else{
+            testbutton.setDisable(false);
+        }
         if(testbutton.isjustPressed()){
             connectionWindow = new ConnectionWindow();
 

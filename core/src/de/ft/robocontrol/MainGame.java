@@ -23,6 +23,7 @@ import com.kotcrab.vis.ui.widget.VisTextButton;
 import de.ft.robocontrol.Block.Block;
 import de.ft.robocontrol.Block.BlockVar;
 import de.ft.robocontrol.Button.Button;
+import de.ft.robocontrol.Button.Switch;
 import de.ft.robocontrol.UI.UI;
 import de.ft.robocontrol.data.programm.Data;
 import de.ft.robocontrol.data.user.changes.DataManager;
@@ -50,7 +51,7 @@ public class MainGame extends ApplicationAdapter {
     public static Logger logger;
 
    public static BitmapFont font;
-
+    public static Switch s;
 
 
     public static int w=0;
@@ -65,6 +66,7 @@ public static Drawable d;
 
     @Override
     public void create() {
+        s=new Switch(500,500);
 font=  new BitmapFont();
         shapeRenderer = new ShapeRenderer();
         cam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -227,6 +229,11 @@ font=  new BitmapFont();
         }
 
 
+
+        //s.setSize(1);
+        s.setSize(1f);
+        s.setWackelstärke(1);
+        s.draw();
 
 
     }
