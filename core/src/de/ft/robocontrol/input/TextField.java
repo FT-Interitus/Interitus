@@ -49,6 +49,7 @@ public class TextField {
 
     }
 
+
     private void active(){
         if(check.isjustPressed(x,y,w,h)){
             if(active){
