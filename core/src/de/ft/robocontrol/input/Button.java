@@ -23,7 +23,8 @@ public class Button {
     private Check check=new Check();
 
 
-
+    SpriteBatch batch = new SpriteBatch();  //TODO WICHTIG HIER MUSS DAS NEW WEG //SO WIE IM SWITCH DA GEHT ES AUCH
+    BitmapFont font = new BitmapFont();
 
 
     public Button(int x,int y,int w,int h){
@@ -90,8 +91,6 @@ return check.isPressed(x,y,w,h);
 
     public void draw(){
         if(isVisible()) {
-            SpriteBatch batch = new SpriteBatch();  //TODO WICHTIG HIER MUSS DAS NEW WEG //SO WIE IM SWITCH DA GEHT ES AUCH
-            BitmapFont font = new BitmapFont();
             if (image == null) {
                 ShapeRenderer s = new ShapeRenderer();
                 s.begin(ShapeRenderer.ShapeType.Filled);
