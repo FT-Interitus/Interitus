@@ -61,7 +61,7 @@ public class MainGame extends ApplicationAdapter {
     Texture inside_white;
     Texture Backgroundgreen_white;
 
-
+    IntegerAuswahl ia;
     public static int w=0;
     public static int h=0;
 

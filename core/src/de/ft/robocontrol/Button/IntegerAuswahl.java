@@ -15,6 +15,7 @@ public class IntegerAuswahl {
     private Button buttonOben=new Button();
     private Button buttonUnten=new Button();
     private BitmapFont font;
+    private int buttonposition=0;
     private int value=0;
     private int grenzel=-999;
     private int grenzer=999;
@@ -52,11 +53,17 @@ public class IntegerAuswahl {
         if(buttonUnten.isjustPressed() && value>grenzel){
             value--;
         }
+if(buttonposition==0) {
+    buttonOben.setBounds(x, y + h, 50, 13);
+    buttonUnten.setBounds(x, y - 13, 50, 13);
+}else if(buttonposition==1) {
+        buttonOben.setBounds(x+w, y + 12, 20, 13);
+        buttonUnten.setBounds(x+w, y , 20, 13);
 
-        buttonOben.setBounds(x,y+h,50,13);
-        buttonOben.setImage(ButtonObenImage);
-        buttonUnten.setBounds(x,y-13,50,13);
-        buttonUnten.setImage(ButtonUntenImage);
+}
+    buttonOben.setImage(ButtonObenImage);
+    buttonUnten.setImage(ButtonUntenImage);
+
         b.begin();
         b.draw(Textfeldmitte,x,y,w,h);
         b.end();
@@ -88,5 +95,13 @@ public class IntegerAuswahl {
 
     public void setTextfeldmitte(Texture textfeldmitte) {
         Textfeldmitte = textfeldmitte;
+    }
+
+    public int getButtonposition() {
+        return buttonposition;
+    }
+
+    public void setButtonposition(int buttonposition) {
+        this.buttonposition = buttonposition;
     }
 }
