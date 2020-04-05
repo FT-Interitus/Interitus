@@ -82,27 +82,6 @@ public class TextField {
             }
         }
 
-            Gdx.input.setInputProcessor(new InputAdapter() {
-
-                @Override
-                public boolean keyTyped (char key) {
-                    if(active) {
-
-                        if(input.length()<=begrenzung || begrenzung==-1 && glyphLayout.width<w-5) {
-                            input = input + Character.toString(key);
-                        }
-                    }
-                    return true;
-                }
-
-                @Override
-                public boolean touchDown (int x, int y, int pointer, int button) {
-
-                    return true;
-                }
-            });
-
-
 
 
         b.begin();
