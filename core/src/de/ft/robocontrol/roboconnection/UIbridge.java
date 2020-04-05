@@ -16,6 +16,7 @@ public class UIbridge {
 
    public static Thread thread;
     public static boolean setup = false;
+    private static boolean found;
 
     public static void UpdateConnectionWindowPortsList() {
 
@@ -77,7 +78,7 @@ public class UIbridge {
                                 portsold[0] = SerialConnection.getPorts().length;
 
                                 for (int i = 0; i < SerialConnection.Arduinos.size(); i++) {
-                                    boolean found = false;
+                                     found = false;
                                     for (int b = 0; b < SerialConnection.getPorts().length; b++) {
                                         if (SerialConnection.Arduinos.get(i).getSystemPortName() == SerialConnection.getPorts()[b].getSystemPortName()) {
                                             found = true;

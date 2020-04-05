@@ -43,6 +43,14 @@ public class UI {
     protected static Button testbutton = new Button();
     Vector3 pos = new Vector3();
 
+    static int abstandvonRand =5;
+
+
+   static int unteneinteilung = 300;
+    static int untenhohe = 125;
+   static int radius = 3;
+
+
     private static Vector2 lastframecamposition = new Vector2(MainGame.cam.position.x, MainGame.cam.position.y);
 
 
@@ -56,13 +64,6 @@ public class UI {
             renderer.setColor(Colors.whitearea);
         }
 
-
-        int abstandvonRand =5;
-
-
-        int unteneinteilung = 300;
-        int untenhohe = 125;
-        int radius = 3;
 
 
 

@@ -159,11 +159,14 @@ s.setInside(inside);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             batch.setProjectionMatrix(cam.combined);
 
+
             if (input.isKeyJustPressed(Input.Keys.INSERT)) {
 
                 BlockVar.blocks.add(new Block(BlockVar.blocks.size(), 100, 200, 150, 70));
                 DataManager.change(BlockVar.blocks.get(BlockVar.blocks.size() - 1), true, false);
             }
+
+
           UI.updatedragui(shapeRenderer, true);
 
             if (!Var.isloading) {
