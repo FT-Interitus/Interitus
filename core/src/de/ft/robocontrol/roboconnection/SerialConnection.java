@@ -10,8 +10,9 @@ import java.util.Scanner;
 public class SerialConnection {
 
     public static ArrayList<SerialPort> Arduinos = new ArrayList<SerialPort>();
-
-
+   static boolean found;
+   static int i = 1;
+   static long save;
 
     public static SerialPort[] getPorts(){
         SerialPort ports[]=SerialPort.getCommPorts();
@@ -88,7 +89,6 @@ public static void searchArduino() {
 //TODO hier System.out's rausschmeisen
                 SerialPort ports[] = SerialPort.getCommPorts();
                 System.out.println("Select a port:");
-                int i = 1;
                 ConnectionWindow.devicemanagebutton.setDisabled(true);
                 ConnectionWindow.devicemanagebutton.setText("Bitte Warten..");
                 for (SerialPort port : ports) {
@@ -109,8 +109,8 @@ public static void searchArduino() {
                         testport.setBaudRate(230400);
                         testport.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 10, 0);
 
-                        long save = System.currentTimeMillis() + 5000;
-                        boolean found = false;
+                         save = System.currentTimeMillis() + 5000;
+                      found = false;
                         while (System.currentTimeMillis() < save && found == false) {
                             if (empfangen(testport) == 1234) {
                                 System.out.println("Arduino gefunden");
