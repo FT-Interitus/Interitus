@@ -3,6 +3,7 @@ package de.ft.robocontrol.UI;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -54,7 +55,7 @@ public class UI {
     private static Vector2 lastframecamposition = new Vector2(MainGame.cam.position.x, MainGame.cam.position.y);
 
 
-    public static void updatedragui(ShapeRenderer renderer, boolean flaeche) {
+    public static void updatedragui(ShapeRenderer renderer, boolean flaeche, SpriteBatch batch) {
 
         renderer.begin(ShapeRenderer.ShapeType.Filled);
 
@@ -93,7 +94,7 @@ public class UI {
         }else {
             testbutton.setImage(img_button_verbindungadd_white);
         }
-        testbutton.draw();
+        testbutton.draw(renderer,batch);
         testbutton.setVisible(true);
         if(Var.isdialogeopend) {
             testbutton.setDisable(true);

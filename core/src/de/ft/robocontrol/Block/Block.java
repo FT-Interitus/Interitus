@@ -322,7 +322,7 @@ public class Block {
 
                 flaeche = (CheckKollision.flache(this.getX_dup_rechts(), this.getY(), this.getW(), this.getH(), BlockVar.markedblock.getX(), BlockVar.markedblock.getY()));
 
-            } catch (NullPointerException e) {
+            } catch (NullPointerException ignored) {
 
             }
 
@@ -335,7 +335,7 @@ public class Block {
 
                 flaeche = (CheckKollision.flache(this.getX_dup_links(), this.getY(), this.getW(), this.getH(), BlockVar.markedblock.getX(), BlockVar.markedblock.getY()));
 
-            } catch (NullPointerException e) {
+            } catch (NullPointerException ignored) {
 
             }
 

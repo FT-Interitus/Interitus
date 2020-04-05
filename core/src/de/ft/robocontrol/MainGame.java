@@ -107,7 +107,7 @@ s.setInside(inside);
                     for (int i = 0; i < 12; i = i + 1) {
                         BlockVar.blocks.add(new Block(i, i * 150, 150, 150, 70));
 
-                        MainGame.logger.finest(String.valueOf(i));
+                      //  MainGame.logger.finest(String.valueOf(i));
                     }
 
                     System.out.println("Block creating done");
@@ -167,7 +167,7 @@ s.setInside(inside);
             }
 
 
-          UI.updatedragui(shapeRenderer, true);
+          UI.updatedragui(shapeRenderer, true, batch);
 
             if (!Var.isloading) {
                 Block Temp = null;
@@ -213,7 +213,7 @@ s.setInside(inside);
                 }
             }
 
-           UI.updatedragui(shapeRenderer, false);
+           UI.updatedragui(shapeRenderer, false, batch);
             UI.update();
 			/*
 
@@ -264,9 +264,10 @@ s.setInside(inside);
         s.setSize(1f);
         s.setWackelstärke(1);
         s.draw();
-        ia.draw();
+        ia.draw(shapeRenderer, batch);
         textfieldtest.setTextAnordnung(1);
         textfieldtest.draw();
+
 
 
 

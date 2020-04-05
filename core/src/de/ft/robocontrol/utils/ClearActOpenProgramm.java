@@ -1,6 +1,5 @@
 package de.ft.robocontrol.utils;
 
-import com.badlogic.gdx.utils.Logger;
 import de.ft.robocontrol.Block.Block;
 import de.ft.robocontrol.Block.BlockVar;
 import de.ft.robocontrol.MainGame;
@@ -13,7 +12,7 @@ import java.util.ArrayList;
 public class ClearActOpenProgramm {
 
 
-    public static ArrayList<Block> blockstoclear = new ArrayList<Block>();
+    public static ArrayList<Block> blockstoclear = new ArrayList<>();
     static Thread clear;
 
     public static void clear() {

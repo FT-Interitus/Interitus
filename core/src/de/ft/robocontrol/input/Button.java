@@ -2,6 +2,7 @@ package de.ft.robocontrol.input;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -23,7 +24,7 @@ public class Button {
     private Check check=new Check();
 
 
-    SpriteBatch batch = new SpriteBatch();  //TODO WICHTIG HIER MUSS DAS NEW WEG //SO WIE IM SWITCH DA GEHT ES AUCH
+
     BitmapFont font = new BitmapFont();
 
 
@@ -89,10 +90,10 @@ return check.isPressed(x,y,w,h);
         this.image=image;
     }
 
-    public void draw(){
+    public void draw(ShapeRenderer s, SpriteBatch batch){
         if(isVisible()) {
             if (image == null) {
-                ShapeRenderer s = new ShapeRenderer();
+
                 s.begin(ShapeRenderer.ShapeType.Filled);
                 RoundRectangle.abgerundetesRechteck(s, this.x, this.y, this.w, this.h, 5);
                 s.end();

@@ -3,6 +3,7 @@ package de.ft.robocontrol.input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class IntegerAuswahl {
     private int x,y,w,h;
@@ -46,7 +47,7 @@ public class IntegerAuswahl {
     public void setW(int w) {
         this.w = w;
     }
-    public void draw(){
+    public void draw(ShapeRenderer renderer, SpriteBatch batch){
         if(buttonOben.isjustPressed() && value<grenzer){
             value++;
         }
@@ -67,8 +68,8 @@ if(visible) {
     b.begin();
     b.draw(Textfeldmitte, x, y, w, h);
     b.end();
-    buttonOben.draw();
-    buttonUnten.draw();
+    buttonOben.draw(renderer,batch);
+    buttonUnten.draw(renderer,batch);
     b.begin();
     font.draw(b, "" + value, x + 5, y + font.getLineHeight());
     b.end();
