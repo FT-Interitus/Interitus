@@ -88,7 +88,7 @@ public class TextField {
                 public boolean keyTyped (char key) {
                     if(active) {
 
-                        if(input.length()<=begrenzung || begrenzung==-1) {
+                        if(input.length()<=begrenzung || begrenzung==-1 && glyphLayout.width<w-5) {
                             input = input + Character.toString(key);
                         }
                     }
