@@ -143,9 +143,9 @@ break;
 
 
 if(System.currentTimeMillis()>cursersave){
-    if(cursorstate){
-        cursorstate=false;
-    }else{
+        if(cursorstate){
+            cursorstate=false;
+        }else{
         cursorstate=true;
     }
     cursersave=System.currentTimeMillis()+500;
