@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import de.ft.robocontrol.UI.Devicemanagmenttab;
 import de.ft.robocontrol.input.check.Check;
 
@@ -23,6 +24,7 @@ public class TextField {
     private boolean cursorstate=true;
     private long cursersave;
     Texture curser;
+    private int TextAnordnung=0;
     private static GlyphLayout glyphLayout = new GlyphLayout();
     public TextField(int x,int y,int w,int h){
         this.x=x;
@@ -103,9 +105,6 @@ public class TextField {
 
 
 
-
-
-
         b.begin();
         if(active){
             b.draw(Backgroundactive,x,y,w,h);
@@ -118,13 +117,26 @@ public class TextField {
 
 
 
-
+switch (TextAnordnung) {
+    case 0:
         glyphLayout.setText(font, input);
-        font.draw(b, glyphLayout, x+5, y +glyphLayout.height+h/2-glyphLayout.height/2);
-        System.out.println(glyphLayout.width);
+        font.draw(b, glyphLayout, x + 5, y + glyphLayout.height + h / 2 - glyphLayout.height / 2);
 
-if(active && cursorstate) {
-    b.draw(curser, x + glyphLayout.width + 6, y + 4, 2, 17);
+
+        if (active && cursorstate) {
+            b.draw(curser, x + glyphLayout.width + 7, y + 4, 2, 17);
+        }
+
+break;
+    case 1:
+        glyphLayout.setText(font, input);
+        font.draw(b, glyphLayout, x + w/2-glyphLayout.width/2, y + glyphLayout.height + h / 2 - glyphLayout.height / 2);
+
+
+        if (active && cursorstate) {
+            b.draw(curser, x + w/2+glyphLayout.width/2+2, y + 4, 2, 17);
+        }
+        break;
 }
 
         b.end();
@@ -140,5 +152,13 @@ if(System.currentTimeMillis()>cursersave){
 }
 
 
+    }
+
+    public void setTextAnordnung(int textAnordnung) {
+        TextAnordnung = textAnordnung;
+    }
+
+    public int getTextAnordnung() {
+        return TextAnordnung;
     }
 }

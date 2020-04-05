@@ -262,6 +262,7 @@ s.setInside(inside);
         s.setWackelstärke(1);
         s.draw();
         ia.draw();
+        textfieldtest.setTextAnordnung(1);
         textfieldtest.draw();
 
 
