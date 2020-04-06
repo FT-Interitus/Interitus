@@ -3,6 +3,7 @@ package de.ft.robocontrol.UI;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.Tree;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.kotcrab.vis.ui.building.GridTableBuilder;
 import com.kotcrab.vis.ui.building.OneRowTableBuilder;
@@ -146,6 +147,31 @@ public class SettingsUI extends VisWindow {
                 }
             });
 
+            VisTree tree = new VisTree();
+            TestNode item1 = new TestNode(new VisLabel(" Aussehen"));
+            TestNode item2 = new TestNode(new VisLabel(" Verhalten"));
+            TestNode item3 = new TestNode(new VisLabel(" item 3"));
+
+            item1.add(new TestNode(new VisLabel(" Theme")));
+            item1.add(new TestNode(new VisLabel(" item 1.2")));
+            item1.add(new TestNode(new VisLabel(" item 1.3")));
+
+            item2.add(new TestNode(new VisLabel(" Tastenkombinationen ")));
+            item2.add(new TestNode(new VisLabel(" item 2.2")));
+            item2.add(new TestNode(new VisLabel(" item 2.3")));
+
+            item3.add(new TestNode(new VisLabel(" item 3.1")));
+            item3.add(new TestNode(new VisLabel(" item 3.2")));
+            item3.add(new TestNode(new VisLabel(" item 3.3")));
+
+            item1.setExpanded(true);
+
+            tree.add(item1);
+            tree.add(item2);
+            tree.add(item3);
+
+            add(tree).expand().fill().padTop(15).padLeft(15);
+
 
             builder.append(rowLayout, CellWidget.builder().fillX().expandX().wrap(), CellWidget.of(darktoggle).expandX().fillY().wrap());
             builder.row();
@@ -158,53 +184,10 @@ public class SettingsUI extends VisWindow {
             builder.append(rowLayout, CellWidget.builder().fillX().expandX().expandX().width(500), CellWidget.of(updateurlfield).expandX().fillX().wrap());
             builder.row();
 
-
-
-/*
-            builder.append(new VisLabel("title label"));
-            builder.row();
-
-            builder.append(new VisLabel("path"));
-            builder.append(rowLayout, CellWidget.builder().fillX(),
-                    CellWidget.of(new VisTextField()).expandX().fillX().wrap(),
-                    CellWidget.of(new VisTextButton("choose")).padding(new Padding(0, 0)).wrap());
-            builder.row();
-
-            builder.append(new VisLabel("name"));
-            builder.append(CellWidget.of(new VisTextField()).expandX().fillX().wrap());
-            builder.row();
-
-            builder.append(new VisLabel("description"));
-            builder.append(CellWidget.of(new VisTextField()).fillX().wrap());
-            builder.row();
-
-
-
-            //rest of content won't fit on screen with OneRowTableBuilder
-            if (builder instanceof OneRowTableBuilder == false) {
-                builder.append(new VisLabel("checkboxes"));
-                builder.append(rowLayout, getCheckBoxArray(5));
-                builder.row();
-
-
-                builder.row();
-
-                builder.append(new VisLabel("second part"));
-                builder.row();
-
-                builder.append(new VisLabel("sliders"));
-              //  builder.append(rowLayout, getSlider(false), getSlider(false), getSlider(false), getSlider(true));
-                builder.row();
-
-              //  builder.append(rowLayout, getCheckBoxArray(8));
-            }
-
-*/
-
             Table table = builder.build();
             add(table).expand().fill();
+            sizeBy(600,450);
 
-            pack();
             centerWindow();
         }
 
@@ -244,6 +227,12 @@ public class SettingsUI extends VisWindow {
                 builder.append(widget);
 
             return builder.build();
+        }
+    }
+
+    static class TestNode extends Tree.Node {
+        public TestNode (Actor actor) {
+            super(actor);
         }
     }
 
