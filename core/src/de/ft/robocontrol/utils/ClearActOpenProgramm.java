@@ -2,7 +2,7 @@ package de.ft.robocontrol.utils;
 
 import de.ft.robocontrol.Block.Block;
 import de.ft.robocontrol.Block.BlockVar;
-import de.ft.robocontrol.ProgrammingSpace;
+import de.ft.robocontrol.MainGame;
 import de.ft.robocontrol.Var;
 import de.ft.robocontrol.data.user.changes.DataManager;
 import de.ft.robocontrol.data.user.changes.SaveChanges;
@@ -34,7 +34,7 @@ public class ClearActOpenProgramm {
                         while (blockstoclear.size() != 0) {
                             blockstoclear.get(0).delete(true);
                             blockstoclear.remove(0);
-                            ProgrammingSpace.logger.finer(String.valueOf(blockstoclear.size()));
+                            MainGame.logger.finer(String.valueOf(blockstoclear.size()));
 
                         }
                         Var.isclearing = false;
@@ -58,7 +58,7 @@ public class ClearActOpenProgramm {
 
 
             }
-            ProgrammingSpace.logger.info("Clearing Finished");
+            MainGame.logger.info("Clearing Finished");
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(-121);
