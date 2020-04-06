@@ -30,7 +30,7 @@ import java.util.logging.Logger;
 import static com.badlogic.gdx.Gdx.input;
 import static de.ft.robocontrol.Settings.*;
 
-public class MainGame extends ScreenAdapter implements Screen {
+public class ProgrammingSpace extends ScreenAdapter implements Screen {
     public static SpriteBatch UIbatch;
     public static SpriteBatch batch;
 
@@ -57,7 +57,7 @@ public static Drawable d;
 
 
 
-    public  MainGame() {
+    public ProgrammingSpace() {
         ia=new IntegerAuswahl(400,400,50,25);
         s=new Switch(500,500);
 font=  new BitmapFont();

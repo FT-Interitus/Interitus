@@ -1,9 +1,7 @@
 package de.ft.robocontrol.roboconnection;
 import com.fazecast.jSerialComm.*;
-import de.ft.robocontrol.MainGame;
 import de.ft.robocontrol.UI.ConnectionWindow;
 
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Scanner;
 

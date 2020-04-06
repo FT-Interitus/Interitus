@@ -1,9 +1,8 @@
 package de.ft.robocontrol.roboconnection;
 
 import de.ft.robocontrol.Block.Arduino;
-import de.ft.robocontrol.MainGame;
+import de.ft.robocontrol.ProgrammingSpace;
 import de.ft.robocontrol.UI.ConnectionWindow;
-import de.ft.robocontrol.UI.UI;
 import de.ft.robocontrol.data.VerbindungsSpeicher;
 
 import java.io.BufferedReader;
@@ -35,7 +34,7 @@ public class BurnProgramm {
             burnLinux(platform, port, file, methode);
 
         } else {
-            MainGame.logger.severe("You OS is not supported");
+            ProgrammingSpace.logger.severe("You OS is not supported");
         }
 
     }
@@ -79,7 +78,7 @@ public class BurnProgramm {
             String output = null;
 
             while ((line = input.readLine()) != null) {
-               MainGame.logger.finer( line);
+               ProgrammingSpace.logger.finer( line);
                 output = output + line;
 
             }
@@ -110,7 +109,7 @@ public class BurnProgramm {
             String output = null;
 
             while ((line = input.readLine()) != null) {
-                MainGame.logger.finer( line);
+                ProgrammingSpace.logger.finer( line);
                 output = output + line;
 
             }
@@ -141,7 +140,7 @@ public class BurnProgramm {
             String output = null;
 
             while ((line = input.readLine()) != null) {
-                MainGame.logger.finer( line);
+                ProgrammingSpace.logger.finer( line);
                 output = output + line;
 
             }

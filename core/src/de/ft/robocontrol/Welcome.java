@@ -13,7 +13,7 @@ public class Welcome extends ScreenAdapter implements Screen {
     @Override
     public void render(float delta) {
         Gdx.graphics.setWindowedMode(Var.w, Var.h);
-        Programm.INSTANCE.setScreen(new MainGame());
+        Programm.INSTANCE.setScreen(new ProgrammingSpace());
     }
 
     @Override

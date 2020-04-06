@@ -1,8 +1,6 @@
 package de.ft.robocontrol.UI;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -14,7 +12,7 @@ import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.widget.MenuBar;
 import com.kotcrab.vis.ui.widget.MenuItem;
 import de.ft.robocontrol.input.Button;
-import de.ft.robocontrol.MainGame;
+import de.ft.robocontrol.ProgrammingSpace;
 import de.ft.robocontrol.Settings;
 import de.ft.robocontrol.Var;
 import de.ft.robocontrol.data.programm.Data;
@@ -26,7 +24,6 @@ import de.ft.robocontrol.utils.RoundRectangle;
 
 
 import java.io.File;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -57,7 +54,7 @@ public class UI {
    static int radius = 3;
 
 
-    private static Vector2 lastframecamposition = new Vector2(MainGame.cam.position.x, MainGame.cam.position.y);
+    private static Vector2 lastframecamposition = new Vector2(ProgrammingSpace.cam.position.x, ProgrammingSpace.cam.position.y);
 
 
     public static void updatedragui(ShapeRenderer renderer, boolean flaeche, SpriteBatch batch) {
@@ -123,7 +120,7 @@ public class UI {
 
     public static void init() {
         VisUI.load(VisUI.SkinScale.X1);
-        stage = new Stage(MainGame.viewport, MainGame.UIbatch);
+        stage = new Stage(ProgrammingSpace.viewport, ProgrammingSpace.UIbatch);
 
         root.setFillParent(true);
         stage.addActor(root);
@@ -212,7 +209,7 @@ public class UI {
         //root.setPosition(0,0);
 
 
-        root.setPosition(MainGame.cam.position.x - ((float) Gdx.graphics.getWidth()) / 2, MainGame.cam.position.y - ((float) Gdx.graphics.getHeight()) / 2);
+        root.setPosition(ProgrammingSpace.cam.position.x - ((float) Gdx.graphics.getWidth()) / 2, ProgrammingSpace.cam.position.y - ((float) Gdx.graphics.getHeight()) / 2);
 
 
         stage.draw();

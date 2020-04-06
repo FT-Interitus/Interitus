@@ -3,7 +3,6 @@ package de.ft.robocontrol.loading;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
-import de.ft.robocontrol.MainGame;
 import de.ft.robocontrol.Programm;
 import de.ft.robocontrol.Welcome;
 
