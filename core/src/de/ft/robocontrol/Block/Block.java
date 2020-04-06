@@ -9,6 +9,7 @@ import de.ft.robocontrol.loading.AssetLoader;
 import de.ft.robocontrol.MainGame;
 import de.ft.robocontrol.ThreadManager;
 import de.ft.robocontrol.data.user.changes.DataManager;
+import de.ft.robocontrol.loading.AssetLoader;
 import de.ft.robocontrol.utils.CheckKollision;
 
 public class Block {
@@ -257,6 +258,7 @@ public class Block {
     }
 
     public void draw(SpriteBatch batch, ShapeRenderer shape, BitmapFont font) {
+        batch.setColor(1,1,1,1);
 
 
         if (!this.blockupdate.toggle) {

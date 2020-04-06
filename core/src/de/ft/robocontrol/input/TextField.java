@@ -3,15 +3,19 @@ package de.ft.robocontrol.input;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import de.ft.robocontrol.UI.Devicemanagmenttab;
+import de.ft.robocontrol.UI.UI;
 import de.ft.robocontrol.input.check.Check;
+import de.ft.robocontrol.input.check.InputManager;
 
 public class TextField {
+
     private int x,y,w,h;
     SpriteBatch b=new SpriteBatch();
     BitmapFont font=new BitmapFont();
@@ -35,13 +39,14 @@ public class TextField {
         Backgroundactive=new Texture("TextFieldBackgroundActive.png");
         curser=new Texture("curser.png");
 
-        Gdx.input.setInputProcessor(new InputAdapter() {
 
+        InputManager.addProcessor(new InputAdapter() {
             @Override
             public boolean keyTyped (char key) {
+                System.out.println("asödlkfjaöslkdfjöalsdkjföalskdjföalskfjöalkjdfölksjdf");
                 if(active) {
 
-                    if(input.length()<=begrenzung) {
+                    if(input.length()<=begrenzung || begrenzung==-1) {
                         input = input + Character.toString(key);
                     }
                 }
@@ -54,7 +59,7 @@ public class TextField {
                 return true;
             }
         });
-
+        InputManager.updateMultiplexer();
     }
 
 
@@ -73,6 +78,10 @@ public class TextField {
 
     public void draw(){
         active();
+
+
+
+
 
         if(active) {
 

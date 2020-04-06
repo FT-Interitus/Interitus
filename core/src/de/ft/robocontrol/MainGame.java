@@ -107,7 +107,7 @@ public static Drawable d;
         Data.init();
         UI.init();
 
-
+        textfieldtest=new TextField(500,600,100,25);
 
 
         ThreadManager.init();
@@ -216,8 +216,6 @@ public static Drawable d;
 
 		}
 		*/
-
-
             if (input.isKeyJustPressed(Input.Keys.LEFT)) {
                 cam.position.set(cam.position.x -= 20, cam.position.y, 0);
             }
