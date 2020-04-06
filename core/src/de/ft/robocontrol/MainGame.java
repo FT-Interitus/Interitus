@@ -1,11 +1,8 @@
 package de.ft.robocontrol;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -21,9 +18,11 @@ import de.ft.robocontrol.UI.UI;
 import de.ft.robocontrol.data.programm.Data;
 import de.ft.robocontrol.data.user.changes.DataManager;
 import de.ft.robocontrol.input.TextField;
+import de.ft.robocontrol.loading.AssetLoader;
 import de.ft.robocontrol.roboconnection.SerialConnection;
 import de.ft.robocontrol.roboconnection.UIbridge;
 import de.ft.robocontrol.utils.PositionSaver;
+
 
 import java.awt.*;
 import java.util.logging.Logger;
@@ -31,12 +30,12 @@ import java.util.logging.Logger;
 import static com.badlogic.gdx.Gdx.input;
 import static de.ft.robocontrol.Settings.*;
 
-public class MainGame extends ApplicationAdapter {
+public class MainGame extends ScreenAdapter implements Screen {
     public static SpriteBatch UIbatch;
     public static SpriteBatch batch;
-    public static Texture img_block;
-    public static Texture img_mouseover;
-    public static Texture img_marked;
+
+
+
     public static OrthographicCamera cam;
     public static Viewport viewport;
     public static Component saver;
@@ -47,14 +46,6 @@ public class MainGame extends ApplicationAdapter {
     public static Switch s;
     public static TextField textfieldtest;
 
-    Texture background;
-    Texture inside;
-    Texture Backgroundgreen;
-
-    Texture background_white;
-    Texture inside_white;
-    Texture Backgroundgreen_white;
-
     IntegerAuswahl ia;
     public static int w=0;
     public static int h=0;
@@ -64,40 +55,27 @@ public static Drawable d;
 
 
     ShapeRenderer shapeRenderer;
+    public MainGame() {
+        Programm.inProgramm = true;
 
-
-    @Override
-    public void create() {
+        textfieldtest=new TextField(500,600,100,25);
         ia=new IntegerAuswahl(400,400,50,25);
         s=new Switch(500,500);
-font=  new BitmapFont();
+        font=  new BitmapFont();
         shapeRenderer = new ShapeRenderer();
         cam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         viewport = new ScreenViewport(cam);
         batch = new SpriteBatch();
         UIbatch = new SpriteBatch();
-
-        img_block = new Texture("block.png");
-        img_mouseover = new Texture("block_mouseover.png");
-        img_marked = new Texture("block_marked.png");
-
-        background=new Texture("switchbackground.png");
-        inside=new Texture("switchinside.png");
-        Backgroundgreen=new Texture("switchbackgroundgreen.png");
-
-        background_white=new Texture("switchbackground_white.png");
-        inside_white=new Texture("switchinside.png");
-        Backgroundgreen_white=new Texture("switchbackground_whitegreen.png");
-
         logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
         logger.setLevel(logLevel);
 
         Gdx.graphics.setTitle("New File");
         DataManager.filename = "New File";
 
-s.setBackground(background);
-s.setBackgroundgreen(Backgroundgreen);
-s.setInside(inside);
+        s.setBackground(AssetLoader.switch_background);
+        s.setBackgroundgreen(AssetLoader.switch_background_green);
+        s.setInside(AssetLoader.switch_inside);
         Thread blockdebugcreater = new Thread() {
             @Override
             public void run() {
@@ -106,7 +84,8 @@ s.setInside(inside);
                     for (int i = 0; i < 12; i = i + 1) {
                         BlockVar.blocks.add(new Block(i, i * 150, 150, 150, 70));
 
-                      //  MainGame.logger.finest(String.valueOf(i));
+                        System.out.println(i);
+                        //  MainGame.logger.finest(String.valueOf(i));
                     }
 
                     System.out.println("Block creating done");
@@ -137,17 +116,26 @@ s.setInside(inside);
         SerialConnection.searchArduino();
 
         UIbridge.UpdateConnectionWindowPortsList();
+        Gdx.graphics.setWindowedMode(Var.w,Var.h);
+
+        Gdx.graphics.setContinuousRendering(true);
+       // Gdx.graphics.requestRendering();
+
+
     }
 
 
-    @Override
-    public void render() {
 
+    public void render(float delta) {
+
+        System.out.println("Test");
         try {
 
             //logger.finest("Blöcke "+BlockVar.blocks.size()+" Sichtbare "+ BlockVar.visibleblocks.size());
 
             PositionSaver.save();
+
+            System.out.println("Test");
 
 
             cam.update();
@@ -168,7 +156,7 @@ s.setInside(inside);
             }
 
 
-          UI.updatedragui(shapeRenderer, true, batch);
+            UI.updatedragui(shapeRenderer, true, batch);
 
             if (!Var.isloading) {
                 Block Temp = null;
@@ -214,7 +202,7 @@ s.setInside(inside);
                 }
             }
 
-           UI.updatedragui(shapeRenderer, false, batch);
+            UI.updatedragui(shapeRenderer, false, batch);
             UI.update();
 			/*
 
@@ -244,7 +232,23 @@ s.setInside(inside);
                 cam.position.set(cam.position.x, cam.position.y -= 20, 0);
             }
 
+            if(darkmode) {
+                s.setBackground(AssetLoader.switch_background);
+                s.setBackgroundgreen(AssetLoader.switch_background_green);
+                s.setInside(AssetLoader.switch_inside);
+            }else{
+                s.setBackground(AssetLoader.switch_background_white);
+                s.setBackgroundgreen(AssetLoader.switch_background_green_white);
+                s.setInside(AssetLoader.switch_inside);
+            }
 
+            //s.setSize(1);
+            s.setSize(1f);
+            s.setWackelstärke(1);
+            s.draw();
+            ia.draw(shapeRenderer, batch);
+            textfieldtest.setTextAnordnung(1);
+            textfieldtest.draw();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -270,9 +274,8 @@ s.setInside(inside);
     }
 
 
-    @Override
     public void resize(int width, int height) {
-        super.resize(width, height);
+
 
 
         UI.updateView(width, height);
@@ -285,14 +288,20 @@ h=height;
     }
 
 
-    @Override
+
+
+    public void hide() {
+
+    }
+
+
+
     public void dispose() {
 
 
         //TODO stop Thread Manager Thread
         Data.close();
         batch.dispose();
-        img_block.dispose();
         Gdx.app.exit();
         System.exit(0);
     }
