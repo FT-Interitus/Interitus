@@ -255,15 +255,7 @@ public static Drawable d;
         }
 
 
-        if(darkmode) {
-            s.setBackground(background);
-            s.setBackgroundgreen(Backgroundgreen);
-            s.setInside(inside);
-        }else{
-            s.setBackground(background_white);
-            s.setBackgroundgreen(Backgroundgreen_white);
-            s.setInside(inside_white);
-        }
+
 
         //s.setSize(1);
         s.setSize(1f);
