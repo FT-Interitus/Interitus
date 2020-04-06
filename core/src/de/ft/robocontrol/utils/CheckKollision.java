@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.robocontrol.Block.Block;
-import de.ft.robocontrol.MainGame;
+import de.ft.robocontrol.ProgrammingSpace;
 
 public class CheckKollision {
 
@@ -30,7 +30,7 @@ public class CheckKollision {
     public static boolean checkmousewithblock(Block block) {
 
 
-        return object(block.getX(), block.getY(), block.getH(), block.getW(), (int) MainGame.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) MainGame.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, mousesize, mousesize);
+        return object(block.getX(), block.getY(), block.getH(), block.getW(), (int) ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, mousesize, mousesize);
 
     }
 

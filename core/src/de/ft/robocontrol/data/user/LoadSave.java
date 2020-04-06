@@ -2,8 +2,7 @@ package de.ft.robocontrol.data.user;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.utils.Logger;
-import de.ft.robocontrol.MainGame;
+import de.ft.robocontrol.ProgrammingSpace;
 import de.ft.robocontrol.data.programm.Data;
 import de.ft.robocontrol.data.user.changes.DataManager;
 
@@ -11,7 +10,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
 
-import static de.ft.robocontrol.MainGame.saver;
+import static de.ft.robocontrol.ProgrammingSpace.saver;
 
 public class LoadSave {
     public static void saveas() {
@@ -32,7 +31,7 @@ public class LoadSave {
 
                     if (userSelection == JFileChooser.APPROVE_OPTION) {
                         File fileToSave = fileChooser.getSelectedFile();
-                        MainGame.logger.fine("Save as file: " + fileToSave.getName());
+                        ProgrammingSpace.logger.fine("Save as file: " + fileToSave.getName());
 
 
                         if (fileToSave.getAbsolutePath().contains(".rac")) {
@@ -45,7 +44,7 @@ public class LoadSave {
                             DataSaver.save(Gdx.files.absolute(fileToSave.getAbsolutePath() + ".rac"));
                             DataManager.filename = fileToSave.getName() + ".rac";
                         }
-                        MainGame.logger.fine(DataManager.path);
+                        ProgrammingSpace.logger.fine(DataManager.path);
 
                         if (Data.filename.size() > 9) {
                             Data.filename.remove(0);
@@ -87,11 +86,11 @@ public class LoadSave {
                 JFileChooser fileChooser = new JFileChooser();
 
                 fileChooser.setFileFilter(new FileNameExtensionFilter("Projektdatei (.rac)", "rac"));
-                int result = fileChooser.showOpenDialog(MainGame.saver);
+                int result = fileChooser.showOpenDialog(ProgrammingSpace.saver);
                 if (result == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile();
 
-                    MainGame.logger.fine("Selected file: " + selectedFile.getName());
+                    ProgrammingSpace.logger.fine("Selected file: " + selectedFile.getName());
                     FileHandle handle = Gdx.files.internal(selectedFile.getAbsolutePath());
                     DataManager.path = selectedFile.getAbsolutePath();
                     DataManager.filename = selectedFile.getName();

@@ -2,7 +2,7 @@ package de.ft.robocontrol.data.programm;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
-import de.ft.robocontrol.MainGame;
+import de.ft.robocontrol.ProgrammingSpace;
 import de.ft.robocontrol.Settings;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,7 +12,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.logging.Level;
 
 public class Data {
     public static ArrayList<String> path = new ArrayList<String>();
@@ -27,7 +26,7 @@ public class Data {
         File knowndevices = new File(System.getProperty("user.home") + "/.racd/devices.json");
         Path path = folder.toPath();
         if (!folder.exists()) {
-            MainGame.logger.config("Create Programm Data Folder");
+            ProgrammingSpace.logger.config("Create Programm Data Folder");
 
             folder.mkdir();
             try {
