@@ -101,11 +101,14 @@ public static void searchArduino() {
                             System.out.println("desprictiveportname:   " + testport.getDescriptivePortName());
                         } else {
                             System.out.println("Unable to open the port.");
-                            return;
+
                         }
+                        System.out.println("1");
 
                         testport.setBaudRate(230400);
+                        System.out.println("2");
                         testport.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 10, 0);
+                        System.out.println("3");
 
                          save = System.currentTimeMillis() + 5000;
                       found = false;
@@ -148,7 +151,7 @@ public static void searchArduino() {
                         testport.closePort();
 
                     } catch (ArrayIndexOutOfBoundsException e) {
-
+System.out.println("da ist wohl dreckiger mist aufgetreten der nicht zu suchen hat hier aber doch gemacht");
                     }
 
 
