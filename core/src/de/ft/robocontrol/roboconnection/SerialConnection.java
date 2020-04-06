@@ -155,7 +155,7 @@ public static void searchArduino() {
                         testport.closePort();
 
                     } catch (ArrayIndexOutOfBoundsException e) {
-System.out.println("da ist wohl dreckiger mist aufgetreten der nicht zu suchen hat hier aber doch gemacht");
+System.out.println("da ist wohl dreckiger mist aufgetreten der nicht zu suchen hat hier aber doch gemacht"+e);
                     }
 
 

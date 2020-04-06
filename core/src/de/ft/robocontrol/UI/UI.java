@@ -20,6 +20,7 @@ import de.ft.robocontrol.Var;
 import de.ft.robocontrol.data.programm.Data;
 import de.ft.robocontrol.data.user.changes.SaveChanges;
 import de.ft.robocontrol.input.check.InputManager;
+import de.ft.robocontrol.roboconnection.SerialConnection;
 import de.ft.robocontrol.roboconnection.UIbridge;
 import de.ft.robocontrol.utils.RoundRectangle;
 
@@ -110,10 +111,12 @@ public class UI {
             connectionWindow = new ConnectionWindow();
 
             connectionWindow.show();
+            connectionWindow.selectportlist.setItems(SerialConnection.getPortNames());
             if(!UIbridge.thread.isAlive()) {
 
             }
             UIbridge.thread.start();
+
         }
 
     }
