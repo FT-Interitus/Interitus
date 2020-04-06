@@ -22,7 +22,7 @@ import de.ft.robocontrol.data.user.changes.SaveChanges;
 import de.ft.robocontrol.input.check.InputManager;
 import de.ft.robocontrol.roboconnection.UIbridge;
 import de.ft.robocontrol.utils.RoundRectangle;
-import javafx.scene.control.TextField;
+
 
 import java.io.File;
 import java.io.InputStream;
