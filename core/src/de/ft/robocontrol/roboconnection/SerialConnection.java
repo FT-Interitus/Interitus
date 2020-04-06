@@ -91,6 +91,7 @@ public static void searchArduino() {
 //TODO hier System.out's rausschmeisen
                 SerialPort ports[] = SerialPort.getCommPorts();
                 ConnectionWindow.devicemanagebutton.setDisabled(true);
+                i = 1;
                 ConnectionWindow.devicemanagebutton.setText("Bitte Warten..");
                 for (SerialPort port : ports) {
                     i++;
@@ -155,7 +156,8 @@ public static void searchArduino() {
                         testport.closePort();
 
                     } catch (ArrayIndexOutOfBoundsException e) {
-System.out.println("da ist wohl dreckiger mist aufgetreten der nicht zu suchen hat hier aber doch gemacht"+e);
+
+                        e.printStackTrace();
                     }
 
 

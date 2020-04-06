@@ -68,6 +68,7 @@ public static VisTextButton devicemanagebutton = new VisTextButton("Software bre
     public void show() {
         if(testBuilder==null) {
             testBuilder = new connectionbuilder("Verbindungen", new StandardTableBuilder(padding));
+            testBuilder.pack();
         }
         UI.stage.addActor(testBuilder);
     }
@@ -109,6 +110,7 @@ public static VisTextButton devicemanagebutton = new VisTextButton("Software bre
             content.add(error).padRight(-400);
 
 
+
         }
 
         @Override
@@ -143,7 +145,7 @@ public static VisTextButton devicemanagebutton = new VisTextButton("Software bre
 
             builder.append(CellWidget.of(tabbedPane.getTable()).expandX().fillX().wrap());
             builder.row();
-
+            container.pack();
             builder.append(container);
 
 
@@ -152,11 +154,12 @@ public static VisTextButton devicemanagebutton = new VisTextButton("Software bre
             Table table = builder.build();
 
             add(table).expand().fill();
-            table.setSize(300,300);
+            //table.setSize(300,300);
 
-            pack();
+
 
             centerWindow();
+            pack();
         }
 
 
