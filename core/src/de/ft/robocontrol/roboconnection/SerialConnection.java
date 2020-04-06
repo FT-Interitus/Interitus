@@ -7,8 +7,9 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class SerialConnection {
 
+public class SerialConnection {
+public static boolean isRunning=false;
     public static ArrayList<SerialPort> Arduinos = new ArrayList<SerialPort>();
    static boolean found;
    static int i = 1;
@@ -85,6 +86,7 @@ public static void searchArduino() {
 
     Thread search = new Thread() {
         public void run() {
+            isRunning=true;
             try {
 //TODO hier System.out's rausschmeisen
                 SerialPort ports[] = SerialPort.getCommPorts();
@@ -96,7 +98,7 @@ public static void searchArduino() {
                     //System.out.println(port.getDescriptivePortName() + "   deks");
                     System.out.println("i     " + i);
                     try {
-                        SerialPort testport = ports[1];
+                        SerialPort testport = ports[i-2];
 
                         if (testport.openPort()) {
                             System.out.println("Successfully opened the port."+testport.getSystemPortName());
@@ -176,9 +178,11 @@ System.out.println("da ist wohl dreckiger mist aufgetreten der nicht zu suchen h
             }catch (Exception e) {
                 e.printStackTrace(); //for debug to find errors
             }
+            isRunning=false;
         }
     };
-
-  search.start();
+if(!isRunning) {
+    search.start();
+}
 }
 }
