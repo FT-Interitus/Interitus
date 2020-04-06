@@ -259,6 +259,7 @@ public class Block {
     }
 
     public void draw(SpriteBatch batch, ShapeRenderer shape, BitmapFont font) {
+        batch.setColor(1,1,1,1);
 
 
         if (!this.blockupdate.toggle) {

@@ -68,7 +68,6 @@ public static Drawable d;
 
     @Override
     public void create() {
-        textfieldtest=new TextField(500,600,100,25);
         ia=new IntegerAuswahl(400,400,50,25);
         s=new Switch(500,500);
 font=  new BitmapFont();
@@ -126,8 +125,10 @@ s.setInside(inside);
         cam.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
 
 //Achtung hier ist die Reihenfolge richtig
+        textfieldtest=new TextField(500,600,100,25);
         Data.init();
         UI.init();
+
 
 
         ThreadManager.init();
