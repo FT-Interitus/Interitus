@@ -125,10 +125,10 @@ s.setInside(inside);
         cam.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
 
 //Achtung hier ist die Reihenfolge richtig
-        textfieldtest=new TextField(500,600,100,25);
         Data.init();
         UI.init();
 
+        textfieldtest=new TextField(500,600,100,25);
 
 
         ThreadManager.init();

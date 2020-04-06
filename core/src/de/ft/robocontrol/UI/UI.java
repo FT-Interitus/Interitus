@@ -1,6 +1,7 @@
 package de.ft.robocontrol.UI;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -18,10 +19,13 @@ import de.ft.robocontrol.Settings;
 import de.ft.robocontrol.Var;
 import de.ft.robocontrol.data.programm.Data;
 import de.ft.robocontrol.data.user.changes.SaveChanges;
+import de.ft.robocontrol.input.check.InputManager;
 import de.ft.robocontrol.roboconnection.UIbridge;
 import de.ft.robocontrol.utils.RoundRectangle;
+import javafx.scene.control.TextField;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -120,7 +124,9 @@ public class UI {
 
         root.setFillParent(true);
         stage.addActor(root);
-        Gdx.input.setInputProcessor(stage);
+
+        InputManager.addProcessor(stage);
+        InputManager.updateMultiplexer();
 
         set = new SettingsUI();
 

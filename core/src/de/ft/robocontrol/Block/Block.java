@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Frustum;
-import com.sun.org.apache.xalan.internal.lib.ExsltBase;
 import de.ft.robocontrol.MainGame;
 import de.ft.robocontrol.ThreadManager;
 import de.ft.robocontrol.data.user.changes.DataManager;
