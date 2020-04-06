@@ -3,9 +3,7 @@ package de.ft.robocontrol.loading;
 import com.badlogic.gdx.*;
 
 
-import de.ft.robocontrol.MainGame;
 import de.ft.robocontrol.Programm;
-import de.ft.robocontrol.Var;
 import de.ft.robocontrol.Welcome;
 
 
@@ -33,7 +31,7 @@ public Loading() {
             AssetLoader.save();
 
             if(Programm.inLoading==true) {
-                System.out.println("Hier");
+
                 Programm.inLoading = false;
                 this.dispose();
                 Programm.INSTANCE.setScreen(new Welcome());

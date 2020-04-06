@@ -18,8 +18,8 @@ public class Welcome extends ScreenAdapter implements Screen {
 
 
     public void render(float delta) {
-        Programm.INSTANCE.setScreen(new MainGame()); //TODO hier ändern
-System.out.println("Test Rendere");
+        Programm.INSTANCE.setScreen(new ProgrammingSpace()); //TODO hier ändern
+;
         if(Settings.darkmode) {
             Gdx.gl.glClearColor(0.23f, 0.23f, 0.23f, 1);
         }else{

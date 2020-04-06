@@ -21,7 +21,7 @@ public class Programm extends Game {
     public void create() {
 
 
-        System.out.println("Test");
+
 
         setScreen(new Loading());
 
