@@ -58,7 +58,6 @@ project(":core") {
 
 
     dependencies {
-        api "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
         compile 'com.fazecast:jSerialComm:[2.0.0,3.0.0)'
         compile "com.kotcrab.vis:vis-ui:$visuiVersion"
         compile 'org.json:json:20171018'

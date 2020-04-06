@@ -5,12 +5,12 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Frustum;
-import de.ft.robocontrol.loading.AssetLoader;
 import de.ft.robocontrol.MainGame;
 import de.ft.robocontrol.ThreadManager;
 import de.ft.robocontrol.data.user.changes.DataManager;
-import de.ft.robocontrol.loading.AssetLoader;
 import de.ft.robocontrol.utils.CheckKollision;
+
+import java.util.concurrent.ExecutionException;
 
 public class Block {
     public boolean seted = true;
@@ -262,24 +262,24 @@ public class Block {
 
 
         if (!this.blockupdate.toggle) {
-            batch.draw(AssetLoader.img_block, this.getX(), this.getY(), this.getW(), this.getH());
+            batch.draw(MainGame.img_block, this.getX(), this.getY(), this.getW(), this.getH());
         } else {
-            batch.draw(AssetLoader.img_block_mouseover, this.getX(), this.getY(), this.getW(), this.getH());
+            batch.draw(MainGame.img_mouseover, this.getX(), this.getY(), this.getW(), this.getH());
         }
 
         if (this.isMarked()) {
-            batch.draw(AssetLoader.img_marked, this.getX(), this.getY(), this.getW(), this.getH());
+            batch.draw(MainGame.img_marked, this.getX(), this.getY(), this.getW(), this.getH());
         }
         if (BlockVar.biggestblock == this) {
             if (this.isShowdupulicate_rechts()) {
                 batch.setColor(1, 1, 1, 0.5f);
-                batch.draw(AssetLoader.img_block, this.x_dup_rechts, this.y, this.getW(), this.getH());
+                batch.draw(MainGame.img_block, this.x_dup_rechts, this.y, this.getW(), this.getH());
                 batch.setColor(1, 1, 1, 1);
             }
 
             if (this.isShowdupulicate_links()) {
                 batch.setColor(1, 1, 1, 0.5f);
-                batch.draw(AssetLoader.img_block, this.x_dup_links, this.y, this.getW(), this.getH());
+                batch.draw(MainGame.img_block, this.x_dup_links, this.y, this.getW(), this.getH());
                 batch.setColor(1, 1, 1, 1);
             }
         }
