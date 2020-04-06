@@ -32,6 +32,7 @@ public class UIbridge {
                 time.scheduleAtFixedRate(new TimerTask() {
                     @Override
                     public void run() {
+
                         try {
 
                             if (ConnectionWindow.devicemanagebutton != null && ConnectionWindow.selectboardlist != null) {

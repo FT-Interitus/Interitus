@@ -70,7 +70,7 @@ public class SerialConnection {
                 number = Integer.parseInt(data.nextLine());
             } catch (Exception e) {
             }
-           // System.out.println("nubmer    "+number);
+            //System.out.println("nubmer    "+number);
             return number;
         }else{
             return -1;
@@ -88,19 +88,19 @@ public static void searchArduino() {
             try {
 //TODO hier System.out's rausschmeisen
                 SerialPort ports[] = SerialPort.getCommPorts();
-                System.out.println("Select a port:");
                 ConnectionWindow.devicemanagebutton.setDisabled(true);
                 ConnectionWindow.devicemanagebutton.setText("Bitte Warten..");
                 for (SerialPort port : ports) {
-                    System.out.println(i++ + ". " + port.getSystemPortName());
-                    System.out.println(port.getDescriptivePortName() + "   deks");
+                    i++;
+                    //System.out.println(i++ + ". " + port.getSystemPortName());
+                    //System.out.println(port.getDescriptivePortName() + "   deks");
                     System.out.println("i     " + i);
                     try {
-                        SerialPort testport = ports[i - 2]; //TODO Hier noch ein Fehler
+                        SerialPort testport = ports[1];
 
                         if (testport.openPort()) {
-                            System.out.println("Successfully opened the port.");
-                            System.out.println("baudrate:   " + testport.getDescriptivePortName());
+                            System.out.println("Successfully opened the port."+testport.getSystemPortName());
+                            System.out.println("desprictiveportname:   " + testport.getDescriptivePortName());
                         } else {
                             System.out.println("Unable to open the port.");
                             return;
@@ -111,18 +111,22 @@ public static void searchArduino() {
 
                          save = System.currentTimeMillis() + 5000;
                       found = false;
+                      System.out.println("checkstart");
                         while (System.currentTimeMillis() < save && found == false) {
                             if (empfangen(testport) == 1234) {
                                 System.out.println("Arduino gefunden");
                                 found = true;
                             }
                         }
-
+                        System.out.println("checkend");
+                System.out.println(found);
                         if (found == false) {
                             testport.closePort();
+                            System.out.println("arduino nicht gefunden");
                         }
                         if (found == true) {
 
+                            System.out.println("arduino gefunden");
 
                             if (Arduinos.size() == 0) {
                                 Arduinos.add(testport);

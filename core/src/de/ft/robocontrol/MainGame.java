@@ -265,6 +265,7 @@ s.setInside(inside);
         s.setSize(1f);
         s.setWackelstärke(1);
         s.draw();
+        ia.setButtonposition(1);
         ia.draw(shapeRenderer, batch);
         textfieldtest.setTextAnordnung(1);
         textfieldtest.draw();
