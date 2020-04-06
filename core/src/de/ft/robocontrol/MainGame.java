@@ -1,8 +1,6 @@
 package de.ft.robocontrol;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -21,6 +19,7 @@ import de.ft.robocontrol.UI.UI;
 import de.ft.robocontrol.data.programm.Data;
 import de.ft.robocontrol.data.user.changes.DataManager;
 import de.ft.robocontrol.input.TextField;
+import de.ft.robocontrol.loading.AssetLoader;
 import de.ft.robocontrol.roboconnection.SerialConnection;
 import de.ft.robocontrol.roboconnection.UIbridge;
 import de.ft.robocontrol.utils.PositionSaver;
@@ -31,12 +30,10 @@ import java.util.logging.Logger;
 import static com.badlogic.gdx.Gdx.input;
 import static de.ft.robocontrol.Settings.*;
 
-public class MainGame extends ApplicationAdapter {
+public class MainGame extends ScreenAdapter implements Screen {
     public static SpriteBatch UIbatch;
     public static SpriteBatch batch;
-    public static Texture img_block;
-    public static Texture img_mouseover;
-    public static Texture img_marked;
+
     public static OrthographicCamera cam;
     public static Viewport viewport;
     public static Component saver;
@@ -47,13 +44,6 @@ public class MainGame extends ApplicationAdapter {
     public static Switch s;
     public static TextField textfieldtest;
 
-    Texture background;
-    Texture inside;
-    Texture Backgroundgreen;
-
-    Texture background_white;
-    Texture inside_white;
-    Texture Backgroundgreen_white;
 
     IntegerAuswahl ia;
     public static int w=0;
@@ -66,8 +56,8 @@ public static Drawable d;
     ShapeRenderer shapeRenderer;
 
 
-    @Override
-    public void create() {
+
+    public  MainGame() {
         ia=new IntegerAuswahl(400,400,50,25);
         s=new Switch(500,500);
 font=  new BitmapFont();
@@ -77,17 +67,6 @@ font=  new BitmapFont();
         batch = new SpriteBatch();
         UIbatch = new SpriteBatch();
 
-        img_block = new Texture("block.png");
-        img_mouseover = new Texture("block_mouseover.png");
-        img_marked = new Texture("block_marked.png");
-
-        background=new Texture("switchbackground.png");
-        inside=new Texture("switchinside.png");
-        Backgroundgreen=new Texture("switchbackgroundgreen.png");
-
-        background_white=new Texture("switchbackground_white.png");
-        inside_white=new Texture("switchinside.png");
-        Backgroundgreen_white=new Texture("switchbackground_whitegreen.png");
 
         logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
         logger.setLevel(logLevel);
@@ -95,9 +74,9 @@ font=  new BitmapFont();
         Gdx.graphics.setTitle("New File");
         DataManager.filename = "New File";
 
-s.setBackground(background);
-s.setBackgroundgreen(Backgroundgreen);
-s.setInside(inside);
+s.setBackground(AssetLoader.switch_background);
+s.setBackgroundgreen(AssetLoader.switch_background_green);
+s.setInside(AssetLoader.switch_inside);
         Thread blockdebugcreater = new Thread() {
             @Override
             public void run() {
@@ -137,11 +116,13 @@ s.setInside(inside);
         SerialConnection.searchArduino();
 
         UIbridge.UpdateConnectionWindowPortsList();
+        Gdx.graphics.setWindowedMode(Var.w, Var.h);
     }
 
 
+
     @Override
-    public void render() {
+    public void render(float delta) {
 
         try {
 
@@ -151,6 +132,7 @@ s.setInside(inside);
 
 
             cam.update();
+
 
             if (darkmode) {
                 Gdx.gl.glClearColor(1, 0, 0, 1);
@@ -252,13 +234,13 @@ s.setInside(inside);
 
 
         if(darkmode) {
-            s.setBackground(background);
-            s.setBackgroundgreen(Backgroundgreen);
-            s.setInside(inside);
+            s.setBackground(AssetLoader.switch_background);
+            s.setBackgroundgreen(AssetLoader.switch_background_green);
+            s.setInside(AssetLoader.switch_inside);
         }else{
-            s.setBackground(background_white);
-            s.setBackgroundgreen(Backgroundgreen_white);
-            s.setInside(inside_white);
+            s.setBackground(AssetLoader.switch_background_white);
+            s.setBackgroundgreen(AssetLoader.switch_background_green_white);
+            s.setInside(AssetLoader.switch_inside);
         }
 
         //s.setSize(1);
@@ -300,7 +282,6 @@ h=height;
         //TODO stop Thread Manager Thread
         Data.close();
         batch.dispose();
-        img_block.dispose();
         Gdx.app.exit();
         System.exit(0);
     }
