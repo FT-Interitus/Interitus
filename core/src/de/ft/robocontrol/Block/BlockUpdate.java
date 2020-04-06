@@ -3,7 +3,7 @@ package de.ft.robocontrol.Block;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import de.ft.robocontrol.ProgrammingSpace;
+import de.ft.robocontrol.MainGame;
 import de.ft.robocontrol.data.user.changes.DataManager;
 import de.ft.robocontrol.utils.CheckKollision;
 
@@ -57,16 +57,16 @@ public class BlockUpdate extends Thread {
                         BlockVar.marked = true;
                         block.setMarked(true);
                         BlockVar.markedblock = block;
-                        BlockVar.unterschiedsave.set(ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x - block.getX(), ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y - block.getY());
+                        BlockVar.unterschiedsave.set(MainGame.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x - block.getX(), MainGame.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y - block.getY());
 
                     }
 
 
                     if (BlockVar.ismoving == false && !block.isMoving() && block.isMarked() && Gdx.input.isButtonPressed(0)) {
                         int feld = 2;
-                        if (Math.abs(BlockVar.mousepressedold.x - ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x) > feld || Math.abs(BlockVar.mousepressedold.y - ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y) > feld) {
+                        if (Math.abs(BlockVar.mousepressedold.x - MainGame.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x) > feld || Math.abs(BlockVar.mousepressedold.y - MainGame.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y) > feld) {
                             if (block.isMoving() == false && BlockVar.ismoving == false) {
-                                BlockVar.unterschiedsave.set(ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x - block.getX(), ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y - block.getY());
+                                BlockVar.unterschiedsave.set(MainGame.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x - block.getX(), MainGame.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y - block.getY());
 
 
                                 DataManager.change(block, false, false);
@@ -83,8 +83,8 @@ public class BlockUpdate extends Thread {
 
                     if (block.isMoving() && Gdx.input.isButtonPressed(0)) {
 
-                        block.setX((int) (ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x - BlockVar.unterschiedsave.x));
-                        block.setY((int) (ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y - BlockVar.unterschiedsave.y));
+                        block.setX((int) (MainGame.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x - BlockVar.unterschiedsave.x));
+                        block.setY((int) (MainGame.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y - BlockVar.unterschiedsave.y));
 
                         //Wenn der Mauszeiger die Ablagefläche berührt
                         // if(CheckKollision.checkmousewithobject(,Gdx.input.getY())) {

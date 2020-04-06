@@ -11,7 +11,7 @@ import com.kotcrab.vis.ui.widget.Menu;
 import com.kotcrab.vis.ui.widget.MenuItem;
 import com.kotcrab.vis.ui.widget.PopupMenu;
 import de.ft.robocontrol.Block.BlockVar;
-import de.ft.robocontrol.ProgrammingSpace;
+import de.ft.robocontrol.MainGame;
 import de.ft.robocontrol.Var;
 import de.ft.robocontrol.data.programm.Data;
 import de.ft.robocontrol.data.user.DataLoader;
@@ -46,7 +46,7 @@ if(fullscreen==false) {
     fullscreen=true;
 }else{
     Gdx.graphics.setWindowedMode(Var.w, Var.h);
-    ProgrammingSpace.batch.getProjectionMatrix().setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+    MainGame.batch.getProjectionMatrix().setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     Gdx.gl.glViewport(0, 0, Gdx.graphics.getBackBufferWidth(), Gdx.graphics.getBackBufferHeight());
     fullscreen=false;
 }

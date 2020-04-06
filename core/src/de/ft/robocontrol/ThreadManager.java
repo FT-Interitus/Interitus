@@ -36,7 +36,7 @@ public class ThreadManager {
                     public void run() {
 
                         try {
-                            camfr = ProgrammingSpace.cam.frustum;
+                            camfr = MainGame.cam.frustum;
 
 
                             for (int i = 0; i < BlockVar.blocks.size(); i++) {
