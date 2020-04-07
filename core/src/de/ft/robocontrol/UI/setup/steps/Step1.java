@@ -6,6 +6,7 @@ import com.kotcrab.vis.ui.building.utilities.Padding;
 import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisTable;
 import com.kotcrab.vis.ui.widget.VisTextField;
+import de.ft.robocontrol.UI.setup.SetupWindow;
 
 public class Step1 {
     public static VisTextField name=new VisTextField();
@@ -22,7 +23,6 @@ public class Step1 {
         builder.append(CellWidget.of(auftrag).expandX().wrap()).row();
         builder.append(CellWidget.of(namelable).expandX().wrap());
         builder.append(CellWidget.of(name).expandX().wrap()).row();
-
 
     }
 }

@@ -140,7 +140,7 @@ public class UIbridge {
 
 
                             } else {
-                                VerbindungsSpeicher.verbundungen.add(new VerbindungsSpeicher("Neue Verbindung"));
+                                //VerbindungsSpeicher.verbundungen.add(new VerbindungsSpeicher("Neue Verbindung"));
                                 KnownDeviceManager.addnewdevice();
                             }
 
