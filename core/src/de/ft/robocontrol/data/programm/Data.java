@@ -177,7 +177,7 @@ public class Data {
         }
 
 
-        recent.writeString(recent.toString(), false);
+        recent.writeString(recent_obj.toString(), false);
         /////////////////////////////////////////////////////////////////////
 
 
