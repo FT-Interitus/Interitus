@@ -49,12 +49,13 @@ public class SetupWindow {
             setModal(true);
             closeOnEscape();
             addCloseButton();
-
+            setLayoutEnabled(false);
             builder.setTablePadding(new Padding(20, 30, 20, 30));
 
-            builder.append(CellWidget.of(Button_cancle).fillX().expandX().wrap());
-            builder.append(CellWidget.of(Button_previouse).fillX().expandX().wrap());
-            builder.append(CellWidget.of(Button_next).fillX().expandX().wrap());
+
+            builder.append(CellWidget.of(Button_cancle).fillX().width(60).padding(new Padding(0,600-60-80-50-50,0,0)).wrap());
+            builder.append(CellWidget.of(Button_previouse).fillX().width(80).wrap());
+            builder.append(CellWidget.of(Button_next).fillX().width(50).wrap());
 
 
             Table table = builder.build();

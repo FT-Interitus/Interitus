@@ -84,6 +84,7 @@ public static VisTextButton devicemanagebutton = new VisTextButton("Software bre
             VisList visList = new VisList();
 
 
+
             error = new VisLabel("");
             error.setColor(Color.RED);
             content = new VisTable();
