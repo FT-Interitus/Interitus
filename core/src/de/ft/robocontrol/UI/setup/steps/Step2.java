@@ -1,6 +1,8 @@
 package de.ft.robocontrol.UI.setup.steps;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.kotcrab.vis.ui.building.TableBuilder;
 import com.kotcrab.vis.ui.building.utilities.CellWidget;
 import com.kotcrab.vis.ui.building.utilities.Padding;
@@ -18,21 +20,146 @@ import java.util.TimerTask;
 public class Step2 {
 
     public static VisSelectBox<String> selectPlatform;
+    public static VisSelectBox<String> selectBoardArt;
     public static CharSequence auftragtext = "Hier wählst du bitte deine Plattform aus.";
     public static VisLabel auftrag = new VisLabel(auftragtext);
     public static Timer time = new Timer();
+
+    public static int shownext=0; ///////////////////0 Bitte Auswählen;1 Arduino;2 EV3;3 Raspberry Pi/////////////////
 
     public Step2() {
 
     }
 
-    public static void step2(VisTable builder) {
+    public static void step2(final VisTable builder) {
+        update();
         builder.add(auftrag).expandX().row();
-        SetupWindow.errorLabel.setText("STep2");
         selectPlatform = new VisSelectBox<String>();
-        selectPlatform.setItems("Arduino","EV3","Raspberry Pi");
-        builder.add(selectPlatform);
+        selectBoardArt = new VisSelectBox<String>();
+        selectPlatform.setItems("Bitte auswählen","Arduino","EV3","Raspberry Pi");
+        builder.add(selectPlatform).row();
+        builder.row();
+        builder.add(selectBoardArt).padBottom(-50);
+        selectBoardArt.setVisible(false);
 
+        SetupWindow.Button_next.setDisabled(true);
+        SetupWindow.errorLabel.setColor(1,0,0,1);
+        SetupWindow.errorLabel.setText("Bitte wähle eine Platform aus");
+        selectPlatform.setColor(1,0,0,1);
+        selectBoardArt.setColor(1,0,0,1);
+
+
+        selectPlatform.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                if(selectPlatform.getSelected().equals("Bitte auswählen")){
+                    SetupWindow.Button_next.setDisabled(true);
+                    SetupWindow.errorLabel.setColor(1,0,0,1);
+                    SetupWindow.errorLabel.setText("Bitte wähle eine Platform aus");
+                    selectBoardArt.setVisible(false);
+                    selectPlatform.setColor(1,0,0,1);
+                    selectBoardArt.setSelected("Bitte auswählen");
+                    shownext=0;
+
+
+                }else{
+                    selectPlatform.setColor(0,1,0,1);
+                    if(selectPlatform.getSelected().equals("Arduino")){
+                        selectBoardArt.setItems("Bitte auswählen","UNO","MEGA");
+                        selectBoardArt.setVisible(true);
+                        SetupWindow.errorLabel.setColor(1,0,0,1);
+                        selectBoardArt.setSelected("Bitte auswählen");
+
+                        SetupWindow.errorLabel.setColor(1,0,0,1);
+                        SetupWindow.errorLabel.setText("Bitte wähle ein Arduino Board aus");
+                        shownext=1;
+
+
+
+                    }
+                    if(selectPlatform.getSelected().equals("EV3")){
+                        selectBoardArt.setVisible(false);
+                        shownext=2;
+
+
+
+                    }
+                    if(selectPlatform.getSelected().equals("Raspberry Pi")){
+                        selectBoardArt.setItems("Bitte auswählen","Pi 3","zero","anderer");
+                        selectBoardArt.setVisible(true);
+                        SetupWindow.errorLabel.setColor(1,0,0,1);
+                        selectBoardArt.setSelected("Bitte auswählen");
+                        SetupWindow.errorLabel.setColor(1,0,0,1);
+                        SetupWindow.errorLabel.setText("Bitte wähle ein Pi aus");
+                        shownext=3;
+
+
+                    }
+
+                }
+
+            }
+        });
+
+
+        selectBoardArt.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                if(selectBoardArt.getSelected().equals("Bitte auswählen")){
+                    selectBoardArt.setColor(1,0,0,1);
+                }
+                switch (shownext){
+                    case 0:
+
+                        break;
+                    case 1:
+                        if(selectBoardArt.getSelected().equals("UNO")){
+                            selectBoardArt.setColor(0,1,0,1);
+                            SetupWindow.errorLabel.setColor(0,1,0,1);
+                            SetupWindow.errorLabel.setText("Alle Voraussetzungen erfüllt");
+                            SetupWindow.Button_next.setDisabled(false);
+                        }else
+                        if(selectBoardArt.getSelected().equals("MEGA")){
+                            selectBoardArt.setColor(0,1,0,1);
+                            SetupWindow.errorLabel.setColor(0,1,0,1);
+                            SetupWindow.errorLabel.setText("Alle Voraussetzungen erfüllt");
+                            SetupWindow.Button_next.setDisabled(false);
+                        }else{
+                            SetupWindow.errorLabel.setColor(1,0,0,1);
+                            SetupWindow.errorLabel.setText("Bitte wähle ein Arduino Board aus");
+                            SetupWindow.Button_next.setDisabled(true);
+                        }
+                        break;
+                    case 2:
+
+                        break;
+                    case 3:
+                        if(selectBoardArt.getSelected().equals("Pi 3")){
+                            selectBoardArt.setColor(0,1,0,1);
+                            SetupWindow.errorLabel.setColor(0,1,0,1);
+                            SetupWindow.errorLabel.setText("Alle Voraussetzungen erfüllt");
+                            SetupWindow.Button_next.setDisabled(false);
+                        }else
+                        if(selectBoardArt.getSelected().equals("zero")){
+                            selectBoardArt.setColor(0,1,0,1);
+                            SetupWindow.errorLabel.setColor(0,1,0,1);
+                            SetupWindow.errorLabel.setText("Alle Voraussetzungen erfüllt");
+                            SetupWindow.Button_next.setDisabled(false);
+                        }else
+                        if(selectBoardArt.getSelected().equals("anderer")){
+                            selectBoardArt.setColor(0,1,0,1);
+                            SetupWindow.errorLabel.setColor(0,1,0,1);
+                            SetupWindow.errorLabel.setText("Alle Voraussetzungen erfüllt");
+                            SetupWindow.Button_next.setDisabled(false);
+                        }else{
+                            SetupWindow.errorLabel.setColor(1,0,0,1);
+                            SetupWindow.errorLabel.setText("Bitte wähle ein Pi aus");
+                            SetupWindow.Button_next.setDisabled(true);
+                        }
+                        break;
+                }
+            }
+        });
 
     }
 

@@ -40,6 +40,7 @@ public class Step1 {
 
 
     public static void step1(VisTable builder) {
+        update();
 
         builder.add(auftrag).expandX().padBottom(-100).row();
         builder.add(namelable).expandX().padBottom(-200).padLeft(-100);

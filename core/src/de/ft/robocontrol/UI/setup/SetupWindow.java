@@ -91,7 +91,7 @@ public class SetupWindow {
             builder.append(buttonTable);
 
 
-            Step1.update();
+
 
 
             Table table = builder.build();
