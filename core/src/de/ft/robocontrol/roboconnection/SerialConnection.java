@@ -88,9 +88,13 @@ public static void searchArduino() {
             try {
 //TODO hier System.out's rausschmeisen
                 SerialPort ports[] = SerialPort.getCommPorts();
-                ConnectionWindow.devicemanagebutton.setDisabled(true);
+                if(ConnectionWindow.devicemanagebutton!=null) {
+                    ConnectionWindow.devicemanagebutton.setDisabled(true);
+                }
                 i = 1;
-                ConnectionWindow.devicemanagebutton.setText("Bitte Warten..");
+                if(ConnectionWindow.devicemanagebutton!=null) {
+                    ConnectionWindow.devicemanagebutton.setText("Bitte Warten..");
+                }
                 for (SerialPort port : ports) {
                     i++;
 

@@ -202,7 +202,7 @@ s.setInside(AssetLoader.switch_inside);
             }
 
            UI.updatedragui(shapeRenderer, false, batch);
-            UI.update();
+
 			/*
 
 		for(int b=0;b<BlockVar.blocks.size();b=b+1) {
@@ -257,7 +257,7 @@ s.setInside(AssetLoader.switch_inside);
         textfieldtest.setTextAnordnung(1);
         textfieldtest.draw();
 
-
+        UI.update();
 
 
 
