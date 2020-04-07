@@ -50,8 +50,7 @@ public class SetupWindow {
             closeOnEscape();
             addCloseButton();
 
-
-            builder.setTablePadding(new Padding(0, 0, 0, 0));
+            builder.setTablePadding(new Padding(20, 30, 20, 30));
 
             builder.append(CellWidget.of(Button_cancle).fillX().expandX().wrap());
             builder.append(CellWidget.of(Button_previouse).fillX().expandX().wrap());
@@ -60,8 +59,7 @@ public class SetupWindow {
 
             Table table = builder.build();
 
-            add(table).expand().fill();
-            //table.setSize(300,300);
+            add(table).expand().fill().size(600,450);
 
 
             centerWindow();
