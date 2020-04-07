@@ -194,6 +194,7 @@ if(fullscreen==false) {
         fileMenu.addItem(new MenuItem("Beenden", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                Data.close();
                 System.exit(0);
             }
         }).setShortcut("Alt+F4"));

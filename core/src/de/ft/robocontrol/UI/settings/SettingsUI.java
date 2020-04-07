@@ -43,7 +43,7 @@ public class SettingsUI extends VisWindow {
      * 7 = item 2.3
      *
      * 8 = Programme Einstellungen
-     * 9 = item 3.1
+     * 9 = Daten
      * 10 = item 3.2
      * 11 = item 3.3
      *
@@ -64,6 +64,7 @@ public class SettingsUI extends VisWindow {
 
     public void show() {
 
+        container.clearChildren();
         instructions.add(container);
         testBuilder = new TestBuilder("Einstellungen", new StandardTableBuilder(padding));
         UI.stage.addActor(testBuilder);
@@ -191,7 +192,7 @@ public class SettingsUI extends VisWindow {
             item2.add(new TestNode(new VisLabel(" item 2.2"),6));
             item2.add(new TestNode(new VisLabel(" item 2.3"),7));
 
-            item3.add(new TestNode(new VisLabel(" item 3.1"),9));
+            item3.add(new TestNode(new VisLabel(" Daten"),9));
             item3.add(new TestNode(new VisLabel(" item 3.2"),10));
             item3.add(new TestNode(new VisLabel(" item 3.3"),11));
 

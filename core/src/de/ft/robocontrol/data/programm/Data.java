@@ -16,11 +16,11 @@ import java.util.ArrayList;
 public class Data {
     public static ArrayList<String> path = new ArrayList<String>();
     public static ArrayList<String> filename = new ArrayList<String>();
-
+    private static File folder;
 
     public static void init() {
 
-        File folder = new File(System.getProperty("user.home") + "/.racd");
+         folder = new File(System.getProperty("user.home") + "/.racd");
         File recent = new File(System.getProperty("user.home") + "/.racd/recent.json");
         File settings = new File(System.getProperty("user.home") + "/.racd/settings.json");
         File knowndevices = new File(System.getProperty("user.home") + "/.racd/devices.json");
@@ -202,4 +202,21 @@ public class Data {
     }
 
 
+    public static long getprogrammfoldersize() {
+
+        long length = 0;
+        for (int i =0;i<folder.listFiles().length;i++) {
+            if (folder.listFiles()[i].isFile())
+                length += folder.listFiles()[i].length();
+            else
+                length += folder.length();
+        }
+        return length;
+
+    }
+
+
+    public static void delete() {
+        folder.delete();
+    }
 }
