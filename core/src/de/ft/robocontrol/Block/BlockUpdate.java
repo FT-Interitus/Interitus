@@ -12,19 +12,19 @@ import java.util.TimerTask;
 
 
 public class BlockUpdate extends Thread {
-    public Block block;
-    public boolean isrunning = true;
-    public Timer time;
-    boolean toggle;
-    Vector2 temp1;
+    public Block block; //Der zugehörige Block den die Klasse updated
+    public boolean isrunning = true; //Läuft der Thread gerade?
+    public Timer time; //das  ist der Timer in dem alle Update Vorgänge laufen
+    boolean toggle; // Ist der Block von der mouse gehovert?
+    Vector2 temp1; //Temp vectoren für berechnungs zwischen schritte
     Vector2 temp2;
     Vector3 temp3;
     Vector3 temp4;
 
     BlockUpdate(Block block) {
-        this.block = block;
+        this.block = block; //Der Block wird zu gewiesen
 
-        temp1 = new Vector2(0,0);
+        temp1 = new Vector2(0,0);//Temp Vectoren init
         temp2 = new Vector2(0,0);
         temp3 = new Vector3(0,0,0);
         temp4 = new Vector3(0,0,0);
@@ -41,15 +41,19 @@ public class BlockUpdate extends Thread {
                 try {
 
 
-                    if (block == null) {
+                    if (block == null) { //Wenn kein Block mehr verbunden ist wird der timer beendet und damit auch der thread
                         time.cancel();
                     }
-                    if (block.getIndex() == -1) {
+                    if (block.getIndex() == -1) { //Wenn der Block gelöscht wird d.h. er hat einen Index von -1 wird der Timer beendet und damit auch der Thread
                         time.cancel();
                         time.purge();
                     }
 
-                    toggle = de.ft.robocontrol.utils.CheckKollision.checkmousewithblock(block);
+                    toggle = de.ft.robocontrol.utils.CheckKollision.checkmousewithblock(block); //Wird der Block von der Mouse gehovert
+
+                    //TODO
+                    //TODO      Kommentierung fortsetzen (Abgebrochen da hier noch sehr viele Änderungen passieren werden)
+                    //TODO
 
 
                     if (de.ft.robocontrol.utils.CheckKollision.checkmousewithblock(block, BlockVar.mousepressedold) && Gdx.input.isButtonPressed(0) && BlockVar.ismoving == false && !block.isMarked() && !BlockVar.marked && BlockVar.markedblock == null) {

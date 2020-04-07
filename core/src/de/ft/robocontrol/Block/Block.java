@@ -239,11 +239,11 @@ public class Block {
             Thread calcnew = new Thread() { //Da dies relativ lange dauert dauert in einem eigenen Thread
                 @Override
                 public void run() {
-                    for (int i = temp; i < BlockVar.blocks.size(); i++) { //Durch alle Indexe des Block Arrays wird durchgegangen alle die einen größeren Index haben
+                    for (int i = temp; i < BlockVar.blocks.size(); i++) { //Durch alle Indexe des Block Arrays wird durchgegangen alle die einen größeren Index haben //Durch die Temp variable kann der alte Index des Blocks hier wieder verwendet werden
                         try {
                             BlockVar.blocks.get(i).setIndex(BlockVar.blocks.get(i).getIndex() - 1); //Alle anderen Blöcke werden um einen Index verschoben
                         }catch (Exception e) {
-                            e.printStackTrace();
+                            e.printStackTrace(); //Hier können Fehler aufreten wenn die Blöcke in der zwischen Zeit gelööscht worden sind //TODO mit 1000000 Blöcke ausprobieren ob hier die Indexe richtig sich verhalten wenn man 2 blöcke löscht bevor das hier abgschlossen ist
                         }
 
                     }
@@ -254,7 +254,7 @@ public class Block {
 
 
             try {
-                BlockVar.blocks.remove(this);
+                BlockVar.blocks.remove(this); //Der Block entfernet sich selbst aus dem Blocks Array
             } catch (Exception e) {
 
             }
@@ -272,38 +272,38 @@ public class Block {
 
 
         if (!this.blockupdate.toggle) {
-            batch.draw(AssetLoader.img_block, this.getX(), this.getY(), this.getW(), this.getH());
+            batch.draw(AssetLoader.img_block, this.getX(), this.getY(), this.getW(), this.getH()); // Block ohne das er makiert ist
         } else {
-            batch.draw(AssetLoader.img_block_mouseover, this.getX(), this.getY(), this.getW(), this.getH());
+            batch.draw(AssetLoader.img_block_mouseover, this.getX(), this.getY(), this.getW(), this.getH()); // Block wenn er makiert ist
         }
 
         if (this.isMarked()) {
-            batch.draw(AssetLoader.img_marked, this.getX(), this.getY(), this.getW(), this.getH());
+            batch.draw(AssetLoader.img_marked, this.getX(), this.getY(), this.getW(), this.getH()); // Wenn der Block makiert ist
         }
         if (BlockVar.biggestblock == this) {
             if (this.isShowdupulicate_rechts()) {
                 batch.setColor(1, 1, 1, 0.5f);
-                batch.draw(AssetLoader.img_block, this.x_dup_rechts, this.y, this.getW(), this.getH());
+                batch.draw(AssetLoader.img_block, this.x_dup_rechts, this.y, this.getW(), this.getH()); //Wenn der Block die größte überlappung hat wird er als show duplicat angezigt
                 batch.setColor(1, 1, 1, 1);
             }
 
             if (this.isShowdupulicate_links()) {
                 batch.setColor(1, 1, 1, 0.5f);
-                batch.draw(AssetLoader.img_block, this.x_dup_links, this.y, this.getW(), this.getH());
+                batch.draw(AssetLoader.img_block, this.x_dup_links, this.y, this.getW(), this.getH()); //das gleiche für links
                 batch.setColor(1, 1, 1, 1);
             }
         }
 
-        if (this.getLeft() != null) {
+        if (this.getLeft() != null) { //Verbindungs marke ob der Nachbar verbunden ist
             batch.end();
             shape.begin(ShapeRenderer.ShapeType.Filled);
             shape.setColor(1f, 0.4f, 0.4f, 0.4f);
-            shape.ellipse(this.getX() - 6, this.getY() + this.getH() / 2 - 6, 12, 12);
+            shape.ellipse(this.getX() - 6, this.getY() + this.getH() / 2 - 6, 12, 12);  //TODO nicht relativ
             shape.end();
             batch.begin();
         }
 
-        if (this.getRight() != null) {
+        if (this.getRight() != null) {//Verbindungs marke ob der Nachbar verbunden ist
             batch.end();
             shape.begin(ShapeRenderer.ShapeType.Filled);
             shape.setColor(1f, 0.4f, 0.4f, 0.4f);
@@ -311,7 +311,7 @@ public class Block {
             shape.end();
             batch.begin();
         }
-        if (this == BlockVar.biggestblock) {
+        if (this == BlockVar.biggestblock) { //DEBUG Wer ist der größte Block?
             batch.end();
             shape.begin(ShapeRenderer.ShapeType.Filled);
             shape.rect(x, y, 20, 20);
@@ -320,17 +320,17 @@ public class Block {
         }
 
 
-        font.draw(batch, "index:  " + this.getIndex(), this.getX() + 30, this.getY() + 30);
+        font.draw(batch, "index:  " + this.getIndex(), this.getX() + 30, this.getY() + 30); //DEBUG Block Index auf dem Block anzeigen
     }
 
 
     public int getDublicatmarkedblockuberlappungsflache() {
         int flaeche = 0;
-        if (this.isShowdupulicate_rechts()) {
+        if (this.isShowdupulicate_rechts()) { //Für rechts
 
             try {
 
-                flaeche = (CheckKollision.flache(this.getX_dup_rechts(), this.getY(), this.getW(), this.getH(), BlockVar.markedblock.getX(), BlockVar.markedblock.getY()));
+                flaeche = (CheckKollision.flache(this.getX_dup_rechts(), this.getY(), this.getW(), this.getH(), BlockVar.markedblock.getX(), BlockVar.markedblock.getY())); //Fläsche mit der die Blöcke überlappen um zu brechenen an welchen Block der Block springen wird
 
             } catch (NullPointerException ignored) {
 
@@ -340,10 +340,10 @@ public class Block {
         }
 
 
-        if (this.isShowdupulicate_links()) {
+        if (this.isShowdupulicate_links()) { //Für links
             try {
 
-                flaeche = (CheckKollision.flache(this.getX_dup_links(), this.getY(), this.getW(), this.getH(), BlockVar.markedblock.getX(), BlockVar.markedblock.getY()));
+                flaeche = (CheckKollision.flache(this.getX_dup_links(), this.getY(), this.getW(), this.getH(), BlockVar.markedblock.getX(), BlockVar.markedblock.getY()));//Fläsche mit der die Blöcke überlappen um zu brechenen an welchen Block der Block springen wird
 
             } catch (NullPointerException ignored) {
 
@@ -356,15 +356,15 @@ public class Block {
     public int getBlockMarkedblockuberlappungsflache() {
         int flaeche = 0;
         try {
-            flaeche = CheckKollision.flache(this.getX(), this.getY(), this.getW(), this.getH(), BlockVar.markedblock.getX(), BlockVar.markedblock.getY());
+            flaeche = CheckKollision.flache(this.getX(), this.getY(), this.getW(), this.getH(), BlockVar.markedblock.getX(), BlockVar.markedblock.getY()); //Fläche des Markierten Blocks
         } catch (NullPointerException e) {
         }
         return flaeche;
     }
 
-    public Thread allowedRestart() {
-        blockupdate = new BlockUpdate(this);
-        blockupdate.start();
+    public Thread allowedRestart() { //WARNUNG diese Methode darf nur von ThreadMananger aufgerufen werden
+        blockupdate = new BlockUpdate(this); //Wenn der Block wieder in den Sichtbereich Rückt
+        blockupdate.start(); //             ...wird der update Thread gestarted
 
         return blockupdate;
     }
