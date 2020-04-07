@@ -6,9 +6,11 @@ import com.kotcrab.vis.ui.building.StandardTableBuilder;
 import com.kotcrab.vis.ui.building.TableBuilder;
 import com.kotcrab.vis.ui.building.utilities.CellWidget;
 import com.kotcrab.vis.ui.building.utilities.Padding;
+import com.kotcrab.vis.ui.widget.VisTable;
 import com.kotcrab.vis.ui.widget.VisTextButton;
 import com.kotcrab.vis.ui.widget.VisWindow;
 import de.ft.robocontrol.UI.UI;
+import de.ft.robocontrol.UI.setup.steps.Step1;
 
 public class SetupWindow {
     public static SetupBuilder setupBuilder;
@@ -52,10 +54,16 @@ public class SetupWindow {
             setLayoutEnabled(true);
             builder.setTablePadding(new Padding(20, 30, 20, 30));
 
+            Step1.step1(builder);
+            builder.row();
 
-            builder.append(CellWidget.of(Button_cancle).fillX().width(60).padding(new Padding(350,600-60-80-50-50,0,0)).wrap());
-            builder.append(CellWidget.of(Button_previouse).fillX().width(80).padding(new Padding(350,0,0,0)).wrap());
-            builder.append(CellWidget.of(Button_next).fillX().width(50).padding(new Padding(350,0,0,0)).wrap());
+
+            VisTable buttonTable = new VisTable(true);
+            buttonTable.add(Button_cancle).fillX().width(60).pad(350,600-60-80-50-50,0,0);
+            buttonTable.add(Button_previouse).fillX().width(80).pad(350,0,0,0);
+            buttonTable.add(Button_next).fillX().width(50).pad(350,0,0,0);
+
+            builder.append(buttonTable);
 
 
             Table table = builder.build();
