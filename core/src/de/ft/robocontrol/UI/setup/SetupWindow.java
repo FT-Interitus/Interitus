@@ -45,10 +45,15 @@ public class SetupWindow {
 
 
     public void show() {
+        tempverbindungsspeicher=new VerbindungsSpeicher();
         if (setupBuilder == null) {
             content = new VisTable();
             setupBuilder = new SetupBuilder("Verbindungs Setup", new StandardTableBuilder(padding));
                 Step1.step1(content);
+            setupBuilder.pack();
+        }else{
+            content.clearChildren();
+            Step1.step1(content);
             setupBuilder.pack();
         }
 
@@ -62,8 +67,7 @@ public class SetupWindow {
 
 
             setModal(true);
-            closeOnEscape();
-            addCloseButton();
+
             setLayoutEnabled(true);
             builder.setTablePadding(new Padding(20, 30, 20, 30));
 
@@ -72,7 +76,7 @@ public class SetupWindow {
 
 
 
-
+            Button_previouse.setDisabled(true);
 
 
 
@@ -106,7 +110,7 @@ public class SetupWindow {
                     switch (currentStep) {
                         case 1:
                             Step1.time.cancel();
-                            tempverbindungsspeicher.name=Step1.name.getText();
+                            Step1.save();
                             break;
                         case 2:
                             Step2.time.cancel();
@@ -124,12 +128,19 @@ public class SetupWindow {
                             break;
 
                     }
+if(currentStep>1) {
+    Button_previouse.setDisabled(false);
+}
+
                 }
+
+
             });
 
             Button_previouse.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
+
                     switch (currentStep) {
                         case 1:
                             Step1.time.cancel();
@@ -143,18 +154,40 @@ public class SetupWindow {
                     content.clearChildren();
                     switch (currentStep) {
                         case 1:
+                            Step1.loadSettings();
                             Step1.step1(content);
                             break;
                         case 2:
+                            Step1.loadSettings();
                             Step2.step2(content);
                             break;
 
                     }
+
+                    if(currentStep==1) {
+                        Button_previouse.setDisabled(true);
+                    }
+                }
+            });
+
+            Button_cancle.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    Step1.time.cancel();
+                    Step2.time.cancel();
+
+                    Step1.close();
+                    Step2.close();
+
+                    currentStep=1;
+                    tempverbindungsspeicher=null;
+                    setupBuilder.close();
                 }
             });
 
 
         }
+
 
 
     }

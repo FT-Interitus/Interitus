@@ -25,9 +25,22 @@ public class Step1 {
     public Step1() {
 
     }
+    public static void save(){
+            SetupWindow.tempverbindungsspeicher.name = name.getText();
+
+    }
+
+    public static void close(){
+        name.setText("");
+    }
+
+    public static void loadSettings(){
+        name.setText(SetupWindow.tempverbindungsspeicher.name);
+    }
+
 
     public static void step1(VisTable builder) {
-        name.setText(SetupWindow.tempverbindungsspeicher.name);
+
         builder.add(auftrag).expandX().padBottom(-100).row();
         builder.add(namelable).expandX().padBottom(-200).padLeft(-100);
         builder.add(name).expandX().padBottom(-200).padLeft(-400).row();

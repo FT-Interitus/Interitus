@@ -16,9 +16,8 @@ import java.util.TimerTask;
 
 public class Step2 {
 
-    public static CharSequence text = "Name: ";
-    public static VisLabel namelable = new VisLabel(text);
-    public static CharSequence auftragtext = "Step 2";
+
+    public static CharSequence auftragtext = "Hier wählst du bitte deine Plattform aus.";
     public static VisLabel auftrag = new VisLabel(auftragtext);
     public static Timer time = new Timer();
 
@@ -28,9 +27,16 @@ public class Step2 {
 
     public static void step2(VisTable builder) {
         builder.add(auftrag).expandX().padBottom(-100).row();
-        builder.add(namelable).expandX().padBottom(-200).padLeft(-100);
         SetupWindow.errorLabel.setText("STep2");
 
+
+    }
+
+    public static void close(){
+
+    }
+
+    public static void loadSettings(){
 
     }
 
