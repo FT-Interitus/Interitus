@@ -64,6 +64,7 @@ public class SettingsUI extends VisWindow {
 
     public void show() {
 
+        instructions.add(container);
         testBuilder = new TestBuilder("Einstellungen", new StandardTableBuilder(padding));
         UI.stage.addActor(testBuilder);
     }
@@ -212,7 +213,12 @@ public class SettingsUI extends VisWindow {
 
                     container.clearChildren();
 
+
                     switch (SelectedItem) {
+
+
+                        case -1:
+                            instructions.add(container);
 
                         case 0:
                             subitem1.add(container);
