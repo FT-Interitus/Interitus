@@ -1,10 +1,12 @@
-package de.ft.robocontrol.UI;
+package de.ft.robocontrol.UI.settings;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Tree;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.DelayedRemovalArray;
+import com.badlogic.gdx.utils.Select;
 import com.kotcrab.vis.ui.building.GridTableBuilder;
 import com.kotcrab.vis.ui.building.OneRowTableBuilder;
 import com.kotcrab.vis.ui.building.StandardTableBuilder;
@@ -16,10 +18,36 @@ import com.kotcrab.vis.ui.util.dialog.ConfirmDialogListener;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import com.kotcrab.vis.ui.widget.*;
 import de.ft.robocontrol.Settings;
+import de.ft.robocontrol.UI.UI;
+import de.ft.robocontrol.UI.settings.subitems.*;
 
 public class SettingsUI extends VisWindow {
 
     public static VisTextField updateurlfield;
+   public static RowLayout rowLayout;
+   public static VisCheckBox darktoggle;
+   public static TestBuilder testBuilder;
+    final VisTable container = new VisTable();
+    public static int SelectedItem = -1;
+    /***
+     * -1 = Informationen
+     *
+     * 0 = Aussehen
+     * 1 = Theme
+     * 2 = item 1.2
+     * 3 = item 1.3
+     *
+     * 4 = Verhalten
+     * 5 = Tastenkombinationen
+     * 6 = item 2.2
+     * 7 = item 2.3
+     *
+     * 8 = Programme Einstellungen
+     * 9 = item 3.1
+     * 10 = item 3.2
+     * 11 = item 3.3
+     *
+     */
 
 
     private static boolean accepteddangerous = false;
@@ -35,16 +63,18 @@ public class SettingsUI extends VisWindow {
     }
 
     public void show() {
-        UI.stage.addActor(new TestBuilder("Einstellungen", new StandardTableBuilder(padding)));
+
+        testBuilder = new TestBuilder("Einstellungen", new StandardTableBuilder(padding));
+        UI.stage.addActor(testBuilder);
     }
 
 
     private class TestBuilder extends VisWindow {
-        public TestBuilder(String name, TableBuilder builder) {
+        public TestBuilder(String name, final TableBuilder builder) {
             super(name);
 
 
-            RowLayout rowLayout = new RowLayout(new Padding(0, 0, 0, 5));
+           rowLayout  = new RowLayout(new Padding(0, 0, 0, 5));
 
 
             setModal(true);
@@ -53,7 +83,7 @@ public class SettingsUI extends VisWindow {
             // setScale(200,200);
 
 
-            final VisCheckBox darktoggle = new VisCheckBox("Schaltet den Dark-Mode an und aus");
+           darktoggle = new VisCheckBox("Schaltet den Dark-Mode an und aus");
             darktoggle.setChecked(Settings.darkmode);
             darktoggle.addListener(new ChangeListener() {
                 @Override
@@ -147,22 +177,22 @@ public class SettingsUI extends VisWindow {
                 }
             });
 
-            VisTree tree = new VisTree();
-            TestNode item1 = new TestNode(new VisLabel(" Aussehen"));
-            TestNode item2 = new TestNode(new VisLabel(" Verhalten"));
-            TestNode item3 = new TestNode(new VisLabel(" item 3"));
+            final VisTree tree = new VisTree();
+            TestNode item1 = new TestNode(new VisLabel(" Aussehen "),0);
+            TestNode item2 = new TestNode(new VisLabel(" Verhalten "),4);
+            TestNode item3 = new TestNode(new VisLabel(" Programm Einstellungen "),8);
 
-            item1.add(new TestNode(new VisLabel(" Theme")));
-            item1.add(new TestNode(new VisLabel(" item 1.2")));
-            item1.add(new TestNode(new VisLabel(" item 1.3")));
+            item1.add(new TestNode(new VisLabel(" Theme"),1));
+            item1.add(new TestNode(new VisLabel(" item 1.2"),2));
+            item1.add(new TestNode(new VisLabel(" item 1.3"),3));
 
-            item2.add(new TestNode(new VisLabel(" Tastenkombinationen ")));
-            item2.add(new TestNode(new VisLabel(" item 2.2")));
-            item2.add(new TestNode(new VisLabel(" item 2.3")));
+            item2.add(new TestNode(new VisLabel(" Tastenkombinationen "),5));
+            item2.add(new TestNode(new VisLabel(" item 2.2"),6));
+            item2.add(new TestNode(new VisLabel(" item 2.3"),7));
 
-            item3.add(new TestNode(new VisLabel(" item 3.1")));
-            item3.add(new TestNode(new VisLabel(" item 3.2")));
-            item3.add(new TestNode(new VisLabel(" item 3.3")));
+            item3.add(new TestNode(new VisLabel(" item 3.1"),9));
+            item3.add(new TestNode(new VisLabel(" item 3.2"),10));
+            item3.add(new TestNode(new VisLabel(" item 3.3"),11));
 
             item1.setExpanded(true);
 
@@ -170,11 +200,87 @@ public class SettingsUI extends VisWindow {
             tree.add(item2);
             tree.add(item3);
 
-            add(tree).expand().fill().padTop(15).padLeft(15);
+
+            tree.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
 
 
-            builder.append(rowLayout, CellWidget.builder().fillX().expandX().wrap(), CellWidget.of(darktoggle).expandX().fillY().wrap());
-            builder.row();
+
+              SettingsUI.SelectedItem =  ((TestNode) tree.getSelectedNode()).Mode;
+
+
+                    container.clearChildren();
+
+                    switch (SelectedItem) {
+
+                        case 0:
+                            subitem1.add(container);
+                            break;
+
+                        case 1:
+                            subitem2.add(container);
+
+                            break;
+                        case 2:
+
+                            subitem3.add(container);
+
+                            break;
+                        case 3:
+                            subitem4.add(container);
+                            break;
+                        case 4:
+                            subitem5.add(container);
+                            break;
+                        case 5:
+                            subitem6.add(container);
+                            break;
+                        case 6:
+                            subitem7.add(container);
+                            break;
+                        case 7:
+                            subitem8.add(container);
+                            break;
+                        case 8:
+                            subitem9.add(container);
+                            break;
+                        case 9:
+                            subitem10.add(container);
+                            break;
+                        case 10:
+                            subitem11.add(container);
+                            break;
+                        case 11:
+                            subitem12.add(container);
+                            break;
+                        default:
+                            break;
+
+
+
+
+
+                    }
+
+
+                //testBuilder.pack();
+
+                }
+            });
+
+
+           add(tree).expand().fill().padTop(15).padLeft(15).width(-10);
+          //  builder.append(CellWidget.of(tree).padding(new Padding(15,15,0,0)).wrap());
+
+            builder.append(CellWidget.of(new Separator()).fillY().padding(new Padding(0,-17,0,0)).wrap());
+
+
+
+            builder.append(CellWidget.of(container).fillX().fillY().expandX().expandY().width(270).wrap());
+
+
+/*
             builder.append(CellWidget.of(new Separator()).fillX().wrap());
             builder.row();
             builder.append(new VisLabel("Gefährliche Einstellungen"));
@@ -182,7 +288,10 @@ public class SettingsUI extends VisWindow {
             builder.row();
 
             builder.append(rowLayout, CellWidget.builder().fillX().expandX().expandX().width(500), CellWidget.of(updateurlfield).expandX().fillX().wrap());
+            */
+
             builder.row();
+
 
             Table table = builder.build();
             add(table).expand().fill();
@@ -190,6 +299,7 @@ public class SettingsUI extends VisWindow {
 
             centerWindow();
         }
+
 
         private VisSlider getSlider(boolean vertical) {
             VisSlider slider = new VisSlider(0, 100, 1, vertical);
@@ -231,9 +341,16 @@ public class SettingsUI extends VisWindow {
     }
 
     static class TestNode extends Tree.Node {
-        public TestNode (Actor actor) {
+        public VisLabel label;
+        public int Mode;
+        public TestNode (Actor actor, int Mode) {
             super(actor);
+            label = (VisLabel) actor;
+            this.Mode = Mode;
         }
+
+
+
     }
 
 }
