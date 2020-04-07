@@ -1,6 +1,6 @@
 package de.ft.robocontrol.roboconnection;
 
-import de.ft.robocontrol.Block.Arduino;
+import de.ft.robocontrol.Block.Devices;
 import de.ft.robocontrol.ProgrammingSpace;
 import de.ft.robocontrol.UI.ConnectionWindow;
 import de.ft.robocontrol.data.VerbindungsSpeicher;
@@ -15,12 +15,12 @@ public class BurnProgramm {
 
     protected static void burn(int arduino, String port, String file) {
         String methode = null;
-        if (arduino == Arduino.UNO) { //TODO add platforms
+        if (arduino == Devices.UNO) { //TODO add platforms
             platform = "atmega328p";
             methode = "arduino";
         }
 
-        if (arduino == Arduino.MEGA) {
+        if (arduino == Devices.MEGA) {
             platform = "atmega2560";
             methode = "wiring";
         }

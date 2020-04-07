@@ -14,57 +14,58 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class Data {
-    public static ArrayList<String> path = new ArrayList<String>();
-    public static ArrayList<String> filename = new ArrayList<String>();
-    private static File folder;
+    //ANMERKUNG Die Programmdaten sind je nach Benutzer unterschiedlich, deswegen liegen sie auch direkt im Bentzter Ordner
+    public static ArrayList<String> path = new ArrayList<String>(); //Die Pfade der zuletzt geöffneten Projekten
+    public static ArrayList<String> filename = new ArrayList<String>(); //Die Namen der Dateien die zuletzt geöffnet wurden
+    private static File folder; //Der Ordner in dem alle Programm daten liegen
 
     public static void init() {
 
-         folder = new File(System.getProperty("user.home") + "/.racd");
-        File recent = new File(System.getProperty("user.home") + "/.racd/recent.json");
-        File settings = new File(System.getProperty("user.home") + "/.racd/settings.json");
-        File knowndevices = new File(System.getProperty("user.home") + "/.racd/devices.json");
+         folder = new File(System.getProperty("user.home") + "/.racd"); //Order der Programmdaten
+        File recent = new File(System.getProperty("user.home") + "/.racd/recent.json"); //JSON file in dem die zuletzt geöffneten Projekte gespeichert werden
+        File settings = new File(System.getProperty("user.home") + "/.racd/settings.json"); // JSON file in dem alle Einstellungen gespeichert werden
+        File knowndevices = new File(System.getProperty("user.home") + "/.racd/devices.json"); //JSON file in dem alle konfigurierten Geräte gespeichert werden
         Path path = folder.toPath();
-        if (!folder.exists()) {
+        if (!folder.exists()) {//Wenn der Programm-Ordner noch nicht exsitiert
             ProgrammingSpace.logger.config("Create Programm Data Folder");
 
-            folder.mkdir();
+            folder.mkdir(); //der Ordner wird erstellt
             try {
-                recent.createNewFile();
+                recent.createNewFile(); //Die datei für die letzten Projekte wird erstellt
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
             try {
-                settings.createNewFile();
+                settings.createNewFile();//Die datei für die Einstellungen wird erstellt
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
             try {
-                knowndevices.createNewFile();
+                knowndevices.createNewFile();//Die datei für die bekannten Geröte wird erstellt
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
             try {
-                Files.setAttribute(path, "dos:hidden", true);
+                Files.setAttribute(path, "dos:hidden", true); //Auf Windows wird das Verzeichnis unsichtbar gemacht (Auf Linux reicht ja schon der punkt davor)
             } catch (IOException e) {
             }
         } else {
 
 
-            if (!recent.exists()) {
+            if (!recent.exists()) { //Wenn die Datei der letzten Projekte noch nicht exsisiert
 
                 try {
                     recent.createNewFile();
-                    Gdx.files.absolute(recent.getAbsolutePath()).writeString("{}", false);
+                    Gdx.files.absolute(recent.getAbsolutePath()).writeString("{}", false); //Wird in das Verzeichnis mit {} als JSON indikator geschrieben
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
 
-            } else {
+            } else { //Wenn es exsistiert
                 try {
 
                     FileHandle re = Gdx.files.absolute(System.getProperty("user.home") + "/.racd/recent.json");
@@ -77,14 +78,14 @@ public class Data {
                     JSONObject obj = new JSONObject(re.readString());
 
                     int i = 0;
-                    while (obj.has("path" + i)) {
+                    while (obj.has("path" + i)) { //Es wird geschaut wie viele Einträge exsistieren (max 10)
                         i++;
                     }
 
 
-                    for (int a = 0; a < i; a++) {
-                        Data.path.add(obj.getString("path" + a));
-                        Data.filename.add(obj.getString("filename" + a));
+                    for (int a = 0; a < i; a++) { //Wird durch alle pfade durchgegangen
+                        Data.path.add(obj.getString("path" + a)); //Pfad wird zum Array hinzugefügt
+                        Data.filename.add(obj.getString("filename" + a)); //Name wird zum Array hinzugefügt
                     }
 
 
@@ -94,24 +95,24 @@ public class Data {
             }
 
 
-            if (!settings.exists()) {
+            if (!settings.exists()) { //siehe recent
                 try {
                     settings.createNewFile();
-                    Gdx.files.absolute(settings.getAbsolutePath()).writeString("{}", false);
+                    Gdx.files.absolute(settings.getAbsolutePath()).writeString("{}", false); //siehe recent
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             } else {
 
                 try {
-                    FileHandle se = Gdx.files.absolute(System.getProperty("user.home") + "/.racd/settings.json");
+                    FileHandle se = Gdx.files.absolute(System.getProperty("user.home") + "/.racd/settings.json");  //Datei wird geladen
                     if (se.readString() == "") {
                         se.writeString("{}", false);
                         return;
                     }
                     JSONObject obj = new JSONObject(se.readString());
 
-                    Settings.darkmode = obj.getBoolean("dark");
+                    Settings.darkmode = obj.getBoolean("dark"); //Einstellungen werden je nach Daten Typ geladem
                     Settings.updateurl = obj.getString("updateurl");
 
                     //TODO weitere einstellugen Laden
@@ -124,10 +125,10 @@ public class Data {
             }
 
 
-            if (!knowndevices.exists()) {
+            if (!knowndevices.exists()) { //siehe recent
                 try {
                     knowndevices.createNewFile();
-                    Gdx.files.absolute(settings.getAbsolutePath()).writeString("{}", false);
+                    Gdx.files.absolute(settings.getAbsolutePath()).writeString("{}", false); //siehe recent
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -140,6 +141,8 @@ public class Data {
                         return;
                     }
                     JSONObject obj = new JSONObject(se.readString());
+
+                    //Die Geräte werden geladen und für jedes eine Verbindungsspeicher Instanze erstellt
 
                    //////////// *.* = obj.getInt();/////////////
 
@@ -169,54 +172,56 @@ public class Data {
     public static void close() {
 
         //for recent////////////////////////////////
-        FileHandle recent = Gdx.files.absolute(System.getProperty("user.home") + "/.racd/recent.json");
+        FileHandle recent = Gdx.files.absolute(System.getProperty("user.home") + "/.racd/recent.json"); //Lade datei
         JSONObject recent_obj = new JSONObject(recent);
-        for (int i = 0; i < Data.path.size(); i++) {
-            recent_obj.put("path" + i, Data.path.get(i));
+        for (int i = 0; i < Data.path.size(); i++) { //Es wird durch alle Vorhanden einträge durch gegangen
+            recent_obj.put("path" + i, Data.path.get(i)); //Und jedes Nacheinander abgespeichert
             recent_obj.put("filename" + i, Data.filename.get(i));
         }
 
 
-        recent.writeString(recent_obj.toString(), false);
+        recent.writeString(recent_obj.toString(), false); //Datei wird geschrieben
         /////////////////////////////////////////////////////////////////////
 
 
-        FileHandle settings = Gdx.files.absolute(System.getProperty("user.home") + "/.racd/settings.json");
-        JSONObject settings_obj = new JSONObject(settings);
+        FileHandle settings = Gdx.files.absolute(System.getProperty("user.home") + "/.racd/settings.json"); //Lade Datei
+        JSONObject settings_obj = new JSONObject(settings); //Einstellungen werden je nach Daten Typ abgespeichert
         settings_obj.put("dark", Settings.darkmode);
         settings_obj.put("updateurl", Settings.updateurl);
 
         //TODO weitere Einstellugen speichern
-        settings.writeString(settings_obj.toString(), false);
+        settings.writeString(settings_obj.toString(), false); //Datei wird geschrieben
 
         ////////////////////////////////////////////////////////////////////
 
-        FileHandle knowndevices = Gdx.files.absolute(System.getProperty("user.home") + "/.racd/devices.json");
+        FileHandle knowndevices = Gdx.files.absolute(System.getProperty("user.home") + "/.racd/devices.json");//Lade Datei
         JSONObject knowndevices_obj = new JSONObject(settings);
 
       ///  knowndevices_obj.put("",Variable);///
 
+        //Jede VerbindungsSpeicher Instance wird ausgelsen und abgespeichert
+
         //TODO attribute laden
-        knowndevices.writeString(knowndevices_obj.toString(), false);
+        knowndevices.writeString(knowndevices_obj.toString(), false); //Datei wird geschrieben
 
     }
 
 
-    public static long getprogrammfoldersize() {
+    public static long getprogrammfoldersize() { //Die Ordner größe wird ausgelesen (benötigt für UI.settings.subitems.subitem10)
 
         long length = 0;
-        for (int i =0;i<folder.listFiles().length;i++) {
+        for (int i =0;i<folder.listFiles().length;i++) { //Durch alle Dateien wird Durchgegeangen...
             if (folder.listFiles()[i].isFile())
-                length += folder.listFiles()[i].length();
+                length += folder.listFiles()[i].length(); //Die größe der Datei wird ausgegeben
             else
-                length += folder.length();
+                length += folder.length(); //Die eigenliche größe des Ordners wird ausgegeben
         }
         return length;
 
     }
 
 
-    public static void delete() {
-        folder.delete();
+    public static void delete() { //TODO Experimentel
+        folder.delete(); //Der Ordner wird gelöscht
     }
 }

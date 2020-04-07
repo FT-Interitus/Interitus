@@ -6,28 +6,31 @@ import java.util.ArrayList;
 
 public class BlockVar {
 
-    public static ArrayList<Block> blocks = new ArrayList<Block>();
-    public static ArrayList<Block> visibleblocks = new ArrayList<Block>();
+
+    //Anmerkung ganz wichtig hier alle beim clearen auf null setzen damit alle referenzierungen auf einen Block gelöscht werden damit der Speicherplatz freigegeben werden kann
+
+    public static ArrayList<Block> blocks = new ArrayList<Block>(); //Liste aller erstellen Blöcke
+    public static ArrayList<Block> visibleblocks = new ArrayList<Block>(); //Liste aller Blöcke die sich im sichtbereich der Camera befinden
 
 
     //TODO Für multi select hier eventuel ArrayList
-    public static Block markedblock = null;
+    public static Block markedblock = null; // Welcher Block ist makiert ?
 
-    public static Vector2 mousepressedold = new Vector2(1, 1);
+    public static Vector2 mousepressedold = new Vector2(1, 1); //Wo war die Maus als das letzte mal eine Taste gedrückt wurde
 
-    public static Vector2 unterschiedsave = new Vector2();
+    public static Vector2 unterschiedsave = new Vector2(); //Unterschied zwischen Blöckem die scih überllappen
 
-    public static boolean ismoving = false;
+    public static boolean ismoving = false; //Wird ein Block bewegt
 
-    public static boolean marked = false;
+    public static boolean marked = false; //Ist gerade ein Block makiert?
 
-    public static ArrayList<Block> uberlapptmitmarkedblock = new ArrayList<Block>();
+    public static ArrayList<Block> uberlapptmitmarkedblock = new ArrayList<Block>(); //Mit welchen Blöcken überlappt der Aktuell ausgewählte block ?
 
-    public static ArrayList<Block> showduplicat = new ArrayList<Block>();
+    public static ArrayList<Block> showduplicat = new ArrayList<Block>(); //Bei welchen Blöcken wir das Duplicat angezeigt?
 
-    public static Block biggestblock = null;
+    public static Block biggestblock = null; // Welcher ist der Block der die größten überlappungen mit dem bewegten Block hat
 
-    public static Block blockmitdergrostenuberlappungmitmarkiertemblock = null;
+    public static Block blockmitdergrostenuberlappungmitmarkiertemblock = null; //Welcher Block hat die größte überlappungsfläche mit dem makierten?
 
 
 }

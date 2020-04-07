@@ -2,9 +2,8 @@ package de.ft.robocontrol.roboconnection;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import de.ft.robocontrol.Block.Arduino;
+import de.ft.robocontrol.Block.Devices;
 import de.ft.robocontrol.UI.ConnectionWindow;
-import de.ft.robocontrol.data.VerbindungsSpeicher;
 
 
 import java.util.Timer;
@@ -127,11 +126,11 @@ public class UIbridge {
                                     @Override
                                     public void run() {
                                         if (selectedboard.contains("MEGA")) {
-                                            BurnProgramm.burn(Arduino.MEGA, getrennt[0], "sketch_mega.hex");
+                                            BurnProgramm.burn(Devices.MEGA, getrennt[0], "sketch_mega.hex");
                                         }
 
                                         if (selectedboard.contains("UNO")) {
-                                            BurnProgramm.burn(Arduino.UNO, getrennt[0], "sketch_uno.hex");
+                                            BurnProgramm.burn(Devices.UNO, getrennt[0], "sketch_uno.hex");
                                         }
                                     }
                                 };
