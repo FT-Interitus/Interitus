@@ -60,7 +60,7 @@ public class subitem10 {
 
                                     Data.delete();
 
-                                    Programm.INSTANCE.setLwjglApplication.exit();
+
 
 
                                 }

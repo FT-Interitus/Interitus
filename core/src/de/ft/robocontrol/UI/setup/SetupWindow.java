@@ -106,6 +106,7 @@ public class SetupWindow {
                     switch (currentStep) {
                         case 1:
                             Step1.time.cancel();
+                            tempverbindungsspeicher.name=Step1.name.getText();
                             break;
                         case 2:
                             Step2.time.cancel();

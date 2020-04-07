@@ -15,7 +15,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Step2 {
-    public static VisTextField name = new VisTextField();
+
     public static CharSequence text = "Name: ";
     public static VisLabel namelable = new VisLabel(text);
     public static CharSequence auftragtext = "Step 2";
@@ -27,10 +27,8 @@ public class Step2 {
     }
 
     public static void step2(VisTable builder) {
-        name.setText(SetupWindow.tempverbindungsspeicher.name);
         builder.add(auftrag).expandX().padBottom(-100).row();
         builder.add(namelable).expandX().padBottom(-200).padLeft(-100);
-        builder.add(name).expandX().padBottom(-200).padLeft(-400).row();
         SetupWindow.errorLabel.setText("STep2");
 
 
