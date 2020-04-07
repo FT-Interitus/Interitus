@@ -1,5 +1,7 @@
 package de.ft.robocontrol.UI.setup;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.kotcrab.vis.ui.building.GridTableBuilder;
@@ -7,17 +9,24 @@ import com.kotcrab.vis.ui.building.StandardTableBuilder;
 import com.kotcrab.vis.ui.building.TableBuilder;
 import com.kotcrab.vis.ui.building.utilities.CellWidget;
 import com.kotcrab.vis.ui.building.utilities.Padding;
+import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisTable;
 import com.kotcrab.vis.ui.widget.VisTextButton;
 import com.kotcrab.vis.ui.widget.VisWindow;
 import de.ft.robocontrol.UI.UI;
 import de.ft.robocontrol.UI.setup.steps.Step1;
+import de.ft.robocontrol.UI.setup.steps.Step2;
+import de.ft.robocontrol.data.VerbindungsSpeicher;
 
 public class SetupWindow {
+    public static VerbindungsSpeicher tempverbindungsspeicher=new VerbindungsSpeicher();
+    public static int currentStep=1;
     public static SetupBuilder setupBuilder;
-    private static VisTextButton Button_next = new VisTextButton("Next");
-    private static VisTextButton Button_previouse = new VisTextButton("Previouse");
-    private static VisTextButton Button_cancle = new VisTextButton("Cancel");
+    public static VisTextButton Button_next = new VisTextButton("Next");
+    public static VisTextButton Button_previouse = new VisTextButton("Previouse");
+    public static VisTextButton Button_cancle = new VisTextButton("Cancel");
+    public static VisLabel errorLabel = new VisLabel("error");
+    public static VisTable content;
     final Padding padding = new Padding(2, 3);
 
     public SetupWindow() {
@@ -37,9 +46,12 @@ public class SetupWindow {
 
     public void show() {
         if (setupBuilder == null) {
+            content = new VisTable();
             setupBuilder = new SetupBuilder("Verbindungs Setup", new StandardTableBuilder(padding));
+                Step1.step1(content);
             setupBuilder.pack();
         }
+
         UI.stage.addActor(setupBuilder);
     }
 
@@ -55,17 +67,27 @@ public class SetupWindow {
             setLayoutEnabled(true);
             builder.setTablePadding(new Padding(20, 30, 20, 30));
 
-            Step1.step1(builder);
+            builder.append(CellWidget.of(content).fillX().fillY().expandX().expandY().wrap());
             builder.row();
 
 
+
+
+
+
+
             VisTable buttonTable = new VisTable(true);
-            buttonTable.add(Button_cancle).fillX().width(60).pad(350,600-60-80-50-50,0,0);
+            buttonTable.add(errorLabel).fillX().width(60).pad(350,0,0,300);
+            buttonTable.add(Button_cancle).fillX().width(60).pad(350,0,0,0);
             buttonTable.add(Button_previouse).fillX().width(80).pad(350,0,0,0);
             buttonTable.add(Button_next).fillX().width(50).pad(350,0,0,0);
 
+
+
             builder.append(buttonTable);
 
+
+            Step1.update();
 
 
             Table table = builder.build();
@@ -75,6 +97,62 @@ public class SetupWindow {
 
             centerWindow();
             pack();
+
+
+
+            Button_next.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    switch (currentStep) {
+                        case 1:
+                            Step1.time.cancel();
+                            break;
+                        case 2:
+                            Step2.time.cancel();
+                            break;
+
+                    }
+                    currentStep++;
+                    content.clearChildren();
+                    switch (currentStep) {
+                        case 1:
+                            Step1.step1(content);
+                            break;
+                        case 2:
+                            Step2.step2(content);
+                            break;
+
+                    }
+                }
+            });
+
+            Button_previouse.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    switch (currentStep) {
+                        case 1:
+                            Step1.time.cancel();
+                            break;
+                        case 2:
+                            Step2.time.cancel();
+                            break;
+
+                    }
+                    currentStep--;
+                    content.clearChildren();
+                    switch (currentStep) {
+                        case 1:
+                            Step1.step1(content);
+                            break;
+                        case 2:
+                            Step2.step2(content);
+                            break;
+
+                    }
+                }
+            });
+
+
         }
 
 

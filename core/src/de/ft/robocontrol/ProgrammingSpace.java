@@ -120,7 +120,8 @@ s.setInside(AssetLoader.switch_inside);
         UIbridge.UpdateConnectionWindowPortsList();
         Gdx.graphics.setWindowedMode(Var.w, Var.h);
 
-
+        SetupWindow sw=new SetupWindow();
+        sw.show();
     }
 
 

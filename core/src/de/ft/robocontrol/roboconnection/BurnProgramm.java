@@ -161,7 +161,6 @@ public class BurnProgramm {
 
         if (output.contains("AVR device initialized")) {
             ConnectionWindow.error.setText("Brennen hat funktioniert, nun kannst du dein Gerät konfigurieren");
-            VerbindungsSpeicher.verbundungen.add(new VerbindungsSpeicher("Neue Verbindung"));
             KnownDeviceManager.addnewdevice();
 
 
