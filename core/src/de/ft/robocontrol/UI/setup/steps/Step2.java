@@ -14,23 +14,24 @@ import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Step1 {
+public class Step2 {
     public static VisTextField name = new VisTextField();
     public static CharSequence text = "Name: ";
     public static VisLabel namelable = new VisLabel(text);
-    public static CharSequence auftragtext = "Bitte gebe hier einen Name für die neue Verbindung ein.";
+    public static CharSequence auftragtext = "Step 2";
     public static VisLabel auftrag = new VisLabel(auftragtext);
     public static Timer time = new Timer();
 
-    public Step1() {
+    public Step2() {
 
     }
 
-    public static void step1(VisTable builder) {
+    public static void step2(VisTable builder) {
         name.setText(SetupWindow.tempverbindungsspeicher.name);
         builder.add(auftrag).expandX().padBottom(-100).row();
         builder.add(namelable).expandX().padBottom(-200).padLeft(-100);
         builder.add(name).expandX().padBottom(-200).padLeft(-400).row();
+        SetupWindow.errorLabel.setText("STep2");
 
 
     }
@@ -40,22 +41,14 @@ public class Step1 {
 
 
 
-    time.scheduleAtFixedRate(new TimerTask() {
-        @Override
-        public void run() {
+        time.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
 
 
-            if(name.isEmpty()){
-                SetupWindow.errorLabel.setColor(new Color(1,0,0,1));
-                SetupWindow.errorLabel.setText("Du musst einen Name vergeben");
-                SetupWindow.Button_next.setDisabled(true);
-            }else{
-                SetupWindow.errorLabel.setColor(new Color(0,1,0,1));
-                SetupWindow.errorLabel.setText("Alle Voraussetzungen erfüllt");
-                SetupWindow.Button_next.setDisabled(false);
+
             }
-        }
-    },0,30);
+        },0,30);
 
-}
+    }
 }
