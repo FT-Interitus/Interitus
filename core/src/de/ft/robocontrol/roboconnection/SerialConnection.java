@@ -93,8 +93,7 @@ public static void searchArduino() {
                 ConnectionWindow.devicemanagebutton.setText("Bitte Warten..");
                 for (SerialPort port : ports) {
                     i++;
-                    //System.out.println(i++ + ". " + port.getSystemPortName());
-                    //System.out.println(port.getDescriptivePortName() + "   deks");
+
                     System.out.println("i     " + i);
                     try {
                         SerialPort testport = ports[i-2];

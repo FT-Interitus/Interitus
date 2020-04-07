@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.ft.robocontrol.Block.Block;
 import de.ft.robocontrol.Block.BlockVar;
+import de.ft.robocontrol.UI.setup.SetupWindow;
 import de.ft.robocontrol.input.IntegerAuswahl;
 import de.ft.robocontrol.input.Switch;
 import de.ft.robocontrol.UI.UI;
@@ -25,6 +26,7 @@ import de.ft.robocontrol.roboconnection.UIbridge;
 import de.ft.robocontrol.utils.PositionSaver;
 
 import java.awt.*;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import static com.badlogic.gdx.Gdx.input;
@@ -117,6 +119,9 @@ s.setInside(AssetLoader.switch_inside);
 
         UIbridge.UpdateConnectionWindowPortsList();
         Gdx.graphics.setWindowedMode(Var.w, Var.h);
+
+        SetupWindow sw=new SetupWindow();
+        sw.show();
     }
 
 
