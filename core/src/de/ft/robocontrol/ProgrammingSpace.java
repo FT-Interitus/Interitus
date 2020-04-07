@@ -280,14 +280,18 @@ h=height;
     }
 
 
-    @Override
+    public void hide() {
+       System.out.println("Stop");
+    }
+
     public void dispose() {
 
 
         //TODO stop Thread Manager Thread
-        Data.close();
+
+        System.out.println("Stop stop stop stop stop stop stop stop stop stopo stop");
+
         batch.dispose();
-        Gdx.app.exit();
-        System.exit(0);
+
     }
 }
