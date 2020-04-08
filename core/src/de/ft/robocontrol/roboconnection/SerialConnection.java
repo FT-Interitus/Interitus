@@ -180,9 +180,9 @@ public static void searchArduino() {
                     ConnectionWindow.update();
                 }
 
-if(Step3.selectportlist!=null) {
-    Step3.selectportlist.setItems(SerialConnection.getPortNames());
-}
+            if(Step3.selectportlist!=null) {
+                Step3.selectportlist.setItems(SerialConnection.getPortNames());
+            }
             }catch (Exception e) {
                 e.printStackTrace(); //for debug to find errors
             }

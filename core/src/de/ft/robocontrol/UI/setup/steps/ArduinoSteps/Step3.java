@@ -91,7 +91,6 @@ public class Step3 {
         builder.add(brenntext).padBottom(-200);
         selectportlist.setItems(SerialConnection.getPortNames());
 
-
         neuladen_button.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
