@@ -77,19 +77,25 @@ public class Step2 {
 
                     }
                     if(selectPlatform.getSelected().equals("EV3")){
-                        selectBoardArt.setVisible(false);
+
+                        selectBoardArt.setItems("Bitte auswählen","Normal","EV3-DEV");
+                        selectBoardArt.setVisible(true);
+                        SetupWindow.errorLabel.setColor(1,0,0,1);
+                        selectBoardArt.setSelected("Bitte auswählen");
+                        SetupWindow.errorLabel.setColor(1,0,0,1);
+                        SetupWindow.errorLabel.setText("Bitte wähle ein EV3 aus");
                         shownext=2;
 
 
 
                     }
                     if(selectPlatform.getSelected().equals("Raspberry Pi")){
-                        selectBoardArt.setItems("Bitte auswählen","Pi 3","zero","anderer");
+                        selectBoardArt.setItems("Bitte auswählen","Raspberry Pi 4b","Raspberry pi 3b/3b+","Raspberry Pi Zero W");
                         selectBoardArt.setVisible(true);
                         SetupWindow.errorLabel.setColor(1,0,0,1);
                         selectBoardArt.setSelected("Bitte auswählen");
                         SetupWindow.errorLabel.setColor(1,0,0,1);
-                        SetupWindow.errorLabel.setText("Bitte wähle ein Pi aus");
+                        SetupWindow.errorLabel.setText("Bitte wähle ein Raspberry pi Pi aus");
                         shownext=3;
 
 
@@ -129,30 +135,44 @@ public class Step2 {
                             SetupWindow.Button_next.setDisabled(true);
                         }
                         break;
+
                     case 2:
+
+                        if(selectBoardArt.getSelected().equals("Normal")){
+                            selectBoardArt.setColor(0,1,0,1);
+                            SetupWindow.errorLabel.setColor(0,1,0,1);
+                            SetupWindow.errorLabel.setText("Alle Voraussetzungen erfüllt");
+                            SetupWindow.Button_next.setDisabled(false);
+                        }else
+                        if(selectBoardArt.getSelected().equals("EV3-DEV")){
+                            selectBoardArt.setColor(0,1,0,1);
+                            SetupWindow.errorLabel.setColor(0,1,0,1);
+                            SetupWindow.errorLabel.setText("Alle Voraussetzungen erfüllt");
+                            SetupWindow.Button_next.setDisabled(false);
+                        }
 
                         break;
                     case 3:
-                        if(selectBoardArt.getSelected().equals("Pi 3")){
+                        if(selectBoardArt.getSelected().equals("Raspberry Pi 4b")){
                             selectBoardArt.setColor(0,1,0,1);
                             SetupWindow.errorLabel.setColor(0,1,0,1);
                             SetupWindow.errorLabel.setText("Alle Voraussetzungen erfüllt");
                             SetupWindow.Button_next.setDisabled(false);
                         }else
-                        if(selectBoardArt.getSelected().equals("zero")){
+                        if(selectBoardArt.getSelected().equals("Raspberry pi 3b/3b+")){
                             selectBoardArt.setColor(0,1,0,1);
                             SetupWindow.errorLabel.setColor(0,1,0,1);
                             SetupWindow.errorLabel.setText("Alle Voraussetzungen erfüllt");
                             SetupWindow.Button_next.setDisabled(false);
                         }else
-                        if(selectBoardArt.getSelected().equals("anderer")){
+                        if(selectBoardArt.getSelected().equals("Raspberry Pi Zero W")){
                             selectBoardArt.setColor(0,1,0,1);
                             SetupWindow.errorLabel.setColor(0,1,0,1);
                             SetupWindow.errorLabel.setText("Alle Voraussetzungen erfüllt");
                             SetupWindow.Button_next.setDisabled(false);
                         }else{
                             SetupWindow.errorLabel.setColor(1,0,0,1);
-                            SetupWindow.errorLabel.setText("Bitte wähle ein Pi aus");
+                            SetupWindow.errorLabel.setText("Bitte wähle einen Raspberry Pi aus");
                             SetupWindow.Button_next.setDisabled(true);
                         }
                         break;
