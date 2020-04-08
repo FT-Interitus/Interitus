@@ -116,7 +116,6 @@ public class SetupWindow {
                     switch (currentStep) {
                         case 1:
                             Step1.close();
-
                             break;
                         case 2:
                             Step2.close();
