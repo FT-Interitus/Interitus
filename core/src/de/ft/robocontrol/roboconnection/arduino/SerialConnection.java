@@ -2,6 +2,7 @@ package de.ft.robocontrol.roboconnection.arduino;
 import com.fazecast.jSerialComm.*;
 import de.ft.robocontrol.UI.setup.steps.ArduinoSteps.Step3;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -69,7 +70,7 @@ public static boolean isRunning=false;
                 number = Integer.parseInt(data.nextLine());
             } catch (Exception e) {
             }
-            //System.out.println("nubmer    "+number);
+            System.out.println("nubmer    "+number);
             return number;
         }else{
             return -1;
@@ -112,7 +113,7 @@ public static boolean isRunning=false;
 
     public static class Authentifikation {
 
-        private static void checkAut(SerialPort checkport){
+        private static void checkAut(SerialPort checkport) throws IOException {
 
             checkport.setBaudRate(230400);
             checkport.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 10, 0);
@@ -122,8 +123,10 @@ public static boolean isRunning=false;
             found = false;
             //System.out.println("checkstart");
             while (System.currentTimeMillis() < save && found == false) {
-                if (empfangen(checkport) == 1234) {
-                    found = true;
+                if(checkport.getInputStream()!=null) {
+                    if (empfangen(checkport) == 1234) {
+                        found = true;
+                    }
                 }
             }
             //System.out.println("checkend");
@@ -181,11 +184,11 @@ public static boolean isRunning=false;
                                 SerialPort checkport = ports[i-2];
 
                                 if (checkport.openPort()) {
-                                    //System.out.println("Successfully opened the port."+checkport.getSystemPortName());
-                                   // System.out.println("desprictiveportname:   " + checkport.getDescriptivePortName());
+                                    System.out.println("Successfully opened the port."+checkport.getSystemPortName());
+                                    System.out.println("desprictiveportname:   " + checkport.getDescriptivePortName());
                                     checkAut(checkport);
                                 } else {
-                                    //System.out.println("Unable to open the port.");
+                                    System.out.println("Unable to open the port.");
 
                                 }
 
