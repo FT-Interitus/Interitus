@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import de.ft.robocontrol.data.programm.Data;
 import de.ft.robocontrol.data.user.experience.ExperienceManager;
 import de.ft.robocontrol.loading.Loading;
+import de.ft.robocontrol.utils.NetworkScan;
 
 public class Programm extends Game {
 
@@ -16,6 +17,8 @@ public class Programm extends Game {
     }
     @Override
     public void create() {
+
+        NetworkScan.get();
 
         ExperienceManager.init();
         setScreen(new Loading());
