@@ -24,6 +24,11 @@ public class AssetLoader {
     public static Texture switch_inside_white;
     public static Texture switch_background_green_white;
 
+    //Setup Help
+    public static Texture help_arduino_boards;
+    public static Texture help_raspberrypi_boards;
+    public static Texture help_ev3;
+
     public static AssetManager manager = new AssetManager();
 
     public static void load() {
@@ -47,6 +52,10 @@ public class AssetLoader {
             manager.load(workingdirectory+"switchbackground_white.png", Texture.class);
             manager.load(workingdirectory+"switchinside.png", Texture.class);
             manager.load(workingdirectory+"switchbackground_whitegreen.png", Texture.class);
+            //Setup Help
+            manager.load(workingdirectory+"ArduinoHilfe.png",Texture.class);
+            manager.load(workingdirectory+"RaspberryPiHilfe.png",Texture.class);
+            manager.load(workingdirectory+"EV3Hilfe.png",Texture.class);
 
 
         }catch (Exception e) {
@@ -76,6 +85,11 @@ public class AssetLoader {
             switch_background_white = manager.get(workingdirectory+"switchbackground_white.png", Texture.class);
             switch_inside_white = manager.get(workingdirectory+"switchinside.png", Texture.class);
             switch_background_green_white = manager.get(workingdirectory+"switchbackground_whitegreen.png", Texture.class);
+            //Setup help
+            help_arduino_boards = manager.get(workingdirectory+"ArduinoHilfe.png",Texture.class);
+            help_raspberrypi_boards =manager.get(workingdirectory+"RaspberryPiHilfe.png",Texture.class);
+            help_ev3 = manager.get(workingdirectory+"EV3Hilfe.png",Texture.class);
+
         }catch (Exception e) {
             e.printStackTrace();
         }

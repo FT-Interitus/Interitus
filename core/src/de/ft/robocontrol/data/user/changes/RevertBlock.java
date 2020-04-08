@@ -1,6 +1,6 @@
 package de.ft.robocontrol.data.user.changes;
 
-public class RevertBlock {
+public class RevertBlock { //Block Duplicat das erstellt wird wenn ein Block bewegt wird
     private int x;
     private int y;
     private int w;

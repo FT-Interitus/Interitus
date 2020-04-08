@@ -15,6 +15,8 @@ public class Updater {
 
     public static void check(final boolean showincaseoffalse) {
 
+        //Noch nicht commited da hier noch viele änderungen passieren
+
         Thread checkupdate;
         checkupdate = new Thread() {
 

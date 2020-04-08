@@ -20,20 +20,20 @@ public class DataLoader {
                 boolean goout = false;
                 int i = 0;
                 while (!goout) {
-                    if (!obj.getJSONObject("Blocks").has("Block" + i)) {
+                    if (!obj.getJSONObject("Blocks").has("Block" + i)) { //Durch alle gefunden Blöcke durchgehen
                         goout = true;
                     } else {
 
                         BlockVar.blocks.add(null);
                         BlockVar.blocks.set(i, new Block(obj.getJSONObject("Blocks").getJSONObject("Block" + i).getInt("index"), obj.getJSONObject("Blocks").getJSONObject("Block" + i).getInt("x"), obj.getJSONObject("Blocks").getJSONObject("Block" + i).getInt("y"), obj.getJSONObject("Blocks").getJSONObject("Block" + i).getInt("w"), obj.getJSONObject("Blocks").getJSONObject("Block" + i).getInt("h")));
-
+                    //Und Paramenter wieder laden
                     }
 
                     i++;
                 }
 
                 for (int a = 0; a < BlockVar.blocks.size(); a++) {
-                    if (obj.getJSONObject("Blocks").getJSONObject("Block" + a).getInt("nachbar_rechts") != -1) {
+                    if (obj.getJSONObject("Blocks").getJSONObject("Block" + a).getInt("nachbar_rechts") != -1) { //Nachbaren wieder anhand der IDs verknüpfen
                         BlockVar.blocks.get(a).setRight(BlockVar.blocks.get(obj.getJSONObject("Blocks").getJSONObject("Block" + a).getInt("nachbar_rechts")));
                         //System.out.println("nachbar gesetzt rechts  "+BlockVar.blocks.get(a).getRight().getIndex());
                     }
