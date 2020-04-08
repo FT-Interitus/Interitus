@@ -12,10 +12,9 @@ import com.kotcrab.vis.ui.widget.VisTable;
 import com.kotcrab.vis.ui.widget.VisTextField;
 import de.ft.robocontrol.UI.setup.SetupWindow;
 
-import java.sql.Time;
-import java.util.Set;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Timer;
 
 public class Step2 {
 
@@ -23,7 +22,7 @@ public class Step2 {
     public static VisSelectBox<String> selectBoardArt;
     public static CharSequence auftragtext = "Hier wählst du bitte deine Plattform aus.";
     public static VisLabel auftrag = new VisLabel(auftragtext);
-    public static Timer time = new Timer();
+    public static Timer time;
 
     public static int shownext=0; ///////////////////0 Bitte Auswählen;1 Arduino;2 EV3;3 Raspberry Pi/////////////////
 
@@ -176,14 +175,13 @@ public class Step2 {
 
 
 
-        time.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-
-
+        time = new javax.swing.Timer( 30, new ActionListener()
+        {
+            public void actionPerformed( ActionEvent evt )
+            {
 
             }
-        },0,30);
+        });
 
     }
 }

@@ -109,11 +109,11 @@ public class SetupWindow {
                 public void changed(ChangeEvent event, Actor actor) {
                     switch (currentStep) {
                         case 1:
-                            Step1.time.cancel();
+                            Step1.time.stop();
                             Step1.save();
                             break;
                         case 2:
-                            Step2.time.cancel();
+                            Step2.time.stop();
                             break;
 
                     }
@@ -143,10 +143,11 @@ if(currentStep>1) {
 
                     switch (currentStep) {
                         case 1:
-                            Step1.time.cancel();
+                            Step1.time.stop();
                             break;
                         case 2:
-                            Step2.time.cancel();
+                            System.out.println("cncle");
+                            Step2.time.stop();
                             break;
 
                     }
@@ -173,8 +174,8 @@ if(currentStep>1) {
             Button_cancle.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
-                    Step1.time.cancel();
-                    Step2.time.cancel();
+                    Step1.time.stop();
+                    Step2.time.stop();
 
                     Step1.close();
                     Step2.close();
