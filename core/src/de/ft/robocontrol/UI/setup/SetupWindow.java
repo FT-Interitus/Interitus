@@ -12,7 +12,9 @@ import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisTable;
 import com.kotcrab.vis.ui.widget.VisTextButton;
 import com.kotcrab.vis.ui.widget.VisWindow;
+import de.ft.robocontrol.Block.Devices;
 import de.ft.robocontrol.UI.UI;
+import de.ft.robocontrol.UI.setup.steps.ArduinoSteps.Step3;
 import de.ft.robocontrol.UI.setup.steps.generalSteps.Step1;
 import de.ft.robocontrol.UI.setup.steps.generalSteps.Step2;
 import de.ft.robocontrol.data.VerbindungsSpeicher;
@@ -121,6 +123,17 @@ public class SetupWindow {
                             break;
 
                     }
+if(currentStep>2) {
+    if (tempverbindungsspeicher.device == Devices.ARDUINO_MEGA || tempverbindungsspeicher.device == Devices.ARDUINO_UNO) {
+        switch (currentStep) {
+            case 3:
+                Step3.close();
+                break;
+
+        }
+    }
+}
+
                     currentStep++;
                     content.clearChildren();
                     switch (currentStep) {
@@ -132,7 +145,21 @@ public class SetupWindow {
                             break;
 
                     }
-if(currentStep>1) {
+
+
+                    if(currentStep>2) {
+                        if (tempverbindungsspeicher.device == Devices.ARDUINO_MEGA || tempverbindungsspeicher.device == Devices.ARDUINO_UNO) {
+                            switch (currentStep) {
+                                case 3:
+                                    Step3.step3(content);
+                                    break;
+
+                            }
+                        }
+                    }
+
+
+                    if(currentStep>1) {
     Button_previouse.setDisabled(false);
 }
 
@@ -154,6 +181,19 @@ if(currentStep>1) {
                             break;
 
                     }
+
+                    if(currentStep>2) {
+                        if (tempverbindungsspeicher.device == Devices.ARDUINO_MEGA || tempverbindungsspeicher.device == Devices.ARDUINO_UNO) {
+                            switch (currentStep) {
+                                case 3:
+                                    Step3.close();
+                                    break;
+
+                            }
+                        }
+                    }
+
+
                     currentStep--;
                     content.clearChildren();
                     switch (currentStep) {
@@ -165,6 +205,18 @@ if(currentStep>1) {
                             break;
 
                     }
+
+                    if(currentStep>2) {
+                        if (tempverbindungsspeicher.device == Devices.ARDUINO_MEGA || tempverbindungsspeicher.device == Devices.ARDUINO_UNO) {
+                            switch (currentStep) {
+                                case 3:
+                                    Step3.step3(content);
+                                    break;
+
+                            }
+                        }
+                    }
+
 
                     if(currentStep==1) {
                         Button_previouse.setDisabled(true);
@@ -179,6 +231,7 @@ if(currentStep>1) {
 
                     Step1.close();
                     Step2.close();
+                    Step3.close();
 
                     currentStep=1;
                     tempverbindungsspeicher=null;

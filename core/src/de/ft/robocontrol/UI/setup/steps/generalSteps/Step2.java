@@ -25,9 +25,6 @@ public class Step2 {
 
     public static int shownext=0; ///////////////////0 Bitte Auswählen;1 Arduino;2 EV3;3 Raspberry Pi/////////////////
 
-    public Step2() {
-
-    }
 
 
 

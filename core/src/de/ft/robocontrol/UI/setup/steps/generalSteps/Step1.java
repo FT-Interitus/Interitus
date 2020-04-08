@@ -27,9 +27,6 @@ public class Step1 {
     public static VisLabel auftrag = new VisLabel(auftragtext);
     public static Timer time;
 
-    public Step1() {
-
-    }
 
 
     public static void close(){
