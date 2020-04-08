@@ -39,7 +39,7 @@ public class SettingsUI extends VisWindow {
      *
      * 4 = Verhalten
      * 5 = Tastenkombinationen
-     * 6 = item 2.2
+     * 6 = Tipps
      * 7 = item 2.3
      *
      * 8 = Programme Einstellungen
@@ -219,7 +219,7 @@ public class SettingsUI extends VisWindow {
             item1.add(new TestNode(new VisLabel(" item 1.3"),3));
 
             item2.add(new TestNode(new VisLabel(" Tastenkombinationen "),5));
-            item2.add(new TestNode(new VisLabel(" item 2.2"),6));
+            item2.add(new TestNode(new VisLabel(" Tipps"),6));
             item2.add(new TestNode(new VisLabel(" item 2.3"),7));
 
             item3.add(new TestNode(new VisLabel(" Daten"),9));

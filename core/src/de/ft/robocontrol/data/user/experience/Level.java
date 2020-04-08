@@ -8,11 +8,13 @@ public class Level {
         if(ExperienceVar.userlevel==0&&ExperienceVar.programmtimeinhoures>1.0f) {
             ExperienceVar.userlevel = 1;
         }
-/*
+
         //Level 1 to 2
-        if(ExperienceVar.userlevel==1&&ExperienceVar.programmtimeinhoures>1.0f) {
-            ExperienceVar.userlevel = 1;
+        if(ExperienceVar.userlevel==1&&ExperienceVar.programmtimeinhoures>2f&&ExperienceVar.settingstimeinhoures>0.03) {
+            ExperienceVar.userlevel = 2;
         }
+
+        /*
 
         //Level 2 to 3
         if(ExperienceVar.userlevel==0&&ExperienceVar.programmtimeinhoures>1.0f) {
