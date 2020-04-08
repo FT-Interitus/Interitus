@@ -5,18 +5,21 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.kotcrab.vis.ui.util.InputValidator;
 import com.kotcrab.vis.ui.widget.*;
 
-import com.sun.tools.javac.util.StringUtils;
-import de.ft.robocontrol.roboconnection.arduino.BurnProgramm;
-import de.ft.robocontrol.roboconnection.arduino.SerialConnection;
+import de.ft.robocontrol.UI.setup.SetupWindow;
 import de.ft.robocontrol.utils.NetworkScan;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 public class Step3 {
     public static Timer time;
-    public static VisValidatableTextField ipaddresse;
+    public static VisValidatableTextField ipadresse;
+    public static VisSelectBox<String> selectIPAdress;
+    private static String[] ipselectable = new String[NetworkScan.device.size()+1]; //Plus eins weil noch ein Bitte auswählen hinzugefügt wird
     public static void step3(VisTable builder){
 
 
@@ -33,10 +36,17 @@ public class Step3 {
             }
         });
         time.start();
+        if(NetworkScan.piaddress!="") {
+            builder.add(new VisLabel("Ein Raspberry Pi wurde automatisch gefunden.")).expandX();
+        }else{
+            builder.add(new VisLabel("Bitte gibt die IP-Adresse des Raspberry Pi's ein.")).expandX();
+        }
 
-        builder.add(new VisLabel("IP-Addresse:")).padLeft(150);
-        ipaddresse = new VisValidatableTextField(NetworkScan.piaddress);
-        ipaddresse.addValidator(new InputValidator() {
+        builder.row();
+        builder.add(new VisLabel("IP-Adresse:")).padLeft(150).padBottom(-90).padLeft(-200);
+
+        ipadresse = new VisValidatableTextField(NetworkScan.piaddress);
+        ipadresse.addValidator(new InputValidator() {
             @Override
             public boolean validateInput(String input) {
                if( input.length() - input.replace(".","").length()==3) {
@@ -46,31 +56,95 @@ public class Step3 {
                            if(!input.split("\\.")[2].isEmpty()) {
                                if(!input.split("\\.")[1].isEmpty()) {
                                    if(!input.split("\\.")[0].isEmpty()) {
+                                       InetAddress testdevice = null;
+                                       try {
+                                           testdevice = InetAddress.getByName(input);
+                                       } catch (UnknownHostException e) {
+                                           e.printStackTrace();
+                                       }
+
+                                       try {
+                                           if(testdevice.isReachable(50)) {
+
+                                               SetupWindow.Button_next.setDisabled(false);
+                                               SetupWindow.errorLabel.setColor(0,1,0,1);
+                                               SetupWindow.errorLabel.setText("Alle Voraussetzungen erfüllt");
+                                           }else{
+                                               SetupWindow.Button_next.setDisabled(true);
+                                               SetupWindow.errorLabel.setColor(1,0,0,1);
+                                               SetupWindow.errorLabel.setText("Die IP-Adresse ist nicht erreichbar");
+                                           }
+                                       } catch (IOException e) {
+                                           SetupWindow.Button_next.setDisabled(true);
+                                           SetupWindow.errorLabel.setColor(1,0,0,1);
+                                           SetupWindow.errorLabel.setText("Die IP-Adresse ist nicht erreichbar");
+                                       }
+
                                         return true;
+
                                    }else {
+                                       SetupWindow.Button_next.setDisabled(true);
+                                       SetupWindow.errorLabel.setColor(1,0,0,1);
+                                       SetupWindow.errorLabel.setText("Bitte gebe eine gültige IP-Adresse an");
                                        return false;
                                    }
                                }else {
+                                   SetupWindow.Button_next.setDisabled(true);
+                                   SetupWindow.errorLabel.setColor(1,0,0,1);
+                                   SetupWindow.errorLabel.setText("Bitte gebe eine gültige IP-Adresse an");
                                    return false;
                                }
                            }else {
+                               SetupWindow.Button_next.setDisabled(true);
+                               SetupWindow.errorLabel.setColor(1,0,0,1);
+                               SetupWindow.errorLabel.setText("Bitte gebe eine gültige IP-Adresse an");
                                return false;
                            }
                        } else {
-
+                           SetupWindow.Button_next.setDisabled(true);
+                           SetupWindow.errorLabel.setColor(1,0,0,1);
+                           SetupWindow.errorLabel.setText("Bitte gebe eine gültige IP-Adresse an");
                            return false;
                        }
                    }catch (ArrayIndexOutOfBoundsException e){
+                       SetupWindow.Button_next.setDisabled(true);
+                       SetupWindow.errorLabel.setColor(1,0,0,1);
+                       SetupWindow.errorLabel.setText("Bitte gebe eine gültige IP-Adresse an");
                        return false;
                    }
                }else{
+                   SetupWindow.Button_next.setDisabled(true);
+                   SetupWindow.errorLabel.setColor(1,0,0,1);
+                   SetupWindow.errorLabel.setText("Bitte gebe eine gültige IP-Adresse an");
                    return false;
                }
             }
         });
-        builder.add(ipaddresse).expandX().padLeft(-150);
+        builder.add(ipadresse).expandX().padLeft(-470).padBottom(-90);
+        selectIPAdress = new VisSelectBox<>();
 
+        for(int i=0;i<NetworkScan.device.size()+1;i++) {
+            if(i==0) {
+                ipselectable[i] ="Bitte Auswählen";
+            }else {
+                ipselectable[i] = "IP: " + NetworkScan.device.get(i-1).getHostAddress() + "/" + NetworkScan.device.get(i-1).getHostName();
+            }
 
+        }
+        selectIPAdress.setItems(ipselectable);
+        builder.row();
+        builder.add(new VisLabel("Falls du die IP-Adresse nicht weißt, sind hier alle Adressen einemal aufgelistet:")).padBottom(-220);
+        builder.row();
+        builder.add(selectIPAdress).expandX().padBottom(-300);
+        selectIPAdress.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                if(!selectIPAdress.getSelected().contains("Bitte Auswählen")) {
+                    ipadresse.setText(selectIPAdress.getSelected().split(":")[1].split("/")[0]);
+                }
+
+            }
+        });
 
     }
     public static void close(){
