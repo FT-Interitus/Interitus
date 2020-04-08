@@ -78,7 +78,7 @@ public class SaveChanges {
         RevertBlock revert = (RevertBlock) changes.pop();
 
 
-        if (revert.isDeleted()) {
+        if (revert.isDeleted()) { //TODO index wieder zurück
             BlockVar.blocks.add(revert.getIndex(), new Block(revert.getIndex(), revert.getX(), revert.getY(), revert.getW(), revert.getH()));
             if (revert.getLeft_index() != -1) {
                 BlockVar.blocks.get(revert.getIndex()).setLeft(BlockVar.blocks.get(revert.getLeft_index()));

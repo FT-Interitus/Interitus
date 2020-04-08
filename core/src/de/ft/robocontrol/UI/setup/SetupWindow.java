@@ -43,6 +43,14 @@ public class SetupWindow {
 
     }
 
+    public static boolean isopend() {
+        try {
+            return setupBuilder.testopen();
+        }catch (Exception e) {
+            return false;
+        }
+    }
+
 
     public void show() {
         tempverbindungsspeicher=new VerbindungsSpeicher();
@@ -183,7 +191,9 @@ if(currentStep>1) {
         }
 
 
-
+        public boolean testopen() {
+            return super.getParent().isVisible();
+        }
     }
 
 

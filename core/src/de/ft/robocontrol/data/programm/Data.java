@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import de.ft.robocontrol.ProgrammingSpace;
 import de.ft.robocontrol.Settings;
-import de.ft.robocontrol.data.user.experience.Counter;
+import de.ft.robocontrol.data.user.experience.ExperienceManager;
 import de.ft.robocontrol.data.user.experience.ExperienceVar;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,7 +14,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutorService;
 
 public class Data {
     //ANMERKUNG Die Programmdaten sind je nach Benutzer unterschiedlich, deswegen liegen sie auch direkt im Bentzter Ordner
@@ -185,6 +184,9 @@ public class Data {
 
                     ExperienceVar.programmtimeinhoures = obj.getDouble("time");
                     ExperienceVar.newprojects = obj.getInt("newprojects");
+                    ExperienceVar.userlevel =obj.getInt("userlevel");
+                    ExperienceVar.settingstimeinhoures = obj.getDouble("settingstime");
+                    ExperienceVar.setuptimeinhoures = obj.getDouble("setuptime");
                     //////////// *.* = obj.getInt();/////////////
 
                     //TODO device laden mit attributen
@@ -250,8 +252,11 @@ public class Data {
         JSONObject userexperience_obj = new JSONObject(userexperience); //UserExperience wird je nach Daten Typ abgespeichert
 
 
-        userexperience_obj.put("time", Counter.getthistime()+ExperienceVar.programmtimeinhoures);
+        userexperience_obj.put("time", ExperienceManager.getthistime()+ExperienceVar.programmtimeinhoures);
         userexperience_obj.put("newprojects",ExperienceVar.newprojects);
+        userexperience_obj.put("userlevel",ExperienceVar.userlevel);
+        userexperience_obj.put("settingstime",ExperienceVar.settingstimeinhoures+ExperienceManager.settingsthistime);
+        userexperience_obj.put("setuptime",ExperienceVar.setuptimeinhoures+ExperienceManager.setupthistime);
 
         //TODO weitere Einstellugen speichern
         userexperience.writeString(userexperience_obj.toString(), false); //Datei wird geschrieben
