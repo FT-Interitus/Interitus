@@ -126,11 +126,11 @@ public class UIbridge {
                                     @Override
                                     public void run() {
                                         if (selectedboard.contains("MEGA")) {
-                                            BurnProgramm.burn(Devices.MEGA, getrennt[0], "sketch_mega.hex");
+                                            BurnProgramm.burn(Devices.ARDUINO_MEGA, getrennt[0], "sketch_mega.hex");
                                         }
 
                                         if (selectedboard.contains("UNO")) {
-                                            BurnProgramm.burn(Devices.UNO, getrennt[0], "sketch_uno.hex");
+                                            BurnProgramm.burn(Devices.ARDUINO_UNO, getrennt[0], "sketch_uno.hex");
                                         }
                                     }
                                 };

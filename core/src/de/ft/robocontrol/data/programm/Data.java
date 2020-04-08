@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
 
 public class Data {
     //ANMERKUNG Die Programmdaten sind je nach Benutzer unterschiedlich, deswegen liegen sie auch direkt im Bentzter Ordner
@@ -183,7 +184,7 @@ public class Data {
                     JSONObject obj = new JSONObject(se.readString());
 
                     ExperienceVar.programmtimeinhoures = obj.getDouble("time");
-
+                    ExperienceVar.newprojects = obj.getInt("newprojects");
                     //////////// *.* = obj.getInt();/////////////
 
                     //TODO device laden mit attributen
@@ -250,7 +251,7 @@ public class Data {
 
 
         userexperience_obj.put("time", Counter.getthistime()+ExperienceVar.programmtimeinhoures);
-
+        userexperience_obj.put("newprojects",ExperienceVar.newprojects);
 
         //TODO weitere Einstellugen speichern
         userexperience.writeString(userexperience_obj.toString(), false); //Datei wird geschrieben
