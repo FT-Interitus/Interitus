@@ -134,6 +134,18 @@ if(currentStep>2) {
     }
 }
 
+                    if(currentStep>2) {
+                        if (tempverbindungsspeicher.device == Devices.RASPBERRY3Bplus || tempverbindungsspeicher.device == Devices.RASPBERRYPI4 || tempverbindungsspeicher.device == Devices.RASPBERRYPIZEROW ) {
+                            switch (currentStep) {
+                                case 3:
+                                    de.ft.robocontrol.UI.setup.steps.RaspberryPiSteps.Step3.close();
+                                    break;
+
+                            }
+                        }
+                    }
+
+
                     currentStep++;
                     content.clearChildren();
                     switch (currentStep) {
@@ -155,6 +167,18 @@ if(currentStep>2) {
                                     break;
 
                             }
+                        }
+
+                        if (tempverbindungsspeicher.device == Devices.RASPBERRY3Bplus || tempverbindungsspeicher.device == Devices.RASPBERRYPI4 || tempverbindungsspeicher.device == Devices.RASPBERRYPIZEROW) {
+
+
+                            switch (currentStep)  {
+                                case 3:
+                                    de.ft.robocontrol.UI.setup.steps.RaspberryPiSteps.Step3.step3(content);
+                                    break;
+                            }
+
+
                         }
                     }
 
@@ -191,6 +215,15 @@ if(currentStep>2) {
 
                             }
                         }
+
+                        if (tempverbindungsspeicher.device == Devices.RASPBERRY3Bplus || tempverbindungsspeicher.device == Devices.RASPBERRYPI4 || tempverbindungsspeicher.device == Devices.RASPBERRYPIZEROW) {
+                            switch (currentStep) {
+                                case 3:
+                                    de.ft.robocontrol.UI.setup.steps.RaspberryPiSteps.Step3.close();
+                                    break;
+                            }
+
+                        }
                     }
 
 
@@ -215,7 +248,18 @@ if(currentStep>2) {
 
                             }
                         }
-                    }
+                        if (tempverbindungsspeicher.device == Devices.RASPBERRY3Bplus || tempverbindungsspeicher.device == Devices.RASPBERRYPI4 || tempverbindungsspeicher.device == Devices.RASPBERRYPIZEROW) {
+
+                            switch (currentStep) {
+                                case 3:
+                                    de.ft.robocontrol.UI.setup.steps.RaspberryPiSteps.Step3.step3(content);
+                                    break;
+                            }
+
+
+                        }
+
+                        }
 
 
                     if(currentStep==1) {
@@ -232,6 +276,7 @@ if(currentStep>2) {
                     Step1.close();
                     Step2.close();
                     Step3.close();
+                    de.ft.robocontrol.UI.setup.steps.RaspberryPiSteps.Step3.close();
 
                     currentStep=1;
                     tempverbindungsspeicher=null;

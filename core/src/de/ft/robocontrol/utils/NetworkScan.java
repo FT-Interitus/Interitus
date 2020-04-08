@@ -7,8 +7,10 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 public class NetworkScan {
+   public static ArrayList<InetAddress> device = new ArrayList<>();
+   public static String piaddress = "";
     public static void get() {
-        ArrayList<InetAddress> device = new ArrayList<>();
+
 
         try {
 
@@ -22,8 +24,10 @@ public class NetworkScan {
                ip = ip.split("\\.")[2];
 
                try {
-
-                   System.out.println("Found Raspberry at "+ InetAddress.getByName("raspberrypi").getHostAddress());
+                 InetAddress raspberrypi =  InetAddress.getByName("raspberrypi");
+                   System.out.println("Found Raspberry at "+raspberrypi.getHostAddress());
+                   piaddress =raspberrypi.getHostAddress();
+                   device.add(raspberrypi);
                }catch (UnknownHostException e) {
                   for(int i = 0;i<255;i++) {
                      InetAddress testdevice =InetAddress.getByName("192.168."+ip+"."+i);

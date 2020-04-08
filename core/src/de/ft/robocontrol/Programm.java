@@ -18,7 +18,13 @@ public class Programm extends Game {
     @Override
     public void create() {
 
-        NetworkScan.get();
+        Thread seachnetwork = new Thread() {
+            @Override
+            public void run() {
+                NetworkScan.get();
+            }
+        };
+        seachnetwork.start();
 
         ExperienceManager.init();
         setScreen(new Loading());
