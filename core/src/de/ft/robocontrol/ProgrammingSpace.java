@@ -24,7 +24,7 @@ import de.ft.robocontrol.data.user.changes.DataManager;
 import de.ft.robocontrol.input.TextField;
 import de.ft.robocontrol.loading.AssetLoader;
 import de.ft.robocontrol.roboconnection.SerialConnection;
-import de.ft.robocontrol.roboconnection.UIbridge;
+import de.ft.robocontrol.roboconnection.PortUpdate;
 import de.ft.robocontrol.utils.PositionSaver;
 
 import java.awt.*;
@@ -118,7 +118,7 @@ s.setInside(AssetLoader.switch_inside);
 
         SerialConnection.searchArduino();
 
-        UIbridge.UpdateConnectionWindowPortsList();
+        PortUpdate.UpdateConnectionWindowPortsList();
         Gdx.graphics.setWindowedMode(Var.w, Var.h);
 
         SetupWindow sw=new SetupWindow();

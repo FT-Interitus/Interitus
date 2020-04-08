@@ -9,7 +9,7 @@ import de.ft.robocontrol.UI.setup.steps.ArduinoSteps.Step3;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class UIbridge {
+public class PortUpdate {
 
 
    public static Thread thread;
