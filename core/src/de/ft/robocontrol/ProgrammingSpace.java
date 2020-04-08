@@ -130,7 +130,6 @@ s.setInside(AssetLoader.switch_inside);
     @Override
     public void render(float delta) {
 
-System.out.println((double) ExperienceManager.settingsthistime);
         try {
 
             //logger.finest("Blöcke "+BlockVar.blocks.size()+" Sichtbare "+ BlockVar.visibleblocks.size());

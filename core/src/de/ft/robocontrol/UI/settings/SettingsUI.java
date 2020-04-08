@@ -52,7 +52,7 @@ public class SettingsUI extends VisWindow {
 
     public static boolean isopend() {
         try {
-            System.out.println("Is called");
+
             return testBuilder.testopen();
         }catch (Exception e) {
             return false;

@@ -186,6 +186,7 @@ public class Data {
                     ExperienceVar.newprojects = obj.getInt("newprojects");
                     ExperienceVar.userlevel =obj.getInt("userlevel");
                     ExperienceVar.settingstimeinhoures = obj.getDouble("settingstime");
+                    ExperienceVar.setuptimeinhoures = obj.getDouble("setuptime");
                     //////////// *.* = obj.getInt();/////////////
 
                     //TODO device laden mit attributen
@@ -255,6 +256,7 @@ public class Data {
         userexperience_obj.put("newprojects",ExperienceVar.newprojects);
         userexperience_obj.put("userlevel",ExperienceVar.userlevel);
         userexperience_obj.put("settingstime",ExperienceVar.settingstimeinhoures+ExperienceManager.settingsthistime);
+        userexperience_obj.put("setuptime",ExperienceVar.setuptimeinhoures+ExperienceManager.setupthistime);
 
         //TODO weitere Einstellugen speichern
         userexperience.writeString(userexperience_obj.toString(), false); //Datei wird geschrieben

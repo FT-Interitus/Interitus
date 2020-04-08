@@ -12,6 +12,7 @@ import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.widget.MenuBar;
 import com.kotcrab.vis.ui.widget.MenuItem;
 import de.ft.robocontrol.UI.settings.SettingsUI;
+import de.ft.robocontrol.UI.setup.SetupWindow;
 import de.ft.robocontrol.data.user.experience.ExperienceManager;
 import de.ft.robocontrol.data.user.experience.ExperienceVar;
 import de.ft.robocontrol.input.Button;
@@ -50,7 +51,7 @@ public class UI {
     protected static Button testbutton = new Button();
     Vector3 pos = new Vector3();
     private static boolean issettingsuiopend = false;
-
+    private static boolean issetupuiopend = false;
     static int abstandvonRand =5;
 
 
@@ -203,21 +204,38 @@ public class UI {
 
                         //Check íf Settings is open///////////
                         if(!issettingsuiopend&&SettingsUI.isopend()) {
-                            System.out.println("Test0");
+
                          issettingsuiopend = true;
                             ExperienceManager.settingstimetemp = (double)((double) System.currentTimeMillis()/(double)3600000);
 
                         }
 
                         if(issettingsuiopend&&!SettingsUI.isopend()) {
-                            System.out.println("Test1");
+
                             issettingsuiopend = false;
                             ExperienceManager.settingsthistime = (double) ((double)ExperienceManager.settingsthistime+(double)System.currentTimeMillis()/(double)3600000-(double)ExperienceManager.settingstimetemp);
                         }
 
                         ////////////////////////////////
 
-                        //Check if Setup is open
+                        //Check if Setup is open///
+
+                        if(!issetupuiopend&& SetupWindow.isopend()) {
+
+                            issetupuiopend = true;
+                            ExperienceManager.setuptimetemp = (double)((double) System.currentTimeMillis()/(double)3600000);
+
+                        }
+
+                        if(issetupuiopend&&!SetupWindow.isopend()) {
+
+                            issetupuiopend = false;
+                            ExperienceManager.setupthistime = (double) ((double)ExperienceManager.setupthistime+(double)System.currentTimeMillis()/(double)3600000-(double)ExperienceManager.setuptimetemp);
+                        }
+
+
+
+                        ///////////////////////////
                     }
                 }, 0, 500);
             }
