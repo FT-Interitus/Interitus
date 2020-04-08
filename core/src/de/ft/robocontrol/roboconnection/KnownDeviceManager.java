@@ -1,12 +1,6 @@
 package de.ft.robocontrol.roboconnection;
 
-import com.kotcrab.vis.ui.util.dialog.Dialogs;
-import com.kotcrab.vis.ui.util.dialog.OptionDialogAdapter;
-import de.ft.robocontrol.UI.ConnectionWindow;
-import de.ft.robocontrol.UI.Devicemanagmenttab;
-import de.ft.robocontrol.UI.UI;
 import de.ft.robocontrol.UI.setup.SetupWindow;
-import de.ft.robocontrol.data.VerbindungsSpeicher;
 
 public class KnownDeviceManager {
     public static void addnewdevice() {

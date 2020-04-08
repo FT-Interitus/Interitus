@@ -100,7 +100,7 @@ public class Devicemanagmenttab extends Tab {
     //   VisTextButton button = new VisTextButton("button");
        TestFormValidator(this);
        // content.add(button).padRight(0);
-        ConnectionWindow.update();
+
     }
 
     @Override

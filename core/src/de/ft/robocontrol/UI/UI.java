@@ -38,7 +38,6 @@ import static de.ft.robocontrol.UI.MenuBar.createSubMenu;
 public class UI {
     static final Table root = new Table();
     public static Stage stage;
-    public static ConnectionWindow connectionWindow;
     protected static MenuItem recent;
     protected static MenuItem revert;
     protected static MenuItem redo;
@@ -110,17 +109,7 @@ public class UI {
         }else{
             testbutton.setDisable(false);
         }
-        if(testbutton.isjustPressed()){
-            connectionWindow = new ConnectionWindow();
 
-            connectionWindow.show();
-            connectionWindow.selectportlist.setItems(SerialConnection.getPortNames());
-            if(!UIbridge.thread.isAlive()) {
-
-            }
-            UIbridge.thread.start();
-
-        }
 
     }
 

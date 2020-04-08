@@ -1,6 +1,5 @@
 package de.ft.robocontrol.UI.setup.steps.ArduinoSteps;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.kotcrab.vis.ui.widget.VisLabel;
@@ -8,7 +7,6 @@ import com.kotcrab.vis.ui.widget.VisSelectBox;
 import com.kotcrab.vis.ui.widget.VisTable;
 import com.kotcrab.vis.ui.widget.VisTextButton;
 import de.ft.robocontrol.Block.Devices;
-import de.ft.robocontrol.UI.ConnectionWindow;
 import de.ft.robocontrol.UI.setup.SetupWindow;
 import de.ft.robocontrol.roboconnection.BurnProgramm;
 import de.ft.robocontrol.roboconnection.SerialConnection;

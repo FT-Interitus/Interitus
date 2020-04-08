@@ -1,6 +1,5 @@
 package de.ft.robocontrol.roboconnection;
 import com.fazecast.jSerialComm.*;
-import de.ft.robocontrol.UI.ConnectionWindow;
 import de.ft.robocontrol.UI.setup.steps.ArduinoSteps.Step3;
 
 import java.util.ArrayList;
@@ -89,13 +88,9 @@ public static void searchArduino() {
             try {
 //TODO hier System.out's rausschmeisen
                 SerialPort ports[] = SerialPort.getCommPorts();
-                if(ConnectionWindow.devicemanagebutton!=null) {
-                    ConnectionWindow.devicemanagebutton.setDisabled(true);
-                }
+
                 i = 1;
-                if(ConnectionWindow.devicemanagebutton!=null) {
-                    ConnectionWindow.devicemanagebutton.setText("Bitte Warten..");
-                }
+
                 for (SerialPort port : ports) {
                     i++;
 
@@ -165,20 +160,6 @@ public static void searchArduino() {
 
                 }
 
-                if (ConnectionWindow.devicemanagebutton != null) {
-                    ConnectionWindow.devicemanagebutton.setDisabled(false);
-                    ConnectionWindow.devicemanagebutton.setText("Software brennen");
-                }
-
-                if (ConnectionWindow.error != null) {
-                    ConnectionWindow.error.setText("");
-                }
-
-
-                if (ConnectionWindow.selectportlist != null) {
-                    ConnectionWindow.selectportlist.setItems(SerialConnection.getPortNames());
-                    ConnectionWindow.update();
-                }
 
             if(Step3.selectportlist!=null) {
                 Step3.selectportlist.setItems(SerialConnection.getPortNames());
