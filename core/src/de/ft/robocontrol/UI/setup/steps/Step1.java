@@ -30,12 +30,11 @@ public class Step1 {
     public Step1() {
 
     }
-    public static void save(){
-            SetupWindow.tempverbindungsspeicher.name = name.getText();
 
-    }
 
     public static void close(){
+        SetupWindow.tempverbindungsspeicher.name = name.getText();
+
         if(time!=null){
             if (time.isRunning()) {
                 time.stop();
@@ -44,12 +43,16 @@ public class Step1 {
         name.setText("");
     }
 
-    public static void loadSettings(){
-        name.setText(SetupWindow.tempverbindungsspeicher.name);
-    }
+
 
 
     public static void step1(VisTable builder) {
+        //loadsettings
+        name.setText(SetupWindow.tempverbindungsspeicher.name);
+        //
+
+
+
         time = new Timer( 30, new ActionListener()
         {
             public void actionPerformed( ActionEvent evt )

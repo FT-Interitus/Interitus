@@ -107,11 +107,11 @@ public class SetupWindow {
                 public void changed(ChangeEvent event, Actor actor) {
                     switch (currentStep) {
                         case 1:
-                            Step1.time.stop();
-                            Step1.save();
+                            Step1.close();
+
                             break;
                         case 2:
-                            Step2.time.stop();
+                            Step2.close();
                             break;
 
                     }
@@ -141,11 +141,10 @@ if(currentStep>1) {
 
                     switch (currentStep) {
                         case 1:
-                            Step1.time.stop();
+                            Step1.close();
                             break;
                         case 2:
-                            System.out.println("cncle");
-                            Step2.time.stop();
+                            Step2.close();
                             break;
 
                     }
@@ -153,11 +152,9 @@ if(currentStep>1) {
                     content.clearChildren();
                     switch (currentStep) {
                         case 1:
-                            Step1.loadSettings();
                             Step1.step1(content);
                             break;
                         case 2:
-                            Step1.loadSettings();
                             Step2.step2(content);
                             break;
 
