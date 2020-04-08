@@ -20,7 +20,6 @@ import java.awt.event.ActionListener;
 import java.util.TimerTask;
 
 public class Step1 {
-    public static VisImage help=new VisImage();
     public static VisTextField name = new VisTextField();
     public static CharSequence text = "Name: ";
     public static VisLabel namelable = new VisLabel(text);

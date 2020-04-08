@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class VerbindungsSpeicher {
     public static ArrayList<VerbindungsSpeicher> verbundungen = new ArrayList<VerbindungsSpeicher>();
     public String name="";
+    public int Board=-1;
 
 
 

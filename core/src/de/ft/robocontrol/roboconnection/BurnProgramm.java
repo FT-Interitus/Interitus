@@ -15,12 +15,12 @@ public class BurnProgramm {
 
     protected static void burn(int arduino, String port, String file) {
         String methode = null;
-        if (arduino == Devices.UNO) { //TODO add platforms
+        if (arduino == Devices.ARDUINO_UNO) { //TODO add platforms
             platform = "atmega328p";
             methode = "arduino";
         }
 
-        if (arduino == Devices.MEGA) {
+        if (arduino == Devices.ARDUINO_MEGA) {
             platform = "atmega2560";
             methode = "wiring";
         }

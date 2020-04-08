@@ -6,18 +6,16 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.kotcrab.vis.ui.building.TableBuilder;
 import com.kotcrab.vis.ui.building.utilities.CellWidget;
 import com.kotcrab.vis.ui.building.utilities.Padding;
-import com.kotcrab.vis.ui.widget.VisLabel;
-import com.kotcrab.vis.ui.widget.VisSelectBox;
-import com.kotcrab.vis.ui.widget.VisTable;
-import com.kotcrab.vis.ui.widget.VisTextField;
+import com.kotcrab.vis.ui.widget.*;
 import de.ft.robocontrol.UI.setup.SetupWindow;
+import de.ft.robocontrol.loading.AssetLoader;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
 public class Step2 {
-
+    public static VisImage helpimage=new VisImage(AssetLoader.help_platforms);
     public static VisSelectBox<String> selectPlatform;
     public static VisSelectBox<String> selectBoardArt;
     public static CharSequence auftragtext = "Hier wählst du bitte deine Plattform aus.";
@@ -51,7 +49,8 @@ public class Step2 {
         selectPlatform.setItems("Bitte auswählen","Arduino","EV3","Raspberry Pi");
         builder.add(selectPlatform).row();
         builder.row();
-        builder.add(selectBoardArt).padBottom(-50);
+        builder.add(selectBoardArt).padBottom(-50).row();
+        builder.add(helpimage).padBottom(-400).height(300*0.7f).width(500*0.7f);
         selectBoardArt.setVisible(false);
 
         SetupWindow.Button_next.setDisabled(true);
@@ -65,6 +64,7 @@ public class Step2 {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 if(selectPlatform.getSelected().equals("Bitte auswählen")){
+                    helpimage.setDrawable(AssetLoader.help_platforms);
                     SetupWindow.Button_next.setDisabled(true);
                     SetupWindow.errorLabel.setColor(1,0,0,1);
                     SetupWindow.errorLabel.setText("Bitte wähle eine Platform aus");
@@ -77,6 +77,7 @@ public class Step2 {
                 }else{
                     selectPlatform.setColor(0,1,0,1);
                     if(selectPlatform.getSelected().equals("Arduino")){
+                        helpimage.setDrawable(AssetLoader.help_arduino_boards);
                         selectBoardArt.setItems("Bitte auswählen","Arduino UNO","Arduino MEGA");
                         selectBoardArt.setVisible(true);
                         SetupWindow.errorLabel.setColor(1,0,0,1);
@@ -90,7 +91,7 @@ public class Step2 {
 
                     }
                     if(selectPlatform.getSelected().equals("EV3")){
-
+                        helpimage.setDrawable(AssetLoader.help_ev3);
                         selectBoardArt.setItems("Bitte auswählen","Normal","EV3-DEV");
                         selectBoardArt.setVisible(true);
                         SetupWindow.errorLabel.setColor(1,0,0,1);
@@ -103,6 +104,7 @@ public class Step2 {
 
                     }
                     if(selectPlatform.getSelected().equals("Raspberry Pi")){
+                        helpimage.setDrawable(AssetLoader.help_raspberrypi_boards);
                         selectBoardArt.setItems("Bitte auswählen","Raspberry Pi 4b","Raspberry pi 3b/3b+","Raspberry Pi Zero W");
                         selectBoardArt.setVisible(true);
                         SetupWindow.errorLabel.setColor(1,0,0,1);

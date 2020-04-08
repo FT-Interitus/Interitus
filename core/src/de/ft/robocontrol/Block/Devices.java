@@ -2,8 +2,8 @@ package de.ft.robocontrol.Block;
 
 public class Devices {
 
-    public static int UNO = 0; // Arduino UNO definition auf 0 um die Lesbvarkeit des Codes zu verbessern
-    public static int MEGA = 1; // Arduino MEGA definition auf 1 ...
+    public static int ARDUINO_UNO = 0; // Arduino UNO definition auf 0 um die Lesbvarkeit des Codes zu verbessern
+    public static int ARDUINO_MEGA = 1; // Arduino MEGA definition auf 1 ...
 
     public static int raspberrypi_4b = 10;
     public static int raspberrypi_3b_3bplus = 11;
