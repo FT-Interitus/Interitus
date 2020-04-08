@@ -58,12 +58,13 @@ public class Step3 {
                                    if(!input.split("\\.")[0].isEmpty()) {
                                        InetAddress testdevice = null;
                                        try {
-                                           testdevice = InetAddress.getByName(input);
-                                       } catch (UnknownHostException e) {
-                                           e.printStackTrace();
-                                       }
+                                           try {
+                                               testdevice = InetAddress.getByName(input);
+                                           }catch (UnknownHostException e) {
 
-                                       try {
+                                           }
+
+
                                            if(testdevice.isReachable(50)) {
 
                                                SetupWindow.Button_next.setDisabled(false);
@@ -78,9 +79,11 @@ public class Step3 {
                                            SetupWindow.Button_next.setDisabled(true);
                                            SetupWindow.errorLabel.setColor(1,0,0,1);
                                            SetupWindow.errorLabel.setText("Die IP-Adresse ist nicht erreichbar");
+                                       }catch (NullPointerException e) {
+
                                        }
 
-                                        return true;
+                                       return true;
 
                                    }else {
                                        SetupWindow.Button_next.setDisabled(true);
