@@ -14,6 +14,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import de.ft.robocontrol.Block.Block;
 import de.ft.robocontrol.Block.BlockVar;
 import de.ft.robocontrol.UI.setup.SetupWindow;
+import de.ft.robocontrol.data.user.experience.Counter;
+import de.ft.robocontrol.data.user.experience.ExperienceVar;
 import de.ft.robocontrol.input.IntegerAuswahl;
 import de.ft.robocontrol.input.Switch;
 import de.ft.robocontrol.UI.UI;
@@ -28,6 +30,7 @@ import de.ft.robocontrol.utils.PositionSaver;
 import java.awt.*;
 import java.util.Set;
 import java.util.logging.Logger;
+import java.util.zip.CheckedOutputStream;
 
 import static com.badlogic.gdx.Gdx.input;
 import static de.ft.robocontrol.Settings.*;
@@ -128,6 +131,7 @@ s.setInside(AssetLoader.switch_inside);
 
     @Override
     public void render(float delta) {
+
 
         try {
 

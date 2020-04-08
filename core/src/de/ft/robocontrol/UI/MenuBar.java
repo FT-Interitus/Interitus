@@ -19,6 +19,7 @@ import de.ft.robocontrol.data.user.DataSaver;
 import de.ft.robocontrol.data.user.LoadSave;
 import de.ft.robocontrol.data.user.changes.DataManager;
 import de.ft.robocontrol.data.user.changes.SaveChanges;
+import de.ft.robocontrol.data.user.experience.ExperienceVar;
 import de.ft.robocontrol.utils.ClearActOpenProgramm;
 
 
@@ -80,6 +81,8 @@ if(fullscreen==false) {
                                 public void result(Integer result) {
                                     if (result == nothing) {
                                         ClearActOpenProgramm.clear();
+
+                                        ExperienceVar.newprojects++;
                                     }
 
                                     if (result == everything) {
@@ -102,6 +105,7 @@ if(fullscreen==false) {
                 } else {
                     try {
                         ClearActOpenProgramm.clear();
+                        ExperienceVar.newprojects++;
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
