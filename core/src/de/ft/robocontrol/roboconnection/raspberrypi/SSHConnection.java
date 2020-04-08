@@ -1,4 +1,4 @@
-package de.ft.robocontrol.roboconnection;
+package de.ft.robocontrol.roboconnection.raspberrypi;
 
 import com.jcraft.jsch.JSch;
 

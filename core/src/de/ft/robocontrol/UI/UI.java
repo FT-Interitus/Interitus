@@ -14,7 +14,6 @@ import com.kotcrab.vis.ui.widget.MenuItem;
 import de.ft.robocontrol.UI.settings.SettingsUI;
 import de.ft.robocontrol.UI.setup.SetupWindow;
 import de.ft.robocontrol.data.user.experience.ExperienceManager;
-import de.ft.robocontrol.data.user.experience.ExperienceVar;
 import de.ft.robocontrol.input.Button;
 import de.ft.robocontrol.ProgrammingSpace;
 import de.ft.robocontrol.Settings;
@@ -22,8 +21,6 @@ import de.ft.robocontrol.Var;
 import de.ft.robocontrol.data.programm.Data;
 import de.ft.robocontrol.data.user.changes.SaveChanges;
 import de.ft.robocontrol.input.check.InputManager;
-import de.ft.robocontrol.roboconnection.SerialConnection;
-import de.ft.robocontrol.roboconnection.PortUpdate;
 import de.ft.robocontrol.utils.RoundRectangle;
 
 

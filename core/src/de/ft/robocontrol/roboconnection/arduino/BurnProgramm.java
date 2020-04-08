@@ -1,4 +1,4 @@
-package de.ft.robocontrol.roboconnection;
+package de.ft.robocontrol.roboconnection.arduino;
 
 import de.ft.robocontrol.Block.Devices;
 import de.ft.robocontrol.ProgrammingSpace;

@@ -8,8 +8,8 @@ import com.kotcrab.vis.ui.widget.VisTable;
 import com.kotcrab.vis.ui.widget.VisTextButton;
 import de.ft.robocontrol.Block.Devices;
 import de.ft.robocontrol.UI.setup.SetupWindow;
-import de.ft.robocontrol.roboconnection.BurnProgramm;
-import de.ft.robocontrol.roboconnection.SerialConnection;
+import de.ft.robocontrol.roboconnection.arduino.BurnProgramm;
+import de.ft.robocontrol.roboconnection.arduino.SerialConnection;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

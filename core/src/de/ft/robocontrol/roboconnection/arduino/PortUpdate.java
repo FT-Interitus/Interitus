@@ -1,8 +1,5 @@
-package de.ft.robocontrol.roboconnection;
+package de.ft.robocontrol.roboconnection.arduino;
 
-import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import de.ft.robocontrol.Block.Devices;
 import de.ft.robocontrol.UI.setup.steps.ArduinoSteps.Step3;
 
 

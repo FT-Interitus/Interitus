@@ -1,4 +1,4 @@
-package de.ft.robocontrol.roboconnection;
+package de.ft.robocontrol.roboconnection.arduino;
 import com.fazecast.jSerialComm.*;
 import de.ft.robocontrol.UI.setup.steps.ArduinoSteps.Step3;
 
