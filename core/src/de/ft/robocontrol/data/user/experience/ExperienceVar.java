@@ -7,6 +7,7 @@ public class ExperienceVar {
     public static double programmtimeinhoures =0;
     public static double settingstimeinhoures =0;
     public static double setuptimeinhoures =0;
+    public static int starttimes = 0;
 
 
 
