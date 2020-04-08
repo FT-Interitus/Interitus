@@ -31,6 +31,11 @@ public class Step1 {
     }
 
     public static void close(){
+        if(time!=null){
+            if (time.isRunning()) {
+                time.stop();
+            }
+        }
         name.setText("");
     }
 
@@ -40,22 +45,6 @@ public class Step1 {
 
 
     public static void step1(VisTable builder) {
-        update();
-
-        builder.add(auftrag).expandX().padBottom(-100).row();
-        builder.add(namelable).expandX().padBottom(-200).padLeft(-100);
-        builder.add(name).expandX().padBottom(-200).padLeft(-400).row();
-
-
-    }
-
-
-    public static void update() {
-
-
-
-
-
         time = new Timer( 30, new ActionListener()
         {
             public void actionPerformed( ActionEvent evt )
@@ -72,7 +61,15 @@ public class Step1 {
                 }
             }
         });
-
         time.start();
-}
+
+        builder.add(auftrag).expandX().padBottom(-100).row();
+        builder.add(namelable).expandX().padBottom(-200).padLeft(-100);
+        builder.add(name).expandX().padBottom(-200).padLeft(-400).row();
+
+
+    }
+
+
+
 }

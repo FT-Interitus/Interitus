@@ -92,8 +92,6 @@ public class SetupWindow {
 
 
 
-
-
             Table table = builder.build();
 
             add(table).expand().fill().size(600,450);
@@ -174,8 +172,7 @@ if(currentStep>1) {
             Button_cancle.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
-                    Step1.time.stop();
-                    Step2.time.stop();
+
 
                     Step1.close();
                     Step2.close();

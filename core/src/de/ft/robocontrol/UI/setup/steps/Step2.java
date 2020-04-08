@@ -31,7 +31,20 @@ public class Step2 {
     }
 
     public static void step2(final VisTable builder) {
-        update();
+
+
+        time = new javax.swing.Timer( 30, new ActionListener()
+        {
+            public void actionPerformed( ActionEvent evt )
+            {
+
+            }
+        });
+        time.start();
+
+
+
+
         builder.add(auftrag).expandX().row();
         selectPlatform = new VisSelectBox<String>();
         selectBoardArt = new VisSelectBox<String>();
@@ -149,6 +162,10 @@ public class Step2 {
                             SetupWindow.errorLabel.setColor(0,1,0,1);
                             SetupWindow.errorLabel.setText("Alle Voraussetzungen erfüllt");
                             SetupWindow.Button_next.setDisabled(false);
+                        }else{
+                            SetupWindow.errorLabel.setColor(1,0,0,1);
+                            SetupWindow.errorLabel.setText("Bitte wähle ein EV3 aus");
+                            SetupWindow.Button_next.setDisabled(true);
                         }
 
                         break;
@@ -183,7 +200,11 @@ public class Step2 {
     }
 
     public static void close(){
-
+        if(time!=null){
+            if (time.isRunning()) {
+                time.stop();
+            }
+        }
     }
 
     public static void loadSettings(){
@@ -191,17 +212,5 @@ public class Step2 {
     }
 
 
-    public static void update() {
 
-
-
-        time = new javax.swing.Timer( 30, new ActionListener()
-        {
-            public void actionPerformed( ActionEvent evt )
-            {
-
-            }
-        });
-
-    }
 }
