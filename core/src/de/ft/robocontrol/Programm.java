@@ -1,10 +1,8 @@
 package de.ft.robocontrol;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.ScreenAdapter;
 import de.ft.robocontrol.data.programm.Data;
-import de.ft.robocontrol.data.user.experience.Counter;
+import de.ft.robocontrol.data.user.experience.ExperienceManager;
 import de.ft.robocontrol.loading.Loading;
 
 public class Programm extends Game {
@@ -19,7 +17,7 @@ public class Programm extends Game {
     @Override
     public void create() {
 
-        Counter.init();
+        ExperienceManager.init();
         setScreen(new Loading());
     }
 

@@ -50,6 +50,15 @@ public class SettingsUI extends VisWindow {
      */
 
 
+    public static boolean isopend() {
+        try {
+            System.out.println("Is called");
+            return testBuilder.testopen();
+        }catch (Exception e) {
+            return false;
+        }
+    }
+
     private static boolean accepteddangerous = false;
     final Padding padding = new Padding(2, 3);
 
@@ -68,12 +77,23 @@ public class SettingsUI extends VisWindow {
         instructions.add(container);
         testBuilder = new TestBuilder("Einstellungen", new StandardTableBuilder(padding));
         UI.stage.addActor(testBuilder);
+
+
+
+
     }
 
 
     private class TestBuilder extends VisWindow {
+        public boolean testopen() {
+            return super.getParent().isVisible();
+
+
+        }
+
         public TestBuilder(String name, final TableBuilder builder) {
             super(name);
+
 
 
            rowLayout  = new RowLayout(new Padding(0, 0, 0, 5));
@@ -82,6 +102,16 @@ public class SettingsUI extends VisWindow {
             setModal(true);
             closeOnEscape();
             addCloseButton();
+
+            addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+
+
+                }
+            });
+
+
             // setScale(200,200);
 
 

@@ -3,7 +3,6 @@ package de.ft.robocontrol;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -13,8 +12,9 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.ft.robocontrol.Block.Block;
 import de.ft.robocontrol.Block.BlockVar;
+import de.ft.robocontrol.UI.settings.SettingsUI;
 import de.ft.robocontrol.UI.setup.SetupWindow;
-import de.ft.robocontrol.data.user.experience.Counter;
+import de.ft.robocontrol.data.user.experience.ExperienceManager;
 import de.ft.robocontrol.data.user.experience.ExperienceVar;
 import de.ft.robocontrol.input.IntegerAuswahl;
 import de.ft.robocontrol.input.Switch;
@@ -28,9 +28,7 @@ import de.ft.robocontrol.roboconnection.UIbridge;
 import de.ft.robocontrol.utils.PositionSaver;
 
 import java.awt.*;
-import java.util.Set;
 import java.util.logging.Logger;
-import java.util.zip.CheckedOutputStream;
 
 import static com.badlogic.gdx.Gdx.input;
 import static de.ft.robocontrol.Settings.*;
@@ -132,7 +130,7 @@ s.setInside(AssetLoader.switch_inside);
     @Override
     public void render(float delta) {
 
-
+System.out.println((double) ExperienceManager.settingsthistime);
         try {
 
             //logger.finest("Blöcke "+BlockVar.blocks.size()+" Sichtbare "+ BlockVar.visibleblocks.size());

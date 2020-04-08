@@ -12,6 +12,8 @@ import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.widget.MenuBar;
 import com.kotcrab.vis.ui.widget.MenuItem;
 import de.ft.robocontrol.UI.settings.SettingsUI;
+import de.ft.robocontrol.data.user.experience.ExperienceManager;
+import de.ft.robocontrol.data.user.experience.ExperienceVar;
 import de.ft.robocontrol.input.Button;
 import de.ft.robocontrol.ProgrammingSpace;
 import de.ft.robocontrol.Settings;
@@ -22,6 +24,7 @@ import de.ft.robocontrol.input.check.InputManager;
 import de.ft.robocontrol.roboconnection.SerialConnection;
 import de.ft.robocontrol.roboconnection.UIbridge;
 import de.ft.robocontrol.utils.RoundRectangle;
+import jdk.internal.platform.cgroupv1.SubSystem;
 
 
 import java.io.File;
@@ -46,6 +49,7 @@ public class UI {
     public static Texture img_button_verbindungadd_white;
     protected static Button testbutton = new Button();
     Vector3 pos = new Vector3();
+    private static boolean issettingsuiopend = false;
 
     static int abstandvonRand =5;
 
@@ -194,6 +198,26 @@ public class UI {
                         }catch (Exception e) {
                             e.printStackTrace(); //for debug to find errors
                         }
+
+
+
+                        //Check íf Settings is open///////////
+                        if(!issettingsuiopend&&SettingsUI.isopend()) {
+                            System.out.println("Test0");
+                         issettingsuiopend = true;
+                            ExperienceManager.settingstimetemp = (double)((double) System.currentTimeMillis()/(double)3600000);
+
+                        }
+
+                        if(issettingsuiopend&&!SettingsUI.isopend()) {
+                            System.out.println("Test1");
+                            issettingsuiopend = false;
+                            ExperienceManager.settingsthistime = (double) ((double)ExperienceManager.settingsthistime+(double)System.currentTimeMillis()/(double)3600000-(double)ExperienceManager.settingstimetemp);
+                        }
+
+                        ////////////////////////////////
+
+                        //Check if Setup is open
                     }
                 }, 0, 500);
             }
