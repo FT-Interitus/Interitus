@@ -60,7 +60,6 @@ public class Step1 {
         {
             public void actionPerformed( ActionEvent evt )
             {
-                System.out.println("timer1isrunning");
 
                 if(name.isEmpty()){
                     SetupWindow.errorLabel.setColor(new Color(1,0,0,1));
