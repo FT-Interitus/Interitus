@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import de.ft.robocontrol.ProgrammingSpace;
 import de.ft.robocontrol.Settings;
+import de.ft.robocontrol.data.user.experience.Counter;
+import de.ft.robocontrol.data.user.experience.ExperienceVar;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -25,6 +27,7 @@ public class Data {
         File recent = new File(System.getProperty("user.home") + "/.racd/recent.json"); //JSON file in dem die zuletzt geöffneten Projekte gespeichert werden
         File settings = new File(System.getProperty("user.home") + "/.racd/settings.json"); // JSON file in dem alle Einstellungen gespeichert werden
         File knowndevices = new File(System.getProperty("user.home") + "/.racd/devices.json"); //JSON file in dem alle konfigurierten Geräte gespeichert werden
+        File userexperience = new File(System.getProperty("user.home") + "/.racd/experience.json"); //JSON file in dem User Analytics gespeichert werden
         Path path = folder.toPath();
         if (!folder.exists()) {//Wenn der Programm-Ordner noch nicht exsitiert
             ProgrammingSpace.logger.config("Create Programm Data Folder");
@@ -44,6 +47,12 @@ public class Data {
 
             try {
                 knowndevices.createNewFile();//Die datei für die bekannten Geröte wird erstellt
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                userexperience.createNewFile();//Die datei für die bekannten Geröte wird erstellt
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -128,7 +137,7 @@ public class Data {
             if (!knowndevices.exists()) { //siehe recent
                 try {
                     knowndevices.createNewFile();
-                    Gdx.files.absolute(settings.getAbsolutePath()).writeString("{}", false); //siehe recent
+                    Gdx.files.absolute(knowndevices.getAbsolutePath()).writeString("{}", false); //siehe recent
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -145,6 +154,37 @@ public class Data {
                     //Die Geräte werden geladen und für jedes eine Verbindungsspeicher Instanze erstellt
 
                    //////////// *.* = obj.getInt();/////////////
+
+                    //TODO device laden mit attributen
+
+                } catch (JSONException e) {
+
+                }
+
+
+            }
+
+
+            if (!userexperience.exists()) { //siehe recent
+                try {
+                    userexperience.createNewFile();
+                    Gdx.files.absolute(userexperience.getAbsolutePath()).writeString("{}", false); //siehe recent
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+
+                try {
+                    FileHandle se = Gdx.files.absolute(System.getProperty("user.home") + "/.racd/experience.json");
+                    if (se.readString() == "") {
+                        se.writeString("{}", false);
+                        return;
+                    }
+                    JSONObject obj = new JSONObject(se.readString());
+
+                    ExperienceVar.programmtimeinhoures = obj.getDouble("time");
+
+                    //////////// *.* = obj.getInt();/////////////
 
                     //TODO device laden mit attributen
 
@@ -204,6 +244,18 @@ public class Data {
         //TODO attribute laden
         knowndevices.writeString(knowndevices_obj.toString(), false); //Datei wird geschrieben
 
+        ///////////////////////////////////////////////////////////////
+        FileHandle userexperience = Gdx.files.absolute(System.getProperty("user.home") + "/.racd/experience.json"); //Lade Datei
+        JSONObject userexperience_obj = new JSONObject(userexperience); //UserExperience wird je nach Daten Typ abgespeichert
+
+
+        userexperience_obj.put("time", Counter.getthistime()+ExperienceVar.programmtimeinhoures);
+
+
+        //TODO weitere Einstellugen speichern
+        userexperience.writeString(userexperience_obj.toString(), false); //Datei wird geschrieben
+
+///////////////////////////////////////////////////////////////////////
     }
 
 
@@ -223,5 +275,6 @@ public class Data {
 
     public static void delete() { //TODO Experimentel
         folder.delete(); //Der Ordner wird gelöscht
+
     }
 }
