@@ -53,7 +53,7 @@ public class Step3 {
             }
         };
         if(!burningThread.isAlive()) {
-            burningThread.start();;
+            burningThread.start();
         }else{
 
         }
@@ -71,9 +71,11 @@ public class Step3 {
                     if (SerialConnection.isRunning || isBurning==true) {
                         neuladen_button.setDisabled(true);
                         brennen_button.setDisabled(true);
+                        selectportlist.setDisabled(true);
                     } else {
                         neuladen_button.setDisabled(false);
                         brennen_button.setDisabled(false);
+                        selectportlist.setDisabled(false);
                     }
 
             }
