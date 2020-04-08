@@ -1,4 +1,4 @@
-package de.ft.robocontrol.UI.setup.steps;
+package de.ft.robocontrol.UI.setup.steps.generalSteps;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;

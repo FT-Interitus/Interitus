@@ -1,6 +1,5 @@
 package de.ft.robocontrol.UI.setup;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -14,8 +13,8 @@ import com.kotcrab.vis.ui.widget.VisTable;
 import com.kotcrab.vis.ui.widget.VisTextButton;
 import com.kotcrab.vis.ui.widget.VisWindow;
 import de.ft.robocontrol.UI.UI;
-import de.ft.robocontrol.UI.setup.steps.Step1;
-import de.ft.robocontrol.UI.setup.steps.Step2;
+import de.ft.robocontrol.UI.setup.steps.generalSteps.Step1;
+import de.ft.robocontrol.UI.setup.steps.generalSteps.Step2;
 import de.ft.robocontrol.data.VerbindungsSpeicher;
 
 public class SetupWindow {
