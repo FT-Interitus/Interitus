@@ -7,6 +7,7 @@ import com.kotcrab.vis.ui.building.TableBuilder;
 import com.kotcrab.vis.ui.building.utilities.CellWidget;
 import com.kotcrab.vis.ui.building.utilities.Padding;
 import com.kotcrab.vis.ui.widget.*;
+import de.ft.robocontrol.Block.Devices;
 import de.ft.robocontrol.UI.setup.SetupWindow;
 import de.ft.robocontrol.loading.AssetLoader;
 
@@ -50,7 +51,7 @@ public class Step2 {
         builder.add(selectPlatform).row();
         builder.row();
         builder.add(selectBoardArt).padBottom(-50).row();
-        builder.add(helpimage).padBottom(-400).height(300*0.7f).width(500*0.7f);
+        builder.add(helpimage).padBottom(-400).height(300*0.8f).width(500*0.8f);
         selectBoardArt.setVisible(false);
 
         SetupWindow.Button_next.setDisabled(true);
@@ -72,6 +73,7 @@ public class Step2 {
                     selectPlatform.setColor(1,0,0,1);
                     selectBoardArt.setSelected("Bitte auswählen");
                     shownext=0;
+                    SetupWindow.tempverbindungsspeicher.device= Devices.UNDEFINIERT;
 
 
                 }else{
@@ -138,16 +140,19 @@ public class Step2 {
                             SetupWindow.errorLabel.setColor(0,1,0,1);
                             SetupWindow.errorLabel.setText("Alle Voraussetzungen erfüllt");
                             SetupWindow.Button_next.setDisabled(false);
+                            SetupWindow.tempverbindungsspeicher.device= Devices.ARDUINO_UNO;
                         }else
                         if(selectBoardArt.getSelected().equals("Arduino MEGA")){
                             selectBoardArt.setColor(0,1,0,1);
                             SetupWindow.errorLabel.setColor(0,1,0,1);
                             SetupWindow.errorLabel.setText("Alle Voraussetzungen erfüllt");
                             SetupWindow.Button_next.setDisabled(false);
+                            SetupWindow.tempverbindungsspeicher.device= Devices.ARDUINO_MEGA;
                         }else{
                             SetupWindow.errorLabel.setColor(1,0,0,1);
                             SetupWindow.errorLabel.setText("Bitte wähle ein Arduino Board aus");
                             SetupWindow.Button_next.setDisabled(true);
+                            SetupWindow.tempverbindungsspeicher.device= Devices.UNDEFINIERT;
                         }
                         break;
 
@@ -158,12 +163,14 @@ public class Step2 {
                             SetupWindow.errorLabel.setColor(0,1,0,1);
                             SetupWindow.errorLabel.setText("Alle Voraussetzungen erfüllt");
                             SetupWindow.Button_next.setDisabled(false);
+                            SetupWindow.tempverbindungsspeicher.device= Devices.EV3;
                         }else
                         if(selectBoardArt.getSelected().equals("EV3-DEV")){
                             selectBoardArt.setColor(0,1,0,1);
                             SetupWindow.errorLabel.setColor(0,1,0,1);
                             SetupWindow.errorLabel.setText("Alle Voraussetzungen erfüllt");
                             SetupWindow.Button_next.setDisabled(false);
+                            SetupWindow.tempverbindungsspeicher.device= Devices.EV3_DEV;
                         }else{
                             SetupWindow.errorLabel.setColor(1,0,0,1);
                             SetupWindow.errorLabel.setText("Bitte wähle ein EV3 aus");
@@ -177,22 +184,26 @@ public class Step2 {
                             SetupWindow.errorLabel.setColor(0,1,0,1);
                             SetupWindow.errorLabel.setText("Alle Voraussetzungen erfüllt");
                             SetupWindow.Button_next.setDisabled(false);
+                            SetupWindow.tempverbindungsspeicher.device= Devices.RASPBERRYPI4;
                         }else
                         if(selectBoardArt.getSelected().equals("Raspberry pi 3b/3b+")){
                             selectBoardArt.setColor(0,1,0,1);
                             SetupWindow.errorLabel.setColor(0,1,0,1);
                             SetupWindow.errorLabel.setText("Alle Voraussetzungen erfüllt");
                             SetupWindow.Button_next.setDisabled(false);
+                            SetupWindow.tempverbindungsspeicher.device= Devices.RASPBERRY3Bplus;
                         }else
                         if(selectBoardArt.getSelected().equals("Raspberry Pi Zero W")){
                             selectBoardArt.setColor(0,1,0,1);
                             SetupWindow.errorLabel.setColor(0,1,0,1);
                             SetupWindow.errorLabel.setText("Alle Voraussetzungen erfüllt");
                             SetupWindow.Button_next.setDisabled(false);
+                            SetupWindow.tempverbindungsspeicher.device= Devices.RASPBERRYPIZEROW;
                         }else{
                             SetupWindow.errorLabel.setColor(1,0,0,1);
                             SetupWindow.errorLabel.setText("Bitte wähle einen Raspberry Pi aus");
                             SetupWindow.Button_next.setDisabled(true);
+                            SetupWindow.tempverbindungsspeicher.device= Devices.UNDEFINIERT;
                         }
                         break;
                 }
@@ -209,9 +220,7 @@ public class Step2 {
         }
     }
 
-    public static void loadSettings(){
 
-    }
 
 
 
