@@ -17,6 +17,7 @@ import com.kotcrab.vis.ui.widget.tabbedpane.TabbedPane;
 import com.kotcrab.vis.ui.widget.tabbedpane.TabbedPaneAdapter;
 import de.ft.robocontrol.Var;
 import de.ft.robocontrol.data.VerbindungsSpeicher;
+import de.ft.robocontrol.roboconnection.KnownDeviceManager;
 
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -25,7 +26,7 @@ public class ConnectionWindow {
 public static VisLabel error;
 //ublic static TabbedPane tabbedPane;
 public static VisTextButton devicemanagebutton = new VisTextButton("Software brennen");
-
+    static TestTab tt;
     public static VisTextButton neuladen_button = new VisTextButton("Neuladen");
     public static VisSelectBox<String> selectportlist;
     public static VisSelectBox<String> selectboardlist;
@@ -44,6 +45,17 @@ public static VisTextButton devicemanagebutton = new VisTextButton("Software bre
             public void switchedTab(Tab tab) {
                 container.clearChildren();
                 container.add(tab.getContentTable()).expand().fill();
+
+
+                try {
+                    if (tab == tt) {
+
+                        testBuilder.close();
+                        KnownDeviceManager.addnewdevice();
+                    }
+                }catch (Exception e) {
+
+                }
                 try {
                     testBuilder.pack();
                 } catch (Exception e) {
@@ -55,6 +67,8 @@ public static VisTextButton devicemanagebutton = new VisTextButton("Software bre
         Var.isdialogeopend=true;
 
     }
+
+
 
     public static void update() {
         try {
@@ -138,17 +152,15 @@ public static VisTextButton devicemanagebutton = new VisTextButton("Software bre
             builder.setTablePadding(new Padding(0, 0, 0, 0));
 
 
-            TestTab tt = new TestTab("+");
-
-
+             tt = new TestTab("+");
             tabbedPane.add(tt);
+            tabbedPane.add(new Devicemanagmenttab("Test"));
 
 
             builder.append(CellWidget.of(tabbedPane.getTable()).expandX().fillX().wrap());
             builder.row();
             container.pack();
             builder.append(container);
-
 
 
 
@@ -161,6 +173,10 @@ public static VisTextButton devicemanagebutton = new VisTextButton("Software bre
 
             centerWindow();
             pack();
+        }
+
+        public void close() {
+            super.close();
         }
 
 

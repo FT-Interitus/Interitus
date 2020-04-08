@@ -11,6 +11,10 @@ import de.ft.robocontrol.data.VerbindungsSpeicher;
 public class KnownDeviceManager {
     public static void addnewdevice() {
 
+
+
+
+        /*
         Dialogs.showOptionDialog(UI.stage, "Neue Verbindung gefunden", "Möchtest das Gerät konfigurieren?", Dialogs.OptionDialogType.YES_NO, new OptionDialogAdapter() {
             @Override
             public void yes () {
@@ -28,5 +32,12 @@ public class KnownDeviceManager {
 
 
         });
+
+
+         */
+
+        SetupWindow sw=new SetupWindow();
+        sw.show();
+
     }
 }
