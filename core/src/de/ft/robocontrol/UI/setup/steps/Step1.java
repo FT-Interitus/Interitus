@@ -8,10 +8,10 @@ import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisTable;
 import com.kotcrab.vis.ui.widget.VisTextField;
 import de.ft.robocontrol.UI.setup.SetupWindow;
+import javax.swing.Timer;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import java.sql.Time;
-import java.util.Set;
-import java.util.Timer;
 import java.util.TimerTask;
 
 public class Step1 {
@@ -20,7 +20,7 @@ public class Step1 {
     public static VisLabel namelable = new VisLabel(text);
     public static CharSequence auftragtext = "Bitte gebe hier einen Name für die neue Verbindung ein.";
     public static VisLabel auftrag = new VisLabel(auftragtext);
-    public static Timer time = new Timer();
+    public static Timer time;
 
     public Step1() {
 
@@ -54,22 +54,26 @@ public class Step1 {
 
 
 
-    time.scheduleAtFixedRate(new TimerTask() {
-        @Override
-        public void run() {
 
 
-            if(name.isEmpty()){
-                SetupWindow.errorLabel.setColor(new Color(1,0,0,1));
-                SetupWindow.errorLabel.setText("Du musst einen Name vergeben");
-                SetupWindow.Button_next.setDisabled(true);
-            }else{
-                SetupWindow.errorLabel.setColor(new Color(0,1,0,1));
-                SetupWindow.errorLabel.setText("Alle Voraussetzungen erfüllt");
-                SetupWindow.Button_next.setDisabled(false);
+        time = new Timer( 30, new ActionListener()
+        {
+            public void actionPerformed( ActionEvent evt )
+            {
+                System.out.println("timer1isrunning");
+
+                if(name.isEmpty()){
+                    SetupWindow.errorLabel.setColor(new Color(1,0,0,1));
+                    SetupWindow.errorLabel.setText("Du musst einen Name vergeben");
+                    SetupWindow.Button_next.setDisabled(true);
+                }else{
+                    SetupWindow.errorLabel.setColor(new Color(0,1,0,1));
+                    SetupWindow.errorLabel.setText("Alle Voraussetzungen erfüllt");
+                    SetupWindow.Button_next.setDisabled(false);
+                }
             }
-        }
-    },0,30);
+        });
 
+        time.start();
 }
 }
