@@ -1,9 +1,7 @@
-package de.ft.robocontrol.roboconnection;
+package de.ft.robocontrol.roboconnection.arduino;
 
 import de.ft.robocontrol.Block.Devices;
 import de.ft.robocontrol.ProgrammingSpace;
-import de.ft.robocontrol.UI.ConnectionWindow;
-import de.ft.robocontrol.data.VerbindungsSpeicher;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -195,13 +193,7 @@ public class BurnProgramm {
                 ausgabe=("Keine Berechtigung starte den PC neu.");
             }
         }
-        ConnectionWindow.devicemanagebutton.setDisabled(false);
-        ConnectionWindow.selectportlist.setDisabled(false);
-        ConnectionWindow.selectboardlist.setDisabled(false);
-        ConnectionWindow.neuladen_button.setDisabled(false);
 
-
-        ConnectionWindow.update();
 
     }
 

@@ -1,6 +1,5 @@
 package de.ft.robocontrol.UI.setup.steps.ArduinoSteps;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.kotcrab.vis.ui.widget.VisLabel;
@@ -8,10 +7,9 @@ import com.kotcrab.vis.ui.widget.VisSelectBox;
 import com.kotcrab.vis.ui.widget.VisTable;
 import com.kotcrab.vis.ui.widget.VisTextButton;
 import de.ft.robocontrol.Block.Devices;
-import de.ft.robocontrol.UI.ConnectionWindow;
 import de.ft.robocontrol.UI.setup.SetupWindow;
-import de.ft.robocontrol.roboconnection.BurnProgramm;
-import de.ft.robocontrol.roboconnection.SerialConnection;
+import de.ft.robocontrol.roboconnection.arduino.BurnProgramm;
+import de.ft.robocontrol.roboconnection.arduino.SerialConnection;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -90,7 +88,6 @@ public class Step3 {
         builder.add(brennen_button).padBottom(-50).row();
         builder.add(brenntext).padBottom(-200);
         selectportlist.setItems(SerialConnection.getPortNames());
-
 
         neuladen_button.addListener(new ChangeListener() {
             @Override

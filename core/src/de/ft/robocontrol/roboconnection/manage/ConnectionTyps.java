@@ -1,4 +1,4 @@
-package de.ft.robocontrol.roboconnection;
+package de.ft.robocontrol.roboconnection.manage;
 
 public class ConnectionTyps {
     public static int ARDUINO = 0;

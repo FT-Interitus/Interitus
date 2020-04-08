@@ -14,7 +14,6 @@ import com.kotcrab.vis.ui.widget.MenuItem;
 import de.ft.robocontrol.UI.settings.SettingsUI;
 import de.ft.robocontrol.UI.setup.SetupWindow;
 import de.ft.robocontrol.data.user.experience.ExperienceManager;
-import de.ft.robocontrol.data.user.experience.ExperienceVar;
 import de.ft.robocontrol.input.Button;
 import de.ft.robocontrol.ProgrammingSpace;
 import de.ft.robocontrol.Settings;
@@ -22,8 +21,6 @@ import de.ft.robocontrol.Var;
 import de.ft.robocontrol.data.programm.Data;
 import de.ft.robocontrol.data.user.changes.SaveChanges;
 import de.ft.robocontrol.input.check.InputManager;
-import de.ft.robocontrol.roboconnection.SerialConnection;
-import de.ft.robocontrol.roboconnection.UIbridge;
 import de.ft.robocontrol.utils.RoundRectangle;
 
 
@@ -38,7 +35,6 @@ import static de.ft.robocontrol.UI.MenuBar.createSubMenu;
 public class UI {
     static final Table root = new Table();
     public static Stage stage;
-    public static ConnectionWindow connectionWindow;
     protected static MenuItem recent;
     protected static MenuItem revert;
     protected static MenuItem redo;
@@ -110,17 +106,7 @@ public class UI {
         }else{
             testbutton.setDisable(false);
         }
-        if(testbutton.isjustPressed()){
-            connectionWindow = new ConnectionWindow();
 
-            connectionWindow.show();
-            connectionWindow.selectportlist.setItems(SerialConnection.getPortNames());
-            if(!UIbridge.thread.isAlive()) {
-
-            }
-            UIbridge.thread.start();
-
-        }
 
     }
 
