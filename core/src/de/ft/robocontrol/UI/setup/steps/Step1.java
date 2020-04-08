@@ -1,13 +1,18 @@
 package de.ft.robocontrol.UI.setup.steps;
 
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.kotcrab.vis.ui.building.TableBuilder;
 import com.kotcrab.vis.ui.building.utilities.CellWidget;
 import com.kotcrab.vis.ui.building.utilities.Padding;
+import com.kotcrab.vis.ui.widget.VisImage;
 import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisTable;
 import com.kotcrab.vis.ui.widget.VisTextField;
 import de.ft.robocontrol.UI.setup.SetupWindow;
+import de.ft.robocontrol.loading.AssetLoader;
+
 import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,6 +20,7 @@ import java.awt.event.ActionListener;
 import java.util.TimerTask;
 
 public class Step1 {
+    public static VisImage help=new VisImage();
     public static VisTextField name = new VisTextField();
     public static CharSequence text = "Name: ";
     public static VisLabel namelable = new VisLabel(text);

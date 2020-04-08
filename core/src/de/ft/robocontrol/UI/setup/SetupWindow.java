@@ -25,6 +25,7 @@ public class SetupWindow {
     public static VisTextButton Button_next = new VisTextButton("Next");
     public static VisTextButton Button_previouse = new VisTextButton("Previouse");
     public static VisTextButton Button_cancle = new VisTextButton("Cancel");
+    public static VisTextButton Button_help = new VisTextButton("Hilfe");
     public static VisLabel errorLabel = new VisLabel("error");
     public static VisTable content;
     final Padding padding = new Padding(2, 3);
@@ -81,7 +82,8 @@ public class SetupWindow {
 
 
             VisTable buttonTable = new VisTable(true);
-            buttonTable.add(errorLabel).fillX().width(60).pad(350,0,0,300);
+            buttonTable.add(errorLabel).fillX().width(60).pad(350,0,0,230);
+            buttonTable.add(Button_help).fillX().width(60).pad(350,0,0,10);
             buttonTable.add(Button_cancle).fillX().width(60).pad(350,0,0,0);
             buttonTable.add(Button_previouse).fillX().width(80).pad(350,0,0,0);
             buttonTable.add(Button_next).fillX().width(50).pad(350,0,0,0);
