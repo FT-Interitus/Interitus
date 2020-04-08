@@ -77,7 +77,7 @@ public class Step2 {
                 }else{
                     selectPlatform.setColor(0,1,0,1);
                     if(selectPlatform.getSelected().equals("Arduino")){
-                        selectBoardArt.setItems("Bitte auswählen","UNO","MEGA");
+                        selectBoardArt.setItems("Bitte auswählen","Arduino UNO","Arduino MEGA");
                         selectBoardArt.setVisible(true);
                         SetupWindow.errorLabel.setColor(1,0,0,1);
                         selectBoardArt.setSelected("Bitte auswählen");
@@ -108,7 +108,7 @@ public class Step2 {
                         SetupWindow.errorLabel.setColor(1,0,0,1);
                         selectBoardArt.setSelected("Bitte auswählen");
                         SetupWindow.errorLabel.setColor(1,0,0,1);
-                        SetupWindow.errorLabel.setText("Bitte wähle ein Raspberry pi Pi aus");
+                        SetupWindow.errorLabel.setText("Bitte wähle ein Raspberry Pi aus");
                         shownext=3;
 
 
@@ -131,13 +131,13 @@ public class Step2 {
 
                         break;
                     case 1:
-                        if(selectBoardArt.getSelected().equals("UNO")){
+                        if(selectBoardArt.getSelected().equals("Arduino UNO")){
                             selectBoardArt.setColor(0,1,0,1);
                             SetupWindow.errorLabel.setColor(0,1,0,1);
                             SetupWindow.errorLabel.setText("Alle Voraussetzungen erfüllt");
                             SetupWindow.Button_next.setDisabled(false);
                         }else
-                        if(selectBoardArt.getSelected().equals("MEGA")){
+                        if(selectBoardArt.getSelected().equals("Arduino MEGA")){
                             selectBoardArt.setColor(0,1,0,1);
                             SetupWindow.errorLabel.setColor(0,1,0,1);
                             SetupWindow.errorLabel.setText("Alle Voraussetzungen erfüllt");
