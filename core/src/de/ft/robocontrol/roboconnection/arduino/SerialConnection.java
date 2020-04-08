@@ -111,6 +111,57 @@ public static boolean isRunning=false;
 
 
     public static class Authentifikation {
+
+        private static void checkAut(SerialPort checkport){
+
+            checkport.setBaudRate(230400);
+            checkport.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 10, 0);
+
+
+            save = System.currentTimeMillis() + 5000;
+            found = false;
+            //System.out.println("checkstart");
+            while (System.currentTimeMillis() < save && found == false) {
+                if (empfangen(checkport) == 1234) {
+                    found = true;
+                }
+            }
+            //System.out.println("checkend");
+            //System.out.println(found);
+            if (found == false) {
+                checkport.closePort();
+                //System.out.println("arduino nicht gefunden");
+            }
+            if (found == true) {
+
+                //System.out.println("arduino gefunden");
+
+                if (Arduinos.size() == 0) {
+                    Arduinos.add(checkport);
+                } else {
+                    for (int e = 0; e < Arduinos.size(); e++) {
+
+                        if (Arduinos.get(e).getSystemPortName().equals(checkport.getSystemPortName())) {
+
+                        } else {
+                            Arduinos.add(checkport);
+                        }
+
+
+                    }
+                }
+
+
+            }
+
+
+            checkport.closePort();
+        }
+
+
+
+
+
         public static void searchArduino() {
             // determine which serial port to use
 
@@ -118,7 +169,6 @@ public static boolean isRunning=false;
                 public void run() {
                     isRunning=true;
                     try {
-//TODO hier System.out's rausschmeisen
                         SerialPort ports[] = SerialPort.getCommPorts();
 
                         i = 1;
@@ -128,61 +178,18 @@ public static boolean isRunning=false;
 
                             System.out.println("i     " + i);
                             try {
-                                SerialPort testport = ports[i-2];
+                                SerialPort checkport = ports[i-2];
 
-                                if (testport.openPort()) {
-                                    System.out.println("Successfully opened the port."+testport.getSystemPortName());
-                                    System.out.println("desprictiveportname:   " + testport.getDescriptivePortName());
+                                if (checkport.openPort()) {
+                                    //System.out.println("Successfully opened the port."+checkport.getSystemPortName());
+                                   // System.out.println("desprictiveportname:   " + checkport.getDescriptivePortName());
+                                    checkAut(checkport);
                                 } else {
-                                    System.out.println("Unable to open the port.");
-
-                                }
-                                System.out.println("1");
-
-                                testport.setBaudRate(230400);
-                                System.out.println("2");
-                                testport.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 10, 0);
-                                System.out.println("3");
-
-                                save = System.currentTimeMillis() + 5000;
-                                found = false;
-                                System.out.println("checkstart");
-                                while (System.currentTimeMillis() < save && found == false) {
-                                    if (empfangen(testport) == 1234) {
-                                        System.out.println("Arduino gefunden");
-                                        found = true;
-                                    }
-                                }
-                                System.out.println("checkend");
-                                System.out.println(found);
-                                if (found == false) {
-                                    testport.closePort();
-                                    System.out.println("arduino nicht gefunden");
-                                }
-                                if (found == true) {
-
-                                    System.out.println("arduino gefunden");
-
-                                    if (Arduinos.size() == 0) {
-                                        Arduinos.add(testport);
-                                    } else {
-                                        for (int e = 0; e < Arduinos.size(); e++) {
-
-                                            if (Arduinos.get(e).getSystemPortName().equals(testport.getSystemPortName())) {
-
-                                            } else {
-                                                Arduinos.add(testport);
-                                            }
-
-
-                                        }
-                                    }
-
+                                    //System.out.println("Unable to open the port.");
 
                                 }
 
 
-                                testport.closePort();
 
                             } catch (ArrayIndexOutOfBoundsException e) {
 
