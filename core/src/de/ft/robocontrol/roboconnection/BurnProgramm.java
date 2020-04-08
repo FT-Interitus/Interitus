@@ -11,9 +11,12 @@ import java.io.InputStreamReader;
 
 public class BurnProgramm {
     static String platform;
+    public static String ausgabe="";
     private static String OS = System.getProperty("os.name").toLowerCase();
 
-    protected static void burn(int arduino, String port, String file) {
+
+    public static void burn(int arduino, String port, String file) {
+
         String methode = null;
         if (arduino == Devices.ARDUINO_UNO) { //TODO add platforms
             platform = "atmega328p";
@@ -157,38 +160,39 @@ public class BurnProgramm {
     }
 
 
+
     public static void postproduktion(String output, String port) {
 
         if (output.contains("AVR device initialized")) {
-            ConnectionWindow.error.setText("Brennen hat funktioniert, nun kannst du dein Gerät konfigurieren");
-            KnownDeviceManager.addnewdevice();
+            ausgabe=("Brennen hat funktioniert, nun kannst du dein Gerät konfigurieren");
+
 
 
         } else {
-            ConnectionWindow.error.setText("Unbekannter Fehler");
+            ausgabe=("Unbekannter Fehler");
         }
 
         if (output.contains("can't open device")) {
-            ConnectionWindow.error.setText("Brennen nicht erfolgreich hast du den richtigen Port und das richtige Board ausgewählt?");
+            ausgabe=("Brennen nicht erfolgreich\nhast du den richtigen Port und das richtige Board ausgewählt?\nwenn das dein 2. versuch des Brennens war dann trenne und stecke den \n Arduino neu an");
         }
 
         if (output.contains("Expected signature")) {
-            ConnectionWindow.error.setText("Brennen nicht erfolgreich du hast den falschen Board-Type ausgewählt");
+            ausgabe=("Brennen nicht erfolgreich du hast den falschen Board-Type ausgewählt");
         }
 
         if (output.contains("not found")) {
-            ConnectionWindow.error.setText("Brennen nicht erfolgreich du hast den falschen Board-Type ausgewählt");
+            ausgabe=("Brennen nicht erfolgreich du hast den falschen Board-Type ausgewählt");
         }
 
         if (output.contains("programmer is not responding")) {
-            ConnectionWindow.error.setText("Brennen nicht erfolgreich hast du den richtigen Port und das richtige Board ausgewählt?");
+            ausgabe=("Brennen nicht erfolgreich hast du den richtigen Port und das richtige Board ausgewählt?");
         }
 
         if (output.contains("Permission denied")) {
             if (isUnix()) {
-                ConnectionWindow.error.setText("Keine Berechtigung! Führe den Befehl: sudo chmod a+rw " + port + " aus.");
+                ausgabe=("Keine Berechtigung! Führe den Befehl: sudo chmod a+rw " + port + " aus.");
             } else {
-                ConnectionWindow.error.setText("Keine Berechtigung starte den PC neu.");
+                ausgabe=("Keine Berechtigung starte den PC neu.");
             }
         }
         ConnectionWindow.devicemanagebutton.setDisabled(false);

@@ -1,6 +1,7 @@
 package de.ft.robocontrol.roboconnection;
 import com.fazecast.jSerialComm.*;
 import de.ft.robocontrol.UI.ConnectionWindow;
+import de.ft.robocontrol.UI.setup.steps.ArduinoSteps.Step3;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -178,9 +179,14 @@ public static void searchArduino() {
                     ConnectionWindow.selectportlist.setItems(SerialConnection.getPortNames());
                     ConnectionWindow.update();
                 }
+
+if(Step3.selectportlist!=null) {
+    Step3.selectportlist.setItems(SerialConnection.getPortNames());
+}
             }catch (Exception e) {
                 e.printStackTrace(); //for debug to find errors
             }
+
             isRunning=false;
         }
     };

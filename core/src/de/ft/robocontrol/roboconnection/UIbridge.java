@@ -4,6 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import de.ft.robocontrol.Block.Devices;
 import de.ft.robocontrol.UI.ConnectionWindow;
+import de.ft.robocontrol.UI.setup.steps.ArduinoSteps.Step3;
 
 
 import java.util.Timer;
@@ -68,9 +69,13 @@ public class UIbridge {
                                     ConnectionWindow.update();
                                 }
 
-
+                                if(Step3.selectportlist!=null) {
+                                    Step3.selectportlist.setItems(SerialConnection.getPortNames());
+                                }
                             } else if (SerialConnection.getPorts().length < portsold[0]) {
-
+                                if(Step3.selectportlist!=null) {
+                                    Step3.selectportlist.setItems(SerialConnection.getPortNames());
+                                }
                                 if (ConnectionWindow.selectportlist != null) {
                                     ConnectionWindow.selectportlist.setItems(SerialConnection.getPortNames());
                                     ConnectionWindow.update();
