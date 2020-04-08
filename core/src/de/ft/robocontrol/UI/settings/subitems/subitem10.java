@@ -32,8 +32,8 @@ public class subitem10 {
         builder.row();
         export.setDisabled(true);
 
-        builder.add(export);
-        builder.add(delete);
+        builder.add(export).padLeft(-250);
+        builder.add(delete).padLeft(-250);
 
         delete.addListener(new ChangeListener() {
             @Override

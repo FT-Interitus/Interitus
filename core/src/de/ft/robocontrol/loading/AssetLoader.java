@@ -28,6 +28,7 @@ public class AssetLoader {
     public static Texture help_arduino_boards;
     public static Texture help_raspberrypi_boards;
     public static Texture help_ev3;
+    public static Texture help_platforms;
 
     public static AssetManager manager = new AssetManager();
 
@@ -56,7 +57,7 @@ public class AssetLoader {
             manager.load(workingdirectory+"ArduinoHilfe.png",Texture.class);
             manager.load(workingdirectory+"RaspberryPiHilfe.png",Texture.class);
             manager.load(workingdirectory+"EV3Hilfe.png",Texture.class);
-
+            manager.load(workingdirectory+"PlatformHilfe.png",Texture.class);
 
         }catch (Exception e) {
             e.printStackTrace();
@@ -89,6 +90,7 @@ public class AssetLoader {
             help_arduino_boards = manager.get(workingdirectory+"ArduinoHilfe.png",Texture.class);
             help_raspberrypi_boards =manager.get(workingdirectory+"RaspberryPiHilfe.png",Texture.class);
             help_ev3 = manager.get(workingdirectory+"EV3Hilfe.png",Texture.class);
+            help_platforms =manager.get(workingdirectory+"PlatformHilfe.png",Texture.class);
 
         }catch (Exception e) {
             e.printStackTrace();
