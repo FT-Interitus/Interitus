@@ -141,16 +141,17 @@ if(empfangen!="") {
 
 
         private static void checkAut(SerialPort checkport) throws IOException {
+
+            checkport.setBaudRate(112500);
+            checkport.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 5, 0);
+
 /*
-            checkport.setBaudRate(230400);
-            checkport.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 1, 0);
-*/
         checkport.setBaudRate(9600);
         checkport.setNumDataBits(8);
         checkport.setNumStopBits(1);
         checkport.setParity(0);
         checkport.setComPortTimeouts(SerialPort.TIMEOUT_NONBLOCKING,0,0);
-
+*/
 
             save = System.currentTimeMillis() + abtastzeit;
             found = false;
