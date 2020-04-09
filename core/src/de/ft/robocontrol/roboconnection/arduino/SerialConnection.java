@@ -2,7 +2,9 @@ package de.ft.robocontrol.roboconnection.arduino;
 import com.fazecast.jSerialComm.*;
 import de.ft.robocontrol.UI.setup.steps.ArduinoSteps.Step3;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -61,23 +63,37 @@ public static boolean isRunning=false;
     }
 
 
-    public static int empfangen(SerialPort sport){
+    public static String empfangenScanner(SerialPort sport){
         Scanner data = new Scanner(sport.getInputStream());
 
         //System.out.println(data.hasNextLine());
         if (data.hasNextLine()) {
-            int number = 0;
+            String number = "";
             try {
-                number = Integer.parseInt(data.nextLine());
+                number = (data.nextLine());
             } catch (Exception e) {
             }
             System.out.println("nubmer    "+number);
             return number;
         }else{
-            return -1;
+            return "";
         }
 
 
+    }
+
+    public static String empfangen(SerialPort port)  {
+        String empfangen="";
+        BufferedReader is = new BufferedReader(new InputStreamReader(port.getInputStream()));
+        try {
+
+            empfangen = is.readLine();
+
+        }catch (Exception e){}
+if(empfangen!="") {
+    System.out.println(empfangen);
+}
+        return empfangen;
     }
 
 
@@ -125,23 +141,29 @@ public static boolean isRunning=false;
 
 
         private static void checkAut(SerialPort checkport) throws IOException {
-
+/*
             checkport.setBaudRate(230400);
-            checkport.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 10, 0);
+            checkport.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 1, 0);
+*/
+        checkport.setBaudRate(9600);
+        checkport.setNumDataBits(8);
+        checkport.setNumStopBits(1);
+        checkport.setParity(0);
+        checkport.setComPortTimeouts(SerialPort.TIMEOUT_NONBLOCKING,0,0);
 
 
             save = System.currentTimeMillis() + abtastzeit;
             found = false;
-            while (System.currentTimeMillis() < save && !found) {                                                           //für jeden port werden 5 sekunden lang überprüft ob er eine ID sendet
-                if(checkport.getInputStream()!=null) {
-                    if (empfangen(checkport) == 1234) {
+            while (System.currentTimeMillis() < save ) {                                                           //für jeden port werden 5 sekunden lang überprüft ob er eine ID sendet
+
+                    if (empfangenScanner(checkport).contains("1234")) {
                          ///////////////////////////////////////////TODO hier muss dem arduino noch eine neue ID zugewiesen werden
                         found = true;
                     }
 
                     /////////////////////////////////////////////TODO hier muss noch überprüft werden ob der Arduino schon bekannt ist (schon eine richtige ID hat)
 
-                }
+
             }
 
             if (found == false) {
