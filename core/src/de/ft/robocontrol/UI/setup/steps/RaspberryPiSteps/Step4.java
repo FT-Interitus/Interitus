@@ -12,6 +12,10 @@ public class Step4 {
     public static VisTextButton trytoconnect = new VisTextButton("Verbinden");
     public static void step4(VisTable builder){
 
+        password.setDisabled(false);
+        username.setDisabled(false);
+        trytoconnect.setDisabled(false);
+
         SetupWindow.errorLabel.setColor(1,0,0,1);
         SetupWindow.errorLabel.setText("Drücke auf Verbinden um zu bestätigen");
         SetupWindow.Button_next.setDisabled(true);
@@ -37,7 +41,19 @@ trytoconnect.addListener(new ChangeListener() {
             password.setDisabled(true);
             SetupWindow.Button_next.setDisabled(true);
 
-            SSHConnection.connect();
+            if(SSHConnection.checkconnection(SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().ip,username.getText(),password.getText())) {
+                SetupWindow.errorLabel.setColor(0,1,0,1);
+                SetupWindow.errorLabel.setText("Verbindung erfolgreich");
+                SetupWindow.Button_next.setDisabled(false);
+                trytoconnect.setDisabled(true);
+            }else{
+                SetupWindow.Button_next.setDisabled(false);
+                password.setDisabled(false);
+                username.setDisabled(false);
+                SetupWindow.errorLabel.setColor(1,0,0,1);
+                SetupWindow.errorLabel.setText("Keine Verbindung möglich");
+                trytoconnect.setDisabled(false);
+            }
         }
     }
 });
@@ -46,6 +62,9 @@ trytoconnect.addListener(new ChangeListener() {
     }
 
     public static void close() {
+
+        SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().password = password.getText();
+        SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().username = username.getText();
 
     }
 }
