@@ -46,6 +46,8 @@ trytoconnect.addListener(new ChangeListener() {
                 SetupWindow.errorLabel.setText("Verbindung erfolgreich");
                 SetupWindow.Button_next.setDisabled(false);
                 trytoconnect.setDisabled(true);
+                SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().password = password.getText();
+                SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().username = username.getText();
             }else{
                 SetupWindow.Button_next.setDisabled(false);
                 password.setDisabled(false);
@@ -53,6 +55,8 @@ trytoconnect.addListener(new ChangeListener() {
                 SetupWindow.errorLabel.setColor(1,0,0,1);
                 SetupWindow.errorLabel.setText("Keine Verbindung möglich");
                 trytoconnect.setDisabled(false);
+                SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().password = password.getText();
+                SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().username = username.getText();
             }
         }
     }
