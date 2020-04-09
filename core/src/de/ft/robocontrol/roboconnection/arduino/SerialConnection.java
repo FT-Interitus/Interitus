@@ -67,12 +67,15 @@ public static boolean isRunning=false;
         Scanner data = new Scanner(sport.getInputStream());
 
         //System.out.println(data.hasNextLine());
+
+
         if (data.hasNextLine()) {
             String number = "";
             try {
                 number = (data.nextLine());
             } catch (Exception e) {
             }
+
             System.out.println("nubmer    "+number);
             return number;
         }else{
@@ -155,9 +158,9 @@ if(empfangen!="") {
 
             save = System.currentTimeMillis() + abtastzeit;
             found = false;
-            while (System.currentTimeMillis() < save ) {                                                           //für jeden port werden 5 sekunden lang überprüft ob er eine ID sendet
+            while (System.currentTimeMillis() < save && !found) {                                                           //für jeden port werden 5 sekunden lang überprüft ob er eine ID sendet
 
-                    if (empfangenScanner(checkport).contains("1234")) {
+                    if (empfangen(checkport).contains("1234")) {
                          ///////////////////////////////////////////TODO hier muss dem arduino noch eine neue ID zugewiesen werden
                         found = true;
                     }
