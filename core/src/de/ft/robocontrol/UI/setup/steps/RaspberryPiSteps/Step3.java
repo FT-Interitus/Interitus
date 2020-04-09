@@ -152,7 +152,9 @@ public class Step3 {
             if(i==0) {
                 ipselectable[i] ="Bitte Auswählen";
             }else {
-                ipselectable[i] = "IP: " + NetworkScan.device.get(i-1).getHostAddress() + "/" + NetworkScan.device.get(i-1).getHostName();
+                try {
+                    ipselectable[i] = "IP: " + NetworkScan.device.get(i - 1).getHostAddress() + "/" + NetworkScan.device.get(i - 1).getHostName();
+                }catch (ArrayIndexOutOfBoundsException e) {}
             }
 
         }
