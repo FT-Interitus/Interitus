@@ -112,11 +112,11 @@ public class BurnProgramm {
             while ((line = input.readLine()) != null) {
                 ProgrammingSpace.logger.finer( line);
                 output = output + line;
-
+                postproduktion(output, port);
             }
 
 
-            postproduktion(output, port);
+
 
 
         } catch (IOException e) {

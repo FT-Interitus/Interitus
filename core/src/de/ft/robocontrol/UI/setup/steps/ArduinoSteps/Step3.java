@@ -60,7 +60,7 @@ public class Step3 {
         }
     }
 
-    public static void step3(VisTable builder){
+    public static void step3(final VisTable builder){
         time = new Timer( 30, new ActionListener()
         {
             public void actionPerformed( ActionEvent evt )
@@ -69,9 +69,10 @@ public class Step3 {
                 arduinosgefunden.setText("Arduinos: "+SerialConnection.Arduinos.size());
 
                     if(isBurning) {
+System.out.println(BurnProgramm.ausgabe);
                         brenntext.setText(BurnProgramm.ausgabe);
                         if(BurnProgramm.ausgabe.contains("Brennen hat funktioniert, nun kannst du dein Gerät konfigurieren")){
-                            
+System.out.println("jetzt ID machen");
                         }
                     }
                     if(SerialConnection.isRunning){
