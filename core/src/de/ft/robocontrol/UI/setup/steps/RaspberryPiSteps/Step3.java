@@ -143,7 +143,7 @@ public class Step3 {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 if(!selectIPAdress.getSelected().contains("Bitte Auswählen")) {
-                    ipadresse.setText(selectIPAdress.getSelected().split(":")[1].split("/")[0]);
+                    ipadresse.setText(selectIPAdress.getSelected().split(":")[1].split("/")[0].replace(" ",""));
                 }
 
             }
