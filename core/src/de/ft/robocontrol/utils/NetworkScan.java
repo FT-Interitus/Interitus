@@ -29,10 +29,11 @@ public class NetworkScan {
                    piaddress =raspberrypi.getHostAddress();
                    device.add(raspberrypi);
                }catch (UnknownHostException e) {
+               }
                   for(int i = 0;i<255;i++) {
                      InetAddress testdevice =InetAddress.getByName("192.168."+ip+"."+i);
 
-                     if(testdevice.isReachable(35)) {
+                     if(testdevice.isReachable(40)) { //TODO bester wert ermittlen
                          device.add(testdevice);
                      }
 
@@ -43,7 +44,7 @@ public class NetworkScan {
 
                       System.out.println(device.get(i).getHostName());
                   }
-               }
+
 
 
 
