@@ -70,6 +70,9 @@ public class Step3 {
 
                     if(isBurning) {
                         brenntext.setText(BurnProgramm.ausgabe);
+                        if(BurnProgramm.ausgabe.contains("Brennen hat funktioniert, nun kannst du dein Gerät konfigurieren")){
+                            
+                        }
                     }
                     if(SerialConnection.isRunning){
                         brenntext.setText(SerialConnection.Authentifikation.getOutput());
