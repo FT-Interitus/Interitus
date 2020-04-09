@@ -38,12 +38,13 @@ public class SSHConnection {
     public static boolean checkconnection(String ipaddress,String username,String password) {
         try {
            testconnectionsession = testconnection.getSession(username,ipaddress,22); //TODO port auswählbar
+            testconnectionsession.setConfig("StrictHostKeyChecking", "no");
            testconnectionsession.setPassword(password);
            testconnectionsession.connect();
            testconnectionsession.disconnect();
            return true;
         } catch (Exception e) {
-            e.printStackTrace();
+
             return false;
         }
     }

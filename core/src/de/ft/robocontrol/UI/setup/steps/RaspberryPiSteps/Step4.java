@@ -12,8 +12,12 @@ public class Step4 {
     public static VisTextButton trytoconnect = new VisTextButton("Verbinden");
     public static void step4(VisTable builder){
 
+        password.setDisabled(false);
+        username.setDisabled(false);
+        trytoconnect.setDisabled(false);
+
         SetupWindow.errorLabel.setColor(1,0,0,1);
-        SetupWindow.errorLabel.setText("Bitte drücke auf Verbinden um eine Verbindung herzustellen");
+        SetupWindow.errorLabel.setText("Drücke auf Verbinden um zu bestätigen");
         SetupWindow.Button_next.setDisabled(true);
         builder.add(new VisLabel("Gibt hier die SSH Verbindungs-Daten ein.")).expandX().padRight(-120);
         builder.row();
@@ -37,7 +41,23 @@ trytoconnect.addListener(new ChangeListener() {
             password.setDisabled(true);
             SetupWindow.Button_next.setDisabled(true);
 
-            SSHConnection.connect();
+            if(SSHConnection.checkconnection(SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().ip,username.getText(),password.getText())) {
+                SetupWindow.errorLabel.setColor(0,1,0,1);
+                SetupWindow.errorLabel.setText("Verbindung erfolgreich");
+                SetupWindow.Button_next.setDisabled(false);
+                trytoconnect.setDisabled(true);
+                SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().password = password.getText();
+                SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().username = username.getText();
+            }else{
+                SetupWindow.Button_next.setDisabled(false);
+                password.setDisabled(false);
+                username.setDisabled(false);
+                SetupWindow.errorLabel.setColor(1,0,0,1);
+                SetupWindow.errorLabel.setText("Keine Verbindung möglich");
+                trytoconnect.setDisabled(false);
+                SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().password = password.getText();
+                SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().username = username.getText();
+            }
         }
     }
 });
@@ -46,6 +66,9 @@ trytoconnect.addListener(new ChangeListener() {
     }
 
     public static void close() {
+
+        SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().password = password.getText();
+        SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().username = username.getText();
 
     }
 }
