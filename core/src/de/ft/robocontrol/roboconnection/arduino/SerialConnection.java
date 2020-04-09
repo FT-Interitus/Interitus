@@ -112,6 +112,13 @@ public static boolean isRunning=false;
 
 
     public static class Authentifikation {
+        private static String output;
+
+
+        public static String getOutput(){
+            return output;
+        }
+
 
         private static void checkAut(SerialPort checkport) throws IOException {
 
@@ -121,23 +128,24 @@ public static boolean isRunning=false;
 
             save = System.currentTimeMillis() + 5000;
             found = false;
-            //System.out.println("checkstart");
-            while (System.currentTimeMillis() < save && found == false) {
+            while (System.currentTimeMillis() < save && found == false) {                                                           //für jeden port werden 5 sekunden lang überprüft ob er eine ID sendet
                 if(checkport.getInputStream()!=null) {
                     if (empfangen(checkport) == 1234) {
+                         ///////////////////////////////////////////TODO hier muss dem arduino noch eine neue ID zugewiesen werden
                         found = true;
                     }
+
+                    /////////////////////////////////////////////TODO hier muss noch überprüft werden ob der Arduino schon bekannt ist (schon eine richtige ID hat)
+
                 }
             }
-            //System.out.println("checkend");
-            //System.out.println(found);
+
             if (found == false) {
+                output="Nicht gefunden";
                 checkport.closePort();
-                //System.out.println("arduino nicht gefunden");
             }
             if (found == true) {
-
-                //System.out.println("arduino gefunden");
+                output="Arduino gefunden";
 
                 if (Arduinos.size() == 0) {
                     Arduinos.add(checkport);
@@ -176,20 +184,25 @@ public static boolean isRunning=false;
 
                         i = 1;
 
-                        for (SerialPort port : ports) {
+                        for (SerialPort port : ports) {   //hier werden alle verfügbaren Ports durchtariert
                             i++;
 
                             System.out.println("i     " + i);
                             try {
                                 SerialPort checkport = ports[i-2];
 
-                                if (checkport.openPort()) {
-                                    System.out.println("Successfully opened the port."+checkport.getSystemPortName());
+                                if (checkport.openPort()) {        //versuche port zu öffnen
+                                    System.out.println("Successfully opened the port."+checkport.getSystemPortName());     //port geöffnet
                                     System.out.println("desprictiveportname:   " + checkport.getDescriptivePortName());
-                                    checkAut(checkport);
+                                    output="versuche "+checkport.getSystemPortName()+" zu autentifizieren";
+
+
+                                    checkAut(checkport);                                                                    //port wird versucht zu autentivizieren
+
+
                                 } else {
                                     System.out.println("Unable to open the port.");
-
+                                    output="Konnte Port nicht öffnen";                                  //port nicht geöffnet
                                 }
 
 
@@ -202,12 +215,17 @@ public static boolean isRunning=false;
 
                         }
 
+                        output="Es wurden "+Arduinos.size()+" Arduinos autentiviziert.";
 
                         if(Step3.selectportlist!=null) {
                             Step3.selectportlist.setItems(SerialConnection.getPortNames());
                         }
+
+
                     }catch (Exception e) {
                         e.printStackTrace(); //for debug to find errors
+                        output="es ist ein Fehler aufgetreten Bitte versuche es erneut\nwenn der Fehler weiterhin auftritt wende dich an den Support";
+                        System.out.println("es ist ein Fehler in SerialConnection aufgetreten | ^^^^ hier oben ist die exeption ^^^^ viel spaß damit ^^^^");
                     }
 
                     isRunning=false;

@@ -19,7 +19,8 @@ public class Step3 {
     public static VisSelectBox<String> selectportlist;
     public static VisTextButton neuladen_button = new VisTextButton("Neuladen");
     public static VisTextButton brennen_button=new VisTextButton("Firmware aufspielen");
-    public static VisLabel brenntext = new VisLabel("error");
+    public static VisLabel brenntext = new VisLabel("");
+    public static VisLabel arduinosgefunden = new VisLabel("Arduinos: ");
 
     public static CharSequence auftragtext = "Bitte Stelle eine Verbindung zum Arduino her";
     public static VisLabel auftrag = new VisLabel(auftragtext);
@@ -65,8 +66,14 @@ public class Step3 {
             public void actionPerformed( ActionEvent evt )
             {
 
+                arduinosgefunden.setText("Arduinos: "+SerialConnection.Arduinos.size());
 
-                    brenntext.setText(BurnProgramm.ausgabe);
+                    if(isBurning) {
+                        brenntext.setText(BurnProgramm.ausgabe);
+                    }
+                    if(SerialConnection.isRunning){
+                        brenntext.setText(SerialConnection.Authentifikation.getOutput());
+                    }
 
                     if (SerialConnection.isRunning || isBurning==true) {
                         neuladen_button.setDisabled(true);
@@ -89,6 +96,7 @@ public class Step3 {
         builder.add(neuladen_button).row();
         builder.add(brennen_button).padBottom(-50).row();
         builder.add(brenntext).padBottom(-200);
+        builder.add(arduinosgefunden).padBottom(-500);
         selectportlist.setItems(SerialConnection.getPortNames());
 
         neuladen_button.addListener(new ChangeListener() {
