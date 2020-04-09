@@ -115,6 +115,8 @@ public static boolean isRunning=false;
 
     public static class Authentifikation {
         private static String output;
+        private static int abtastzeit=5000;
+        private static int arduinoneustartzeit=2000;
 
 
         public static String getOutput(){
@@ -128,7 +130,7 @@ public static boolean isRunning=false;
             checkport.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 10, 0);
 
 
-            save = System.currentTimeMillis() + 5000;
+            save = System.currentTimeMillis() + abtastzeit;
             found = false;
             while (System.currentTimeMillis() < save && !found) {                                                           //für jeden port werden 5 sekunden lang überprüft ob er eine ID sendet
                 if(checkport.getInputStream()!=null) {
@@ -198,7 +200,8 @@ public static boolean isRunning=false;
                                     System.out.println("desprictiveportname:   " + checkport.getDescriptivePortName());
                                     output="versuche "+checkport.getSystemPortName()+" zu autentifizieren";
 
-                                    Thread.sleep(2000);             //warten da Arduino bei einer neuen Verbindung automatisch neustartet
+                                    Thread.sleep(arduinoneustartzeit);             //warten da Arduino bei einer neuen Verbindung automatisch neustartet
+
                                     checkAut(checkport);                                                                    //port wird versucht zu autentivizieren
 
 
