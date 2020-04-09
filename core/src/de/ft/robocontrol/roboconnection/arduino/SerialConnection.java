@@ -63,6 +63,7 @@ public static boolean isRunning=false;
 
     public static int empfangen(SerialPort sport){
         Scanner data = new Scanner(sport.getInputStream());
+
         //System.out.println(data.hasNextLine());
         if (data.hasNextLine()) {
             int number = 0;
@@ -78,6 +79,7 @@ public static boolean isRunning=false;
 
 
     }
+
 
 
     public static void searchArduino(){
@@ -128,7 +130,7 @@ public static boolean isRunning=false;
 
             save = System.currentTimeMillis() + 5000;
             found = false;
-            while (System.currentTimeMillis() < save && found == false) {                                                           //für jeden port werden 5 sekunden lang überprüft ob er eine ID sendet
+            while (System.currentTimeMillis() < save && !found) {                                                           //für jeden port werden 5 sekunden lang überprüft ob er eine ID sendet
                 if(checkport.getInputStream()!=null) {
                     if (empfangen(checkport) == 1234) {
                          ///////////////////////////////////////////TODO hier muss dem arduino noch eine neue ID zugewiesen werden
@@ -196,7 +198,7 @@ public static boolean isRunning=false;
                                     System.out.println("desprictiveportname:   " + checkport.getDescriptivePortName());
                                     output="versuche "+checkport.getSystemPortName()+" zu autentifizieren";
 
-
+                                    Thread.sleep(2000);             //warten da Arduino bei einer neuen Verbindung automatisch neustartet
                                     checkAut(checkport);                                                                    //port wird versucht zu autentivizieren
 
 
