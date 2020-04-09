@@ -124,7 +124,7 @@ public class SetupWindow {
 
                     }
 if(currentStep>2) {
-    if (tempverbindungsspeicher.device == Devices.ARDUINO_MEGA || tempverbindungsspeicher.device == Devices.ARDUINO_UNO) {
+    if (tempverbindungsspeicher.getDevice() == Devices.ARDUINO_MEGA || tempverbindungsspeicher.getDevice() == Devices.ARDUINO_UNO) {
         switch (currentStep) {
             case 3:
                 Step3.close();
@@ -139,7 +139,7 @@ if(currentStep>2) {
 }
 
                     if(currentStep>2) {
-                        if (tempverbindungsspeicher.device == Devices.RASPBERRY3Bplus || tempverbindungsspeicher.device == Devices.RASPBERRYPI4 || tempverbindungsspeicher.device == Devices.RASPBERRYPIZEROW ) {
+                        if (tempverbindungsspeicher.getDevice() == Devices.RASPBERRY3Bplus || tempverbindungsspeicher.getDevice() == Devices.RASPBERRYPI4 || tempverbindungsspeicher.getDevice() == Devices.RASPBERRYPIZEROW ) {
                             switch (currentStep) {
                                 case 3:
                                     de.ft.robocontrol.UI.setup.steps.RaspberryPiSteps.Step3.close();
@@ -164,7 +164,7 @@ if(currentStep>2) {
 
 
                     if(currentStep>2) {
-                        if (tempverbindungsspeicher.device == Devices.ARDUINO_MEGA || tempverbindungsspeicher.device == Devices.ARDUINO_UNO) {
+                        if (tempverbindungsspeicher.getDevice() == Devices.ARDUINO_MEGA || tempverbindungsspeicher.getDevice() == Devices.ARDUINO_UNO) {
                             switch (currentStep) {
                                 case 3:
                                     Step3.step3(content);
@@ -173,7 +173,7 @@ if(currentStep>2) {
                             }
                         }
 
-                        if (tempverbindungsspeicher.device == Devices.RASPBERRY3Bplus || tempverbindungsspeicher.device == Devices.RASPBERRYPI4 || tempverbindungsspeicher.device == Devices.RASPBERRYPIZEROW) {
+                        if (tempverbindungsspeicher.getDevice() == Devices.RASPBERRY3Bplus || tempverbindungsspeicher.getDevice() == Devices.RASPBERRYPI4 || tempverbindungsspeicher.getDevice() == Devices.RASPBERRYPIZEROW) {
 
 
                             switch (currentStep)  {
@@ -211,7 +211,7 @@ if(currentStep>2) {
                     }
 
                     if(currentStep>2) {
-                        if (tempverbindungsspeicher.device == Devices.ARDUINO_MEGA || tempverbindungsspeicher.device == Devices.ARDUINO_UNO) {
+                        if (tempverbindungsspeicher.getDevice() == Devices.ARDUINO_MEGA || tempverbindungsspeicher.getDevice() == Devices.ARDUINO_UNO) {
                             switch (currentStep) {
                                 case 3:
                                     Step3.close();
@@ -220,7 +220,7 @@ if(currentStep>2) {
                             }
                         }
 
-                        if (tempverbindungsspeicher.device == Devices.RASPBERRY3Bplus || tempverbindungsspeicher.device == Devices.RASPBERRYPI4 || tempverbindungsspeicher.device == Devices.RASPBERRYPIZEROW) {
+                        if (tempverbindungsspeicher.getDevice() == Devices.RASPBERRY3Bplus || tempverbindungsspeicher.getDevice() == Devices.RASPBERRYPI4 || tempverbindungsspeicher.getDevice() == Devices.RASPBERRYPIZEROW) {
                             switch (currentStep) {
                                 case 3:
                                     de.ft.robocontrol.UI.setup.steps.RaspberryPiSteps.Step3.close();
@@ -244,7 +244,7 @@ if(currentStep>2) {
                     }
 
                     if(currentStep>2) {
-                        if (tempverbindungsspeicher.device == Devices.ARDUINO_MEGA || tempverbindungsspeicher.device == Devices.ARDUINO_UNO) {
+                        if (tempverbindungsspeicher.getDevice() == Devices.ARDUINO_MEGA || tempverbindungsspeicher.getDevice() == Devices.ARDUINO_UNO) {
                             switch (currentStep) {
                                 case 3:
                                     Step3.step3(content);
@@ -252,7 +252,7 @@ if(currentStep>2) {
 
                             }
                         }
-                        if (tempverbindungsspeicher.device == Devices.RASPBERRY3Bplus || tempverbindungsspeicher.device == Devices.RASPBERRYPI4 || tempverbindungsspeicher.device == Devices.RASPBERRYPIZEROW) {
+                        if (tempverbindungsspeicher.getDevice() == Devices.RASPBERRY3Bplus || tempverbindungsspeicher.getDevice() == Devices.RASPBERRYPI4 || tempverbindungsspeicher.getDevice() == Devices.RASPBERRYPIZEROW) {
 
                             switch (currentStep) {
                                 case 3:

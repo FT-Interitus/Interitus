@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.kotcrab.vis.ui.util.InputValidator;
 import com.kotcrab.vis.ui.widget.*;
 
+import de.ft.robocontrol.Block.Devices;
 import de.ft.robocontrol.UI.setup.SetupWindow;
 import de.ft.robocontrol.utils.NetworkScan;
 
@@ -35,6 +36,7 @@ public class Step3 {
 
             }
         });
+
         time.start();
         if(NetworkScan.piaddress!="") {
             builder.add(new VisLabel("Ein Raspberry Pi wurde automatisch gefunden.")).expandX();
