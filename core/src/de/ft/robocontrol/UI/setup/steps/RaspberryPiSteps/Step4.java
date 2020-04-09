@@ -13,7 +13,7 @@ public class Step4 {
     public static void step4(VisTable builder){
 
         SetupWindow.errorLabel.setColor(1,0,0,1);
-        SetupWindow.errorLabel.setText("Bitte drücke auf Verbinden um eine Verbindung herzustellen");
+        SetupWindow.errorLabel.setText("Drücke auf Verbinden um zu bestätigen");
         SetupWindow.Button_next.setDisabled(true);
         builder.add(new VisLabel("Gibt hier die SSH Verbindungs-Daten ein.")).expandX().padRight(-120);
         builder.row();

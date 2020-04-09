@@ -47,7 +47,27 @@ public class Step3 {
         builder.row();
         builder.add(new VisLabel("IP-Adresse:")).padLeft(150).padBottom(-90).padLeft(-200);
 
-        ipadresse = new VisValidatableTextField(NetworkScan.piaddress);
+        try {
+
+            if (SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().ip != "") {
+                ipadresse = new VisValidatableTextField(SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().ip);
+                try {
+                    if( !InetAddress.getByName(ipadresse.getText()).isReachable(50)) {
+                        SetupWindow.Button_next.setDisabled(true);
+                        SetupWindow.errorLabel.setColor(1,0,0,1);
+                        SetupWindow.errorLabel.setText("Die IP-Adresse ist nicht erreichbar");
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            } else {
+                ipadresse = new VisValidatableTextField(NetworkScan.piaddress);
+            }
+        }catch (NullPointerException e) {
+            ipadresse = new VisValidatableTextField(NetworkScan.piaddress);
+        }
+
         ipadresse.addValidator(new InputValidator() {
             @Override
             public boolean validateInput(String input) {
@@ -153,8 +173,12 @@ public class Step3 {
 
     }
     public static void close(){
+        SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().ip = ipadresse.getText();
+
+
+
         if(time!=null){
-            if (time.isRunning()) { //TODO hier speichern der IP
+            if (time.isRunning()) {
                 time.stop();
             }
         }
