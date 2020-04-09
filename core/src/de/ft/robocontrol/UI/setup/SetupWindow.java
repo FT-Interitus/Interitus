@@ -233,6 +233,7 @@ if(currentStep>2) {
                                     break;
                                 case 4:
                                     de.ft.robocontrol.UI.setup.steps.RaspberryPiSteps.Step4.close();
+                                    break;
                             }
 
                         }
