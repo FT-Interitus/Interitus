@@ -188,7 +188,7 @@ public class BurnProgramm {
 
         if (output.contains("Permission denied")) {
             if (isUnix()) {
-                ausgabe=("Keine Berechtigung! Führe den Befehl: sudo chmod a+rw " + port + " aus.");
+                ausgabe=("Keine Berechtigung! Führe den Befehl: \"sudo chmod a+rw " + port + "\" aus.");
             } else {
                 ausgabe=("Keine Berechtigung starte den PC neu.");
             }

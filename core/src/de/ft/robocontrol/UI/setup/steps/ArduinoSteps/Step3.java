@@ -65,8 +65,12 @@ public class Step3 {
             public void actionPerformed( ActionEvent evt )
             {
 
-
-                    brenntext.setText(BurnProgramm.ausgabe);
+                    if(isBurning) {
+                        brenntext.setText(BurnProgramm.ausgabe);
+                    }
+                    if(SerialConnection.isRunning){
+                        brenntext.setText(SerialConnection.Authentifikation.getOutput());
+                    }
 
                     if (SerialConnection.isRunning || isBurning==true) {
                         neuladen_button.setDisabled(true);

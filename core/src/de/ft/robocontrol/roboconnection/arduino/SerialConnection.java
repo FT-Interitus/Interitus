@@ -112,6 +112,13 @@ public static boolean isRunning=false;
 
 
     public static class Authentifikation {
+        private static String output;
+
+
+        public static String getOutput(){
+            return output;
+        }
+
 
         private static void checkAut(SerialPort checkport) throws IOException {
 
@@ -121,7 +128,6 @@ public static boolean isRunning=false;
 
             save = System.currentTimeMillis() + 5000;
             found = false;
-            //System.out.println("checkstart");
             while (System.currentTimeMillis() < save && found == false) {
                 if(checkport.getInputStream()!=null) {
                     if (empfangen(checkport) == 1234) {
@@ -129,15 +135,13 @@ public static boolean isRunning=false;
                     }
                 }
             }
-            //System.out.println("checkend");
-            //System.out.println(found);
+
             if (found == false) {
+                output="Nicht gefunden";
                 checkport.closePort();
-                //System.out.println("arduino nicht gefunden");
             }
             if (found == true) {
-
-                //System.out.println("arduino gefunden");
+                output="Arduino gefunden";
 
                 if (Arduinos.size() == 0) {
                     Arduinos.add(checkport);
@@ -186,10 +190,11 @@ public static boolean isRunning=false;
                                 if (checkport.openPort()) {
                                     System.out.println("Successfully opened the port."+checkport.getSystemPortName());
                                     System.out.println("desprictiveportname:   " + checkport.getDescriptivePortName());
+                                    output="versuche "+checkport.getSystemPortName()+" zu autentifizieren";
                                     checkAut(checkport);
                                 } else {
                                     System.out.println("Unable to open the port.");
-
+                                    output="Konnte Port nicht öffnen";
                                 }
 
 
@@ -202,12 +207,13 @@ public static boolean isRunning=false;
 
                         }
 
-
+                        output="Es wurden "+Arduinos.size()+" Arduinos autentiviziert.";
                         if(Step3.selectportlist!=null) {
                             Step3.selectportlist.setItems(SerialConnection.getPortNames());
                         }
                     }catch (Exception e) {
                         e.printStackTrace(); //for debug to find errors
+                        output="es ist ein Fehler aufgetreten Bitte versuche es erneut\nwenn der Fehler weiterhin auftritt wende dich an den Support";
                     }
 
                     isRunning=false;
