@@ -154,7 +154,7 @@ public class Step3 {
     }
     public static void close(){
         if(time!=null){
-            if (time.isRunning()) {
+            if (time.isRunning()) { //TODO hier speichern der IP
                 time.stop();
             }
         }

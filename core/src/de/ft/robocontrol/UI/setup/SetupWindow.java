@@ -71,7 +71,7 @@ public class SetupWindow {
 
 
     private class SetupBuilder extends VisWindow {
-        public SetupBuilder(String name, TableBuilder builder) {
+        public SetupBuilder(String name, final TableBuilder builder) {
             super(name);
 
 
@@ -144,6 +144,9 @@ if(currentStep>2) {
                                 case 3:
                                     de.ft.robocontrol.UI.setup.steps.RaspberryPiSteps.Step3.close();
                                     break;
+                                case 4:
+                                    de.ft.robocontrol.UI.setup.steps.RaspberryPiSteps.Step4.close();
+                                    break;
 
                             }
                         }
@@ -179,6 +182,9 @@ if(currentStep>2) {
                             switch (currentStep)  {
                                 case 3:
                                     de.ft.robocontrol.UI.setup.steps.RaspberryPiSteps.Step3.step3(content);
+                                    break;
+                                case 4:
+                                    de.ft.robocontrol.UI.setup.steps.RaspberryPiSteps.Step4.step4(content);
                                     break;
                             }
 
@@ -225,6 +231,8 @@ if(currentStep>2) {
                                 case 3:
                                     de.ft.robocontrol.UI.setup.steps.RaspberryPiSteps.Step3.close();
                                     break;
+                                case 4:
+                                    de.ft.robocontrol.UI.setup.steps.RaspberryPiSteps.Step4.close();
                             }
 
                         }
@@ -258,6 +266,9 @@ if(currentStep>2) {
                                 case 3:
                                     de.ft.robocontrol.UI.setup.steps.RaspberryPiSteps.Step3.step3(content);
                                     break;
+                                case 4:
+                                    de.ft.robocontrol.UI.setup.steps.RaspberryPiSteps.Step4.step4(content);
+                                    break;
                             }
 
 
@@ -281,6 +292,7 @@ if(currentStep>2) {
                     Step2.close();
                     Step3.close();
                     de.ft.robocontrol.UI.setup.steps.RaspberryPiSteps.Step3.close();
+                    de.ft.robocontrol.UI.setup.steps.RaspberryPiSteps.Step4.close();
 
                     currentStep=1;
                     tempverbindungsspeicher=null;
