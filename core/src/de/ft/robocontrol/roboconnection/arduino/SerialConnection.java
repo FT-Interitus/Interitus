@@ -146,7 +146,7 @@ if(empfangen!="") {
         private static void checkAut(SerialPort checkport) throws IOException {
 
             checkport.setBaudRate(112500);
-            checkport.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 5, 0);
+            //checkport.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 5, 0);
 
 /*
         checkport.setBaudRate(9600);
@@ -159,12 +159,11 @@ if(empfangen!="") {
             save = System.currentTimeMillis() + abtastzeit;
             found = false;
             while (System.currentTimeMillis() < save) {                                                           //für jeden port werden 5 sekunden lang überprüft ob er eine ID sendet
-System.out.println("vorher");
+
                     if (empfangen(checkport).contains("defaultID")) {
                          ///////////////////////////////////////////TODO hier muss dem arduino noch eine neue ID zugewiesen werden
                         found = true;
                     }
-                System.out.println("nachher");
                     /////////////////////////////////////////////TODO hier muss noch überprüft werden ob der Arduino schon bekannt ist (schon eine richtige ID hat)
 
 
