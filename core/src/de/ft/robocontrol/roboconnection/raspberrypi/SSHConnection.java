@@ -40,7 +40,7 @@ public class SSHConnection {
            testconnectionsession = testconnection.getSession(username,ipaddress,22); //TODO port auswählbar
             testconnectionsession.setConfig("StrictHostKeyChecking", "no");
            testconnectionsession.setPassword(password);
-           testconnectionsession.connect();
+           testconnectionsession.connect(1000);
            testconnectionsession.disconnect();
            return true;
         } catch (Exception e) {
