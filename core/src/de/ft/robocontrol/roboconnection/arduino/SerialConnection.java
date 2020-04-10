@@ -5,6 +5,7 @@ import de.ft.robocontrol.UI.setup.steps.ArduinoSteps.Step3;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.CharBuffer;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -87,13 +88,16 @@ public static boolean isRunning=false;
     public static String empfangen(SerialPort port)  {
         String empfangen="";
         BufferedReader is = new BufferedReader(new InputStreamReader(port.getInputStream()));
-        try {
 
-            empfangen = is.readLine();
+        try {
+while (empfangen!="\n") {
+    empfangen += (char) is.read();
+}
+System.out.println();
 
         }catch (Exception e){}
 if(empfangen!="") {
-    System.out.println(empfangen);
+    System.out.print(empfangen);
 }
         return empfangen;
     }
