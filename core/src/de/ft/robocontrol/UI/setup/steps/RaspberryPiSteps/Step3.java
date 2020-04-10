@@ -175,8 +175,11 @@ public class Step3 {
 
     }
     public static void close(){
-        SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().ip = ipadresse.getText();
+        try {
+            SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().ip = ipadresse.getText();
+        }catch (NullPointerException e) {
 
+        }
 
 
         if(time!=null){

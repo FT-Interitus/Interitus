@@ -66,9 +66,11 @@ trytoconnect.addListener(new ChangeListener() {
     }
 
     public static void close() {
+try {
+    SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().password = password.getText();
+    SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().username = username.getText();
+}catch (NullPointerException e) {
 
-        SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().password = password.getText();
-        SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().username = username.getText();
-
+}
     }
 }
