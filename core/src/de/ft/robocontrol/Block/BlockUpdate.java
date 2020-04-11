@@ -277,6 +277,7 @@ public class BlockUpdate extends Thread {
 
 
                         if (CheckKollision.checkblockwithduplicate(BlockVar.markedblock, block, 1) && block.getLeft() == null) {  //TODO Fehler beheben
+
                             if (BlockVar.markedblock.isMoving()) {
 
 
