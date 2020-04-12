@@ -1,8 +1,10 @@
 package de.ft.robocontrol;
 
+import animation.Animation;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -50,7 +52,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
     public static int h=0;
 
 public static Drawable d;
-
+public static Animation testanim = new Animation(new Texture("ballfeueranimation.png"),60,100,100);
 
 
     ShapeRenderer shapeRenderer;
@@ -258,7 +260,10 @@ s.setInside(AssetLoader.switch_inside);
         UI.update();
 
 
-
+batch.begin();
+testanim.startAnimation();
+batch.draw(testanim.getAnimation(),50,50);
+batch.end();
 
     }
 
