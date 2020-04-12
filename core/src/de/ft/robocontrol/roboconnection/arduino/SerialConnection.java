@@ -93,10 +93,17 @@ public static boolean isRunning=false;
 while (empfangen!="\n") {
     empfangen += (char) is.read();
 }
+
+
+
+
 System.out.println();
 
-        }catch (Exception e){}
+        }catch (Exception e){e.printStackTrace();}
 if(empfangen!="") {
+
+
+
     System.out.print(empfangen);
 }
         return empfangen;
@@ -137,8 +144,7 @@ if(empfangen!="") {
 
     public static class Authentifikation {
         private static String output;
-        private static int abtastzeit=5000;
-        private static int arduinoneustartzeit=2000;
+        private static int abtastzeit=10000;
 
 
         public static String getOutput(){
@@ -228,7 +234,6 @@ if(empfangen!="") {
                                     System.out.println("desprictiveportname:   " + checkport.getDescriptivePortName());
                                     output="versuche "+checkport.getSystemPortName()+" zu autentifizieren";
 
-                                    Thread.sleep(arduinoneustartzeit);             //warten da Arduino bei einer neuen Verbindung automatisch neustartet
 
                                     checkAut(checkport);                                                                    //port wird versucht zu autentivizieren
 
