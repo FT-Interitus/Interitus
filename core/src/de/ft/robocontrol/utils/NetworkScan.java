@@ -11,11 +11,10 @@ public class NetworkScan {
    public static String piaddress = "";
     public static void get() {
 
-
         try {
 
             try(final DatagramSocket socket = new DatagramSocket()){
-                socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
+                socket.connect(InetAddress.getByName("8.8.8.8"), 10002); //TODO port kann belegt sein
                 String ip = socket.getLocalAddress().getHostAddress();
 
 
@@ -25,15 +24,14 @@ public class NetworkScan {
 
                try {
                  InetAddress raspberrypi =  InetAddress.getByName("raspberrypi");
-                   System.out.println("Found Raspberry at "+raspberrypi.getHostAddress());
+                   System.out.println("Found Raspberry at "+raspberrypi.getHostName());
                    piaddress =raspberrypi.getHostAddress();
 
-               }catch (UnknownHostException e) {
-               }
+               }catch (UnknownHostException e) {}
                   for(int i = 0;i<255;i++) {
                      InetAddress testdevice =InetAddress.getByName("192.168."+ip+"."+i);
 
-                     if(testdevice.isReachable(45)) { //TODO bester wert ermittlen
+                     if(testdevice.isReachable(60)) { //TODO bester wert ermittlen
                          device.add(testdevice);
                      }
 
@@ -42,6 +40,7 @@ public class NetworkScan {
 
                   for(int i =0;i<device.size();i++) {
 
+                   //   System.out.println(device.get(i).getHostName());
                       System.out.println(device.get(i).getHostName());
                   }
 

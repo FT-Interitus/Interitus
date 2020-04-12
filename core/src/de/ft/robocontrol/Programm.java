@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import de.ft.robocontrol.data.programm.Data;
 import de.ft.robocontrol.data.user.experience.ExperienceManager;
 import de.ft.robocontrol.loading.Loading;
+import de.ft.robocontrol.roboconnection.raspberrypi.SSHConnection;
 import de.ft.robocontrol.utils.NetworkScan;
 
 public class Programm extends Game {
@@ -17,6 +18,7 @@ public class Programm extends Game {
     }
     @Override
     public void create() {
+      //  SSHConnection.update("192.168.2.112","pi","Pi-Server");
 
         Thread seachnetwork = new Thread() {
             @Override

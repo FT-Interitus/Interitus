@@ -58,7 +58,7 @@ public class Step3 {
                         SetupWindow.errorLabel.setText("Die IP-Adresse ist nicht erreichbar");
                     }
                 } catch (IOException e) {
-                    e.printStackTrace();
+
                 }
 
             } else {

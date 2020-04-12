@@ -147,6 +147,8 @@ if(currentStep>2) {
                                 case 4:
                                     de.ft.robocontrol.UI.setup.steps.RaspberryPiSteps.Step4.close();
                                     break;
+                                case 5:
+                                    de.ft.robocontrol.UI.setup.steps.RaspberryPiSteps.Step5.close();
 
                             }
                         }
@@ -186,6 +188,9 @@ if(currentStep>2) {
                                 case 4:
                                     de.ft.robocontrol.UI.setup.steps.RaspberryPiSteps.Step4.step4(content);
                                     break;
+                                case 5:
+                                    de.ft.robocontrol.UI.setup.steps.RaspberryPiSteps.Step5.step5(content);
+                                    break;
                             }
 
 
@@ -194,8 +199,13 @@ if(currentStep>2) {
 
 
                     if(currentStep>1) {
-    Button_previouse.setDisabled(false);
-}
+                        if (tempverbindungsspeicher.getDevice() == Devices.RASPBERRY3Bplus || tempverbindungsspeicher.getDevice() == Devices.RASPBERRYPI4 || tempverbindungsspeicher.getDevice() == Devices.RASPBERRYPIZEROW) {
+
+
+                        }else if(currentStep!=5){
+                            Button_previouse.setDisabled(false);
+                        }
+                }
 
                 }
 
@@ -233,6 +243,10 @@ if(currentStep>2) {
                                     break;
                                 case 4:
                                     de.ft.robocontrol.UI.setup.steps.RaspberryPiSteps.Step4.close();
+                                    Button_previouse.setDisabled(true); //Wenn die installation startet darf der nutzer nicht mehr zurückgehen
+                                    break;
+                                case 5:
+                                    de.ft.robocontrol.UI.setup.steps.RaspberryPiSteps.Step5.close();
                                     break;
                             }
 
@@ -270,6 +284,10 @@ if(currentStep>2) {
                                 case 4:
                                     de.ft.robocontrol.UI.setup.steps.RaspberryPiSteps.Step4.step4(content);
                                     break;
+                                case 5:
+                                    de.ft.robocontrol.UI.setup.steps.RaspberryPiSteps.Step5.step5(content);
+                                    Button_previouse.setDisabled(true);  //Wenn die installation startet darf der nutzer nicht mehr zurückgehen
+                                    break;
                             }
 
 
@@ -294,6 +312,7 @@ if(currentStep>2) {
                     Step3.close();
                     de.ft.robocontrol.UI.setup.steps.RaspberryPiSteps.Step3.close();
                     de.ft.robocontrol.UI.setup.steps.RaspberryPiSteps.Step4.close();
+                    de.ft.robocontrol.UI.setup.steps.RaspberryPiSteps.Step5.close();
 
                     currentStep=1;
                     tempverbindungsspeicher=null;
