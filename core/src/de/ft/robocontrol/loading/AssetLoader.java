@@ -13,6 +13,8 @@ public class AssetLoader {
     public static Texture img_block;
     public static Texture img_block_mouseover;
     public static Texture img_marked;
+    public static Texture connector;
+    public static Texture connector_offerd;
 
     //Switch Textures
     public static Texture switch_background;
@@ -30,6 +32,7 @@ public class AssetLoader {
     public static Texture help_ev3;
     public static Texture help_platforms;
 
+
     public static AssetManager manager = new AssetManager();
 
     public static void load() {
@@ -42,6 +45,8 @@ public class AssetLoader {
             manager.load(workingdirectory+ "block.png", Texture.class);
             manager.load(workingdirectory+"block_mouseover.png", Texture.class);
             manager.load(workingdirectory+"block_marked.png", Texture.class);
+            manager.load(workingdirectory+"connector.png",Texture.class);
+            manager.load(workingdirectory+"connector_offerd.png",Texture.class);
 
             group = "Switches";
             //Switch
@@ -58,6 +63,7 @@ public class AssetLoader {
             manager.load(workingdirectory+"RaspberryPiHilfe.png",Texture.class);
             manager.load(workingdirectory+"EV3Hilfe.png",Texture.class);
             manager.load(workingdirectory+"PlatformHilfe.png",Texture.class);
+
 
         }catch (Exception e) {
             e.printStackTrace();
@@ -77,6 +83,8 @@ public class AssetLoader {
             img_block = manager.get(workingdirectory+"block.png", Texture.class);
             img_block_mouseover = manager.get(workingdirectory+"block_mouseover.png", Texture.class);
             img_marked = manager.get(workingdirectory+"block_marked.png", Texture.class);
+            connector =  manager.get(workingdirectory+"connector.png",Texture.class);
+            connector_offerd = manager.get(workingdirectory+"connector_offerd.png",Texture.class);
 
             //Switch
             switch_background = manager.get(workingdirectory+"switchbackground.png", Texture.class);
@@ -91,6 +99,7 @@ public class AssetLoader {
             help_raspberrypi_boards =manager.get(workingdirectory+"RaspberryPiHilfe.png",Texture.class);
             help_ev3 = manager.get(workingdirectory+"EV3Hilfe.png",Texture.class);
             help_platforms =manager.get(workingdirectory+"PlatformHilfe.png",Texture.class);
+
 
         }catch (Exception e) {
             e.printStackTrace();

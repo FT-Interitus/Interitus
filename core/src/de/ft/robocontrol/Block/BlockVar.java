@@ -11,7 +11,7 @@ public class BlockVar {
 
     public static ArrayList<Block> blocks = new ArrayList<Block>(); //Liste aller erstellen Blöcke
     public static ArrayList<Block> visibleblocks = new ArrayList<Block>(); //Liste aller Blöcke die sich im sichtbereich der Camera befinden
-
+    public static ArrayList<Wire> wires = new ArrayList<>(); //Liste aller Wires die gesetzt werden
 
     //TODO Für multi select hier eventuel ArrayList
     public static Block markedblock = null; // Welcher Block ist makiert ?
@@ -31,6 +31,10 @@ public class BlockVar {
     public static Block biggestblock = null; // Welcher ist der Block der die größten überlappungen mit dem bewegten Block hat
 
     public static Block blockmitdergrostenuberlappungmitmarkiertemblock = null; //Welcher Block hat die größte überlappungsfläche mit dem makierten?
+
+    public static boolean showleftdocker = false; //Wenn ein connector ausgewählt wird bieten sich die anderen Blöcke zum verbinden an
+
+    public static Block connetor_offerd_hoverd_block = null; //Der Block über den man fährt welcher gehovert wird
 
 
 }

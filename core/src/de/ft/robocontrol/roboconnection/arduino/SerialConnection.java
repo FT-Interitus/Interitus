@@ -99,7 +99,8 @@ while (empfangen!="\n") {
 
 System.out.println();
 
-        }catch (Exception e){e.printStackTrace();}
+        }catch (Exception e){//e.printStackTrace();
+            }
 if(empfangen!="") {
 
 
@@ -247,7 +248,7 @@ if(empfangen!="") {
 
                             } catch (ArrayIndexOutOfBoundsException e) {
 
-                                e.printStackTrace();
+                          //      e.printStackTrace();
                             }
 
 
@@ -261,7 +262,7 @@ if(empfangen!="") {
 
 
                     }catch (Exception e) {
-                        e.printStackTrace(); //for debug to find errors
+                    //    e.printStackTrace(); //for debug to find errors
                         output="es ist ein Fehler aufgetreten Bitte versuche es erneut\nwenn der Fehler weiterhin auftritt wende dich an den Support";
                         System.out.println("es ist ein Fehler in SerialConnection aufgetreten | ^^^^ hier oben ist die exeption ^^^^ viel spaß damit ^^^^");
                     }

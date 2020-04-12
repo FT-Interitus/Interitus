@@ -52,7 +52,7 @@ public class SSHConnection {
         }
     }
 
-    public static boolean update(String ipaddress,String username,String password) {
+    public static boolean update(String ipaddress,String username,String password) { //TODO Retrun int from Exit state
         try {
             updatesession = testconnection.getSession(username,ipaddress,22); //TODO port auswählbar
             updatesession.setConfig("StrictHostKeyChecking", "no");

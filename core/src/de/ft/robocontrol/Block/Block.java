@@ -1,10 +1,12 @@
 package de.ft.robocontrol.Block;
 
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Frustum;
+import com.badlogic.gdx.math.Vector2;
 import de.ft.robocontrol.ProgrammingSpace;
 import de.ft.robocontrol.ThreadManager;
 import de.ft.robocontrol.data.user.changes.DataManager;
@@ -39,6 +41,10 @@ public class Block {
     private BlockUpdate blockupdate; // Die Block update methode hier werden user actionen engegengenommen und verarbeitet
     private Block left = null; //Der rechte verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
     private Block right = null; //Der linke verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
+    private Vector2 wireconnector_right =new Vector2(0,0); //Die rechte wire-Anschluss Position
+    private Vector2 wireconnector_left =new Vector2(0,0); //Die linke wire-Anschluss Position
+    private Wire wire_left = null; //linke verbundene Wire
+    private Wire wire_right = null; //rechte verbunde Wire
 
     public Block(int index, int x, int y, int w, int h) { //Initzialisieren des Blocks
         this.x = x;
@@ -47,7 +53,7 @@ public class Block {
         this.h = h;
         this.x_dup_rechts = this.x + this.w; //Duplicats positionen werden berechnet
         this.x_dup_links = this.x - this.w;//Duplicats positionen werden berechnet
-
+        wireconnector_right.set(x+w,y+h/3);
         this.index = index;
         blockupdate = new BlockUpdate(this); //BlockUpdate Klasse wird initzilisieren
 
@@ -108,6 +114,22 @@ public class Block {
     public void setMarked(boolean marked) {
 
         this.marked = marked; //Soll der Block makiert sein?
+    }
+
+    public void setWire_left(Wire wire_left) {
+        this.wire_left = wire_left;
+    }
+
+    public void setWire_right(Wire wire_right) {
+        this.wire_right = wire_right;
+    }
+
+    public Wire getWire_left() {
+        return wire_left;
+    }
+
+    public Wire getWire_right() {
+        return wire_right;
     }
 
     public Block getLeft() {
@@ -271,6 +293,8 @@ public class Block {
         batch.setColor(1,1,1,1);
 
 
+
+
         if (!this.blockupdate.toggle) {
             batch.draw(AssetLoader.img_block, this.getX(), this.getY(), this.getW(), this.getH()); // Block ohne das er makiert ist
         } else {
@@ -319,10 +343,26 @@ public class Block {
             batch.begin();
         }
 
+        if(!this.blockupdate.isIsconnectorclicked()&&BlockVar.showleftdocker&&this.getLeft()==null) {
+            batch.draw(AssetLoader.connector_offerd,getWireconnector_left().x,getWireconnector_left().y,20,20);
+        }
+
+        if(this.getRight() ==null) {
+            batch.draw(AssetLoader.connector, getwireconnector_right().x, getwireconnector_right().y, 20, 20);
+        }
 
         font.draw(batch, "index:  " + this.getIndex(), this.getX() + 30, this.getY() + 30); //DEBUG Block Index auf dem Block anzeigen
     }
 
+    public Vector2 getwireconnector_right() {
+        wireconnector_right.set(x+w-15,y+h/3);
+     return wireconnector_right;
+    }
+
+    public Vector2 getWireconnector_left() {
+        wireconnector_left.set(x-5,y+h/3);
+        return wireconnector_left;
+    }
 
     public int getDublicatmarkedblockuberlappungsflache() {
         int flaeche = 0;
