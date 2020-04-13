@@ -12,6 +12,7 @@ public class BlockVar {
     public static ArrayList<Block> blocks = new ArrayList<Block>(); //Liste aller erstellen Blöcke
     public static ArrayList<Block> visibleblocks = new ArrayList<Block>(); //Liste aller Blöcke die sich im sichtbereich der Camera befinden
     public static ArrayList<Wire> wires = new ArrayList<>(); //Liste aller Wires die gesetzt werden
+    public static ArrayList<Wire> visiblewires =new ArrayList<>(); //Liste aller Sichtbaren Wires
 
     //TODO Für multi select hier eventuel ArrayList
     public static Block markedblock = null; // Welcher Block ist makiert ?

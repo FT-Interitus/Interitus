@@ -63,6 +63,20 @@ public class ThreadManager {
                                     e.printStackTrace();
                                 }
                             }
+
+
+                            for(int i=0;i<BlockVar.wires.size();i++) {
+                                if(BlockVar.wires.get(i).isvisible()) {
+                                    if(BlockVar.visiblewires.indexOf(BlockVar.wires.get(i))==-1) {
+                                        BlockVar.visiblewires.add(BlockVar.wires.get(i));
+                                    }
+                                }else{
+                                    if(BlockVar.visiblewires.indexOf(BlockVar.wires.get(i))!=-1) {
+                                        BlockVar.visiblewires.remove(BlockVar.wires.get(i));
+                                    }
+                                }
+                            }
+
                         }catch (Exception e) {
                             e.printStackTrace(); //for debug to find errors
                         }

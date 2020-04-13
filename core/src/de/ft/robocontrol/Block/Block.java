@@ -23,7 +23,7 @@ import de.ft.robocontrol.utils.CheckKollision;
  */
 
 
-public class Block {
+public class Block implements VisibleObjects{
     public boolean seted = true; //Ob der Block losgelassen wurde bzw ob der Block eine statische Position hat
     public boolean moved = false; // Ob der Block gerade mit der Maus bewegt wird
     Frustum camfr = ProgrammingSpace.cam.frustum; //getten der Camera werte um zu überprüfen ob der Block gerade sichtbar ist.
@@ -67,8 +67,60 @@ public class Block {
 
     }
 
+
+    @Override
     public boolean isVisible() {
         return camfr.boundsInFrustum(this.getX(), this.getY(), 0, this.getW(), this.getH(), 0); //Ist der Block im Camera bereich?
+    }
+
+    @Override
+    public boolean amiablock() {
+        return true;
+    }
+
+    @Override
+    public Block getblock() { //TODO bestimmen
+        return this;
+    }
+
+    @Override
+    public int getX_entrance() {
+        return 0;
+    }
+
+    @Override
+    public int getY_entrance() {
+        return 0;
+    }
+
+    @Override
+    public int getW_entrance() {
+        return 0;
+    }
+
+    @Override
+    public int getH_entrance() {
+        return 0;
+    }
+
+    @Override
+    public int getX_exit() {
+        return (int) this.getwireconnector_right().x;
+    }
+
+    @Override
+    public int getY_exit() {
+        return  (int) this.getwireconnector_right().y;
+    }
+
+    @Override
+    public int getW_exit() {
+        return 0;
+    }
+
+    @Override
+    public int getH_exit() {
+        return 0;
     }
 
     public BlockUpdate getBlockupdate() {
@@ -408,6 +460,7 @@ public class Block {
 
         return blockupdate;
     }
+
 
 
 }

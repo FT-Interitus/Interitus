@@ -84,8 +84,8 @@ s.setInside(AssetLoader.switch_inside);
             public void run() {
                 try {
 
-                    for (int i = 0; i < 12; i = i + 1) {
-                        BlockVar.blocks.add(new Block(i, i * 150, 150, 150, 70));
+                    for (int i = 0; i < 1; i = i + 1) {
+                        BlockVar.blocks.add(new Block(i, 738,552, 150, 70));
 
                       //  MainGame.logger.finest(String.valueOf(i));
                     }
@@ -248,7 +248,7 @@ s.setInside(AssetLoader.switch_inside);
             s.setInside(AssetLoader.switch_inside);
         }
 
-        for(int i =0;i<BlockVar.wires.size();i++) {
+        for(int i =0;i<BlockVar.visiblewires.size();i++) {
             BlockVar.wires.get(i).draw();
         }
 

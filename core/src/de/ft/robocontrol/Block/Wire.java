@@ -8,8 +8,8 @@ import de.ft.robocontrol.ProgrammingSpace;
 import de.ft.robocontrol.loading.AssetLoader;
 
 public class Wire {
-    private Block left_connection;
-    private Block right_connection;
+    private VisibleObjects left_connection;
+    private VisibleObjects right_connection;
 
     private boolean space_between_blocks = false;
     private boolean movebymouse = false;
@@ -29,7 +29,7 @@ public class Wire {
 
 
         if(!space_between_blocks) {
-            System.out.println("Test");
+
             if(movebymouse) {
                 boolean temp = false;
                 if(!ProgrammingSpace.batch.isDrawing()) {
@@ -41,22 +41,32 @@ public class Wire {
 
 
 
-float a = left_connection.getwireconnector_right().x - ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x;
-float b = left_connection.getwireconnector_right().y - ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).y;
+float a = left_connection.getX_exit() - ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x;
+float b = left_connection.getY_exit() - ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).y;
 
-                sprite.setPosition(left_connection.getwireconnector_right().x,left_connection.getwireconnector_right().y);
+                sprite.setPosition(left_connection.getX_exit(),left_connection.getY_exit());
+
 
                 double weite = Math.sqrt(a * a + b * b);
 
-                System.out.println("test");
-               sprite.setRotation((float) ((float) Math.acos((float) ((ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x-left_connection.getwireconnector_right().x)/weite))*180/Math.PI));
-                System.out.println((float) ((float) Math.acos((float) ((ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x-left_connection.getwireconnector_right().x)/weite))*180/Math.PI));
-               sprite.setSize((float) weite,5);
+                //sprite.setOrigin(left_connection.getX_exit(),left_connection.getY_exit());
+
+               // sprite.setOrigin(left_connection.getX_exit(),left_connection.getY_exit());
+               sprite.setRotation((float) ((float) -Math.atan((float) ((ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).y-left_connection.getY_exit())/(ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x-left_connection.getX_exit())))*180/Math.PI));
+
+               ProgrammingSpace.batch.draw(AssetLoader.switch_background_white,873,575,5,5);
+
+
+             //   System.out.println((float) ((float) Math.acos((float) ((ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x-left_connection.getX_exit())/weite))*180/Math.PI));
+              sprite.setSize((float) weite,5);
+              sprite.setOrigin(0,0);
+             //   sprite.setSize(50,50);
               //  sprite.setRotation(20);
                // sprite.setRotation();
-                System.out.println("here");
 
 
+
+                System.out.println("X: "+left_connection.getX_exit()+" Y: "+left_connection.getY_exit()+" Mouse: X:" + ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x+" Y:"+ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).y+" Origion X:"+sprite.getOriginX()+" Y:"+sprite.getOriginY()+"   Rotation "+sprite.getRotation());
 
 
                 sprite.draw(ProgrammingSpace.batch);
@@ -89,11 +99,11 @@ float b = left_connection.getwireconnector_right().y - ProgrammingSpace.cam.unpr
 
 
     public Block getLeft_connection() {
-        return left_connection;
+        return left_connection.getblock();
     }
 
     public Block getRight_connection() {
-        return right_connection;
+        return right_connection.getblock();
     }
 
     public void setSpace_between_blocks(boolean space_between_blocks) {
@@ -107,4 +117,32 @@ float b = left_connection.getwireconnector_right().y - ProgrammingSpace.cam.unpr
     public void setMovebymouse(boolean movebymouse) {
         this.movebymouse = movebymouse;
     }
+
+    public boolean isvisible() {
+
+        try {
+            if(left_connection.isVisible()) {
+                return true;
+            }
+
+        }catch (Exception e) {
+
+        }
+
+        try {
+            if (right_connection.isVisible()) {
+                return true;
+            }
+        }catch (Exception e) {
+
+        }
+
+        return false;
+
+
+
+
+    }
+
+
 }
