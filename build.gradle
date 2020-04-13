@@ -58,6 +58,7 @@ project(":core") {
 
 
     dependencies {
+        compile group: 'org.usb4java', name: 'usb4java', version: '1.2.0'
         compile 'com.jcraft:jsch:0.1.54'
         compile 'com.fazecast:jSerialComm:[2.0.0,3.0.0)'
         compile "com.kotcrab.vis:vis-ui:$visuiVersion"
