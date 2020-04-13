@@ -249,7 +249,7 @@ s.setInside(AssetLoader.switch_inside);
         }
 
         for(int i =0;i<BlockVar.visiblewires.size();i++) {
-            BlockVar.wires.get(i).draw();
+            BlockVar.visiblewires.get(i).draw();
         }
 
         //s.setSize(1);
