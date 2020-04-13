@@ -90,17 +90,19 @@ public static boolean isRunning=false;
         BufferedReader is = new BufferedReader(new InputStreamReader(port.getInputStream()));
 
         try {
-while (empfangen!="\n") {
-    empfangen += (char) is.read();
-}
+
+//while (empfangen!="\n") {
+        empfangen = is.readLine(); //fehler
+
+//}
+
 
 
 
 
 System.out.println();
 
-        }catch (Exception e){//e.printStackTrace();
-            }
+        }catch (Exception e){}
 if(empfangen!="") {
 
 
@@ -170,7 +172,7 @@ if(empfangen!="") {
             found = false;
             while (System.currentTimeMillis() < save) {                                                           //für jeden port werden 5 sekunden lang überprüft ob er eine ID sendet
 
-                    if (empfangen(checkport).contains("defaultID")) {
+                    if (empfangen(checkport).contains("defaultID")) {  //fehler
                          ///////////////////////////////////////////TODO hier muss dem arduino noch eine neue ID zugewiesen werden
                         found = true;
                     }
