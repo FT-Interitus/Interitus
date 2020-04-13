@@ -1,6 +1,6 @@
 package de.ft.robocontrol;
 
-import animation.Animation;
+import de.ft.robocontrol.utils.animation.Animation;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;

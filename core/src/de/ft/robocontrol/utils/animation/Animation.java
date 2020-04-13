@@ -1,10 +1,8 @@
-package animation;
+package de.ft.robocontrol.utils.animation;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import de.ft.robocontrol.roboconnection.arduino.BurnProgramm;
-import de.ft.robocontrol.roboconnection.arduino.SerialConnection;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
