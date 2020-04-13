@@ -266,7 +266,7 @@ s.setInside(AssetLoader.switch_inside);
 
 batch.begin();
 testanim.startAnimation();
-batch.draw(testanim.getAnimation(),50,50);
+//batch.draw(testanim.getAnimation(),50,50);
 batch.end();
 
     }

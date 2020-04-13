@@ -88,6 +88,8 @@ public class BlockUpdate extends Thread {
 
                         }
 
+                        BlockVar.movingwires.clear();
+
 
                     }
 
@@ -112,6 +114,7 @@ public class BlockUpdate extends Thread {
                                tempwire = new Wire(block);
                                 tempwire.setMovebymouse(true);
                                 BlockVar.wires.add(tempwire);
+                                BlockVar.movingwires.add(tempwire);
 
 
                                 isconnectorclicked = true;

@@ -13,6 +13,7 @@ public class BlockVar {
     public static ArrayList<Block> visibleblocks = new ArrayList<Block>(); //Liste aller Blöcke die sich im sichtbereich der Camera befinden
     public static ArrayList<Wire> wires = new ArrayList<>(); //Liste aller Wires die gesetzt werden
     public static ArrayList<Wire> visiblewires =new ArrayList<>(); //Liste aller Sichtbaren Wires
+    public static ArrayList<Wire> movingwires = new ArrayList<>(); //Liste aller Wires die bewegt werden //Die erste ist die "master moving wire"
     public static ArrayList<WireNode> wireNodes = new ArrayList<>(); //Liste aller gesetzer Nodes
     public static ArrayList<WireNode> visibleWireNodes = new ArrayList<>(); //Liste aller sichtbaren Nodes
 
