@@ -3,6 +3,7 @@ package de.ft.robocontrol.Block;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.robocontrol.ProgrammingSpace;
 import de.ft.robocontrol.loading.AssetLoader;
@@ -13,6 +14,7 @@ public class Wire {
 
     private boolean space_between_blocks = false;
     private boolean movebymouse = false;
+    private Vector3 tempvector = new Vector3();
 
 
     public Wire(Block left_connection,Block right_connection) {
@@ -31,6 +33,15 @@ public class Wire {
         if(!space_between_blocks) {
 
             if(movebymouse) {
+
+            if(Gdx.input.isButtonJustPressed(0)) {
+
+            }
+
+
+
+
+
                 boolean temp = false;
                 if(!ProgrammingSpace.batch.isDrawing()) {
                     ProgrammingSpace.batch.begin();
@@ -99,6 +110,7 @@ float b = left_connection.getY_exit() - ProgrammingSpace.cam.unproject(new Vecto
 
 
     }
+
 
     public boolean isSpace_between_blocks() {
         return space_between_blocks;

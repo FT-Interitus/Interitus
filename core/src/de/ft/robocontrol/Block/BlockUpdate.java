@@ -78,10 +78,16 @@ public class BlockUpdate extends Thread {
 
                             BlockVar.connetor_offerd_hoverd_block = null;
                         }
-                        tempwire.getLeft_connection().setWire_right(null);
-                        BlockVar.visiblewires.remove(tempwire);
-                        BlockVar.wires.remove(tempwire);
-                        tempwire = null;
+
+                        try {
+                            tempwire.getLeft_connection().setWire_right(null);
+                            BlockVar.visiblewires.remove(tempwire);
+                            BlockVar.wires.remove(tempwire);
+                            tempwire = null;
+                        }catch (Exception e) {
+
+                        }
+
 
                     }
 
