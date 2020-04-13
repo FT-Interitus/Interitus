@@ -127,6 +127,10 @@ float b = left_connection.getY_exit() - ProgrammingSpace.cam.unproject(new Vecto
 
     public boolean isvisible() {
 
+        if(movebymouse)  {
+            return true;
+        }
+
         try {
             if(left_connection.isVisible()) {
                 return true;

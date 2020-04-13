@@ -22,7 +22,7 @@ public class BlockUpdate extends Thread {
     Vector3 temp3;//Temp vectoren für berechnungs zwischen schritte
     Vector3 temp4;//Temp vectoren für berechnungs zwischen schritte
     private boolean isconnectorclicked = false;//Ist der connector des zuständigen Blocks ausgelöst
-
+   private Wire tempwire;
 
     BlockUpdate(Block block) {
         this.block = block; //Der Block wird zu gewiesen
@@ -67,6 +67,7 @@ public class BlockUpdate extends Thread {
                         BlockVar.showleftdocker = false;
                         if (BlockVar.connetor_offerd_hoverd_block != null) {
 
+
                             block.setWire_right(new Wire(block,BlockVar.connetor_offerd_hoverd_block));
                             BlockVar.connetor_offerd_hoverd_block.setWire_left(block.getWire_right());
                             block.getWire_right().setSpace_between_blocks(true);
@@ -77,6 +78,11 @@ public class BlockUpdate extends Thread {
 
                             BlockVar.connetor_offerd_hoverd_block = null;
                         }
+                        tempwire.getLeft_connection().setWire_right(null);
+                        BlockVar.visiblewires.remove(tempwire);
+                        BlockVar.wires.remove(tempwire);
+                        tempwire = null;
+
                     }
 
 
@@ -97,7 +103,7 @@ public class BlockUpdate extends Thread {
                         if (!(BlockVar.markedblock == block)) {
                             if (!isconnectorclicked) {
 
-                                Wire tempwire = new Wire(block);
+                               tempwire = new Wire(block);
                                 tempwire.setMovebymouse(true);
                                 BlockVar.wires.add(tempwire);
 
