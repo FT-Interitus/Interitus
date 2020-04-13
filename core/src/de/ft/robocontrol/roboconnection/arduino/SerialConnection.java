@@ -92,7 +92,9 @@ public static boolean isRunning=false;
         try {
 
 //while (empfangen!="\n") {
+
         empfangen = is.readLine(); //fehler
+
 
 //}
 

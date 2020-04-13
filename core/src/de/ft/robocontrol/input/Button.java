@@ -2,9 +2,7 @@ package de.ft.robocontrol.input;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.*;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import de.ft.robocontrol.input.check.Check;
@@ -20,6 +18,10 @@ public class Button {
 
     private boolean visible=true;
     private boolean disable=false;
+    private SpriteBatch batch=new SpriteBatch();
+    private ShapeRenderer s=new ShapeRenderer();
+    private GlyphLayout glyphLayout = new GlyphLayout();
+
 
     private Check check=new Check();
 
@@ -90,7 +92,7 @@ return check.isPressed(x,y,w,h);
         this.image=image;
     }
 
-    public void draw(ShapeRenderer s, SpriteBatch batch){
+    public void draw(){
         if(isVisible()) {
             if (image == null) {
 
@@ -115,7 +117,10 @@ return check.isPressed(x,y,w,h);
             }
             if (text != null) {
                 batch.begin();
-                font.draw(batch, this.text, x + w / 2 - (this.text.length() / 2) * 6, y + h / 2);
+
+                glyphLayout.setText(font, this.text);
+                font.draw(batch, glyphLayout, x + 5, y + glyphLayout.height + h / 2 - glyphLayout.height / 2);
+
                 batch.end();
             }
         }

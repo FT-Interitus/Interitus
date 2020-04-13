@@ -68,8 +68,8 @@ if(visible) {
     b.begin();
     b.draw(Textfeldmitte, x, y, w, h);
     b.end();
-    buttonOben.draw(renderer,batch);
-    buttonUnten.draw(renderer,batch);
+    buttonOben.draw();
+    buttonUnten.draw();
     b.begin();
     font.draw(b, "" + value, x + 5, y + font.getLineHeight());
     b.end();

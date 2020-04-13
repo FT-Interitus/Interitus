@@ -1,5 +1,6 @@
 package de.ft.robocontrol;
 
+import de.ft.robocontrol.input.popup.PopupMenue;
 import de.ft.robocontrol.utils.animation.Animation;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.GL20;
@@ -57,9 +58,11 @@ public static Animation testanim = new Animation(new Texture("ballfeueranimation
 
     ShapeRenderer shapeRenderer;
 
-
+        public static PopupMenue pm= new PopupMenue();
 
     public ProgrammingSpace() {
+        String[] items={"item_1","item_2","item_3","item_4"};
+pm.setItems(items);
         ia=new IntegerAuswahl(400,400,50,25);
         s=new Switch(500,500);
 font=  new BitmapFont();
@@ -267,6 +270,9 @@ s.setInside(AssetLoader.switch_inside);
 batch.begin();
 testanim.startAnimation();
 //batch.draw(testanim.getAnimation(),50,50);
+    pm.setBounds(700,200);
+    pm.draw();
+    System.out.println(pm.getPressed());
 batch.end();
 
     }
