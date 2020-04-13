@@ -32,6 +32,9 @@ public class AssetLoader {
     public static Texture help_ev3;
     public static Texture help_platforms;
 
+    //Wire
+    public static Texture wire;
+
 
     public static AssetManager manager = new AssetManager();
 
@@ -58,11 +61,15 @@ public class AssetLoader {
             manager.load(workingdirectory+"switchbackground_white.png", Texture.class);
             manager.load(workingdirectory+"switchinside.png", Texture.class);
             manager.load(workingdirectory+"switchbackground_whitegreen.png", Texture.class);
+            group = "Setup";
             //Setup Help
             manager.load(workingdirectory+"ArduinoHilfe.png",Texture.class);
             manager.load(workingdirectory+"RaspberryPiHilfe.png",Texture.class);
             manager.load(workingdirectory+"EV3Hilfe.png",Texture.class);
             manager.load(workingdirectory+"PlatformHilfe.png",Texture.class);
+            group = "Wire";
+            //Wire
+            manager.load(workingdirectory+"wire.png",Texture.class);
 
 
         }catch (Exception e) {
@@ -99,6 +106,8 @@ public class AssetLoader {
             help_raspberrypi_boards =manager.get(workingdirectory+"RaspberryPiHilfe.png",Texture.class);
             help_ev3 = manager.get(workingdirectory+"EV3Hilfe.png",Texture.class);
             help_platforms =manager.get(workingdirectory+"PlatformHilfe.png",Texture.class);
+            //wire
+            wire =  manager.get(workingdirectory+"wire.png",Texture.class);
 
 
         }catch (Exception e) {

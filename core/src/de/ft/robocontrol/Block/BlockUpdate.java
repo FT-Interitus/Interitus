@@ -1,6 +1,7 @@
 package de.ft.robocontrol.Block;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.robocontrol.ProgrammingSpace;
@@ -60,7 +61,7 @@ public class BlockUpdate extends Thread {
 
 
 
-                    if (isconnectorclicked && !Gdx.input.isButtonPressed(0)) { //Um vorzeitige wire wieder aufzulösen und ggf zu richtigen umzuwandeln
+                    if (isconnectorclicked && Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) { //Um vorzeitige wire wieder aufzulösen und ggf zu richtigen umzuwandeln
 
                         isconnectorclicked = false;
                         BlockVar.showleftdocker = false;
@@ -95,6 +96,12 @@ public class BlockUpdate extends Thread {
                     if (CheckKollision.checkmousewithobject((int) block.getwireconnector_right().x, (int) block.getwireconnector_right().y, 20, 20, (int) BlockVar.mousepressedold.x, (int) BlockVar.mousepressedold.y) && Gdx.input.isButtonPressed(0)) {
                         if (!(BlockVar.markedblock == block)) {
                             if (!isconnectorclicked) {
+
+                                Wire tempwire = new Wire(block);
+                                tempwire.setMovebymouse(true);
+                                BlockVar.wires.add(tempwire);
+
+
                                 isconnectorclicked = true;
                                 if (block.isMarked()) {
 

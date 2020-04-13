@@ -248,6 +248,10 @@ s.setInside(AssetLoader.switch_inside);
             s.setInside(AssetLoader.switch_inside);
         }
 
+        for(int i =0;i<BlockVar.wires.size();i++) {
+            BlockVar.wires.get(i).draw();
+        }
+
         //s.setSize(1);
         s.setSize(1f);
         s.setWackelstärke(1);
