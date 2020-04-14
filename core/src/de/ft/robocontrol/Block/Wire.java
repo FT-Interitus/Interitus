@@ -67,7 +67,7 @@ float b = left_connection.getY_exit() - ProgrammingSpace.cam.unproject(new Vecto
                // sprite.setOrigin(left_connection.getX_exit(),left_connection.getY_exit());
 
 
-                if(ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x-left_connection.getX_exit()>0) {
+                if(ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x-left_connection.getX_exit()>=0) {
                     sprite.setRotation((float) ((float) Math.atan((float) ((ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y - left_connection.getY_exit()) / (ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x - left_connection.getX_exit()))) * 180 / Math.PI));
                 }else{
                     sprite.setRotation((float) ((float) Math.atan((float) ((ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y - left_connection.getY_exit()) / (ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x - left_connection.getX_exit()))) * 180 / Math.PI)+180);
