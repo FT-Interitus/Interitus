@@ -115,15 +115,15 @@ public class USBConnection {
         ByteBuffer operations = ByteBuffer.allocateDirect(2 + b.length + 2);
         operations.put(ev3.opCom_Set);
         operations.put(ev3.SET_BRICKNAME);
+        operations.put(ev3.LCS("test"));
 
+     //   operations.put((byte) 0x84);
 
-        operations.put((byte) 0x84);
+       // for (int i = 0; i < b.length; i++) {
+        //    operations.put(b[i]);
+       // }
 
-        for (int i = 0; i < b.length; i++) {
-            operations.put(b[i]);
-        }
-
-        operations.put((byte) 0x00);
+        //operations.put((byte) 0x00);
 
 
         ByteBuffer reply = sendDirectCmd(operations, 7 + b.length + 2, 0);
@@ -132,12 +132,7 @@ public class USBConnection {
         LibUsb.close(handle);
     }
 
-  public static void main(String[] args) {
 
-        setbrickname("");
-
-
-    }
 
 
 

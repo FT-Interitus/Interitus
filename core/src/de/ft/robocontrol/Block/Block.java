@@ -84,42 +84,42 @@ public class Block implements VisibleObjects{
     }
 
     @Override
-    public int getX_entrance() {
+    public float getX_entrance() {
         return 0;
     }
 
     @Override
-    public int getY_entrance() {
+    public float getY_entrance() {
         return 0;
     }
 
     @Override
-    public int getW_entrance() {
+    public float getW_entrance() {
         return 0;
     }
 
     @Override
-    public int getH_entrance() {
+    public float getH_entrance() {
         return 0;
     }
 
     @Override
-    public int getX_exit() {
+    public float getX_exit() {
         return (int) this.getwireconnector_right().x;
     }
 
     @Override
-    public int getY_exit() {
+    public float getY_exit() {
         return  (int) this.getwireconnector_right().y;
     }
 
     @Override
-    public int getW_exit() {
+    public float getW_exit() {
         return 0;
     }
 
     @Override
-    public int getH_exit() {
+    public float getH_exit() {
         return 0;
     }
 

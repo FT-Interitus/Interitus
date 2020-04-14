@@ -6,13 +6,13 @@ public interface VisibleObjects {
     boolean isVisible();
     boolean amiablock();
     Block getblock();
-    int getX_entrance();
-    int getY_entrance();
-    int getW_entrance();
-    int getH_entrance();
+    float getX_entrance();
+    float getY_entrance();
+    float getW_entrance();
+    float getH_entrance();
 
-    int getX_exit();
-    int getY_exit();
-    int getW_exit();
-    int getH_exit();
+    float getX_exit();
+    float getY_exit();
+    float getW_exit();
+    float getH_exit();
 }

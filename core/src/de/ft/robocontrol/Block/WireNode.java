@@ -13,7 +13,12 @@ public class WireNode implements VisibleObjects {
     private int w;
     private int h;
     private Frustum frustum;
-    public WireNode(ArrayList<Wire> wiresleft) { //Wenn eine neue Node gesetzt wird
+    public WireNode(ArrayList<Wire> wiresleft,int x,int y,int w,int h) { //Wenn eine neue Node gesetzt wird
+
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
 
         this.wire_left = wiresleft;
 
@@ -57,42 +62,46 @@ public class WireNode implements VisibleObjects {
     }
 
     @Override
-    public int getX_entrance() {
-        return 0;
+    public float getX_entrance() {
+        return x;
     }
 
     @Override
-    public int getY_entrance() {
-        return 0;
+    public float getY_entrance() {
+        return y;
     }
 
     @Override
-    public int getW_entrance() {
-        return 0;
+    public float getW_entrance() {
+        return w;
     }
 
     @Override
-    public int getH_entrance() {
-        return 0;
+    public float getH_entrance() {
+        return h;
     }
 
     @Override
-    public int getX_exit() {
-        return 0;
+    public float getX_exit() {
+        return x;
     }
 
     @Override
-    public int getY_exit() {
-        return 0;
+    public float getY_exit() {
+        return y;
     }
 
     @Override
-    public int getW_exit() {
-        return 0;
+    public float getW_exit() {
+        return w;
     }
 
     @Override
-    public int getH_exit() {
-        return 0;
+    public float getH_exit() {
+        return h;
     }
+
+
+
+
 }

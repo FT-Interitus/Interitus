@@ -1,6 +1,7 @@
 package de.ft.robocontrol.Block;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
@@ -14,39 +15,65 @@ public class Wire {
 
     private boolean space_between_blocks = false;
     private boolean movebymouse = false;
+    private boolean canplaceanewwirenode = false;
+
     private Vector3 tempvector = new Vector3();
 
 
-    public Wire(Block left_connection,Block right_connection) {
+    public Wire(VisibleObjects left_connection,Block right_connection) {
         this.left_connection = left_connection;
         this.right_connection = right_connection;
     }
 
-    public Wire(Block left_connection) {
+    public Wire(VisibleObjects left_connection) {
         this.left_connection = left_connection;
     }
 
+
+
+
+
     public void draw() {
 
+
+        if(!Gdx.input.isKeyPressed(Input.Keys.N)) {
+             canplaceanewwirenode = true;
+        }
 
 
         if(!space_between_blocks) {
 
             if(movebymouse) {
 
-            if(Gdx.input.isButtonJustPressed(0)) {
+            if(Gdx.input.isKeyJustPressed(Input.Keys.N)&&canplaceanewwirenode) {
 
                 if(BlockVar.movingwires.indexOf(this)==0) {
-                    WireNode tempwirenode = new WireNode(BlockVar.movingwires);
+                    WireNode tempwirenode = new WireNode(BlockVar.movingwires,(int)ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x,(int)ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y,10,10);
+
                     BlockVar.wireNodes.add(tempwirenode);
                     BlockVar.visibleWireNodes.add(tempwirenode);
 
+                    this.right_connection = tempwirenode;
+
                     for(int i=0;i<BlockVar.movingwires.size();i++) {
                         BlockVar.movingwires.get(i).movebymouse = false;
+                        BlockVar.movingwires.get(i).space_between_blocks = false;
                         BlockVar.movingwires.get(i).right_connection = tempwirenode;
                     }
 
                     BlockVar.movingwires.clear();
+
+                    tempwirenode.setWire_right(new Wire(tempwirenode));
+                    //tempwirenode.getWire_right().space_between_blocks = false;
+                    tempwirenode.getWire_right().movebymouse = true;
+                   BlockVar.movingwires.add( tempwirenode.getWire_right());
+                   BlockVar.visiblewires.add(tempwirenode.getWire_right());
+                   //BlockVar.wires.add(tempwirenode.getWire_right());
+
+                    System.out.println("Test");
+
+
+System.out.println("test");
                 }
 
             }
@@ -116,7 +143,7 @@ float b = left_connection.getY_exit() - ProgrammingSpace.cam.unproject(new Vecto
 
             }else{
 
-
+                //TODO selbst zerstörung wenn der Block weg ist
                 boolean temp = false;
                 if(!ProgrammingSpace.batch.isDrawing()) {
                     ProgrammingSpace.batch.begin();
@@ -135,15 +162,17 @@ float b = left_connection.getY_exit() - ProgrammingSpace.cam.unproject(new Vecto
                 double weite = Math.sqrt(a * a + b * b);
 
                 if(right_connection.getX_entrance()-left_connection.getX_exit()>0) {
-               //TODO hier sthen geblieben     sprite.setRotation((float) ((float) Math.atan((float) ((ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y - left_connection.getY_exit()) / (ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x - left_connection.getX_exit()))) * 180 / Math.PI));
+                    sprite.setRotation((float) ((float) Math.atan((float) ((right_connection.getY_entrance() - left_connection.getY_exit()) / (right_connection.getX_entrance() - left_connection.getX_exit()))) * 180 / Math.PI));
+
                 }else{
-                    sprite.setRotation((float) ((float) Math.atan((float) ((ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y - left_connection.getY_exit()) / (ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x - left_connection.getX_exit()))) * 180 / Math.PI)+180);
+                    sprite.setRotation((float) ((float) Math.atan((float) ((right_connection.getY_entrance() - left_connection.getY_exit()) / (right_connection.getX_entrance() - left_connection.getX_exit()))) * 180 / Math.PI)+180);
 
                 }
 
-
+                System.out.println(sprite.getRotation());
 
                 sprite.setSize((float) weite,5);
+                sprite.setOrigin(0,0);
 
 
                 sprite.draw(ProgrammingSpace.batch);
