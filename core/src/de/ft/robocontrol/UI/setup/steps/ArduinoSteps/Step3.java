@@ -73,6 +73,9 @@ System.out.println(BurnProgramm.ausgabe);
                         brenntext.setText(BurnProgramm.ausgabe);
                         if(BurnProgramm.ausgabe.contains("Brennen hat funktioniert, nun kannst du dein Gerät konfigurieren")){
 System.out.println("jetzt ID machen");
+
+
+
                         }
                     }
                     if(SerialConnection.isRunning){

@@ -134,7 +134,7 @@ public class USBConnection {
 
   public static void main(String[] args) {
 
-        setbrickname("");
+        setbrickname("FelixsEv3");
 
 
     }

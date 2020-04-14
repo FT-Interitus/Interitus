@@ -1,10 +1,12 @@
 package de.ft.robocontrol.input.popup;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import de.ft.robocontrol.input.Button;
+import de.ft.robocontrol.input.check.Check;
 
 import java.util.ArrayList;
 
@@ -15,6 +17,9 @@ public class PopupMenue {
     private SpriteBatch batch=new SpriteBatch();
     private ArrayList<Button>buttons=new ArrayList<>();
     private Texture popupButtonimage=new Texture("popupbuttonimage.png");
+    private boolean show=false;
+    private Check check=new Check();
+
     public PopupMenue(){
 
     }
@@ -27,14 +32,28 @@ public class PopupMenue {
         this.x=x;
         this.y=y;
     }
-    public void draw(){
-        batch.begin();
-        for(int i=0;i<buttons.size();i++){
-            buttons.get(i).setBounds(this.x,this.y+(buttonheight*i),200,buttonheight);
-            buttons.get(i).setImage(popupButtonimage);
-            buttons.get(i).draw();
+
+    public void rechtsKlickControlle(){
+        if(Gdx.input.isButtonJustPressed(1) && !check.isMouseover(this.x,this.y,200,buttonheight*buttons.size())){
+            show=true;
+            this.x=Gdx.input.getX();
+            this.y= Gdx.graphics.getHeight()-Gdx.input.getY();
         }
-        batch.end();
+        if(Gdx.input.isButtonJustPressed(0) && !check.isMouseover(this.x,this.y,200,buttonheight*buttons.size())){
+            show=false;
+        }
+    }
+
+    public void draw(){
+        if(show) {
+            batch.begin();
+            for (int i = 0; i < buttons.size(); i++) {
+                buttons.get(i).setBounds(this.x, this.y + (buttonheight * i), 200, buttonheight);
+                buttons.get(i).setImage(popupButtonimage);
+                buttons.get(i).draw();
+            }
+            batch.end();
+        }
     }
     public void addItem(String text){
         Button b=new Button();
