@@ -11,12 +11,9 @@ public class USBConnection {
     static final short ID_PRODUCT_EV3 = (short) 0x0005;
     static final byte EP_IN = (byte) 0x81;
     static final byte EP_OUT = (byte) 0x01;
-
-    static final byte com_set = (byte) 0xD4;
-    static final byte light = (byte) 0x84;
     static final byte DIRECT_COMMAND_REPLY = (byte) 0x00;
 
-    static final byte command_to_set_name = (byte) 0x08;
+
 
 
     static DeviceHandle handle;
@@ -26,6 +23,8 @@ public class USBConnection {
         Device device = null;
         DeviceList list = new DeviceList();
         result = LibUsb.getDeviceList(null, list);
+
+
         if (result < 0) {
             throw new RuntimeException("Unable to get device list. Result=" + result);
         }
@@ -114,8 +113,8 @@ public class USBConnection {
         byte[] b = name.getBytes();
 
         ByteBuffer operations = ByteBuffer.allocateDirect(2 + b.length + 2);
-        operations.put(com_set);
-        operations.put(command_to_set_name);
+        operations.put(ev3.opCom_Set);
+        operations.put(ev3.SET_BRICKNAME);
 
 
         operations.put((byte) 0x84);
@@ -131,6 +130,13 @@ public class USBConnection {
 
         LibUsb.releaseInterface(handle, 0);
         LibUsb.close(handle);
+    }
+
+  public static void main(String[] args) {
+
+        setbrickname("");
+
+
     }
 
 

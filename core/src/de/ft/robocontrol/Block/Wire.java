@@ -36,7 +36,18 @@ public class Wire {
 
             if(Gdx.input.isButtonJustPressed(0)) {
 
+                if(BlockVar.movingwires.indexOf(this)==0) {
+                    WireNode tempwirenode = new WireNode(BlockVar.movingwires);
+                    BlockVar.wireNodes.add(tempwirenode);
+                    BlockVar.visibleWireNodes.add(tempwirenode);
 
+                    for(int i=0;i<BlockVar.movingwires.size();i++) {
+                        BlockVar.movingwires.get(i).movebymouse = false;
+                        BlockVar.movingwires.get(i).right_connection = tempwirenode;
+                    }
+
+                    BlockVar.movingwires.clear();
+                }
 
             }
 
@@ -105,6 +116,41 @@ float b = left_connection.getY_exit() - ProgrammingSpace.cam.unproject(new Vecto
 
             }else{
 
+
+                boolean temp = false;
+                if(!ProgrammingSpace.batch.isDrawing()) {
+                    ProgrammingSpace.batch.begin();
+                    temp = true;
+                }
+
+
+                Sprite sprite = new Sprite(AssetLoader.wire);
+
+                float a = left_connection.getX_exit() - right_connection.getX_entrance();
+                float b = left_connection.getY_exit() - right_connection.getY_entrance();
+
+                sprite.setPosition(left_connection.getX_exit(),left_connection.getY_exit());
+
+
+                double weite = Math.sqrt(a * a + b * b);
+
+                if(right_connection.getX_entrance()-left_connection.getX_exit()>0) {
+               //TODO hier sthen geblieben     sprite.setRotation((float) ((float) Math.atan((float) ((ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y - left_connection.getY_exit()) / (ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x - left_connection.getX_exit()))) * 180 / Math.PI));
+                }else{
+                    sprite.setRotation((float) ((float) Math.atan((float) ((ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y - left_connection.getY_exit()) / (ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x - left_connection.getX_exit()))) * 180 / Math.PI)+180);
+
+                }
+
+
+
+                sprite.setSize((float) weite,5);
+
+
+                sprite.draw(ProgrammingSpace.batch);
+
+                if(temp) {
+                    ProgrammingSpace.batch.end();
+                }
             }
 
 
