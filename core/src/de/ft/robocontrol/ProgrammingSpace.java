@@ -270,8 +270,9 @@ s.setInside(AssetLoader.switch_inside);
 batch.begin();
 testanim.startAnimation();
 //batch.draw(testanim.getAnimation(),50,50);
-    pm.setBounds(700,200);
+   // pm.setBounds(700,200);
     pm.draw();
+    pm.rechtsKlickControlle();
     System.out.println(pm.getPressed());
 batch.end();
 
