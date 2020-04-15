@@ -45,6 +45,7 @@ public class Block implements VisibleObjects{
     private Vector2 wireconnector_left =new Vector2(0,0); //Die linke wire-Anschluss Position
     private Wire wire_left = null; //linke verbundene Wire
     private Wire wire_right = null; //rechte verbunde Wire
+    private BlockAttribute blockAttribute = new BlockAttribute();
 
     public Block(int index, int x, int y, int w, int h) { //Initzialisieren des Blocks
         this.x = x;
