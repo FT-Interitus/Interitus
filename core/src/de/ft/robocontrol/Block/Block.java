@@ -86,12 +86,12 @@ public class Block implements VisibleObjects{
 
     @Override
     public float getX_entrance() {
-        return 0;
+        return getWireconnector_left().x;
     }
 
     @Override
     public float getY_entrance() {
-        return 0;
+        return getWireconnector_left().y;
     }
 
     @Override

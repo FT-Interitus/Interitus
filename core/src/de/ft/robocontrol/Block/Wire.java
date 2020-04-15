@@ -78,10 +78,7 @@ public class Wire {
                    BlockVar.visiblewires.add(tempwirenode.getWire_right().get(0));
                    //BlockVar.wires.add(tempwirenode.getWire_right());
 
-                    System.out.println("Test");
 
-
-System.out.println("test");
                 }
 
             }
@@ -119,7 +116,7 @@ float b = left_connection.getY_exit() - ProgrammingSpace.cam.unproject(new Vecto
                     sprite.setRotation((float) ((float) Math.atan((float) ((ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y - left_connection.getY_exit()) / (ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x - left_connection.getX_exit()))) * 180 / Math.PI)+180);
 
                 }
-               ProgrammingSpace.batch.draw(AssetLoader.switch_background_white,873,575,5,5);
+            //   ProgrammingSpace.batch.draw(AssetLoader.switch_background_white,873,575,5,5);
 
 
 
