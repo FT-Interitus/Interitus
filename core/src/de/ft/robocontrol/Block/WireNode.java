@@ -7,21 +7,21 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class WireNode implements VisibleObjects {
-    private ArrayList<Wire> wire_left;
-    private ArrayList<Wire> wire_right;
+    private Wire wire_left;
+    private Wire wire_right;
     private int x;
     private int y;
     private int w;
     private int h;
     private Frustum frustum;
-    public WireNode(ArrayList<Wire> wiresleft,int x,int y,int w,int h) { //Wenn eine neue Node gesetzt wird
+    public WireNode(Wire wiresleft,int x,int y,int w,int h) { //Wenn eine neue Node gesetzt wird
 
         this.x = x;
         this.y = y;
         this.w = w;
         this.h = h;
 
-        this.wire_left = (ArrayList<Wire>) wiresleft.clone();
+        this.wire_left = wiresleft;
 
     }
 
@@ -29,19 +29,19 @@ public class WireNode implements VisibleObjects {
 
     }
 
-    public ArrayList<Wire> getWire_right() {
+    public Wire getWire_right() {
         return wire_right;
     }
 
-    public ArrayList<Wire> getWire_left() {
+    public Wire getWire_left() {
         return wire_left;
     }
 
-    public void setWire_right(ArrayList<Wire> wire_right) {
+    public void setWire_right(Wire wire_right) {
         this.wire_right = wire_right;
     }
 
-    public void setWire_left(ArrayList<Wire> wire_left) {
+    public void setWire_left(Wire wire_left) {
         this.wire_left = wire_left;
     }
 

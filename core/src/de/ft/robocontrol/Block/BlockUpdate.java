@@ -88,11 +88,10 @@ public class BlockUpdate extends Thread {
 
                         }
 
-                        BlockVar.movingwires.clear();
+                        BlockVar.movingwires =null;
 
 
                     }
-
 
                     if (!isconnectorclicked && BlockVar.showleftdocker) { //Wenn der eigene Wire connector nicht ausgelöst ist aber ein anderer
                         if (CheckKollision.checkmousewithobject((int) block.getWireconnector_left().x, (int) block.getWireconnector_left().y, 20, 20, (int) ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y)) { //Wenn die Maus über meinen connection offerer fährt...
@@ -115,7 +114,7 @@ public class BlockUpdate extends Thread {
                                 tempwire.setMovebymouse(true);
                                 tempwire.setSpace_between_blocks(true);
                                 BlockVar.wires.add(tempwire);
-                                BlockVar.movingwires.add(tempwire);
+                                BlockVar.movingwires =tempwire;
 
 
                                 isconnectorclicked = true;

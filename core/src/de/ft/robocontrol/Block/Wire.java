@@ -51,7 +51,7 @@ public class Wire {
 
             if(Gdx.input.isKeyJustPressed(Input.Keys.N)&&canplaceanewwirenode) {
 
-                if(BlockVar.movingwires.indexOf(this)==0) {
+
                     WireNode tempwirenode = new WireNode(BlockVar.movingwires,(int)ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x,(int)ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y,10,10);
 
                     BlockVar.wireNodes.add(tempwirenode);
@@ -59,27 +59,25 @@ public class Wire {
 
                     this.right_connection = tempwirenode;
 
-                    for(int i=0;i<BlockVar.movingwires.size();i++) {
-                        BlockVar.movingwires.get(i).movebymouse = false;
-                        BlockVar.movingwires.get(i).space_between_blocks = true;
-                        BlockVar.movingwires.get(i).right_connection = tempwirenode;
-                    }
 
-                    BlockVar.movingwires.clear();
+                        BlockVar.movingwires.movebymouse = false;
+                        BlockVar.movingwires.space_between_blocks = true;
+                        BlockVar.movingwires.right_connection = tempwirenode;
 
-                    ArrayList<Wire> tempwirearray = new ArrayList<>();
-                    tempwirearray.add(new Wire(tempwirenode));
-                    tempwirearray.get(0).setSpace_between_blocks(true);
 
-                    tempwirenode.setWire_right(tempwirearray);
+                    BlockVar.movingwires = null;
+
+
+
+                    tempwirenode.setWire_right(new Wire(tempwirenode));
                     //tempwirenode.getWire_right().space_between_blocks = false;
-                    tempwirenode.getWire_right().get(0).movebymouse = true;
-                   BlockVar.movingwires.add( tempwirenode.getWire_right().get(0));
-                   BlockVar.visiblewires.add(tempwirenode.getWire_right().get(0));
+                    tempwirenode.getWire_right().movebymouse = true;
+                   BlockVar.movingwires =tempwirenode.getWire_right();
+                   BlockVar.visiblewires.add(tempwirenode.getWire_right());
                    //BlockVar.wires.add(tempwirenode.getWire_right());
 
 
-                }
+
 
             }
 
