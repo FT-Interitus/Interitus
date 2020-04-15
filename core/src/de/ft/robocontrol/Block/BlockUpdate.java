@@ -73,7 +73,7 @@ public class BlockUpdate extends Thread {
                             block.getWire_right().setSpace_between_blocks(true);
                             BlockVar.wires.add(block.getWire_right());
 
-                            block.setRight(BlockVar.connetor_offerd_hoverd_block);
+                            block.setRight(BlockVar.connetor_offerd_hoverd_block,block.getRight().size());
 
 
                             BlockVar.connetor_offerd_hoverd_block = null;
@@ -189,7 +189,13 @@ public class BlockUpdate extends Thread {
                         if(block.getWire_left()!=null) {
                             if (!block.getWire_left().isSpace_between_blocks()) {
                                 if (block.getLeft() != null) {
-                                    block.getLeft().setRight(null);
+
+                                    block.getLeft().get(0).setRight(null,0);
+
+
+
+
+                                    block.getLeft().get(0).setRight(null,0);
 
                                     block.getWire_left().getLeft_connection().setWire_right(null); //löschen der Wire die zwischen den Blöcken war
                                     BlockVar.wires.remove(block.getWire_left());
@@ -198,7 +204,7 @@ public class BlockUpdate extends Thread {
 
 
                                 }
-                                block.setLeft(null);
+                                block.setLeft(null,0);
 
                             }
                         }
@@ -206,14 +212,14 @@ public class BlockUpdate extends Thread {
                         if(block.getWire_right()!=null) {
                             if(!block.getWire_right().isSpace_between_blocks()) {
                                 if (block.getRight() != null) {
-                                    block.getRight().setLeft(null);
+                                    block.getRight().get(0).setLeft(null,0);
 
                                     block.getWire_right().getRight_connection().setWire_left(null);//löschen der Wire die zwischen den Blöcken war
                                     BlockVar.wires.remove(block.getWire_right());
                                     block.setWire_right(null);
 
                                 }
-                                block.setRight(null);
+                                block.setRight(null,0);
                             }
 
                         }
@@ -302,7 +308,7 @@ public class BlockUpdate extends Thread {
                     }
 
 
-                    if (block == BlockVar.blockmitdergrostenuberlappungmitmarkiertemblock && block.moved == false) {
+                    if (block == BlockVar.blockmitdergrostenuberlappungmitmarkiertemblock && block.moved == false&&block.getWire_right().isSpace_between_blocks()) {
                         block.moved = true;
 
 
@@ -314,11 +320,11 @@ public class BlockUpdate extends Thread {
 
                         try {
 
-                            while (BlockVar.blocks.get(a).getRight().getIndex() != -1) {
+                            while (BlockVar.blocks.get(a).getRight().get(0).getIndex() != -1) {
 
                                 //block.getRight().setX(block.getRight().getX() + block.getW());
 
-                                BlockVar.blocks.get(a).getRight().setX(BlockVar.blocks.get(a).getX() + BlockVar.blocks.get(a).getW());
+                                BlockVar.blocks.get(a).getRight().get(0).setX(BlockVar.blocks.get(a).getX() + BlockVar.blocks.get(a).getW());
                                 a = BlockVar.blocks.indexOf(BlockVar.blocks.get(a).getRight());
                             }
 
@@ -344,11 +350,11 @@ public class BlockUpdate extends Thread {
 
                         try {
 
-                            while (BlockVar.blocks.get(b).getRight().getIndex() != -1) {
+                            while (BlockVar.blocks.get(b).getRight().get(0).getIndex() != -1) {
 
                                 //block.getRight().setX(block.getRight().getX() + block.getW());
 
-                                BlockVar.blocks.get(b).getRight().setX(BlockVar.blocks.get(b).getRight().getX() - BlockVar.blocks.get(b).getW());
+                                BlockVar.blocks.get(b).getRight().get(0).setX(BlockVar.blocks.get(b).getRight().get(0).getX() - BlockVar.blocks.get(b).getW());
                                 b = BlockVar.blocks.indexOf(BlockVar.blocks.get(b).getRight());
                             }
 
@@ -380,7 +386,7 @@ public class BlockUpdate extends Thread {
                             } else {
 
 
-                                if (block.getRight() != BlockVar.markedblock && BlockVar.markedblock.getLeft() != block && block.getRight() == null && BlockVar.biggestblock == block) {
+                                if (block.getRight().get(0) != BlockVar.markedblock && BlockVar.markedblock.getLeft().get(0) != block && block.getRight() == null && BlockVar.biggestblock == block) {
 
                                     //System.out.println("test");
                                     block.setShowdupulicate_rechts(false);
@@ -389,7 +395,7 @@ public class BlockUpdate extends Thread {
                                     BlockVar.markedblock.setWire_left(block.getWire_right());
                                     BlockVar.wires.add(block.getWire_right());
 
-                                    block.setRight(BlockVar.markedblock);
+                                    block.setRight(BlockVar.markedblock,0);
                                     BlockVar.markedblock.setY(block.getY());
                                     BlockVar.markedblock.setX(block.getX_dup_rechts());
                                 }
@@ -412,7 +418,7 @@ public class BlockUpdate extends Thread {
                             } else {
 
 
-                                if (block.getRight() != BlockVar.markedblock && BlockVar.markedblock.getLeft() != block && block.getLeft() == null && BlockVar.biggestblock == block) {
+                                if (block.getRight().get(0) != BlockVar.markedblock && BlockVar.markedblock.getLeft().get(0) != block && block.getLeft() == null && BlockVar.biggestblock == block) {
 
 
                                     block.setShowdupulicate_links(false);
@@ -422,7 +428,7 @@ public class BlockUpdate extends Thread {
                                     BlockVar.markedblock.setWire_right(block.getWire_left());
                                     BlockVar.wires.add(block.getWire_left());
 
-                                    block.setLeft(BlockVar.markedblock);
+                                    block.setLeft(BlockVar.markedblock,0);
                                     BlockVar.markedblock.setY(block.getY());
                                     BlockVar.markedblock.setX(block.getX_dup_links());
                                 }

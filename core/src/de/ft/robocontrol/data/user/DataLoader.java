@@ -34,11 +34,11 @@ public class DataLoader {
 
                 for (int a = 0; a < BlockVar.blocks.size(); a++) {
                     if (obj.getJSONObject("Blocks").getJSONObject("Block" + a).getInt("nachbar_rechts") != -1) { //Nachbaren wieder anhand der IDs verknüpfen
-                        BlockVar.blocks.get(a).setRight(BlockVar.blocks.get(obj.getJSONObject("Blocks").getJSONObject("Block" + a).getInt("nachbar_rechts")));
+                       // BlockVar.blocks.get(a).setRight(BlockVar.blocks.get(obj.getJSONObject("Blocks").getJSONObject("Block" + a).getInt("nachbar_rechts")));
                         //System.out.println("nachbar gesetzt rechts  "+BlockVar.blocks.get(a).getRight().getIndex());
                     }
                     if (obj.getJSONObject("Blocks").getJSONObject("Block" + a).getInt("nachbar_links") != -1) {
-                        BlockVar.blocks.get(a).setLeft(BlockVar.blocks.get(obj.getJSONObject("Blocks").getJSONObject("Block" + a).getInt("nachbar_links")));
+                     //   BlockVar.blocks.get(a).setLeft(BlockVar.blocks.get(obj.getJSONObject("Blocks").getJSONObject("Block" + a).getInt("nachbar_links")));
                         //System.out.println("nachbar gesetzt links "+BlockVar.blocks.get(a).getLeft().getIndex());
                     }
                 }
