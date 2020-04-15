@@ -218,7 +218,7 @@ if(fullscreen==false) {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 if (!SaveChanges.checkredostack()) {
-        //       SaveChanges.redo();
+                    SaveChanges.redo();
                 }
             }
         }).setShortcut("Strg+Y"));

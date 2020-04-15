@@ -13,9 +13,6 @@ import de.ft.robocontrol.data.user.changes.DataManager;
 import de.ft.robocontrol.loading.AssetLoader;
 import de.ft.robocontrol.utils.CheckKollision;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-
 
 /***
  *
@@ -42,8 +39,8 @@ public class Block implements VisibleObjects{
     private int x_dup_links; //Die Y Position des Duplicates  //Die Weite und Höhe ergeben sich aus der Block weite und Höhe
     private boolean moving = false; //Ob der Block gerade durch den Nutzer bewegt wird
     private BlockUpdate blockupdate; // Die Block update methode hier werden user actionen engegengenommen und verarbeitet
-    private ArrayList<Block>left = null; //Der rechte verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
-    private ArrayList<Block>right = null; //Der linke verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
+    private Block left = null; //Der rechte verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
+    private Block right = null; //Der linke verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
     private Vector2 wireconnector_right =new Vector2(0,0); //Die rechte wire-Anschluss Position
     private Vector2 wireconnector_left =new Vector2(0,0); //Die linke wire-Anschluss Position
     private Wire wire_left = null; //linke verbundene Wire
@@ -187,36 +184,36 @@ public class Block implements VisibleObjects{
         return wire_right;
     }
 
-    public ArrayList<Block> getLeft() {
+    public Block getLeft() {
         return left; //Gibt den linken VERBUNDENEN Nachbar zurück
     }
 
-    public void setLeft(Block left, int Index) { //Setzt einen neuen linken nachbar
+    public void setLeft(Block left) { //Setzt einen neuen linken nachbar
 
 
-        if (this.left.get(Index) != left) { //Wenn der linke Nachbar nicht der schon der Gleiche Block ist (Sonst tritt hier ein OverFlow auf siehe set Right)
-            this.left.set(Index,left);      //Block wird als Nachbar aufgenommen
+        if (this.left != left) { //Wenn der linke Nachbar nicht der schon der Gleiche Block ist (Sonst tritt hier ein OverFlow auf siehe set Right)
+            this.left = left;      //Block wird als Nachbar aufgenommen
         }
         if (left != null) { //Wenn der Block nicht null ist...
-            if (left.getRight().get(Index) != this) { //Und der wenn der Rechte Nachbar vom linken Block nicht man selbst ist
-                left.setRight(this, getRight().size()); //Wird auch diese Verbindung neu gesetzt (Um Nachbarsetzten zu erleichtern (Aus der Schlussfolgerung das der Rechte Nachbar vom linken Nachbar man selbst ist) )
+            if (left.getRight() != this) { //Und der wenn der Rechte Nachbar vom linken Block nicht man selbst ist
+                left.setRight(this); //Wird auch diese Verbindung neu gesetzt (Um Nachbarsetzten zu erleichtern (Aus der Schlussfolgerung das der Rechte Nachbar vom linken Nachbar man selbst ist) )
             }
         }
 
     }
 
-    public ArrayList<Block> getRight() {
+    public Block getRight() {
         return right; //Rück gabe des rechts VERBUNDENEN Nachbars
     }
 
-    public void setRight(Block right,int Index) {
+    public void setRight(Block right) {
 
-        if (this.right.get(Index) != right) { //Wenn der rechte Nachbar nicht der schon der Gleiche Block ist (Sonst tritt hier ein OverFlow auf siehe set Left)
-            this.right.set(Index,right);//Block wird als Nachbar aufgenommen
+        if (this.right != right) { //Wenn der rechte Nachbar nicht der schon der Gleiche Block ist (Sonst tritt hier ein OverFlow auf siehe set Left)
+            this.right = right;//Block wird als Nachbar aufgenommen
         }
         if (right != null) {//Wenn der Block nicht null ist..
-            if (right.getLeft().get(Index) != this) {//Und der wenn der linke Nachbar vom rechten Block nicht man selbst ist
-                right.setLeft(this,getLeft().size());//Wird auch diese Verbindung neu gesetzt (Um Nachbarsetzten zu erleichtern (Aus der Schlussfolgerung das der linke Nachbar vom rechten Nachbar man selbst ist))
+            if (right.getLeft() != this) {//Und der wenn der linke Nachbar vom rechten Block nicht man selbst ist
+                right.setLeft(this);//Wird auch diese Verbindung neu gesetzt (Um Nachbarsetzten zu erleichtern (Aus der Schlussfolgerung das der linke Nachbar vom rechten Nachbar man selbst ist))
             }
         }
 
@@ -282,16 +279,11 @@ public class Block implements VisibleObjects{
         DataManager.change(this, false, true); // Ein Block Abbild wird erstellt um ein eventuelles Rückgänig machen
         this.setIndex(-1); //Der Index wird auf -1 gesetzt dann merkt der BlockUpdater das der laufenden Timer beendet werden soll
         if (left != null) { //Wenn ein linker Nachbar exsistiert
-
-            for(int i = 0; i<left.size();i++) {
-                left.get(i).setRight(null,i); //wird dem linken Nachbar gesagt das er keinen Rechten Nachbar mehr hat
-            }
+            left.setRight(null); //wird dem linken Nachbar gesagt das er keinen Rechten Nachbar mehr hat
         }
 
         if (right != null) { // wenn ein Rechter nachbar exsitiert
-            for(int i = 0; i<right.size();i++) {
-                right.get(i).setRight(null,i); //wird dem rechten Nachbar gesagt das er keinen linken nachbar mehr hat
-            }
+            right.setLeft(null); // wird dem rechten Nachbar gesagt das er keinen linken nachbar mehr hat
         }
 
 

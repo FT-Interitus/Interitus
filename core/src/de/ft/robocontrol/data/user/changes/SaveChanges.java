@@ -34,13 +34,13 @@ public class SaveChanges {
             revblock = new RevertBlock(block.getX(), block.getY(), block.getW(), block.getH(), block.getIndex(), created, deleted, -1, -1);
 
         } else if (block.getRight() == null && block.getLeft() != null) {
-            revblock = new RevertBlock(block.getX(), block.getY(), block.getW(), block.getH(), block.getIndex(), created, deleted, block.getLeft().get(0).getIndex(), -1);
+            revblock = new RevertBlock(block.getX(), block.getY(), block.getW(), block.getH(), block.getIndex(), created, deleted, block.getLeft().getIndex(), -1);
 
         } else if (block.getRight() != null && block.getLeft() == null) {
-            revblock = new RevertBlock(block.getX(), block.getY(), block.getW(), block.getH(), block.getIndex(), created, deleted, -1, block.getRight().get(0).getIndex());
+            revblock = new RevertBlock(block.getX(), block.getY(), block.getW(), block.getH(), block.getIndex(), created, deleted, -1, block.getRight().getIndex());
 
         } else {
-            revblock = new RevertBlock(block.getX(), block.getY(), block.getW(), block.getH(), block.getIndex(), created, deleted, block.getLeft().get(0).getIndex(), block.getRight().get(0).getIndex());
+            revblock = new RevertBlock(block.getX(), block.getY(), block.getW(), block.getH(), block.getIndex(), created, deleted, block.getLeft().getIndex(), block.getRight().getIndex());
 
         }
 
@@ -56,13 +56,13 @@ public class SaveChanges {
             redoblock = new RevertBlock(block.getX(), block.getY(), block.getW(), block.getH(), block.getIndex(), created, deleted, -1, -1);
 
         } else if (block.getRight() == null && block.getLeft() != null) {
-            redoblock = new RevertBlock(block.getX(), block.getY(), block.getW(), block.getH(), block.getIndex(), created, deleted, block.getLeft().get(0).getIndex(), -1);
+            redoblock = new RevertBlock(block.getX(), block.getY(), block.getW(), block.getH(), block.getIndex(), created, deleted, block.getLeft().getIndex(), -1);
 
         } else if (block.getRight() != null && block.getLeft() == null) {
-            redoblock = new RevertBlock(block.getX(), block.getY(), block.getW(), block.getH(), block.getIndex(), created, deleted, -1, block.getRight().get(0).getIndex());
+            redoblock = new RevertBlock(block.getX(), block.getY(), block.getW(), block.getH(), block.getIndex(), created, deleted, -1, block.getRight().getIndex());
 
         } else {
-            redoblock = new RevertBlock(block.getX(), block.getY(), block.getW(), block.getH(), block.getIndex(), created, deleted, block.getLeft().get(9).getIndex(), block.getRight().get(0).getIndex());
+            redoblock = new RevertBlock(block.getX(), block.getY(), block.getW(), block.getH(), block.getIndex(), created, deleted, block.getLeft().getIndex(), block.getRight().getIndex());
 
         }
 
@@ -81,10 +81,10 @@ public class SaveChanges {
         if (revert.isDeleted()) { //TODO index wieder zurück
             BlockVar.blocks.add(revert.getIndex(), new Block(revert.getIndex(), revert.getX(), revert.getY(), revert.getW(), revert.getH()));
             if (revert.getLeft_index() != -1) {
-             //   BlockVar.blocks.get(revert.getIndex()).setLeft(BlockVar.blocks.get(revert.getLeft_index()));
+                BlockVar.blocks.get(revert.getIndex()).setLeft(BlockVar.blocks.get(revert.getLeft_index()));
             }
             if (revert.getRight_index() != -1) {
-              //  BlockVar.blocks.get(revert.getIndex()).setRight(BlockVar.blocks.get(revert.getRight_index()));
+                BlockVar.blocks.get(revert.getIndex()).setRight(BlockVar.blocks.get(revert.getRight_index()));
             }
 
 
@@ -126,7 +126,7 @@ public class SaveChanges {
             torevert.setWH(revert.getW(), revert.getH());
         }
 
-/*
+
         if (torevert.getLeft() == null) {
             if (revert.getLeft_index() != -1) {
                 torevert.setLeft(BlockVar.blocks.get(revert.getLeft_index()));
@@ -254,8 +254,6 @@ public class SaveChanges {
         }
 
 
-
- */
     }
 
 

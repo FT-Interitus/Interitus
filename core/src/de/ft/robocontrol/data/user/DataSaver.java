@@ -31,13 +31,13 @@ public class DataSaver {
                         int[] temp;
                         temp = new int[]{-1, -1};
                         try {
-                          //  temp[0] = BlockVar.blocks.get(i).getLeft().getIndex();
+                            temp[0] = BlockVar.blocks.get(i).getLeft().getIndex();
                         } catch (NullPointerException e) {
 
                         }
 
                         try {
-                           // temp[1] = BlockVar.blocks.get(i).getRight().getIndex();
+                            temp[1] = BlockVar.blocks.get(i).getRight().getIndex();
                         } catch (NullPointerException e) {
 
 
