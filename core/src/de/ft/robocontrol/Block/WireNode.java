@@ -3,11 +3,12 @@ package de.ft.robocontrol.Block;
 import com.badlogic.gdx.math.Frustum;
 import de.ft.robocontrol.ProgrammingSpace;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class WireNode implements VisibleObjects {
     private ArrayList<Wire> wire_left;
-    private Wire wire_right;
+    private ArrayList<Wire> wire_right;
     private int x;
     private int y;
     private int w;
@@ -20,7 +21,7 @@ public class WireNode implements VisibleObjects {
         this.w = w;
         this.h = h;
 
-        this.wire_left = wiresleft;
+        this.wire_left = (ArrayList<Wire>) wiresleft.clone();
 
     }
 
@@ -28,7 +29,7 @@ public class WireNode implements VisibleObjects {
 
     }
 
-    public Wire getWire_right() {
+    public ArrayList<Wire> getWire_right() {
         return wire_right;
     }
 
@@ -36,7 +37,7 @@ public class WireNode implements VisibleObjects {
         return wire_left;
     }
 
-    public void setWire_right(Wire wire_right) {
+    public void setWire_right(ArrayList<Wire> wire_right) {
         this.wire_right = wire_right;
     }
 

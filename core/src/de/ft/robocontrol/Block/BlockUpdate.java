@@ -113,6 +113,7 @@ public class BlockUpdate extends Thread {
 
                                tempwire = new Wire(block);
                                 tempwire.setMovebymouse(true);
+                                tempwire.setSpace_between_blocks(true);
                                 BlockVar.wires.add(tempwire);
                                 BlockVar.movingwires.add(tempwire);
 

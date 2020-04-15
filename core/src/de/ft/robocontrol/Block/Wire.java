@@ -9,6 +9,9 @@ import com.badlogic.gdx.math.Vector3;
 import de.ft.robocontrol.ProgrammingSpace;
 import de.ft.robocontrol.loading.AssetLoader;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class Wire {
     private VisibleObjects left_connection;
     private VisibleObjects right_connection;
@@ -33,6 +36,7 @@ public class Wire {
 
 
 
+
     public void draw() {
 
 
@@ -41,7 +45,7 @@ public class Wire {
         }
 
 
-        if(!space_between_blocks) {
+        if(space_between_blocks) {
 
             if(movebymouse) {
 
@@ -57,17 +61,21 @@ public class Wire {
 
                     for(int i=0;i<BlockVar.movingwires.size();i++) {
                         BlockVar.movingwires.get(i).movebymouse = false;
-                        BlockVar.movingwires.get(i).space_between_blocks = false;
+                        BlockVar.movingwires.get(i).space_between_blocks = true;
                         BlockVar.movingwires.get(i).right_connection = tempwirenode;
                     }
 
                     BlockVar.movingwires.clear();
 
-                    tempwirenode.setWire_right(new Wire(tempwirenode));
+                    ArrayList<Wire> tempwirearray = new ArrayList<>();
+                    tempwirearray.add(new Wire(tempwirenode));
+                    tempwirearray.get(0).setSpace_between_blocks(true);
+
+                    tempwirenode.setWire_right(tempwirearray);
                     //tempwirenode.getWire_right().space_between_blocks = false;
-                    tempwirenode.getWire_right().movebymouse = true;
-                   BlockVar.movingwires.add( tempwirenode.getWire_right());
-                   BlockVar.visiblewires.add(tempwirenode.getWire_right());
+                    tempwirenode.getWire_right().get(0).movebymouse = true;
+                   BlockVar.movingwires.add( tempwirenode.getWire_right().get(0));
+                   BlockVar.visiblewires.add(tempwirenode.getWire_right().get(0));
                    //BlockVar.wires.add(tempwirenode.getWire_right());
 
                     System.out.println("Test");
