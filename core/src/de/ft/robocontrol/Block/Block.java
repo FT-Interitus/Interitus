@@ -42,8 +42,8 @@ public class Block implements VisibleObjects{
     private int x_dup_links; //Die Y Position des Duplicates  //Die Weite und Höhe ergeben sich aus der Block weite und Höhe
     private boolean moving = false; //Ob der Block gerade durch den Nutzer bewegt wird
     private BlockUpdate blockupdate; // Die Block update methode hier werden user actionen engegengenommen und verarbeitet
-    private ArrayList<Block>left = null; //Der rechte verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
-    private ArrayList<Block>right = null; //Der linke verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
+    private ArrayList<Block>left = new ArrayList<>(); //Der rechte verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
+    private ArrayList<Block>right = new ArrayList<>(); //Der linke verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
     private Vector2 wireconnector_right =new Vector2(0,0); //Die rechte wire-Anschluss Position
     private Vector2 wireconnector_left =new Vector2(0,0); //Die linke wire-Anschluss Position
     private Wire wire_left = null; //linke verbundene Wire
