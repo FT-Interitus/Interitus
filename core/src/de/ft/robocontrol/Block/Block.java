@@ -276,6 +276,14 @@ public class Block implements VisibleObjects{
         BlockVar.ismoving = false; // Ob ein Block bewegt wird, wird auf false gesetzt da wenn ein Block bewegt und gelöscht wird kann es nur der bewegte Block sein
 
 
+        if(this.getWire_left()!=null)  {
+            this.getWire_left().setRight_connection(null);
+        }
+
+        if(this.getWire_right()!=null)  {
+            this.getWire_right().setLeft_connection(null);
+        }
+
         final int temp = this.getIndex(); // Der Index des Blocks wird in eine Temp Variable verlegt, da er später nochmal gebraucht wird
         DataManager.change(this, false, true); // Ein Block Abbild wird erstellt um ein eventuelles Rückgänig machen
         this.setIndex(-1); //Der Index wird auf -1 gesetzt dann merkt der BlockUpdater das der laufenden Timer beendet werden soll

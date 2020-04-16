@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import de.ft.robocontrol.Programm;
 import de.ft.robocontrol.ProgrammingSpace;
 import de.ft.robocontrol.loading.AssetLoader;
 
@@ -145,44 +146,59 @@ float b = left_connection.getY_exit() - ProgrammingSpace.cam.unproject(new Vecto
 
 
 
-            }else{
+            }else {
 
-                //TODO selbst zerstörung wenn der Block weg ist
-                boolean temp = false;
-                if(!ProgrammingSpace.batch.isDrawing()) {
-                    ProgrammingSpace.batch.begin();
-                    temp = true;
+
+                if (getLeft_connection() == null && getRight_connection() == null) { //Selbst zerstören wenn ein Block gelöscht wird mit der die Wire verbunden war
+                    BlockVar.wires.remove(this);
+                    BlockVar.visiblewires.remove(this);
                 }
 
 
-                Sprite sprite = new Sprite(AssetLoader.wire);
-
-                float a = left_connection.getX_exit() - right_connection.getX_entrance();
-                float b = left_connection.getY_exit() - right_connection.getY_entrance();
-
-                sprite.setPosition(left_connection.getX_exit(),left_connection.getY_exit());
-
-
-                double weite = Math.sqrt(a * a + b * b);
-
-                if(right_connection.getX_entrance()-left_connection.getX_exit()>0) {
-                    sprite.setRotation((float) ((float) Math.atan((float) ((right_connection.getY_entrance() - left_connection.getY_exit()) / (right_connection.getX_entrance() - left_connection.getX_exit()))) * 180 / Math.PI));
-
-                }else{
-                    sprite.setRotation((float) ((float) Math.atan((float) ((right_connection.getY_entrance() - left_connection.getY_exit()) / (right_connection.getX_entrance() - left_connection.getX_exit()))) * 180 / Math.PI)+180);
-
-                }
-
-                System.out.println(sprite.getRotation());
-
-                sprite.setSize((float) weite,5);
-                sprite.setOrigin(0,0);
+                try {
+                    boolean temp = false;
+                    if (!ProgrammingSpace.batch.isDrawing()) {
+                        ProgrammingSpace.batch.begin();
+                        temp = true;
+                    }
 
 
-                sprite.draw(ProgrammingSpace.batch);
+                    Sprite sprite = new Sprite(AssetLoader.wire);
 
-                if(temp) {
-                    ProgrammingSpace.batch.end();
+                    float a = left_connection.getX_exit() - right_connection.getX_entrance();
+                    float b = left_connection.getY_exit() - right_connection.getY_entrance();
+
+                    sprite.setPosition(left_connection.getX_exit(), left_connection.getY_exit());
+
+
+                    double weite = Math.sqrt(a * a + b * b);
+
+                    if (right_connection.getX_entrance() - left_connection.getX_exit() > 0) {
+                        sprite.setRotation((float) ((float) Math.atan((float) ((right_connection.getY_entrance() - left_connection.getY_exit()) / (right_connection.getX_entrance() - left_connection.getX_exit()))) * 180 / Math.PI));
+
+                    } else {
+                        sprite.setRotation((float) ((float) Math.atan((float) ((right_connection.getY_entrance() - left_connection.getY_exit()) / (right_connection.getX_entrance() - left_connection.getX_exit()))) * 180 / Math.PI) + 180);
+
+                    }
+
+                    System.out.println(sprite.getRotation());
+
+                    sprite.setSize((float) weite, 5);
+                    sprite.setOrigin(0, 0);
+
+
+                    sprite.draw(ProgrammingSpace.batch);
+
+                    if (temp) {
+                        ProgrammingSpace.batch.end();
+                    }
+                }catch (Exception e) {
+                    //Falls der Block der Verbunden ist gerade gelöscht wird
+                    try {
+                        ProgrammingSpace.batch.end(); //Damit der Render Prozess weiterläuft
+                    }catch (IllegalStateException I) {
+
+                    }
                 }
             }
 
