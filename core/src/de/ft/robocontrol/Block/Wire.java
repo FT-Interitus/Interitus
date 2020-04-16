@@ -72,6 +72,7 @@ public class Wire {
                     tempwirenode.setWire_right(new Wire(tempwirenode));
                     //tempwirenode.getWire_right().space_between_blocks = false;
                     tempwirenode.getWire_right().movebymouse = true;
+                    tempwirenode.getWire_right().space_between_blocks = true;
                    BlockVar.movingwires =tempwirenode.getWire_right();
                    BlockVar.visiblewires.add(tempwirenode.getWire_right());
                    //BlockVar.wires.add(tempwirenode.getWire_right());
@@ -196,6 +197,13 @@ float b = left_connection.getY_exit() - ProgrammingSpace.cam.unproject(new Vecto
         return space_between_blocks;
     }
 
+    public void setLeft_connection(VisibleObjects left_connection) {
+        this.left_connection = left_connection;
+    }
+
+    public void setRight_connection(VisibleObjects right_connection) {
+        this.right_connection = right_connection;
+    }
 
     public Block getLeft_connection() {
         return left_connection.getblock();
@@ -246,6 +254,10 @@ float b = left_connection.getY_exit() - ProgrammingSpace.cam.unproject(new Vecto
 
 
     }
+
+
+
+
 
 
 }

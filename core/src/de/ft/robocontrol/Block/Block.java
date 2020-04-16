@@ -96,12 +96,12 @@ public class Block implements VisibleObjects{
 
     @Override
     public float getW_entrance() {
-        return 0;
+        return 20;
     }
 
     @Override
     public float getH_entrance() {
-        return 0;
+        return 20;
     }
 
     @Override

@@ -17,7 +17,7 @@ public class CheckKollision {
     static Rectangle rec2 = new Rectangle();
     private static int mousesize = 0;
 
-    public static boolean object(int obj1_x, int obj1_y, int obj1_h, int obj1_w, int obj2_x, int obj2_y, int obj2_h, int obj2_w) {
+    public static boolean object(float obj1_x, float obj1_y, float obj1_h, float obj1_w, float obj2_x, float obj2_y, float obj2_h, float obj2_w) {
 
 
         rec1.set(obj1_x, obj1_y, obj1_w, obj1_h);
