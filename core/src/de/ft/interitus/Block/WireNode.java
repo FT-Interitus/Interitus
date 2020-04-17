@@ -39,7 +39,7 @@ public class WireNode implements VisibleObjects {
             //TODO hier darf felix die die X und Y pos auf die MausPosition verlagern
                 System.out.println("drinnen");
             if(!gemerkt){
-                gemerktvector.set(Gdx.input.getX()-x,Gdx.input.getY()-(Gdx.graphics.getHeight()-y));
+                gemerktvector.set(Gdx.input.getX()-x,Gdx.graphics.getHeight()-Gdx.input.getY()-y);
            System.out.println("gemerktvector: : :   "+ gemerktvector);
            gemerkt=true;
             }
@@ -52,7 +52,7 @@ public class WireNode implements VisibleObjects {
         if(gemerkt){
             System.out.println("x: "+gemerktvector.x+" y: "+gemerktvector.y);
             x=(int)(Gdx.input.getX()-gemerktvector.x);
-            y=(int)(Gdx.input.getY()-gemerktvector.y);
+            y=(int)(Gdx.graphics.getHeight()-Gdx.input.getY()-gemerktvector.y);
         }
 
 
