@@ -6,6 +6,7 @@ import de.ft.robocontrol.ProgrammingSpace;
 import de.ft.robocontrol.Settings;
 import de.ft.robocontrol.data.user.experience.ExperienceManager;
 import de.ft.robocontrol.data.user.experience.ExperienceVar;
+import de.ft.robocontrol.displayErrors;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -37,24 +38,28 @@ public class Data {
                 recent.createNewFile(); //Die datei für die letzten Projekte wird erstellt
             } catch (IOException e) {
                 e.printStackTrace();
+                displayErrors.error = e;
             }
 
             try {
                 settings.createNewFile();//Die datei für die Einstellungen wird erstellt
             } catch (IOException e) {
                 e.printStackTrace();
+                displayErrors.error = e;
             }
 
             try {
                 knowndevices.createNewFile();//Die datei für die bekannten Geröte wird erstellt
             } catch (IOException e) {
                 e.printStackTrace();
+                displayErrors.error = e;
             }
 
             try {
                 userexperience.createNewFile();//Die datei für die bekannten Geröte wird erstellt
             } catch (IOException e) {
                 e.printStackTrace();
+                displayErrors.error = e;
             }
 
             try {
@@ -70,6 +75,7 @@ public class Data {
                     recent.createNewFile();
                     Gdx.files.absolute(recent.getAbsolutePath()).writeString("{}", false); //Wird in das Verzeichnis mit {} als JSON indikator geschrieben
                 } catch (IOException e) {
+                    displayErrors.error = e;
                     e.printStackTrace();
                 }
 
@@ -109,6 +115,7 @@ public class Data {
                     settings.createNewFile();
                     Gdx.files.absolute(settings.getAbsolutePath()).writeString("{}", false); //siehe recent
                 } catch (IOException e) {
+                    displayErrors.error = e;
                     e.printStackTrace();
                 }
             } else {

@@ -1,5 +1,7 @@
 package de.ft.robocontrol.utils;
 
+import de.ft.robocontrol.displayErrors;
+
 import java.io.IOException;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -50,6 +52,7 @@ public class NetworkScan {
 
             }
         } catch (IOException e) {
+            displayErrors.error = e;
             e.printStackTrace();
         }
     }

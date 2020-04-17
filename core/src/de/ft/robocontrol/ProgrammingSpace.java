@@ -95,6 +95,7 @@ s.setInside(AssetLoader.switch_inside);
 
                     System.out.println("Block creating done");
                 }catch (Exception e) {
+                    displayErrors.error = e;
                     e.printStackTrace(); //for debug to find errors
                 }
             }
@@ -237,6 +238,7 @@ s.setInside(AssetLoader.switch_inside);
 
 
         } catch (Exception e) {
+            displayErrors.error = e;
             e.printStackTrace();
         }
 
@@ -279,6 +281,8 @@ testanim.startAnimation();
     pm.draw();
     pm.rechtsKlickControlle();
 batch.end();
+
+displayErrors.checkerror();
 
     }
 

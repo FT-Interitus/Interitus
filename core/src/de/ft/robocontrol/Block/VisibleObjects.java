@@ -17,4 +17,7 @@ public interface VisibleObjects {
     float getY_exit();
     float getW_exit();
     float getH_exit();
+
+    void setWire_right(Wire o);
+    void setWire_left(Wire o);
 }

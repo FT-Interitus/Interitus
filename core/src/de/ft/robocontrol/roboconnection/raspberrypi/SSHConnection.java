@@ -1,6 +1,7 @@
 package de.ft.robocontrol.roboconnection.raspberrypi;
 
 import com.jcraft.jsch.*;
+import de.ft.robocontrol.displayErrors;
 
 import java.io.InputStream;
 
@@ -33,6 +34,7 @@ public class SSHConnection {
 
         } catch (JSchException e) {
             e.printStackTrace();
+            displayErrors.error = e;
         }
 
 
@@ -87,7 +89,7 @@ public class SSHConnection {
 
             return true;
         } catch (Exception e) {
-
+            displayErrors.error = e;
             e.printStackTrace();
             return false;
         }
@@ -129,6 +131,7 @@ public class SSHConnection {
         } catch (Exception e) {
 
             e.printStackTrace();
+            displayErrors.error = e;
             return false;
         }
     }
