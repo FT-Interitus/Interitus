@@ -35,11 +35,11 @@ public class WireNode implements VisibleObjects {
 
     public void draw() {
       //Hier Thread für Maus bewegen
-        if(CheckKollision.checkmousewithobject(x-5,y-5,h,w,(int)ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x,(int)ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y)&&Gdx.input.isButtonPressed(0)) {
+        if(CheckKollision.checkmousewithobject(x,y,h,w,(int)ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x,(int)ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y)&&Gdx.input.isButtonPressed(0)) {
             //TODO hier darf felix die die X und Y pos auf die MausPosition verlagern
                 System.out.println("drinnen");
             if(!gemerkt){
-                gemerktvector.set(Gdx.input.getX()-x,Gdx.input.getY()-y);
+                gemerktvector.set(Gdx.input.getX()-x,Gdx.input.getY()-(Gdx.graphics.getHeight()-y));
            System.out.println("gemerktvector: : :   "+ gemerktvector);
            gemerkt=true;
             }
@@ -50,8 +50,9 @@ public class WireNode implements VisibleObjects {
         if(!Gdx.input.isButtonPressed(0)){gemerkt=false;}
 
         if(gemerkt){
-            x=(int)(Gdx.input.getX()+gemerktvector.x);
-            y=(int)(Gdx.input.getY()+gemerktvector.y);
+            System.out.println("x: "+gemerktvector.x+" y: "+gemerktvector.y);
+            x=(int)(Gdx.input.getX()-gemerktvector.x);
+            y=(int)(Gdx.input.getY()-gemerktvector.y);
         }
 
 
@@ -62,7 +63,7 @@ public class WireNode implements VisibleObjects {
        }
 
 
-       ProgrammingSpace.batch.draw(AssetLoader.wire_node,x-5,y-5,w,h);
+       ProgrammingSpace.batch.draw(AssetLoader.wire_node,x,y,w,h);
 
 
        if(temp) {
