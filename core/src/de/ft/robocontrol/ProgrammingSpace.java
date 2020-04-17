@@ -273,7 +273,6 @@ testanim.startAnimation();
    // pm.setBounds(700,200);
     pm.draw();
     pm.rechtsKlickControlle();
-    System.out.println(pm.getPressed());
 batch.end();
 
     }
