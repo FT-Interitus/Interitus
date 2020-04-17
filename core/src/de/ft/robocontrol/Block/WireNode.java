@@ -2,6 +2,7 @@ package de.ft.robocontrol.Block;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Frustum;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.robocontrol.ProgrammingSpace;
 import de.ft.robocontrol.input.check.Check;
@@ -18,6 +19,8 @@ public class WireNode implements VisibleObjects {
     private int y;
     private int w;
     private int h;
+    private boolean gemerkt=false;
+    private Vector2 gemerktvector=new Vector2(0,0);
     private Frustum frustum;
     public WireNode(Wire wiresleft,int x,int y,int w,int h) { //Wenn eine neue Node gesetzt wird
 
@@ -36,9 +39,26 @@ public class WireNode implements VisibleObjects {
 
     public void draw() {
       //Hier Thread für Maus bewegen
-        if(CheckKollision.checkmousewithobject(x,y,h,w,(int)ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x,(int)ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y)&&Gdx.input.isButtonPressed(0)) {
+        if(CheckKollision.checkmousewithobject(x-5,y-5,h,w,(int)ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x,(int)ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y)&&Gdx.input.isButtonPressed(0)) {
             //TODO hier darf felix die die X und Y pos auf die MausPosition verlagern
+                System.out.println("drinnen");
+            if(!gemerkt){
+                gemerktvector.set(Gdx.input.getX()-x,Gdx.input.getY()-y);
+           System.out.println("gemerktvector: : :   "+ gemerktvector);
+           gemerkt=true;
+            }
+
+
         }
+
+        if(!Gdx.input.isButtonPressed(0)){gemerkt=false;}
+
+        if(gemerkt){
+            x=(int)(Gdx.input.getX()+gemerktvector.x);
+            y=(int)(Gdx.input.getY()+gemerktvector.y);
+        }
+
+
        boolean temp = false;
        if(!ProgrammingSpace.batch.isDrawing()) {
            ProgrammingSpace.batch.begin();
