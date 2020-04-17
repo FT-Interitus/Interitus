@@ -60,6 +60,7 @@ public class ThreadManager {
 
 
                                 } catch (Exception e) {
+                                    displayErrors.error = e;
                                     e.printStackTrace();
                                 }
                             }

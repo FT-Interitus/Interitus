@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.robocontrol.ProgrammingSpace;
 import de.ft.robocontrol.data.user.changes.DataManager;
+import de.ft.robocontrol.displayErrors;
 import de.ft.robocontrol.utils.CheckKollision;
 
 import java.awt.image.Kernel;
@@ -463,6 +464,7 @@ public class BlockUpdate extends Thread {
 
                     }
                 } catch (Exception e) {
+                    displayErrors.error = e;
                     e.printStackTrace(); //FOR Debug to find errors
                 }
 

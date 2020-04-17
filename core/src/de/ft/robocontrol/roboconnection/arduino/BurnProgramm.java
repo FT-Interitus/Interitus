@@ -2,6 +2,7 @@ package de.ft.robocontrol.roboconnection.arduino;
 
 import de.ft.robocontrol.Block.Devices;
 import de.ft.robocontrol.ProgrammingSpace;
+import de.ft.robocontrol.displayErrors;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -90,6 +91,7 @@ public class BurnProgramm {
 
         } catch (IOException e) {
             e.printStackTrace();
+            displayErrors.error = e;
         }
 
     }
@@ -120,6 +122,7 @@ public class BurnProgramm {
 
 
         } catch (IOException e) {
+            displayErrors.error = e;
             e.printStackTrace();
         }
 
@@ -152,6 +155,7 @@ public class BurnProgramm {
 
 
         } catch (IOException e) {
+            displayErrors.error = e;
             e.printStackTrace();
         }
 

@@ -2,6 +2,7 @@ package de.ft.robocontrol.loading;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
+import de.ft.robocontrol.displayErrors;
 
 public class AssetLoader {
 
@@ -118,6 +119,7 @@ public class AssetLoader {
 
         }catch (Exception e) {
             e.printStackTrace();
+            displayErrors.error = e;
         }
 
 

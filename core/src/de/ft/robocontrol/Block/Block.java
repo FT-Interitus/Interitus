@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 import de.ft.robocontrol.ProgrammingSpace;
 import de.ft.robocontrol.ThreadManager;
 import de.ft.robocontrol.data.user.changes.DataManager;
+import de.ft.robocontrol.displayErrors;
 import de.ft.robocontrol.loading.AssetLoader;
 import de.ft.robocontrol.utils.CheckKollision;
 
@@ -336,6 +337,7 @@ public class Block implements VisibleObjects{
                         try {
                             BlockVar.blocks.get(i).setIndex(BlockVar.blocks.get(i).getIndex() - 1); //Alle anderen Blöcke werden um einen Index verschoben
                         }catch (Exception e) {
+                            displayErrors.error = e;
                             e.printStackTrace(); //Hier können Fehler aufreten wenn die Blöcke in der zwischen Zeit gelööscht worden sind //TODO mit 1000000 Blöcke ausprobieren ob hier die Indexe richtig sich verhalten wenn man 2 blöcke löscht bevor das hier abgschlossen ist
                         }
 

@@ -6,6 +6,7 @@ import de.ft.robocontrol.ProgrammingSpace;
 import de.ft.robocontrol.Var;
 import de.ft.robocontrol.data.user.changes.DataManager;
 import de.ft.robocontrol.data.user.changes.SaveChanges;
+import de.ft.robocontrol.displayErrors;
 
 import java.util.ArrayList;
 
@@ -40,11 +41,13 @@ public class ClearActOpenProgramm {
                         Var.isclearing = false;
 
                     } catch (Exception e) {
+                        displayErrors.error = e;
                         e.printStackTrace();
                         System.exit(-1);
                     }
 
                 }catch (Exception e) {
+                    displayErrors.error = e;
                     e.printStackTrace(); //for debug to find errors
                 }
             }
@@ -60,6 +63,7 @@ public class ClearActOpenProgramm {
             }
             ProgrammingSpace.logger.info("Clearing Finished");
         } catch (Exception e) {
+            displayErrors.error = e;
             e.printStackTrace();
             System.exit(-121);
         }

@@ -14,6 +14,7 @@ import com.kotcrab.vis.ui.widget.MenuItem;
 import de.ft.robocontrol.UI.settings.SettingsUI;
 import de.ft.robocontrol.UI.setup.SetupWindow;
 import de.ft.robocontrol.data.user.experience.ExperienceManager;
+import de.ft.robocontrol.displayErrors;
 import de.ft.robocontrol.input.Button;
 import de.ft.robocontrol.ProgrammingSpace;
 import de.ft.robocontrol.Settings;
@@ -183,6 +184,7 @@ public class UI {
                             }
 
                         }catch (Exception e) {
+                            displayErrors.error = e;
                             e.printStackTrace(); //for debug to find errors
                         }
 

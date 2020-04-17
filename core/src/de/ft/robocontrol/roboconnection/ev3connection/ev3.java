@@ -1,5 +1,7 @@
 package de.ft.robocontrol.roboconnection.ev3connection;
 
+import de.ft.robocontrol.displayErrors;
+
 import java.io.UnsupportedEncodingException;
 
 /***
@@ -62,6 +64,7 @@ public class ev3 {
             return a;
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
+            displayErrors.error = e;
         }
 
         return null;

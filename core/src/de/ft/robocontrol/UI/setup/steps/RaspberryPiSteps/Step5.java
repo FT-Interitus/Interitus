@@ -4,6 +4,7 @@ import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisTable;
 import de.ft.robocontrol.Settings;
 import de.ft.robocontrol.UI.setup.SetupWindow;
+import de.ft.robocontrol.displayErrors;
 import de.ft.robocontrol.roboconnection.raspberrypi.SSHConnection;
 
 public class Step5 {
@@ -30,6 +31,7 @@ public class Step5 {
                     Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
+                    displayErrors.error = e;
                 }
                 installationprogress.setText("System-Update abgeschlossen\n\nPython installieren abgeschlossen\n\nWeitere Aktion abgeschlossen\n\nNoch weiteres...\n\n ");
 
