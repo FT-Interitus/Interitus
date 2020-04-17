@@ -36,7 +36,6 @@ public class WireNode implements VisibleObjects {
     public void draw() {
       //Hier Thread für Maus bewegen
         if(CheckKollision.checkmousewithobject(x,y,h,w,(int)ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x,(int)ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y)&&Gdx.input.isButtonPressed(0)) {
-            //TODO hier darf felix die die X und Y pos auf die MausPosition verlagern
                 System.out.println("drinnen");
             if(!gemerkt){
                 gemerktvector.set(Gdx.input.getX()-x,Gdx.graphics.getHeight()-Gdx.input.getY()-y);
