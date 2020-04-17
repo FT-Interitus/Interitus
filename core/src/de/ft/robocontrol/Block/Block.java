@@ -80,8 +80,18 @@ public class Block implements VisibleObjects{
     }
 
     @Override
+    public boolean amiwirenode() {
+        return false;
+    }
+
+    @Override
     public Block getblock() { //TODO bestimmen
         return this;
+    }
+
+    @Override
+    public WireNode getwirenode() {
+        return null;
     }
 
     @Override

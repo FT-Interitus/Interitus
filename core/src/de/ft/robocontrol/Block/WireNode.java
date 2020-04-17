@@ -1,7 +1,12 @@
 package de.ft.robocontrol.Block;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Frustum;
+import com.badlogic.gdx.math.Vector3;
 import de.ft.robocontrol.ProgrammingSpace;
+import de.ft.robocontrol.input.check.Check;
+import de.ft.robocontrol.loading.AssetLoader;
+import de.ft.robocontrol.utils.CheckKollision;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -26,6 +31,27 @@ public class WireNode implements VisibleObjects {
     }
 
     public WireNode(Wire wire_left,Wire wire_right) {
+
+    }
+
+    public void draw() {
+      //Hier Thread für Maus bewegen
+        if(CheckKollision.checkmousewithobject(x,y,h,w,(int)ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x,(int)ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y)&&Gdx.input.isButtonPressed(0)) {
+            //TODO hier darf felix die die X und Y pos auf die MausPosition verlagern
+        }
+       boolean temp = false;
+       if(!ProgrammingSpace.batch.isDrawing()) {
+           ProgrammingSpace.batch.begin();
+           temp = true;
+       }
+
+
+       ProgrammingSpace.batch.draw(AssetLoader.wire_node,x-5,y-5,w,h);
+
+
+       if(temp) {
+           ProgrammingSpace.batch.end();
+       }
 
     }
 
@@ -58,8 +84,18 @@ public class WireNode implements VisibleObjects {
     }
 
     @Override
+    public boolean amiwirenode() {
+        return true;
+    }
+
+    @Override
     public Block getblock() {
         return null;
+    }
+
+    @Override
+    public WireNode getwirenode() {
+        return this;
     }
 
     @Override

@@ -5,7 +5,9 @@ public interface VisibleObjects {
 
     boolean isVisible();
     boolean amiablock();
+    boolean amiwirenode();
     Block getblock();
+    WireNode getwirenode();
     float getX_entrance();
     float getY_entrance();
     float getW_entrance();

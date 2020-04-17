@@ -34,6 +34,8 @@ public class AssetLoader {
 
     //Wire
     public static Texture wire;
+    //Wire Nod
+    public static Texture wire_node;
 
 
     public static AssetManager manager = new AssetManager();
@@ -70,6 +72,9 @@ public class AssetLoader {
             group = "Wire";
             //Wire
             manager.load(workingdirectory+"wire.png",Texture.class);
+            group = "Wire-Node";
+            //Wire Node
+            manager.load(workingdirectory+"node.png",Texture.class);
 
 
         }catch (Exception e) {
@@ -108,7 +113,8 @@ public class AssetLoader {
             help_platforms =manager.get(workingdirectory+"PlatformHilfe.png",Texture.class);
             //wire
             wire =  manager.get(workingdirectory+"wire.png",Texture.class);
-
+            //Wire Node
+          wire_node =  manager.get(workingdirectory+"node.png",Texture.class);
 
         }catch (Exception e) {
             e.printStackTrace();

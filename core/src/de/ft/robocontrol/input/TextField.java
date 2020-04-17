@@ -43,7 +43,6 @@ public class TextField {
         InputManager.addProcessor(new InputAdapter() {
             @Override
             public boolean keyTyped (char key) {
-                System.out.println("asödlkfjaöslkdfjöalsdkjföalskdjföalskfjöalkjdfölksjdf");
                 if(active) {
 
                     if(input.length()<=begrenzung || begrenzung==-1) {

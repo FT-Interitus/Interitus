@@ -68,7 +68,17 @@ public class BlockUpdate extends Thread {
                             BlockVar.movingwires.setRight_connection(block);
                             BlockVar.movingwires.setSpace_between_blocks(true);
                             block.setWire_left(BlockVar.movingwires);
-                            BlockVar.movingwires.getLeft_connection().getblock().setRight(block);
+                            try {
+                                BlockVar.movingwires.getLeft_connection().getblock().setRight(block);
+                            }catch (NullPointerException e) {
+
+                                //Falls die eine Node dazwischen ist und der Nachbar über die Node gesetzt werden muss
+
+                                System.out.println("Konnte Nachbar nicht setzten");
+
+
+                            }
+
                             BlockVar.movingwires.getLeft_connection().getblock().getBlockupdate().isconnectorclicked = false;
                             BlockVar.movingwires = null;
 

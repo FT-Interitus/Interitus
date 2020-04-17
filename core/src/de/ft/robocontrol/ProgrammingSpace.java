@@ -254,6 +254,11 @@ s.setInside(AssetLoader.switch_inside);
         for(int i =0;i<BlockVar.visiblewires.size();i++) {
             BlockVar.visiblewires.get(i).draw();
         }
+        for(int i =0;i<BlockVar.visibleWireNodes.size();i++) {
+            BlockVar.visibleWireNodes.get(i).draw();
+        }
+
+
 
         //s.setSize(1);
         s.setSize(1f);
