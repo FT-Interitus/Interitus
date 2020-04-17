@@ -22,7 +22,7 @@ public class BlockUpdate extends Thread {
     Vector2 temp2;//Temp vectoren für berechnungs zwischen schritte
     Vector3 temp3;//Temp vectoren für berechnungs zwischen schritte
     Vector3 temp4;//Temp vectoren für berechnungs zwischen schritte
-    private boolean isconnectorclicked = false;//Ist der connector des zuständigen Blocks ausgelöst
+    public boolean isconnectorclicked = false;//Ist der connector des zuständigen Blocks ausgelöst
    private Wire tempwire;
 
     BlockUpdate(Block block) {
@@ -60,14 +60,20 @@ public class BlockUpdate extends Thread {
                     //TODO
 
 
-                    if(!isIsconnectorclicked()&& BlockVar.showleftdocker&& CheckKollision.object(block.getX_entrance(),block.getY_entrance(),block.getH_entrance(),block.getW_entrance(),(int) ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y,1,1)&&Gdx.input.isButtonPressed(0)) {
+
+
+                    if(!isIsconnectorclicked()&& BlockVar.showleftdocker&& CheckKollision.object(block.getX_entrance(),block.getY_entrance(),block.getH_entrance(),block.getW_entrance(),(int) ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y,1,1)&&Gdx.input.isButtonPressed(0)&&block.getLeft()==null) {
                             BlockVar.showleftdocker = false;
                             BlockVar.movingwires.setMovebymouse(false);
                             BlockVar.movingwires.setRight_connection(block);
                             BlockVar.movingwires.setSpace_between_blocks(true);
                             block.setWire_left(BlockVar.movingwires);
                             BlockVar.movingwires.getLeft_connection().getblock().setRight(block);
+                            BlockVar.movingwires.getLeft_connection().getblock().getBlockupdate().isconnectorclicked = false;
                             BlockVar.movingwires = null;
+
+
+
 
                     }
 
@@ -125,6 +131,8 @@ public class BlockUpdate extends Thread {
                                tempwire = new Wire(block);
                                 tempwire.setMovebymouse(true);
                                 tempwire.setSpace_between_blocks(true);
+
+                                block.setWire_right(tempwire);
                                 BlockVar.wires.add(tempwire);
                                 BlockVar.movingwires =tempwire;
 

@@ -50,6 +50,14 @@ public class Wire {
 
             if(movebymouse) {
 
+                if (left_connection== null) { //Selbst zerstören wenn ein Block gelöscht wird mit der die Wire verbunden war
+                    BlockVar.wires.remove(this);
+                    BlockVar.visiblewires.remove(this);
+                    BlockVar.movingwires = null;
+
+
+                }
+
             if(Gdx.input.isKeyJustPressed(Input.Keys.N)&&canplaceanewwirenode) {
 
 
@@ -149,10 +157,28 @@ float b = left_connection.getY_exit() - ProgrammingSpace.cam.unproject(new Vecto
             }else {
 
 
-                if (getLeft_connection() == null && getRight_connection() == null) { //Selbst zerstören wenn ein Block gelöscht wird mit der die Wire verbunden war
+                if (left_connection== null || right_connection == null) { //Selbst zerstören wenn ein Block gelöscht wird mit der die Wire verbunden war
                     BlockVar.wires.remove(this);
                     BlockVar.visiblewires.remove(this);
+
+
+                    if(right_connection!=null) {
+                        right_connection.getblock().setWire_left(null);
+                        right_connection = null;
+                        System.out.println("Tets");
+                    }
+
+                    if(left_connection!=null) {
+                        left_connection.getblock().setWire_right(null);
+                        System.out.println("Tets");
+                        left_connection = null;
+                    }
+
                 }
+
+
+
+
 
 
                 try {
@@ -181,7 +207,6 @@ float b = left_connection.getY_exit() - ProgrammingSpace.cam.unproject(new Vecto
 
                     }
 
-                    System.out.println(sprite.getRotation());
 
                     sprite.setSize((float) weite, 5);
                     sprite.setOrigin(0, 0);
