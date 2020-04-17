@@ -1,24 +1,27 @@
 package de.ft.robocontrol.roboconnection.ev3connection;
 
+import de.ft.robocontrol.Var;
 import org.usb4java.*;
 
+import java.lang.management.OperatingSystemMXBean;
+import java.lang.reflect.Array;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.IntBuffer;
+import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class USBConnection {
+
     static final short ID_VENDOR_LEGO = (short) 0x0694;
     static final short ID_PRODUCT_EV3 = (short) 0x0005;
     static final byte EP_IN = (byte) 0x81;
     static final byte EP_OUT = (byte) 0x01;
     static final byte DIRECT_COMMAND_REPLY = (byte) 0x00;
 
-
-
-
     static DeviceHandle handle;
 
-    public static void connectUsb() {
+    private static void connectUsb() {
         int result = LibUsb.init(null);
         Device device = null;
         DeviceList list = new DeviceList();
@@ -64,16 +67,16 @@ public class USBConnection {
         }
     }
 
-    public static ByteBuffer sendDirectCmd(ByteBuffer operations,
+    private static ByteBuffer sendDirectCmd(ArrayList<Byte> operations,
                                            int local_mem, int global_mem) {
-        ByteBuffer buffer = ByteBuffer.allocateDirect(operations.position() + 7);
+        ByteBuffer buffer = ByteBuffer.allocateDirect(operations.size() + 7);
         buffer.order(ByteOrder.LITTLE_ENDIAN);
-        buffer.putShort((short) (operations.position() + 5));   // length
+        buffer.putShort((short) (operations.size() + 5));   // length
         buffer.putShort((short) 42);                            // counter
         buffer.put(DIRECT_COMMAND_REPLY);                       // type
         buffer.putShort((short) (local_mem * 1024 + global_mem)); // header
 
-        for (int i = 0; i < operations.position(); i++) {         // operations
+        for (int i = 0; i < operations.size(); i++) {         // operations
             buffer.put(operations.get(i));
         }
 
@@ -93,11 +96,10 @@ public class USBConnection {
         }
         buffer.position(global_mem + 5);
         printHex("Recv", buffer);
-
         return buffer;
     }
 
-    public static void printHex(String desc, ByteBuffer buffer) {
+    private static void printHex(String desc, ByteBuffer buffer) {
         System.out.print(desc + " 0x|");
         for (int i = 0; i < buffer.position() - 1; i++) {
             System.out.printf("%02X:", buffer.get(i));
@@ -106,30 +108,32 @@ public class USBConnection {
         System.out.println();
     }
 
-    public static void setbrickname(String name) {
+
+
+
+    public static void openev3sesseion() {
         connectUsb();
+    }
 
-
-        byte[] b = name.getBytes();
-
-        ByteBuffer operations = ByteBuffer.allocateDirect(2 + b.length + 2);
-        operations.put(ev3.opCom_Set);
-        operations.put(ev3.SET_BRICKNAME);
-        operations.put(ev3.LCS("test"));
-
-     //   operations.put((byte) 0x84);
-
-       // for (int i = 0; i < b.length; i++) {
-        //    operations.put(b[i]);
-       // }
-
-        //operations.put((byte) 0x00);
-
-
-        ByteBuffer reply = sendDirectCmd(operations, 7 + b.length + 2, 0);
-
+    public static void closeev3session() {
         LibUsb.releaseInterface(handle, 0);
         LibUsb.close(handle);
+    }
+    public static void sendcommand(ArrayList<Byte> command) {
+        ByteBuffer reply = sendDirectCmd(command, 7 + command.size() + 2, 0);
+    }
+
+
+
+    public static void main(String[] args) {
+
+        openev3sesseion();
+
+       sendcommand(Operations.led(0,true,true));
+        closeev3session();
+
+
+
     }
 
 
