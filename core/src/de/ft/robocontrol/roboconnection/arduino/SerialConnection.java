@@ -91,16 +91,15 @@ public static boolean isRunning=false;
 
         try {
 
-//while (empfangen!="\n") {
-            if(port.getInputStream().available()!=0) {
 
-                while (empfangen != "\n") {
-                    empfangen = empfangen + (char) port.getInputStream().read(); //fehler
-                }
 
-            }
+                //while (empfangen != "\n") {
+                    empfangen = is.readLine(); //fehler
+               // }
 
-//}
+
+
+
 
 
 
