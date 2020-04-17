@@ -70,7 +70,7 @@ public class BlockUpdate extends Thread {
                             BlockVar.movingwires.setSpace_between_blocks(true);
                             block.setWire_left(BlockVar.movingwires);
                             try {
-                                BlockVar.movingwires.getLeft_connection().getblock().setRight(block);
+                                BlockVar.wire_beginn.setRight(block);
                             }catch (NullPointerException e) {
 
                                 //Falls die eine Node dazwischen ist und der Nachbar über die Node gesetzt werden muss
@@ -80,7 +80,7 @@ public class BlockUpdate extends Thread {
 
                             }
 
-                            BlockVar.movingwires.getLeft_connection().getblock().getBlockupdate().isconnectorclicked = false;
+                            BlockVar.movingwires.getRight_connection().getLeft().getBlockupdate().isconnectorclicked = false; //TODO hier fehler bei der node nutzung
                             BlockVar.movingwires = null;
 
 
@@ -146,6 +146,7 @@ public class BlockUpdate extends Thread {
                                 block.setWire_right(tempwire);
                                 BlockVar.wires.add(tempwire);
                                 BlockVar.movingwires =tempwire;
+                                BlockVar.wire_beginn = block;
 
 
                                 BlockVar.showleftdocker = true;

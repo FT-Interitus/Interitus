@@ -53,6 +53,21 @@ public class WireNode implements VisibleObjects {
            ProgrammingSpace.batch.end();
        }
 
+      if(wire_left==null||wire_right==null) {
+          BlockVar.wireNodes.remove(this);
+          BlockVar.visibleWireNodes.remove(this);
+
+          if(wire_right!=null) {
+              wire_right.setLeft_connection(null);
+          }
+          if(wire_left!=null) {
+              wire_left.setRight_connection(null);
+
+
+          }
+
+      }
+
     }
 
     public Wire getWire_right() {
@@ -63,10 +78,12 @@ public class WireNode implements VisibleObjects {
         return wire_left;
     }
 
+    @Override
     public void setWire_right(Wire wire_right) {
         this.wire_right = wire_right;
     }
 
+    @Override
     public void setWire_left(Wire wire_left) {
         this.wire_left = wire_left;
     }

@@ -180,10 +180,11 @@ public class Block implements VisibleObjects{
         this.marked = marked; //Soll der Block makiert sein?
     }
 
+    @Override
     public void setWire_left(Wire wire_left) {
         this.wire_left = wire_left;
     }
-
+    @Override
     public void setWire_right(Wire wire_right) {
         this.wire_right = wire_right;
     }
