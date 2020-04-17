@@ -49,7 +49,6 @@ public class WireNode implements VisibleObjects {
         if(!Gdx.input.isButtonPressed(0)){gemerkt=false;}
 
         if(gemerkt){
-            System.out.println("x: "+gemerktvector.x+" y: "+gemerktvector.y);
             x=(int)(Gdx.input.getX()-gemerktvector.x);
             y=(int)(Gdx.graphics.getHeight()-Gdx.input.getY()-gemerktvector.y);
         }
