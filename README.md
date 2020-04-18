@@ -4,7 +4,7 @@ Ist oder soll eine graphische drag'n'drop Programmier-Oberfläche für angehende
 Es soll Ev3, Arduino sowie Raspberry Pi unterstützen, dabei den Nutzer aber nicht Limitieren, 
 um den Sprung in eine "echte" Programmiersprache zu schaffen.
 
-[![Build Status](https://travis-ci.com/Felixpc/Interitus.svg?branch=master)](https://travis-ci.com/Felixpc/Interitus)
+[![Build Status](https://travis-ci.com/FT-Interitus/Interitus.svg?branch=master)](https://travis-ci.com/FT-Interitus/Interitus)
 
 Interitus basiert auf dem LibGDX Framework.
 
