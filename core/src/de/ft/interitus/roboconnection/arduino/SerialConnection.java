@@ -15,6 +15,7 @@ public static boolean isRunning=false;
    static boolean found;
    static int i = 1;
    static long save;
+    static BufferedReader is ;
 
     public static SerialPort[] getPorts(){
         SerialPort ports[]=SerialPort.getCommPorts();
@@ -86,15 +87,17 @@ public static boolean isRunning=false;
 
     public static String empfangen(SerialPort port)  {
         String empfangen="";
-        BufferedReader is = new BufferedReader(new InputStreamReader(port.getInputStream()));
+
 
         try {
 
 
 
-                while (empfangen != "\n") {
-                    empfangen = empfangen+(char)port.getInputStream().read(); //fehler
-                }
+                //while (empfangen != "\n") {
+                    if(port.bytesAvailable()>0) {
+                        empfangen = is.readLine(); //fehler
+                    }
+                //}
 
 
 
@@ -104,7 +107,7 @@ if(empfangen!="") {
 
 
 
-    System.out.print(empfangen);
+    System.out.println(empfangen);
 
 }
         return empfangen;
@@ -157,7 +160,7 @@ if(empfangen!="") {
         private static void checkAut(SerialPort checkport) throws IOException {
 
             checkport.setBaudRate(112500);
-            //checkport.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 5, 0);
+            //checkport.setComPortTimeouts(SerialPort.TIMEOUT_READ_BLOCKING, 5, 5);
 
 /*
         checkport.setBaudRate(9600);
@@ -169,6 +172,9 @@ if(empfangen!="") {
 
             save = System.currentTimeMillis() + abtastzeit;
             found = false;
+
+            is= new BufferedReader(new InputStreamReader(checkport.getInputStream()));
+
             while (System.currentTimeMillis() < save) {                                                           //für jeden port werden 5 sekunden lang überprüft ob er eine ID sendet
 
                     if (empfangen(checkport).contains("defaultID")) {  //fehler
