@@ -149,7 +149,7 @@ if(empfangen!="") {
     public static class Authentifikation {
         private static String output;
         private static int abtastzeit=5000;
-        private static int arduinoneustartzeit=3000;
+        private static int arduinoneustartzeit=2000;
 
 
         public static String getOutput(){
@@ -162,13 +162,13 @@ if(empfangen!="") {
             checkport.setBaudRate(112500);
             //checkport.setComPortTimeouts(SerialPort.TIMEOUT_READ_BLOCKING, 5, 5);
 
-/*
-        checkport.setBaudRate(9600);
+
+        //checkport.setBaudRate(9600);
         checkport.setNumDataBits(8);
         checkport.setNumStopBits(1);
         checkport.setParity(0);
         checkport.setComPortTimeouts(SerialPort.TIMEOUT_NONBLOCKING,0,0);
-*/
+
 
             save = System.currentTimeMillis() + abtastzeit;
             found = false;
