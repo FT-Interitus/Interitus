@@ -1,14 +1,17 @@
-### All Submissions:
+### Generell:
 
-* [ ] Have you checked to ensure there aren't other open [Pull Requests](../../../pulls) for the same update/change?
+* [ ] Sind keine andere Pull-Request mit dem gleichen Thema bereits geöffnet?
 
 
 ### New Features:
 
-1. [ ] Does your Features pass tests?
-2. [ ] Does not have your code any errors?
+1. [ ] Gibt es keine Fehler bei deinem neuen Code?
+2. [ ] Funktioniert der Code perfekt?
+3. [ ] Ist der Code gut kommentiert?
 
-### Changes to Core Features:
+### Änderungen an verhandenem Code:
 
-* [ ] Have you added an explanation of what your changes do?
-* [ ] Have you successfully ran tests with your changes locally?
+3. [ ] Was hast du geändert und Warum?
+1. [ ] Gibt es keine Fehler bei deinem neuen Code?
+2. [ ] Funktioniert der Code perfekt?
+3. [ ] Ist der Code gut kommentiert?
