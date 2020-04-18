@@ -145,7 +145,8 @@ if(empfangen!="") {
 
     public static class Authentifikation {
         private static String output;
-        private static int abtastzeit=10000;
+        private static int abtastzeit=5000;
+        private static int arduinoneustartzeit=3000;
 
 
         public static String getOutput(){
@@ -235,7 +236,7 @@ if(empfangen!="") {
                                     System.out.println("desprictiveportname:   " + checkport.getDescriptivePortName());
                                     output="versuche "+checkport.getSystemPortName()+" zu autentifizieren";
 
-
+                                    Thread.sleep(arduinoneustartzeit);
                                     checkAut(checkport);                                                                    //port wird versucht zu autentivizieren
 
 
