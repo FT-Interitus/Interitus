@@ -93,15 +93,8 @@ public static boolean isRunning=false;
 
 
                 //while (empfangen != "\n") {
-                    empfangen = is.readLine(); //fehler
+                    empfangen = empfangen+(char)port.getInputStream().read(); //fehler
                // }
-
-
-
-
-
-
-
 
 
 
@@ -112,6 +105,7 @@ if(empfangen!="") {
 
 
     System.out.print(empfangen);
+
 }
         return empfangen;
     }

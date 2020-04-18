@@ -42,4 +42,6 @@ public class BlockVar {
     public static Block wire_beginn = null;  //um bei verbindungen über eine Node trotzdem noch den Nachbar erfahren zu können
 
 
+
+
 }
