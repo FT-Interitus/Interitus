@@ -16,6 +16,7 @@ public class Wire {
     private boolean canplaceanewwirenode = false;
 
     private Vector3 tempvector = new Vector3();
+    private float dicke = 3.5f;
 
 
     public Wire(VisibleObjects left_connection,Block right_connection) {
@@ -123,7 +124,7 @@ float b = left_connection.getY_exit() - ProgrammingSpace.cam.unproject(new Vecto
 
 
              //   System.out.println((float) ((float) Math.acos((float) ((ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x-left_connection.getX_exit())/weite))*180/Math.PI));
-              sprite.setSize((float) weite,5);
+              sprite.setSize((float) weite,dicke);
               sprite.setOrigin(0,0);
              //   sprite.setSize(50,50);
               //  sprite.setRotation(20);
@@ -202,7 +203,7 @@ float b = left_connection.getY_exit() - ProgrammingSpace.cam.unproject(new Vecto
                     }
 
 
-                    sprite.setSize((float) weite, 5);
+                    sprite.setSize((float) weite, dicke);
                     sprite.setOrigin(0, 0);
 
 
