@@ -6,6 +6,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class USBConnection {
 
@@ -125,7 +126,19 @@ public class USBConnection {
 
         openev3sesseion();
 
-       sendcommand(Operations.led(0,true,true));
+        ArrayList<Byte> command = new ArrayList<>();
+        //command.addAll(Operations.ev3statusline(false));
+       // command.addAll(Operations.displayBMPFile(true,0,0,"../apps/Motor Control/MotorCtlAD.rgf"));
+       // command.addAll(Operations.updateev3screen());
+
+        //command.addAll(Operations.setbrickname("Stein123"));
+
+       sendcommand(command);
+        try {
+            TimeUnit.SECONDS.sleep(10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         closeev3session();
 
 

@@ -22,7 +22,7 @@ public class ev3 {
     static final byte opSound_Ready = (byte) 0x96;
 
     static final byte opUI_Write = (byte) 0x82;
-    static final byte opUI_draw = (byte) 0x84;
+    static final byte opUI_draw = (byte) 0x84;//TODO geht gar nicht
 
    static final byte SET_BRICKNAME =(byte) 0x08;
 
@@ -44,9 +44,9 @@ public class ev3 {
 
     static final byte UPDATE = (byte) 0x00;
     static final byte TOPLINE = (byte) 0x12;
-    static final byte FILLWINOW = (byte) 0x13;
+    static final byte FILLWINDOW = (byte) 0x13;
     static final byte BMPFile = (byte) 0x1C;
-    //TODO Hier weitermachen
+
 
     public static byte[] LCS(String string) {
         try {
