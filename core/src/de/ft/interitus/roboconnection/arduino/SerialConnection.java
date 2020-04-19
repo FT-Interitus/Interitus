@@ -120,7 +120,7 @@ if(empfangen !="") {
     }
 
 
-    void empfangenListener(SerialPort port){
+    static void empfangenListener(SerialPort port){
         final BufferedReader b= new BufferedReader(new InputStreamReader(port.getInputStream()));
 
 
@@ -203,14 +203,16 @@ if(empfangen !="") {
             save = System.currentTimeMillis() + abtastzeit;
             found = false;
 
-            is= new BufferedReader(new InputStreamReader(checkport.getInputStream()));
+            //is= new BufferedReader(new InputStreamReader(checkport.getInputStream()));
+
+            empfangenListener(checkport);
 
             while (System.currentTimeMillis() < save) {                                                           //für jeden port werden 5 sekunden lang überprüft ob er eine ID sendet
 
-                    if (empfangen(checkport).contains("defaultID")) {  //fehler
+                    //if (empfangen(checkport).contains("defaultID")) {  //fehler
                          ///////////////////////////////////////////TODO hier muss dem arduino noch eine neue ID zugewiesen werden
-                        found = true;
-                    }
+                    //    found = true;
+                   // }
                     /////////////////////////////////////////////TODO hier muss noch überprüft werden ob der Arduino schon bekannt ist (schon eine richtige ID hat)
 
 
