@@ -14,12 +14,14 @@ public class Animation {
      Texture imganimation;
      Sprite animation;
      int frame = 0;
+     int framecount;
     final TextureRegion[][] regions;
 
-    public Animation(Texture imganimation,int speed,int tileWidth,int tileHeight){
+    public Animation(Texture imganimation,int speed,int tileWidth,int tileHeight,int framecount){
         this.speed=speed;
          regions = TextureRegion.split(imganimation, tileWidth, tileHeight);
         animation = new Sprite(regions[0][0]);
+        this.framecount = framecount;
     }
 
     public void startAnimation(){
@@ -40,7 +42,7 @@ public class Animation {
         {
 
             frame++;
-            if (frame > 3) {
+            if (frame > framecount) {
                 frame = 0;
             }
 
