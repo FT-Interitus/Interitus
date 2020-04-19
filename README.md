@@ -8,4 +8,4 @@ um den Sprung in eine "echte" Programmiersprache zu schaffen.
 
 Interitus basiert auf dem LibGDX Framework.
 
-Wenn du dem Projekt etwas beisteuer willst lies dir bitte unbedingt das [Wiki](https://github.com/FT-Interitus/Interitus/wiki "Interitus Wiki") durch.
+Wenn du dem Projekt etwas beisteuern willst lies dir bitte unbedingt das [Wiki](https://github.com/FT-Interitus/Interitus/wiki "Interitus Wiki") durch.

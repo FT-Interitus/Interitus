@@ -15,6 +15,7 @@ public static boolean isRunning=false;
    static boolean found;
    static int i = 1;
    static long save;
+    static BufferedReader is ;
 
     public static SerialPort[] getPorts(){
         SerialPort ports[]=SerialPort.getCommPorts();
@@ -85,29 +86,61 @@ public static boolean isRunning=false;
     }
 
     public static String empfangen(SerialPort port)  {
-        String empfangen="";
-        BufferedReader is = new BufferedReader(new InputStreamReader(port.getInputStream()));
+        String empfangen = "";
+
 
         try {
 
 
 
-                while (empfangen != "\n") {
-                    empfangen = empfangen+(char)port.getInputStream().read(); //fehler
-                }
+                //while (empfangen != "\n") {
+
+
+
+                    if(port.bytesAvailable()>0) {
+                        empfangen = is.readLine(); //fehler
+                    }
+
+
+
+                //}
 
 
 
 
         }catch (Exception e){}
-if(empfangen!="") {
+if(empfangen !="") {
 
 
 
-    System.out.print(empfangen);
+    System.out.println(empfangen);
 
 }
         return empfangen;
+    }
+
+
+    static void empfangenListener(SerialPort port){
+        final BufferedReader b= new BufferedReader(new InputStreamReader(port.getInputStream()));
+
+
+        port.addDataListener(new SerialPortDataListener() {
+            @Override
+            public int getListeningEvents() {
+                return SerialPort.LISTENING_EVENT_DATA_AVAILABLE;
+            }
+
+            @Override
+            public void serialEvent(SerialPortEvent event) {
+                if (event.getEventType() != SerialPort.LISTENING_EVENT_DATA_AVAILABLE)
+                    return;
+                try {
+                    System.out.println(b.readLine());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
 
@@ -145,8 +178,8 @@ if(empfangen!="") {
 
     public static class Authentifikation {
         private static String output;
-        private static int abtastzeit=5000;
-        private static int arduinoneustartzeit=3000;
+        private static int abtastzeit=10000;
+        private static int arduinoneustartzeit=0;
 
 
         public static String getOutput(){
@@ -154,27 +187,32 @@ if(empfangen!="") {
         }
 
 
-        private static void checkAut(SerialPort checkport) throws IOException {
+        private static void checkAut(final SerialPort checkport) throws IOException {
 
             checkport.setBaudRate(112500);
-            //checkport.setComPortTimeouts(SerialPort.TIMEOUT_READ_SEMI_BLOCKING, 5, 0);
+            //checkport.setComPortTimeouts(SerialPort.TIMEOUT_READ_BLOCKING, 5, 5);
 
-/*
-        checkport.setBaudRate(9600);
+
+        //checkport.setBaudRate(9600);
         checkport.setNumDataBits(8);
         checkport.setNumStopBits(1);
         checkport.setParity(0);
         checkport.setComPortTimeouts(SerialPort.TIMEOUT_NONBLOCKING,0,0);
-*/
+
 
             save = System.currentTimeMillis() + abtastzeit;
             found = false;
+
+            //is= new BufferedReader(new InputStreamReader(checkport.getInputStream()));
+
+            empfangenListener(checkport);
+
             while (System.currentTimeMillis() < save) {                                                           //für jeden port werden 5 sekunden lang überprüft ob er eine ID sendet
 
-                    if (empfangen(checkport).contains("defaultID")) {  //fehler
+                    //if (empfangen(checkport).contains("defaultID")) {  //fehler
                          ///////////////////////////////////////////TODO hier muss dem arduino noch eine neue ID zugewiesen werden
-                        found = true;
-                    }
+                    //    found = true;
+                   // }
                     /////////////////////////////////////////////TODO hier muss noch überprüft werden ob der Arduino schon bekannt ist (schon eine richtige ID hat)
 
 
