@@ -280,7 +280,7 @@ public class Block implements VisibleObjects{
         this.index = index;
     }
 
-    public void delete(boolean complete) { //Der Block soll gelöscht werden
+    public void delete(boolean complete) { //Der Block soll gelöscht werden (complete beduetet das alle Blöcke gelöscht werden sollen)
         BlockVar.markedblock = null; //Der Makierte Block wird auf null gesetzt da nur ein makierter block gelöscht werden kann //Anmerkung falls das ganze Programm gelöscht wird spielt das sowieso keine Rolle
         BlockVar.marked = false; //Ob ein Block makiert ist wird auf false gesetzt da nur ein makierter Block gelöscht werden kann
         BlockVar.ismoving = false; // Ob ein Block bewegt wird, wird auf false gesetzt da wenn ein Block bewegt und gelöscht wird kann es nur der bewegte Block sein
@@ -299,10 +299,22 @@ public class Block implements VisibleObjects{
         this.setIndex(-1); //Der Index wird auf -1 gesetzt dann merkt der BlockUpdater das der laufenden Timer beendet werden soll
         if (left != null) { //Wenn ein linker Nachbar exsistiert
             left.setRight(null); //wird dem linken Nachbar gesagt das er keinen Rechten Nachbar mehr hat
+
+            try {
+                left.setWire_right(null); //Die Wire des nachbar block wird gelöscht damit die Wire kein zweites mal gelöscht wird (passiert nur bei ganz vielen wire nodes)
+            }catch (NullPointerException e) {
+                //Falls es gar keine Wire gab
+            }
         }
 
         if (right != null) { // wenn ein Rechter nachbar exsitiert
             right.setLeft(null); // wird dem rechten Nachbar gesagt das er keinen linken nachbar mehr hat
+
+            try {
+                right.setWire_left(null); //Die Wire des nachbar block wird gelöscht damit die Wire kein zweites mal gelöscht wird (passiert nur bei ganz vielen wire nodes)
+            }catch (NullPointerException e) {
+                //Falls es gar keine Wire gab
+            }
         }
 
 
