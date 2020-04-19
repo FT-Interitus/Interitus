@@ -4,8 +4,9 @@ public class Level {
 
     protected static void checkLevel() { //Internal Level System NOT visible to rhe user
 
+
         //Level 0 to 1
-        if(ExperienceVar.userlevel==0&&ExperienceVar.programmtimeinhoures>1.0f) {
+        if(ExperienceVar.userlevel==0&&ExperienceVar.programmtimeinhoures>0.70f) {
             ExperienceVar.userlevel = 1;
         }
 
@@ -24,7 +25,7 @@ public class Level {
 
         //Level 3 to 4
         if(ExperienceVar.userlevel==3&&ExperienceVar.programmtimeinhoures>1.0f) {
-            ExperienceVar.userlevel = 1;
+            ExperienceVar.userlevel = 4;
         }
 /*
         //Level 1 to 2

@@ -8,7 +8,7 @@ public class displayErrors {
 
    public static void checkerror() {
        if(error!=null) {
-           //TODO popup
+
 
            Dialogs.showErrorDialog(UI.stage,"Ein Fehler ist aufgetreten!",error);
 

@@ -26,7 +26,7 @@ public class Programm extends Game {
             }
         };
         seachnetwork.start();
-
+        Data.init();
         ExperienceManager.init();
         setScreen(new Loading());
     }
