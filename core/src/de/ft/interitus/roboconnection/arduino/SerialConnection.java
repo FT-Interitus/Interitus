@@ -86,7 +86,7 @@ public static boolean isRunning=false;
     }
 
     public static String empfangen(SerialPort port)  {
-        String empfangen="";
+        String empfangen = "";
 
 
         try {
@@ -94,16 +94,22 @@ public static boolean isRunning=false;
 
 
                 //while (empfangen != "\n") {
+
+
+
                     if(port.bytesAvailable()>0) {
                         empfangen = is.readLine(); //fehler
                     }
+
+
+
                 //}
 
 
 
 
         }catch (Exception e){}
-if(empfangen!="") {
+if(empfangen !="") {
 
 
 
@@ -111,6 +117,30 @@ if(empfangen!="") {
 
 }
         return empfangen;
+    }
+
+
+    void empfangenListener(SerialPort port){
+        final BufferedReader b= new BufferedReader(new InputStreamReader(port.getInputStream()));
+
+
+        port.addDataListener(new SerialPortDataListener() {
+            @Override
+            public int getListeningEvents() {
+                return SerialPort.LISTENING_EVENT_DATA_AVAILABLE;
+            }
+
+            @Override
+            public void serialEvent(SerialPortEvent event) {
+                if (event.getEventType() != SerialPort.LISTENING_EVENT_DATA_AVAILABLE)
+                    return;
+                try {
+                    System.out.println(b.readLine());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
 
@@ -148,8 +178,8 @@ if(empfangen!="") {
 
     public static class Authentifikation {
         private static String output;
-        private static int abtastzeit=5000;
-        private static int arduinoneustartzeit=2000;
+        private static int abtastzeit=10000;
+        private static int arduinoneustartzeit=0;
 
 
         public static String getOutput(){
@@ -157,7 +187,7 @@ if(empfangen!="") {
         }
 
 
-        private static void checkAut(SerialPort checkport) throws IOException {
+        private static void checkAut(final SerialPort checkport) throws IOException {
 
             checkport.setBaudRate(112500);
             //checkport.setComPortTimeouts(SerialPort.TIMEOUT_READ_BLOCKING, 5, 5);
