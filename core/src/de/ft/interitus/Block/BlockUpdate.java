@@ -79,7 +79,7 @@ public class BlockUpdate extends Thread {
 
                             }
 
-                            BlockVar.movingwires.getRight_connection().getLeft().getBlockupdate().isconnectorclicked = false; //TODO hier fehler bei der node nutzung
+                            BlockVar.movingwires.getRight_connection().getLeft().getBlockupdate().isconnectorclicked = false;
                             BlockVar.movingwires = null;
 
 
@@ -93,24 +93,20 @@ public class BlockUpdate extends Thread {
 
                         isconnectorclicked = false;
                         BlockVar.showleftdocker = false;
-                        if (BlockVar.connetor_offerd_hoverd_block != null) {
-
-
-                            block.setWire_right(new Wire(block,BlockVar.connetor_offerd_hoverd_block));
-                            BlockVar.connetor_offerd_hoverd_block.setWire_left(block.getWire_right());
-                            block.getWire_right().setSpace_between_blocks(true);
-                            BlockVar.wires.add(block.getWire_right());
-
-                            block.setRight(BlockVar.connetor_offerd_hoverd_block);
-
-
-                            BlockVar.connetor_offerd_hoverd_block = null;
-                        }
 
                         try {
                             tempwire.getLeft_connection().setWire_right(null);
                             BlockVar.visiblewires.remove(tempwire);
                             BlockVar.wires.remove(tempwire);
+
+                            try {
+
+                                tempwire.getRight_connectionObject().getwirenode().setWire_left(null);
+                                tempwire.setRight_connection(null);
+
+                            }catch (NullPointerException e) {
+
+                            }
                             tempwire = null;
                         }catch (Exception e) {
 

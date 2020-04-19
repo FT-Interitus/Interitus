@@ -95,12 +95,23 @@ public class WireNode implements VisibleObjects {
 
     @Override
     public void setWire_right(Wire wire_right) {
+        if(wire_right==null) {
+            this.wire_right.setLeft_connection(null);
+        }
+
         this.wire_right = wire_right;
     }
 
     @Override
     public void setWire_left(Wire wire_left) {
+
+        if(wire_left==null) {
+            this.wire_left.setRight_connection(null);
+        }
+
         this.wire_left = wire_left;
+
+
     }
 
     @Override

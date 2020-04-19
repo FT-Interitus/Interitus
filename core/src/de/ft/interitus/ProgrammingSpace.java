@@ -53,7 +53,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
     public static int h=0;
 
 public static Drawable d;
-public static Animation testanim = new Animation(new Texture("ballfeueranimation.png"),60,100,100);
+public static Animation testanim = new Animation(new Texture("ballfeueranimation.png"),60,100,100,3);
 
 
     ShapeRenderer shapeRenderer;

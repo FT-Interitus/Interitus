@@ -13,15 +13,14 @@ import de.ft.interitus.displayErrors;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.utils.CheckKollision;
 
-
 /***
  *
  * @author Felix & Tim
  *
- *Hier werden die Blöcke erstellt die für die Programmmierung zuständig sind
+ *Hier werden die Blöcke erstellt die für die Programmmierung zuständig sind.
+ * Nähere Informationen stehen in den Kommentaren oder im Github Wiki.
  *
  */
-
 
 public class Block implements VisibleObjects{
     public boolean seted = true; //Ob der Block losgelassen wurde bzw ob der Block eine statische Position hat

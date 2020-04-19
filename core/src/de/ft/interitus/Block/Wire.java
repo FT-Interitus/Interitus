@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.loading.AssetLoader;
+import org.apache.commons.lang3.ObjectUtils;
 
 public class Wire {
     private VisibleObjects left_connection;
@@ -49,7 +50,24 @@ public class Wire {
                     BlockVar.wires.remove(this);
                     BlockVar.visiblewires.remove(this);
                     BlockVar.movingwires = null;
+                    BlockVar.showleftdocker = false;
 
+
+                    try {
+                        getRight_connectionObject().getwirenode().setWire_left(null);
+                    }catch (NullPointerException e) {
+                        //Falls da nie was war
+                    }
+
+
+                    try {
+
+                        getLeft_connectionObject().getwirenode().setWire_right(null);
+                    }catch (NullPointerException e) {
+
+                    }
+
+                    return; //Damit die Funktion interupted wird
 
                 }
 
@@ -247,6 +265,14 @@ float b = left_connection.getY_exit() - ProgrammingSpace.cam.unproject(new Vecto
 
     public Block getRight_connection() {
         return right_connection.getblock();
+    }
+
+    public VisibleObjects getLeft_connectionObject() {
+        return left_connection;
+    }
+
+    public VisibleObjects getRight_connectionObject() {
+        return right_connection;
     }
 
     public void setSpace_between_blocks(boolean space_between_blocks) {
