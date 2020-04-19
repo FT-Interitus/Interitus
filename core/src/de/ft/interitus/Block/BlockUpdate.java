@@ -105,7 +105,7 @@ public class BlockUpdate extends Thread {
                                 tempwire.setRight_connection(null);
 
                             }catch (NullPointerException e) {
-
+                            //Falls hier keine Wire ist
                             }
                             tempwire = null;
                         }catch (Exception e) {

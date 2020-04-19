@@ -320,7 +320,8 @@ public class Block implements VisibleObjects{
             blockupdate.interrupt(); // Der Thread wird interrupted
             blockupdate.block = null; //Die referenzierung des Threads BLocks wird getrennt
         } catch (Exception e) {
-           ProgrammingSpace.logger.severe(e.getMessage()); //Über den Logger werden eventuelle Exeptions ausgegeben
+            displayErrors.error = e;
+            e.printStackTrace();
 
         }
 

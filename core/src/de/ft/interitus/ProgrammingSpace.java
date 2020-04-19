@@ -41,7 +41,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
     public static Viewport viewport;
     public static Component saver;
     //BlockUpdate bu[] = new BlockUpdate[0];
-    public static Logger logger;
+
 
    public static BitmapFont font;
     public static Switch s;
@@ -73,8 +73,7 @@ font=  new BitmapFont();
         UIbatch = new SpriteBatch();
 
 
-        logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
-        logger.setLevel(logLevel);
+
 
         Gdx.graphics.setTitle("New File");
         DataManager.filename = "New File";
@@ -197,7 +196,7 @@ s.setInside(AssetLoader.switch_inside);
                             batch.end();
                         }
 
-                        logger.finer(BlockVar.blocks.get(i).isMarked() + "  id: "+BlockVar.blocks.get(i).getIndex());
+
 
                     } catch (Exception e) {
 

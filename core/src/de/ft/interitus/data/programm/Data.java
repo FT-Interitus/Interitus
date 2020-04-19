@@ -31,7 +31,7 @@ public class Data {
         File userexperience = new File(System.getProperty("user.home") + "/.racd/experience.json"); //JSON file in dem User Analytics gespeichert werden
         Path path = folder.toPath();
         if (!folder.exists()) {//Wenn der Programm-Ordner noch nicht exsitiert
-            ProgrammingSpace.logger.config("Create Programm Data Folder");
+            System.out.println("Create Programm Data Folder");
 
             folder.mkdir(); //der Ordner wird erstellt
             try {

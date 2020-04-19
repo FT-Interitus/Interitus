@@ -8,6 +8,16 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/***
+ *
+ * @author Felix & Tim
+ *
+ * TODO eventuell noch als debug den Log von avrdude ausprobieren
+ *
+ * TODO ausführlich auf MacOS testen
+ *
+ */
+
 public class BurnProgramm {
     static String platform;
     public static String ausgabe="";
@@ -36,7 +46,7 @@ public class BurnProgramm {
             burnLinux(platform, port, file, methode);
 
         } else {
-            ProgrammingSpace.logger.severe("You OS is not supported");
+            System.out.println("You OS is not supported");
         }
 
     }
@@ -80,7 +90,7 @@ public class BurnProgramm {
             String output = null;
 
             while ((line = input.readLine()) != null) {
-               ProgrammingSpace.logger.finer( line);
+
                 output = output + line;
 
             }
@@ -112,7 +122,6 @@ public class BurnProgramm {
             String output = null;
 
             while ((line = input.readLine()) != null) {
-                ProgrammingSpace.logger.finer( line);
                 output = output + line;
                 postproduktion(output, port);
             }
@@ -144,7 +153,6 @@ public class BurnProgramm {
             String output = null;
 
             while ((line = input.readLine()) != null) {
-                ProgrammingSpace.logger.finer( line);
                 output = output + line;
 
             }

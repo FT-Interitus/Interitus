@@ -35,7 +35,7 @@ public class ClearActOpenProgramm {
                         while (blockstoclear.size() != 0) {
                             blockstoclear.get(0).delete(true);
                             blockstoclear.remove(0);
-                            ProgrammingSpace.logger.finer(String.valueOf(blockstoclear.size()));
+                            System.out.println(String.valueOf(blockstoclear.size()));
 
                         }
                         Var.isclearing = false;
@@ -61,7 +61,7 @@ public class ClearActOpenProgramm {
 
 
             }
-            ProgrammingSpace.logger.info("Clearing Finished");
+            System.out.println("Clearing Finished");
         } catch (Exception e) {
             displayErrors.error = e;
             e.printStackTrace();

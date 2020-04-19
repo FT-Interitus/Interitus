@@ -32,7 +32,7 @@ public class LoadSave {
 
                     if (userSelection == JFileChooser.APPROVE_OPTION) {
                         File fileToSave = fileChooser.getSelectedFile();
-                        ProgrammingSpace.logger.fine("Save as file: " + fileToSave.getName());
+                        System.out.println("Save as file: " + fileToSave.getName());
 
 
                         if (fileToSave.getAbsolutePath().contains(".rac")) {
@@ -45,7 +45,7 @@ public class LoadSave {
                             DataSaver.save(Gdx.files.absolute(fileToSave.getAbsolutePath() + ".rac"));
                             DataManager.filename = fileToSave.getName() + ".rac";
                         }
-                        ProgrammingSpace.logger.fine(DataManager.path);
+                        System.out.println(DataManager.path);
 
                         if (Data.filename.size() > 9) {
                             Data.filename.remove(0);
@@ -92,7 +92,7 @@ public class LoadSave {
                 if (result == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile();
 
-                    ProgrammingSpace.logger.fine("Selected file: " + selectedFile.getName());
+                    System.out.println("Selected file: " + selectedFile.getName());
                     FileHandle handle = Gdx.files.internal(selectedFile.getAbsolutePath());
                     DataManager.path = selectedFile.getAbsolutePath();
                     DataManager.filename = selectedFile.getName();
