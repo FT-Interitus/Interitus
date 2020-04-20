@@ -133,7 +133,7 @@ public class BlockUpdate extends Thread {
                     }
 
 
-                    if (CheckKollision.checkmousewithobject((int) block.getwireconnector_right().x, (int) block.getwireconnector_right().y, 20, 20, (int) BlockVar.mousepressedold.x, (int) BlockVar.mousepressedold.y) && Gdx.input.isButtonPressed(0)&&BlockVar.movingwires==null&&!IsMousealreadypressed) {
+                    if (CheckKollision.checkmousewithobject((int) block.getwireconnector_right().x, (int) block.getwireconnector_right().y, 20, 20, (int) BlockVar.mousepressedold.x, (int) BlockVar.mousepressedold.y) && Gdx.input.isButtonPressed(0)&&BlockVar.movingwires==null&&!IsMousealreadypressed&&block.getWire_right()==null) {
                         if (!(BlockVar.markedblock == block)) {
                             if (!isconnectorclicked) {
 
@@ -164,7 +164,7 @@ public class BlockUpdate extends Thread {
 
                             }
                         }
-                        //System.out.println("hry");
+
                     }
 
                     if(IsMousealreadypressed&&!Gdx.input.isButtonPressed(0)) {
