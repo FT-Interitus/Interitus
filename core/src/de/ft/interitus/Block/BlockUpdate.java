@@ -186,7 +186,7 @@ public class BlockUpdate extends Thread {
                     }
 
 
-                    if (BlockVar.ismoving == false && !block.isMoving() && block.isMarked() && Gdx.input.isButtonPressed(0)) {
+                    if (BlockVar.ismoving == false && !block.isMoving() && block.isMarked() && Gdx.input.isButtonPressed(0)&&CheckKollision.checkmousewithblock(block)) {
 
                         if (!CheckKollision.checkmousewithobject((int) block.getwireconnector_right().x, (int) block.getwireconnector_right().y, 20, 20, (int) BlockVar.mousepressedold.x, (int) BlockVar.mousepressedold.y)) {
 
@@ -401,6 +401,8 @@ public class BlockUpdate extends Thread {
                         BlockVar.marked = false;
                         BlockVar.markedblock = null;
                     }
+
+
 
 
                     if (BlockVar.marked && !block.isMarked()) {
