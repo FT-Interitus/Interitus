@@ -28,7 +28,7 @@ public class BlockUpdate extends Thread {
    private boolean IsMousealreadypressed = false;
 
 
-   int temp = 0;
+
 
     BlockUpdate(Block block) {
         this.block = block; //Der Block wird zu gewiesen
@@ -65,9 +65,7 @@ public class BlockUpdate extends Thread {
                     //TODO
 
 
-
-
-                    if(!isIsconnectorclicked()&& BlockVar.showleftdocker&& CheckKollision.object(block.getX_entrance(),block.getY_entrance(),block.getH_entrance(),block.getW_entrance(),(int) ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y,1,1)&&Gdx.input.isButtonPressed(0)&&block.getLeft()==null&&tempwire==null) {
+                    if(!isIsconnectorclicked()&& BlockVar.showleftdocker&& CheckKollision.object(block.getX_entrance(),block.getY_entrance(),block.getH_entrance(),block.getW_entrance(),(int) ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y,1,1)&&Gdx.input.isButtonPressed(0)&&block.getLeft()==null) {
                             BlockVar.showleftdocker = false;
                             BlockVar.movingwires.setMovebymouse(false);
                             BlockVar.movingwires.setRight_connection(block);
@@ -142,10 +140,7 @@ public class BlockUpdate extends Thread {
                                tempwire = new Wire(block);
 
                                 tempwire.setMovebymouse(true);
-                                temp++;
-                                if(temp==2) {
-                                    System.out.println("Der Compiler ist doof");
-                                }
+
                                 tempwire.setSpace_between_blocks(true);
 
                                 block.setWire_right(tempwire);
@@ -462,6 +457,7 @@ public class BlockUpdate extends Thread {
                                     block.setWire_left(new Wire(BlockVar.markedblock,block));
                                     BlockVar.markedblock.setWire_right(block.getWire_left());
                                     BlockVar.wires.add(block.getWire_left());
+
 
                                     block.setLeft(BlockVar.markedblock);
                                     BlockVar.markedblock.setY(block.getY());
