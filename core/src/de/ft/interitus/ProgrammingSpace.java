@@ -121,6 +121,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
     @Override
     public void render(float delta) {
+        System.out.println(BlockVar.wires.size());
 
         try {
 

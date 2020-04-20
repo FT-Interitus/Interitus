@@ -25,6 +25,11 @@ public class BlockUpdate extends Thread {
     public boolean isconnectorclicked = false;//Ist der connector des zuständigen Blocks ausgelöst
    private Wire tempwire;
 
+   private boolean IsMousealreadypressed = false;
+
+
+   int temp = 0;
+
     BlockUpdate(Block block) {
         this.block = block; //Der Block wird zu gewiesen
 
@@ -62,7 +67,7 @@ public class BlockUpdate extends Thread {
 
 
 
-                    if(!isIsconnectorclicked()&& BlockVar.showleftdocker&& CheckKollision.object(block.getX_entrance(),block.getY_entrance(),block.getH_entrance(),block.getW_entrance(),(int) ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y,1,1)&&Gdx.input.isButtonPressed(0)&&block.getLeft()==null) {
+                    if(!isIsconnectorclicked()&& BlockVar.showleftdocker&& CheckKollision.object(block.getX_entrance(),block.getY_entrance(),block.getH_entrance(),block.getW_entrance(),(int) ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y,1,1)&&Gdx.input.isButtonPressed(0)&&block.getLeft()==null&&tempwire==null) {
                             BlockVar.showleftdocker = false;
                             BlockVar.movingwires.setMovebymouse(false);
                             BlockVar.movingwires.setRight_connection(block);
@@ -130,12 +135,17 @@ public class BlockUpdate extends Thread {
                     }
 
 
-                    if (CheckKollision.checkmousewithobject((int) block.getwireconnector_right().x, (int) block.getwireconnector_right().y, 20, 20, (int) BlockVar.mousepressedold.x, (int) BlockVar.mousepressedold.y) && Gdx.input.isButtonPressed(0)&&BlockVar.movingwires==null) {
+                    if (CheckKollision.checkmousewithobject((int) block.getwireconnector_right().x, (int) block.getwireconnector_right().y, 20, 20, (int) BlockVar.mousepressedold.x, (int) BlockVar.mousepressedold.y) && Gdx.input.isButtonPressed(0)&&BlockVar.movingwires==null&&!IsMousealreadypressed) {
                         if (!(BlockVar.markedblock == block)) {
                             if (!isconnectorclicked) {
 
                                tempwire = new Wire(block);
+
                                 tempwire.setMovebymouse(true);
+                                temp++;
+                                if(temp==2) {
+                                    System.out.println("Der Compiler ist doof");
+                                }
                                 tempwire.setSpace_between_blocks(true);
 
                                 block.setWire_right(tempwire);
@@ -155,9 +165,15 @@ public class BlockUpdate extends Thread {
                                     BlockVar.marked = false;
                                 }
 
+                                IsMousealreadypressed = true;
+
                             }
                         }
                         //System.out.println("hry");
+                    }
+
+                    if(IsMousealreadypressed&&!Gdx.input.isButtonPressed(0)) {
+                        IsMousealreadypressed =false;
                     }
 
                     if (de.ft.interitus.utils.CheckKollision.checkmousewithblock(block, BlockVar.mousepressedold) && Gdx.input.isButtonPressed(0) && BlockVar.ismoving == false && !block.isMarked() && !BlockVar.marked && BlockVar.markedblock == null) {

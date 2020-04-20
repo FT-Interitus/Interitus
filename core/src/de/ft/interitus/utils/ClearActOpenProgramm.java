@@ -86,10 +86,22 @@ public class ClearActOpenProgramm {
         DataManager.path = "";
 
 
+        BlockVar.wireNodes.clear();
+        BlockVar.showleftdocker = false;
+        BlockVar.connetor_offerd_hoverd_block = null;
+        BlockVar.wires.clear();
+        BlockVar.movingwires = null;
+        BlockVar.visiblewires.clear();
+        BlockVar.visibleWireNodes.clear();
+        BlockVar.wire_beginn = null;
+
+
         SaveChanges.clearstacks();
         //clear.start();
         blockstoclear.clear();
         Var.isclearing = false;
+
+
 
     }
 }
