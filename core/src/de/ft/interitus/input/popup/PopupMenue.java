@@ -87,7 +87,7 @@ public class PopupMenue {
         buttons.add(b);
 
     }
-    public void setItems(String[] it){
+    public void setItems(String... it){
         buttons.clear();
         for(int i=0;i<it.length;i++){
             Button b=new Button();

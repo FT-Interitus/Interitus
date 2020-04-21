@@ -59,8 +59,8 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
     ShapeRenderer shapeRenderer;
 
     public ProgrammingSpace() {
-        String[] items = {"item_1", "item_2", "item_3", "item_4"};
-        popupmanager.getPopup(0).setItems(items);
+
+        popupmanager.getPopup(0).setItems("item_1", "item_2", "item_3", "item_4");
 
         ia = new IntegerAuswahl(400, 400, 50, 25);
         s = new Switch(500, 500);
