@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class PopupManager {
     ArrayList<PopupMenue>popups=new ArrayList<>();
-    private int shownpopup=-1;
+    private int possiblepopup=-1;
 
     public PopupManager(PopupMenue... popup){
         popups.clear();
@@ -14,11 +14,16 @@ public class PopupManager {
     }
 
     public void draw(){
-for(int i=0;i<popups.size();i++){
-    popups.get(i).draw();
-    popups.get(i).rechtsKlickControlle();
-}
+        if(possiblepopup!=-1) {
+            popups.get(possiblepopup).draw();
+            popups.get(possiblepopup).rechtsKlickControlle();
+        }
     }
+
+    public void setPossiblepopup(int possiblepopup) {
+        this.possiblepopup = possiblepopup;
+    }
+
     public void setPopups(PopupMenue... popup){
         popups.clear();
         for(int i=0;i<popup.length;i++){

@@ -269,6 +269,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
         testanim.startAnimation();
 //batch.draw(testanim.getAnimation(),50,50);
         // pm.setBounds(700,200);
+        popupmanager.setPossiblepopup(0);
         popupmanager.draw();
         batch.end();
 
