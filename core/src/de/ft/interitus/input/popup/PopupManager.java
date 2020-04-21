@@ -3,9 +3,8 @@ package de.ft.interitus.input.popup;
 import java.util.ArrayList;
 
 public class PopupManager {
-    private ArrayList<PopupMenue>popups=new ArrayList<>();
+    ArrayList<PopupMenue>popups=new ArrayList<>();
     private int shownpopup=-1;
-    private int possiblepopup=-1;
 
     public PopupManager(PopupMenue... popup){
         popups.clear();
@@ -15,26 +14,11 @@ public class PopupManager {
     }
 
     public void draw(){
-
-        if(shownpopup!=-1) {
-            popups.get(shownpopup).draw();
-            
-        }
+for(int i=0;i<popups.size();i++){
+    popups.get(i).draw();
+    popups.get(i).rechtsKlickControlle();
 }
-
-public void showPopup(int _shownpopup){
-        shownpopup=_shownpopup;
-
-    for(int i=0;i<popups.size();i++){
-        if(i==shownpopup){
-            popups.get(i).setShow(true);
-        }else{
-            popups.get(i).setShow(false);
-        }
     }
-
-}
-
     public void setPopups(PopupMenue... popup){
         popups.clear();
         for(int i=0;i<popup.length;i++){
