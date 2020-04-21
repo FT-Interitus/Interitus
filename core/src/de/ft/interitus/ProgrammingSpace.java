@@ -53,14 +53,14 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
     public static Drawable d;
     public static Animation testanim = new Animation(new Texture("ballfeueranimation.png"), 60, 100, 100, 3);
 
-    public static PopupManager popupmanager=new PopupManager(new PopupMenue());
+    public static PopupManager popupmanager=new PopupManager(new PopupMenue("popoup1", "item_2", "item_3", "item_4"),new PopupMenue("popup2", "item_2", "item_3", "item_4"));
     IntegerAuswahl ia;
 
     ShapeRenderer shapeRenderer;
 
     public ProgrammingSpace() {
 
-        popupmanager.getPopup(0).setItems("item_1", "item_2", "item_3", "item_4");
+
 
         ia = new IntegerAuswahl(400, 400, 50, 25);
         s = new Switch(500, 500);
@@ -269,7 +269,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
         testanim.startAnimation();
 //batch.draw(testanim.getAnimation(),50,50);
         // pm.setBounds(700,200);
-        popupmanager.setPossiblepopup(0);
+        popupmanager.setPossiblepopup(1);
         popupmanager.draw();
         batch.end();
 

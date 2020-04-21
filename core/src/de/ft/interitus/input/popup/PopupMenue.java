@@ -22,8 +22,13 @@ public class PopupMenue {
     private boolean show=false;
     private Check check=new Check();
 
-    public PopupMenue(){
-
+    public PopupMenue(String... it){
+        buttons.clear();
+        for(int i=0;i<it.length;i++){
+            Button b=new Button();
+            b.setText(it[i]);
+            buttons.add(b);
+        }
     }
     public PopupMenue(int x,int y){
         this.x=x;
