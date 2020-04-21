@@ -22,8 +22,9 @@ public class Programm extends Game {
         Thread loadplugins = new Thread() {
             @Override
             public void run() {
-                PluginManagerImpl pl = new PluginManagerImpl();
-                pl.start();
+                Var.pluginManager = new PluginManagerImpl();
+                displayErrors.error = Var.pluginManager.init();
+
             }
         };
         loadplugins.start();
