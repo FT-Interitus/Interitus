@@ -30,7 +30,12 @@ public class PopupMenue {
             buttons.add(b);
         }
     }
-    public PopupMenue(int x,int y){
+
+    public void setShow(boolean show) {
+        this.show = show;
+    }
+
+    public PopupMenue(int x, int y){
         this.x=x;
         this.y=y;
     }

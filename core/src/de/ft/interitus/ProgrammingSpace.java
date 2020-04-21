@@ -53,7 +53,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
     public static Drawable d;
     public static Animation testanim = new Animation(new Texture("ballfeueranimation.png"), 60, 100, 100, 3);
 
-    public static PopupManager popupmanager=new PopupManager(new PopupMenue("popoup1", "item_2", "item_3", "item_4"),new PopupMenue("popup2", "item_2", "item_3", "item_4"));
+    public static PopupManager popupmanager=new PopupManager(new PopupMenue("ein popup"),new PopupMenue("BlockPopup","delete"));
     IntegerAuswahl ia;
 
     ShapeRenderer shapeRenderer;
@@ -125,7 +125,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
     @Override
     public void render(float delta) {
-
+        RechtsKlick.checkblockmouse();
 
         try {
 
@@ -269,7 +269,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
         testanim.startAnimation();
 //batch.draw(testanim.getAnimation(),50,50);
         // pm.setBounds(700,200);
-        popupmanager.setPossiblepopup(1);
+
         popupmanager.draw();
         batch.end();
 

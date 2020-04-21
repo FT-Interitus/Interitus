@@ -13,6 +13,10 @@ public class PopupManager {
         }
     }
 
+    public int getPossiblepopup() {
+        return possiblepopup;
+    }
+
     public void draw(){
         if(possiblepopup!=-1) {
             popups.get(possiblepopup).draw();
