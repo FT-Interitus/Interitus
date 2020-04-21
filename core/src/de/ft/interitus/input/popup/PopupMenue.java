@@ -87,6 +87,7 @@ public class PopupMenue {
         buttons.add(b);
 
     }
+
     public void setItems(String... it){
         buttons.clear();
         for(int i=0;i<it.length;i++){
@@ -103,5 +104,9 @@ public class PopupMenue {
             }
         }
         return p;
+    }
+
+    public void setShow(boolean show) {
+        this.show = show;
     }
 }

@@ -60,7 +60,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
     public ProgrammingSpace() {
 
-        popupmanager.getPopup(0).setItems("item_1", "item_2", "item_3", "item_4");
+        popupmanager.getPopup(0).setItems("item_1", "item_2", "item_3", "item_4","item_5","item_6","item_7","item_8","item_9","item_10","item_11","item 12","item_13");
 
         ia = new IntegerAuswahl(400, 400, 50, 25);
         s = new Switch(500, 500);
@@ -269,6 +269,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
         testanim.startAnimation();
 //batch.draw(testanim.getAnimation(),50,50);
         // pm.setBounds(700,200);
+        popupmanager.showPopup(0);
         popupmanager.draw();
         batch.end();
 
