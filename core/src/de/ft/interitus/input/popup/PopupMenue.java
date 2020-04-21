@@ -11,6 +11,10 @@ import java.util.ArrayList;
 public class PopupMenue {
     private int x;
     private int y;
+
+    private int ausgleichX=0;
+    private int ausgleichY=0;
+
     private int buttonheight=20;
     private SpriteBatch batch=new SpriteBatch();
     private ArrayList<Button>buttons=new ArrayList<>();
@@ -46,34 +50,31 @@ public class PopupMenue {
         if(show) {
             batch.begin();
             if(y+buttonheight* buttons.size()<Gdx.graphics.getHeight() && x+200<Gdx.graphics.getWidth()){
-                for (int i = 0; i < buttons.size(); i++) {
-                    buttons.get(i).setBounds(this.x, this.y + (buttonheight * i), 200, buttonheight);
-                    buttons.get(i).setImage(popupButtonimage);
-                    buttons.get(i).draw();
-                }
+                ausgleichX=0;
+                ausgleichY=0;
+
             }else{
                 if(x+200>Gdx.graphics.getWidth()){
                     if(y+buttonheight*buttons.size()>Gdx.graphics.getHeight()){
-                        for (int i = 0; i < buttons.size(); i++) {
-                            buttons.get(i).setBounds(this.x - ((x + 200) - Gdx.graphics.getWidth()), this.y + (buttonheight * i)-buttonheight*buttons.size(), 200, buttonheight);
-                            buttons.get(i).setImage(popupButtonimage);
-                            buttons.get(i).draw();
-                        }
+                        ausgleichX=- ((x + 200) - Gdx.graphics.getWidth());
+                        ausgleichY=-buttonheight*buttons.size();
+
                     }else {
-                        for (int i = 0; i < buttons.size(); i++) {
-                            buttons.get(i).setBounds(this.x - ((x + 200) - Gdx.graphics.getWidth()), this.y + (buttonheight * i), 200, buttonheight);
-                            buttons.get(i).setImage(popupButtonimage);
-                            buttons.get(i).draw();
-                        }
+                        ausgleichX=- ((x + 200) - Gdx.graphics.getWidth());
+                        ausgleichY=0;
                     }
                 }else{
-                    for (int i = 0; i < buttons.size(); i++) {
-                        buttons.get(i).setBounds(this.x , this.y + (buttonheight * i)-buttonheight*buttons.size(), 200, buttonheight);
-                        buttons.get(i).setImage(popupButtonimage);
-                        buttons.get(i).draw();
-                    }
+                    ausgleichX=0;
+                    ausgleichY=-buttonheight*buttons.size();
                 }
             }
+
+            for (int i = 0; i < buttons.size(); i++) {
+                buttons.get(i).setBounds(this.x +ausgleichX, this.y + (buttonheight * i)+ausgleichY, 200, buttonheight);
+                buttons.get(i).setImage(popupButtonimage);
+                buttons.get(i).draw();
+            }
+
 
             batch.end();
         }
