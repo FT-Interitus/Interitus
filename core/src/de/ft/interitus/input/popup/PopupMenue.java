@@ -53,8 +53,22 @@ public class PopupMenue {
                 }
             }else{
                 if(x+200>Gdx.graphics.getWidth()){
+                    if(y+buttonheight*buttons.size()>Gdx.graphics.getHeight()){
+                        for (int i = 0; i < buttons.size(); i++) {
+                            buttons.get(i).setBounds(this.x - ((x + 200) - Gdx.graphics.getWidth()), this.y + (buttonheight * i)-buttonheight*buttons.size(), 200, buttonheight);
+                            buttons.get(i).setImage(popupButtonimage);
+                            buttons.get(i).draw();
+                        }
+                    }else {
+                        for (int i = 0; i < buttons.size(); i++) {
+                            buttons.get(i).setBounds(this.x - ((x + 200) - Gdx.graphics.getWidth()), this.y + (buttonheight * i), 200, buttonheight);
+                            buttons.get(i).setImage(popupButtonimage);
+                            buttons.get(i).draw();
+                        }
+                    }
+                }else{
                     for (int i = 0; i < buttons.size(); i++) {
-                        buttons.get(i).setBounds(this.x-((x+200)-Gdx.graphics.getWidth()), this.y + (buttonheight * i), 200, buttonheight);
+                        buttons.get(i).setBounds(this.x , this.y + (buttonheight * i)-buttonheight*buttons.size(), 200, buttonheight);
                         buttons.get(i).setImage(popupButtonimage);
                         buttons.get(i).draw();
                     }
