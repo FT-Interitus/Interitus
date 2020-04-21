@@ -9,10 +9,17 @@ public class PluginRegister {
         switch (option) {
             case "name":
                 this.name = selection;
+                break;
+            case "version":
+                this.version = Double.parseDouble(selection);
         }
     }
 
     public String getName() {
         return name;
+    }
+
+    public double getVersion() {
+        return version;
     }
 }

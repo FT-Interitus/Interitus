@@ -178,12 +178,10 @@ float b = left_connection.getY_exit() - ProgrammingSpace.cam.unproject(new Vecto
                     if(right_connection!=null) {
                         right_connection.setWire_left(null);
                         right_connection = null;
-                        System.out.println("Tets");
                     }
 
                     if(left_connection!=null) {
-                        left_connection.setWire_right(null); //TODO hier fehler bei der benutzung von Wirenodes
-                        System.out.println("Tets");
+                        left_connection.setWire_right(null);
                         left_connection = null;
                     }
 

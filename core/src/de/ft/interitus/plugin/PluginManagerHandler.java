@@ -167,7 +167,6 @@ public static void register(PluginRegister pluginRegister) { //Wird von Plugins 
 
 
             if(doppelt) {
-                System.out.println("TGets");
                 throw new LoaderException("Es gibt mehrere Plugins mit dem geleichen Namen");
 
             }
@@ -180,9 +179,12 @@ public static void register(PluginRegister pluginRegister) { //Wird von Plugins 
             for(int i =0;i<Var.pluginManager.loadedplugins.size();i++) {
 
 
-                if(registeredplugins.get(i).getName()!=""&&registeredplugins.get(i).getName()!=" "&&registeredplugins.get(i).getName().length()>2)
-                System.out.println(registeredplugins.get(i).getName()+" geladen");
-                Var.pluginManager.loadedplugins.get(i).run();
+                if (registeredplugins.get(i).getName() != "" && registeredplugins.get(i).getName() != " " && registeredplugins.get(i).getName().length() > 2 && !registeredplugins.get(i).getName().endsWith(" ") && !registeredplugins.get(i).getName().startsWith(" ")) {
+                    if(registeredplugins.get(i).getVersion()>0.0) {
+                        System.out.println(registeredplugins.get(i).getName() + " geladen. In der Version "+registeredplugins.get(i).getVersion());
+                        Var.pluginManager.loadedplugins.get(i).run();
+                    }
+            }
             }
         }
 
