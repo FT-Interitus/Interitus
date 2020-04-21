@@ -18,6 +18,10 @@ import com.kotcrab.vis.ui.widget.*;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.settings.subitems.*;
+import de.ft.interitus.plugin.PluginManagerHandler;
+import jdk.jfr.Unsigned;
+
+import java.lang.reflect.InvocationTargetException;
 
 public class SettingsUI extends VisWindow {
 
@@ -44,6 +48,9 @@ public class SettingsUI extends VisWindow {
      * 9 = Daten
      * 10 = item 3.2
      * 11 = item 3.3
+     *
+     * 12 = Plugin Einstellungen (Wenn keine Plugins geladen unsichtbar)
+     * 13.. Plguin
      *
      */
 
@@ -211,6 +218,12 @@ public class SettingsUI extends VisWindow {
             TestNode item1 = new TestNode(new VisLabel(" Aussehen "),0);
             TestNode item2 = new TestNode(new VisLabel(" Verhalten "),4);
             TestNode item3 = new TestNode(new VisLabel(" Programm Einstellungen "),8);
+            TestNode item4;
+            if(PluginManagerHandler.plugisettings.size()!=0) {
+               item4 = new TestNode(new VisLabel(" Plugin Einstellungen "), 12);
+            }else{
+                item4 = null;
+            }
 
             item1.add(new TestNode(new VisLabel(" Theme"),1));
             item1.add(new TestNode(new VisLabel(" item 1.2"),2));
@@ -224,11 +237,19 @@ public class SettingsUI extends VisWindow {
             item3.add(new TestNode(new VisLabel(" item 3.2"),10));
             item3.add(new TestNode(new VisLabel(" item 3.3"),11));
 
+            for(int i=0;i<PluginManagerHandler.plugisettings.size();i++) {
+                item4.add(new TestNode(new VisLabel(" "+PluginManagerHandler.registeredplugins.get(i).getName()+" "),13+i));
+            }
+
             item1.setExpanded(true);
 
             tree.add(item1);
             tree.add(item2);
             tree.add(item3);
+            if(PluginManagerHandler.plugisettings.size()!=0) {
+
+                tree.add(item4);
+            }
 
 
             tree.addListener(new ChangeListener() {
@@ -289,7 +310,16 @@ public class SettingsUI extends VisWindow {
                         case 11:
                             subitem12.add(container);
                             break;
+                        case 12:
+                            subitem12.add(container); //Own settingsoverview for Plugins
                         default:
+
+                            if(SelectedItem>12) {
+                                container.add(PluginManagerHandler.plugisettings.get(SelectedItem - 13));
+                            }
+
+
+
                             break;
 
 

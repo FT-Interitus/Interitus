@@ -112,7 +112,7 @@ public class UI {
     }
 
     public static void init() {
-        VisUI.load(VisUI.SkinScale.X1);
+
         stage = new Stage(ProgrammingSpace.viewport, ProgrammingSpace.UIbatch);
 
         root.setFillParent(true);

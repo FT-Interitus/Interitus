@@ -1,10 +1,11 @@
 package de.ft.interitus;
 
 import com.badlogic.gdx.Game;
+import com.kotcrab.vis.ui.VisUI;
 import de.ft.interitus.data.programm.Data;
 import de.ft.interitus.data.user.experience.ExperienceManager;
 import de.ft.interitus.loading.Loading;
-import de.ft.interitus.plugin.PluginManagerImpl;
+import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.utils.NetworkScan;
 
 public class Programm extends Game {
@@ -22,11 +23,12 @@ public class Programm extends Game {
         Thread loadplugins = new Thread() {
             @Override
             public void run() {
-                Var.pluginManager = new PluginManagerImpl();
+                Var.pluginManager = new PluginManagerHandler();
                 displayErrors.error = Var.pluginManager.init();
 
             }
         };
+        VisUI.load(VisUI.SkinScale.X1);
         loadplugins.start();
 
 

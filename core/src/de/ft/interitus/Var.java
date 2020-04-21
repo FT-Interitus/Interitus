@@ -1,10 +1,10 @@
 package de.ft.interitus;
 
-import de.ft.interitus.plugin.PluginManagerImpl;
+import de.ft.interitus.plugin.PluginManagerHandler;
 
 public class Var {
 
-    public static PluginManagerImpl pluginManager;
+    public static PluginManagerHandler pluginManager;
 
     public static double PROGRAMM_VERSION_ID = 1.0;
     public static double PROGRAMM_VERSION = 1.0;
