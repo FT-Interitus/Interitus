@@ -2,6 +2,7 @@ package de.ft.interitus.plugin;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -46,7 +47,7 @@ public class PluginManagerImpl {
 // laden der Klasse mit dem File als URL und der Mainclass
         Class cl = null;
         try {
-            cl = new URLClassLoader(new URL[]{new File(filetest.getAbsolutePath()).toURL()}).loadClass(main);
+            cl = new URLClassLoader(new URL[]{new File(filetest.getAbsolutePath()).toURI().toURL()}).loadClass(main);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (MalformedURLException e) {
@@ -62,7 +63,13 @@ public class PluginManagerImpl {
         if(isplugin){
             PluginInterface plugin = null;
             try {
-                plugin = (PluginInterface) cl.newInstance();
+                try {
+                    plugin = (PluginInterface) cl.getDeclaredConstructor().newInstance();
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
+                } catch (NoSuchMethodException e) {
+                    e.printStackTrace();
+                }
             } catch (InstantiationException e) {
                 e.printStackTrace();
             } catch (IllegalAccessException e) {
