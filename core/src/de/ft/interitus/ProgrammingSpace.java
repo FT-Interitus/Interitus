@@ -22,6 +22,7 @@ import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.input.IntegerAuswahl;
 import de.ft.interitus.input.Switch;
 import de.ft.interitus.input.TextField;
+import de.ft.interitus.input.popup.PopupManager;
 import de.ft.interitus.input.popup.PopupMenue;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.roboconnection.arduino.PortUpdate;
@@ -51,13 +52,16 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
     public static int h = 0;
     public static Drawable d;
     public static Animation testanim = new Animation(new Texture("ballfeueranimation.png"), 60, 100, 100, 3);
-    public static PopupMenue pm = new PopupMenue();
+
+    public static PopupManager popupmanager=new PopupManager(new PopupMenue());
     IntegerAuswahl ia;
+
     ShapeRenderer shapeRenderer;
 
     public ProgrammingSpace() {
         String[] items = {"item_1", "item_2", "item_3", "item_4"};
-        pm.setItems(items);
+        popupmanager.getPopup(0).setItems(items);
+
         ia = new IntegerAuswahl(400, 400, 50, 25);
         s = new Switch(500, 500);
         font = new BitmapFont();
@@ -265,8 +269,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
         testanim.startAnimation();
 //batch.draw(testanim.getAnimation(),50,50);
         // pm.setBounds(700,200);
-        pm.draw();
-        pm.rechtsKlickControlle();
+        popupmanager.draw();
         batch.end();
 
         displayErrors.checkerror();
