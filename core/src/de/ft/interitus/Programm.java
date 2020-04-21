@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import de.ft.interitus.data.programm.Data;
 import de.ft.interitus.data.user.experience.ExperienceManager;
 import de.ft.interitus.loading.Loading;
+import de.ft.interitus.plugin.PluginManagerImpl;
 import de.ft.interitus.utils.NetworkScan;
 
 public class Programm extends Game {
@@ -18,6 +19,15 @@ public class Programm extends Game {
     @Override
     public void create() {
       //  SSHConnection.update("192.168.2.112","pi","Pi-Server");
+        Thread loadplugins = new Thread() {
+            @Override
+            public void run() {
+                PluginManagerImpl pl = new PluginManagerImpl();
+                pl.start();
+            }
+        };
+        loadplugins.start();
+
 
         Thread seachnetwork = new Thread() {
             @Override
