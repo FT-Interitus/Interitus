@@ -65,8 +65,6 @@ public class PluginManagerHandler {
         }
 
 
-
-
 // auslesen der Attribute aus der Manifest
 
             Attributes attrib = manifest.getMainAttributes();
@@ -167,13 +165,10 @@ public static void register(PluginRegister pluginRegister) { //Wird von Plugins 
 
 
             if(doppelt) {
+
                 throw new LoaderException("Es gibt mehrere Plugins mit dem geleichen Namen");
 
             }
-
-
-
-
 
 
             for(int i =0;i<Var.pluginManager.loadedplugins.size();i++) {

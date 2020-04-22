@@ -219,11 +219,8 @@ public class SettingsUI extends VisWindow {
             TestNode item2 = new TestNode(new VisLabel(" Verhalten "),4);
             TestNode item3 = new TestNode(new VisLabel(" Programm Einstellungen "),8);
             TestNode item4;
-            if(PluginManagerHandler.plugisettings.size()!=0) {
-               item4 = new TestNode(new VisLabel(" Plugin Einstellungen "), 12);
-            }else{
-                item4 = null;
-            }
+            item4 = new TestNode(new VisLabel(" Plugins"), 12);
+
 
             item1.add(new TestNode(new VisLabel(" Theme"),1));
             item1.add(new TestNode(new VisLabel(" item 1.2"),2));
@@ -246,10 +243,8 @@ public class SettingsUI extends VisWindow {
             tree.add(item1);
             tree.add(item2);
             tree.add(item3);
-            if(PluginManagerHandler.plugisettings.size()!=0) {
+            tree.add(item4);
 
-                tree.add(item4);
-            }
 
 
             tree.addListener(new ChangeListener() {
@@ -311,7 +306,7 @@ public class SettingsUI extends VisWindow {
                             subitem12.add(container);
                             break;
                         case 12:
-                            subitem12.add(container); //Own settingsoverview for Plugins
+                            subitem13.add(container);
                         default:
 
                             if(SelectedItem>12) {

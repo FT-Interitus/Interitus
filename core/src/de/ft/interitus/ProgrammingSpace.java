@@ -25,12 +25,15 @@ import de.ft.interitus.input.TextField;
 import de.ft.interitus.input.popup.PopupManager;
 import de.ft.interitus.input.popup.PopupMenue;
 import de.ft.interitus.loading.AssetLoader;
+import de.ft.interitus.plugin.store.ReadStorePlugins;
 import de.ft.interitus.roboconnection.arduino.PortUpdate;
 import de.ft.interitus.roboconnection.arduino.SerialConnection;
+import de.ft.interitus.utils.DownloadFile;
 import de.ft.interitus.utils.PositionSaver;
 import de.ft.interitus.utils.animation.Animation;
 
 import java.awt.*;
+import java.io.IOException;
 
 import static com.badlogic.gdx.Gdx.input;
 import static de.ft.interitus.Settings.darkmode;
@@ -60,6 +63,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
     public ProgrammingSpace() {
 
+       ReadStorePlugins.read();
 
 
         ia = new IntegerAuswahl(400, 400, 50, 25);

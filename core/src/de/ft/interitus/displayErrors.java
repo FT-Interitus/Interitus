@@ -5,14 +5,16 @@ import de.ft.interitus.UI.UI;
 
 public class displayErrors {
    public static Exception error;
+   public static String customErrorstring = "Ein Fehler ist aufgetreten!";
 
    public static void checkerror() {
        if(error!=null) {
 
 
-           Dialogs.showErrorDialog(UI.stage,"Ein Fehler ist aufgetreten!",error);
+           Dialogs.showErrorDialog(UI.stage,customErrorstring,error);
 
            error = null;
+           customErrorstring = "Ein Fehler ist aufgetreten!";
 
 
        }
