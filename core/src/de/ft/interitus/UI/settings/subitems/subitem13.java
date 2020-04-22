@@ -120,7 +120,7 @@ public class subitem13 {
 
 
 
-                if (search.getText() != "" && search.getText() != " " && search.getText().length() > 0) {
+                if (search.getText() != "" && search.getText() != " " && search.getText().length() > 0&&pluginimage.size()==StorePluginsVar.pluginEntries.size()) {
 
 
 
