@@ -41,14 +41,12 @@ public class DownloadFile {
 
             // opens input stream from the HTTP connection
             InputStream inputStream = httpConn.getInputStream();
-           System.out.println();
            byte[] bytes = inputStream.readAllBytes();
             String s = new String(bytes, StandardCharsets.UTF_8);
 
 
             inputStream.close();
             httpConn.disconnect();
-            System.out.println("File downloaded");
             return s;
 
 
@@ -96,14 +94,12 @@ public class DownloadFile {
 
             // opens input stream from the HTTP connection
             InputStream inputStream = httpConn.getInputStream();
-            System.out.println();
             byte[] bytes = inputStream.readAllBytes();
 
 
 
             inputStream.close();
             httpConn.disconnect();
-            System.out.println("File downloaded");
             return bytes;
 
 

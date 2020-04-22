@@ -286,8 +286,9 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
         displayErrors.checkerror();
 
         if(subitem13.saveme!=null) {
-            AssetLoader.storeimages.add(new Texture(subitem13.saveme));
-            subitem13.saveme=null;
+                AssetLoader.storeimages.add(new Texture( subitem13.saveme));
+                subitem13.saveme = null;
+
         }
 
     }

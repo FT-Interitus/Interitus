@@ -1,6 +1,7 @@
 package de.ft.interitus.plugin.store;
 
 import de.ft.interitus.displayErrors;
+import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.utils.DownloadFile;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,7 +29,7 @@ public class ReadStorePlugins {
 
 
 try {
-    for (plugincounter = plugincounter; plugincounter < 10; plugincounter++) {
+    for (plugincounter = plugincounter; plugincounter < 999999999; plugincounter++) {
         if (!jsonObject.has("plugin" + plugincounter)) {
             break;
         }
@@ -63,16 +64,16 @@ e.printStackTrace();
 
     public static int loadmore() {
         JSONObject jsonObject = new JSONObject(jsonfile);
-        int oldplugin = plugincounter;
-        int limit = plugincounter+5;
-        for(plugincounter=plugincounter;plugincounter<limit;plugincounter++) {
-            if(!jsonObject.has("plugin"+plugincounter)) {
+        int oldplugin = AssetLoader.storeimages.size();
+        int limit =  AssetLoader.storeimages.size()+StorePluginsVar.loadinglimit;
+        for(int i= AssetLoader.storeimages.size(); i<limit;i++) {
+            if(!jsonObject.has("plugin"+i)) {
 
                 break;
             }
         }
 
-        for(int i = oldplugin;i<plugincounter;i++) {
+        for(int i = oldplugin;i< limit;i++) {
 
             int id =jsonObject.getJSONObject("plugin"+i).getInt("id");
             String name = jsonObject.getJSONObject("plugin"+i).getString("name");
@@ -84,7 +85,8 @@ e.printStackTrace();
         }
 
 
-        return plugincounter-oldplugin;
+        System.out.println("Plugin "+( AssetLoader.storeimages.size()-oldplugin));
+        return  AssetLoader.storeimages.size()-oldplugin;
 
     }
 

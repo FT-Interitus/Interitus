@@ -84,7 +84,16 @@ public static ArrayList<Texture> storeimages = new ArrayList<>();
             //Wire Node
             manager.load(workingdirectory+"node.png",Texture.class);
 
-            for(int i=0;i< StorePluginsVar.pluginEntries.size();i++) {
+
+            int load = 0;
+
+            if(StorePluginsVar.pluginEntries.size()>10) {
+                load =10;
+            }else{
+                load = StorePluginsVar.pluginEntries.size();
+            }
+            for(int i=0;i<load;i++) {
+                System.out.println("load"+i);
                 byte[] download =DownloadFile.downloadBytes(StorePluginsVar.pluginEntries.get(i).getImage());
                 Pixmap pixmap = new Pixmap(download,0,download.length);
                 storeimages.add(new Texture(pixmap));
