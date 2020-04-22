@@ -1,10 +1,17 @@
 package de.ft.interitus.loading;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.displayErrors;
+import de.ft.interitus.plugin.store.StorePluginsVar;
+import de.ft.interitus.utils.DownloadFile;
+
+import java.util.ArrayList;
 
 public class AssetLoader {
+
+public static ArrayList<Texture> storeimages = new ArrayList<>();
 
 
     public static String group = "";
@@ -76,6 +83,11 @@ public class AssetLoader {
             group = "Wire-Node";
             //Wire Node
             manager.load(workingdirectory+"node.png",Texture.class);
+
+            for(int i=0;i< StorePluginsVar.pluginEntries.size();i++) {
+                Pixmap pixmap = new Pixmap(DownloadFile.downloadBytes(StorePluginsVar.pluginEntries.get(i).getImage()),0,DownloadFile.downloadBytes(StorePluginsVar.pluginEntries.get(i).getImage()).length);
+                storeimages.add(new Texture(pixmap));
+            }
 
 
         }catch (Exception e) {

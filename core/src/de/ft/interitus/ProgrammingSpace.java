@@ -6,6 +6,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -26,6 +27,7 @@ import de.ft.interitus.input.popup.PopupManager;
 import de.ft.interitus.input.popup.PopupMenue;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.plugin.store.ReadStorePlugins;
+import de.ft.interitus.plugin.store.StorePluginsVar;
 import de.ft.interitus.roboconnection.arduino.PortUpdate;
 import de.ft.interitus.roboconnection.arduino.SerialConnection;
 import de.ft.interitus.utils.DownloadFile;
@@ -63,7 +65,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
     public ProgrammingSpace() {
 
-       ReadStorePlugins.read();
+
 
 
         ia = new IntegerAuswahl(400, 400, 50, 25);

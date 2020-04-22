@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class ReadStorePlugins {
    static String jsonfile =null;
-   static int plugincounter;
+   static int plugincounter =0;
     public static void read() {
 
 
@@ -35,18 +35,23 @@ try {
     }
 
     for(int i=0;i<plugincounter;i++) {
-        int id =jsonObject.getJSONObject("plugin"+plugincounter).getInt("id");
-        String name = jsonObject.getJSONObject("plugin"+plugincounter).getString("name");
-        double version = jsonObject.getJSONObject("plugin"+plugincounter).getDouble("version");
-        String path = jsonObject.getJSONObject("plugin"+plugincounter).getString("path");
-        String description = jsonObject.getJSONObject("plugin"+plugincounter).getString("description");
-        String image =jsonObject.getJSONObject("plugin"+plugincounter).getString("image");
+
+
+        int id =jsonObject.getJSONObject("plugin"+i).getInt("id");
+        String name = jsonObject.getJSONObject("plugin"+i).getString("name");
+        double version = jsonObject.getJSONObject("plugin"+i).getDouble("version");
+        String path = jsonObject.getJSONObject("plugin"+i).getString("path");
+        String description = jsonObject.getJSONObject("plugin"+i).getString("description");
+        String image =jsonObject.getJSONObject("plugin"+i).getString("image");
         StorePluginsVar.pluginEntries.add(new StorePluginEntry(id,name,version,path,description,image));
+
+        System.out.println(StorePluginsVar.pluginEntries.size());
+
     }
 
 
 }catch (Exception e) {
-
+e.printStackTrace();
 }
 
 
