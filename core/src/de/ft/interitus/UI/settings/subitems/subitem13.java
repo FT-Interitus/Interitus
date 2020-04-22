@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.Align;
 import com.kotcrab.vis.ui.widget.VisImage;
 import com.kotcrab.vis.ui.widget.VisLabel;
+import com.kotcrab.vis.ui.widget.VisScrollPane;
 import com.kotcrab.vis.ui.widget.VisTable;
 import de.ft.interitus.Programm;
 import de.ft.interitus.ProgrammingSpace;
@@ -28,28 +29,35 @@ import java.util.ArrayList;
 
 public class subitem13 {
     static ArrayList<VisImage> pluginimage = new ArrayList<>();
+    static VisTable scrollingbar = new VisTable();
     public static void add(VisTable builder) {
-        int counter;
-        if(StorePluginsVar.pluginEntries.size()<=10) {
-            counter = StorePluginsVar.pluginEntries.size();
-        }else{
-            counter = 10;
-        }
+
+
+        scrollingbar.clearChildren();
+
 
 
        if(pluginimage.size()==0) {
-            for (int i = 0; i < counter; i++) {
+            for (int i = 0; i < StorePluginsVar.pluginEntries.size(); i++) {
 
                 pluginimage.add(new VisImage(AssetLoader.storeimages.get(i))); //Hier ist das new ok da hier wirklich ein neues Bild erzeugt werden MUSS
 
             }
        }
+       scrollingbar.padTop(0);
 
         for(int i=0;i<pluginimage.size();i++) {
-            builder.add(pluginimage.get(i)).padBottom(15).align(Align.right).padRight(-100).height(75).width(75); //TODO ausarbeiten un dscrollbar wietere laden button usw...
-            builder.row();
+            scrollingbar.add(pluginimage.get(i)).padBottom(15).align(Align.left).fillY().padLeft(-200).height(80).width(80);
+            scrollingbar.add(new VisLabel(StorePluginsVar.pluginEntries.get(i).getDescription())).padLeft(-100).padRight(-200).padTop(-15);
+            scrollingbar.row();
         }
-        builder.row();
-       builder.add(new VisLabel("PluginStore")).expandX().fillY();
+        scrollingbar.row();
+    //   scrollingbar.add(new VisLabel("PluginStore")).expandX().fillY();
+
+        VisScrollPane scrollPane = new VisScrollPane(scrollingbar);
+        scrollPane.setFlickScroll(false);
+        scrollPane.setFadeScrollBars(false);
+        builder.add(scrollPane).spaceTop(8).growX().fillX().width(525).height(550).padTop(-60).padBottom(-60).row();
+
     }
 }

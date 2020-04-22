@@ -37,7 +37,7 @@ public class PortUpdate {
                                 SerialConnection.searchArduino();
 
 
-                                if(Step3.selectportlist!=null) {
+                                if(Step3.selectportlist!=null) { //TODO @Felix ich hatte hier einen Null Pointer
                                     Step3.selectportlist.setItems(SerialConnection.getPortNames());
                                 }
                             } else if (SerialConnection.getPorts().length < portsold[0]) {
