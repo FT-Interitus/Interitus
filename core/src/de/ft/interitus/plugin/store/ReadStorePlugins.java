@@ -64,7 +64,8 @@ e.printStackTrace();
     public static int loadmore() {
         JSONObject jsonObject = new JSONObject(jsonfile);
         int oldplugin = plugincounter;
-        for(plugincounter=plugincounter;plugincounter<plugincounter+10;plugincounter++) {
+        int limit = plugincounter+5;
+        for(plugincounter=plugincounter;plugincounter<limit;plugincounter++) {
             if(!jsonObject.has("plugin"+plugincounter)) {
 
                 break;
