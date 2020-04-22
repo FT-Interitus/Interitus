@@ -4,6 +4,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.utils.Align;
 import com.kotcrab.vis.ui.widget.VisImage;
 import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisTable;
@@ -34,17 +35,18 @@ public class subitem13 {
         }else{
             counter = 10;
         }
-        System.out.println(StorePluginsVar.pluginEntries.size() +" that the size");
 
 
-        for(int i = 0;i<counter;i++) {
+       if(pluginimage.size()==0) {
+            for (int i = 0; i < counter; i++) {
 
                 pluginimage.add(new VisImage(AssetLoader.storeimages.get(i))); //Hier ist das new ok da hier wirklich ein neues Bild erzeugt werden MUSS
 
-        }
+            }
+       }
 
         for(int i=0;i<pluginimage.size();i++) {
-            builder.add(pluginimage.get(i)).expandX().fillY();
+            builder.add(pluginimage.get(i)).padBottom(15).align(Align.right).padRight(-100).height(75).width(75); //TODO ausarbeiten un dscrollbar wietere laden button usw...
             builder.row();
         }
         builder.row();

@@ -17,8 +17,7 @@ public class Loading extends ScreenAdapter implements Screen {
     public void render(float delta) {
 
 
-        Gdx.gl.glClearColor(1, 1, 1, 1);
-       Gdx.graphics.setWindowedMode(1,1);
+
 
         if(AssetLoader.manager.update()) {
             AssetLoader.save();
