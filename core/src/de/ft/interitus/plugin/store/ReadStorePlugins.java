@@ -61,26 +61,30 @@ e.printStackTrace();
 
     }
 
-    public static void loadmore() {
+    public static int loadmore() {
         JSONObject jsonObject = new JSONObject(jsonfile);
         int oldplugin = plugincounter;
         for(plugincounter=plugincounter;plugincounter<plugincounter+10;plugincounter++) {
             if(!jsonObject.has("plugin"+plugincounter)) {
+
                 break;
             }
         }
 
-        for(int i = plugincounter;i<plugincounter;i++) {
-            int id =jsonObject.getJSONObject("plugin"+plugincounter).getInt("id");
-            String name = jsonObject.getJSONObject("plugin"+plugincounter).getString("name");
-            double version = jsonObject.getJSONObject("plugin"+plugincounter).getDouble("version");
-            String path = jsonObject.getJSONObject("plugin"+plugincounter).getString("path");
-            String description = jsonObject.getJSONObject("plugin"+plugincounter).getString("description");
-            String image =jsonObject.getJSONObject("plugin"+plugincounter).getString("image");
+        for(int i = oldplugin;i<plugincounter;i++) {
+
+            int id =jsonObject.getJSONObject("plugin"+i).getInt("id");
+            String name = jsonObject.getJSONObject("plugin"+i).getString("name");
+            double version = jsonObject.getJSONObject("plugin"+i).getDouble("version");
+            String path = jsonObject.getJSONObject("plugin"+i).getString("path");
+            String description = jsonObject.getJSONObject("plugin"+i).getString("description");
+            String image =jsonObject.getJSONObject("plugin"+i).getString("image");
             StorePluginsVar.pluginEntries.add(new StorePluginEntry(id,name,version,path,description,image));
         }
 
-        System.out.println("new Plugins "+(plugincounter-oldplugin));
+
+        return plugincounter-oldplugin;
+
     }
 
 

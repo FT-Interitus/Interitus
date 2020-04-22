@@ -17,6 +17,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.BlockVar;
 import de.ft.interitus.UI.UI;
+import de.ft.interitus.UI.settings.subitems.subitem13;
 import de.ft.interitus.UI.setup.SetupWindow;
 import de.ft.interitus.data.programm.Data;
 import de.ft.interitus.data.user.changes.DataManager;
@@ -131,6 +132,9 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
     @Override
     public void render(float delta) {
+
+
+
         RechtsKlick.checkblockmouse();
 
         try {
@@ -280,6 +284,11 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
         batch.end();
 
         displayErrors.checkerror();
+
+        if(subitem13.saveme!=null) {
+            AssetLoader.storeimages.add(new Texture(subitem13.saveme));
+            subitem13.saveme=null;
+        }
 
     }
 
