@@ -181,11 +181,8 @@ float b = left_connection.getY_exit() - ProgrammingSpace.cam.unproject(new Vecto
                     }
 
                     if(left_connection!=null) {
- <<<<<<< Updated upstream
                         left_connection.setWire_right(null);
-=======
-                        left_connection.setWire_right(null); //TODO hier fehler bei der benutzung von Wirenodes
->>>>>>> Stashed changes
+
                         left_connection = null;
                     }
 
