@@ -191,7 +191,7 @@ public static void register(PluginRegister pluginRegister) { //Wird von Plugins 
         plugisettings.add(settingsclass);
     }
     public static void addMenuEntry(Menu menuentry) {
-        menuentry.add(menuentry);
+        pluginMenubar.add(menuentry);
     }
 
 }
