@@ -197,8 +197,7 @@ public static void register(PluginRegister pluginRegister) { //Wird von Plugins 
 
                     pluginthread.clear();
 
-
-
+                    //TODO erkennen ob ein Plugin zu langsam ist (starttime>19)
 
                     finish.clear();
                     starttime.clear();

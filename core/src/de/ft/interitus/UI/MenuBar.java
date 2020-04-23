@@ -293,6 +293,7 @@ if(fullscreen==false) {
         UI.menuBar.addMenu(editMenu);
         UI.menuBar.addMenu(windowMenu);
         UI.menuBar.addMenu(helpMenu);
+
         for(int i =0;i< PluginManagerHandler.pluginMenubar.size();i++) {
             UI.menuBar.addMenu(PluginManagerHandler.pluginMenubar.get(i));
         }
