@@ -21,18 +21,22 @@ public static void Rechtsklickupdate(){
 
             }
         }
+
+
+        if(mob==false) {
+            mouseoverblockindex = -1;
+            ProgrammingSpace.popupmanager.getPopup(1).setShow(false);
+            ProgrammingSpace.popupmanager.setPossiblepopup(0);
+        }else{
+            ProgrammingSpace.popupmanager.getPopup(0).setShow(false);
+            ProgrammingSpace.popupmanager.setPossiblepopup(1);
+        }
+
     }
 
 
 
-    if(mob==false) {
-        mouseoverblockindex = -1;
-        ProgrammingSpace.popupmanager.getPopup(1).setShow(false);
-        ProgrammingSpace.popupmanager.setPossiblepopup(0);
-    }else{
-        ProgrammingSpace.popupmanager.getPopup(0).setShow(false);
-        ProgrammingSpace.popupmanager.setPossiblepopup(1);
-    }
+
 }
 }
 
