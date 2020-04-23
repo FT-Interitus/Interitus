@@ -291,13 +291,21 @@ if(fullscreen==false) {
 
         UI.menuBar.addMenu(fileMenu);
         UI.menuBar.addMenu(editMenu);
+
+
+
+
         UI.menuBar.addMenu(windowMenu);
+
         UI.menuBar.addMenu(helpMenu);
 
-        for(int i =0;i< PluginManagerHandler.pluginMenubar.size();i++) {
+        for(int i =0;i< PluginManagerHandler.pluginMenubar.size();i++) { //Alle Plugins MenuBar werden der MenuBar
             UI.menuBar.addMenu(PluginManagerHandler.pluginMenubar.get(i));
         }
+
     }
+
+
 
 
     protected static PopupMenu createSubMenu(int count, final String[] projects) {
