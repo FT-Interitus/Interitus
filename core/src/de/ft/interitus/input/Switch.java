@@ -7,7 +7,7 @@ import de.ft.interitus.input.check.Check;
 
 import java.util.Random;
 
-public class Switch {
+public class Switch implements VisObjekt{
     private int x;
     private int y;
     private int w=50;
@@ -180,18 +180,19 @@ if(wackeln==true) {
         this.wackeln = wackeln;
     }
 
+    @Override
     public int getW() {
         return w;
     }
-
+    @Override
     public int getH() {
         return h;
     }
-
+    @Override
     public int getY() {
         return y;
     }
-
+    @Override
     public int getX() {
         return x;
     }

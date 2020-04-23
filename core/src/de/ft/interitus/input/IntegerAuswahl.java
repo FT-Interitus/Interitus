@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
-public class IntegerAuswahl {
+public class IntegerAuswahl implements VisObjekt{
     private int x,y,w,h;
     private SpriteBatch b=new SpriteBatch();
     private Texture Textfeldmitte;
@@ -123,5 +123,25 @@ if(visible) {
 
     public boolean isDisable() {
         return disable;
+    }
+
+    @Override
+    public int getX() {
+        return x;
+    }
+
+    @Override
+    public int getY() {
+        return y;
+    }
+
+    @Override
+    public int getW() {
+        return w;
+    }
+
+    @Override
+    public int getH() {
+        return h;
     }
 }

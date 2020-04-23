@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import de.ft.interitus.input.check.Check;
 import de.ft.interitus.input.check.InputManager;
 
-public class TextField {
+public class TextField implements VisObjekt{
 
     private int x,y,w,h;
     SpriteBatch b=new SpriteBatch();
@@ -143,5 +143,25 @@ if(System.currentTimeMillis()>cursersave){
 
     public int getTextAnordnung() {
         return TextAnordnung;
+    }
+
+    @Override
+    public int getX() {
+        return x;
+    }
+
+    @Override
+    public int getY() {
+        return y;
+    }
+
+    @Override
+    public int getW() {
+        return w;
+    }
+
+    @Override
+    public int getH() {
+        return h;
     }
 }
