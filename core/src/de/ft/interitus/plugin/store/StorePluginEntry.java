@@ -7,14 +7,16 @@ public class StorePluginEntry {
     String description;
     String image;
     String path;
+    String detailed_description;
 
-    public StorePluginEntry(int id,String name,double version,String path,String description,String image) {
+    public StorePluginEntry(int id,String name,double version,String path,String description,String image,String detailed_description) {
         this.id =id;
         this.name = name;
         this.image = image;
         this.path = path;
         this.version = version;
         this.description = description;
+        this.detailed_description = detailed_description;
 
     }
 
@@ -66,5 +68,11 @@ public class StorePluginEntry {
         this.version = version;
     }
 
+    public String getDetailed_description() {
+        return detailed_description;
+    }
 
+    public void setDetailed_description(String detailed_description) {
+        this.detailed_description = detailed_description;
+    }
 }

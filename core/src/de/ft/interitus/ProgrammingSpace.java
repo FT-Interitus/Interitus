@@ -11,12 +11,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.BlockVar;
 import de.ft.interitus.UI.UI;
+import de.ft.interitus.UI.settings.SettingsUI;
 import de.ft.interitus.UI.settings.subitems.subitem13;
 import de.ft.interitus.UI.setup.SetupWindow;
 import de.ft.interitus.data.programm.Data;
@@ -62,7 +64,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
     public static PopupManager popupmanager=new PopupManager(new PopupMenue("ein popup"),new PopupMenue("BlockPopup","delete"));
     IntegerAuswahl ia;
 
-    ShapeRenderer shapeRenderer;
+    public static ShapeRenderer shapeRenderer;
 
     public ProgrammingSpace() {
 
@@ -125,8 +127,14 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
         PortUpdate.UpdateConnectionWindowPortsList();
         Gdx.graphics.setWindowedMode(Var.w, Var.h);
 
-        SetupWindow sw = new SetupWindow();
-        sw.show();
+
+
+        try {
+            SetupWindow sw = new SetupWindow(); //TODO zu debug zwecken
+            sw.show();
+        }catch (NullPointerException e) {
+
+        }
     }
 
 
@@ -272,7 +280,12 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
         textfieldtest.setTextAnordnung(1);
         textfieldtest.draw();
 
-        UI.update();
+        try {
+            UI.update();
+        }catch (NullPointerException e) {
+            //Falls die UI nicht richtig initialisiert werden konnte
+        }
+
 
 
         batch.begin();
@@ -291,6 +304,9 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
         }
 
+
+
+
     }
 
 
@@ -299,7 +315,11 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
         super.resize(width, height);
 
 
-        UI.updateView(width, height);
+        try {
+            UI.updateView(width, height);
+        }catch (NullPointerException e) { //Falls die UI nicht initialisiert werden konnte
+
+        }
         viewport.update(width, height);
 
 

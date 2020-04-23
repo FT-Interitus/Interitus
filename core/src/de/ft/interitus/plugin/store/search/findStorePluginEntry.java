@@ -17,8 +17,10 @@ public class findStorePluginEntry {
             if(storePluginEntry.getDescription().contains(search)) {
                 findobjects.add(storePluginEntry);
             }else if(storePluginEntry.getName().contains(search)) {
-                findobjects.add(storePluginEntry); //TODO eventuell weitere Such parameter
-            }
+                findobjects.add(storePluginEntry);
+            }else if(storePluginEntry.getDetailed_description().contains(search)) {
+                findobjects.add(storePluginEntry);
+            }//TODO eventuell weitere Such parameter
 
         }
 

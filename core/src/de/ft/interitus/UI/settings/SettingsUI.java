@@ -64,6 +64,8 @@ public class SettingsUI extends VisWindow {
         }
     }
 
+
+
     private static boolean accepteddangerous = false;
     final Padding padding = new Padding(2, 3);
 
@@ -95,6 +97,7 @@ public class SettingsUI extends VisWindow {
 
 
         }
+
 
         public TestBuilder(String name, final TableBuilder builder) {
             super(name);

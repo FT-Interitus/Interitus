@@ -25,6 +25,7 @@ public class ReadStorePlugins {
             jsonObject = new JSONObject(jsonfile);
         }catch (JSONException e) {
             displayErrors.error =e;
+            e.printStackTrace();
         }
 
 
@@ -44,7 +45,8 @@ try {
         String path = jsonObject.getJSONObject("plugin"+i).getString("path");
         String description = jsonObject.getJSONObject("plugin"+i).getString("description");
         String image =jsonObject.getJSONObject("plugin"+i).getString("image");
-        StorePluginsVar.pluginEntries.add(new StorePluginEntry(id,name,version,path,description,image));
+        String detailed_description =jsonObject.getJSONObject("plugin"+i).getString("detailed_description");
+        StorePluginsVar.pluginEntries.add(new StorePluginEntry(id,name,version,path,description,image,detailed_description));
 
         System.out.println(StorePluginsVar.pluginEntries.size());
 
@@ -81,7 +83,8 @@ e.printStackTrace();
             String path = jsonObject.getJSONObject("plugin"+i).getString("path");
             String description = jsonObject.getJSONObject("plugin"+i).getString("description");
             String image =jsonObject.getJSONObject("plugin"+i).getString("image");
-            StorePluginsVar.pluginEntries.add(new StorePluginEntry(id,name,version,path,description,image));
+            String detailed_description =jsonObject.getJSONObject("plugin"+i).getString("detailed_description");
+            StorePluginsVar.pluginEntries.add(new StorePluginEntry(id,name,version,path,description,image,detailed_description));
         }
 
 
