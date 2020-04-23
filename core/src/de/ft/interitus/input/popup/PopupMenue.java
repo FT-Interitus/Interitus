@@ -31,6 +31,12 @@ public class PopupMenue {
             buttons.add(b);
         }
     }
+    public PopupMenue(VisObjekt... vo){
+        buttons.clear();
+        for(int i=0;i<vo.length;i++){
+            buttons.add(vo[i]);
+        }
+    }
 
     public void setShow(boolean show) {
         this.show = show;
@@ -84,7 +90,7 @@ public class PopupMenue {
 
             for (int i = 0; i < buttons.size(); i++) {
                 buttons.get(i).setBounds(this.x +ausgleichX, this.y + (buttonheight * i)+ausgleichY, 200, buttonheight);
-                //buttons.get(i).setImage(popupButtonimage);
+                    //buttons.get(i).setImage(popupButtonimage);
                 buttons.get(i).draw();
             }
 

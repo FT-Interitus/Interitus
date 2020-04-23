@@ -59,7 +59,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
     public static Drawable d;
     public static Animation testanim = new Animation(new Texture("ballfeueranimation.png"), 60, 100, 100, 3);
 
-    public static PopupManager popupmanager=new PopupManager(new PopupMenue("ein popup"),new PopupMenue("BlockPopup","delete"));
+    public static PopupManager popupmanager=new PopupManager(new PopupMenue(new TextField(0,0,0,0)),new PopupMenue("BlockPopup","delete"));
     IntegerAuswahl ia;
 
     ShapeRenderer shapeRenderer;
