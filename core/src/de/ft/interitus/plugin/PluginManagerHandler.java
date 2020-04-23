@@ -196,6 +196,7 @@ public static void register(PluginRegister pluginRegister) { //Wird von Plugins 
                 public void run() {
 
                     pluginthread.clear();
+                    finish.clear();
 
 
                     if(!firtstime) {
@@ -223,6 +224,7 @@ public static void register(PluginRegister pluginRegister) { //Wird von Plugins 
 
                             }
                         });
+                        pluginthread.get(pluginthread.size()-1).start();
 
 
 
