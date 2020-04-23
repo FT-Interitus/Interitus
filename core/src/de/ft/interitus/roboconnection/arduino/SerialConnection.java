@@ -1,4 +1,6 @@
 package de.ft.interitus.roboconnection.arduino;
+
+
 import com.fazecast.jSerialComm.*;
 import de.ft.interitus.UI.setup.steps.ArduinoSteps.Step3;
 
@@ -121,6 +123,7 @@ if(empfangen !="") {
 
 
     static void empfangenListener(SerialPort port){
+        System.out.println("abcd");
         final BufferedReader b= new BufferedReader(new InputStreamReader(port.getInputStream()));
 
 
@@ -132,6 +135,7 @@ if(empfangen !="") {
 
             @Override
             public void serialEvent(SerialPortEvent event) {
+                System.out.println("event");
                 if (event.getEventType() != SerialPort.LISTENING_EVENT_DATA_AVAILABLE)
                     return;
                 try {
@@ -169,16 +173,9 @@ if(empfangen !="") {
 
 
 
-
-
-
-
-
-
-
     public static class Authentifikation {
         private static String output;
-        private static int abtastzeit=10000;
+        private static int abtastzeit=50000;
         private static int arduinoneustartzeit=0;
 
 
@@ -267,7 +264,7 @@ if(empfangen !="") {
 
                             System.out.println("i     " + i);
                             try {
-                                SerialPort checkport = ports[i-2];
+                                SerialPort checkport = ports[1];
 
                                 if (checkport.openPort()) {        //versuche port zu öffnen
                                     System.out.println("Successfully opened the port."+checkport.getSystemPortName());     //port geöffnet
