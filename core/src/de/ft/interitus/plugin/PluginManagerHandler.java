@@ -190,45 +190,43 @@ public static void register(PluginRegister pluginRegister) { //Wird von Plugins 
            final ArrayList<Thread> pluginthread = new ArrayList<>();
            final ArrayList<Long> starttime = new ArrayList<>();
            final ArrayList<Boolean> finish = new ArrayList<>();
-           final boolean firtstime = true;
+            final boolean[] firtstime = {true};
             plugintimer.scheduleAtFixedRate(new TimerTask() {
                 @Override
                 public void run() {
 
                     pluginthread.clear();
+
+
+
+
                     finish.clear();
+                    starttime.clear();
 
-
-                    if(!firtstime) {
-
-                        for (int i = 0; i < registeredplugins.size(); i++) {
-
-                            if(finish.get(i)&&(System.currentTimeMillis()-starttime.get(i))<19) {
-
-
-                            }else{
-                                System.out.println("Plugin " + registeredplugins.get(i).getName()+" verlangsamt das System");
-                            }
-
-                        }
-                    }
 
                     for(int i =0;i<registeredplugins.size();i++) {
 
                        final int finalI = i;
+
+                       final int finalI1 = i;
                         pluginthread.add(new Thread() {
                             @Override
                             public void run() {
-                                starttime.add(System.currentTimeMillis());
-                              finish.add(Var.pluginManager.loadedplugins.get(finalI).run());
+
+
+                                    starttime.add(System.currentTimeMillis());
+                                    finish.add(Var.pluginManager.loadedplugins.get(finalI).run());
+
+
 
                             }
                         });
-                        pluginthread.get(pluginthread.size()-1).start();
 
 
+                        pluginthread.get(i).start();
 
                     }
+                    firtstime[0] = false;
 
 
 
