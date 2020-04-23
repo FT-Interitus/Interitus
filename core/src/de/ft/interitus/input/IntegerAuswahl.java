@@ -47,7 +47,9 @@ public class IntegerAuswahl implements VisObjekt{
     public void setW(int w) {
         this.w = w;
     }
-    public void draw(ShapeRenderer renderer, SpriteBatch batch){
+
+    @Override
+    public void draw(){
         if(buttonOben.isjustPressed() && value<grenzer){
             value++;
         }
@@ -143,5 +145,13 @@ if(visible) {
     @Override
     public int getH() {
         return h;
+    }
+
+    @Override
+    public void setBounds(int x, int y, int w, int h) {
+        this.x=x;
+        this.y=y;
+        this.w=w;
+        this.h=h;
     }
 }

@@ -40,7 +40,7 @@ public class Button implements VisObjekt{
 
 
     }
-
+    @Override
     public void setBounds(int x,int y,int w,int h){
         this.x=x;
         this.y=y;
@@ -90,7 +90,7 @@ return check.isPressed(x,y,w,h);
     public void setImage(Texture image){
         this.image=image;
     }
-
+    @Override
     public void draw(){
         if(isVisible()) {
             if (image == null) {

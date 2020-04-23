@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import de.ft.interitus.input.Button;
+import de.ft.interitus.input.VisObjekt;
 import de.ft.interitus.input.check.Check;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class PopupMenue {
 
     private int buttonheight=20;
     private SpriteBatch batch=new SpriteBatch();
-    private ArrayList<Button>buttons=new ArrayList<>();
+    private ArrayList<VisObjekt>buttons=new ArrayList<>();
     private Texture popupButtonimage=new Texture("popupbuttonimage.png");
     private boolean show=false;
     private Check check=new Check();
@@ -83,7 +84,7 @@ public class PopupMenue {
 
             for (int i = 0; i < buttons.size(); i++) {
                 buttons.get(i).setBounds(this.x +ausgleichX, this.y + (buttonheight * i)+ausgleichY, 200, buttonheight);
-                buttons.get(i).setImage(popupButtonimage);
+                //buttons.get(i).setImage(popupButtonimage);
                 buttons.get(i).draw();
             }
 
@@ -108,9 +109,9 @@ public class PopupMenue {
     public int getPressed(){
         int p=-1;
         for(int i=0;i<buttons.size();i++){
-            if(buttons.get(i).isjustPressed()){
-                p=i;
-            }
+            //if(buttons.get(i).isjustPressed()){
+            //    p=i;
+            //}
         }
         return p;
     }

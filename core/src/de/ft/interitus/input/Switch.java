@@ -56,9 +56,11 @@ public class Switch implements VisObjekt{
         this.yecht=y;
     }
 
-    public void setBounds(int x,int y){
+    public void setBounds(int x,int y,int w,int h){
         this.x=x;
         this.y=y;
+        this.w=w;
+        this.h=h;
         this.xecht=x;
         this.yecht=y;
 
@@ -101,7 +103,7 @@ public class Switch implements VisObjekt{
             }
         }
     }
-
+    @Override
     public void draw(){
 
         update();

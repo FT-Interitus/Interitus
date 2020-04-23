@@ -268,7 +268,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
         s.setWackelstärke(1);
         s.draw();
         ia.setButtonposition(1);
-        ia.draw(shapeRenderer, batch);
+        ia.draw();
         textfieldtest.setTextAnordnung(1);
         textfieldtest.draw();
 

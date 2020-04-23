@@ -70,7 +70,7 @@ public class TextField implements VisObjekt{
             active=false;
         }
     }
-
+    @Override
     public void draw(){
         active();
 
@@ -163,5 +163,13 @@ if(System.currentTimeMillis()>cursersave){
     @Override
     public int getH() {
         return h;
+    }
+
+    @Override
+    public void setBounds(int x, int y, int w, int h) {
+        this.x=x;
+        this.y=y;
+        this.w=w;
+        this.h=h;
     }
 }
