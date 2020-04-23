@@ -6,6 +6,8 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.kotcrab.vis.ui.widget.*;
+import de.ft.interitus.Settings;
+import de.ft.interitus.UI.settings.SettingsUI;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.plugin.store.StorePluginEntry;
 import de.ft.interitus.plugin.store.StorePluginsVar;
@@ -54,7 +56,7 @@ public class subitem13 {
         scrollPane.setFadeScrollBars(false);
 
 
-        Timer time = new Timer(); //Timer um spätere einträge zu laden
+        final Timer time = new Timer(); //Timer um spätere einträge zu laden
 
         time.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -107,6 +109,11 @@ public class subitem13 {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
+                if(SettingsUI.SelectedItem!=12||!SettingsUI.isopend()) { //Damit der Timer nicht unnötig weiterläuft
+                    time.cancel();
+                }
+
             }
         }, 0, 500);
 
@@ -125,6 +132,7 @@ public class subitem13 {
 
 
 
+                    //Lade Porzess wenn schon alle Plugins vorgeladen sind
                     ArrayList<StorePluginEntry> result = findStorePluginEntry.search(search.getText());
 
                     scrollingbar.clearChildren();
@@ -133,8 +141,29 @@ public class subitem13 {
 
                     for (int i = 0; i < result.size(); i++) {
 
+                            scrollingbar.add(pluginimage.get(StorePluginsVar.pluginEntries.indexOf(result.get(i)))).padBottom(15).align(Align.left).fillY().padLeft(-200).height(80).width(80);
+
+                        scrollingbar.add(new VisLabel(StorePluginsVar.pluginEntries.get(StorePluginsVar.pluginEntries.indexOf(result.get(i))).getDescription())).padLeft(-100).padRight(-200).padTop(-15);
+                        scrollingbar.row();
+                    }
+                    scrollingbar.row();
+                    scrollingbar.pack();
+
+                }else
+
+                    if(search.getText() != "" && search.getText() != " " && search.getText().length() > 0) {
+
+                    ArrayList<StorePluginEntry> result = findStorePluginEntry.search(search.getText());
+
+                    scrollingbar.clearChildren();
+                    scrollingbar.padTop(0);
+
+                    for (int i = 0; i < result.size(); i++) {
+
                         if(StorePluginsVar.pluginEntries.indexOf(result.get(i))>=pluginimage.size()) {
 
+
+                           /*
                             byte[] download = null;
                             try {
                                 download = DownloadFile.downloadBytes(StorePluginsVar.pluginEntries.get(StorePluginsVar.pluginEntries.indexOf(result.get(i))).getImage());
@@ -144,6 +173,11 @@ public class subitem13 {
                             Pixmap pixmap = new Pixmap(download, 0, download.length);
 
                             scrollingbar.add(new VisImage( new Texture(pixmap))).padBottom(15).align(Align.left).fillY().padLeft(-200).height(80).width(80);
+
+                            */
+
+                            scrollingbar.add(new VisImage(AssetLoader.pluginwait)).padBottom(15).align(Align.left).fillY().padLeft(-200).height(80).width(80);
+
 
                         }else {
                             scrollingbar.add(pluginimage.get(StorePluginsVar.pluginEntries.indexOf(result.get(i)))).padBottom(15).align(Align.left).fillY().padLeft(-200).height(80).width(80);
@@ -182,4 +216,5 @@ public class subitem13 {
         builder.add(scrollPane).spaceTop(8).growX().fillX().width(525).height(500).padTop(-60).padBottom(-60).row();
 
     }
+
 }

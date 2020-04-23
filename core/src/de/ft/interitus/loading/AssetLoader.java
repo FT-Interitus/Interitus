@@ -45,6 +45,9 @@ public static ArrayList<Texture> storeimages = new ArrayList<>();
     //Wire Nod
     public static Texture wire_node;
 
+    //Plugin Warte Bild
+    public static Texture pluginwait;
+
 
     public static AssetManager manager = new AssetManager();
 
@@ -83,6 +86,8 @@ public static ArrayList<Texture> storeimages = new ArrayList<>();
             group = "Wire-Node";
             //Wire Node
             manager.load(workingdirectory+"node.png",Texture.class);
+            group = "Plugin";
+            manager.load(workingdirectory+"pluginwaiting.png",Texture.class);
 
 
             int load = 0;
@@ -138,6 +143,8 @@ public static ArrayList<Texture> storeimages = new ArrayList<>();
             wire =  manager.get(workingdirectory+"wire.png",Texture.class);
             //Wire Node
           wire_node =  manager.get(workingdirectory+"node.png",Texture.class);
+          //Plugin
+            pluginwait = manager.get(workingdirectory+"pluginwaiting.png",Texture.class);
 
         }catch (Exception e) {
             e.printStackTrace();
