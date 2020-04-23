@@ -1,5 +1,6 @@
 package de.ft.interitus.plugin;
 
+import com.kotcrab.vis.ui.widget.Menu;
 import com.kotcrab.vis.ui.widget.VisTable;
 import de.ft.interitus.Var;
 import org.usb4java.LoaderException;
@@ -20,6 +21,7 @@ public class PluginManagerHandler {
     private List<Plugin> loadedplugins = new ArrayList<>();
     public static List<PluginRegister> registeredplugins = new ArrayList<>();
     public static List<VisTable> plugisettings = new ArrayList<>();
+    public static List<Menu> pluginMenubar = new ArrayList<>();
     private int Plugincounter = 0;
     public Exception init(){
 
@@ -187,6 +189,9 @@ public static void register(PluginRegister pluginRegister) { //Wird von Plugins 
 
     public static void addsettings(VisTable settingsclass) {
         plugisettings.add(settingsclass);
+    }
+    public static void addMenuEntry(Menu menuentry) {
+        menuentry.add(menuentry);
     }
 
 }

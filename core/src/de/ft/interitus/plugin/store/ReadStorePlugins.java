@@ -17,7 +17,7 @@ public class ReadStorePlugins {
         try {
            jsonfile = DownloadFile.downloadFile("https://raw.githubusercontent.com/FT-Interitus/Interitus-Plugins/master/plugins.json");
         } catch (IOException e) {
-            e.printStackTrace();
+
         }
         System.out.println(jsonfile);
         JSONObject jsonObject =null;

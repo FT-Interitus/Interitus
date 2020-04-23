@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.Align;
 import com.kotcrab.vis.ui.widget.*;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.settings.SettingsUI;
+import de.ft.interitus.Var;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.plugin.store.StorePluginEntry;
 import de.ft.interitus.plugin.store.StorePluginsVar;
@@ -55,6 +56,9 @@ public class subitem13 {
         scrollPane.setFlickScroll(false);
         scrollPane.setFadeScrollBars(false);
 
+        if(Var.nointernetconnection) {
+            scrollingbar.add(new VisLabel("Du hast keine Internet-Verbindung.\n Wenn du eine Verbindung hast bitte das Programm neustarten."));
+        }
 
         final Timer time = new Timer(); //Timer um spätere einträge zu laden
 

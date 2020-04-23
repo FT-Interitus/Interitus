@@ -37,8 +37,12 @@ public class Programm extends Game {
         VisUI.load(VisUI.SkinScale.X1);
 
 
-        loadplugins.start(); //Plugins laden
-        ReadStorePlugins.read(); //Ersten 10 Plugins im Store laden
+        try {
+            loadplugins.start(); //Plugins laden
+            ReadStorePlugins.read(); //Ersten 10 Plugins im Store laden
+        }catch (Exception e) {
+            Var.nointernetconnection = true;
+        }
 
         Thread seachnetwork = new Thread() {
             @Override

@@ -20,6 +20,7 @@ import de.ft.interitus.data.user.LoadSave;
 import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.data.user.changes.SaveChanges;
 import de.ft.interitus.data.user.experience.ExperienceVar;
+import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.utils.ClearActOpenProgramm;
 
 
@@ -292,6 +293,9 @@ if(fullscreen==false) {
         UI.menuBar.addMenu(editMenu);
         UI.menuBar.addMenu(windowMenu);
         UI.menuBar.addMenu(helpMenu);
+        for(int i =0;i< PluginManagerHandler.pluginMenubar.size();i++) {
+            UI.menuBar.addMenu(PluginManagerHandler.pluginMenubar.get(i));
+        }
     }
 
 

@@ -12,6 +12,7 @@ public class Var {
     public static boolean isclearing = false;
     public static boolean isdialogeopend = false; //TODO DAMIT KOllisions abfrgae der blöcke abschalten
 
+    public static boolean nointernetconnection = false;
 
     public static int w=1300;
     public static int h=800;
