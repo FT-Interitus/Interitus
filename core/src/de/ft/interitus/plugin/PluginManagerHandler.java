@@ -12,13 +12,15 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 
 public class PluginManagerHandler {
     Exception error = null;
-    private List<Plugin> loadedplugins = new ArrayList<>();
+    public List<Plugin> loadedplugins = new ArrayList<>();
     public static List<PluginRegister> registeredplugins = new ArrayList<>();
     public static List<VisTable> plugisettings = new ArrayList<>();
     public static List<Menu> pluginMenubar = new ArrayList<>();
@@ -179,10 +181,57 @@ public static void register(PluginRegister pluginRegister) { //Wird von Plugins 
                 if (registeredplugins.get(i).getName() != "" && registeredplugins.get(i).getName() != " " && registeredplugins.get(i).getName().length() > 2 && !registeredplugins.get(i).getName().endsWith(" ") && !registeredplugins.get(i).getName().startsWith(" ")) {
                     if(registeredplugins.get(i).getVersion()>0.0) {
                         System.out.println(registeredplugins.get(i).getName() + " geladen. In der Version "+registeredplugins.get(i).getVersion());
-                        Var.pluginManager.loadedplugins.get(i).run();
+
                     }
             }
             }
+
+            Timer plugintimer = new Timer();
+           final ArrayList<Thread> pluginthread = new ArrayList<>();
+           final ArrayList<Long> starttime = new ArrayList<>();
+           final ArrayList<Boolean> finish = new ArrayList<>();
+           final boolean firtstime = true;
+            plugintimer.scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() {
+
+                    pluginthread.clear();
+
+
+                    if(!firtstime) {
+
+                        for (int i = 0; i < registeredplugins.size(); i++) {
+
+                            if(finish.get(i)&&(System.currentTimeMillis()-starttime.get(i))<19) {
+
+
+                            }else{
+                                System.out.println("Plugin " + registeredplugins.get(i).getName()+" verlangsamt das System");
+                            }
+
+                        }
+                    }
+
+                    for(int i =0;i<registeredplugins.size();i++) {
+
+                       final int finalI = i;
+                        pluginthread.add(new Thread() {
+                            @Override
+                            public void run() {
+                                starttime.add(System.currentTimeMillis());
+                              finish.add(Var.pluginManager.loadedplugins.get(finalI).run());
+
+                            }
+                        });
+
+
+
+                    }
+
+
+
+                }
+            },0,16);
         }
 
     }
@@ -193,5 +242,6 @@ public static void register(PluginRegister pluginRegister) { //Wird von Plugins 
     public static void addMenuEntry(Menu menuentry) {
         pluginMenubar.add(menuentry);
     }
+
 
 }
