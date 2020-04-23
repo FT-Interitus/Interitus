@@ -135,7 +135,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
 
 
-        RechtsKlick.checkblockmouse();
+        RechtsKlick.Rechtsklickupdate();
 
         try {
 
