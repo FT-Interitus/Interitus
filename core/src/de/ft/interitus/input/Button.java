@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import de.ft.interitus.input.check.Check;
 import de.ft.interitus.utils.RoundRectangle;
 
-public class Button {
+public class Button implements VisObjekt {
      private int x;
      private int y;
     private int w;
@@ -124,19 +124,22 @@ return check.isPressed(x,y,w,h);
             }
         }
     }
-
+    @Override
     public int getX() {
         return x;
     }
 
+    @Override
     public int getY() {
         return y;
     }
 
+    @Override
     public int getH() {
         return h;
     }
 
+    @Override
     public int getW() {
         return w;
     }
