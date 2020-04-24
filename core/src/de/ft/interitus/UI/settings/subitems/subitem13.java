@@ -1,16 +1,22 @@
 package de.ft.interitus.UI.settings.subitems;
 
+import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.kotcrab.vis.ui.widget.*;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.settings.SettingsUI;
 import de.ft.interitus.Var;
+import de.ft.interitus.input.check.InputManager;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.plugin.store.StorePluginEntry;
 import de.ft.interitus.plugin.store.StorePluginsVar;
@@ -30,8 +36,10 @@ public class subitem13 {
    public static VisTable scrollingbar = new VisTable();
     static VisTextButton searchbutton = new VisTextButton("?");
    public static VisScrollPane scrollPane =null;
+   private static final ArrayList<VisTable> visTables = new ArrayList<>();
 
     public static void add(VisTable builder) {
+
 
 
         scrollingbar.clearChildren();
@@ -46,30 +54,34 @@ public class subitem13 {
         }
         scrollingbar.padTop(0);
 
+
+
         for (int i = 0; i < pluginimage.size(); i++) {
 
+        visTables.add(new VisTable());
 
 
+            visTables.get(i).add(pluginimage.get(i)).padBottom(15).align(Align.left).fillY().padLeft(-200).height(80).width(80);
+            visTables.get(i).add(new VisLabel(StorePluginsVar.pluginEntries.get(i).getName())).padLeft(-100).padRight(0).padTop(-60).padBottom(20);
+            visTables.get(i).add(new VisLabel(StorePluginsVar.pluginEntries.get(i).getDescription())).padLeft(-100).padRight(-200).padTop(-15).align(Align.right);
+            visTables.get(i).row();
 
-            scrollingbar.add(pluginimage.get(i)).padBottom(15).align(Align.left).fillY().padLeft(-200).height(80).width(80);
+            scrollingbar.add(visTables.get(i)).expandX().fillY().expandY().fillX().maxWidth(400);
 
-
-
-
-
-            scrollingbar.add(new VisLabel(StorePluginsVar.pluginEntries.get(i).getName())).padLeft(-100).padRight(0).padTop(-60).padBottom(20);
-            scrollingbar.add(new VisLabel(StorePluginsVar.pluginEntries.get(i).getDescription())).padLeft(-100).padRight(-200).padTop(-15).align(Align.right);
             scrollingbar.row();
 
-                //scrollingbar.getCells().get(i).getActor().setDebug(true);
-            /*
-            for(int z=0;z<  scrollingbar.getCells().get(0).getTable().getChildren().size;z++) {
-                scrollingbar.getCells().get(0).getTable().getChildren().get(z).setDebug(true);
-            }
+            visTables.get(i).setTouchable(Touchable.enabled);
 
-             */
 
-            //TODO hier tests angefangen
+            visTables.get(i).addListener(new ClickListener() {
+
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+
+                    System.out.println("So jetztz" + visTables.indexOf(event.getListenerActor()));
+
+                }
+            });
 
 
 
@@ -121,10 +133,18 @@ public class subitem13 {
 
                             //Es wird durch alle durchgegangen und die fehlenden hinzugefügt
 
-                            scrollingbar.add(pluginimage.get(AssetLoader.storeimages.size() - 1)).padBottom(15).align(Align.left).fillY().padLeft(-200).height(80).width(80);
-                            scrollingbar.add(new VisLabel(StorePluginsVar.pluginEntries.get(AssetLoader.storeimages.size() - 1).getName())).padLeft(-100).padRight(0).padTop(-60).padBottom(20);
-                            scrollingbar.add(new VisLabel(StorePluginsVar.pluginEntries.get(AssetLoader.storeimages.size() - 1).getDescription())).padLeft(-100).padRight(-200).padTop(-15).align(Align.right);
+                            visTables.add(new VisTable());
+
+
+                            visTables.get(visTables.size()-1).add(pluginimage.get(AssetLoader.storeimages.size() - 1)).padBottom(15).align(Align.left).fillY().padLeft(-200).height(80).width(80);
+                            visTables.get(visTables.size()-1).add(new VisLabel(StorePluginsVar.pluginEntries.get(AssetLoader.storeimages.size() - 1).getName())).padLeft(-100).padRight(0).padTop(-60).padBottom(20);
+                            visTables.get(visTables.size()-1).add(new VisLabel(StorePluginsVar.pluginEntries.get(AssetLoader.storeimages.size() - 1).getDescription())).padLeft(-100).padRight(-200).padTop(-15).align(Align.right);
+                            visTables.get(visTables.size()-1).row();
+
+                            scrollingbar.add(visTables.get(visTables.size()-1)).expandX().fillY().expandY().fillX().maxWidth(400);
+
                             scrollingbar.row();
+
 
 
                             try {
@@ -178,17 +198,30 @@ public class subitem13 {
                     ArrayList<StorePluginEntry> result = findStorePluginEntry.search(search.getText());
 
                     scrollingbar.clearChildren();
+                    visTables.clear();
 
                     scrollingbar.padTop(0);
 
                     for (int i = 0; i < result.size(); i++) {
-                        scrollingbar.add(pluginimage.get(StorePluginsVar.pluginEntries.indexOf(result.get(i)))).padBottom(15).align(Align.left).fillY().padLeft(-200).height(80).width(80);
 
 
 
+                        visTables.add(new VisTable());
 
-                        scrollingbar.add(new VisLabel(StorePluginsVar.pluginEntries.get(StorePluginsVar.pluginEntries.indexOf(result.get(i))).getName())).padLeft(-100).padRight(0).padTop(-60).padBottom(20);
-                        scrollingbar.add(new VisLabel(StorePluginsVar.pluginEntries.get(StorePluginsVar.pluginEntries.indexOf(result.get(i))).getDescription())).padLeft(-100).padRight(-200).padTop(-15).align(Align.right);
+
+                        visTables.get(i).add(pluginimage.get(StorePluginsVar.pluginEntries.indexOf(result.get(i)))).padBottom(15).align(Align.left).fillY().padLeft(-200).height(80).width(80);
+                        visTables.get(i).add(new VisLabel(StorePluginsVar.pluginEntries.get(StorePluginsVar.pluginEntries.indexOf(result.get(i))).getName())).padLeft(-100).padRight(0).padTop(-60).padBottom(20);
+                        visTables.get(i).add(new VisLabel(StorePluginsVar.pluginEntries.get(StorePluginsVar.pluginEntries.indexOf(result.get(i))).getDescription())).padLeft(-100).padRight(-200).padTop(-15).align(Align.right);
+                        visTables.get(i).row();
+
+                       // scrollingbar.add(pluginimage.get(StorePluginsVar.pluginEntries.indexOf(result.get(i)))).padBottom(15).align(Align.left).fillY().padLeft(-200).height(80).width(80);
+
+                        scrollingbar.add(visTables.get(i)).expandX().fillY().expandY().fillX().maxWidth(400);
+
+
+                       // scrollingbar.add(new VisLabel(StorePluginsVar.pluginEntries.get(StorePluginsVar.pluginEntries.indexOf(result.get(i))).getName())).padLeft(-100).padRight(0).padTop(-60).padBottom(20);
+                        //scrollingbar.add(new VisLabel(StorePluginsVar.pluginEntries.get(StorePluginsVar.pluginEntries.indexOf(result.get(i))).getDescription())).padLeft(-100).padRight(-200).padTop(-15).align(Align.right);
+
 
                         scrollingbar.row();
                     }
@@ -226,16 +259,29 @@ public class subitem13 {
 
                             */
 
-                            scrollingbar.add(new VisImage(AssetLoader.pluginwait)).padBottom(15).align(Align.left).fillY().padLeft(-200).height(80).width(80);
+                            visTables.get(i).add(new VisImage(AssetLoader.pluginwait)).padBottom(15).align(Align.left).fillY().padLeft(-200).height(80).width(80);
 
 
                         }else {
-                            scrollingbar.add(pluginimage.get(StorePluginsVar.pluginEntries.indexOf(result.get(i)))).padBottom(15).align(Align.left).fillY().padLeft(-200).height(80).width(80);
+                            visTables.get(i).add(pluginimage.get(StorePluginsVar.pluginEntries.indexOf(result.get(i)))).padBottom(15).align(Align.left).fillY().padLeft(-200).height(80).width(80);
+
                         }
 
-                        scrollingbar.add(new VisLabel(StorePluginsVar.pluginEntries.get(StorePluginsVar.pluginEntries.indexOf(result.get(i))).getName())).padLeft(-100).padRight(0).padTop(-60).padBottom(20);
-                        scrollingbar.add(new VisLabel(StorePluginsVar.pluginEntries.get(StorePluginsVar.pluginEntries.indexOf(result.get(i))).getDescription())).padLeft(-100).padRight(-200).padTop(-15).align(Align.right);
 
+
+                        visTables.get(i).add(new VisLabel(StorePluginsVar.pluginEntries.get(StorePluginsVar.pluginEntries.indexOf(result.get(i))).getName())).padLeft(-100).padRight(0).padTop(-60).padBottom(20);
+                        visTables.get(i).add(new VisLabel(StorePluginsVar.pluginEntries.get(StorePluginsVar.pluginEntries.indexOf(result.get(i))).getDescription())).padLeft(-100).padRight(-200).padTop(-15).align(Align.right);
+                        visTables.get(i).row();
+
+                        // scrollingbar.add(pluginimage.get(StorePluginsVar.pluginEntries.indexOf(result.get(i)))).padBottom(15).align(Align.left).fillY().padLeft(-200).height(80).width(80);
+
+
+
+                      //  scrollingbar.add(new VisLabel(StorePluginsVar.pluginEntries.get(StorePluginsVar.pluginEntries.indexOf(result.get(i))).getName())).padLeft(-100).padRight(0).padTop(-60).padBottom(20);
+                       // scrollingbar.add(new VisLabel(StorePluginsVar.pluginEntries.get(StorePluginsVar.pluginEntries.indexOf(result.get(i))).getDescription())).padLeft(-100).padRight(-200).padTop(-15).align(Align.right);
+
+
+                        scrollingbar.add(visTables.get(i)).expandX().fillY().expandY().fillX().maxWidth(400);
                         scrollingbar.row();
                     }
                         if(result.size()==0) {
@@ -243,25 +289,27 @@ public class subitem13 {
                         }
                     scrollingbar.row();
                     scrollingbar.pack();
-                    scrollPane.addListener(new ChangeListener() {
-                        @Override
-                        public void changed(ChangeEvent event, Actor actor) {
 
-                            System.out.println("Hallo hör mich doch");
-                        }
-                    });
 
                 } else {
 
                     scrollingbar.clearChildren();
+                    visTables.clear();
                     scrollingbar.padTop(0);
 
                     for (int i = 0; i < pluginimage.size(); i++) {
-                        scrollingbar.add(pluginimage.get(i)).padBottom(15).align(Align.left).fillY().padLeft(-200).height(80).width(80);
+
+                        visTables.add(new VisTable());
+
+                        visTables.get(i).add(pluginimage.get(i)).padBottom(15).align(Align.left).fillY().padLeft(-200).height(80).width(80);
 
 
-                        scrollingbar.add(new VisLabel(StorePluginsVar.pluginEntries.get(i).getName())).padLeft(-100).padRight(0).padTop(-60).padBottom(20);
-                        scrollingbar.add(new VisLabel(StorePluginsVar.pluginEntries.get(i).getDescription())).padLeft(-100).padRight(-200).padTop(-15).align(Align.right);
+                        visTables.get(i).add(new VisLabel(StorePluginsVar.pluginEntries.get(i).getName())).padLeft(-100).padRight(0).padTop(-60).padBottom(20);
+                        visTables.get(i).add(new VisLabel(StorePluginsVar.pluginEntries.get(i).getDescription())).padLeft(-100).padRight(-200).padTop(-15).align(Align.right);
+                        visTables.get(i).row();
+
+                        scrollingbar.add(visTables.get(i)).expandX().fillY().expandY().fillX().maxWidth(400);
+
                         scrollingbar.row();
                     }
                     scrollingbar.row();
