@@ -71,7 +71,7 @@ if(visible) {
     buttonOben.draw();
     buttonUnten.draw();
     b.begin();
-    font.draw(b, "" + value, x + 5, y + font.getLineHeight());
+    font.draw(b, "" + value, x + 5, y + font.getLineHeight()); //TODO @Felix hier NullPointer manchmal
     b.end();
 }
     }
