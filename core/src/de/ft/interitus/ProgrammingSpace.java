@@ -100,7 +100,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
                     double time = System.currentTimeMillis();
 
-                    for (int i = 0; i < 1000000; i = i + 1) {
+                    for (int i = 0; i < 50000; i = i + 1) {
 
                         BlockVar.blocks.add(new Block(i, 2000, 552, 150, 70));
 
