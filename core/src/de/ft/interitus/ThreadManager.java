@@ -45,7 +45,12 @@ public class ThreadManager {
                                 try {
                                     Block block = ((BlockUpdate) threads.get(i)).block;
                                     if (!(camfr.boundsInFrustum(block.getX(), block.getY(), 0, block.getW(), block.getH(), 0)) && block.isMarked() == false && ((BlockUpdate) threads.get(i)).isrunning == true) {
-                                        ((BlockUpdate) threads.get(i)).time.cancel();
+
+                                    if(((BlockUpdate) threads.get(i)).isrunning) {
+                                        try {
+                                            ((BlockUpdate) threads.get(i)).time.cancel();
+                                        }catch (Exception e) {}
+                                    }
                                         threads.get(i).interrupt();
                                         ((BlockUpdate) threads.get(i)).isrunning = false;
                                         BlockVar.visibleblocks.remove(block);

@@ -94,7 +94,7 @@ public class DownloadFile {
 
             // opens input stream from the HTTP connection
             InputStream inputStream = httpConn.getInputStream();
-            byte[] bytes = inputStream.readAllBytes();
+           byte[] bytes = inputStream.readAllBytes();
 
 
 

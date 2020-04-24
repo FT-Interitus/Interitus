@@ -181,7 +181,7 @@ public class PluginPage {
 
        table.add(new VisLabel(Storeentry.getDescription())).padTop(-350).padLeft(-90).padRight(-250);
        table.row();
-       table.add(new VisLabel(Storeentry.detailed_description)).padLeft(-230).padTop(-200).padBottom(-50).padRight(-300).align(Align.left);
+       table.add(new VisLabel(Storeentry.detailed_description)).padLeft(-220).padTop(-200).padBottom(-50).padRight(-300).align(Align.bottomLeft);
 
 
     }

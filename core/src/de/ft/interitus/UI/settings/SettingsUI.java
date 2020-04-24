@@ -19,9 +19,7 @@ import de.ft.interitus.Settings;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.settings.subitems.*;
 import de.ft.interitus.plugin.PluginManagerHandler;
-import jdk.jfr.Unsigned;
 
-import java.lang.reflect.InvocationTargetException;
 
 public class SettingsUI extends VisWindow {
 

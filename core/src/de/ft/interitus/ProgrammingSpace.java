@@ -98,11 +98,17 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
             public void run() {
                 try {
 
-                    for (int i = 0; i < 1; i = i + 1) {
-                        BlockVar.blocks.add(new Block(i, 738, 552, 150, 70));
+                    double time = System.currentTimeMillis();
 
+                    for (int i = 0; i < 1000000; i = i + 1) {
+
+                        BlockVar.blocks.add(new Block(i, 2000, 552, 150, 70));
+
+                        System.out.println(i);
                         //  MainGame.logger.finest(String.valueOf(i));
                     }
+                    BlockVar.blocks.add(new Block(50001, 400, 552, 150, 70));
+                    System.out.println(System.currentTimeMillis()-time);
 
                     System.out.println("Block creating done");
                 } catch (Exception e) {

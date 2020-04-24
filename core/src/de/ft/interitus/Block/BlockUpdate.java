@@ -32,7 +32,7 @@ public class BlockUpdate extends Thread {
 
 
     BlockUpdate(Block block) {
-        this.block = block; //Der Block wird zu gewiesen
+        this.block = block; //Der Block wird zugewiesen
 
         temp1 = new Vector2(0, 0);//Temp Vectoren init
         temp2 = new Vector2(0, 0);//Temp Vectoren init
