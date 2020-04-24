@@ -19,7 +19,7 @@ public class ReadStorePlugins {
         } catch (IOException e) {
 
         }
-        System.out.println(jsonfile);
+        //System.out.println(jsonfile);
         JSONObject jsonObject =null;
         try {
             jsonObject = new JSONObject(jsonfile);
@@ -48,7 +48,7 @@ try {
         String detailed_description =jsonObject.getJSONObject("plugin"+i).getString("detailed_description");
         StorePluginsVar.pluginEntries.add(new StorePluginEntry(id,name,version,path,description,image,detailed_description));
 
-        System.out.println(StorePluginsVar.pluginEntries.size());
+
 
     }
 

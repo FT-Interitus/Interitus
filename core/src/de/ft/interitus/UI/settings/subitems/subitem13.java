@@ -30,7 +30,7 @@ public class subitem13 {
     public static ArrayList<VisImage> pluginimage = new ArrayList<>();
     public static VisTable scrollingbar = new VisTable();
     public static VisScrollPane scrollPane = null;
-    static VisTextButton searchbutton = new VisTextButton("?");
+   static boolean issearching = false; //Um zu verhindern das waährend dem Suchen einträge geladen werden können
 
     public static void add(final VisTable builder, float percentscrolling) {
 
@@ -104,7 +104,7 @@ public class subitem13 {
 
                 try {
 
-                    if (scrollPane.getScrollPercentY() > 0.3f && AssetLoader.storeimages.size() < StorePluginsVar.pluginEntries.size()) { //Wenn weiter als 50% gescrollt ist und es neue Plugins gibt
+                    if (scrollPane.getScrollPercentY() > 0.3f && AssetLoader.storeimages.size() < StorePluginsVar.pluginEntries.size()&&!issearching) { //Wenn weiter als 50% gescrollt ist und es neue Plugins gibt
 
 
                         int old = pluginimage.size(); //Wird die Pluginanzeige abgespeichert
@@ -179,8 +179,38 @@ public class subitem13 {
 
         VisTextButton loadfromfile = new VisTextButton("Aus Datei laden");
 
-        builder.add(new VisLabel("Plugin Store")).padTop(-150).padLeft(-330); //TODO list of installed plugins as Toggle
-        builder.add(loadfromfile).padBottom(-930).padLeft(-880);
+       final VisTextButton store = new VisTextButton("Plugin Store","toggle");
+      final   VisTextButton installed = new VisTextButton("Installiert","toggle");
+        builder.add(store).padTop(-150).padLeft(-330);
+        builder.add(installed).padTop(-150).padLeft(-700);
+        store.setChecked(true);
+        installed.setChecked(false);
+
+        store.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+           if(!store.isChecked()&&!installed.isChecked()) {
+              store.setChecked(true);
+           }else if(installed.isChecked()){
+               installed.setChecked(false);
+           }
+
+            }
+        });
+
+        installed.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                if(!installed.isChecked()&&!store.isChecked()) {
+                    installed.setChecked(true);
+                }else if(store.isChecked()){
+                    store.setChecked(false);
+                }
+
+            }
+        });
+
+        builder.add(loadfromfile).padBottom(-930).padLeft(-800);
 
 
         search.setMessageText(" Plugins suchen");
@@ -190,6 +220,10 @@ public class subitem13 {
 
 
                 if (search.getText() != "" && search.getText() != " " && search.getText().length() > 0 && pluginimage.size() == StorePluginsVar.pluginEntries.size()) {
+
+                    issearching = true;
+
+                    visTables.clear();
 
 
                     //Lade Porzess wenn schon alle Plugins vorgeladen sind
@@ -232,17 +266,20 @@ public class subitem13 {
                     scrollingbar.row();
                     scrollingbar.pack();
 
-                } else if (search.getText() != "" && search.getText() != " " && search.getText().length() > 0) {
+                } else if (search.getText() != "" && search.getText() != " " && search.getText().length() > 0) { //Wenn noch nicht alle PLugins geladen worden sind
 
+                    visTables.clear();
                     ArrayList<StorePluginEntry> result = findStorePluginEntry.search(search.getText());
-
+                    issearching = true;
                     scrollingbar.clearChildren();
                     scrollingbar.padTop(0);
 
                     for (int i = 0; i < result.size(); i++) {
-
+                    visTables.add(new VisTable());
                         if (StorePluginsVar.pluginEntries.indexOf(result.get(i)) >= pluginimage.size()) {
 
+
+                            //TODO load images
 
                            /*
                             byte[] download = null;
@@ -325,6 +362,7 @@ public class subitem13 {
                     }
                     scrollingbar.row();
                     scrollingbar.pack();
+                    issearching = false;
                 }
 
             }
