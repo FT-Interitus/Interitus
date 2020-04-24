@@ -24,6 +24,7 @@ public class PluginManagerHandler {
     public static List<PluginRegister> registeredplugins = new ArrayList<>();
     public static List<VisTable> plugisettings = new ArrayList<>();
     public static List<Menu> pluginMenubar = new ArrayList<>();
+
     private int Plugincounter = 0;
     public Exception init(){
 
@@ -120,19 +121,22 @@ public class PluginManagerHandler {
             System.out.println("Fehlerhaftes Plugin");
         }
 
+        try {
+            file.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
     }
-    public void openWindow(String msg){
+
+
+    public void unload(PluginRegister pluginRegister) {
 
     }
 
     public Plugin getsettings(Plugin pl) {
-
-
       return loadedplugins.get(loadedplugins.indexOf(pl));
-
-
-
 
     }
 
