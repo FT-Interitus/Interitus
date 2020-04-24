@@ -4,7 +4,7 @@ public class PluginRegister {
    private String name = "";
    private double version;
     public PluginRegister() {}
-
+    public PluginRegister(String name) {}
     public void config(String option,String selection) {
         switch (option) {
             case "name":

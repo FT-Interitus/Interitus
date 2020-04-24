@@ -6,6 +6,7 @@ import de.ft.interitus.Programm;
 import de.ft.interitus.Var;
 
 public class DesktopLauncher {
+	DesktopLauncher SESSION = this;
 	public static void main (String[] arg) {
 
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
@@ -13,5 +14,10 @@ public class DesktopLauncher {
 		config.height=Var.h;
 		config.vSyncEnabled=false;
 		new LwjglApplication(new Programm(), config);
+
+
+
 	}
+
+
 }

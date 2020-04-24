@@ -15,6 +15,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.kotcrab.vis.ui.VisUI;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.BlockVar;
 import de.ft.interitus.UI.UI;
@@ -23,17 +24,22 @@ import de.ft.interitus.UI.settings.subitems.subitem13;
 import de.ft.interitus.UI.setup.SetupWindow;
 import de.ft.interitus.data.programm.Data;
 import de.ft.interitus.data.user.changes.DataManager;
+import de.ft.interitus.data.user.experience.ExperienceManager;
 import de.ft.interitus.input.IntegerAuswahl;
 import de.ft.interitus.input.Switch;
 import de.ft.interitus.input.TextField;
 import de.ft.interitus.input.popup.PopupManager;
 import de.ft.interitus.input.popup.PopupMenue;
 import de.ft.interitus.loading.AssetLoader;
+import de.ft.interitus.loading.Loading;
+import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.plugin.store.ReadStorePlugins;
 import de.ft.interitus.plugin.store.StorePluginsVar;
 import de.ft.interitus.roboconnection.arduino.PortUpdate;
 import de.ft.interitus.roboconnection.arduino.SerialConnection;
+import de.ft.interitus.utils.ClearActOpenProgramm;
 import de.ft.interitus.utils.DownloadFile;
+import de.ft.interitus.utils.NetworkScan;
 import de.ft.interitus.utils.PositionSaver;
 import de.ft.interitus.utils.animation.Animation;
 
@@ -62,12 +68,12 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
     public static Animation testanim = new Animation(new Texture("ballfeueranimation.png"), 60, 100, 100, 3);
 
     public static PopupManager popupmanager=new PopupManager(new PopupMenue("ein popup"),new PopupMenue("BlockPopup","delete"));
+
     IntegerAuswahl ia;
 
     public static ShapeRenderer shapeRenderer;
 
     public ProgrammingSpace() {
-
 
 
 
@@ -303,6 +309,8 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
                 subitem13.saveme = null;
 
         }
+
+
 
 
 

@@ -309,7 +309,7 @@ public class SettingsUI extends VisWindow {
                             subitem12.add(container);
                             break;
                         case 12:
-                            subitem13.add(container);
+                            subitem13.add(container,0);
                         default:
 
                             if(SelectedItem>12) {

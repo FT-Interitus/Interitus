@@ -21,12 +21,9 @@ public class Loading extends ScreenAdapter implements Screen {
 
         if(AssetLoader.manager.update()) {
             AssetLoader.save();
-            System.out.println("test1");
             if(Programm.inLoading==true) {
-                System.out.println("test2");
                 Programm.inLoading = false;
                 this.dispose();
-                System.out.println("test3");
                 Programm.INSTANCE.setScreen(new Welcome());
 
             }
