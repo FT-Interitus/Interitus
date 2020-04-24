@@ -1,16 +1,18 @@
 package de.ft.interitus.plugin;
 
+import static de.ft.interitus.plugin.Configuration.*;
+
 public class PluginRegister {
    private String name = "";
    private double version;
     public PluginRegister() {}
     public PluginRegister(String name) {}
-    public void config(String option,String selection) {
+    public void config(Configuration option,String selection) {
         switch (option) {
-            case "name":
+            case name:
                 this.name = selection;
                 break;
-            case "version":
+            case version:
                 this.version = Double.parseDouble(selection);
         }
     }

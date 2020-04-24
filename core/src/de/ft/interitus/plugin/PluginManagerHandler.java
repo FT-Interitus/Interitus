@@ -33,6 +33,7 @@ public class PluginManagerHandler {
         for(File f : files) {
             Plugincounter++;
             loadPlugin(f); //jedes gefundene Plugin bekommt den Befehel zu laden
+
         }
         for(Plugin pi : loadedplugins) {
 
@@ -121,18 +122,17 @@ public class PluginManagerHandler {
             System.out.println("Fehlerhaftes Plugin");
         }
 
-        try {
-            file.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+
+
+
 
 
     }
 
 
     public void unload(PluginRegister pluginRegister) {
-
+    registeredplugins.remove(pluginRegister);
     }
 
     public Plugin getsettings(Plugin pl) {
