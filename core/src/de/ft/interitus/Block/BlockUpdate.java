@@ -5,9 +5,8 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.ProgrammingSpace;
-import de.ft.interitus.RechtsKlick;
 import de.ft.interitus.data.user.changes.DataManager;
-import de.ft.interitus.displayErrors;
+import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.utils.CheckKollision;
 
 import java.util.Timer;
@@ -477,7 +476,7 @@ public class BlockUpdate extends Thread {
 
                     }
                 } catch (Exception e) {
-                    displayErrors.error = e;
+                    DisplayErrors.error = e;
                     e.printStackTrace(); //FOR Debug to find errors
                 }
 

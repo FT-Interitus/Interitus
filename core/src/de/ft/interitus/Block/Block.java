@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.ThreadManager;
 import de.ft.interitus.data.user.changes.DataManager;
-import de.ft.interitus.displayErrors;
+import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.utils.CheckKollision;
 
@@ -332,7 +332,7 @@ public class Block implements VisibleObjects{
             blockupdate.interrupt(); // Der Thread wird interrupted
             blockupdate.block = null; //Die referenzierung des Threads BLocks wird getrennt
         } catch (Exception e) {
-            displayErrors.error = e;
+            DisplayErrors.error = e;
             e.printStackTrace();
 
         }
@@ -349,7 +349,7 @@ public class Block implements VisibleObjects{
                         try {
                             BlockVar.blocks.get(i).setIndex(BlockVar.blocks.get(i).getIndex() - 1); //Alle anderen Blöcke werden um einen Index verschoben
                         }catch (Exception e) {
-                            displayErrors.error = e;
+                            DisplayErrors.error = e;
                             e.printStackTrace(); //Hier können Fehler aufreten wenn die Blöcke in der zwischen Zeit gelööscht worden sind //TODO mit 1000000 Blöcke ausprobieren ob hier die Indexe richtig sich verhalten wenn man 2 blöcke löscht bevor das hier abgschlossen ist
                         }
 

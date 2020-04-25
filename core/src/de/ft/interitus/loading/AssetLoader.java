@@ -3,11 +3,10 @@ package de.ft.interitus.loading;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import de.ft.interitus.displayErrors;
+import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.plugin.store.StorePluginsVar;
 import de.ft.interitus.utils.DownloadFile;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class AssetLoader {
@@ -160,7 +159,7 @@ public static ArrayList<ArrayList<Object>> pluginimages = new ArrayList<>();
 
         }catch (Exception e) {
             e.printStackTrace();
-            displayErrors.error = e;
+            DisplayErrors.error = e;
         }
 
 

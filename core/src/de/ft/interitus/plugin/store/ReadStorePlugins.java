@@ -1,6 +1,6 @@
 package de.ft.interitus.plugin.store;
 
-import de.ft.interitus.displayErrors;
+import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.utils.DownloadFile;
 import org.json.JSONException;
@@ -24,7 +24,7 @@ public class ReadStorePlugins {
         try {
             jsonObject = new JSONObject(jsonfile);
         }catch (JSONException e) {
-            displayErrors.error =e;
+            DisplayErrors.error =e;
             e.printStackTrace();
         }
 

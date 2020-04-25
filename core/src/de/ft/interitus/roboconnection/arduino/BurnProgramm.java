@@ -1,8 +1,7 @@
 package de.ft.interitus.roboconnection.arduino;
 
 import de.ft.interitus.Block.Devices;
-import de.ft.interitus.ProgrammingSpace;
-import de.ft.interitus.displayErrors;
+import de.ft.interitus.DisplayErrors;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -101,7 +100,7 @@ public class BurnProgramm {
 
         } catch (IOException e) {
             e.printStackTrace();
-            displayErrors.error = e;
+            DisplayErrors.error = e;
         }
 
     }
@@ -131,7 +130,7 @@ public class BurnProgramm {
 
 
         } catch (IOException e) {
-            displayErrors.error = e;
+            DisplayErrors.error = e;
             e.printStackTrace();
         }
 
@@ -163,7 +162,7 @@ public class BurnProgramm {
 
 
         } catch (IOException e) {
-            displayErrors.error = e;
+            DisplayErrors.error = e;
             e.printStackTrace();
         }
 

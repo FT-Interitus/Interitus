@@ -1,7 +1,7 @@
 package de.ft.interitus.roboconnection.raspberrypi;
 
 import com.jcraft.jsch.*;
-import de.ft.interitus.displayErrors;
+import de.ft.interitus.DisplayErrors;
 
 import java.io.InputStream;
 
@@ -34,7 +34,7 @@ public class SSHConnection {
 
         } catch (JSchException e) {
             e.printStackTrace();
-            displayErrors.error = e;
+            DisplayErrors.error = e;
         }
 
 
@@ -89,7 +89,7 @@ public class SSHConnection {
 
             return true;
         } catch (Exception e) {
-            displayErrors.error = e;
+            DisplayErrors.error = e;
             e.printStackTrace();
             return false;
         }
@@ -131,7 +131,7 @@ public class SSHConnection {
         } catch (Exception e) {
 
             e.printStackTrace();
-            displayErrors.error = e;
+            DisplayErrors.error = e;
             return false;
         }
     }

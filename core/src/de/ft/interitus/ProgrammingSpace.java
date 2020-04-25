@@ -6,45 +6,30 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.kotcrab.vis.ui.VisUI;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.BlockVar;
 import de.ft.interitus.UI.UI;
-import de.ft.interitus.UI.settings.SettingsUI;
 import de.ft.interitus.UI.settings.subitems.subitem13;
-import de.ft.interitus.UI.setup.SetupWindow;
-import de.ft.interitus.data.programm.Data;
 import de.ft.interitus.data.user.changes.DataManager;
-import de.ft.interitus.data.user.experience.ExperienceManager;
 import de.ft.interitus.input.IntegerAuswahl;
 import de.ft.interitus.input.Switch;
 import de.ft.interitus.input.TextField;
 import de.ft.interitus.input.popup.PopupManager;
 import de.ft.interitus.input.popup.PopupMenue;
 import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.loading.Loading;
-import de.ft.interitus.plugin.PluginManagerHandler;
-import de.ft.interitus.plugin.store.ReadStorePlugins;
-import de.ft.interitus.plugin.store.StorePluginsVar;
 import de.ft.interitus.roboconnection.arduino.PortUpdate;
 import de.ft.interitus.roboconnection.arduino.SerialConnection;
-import de.ft.interitus.utils.ClearActOpenProgramm;
-import de.ft.interitus.utils.DownloadFile;
-import de.ft.interitus.utils.NetworkScan;
 import de.ft.interitus.utils.PositionSaver;
 import de.ft.interitus.utils.animation.Animation;
 
 import java.awt.*;
-import java.io.IOException;
 
 import static com.badlogic.gdx.Gdx.input;
 import static de.ft.interitus.Settings.darkmode;
@@ -102,17 +87,16 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
                     for (int i = 0; i < 1; i = i + 1) {
 
-                        BlockVar.blocks.add(new Block(i, 2000, 552, 150, 70));
+                        BlockVar.blocks.add(new Block(i, 400, 552, 150, 70));
 
                         System.out.println(i);
                         //  MainGame.logger.finest(String.valueOf(i));
                     }
-                    BlockVar.blocks.add(new Block(50001, 400, 552, 150, 70));
                     System.out.println(System.currentTimeMillis()-time);
 
                     System.out.println("Block creating done");
                 } catch (Exception e) {
-                    displayErrors.error = e;
+                    DisplayErrors.error = e;
                     e.printStackTrace(); //for debug to find errors
                 }
             }
@@ -255,7 +239,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
 
         } catch (Exception e) {
-            displayErrors.error = e;
+            DisplayErrors.error = e;
             e.printStackTrace();
         }
 
@@ -303,7 +287,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
         popupmanager.draw();
         batch.end();
 
-        displayErrors.checkerror();
+        DisplayErrors.checkerror();
 
         if(subitem13.saveme!=null) {
                 AssetLoader.storeimages.add(new Texture( subitem13.saveme));

@@ -1,34 +1,19 @@
 package de.ft.interitus.plugin.store;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
 import com.kotcrab.vis.ui.util.dialog.ConfirmDialogListener;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
-import com.kotcrab.vis.ui.widget.VisImage;
 import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisTable;
 import com.kotcrab.vis.ui.widget.VisTextButton;
-import de.ft.interitus.Programm;
-import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.settings.SettingsUI;
 import de.ft.interitus.UI.settings.subitems.subitem13;
-import de.ft.interitus.data.programm.Data;
-import de.ft.interitus.data.user.DataLoader;
-import de.ft.interitus.data.user.DataSaver;
-import de.ft.interitus.data.user.LoadSave;
-import de.ft.interitus.data.user.changes.DataManager;
-import de.ft.interitus.displayErrors;
-import de.ft.interitus.loading.Loading;
-import de.ft.interitus.plugin.Plugin;
+import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.plugin.PluginManagerHandler;
-import de.ft.interitus.plugin.PluginRegister;
-import de.ft.interitus.utils.ClearActOpenProgramm;
 
-import java.awt.*;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -111,7 +96,7 @@ public class PluginPage {
                        download.setText("Installieren");
                        download.setDisabled(true);
                        e.printStackTrace();
-                       displayErrors.error = e;
+                       DisplayErrors.error = e;
                        return;
                    }
 

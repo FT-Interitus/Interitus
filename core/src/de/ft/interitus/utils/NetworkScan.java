@@ -1,6 +1,6 @@
 package de.ft.interitus.utils;
 
-import de.ft.interitus.displayErrors;
+import de.ft.interitus.DisplayErrors;
 
 import java.io.IOException;
 import java.net.DatagramSocket;
@@ -52,7 +52,7 @@ public class NetworkScan {
 
             }
         } catch (IOException e) {
-            displayErrors.error = e;
+            DisplayErrors.error = e;
             e.printStackTrace();
         }
     }

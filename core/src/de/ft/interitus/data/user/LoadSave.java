@@ -5,7 +5,7 @@ import com.badlogic.gdx.files.FileHandle;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.data.programm.Data;
 import de.ft.interitus.data.user.changes.DataManager;
-import de.ft.interitus.displayErrors;
+import de.ft.interitus.DisplayErrors;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -68,7 +68,7 @@ public class LoadSave {
                     }
                 }catch (Exception e) {
                     e.printStackTrace();//for debug to find errors
-                    displayErrors.error = e;
+                    DisplayErrors.error = e;
                 }
             }
 
