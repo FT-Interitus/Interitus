@@ -8,10 +8,7 @@ import com.kotcrab.vis.ui.building.StandardTableBuilder;
 import com.kotcrab.vis.ui.building.TableBuilder;
 import com.kotcrab.vis.ui.building.utilities.CellWidget;
 import com.kotcrab.vis.ui.building.utilities.Padding;
-import com.kotcrab.vis.ui.widget.VisLabel;
-import com.kotcrab.vis.ui.widget.VisTable;
-import com.kotcrab.vis.ui.widget.VisTextButton;
-import com.kotcrab.vis.ui.widget.VisWindow;
+import com.kotcrab.vis.ui.widget.*;
 import de.ft.interitus.Block.Devices;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.setup.steps.ArduinoSteps.Step3;
@@ -28,6 +25,11 @@ public class NeuesProjektWindow {
     public static VisTextButton Button_cancle = new VisTextButton("Cancel");
     public static VisLabel errorLabel = new VisLabel("Das Wichtigste hier DAS ERROR LABLE");
 
+    public static VisTextField nameinput = new VisTextField();
+    public static CharSequence text = "Name: ";
+    public static VisLabel namelable = new VisLabel(text);
+    public static CharSequence auftragtext = "Bitte gebe hier einen Name für das neue Projekt ein.";
+    public static VisLabel auftrag = new VisLabel(auftragtext);
 
     final Padding padding = new Padding(2, 3);
 
@@ -88,6 +90,9 @@ public class NeuesProjektWindow {
             //buttonTable.add(Button_previouse).fillX().width(80).pad(350,0,0,0);
             buttonTable.add(Button_next).fillX().width(70).pad(350,0,0,0);
 
+            content.add(auftrag).row();
+            content.add(namelable).expandX().padLeft(-310);
+            content.add(nameinput).expandX().padLeft(-350).width(400).row();
 
 
             builder.append(buttonTable);
