@@ -10,6 +10,7 @@ import com.kotcrab.vis.ui.building.utilities.CellWidget;
 import com.kotcrab.vis.ui.building.utilities.Padding;
 import com.kotcrab.vis.ui.widget.*;
 import de.ft.interitus.Block.Devices;
+import de.ft.interitus.Settings;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.setup.steps.ArduinoSteps.Step3;
 import de.ft.interitus.UI.setup.steps.generalSteps.Step1;
@@ -117,6 +118,8 @@ public class NeuesProjektWindow {
             buttonTable.add(Button_next).fillX().width(70).pad(350,0,0,0);
 
             builder.append(buttonTable);
+
+            pfadinput.setText(Settings.defaultpfad);
 
             content.add(auftrag).row();
             content.add(namelable).expandX().padLeft(-400).padBottom(-50);

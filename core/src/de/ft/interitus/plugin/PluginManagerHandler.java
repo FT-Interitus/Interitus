@@ -1,8 +1,11 @@
 package de.ft.interitus.plugin;
 
+import com.badlogic.gdx.InputMultiplexer;
 import com.kotcrab.vis.ui.widget.Menu;
 import com.kotcrab.vis.ui.widget.VisTable;
 import de.ft.interitus.Var;
+import de.ft.interitus.device.ProgrammableObjekt;
+import de.ft.interitus.projecttypes.ProjektTypes;
 import org.usb4java.LoaderException;
 
 import java.io.*;
@@ -19,6 +22,7 @@ import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 
 public class PluginManagerHandler {
+    public static ArrayList<ProjektTypes> projekttypes= new ArrayList<>();
     Exception error = null;
     public List<Plugin> loadedplugins = new ArrayList<>();
     public static List<PluginRegister> registeredplugins = new ArrayList<>();
@@ -244,6 +248,10 @@ public static void register(PluginRegister pluginRegister) { //Wird von Plugins 
     }
     public static void addMenuEntry(Menu menuentry) {
         pluginMenubar.add(menuentry);
+    }
+
+    public static void addProjectType(ProjektTypes PT){
+        projekttypes.add(PT);
     }
 
 
