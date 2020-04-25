@@ -15,6 +15,11 @@ import de.ft.interitus.UI.setup.steps.ArduinoSteps.Step3;
 import de.ft.interitus.UI.setup.steps.generalSteps.Step1;
 import de.ft.interitus.UI.setup.steps.generalSteps.Step2;
 import de.ft.interitus.data.VerbindungsSpeicher;
+import de.ft.interitus.device.ProgrammableObjekt;
+import de.ft.interitus.plugin.PluginManagerHandler;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class NeuesProjektWindow {
     public static SetupBuilder setupBuilder;
@@ -26,10 +31,14 @@ public class NeuesProjektWindow {
     public static VisLabel errorLabel = new VisLabel("Das Wichtigste hier DAS ERROR LABLE");
 
     public static VisTextField nameinput = new VisTextField();
+    public static VisTextField pfadinput = new VisTextField();
     public static CharSequence text = "Name: ";
     public static VisLabel namelable = new VisLabel(text);
+    public static CharSequence pfadtext = "Pfad: ";
+    public static VisLabel pfadlable = new VisLabel(pfadtext);
     public static CharSequence auftragtext = "Bitte gebe hier einen Name für das neue Projekt ein.";
     public static VisLabel auftrag = new VisLabel(auftragtext);
+    public static VisSelectBox<String> selectProjectType;
 
     final Padding padding = new Padding(2, 3);
 
@@ -83,6 +92,23 @@ public class NeuesProjektWindow {
             builder.append(CellWidget.of(content).fillX().fillY().expandX().expandY().wrap());
             builder.row();
 
+            selectProjectType = new VisSelectBox<String>();
+
+            ArrayList<String> items=new ArrayList<>();
+            for(int i=0;i<PluginManagerHandler.projekttypes.size();i++) {
+                if(PluginManagerHandler.projekttypes.get(i).getPO()==null) {
+                    items.add(PluginManagerHandler.projekttypes.get(i).getName());
+                }
+            }
+
+
+            String[] itemsstring = new String[items.size()];
+            for(int i =0;i<items.size();i++) {
+                itemsstring[i]=items.get(i);
+            }
+
+            selectProjectType.setItems(itemsstring);
+
             errorLabel.setColor(1,0,0,1);
             VisTable buttonTable = new VisTable(true);
             buttonTable.add(errorLabel).fillX().width(60).pad(350,0,0,350);
@@ -90,12 +116,18 @@ public class NeuesProjektWindow {
             //buttonTable.add(Button_previouse).fillX().width(80).pad(350,0,0,0);
             buttonTable.add(Button_next).fillX().width(70).pad(350,0,0,0);
 
-            content.add(auftrag).row();
-            content.add(namelable).expandX().padLeft(-310);
-            content.add(nameinput).expandX().padLeft(-350).width(400).row();
-
-
             builder.append(buttonTable);
+
+            content.add(auftrag).row();
+            content.add(namelable).expandX().padLeft(-400).padBottom(-50);
+            content.add(nameinput).expandX().width(400).padLeft(-500).padBottom(-50).row();
+
+           content.add(pfadlable).expandX().padLeft(-400).padBottom(-150);
+           content.add(pfadinput).expandX().width(400).padLeft(-500).padBottom(-150).row();
+            content.add(selectProjectType).expandX().padBottom(-250).row();
+
+
+
 
 
 

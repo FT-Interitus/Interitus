@@ -3,6 +3,7 @@ package de.ft.interitus.plugin;
 import com.kotcrab.vis.ui.widget.Menu;
 import com.kotcrab.vis.ui.widget.VisTable;
 import de.ft.interitus.Var;
+import de.ft.interitus.projecttypes.ProjektTypes;
 import org.usb4java.LoaderException;
 
 import java.io.*;
@@ -24,6 +25,7 @@ public class PluginManagerHandler {
     public static List<PluginRegister> registeredplugins = new ArrayList<>();
     public static List<VisTable> plugisettings = new ArrayList<>();
     public static List<Menu> pluginMenubar = new ArrayList<>();
+    public static ArrayList<ProjektTypes>projekttypes=new ArrayList<>();
 
     private int Plugincounter = 0;
     public Exception init(){
@@ -245,6 +247,6 @@ public static void register(PluginRegister pluginRegister) { //Wird von Plugins 
     public static void addMenuEntry(Menu menuentry) {
         pluginMenubar.add(menuentry);
     }
-
+    public static void addProjectType(ProjektTypes projektTypes){projekttypes.add(projektTypes);}
 
 }
