@@ -59,6 +59,12 @@ if(fullscreen==false) {
 
 
 
+        fileMenu.addItem(new MenuItem("Neues Projekt", new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+
+            }
+        }));
 
         fileMenu.addItem(new MenuItem("Neu", new ChangeListener() {
             @Override
