@@ -3,6 +3,7 @@ package de.ft.interitus.data.programm;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import de.ft.interitus.Settings;
+import de.ft.interitus.Var;
 import de.ft.interitus.data.user.experience.ExperienceManager;
 import de.ft.interitus.data.user.experience.ExperienceVar;
 import de.ft.interitus.DisplayErrors;
@@ -23,11 +24,11 @@ public class Data {
 
     public static void init() {
 
-         folder = new File(System.getProperty("user.home") + "/.racd"); //Order der Programmdaten
-        File recent = new File(System.getProperty("user.home") + "/.racd/recent.json"); //JSON file in dem die zuletzt geöffneten Projekte gespeichert werden
-        File settings = new File(System.getProperty("user.home") + "/.racd/settings.json"); // JSON file in dem alle Einstellungen gespeichert werden
-        File knowndevices = new File(System.getProperty("user.home") + "/.racd/devices.json"); //JSON file in dem alle konfigurierten Geräte gespeichert werden
-        File userexperience = new File(System.getProperty("user.home") + "/.racd/experience.json"); //JSON file in dem User Analytics gespeichert werden
+         folder = new File(System.getProperty("user.home") + "/.itd"); //Order der Programmdaten
+        File recent = new File(System.getProperty("user.home") + "/.itd/recent.json"); //JSON file in dem die zuletzt geöffneten Projekte gespeichert werden
+        File settings = new File(System.getProperty("user.home") + "/.itd/settings.json"); // JSON file in dem alle Einstellungen gespeichert werden
+        File knowndevices = new File(System.getProperty("user.home") + "/.itd/devices.json"); //JSON file in dem alle konfigurierten Geräte gespeichert werden
+        File userexperience = new File(System.getProperty("user.home") + "/.itd/experience.json"); //JSON file in dem User Analytics gespeichert werden
         Path path = folder.toPath();
         if (!folder.exists()) {//Wenn der Programm-Ordner noch nicht exsitiert
             System.out.println("Create Programm Data Folder");
@@ -82,7 +83,7 @@ public class Data {
             } else { //Wenn es exsistiert
                 try {
 
-                    FileHandle re = Gdx.files.absolute(System.getProperty("user.home") + "/.racd/recent.json");
+                    FileHandle re = Gdx.files.absolute(System.getProperty("user.home") + "/.itd/recent.json");
 
                     if (re.readString() == "") {
                         re.writeString("{}", false);
@@ -120,7 +121,7 @@ public class Data {
             } else {
 
                 try {
-                    FileHandle se = Gdx.files.absolute(System.getProperty("user.home") + "/.racd/settings.json");  //Datei wird geladen
+                    FileHandle se = Gdx.files.absolute(System.getProperty("user.home") + "/.itd/settings.json");  //Datei wird geladen
                     if (se.readString() == "") {
                         se.writeString("{}", false);
                         return;
@@ -129,6 +130,7 @@ public class Data {
 
                     Settings.darkmode = obj.getBoolean("dark"); //Einstellungen werden je nach Daten Typ geladem
                     Settings.updateurl = obj.getString("updateurl");
+                    Settings.defaultpfad = obj.getString("defaultpath");
 
                     //TODO weitere einstellugen Laden
 
@@ -150,7 +152,7 @@ public class Data {
             } else {
 
                 try {
-                    FileHandle se = Gdx.files.absolute(System.getProperty("user.home") + "/.racd/devices.json");
+                    FileHandle se = Gdx.files.absolute(System.getProperty("user.home") + "/.itd/devices.json");
                     if (se.readString() == "") {
                         se.writeString("{}", false);
                         return;
@@ -181,7 +183,7 @@ public class Data {
             } else {
 
                 try {
-                    FileHandle se = Gdx.files.absolute(System.getProperty("user.home") + "/.racd/experience.json");
+                    FileHandle se = Gdx.files.absolute(System.getProperty("user.home") + "/.itd/experience.json");
                     if (se.readString() == "") {
                         se.writeString("{}", false);
                         return;
@@ -222,7 +224,7 @@ public class Data {
     public static void close() {
 
         //for recent////////////////////////////////
-        FileHandle recent = Gdx.files.absolute(System.getProperty("user.home") + "/.racd/recent.json"); //Lade datei
+        FileHandle recent = Gdx.files.absolute(System.getProperty("user.home") + "/.itd/recent.json"); //Lade datei
         JSONObject recent_obj = new JSONObject(recent);
         for (int i = 0; i < Data.path.size(); i++) { //Es wird durch alle Vorhanden einträge durch gegangen
             recent_obj.put("path" + i, Data.path.get(i)); //Und jedes Nacheinander abgespeichert
@@ -234,17 +236,18 @@ public class Data {
         /////////////////////////////////////////////////////////////////////
 
 
-        FileHandle settings = Gdx.files.absolute(System.getProperty("user.home") + "/.racd/settings.json"); //Lade Datei
+        FileHandle settings = Gdx.files.absolute(System.getProperty("user.home") + "/.itd/settings.json"); //Lade Datei
         JSONObject settings_obj = new JSONObject(settings); //Einstellungen werden je nach Daten Typ abgespeichert
         settings_obj.put("dark", Settings.darkmode);
         settings_obj.put("updateurl", Settings.updateurl);
+        settings_obj.put("defaultpath",Settings.defaultpfad);
 
         //TODO weitere Einstellugen speichern
         settings.writeString(settings_obj.toString(), false); //Datei wird geschrieben
 
         ////////////////////////////////////////////////////////////////////
 
-        FileHandle knowndevices = Gdx.files.absolute(System.getProperty("user.home") + "/.racd/devices.json");//Lade Datei
+        FileHandle knowndevices = Gdx.files.absolute(System.getProperty("user.home") + "/.itd/devices.json");//Lade Datei
         JSONObject knowndevices_obj = new JSONObject(settings);
 
       ///  knowndevices_obj.put("",Variable);///
@@ -255,7 +258,7 @@ public class Data {
         knowndevices.writeString(knowndevices_obj.toString(), false); //Datei wird geschrieben
 
         ///////////////////////////////////////////////////////////////
-        FileHandle userexperience = Gdx.files.absolute(System.getProperty("user.home") + "/.racd/experience.json"); //Lade Datei
+        FileHandle userexperience = Gdx.files.absolute(System.getProperty("user.home") + "/.itd/experience.json"); //Lade Datei
         JSONObject userexperience_obj = new JSONObject(userexperience); //UserExperience wird je nach Daten Typ abgespeichert
 
 

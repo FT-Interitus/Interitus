@@ -14,6 +14,7 @@ public class Var {
 
     public static boolean nointernetconnection = false;
 
+
     public static int w=1300;
     public static int h=800;
 
