@@ -7,11 +7,13 @@ import de.ft.interitus.displayErrors;
 import de.ft.interitus.plugin.store.StorePluginsVar;
 import de.ft.interitus.utils.DownloadFile;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class AssetLoader {
 
 public static ArrayList<Texture> storeimages = new ArrayList<>();
+public static ArrayList<ArrayList<Object>> pluginimages = new ArrayList<>();
 
 
     public static String group = "";
@@ -50,6 +52,16 @@ public static ArrayList<Texture> storeimages = new ArrayList<>();
 
 
     public static AssetManager manager = new AssetManager();
+
+
+    public static void loadmore(String file,Class type){
+        manager.load(workingdirectory+file,type);
+    }
+
+    public static Object save(String file, Class Type) {
+        return manager.get(workingdirectory+file,Type);
+    }
+
 
     public static void load() {
 
