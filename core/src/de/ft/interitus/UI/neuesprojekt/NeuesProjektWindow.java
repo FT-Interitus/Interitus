@@ -22,6 +22,13 @@ import de.ft.interitus.data.VerbindungsSpeicher;
 public class NeuesProjektWindow {
     public static SetupBuilder setupBuilder;
     public static VisTable content;
+
+    public static VisTextButton Button_next = new VisTextButton("Next");
+    public static VisTextButton Button_previouse = new VisTextButton("Previouse");
+    public static VisTextButton Button_cancle = new VisTextButton("Cancel");
+    public static VisLabel errorLabel = new VisLabel("Das Wichtigste hier DAS ERROR LABLE");
+
+
     final Padding padding = new Padding(2, 3);
 
     public NeuesProjektWindow() {
@@ -74,7 +81,16 @@ public class NeuesProjektWindow {
             builder.append(CellWidget.of(content).fillX().fillY().expandX().expandY().wrap());
             builder.row();
 
+            errorLabel.setColor(1,0,0,1);
+            VisTable buttonTable = new VisTable(true);
+            buttonTable.add(errorLabel).fillX().width(60).pad(350,0,0,300);
+            buttonTable.add(Button_cancle).fillX().width(60).pad(350,0,0,0);
+            buttonTable.add(Button_previouse).fillX().width(80).pad(350,0,0,0);
+            buttonTable.add(Button_next).fillX().width(50).pad(350,0,0,0);
 
+
+
+            builder.append(buttonTable);
 
 
 
