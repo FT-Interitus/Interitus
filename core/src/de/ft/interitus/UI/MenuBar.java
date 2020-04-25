@@ -234,7 +234,7 @@ if(fullscreen==false) {
         ConnectionMenue.addItem(new MenuItem("Verbindungs Manager", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                Dialogs.showOKDialog(UI.stage, ")-:", "Dieses Fenster Exestiert noch nicht");
+                Dialogs.showOKDialog(UI.stage, "++++ )-: ++++", "Dieses Fenster Exestiert noch nicht");
             }
         }));
 
