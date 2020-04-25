@@ -141,12 +141,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
 
 
-        try {
-            SetupWindow sw = new SetupWindow(); //TODO zu debug zwecken
-            sw.show();
-        }catch (NullPointerException e) {
 
-        }
     }
 
 

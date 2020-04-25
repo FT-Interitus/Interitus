@@ -31,6 +31,7 @@ public class MenuBar {
     protected static void createMenus() {
         Menu fileMenu = new Menu("Datei");
         Menu editMenu = new Menu("Bearbeiten");
+        Menu ConnectionMenue=new Menu("Verbindungen");
         Menu windowMenu = new Menu("Ansicht");
         Menu helpMenu = new Menu("Hilfe");
 
@@ -214,7 +215,33 @@ if(fullscreen==false) {
         }).setShortcut("Alt+F4"));
 
 
-        // ---
+        // ------------------------------------
+
+
+
+        ConnectionMenue.addItem(new MenuItem("Neue Verbindung", new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                try {
+                    SetupWindow sw = new SetupWindow(); //TODO zu debug zwecken
+                    sw.show();
+                }catch (NullPointerException e) {
+
+                }
+            }
+        }));
+
+        ConnectionMenue.addItem(new MenuItem("Verbindungs Manager", new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Dialogs.showOKDialog(UI.stage, ")-:", "Dieses Fenster Exestiert noch nicht");
+            }
+        }));
+
+
+
+
+// --------------------------------------------
 
         editMenu.addItem(UI.revert = new MenuItem("Rückgänig", new ChangeListener() {
             @Override
@@ -302,7 +329,7 @@ if(fullscreen==false) {
         UI.menuBar.addMenu(editMenu);
 
 
-
+        UI.menuBar.addMenu(ConnectionMenue);
 
         UI.menuBar.addMenu(windowMenu);
 
