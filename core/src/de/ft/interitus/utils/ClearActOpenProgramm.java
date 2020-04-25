@@ -2,11 +2,10 @@ package de.ft.interitus.utils;
 
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.BlockVar;
-import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.Var;
 import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.data.user.changes.SaveChanges;
-import de.ft.interitus.displayErrors;
+import de.ft.interitus.DisplayErrors;
 
 import java.util.ArrayList;
 
@@ -41,13 +40,13 @@ public class ClearActOpenProgramm {
                         Var.isclearing = false;
 
                     } catch (Exception e) {
-                        displayErrors.error = e;
+                        DisplayErrors.error = e;
                         e.printStackTrace();
                         System.exit(-1);
                     }
 
                 }catch (Exception e) {
-                    displayErrors.error = e;
+                    DisplayErrors.error = e;
                     e.printStackTrace(); //for debug to find errors
                 }
             }
@@ -63,7 +62,7 @@ public class ClearActOpenProgramm {
             }
             System.out.println("Clearing Finished");
         } catch (Exception e) {
-            displayErrors.error = e;
+            DisplayErrors.error = e;
             e.printStackTrace();
             System.exit(-121);
         }

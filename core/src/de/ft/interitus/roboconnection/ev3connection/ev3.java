@@ -1,6 +1,6 @@
 package de.ft.interitus.roboconnection.ev3connection;
 
-import de.ft.interitus.displayErrors;
+import de.ft.interitus.DisplayErrors;
 
 import java.io.UnsupportedEncodingException;
 
@@ -64,7 +64,7 @@ public class ev3 {
             return a;
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
-            displayErrors.error = e;
+            DisplayErrors.error = e;
         }
 
         return null;

@@ -8,13 +8,12 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.widget.MenuBar;
 import com.kotcrab.vis.ui.widget.MenuItem;
 import de.ft.interitus.UI.settings.SettingsUI;
 import de.ft.interitus.UI.setup.SetupWindow;
 import de.ft.interitus.data.user.experience.ExperienceManager;
-import de.ft.interitus.displayErrors;
+import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.input.Button;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.Settings;
@@ -184,7 +183,7 @@ public class UI {
                             }
 
                         }catch (Exception e) {
-                            displayErrors.error = e;
+                            DisplayErrors.error = e;
                             e.printStackTrace(); //for debug to find errors
                         }
 

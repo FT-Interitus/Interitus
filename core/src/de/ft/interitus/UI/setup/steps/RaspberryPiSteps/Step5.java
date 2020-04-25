@@ -3,7 +3,7 @@ package de.ft.interitus.UI.setup.steps.RaspberryPiSteps;
 import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisTable;
 import de.ft.interitus.UI.setup.SetupWindow;
-import de.ft.interitus.displayErrors;
+import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.roboconnection.raspberrypi.SSHConnection;
 
 public class Step5 {
@@ -30,7 +30,7 @@ public class Step5 {
                     Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                    displayErrors.error = e;
+                    DisplayErrors.error = e;
                 }
                 installationprogress.setText("System-Update abgeschlossen\n\nPython installieren abgeschlossen\n\nWeitere Aktion abgeschlossen\n\nNoch weiteres...\n\n ");
 

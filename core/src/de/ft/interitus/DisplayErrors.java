@@ -3,7 +3,7 @@ package de.ft.interitus;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import de.ft.interitus.UI.UI;
 
-public class displayErrors {
+public class DisplayErrors {
    public static Exception error;
    public static String customErrorstring = "Ein Fehler ist aufgetreten!";
 
