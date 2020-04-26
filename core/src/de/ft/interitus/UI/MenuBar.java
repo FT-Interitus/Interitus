@@ -68,9 +68,9 @@ if(fullscreen==false) {
                 NewProjectWindow NPW = new NewProjectWindow(); //TODO zu debug zwecken
                 NPW.show();
             }
-        }));
+        }).setShortcut("Strg+N"));
 
-        fileMenu.addItem(new MenuItem("Neu", new ChangeListener() {
+   /*     fileMenu.addItem(new MenuItem("Neu", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
@@ -125,6 +125,7 @@ if(fullscreen==false) {
 
             }
         }).setShortcut("Strg+N"));
+        */
 
 
         fileMenu.addItem(UI.recent);
