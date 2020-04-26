@@ -3,6 +3,7 @@ package de.ft.interitus.plugin;
 import com.badlogic.gdx.InputMultiplexer;
 import com.kotcrab.vis.ui.widget.Menu;
 import com.kotcrab.vis.ui.widget.VisTable;
+import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Var;
 import de.ft.interitus.device.ProgrammableObjekt;
 import de.ft.interitus.projecttypes.ProjektTypes;
@@ -35,8 +36,19 @@ public class PluginManagerHandler {
 
         File[] files = new File("plugins").listFiles(); //Aus dem Ordner Plugins werden alle Files aufgelistet
         for(File f : files) {
-            Plugincounter++;
-            loadPlugin(f); //jedes gefundene Plugin bekommt den Befehel zu laden
+
+            try {
+                loadPlugin(f); //jedes gefundene Plugin bekommt den Befehel zu laden
+                Plugincounter++;
+            }catch (Exception e) {
+                System.out.println("Plugin lade Fehler");
+                DisplayErrors.customErrorstring = "Plugin Lade-Fehler";
+                DisplayErrors.error = e;
+                e.printStackTrace();
+            }catch (UnsupportedClassVersionError a) {
+                System.out.println("Das Plugin "+f.getName()+" wurde in der falschen Version geschrieben");
+
+            }
 
         }
         for(Plugin pi : loadedplugins) {
@@ -114,6 +126,8 @@ public class PluginManagerHandler {
                     error = e;
                     e.printStackTrace();
                 }
+                System.out.println("Loaded "+filetest.getName());
+                loadedplugins.add(plugin);
             } catch (InstantiationException e) {
                 error = e;
                 e.printStackTrace();
@@ -121,7 +135,7 @@ public class PluginManagerHandler {
                 error = e;
                 e.printStackTrace();
             }
-            loadedplugins.add(plugin);
+
         }else{
             System.out.println("Fehlerhaftes Plugin");
         }
@@ -203,40 +217,42 @@ public static void register(PluginRegister pluginRegister) { //Wird von Plugins 
                 @Override
                 public void run() {
 
-                    pluginthread.clear();
+                    try {
+                        pluginthread.clear();
 
-                    //TODO erkennen ob ein Plugin zu langsam ist (starttime>19)
+                        //TODO erkennen ob ein Plugin zu langsam ist (starttime>19)
 
-                    finish.clear();
-                    starttime.clear();
+                        finish.clear();
+                        starttime.clear();
 
 
-                    for(int i =0;i<registeredplugins.size();i++) {
+                        for (int i = 0; i < registeredplugins.size(); i++) {
 
-                       final int finalI = i;
+                            final int finalI = i;
 
-                       final int finalI1 = i;
-                        pluginthread.add(new Thread() {
-                            @Override
-                            public void run() {
+                            final int finalI1 = i;
+                            pluginthread.add(new Thread() {
+                                @Override
+                                public void run() {
 
 
                                     starttime.add(System.currentTimeMillis());
                                     finish.add(Var.pluginManager.loadedplugins.get(finalI).run());
 
 
+                                }
+                            });
 
-                            }
-                        });
+
+                            pluginthread.get(i).start();
+
+                        }
+                        firtstime[0] = false;
 
 
-                        pluginthread.get(i).start();
-
+                    }catch (Exception e) {
+                        e.printStackTrace();
                     }
-                    firtstime[0] = false;
-
-
-
                 }
             },0,16);
         }
