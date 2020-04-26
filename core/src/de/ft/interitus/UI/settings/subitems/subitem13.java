@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.kotcrab.vis.ui.widget.*;
+import de.ft.interitus.Settings;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.settings.SettingsUI;
 import de.ft.interitus.Var;
@@ -157,7 +158,7 @@ public class subitem13 {
 
                             }
 
-                            if (i > 5) {
+                            if (i > StorePluginsVar.loadinglimit) {
                                 break;
                             }
                         }
