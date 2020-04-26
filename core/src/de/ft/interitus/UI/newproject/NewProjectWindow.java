@@ -1,4 +1,4 @@
-package de.ft.interitus.UI.neuesprojekt;
+package de.ft.interitus.UI.newproject;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -9,20 +9,13 @@ import com.kotcrab.vis.ui.building.TableBuilder;
 import com.kotcrab.vis.ui.building.utilities.CellWidget;
 import com.kotcrab.vis.ui.building.utilities.Padding;
 import com.kotcrab.vis.ui.widget.*;
-import de.ft.interitus.Block.Devices;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.UI;
-import de.ft.interitus.UI.setup.steps.ArduinoSteps.Step3;
-import de.ft.interitus.UI.setup.steps.generalSteps.Step1;
-import de.ft.interitus.UI.setup.steps.generalSteps.Step2;
-import de.ft.interitus.data.VerbindungsSpeicher;
-import de.ft.interitus.device.ProgrammableObjekt;
 import de.ft.interitus.plugin.PluginManagerHandler;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class NeuesProjektWindow {
+public class NewProjectWindow {
     public static SetupBuilder setupBuilder;
     public static VisTable content;
 
@@ -43,7 +36,7 @@ public class NeuesProjektWindow {
 
     final Padding padding = new Padding(2, 3);
 
-    public NeuesProjektWindow() {
+    public NewProjectWindow() {
 
         new GridTableBuilder(4);
     }
@@ -72,7 +65,6 @@ public class NeuesProjektWindow {
             setupBuilder = new SetupBuilder("Neues Projekt Setup", new StandardTableBuilder(padding));
             setupBuilder.pack();
         }else{
-            content.clearChildren();
             setupBuilder.pack();
         }
 

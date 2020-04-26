@@ -12,7 +12,7 @@ import com.kotcrab.vis.ui.widget.MenuItem;
 import com.kotcrab.vis.ui.widget.PopupMenu;
 import de.ft.interitus.Block.BlockVar;
 import de.ft.interitus.ProgrammingSpace;
-import de.ft.interitus.UI.neuesprojekt.NeuesProjektWindow;
+import de.ft.interitus.UI.newproject.NewProjectWindow;
 import de.ft.interitus.UI.setup.SetupWindow;
 import de.ft.interitus.Var;
 import de.ft.interitus.data.programm.Data;
@@ -65,7 +65,7 @@ if(fullscreen==false) {
         fileMenu.addItem(new MenuItem("Neues Projekt", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                NeuesProjektWindow NPW = new NeuesProjektWindow(); //TODO zu debug zwecken
+                NewProjectWindow NPW = new NewProjectWindow(); //TODO zu debug zwecken
                 NPW.show();
             }
         }));
