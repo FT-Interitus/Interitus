@@ -2,6 +2,8 @@ package de.ft.interitus;
 
 import de.ft.interitus.plugin.PluginManagerHandler;
 
+import java.util.ArrayList;
+
 public class Var {
 
     public static PluginManagerHandler pluginManager;
@@ -14,6 +16,8 @@ public class Var {
 
     public static boolean nointernetconnection = false;
 
+
+    public static ArrayList<String> programmarguments = new ArrayList<>();
 
     public static int w=1300;
     public static int h=800;

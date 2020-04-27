@@ -30,7 +30,7 @@ public class ReadStorePlugins {
 
 
 try {
-    for (plugincounter = plugincounter; plugincounter < 999999999; plugincounter++) {
+    for (plugincounter = plugincounter; plugincounter < 999999999; plugincounter++) { //TODO replace with while loop
         if (!jsonObject.has("plugin" + plugincounter)) {
             break;
         }
@@ -64,6 +64,11 @@ e.printStackTrace();
 
     }
 
+
+    /***
+     * @deprecated every entry will be loaded by the first loader Methode now without the images
+     * @return
+     */
     public static int loadmore() {
         JSONObject jsonObject = new JSONObject(jsonfile);
         int oldplugin = AssetLoader.storeimages.size();
