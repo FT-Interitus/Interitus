@@ -28,6 +28,7 @@ public class DesktopLauncher {
 			config.width = Var.w;
 			config.height = Var.h;
 			config.vSyncEnabled = false;
+
 			new LwjglApplication(new Programm(), config);
 
 		}else{
