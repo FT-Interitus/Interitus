@@ -175,12 +175,18 @@ if(empfangen !="") {
 
     public static class Authentifikation {
         private static String output;
-        private static int abtastzeit=50000;
+        private static int abtastzeit=10000;
         private static int arduinoneustartzeit=0;
 
 
         public static String getOutput(){
             return output;
+        }
+
+        public static long getPart(String identify,String Input) {
+
+            Bis Dann 
+
         }
 
 
@@ -264,7 +270,7 @@ if(empfangen !="") {
 
                             System.out.println("i     " + i);
                             try {
-                                SerialPort checkport = ports[1];
+                                SerialPort checkport = ports[i-2];
 
                                 if (checkport.openPort()) {        //versuche port zu öffnen
                                     System.out.println("Successfully opened the port."+checkport.getSystemPortName());     //port geöffnet
