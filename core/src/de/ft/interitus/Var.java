@@ -19,6 +19,8 @@ public class Var {
 
     public static ArrayList<String> programmarguments = new ArrayList<>();
 
+    public static boolean verboseoutput = false;
+
     public static int w=1300;
     public static int h=800;
 

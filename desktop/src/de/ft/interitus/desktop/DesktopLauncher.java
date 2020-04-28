@@ -20,6 +20,9 @@ public class DesktopLauncher {
 
 		Var.programmarguments.addAll(Arrays.asList(arg));
 
+		if(Var.programmarguments.indexOf("-v")!=-1) {
+			Var.verboseoutput = true;
+		}
 
 
 		if(Var.programmarguments.indexOf("-nogui")==-1) {
@@ -36,6 +39,7 @@ public class DesktopLauncher {
 			System.out.println("No GUI opend");
 
 		}
+
 
 	}
 

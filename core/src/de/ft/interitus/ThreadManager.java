@@ -59,7 +59,9 @@ public class ThreadManager {
                                     if (camfr.boundsInFrustum(block.getX(), block.getY(), 0, block.getW(), block.getH(), 0) && ((BlockUpdate) threads.get(i)).isrunning == false) {
                                         BlockVar.visibleblocks.add(block);
                                         threads.set(i, ((BlockUpdate) threads.get(i)).block.allowedRestart());
-                                        System.out.println("Started");
+                                        if(Var.verboseoutput) {
+                                            System.out.println("Started " + block.getIndex());
+                                        }
                                         ((BlockUpdate) threads.get(i)).isrunning = true;
                                     }
 

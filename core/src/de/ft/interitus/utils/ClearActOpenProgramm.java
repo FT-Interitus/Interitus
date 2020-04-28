@@ -60,7 +60,9 @@ public class ClearActOpenProgramm {
 
 
             }
-            System.out.println("Clearing Finished");
+            if(Var.verboseoutput) {
+                System.out.println("Clearing Finished");
+            }
         } catch (Exception e) {
             DisplayErrors.error = e;
             e.printStackTrace();

@@ -83,7 +83,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
             public void run() {
                 try {
 
-                    double time = System.currentTimeMillis();
+
 
                     for (int i = 0; i < 1; i = i + 1) {
 
@@ -92,7 +92,8 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
                         System.out.println(i);
                         //  MainGame.logger.finest(String.valueOf(i));
                     }
-                    System.out.println(System.currentTimeMillis()-time);
+
+
 
                     System.out.println("Block creating done");
                 } catch (Exception e) {
@@ -331,7 +332,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
         //TODO stop Thread Manager Thread
 
-        System.out.println("Stop stop stop stop stop stop stop stop stop stopo stop");
+
 
         batch.dispose();
 

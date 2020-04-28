@@ -47,7 +47,7 @@ public class SettingsUI extends VisWindow {
      * 10 = item 3.2
      * 11 = item 3.3
      *
-     * 12 = Plugin Einstellungen (Wenn keine Plugins geladen unsichtbar)
+     * 12 = Plugin Store
      * 13.. Plguin
      *
      */
