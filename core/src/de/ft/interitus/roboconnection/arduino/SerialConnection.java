@@ -123,7 +123,6 @@ if(empfangen !="") {
 
 
     static void empfangenListener(SerialPort port){
-        System.out.println("abcd");
         final BufferedReader b= new BufferedReader(new InputStreamReader(port.getInputStream()));
 
 
@@ -135,11 +134,19 @@ if(empfangen !="") {
 
             @Override
             public void serialEvent(SerialPortEvent event) {
-                System.out.println("event");
                 if (event.getEventType() != SerialPort.LISTENING_EVENT_DATA_AVAILABLE)
                     return;
                 try {
-                    System.out.println(b.readLine());
+
+                    String input = b.readLine();
+
+
+                   Authentifikation.checkvalidaten(input);
+
+                //    Authentifikation.getPart()
+
+
+                  //  System.out.println(input);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -175,7 +182,7 @@ if(empfangen !="") {
 
     public static class Authentifikation {
         private static String output;
-        private static int abtastzeit=10000;
+        private static int abtastzeit=20000;
         private static int arduinoneustartzeit=0;
 
 
@@ -183,12 +190,40 @@ if(empfangen !="") {
             return output;
         }
 
+
+        /***
+         *
+         * @param input checks the String with the checksum
+         * @return
+         */
+
+        public static void checkvalidaten(String input) {
+
+            try {
+            String[] split = input.split("∑");
+
+
+
+            for(int i = 0;i<split.length;i++) {
+                System.out.println(split[i]);
+
+            }
+
+
+            }catch (Exception e){
+                e.p
+
+
+            }
+
+
+
+
+
         public static long getPart(String identify,String Input) {
 
-            Bis Dann 
-
+return 0;
         }
-
 
         private static void checkAut(final SerialPort checkport) throws IOException {
 
