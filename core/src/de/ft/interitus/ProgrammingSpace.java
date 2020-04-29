@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.BlockVar;
+import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.settings.subitems.subitem13;
 import de.ft.interitus.data.user.changes.DataManager;
@@ -297,8 +298,8 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
         }
 
 
-
-
+        //Um alle shortcuts für das Programm zu überprüfen
+        CheckShortcuts.check();
 
 
     }

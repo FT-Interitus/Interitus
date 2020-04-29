@@ -14,8 +14,10 @@ import java.io.File;
 import static de.ft.interitus.ProgrammingSpace.saver;
 
 public class LoadSave {
+   static Thread open;
+    static Thread save;
     public static void saveas() {
-        Thread save = new Thread() {
+        save = new Thread() {
             @Override
             public void run() {
 
@@ -82,7 +84,7 @@ public class LoadSave {
 
 
     public static void open() {
-        Thread open = new Thread() {
+         open = new Thread() {
             @Override
             public void run() {
                 JFileChooser fileChooser = new JFileChooser();
@@ -119,4 +121,41 @@ public class LoadSave {
         };
         open.start();
     }
+
+    /***
+     *
+     * @return a boolean if the open dialoge is opened
+     */
+
+    public static boolean isopenopen() {
+
+        try {
+            if (open.isAlive()) {
+                return true;
+            } else {
+                return false;
+            }
+        }catch (Exception e) {
+            return false;
+        }
+    }
+
+    /***
+     *
+     * @return a boolean if the save dialoge is opened
+     */
+
+    public static boolean issaveopen() {
+
+        try {
+            if (save.isAlive()) {
+                return true;
+            } else {
+                return false;
+            }
+        }catch (Exception e) {
+            return false;
+        }
+    }
+
 }
