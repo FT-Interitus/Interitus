@@ -23,6 +23,10 @@ import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.block.BlockCreateEvent;
 import de.ft.interitus.events.block.BlockDeleteEvent;
 import de.ft.interitus.events.block.BlockEventListener;
+import de.ft.interitus.events.global.GlobalErrorOccurredEvent;
+import de.ft.interitus.events.global.GlobalEventListener;
+import de.ft.interitus.events.global.GlobalLoadingDoneEvent;
+import de.ft.interitus.events.global.GlobalLoadingStartEvent;
 import de.ft.interitus.input.IntegerAuswahl;
 import de.ft.interitus.input.Switch;
 import de.ft.interitus.input.TextField;
@@ -35,6 +39,7 @@ import de.ft.interitus.utils.PositionSaver;
 import de.ft.interitus.utils.animation.Animation;
 
 import java.awt.*;
+import java.util.EventObject;
 
 import static com.badlogic.gdx.Gdx.input;
 import static de.ft.interitus.Settings.darkmode;
@@ -138,22 +143,6 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
         Gdx.graphics.setWindowedMode(Var.w, Var.h);
 
 
-        EventVar.blockEventManager.addListener(new BlockEventListener() {
-            @Override
-            public void createBlock(BlockCreateEvent e) {
-                System.out.println("Test Block erstellt");
-
-
-            }
-
-            @Override
-            public void deleteBlock(BlockDeleteEvent e) {
-
-            }
-        });
-
-
-
 
 
 
@@ -164,6 +153,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
     @Override
     public void render(float delta) {
+
 
 
 

@@ -1,6 +1,7 @@
 package de.ft.interitus.events.rightclick;
 
 import de.ft.interitus.events.block.BlockEventListener;
+import de.ft.interitus.events.global.GlobalEventManager;
 
 import java.util.Vector;
 
@@ -21,12 +22,12 @@ public class RightClickEventManager implements RightClickEventListener {
                     buttonclickedinwindow(e);
     }
 
-    public void removeListener(BlockEventListener l) {
+    public void removeListener(RightClickEventListener l) {
         listener.remove(l);
     }
 
 
-    public void addListener(BlockEventListener a) {
+    public void addListener(RightClickEventListener a) {
         if(! listener.contains(a))
             listener.addElement(a);
     }
