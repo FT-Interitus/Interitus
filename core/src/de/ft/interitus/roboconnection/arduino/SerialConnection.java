@@ -210,11 +210,15 @@ if(empfangen !="") {
             }
 
 
-            }catch (Exception e){
-                e.p
+            }catch (Exception e) {
 
+                e.printStackTrace();
 
             }
+
+            }
+
+
 
 
 

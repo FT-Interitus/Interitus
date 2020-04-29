@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.loading.AssetLoader;
+import de.ft.interitus.utils.CheckKollision;
 import org.apache.commons.lang3.ObjectUtils;
 
 public class Wire {
@@ -45,6 +46,28 @@ public class Wire {
         if(space_between_blocks) {
 
             if(movebymouse) {
+
+
+                if(Gdx.input.isButtonJustPressed(0)) {
+                            int counter = 0;
+                    for (int i = 0; i < BlockVar.visibleblocks.size(); i++) {
+
+                        if(CheckKollision.object(BlockVar.visibleblocks.get(i).getX_entrance(),BlockVar.visibleblocks.get(i).getY_entrance(),BlockVar.visibleblocks.get(i).getH_entrance(),BlockVar.visibleblocks.get(i).getW_entrance(),(int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y,1,1)) {
+                            counter++;
+                        }
+
+
+                    }
+
+                    if(counter==0) {
+
+                        System.out.println("Void clicked clear"); //TODO Clear funtion
+
+
+                    }
+
+                }
+
 
                 if (left_connection== null) { //Selbst zerstören wenn ein Block gelöscht wird mit der die Wire verbunden war
                     BlockVar.wires.remove(this);
