@@ -19,6 +19,9 @@ import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.settings.subitems.subitem13;
 import de.ft.interitus.data.user.changes.DataManager;
+import de.ft.interitus.events.EventVar;
+import de.ft.interitus.events.block.BlockCreateEvent;
+import de.ft.interitus.events.block.BlockEventListener;
 import de.ft.interitus.input.IntegerAuswahl;
 import de.ft.interitus.input.Switch;
 import de.ft.interitus.input.TextField;
@@ -53,7 +56,9 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
     public static Drawable d;
     public static Animation testanim = new Animation(new Texture("ballfeueranimation.png"), 60, 100, 100, 3);
 
-    public static PopupManager popupmanager=new PopupManager(new PopupMenue("ein popup"),new PopupMenue("BlockPopup","delete"));
+    public static PopupManager popupmanager=new PopupManager();
+
+
 
     IntegerAuswahl ia;
 
@@ -61,6 +66,12 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
     public ProgrammingSpace() {
 
+
+
+
+
+        popupmanager.addPopup(new PopupMenue("ein popup"));
+        popupmanager.addPopup(new PopupMenue("Löschen","Fixieren","Umbenennen","Befreien"));
 
 
         ia = new IntegerAuswahl(400, 400, 50, 25);
@@ -124,6 +135,20 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
         PortUpdate.UpdateConnectionWindowPortsList();
         Gdx.graphics.setWindowedMode(Var.w, Var.h);
+
+
+        EventVar.blockEventManager.addListener(new BlockEventListener() {
+            @Override
+            public void createBlock(BlockCreateEvent e) {
+                System.out.println("Test Block erstellt");
+
+
+            }
+        });
+
+
+
+
 
 
 
@@ -338,4 +363,10 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
         batch.dispose();
 
     }
+
+
+
+
+
+
 }

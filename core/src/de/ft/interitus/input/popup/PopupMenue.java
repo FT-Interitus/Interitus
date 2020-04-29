@@ -3,6 +3,9 @@ package de.ft.interitus.input.popup;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import de.ft.interitus.events.EventVar;
+import de.ft.interitus.events.block.BlockCreateEvent;
+import de.ft.interitus.events.rightclick.RightClickButtonSelectEvent;
 import de.ft.interitus.input.Button;
 import de.ft.interitus.input.check.Check;
 
@@ -90,6 +93,12 @@ public class PopupMenue {
 
             batch.end();
         }
+
+        if(getPressed()!=-1) {
+            EventVar.rightClickEventManager.buttonclickedinwindow(new RightClickButtonSelectEvent(this,buttons.get(getPressed())));
+
+        }
+
     }
     public void addItem(String text){
         Button b=new Button();
@@ -105,7 +114,7 @@ public class PopupMenue {
             buttons.add(b);
         }
     }
-    public int getPressed(){
+    private int getPressed(){
         int p=-1;
         for(int i=0;i<buttons.size();i++){
             if(buttons.get(i).isjustPressed()){

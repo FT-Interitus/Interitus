@@ -23,6 +23,7 @@ public class BlockUpdate extends Thread {
     Vector3 temp3;//Temp vectoren für berechnungs zwischen schritte
     Vector3 temp4;//Temp vectoren für berechnungs zwischen schritte
     public boolean isconnectorclicked = false;//Ist der connector des zuständigen Blocks ausgelöst
+    public boolean geschoben=false;
 
    public  Wire tempwire;
 
@@ -344,9 +345,9 @@ public class BlockUpdate extends Thread {
                     }
 
 
-                    if (block == BlockVar.blockmitdergrostenuberlappungmitmarkiertemblock && block.moved == false) {
+                    if (block == BlockVar.blockmitdergrostenuberlappungmitmarkiertemblock && block.moved == false && !geschoben) {
                         block.moved = true;
-
+                        geschoben=true;
 
                         int a = BlockVar.blocks.indexOf(BlockVar.blockmitdergrostenuberlappungmitmarkiertemblock);
                         //System.out.println(a);
@@ -370,12 +371,14 @@ public class BlockUpdate extends Thread {
 
                     }
 
-                    if (block.seted == false && BlockVar.biggestblock == block && !Gdx.input.isButtonPressed(0)) {
+                    if (block.seted == false && BlockVar.biggestblock == block && !Gdx.input.isButtonPressed(0)) { //TODO flackern wegmachen!
 //System.out.println("funzt");
                         block.seted = true;
+                        geschoben=false;
                     }
 
                     if (block.seted == false && BlockVar.biggestblock != block) {
+                         geschoben=false;
 
                         // System.out.println("jezt muss das ruckgangig gemacht werdn");
 

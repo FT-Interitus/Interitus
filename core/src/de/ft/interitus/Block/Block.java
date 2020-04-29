@@ -10,6 +10,8 @@ import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.ThreadManager;
 import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.DisplayErrors;
+import de.ft.interitus.events.EventVar;
+import de.ft.interitus.events.block.BlockCreateEvent;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.utils.CheckKollision;
 
@@ -47,6 +49,7 @@ public class Block implements VisibleObjects{
     private BlockAttribute blockAttribute = new BlockAttribute();
 
     public Block(int index, int x, int y, int w, int h) { //Initzialisieren des Blocks
+        EventVar.blockEventManager.createBlock(new BlockCreateEvent(this, this));
         this.x = x;
         this.y = y;
         this.w = w;
