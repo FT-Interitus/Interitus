@@ -22,4 +22,11 @@ public class BlockEventManager implements BlockEventListener {
             ((BlockEventListener)listener.elementAt(i)).
                     createBlock(e);
     }
+
+    @Override
+    public void deleteBlock(BlockDeleteEvent e) {
+        for(int i=0; i < listener.size(); i++)
+            ((BlockEventListener)listener.elementAt(i)).
+                    deleteBlock(e);
+    }
 }

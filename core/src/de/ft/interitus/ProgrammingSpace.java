@@ -21,6 +21,7 @@ import de.ft.interitus.UI.settings.subitems.subitem13;
 import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.block.BlockCreateEvent;
+import de.ft.interitus.events.block.BlockDeleteEvent;
 import de.ft.interitus.events.block.BlockEventListener;
 import de.ft.interitus.input.IntegerAuswahl;
 import de.ft.interitus.input.Switch;
@@ -142,6 +143,11 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
             public void createBlock(BlockCreateEvent e) {
                 System.out.println("Test Block erstellt");
 
+
+            }
+
+            @Override
+            public void deleteBlock(BlockDeleteEvent e) {
 
             }
         });
