@@ -14,6 +14,7 @@ public class BlockDeleteEvent extends EventObject {
      */
     public BlockDeleteEvent(Object source, Block block) {
         super(source);
+        this.block = block;
     }
 
     public Block getBlock() {
