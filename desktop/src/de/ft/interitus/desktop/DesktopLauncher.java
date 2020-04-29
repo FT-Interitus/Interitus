@@ -1,6 +1,7 @@
 package de.ft.interitus.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import de.ft.interitus.Programm;
 import de.ft.interitus.Var;
@@ -27,7 +28,10 @@ public class DesktopLauncher {
 
 		if(Var.programmarguments.indexOf("-nogui")==-1) {
 
+
+
 			LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+			config.useGL30 = true;
 			config.width = Var.w;
 			config.height = Var.h;
 			config.vSyncEnabled = false;

@@ -3,6 +3,7 @@ package de.ft.interitus.Block;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.loading.AssetLoader;
@@ -18,7 +19,9 @@ public class Wire {
     private boolean canplaceanewwirenode = false;
 
     private Vector3 tempvector = new Vector3();
+    private Vector3 tempvector1 = new Vector3();
     private float dicke = 3.5f;
+
 
 
     public Wire(VisibleObjects left_connection,Block right_connection) {
@@ -117,7 +120,7 @@ public class Wire {
             if(Gdx.input.isKeyJustPressed(Input.Keys.N)&&canplaceanewwirenode) {
 
 
-                    WireNode tempwirenode = new WireNode(BlockVar.movingwires,(int)ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x,(int)ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y,10,10);
+                    WireNode tempwirenode = new WireNode(BlockVar.movingwires,(int)ProgrammingSpace.cam.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x,(int)ProgrammingSpace.cam.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y,10,10);
 
                     BlockVar.wireNodes.add(tempwirenode);
                     BlockVar.visibleWireNodes.add(tempwirenode);
@@ -175,9 +178,9 @@ float b = left_connection.getY_exit() - ProgrammingSpace.cam.unproject(new Vecto
 
 
                 if(ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(),0)).x-left_connection.getX_exit()>=0) {
-                    sprite.setRotation((float) ((float) Math.atan((float) ((ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y - left_connection.getY_exit()) / (ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x - left_connection.getX_exit()))) * 180 / Math.PI));
+                    sprite.setRotation((float) ((float) Math.atan((float) ((ProgrammingSpace.cam.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y - left_connection.getY_exit()) / (ProgrammingSpace.cam.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x - left_connection.getX_exit()))) * 180 / Math.PI));
                 }else{
-                    sprite.setRotation((float) ((float) Math.atan((float) ((ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y - left_connection.getY_exit()) / (ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x - left_connection.getX_exit()))) * 180 / Math.PI)+180);
+                    sprite.setRotation((float) ((float) Math.atan((float) ((ProgrammingSpace.cam.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y - left_connection.getY_exit()) / (ProgrammingSpace.cam.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x - left_connection.getX_exit()))) * 180 / Math.PI)+180);
 
                 }
             //   ProgrammingSpace.batch.draw(AssetLoader.switch_background_white,873,575,5,5);
