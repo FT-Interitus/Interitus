@@ -23,7 +23,8 @@ public class BlockUpdate extends Thread {
     Vector3 temp3;//Temp vectoren für berechnungs zwischen schritte
     Vector3 temp4;//Temp vectoren für berechnungs zwischen schritte
     public boolean isconnectorclicked = false;//Ist der connector des zuständigen Blocks ausgelöst
-   private Wire tempwire;
+
+   public  Wire tempwire;
 
    private boolean IsMousealreadypressed = false;
 
@@ -67,7 +68,10 @@ public class BlockUpdate extends Thread {
                     //TODO
 
 
-                    if(!isIsconnectorclicked()&& BlockVar.showleftdocker&& CheckKollision.object(block.getX_entrance(),block.getY_entrance(),block.getH_entrance(),block.getW_entrance(),(int) ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y,1,1)&&Gdx.input.isButtonPressed(0)&&block.getLeft()==null) {
+
+
+
+                    if(!isIsconnectorclicked()&& BlockVar.showleftdocker&& CheckKollision.object(block.getX_entrance(),block.getY_entrance(),block.getH_entrance(),block.getW_entrance(),(int) ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y,1,1)&&Gdx.input.isButtonJustPressed(0)&&block.getLeft()==null) { //TODO Durch das Just pressed kann es sein das es manchmal verpasst wird dieses Event auszuführen
                             BlockVar.showleftdocker = false;
                             BlockVar.movingwires.setMovebymouse(false);
                             BlockVar.movingwires.setRight_connection(block);
@@ -94,7 +98,7 @@ public class BlockUpdate extends Thread {
 
 
 
-                    if (isconnectorclicked && Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) { //Um vorzeitige wire wieder aufzulösen und ggf zu richtigen umzuwandeln
+                    if ((isconnectorclicked && Gdx.input.isKeyPressed(Input.Keys.ESCAPE))) { //Um vorzeitige wire wieder aufzulösen und ggf zu richtigen umzuwandeln
 
                         isconnectorclicked = false;
                         BlockVar.showleftdocker = false;

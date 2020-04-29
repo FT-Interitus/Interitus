@@ -61,8 +61,28 @@ public class Wire {
 
                     if(counter==0) {
 
-                        System.out.println("Void clicked clear"); //TODO Clear funtion
+                        BlockVar.wire_beginn.getBlockupdate().isconnectorclicked = false;
+                        BlockVar.showleftdocker = false;
 
+                        try {
+                            BlockVar.wire_beginn.getBlockupdate().tempwire.getLeft_connection().setWire_right(null);
+                            BlockVar.visiblewires.remove(BlockVar.wire_beginn.getBlockupdate().tempwire);
+                            BlockVar.wires.remove(BlockVar.wire_beginn.getBlockupdate().tempwire);
+
+                            try {
+
+                                BlockVar.wire_beginn.getBlockupdate().tempwire.getRight_connectionObject().getwirenode().setWire_left(null);
+                                BlockVar.wire_beginn.getBlockupdate().tempwire.setRight_connection(null);
+
+                            }catch (NullPointerException e) {
+                                //Falls hier keine Wire ist
+                            }
+                            BlockVar.wire_beginn.getBlockupdate().tempwire = null;
+                        }catch (Exception e) {
+
+                        }
+
+                        BlockVar.movingwires =null;
 
                     }
 
