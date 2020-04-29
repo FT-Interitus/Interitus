@@ -65,7 +65,7 @@ public class USBConnection {
     }
 
     private static ByteBuffer sendDirectCmd(ArrayList<Byte> operations,
-                                           int local_mem, int global_mem) {
+                                            int local_mem, int global_mem) {
         ByteBuffer buffer = ByteBuffer.allocateDirect(operations.size() + 7);
         buffer.order(ByteOrder.LITTLE_ENDIAN);
         buffer.putShort((short) (operations.size() + 5));   // length
@@ -106,8 +106,6 @@ public class USBConnection {
     }
 
 
-
-
     public static void openev3sesseion() {
         connectUsb();
     }
@@ -116,10 +114,10 @@ public class USBConnection {
         LibUsb.releaseInterface(handle, 0);
         LibUsb.close(handle);
     }
+
     public static void sendcommand(ArrayList<Byte> command) {
         ByteBuffer reply = sendDirectCmd(command, 7 + command.size() + 2, 0);
     }
-
 
 
     public static void main(String[] args) {
@@ -128,12 +126,12 @@ public class USBConnection {
 
         ArrayList<Byte> command = new ArrayList<>();
         //command.addAll(Operations.ev3statusline(false));
-       // command.addAll(Operations.displayBMPFile(true,0,0,"../apps/Motor Control/MotorCtlAD.rgf"));
-       // command.addAll(Operations.updateev3screen());
+        // command.addAll(Operations.displayBMPFile(true,0,0,"../apps/Motor Control/MotorCtlAD.rgf"));
+        // command.addAll(Operations.updateev3screen());
 
         //command.addAll(Operations.setbrickname("Stein123"));
 
-       sendcommand(command);
+        sendcommand(command);
         try {
             TimeUnit.SECONDS.sleep(10);
         } catch (InterruptedException e) {
@@ -142,11 +140,7 @@ public class USBConnection {
         closeev3session();
 
 
-
     }
-
-
-
 
 
 }

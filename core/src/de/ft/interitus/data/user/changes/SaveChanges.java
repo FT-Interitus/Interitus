@@ -12,9 +12,9 @@ public class SaveChanges {
 
     static RevertBlock revblock;
     static RevertBlock redoblock;
-    private static Stack changes = new Stack();
+    private static final Stack changes = new Stack();
 
-    private static Stack redo = new Stack();
+    private static final Stack redo = new Stack();
 
 
     public static void clearstacks() {

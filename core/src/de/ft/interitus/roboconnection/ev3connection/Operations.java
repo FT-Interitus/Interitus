@@ -48,7 +48,7 @@ public class Operations {
             temp = ev3.LCX(0);
         }
 
-        for(int i=0;i<temp.length;i++) {
+        for (int i = 0; i < temp.length; i++) {
             b.add(temp[i]);
         }
 
@@ -57,9 +57,9 @@ public class Operations {
         temp2 = ev3.LCX(X);
 
 
-        for(int i=0;i<temp2.length;i++) {
-        b.add(temp2[i]);
-    }
+        for (int i = 0; i < temp2.length; i++) {
+            b.add(temp2[i]);
+        }
 
 /////////////////////////Y/////////
 
@@ -67,7 +67,7 @@ public class Operations {
         temp3 = ev3.LCX(Y);
 
 
-        for(int i=0;i<temp3.length;i++) {
+        for (int i = 0; i < temp3.length; i++) {
             b.add(temp3[i]);
         }
 
@@ -75,7 +75,7 @@ public class Operations {
         byte[] temp4;
         temp4 = ev3.LCS(name);
 
-        for(int i=0;i<temp4.length;i++) {
+        for (int i = 0; i < temp4.length; i++) {
             b.add(temp4[i]);
         }
 

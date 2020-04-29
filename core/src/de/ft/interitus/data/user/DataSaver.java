@@ -61,7 +61,7 @@ public class DataSaver {
                     handle.writeString(obj.toString(), false);
                     //System.out.println(BlockVar.blocks.get(1).getLeft());
 
-                }catch (Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace(); //for debug to find errors
                 }
             }

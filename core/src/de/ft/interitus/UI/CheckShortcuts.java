@@ -3,7 +3,6 @@ package de.ft.interitus.UI;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.g2d.CpuSpriteBatch;
 import com.kotcrab.vis.ui.util.dialog.ConfirmDialogListener;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import de.ft.interitus.UI.newproject.NewProjectWindow;
@@ -14,10 +13,11 @@ import de.ft.interitus.data.user.changes.DataManager;
 
 public class CheckShortcuts {
     public static boolean blockshortcuts = false;
+
     public static void check() {
 
 
-        if(!blockshortcuts) {
+        if (!blockshortcuts) {
 
             //TODO Changeable in the Settings   <- Deswegen habe ich erstmal nur Datei gemacht
             if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT) || Gdx.input.isKeyPressed(Input.Keys.CONTROL_RIGHT)) {
@@ -29,8 +29,7 @@ public class CheckShortcuts {
                     NPW.show();
                 }
 
-                if(Gdx.input.isKeyPressed(Input.Keys.O)&&!LoadSave.isopenopen()) {
-
+                if (Gdx.input.isKeyPressed(Input.Keys.O) && !LoadSave.isopenopen()) {
 
 
                     if (!Var.isclearing) {
@@ -82,16 +81,15 @@ public class CheckShortcuts {
                 }
 
 
-                if(Gdx.input.isKeyPressed(Input.Keys.S)) {
+                if (Gdx.input.isKeyPressed(Input.Keys.S)) {
 
-                    if(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)||Gdx.input.isKeyPressed(Input.Keys.SHIFT_RIGHT)) {
-                        if(!LoadSave.issaveopen()) {
+                    if (Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) || Gdx.input.isKeyPressed(Input.Keys.SHIFT_RIGHT)) {
+                        if (!LoadSave.issaveopen()) {
                             LoadSave.saveas();
                         }
 
 
-
-                    }else {
+                    } else {
                         if (DataManager.path != "") {
                             FileHandle handle = Gdx.files.absolute(DataManager.path);
                             DataSaver.save(handle);
@@ -104,22 +102,13 @@ public class CheckShortcuts {
                     }
 
 
-
                 }
-
-
-
-
-
-
-
 
 
             }
 
 
         }
-
 
 
     }

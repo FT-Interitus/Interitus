@@ -6,6 +6,7 @@ import java.util.EventObject;
 
 public class BlockDeleteEvent extends EventObject {
     Block block;
+
     /**
      * Constructs a prototypical Event.
      *

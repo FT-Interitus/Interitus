@@ -10,8 +10,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class ThreadManager {
-    public static ArrayList<Thread> threads = new ArrayList<Thread>();
-    public static ArrayList<Object> requestobj = new ArrayList<Object>();
+    public static ArrayList<Thread> threads = new ArrayList<>();
+    public static ArrayList<Object> requestobj = new ArrayList<>();
 
 
     static Frustum camfr;
@@ -46,11 +46,12 @@ public class ThreadManager {
                                     Block block = ((BlockUpdate) threads.get(i)).block;
                                     if (!(camfr.boundsInFrustum(block.getX(), block.getY(), 0, block.getW(), block.getH(), 0)) && block.isMarked() == false && ((BlockUpdate) threads.get(i)).isrunning == true) {
 
-                                    if(((BlockUpdate) threads.get(i)).isrunning) {
-                                        try {
-                                            ((BlockUpdate) threads.get(i)).time.cancel();
-                                        }catch (Exception e) {}
-                                    }
+                                        if (((BlockUpdate) threads.get(i)).isrunning) {
+                                            try {
+                                                ((BlockUpdate) threads.get(i)).time.cancel();
+                                            } catch (Exception e) {
+                                            }
+                                        }
                                         threads.get(i).interrupt();
                                         ((BlockUpdate) threads.get(i)).isrunning = false;
                                         BlockVar.visibleblocks.remove(block);
@@ -59,7 +60,7 @@ public class ThreadManager {
                                     if (camfr.boundsInFrustum(block.getX(), block.getY(), 0, block.getW(), block.getH(), 0) && ((BlockUpdate) threads.get(i)).isrunning == false) {
                                         BlockVar.visibleblocks.add(block);
                                         threads.set(i, ((BlockUpdate) threads.get(i)).block.allowedRestart());
-                                        if(Var.verboseoutput) {
+                                        if (Var.verboseoutput) {
                                             System.out.println("Started " + block.getIndex());
                                         }
                                         ((BlockUpdate) threads.get(i)).isrunning = true;
@@ -73,33 +74,32 @@ public class ThreadManager {
                             }
 
 
-                            for(int i=0;i<BlockVar.wires.size();i++) {
-                                if(BlockVar.wires.get(i).isvisible()) {
-                                    if(BlockVar.visiblewires.indexOf(BlockVar.wires.get(i))==-1) {
+                            for (int i = 0; i < BlockVar.wires.size(); i++) {
+                                if (BlockVar.wires.get(i).isvisible()) {
+                                    if (BlockVar.visiblewires.indexOf(BlockVar.wires.get(i)) == -1) {
                                         BlockVar.visiblewires.add(BlockVar.wires.get(i));
                                     }
-                                }else{
-                                    if(BlockVar.visiblewires.indexOf(BlockVar.wires.get(i))!=-1) {
+                                } else {
+                                    if (BlockVar.visiblewires.indexOf(BlockVar.wires.get(i)) != -1) {
                                         BlockVar.visiblewires.remove(BlockVar.wires.get(i));
                                     }
                                 }
                             }
 
-                            for(int i=0;i<BlockVar.wireNodes.size();i++) {
-                                if(BlockVar.wireNodes.get(i).isVisible()) {
-                                    if(BlockVar.visibleWireNodes.indexOf(BlockVar.wireNodes.get(i))==-1) {
+                            for (int i = 0; i < BlockVar.wireNodes.size(); i++) {
+                                if (BlockVar.wireNodes.get(i).isVisible()) {
+                                    if (BlockVar.visibleWireNodes.indexOf(BlockVar.wireNodes.get(i)) == -1) {
                                         BlockVar.visibleWireNodes.add(BlockVar.wireNodes.get(i));
                                     }
-                                }else{
-                                    if(BlockVar.visibleWireNodes.indexOf(BlockVar.wireNodes.get(i))!=-1) {
+                                } else {
+                                    if (BlockVar.visibleWireNodes.indexOf(BlockVar.wireNodes.get(i)) != -1) {
                                         BlockVar.visibleWireNodes.remove(BlockVar.wireNodes.get(i));
                                     }
                                 }
                             }
 
 
-
-                        }catch (Exception e) {
+                        } catch (Exception e) {
                             e.printStackTrace(); //for debug to find errors
                         }
                     }

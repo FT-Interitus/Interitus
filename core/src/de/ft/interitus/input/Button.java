@@ -2,97 +2,86 @@ package de.ft.interitus.input;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.*;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import de.ft.interitus.input.check.Check;
 import de.ft.interitus.utils.RoundRectangle;
 
 public class Button {
-     private int x;
-     private int y;
+    BitmapFont font = new BitmapFont();
+    private int x;
+    private int y;
     private int w;
     private int h;
     private String text;
-    private Texture image=null;
-
-    private boolean visible=true;
-    private boolean disable=false;
-    private SpriteBatch batch=new SpriteBatch();
-    private ShapeRenderer s=new ShapeRenderer();
-    private GlyphLayout glyphLayout = new GlyphLayout();
-
-
-    private Check check=new Check();
+    private Texture image = null;
+    private boolean visible = true;
+    private boolean disable = false;
+    private final SpriteBatch batch = new SpriteBatch();
+    private final ShapeRenderer s = new ShapeRenderer();
+    private final GlyphLayout glyphLayout = new GlyphLayout();
+    private final Check check = new Check();
 
 
-
-    BitmapFont font = new BitmapFont();
-
-
-    public Button(int x,int y,int w,int h){
-        this.x=x;
-        this.y=y;
-        this.w=w;
-        this.h=h;
+    public Button(int x, int y, int w, int h) {
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
 
     }
-    public Button(){
+
+    public Button() {
 
 
     }
 
-    public void setBounds(int x,int y,int w,int h){
-        this.x=x;
-        this.y=y;
-        this.w=w;
-        this.h=h;
+    public void setBounds(int x, int y, int w, int h) {
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
 
     }
 
-    public boolean isjustPressed(){
-        boolean pressed=false;
-if(!disable) {
+    public boolean isjustPressed() {
+        boolean pressed = false;
+        if (!disable) {
 
-pressed=check.isjustPressed(x,y,w,h);
+            pressed = check.isjustPressed(x, y, w, h);
 
-}else{
-    return false;
-}
+        } else {
+            return false;
+        }
 
         return pressed;
 
     }
 
 
-    public boolean isPresseded(){
-        if(!disable) {
+    public boolean isPresseded() {
+        if (!disable) {
 
-return check.isPressed(x,y,w,h);
-        }else{
+            return check.isPressed(x, y, w, h);
+        } else {
             return false;
         }
     }
 
 
-    public boolean isMouseover(){
-        if(!disable) {
+    public boolean isMouseover() {
+        if (!disable) {
 
-            return check.isMouseover(x,y,w,h);
-        }else{
+            return check.isMouseover(x, y, w, h);
+        } else {
             return false;
         }
     }
 
-    public void setText(String text){
-        this.text=text;
-    }
-
-    public void setImage(Texture image){
-        this.image=image;
-    }
-
-    public void draw(){
-        if(isVisible()) {
+    public void draw() {
+        if (isVisible()) {
             if (image == null) {
 
                 s.begin(ShapeRenderer.ShapeType.Filled);
@@ -108,8 +97,8 @@ return check.isPressed(x,y,w,h);
                 if (isMouseover() && Gdx.input.isButtonPressed(0)) {
                     batch.setColor(1, 0.5f, 0.5f, 1);
                 }
-                if(isDisable()){
-                    batch.setColor(1,1,1,0.2f);
+                if (isDisable()) {
+                    batch.setColor(1, 1, 1, 0.2f);
                 }
                 batch.draw(image, this.x, this.y, this.w, this.h);
                 batch.end();
@@ -129,48 +118,56 @@ return check.isPressed(x,y,w,h);
         return x;
     }
 
-    public int getY() {
-        return y;
-    }
-
-    public int getH() {
-        return h;
-    }
-
-    public int getW() {
-        return w;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public Texture getImage() {
-        return image;
-    }
-
-    public void setW(int w) {
-        this.w = w;
-    }
-
-    public void setH(int h) {
-        this.h = h;
-    }
-
     public void setX(int x) {
         this.x = x;
+    }
+
+    public int getY() {
+        return y;
     }
 
     public void setY(int y) {
         this.y = y;
     }
 
-    public void setVisible(boolean visible) {
-        this.visible = visible;
+    public int getH() {
+        return h;
+    }
+
+    public void setH(int h) {
+        this.h = h;
+    }
+
+    public int getW() {
+        return w;
+    }
+
+    public void setW(int w) {
+        this.w = w;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public Texture getImage() {
+        return image;
+    }
+
+    public void setImage(Texture image) {
+        this.image = image;
     }
 
     public boolean isVisible() {
         return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
     }
 
     public boolean isDisable() {

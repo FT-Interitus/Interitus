@@ -6,7 +6,7 @@ import com.kotcrab.vis.ui.widget.VisTable;
 import com.kotcrab.vis.ui.widget.VisTextField;
 import de.ft.interitus.UI.setup.SetupWindow;
 
-import javax.swing.Timer;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -19,11 +19,10 @@ public class Step1 {
     public static Timer time;
 
 
-
-    public static void close(){
+    public static void close() {
         SetupWindow.tempverbindungsspeicher.name = name.getText();
 
-        if(time!=null){
+        if (time != null) {
             if (time.isRunning()) {
                 time.stop();
             }
@@ -32,26 +31,21 @@ public class Step1 {
     }
 
 
-
-
     public static void step1(VisTable builder) {
         //loadsettings
         name.setText(SetupWindow.tempverbindungsspeicher.name);
         //
 
 
+        time = new Timer(30, new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
 
-        time = new Timer( 30, new ActionListener()
-        {
-            public void actionPerformed( ActionEvent evt )
-            {
-
-                if(name.isEmpty()){
-                    SetupWindow.errorLabel.setColor(new Color(1,0,0,1));
+                if (name.isEmpty()) {
+                    SetupWindow.errorLabel.setColor(new Color(1, 0, 0, 1));
                     SetupWindow.errorLabel.setText("Du musst einen Name vergeben");
                     SetupWindow.Button_next.setDisabled(true);
-                }else{
-                    SetupWindow.errorLabel.setColor(new Color(0,1,0,1));
+                } else {
+                    SetupWindow.errorLabel.setColor(new Color(0, 1, 0, 1));
                     SetupWindow.errorLabel.setText("Alle Voraussetzungen erfüllt");
                     SetupWindow.Button_next.setDisabled(false);
                 }
@@ -65,7 +59,6 @@ public class Step1 {
 
 
     }
-
 
 
 }

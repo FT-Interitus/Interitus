@@ -12,8 +12,20 @@ import static com.badlogic.gdx.scenes.scene2d.ui.Cell.defaults;
 
 
 public class Devicemanagmenttab extends Tab {
-    private String title;
-    private Table content;
+    private final String title;
+    private final Table content;
+
+    public Devicemanagmenttab(String title) {
+        super(false, false);
+        this.title = title;
+
+        VisList visList = new VisList();
+        content = new VisTable();
+        //   VisTextButton button = new VisTextButton("button");
+        TestFormValidator(this);
+        // content.add(button).padRight(0);
+
+    }
 
     public void TestFormValidator(final Devicemanagmenttab devicemanagmenttab) {
 
@@ -44,31 +56,22 @@ public class Devicemanagmenttab extends Tab {
             @Override
             public boolean validateInput(String input) {
 
-                if(input.length()>14) {
-                    return false;
-                }else{
-                    return true;
-                }
+                return input.length() <= 14;
             }
         });
 
         Name.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-               // devicemanagmenttab.set
+                // devicemanagmenttab.set
             }
         });
         Name.isInputValid();
 
 
-
-
         content.add(device).padLeft(-299);
         content.add(Name).expand().fill().padLeft(-120);
         content.row();
-
-
-
 
 
         content.pack();
@@ -77,26 +80,13 @@ public class Devicemanagmenttab extends Tab {
 
     }
 
-
-    public Devicemanagmenttab(String title) {
-        super(false, false);
-        this.title = title;
-
-        VisList visList = new VisList();
-        content = new VisTable();
-    //   VisTextButton button = new VisTextButton("button");
-       TestFormValidator(this);
-       // content.add(button).padRight(0);
-
-    }
-
     @Override
-    public String getTabTitle () {
+    public String getTabTitle() {
         return title;
     }
 
     @Override
-    public Table getContentTable () {
+    public Table getContentTable() {
         return content;
     }
 }

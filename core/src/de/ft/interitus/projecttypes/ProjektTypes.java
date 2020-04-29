@@ -5,17 +5,18 @@ import de.ft.interitus.device.ProgrammableObjekt;
 public class ProjektTypes {
     ProgrammableObjekt PO;
     String name;
-    public ProjektTypes(ProgrammableObjekt PO,String name){
-        this.PO=PO;
-        this.name=name;
-    }
 
-    public void setPO(ProgrammableObjekt PO) {
+    public ProjektTypes(ProgrammableObjekt PO, String name) {
         this.PO = PO;
+        this.name = name;
     }
 
     public ProgrammableObjekt getPO() {
         return PO;
+    }
+
+    public void setPO(ProgrammableObjekt PO) {
+        this.PO = PO;
     }
 
     public String getName() {

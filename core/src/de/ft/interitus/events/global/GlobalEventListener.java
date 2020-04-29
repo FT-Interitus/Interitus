@@ -1,7 +1,9 @@
 package de.ft.interitus.events.global;
 
 public interface GlobalEventListener {
-    public void loadingdone(GlobalLoadingDoneEvent e);
-    public void loadingstart(GlobalLoadingStartEvent e);
-    public void erroroccurred(GlobalErrorOccurredEvent e);
+    void loadingdone(GlobalLoadingDoneEvent e);
+
+    void loadingstart(GlobalLoadingStartEvent e);
+
+    void erroroccurred(GlobalErrorOccurredEvent e);
 }

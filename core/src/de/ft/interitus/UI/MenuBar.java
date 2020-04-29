@@ -1,7 +1,6 @@
 package de.ft.interitus.UI;
 
 import com.badlogic.gdx.Gdx;
-
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -21,17 +20,17 @@ import de.ft.interitus.data.user.DataSaver;
 import de.ft.interitus.data.user.LoadSave;
 import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.data.user.changes.SaveChanges;
-import de.ft.interitus.data.user.experience.ExperienceVar;
 import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.utils.ClearActOpenProgramm;
 
 
 public class MenuBar {
-    public static boolean fullscreen=false;
+    public static boolean fullscreen = false;
+
     protected static void createMenus() {
         Menu fileMenu = new Menu("Datei");
         Menu editMenu = new Menu("Bearbeiten");
-        Menu ConnectionMenue=new Menu("Verbindungen");
+        Menu ConnectionMenue = new Menu("Verbindungen");
         Menu windowMenu = new Menu("Ansicht");
         Menu helpMenu = new Menu("Hilfe");
 
@@ -40,26 +39,21 @@ public class MenuBar {
         //recent.setSubMenu(createSubMenu());
 
 
-
-
-
         windowMenu.addItem(new MenuItem("Vollbild", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-if(fullscreen==false) {
-    Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
-    fullscreen=true;
-}else{
-    Gdx.graphics.setWindowedMode(Var.w, Var.h);
-    ProgrammingSpace.batch.getProjectionMatrix().setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-    Gdx.gl.glViewport(0, 0, Gdx.graphics.getBackBufferWidth(), Gdx.graphics.getBackBufferHeight());
-    fullscreen=false;
-}
+                if (fullscreen == false) {
+                    Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
+                    fullscreen = true;
+                } else {
+                    Gdx.graphics.setWindowedMode(Var.w, Var.h);
+                    ProgrammingSpace.batch.getProjectionMatrix().setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                    Gdx.gl.glViewport(0, 0, Gdx.graphics.getBackBufferWidth(), Gdx.graphics.getBackBufferHeight());
+                    fullscreen = false;
+                }
 
             }
         }).setShortcut("F11"));
-
-
 
 
         fileMenu.addItem(new MenuItem("Neues Projekt", new ChangeListener() {
@@ -133,7 +127,7 @@ if(fullscreen==false) {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
-                if(!LoadSave.isopenopen()) {
+                if (!LoadSave.isopenopen()) {
                     if (!Var.isclearing) {
                         if (DataManager.changes) {
                             String[] möglichkeiten = {"Verwerfen", "Speichern", "Abbrechen"};
@@ -191,7 +185,7 @@ if(fullscreen==false) {
                     DataSaver.save(handle);
                     DataManager.saved();
                 } else {
-                    if(!LoadSave.issaveopen()) {
+                    if (!LoadSave.issaveopen()) {
                         LoadSave.saveas();
                     }
                 }
@@ -202,7 +196,7 @@ if(fullscreen==false) {
             public void changed(ChangeEvent event, Actor actor) {
 
 
-                if(!LoadSave.issaveopen()) {
+                if (!LoadSave.issaveopen()) {
                     LoadSave.saveas();
                 }
             }
@@ -226,14 +220,13 @@ if(fullscreen==false) {
         // ------------------------------------
 
 
-
         ConnectionMenue.addItem(new MenuItem("Neue Verbindung", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 try {
                     SetupWindow sw = new SetupWindow(); //TODO zu debug zwecken
                     sw.show();
-                }catch (NullPointerException e) {
+                } catch (NullPointerException e) {
 
                 }
             }
@@ -245,8 +238,6 @@ if(fullscreen==false) {
                 Dialogs.showOKDialog(UI.stage, "++++ )-: ++++", "Dieses Fenster Exestiert noch nicht");
             }
         }));
-
-
 
 
 // --------------------------------------------
@@ -300,7 +291,6 @@ if(fullscreen==false) {
         }).setShortcut("Strg+V"));
 
 
-
         helpMenu.addItem(new MenuItem("Updates..", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -343,13 +333,11 @@ if(fullscreen==false) {
 
         UI.menuBar.addMenu(helpMenu);
 
-        for(int i =0;i< PluginManagerHandler.pluginMenubar.size();i++) { //Alle Plugins MenuBar werden der MenuBar
+        for (int i = 0; i < PluginManagerHandler.pluginMenubar.size(); i++) { //Alle Plugins MenuBar werden der MenuBar
             UI.menuBar.addMenu(PluginManagerHandler.pluginMenubar.get(i));
         }
 
     }
-
-
 
 
     protected static PopupMenu createSubMenu(int count, final String[] projects) {
@@ -376,7 +364,7 @@ if(fullscreen==false) {
                                     @Override
                                     public void result(Integer result) {
                                         if (result == nothing) {
-                                           ClearActOpenProgramm.clear();
+                                            ClearActOpenProgramm.clear();
                                             DataManager.saved();
                                             DataManager.filename = Data.filename.get(finalI);
                                             DataManager.path = Data.path.get(finalI);

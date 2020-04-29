@@ -24,11 +24,23 @@ import de.ft.interitus.plugin.PluginManagerHandler;
 public class SettingsUI extends VisWindow {
 
     public static VisTextField updateurlfield;
-   public static RowLayout rowLayout;
-   public static VisCheckBox darktoggle;
-   public static TestBuilder testBuilder;
-    final VisTable container = new VisTable();
+    public static RowLayout rowLayout;
+    public static VisCheckBox darktoggle;
+    public static TestBuilder testBuilder;
     public static int SelectedItem = -1;
+    private static boolean accepteddangerous = false;
+    final VisTable container = new VisTable();
+    final Padding padding = new Padding(2, 3);
+
+    public SettingsUI() {
+        super("Einstellungen");
+        pack();
+        setPosition(31, 35);
+
+
+        new GridTableBuilder(4);
+    }
+
     /***
      * -1 = Informationen
      *
@@ -57,23 +69,9 @@ public class SettingsUI extends VisWindow {
         try {
 
             return testBuilder.testopen();
-        }catch (Exception e) {
+        } catch (Exception e) {
             return false;
         }
-    }
-
-
-
-    private static boolean accepteddangerous = false;
-    final Padding padding = new Padding(2, 3);
-
-    public SettingsUI() {
-        super("Einstellungen");
-        pack();
-        setPosition(31, 35);
-
-
-        new GridTableBuilder(4);
     }
 
     public void show() {
@@ -84,25 +82,27 @@ public class SettingsUI extends VisWindow {
         UI.stage.addActor(testBuilder);
 
 
+    }
+
+    static class TestNode extends Tree.Node {
+        public VisLabel label;
+        public int Mode;
+
+        public TestNode(Actor actor, int Mode) {
+            super(actor);
+            label = (VisLabel) actor;
+            this.Mode = Mode;
+        }
 
 
     }
 
-
     private class TestBuilder extends VisWindow {
-        public boolean testopen() {
-            return super.getParent().isVisible();
-
-
-        }
-
-
         public TestBuilder(String name, final TableBuilder builder) {
             super(name);
 
 
-
-           rowLayout  = new RowLayout(new Padding(0, 0, 0, 5));
+            rowLayout = new RowLayout(new Padding(0, 0, 0, 5));
 
 
             setModal(true);
@@ -121,7 +121,7 @@ public class SettingsUI extends VisWindow {
             // setScale(200,200);
 
 
-           darktoggle = new VisCheckBox("Schaltet den Dark-Mode an und aus");
+            darktoggle = new VisCheckBox("Schaltet den Dark-Mode an und aus");
             darktoggle.setChecked(Settings.darkmode);
             darktoggle.addListener(new ChangeListener() {
                 @Override
@@ -216,27 +216,27 @@ public class SettingsUI extends VisWindow {
             });
 
             final VisTree tree = new VisTree();
-            TestNode item1 = new TestNode(new VisLabel(" Aussehen "),0);
-            TestNode item2 = new TestNode(new VisLabel(" Verhalten "),4);
-            TestNode item3 = new TestNode(new VisLabel(" Programm Einstellungen "),8);
+            TestNode item1 = new TestNode(new VisLabel(" Aussehen "), 0);
+            TestNode item2 = new TestNode(new VisLabel(" Verhalten "), 4);
+            TestNode item3 = new TestNode(new VisLabel(" Programm Einstellungen "), 8);
             TestNode item4;
             item4 = new TestNode(new VisLabel(" Plugins"), 12);
 
 
-            item1.add(new TestNode(new VisLabel(" Theme"),1));
-            item1.add(new TestNode(new VisLabel(" item 1.2"),2));
-            item1.add(new TestNode(new VisLabel(" item 1.3"),3));
+            item1.add(new TestNode(new VisLabel(" Theme"), 1));
+            item1.add(new TestNode(new VisLabel(" item 1.2"), 2));
+            item1.add(new TestNode(new VisLabel(" item 1.3"), 3));
 
-            item2.add(new TestNode(new VisLabel(" Tastenkombinationen "),5));
-            item2.add(new TestNode(new VisLabel(" Tipps"),6));
-            item2.add(new TestNode(new VisLabel(" item 2.3"),7));
+            item2.add(new TestNode(new VisLabel(" Tastenkombinationen "), 5));
+            item2.add(new TestNode(new VisLabel(" Tipps"), 6));
+            item2.add(new TestNode(new VisLabel(" item 2.3"), 7));
 
-            item3.add(new TestNode(new VisLabel(" Daten"),9));
-            item3.add(new TestNode(new VisLabel(" item 3.2"),10));
-            item3.add(new TestNode(new VisLabel(" item 3.3"),11));
+            item3.add(new TestNode(new VisLabel(" Daten"), 9));
+            item3.add(new TestNode(new VisLabel(" item 3.2"), 10));
+            item3.add(new TestNode(new VisLabel(" item 3.3"), 11));
 
-            for(int i=0;i<PluginManagerHandler.plugisettings.size();i++) {
-                item4.add(new TestNode(new VisLabel(" "+PluginManagerHandler.registeredplugins.get(i).getName()+" "),13+i));
+            for (int i = 0; i < PluginManagerHandler.plugisettings.size(); i++) {
+                item4.add(new TestNode(new VisLabel(" " + PluginManagerHandler.registeredplugins.get(i).getName() + " "), 13 + i));
             }
 
             item1.setExpanded(true);
@@ -247,14 +247,12 @@ public class SettingsUI extends VisWindow {
             tree.add(item4);
 
 
-
             tree.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
 
 
-
-              SettingsUI.SelectedItem =  ((TestNode) tree.getSelectedNode()).Mode;
+                    SettingsUI.SelectedItem = ((TestNode) tree.getSelectedNode()).Mode;
 
 
                     container.clearChildren();
@@ -307,35 +305,30 @@ public class SettingsUI extends VisWindow {
                             subitem12.add(container);
                             break;
                         case 12:
-                            subitem13.add(container,0);
+                            subitem13.add(container, 0);
                         default:
 
-                            if(SelectedItem>12) {
+                            if (SelectedItem > 12) {
                                 container.add(PluginManagerHandler.plugisettings.get(SelectedItem - 13));
                             }
-
 
 
                             break;
 
 
-
-
-
                     }
 
 
-                //testBuilder.pack();
+                    //testBuilder.pack();
 
                 }
             });
 
 
-           add(tree).expand().fill().padTop(15).padLeft(15).width(-10);
-          //  builder.append(CellWidget.of(tree).padding(new Padding(15,15,0,0)).wrap());
+            add(tree).expand().fill().padTop(15).padLeft(15).width(-10);
+            //  builder.append(CellWidget.of(tree).padding(new Padding(15,15,0,0)).wrap());
 
-            builder.append(CellWidget.of(new Separator()).fillY().padding(new Padding(0,-17,0,0)).wrap());
-
+            builder.append(CellWidget.of(new Separator()).fillY().padding(new Padding(0, -17, 0, 0)).wrap());
 
 
             builder.append(CellWidget.of(container).fillX().fillY().expandX().expandY().width(270).wrap());
@@ -356,11 +349,16 @@ public class SettingsUI extends VisWindow {
 
             Table table = builder.build();
             add(table).expand().fill();
-            sizeBy(600,450);
+            sizeBy(600, 450);
 
             centerWindow();
         }
 
+        public boolean testopen() {
+            return super.getParent().isVisible();
+
+
+        }
 
         private VisSlider getSlider(boolean vertical) {
             VisSlider slider = new VisSlider(0, 100, 1, vertical);
@@ -379,7 +377,7 @@ public class SettingsUI extends VisWindow {
     }
 
     private class RowLayout implements ActorLayout {
-        private Padding padding;
+        private final Padding padding;
 
         public RowLayout(Padding padding) {
             this.padding = padding;
@@ -399,19 +397,6 @@ public class SettingsUI extends VisWindow {
 
             return builder.build();
         }
-    }
-
-    static class TestNode extends Tree.Node {
-        public VisLabel label;
-        public int Mode;
-        public TestNode (Actor actor, int Mode) {
-            super(actor);
-            label = (VisLabel) actor;
-            this.Mode = Mode;
-        }
-
-
-
     }
 
 }

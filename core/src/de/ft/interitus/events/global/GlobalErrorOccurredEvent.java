@@ -1,10 +1,10 @@
 package de.ft.interitus.events.global;
 
 import java.util.EventObject;
-import java.util.concurrent.ExecutionException;
 
 public class GlobalErrorOccurredEvent extends EventObject {
     Exception e;
+
     /**
      * Constructs a prototypical Event.
      *

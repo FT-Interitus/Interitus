@@ -1,13 +1,16 @@
 package de.ft.interitus.plugin;
 
-import static de.ft.interitus.plugin.Configuration.*;
-
 public class PluginRegister {
-   private String name = "";
-   private double version;
-    public PluginRegister() {}
-    public PluginRegister(String name) {}
-    public void config(Configuration option,String selection) {
+    private String name = "";
+    private double version;
+
+    public PluginRegister() {
+    }
+
+    public PluginRegister(String name) {
+    }
+
+    public void config(Configuration option, String selection) {
         switch (option) {
             case name:
                 this.name = selection;

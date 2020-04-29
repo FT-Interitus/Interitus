@@ -7,10 +7,11 @@ import com.badlogic.gdx.InputProcessor;
 public class InputManager {
     public static InputMultiplexer multiplexer = new InputMultiplexer();
 
-    public static void updateMultiplexer(){
+    public static void updateMultiplexer() {
         Gdx.input.setInputProcessor(multiplexer);
     }
-    public static void addProcessor(InputProcessor p){
+
+    public static void addProcessor(InputProcessor p) {
         multiplexer.addProcessor(p);
     }
 }

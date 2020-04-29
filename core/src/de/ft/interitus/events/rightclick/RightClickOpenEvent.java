@@ -6,6 +6,7 @@ import java.util.EventObject;
 
 public class RightClickOpenEvent extends EventObject {
     PopupMenue popupMenue;
+
     /**
      * Constructs a prototypical Event.
      *

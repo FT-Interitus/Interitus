@@ -9,13 +9,13 @@ import de.ft.interitus.ProgrammingSpace;
 
 public class CheckKollision {
 
-    Vector2 temp1 = new Vector2();
-    Vector2 temp2 = new Vector2();
     static Vector3 temp3 = new Vector3();
     static Vector3 temp4 = new Vector3();
     static Rectangle rec1 = new Rectangle();
     static Rectangle rec2 = new Rectangle();
-    private static int mousesize = 0;
+    private static final int mousesize = 0;
+    Vector2 temp1 = new Vector2();
+    Vector2 temp2 = new Vector2();
 
     public static boolean object(float obj1_x, float obj1_y, float obj1_h, float obj1_w, float obj2_x, float obj2_y, float obj2_h, float obj2_w) {
 

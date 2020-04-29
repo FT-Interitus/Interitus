@@ -1,7 +1,5 @@
 package de.ft.interitus.utils;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -34,14 +32,14 @@ public class DownloadFile {
                 }
             } else {
                 // extracts file name from URL
-                fileName = fileURL.substring(fileURL.lastIndexOf("/") + 1,
-                        fileURL.length());
+                fileName = fileURL.substring(fileURL.lastIndexOf("/") + 1
+                );
             }
 
 
             // opens input stream from the HTTP connection
             InputStream inputStream = httpConn.getInputStream();
-           byte[] bytes = inputStream.readAllBytes();
+            byte[] bytes = inputStream.readAllBytes();
             String s = new String(bytes, StandardCharsets.UTF_8);
 
 
@@ -50,13 +48,10 @@ public class DownloadFile {
             return s;
 
 
-
-
         } else {
             System.out.println("No file to download. Server replied HTTP code: " + responseCode);
             return null;
         }
-
 
 
     }
@@ -86,16 +81,14 @@ public class DownloadFile {
                 }
             } else {
                 // extracts file name from URL
-                fileName = fileURL.substring(fileURL.lastIndexOf("/") + 1,
-                        fileURL.length());
+                fileName = fileURL.substring(fileURL.lastIndexOf("/") + 1
+                );
             }
-
 
 
             // opens input stream from the HTTP connection
             InputStream inputStream = httpConn.getInputStream();
-           byte[] bytes = inputStream.readAllBytes();
-
+            byte[] bytes = inputStream.readAllBytes();
 
 
             inputStream.close();
@@ -103,13 +96,10 @@ public class DownloadFile {
             return bytes;
 
 
-
-
         } else {
             System.out.println("No file to download. Server replied HTTP code: " + responseCode);
             return null;
         }
-
 
 
     }

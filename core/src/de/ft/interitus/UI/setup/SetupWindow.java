@@ -20,8 +20,8 @@ import de.ft.interitus.UI.setup.steps.generalSteps.Step2;
 import de.ft.interitus.data.VerbindungsSpeicher;
 
 public class SetupWindow {
-    public static VerbindungsSpeicher tempverbindungsspeicher=new VerbindungsSpeicher();
-    public static int currentStep=1;
+    public static VerbindungsSpeicher tempverbindungsspeicher = new VerbindungsSpeicher();
+    public static int currentStep = 1;
     public static SetupBuilder setupBuilder;
     public static VisTextButton Button_next = new VisTextButton("Next");
     public static VisTextButton Button_previouse = new VisTextButton("Previouse");
@@ -47,20 +47,20 @@ public class SetupWindow {
     public static boolean isopend() {
         try {
             return setupBuilder.testopen();
-        }catch (Exception e) {
+        } catch (Exception e) {
             return false;
         }
     }
 
 
     public void show() {
-        tempverbindungsspeicher=new VerbindungsSpeicher();
+        tempverbindungsspeicher = new VerbindungsSpeicher();
         if (setupBuilder == null) {
             content = new VisTable();
             setupBuilder = new SetupBuilder("Verbindungs Setup", new StandardTableBuilder(padding));
-                Step1.step1(content);
+            Step1.step1(content);
             setupBuilder.pack();
-        }else{
+        } else {
             content.clearChildren();
             Step1.step1(content);
             setupBuilder.pack();
@@ -84,31 +84,26 @@ public class SetupWindow {
             builder.row();
 
 
-
             Button_previouse.setDisabled(true);
 
 
-
             VisTable buttonTable = new VisTable(true);
-            buttonTable.add(errorLabel).fillX().width(60).pad(350,0,0,300);
-            buttonTable.add(Button_cancle).fillX().width(60).pad(350,0,0,0);
-            buttonTable.add(Button_previouse).fillX().width(80).pad(350,0,0,0);
-            buttonTable.add(Button_next).fillX().width(50).pad(350,0,0,0);
-
+            buttonTable.add(errorLabel).fillX().width(60).pad(350, 0, 0, 300);
+            buttonTable.add(Button_cancle).fillX().width(60).pad(350, 0, 0, 0);
+            buttonTable.add(Button_previouse).fillX().width(80).pad(350, 0, 0, 0);
+            buttonTable.add(Button_next).fillX().width(50).pad(350, 0, 0, 0);
 
 
             builder.append(buttonTable);
 
 
-
             Table table = builder.build();
 
-            add(table).expand().fill().size(600,450);
+            add(table).expand().fill().size(600, 450);
 
 
             centerWindow();
             pack();
-
 
 
             Button_next.addListener(new ChangeListener() {
@@ -123,23 +118,21 @@ public class SetupWindow {
                             break;
 
                     }
-if(currentStep>2) {
-    if (tempverbindungsspeicher.getDevice() == Devices.ARDUINO_MEGA || tempverbindungsspeicher.getDevice() == Devices.ARDUINO_UNO) {
-        switch (currentStep) {
-            case 3:
-                Step3.close();
-                break;
+                    if (currentStep > 2) {
+                        if (tempverbindungsspeicher.getDevice() == Devices.ARDUINO_MEGA || tempverbindungsspeicher.getDevice() == Devices.ARDUINO_UNO) {
+                            switch (currentStep) {
+                                case 3:
+                                    Step3.close();
+                                    break;
 
-        }
-    }
-
-
+                            }
+                        }
 
 
-}
+                    }
 
-                    if(currentStep>2) {
-                        if (tempverbindungsspeicher.getDevice() == Devices.RASPBERRY3Bplus || tempverbindungsspeicher.getDevice() == Devices.RASPBERRYPI4 || tempverbindungsspeicher.getDevice() == Devices.RASPBERRYPIZEROW ) {
+                    if (currentStep > 2) {
+                        if (tempverbindungsspeicher.getDevice() == Devices.RASPBERRY3Bplus || tempverbindungsspeicher.getDevice() == Devices.RASPBERRYPI4 || tempverbindungsspeicher.getDevice() == Devices.RASPBERRYPIZEROW) {
                             switch (currentStep) {
                                 case 3:
                                     de.ft.interitus.UI.setup.steps.RaspberryPiSteps.Step3.close();
@@ -168,7 +161,7 @@ if(currentStep>2) {
                     }
 
 
-                    if(currentStep>2) {
+                    if (currentStep > 2) {
                         if (tempverbindungsspeicher.getDevice() == Devices.ARDUINO_MEGA || tempverbindungsspeicher.getDevice() == Devices.ARDUINO_UNO) {
                             switch (currentStep) {
                                 case 3:
@@ -181,7 +174,7 @@ if(currentStep>2) {
                         if (tempverbindungsspeicher.getDevice() == Devices.RASPBERRY3Bplus || tempverbindungsspeicher.getDevice() == Devices.RASPBERRYPI4 || tempverbindungsspeicher.getDevice() == Devices.RASPBERRYPIZEROW) {
 
 
-                            switch (currentStep)  {
+                            switch (currentStep) {
                                 case 3:
                                     de.ft.interitus.UI.setup.steps.RaspberryPiSteps.Step3.step3(content);
                                     break;
@@ -198,14 +191,14 @@ if(currentStep>2) {
                     }
 
 
-                    if(currentStep>1) {
+                    if (currentStep > 1) {
                         if (tempverbindungsspeicher.getDevice() == Devices.RASPBERRY3Bplus || tempverbindungsspeicher.getDevice() == Devices.RASPBERRYPI4 || tempverbindungsspeicher.getDevice() == Devices.RASPBERRYPIZEROW) {
 
 
-                        }else if(currentStep!=5){
+                        } else if (currentStep != 5) {
                             Button_previouse.setDisabled(false);
                         }
-                }
+                    }
 
                 }
 
@@ -226,7 +219,7 @@ if(currentStep>2) {
 
                     }
 
-                    if(currentStep>2) {
+                    if (currentStep > 2) {
                         if (tempverbindungsspeicher.getDevice() == Devices.ARDUINO_MEGA || tempverbindungsspeicher.getDevice() == Devices.ARDUINO_UNO) {
                             switch (currentStep) {
                                 case 3:
@@ -266,7 +259,7 @@ if(currentStep>2) {
 
                     }
 
-                    if(currentStep>2) {
+                    if (currentStep > 2) {
                         if (tempverbindungsspeicher.getDevice() == Devices.ARDUINO_MEGA || tempverbindungsspeicher.getDevice() == Devices.ARDUINO_UNO) {
                             switch (currentStep) {
                                 case 3:
@@ -293,10 +286,10 @@ if(currentStep>2) {
 
                         }
 
-                        }
+                    }
 
 
-                    if(currentStep==1) {
+                    if (currentStep == 1) {
                         Button_previouse.setDisabled(true);
                     }
                 }
@@ -314,8 +307,8 @@ if(currentStep>2) {
                     de.ft.interitus.UI.setup.steps.RaspberryPiSteps.Step4.close();
                     de.ft.interitus.UI.setup.steps.RaspberryPiSteps.Step5.close();
 
-                    currentStep=1;
-                    tempverbindungsspeicher=null;
+                    currentStep = 1;
+                    tempverbindungsspeicher = null;
                     setupBuilder.close();
                 }
             });

@@ -12,6 +12,6 @@ public class Devices {
     public static int EV3 = 20;
     public static int EV3_DEV = 21;
 
-    public static int UNDEFINIERT=-1;
+    public static int UNDEFINIERT = -1;
     //Raspberry pi, Ev3...
 }

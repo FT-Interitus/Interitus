@@ -10,21 +10,18 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.kotcrab.vis.ui.widget.MenuBar;
 import com.kotcrab.vis.ui.widget.MenuItem;
-import de.ft.interitus.UI.settings.SettingsUI;
-import de.ft.interitus.UI.setup.SetupWindow;
-import de.ft.interitus.data.user.experience.ExperienceManager;
 import de.ft.interitus.DisplayErrors;
-import de.ft.interitus.input.Button;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.Settings;
+import de.ft.interitus.UI.settings.SettingsUI;
+import de.ft.interitus.UI.setup.SetupWindow;
 import de.ft.interitus.Var;
 import de.ft.interitus.data.programm.Data;
 import de.ft.interitus.data.user.changes.SaveChanges;
-import de.ft.interitus.input.check.Check;
+import de.ft.interitus.data.user.experience.ExperienceManager;
+import de.ft.interitus.input.Button;
 import de.ft.interitus.input.check.InputManager;
 import de.ft.interitus.utils.RoundRectangle;
-
-
 
 import java.io.File;
 import java.util.ArrayList;
@@ -36,6 +33,8 @@ import static de.ft.interitus.UI.MenuBar.createSubMenu;
 public class UI {
     static final Table root = new Table();
     public static Stage stage;
+    private static final Vector2 lastframecamposition = new Vector2(ProgrammingSpace.cam.position.x, ProgrammingSpace.cam.position.y);
+    public static Texture img_button_verbindungadd;
     protected static MenuItem recent;
     protected static MenuItem revert;
     protected static MenuItem redo;
@@ -43,22 +42,15 @@ public class UI {
     protected static MenuItem paste;
     protected static MenuBar menuBar;
     protected static SettingsUI set;
-    public static Texture img_button_verbindungadd;
-    public static Texture img_button_verbindungadd_white;
     protected static Button testbutton = new Button();
-    Vector3 pos = new Vector3();
+    public static Texture img_button_verbindungadd_white;
+    static int abstandvonRand = 5;
+    static int untenhohe = 125;
+    static int unteneinteilung = 300;
+    static int radius = 3;
     private static boolean issettingsuiopend = false;
     private static boolean issetupuiopend = false;
-    static int abstandvonRand =5;
-
-
-   static int unteneinteilung = 300;
-    static int untenhohe = 125;
-   static int radius = 3;
-
-
-    private static Vector2 lastframecamposition = new Vector2(ProgrammingSpace.cam.position.x, ProgrammingSpace.cam.position.y);
-
+    Vector3 pos = new Vector3();
 
     public static void updatedragui(ShapeRenderer renderer, boolean flaeche, SpriteBatch batch) {
 
@@ -69,8 +61,6 @@ public class UI {
         } else {
             renderer.setColor(Colors.whitearea);
         }
-
-
 
 
         if (flaeche == true) {
@@ -93,20 +83,15 @@ public class UI {
         renderer.end();
 
 
-        testbutton.setBounds(Gdx.graphics.getWidth() - unteneinteilung+5,untenhohe-30-5,30,30);
-        if(Settings.darkmode) {
+        testbutton.setBounds(Gdx.graphics.getWidth() - unteneinteilung + 5, untenhohe - 30 - 5, 30, 30);
+        if (Settings.darkmode) {
             testbutton.setImage(img_button_verbindungadd);
-        }else {
+        } else {
             testbutton.setImage(img_button_verbindungadd_white);
         }
         testbutton.draw();
         testbutton.setVisible(true);
-        if(Var.isdialogeopend) {
-            testbutton.setDisable(true);
-
-        }else{
-            testbutton.setDisable(false);
-        }
+        testbutton.setDisable(Var.isdialogeopend);
 
 
     }
@@ -128,8 +113,6 @@ public class UI {
 
         root.add(menuBar.getTable()).expandX().fillX().row();
         root.add().expand().fill().row();
-
-
 
 
         de.ft.interitus.UI.MenuBar.createMenus();
@@ -156,11 +139,7 @@ public class UI {
                                 }
                             }
 
-                            if (Data.path.size() == 0) {
-                                recent.setDisabled(true);
-                            } else {
-                                recent.setDisabled(false);
-                            }
+                            recent.setDisabled(Data.path.size() == 0);
 
 
                             ///////////////////////////////////
@@ -168,63 +147,52 @@ public class UI {
 
                             /////////////revert//////////////
 
-                            if (SaveChanges.checkstack()) {
-                                revert.setDisabled(true);
-                            } else {
-                                revert.setDisabled(false);
-                            }
+                            revert.setDisabled(SaveChanges.checkstack());
 
                             ///////Redo//////////////
 
 
-                            if (SaveChanges.checkredostack()) {
-                                redo.setDisabled(true);
-                            } else {
-                                redo.setDisabled(false);
-                            }
+                            redo.setDisabled(SaveChanges.checkredostack());
 
-                        }catch (Exception e) {
+                        } catch (Exception e) {
                             DisplayErrors.error = e;
                             e.printStackTrace(); //for debug to find errors
                         }
 
 
-
                         //Check íf Settings is open///////////
-                        if(!issettingsuiopend&&SettingsUI.isopend()) {
+                        if (!issettingsuiopend && SettingsUI.isopend()) {
 
-                         issettingsuiopend = true;
-                            ExperienceManager.settingstimetemp = (double)((double) System.currentTimeMillis()/(double)3600000);
+                            issettingsuiopend = true;
+                            ExperienceManager.settingstimetemp = (double) System.currentTimeMillis() / (double) 3600000;
 
                         }
 
-                        if(issettingsuiopend&&!SettingsUI.isopend()) {
+                        if (issettingsuiopend && !SettingsUI.isopend()) {
 
                             issettingsuiopend = false;
-                            ExperienceManager.settingsthistime = (double) ((double)ExperienceManager.settingsthistime+(double)System.currentTimeMillis()/(double)3600000-(double)ExperienceManager.settingstimetemp);
+                            ExperienceManager.settingsthistime = ExperienceManager.settingsthistime + (double) System.currentTimeMillis() / (double) 3600000 - ExperienceManager.settingstimetemp;
                         }
 
                         ////////////////////////////////
 
                         //Check if Setup is open///
 
-                        if(!issetupuiopend&& SetupWindow.isopend()) {
+                        if (!issetupuiopend && SetupWindow.isopend()) {
 
                             issetupuiopend = true;
-                            ExperienceManager.setuptimetemp = (double)((double) System.currentTimeMillis()/(double)3600000);
+                            ExperienceManager.setuptimetemp = (double) System.currentTimeMillis() / (double) 3600000;
 
                         }
 
-                        if(issetupuiopend&&!SetupWindow.isopend()) {
+                        if (issetupuiopend && !SetupWindow.isopend()) {
 
                             issetupuiopend = false;
-                            ExperienceManager.setupthistime = (double) ((double)ExperienceManager.setupthistime+(double)System.currentTimeMillis()/(double)3600000-(double)ExperienceManager.setuptimetemp);
+                            ExperienceManager.setupthistime = ExperienceManager.setupthistime + (double) System.currentTimeMillis() / (double) 3600000 - ExperienceManager.setuptimetemp;
                         }
 
 
-                    ///////////////////Check if shortcut is pressed//////////
-
-
+                        ///////////////////Check if shortcut is pressed//////////
 
 
                         ///////////////////////////
@@ -232,8 +200,6 @@ public class UI {
                 }, 0, 500);
             }
         };
-
-
 
 
         UIthread.start();
