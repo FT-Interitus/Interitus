@@ -20,6 +20,7 @@ import de.ft.interitus.Settings;
 import de.ft.interitus.Var;
 import de.ft.interitus.data.programm.Data;
 import de.ft.interitus.data.user.changes.SaveChanges;
+import de.ft.interitus.input.check.Check;
 import de.ft.interitus.input.check.InputManager;
 import de.ft.interitus.utils.RoundRectangle;
 
@@ -221,12 +222,19 @@ public class UI {
                         }
 
 
+                    ///////////////////Check if shortcut is pressed//////////
+
+
+
 
                         ///////////////////////////
                     }
                 }, 0, 500);
             }
         };
+
+
+
 
         UIthread.start();
 

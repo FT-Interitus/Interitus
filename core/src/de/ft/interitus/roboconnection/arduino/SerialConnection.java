@@ -200,21 +200,21 @@ if(empfangen !="") {
         public static void checkvalidaten(String input) {
 
             try {
-            String[] split = input.split("∑");
+                String[] split = input.split("∑");
 
 
+                for (int i = 0; i < split.length; i++) {
+                    System.out.println(split[i]);
 
-            for(int i = 0;i<split.length;i++) {
-                System.out.println(split[i]);
+                }
+
+
+            } catch (Exception e) {
+
 
             }
 
-
-            }catch (Exception e){
-                e.p
-
-
-            }
+        }
 
 
 

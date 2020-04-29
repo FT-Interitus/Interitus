@@ -65,7 +65,7 @@ if(fullscreen==false) {
         fileMenu.addItem(new MenuItem("Neues Projekt", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                NewProjectWindow NPW = new NewProjectWindow(); //TODO zu debug zwecken
+                NewProjectWindow NPW = new NewProjectWindow();
                 NPW.show();
             }
         }).setShortcut("Strg+N"));
@@ -132,49 +132,52 @@ if(fullscreen==false) {
         fileMenu.addItem(new MenuItem("Öffnen", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                if (!Var.isclearing) {
-                    if (DataManager.changes) {
-                        String[] möglichkeiten = {"Verwerfen", "Speichern", "Abbrechen"};
+
+                if(!LoadSave.isopenopen()) {
+                    if (!Var.isclearing) {
+                        if (DataManager.changes) {
+                            String[] möglichkeiten = {"Verwerfen", "Speichern", "Abbrechen"};
 
 
-                        final int nothing = 1;
-                        final int everything = 2;
-                        final int something = 3;
+                            final int nothing = 1;
+                            final int everything = 2;
+                            final int something = 3;
 
-                        //confirmdialog may return result of any type, here we are just using ints
-                        Dialogs.showConfirmDialog(UI.stage, "Ungespeicherte Änderungen", "\nWenn du eine neue Datei öffnest werden womögich Änderungen verworfen.\n",
-                                möglichkeiten, new Integer[]{nothing, everything, something},
-                                new ConfirmDialogListener<Integer>() {
-                                    @Override
-                                    public void result(Integer result) {
-                                        if (result == nothing) {
+                            //confirmdialog may return result of any type, here we are just using ints
+                            Dialogs.showConfirmDialog(UI.stage, "Ungespeicherte Änderungen", "\nWenn du eine neue Datei öffnest werden womögich Änderungen verworfen.\n",
+                                    möglichkeiten, new Integer[]{nothing, everything, something},
+                                    new ConfirmDialogListener<Integer>() {
+                                        @Override
+                                        public void result(Integer result) {
+                                            if (result == nothing) {
 
-                                            LoadSave.open();
-                                        }
+                                                LoadSave.open();
+                                            }
 
-                                        if (result == everything) {
-                                            if (DataManager.path != "") {
-                                                FileHandle handle = Gdx.files.external(DataManager.path);
-                                                DataSaver.save(handle);
-                                                DataManager.saved();
-                                            } else {
-                                                LoadSave.saveas();
+                                            if (result == everything) {
+                                                if (DataManager.path != "") {
+                                                    FileHandle handle = Gdx.files.external(DataManager.path);
+                                                    DataSaver.save(handle);
+                                                    DataManager.saved();
+                                                } else {
+                                                    LoadSave.saveas();
+                                                }
+                                            }
+
+                                            if (result == something) {
+
+
                                             }
                                         }
-
-                                        if (result == something) {
-
-
-                                        }
-                                    }
-                                });
+                                    });
 
 
+                        } else {
+                            LoadSave.open();
+                        }
                     } else {
-                        LoadSave.open();
+                        Dialogs.showOKDialog(UI.stage, "Bitte Warten", "Das Programm ist gerade mit deinem zuletzt Geöffnetem Programm beschäftigt. Bitte warte noch bis es fertig ist");
                     }
-                } else {
-                    Dialogs.showOKDialog(UI.stage, "Bitte Warten", "Das Programm ist gerade mit deinem zuletzt Geöffnetem Programm beschäftigt. Bitte warte noch bis es fertig ist");
                 }
 
 
@@ -188,7 +191,9 @@ if(fullscreen==false) {
                     DataSaver.save(handle);
                     DataManager.saved();
                 } else {
-                    LoadSave.saveas();
+                    if(!LoadSave.issaveopen()) {
+                        LoadSave.saveas();
+                    }
                 }
             }
         }).setShortcut("Strg+S"));
@@ -197,7 +202,9 @@ if(fullscreen==false) {
             public void changed(ChangeEvent event, Actor actor) {
 
 
-                LoadSave.saveas();
+                if(!LoadSave.issaveopen()) {
+                    LoadSave.saveas();
+                }
             }
         }).setShortcut("Strg+shift+S"));
         fileMenu.addSeparator();
