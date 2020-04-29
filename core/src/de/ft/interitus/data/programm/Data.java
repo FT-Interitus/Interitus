@@ -22,6 +22,19 @@ public class Data {
     public static ArrayList<String> filename = new ArrayList<String>(); //Die Namen der Dateien die zuletzt geöffnet wurden
     private static File folder; //Der Ordner in dem alle Programm daten liegen
 
+
+    /**
+     * load the Programm data from the UserFolder/.itd
+     *
+     * On Linux the Folder with a dot is default invisible
+     * On Windows we need to set the file attributes
+     *
+     * In the recent file there are the projects which were opened recently
+     * In the settings file the Settings from the user are Saved
+     *
+     * In the devices file are the whole configurated devices saved
+     * In the experienced file the user level, ... is saved
+     */
     public static void init() {
 
          folder = new File(System.getProperty("user.home") + "/.itd"); //Order der Programmdaten
@@ -290,7 +303,7 @@ public class Data {
     }
 
 
-    public static void delete() { //TODO Experimentel
+    public static void delete() { //TODO Experimentell
         folder.delete(); //Der Ordner wird gelöscht
 
     }

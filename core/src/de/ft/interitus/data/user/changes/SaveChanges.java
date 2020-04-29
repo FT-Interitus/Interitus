@@ -5,6 +5,9 @@ import de.ft.interitus.Block.BlockVar;
 
 import java.util.Stack;
 
+/***
+ * @deprecated
+ */
 public class SaveChanges {
 
     static RevertBlock revblock;

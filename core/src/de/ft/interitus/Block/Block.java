@@ -108,7 +108,7 @@ public class Block implements VisibleObjects{
      * @return the block variable it's need to set the block left und rights if you use wires
      */
     @Override
-    public Block getblock() { //TODO bestimmen
+    public Block getblock() {
         return this;
     }
 
@@ -218,7 +218,7 @@ public class Block implements VisibleObjects{
     /***
      *
      * @return is the Block moved by the user
-     * You can also check this state with a Listener //TODO Create Moving Listener
+     * You can also check this state with a Listener //TODO Create Moving Listener (with start and Stop position)
      * @see de.ft.interitus.events.block.BlockEventListener
      */
     public boolean isMoving() {
@@ -605,7 +605,7 @@ public class Block implements VisibleObjects{
 
     /**
      * Returns the size of the biggest Area which overlaps over the blocks
-     * TODO @Felix more details
+     *
      * @return
      */
 

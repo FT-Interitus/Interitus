@@ -19,14 +19,6 @@ import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.settings.subitems.subitem13;
 import de.ft.interitus.data.user.changes.DataManager;
-import de.ft.interitus.events.EventVar;
-import de.ft.interitus.events.block.BlockCreateEvent;
-import de.ft.interitus.events.block.BlockDeleteEvent;
-import de.ft.interitus.events.block.BlockEventListener;
-import de.ft.interitus.events.global.GlobalErrorOccurredEvent;
-import de.ft.interitus.events.global.GlobalEventListener;
-import de.ft.interitus.events.global.GlobalLoadingDoneEvent;
-import de.ft.interitus.events.global.GlobalLoadingStartEvent;
 import de.ft.interitus.input.IntegerAuswahl;
 import de.ft.interitus.input.Switch;
 import de.ft.interitus.input.TextField;
@@ -39,7 +31,6 @@ import de.ft.interitus.utils.PositionSaver;
 import de.ft.interitus.utils.animation.Animation;
 
 import java.awt.*;
-import java.util.EventObject;
 
 import static com.badlogic.gdx.Gdx.input;
 import static de.ft.interitus.Settings.darkmode;
@@ -62,22 +53,15 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
     public static Drawable d;
     public static Animation testanim = new Animation(new Texture("ballfeueranimation.png"), 60, 100, 100, 3);
 
-    public static PopupManager popupmanager=new PopupManager();
-
-
-
-    IntegerAuswahl ia;
-
+    public static PopupManager popupmanager = new PopupManager();
     public static ShapeRenderer shapeRenderer;
+    IntegerAuswahl ia;
 
     public ProgrammingSpace() {
 
 
-
-
-
         popupmanager.addPopup(new PopupMenue("ein popup"));
-        popupmanager.addPopup(new PopupMenue("Löschen","Fixieren","Umbenennen","Befreien"));
+        popupmanager.addPopup(new PopupMenue("Löschen", "Fixieren", "Umbenennen", "Befreien"));
 
 
         ia = new IntegerAuswahl(400, 400, 50, 25);
@@ -102,7 +86,6 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
                 try {
 
 
-
                     for (int i = 0; i < 1; i = i + 1) {
 
                         BlockVar.blocks.add(new Block(i, 400, 552, 150, 70));
@@ -110,7 +93,6 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
                         System.out.println(i);
                         //  MainGame.logger.finest(String.valueOf(i));
                     }
-
 
 
                     System.out.println("Block creating done");
@@ -128,7 +110,6 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
         cam.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
 
 
-
         UI.init();
 
         textfieldtest = new TextField(500, 600, 100, 25);
@@ -143,18 +124,11 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
         Gdx.graphics.setWindowedMode(Var.w, Var.h);
 
 
-
-
-
-
-
     }
 
 
     @Override
     public void render(float delta) {
-
-
 
 
         RechtsKlick.Rechtsklickupdate();
@@ -296,10 +270,9 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
         try {
             UI.update();
-        }catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             //Falls die UI nicht richtig initialisiert werden konnte
         }
-
 
 
         batch.begin();
@@ -312,9 +285,9 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
         DisplayErrors.checkerror();
 
-        if(subitem13.saveme!=null) {
-                AssetLoader.storeimages.add(new Texture( subitem13.saveme));
-                subitem13.saveme = null;
+        if (subitem13.saveme != null) {
+            AssetLoader.storeimages.add(new Texture(subitem13.saveme));
+            subitem13.saveme = null;
 
         }
 
@@ -333,7 +306,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
         try {
             UI.updateView(width, height);
-        }catch (NullPointerException e) { //Falls die UI nicht initialisiert werden konnte
+        } catch (NullPointerException e) { //Falls die UI nicht initialisiert werden konnte
 
         }
         viewport.update(width, height);
@@ -355,14 +328,9 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
         //TODO stop Thread Manager Thread
 
 
-
         batch.dispose();
 
     }
-
-
-
-
 
 
 }
