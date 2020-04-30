@@ -12,6 +12,8 @@ import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.settings.SettingsUI;
 import de.ft.interitus.UI.settings.subitems.subitem13;
+import de.ft.interitus.events.EventVar;
+import de.ft.interitus.events.plugin.store.PluginInstalledNewEvent;
 import de.ft.interitus.plugin.PluginManagerHandler;
 
 import java.io.BufferedInputStream;
@@ -22,6 +24,8 @@ import java.net.URL;
 
 public class PluginPage {
 
+
+    PluginPage INSTANCE = this;
 
     /***
      * Shows the information of the Plugin if you click on it
@@ -99,6 +103,7 @@ public class PluginPage {
                         return;
                     }
 
+                    EventVar.pluginStoreEventManager.plugininstalled(new PluginInstalledNewEvent(this, Storeentry));
 
                     download.setText("Programm bitte neustarten");
                     download.setDisabled(true);
