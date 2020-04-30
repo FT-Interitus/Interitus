@@ -71,7 +71,7 @@ public class ev3 {
     }
 
 
-    public static byte[] LCX(int value) {
+    public static byte[] LCX(int value) { //TODO überarbeiten da vllt. ein präfix fehlt
 
         byte[] returnarray = new byte[2];
 

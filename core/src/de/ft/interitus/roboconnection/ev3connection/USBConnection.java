@@ -125,11 +125,11 @@ public class USBConnection {
         openev3sesseion();
 
         ArrayList<Byte> command = new ArrayList<>();
-        command.addAll(Operations.ev3statusline(false));
+       //command.addAll(Operations.ev3statusline(false));
         // command.addAll(Operations.displayBMPFile(true,0,0,"../apps/Motor Control/MotorCtlAD.rgf"));
-         command.addAll(Operations.updateev3screen());
-
-        //command.addAll(Operations.setbrickname("Stein123"));
+        // command.addAll(Operations.updateev3screen());
+        command.addAll(Operations.playTone(20,502,100));
+//        command.addAll(Operations.setbrickname("MyEv3"));
 
         sendcommand(command);
         try {
