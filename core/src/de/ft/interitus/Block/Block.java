@@ -10,6 +10,7 @@ import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.ThreadManager;
 import de.ft.interitus.data.user.changes.DataManager;
+import de.ft.interitus.device.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.block.BlockCreateEvent;
 import de.ft.interitus.events.block.BlockDeleteEvent;
@@ -50,7 +51,7 @@ public class Block implements VisibleObjects {
     private final Vector2 wireconnector_left = new Vector2(0, 0); //Die linke wire-Anschluss Position
     private Wire wire_left = null; //linke verbundene Wire
     private Wire wire_right = null; //rechte verbunde Wire
-    private final BlockAttribute blockAttribute = new BlockAttribute();
+    private PlatformSpecificBlock blocktype =null;
     private RightClickEventListener rightClickEventListener;
 
     public Block(int index, int x, int y, int w, int h) { //Initzialisieren des Blocks
@@ -688,5 +689,11 @@ public class Block implements VisibleObjects {
         return blockupdate;
     }
 
+    public PlatformSpecificBlock getBlocktype() {
+        return blocktype;
+    }
 
+    public void setBlocktype(PlatformSpecificBlock blocktype) {
+        this.blocktype = blocktype;
+    }
 }

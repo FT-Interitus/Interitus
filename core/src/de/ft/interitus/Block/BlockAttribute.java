@@ -2,6 +2,9 @@ package de.ft.interitus.Block;
 
 import java.util.ArrayList;
 
+/**
+ * @deprecated we can delete it
+ */
 public class BlockAttribute {
 
     //platform verfügbarkeit

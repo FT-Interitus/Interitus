@@ -136,7 +136,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
 
         for(int i =0;i< BlockTypesVar.blocks.get(0).size();i++) {
-           System.out.println( BlockTypesVar.blocks.get(0).get(i).getName());
+           System.out.println( BlockTypesVar.blocks.get(1).get(i).getBlockCategoration());
         }
 
         RechtsKlick.Rechtsklickupdate();
