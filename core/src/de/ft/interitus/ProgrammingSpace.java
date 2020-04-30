@@ -19,7 +19,6 @@ import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.settings.subitems.subitem13;
 import de.ft.interitus.data.user.changes.DataManager;
-import de.ft.interitus.device.BlockTypes.BlockTypesVar;
 import de.ft.interitus.input.IntegerAuswahl;
 import de.ft.interitus.input.Switch;
 import de.ft.interitus.input.TextField;
@@ -134,10 +133,6 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
     @Override
     public void render(float delta) {
 
-
-        for(int i =0;i< BlockTypesVar.blocks.get(0).size();i++) {
-           System.out.println( BlockTypesVar.blocks.get(1).get(i).getBlockCategoration());
-        }
 
         RechtsKlick.Rechtsklickupdate();
 
