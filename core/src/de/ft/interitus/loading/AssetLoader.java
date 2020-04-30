@@ -20,6 +20,8 @@ public static ArrayList<ArrayList<Object>> pluginimages = new ArrayList<>();
 
     //Block Textures
     public static Texture img_block;
+    public static Texture img_block_right;
+    public static Texture img_block_left;
     public static Texture img_block_mouseover;
     public static Texture img_marked;
     public static Texture connector;
@@ -69,7 +71,9 @@ public static ArrayList<ArrayList<Object>> pluginimages = new ArrayList<>();
 
             group = "Blöcke";
             //Block Textures
-            manager.load(workingdirectory+ "block.png", Texture.class);
+            manager.load(workingdirectory+ "Block/Blockrechts.png", Texture.class);
+            manager.load(workingdirectory+ "Block/Blocklinks.png", Texture.class);
+            manager.load(workingdirectory+ "Block/Blockmitte.png", Texture.class);
             manager.load(workingdirectory+"block_mouseover.png", Texture.class);
             manager.load(workingdirectory+"block_marked.png", Texture.class);
             manager.load(workingdirectory+"connector.png",Texture.class);
@@ -131,7 +135,9 @@ public static ArrayList<ArrayList<Object>> pluginimages = new ArrayList<>();
         try {
             group = "";
             //Block
-            img_block = manager.get(workingdirectory+"block.png", Texture.class);
+            img_block_right = manager.get(workingdirectory+ "Block/Blockrechts.png", Texture.class);
+            img_block_left = manager.get(workingdirectory+ "Block/Blocklinks.png", Texture.class);
+            img_block = manager.get(workingdirectory+"Block/Blockmitte.png", Texture.class);
             img_block_mouseover = manager.get(workingdirectory+"block_mouseover.png", Texture.class);
             img_marked = manager.get(workingdirectory+"block_marked.png", Texture.class);
             connector =  manager.get(workingdirectory+"connector.png",Texture.class);

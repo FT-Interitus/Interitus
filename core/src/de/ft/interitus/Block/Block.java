@@ -386,7 +386,9 @@ public class Block implements VisibleObjects{
 
 
         if (!this.blockupdate.toggle) {
-            batch.draw(AssetLoader.img_block, this.getX(), this.getY(), this.getW(), this.getH()); // Block ohne das er makiert ist
+            batch.draw(AssetLoader.img_block, this.getX()+10, this.getY(), this.getW()-15-10, this.getH()); // Block ohne das er makiert ist
+            batch.draw(AssetLoader.img_block_left,this.getX(),this.getY(),10,this.getH());
+            batch.draw(AssetLoader.img_block_right,this.getX()+this.getW()-15,this.getY(),15,this.getH());
         } else {
             batch.draw(AssetLoader.img_block_mouseover, this.getX(), this.getY(), this.getW(), this.getH()); // Block wenn er makiert ist
         }
