@@ -76,7 +76,7 @@ public class Updater {
                             Dialogs.showErrorDialog(UI.stage, "Der Update-Server reagiert leider nicht oder du hast einfach keine Internetverbindung");
                         }
                     }
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace(); //for debug to find errors
                 }
             }

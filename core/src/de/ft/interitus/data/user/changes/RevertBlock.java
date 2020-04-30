@@ -1,5 +1,8 @@
 package de.ft.interitus.data.user.changes;
 
+/**
+ * @deprecated
+ */
 public class RevertBlock { //Block Duplicat das erstellt wird wenn ein Block bewegt wird
     private int x;
     private int y;
@@ -11,6 +14,18 @@ public class RevertBlock { //Block Duplicat das erstellt wird wenn ein Block bew
     private int right_index;
     private boolean deleted;
 
+    /**
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     * @param index
+     * @param created
+     * @param deleted
+     * @param left_index
+     * @param right_index
+     *
+     */
     public RevertBlock(int x, int y, int w, int h, int index, boolean created, boolean deleted, int left_index, int right_index) {//TODO hier Blockart und Parameter übergeben
         this.x = x;
         this.y = y;

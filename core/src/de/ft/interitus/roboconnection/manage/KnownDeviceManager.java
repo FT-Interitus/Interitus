@@ -6,9 +6,7 @@ public class KnownDeviceManager {
     public static void addnewdevice() {
 
 
-
-
-        SetupWindow sw=new SetupWindow();
+        SetupWindow sw = new SetupWindow();
         sw.show();
 
     }

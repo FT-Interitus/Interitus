@@ -18,10 +18,9 @@ import java.io.InputStreamReader;
  */
 
 public class BurnProgramm {
+    private static final String OS = System.getProperty("os.name").toLowerCase();
+    public static String ausgabe = "";
     static String platform;
-    public static String ausgabe="";
-    private static String OS = System.getProperty("os.name").toLowerCase();
-
 
     public static void burn(int arduino, String port, String file) {
 
@@ -83,7 +82,6 @@ public class BurnProgramm {
             Process pr = rt.exec("./libs/avrdude -Clibs/avrdude.conf -v -p" + platform + " -c " + methode + " -P" + port + " -b115200 -D -Uflash:w:libs/" + file + ":i"); //TODO Progress
 
 
-
             BufferedReader input = new BufferedReader(new InputStreamReader(pr.getErrorStream()));
             String line = null;
             String output = null;
@@ -126,9 +124,6 @@ public class BurnProgramm {
             }
 
 
-
-
-
         } catch (IOException e) {
             DisplayErrors.error = e;
             e.printStackTrace();
@@ -146,7 +141,6 @@ public class BurnProgramm {
             Process pr = rt.exec("libs/avrdudeapple -C libs/avrdude.conf -v -p " + platform + " -c" + methode + " -P" + port + " -b115200 -D -Uflash:w:libs/" + file + ":i"); //TODO Progress
 
 
-
             BufferedReader input = new BufferedReader(new InputStreamReader(pr.getErrorStream()));
             String line = null;
             String output = null;
@@ -155,7 +149,6 @@ public class BurnProgramm {
                 output = output + line;
 
             }
-
 
 
             postproduktion(output, port);
@@ -168,40 +161,37 @@ public class BurnProgramm {
 
     }
 
-
-
     public static void postproduktion(String output, String port) {
 
         if (output.contains("AVR device initialized")) {
-            ausgabe=("Brennen hat funktioniert, nun kannst du dein Gerät konfigurieren");
-
+            ausgabe = ("Brennen hat funktioniert, nun kannst du dein Gerät konfigurieren");
 
 
         } else {
-            ausgabe=("Unbekannter Fehler");
+            ausgabe = ("Unbekannter Fehler");
         }
 
         if (output.contains("can't open device")) {
-            ausgabe=("Brennen nicht erfolgreich\nhast du den richtigen Port und das richtige Board ausgewählt?\nwenn das dein 2. versuch des Brennens war dann trenne und stecke den \n Arduino neu an");
+            ausgabe = ("Brennen nicht erfolgreich\nhast du den richtigen Port und das richtige Board ausgewählt?\nwenn das dein 2. versuch des Brennens war dann trenne und stecke den \n Arduino neu an");
         }
 
         if (output.contains("Expected signature")) {
-            ausgabe=("Brennen nicht erfolgreich du hast den falschen Board-Type ausgewählt");
+            ausgabe = ("Brennen nicht erfolgreich du hast den falschen Board-Type ausgewählt");
         }
 
         if (output.contains("not found")) {
-            ausgabe=("Brennen nicht erfolgreich du hast den falschen Board-Type ausgewählt");
+            ausgabe = ("Brennen nicht erfolgreich du hast den falschen Board-Type ausgewählt");
         }
 
         if (output.contains("programmer is not responding")) {
-            ausgabe=("Brennen nicht erfolgreich hast du den richtigen Port und das richtige Board ausgewählt?");
+            ausgabe = ("Brennen nicht erfolgreich hast du den richtigen Port und das richtige Board ausgewählt?");
         }
 
         if (output.contains("Permission denied")) {
             if (isUnix()) {
-                ausgabe=("Keine Berechtigung! Führe den Befehl: \"sudo chmod a+rw " + port + "\" aus.");
+                ausgabe = ("Keine Berechtigung! Führe den Befehl: \"sudo chmod a+rw " + port + "\" aus.");
             } else {
-                ausgabe=("Keine Berechtigung starte den PC neu.");
+                ausgabe = ("Keine Berechtigung starte den PC neu.");
             }
         }
 

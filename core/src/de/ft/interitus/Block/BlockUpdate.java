@@ -4,9 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.data.user.changes.DataManager;
-import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.utils.CheckKollision;
 
 import java.util.Timer;
@@ -17,19 +17,15 @@ public class BlockUpdate extends Thread {
     public Block block; //Der zugehörige Block den die Klasse updated
     public boolean isrunning = true; //Läuft der Thread gerade?
     public Timer time; //das  ist der Timer in dem alle Update Vorgänge laufen
+    public boolean isconnectorclicked = false;//Ist der connector des zuständigen Blocks ausgelöst
+    public boolean geschoben = false;
+    public Wire tempwire;
     boolean toggle; // Ist der Block von der mouse gehovert?
     Vector2 temp1; //Temp vectoren für berechnungs zwischen schritte
     Vector2 temp2;//Temp vectoren für berechnungs zwischen schritte
     Vector3 temp3;//Temp vectoren für berechnungs zwischen schritte
     Vector3 temp4;//Temp vectoren für berechnungs zwischen schritte
-    public boolean isconnectorclicked = false;//Ist der connector des zuständigen Blocks ausgelöst
-    public boolean geschoben=false;
-
-   public  Wire tempwire;
-
-   private boolean IsMousealreadypressed = false;
-
-
+    private boolean IsMousealreadypressed = false;
 
 
     BlockUpdate(Block block) {
@@ -40,7 +36,6 @@ public class BlockUpdate extends Thread {
         temp3 = new Vector3(0, 0, 0);//Temp Vectoren init
         temp4 = new Vector3(0, 0, 0);//Temp Vectoren init
     }
-
 
 
     @Override
@@ -69,34 +64,28 @@ public class BlockUpdate extends Thread {
                     //TODO
 
 
+                    if (!isIsconnectorclicked() && BlockVar.showleftdocker && CheckKollision.object(block.getX_entrance(), block.getY_entrance(), block.getH_entrance(), block.getW_entrance(), (int) ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1) && Gdx.input.isButtonJustPressed(0) && block.getLeft() == null) { //TODO Durch das Just pressed kann es sein das es manchmal verpasst wird dieses Event auszuführen
+                        BlockVar.showleftdocker = false;
+                        BlockVar.movingwires.setMovebymouse(false);
+                        BlockVar.movingwires.setRight_connection(block);
+                        BlockVar.movingwires.setSpace_between_blocks(true);
+                        block.setWire_left(BlockVar.movingwires);
+                        try {
+                            BlockVar.wire_beginn.setRight(block);
+                        } catch (NullPointerException e) {
+
+                            //Falls die eine Node dazwischen ist und der Nachbar über die Node gesetzt werden muss
+
+                            System.out.println("Konnte Nachbar nicht setzten");
 
 
+                        }
 
-                    if(!isIsconnectorclicked()&& BlockVar.showleftdocker&& CheckKollision.object(block.getX_entrance(),block.getY_entrance(),block.getH_entrance(),block.getW_entrance(),(int) ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y,1,1)&&Gdx.input.isButtonJustPressed(0)&&block.getLeft()==null) { //TODO Durch das Just pressed kann es sein das es manchmal verpasst wird dieses Event auszuführen
-                            BlockVar.showleftdocker = false;
-                            BlockVar.movingwires.setMovebymouse(false);
-                            BlockVar.movingwires.setRight_connection(block);
-                            BlockVar.movingwires.setSpace_between_blocks(true);
-                            block.setWire_left(BlockVar.movingwires);
-                            try {
-                                BlockVar.wire_beginn.setRight(block);
-                            }catch (NullPointerException e) {
-
-                                //Falls die eine Node dazwischen ist und der Nachbar über die Node gesetzt werden muss
-
-                                System.out.println("Konnte Nachbar nicht setzten");
-
-
-                            }
-
-                            BlockVar.movingwires.getRight_connection().getLeft().getBlockupdate().isconnectorclicked = false;
-                            BlockVar.movingwires = null;
-
-
+                        BlockVar.movingwires.getRight_connection().getLeft().getBlockupdate().isconnectorclicked = false;
+                        BlockVar.movingwires = null;
 
 
                     }
-
 
 
                     if ((isconnectorclicked && Gdx.input.isKeyPressed(Input.Keys.ESCAPE))) { //Um vorzeitige wire wieder aufzulösen und ggf zu richtigen umzuwandeln
@@ -114,15 +103,15 @@ public class BlockUpdate extends Thread {
                                 tempwire.getRight_connectionObject().getwirenode().setWire_left(null);
                                 tempwire.setRight_connection(null);
 
-                            }catch (NullPointerException e) {
-                            //Falls hier keine Wire ist
+                            } catch (NullPointerException e) {
+                                //Falls hier keine Wire ist
                             }
                             tempwire = null;
-                        }catch (Exception e) {
+                        } catch (Exception e) {
 
                         }
 
-                        BlockVar.movingwires =null;
+                        BlockVar.movingwires = null;
 
 
                     }
@@ -140,11 +129,11 @@ public class BlockUpdate extends Thread {
                     }
 
 
-                    if (CheckKollision.checkmousewithobject((int) block.getwireconnector_right().x, (int) block.getwireconnector_right().y, 20, 20, (int) BlockVar.mousepressedold.x, (int) BlockVar.mousepressedold.y) && Gdx.input.isButtonPressed(0)&&BlockVar.movingwires==null&&!IsMousealreadypressed&&block.getWire_right()==null) {
+                    if (CheckKollision.checkmousewithobject((int) block.getwireconnector_right().x, (int) block.getwireconnector_right().y, 20, 20, (int) BlockVar.mousepressedold.x, (int) BlockVar.mousepressedold.y) && Gdx.input.isButtonPressed(0) && BlockVar.movingwires == null && !IsMousealreadypressed && block.getWire_right() == null) {
                         if (!(BlockVar.markedblock == block)) {
                             if (!isconnectorclicked) {
 
-                               tempwire = new Wire(block);
+                                tempwire = new Wire(block);
 
                                 tempwire.setMovebymouse(true);
 
@@ -152,7 +141,7 @@ public class BlockUpdate extends Thread {
 
                                 block.setWire_right(tempwire);
                                 BlockVar.wires.add(tempwire);
-                                BlockVar.movingwires =tempwire;
+                                BlockVar.movingwires = tempwire;
                                 BlockVar.wire_beginn = block;
 
 
@@ -174,8 +163,8 @@ public class BlockUpdate extends Thread {
 
                     }
 
-                    if(IsMousealreadypressed&&!Gdx.input.isButtonPressed(0)) {
-                        IsMousealreadypressed =false;
+                    if (IsMousealreadypressed && !Gdx.input.isButtonPressed(0)) {
+                        IsMousealreadypressed = false;
                     }
 
                     if (de.ft.interitus.utils.CheckKollision.checkmousewithblock(block, BlockVar.mousepressedold) && Gdx.input.isButtonPressed(0) && BlockVar.ismoving == false && !block.isMarked() && !BlockVar.marked && BlockVar.markedblock == null) {
@@ -193,7 +182,7 @@ public class BlockUpdate extends Thread {
                     }
 
 
-                    if (BlockVar.ismoving == false && !block.isMoving() && block.isMarked() && Gdx.input.isButtonPressed(0)&&CheckKollision.checkmousewithblock(block)) {
+                    if (BlockVar.ismoving == false && !block.isMoving() && block.isMarked() && Gdx.input.isButtonPressed(0) && CheckKollision.checkmousewithblock(block)) {
 
                         if (!CheckKollision.checkmousewithobject((int) block.getwireconnector_right().x, (int) block.getwireconnector_right().y, 20, 20, (int) BlockVar.mousepressedold.x, (int) BlockVar.mousepressedold.y)) {
 
@@ -229,7 +218,7 @@ public class BlockUpdate extends Thread {
                         //gotodelete = false;
                         //}
 
-                        if(block.getWire_left()!=null) {
+                        if (block.getWire_left() != null) {
                             if (!block.getWire_left().isSpace_between_blocks()) {
                                 if (block.getLeft() != null) {
                                     block.getLeft().setRight(null);
@@ -239,15 +228,14 @@ public class BlockUpdate extends Thread {
                                     block.setWire_left(null);
 
 
-
                                 }
                                 block.setLeft(null);
 
                             }
                         }
 
-                        if(block.getWire_right()!=null) {
-                            if(!block.getWire_right().isSpace_between_blocks()) {
+                        if (block.getWire_right() != null) {
+                            if (!block.getWire_right().isSpace_between_blocks()) {
                                 if (block.getRight() != null) {
                                     block.getRight().setLeft(null);
 
@@ -260,11 +248,6 @@ public class BlockUpdate extends Thread {
                             }
 
                         }
-
-
-
-
-
 
 
                     } else if (block.isMoving()) {
@@ -347,7 +330,7 @@ public class BlockUpdate extends Thread {
 
                     if (block == BlockVar.blockmitdergrostenuberlappungmitmarkiertemblock && block.moved == false && !geschoben) {
                         block.moved = true;
-                        geschoben=true;
+                        geschoben = true;
 
                         int a = BlockVar.blocks.indexOf(BlockVar.blockmitdergrostenuberlappungmitmarkiertemblock);
                         //System.out.println(a);
@@ -374,11 +357,11 @@ public class BlockUpdate extends Thread {
                     if (block.seted == false && BlockVar.biggestblock == block && !Gdx.input.isButtonPressed(0)) { //TODO flackern wegmachen!
 //System.out.println("funzt");
                         block.seted = true;
-                        geschoben=false;
+                        geschoben = false;
                     }
 
                     if (block.seted == false && BlockVar.biggestblock != block) {
-                         geschoben=false;
+                        geschoben = false;
 
                         // System.out.println("jezt muss das ruckgangig gemacht werdn");
 
@@ -412,11 +395,9 @@ public class BlockUpdate extends Thread {
                     }
 
 
-
-
                     if (BlockVar.marked && !block.isMarked()) {
 
-                        if (CheckKollision.checkblockwithduplicate(BlockVar.markedblock, block, 0) && block.getRight() == null && BlockVar.markedblock.getWire_left()==null) {
+                        if (CheckKollision.checkblockwithduplicate(BlockVar.markedblock, block, 0) && block.getRight() == null && BlockVar.markedblock.getWire_left() == null) {
                             if (BlockVar.markedblock.isMoving()) {
                                 //System.out.println("Kollision!");
 
@@ -432,7 +413,7 @@ public class BlockUpdate extends Thread {
                                     //System.out.println("test");
                                     block.setShowdupulicate_rechts(false);
 
-                                    block.setWire_right(new Wire(block,BlockVar.markedblock));
+                                    block.setWire_right(new Wire(block, BlockVar.markedblock));
                                     BlockVar.markedblock.setWire_left(block.getWire_right());
                                     BlockVar.wires.add(block.getWire_right());
 
@@ -448,7 +429,7 @@ public class BlockUpdate extends Thread {
                         }
 
 
-                        if (CheckKollision.checkblockwithduplicate(BlockVar.markedblock, block, 1) && block.getLeft() == null &&BlockVar.markedblock.getWire_right()==null) {  //TODO Fehler beheben
+                        if (CheckKollision.checkblockwithduplicate(BlockVar.markedblock, block, 1) && block.getLeft() == null && BlockVar.markedblock.getWire_right() == null) {  //TODO Fehler beheben
 
                             if (BlockVar.markedblock.isMoving()) {
 
@@ -465,7 +446,7 @@ public class BlockUpdate extends Thread {
                                     block.setShowdupulicate_links(false);
 
 
-                                    block.setWire_left(new Wire(BlockVar.markedblock,block));
+                                    block.setWire_left(new Wire(BlockVar.markedblock, block));
                                     BlockVar.markedblock.setWire_right(block.getWire_left());
                                     BlockVar.wires.add(block.getWire_left());
 

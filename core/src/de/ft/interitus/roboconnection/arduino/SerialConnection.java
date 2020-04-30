@@ -1,7 +1,9 @@
 package de.ft.interitus.roboconnection.arduino;
 
 
-import com.fazecast.jSerialComm.*;
+import com.fazecast.jSerialComm.SerialPort;
+import com.fazecast.jSerialComm.SerialPortDataListener;
+import com.fazecast.jSerialComm.SerialPortEvent;
 import de.ft.interitus.UI.setup.steps.ArduinoSteps.Step3;
 
 import java.io.BufferedReader;
@@ -12,48 +14,48 @@ import java.util.Scanner;
 
 
 public class SerialConnection {
-public static boolean isRunning=false;
+    public static boolean isRunning = false;
     public static ArrayList<SerialPort> Arduinos = new ArrayList<SerialPort>();
-   static boolean found;
-   static int i = 1;
-   static long save;
-    static BufferedReader is ;
+    static boolean found;
+    static int i = 1;
+    static long save;
+    static BufferedReader is;
 
-    public static SerialPort[] getPorts(){
-        SerialPort ports[]=SerialPort.getCommPorts();
+    public static SerialPort[] getPorts() {
+        SerialPort[] ports = SerialPort.getCommPorts();
 
 
         return ports;
     }
 
 
-    public static String[] getPortNames(){
+    public static String[] getPortNames() {
 
         String[] items = new String[SerialConnection.getPorts().length];
 
-        for(int i = 0; i<SerialConnection.getPorts().length;i++) {
+        for (int i = 0; i < SerialConnection.getPorts().length; i++) {
 
-            String ssv="";
-            String arduinoerkannt="";
+            String ssv = "";
+            String arduinoerkannt = "";
 
-            for(int a=0;a<SerialConnection.Arduinos.size();a++){
-                if(SerialConnection.Arduinos.get(a).getDescriptivePortName().equals(SerialConnection.getPorts()[i].getDescriptivePortName())){
-                    ssv=" (keine ID)";
+            for (int a = 0; a < SerialConnection.Arduinos.size(); a++) {
+                if (SerialConnection.Arduinos.get(a).getDescriptivePortName().equals(SerialConnection.getPorts()[i].getDescriptivePortName())) {
+                    ssv = " (keine ID)";
                 }
             }
 
-            if(SerialConnection.getPorts()[i].getDescriptivePortName().contains("Arduino")  ||  SerialConnection.getPorts()[i].getDescriptivePortName().contains("arduino")){
-                arduinoerkannt=" (Arduino)";
-                if(SerialConnection.getPorts()[i].getDescriptivePortName().contains("Mega") || SerialConnection.getPorts()[i].getDescriptivePortName().contains("mega")){
-                    arduinoerkannt=" (Arduino MEGA)";
-                }else if(SerialConnection.getPorts()[i].getDescriptivePortName().contains("uno") || SerialConnection.getPorts()[i].getDescriptivePortName().contains("UNO") || SerialConnection.getPorts()[i].getDescriptivePortName().contains("Uno")){
-                    arduinoerkannt=" (Arduino UNO)";
+            if (SerialConnection.getPorts()[i].getDescriptivePortName().contains("Arduino") || SerialConnection.getPorts()[i].getDescriptivePortName().contains("arduino")) {
+                arduinoerkannt = " (Arduino)";
+                if (SerialConnection.getPorts()[i].getDescriptivePortName().contains("Mega") || SerialConnection.getPorts()[i].getDescriptivePortName().contains("mega")) {
+                    arduinoerkannt = " (Arduino MEGA)";
+                } else if (SerialConnection.getPorts()[i].getDescriptivePortName().contains("uno") || SerialConnection.getPorts()[i].getDescriptivePortName().contains("UNO") || SerialConnection.getPorts()[i].getDescriptivePortName().contains("Uno")) {
+                    arduinoerkannt = " (Arduino UNO)";
                 }
 
 
             }
 
-            items[i]=SerialConnection.getPorts()[i].getSystemPortName()+ssv+arduinoerkannt;
+            items[i] = SerialConnection.getPorts()[i].getSystemPortName() + ssv + arduinoerkannt;
 
 
         }
@@ -65,7 +67,7 @@ public static boolean isRunning=false;
     }
 
 
-    public static String empfangenScanner(SerialPort sport){
+    public static String empfangenScanner(SerialPort sport) {
         Scanner data = new Scanner(sport.getInputStream());
 
         //System.out.println(data.hasNextLine());
@@ -78,52 +80,47 @@ public static boolean isRunning=false;
             } catch (Exception e) {
             }
 
-            System.out.println("nubmer    "+number);
+            System.out.println("nubmer    " + number);
             return number;
-        }else{
+        } else {
             return "";
         }
 
 
     }
 
-    public static String empfangen(SerialPort port)  {
+    public static String empfangen(SerialPort port) {
         String empfangen = "";
 
 
         try {
 
 
-
-                //while (empfangen != "\n") {
-
+            //while (empfangen != "\n") {
 
 
-                    if(port.bytesAvailable()>0) {
-                        empfangen = is.readLine(); //fehler
-                    }
+            if (port.bytesAvailable() > 0) {
+                empfangen = is.readLine(); //fehler
+            }
 
 
-
-                //}
-
+            //}
 
 
+        } catch (Exception e) {
+        }
+        if (empfangen != "") {
 
-        }catch (Exception e){}
-if(empfangen !="") {
 
+            System.out.println(empfangen);
 
-
-    System.out.println(empfangen);
-
-}
+        }
         return empfangen;
     }
 
 
-    static void empfangenListener(SerialPort port){
-        final BufferedReader b= new BufferedReader(new InputStreamReader(port.getInputStream()));
+    static void empfangenListener(SerialPort port) {
+        final BufferedReader b = new BufferedReader(new InputStreamReader(port.getInputStream()));
 
 
         port.addDataListener(new SerialPortDataListener() {
@@ -141,12 +138,12 @@ if(empfangen !="") {
                     String input = b.readLine();
 
 
-                   Authentifikation.checkvalidaten(input);
+                    Authentifikation.checkvalidaten(input);
 
-                //    Authentifikation.getPart()
+                    //    Authentifikation.getPart()
 
 
-                  //  System.out.println(input);
+                    //  System.out.println(input);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -155,38 +152,17 @@ if(empfangen !="") {
     }
 
 
-
-    public static void searchArduino(){
+    public static void searchArduino() {
         SerialConnection.Authentifikation.searchArduino();
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     public static class Authentifikation {
+        private static final int abtastzeit = 20000;
+        private static final int arduinoneustartzeit = 0;
         private static String output;
-        private static int abtastzeit=20000;
-        private static int arduinoneustartzeit=0;
 
-
-        public static String getOutput(){
+        public static String getOutput() {
             return output;
         }
 
@@ -200,33 +176,27 @@ if(empfangen !="") {
         public static void checkvalidaten(String input) {
 
             try {
-            String[] split = input.split("∑");
+                String[] split = input.split("∑");
 
 
+                for (int i = 0; i < split.length; i++) {
+                    System.out.println(split[i]);
 
-            for(int i = 0;i<split.length;i++) {
-                System.out.println(split[i]);
-
-            }
+                }
 
 
-            }catch (Exception e) {
+            } catch (Exception e) {
 
                 e.printStackTrace();
 
             }
 
-            }
+        }
 
 
+        public static long getPart(String identify, String Input) {
 
-
-
-
-
-        public static long getPart(String identify,String Input) {
-
-return 0;
+            return 0;
         }
 
         private static void checkAut(final SerialPort checkport) throws IOException {
@@ -235,11 +205,11 @@ return 0;
             //checkport.setComPortTimeouts(SerialPort.TIMEOUT_READ_BLOCKING, 5, 5);
 
 
-        //checkport.setBaudRate(9600);
-        checkport.setNumDataBits(8);
-        checkport.setNumStopBits(1);
-        checkport.setParity(0);
-        checkport.setComPortTimeouts(SerialPort.TIMEOUT_NONBLOCKING,0,0);
+            //checkport.setBaudRate(9600);
+            checkport.setNumDataBits(8);
+            checkport.setNumStopBits(1);
+            checkport.setParity(0);
+            checkport.setComPortTimeouts(SerialPort.TIMEOUT_NONBLOCKING, 0, 0);
 
 
             save = System.currentTimeMillis() + abtastzeit;
@@ -251,21 +221,21 @@ return 0;
 
             while (System.currentTimeMillis() < save) {                                                           //für jeden port werden 5 sekunden lang überprüft ob er eine ID sendet
 
-                    //if (empfangen(checkport).contains("defaultID")) {  //fehler
-                         ///////////////////////////////////////////TODO hier muss dem arduino noch eine neue ID zugewiesen werden
-                    //    found = true;
-                   // }
-                    /////////////////////////////////////////////TODO hier muss noch überprüft werden ob der Arduino schon bekannt ist (schon eine richtige ID hat)
+                //if (empfangen(checkport).contains("defaultID")) {  //fehler
+                ///////////////////////////////////////////TODO hier muss dem arduino noch eine neue ID zugewiesen werden
+                //    found = true;
+                // }
+                /////////////////////////////////////////////TODO hier muss noch überprüft werden ob der Arduino schon bekannt ist (schon eine richtige ID hat)
 
 
             }
 
             if (found == false) {
-                output="Nicht gefunden";
+                output = "Nicht gefunden";
                 checkport.closePort();
             }
             if (found == true) {
-                output="Arduino gefunden";
+                output = "Arduino gefunden";
 
                 if (Arduinos.size() == 0) {
                     Arduinos.add(checkport);
@@ -290,17 +260,14 @@ return 0;
         }
 
 
-
-
-
         public static void searchArduino() {
             // determine which serial port to use
 
             Thread search = new Thread() {
                 public void run() {
-                    isRunning=true;
+                    isRunning = true;
                     try {
-                        SerialPort ports[] = SerialPort.getCommPorts();
+                        SerialPort[] ports = SerialPort.getCommPorts();
 
                         i = 1;
 
@@ -309,12 +276,12 @@ return 0;
 
                             System.out.println("i     " + i);
                             try {
-                                SerialPort checkport = ports[i-2];
+                                SerialPort checkport = ports[i - 2];
 
                                 if (checkport.openPort()) {        //versuche port zu öffnen
-                                    System.out.println("Successfully opened the port."+checkport.getSystemPortName());     //port geöffnet
+                                    System.out.println("Successfully opened the port." + checkport.getSystemPortName());     //port geöffnet
                                     System.out.println("desprictiveportname:   " + checkport.getDescriptivePortName());
-                                    output="versuche "+checkport.getSystemPortName()+" zu autentifizieren";
+                                    output = "versuche " + checkport.getSystemPortName() + " zu autentifizieren";
 
                                     Thread.sleep(arduinoneustartzeit);
                                     checkAut(checkport);                                                                    //port wird versucht zu autentivizieren
@@ -322,51 +289,39 @@ return 0;
 
                                 } else {
                                     System.out.println("Unable to open the port.");
-                                    output="Konnte Port nicht öffnen";                                  //port nicht geöffnet
+                                    output = "Konnte Port nicht öffnen";                                  //port nicht geöffnet
                                 }
-
 
 
                             } catch (ArrayIndexOutOfBoundsException e) {
 
-                          //      e.printStackTrace();
+                                //      e.printStackTrace();
                             }
 
 
                         }
 
-                        output="Es wurden "+Arduinos.size()+" Arduinos autentiviziert.";
+                        output = "Es wurden " + Arduinos.size() + " Arduinos autentiviziert.";
 
-                        if(Step3.selectportlist!=null) {
+                        if (Step3.selectportlist != null) {
                             Step3.selectportlist.setItems(SerialConnection.getPortNames());
                         }
 
 
-                    }catch (Exception e) {
-                    //    e.printStackTrace(); //for debug to find errors
-                        output="es ist ein Fehler aufgetreten Bitte versuche es erneut\nwenn der Fehler weiterhin auftritt wende dich an den Support";
+                    } catch (Exception e) {
+                        //    e.printStackTrace(); //for debug to find errors
+                        output = "es ist ein Fehler aufgetreten Bitte versuche es erneut\nwenn der Fehler weiterhin auftritt wende dich an den Support";
                         System.out.println("es ist ein Fehler in SerialConnection aufgetreten | ^^^^ hier oben ist die exeption ^^^^ viel spaß damit ^^^^");
                     }
 
-                    isRunning=false;
+                    isRunning = false;
                 }
             };
-            if(!isRunning) {
+            if (!isRunning) {
                 search.start();
             }
         }
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

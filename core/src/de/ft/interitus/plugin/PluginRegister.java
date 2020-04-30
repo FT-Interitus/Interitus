@@ -1,13 +1,21 @@
 package de.ft.interitus.plugin;
 
-import static de.ft.interitus.plugin.Configuration.*;
+import de.ft.interitus.events.EventVar;
+import de.ft.interitus.events.plugin.PluginLoadedEvent;
 
 public class PluginRegister {
-   private String name = "";
-   private double version;
-    public PluginRegister() {}
-    public PluginRegister(String name) {}
-    public void config(Configuration option,String selection) {
+    private String name = "";
+    private double version;
+
+    public PluginRegister() {
+        EventVar.pluginEventManager.pluginload(new PluginLoadedEvent(this,this));
+    }
+
+    public PluginRegister(String name) {
+        EventVar.pluginEventManager.pluginload(new PluginLoadedEvent(this,this));
+    }
+
+    public void config(Configuration option, String selection) {
         switch (option) {
             case name:
                 this.name = selection;

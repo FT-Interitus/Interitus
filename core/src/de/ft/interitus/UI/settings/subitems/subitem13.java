@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Align;
 import com.kotcrab.vis.ui.widget.*;
-import de.ft.interitus.Settings;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.settings.SettingsUI;
 import de.ft.interitus.Var;
@@ -31,7 +30,7 @@ public class subitem13 {
     public static ArrayList<VisImage> pluginimage = new ArrayList<>();
     public static VisTable scrollingbar = new VisTable();
     public static VisScrollPane scrollPane = null;
-   static boolean issearching = false; //Um zu verhindern das waährend dem Suchen einträge geladen werden können
+    static boolean issearching = false; //Um zu verhindern das waährend dem Suchen einträge geladen werden können
 
     public static void add(final VisTable builder, float percentscrolling) {
 
@@ -105,7 +104,7 @@ public class subitem13 {
 
                 try {
 
-                    if (scrollPane.getScrollPercentY() > 0.3f && AssetLoader.storeimages.size() < StorePluginsVar.pluginEntries.size()&&!issearching) { //Wenn weiter als 50% gescrollt ist und es neue Plugins gibt
+                    if (scrollPane.getScrollPercentY() > 0.3f && AssetLoader.storeimages.size() < StorePluginsVar.pluginEntries.size() && !issearching) { //Wenn weiter als 50% gescrollt ist und es neue Plugins gibt
 
 
                         int old = pluginimage.size(); //Wird die Pluginanzeige abgespeichert
@@ -180,8 +179,8 @@ public class subitem13 {
 
         VisTextButton loadfromfile = new VisTextButton("Aus Datei laden");
 
-       final VisTextButton store = new VisTextButton("Plugin Store","toggle");
-      final   VisTextButton installed = new VisTextButton("Installiert","toggle");
+        final VisTextButton store = new VisTextButton("Plugin Store", "toggle");
+        final VisTextButton installed = new VisTextButton("Installiert", "toggle");
         builder.add(store).padTop(-150).padLeft(-330);
         builder.add(installed).padTop(-150).padLeft(-700);
         store.setChecked(true);
@@ -190,11 +189,11 @@ public class subitem13 {
         store.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-           if(!store.isChecked()&&!installed.isChecked()) {
-              store.setChecked(true);
-           }else if(installed.isChecked()){
-               installed.setChecked(false);
-           }
+                if (!store.isChecked() && !installed.isChecked()) {
+                    store.setChecked(true);
+                } else if (installed.isChecked()) {
+                    installed.setChecked(false);
+                }
 
             }
         });
@@ -202,9 +201,9 @@ public class subitem13 {
         installed.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                if(!installed.isChecked()&&!store.isChecked()) {
+                if (!installed.isChecked() && !store.isChecked()) {
                     installed.setChecked(true);
-                }else if(store.isChecked()){
+                } else if (store.isChecked()) {
                     store.setChecked(false);
                 }
 
@@ -276,7 +275,7 @@ public class subitem13 {
                     scrollingbar.padTop(0);
 
                     for (int i = 0; i < result.size(); i++) {
-                    visTables.add(new VisTable());
+                        visTables.add(new VisTable());
                         if (StorePluginsVar.pluginEntries.indexOf(result.get(i)) >= pluginimage.size()) {
 
 

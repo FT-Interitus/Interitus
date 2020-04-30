@@ -18,7 +18,7 @@ import java.awt.event.ActionListener;
 public class Step3 {
     public static VisSelectBox<String> selectportlist;
     public static VisTextButton neuladen_button = new VisTextButton("Neuladen");
-    public static VisTextButton brennen_button=new VisTextButton("Firmware aufspielen");
+    public static VisTextButton brennen_button = new VisTextButton("Firmware aufspielen");
     public static VisLabel brenntext = new VisLabel("");
     public static VisLabel arduinosgefunden = new VisLabel("Arduinos: ");
 
@@ -26,17 +26,16 @@ public class Step3 {
     public static VisLabel auftrag = new VisLabel(auftragtext);
     public static Timer time;
     public static boolean a;
-    public static boolean isBurning=false;
+    public static boolean isBurning = false;
 
 
-
-    public static void brennen(){
+    public static void brennen() {
         final String[] getrennt = selectportlist.getSelected().split(" ");
         System.out.println(getrennt[0]);
         Thread burningThread = new Thread() {
             @Override
             public void run() {
-                isBurning=true;
+                isBurning = true;
                 try {
 
                     if (SetupWindow.tempverbindungsspeicher.getDevice() == Devices.ARDUINO_MEGA) {
@@ -47,50 +46,47 @@ public class Step3 {
                         BurnProgramm.burn(Devices.ARDUINO_UNO, getrennt[0], "sketch_uno.hex");
                     }
 
-                }catch(Exception e){
+                } catch (Exception e) {
 
                 }
-                isBurning=false;
+                isBurning = false;
             }
         };
-        if(!burningThread.isAlive()) {
+        if (!burningThread.isAlive()) {
             burningThread.start();
-        }else{
+        } else {
 
         }
     }
 
-    public static void step3(final VisTable builder){
-        time = new Timer( 30, new ActionListener()
-        {
-            public void actionPerformed( ActionEvent evt )
-            {
+    public static void step3(final VisTable builder) {
+        time = new Timer(30, new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
 
-                arduinosgefunden.setText("Arduinos: "+SerialConnection.Arduinos.size());
+                arduinosgefunden.setText("Arduinos: " + SerialConnection.Arduinos.size());
 
-                    if(isBurning) {
-System.out.println(BurnProgramm.ausgabe);
-                        brenntext.setText(BurnProgramm.ausgabe);
-                        if(BurnProgramm.ausgabe.contains("Brennen hat funktioniert, nun kannst du dein Gerät konfigurieren")){
-System.out.println("jetzt ID machen");
+                if (isBurning) {
+                    System.out.println(BurnProgramm.ausgabe);
+                    brenntext.setText(BurnProgramm.ausgabe);
+                    if (BurnProgramm.ausgabe.contains("Brennen hat funktioniert, nun kannst du dein Gerät konfigurieren")) {
+                        System.out.println("jetzt ID machen");
 
 
-
-                        }
                     }
-                    if(SerialConnection.isRunning){
-                        brenntext.setText(SerialConnection.Authentifikation.getOutput());
-                    }
+                }
+                if (SerialConnection.isRunning) {
+                    brenntext.setText(SerialConnection.Authentifikation.getOutput());
+                }
 
-                    if (SerialConnection.isRunning || isBurning==true) {
-                        neuladen_button.setDisabled(true);
-                        brennen_button.setDisabled(true);
-                        selectportlist.setDisabled(true);
-                    } else {
-                        neuladen_button.setDisabled(false);
-                        brennen_button.setDisabled(false);
-                        selectportlist.setDisabled(false);
-                    }
+                if (SerialConnection.isRunning || isBurning == true) {
+                    neuladen_button.setDisabled(true);
+                    brennen_button.setDisabled(true);
+                    selectportlist.setDisabled(true);
+                } else {
+                    neuladen_button.setDisabled(false);
+                    brennen_button.setDisabled(false);
+                    selectportlist.setDisabled(false);
+                }
 
             }
         });
@@ -116,13 +112,14 @@ System.out.println("jetzt ID machen");
         brennen_button.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                     brennen();
+                brennen();
             }
         });
 
     }
-    public static void close(){
-        if(time!=null){
+
+    public static void close() {
+        if (time != null) {
             if (time.isRunning()) {
                 time.stop();
             }

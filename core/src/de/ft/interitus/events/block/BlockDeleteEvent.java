@@ -6,6 +6,7 @@ import java.util.EventObject;
 
 public class BlockDeleteEvent extends EventObject {
     Block block;
+
     /**
      * Constructs a prototypical Event.
      *
@@ -14,6 +15,7 @@ public class BlockDeleteEvent extends EventObject {
      */
     public BlockDeleteEvent(Object source, Block block) {
         super(source);
+        this.block = block;
     }
 
     public Block getBlock() {

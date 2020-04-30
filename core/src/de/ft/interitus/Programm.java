@@ -15,14 +15,16 @@ public class Programm extends Game {
     public static boolean inLoading = true;
 
 
-
     public Programm() {
+
 
         INSTANCE = this;
     }
+
     @Override
     public void create() {
-      //  SSHConnection.update("192.168.2.112","pi","Pi-Server");
+
+        //  SSHConnection.update("192.168.2.112","pi","Pi-Server");
         Thread loadplugins = new Thread() {
             @Override
             public void run() {
@@ -37,7 +39,7 @@ public class Programm extends Game {
         try {
             loadplugins.start(); //Plugins laden
             ReadStorePlugins.read(); //Ersten 10 Plugins im Store laden
-        }catch (Exception e) {
+        } catch (Exception e) {
             Var.nointernetconnection = true;
         }
 

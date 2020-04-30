@@ -13,67 +13,8 @@ public class VerbindungsSpeicher {
     private EV3Speicher ev3Speicher;
     private EV3devSpeicher ev3devSpeicher;
 
-    public void setDevice(int device) {
-        this.device = device;
-        if(device==Devices.ARDUINO_UNO){
-            if(arduinospeicher==null) {
-                arduinospeicher = new ArduinoSpeicher();
-            }
-            raspberrypispeicher=null;
-            ev3devSpeicher=null;
-            ev3Speicher=null;
-        }
-        if(device==Devices.ARDUINO_MEGA){
-            if(arduinospeicher==null) {
-                arduinospeicher = new ArduinoSpeicher();
-            }
-            raspberrypispeicher=null;
-            ev3devSpeicher=null;
-            ev3Speicher=null;
-        }
-        if(device== Devices.RASPBERRYPI4){
-            if(raspberrypispeicher==null) {
-                raspberrypispeicher = new RaspberryPiSpeicher();
-            }
-            arduinospeicher=null;
-            ev3Speicher=null;
-            ev3devSpeicher=null;
-        }
-        if(device==Devices.RASPBERRY3Bplus){
-            if(raspberrypispeicher==null) {
-                raspberrypispeicher = new RaspberryPiSpeicher();
-            }
-            arduinospeicher=null;
-            ev3Speicher=null;
-            ev3devSpeicher=null;
-        }
-        if(device==Devices.RASPBERRYPIZEROW){
-            if(raspberrypispeicher==null) {
-                raspberrypispeicher = new RaspberryPiSpeicher();
-            }
-            arduinospeicher=null;
-            ev3Speicher=null;
-            ev3devSpeicher=null;
-        }
-        if(device==Devices.EV3){
-            if(ev3Speicher==null) {
-                ev3Speicher = new EV3Speicher();
-            }
-            arduinospeicher=null;
-            raspberrypispeicher=null;
-            ev3devSpeicher=null;
-        }
-        if(device==Devices.EV3_DEV){
-            if(ev3devSpeicher==null) {
-                ev3devSpeicher = new EV3devSpeicher();
-            }
-          arduinospeicher=null;
-          raspberrypispeicher=null;
-          ev3Speicher=null;
-        }
-
+    public VerbindungsSpeicher() {
     }
-
 
     public ArduinoSpeicher getArduinospeicher() {
         return arduinospeicher;
@@ -87,7 +28,65 @@ public class VerbindungsSpeicher {
         return device;
     }
 
-    public VerbindungsSpeicher() {
+    public void setDevice(int device) {
+        this.device = device;
+        if (device == Devices.ARDUINO_UNO) {
+            if (arduinospeicher == null) {
+                arduinospeicher = new ArduinoSpeicher();
+            }
+            raspberrypispeicher = null;
+            ev3devSpeicher = null;
+            ev3Speicher = null;
+        }
+        if (device == Devices.ARDUINO_MEGA) {
+            if (arduinospeicher == null) {
+                arduinospeicher = new ArduinoSpeicher();
+            }
+            raspberrypispeicher = null;
+            ev3devSpeicher = null;
+            ev3Speicher = null;
+        }
+        if (device == Devices.RASPBERRYPI4) {
+            if (raspberrypispeicher == null) {
+                raspberrypispeicher = new RaspberryPiSpeicher();
+            }
+            arduinospeicher = null;
+            ev3Speicher = null;
+            ev3devSpeicher = null;
+        }
+        if (device == Devices.RASPBERRY3Bplus) {
+            if (raspberrypispeicher == null) {
+                raspberrypispeicher = new RaspberryPiSpeicher();
+            }
+            arduinospeicher = null;
+            ev3Speicher = null;
+            ev3devSpeicher = null;
+        }
+        if (device == Devices.RASPBERRYPIZEROW) {
+            if (raspberrypispeicher == null) {
+                raspberrypispeicher = new RaspberryPiSpeicher();
+            }
+            arduinospeicher = null;
+            ev3Speicher = null;
+            ev3devSpeicher = null;
+        }
+        if (device == Devices.EV3) {
+            if (ev3Speicher == null) {
+                ev3Speicher = new EV3Speicher();
+            }
+            arduinospeicher = null;
+            raspberrypispeicher = null;
+            ev3devSpeicher = null;
+        }
+        if (device == Devices.EV3_DEV) {
+            if (ev3devSpeicher == null) {
+                ev3devSpeicher = new EV3devSpeicher();
+            }
+            arduinospeicher = null;
+            raspberrypispeicher = null;
+            ev3Speicher = null;
+        }
+
     }
 
     public String getName() {
@@ -99,30 +98,33 @@ public class VerbindungsSpeicher {
     }
 
 
-    public class ArduinoSpeicher{
-        public String id="";
-        public ArduinoSpeicher(){
+    public class ArduinoSpeicher {
+        public String id = "";
 
-        }
-    }
-    public class RaspberryPiSpeicher{
-        public String ip="";
-        public int port=22;
-        public String username="";
-        public String password="";
-        public RaspberryPiSpeicher(){
+        public ArduinoSpeicher() {
 
         }
     }
 
-    public class EV3Speicher{
-        public EV3Speicher(){
+    public class RaspberryPiSpeicher {
+        public String ip = "";
+        public int port = 22;
+        public String username = "";
+        public String password = "";
+
+        public RaspberryPiSpeicher() {
 
         }
     }
 
-    public class EV3devSpeicher{
-        public EV3devSpeicher(){
+    public class EV3Speicher {
+        public EV3Speicher() {
+
+        }
+    }
+
+    public class EV3devSpeicher {
+        public EV3devSpeicher() {
 
         }
     }

@@ -2,11 +2,10 @@ package de.ft.interitus.data.programm;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Settings;
-import de.ft.interitus.Var;
 import de.ft.interitus.data.user.experience.ExperienceManager;
 import de.ft.interitus.data.user.experience.ExperienceVar;
-import de.ft.interitus.DisplayErrors;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -22,9 +21,22 @@ public class Data {
     public static ArrayList<String> filename = new ArrayList<String>(); //Die Namen der Dateien die zuletzt geöffnet wurden
     private static File folder; //Der Ordner in dem alle Programm daten liegen
 
+
+    /**
+     * load the Programm data from the UserFolder/.itd
+     * <p>
+     * On Linux the Folder with a dot is default invisible
+     * On Windows we need to set the file attributes
+     * <p>
+     * In the recent file there are the projects which were opened recently
+     * In the settings file the Settings from the user are Saved
+     * <p>
+     * In the devices file are the whole configurated devices saved
+     * In the experienced file the user level, ... is saved
+     */
     public static void init() {
 
-         folder = new File(System.getProperty("user.home") + "/.itd"); //Order der Programmdaten
+        folder = new File(System.getProperty("user.home") + "/.itd"); //Order der Programmdaten
         File recent = new File(System.getProperty("user.home") + "/.itd/recent.json"); //JSON file in dem die zuletzt geöffneten Projekte gespeichert werden
         File settings = new File(System.getProperty("user.home") + "/.itd/settings.json"); // JSON file in dem alle Einstellungen gespeichert werden
         File knowndevices = new File(System.getProperty("user.home") + "/.itd/devices.json"); //JSON file in dem alle konfigurierten Geräte gespeichert werden
@@ -161,7 +173,7 @@ public class Data {
 
                     //Die Geräte werden geladen und für jedes eine Verbindungsspeicher Instanze erstellt
 
-                   //////////// *.* = obj.getInt();/////////////
+                    //////////// *.* = obj.getInt();/////////////
 
                     //TODO device laden mit attributen
 
@@ -192,7 +204,7 @@ public class Data {
 
                     ExperienceVar.programmtimeinhoures = obj.getDouble("time");
                     ExperienceVar.newprojects = obj.getInt("newprojects");
-                    ExperienceVar.userlevel =obj.getInt("userlevel");
+                    ExperienceVar.userlevel = obj.getInt("userlevel");
                     ExperienceVar.settingstimeinhoures = obj.getDouble("settingstime");
                     ExperienceVar.setuptimeinhoures = obj.getDouble("setuptime");
                     ExperienceVar.starttimes = obj.getInt("starttimes");
@@ -206,7 +218,6 @@ public class Data {
 
 
             }
-
 
 
         }
@@ -240,7 +251,7 @@ public class Data {
         JSONObject settings_obj = new JSONObject(settings); //Einstellungen werden je nach Daten Typ abgespeichert
         settings_obj.put("dark", Settings.darkmode);
         settings_obj.put("updateurl", Settings.updateurl);
-        settings_obj.put("defaultpath",Settings.defaultpfad);
+        settings_obj.put("defaultpath", Settings.defaultpfad);
 
         //TODO weitere Einstellugen speichern
         settings.writeString(settings_obj.toString(), false); //Datei wird geschrieben
@@ -250,7 +261,7 @@ public class Data {
         FileHandle knowndevices = Gdx.files.absolute(System.getProperty("user.home") + "/.itd/devices.json");//Lade Datei
         JSONObject knowndevices_obj = new JSONObject(settings);
 
-      ///  knowndevices_obj.put("",Variable);///
+        ///  knowndevices_obj.put("",Variable);///
 
         //Jede VerbindungsSpeicher Instance wird ausgelsen und abgespeichert
 
@@ -262,12 +273,12 @@ public class Data {
         JSONObject userexperience_obj = new JSONObject(userexperience); //UserExperience wird je nach Daten Typ abgespeichert
 
 
-        userexperience_obj.put("time", ExperienceManager.getthistime()+ExperienceVar.programmtimeinhoures);
-        userexperience_obj.put("newprojects",ExperienceVar.newprojects);
-        userexperience_obj.put("userlevel",ExperienceVar.userlevel);
-        userexperience_obj.put("settingstime",ExperienceVar.settingstimeinhoures+ExperienceManager.settingsthistime);
-        userexperience_obj.put("setuptime",ExperienceVar.setuptimeinhoures+ExperienceManager.setupthistime);
-        userexperience_obj.put("starttimes",ExperienceVar.starttimes+1);
+        userexperience_obj.put("time", ExperienceManager.getthistime() + ExperienceVar.programmtimeinhoures);
+        userexperience_obj.put("newprojects", ExperienceVar.newprojects);
+        userexperience_obj.put("userlevel", ExperienceVar.userlevel);
+        userexperience_obj.put("settingstime", ExperienceVar.settingstimeinhoures + ExperienceManager.settingsthistime);
+        userexperience_obj.put("setuptime", ExperienceVar.setuptimeinhoures + ExperienceManager.setupthistime);
+        userexperience_obj.put("starttimes", ExperienceVar.starttimes + 1);
 
         //TODO weitere Einstellugen speichern
         userexperience.writeString(userexperience_obj.toString(), false); //Datei wird geschrieben
@@ -279,7 +290,7 @@ public class Data {
     public static long getprogrammfoldersize() { //Die Ordner größe wird ausgelesen (benötigt für UI.settings.subitems.subitem10)
 
         long length = 0;
-        for (int i =0;i<folder.listFiles().length;i++) { //Durch alle Dateien wird Durchgegeangen...
+        for (int i = 0; i < folder.listFiles().length; i++) { //Durch alle Dateien wird Durchgegeangen...
             if (folder.listFiles()[i].isFile())
                 length += folder.listFiles()[i].length(); //Die größe der Datei wird ausgegeben
             else
@@ -290,7 +301,7 @@ public class Data {
     }
 
 
-    public static void delete() { //TODO Experimentel
+    public static void delete() { //TODO Experimentell
         folder.delete(); //Der Ordner wird gelöscht
 
     }

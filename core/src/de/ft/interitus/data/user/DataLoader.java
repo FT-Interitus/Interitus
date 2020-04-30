@@ -26,7 +26,7 @@ public class DataLoader {
 
                         BlockVar.blocks.add(null);
                         BlockVar.blocks.set(i, new Block(obj.getJSONObject("Blocks").getJSONObject("Block" + i).getInt("index"), obj.getJSONObject("Blocks").getJSONObject("Block" + i).getInt("x"), obj.getJSONObject("Blocks").getJSONObject("Block" + i).getInt("y"), obj.getJSONObject("Blocks").getJSONObject("Block" + i).getInt("w"), obj.getJSONObject("Blocks").getJSONObject("Block" + i).getInt("h")));
-                    //Und Paramenter wieder laden
+                        //Und Paramenter wieder laden
                     }
 
                     i++;

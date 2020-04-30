@@ -6,6 +6,7 @@ import java.util.EventObject;
 
 public class RightClickButtonSelectEvent extends EventObject {
     Button button;
+
     /**
      * Constructs a prototypical Event.
      *

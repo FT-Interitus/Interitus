@@ -8,13 +8,14 @@ public class BlockCreateEvent extends EventObject {
 
 
     Block block;
+
     /**
      * Constructs a prototypical Event.
      *
      * @param source the object on which the Event initially occurred
      * @throws IllegalArgumentException if source is null
      */
-    public BlockCreateEvent(Object source,Block block) {
+    public BlockCreateEvent(Object source, Block block) {
 
         super(source);
         this.block = block;
