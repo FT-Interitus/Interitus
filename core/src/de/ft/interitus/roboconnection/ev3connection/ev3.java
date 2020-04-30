@@ -71,12 +71,12 @@ public class ev3 {
     }
 
 
-    public static byte[] LCX(int value) { //Experimentell
+    public static byte[] LCX(int value) {
 
         byte[] returnarray = new byte[2];
 
         returnarray[0] = (byte) 0x81;
-        returnarray[1] = (byte) Integer.parseInt(Integer.toHexString(100));
+        returnarray[1] = (byte) Integer.parseInt(Integer.toHexString(value));
 
        return returnarray;
 
