@@ -17,6 +17,7 @@ public class PopupMenue {
     private int ausgleichX = 0;
     private int ausgleichY = 0;
 
+    int ispressed;
     private final int buttonheight = 20;
     private final SpriteBatch batch = new SpriteBatch();
     private final ArrayList<Button> buttons = new ArrayList<>();
@@ -93,10 +94,15 @@ public class PopupMenue {
             batch.end();
         }
 
-        if (getPressed() != -1) {
-            EventVar.rightClickEventManager.buttonclickedinwindow(new RightClickButtonSelectEvent(this, buttons.get(getPressed())));
+        ispressed = getPressed();
+        if (ispressed!=-1) {
+            EventVar.rightClickEventManager.buttonclickedinwindow(new RightClickButtonSelectEvent(this, buttons.get(ispressed)));
+            ispressed = -1;
+            this.show = false;
 
         }
+
+
 
     }
 

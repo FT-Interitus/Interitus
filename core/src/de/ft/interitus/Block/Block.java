@@ -13,6 +13,9 @@ import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.block.BlockCreateEvent;
 import de.ft.interitus.events.block.BlockDeleteEvent;
+import de.ft.interitus.events.rightclick.RightClickButtonSelectEvent;
+import de.ft.interitus.events.rightclick.RightClickEventListener;
+import de.ft.interitus.events.rightclick.RightClickOpenEvent;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.utils.CheckKollision;
 
@@ -48,6 +51,7 @@ public class Block implements VisibleObjects {
     private Wire wire_left = null; //linke verbundene Wire
     private Wire wire_right = null; //rechte verbunde Wire
     private final BlockAttribute blockAttribute = new BlockAttribute();
+    private RightClickEventListener rightClickEventListener;
 
     public Block(int index, int x, int y, int w, int h) { //Initzialisieren des Blocks
         EventVar.blockEventManager.createBlock(new BlockCreateEvent(this, this));
@@ -69,7 +73,30 @@ public class Block implements VisibleObjects {
         }
         ThreadManager.add(blockupdate, this); //Blockupdate wird zum Array der laufenden Threads hinzugefügt
 
+        final Block instance = this;
+
+        rightClickEventListener = new RightClickEventListener() {
+            @Override
+            public void openrightclickwindow(RightClickOpenEvent e) {
+
+            }
+
+            @Override
+            public void buttonclickedinwindow(RightClickButtonSelectEvent e) {
+
+                if (e.getButton().getText().contains("Löschen")) {
+                    instance.delete(false);
+                }
+            }
+        };
+        EventVar.rightClickEventManager.addListener(rightClickEventListener);
+
     }
+
+
+
+
+
 
 
     /***
@@ -416,6 +443,7 @@ public class Block implements VisibleObjects {
      */
 
     public void delete(boolean complete) { //Der Block soll gelöscht werden (complete beduetet das alle Blöcke gelöscht werden sollen)
+        EventVar.rightClickEventManager.removeListener(this.rightClickEventListener);
         EventVar.blockEventManager.deleteBlock(new BlockDeleteEvent(this, this)); //Fire Delete Event
         BlockVar.markedblock = null; //Der Makierte Block wird auf null gesetzt da nur ein makierter block gelöscht werden kann //Anmerkung falls das ganze Programm gelöscht wird spielt das sowieso keine Rolle
         BlockVar.marked = false; //Ob ein Block makiert ist wird auf false gesetzt da nur ein makierter Block gelöscht werden kann
