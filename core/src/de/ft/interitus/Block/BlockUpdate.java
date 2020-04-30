@@ -64,6 +64,7 @@ public class BlockUpdate extends Thread {
                     //TODO
 
 
+
                     if (!isIsconnectorclicked() && BlockVar.showleftdocker && CheckKollision.object(block.getX_entrance(), block.getY_entrance(), block.getH_entrance(), block.getW_entrance(), (int) ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1) && Gdx.input.isButtonJustPressed(0) && block.getLeft() == null) { //TODO Durch das Just pressed kann es sein das es manchmal verpasst wird dieses Event auszuführen
                         BlockVar.showleftdocker = false;
                         BlockVar.movingwires.setMovebymouse(false);
