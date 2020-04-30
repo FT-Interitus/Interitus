@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.kotcrab.vis.ui.VisUI;
 import de.ft.interitus.data.programm.Data;
 import de.ft.interitus.data.user.experience.ExperienceManager;
+import de.ft.interitus.device.BlockTypes.Init;
 import de.ft.interitus.loading.Loading;
 import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.plugin.store.ReadStorePlugins;
@@ -23,6 +24,8 @@ public class Programm extends Game {
 
     @Override
     public void create() {
+
+        Init.initBlocks();
 
         //  SSHConnection.update("192.168.2.112","pi","Pi-Server");
         Thread loadplugins = new Thread() {

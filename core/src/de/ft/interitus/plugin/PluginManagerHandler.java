@@ -4,6 +4,7 @@ import com.kotcrab.vis.ui.widget.Menu;
 import com.kotcrab.vis.ui.widget.VisTable;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Var;
+import de.ft.interitus.device.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.ProjektTypes;
 import org.usb4java.LoaderException;
 
@@ -26,6 +27,7 @@ public class PluginManagerHandler {
     public static List<PluginRegister> registeredplugins = new ArrayList<>();
     public static List<VisTable> plugisettings = new ArrayList<>();
     public static List<Menu> pluginMenubar = new ArrayList<>();
+    public static List<ArrayList<PlatformSpecificBlock>> platformSpecificBlock = new ArrayList<>();
     public List<Plugin> loadedplugins = new ArrayList<>();
     Exception error = null;
     private int Plugincounter = 0;
@@ -141,6 +143,10 @@ public class PluginManagerHandler {
 
     public static void addProjectType(ProjektTypes PT) {
         projekttypes.add(PT);
+    }
+
+    public static void addDeviceSpecificBlocks(ArrayList<PlatformSpecificBlock> PT) {
+        platformSpecificBlock.add(PT);
     }
 
     public Exception init() {

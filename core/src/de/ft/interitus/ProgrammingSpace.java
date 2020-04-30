@@ -19,10 +19,7 @@ import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.settings.subitems.subitem13;
 import de.ft.interitus.data.user.changes.DataManager;
-import de.ft.interitus.events.EventVar;
-import de.ft.interitus.events.rightclick.RightClickButtonSelectEvent;
-import de.ft.interitus.events.rightclick.RightClickEventListener;
-import de.ft.interitus.events.rightclick.RightClickOpenEvent;
+import de.ft.interitus.device.BlockTypes.BlockTypesVar;
 import de.ft.interitus.input.IntegerAuswahl;
 import de.ft.interitus.input.Switch;
 import de.ft.interitus.input.TextField;
@@ -64,17 +61,8 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
     public ProgrammingSpace() {
 
-        EventVar.rightClickEventManager.addListener(new RightClickEventListener() {
-            @Override
-            public void openrightclickwindow(RightClickOpenEvent e) {
 
-            }
 
-            @Override
-            public void buttonclickedinwindow(RightClickButtonSelectEvent e) {
-System.out.println(e.getButton().getText());
-            }
-        });
 
         popupmanager.addPopup(new PopupMenue("ein popup"));
         popupmanager.addPopup(new PopupMenue("Löschen", "Fixieren", "Umbenennen", "Befreien"));
@@ -146,6 +134,10 @@ System.out.println(e.getButton().getText());
     @Override
     public void render(float delta) {
 
+
+        for(int i =0;i< BlockTypesVar.blocks.get(0).size();i++) {
+           System.out.println( BlockTypesVar.blocks.get(0).get(i).getName());
+        }
 
         RechtsKlick.Rechtsklickupdate();
 

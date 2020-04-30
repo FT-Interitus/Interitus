@@ -89,7 +89,7 @@ public class NewProjectWindow {
 
             ArrayList<String> items = new ArrayList<>();
             for (int i = 0; i < PluginManagerHandler.projekttypes.size(); i++) {
-                if (PluginManagerHandler.projekttypes.get(i).getPO() == null) {
+                if (PluginManagerHandler.projekttypes.get(i).getPO() != null) {
                     items.add(PluginManagerHandler.projekttypes.get(i).getName());
                 }
             }
