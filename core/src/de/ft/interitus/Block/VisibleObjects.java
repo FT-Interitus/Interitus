@@ -33,4 +33,7 @@ VisibleObjects {
     void setWire_right(Wire o);
 
     void setWire_left(Wire o);
+
+
+
 }

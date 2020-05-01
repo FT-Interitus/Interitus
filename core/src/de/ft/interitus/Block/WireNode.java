@@ -117,6 +117,8 @@ public class WireNode implements VisibleObjects {
 
     }
 
+
+
     @Override
     public boolean isVisible() {
         frustum = ProgrammingSpace.cam.frustum;

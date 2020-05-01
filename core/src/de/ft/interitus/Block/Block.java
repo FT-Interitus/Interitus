@@ -323,6 +323,7 @@ public class Block implements VisibleObjects {
         this.wire_left = wire_left;
     }
 
+
     public Wire getWire_right() {
         return wire_right;
     }
@@ -579,12 +580,12 @@ public class Block implements VisibleObjects {
                 batch.setColor(1, 1, 1, 1);
             }
         }
-
+/*
         if (this.getLeft() != null) { //Verbindungs marke ob der Nachbar verbunden ist
             batch.end();
             shape.begin(ShapeRenderer.ShapeType.Filled);
             shape.setColor(1f, 0.4f, 0.4f, 0.4f);
-            shape.ellipse(this.getX() - 6, this.getY() + this.getH() / 2 - 6, 12, 12);  //TODO nicht relativ
+            shape.ellipse(this.getX() - 6, this.getY() + this.getH() / 2 - 6, 12, 12);
             shape.end();
             batch.begin();
         }
@@ -597,6 +598,8 @@ public class Block implements VisibleObjects {
             shape.end();
             batch.begin();
         }
+
+ */
         if (this == BlockVar.biggestblock) { //DEBUG Wer ist der größte Block?
             batch.end();
             shape.begin(ShapeRenderer.ShapeType.Filled);
@@ -621,7 +624,7 @@ public class Block implements VisibleObjects {
      */
 
     public Vector2 getwireconnector_right() {
-        wireconnector_right.set(x + w - 15, y + h / 3);
+        wireconnector_right.set(x + w - 7, y + h / 3+12);
         return wireconnector_right;
     }
 
@@ -629,9 +632,12 @@ public class Block implements VisibleObjects {
      * @return the position of the two connectors
      */
     public Vector2 getWireconnector_left() {
-        wireconnector_left.set(x - 5, y + h / 3);
+        wireconnector_left.set(x + 2, y + h / 3+9);
         return wireconnector_left;
     }
+
+
+
 
     /**
      * Returns the size of the biggest Area which overlaps over the blocks
@@ -681,7 +687,7 @@ public class Block implements VisibleObjects {
      * restart the Block Thread if the block is in the cam frustrum again
      * ATTENTION DO NOT CALL THIS FUNKTION OUTSIDE THREADMANAGER THIS MAY CAUSE PERFORMANCE PROBLEMS
      *
-     * @return the block array
+     * @return the block Thread
      */
     public Thread allowedRestart() { //WARNUNG diese Methode darf nur von ThreadMananger aufgerufen werden
         blockupdate = new BlockUpdate(this); //Wenn der Block wieder in den Sichtbereich Rückt
