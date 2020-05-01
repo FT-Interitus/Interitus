@@ -19,7 +19,7 @@ import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.settings.subitems.subitem13;
 import de.ft.interitus.data.user.changes.DataManager;
-import de.ft.interitus.device.BlockTypes.Ev3.Wait;
+import de.ft.interitus.device.BlockTypes.BlockTypesVar;
 import de.ft.interitus.input.IntegerAuswahl;
 import de.ft.interitus.input.Switch;
 import de.ft.interitus.input.TextField;
@@ -92,7 +92,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
                     for (int i = 0; i < 1; i = i + 1) {
 
-                        BlockVar.blocks.add(new Block(i, 400, 552, 150, 70, new Wait()));
+                        BlockVar.blocks.add(new Block(i, 400, 552, 150, 70, BlockTypesVar.blocks.get(0).get(0)));
 
                         System.out.println(i);
                         //  MainGame.logger.finest(String.valueOf(i));
@@ -158,7 +158,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
             if (input.isKeyJustPressed(Input.Keys.INSERT)) {
 
-                BlockVar.blocks.add(new Block(BlockVar.blocks.size(), 100, 200, 150, 70,new Wait()));
+                BlockVar.blocks.add(new Block(BlockVar.blocks.size(), 100, 200, 150, 70, BlockTypesVar.blocks.get(0).get(0)));
                 DataManager.change(BlockVar.blocks.get(BlockVar.blocks.size() - 1), true, false);
             }
 

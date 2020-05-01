@@ -613,7 +613,7 @@ public class Block implements VisibleObjects {
             batch.draw(AssetLoader.connector, getwireconnector_right().x, getwireconnector_right().y, 20, 20);
         }
 
-        font.draw(batch, "index:  " + this.getIndex(), this.getX() + 30, this.getY() + 30); //DEBUG Block Index auf dem Block anzeigen
+        font.draw(batch, "index:  " + this.getIndex()+" Block: "+this.getBlocktype().getName(), this.getX() + 5, this.getY() + 30); //DEBUG Block Index auf dem Block anzeigen
     }
 
     /**
