@@ -77,7 +77,7 @@ public class TextField {
 
         if (active) {
 
-            if (Gdx.input.isKeyPressed(Input.Keys.DEL) && input.length() > 0) {
+            if (Gdx.input.isKeyPressed(Input.Keys.DEL) && input.length() > 0) { //TODO zu schnell löschen
 
                 input = input.substring(0, input.length() - 1);
             }
