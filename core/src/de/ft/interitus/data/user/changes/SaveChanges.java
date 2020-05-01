@@ -82,7 +82,7 @@ public class SaveChanges {
 
 
         if (revert.isDeleted()) { //TODO index wieder zurück
-            BlockVar.blocks.add(revert.getIndex(), new Block(revert.getIndex(), revert.getX(), revert.getY(), revert.getW(), revert.getH()));
+          //  BlockVar.blocks.add(revert.getIndex(), new Block(revert.getIndex(), revert.getX(), revert.getY(), revert.getW(), revert.getH()));
             if (revert.getLeft_index() != -1) {
                 BlockVar.blocks.get(revert.getIndex()).setLeft(BlockVar.blocks.get(revert.getLeft_index()));
             }
@@ -173,7 +173,7 @@ public class SaveChanges {
 
 
         if (revert.isDeleted()) {
-            BlockVar.blocks.add(revert.getIndex(), new Block(revert.getIndex(), revert.getX(), revert.getY(), revert.getW(), revert.getH()));
+           // BlockVar.blocks.add(revert.getIndex(), new Block(revert.getIndex(), revert.getX(), revert.getY(), revert.getW(), revert.getH()));
             if (revert.getLeft_index() != -1) {
                 BlockVar.blocks.get(revert.getIndex()).setLeft(BlockVar.blocks.get(revert.getLeft_index()));
             }

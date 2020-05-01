@@ -1,7 +1,6 @@
 package de.ft.interitus.data.user;
 
 import com.badlogic.gdx.files.FileHandle;
-import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.BlockVar;
 import de.ft.interitus.Var;
 import de.ft.interitus.utils.ClearActOpenProgramm;
@@ -25,7 +24,7 @@ public class DataLoader {
                     } else {
 
                         BlockVar.blocks.add(null);
-                        BlockVar.blocks.set(i, new Block(obj.getJSONObject("Blocks").getJSONObject("Block" + i).getInt("index"), obj.getJSONObject("Blocks").getJSONObject("Block" + i).getInt("x"), obj.getJSONObject("Blocks").getJSONObject("Block" + i).getInt("y"), obj.getJSONObject("Blocks").getJSONObject("Block" + i).getInt("w"), obj.getJSONObject("Blocks").getJSONObject("Block" + i).getInt("h")));
+                       // BlockVar.blocks.set(i, new Block(obj.getJSONObject("Blocks").getJSONObject("Block" + i).getInt("index"), obj.getJSONObject("Blocks").getJSONObject("Block" + i).getInt("x"), obj.getJSONObject("Blocks").getJSONObject("Block" + i).getInt("y"), obj.getJSONObject("Blocks").getJSONObject("Block" + i).getInt("w"), obj.getJSONObject("Blocks").getJSONObject("Block" + i).getInt("h")));
                         //Und Paramenter wieder laden
                     }
 

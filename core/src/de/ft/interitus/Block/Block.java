@@ -54,7 +54,8 @@ public class Block implements VisibleObjects {
     private PlatformSpecificBlock blocktype =null;
     private RightClickEventListener rightClickEventListener;
 
-    public Block(int index, int x, int y, int w, int h) { //Initzialisieren des Blocks
+    public Block(int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock) { //Initzialisieren des Blocks
+       this.blocktype = platformSpecificBlock;
         EventVar.blockEventManager.createBlock(new BlockCreateEvent(this, this));
         this.x = x;
         this.y = y;

@@ -1,6 +1,5 @@
 package de.ft.interitus.data.user.clipboard;
 
-import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.BlockVar;
 
 public class Manager {
@@ -22,9 +21,9 @@ public class Manager {
     }
 
     public static void paste() {
-        Block paste = new Block(BlockVar.blocks.size(), sb.getX(), sb.getY(), sb.getW(), sb.getH());
+        //Block paste = new Block(BlockVar.blocks.size(), sb.getX(), sb.getY(), sb.getW(), sb.getH());
 
-        BlockVar.blocks.add(paste);
+     //   BlockVar.blocks.add(paste);
 
     }
 
