@@ -2,6 +2,7 @@ package de.ft.interitus.roboconnection.ev3connection;
 
 import org.usb4java.*;
 
+import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.IntBuffer;
@@ -116,24 +117,43 @@ public class USBConnection {
     }
 
     public static void sendcommand(ArrayList<Byte> command) {
-        ByteBuffer reply = sendDirectCmd(command, 7 + command.size() + 2, 0);
+        ByteBuffer reply = sendDirectCmd(command, 0, 0);
     }
 
 
     public static void main(String[] args) {
-
+        Integer integer = 129;
+        System.out.println(BigInteger.valueOf(integer).toByteArray()[1]);
         openev3sesseion();
 
         ArrayList<Byte> command = new ArrayList<>();
-       //command.addAll(Operations.ev3statusline(false));
-        // command.addAll(Operations.displayBMPFile(true,0,0,"../apps/Motor Control/MotorCtlAD.rgf"));
-        // command.addAll(Operations.updateev3screen());
-        command.addAll(Operations.playTone(20,502,100));
-//        command.addAll(Operations.setbrickname("MyEv3"));
 
-        sendcommand(command);
+        for(int i=0;i<128;i++) {
+            command.clear();
+
+
+            command.addAll(Operations.ev3statusline(false));
+            command.addAll(Operations.fillwindow(false, 0, 0));
+            command.addAll(Operations.fillwindow(true, 127-i, 0));
+            //  command.addAll(Operations.displayBMPFile(false,0,15,"../apps/Motor Control/MotorCtlAD.rgf"));
+            command.addAll(Operations.updateev3screen());
+            System.out.println(i);
+            sendcommand(command);
+
+            try {
+                TimeUnit.MILLISECONDS.sleep(75);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        //command.addAll(Operations.playTone(100,440,1000));
+        //command.addAll(Operations.playSound("./ui/DownloadSucces",100,false));
+       // command.addAll(Operations.setbrickname("MyEv3"));
+
+
+
         try {
-            TimeUnit.SECONDS.sleep(10);
+            TimeUnit.SECONDS.sleep(0);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

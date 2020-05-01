@@ -7,37 +7,40 @@ public class Operations {
 public static ArrayList<Byte> fillwindow(boolean white,int ystart,int ysize) {
 
     ArrayList<Byte> b = new ArrayList<>();
+    b.clear();
 
-    if(ystart>127)  {
-        return null;
-    }
+        if (ystart > 127) {
+            return null;
+        }
 
-    b.add(ev3.opUI_draw);
-    b.add(ev3.FILLWINDOW);
-    byte[] temp;
+        b.add(ev3.opUI_draw);
+        b.add(ev3.FILLWINDOW);
+        byte[] temp;
 
-    if(white) {
-    temp =ev3.LCX(0);
-    }else{
+        if (white) {
+            temp = ev3.LCX(0);
+        } else {
 
-        temp =ev3.LCX(1);
-    }
+            temp = ev3.LCX(1);
+        }
 
-    for(int i=0;i<temp.length;i++) {
-        b.add(temp[i]);
-    }
+        for (int i = 0; i < temp.length; i++) {
+            b.add(temp[i]);
+        }
 
-    byte[] temp2 = ev3.LCX(ystart);
+        byte[] temp2 = ev3.LCX(ystart);
 
-    for(int i =0;i<temp2.length;i++) {
-        b.add(temp2[i]);
-    }
+        for (int i = 0; i < temp2.length; i++) {
+            b.add(temp2[i]);
+        }
 
-    byte[] temp3 = ev3.LCX(ysize);
+        byte[] temp3 = ev3.LCX(ysize);
 
-    for(int i =0;i<temp3.length;i++) {
-        b.add(temp3[i]);
-    }
+        for (int i = 0; i < temp3.length; i++) {
+            b.add(temp3[i]);
+        }
+
+System.out.println("Test"+b);
 
     return b;
 

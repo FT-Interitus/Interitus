@@ -71,19 +71,70 @@ public class ev3 {
     }
 
 
-    public static byte[] LCX(int value) { //TODO überarbeiten da vllt. ein präfix fehlt
+    public static byte[] LCX(int value) { //TODO eventuell ist hier das = in den if s falsch
 
-        byte[] returnarray = new byte[2];
 
-        returnarray[0] = (byte) 0x81;
-        returnarray[1] = (byte) Integer.parseInt(Integer.toHexString(value));
 
-       return returnarray;
+
+        byte count1 = (byte) 0x01;
+        byte count2 = (byte) 0x81;
+        byte count3 = (byte) 0x82;
+        byte count4 = (byte) 0x83;
+        byte count5 = (byte) 0x84;
+
+
+Integer integer = value;
+
+        if(value>=-32&&value<=31) {
+            byte[] returnarray = new byte[1];
+
+            returnarray[0] = integer.byteValue();
+            return returnarray;
+        }else
+
+
+            if (value >= -127 && value <= 127) {
+                byte[] returnarray = new byte[2];
+                returnarray[0] = count2;
+                returnarray[1] = integer.byteValue();
+                return returnarray;
+
+            } else{ //TODO bis hir hin geht alles
+
+
+                byte[] returnarray = new byte[2];
+                if (value >= -32767 && value <= 32767) {
+                returnarray[0] = count3;
+            } else if (value >= -2147483647 && value <= 2147483647) {
+                returnarray[0] = count4;
+            } else {
+                returnarray[0] = count5;
+            }
+
+
+
+returnarray[1] = (byte) value;
+                System.out.println(returnarray[1]);
+
+
+            return returnarray;
+        }
+
+
+
+
 
 
     }
 
-
+    private static byte[] intToBytes(final int data) {
+        return new byte[] {
+                (byte)((data >> 24) & 0xff),
+                (byte)((data >> 16) & 0xff),
+                (byte)((data >> 8) & 0xff),
+                (byte)((data >> 0) & 0xff),
+        };
+    }
 
 
 }
