@@ -38,14 +38,14 @@ public class USBConnection {
             command.clear();
             //command.addAll(Operations.playTone(100, i, 100-i/5));
 
-        command.addAll(Operations.led(2,false,false));
-        command.addAll(Operations.newWaitTimer(5000,0));
-        command.addAll(Operations.waitforTimerFinish(0));
-        command.addAll(Operations.led(0,true,false));
-            ev3.sendcommand(command);
+
+        command.addAll(Operations.loadProgrammFiles(1,"../prjs/Demo/Demo.rbf",0,4));
+        command.addAll(Operations.startProgramm(1,0,4,true));
+
+            ev3.sendcommand(command,8,0);
 
             try {
-                TimeUnit.MILLISECONDS.sleep(8000);
+                TimeUnit.MILLISECONDS.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

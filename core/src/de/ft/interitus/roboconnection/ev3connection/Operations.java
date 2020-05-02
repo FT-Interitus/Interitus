@@ -4,6 +4,75 @@ import java.util.ArrayList;
 
 public class Operations {
 
+    public static ArrayList<Byte> startProgramm(int Slot, int size,int ProgrammReferenzNumber,boolean debug) {
+
+        ArrayList<Byte> b = new ArrayList<>();
+        b.add(ev3.opFile);
+        b.add(ev3.LOAD_IMAGE);
+
+        byte[] temp1 = ev3.LCX(Slot);
+
+        for(int i=0;i<temp1.length;i++) {
+            b.add(temp1[i]);
+        }
+
+        byte[] temp2 = ev3.LVX(size);
+        for(int i=0;i<temp2.length;i++) {
+            b.add(temp2[i]);
+        }
+
+        byte[] temp3 = ev3.LVX(ProgrammReferenzNumber);
+        for(int i=0;i<temp3.length;i++) {
+            b.add(temp3[i]);
+        }
+
+        byte[] temp4 = null;
+        if(debug) {
+           temp4 =  ev3.LCX(1);
+        }else{
+            temp4 =  ev3.LCX(0);
+        }
+
+        for(int i=0;i<temp4.length;i++) {
+            b.add(temp4[i]);
+        }
+
+        return b;
+
+
+    }
+
+    public static ArrayList<Byte> loadProgrammFiles(int Slot, String path, int size, int ProgrammReferenzNumber) {
+
+        ArrayList<Byte> b = new ArrayList<>();
+        b.add(ev3.opFile);
+        b.add(ev3.LOAD_IMAGE);
+
+        byte[] temp1 = ev3.LCX(Slot);
+
+        for(int i=0;i<temp1.length;i++) {
+            b.add(temp1[i]);
+        }
+
+        byte[] temp2 = ev3.LCS(path);
+        for(int i=0;i<temp2.length;i++) {
+            b.add(temp2[i]);
+        }
+
+        byte[] temp3 = ev3.LVX(size);
+        for(int i=0;i<temp3.length;i++) {
+            b.add(temp3[i]);
+        }
+
+        byte[] temp4 = ev3.LVX(ProgrammReferenzNumber);
+        for(int i=0;i<temp4.length;i++) {
+            b.add(temp4[i]);
+        }
+
+        return b;
+
+
+    }
 
     public static ArrayList<Byte> newWaitTimer(int TimetoWait,int TimerReferezNumber) {
         ArrayList<Byte> b = new ArrayList<>();

@@ -33,6 +33,10 @@ public class ev3 {
     static final byte opTimer_Wait = (byte) 0x85;
     static final byte opTimer_Ready = (byte) 0x86;
 
+    static final byte opFile = (byte) 0xC0;
+
+    static final byte opProgram_Start = (byte) 0x03;
+
     static final byte SET_BRICKNAME = (byte) 0x08;
 
     static final byte TONE = (byte) 0x01;
@@ -56,6 +60,8 @@ public class ev3 {
     static final byte FILLWINDOW = (byte) 0x13;
     static final byte BMPFile = (byte) 0x1C;
     static final byte LINE = (byte) 0x03;
+
+    static final byte LOAD_IMAGE = (byte) 0x08;
 
 
     public static byte[] LCS(String string) {
@@ -307,8 +313,8 @@ public class ev3 {
     }
 
 
-    public static void sendcommand(ArrayList<Byte> command) {
-        ByteBuffer reply = sendDirectCmd(command, 4, 0);
+    public static void sendcommand(ArrayList<Byte> command,int local_mem,int global_mem) {
+        ByteBuffer reply = sendDirectCmd(command, local_mem, global_mem);
     }
 
 }
