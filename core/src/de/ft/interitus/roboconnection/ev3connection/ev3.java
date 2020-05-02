@@ -30,6 +30,9 @@ public class ev3 {
     static final byte opUI_Write = (byte) 0x82;
     static final byte opUI_draw = (byte) 0x84;
 
+    static final byte opTimer_Wait = (byte) 0x85;
+    static final byte opTimer_Ready = (byte) 0x86;
+
     static final byte SET_BRICKNAME = (byte) 0x08;
 
     static final byte TONE = (byte) 0x01;
@@ -132,7 +135,7 @@ public class ev3 {
     }
 
 
-    public byte[] addLVX(int value) {
+    public static byte[] LVX(int value) {
         List<Byte> ops = new ArrayList<>();
         if (value < 0) {
             throw new IllegalArgumentException("Parameter must be positive " + value);
@@ -162,7 +165,7 @@ public class ev3 {
     }
 
     // Global Variable 1,2,4 bytes follow
-    public byte[] addGVX(int value) {
+    public static byte[] GVX(int value) {
         List<Byte> ops = new ArrayList<>();
         if (value < 0) {
             throw new IllegalArgumentException("Parameter must be positive " + value);
@@ -305,7 +308,7 @@ public class ev3 {
 
 
     public static void sendcommand(ArrayList<Byte> command) {
-        ByteBuffer reply = sendDirectCmd(command, 0, 0);
+        ByteBuffer reply = sendDirectCmd(command, 4, 0);
     }
 
 }

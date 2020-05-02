@@ -4,6 +4,42 @@ import java.util.ArrayList;
 
 public class Operations {
 
+
+    public static ArrayList<Byte> newWaitTimer(int TimetoWait,int TimerReferezNumber) {
+        ArrayList<Byte> b = new ArrayList<>();
+        b.add(ev3.opTimer_Wait);
+
+        byte[] temp1 = ev3.LCX(TimetoWait);
+
+        for (int i = 0; i < temp1.length; i++) {
+            b.add(temp1[i]);
+        }
+
+        byte[] temp2 = ev3.LVX(TimerReferezNumber);
+
+        for (int i = 0; i < temp2.length; i++) {
+            b.add(temp2[i]);
+        }
+
+
+        return b;
+    }
+
+    public static ArrayList<Byte> waitforTimerFinish(int TimerReferezNumber) {
+        ArrayList<Byte> b = new ArrayList<>();
+        b.add(ev3.opTimer_Ready);
+
+
+        byte[] temp2 = ev3.LVX(TimerReferezNumber);
+
+        for (int i = 0; i < temp2.length; i++) {
+            b.add(temp2[i]);
+        }
+
+
+        return b;
+    }
+
     public static ArrayList<Byte> drawline(boolean white,int xstart,int ystart,int xend,int yend) {
 
         ArrayList<Byte> b = new ArrayList<>();

@@ -33,14 +33,19 @@ public class USBConnection {
 
  */
 
+
+
             command.clear();
             //command.addAll(Operations.playTone(100, i, 100-i/5));
-        command.addAll(Operations.drawline(false,2,125,88,2));
-        command.addAll(Operations.updateev3screen());
+
+        command.addAll(Operations.led(2,false,false));
+        command.addAll(Operations.newWaitTimer(5000,0));
+        command.addAll(Operations.waitforTimerFinish(0));
+        command.addAll(Operations.led(0,true,false));
             ev3.sendcommand(command);
 
             try {
-                TimeUnit.MILLISECONDS.sleep(100);
+                TimeUnit.MILLISECONDS.sleep(8000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
