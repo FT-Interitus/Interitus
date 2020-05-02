@@ -4,7 +4,71 @@ import java.util.ArrayList;
 
 public class Operations {
 
-public static ArrayList<Byte> fillwindow(boolean white,int ystart,int ysize) {
+    public static ArrayList<Byte> drawline(boolean white,int xstart,int ystart,int xend,int yend) {
+
+        ArrayList<Byte> b = new ArrayList<>();
+        b.clear();
+
+        if (ystart > 127) {
+            return null;
+        }
+
+        b.add(ev3.opUI_draw);
+        b.add(ev3.LINE);
+        byte[] temp;
+
+        if (white) {
+            temp = ev3.LCX(0);
+        } else {
+
+            temp = ev3.LCX(1);
+        }
+
+        for (int i = 0; i < temp.length; i++) {
+            b.add(temp[i]);
+        }
+
+        byte[] temp2 = ev3.LCX(xstart);
+
+        for (int i = 0; i < temp2.length; i++) {
+            b.add(temp2[i]);
+        }
+
+        byte[] temp3 = ev3.LCX(ystart);
+
+        for (int i = 0; i < temp3.length; i++) {
+            b.add(temp3[i]);
+        }
+
+        byte[] temp4 = ev3.LCX(xend);
+
+        for (int i = 0; i < temp4.length; i++) {
+            b.add(temp4[i]);
+        }
+
+        byte[] temp5 = ev3.LCX(yend);
+
+        for (int i = 0; i < temp5.length; i++) {
+            b.add(temp5[i]);
+        }
+
+        return b;
+
+
+
+
+
+
+    }
+
+    /**
+     *
+     * @param white
+     * @param ystart must be smaller than 127
+     * @param ysize
+     * @return
+     */
+    public static ArrayList<Byte> fillwindow(boolean white,int ystart,int ysize) {
 
     ArrayList<Byte> b = new ArrayList<>();
     b.clear();
