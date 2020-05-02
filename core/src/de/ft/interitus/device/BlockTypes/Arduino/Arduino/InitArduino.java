@@ -15,7 +15,7 @@ public class InitArduino {
 
     public static ArrayList<PlatformSpecificBlock> init() {
 
-        PluginManagerHandler.projekttypes.add(new ProjektTypes(new Arduino(),"Arduino"));
+        PluginManagerHandler.projekttypes.add(new ProjektTypes(new Arduino(),"Arduino-Projekt"));
 
         blocks.add(new Wait());
 

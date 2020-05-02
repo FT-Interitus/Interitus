@@ -134,6 +134,9 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
     @Override
     public void render(float delta) {
 
+        if(Var.actProjekt==null) {
+           // Programm.INSTANCE.setScreen(new Welcome()); //TODO auskommentiert zu debug zwecken
+        }
 
         RechtsKlick.Rechtsklickupdate();
 
