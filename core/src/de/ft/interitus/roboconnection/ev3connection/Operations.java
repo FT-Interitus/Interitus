@@ -7,8 +7,8 @@ public class Operations {
     public static ArrayList<Byte> startProgramm(int Slot, int size,int ProgrammReferenzNumber,boolean debug) {
 
         ArrayList<Byte> b = new ArrayList<>();
-        b.add(ev3.opFile);
-        b.add(ev3.LOAD_IMAGE);
+
+        b.add(ev3.opProgram_Start);
 
         byte[] temp1 = ev3.LCX(Slot);
 

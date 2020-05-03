@@ -39,7 +39,7 @@ public class USBConnection {
             //command.addAll(Operations.playTone(100, i, 100-i/5));
 
 
-        command.addAll(Operations.loadProgrammFiles(1,"../prjs/Demo/Demo.rbf",0,4));
+        command.addAll(Operations.loadProgrammFiles(1,"../apps/Motor Control/Motor Control.rbf",0,4));
         command.addAll(Operations.startProgramm(1,0,4,true));
 
             ev3.sendcommand(command,8,0);
