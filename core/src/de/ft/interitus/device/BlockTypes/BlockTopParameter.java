@@ -2,6 +2,6 @@ package de.ft.interitus.device.BlockTypes;
 
 public enum BlockTopParameter {
 
-    display_black_white, display, PORT, LED_STRIPE, LED_MATRIX
+    display_black_white, display, PORT,PORT_TWO, LED_STRIPE, LED_MATRIX
 
 }

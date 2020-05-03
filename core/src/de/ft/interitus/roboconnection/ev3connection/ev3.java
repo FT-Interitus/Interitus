@@ -114,7 +114,7 @@ public class ev3 {
                 returnarray[1] = integer.byteValue();
                 return returnarray;
 
-            } else { //TODO bis hir hin geht alles
+            } else {
 
                 if (value >= -32767 && value <= 32767) {
                     returnarray = new byte[3];
