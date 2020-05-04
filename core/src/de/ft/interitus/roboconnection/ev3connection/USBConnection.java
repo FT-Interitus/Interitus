@@ -40,7 +40,7 @@ public class USBConnection {
 
 
         command.addAll(Operations.loadProgrammFiles(1,"../apps/Motor Control/Motor Control.rbf",0,4));
-        command.addAll(Operations.startProgramm(1,0,4,true));
+        command.addAll(Operations.startProgramm(1,0,4,false));
 
             ev3.sendcommand(command,8,0);
 
