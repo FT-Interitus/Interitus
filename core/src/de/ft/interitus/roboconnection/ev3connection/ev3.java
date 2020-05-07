@@ -21,7 +21,11 @@ import java.util.List;
  *
  */
 
+
 public class ev3 {
+
+
+
     static final byte opCom_Set = (byte) 0xD4;
 
     static final byte opSound = (byte) 0x94;
@@ -29,6 +33,7 @@ public class ev3 {
 
     static final byte opUI_Write = (byte) 0x82;
     static final byte opUI_draw = (byte) 0x84;
+    static final byte opUI_Button = (byte) 0x83;
 
     static final byte opTimer_Wait = (byte) 0x85;
     static final byte opTimer_Ready = (byte) 0x86;
@@ -36,6 +41,8 @@ public class ev3 {
     static final byte opFile = (byte) 0xC0;
 
     static final byte opProgram_Start = (byte) 0x03;
+
+
 
     static final byte SET_BRICKNAME = (byte) 0x08;
 
@@ -62,6 +69,9 @@ public class ev3 {
     static final byte LINE = (byte) 0x03;
 
     static final byte LOAD_IMAGE = (byte) 0x08;
+
+    static final byte PRESS = (byte) 0x05;
+
 
 
     public static byte[] LCS(String string) {

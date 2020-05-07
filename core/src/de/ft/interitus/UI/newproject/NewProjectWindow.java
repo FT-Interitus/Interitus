@@ -11,6 +11,7 @@ import com.kotcrab.vis.ui.building.utilities.Padding;
 import com.kotcrab.vis.ui.widget.*;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.UI;
+import de.ft.interitus.Var;
 import de.ft.interitus.plugin.PluginManagerHandler;
 
 import java.util.ArrayList;
@@ -87,7 +88,7 @@ public class NewProjectWindow {
 
             selectProjectType = new VisSelectBox<String>();
 
-            ArrayList<String> items = new ArrayList<>();
+            final ArrayList<String> items = new ArrayList<>();
             for (int i = 0; i < PluginManagerHandler.projekttypes.size(); i++) {
                 if (PluginManagerHandler.projekttypes.get(i).getPO() != null) {
                     items.add(PluginManagerHandler.projekttypes.get(i).getName());
@@ -135,6 +136,16 @@ public class NewProjectWindow {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
 
+                    setupBuilder.close();
+                }
+            });
+
+
+            Button_next.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    Var.actProjekt = PluginManagerHandler.projekttypes.get(items.indexOf(selectProjectType.getSelected()));
+                    //TODO project init
                     setupBuilder.close();
                 }
             });

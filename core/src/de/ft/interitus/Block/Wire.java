@@ -47,7 +47,7 @@ public class Wire {
                 if (Gdx.input.isButtonJustPressed(0)) {
                     int counter = 0;
                     for (int i = 0; i < BlockVar.visibleblocks.size(); i++) {
-
+                //TODO hier auch nach nodes testen eventuell will man die nur verschieben
                         if (CheckKollision.object(BlockVar.visibleblocks.get(i).getX_entrance(), BlockVar.visibleblocks.get(i).getY_entrance(), BlockVar.visibleblocks.get(i).getH_entrance(), BlockVar.visibleblocks.get(i).getW_entrance(), (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1)) {
                             counter++;
                         }
