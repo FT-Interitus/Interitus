@@ -12,7 +12,7 @@ public class InitRoboArm {
 
     public static ArrayList<PlatformSpecificBlock> init() {
 
-        PluginManagerHandler.projekttypes.add(new ProjektTypes(new RoboArm(),"Arduino-RoboterArm-Projekt"));
+        PluginManagerHandler.projekttypes.add(new ProjektTypes(new RoboArm(),"Arduino-RoboterArm-Projekt",blocks));
 
 
 

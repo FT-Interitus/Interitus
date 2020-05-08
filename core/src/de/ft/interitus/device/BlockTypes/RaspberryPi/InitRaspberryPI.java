@@ -11,8 +11,9 @@ import java.util.ArrayList;
 public class InitRaspberryPI {
     static ArrayList<PlatformSpecificBlock> platformSpecificBlocks = new ArrayList<>();
     public static ArrayList<PlatformSpecificBlock> init() {
-        PluginManagerHandler.projekttypes.add(new ProjektTypes(new Ev3(),"RaspberryPi-Projekt"));
+
         platformSpecificBlocks.add(new Wait());
+        PluginManagerHandler.projekttypes.add(new ProjektTypes(new Ev3(),"RaspberryPi-Projekt",platformSpecificBlocks));
         return platformSpecificBlocks;
     }
 }

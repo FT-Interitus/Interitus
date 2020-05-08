@@ -1,12 +1,17 @@
 package de.ft.interitus.projecttypes;
 
+import de.ft.interitus.device.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.device.ProgrammableObjekt;
+
+import java.util.ArrayList;
 
 public class ProjektTypes {
     ProgrammableObjekt PO;
     String name;
+    ArrayList<PlatformSpecificBlock> projectblocks;
 
-    public ProjektTypes(ProgrammableObjekt PO, String name) {
+    public ProjektTypes(ProgrammableObjekt PO, String name,ArrayList<PlatformSpecificBlock> blocks) {
+        this.projectblocks = blocks;
         this.PO = PO;
         this.name = name;
     }
@@ -21,6 +26,14 @@ public class ProjektTypes {
 
     public String getName() {
         return name;
+    }
+
+    public ArrayList<PlatformSpecificBlock> getProjectblocks() {
+        return projectblocks;
+    }
+
+    public void setProjectblocks(ArrayList<PlatformSpecificBlock> projectblocks) {
+        this.projectblocks = projectblocks;
     }
 
     public void setName(String name) {

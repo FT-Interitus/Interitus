@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class InitEv3 {
    static ArrayList<PlatformSpecificBlock> platformSpecificBlocks = new ArrayList<>();
     public static ArrayList<PlatformSpecificBlock> init() {
-        PluginManagerHandler.projekttypes.add(new ProjektTypes(new Ev3(),"EV3-Projekt"));
+        PluginManagerHandler.projekttypes.add(new ProjektTypes(new Ev3(),"EV3-Projekt",platformSpecificBlocks));
         return platformSpecificBlocks;
     }
 }

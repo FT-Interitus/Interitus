@@ -12,10 +12,10 @@ public class InitNeoPixelController {
     static ArrayList<PlatformSpecificBlock> blocks  = new ArrayList<>();
 
     public static ArrayList<PlatformSpecificBlock> init() {
-
-        PluginManagerHandler.projekttypes.add(new ProjektTypes(new NeoPixelController(),"Arduino-Neopixel-Projekt"));
-
         blocks.add(new SetTableColor());
+        PluginManagerHandler.projekttypes.add(new ProjektTypes(new NeoPixelController(),"Arduino-Neopixel-Projekt",blocks));
+
+
 
         return blocks;
     }
