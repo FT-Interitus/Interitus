@@ -7,9 +7,12 @@ import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.plugin.store.StorePluginsVar;
 import de.ft.interitus.utils.DownloadFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class AssetLoader {
+
+
 
     public static ArrayList<Texture> storeimages = new ArrayList<>();
     public static ArrayList<ArrayList<Object>> pluginimages = new ArrayList<>();
@@ -54,6 +57,8 @@ public class AssetLoader {
 
     public static AssetManager manager = new AssetManager();
 
+    public static  ArrayList<Pixmap> pixmap = new ArrayList<>();
+    public static boolean finishpluginimageloading = false;
 
     public static void loadmore(String file, Class type) {
         manager.load(workingdirectory + file, type);
@@ -105,19 +110,36 @@ public class AssetLoader {
             manager.load(workingdirectory + "pluginwaiting.png", Texture.class);
 
 
-            int load = 0;
+           Thread loadimagesfromweb = new Thread() {
+               @Override
+               public void run() {
+                   int load = 0;
 
-            if (StorePluginsVar.pluginEntries.size() > 10) {
-                load = 10;
-            } else {
-                load = StorePluginsVar.pluginEntries.size();
-            }
-            for (int i = 0; i < load; i++) {
-                System.out.println("load" + i);
-                byte[] download = DownloadFile.downloadBytes(StorePluginsVar.pluginEntries.get(i).getImage());
-                Pixmap pixmap = new Pixmap(download, 0, download.length);
-                storeimages.add(new Texture(pixmap));
-            }
+                   if (StorePluginsVar.pluginEntries.size() > 10) {
+                       load = 10;
+                   } else {
+                       load = StorePluginsVar.pluginEntries.size();
+                   }
+                   for (int i = 0; i < load; i++) {
+                       System.out.println("load" + i);
+                       byte[] download = new byte[0];
+                       try {
+                           download = DownloadFile.downloadBytes(StorePluginsVar.pluginEntries.get(i).getImage());
+                       } catch (IOException e) {
+                           DisplayErrors.error = e;
+                       }
+                       pixmap.add( new Pixmap(download, 0, download.length));
+                       //storeimages.add(new Texture(pixmap));
+                   }
+                   finishpluginimageloading=true;
+               }
+           };
+
+
+
+            loadimagesfromweb.start();
+
+
 
 
         } catch (Exception e) {

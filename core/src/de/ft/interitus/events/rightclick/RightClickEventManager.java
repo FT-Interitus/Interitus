@@ -14,6 +14,13 @@ public class RightClickEventManager implements RightClickEventListener {
     }
 
     @Override
+    public void closerightclickwindow(RightClickCloseEvent e) {
+        for (int i = 0; i < listener.size(); i++)
+            ((RightClickEventListener) listener.elementAt(i)).
+                    closerightclickwindow(e);
+    }
+
+    @Override
     public void buttonclickedinwindow(RightClickButtonSelectEvent e) {
         for (int i = 0; i < listener.size(); i++)
             ((RightClickEventListener) listener.elementAt(i)).

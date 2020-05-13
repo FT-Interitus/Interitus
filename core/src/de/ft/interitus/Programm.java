@@ -5,6 +5,8 @@ import com.kotcrab.vis.ui.VisUI;
 import de.ft.interitus.data.programm.Data;
 import de.ft.interitus.data.user.experience.ExperienceManager;
 import de.ft.interitus.device.BlockTypes.Init;
+import de.ft.interitus.events.EventVar;
+import de.ft.interitus.events.UI.UILoadEvent;
 import de.ft.interitus.loading.Loading;
 import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.plugin.store.ReadStorePlugins;
@@ -38,6 +40,7 @@ public class Programm extends Game {
         };
         VisUI.load(VisUI.SkinScale.X1);
 
+        EventVar.uiEventManager.UILoadEvent(new UILoadEvent(this));
 
         try {
             loadplugins.start(); //Plugins laden
@@ -60,9 +63,12 @@ public class Programm extends Game {
 
 
     public void dispose() {
-        System.out.println("Save");
+
+        ThreadManager.stopall();
+
         Data.close();
-        System.out.println("saved");
+
+        System.exit(0);
     }
 
 

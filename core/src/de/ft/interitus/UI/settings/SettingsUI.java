@@ -240,6 +240,8 @@ public class SettingsUI extends VisWindow {
             }
 
             item1.setExpanded(true);
+            item2.setExpanded(true);
+            item3.setExpanded(true);
 
             tree.add(item1);
             tree.add(item2);
