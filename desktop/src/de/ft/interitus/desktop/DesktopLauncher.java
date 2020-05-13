@@ -1,11 +1,11 @@
 package de.ft.interitus.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import de.ft.interitus.Programm;
 import de.ft.interitus.Var;
 
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 
 public class DesktopLauncher {
@@ -17,12 +17,16 @@ public class DesktopLauncher {
 	 *            -v Verbose output not included yet
 	 */
 
-	public static void main (String[] arg) {
+	public static void main (String[] arg) throws FileNotFoundException {
 
 		Var.programmarguments.addAll(Arrays.asList(arg));
 
 		if(Var.programmarguments.indexOf("-v")!=-1) {
 			Var.verboseoutput = true;
+		}
+
+		if(Var.programmarguments.indexOf("-do")!=-1) {
+			LoggingSystem.RedirectLog();
 		}
 
 
@@ -36,7 +40,8 @@ public class DesktopLauncher {
 			config.height = Var.h;
 			config.vSyncEnabled = false;
 
-			new LwjglApplication(new Programm(), config);
+
+			 new LwjglApplication(new Programm(), config);
 
 		}else{
 
@@ -46,6 +51,5 @@ public class DesktopLauncher {
 
 
 	}
-
 
 }

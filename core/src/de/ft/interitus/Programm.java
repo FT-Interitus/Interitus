@@ -11,6 +11,7 @@ import de.ft.interitus.loading.Loading;
 import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.plugin.store.ReadStorePlugins;
 import de.ft.interitus.utils.NetworkScan;
+import org.lwjgl.openal.AL;
 
 public class Programm extends Game {
 
@@ -68,7 +69,9 @@ public class Programm extends Game {
 
         Data.close();
 
-        System.exit(0);
+        AL.destroy(); //Destroy Sound System
+       System.exit(0);
+
     }
 
 
