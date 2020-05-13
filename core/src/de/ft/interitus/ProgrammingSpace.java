@@ -134,6 +134,8 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
     @Override
     public void render(float delta) {
 
+
+
         if(Var.actProjekt==null) {
            // Programm.INSTANCE.setScreen(new Welcome()); //TODO auskommentiert zu debug zwecken
         }
@@ -301,7 +303,15 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
         //Um alle shortcuts für das Programm zu überprüfen
         CheckShortcuts.check();
+        //Import all Donwloaded images
+        if(AssetLoader.finishpluginimageloading) { //Import all
 
+            for(int i=0;i<AssetLoader.pixmap.size();i++) {
+                AssetLoader.storeimages.add(new Texture(AssetLoader.pixmap.get(i)));
+            }
+
+            AssetLoader.finishpluginimageloading = false; //
+        }
 
     }
 

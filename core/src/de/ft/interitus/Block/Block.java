@@ -15,6 +15,7 @@ import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.block.BlockCreateEvent;
 import de.ft.interitus.events.block.BlockDeleteEvent;
 import de.ft.interitus.events.rightclick.RightClickButtonSelectEvent;
+import de.ft.interitus.events.rightclick.RightClickCloseEvent;
 import de.ft.interitus.events.rightclick.RightClickEventListener;
 import de.ft.interitus.events.rightclick.RightClickOpenEvent;
 import de.ft.interitus.loading.AssetLoader;
@@ -84,9 +85,14 @@ public class Block implements VisibleObjects {
             }
 
             @Override
+            public void closerightclickwindow(RightClickCloseEvent e) {
+
+            }
+
+            @Override
             public void buttonclickedinwindow(RightClickButtonSelectEvent e) {
 
-                if (e.getButton().getText().contains("Löschen")) {
+                if (e.getButton().getText().contains("Löschen")&&blockupdate.toggle) {
                     instance.delete(false);
                 }
             }

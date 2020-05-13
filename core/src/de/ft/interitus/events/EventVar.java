@@ -1,6 +1,7 @@
 package de.ft.interitus.events;
 
 
+import de.ft.interitus.events.UI.UIEventManager;
 import de.ft.interitus.events.block.BlockEventManager;
 import de.ft.interitus.events.global.GlobalEventManager;
 import de.ft.interitus.events.plugin.PluginEventManager;
@@ -13,5 +14,6 @@ public class EventVar {
     public static GlobalEventManager globalEventManager = new GlobalEventManager();
     public static PluginEventManager pluginEventManager = new PluginEventManager();
     public static PluginStoreEventManager pluginStoreEventManager = new PluginStoreEventManager();
+    public static UIEventManager uiEventManager = new UIEventManager();
 
 }
