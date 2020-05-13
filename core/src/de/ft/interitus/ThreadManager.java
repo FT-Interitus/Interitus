@@ -23,6 +23,12 @@ public class ThreadManager {
         return createThread;
     }
 
+    public static void stopall() {
+        for(int i=0;i<threads.size();i++) {
+            ((BlockUpdate) threads.get(i)).time.cancel();
+        }
+    }
+
 
     public synchronized static void init() {
 

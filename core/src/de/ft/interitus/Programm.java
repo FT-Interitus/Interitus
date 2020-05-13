@@ -63,9 +63,12 @@ public class Programm extends Game {
 
 
     public void dispose() {
-        System.out.println("Save");
+
+        ThreadManager.stopall();
+
         Data.close();
-        System.out.println("saved");
+
+        System.exit(0);
     }
 
 

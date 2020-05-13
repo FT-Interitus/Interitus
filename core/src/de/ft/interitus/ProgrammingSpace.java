@@ -342,7 +342,6 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
     public void dispose() {
 
 
-        //TODO stop Thread Manager Thread
 
 
         batch.dispose();
