@@ -23,6 +23,7 @@ import de.ft.interitus.device.BlockTypes.BlockTypesVar;
 import de.ft.interitus.input.IntegerAuswahl;
 import de.ft.interitus.input.Switch;
 import de.ft.interitus.input.TextField;
+import de.ft.interitus.input.bar.tappedbar.TappedBar;
 import de.ft.interitus.input.popup.PopupManager;
 import de.ft.interitus.input.popup.PopupMenue;
 import de.ft.interitus.loading.AssetLoader;
@@ -58,6 +59,8 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
     public static PopupManager popupmanager = new PopupManager();
     public static ShapeRenderer shapeRenderer;
     IntegerAuswahl ia;
+
+    public static TappedBar tb= new TappedBar(100,100);
 
     public ProgrammingSpace() {
 
@@ -302,7 +305,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
         //Um alle shortcuts für das Programm zu überprüfen
         CheckShortcuts.check();
 
-
+        tb.draw();
     }
 
 
