@@ -13,12 +13,29 @@ public class TapContent {
     Button tab_button=new Button();
     ArrayList<TapItem>items=new ArrayList<>();
 
-    public TapContent(Texture img){
+    public TapContent(Texture img,TapItem... ti){
 
-        items.add(new TapBarBlockItem( new Wait(), AssetLoader.aktion_mittlerermotor));
+        //items.add(new TapBarBlockItem( new Wait(), AssetLoader.aktion_mittlerermotor));
+        items.clear();
+        for(int i=0;i<ti.length;i++){
+            items.add(ti[i]);
+        }
 
         tab_button.setImage(img);
     }
+    public TapContent(Texture img){
+
+        //items.add(new TapBarBlockItem( new Wait(), AssetLoader.aktion_mittlerermotor));
+
+        tab_button.setImage(img);
+    }
+    public void setItems(TapItem... ti){
+        items.clear();
+        for(int i=0;i<ti.length;i++){
+            items.add(ti[i]);
+        }
+    }
+
 
     public Button getTab_button() {
         return tab_button;
