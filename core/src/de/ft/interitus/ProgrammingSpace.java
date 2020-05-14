@@ -69,7 +69,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
         popupmanager.addPopup(new PopupMenue("ein popup"));
         popupmanager.addPopup(new PopupMenue("Löschen", "Fixieren", "Umbenennen", "Befreien"));
-
+        popupmanager.addPopup(new PopupMenue("Löschen", "Node einfügen"));
 
         ia = new IntegerAuswahl(400, 400, 50, 25);
         s = new Switch(500, 500);

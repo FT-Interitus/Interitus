@@ -37,7 +37,7 @@ public class WireNode implements VisibleObjects {
     public void draw() {
 
         if (CheckKollision.checkmousewithobject(x, y, h, w, (int) ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y) && Gdx.input.isButtonJustPressed(0)) {
-            System.out.println("drinnen");
+
             if (!gemerkt) {
                 gemerktvector.set(Gdx.input.getX() - x, Gdx.graphics.getHeight() - Gdx.input.getY() - y);
                 System.out.println("gemerktvector: : :   " + gemerktvector);

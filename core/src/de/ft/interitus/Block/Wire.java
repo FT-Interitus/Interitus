@@ -5,29 +5,75 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.events.EventVar;
+import de.ft.interitus.events.rightclick.RightClickButtonSelectEvent;
+import de.ft.interitus.events.rightclick.RightClickCloseEvent;
+import de.ft.interitus.events.rightclick.RightClickEventListener;
+import de.ft.interitus.events.rightclick.RightClickOpenEvent;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.utils.CheckKollision;
 
 public class Wire {
-    private VisibleObjects left_connection;
-    private VisibleObjects right_connection;
-
-    private boolean space_between_blocks = false;
-    private boolean movebymouse = false;
-    private boolean canplaceanewwirenode = false;
-
     private final Vector3 tempvector = new Vector3();
     private final Vector3 tempvector1 = new Vector3();
     private final float dicke = 3.5f;
+    private VisibleObjects left_connection;
+    private VisibleObjects right_connection;
+    private boolean space_between_blocks = false;
+    private boolean movebymouse = false;
+    private boolean canplaceanewwirenode = false;
+    private final boolean clickedonwire = false;
 
 
-    public Wire(VisibleObjects left_connection, Block right_connection) {
+    public Wire(final VisibleObjects left_connection, final Block right_connection) {
         this.left_connection = left_connection;
         this.right_connection = right_connection;
+        final Wire INSTANCE = this;
+        EventVar.rightClickEventManager.addListener(new RightClickEventListener() {
+            @Override
+            public void openrightclickwindow(RightClickOpenEvent e) {
+
+            }
+
+            @Override
+            public void closerightclickwindow(RightClickCloseEvent e) {
+
+            }
+
+            @Override
+            public void buttonclickedinwindow(RightClickButtonSelectEvent e) {
+                if (e.getButton().getText().contains("Löschen")) {
+                    INSTANCE.left_connection.getblock().setRight(null);
+                    INSTANCE.left_connection.setWire_right(null);
+                  INSTANCE.left_connection=null;
+                }
+            }
+        });
     }
 
-    public Wire(VisibleObjects left_connection) {
+    public Wire(final VisibleObjects left_connection) {
         this.left_connection = left_connection;
+        final Wire INSTANCE = this;
+        EventVar.rightClickEventManager.addListener(new RightClickEventListener() {
+            @Override
+            public void openrightclickwindow(RightClickOpenEvent e) {
+
+            }
+
+            @Override
+            public void closerightclickwindow(RightClickCloseEvent e) {
+
+            }
+
+            @Override
+            public void buttonclickedinwindow(RightClickButtonSelectEvent e) {
+                if (e.getButton().getText().contains("Löschen")) {
+                    INSTANCE.left_connection.getblock().setRight(null);
+                    INSTANCE.left_connection.setWire_right(null);
+                    INSTANCE.left_connection=null;
+                }
+            }
+        });
     }
 
 
@@ -47,7 +93,7 @@ public class Wire {
                 if (Gdx.input.isButtonJustPressed(0)) {
                     int counter = 0;
                     for (int i = 0; i < BlockVar.visibleblocks.size(); i++) {
-                //TODO hier auch nach nodes testen eventuell will man die nur verschieben
+                        //TODO hier auch nach nodes testen eventuell will man die nur verschieben
                         if (CheckKollision.object(BlockVar.visibleblocks.get(i).getX_entrance(), BlockVar.visibleblocks.get(i).getY_entrance(), BlockVar.visibleblocks.get(i).getH_entrance(), BlockVar.visibleblocks.get(i).getW_entrance(), (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1)) {
                             counter++;
                         }
@@ -249,6 +295,41 @@ public class Wire {
 
 
                     sprite.draw(ProgrammingSpace.batch);
+                    if (CheckKollision.objectwithrotation(sprite.getX(), sprite.getY(), sprite.getHeight(), sprite.getWidth(), sprite.getRotation(), ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x, ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1, 0) && BlockVar.mousehoveredwire != this) {
+                        BlockVar.mousehoveredwire = this;
+
+                    }
+
+                    if (BlockVar.mousehoveredwire == this && !CheckKollision.objectwithrotation(sprite.getX(), sprite.getY(), sprite.getHeight(), sprite.getWidth(), sprite.getRotation(), ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x, ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1, 0)) {
+                        BlockVar.mousehoveredwire = null;
+                    }
+
+
+                 /*
+
+
+                    if(clickedonwire&&Gdx.input.isButtonPressed(0)&&!CheckKollision.objectwithrotation(sprite.getX(),sprite.getY(),sprite.getHeight(),sprite.getWidth(),sprite.getRotation(),ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x,ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y,1,1,0)) {
+                        WireNode node = new WireNode(this,(int)ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x,(int)ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y,10,10);
+                        Wire newwire = new Wire(node,this.getRight_connection());
+                        this.getRight_connection().setWire_left(newwire);
+                        this.setRight_connection(node);
+                      //  newwire.setRight_connection(this.getRight_connectionObject());
+                        newwire.setMovebymouse(false);
+                        newwire.setSpace_between_blocks(true);
+
+                        node.setWire_right(newwire);
+                        node.setWire_left(this);
+
+                        BlockVar.wires.add(newwire);
+                        BlockVar.visiblewires.add(newwire);
+
+                        BlockVar.wireNodes.add(node);
+                        BlockVar.visibleWireNodes.add(node);
+
+
+                    }
+
+                     */
 
                     if (temp) {
                         ProgrammingSpace.batch.end();
