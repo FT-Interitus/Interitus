@@ -3,8 +3,9 @@ package de.ft.interitus.Block;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import de.ft.interitus.device.BlockTypes.PlatformSpecificBlock;
-import de.ft.interitus.input.bar.tappedbar.TapItem;
+import de.ft.interitus.UI.input.bar.tappedbar.TapItem;
+import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
+
 
 public class TapBarBlockItem implements TapItem {
     int x;
