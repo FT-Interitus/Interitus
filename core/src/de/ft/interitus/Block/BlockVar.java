@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class BlockVar {
 
-
+    public static boolean wirezulassung=true;  //Wires können blockiert werden
     //Anmerkung ganz wichtig hier alle beim clearen auf null setzen damit alle referenzierungen auf einen Block gelöscht werden damit der Speicherplatz freigegeben werden kann
 
     public static ArrayList<Block> blocks = new ArrayList<Block>(); //Liste aller erstellen Blöcke
