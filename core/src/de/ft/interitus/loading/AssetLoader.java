@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.plugin.store.StorePluginsVar;
 import de.ft.interitus.utils.DownloadFile;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -53,6 +54,45 @@ public class AssetLoader {
 
     //Plugin Warte Bild
     public static Texture pluginwait;
+
+
+
+
+
+    //////////////////-Tap Block Bar-////////////////////////////
+    //////////////////-Aktionsblöck-////////////////////////////
+    public static Texture aktion_mittlerermotor;
+    public static Texture aktion_großermotor;
+    public static Texture aktion_standartsteuerung;
+    public static Texture aktion_hebelsteuerung;
+    public static Texture aktion_anzeige;
+    public static Texture aktion_klang;
+    public static Texture aktion_steinstatusleuchte;
+    //////////////////-Programm ablauf-////////////////////////////
+    public static Texture programmablauf_start;
+    public static Texture Programmablauf_wait;
+    public static Texture programmablauf_schleufe;
+    public static Texture programmablauf_schalter;
+    public static Texture programmablauf_interrupt;
+    //////////////////-Sensorblöcke-////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     public static AssetManager manager = new AssetManager();
@@ -108,6 +148,8 @@ public class AssetLoader {
             manager.load(workingdirectory + "node.png", Texture.class);
             group = "Plugin";
             manager.load(workingdirectory + "pluginwaiting.png", Texture.class);
+            group="Blöcke";
+            manager.load(workingdirectory+"/TabBarBlockBilder/antikaeferblock.png", Texture.class);
 
 
            Thread loadimagesfromweb = new Thread() {
@@ -183,6 +225,8 @@ public class AssetLoader {
             wire_node = manager.get(workingdirectory + "node.png", Texture.class);
             //Plugin
             pluginwait = manager.get(workingdirectory + "pluginwaiting.png", Texture.class);
+
+            aktion_mittlerermotor=manager.get(workingdirectory+"/TabBarBlockBilder/antikaeferblock.png");
 
         } catch (Exception e) {
             e.printStackTrace();

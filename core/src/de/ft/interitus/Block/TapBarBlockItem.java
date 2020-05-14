@@ -3,6 +3,7 @@ package de.ft.interitus.Block;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import de.ft.interitus.device.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.input.bar.tappedbar.TapItem;
 
 public class TapBarBlockItem implements TapItem {
@@ -11,8 +12,14 @@ public class TapBarBlockItem implements TapItem {
     int w;
     int h;
     Texture img;
+    PlatformSpecificBlock psb;
     SpriteBatch batch=new SpriteBatch();
     ShapeRenderer renderer = new ShapeRenderer();
+
+    public TapBarBlockItem(PlatformSpecificBlock psb,Texture img){
+        this.img=img;
+        this.psb=psb;
+    }
 
     @Override
     public void draw() {
