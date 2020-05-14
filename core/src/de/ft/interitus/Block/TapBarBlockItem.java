@@ -19,8 +19,7 @@ public class TapBarBlockItem implements TapItem {
     Texture img;
     PlatformSpecificBlock psb;
     SpriteBatch batch=new SpriteBatch();
-    ShapeRenderer renderer = new ShapeRenderer();
-        Check check = new Check();
+    Check check = new Check();
 
     public TapBarBlockItem(PlatformSpecificBlock psb,Texture img){
         this.img=img;
@@ -37,6 +36,7 @@ public class TapBarBlockItem implements TapItem {
             tempblock.setMoving(true);
             BlockVar.markedblock = tempblock;
             BlockVar.visibleblocks.add(tempblock);
+            BlockVar.unterschiedsave.set(150,70);
         }
 
         batch.begin();
