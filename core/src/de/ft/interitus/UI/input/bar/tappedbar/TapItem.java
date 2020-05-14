@@ -12,8 +12,7 @@ public interface TapItem {
     void setY(int y);
     void setW(int w);
     void setH(int h);
-    Texture getImage();
-    void setImage(Texture img);
+
     //void setImage(Texture texture);
     //Object getRefferdObject();
     //void setRefferdObject(Object RefferdObejct);

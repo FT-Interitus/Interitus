@@ -13,6 +13,7 @@ public class TappedBar {
     int y=0;
     int weight=500;
     int height=100;
+    int itemabstand=30;
     SpriteBatch batch = new SpriteBatch();
     ShapeRenderer renderer = new ShapeRenderer();
     BitmapFont font = new BitmapFont();
@@ -67,7 +68,15 @@ public class TappedBar {
 
     private void drawContent(){
         if(selectetContent!=null) {
+            int gedachtweight=0;
             for (int i = 0; i < selectetContent.items.size(); i++) {
+                gedachtweight+=selectetContent.items.get(i).getW();
+            }
+            for (int i = 0; i < selectetContent.items.size(); i++) {
+                selectetContent.items.get(i).setY(height/2-selectetContent.items.get(i).getH()/2+y);
+                selectetContent.items.get(i).setX(x+(weight/2-(     gedachtweight    )/2)+(i*    selectetContent.items.get(i).getW()     )-((selectetContent.items.size()/2-i)*itemabstand));
+                selectetContent.items.get(i).draw();
+                System.out.println(gedachtweight);
 
             }
         }
@@ -92,5 +101,29 @@ public class TappedBar {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public void setItemabstand(int itemabstand) {
+        this.itemabstand = itemabstand;
+    }
+
+    public int getItemabstand() {
+        return itemabstand;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    public int getWeight() {
+        return weight;
     }
 }

@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.BlockVar;
+import de.ft.interitus.Block.TapBarBlockItem;
 import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.input.IntegerAuswahl;
@@ -29,7 +30,9 @@ import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.deviceconnection.arduino.PortUpdate;
 import de.ft.interitus.deviceconnection.arduino.SerialConnection;
 import de.ft.interitus.loading.AssetLoader;
+import de.ft.interitus.projecttypes.device.BlockTypes.Arduino.Arduino.Wait;
 import de.ft.interitus.projecttypes.device.BlockTypes.BlockTypesVar;
+import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.utils.PositionSaver;
 import de.ft.interitus.utils.animation.Animation;
 
@@ -66,7 +69,13 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
     public ProgrammingSpace() {
         Texture img_mappe= new Texture("Bar/Mappe.png");
 
-        tb.setContent(new TapContent(img_mappe),new TapContent(img_mappe),new TapContent(img_mappe),new TapContent(img_mappe));
+        TapContent content1=new TapContent(img_mappe);
+
+        TapBarBlockItem tbbi=new TapBarBlockItem(new Wait(),img_mappe);
+
+
+        content1.setItems(tbbi,new TapBarBlockItem(new Wait(),img_mappe),new TapBarBlockItem(new Wait(),img_mappe),new TapBarBlockItem(new Wait(),img_mappe),new TapBarBlockItem(new Wait(),img_mappe));
+        tb.setContent(content1,new TapContent(img_mappe),new TapContent(img_mappe),new TapContent(img_mappe));
 
 
         popupmanager.addPopup(new PopupMenue("ein popup"));
