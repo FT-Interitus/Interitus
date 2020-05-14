@@ -10,7 +10,6 @@ import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.ThreadManager;
 import de.ft.interitus.data.user.changes.DataManager;
-import de.ft.interitus.device.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.block.BlockCreateEvent;
 import de.ft.interitus.events.block.BlockDeleteEvent;
@@ -19,6 +18,7 @@ import de.ft.interitus.events.rightclick.RightClickCloseEvent;
 import de.ft.interitus.events.rightclick.RightClickEventListener;
 import de.ft.interitus.events.rightclick.RightClickOpenEvent;
 import de.ft.interitus.loading.AssetLoader;
+import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.utils.CheckKollision;
 
 /***

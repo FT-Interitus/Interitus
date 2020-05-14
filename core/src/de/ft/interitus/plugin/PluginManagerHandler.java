@@ -4,8 +4,8 @@ import com.kotcrab.vis.ui.widget.Menu;
 import com.kotcrab.vis.ui.widget.VisTable;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Var;
-import de.ft.interitus.device.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.ProjektTypes;
+import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
 import org.usb4java.LoaderException;
 
 import java.io.File;
