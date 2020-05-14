@@ -13,7 +13,6 @@ public class TappedBar {
     int y=0;
     int weight=500;
     int height=100;
-    Texture img_mappe= new Texture("Bar/Mappe.png");
     SpriteBatch batch = new SpriteBatch();
     ShapeRenderer renderer = new ShapeRenderer();
     BitmapFont font = new BitmapFont();
@@ -22,9 +21,7 @@ public class TappedBar {
     public TappedBar(int x,int y){
         this.x=x;
         this.y=y;
-        if(taps.size()>0) {
-            selectetContent = taps.get(0);
-        }
+
     }
     public TappedBar(int x,int y,int w,int h){
         this.x=x;
@@ -33,8 +30,12 @@ public class TappedBar {
         this.height=h;
     }
 
-    public void addContent(TapContent tc){
-        taps.add(tc);
+    public void setContent(TapContent... tc){
+        taps.clear();
+        for(int i=0;i<tc.length;i++){
+            taps.add(tc[i]);
+        }
+        selectetContent=tc[0];
     }
 
     private void drawBar(){

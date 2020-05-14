@@ -64,7 +64,9 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
     public static TappedBar tb= new TappedBar(100,100);
 
     public ProgrammingSpace() {
+        Texture img_mappe= new Texture("Bar/Mappe.png");
 
+        tb.setContent(new TapContent(img_mappe),new TapContent(img_mappe),new TapContent(img_mappe),new TapContent(img_mappe));
 
 
         popupmanager.addPopup(new PopupMenue("ein popup"));
