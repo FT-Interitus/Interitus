@@ -54,7 +54,7 @@ public class CheckKollision {
 
     }
 
-    public static boolean checkmousewithobject(int obj1_x, int obj1_y, int obj1_h, int obj1_w, int x, int y) {
+    public static boolean checkmousewithobject(int obj1_x, int obj1_y, int obj1_h, int obj1_w, float x, float y) {
 
 
         return object(obj1_x, obj1_y, obj1_w, obj1_h, x, y, mousesize, mousesize);
