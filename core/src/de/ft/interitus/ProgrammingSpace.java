@@ -287,13 +287,11 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
         }
 
 
-        batch.begin();
         testanim.startAnimation();
 //batch.draw(testanim.getAnimation(),50,50);
         // pm.setBounds(700,200);
-
+        tb.draw();
         popupmanager.draw();
-        batch.end();
 
         DisplayErrors.checkerror();
 
@@ -316,7 +314,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
             AssetLoader.finishpluginimageloading = false; //
         }
 
-        tb.draw();
+
 
     }
 

@@ -3,6 +3,7 @@ package de.ft.interitus.input.bar.tappedbar;
 import com.badlogic.gdx.graphics.Texture;
 
 public interface TapItem {
+    void draw();
     int getX();
     int getY();
     int getW();
@@ -12,6 +13,7 @@ public interface TapItem {
     void setW(int w);
     void setH(int h);
     Texture getImage();
+    void setImage(Texture img);
     //void setImage(Texture texture);
     //Object getRefferdObject();
     //void setRefferdObject(Object RefferdObejct);
