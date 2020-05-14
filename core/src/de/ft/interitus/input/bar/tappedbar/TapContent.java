@@ -1,12 +1,16 @@
 package de.ft.interitus.input.bar.tappedbar;
 
+import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.input.Button;
+
+import java.util.ArrayList;
 
 public class TapContent {
 
     Button tab_button=new Button();
-    public TapContent(){
-
+    ArrayList<TapItem>items=new ArrayList<>();
+    public TapContent(Texture img){
+        tab_button.setImage(img);
     }
 
     public Button getTab_button() {

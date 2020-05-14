@@ -36,6 +36,10 @@ public class Check {
 
     }
 
+    public boolean isJustPressedNormal(int x,int y,int w,int h){
+        return Gdx.input.getX() > x && Gdx.input.getX() < x + w && Gdx.input.getY() > Gdx.graphics.getHeight() - y - h && Gdx.input.getY() < Gdx.graphics.getHeight() - y && Gdx.input.isButtonJustPressed(0);
+
+    }
 
     public boolean isMouseover(int x, int y, int w, int h) {
         return Gdx.input.getX() > x && Gdx.input.getX() < x + w && Gdx.input.getY() > Gdx.graphics.getHeight() - y - h && Gdx.input.getY() < Gdx.graphics.getHeight() - y;
