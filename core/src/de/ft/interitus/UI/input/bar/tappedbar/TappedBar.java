@@ -65,8 +65,10 @@ public class TappedBar {
     }
 
     private void drawContent(){
-        for(int i=0;i<selectetContent.items.size();i++){
+        if(selectetContent!=null) {
+            for (int i = 0; i < selectetContent.items.size(); i++) {
 
+            }
         }
     }
 
