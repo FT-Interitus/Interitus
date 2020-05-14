@@ -22,17 +22,9 @@ public class TappedBar {
     public TappedBar(int x,int y){
         this.x=x;
         this.y=y;
-
-
-        taps.add(new TapContent(img_mappe));
-        taps.add(new TapContent(img_mappe));
-        taps.add(new TapContent(img_mappe));
-        taps.add(new TapContent(img_mappe));
-        taps.add(new TapContent(img_mappe));
-        taps.add(new TapContent(img_mappe));
-
-        selectetContent=taps.get(0);
-
+        if(taps.size()>0) {
+            selectetContent = taps.get(0);
+        }
     }
     public TappedBar(int x,int y,int w,int h){
         this.x=x;
@@ -80,6 +72,7 @@ public class TappedBar {
 
     public void draw(){
         drawBar();
+        drawContent();
     }
 
     public int getX() {

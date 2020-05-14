@@ -20,6 +20,7 @@ import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.input.IntegerAuswahl;
 import de.ft.interitus.UI.input.Switch;
 import de.ft.interitus.UI.input.TextField;
+import de.ft.interitus.UI.input.bar.tappedbar.TapContent;
 import de.ft.interitus.UI.input.bar.tappedbar.TappedBar;
 import de.ft.interitus.UI.input.popup.PopupManager;
 import de.ft.interitus.UI.input.popup.PopupMenue;
@@ -63,7 +64,6 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
     public static TappedBar tb= new TappedBar(100,100);
 
     public ProgrammingSpace() {
-
 
 
 

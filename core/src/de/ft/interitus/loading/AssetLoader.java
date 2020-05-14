@@ -149,7 +149,7 @@ public class AssetLoader {
             group = "Plugin";
             manager.load(workingdirectory + "pluginwaiting.png", Texture.class);
             group="Blöcke";
-            manager.load(workingdirectory+"/TabBarBlockBilder/antikaeferblock.png", Texture.class);
+            manager.load(workingdirectory+"TabBarBlockBilder/antikaeferblock.png", Texture.class);
 
 
            Thread loadimagesfromweb = new Thread() {
@@ -226,7 +226,7 @@ public class AssetLoader {
             //Plugin
             pluginwait = manager.get(workingdirectory + "pluginwaiting.png", Texture.class);
 
-            aktion_mittlerermotor=manager.get(workingdirectory+"/TabBarBlockBilder/antikaeferblock.png");
+            aktion_mittlerermotor=manager.get(workingdirectory+"TabBarBlockBilder/antikaeferblock.png");
 
         } catch (Exception e) {
             e.printStackTrace();

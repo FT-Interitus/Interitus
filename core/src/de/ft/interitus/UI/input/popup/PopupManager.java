@@ -6,6 +6,17 @@ public class PopupManager {
     ArrayList<PopupMenue> popups = new ArrayList<>();
     private int possiblepopup = -1;
 
+    public boolean isPopupopen(){
+        boolean blub=false;
+        for(int i=0;i<popups.size();i++){
+            if(popups.get(i).isShow()){
+                blub=true;
+            }
+        }
+    return blub;
+    }
+
+
     public PopupManager(PopupMenue... popup) {
         popups.clear();
         for (int i = 0; i < popup.length; i++) {

@@ -2,9 +2,10 @@ package de.ft.interitus.UI.input.bar.tappedbar;
 
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.TapBarBlockItem;
-import de.ft.interitus.device.BlockTypes.Ev3.Wait;
-import de.ft.interitus.input.Button;
+
+import de.ft.interitus.UI.input.Button;
 import de.ft.interitus.loading.AssetLoader;
+import de.ft.interitus.projecttypes.device.BlockTypes.Arduino.Arduino.Wait;
 
 import java.util.ArrayList;
 

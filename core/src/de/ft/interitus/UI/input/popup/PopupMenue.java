@@ -61,6 +61,10 @@ public class PopupMenue {
         }
     }
 
+    public boolean isShow() {
+        return show;
+    }
+
     public void draw() {
         if (show) {
             batch.begin();
