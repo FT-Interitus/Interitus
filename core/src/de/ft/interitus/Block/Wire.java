@@ -23,57 +23,44 @@ public class Wire {
     private boolean movebymouse = false;
     private boolean canplaceanewwirenode = false;
     private final boolean clickedonwire = false;
+    final Wire INSTANCE = this;
+    RightClickEventListener rightClickEventListener= new RightClickEventListener() {
+        @Override
+        public void openrightclickwindow(RightClickOpenEvent e) {
 
+        }
+
+        @Override
+        public void closerightclickwindow(RightClickCloseEvent e) {
+
+        }
+
+        @Override
+        public void buttonclickedinwindow(RightClickButtonSelectEvent e) {
+            if (e.getButton().getText().contains("Löschen")) {
+                if(BlockVar.mousehoveredwire==INSTANCE) {
+                    INSTANCE.left_connection.getblock().setRight(null);
+                    INSTANCE.right_connection.getblock().setLeft(null);
+                    INSTANCE.left_connection.setWire_right(null);
+                    INSTANCE.right_connection.setWire_left(null);
+                    INSTANCE.left_connection = null;
+                    EventVar.rightClickEventManager.removeListener(INSTANCE.rightClickEventListener);
+                }
+            }
+        }
+    };
 
     public Wire(final VisibleObjects left_connection, final Block right_connection) {
         this.left_connection = left_connection;
         this.right_connection = right_connection;
-        final Wire INSTANCE = this;
-        EventVar.rightClickEventManager.addListener(new RightClickEventListener() {
-            @Override
-            public void openrightclickwindow(RightClickOpenEvent e) {
+        EventVar.rightClickEventManager.addListener(rightClickEventListener);
 
-            }
-
-            @Override
-            public void closerightclickwindow(RightClickCloseEvent e) {
-
-            }
-
-            @Override
-            public void buttonclickedinwindow(RightClickButtonSelectEvent e) {
-                if (e.getButton().getText().contains("Löschen")) {
-                    INSTANCE.left_connection.getblock().setRight(null);
-                    INSTANCE.left_connection.setWire_right(null);
-                  INSTANCE.left_connection=null;
-                }
-            }
-        });
     }
 
     public Wire(final VisibleObjects left_connection) {
         this.left_connection = left_connection;
         final Wire INSTANCE = this;
-        EventVar.rightClickEventManager.addListener(new RightClickEventListener() {
-            @Override
-            public void openrightclickwindow(RightClickOpenEvent e) {
-
-            }
-
-            @Override
-            public void closerightclickwindow(RightClickCloseEvent e) {
-
-            }
-
-            @Override
-            public void buttonclickedinwindow(RightClickButtonSelectEvent e) {
-                if (e.getButton().getText().contains("Löschen")) {
-                    INSTANCE.left_connection.getblock().setRight(null);
-                    INSTANCE.left_connection.setWire_right(null);
-                    INSTANCE.left_connection=null;
-                }
-            }
-        });
+        EventVar.rightClickEventManager.addListener(rightClickEventListener);
     }
 
 
@@ -159,7 +146,7 @@ public class Wire {
                 if (Gdx.input.isKeyJustPressed(Input.Keys.N) && canplaceanewwirenode) {
 
 
-                    WireNode tempwirenode = new WireNode(BlockVar.movingwires, (int) ProgrammingSpace.cam.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.cam.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 10, 10);
+                    WireNode tempwirenode = new WireNode(BlockVar.movingwires, (int) ProgrammingSpace.cam.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.cam.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, WireNode.public_w, WireNode.public_h);
 
                     BlockVar.wireNodes.add(tempwirenode);
                     BlockVar.visibleWireNodes.add(tempwirenode);
@@ -300,7 +287,7 @@ public class Wire {
 
                     }
 
-                    if (BlockVar.mousehoveredwire == this && !CheckKollision.objectwithrotation(sprite.getX(), sprite.getY(), sprite.getHeight(), sprite.getWidth(), sprite.getRotation(), ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x, ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1, 0)) {
+                    if (!ProgrammingSpace.popupmanager.isPopupopen()&&BlockVar.mousehoveredwire == this && !CheckKollision.objectwithrotation(sprite.getX(), sprite.getY(), sprite.getHeight(), sprite.getWidth(), sprite.getRotation(), ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x, ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1, 0)) {
                         BlockVar.mousehoveredwire = null;
                     }
 

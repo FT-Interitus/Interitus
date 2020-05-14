@@ -171,8 +171,16 @@ public class PluginManagerHandler {
         }
         for (Plugin pi : loadedplugins) {
 
-            pi.register();  //jedes gefundene Plugin bekommt den Befehl sich zu registrieren
+            try {
+                pi.register();  //jedes gefundene Plugin bekommt den Befehl sich zu registrieren
+            }catch (NoSuchMethodError e) {
+                try {
+                    throw new PluginSDKDeprecatedException("Ein Plugin nutzt nicht die neuste Interitus-SDK Version");
+                } catch (PluginSDKDeprecatedException pluginSDKDeprecatedException) {
+                    pluginSDKDeprecatedException.printStackTrace();
+                }
 
+            }
         }
 
         return error;

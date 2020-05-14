@@ -9,6 +9,8 @@ import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.utils.CheckKollision;
 
 public class WireNode implements VisibleObjects {
+    public static int public_w = 10;
+    public static int public_h = 10;
     private final Vector2 gemerktvector = new Vector2(0, 0);
     private Wire wire_left;
     private Wire wire_right;
