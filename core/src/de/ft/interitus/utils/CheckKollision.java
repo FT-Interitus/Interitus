@@ -1,9 +1,7 @@
 package de.ft.interitus.utils;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.math.*;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.ProgrammingSpace;
 
@@ -26,7 +24,21 @@ public class CheckKollision {
         return rec1.overlaps(rec2);
 
     }
+    public static boolean objectwithrotation(float obj1_x, float obj1_y, float obj1_h, float obj1_w, float obj1_angle, float obj2_x, float obj2_y, int obj2_h, int obj2_w, float obj2_angle) {
 
+
+        Polygon obj1 = new Polygon(new float[]{0, 0, obj1_w, 0, obj1_w, obj1_h, 0, obj1_h});
+        Polygon obj2 = new Polygon(new float[]{0, 0, obj2_w, 0, obj2_w, obj2_h, 0, obj2_h});
+        obj1.setOrigin(0,0);
+        obj2.setOrigin(0,0);
+        obj1.setPosition(obj1_x, obj1_y);
+        obj2.setPosition(obj2_x, obj2_y);
+        obj1.setRotation(obj1_angle);
+        obj2.setRotation(obj2_angle);
+
+        return Intersector.overlapConvexPolygons(obj1, obj2);
+
+    }
     public static boolean checkmousewithblock(Block block) {
 
 

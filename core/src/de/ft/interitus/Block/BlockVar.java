@@ -41,5 +41,5 @@ public class BlockVar {
     public static Block connetor_offerd_hoverd_block = null; //Der Block über den man fährt welcher gehovert wird
     public static Block wire_beginn = null;  //um bei verbindungen über eine Node trotzdem noch den Nachbar erfahren zu können
 
-
+    public static Wire mousehoveredwire = null;
 }

@@ -11,6 +11,7 @@ public class RechtsKlick {
 
     public static void Rechtsklickupdate() {
         boolean mob = false;
+        boolean mow = false;
 
 
         if (Gdx.input.isButtonPressed(1)) {
@@ -23,14 +24,27 @@ public class RechtsKlick {
                 }
             }
 
+            if(BlockVar.mousehoveredwire!=null) {
+                mow=true;
+
+            }
+
 
             if (mob == false) {
-                mouseoverblockindex = -1;
-                ProgrammingSpace.popupmanager.getPopup(1).setShow(false);
-                ProgrammingSpace.popupmanager.setPossiblepopup(0);
+                if(mow) {
+                    ProgrammingSpace.popupmanager.getPopup(1).setShow(false);
+                    ProgrammingSpace.popupmanager.setPossiblepopup(2);
+                }else {
+                    mouseoverblockindex = -1;
+                    ProgrammingSpace.popupmanager.getPopup(1).setShow(false);
+                    ProgrammingSpace.popupmanager.setPossiblepopup(0);
+                }
             } else {
-                ProgrammingSpace.popupmanager.getPopup(0).setShow(false);
-                ProgrammingSpace.popupmanager.setPossiblepopup(1);
+
+
+                    ProgrammingSpace.popupmanager.getPopup(0).setShow(false);
+                    ProgrammingSpace.popupmanager.setPossiblepopup(1);
+
             }
 
         }
