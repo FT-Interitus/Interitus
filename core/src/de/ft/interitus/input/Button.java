@@ -60,6 +60,19 @@ public class Button {
 
     }
 
+    public boolean isjustPressednormal(){
+        boolean pressed = false;
+        if (!disable) {
+
+            pressed = check.isJustPressedNormal(x, y, w, h);
+
+        } else {
+            return false;
+        }
+
+        return pressed;
+    }
+
 
     public boolean isPresseded() {
         if (!disable) {

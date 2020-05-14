@@ -20,15 +20,20 @@ public class TappedBar {
     ShapeRenderer renderer = new ShapeRenderer();
     BitmapFont font = new BitmapFont();
     ArrayList<TapContent>taps=new ArrayList<>();
+    TapContent selectetContent=null;
     public TappedBar(int x,int y){
         this.x=x;
         this.y=y;
 
-        TapContent tb=new TapContent();
-        tb.getTab_button().setImage(img_mappe);
-        taps.add(tb);
-        taps.add(tb);
-        taps.add(tb);
+
+        taps.add(new TapContent(img_mappe));
+        taps.add(new TapContent(img_mappe));
+        taps.add(new TapContent(img_mappe));
+        taps.add(new TapContent(img_mappe));
+        taps.add(new TapContent(img_mappe));
+        taps.add(new TapContent(img_mappe));
+
+        selectetContent=taps.get(0);
 
     }
     public TappedBar(int x,int y,int w,int h){
@@ -38,6 +43,10 @@ public class TappedBar {
         this.height=h;
     }
 
+    public void addContent(TapContent tc){
+        taps.add(tc);
+    }
+
     private void drawBar(){
         renderer.begin(ShapeRenderer.ShapeType.Line);
         renderer.rect(x,y,weight,height);
@@ -45,14 +54,30 @@ public class TappedBar {
         renderer.end();
             for(int i=0;i<taps.size();i++){
                 TapContent tb=taps.get(i);
-                Vector2 tabbuttonsize=new Vector2(64,15);
-                tb.getTab_button().setBounds(x+(int)(((taps.size()*tabbuttonsize.x)/taps.size()*i)+weight/2-taps.size()*tabbuttonsize.x/2),y,(int)tabbuttonsize.x,(int)tabbuttonsize.y);
+                //Vector2 tabbuttonsize=new Vector2(64,15);
+                tb.getTab_button().setW(64);
+                tb.getTab_button().setH(15);
+
+                if(tb.getTab_button().isjustPressednormal()){
+                    selectetContent=tb;
+                }
+
+
+                if(selectetContent==taps.get(i)){
+                    tb.getTab_button().setBounds(x+(((taps.size()*tb.getTab_button().getW())/taps.size()*i)+weight/2-taps.size()*tb.getTab_button().getW()/2),y+height+10,tb.getTab_button().getW(),tb.getTab_button().getH());
+
+                }else{
+                    tb.getTab_button().setBounds(x+(((taps.size()*tb.getTab_button().getW())/taps.size()*i)+weight/2-taps.size()*tb.getTab_button().getW()/2),y+height,tb.getTab_button().getW(),tb.getTab_button().getH());
+
+                }
                 tb.getTab_button().draw();
             }
     }
 
     private void drawContent(){
+        for(int i=0;i<selectetContent.items.size();i++){
 
+        }
     }
 
     public void draw(){

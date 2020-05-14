@@ -316,6 +316,8 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
             AssetLoader.finishpluginimageloading = false; //
         }
 
+        tb.draw();
+
     }
 
 
