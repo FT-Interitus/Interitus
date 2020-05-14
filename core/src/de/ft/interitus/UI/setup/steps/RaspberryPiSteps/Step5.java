@@ -4,7 +4,7 @@ import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisTable;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.UI.setup.SetupWindow;
-import de.ft.interitus.roboconnection.raspberrypi.SSHConnection;
+import de.ft.interitus.deviceconnection.raspberrypi.SSHConnection;
 
 public class Step5 {
 

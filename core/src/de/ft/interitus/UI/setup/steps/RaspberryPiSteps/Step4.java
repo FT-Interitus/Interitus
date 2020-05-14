@@ -7,7 +7,7 @@ import com.kotcrab.vis.ui.widget.VisTable;
 import com.kotcrab.vis.ui.widget.VisTextButton;
 import com.kotcrab.vis.ui.widget.VisTextField;
 import de.ft.interitus.UI.setup.SetupWindow;
-import de.ft.interitus.roboconnection.raspberrypi.SSHConnection;
+import de.ft.interitus.deviceconnection.raspberrypi.SSHConnection;
 
 public class Step4 {
     public static VisTextField username = new VisTextField("pi");

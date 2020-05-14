@@ -2,7 +2,7 @@ package de.ft.interitus;
 
 import com.badlogic.gdx.Gdx;
 import de.ft.interitus.Block.BlockVar;
-import de.ft.interitus.input.check.Check;
+import de.ft.interitus.UI.input.check.Check;
 
 public class RechtsKlick {
     public static Check check = new Check();

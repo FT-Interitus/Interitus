@@ -1,7 +1,7 @@
 package de.ft.interitus.projecttypes;
 
-import de.ft.interitus.device.BlockTypes.PlatformSpecificBlock;
-import de.ft.interitus.device.ProgrammableObjekt;
+import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
+import de.ft.interitus.projecttypes.device.ProgrammableObjekt;
 
 import java.util.ArrayList;
 

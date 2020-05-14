@@ -17,18 +17,18 @@ import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.BlockVar;
 import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.UI;
+import de.ft.interitus.UI.input.IntegerAuswahl;
+import de.ft.interitus.UI.input.Switch;
+import de.ft.interitus.UI.input.TextField;
+import de.ft.interitus.UI.input.bar.tappedbar.TappedBar;
+import de.ft.interitus.UI.input.popup.PopupManager;
+import de.ft.interitus.UI.input.popup.PopupMenue;
 import de.ft.interitus.UI.settings.subitems.subitem13;
 import de.ft.interitus.data.user.changes.DataManager;
-import de.ft.interitus.device.BlockTypes.BlockTypesVar;
-import de.ft.interitus.input.IntegerAuswahl;
-import de.ft.interitus.input.Switch;
-import de.ft.interitus.input.TextField;
-import de.ft.interitus.input.bar.tappedbar.TappedBar;
-import de.ft.interitus.input.popup.PopupManager;
-import de.ft.interitus.input.popup.PopupMenue;
+import de.ft.interitus.deviceconnection.arduino.PortUpdate;
+import de.ft.interitus.deviceconnection.arduino.SerialConnection;
 import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.roboconnection.arduino.PortUpdate;
-import de.ft.interitus.roboconnection.arduino.SerialConnection;
+import de.ft.interitus.projecttypes.device.BlockTypes.BlockTypesVar;
 import de.ft.interitus.utils.PositionSaver;
 import de.ft.interitus.utils.animation.Animation;
 
@@ -218,33 +218,8 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
             UI.updatedragui(shapeRenderer, false, batch);
 
-			/*
 
-		for(int b=0;b<BlockVar.blocks.size();b=b+1) {
-			Block block = BlockVar.blocks.get(b);
-			if(!BlockVar.blocks.get(b).blockupdate.toggle) {
-				batch.draw(img_block, block.getX(), block.getY(), block.getW(), block.getH());
-			}else{
-				batch.draw(img_selected, block.getX(), block.getY(), block.getW(), block.getH());
-			}
-
-		}
-		*/
-            if (input.isKeyJustPressed(Input.Keys.LEFT)) {
-                cam.position.set(cam.position.x -= 20, cam.position.y, 0);
-            }
-
-            if (input.isKeyJustPressed(Input.Keys.RIGHT)) {
-                cam.position.set(cam.position.x += 20, cam.position.y, 0);
-            }
-
-            if (input.isKeyJustPressed(Input.Keys.UP)) {
-                cam.position.set(cam.position.x, cam.position.y += 20, 0);
-            }
-
-            if (input.isKeyJustPressed(Input.Keys.DOWN)) {
-                cam.position.set(cam.position.x, cam.position.y -= 20, 0);
-            }
+           de.ft.interitus.UI.Viewport.update();
 
 
         } catch (Exception e) {
@@ -280,6 +255,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
         textfieldtest.setTextAnordnung(1);
         textfieldtest.draw();
 
+        tb.draw();
         try {
             UI.update();
         } catch (NullPointerException e) {
@@ -287,32 +263,15 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
         }
 
 
-        testanim.startAnimation();
+      //  testanim.startAnimation();
 //batch.draw(testanim.getAnimation(),50,50);
         // pm.setBounds(700,200);
-        tb.draw();
-        popupmanager.draw();
 
-        DisplayErrors.checkerror();
+        popupmanager.draw(); //Show Popups
 
-        if (subitem13.saveme != null) {
-            AssetLoader.storeimages.add(new Texture(subitem13.saveme));
-            subitem13.saveme = null;
+        DisplayErrors.checkerror(); //Check if there are undisplayed Images
 
-        }
-
-
-        //Um alle shortcuts für das Programm zu überprüfen
-        CheckShortcuts.check();
-        //Import all Donwloaded images
-        if(AssetLoader.finishpluginimageloading) { //Import all
-
-            for(int i=0;i<AssetLoader.pixmap.size();i++) {
-                AssetLoader.storeimages.add(new Texture(AssetLoader.pixmap.get(i)));
-            }
-
-            AssetLoader.finishpluginimageloading = false; //
-        }
+        loader(); //Load Images in OpenGL context
 
 
 
@@ -349,6 +308,27 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
         batch.dispose();
 
+    }
+
+    public void loader() {
+        if (subitem13.saveme != null) {
+            AssetLoader.storeimages.add(new Texture(subitem13.saveme));
+            subitem13.saveme = null;
+
+        }
+
+
+        //Um alle shortcuts für das Programm zu überprüfen
+        CheckShortcuts.check();
+        //Import all Donwloaded images
+        if(AssetLoader.finishpluginimageloading) { //Import all
+
+            for(int i=0;i<AssetLoader.pixmap.size();i++) {
+                AssetLoader.storeimages.add(new Texture(AssetLoader.pixmap.get(i)));
+            }
+
+            AssetLoader.finishpluginimageloading = false; //
+        }
     }
 
 

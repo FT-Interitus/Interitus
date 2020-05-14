@@ -8,8 +8,8 @@ import com.kotcrab.vis.ui.widget.VisTable;
 import com.kotcrab.vis.ui.widget.VisTextButton;
 import de.ft.interitus.Block.Devices;
 import de.ft.interitus.UI.setup.SetupWindow;
-import de.ft.interitus.roboconnection.arduino.BurnProgramm;
-import de.ft.interitus.roboconnection.arduino.SerialConnection;
+import de.ft.interitus.deviceconnection.arduino.BurnProgramm;
+import de.ft.interitus.deviceconnection.arduino.SerialConnection;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
