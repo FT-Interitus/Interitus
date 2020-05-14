@@ -20,7 +20,6 @@ import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.input.IntegerAuswahl;
 import de.ft.interitus.UI.input.Switch;
 import de.ft.interitus.UI.input.TextField;
-import de.ft.interitus.UI.input.bar.tappedbar.TapContent;
 import de.ft.interitus.UI.input.bar.tappedbar.TappedBar;
 import de.ft.interitus.UI.input.popup.PopupManager;
 import de.ft.interitus.UI.input.popup.PopupMenue;
@@ -257,7 +256,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
         textfieldtest.setTextAnordnung(1);
         textfieldtest.draw();
 
-        tb.draw();
+       // tb.draw();
         try {
             UI.update();
         } catch (NullPointerException e) {
