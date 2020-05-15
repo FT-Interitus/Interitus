@@ -17,6 +17,7 @@ import de.ft.interitus.UI.input.Button;
 import de.ft.interitus.UI.input.check.InputManager;
 import de.ft.interitus.UI.settings.SettingsUI;
 import de.ft.interitus.UI.setup.SetupWindow;
+import de.ft.interitus.UI.setup.UIVar;
 import de.ft.interitus.Var;
 import de.ft.interitus.data.programm.Data;
 import de.ft.interitus.data.user.changes.SaveChanges;
@@ -44,10 +45,7 @@ public class UI {
     protected static SettingsUI set;
     protected static Button testbutton = new Button();
     public static Texture img_button_verbindungadd_white;
-    static int abstandvonRand = 5;
-    static int untenhohe = 125;
-    static int unteneinteilung = 300;
-    static int radius = 3;
+
     private static boolean issettingsuiopend = false;
     private static boolean issetupuiopend = false;
     Vector3 pos = new Vector3();
@@ -64,7 +62,7 @@ public class UI {
 
 
         if (flaeche == true) {
-            RoundRectangle.abgerundetesRechteck(renderer, abstandvonRand, untenhohe + abstandvonRand, Var.w - abstandvonRand * 2, Var.h - untenhohe + abstandvonRand - 45 - abstandvonRand, radius);
+            RoundRectangle.abgerundetesRechteck(renderer, UIVar.abstandvonRand, UIVar.untenhohe + UIVar.abstandvonRand, Var.w - UIVar.abstandvonRand * 2, Var.h - UIVar.untenhohe + UIVar.abstandvonRand - 45 - UIVar.abstandvonRand, UIVar.radius);
         } else {
             if (Settings.darkmode) {
                 renderer.setColor(Colors.darkmode_blockbar);
@@ -72,18 +70,18 @@ public class UI {
             } else {
                 renderer.setColor(Colors.whitearea);
             }
-            RoundRectangle.abgerundetesRechteck(renderer, abstandvonRand, abstandvonRand, Var.w - abstandvonRand * 2 - unteneinteilung, untenhohe - abstandvonRand, radius);
+            //RoundRectangle.abgerundetesRechteck(renderer, abstandvonRand, abstandvonRand, Var.w - abstandvonRand * 2 - unteneinteilung, untenhohe - abstandvonRand, radius);
             if (Settings.darkmode) {
                 renderer.setColor(Colors.darkmode_connections);
             } else {
                 renderer.setColor(Colors.whitearea);
             }
-            RoundRectangle.abgerundetesRechteck(renderer, Var.w - unteneinteilung, abstandvonRand, unteneinteilung - abstandvonRand, untenhohe - abstandvonRand, radius);
+            RoundRectangle.abgerundetesRechteck(renderer, Var.w - UIVar.unteneinteilung, UIVar.abstandvonRand, UIVar.unteneinteilung - UIVar.abstandvonRand, UIVar.untenhohe - UIVar.abstandvonRand, UIVar.radius);
         }
         renderer.end();
 
 
-        testbutton.setBounds(Gdx.graphics.getWidth() - unteneinteilung + 5, untenhohe - 30 - 5, 30, 30);
+        testbutton.setBounds(Gdx.graphics.getWidth() - UIVar.unteneinteilung + 5, UIVar.untenhohe - 30 - 5, 30, 30);
         if (Settings.darkmode) {
             testbutton.setImage(img_button_verbindungadd);
         } else {
