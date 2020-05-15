@@ -68,15 +68,20 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
     public static TappedBar tb= new TappedBar(100,100);
 
     public ProgrammingSpace() {
-        Texture img_mappe= new Texture("Bar/Mappe.png");
-
-        TapContent content1=new TapContent(img_mappe);
-
-        TapBarBlockItem tbbi=new TapBarBlockItem(new Wait(),img_mappe);
 
 
-        content1.setItems(tbbi,new TapBarBlockItem(new Wait(),img_mappe),new TapBarBlockItem(new Wait(),img_mappe),new TapBarBlockItem(new Wait(),img_mappe),new TapBarBlockItem(new Wait(),img_mappe));
-        tb.setContent(content1,new TapContent(img_mappe),new TapContent(img_mappe),new TapContent(img_mappe));
+        TapContent content1=new TapContent(AssetLoader.img_mappe1);
+        TapBarBlockItem tbbi=new TapBarBlockItem(new Wait(),AssetLoader.img_mappe2);
+
+        TapContent content2=new TapContent(AssetLoader.img_mappe2);
+        TapContent content3=new TapContent(AssetLoader.img_mappe3);
+        TapContent content4=new TapContent(AssetLoader.img_mappe4);
+        TapContent content5=new TapContent(AssetLoader.img_mappe5);
+        TapContent content6=new TapContent(AssetLoader.img_mappe6);
+
+
+        content1.setItems(tbbi,new TapBarBlockItem(new Wait(),AssetLoader.img_mappe3),new TapBarBlockItem(new Wait(),AssetLoader.img_mappe3),new TapBarBlockItem(new Wait(),AssetLoader.img_mappe3),new TapBarBlockItem(new Wait(),AssetLoader.img_mappe3));
+        tb.setContent(content1,content2,content3,content4,content5,content6);
 
 
         popupmanager.addPopup(new PopupMenue("ein popup"));
@@ -168,7 +173,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
 
             if (darkmode) {
-                Gdx.gl.glClearColor(1, 0, 0, 1);
+                Gdx.gl.glClearColor(60f/255f,63f/255f,65f/255f,1);
             } else {
                 Gdx.gl.glClearColor(0.54f, 0.533f, 0.51f, 1);
             }

@@ -91,7 +91,7 @@ public class UI {
         } else {
             testbutton.setImage(img_button_verbindungadd_white);
         }
-        testbutton.draw();
+   //     testbutton.draw();
         testbutton.setVisible(true);
         testbutton.setDisable(Var.isdialogeopend);
 

@@ -58,9 +58,12 @@ public class TappedBar {
 
 
                 if(selectetContent==taps.get(i)){
+                    tb.getTab_button().setFlipY(true);
                     tb.getTab_button().setBounds(x+(((taps.size()*tb.getTab_button().getW())/taps.size()*i)+mittenpositionX-taps.size()*tb.getTab_button().getW()/2)-    ((taps.size()/2-i)*buttonabstand)    ,y+height+10,tb.getTab_button().getW(),tb.getTab_button().getH());
 
                 }else{
+                    tb.getTab_button().setFlipY(false);
+
                     tb.getTab_button().setBounds(x+(((taps.size()*tb.getTab_button().getW())/taps.size()*i)+mittenpositionX-taps.size()*tb.getTab_button().getW()/2)-    ((taps.size()/2-i)*buttonabstand)    ,y+height,tb.getTab_button().getW(),tb.getTab_button().getH());
 
                 }
@@ -78,7 +81,6 @@ public class TappedBar {
                 selectetContent.items.get(i).setY(height/2-selectetContent.items.get(i).getH()/2+y);
                 selectetContent.items.get(i).setX(x+(mittenpositionX-(     gedachtweight    )/2)+(i*    selectetContent.items.get(i).getW()     )-((selectetContent.items.size()/2-i)*itemabstand));
                 selectetContent.items.get(i).draw();
-                System.out.println(gedachtweight);
 
             }
         }

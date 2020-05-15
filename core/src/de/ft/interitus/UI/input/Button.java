@@ -23,6 +23,8 @@ public class Button {
     private final ShapeRenderer s = new ShapeRenderer();
     private final GlyphLayout glyphLayout = new GlyphLayout();
     private final Check check = new Check();
+    private boolean flipX=false;
+    private boolean flipY=false;
 
 
     public Button(int x, int y, int w, int h) {
@@ -113,7 +115,8 @@ public class Button {
                 if (isDisable()) {
                     batch.setColor(1, 1, 1, 0.2f);
                 }
-                batch.draw(image, this.x, this.y, this.w, this.h);
+                //batch.draw(image, this.x, this.y, this.w, this.h);
+                batch.draw(image,this.x,this.y,this.w,this.h,0,0,image.getWidth(),image.getHeight(),this.flipX,this.flipY);
                 batch.end();
             }
             if (text != null) {
@@ -189,6 +192,22 @@ public class Button {
 
     public void setDisable(boolean disable) {
         this.disable = disable;
+    }
+
+    public void setFlipX(boolean flipX) {
+        this.flipX = flipX;
+    }
+
+    public void setFlipY(boolean flipY) {
+        this.flipY = flipY;
+    }
+
+    public boolean isFlipX() {
+        return flipX;
+    }
+
+    public boolean isFlipY() {
+        return flipY;
     }
 }
 

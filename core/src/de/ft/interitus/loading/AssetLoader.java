@@ -78,6 +78,12 @@ public class AssetLoader {
 
 
 
+    public static Texture img_mappe1;
+    public static Texture img_mappe2;
+    public static Texture img_mappe3;
+    public static Texture img_mappe4;
+    public static Texture img_mappe5;
+    public static Texture img_mappe6;
 
 
 
@@ -113,6 +119,15 @@ public class AssetLoader {
 
 
         try {
+
+            group = "mappen";
+            manager.load(workingdirectory+"Bar/Mappe1.png",Texture.class);
+            manager.load(workingdirectory+"Bar/Mappe2.png",Texture.class);
+            manager.load(workingdirectory+"Bar/Mappe3.png",Texture.class);
+            manager.load(workingdirectory+"Bar/Mappe4.png",Texture.class);
+            manager.load(workingdirectory+"Bar/Mappe5.png",Texture.class);
+            manager.load(workingdirectory+"Bar/Mappe6.png",Texture.class);
+
 
             group = "Blöcke";
             //Block Textures
@@ -197,6 +212,16 @@ public class AssetLoader {
 
         try {
             group = "";
+
+            img_mappe1 = manager.get(workingdirectory+"Bar/Mappe1.png",Texture.class);
+            img_mappe2 = manager.get(workingdirectory+"Bar/Mappe2.png",Texture.class);
+            img_mappe3 = manager.get(workingdirectory+"Bar/Mappe3.png",Texture.class);
+            img_mappe4 = manager.get(workingdirectory+"Bar/Mappe4.png",Texture.class);
+            img_mappe5 = manager.get(workingdirectory+"Bar/Mappe5.png",Texture.class);
+            img_mappe6 = manager.get(workingdirectory+"Bar/Mappe6.png",Texture.class);
+
+
+
             //Block
             img_block_right = manager.get(workingdirectory+ "Block/Blockrechts.png", Texture.class);
             img_block_left = manager.get(workingdirectory+ "Block/Blocklinks.png", Texture.class);
