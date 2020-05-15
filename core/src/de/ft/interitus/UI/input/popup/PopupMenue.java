@@ -51,9 +51,10 @@ public class PopupMenue {
     public void rechtsKlickControlle() {
 
         if (Gdx.input.isButtonJustPressed(1) && (!check.isMouseover(this.x + ausgleichX, this.y + ausgleichY, 200, buttonheight * buttons.size()) || !show)) {
-            show = true;
             this.x = Gdx.input.getX();
             this.y = Gdx.graphics.getHeight() - Gdx.input.getY();
+            show = true;
+
         }
 
         if (Gdx.input.isButtonJustPressed(0) && !check.isMouseover(this.x + ausgleichX, this.y + ausgleichY, 200, buttonheight * buttons.size())) {
