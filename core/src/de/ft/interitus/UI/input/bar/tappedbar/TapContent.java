@@ -1,10 +1,7 @@
 package de.ft.interitus.UI.input.bar.tappedbar;
 
 import com.badlogic.gdx.graphics.Texture;
-import de.ft.interitus.Block.TapBarBlockItem;
 import de.ft.interitus.UI.input.Button;
-import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.projecttypes.device.BlockTypes.Ev3.Wait;
 
 import java.util.ArrayList;
 
@@ -20,11 +17,13 @@ public class TapContent {
         for(int i=0;i<ti.length;i++){
             items.add(ti[i]);
         }
-
+        tab_button.disablepresscolorchange = true;
+        tab_button.hovertransparancy = 0.9f;
         tab_button.setImage(img);
     }
     public TapContent(Texture img){
-
+        tab_button.disablepresscolorchange = true;
+        tab_button.hovertransparancy = 0.9f;
         //items.add(new TapBarBlockItem( new Wait(), AssetLoader.aktion_mittlerermotor));
 
         tab_button.setImage(img);
