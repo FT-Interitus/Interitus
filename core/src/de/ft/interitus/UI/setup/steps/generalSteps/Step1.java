@@ -40,14 +40,15 @@ public class Step1 {
         time = new Timer(30, new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
 
-                if (name.isEmpty()) {
-                    SetupWindow.errorLabel.setColor(new Color(1, 0, 0, 1));
-                    SetupWindow.errorLabel.setText("Du musst einen Name vergeben");
-                    SetupWindow.Button_next.setDisabled(true);
-                } else {
+                if (!name.isEmpty()&&name.getText().length()>3&&!name.getText().startsWith(" ")&&!name.getText().endsWith(" ")) {
+
                     SetupWindow.errorLabel.setColor(new Color(0, 1, 0, 1));
                     SetupWindow.errorLabel.setText("Alle Voraussetzungen erfüllt");
                     SetupWindow.Button_next.setDisabled(false);
+                } else {
+                    SetupWindow.errorLabel.setColor(new Color(1, 0, 0, 1));
+                    SetupWindow.errorLabel.setText("Du musst einen gültigen Name vergeben");
+                    SetupWindow.Button_next.setDisabled(true);
                 }
             }
         });

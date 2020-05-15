@@ -258,6 +258,10 @@ public class BlockUpdate extends Thread {
 
                     }
 
+                    if(BlockVar.markedblock==null&&block.isMarked()) {
+                        block.setMarked(false);
+                    }
+
 
                     if (block.isShowdupulicate_links() || block.isShowdupulicate_rechts()) {
                         if (BlockVar.showduplicat.indexOf(block) == -1) {

@@ -157,7 +157,7 @@ public class Step3 {
         }
         selectIPAdress.setItems(ipselectable);
         builder.row();
-        builder.add(new VisLabel("Falls du die IP-Adresse nicht weißt, sind hier alle Adressen einemal aufgelistet:")).padBottom(-220);
+        builder.add(new VisLabel("Falls du die IP-Adresse nicht weißt, sind hier alle Adressen einmal aufgelistet:")).padBottom(-220);
         builder.row();
         builder.add(selectIPAdress).expandX().padBottom(-300);
         selectIPAdress.addListener(new ChangeListener() {

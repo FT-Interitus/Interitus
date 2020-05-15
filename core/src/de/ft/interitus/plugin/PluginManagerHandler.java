@@ -175,7 +175,7 @@ public class PluginManagerHandler {
                 pi.register();  //jedes gefundene Plugin bekommt den Befehl sich zu registrieren
             }catch (NoSuchMethodError e) {
                 try {
-                    throw new PluginSDKDeprecatedException("Ein Plugin nutzt nicht die neuste Interitus-SDK Version");
+                    throw new PluginSDKDeprecatedException("A Plugin dosn't use the newest Interitus-SDK version!");
                 } catch (PluginSDKDeprecatedException pluginSDKDeprecatedException) {
                     pluginSDKDeprecatedException.printStackTrace();
                 }
