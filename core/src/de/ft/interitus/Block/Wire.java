@@ -290,7 +290,7 @@ public class Wire {
                     }
 
                     if (!ProgrammingSpace.popupmanager.isPopupopen()&&BlockVar.mousehoveredwire == this && !CheckKollision.objectwithrotation(sprite.getX(), sprite.getY(), sprite.getHeight(), sprite.getWidth(), sprite.getRotation(), ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x, ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1, 0)) {
-                        System.out.println("Popup disable");
+                        System.out.println("Popup disable"); //TODO here is an error
                         BlockVar.mousehoveredwire = null;
                     }
 

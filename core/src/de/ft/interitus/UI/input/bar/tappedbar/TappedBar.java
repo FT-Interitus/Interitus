@@ -48,8 +48,8 @@ public class TappedBar {
             for(int i=0;i<taps.size();i++){
                 TapContent tb=taps.get(i);
                 //Vector2 tabbuttonsize=new Vector2(64,15);
-                tb.getTab_button().setW(64);
-                tb.getTab_button().setH(15);
+                tb.getTab_button().setW(48);
+                tb.getTab_button().setH(17);
 
                 if(tb.getTab_button().isjustPressednormal()){
                     selectetContent=tb;
