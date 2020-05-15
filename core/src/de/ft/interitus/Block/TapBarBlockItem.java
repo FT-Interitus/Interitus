@@ -35,8 +35,8 @@ public class TapBarBlockItem implements TapItem {
             tempblock.setMarked(true);
             tempblock.setMoving(true);
             BlockVar.markedblock = tempblock;
-            BlockVar.visibleblocks.add(tempblock);
-            BlockVar.unterschiedsave.set(150,70);
+
+            BlockVar.unterschiedsave.set(150/2,70/2);
         }
 
         batch.begin();
