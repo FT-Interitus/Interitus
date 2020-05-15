@@ -3,6 +3,7 @@ package de.ft.interitus.Block;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.UI.input.bar.tappedbar.TapItem;
@@ -34,10 +35,8 @@ public class TapBarBlockItem implements TapItem {
             tempblock.setMarked(true);
             tempblock.setMoving(true);
             BlockVar.markedblock = tempblock;
-            BlockVar.visibleblocks.add(tempblock);
-            BlockVar.unterschiedsave.set(150,70);
-
-
+            BlockVar.blocks.add(tempblock);
+            BlockVar.unterschiedsave.set(150/2,70/2);
         }
 
         batch.begin();
