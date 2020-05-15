@@ -203,6 +203,7 @@ public class Wire {
                     sprite.setRotation((float) ((float) Math.atan((ProgrammingSpace.cam.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y - left_connection.getY_exit()) / (ProgrammingSpace.cam.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x - left_connection.getX_exit())) * 180 / Math.PI) + 180);
 
                 }
+
                 //   ProgrammingSpace.batch.draw(AssetLoader.switch_background_white,873,575,5,5);
 
 
@@ -269,7 +270,7 @@ public class Wire {
 
                     double weite = Math.sqrt(a * a + b * b);
 
-                    if (right_connection.getX_entrance() - left_connection.getX_exit() > 0) {
+                    if (right_connection.getX_entrance() - left_connection.getX_exit() >= 0) {
                         sprite.setRotation((float) ((float) Math.atan((right_connection.getY_entrance() - left_connection.getY_exit()) / (right_connection.getX_entrance() - left_connection.getX_exit())) * 180 / Math.PI));
 
                     } else {
