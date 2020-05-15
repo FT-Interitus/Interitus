@@ -42,10 +42,10 @@ public class TappedBar {
     }
 
     private void drawBar(){
-        //renderer.begin(ShapeRenderer.ShapeType.Line);
+        renderer.begin(ShapeRenderer.ShapeType.Line);
         //renderer.rect(x,y,weight,height);
         //renderer.line(x,y,x,y+height);
-        //renderer.end();
+        renderer.end();
             for(int i=0;i<taps.size();i++){
                 TapContent tb=taps.get(i);
                 //Vector2 tabbuttonsize=new Vector2(64,15);
