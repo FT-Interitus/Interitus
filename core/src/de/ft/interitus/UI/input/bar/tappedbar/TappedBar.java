@@ -9,11 +9,13 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import java.util.ArrayList;
 
 public class TappedBar {
+    int mittenpositionX;
     int x=0;
     int y=0;
     int weight=500;
     int height=100;
     int itemabstand=30;
+    int buttonabstand=5;
     SpriteBatch batch = new SpriteBatch();
     ShapeRenderer renderer = new ShapeRenderer();
     BitmapFont font = new BitmapFont();
@@ -40,10 +42,10 @@ public class TappedBar {
     }
 
     private void drawBar(){
-        renderer.begin(ShapeRenderer.ShapeType.Line);
-        renderer.rect(x,y,weight,height);
-        renderer.line(x+weight/2,y,x+weight/2,y+height);
-        renderer.end();
+        //renderer.begin(ShapeRenderer.ShapeType.Line);
+        //renderer.rect(x,y,weight,height);
+        //renderer.line(x,y,x,y+height);
+        //renderer.end();
             for(int i=0;i<taps.size();i++){
                 TapContent tb=taps.get(i);
                 //Vector2 tabbuttonsize=new Vector2(64,15);
@@ -56,10 +58,10 @@ public class TappedBar {
 
 
                 if(selectetContent==taps.get(i)){
-                    tb.getTab_button().setBounds(x+(((taps.size()*tb.getTab_button().getW())/taps.size()*i)+weight/2-taps.size()*tb.getTab_button().getW()/2),y+height+10,tb.getTab_button().getW(),tb.getTab_button().getH());
+                    tb.getTab_button().setBounds(x+(((taps.size()*tb.getTab_button().getW())/taps.size()*i)+mittenpositionX-taps.size()*tb.getTab_button().getW()/2)-    ((taps.size()/2-i)*buttonabstand)    ,y+height+10,tb.getTab_button().getW(),tb.getTab_button().getH());
 
                 }else{
-                    tb.getTab_button().setBounds(x+(((taps.size()*tb.getTab_button().getW())/taps.size()*i)+weight/2-taps.size()*tb.getTab_button().getW()/2),y+height,tb.getTab_button().getW(),tb.getTab_button().getH());
+                    tb.getTab_button().setBounds(x+(((taps.size()*tb.getTab_button().getW())/taps.size()*i)+mittenpositionX-taps.size()*tb.getTab_button().getW()/2)-    ((taps.size()/2-i)*buttonabstand)    ,y+height,tb.getTab_button().getW(),tb.getTab_button().getH());
 
                 }
                 tb.getTab_button().draw();
@@ -74,7 +76,7 @@ public class TappedBar {
             }
             for (int i = 0; i < selectetContent.items.size(); i++) {
                 selectetContent.items.get(i).setY(height/2-selectetContent.items.get(i).getH()/2+y);
-                selectetContent.items.get(i).setX(x+(weight/2-(     gedachtweight    )/2)+(i*    selectetContent.items.get(i).getW()     )-((selectetContent.items.size()/2-i)*itemabstand));
+                selectetContent.items.get(i).setX(x+(mittenpositionX-(     gedachtweight    )/2)+(i*    selectetContent.items.get(i).getW()     )-((selectetContent.items.size()/2-i)*itemabstand));
                 selectetContent.items.get(i).draw();
                 System.out.println(gedachtweight);
 
@@ -83,6 +85,7 @@ public class TappedBar {
     }
 
     public void draw(){
+        mittenpositionX=0;
         drawBar();
         drawContent();
     }

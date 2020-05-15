@@ -26,6 +26,7 @@ import de.ft.interitus.UI.input.bar.tappedbar.TappedBar;
 import de.ft.interitus.UI.input.popup.PopupManager;
 import de.ft.interitus.UI.input.popup.PopupMenue;
 import de.ft.interitus.UI.settings.subitems.subitem13;
+import de.ft.interitus.UI.setup.UIVar;
 import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.deviceconnection.arduino.PortUpdate;
 import de.ft.interitus.deviceconnection.arduino.SerialConnection;
@@ -265,7 +266,9 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
         //ia.draw(shapeRenderer, batch);
         //textfieldtest.setTextAnordnung(1);
         //textfieldtest.draw();
-
+        //tb.setX(UIVar.);
+        tb.setX(UIVar.BlockBarX+UIVar.BlockBarW/2);
+        tb.setY(UIVar.BlockBarY+UIVar.BlockBarH/2-(tb.getHeight()+UIVar.abstandvonRand*2)/2);
         tb.draw();
         try {
             UI.update();
