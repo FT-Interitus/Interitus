@@ -35,7 +35,7 @@ public class UI {
     static final Table root = new Table();
     public static Stage stage;
     private static final Vector2 lastframecamposition = new Vector2(ProgrammingSpace.cam.position.x, ProgrammingSpace.cam.position.y);
-    public static Texture img_button_verbindungadd;
+
     protected static MenuItem recent;
     protected static MenuItem revert;
     protected static MenuItem redo;
@@ -43,8 +43,6 @@ public class UI {
     protected static MenuItem paste;
     protected static MenuBar menuBar;
     protected static SettingsUI set;
-    protected static Button testbutton = new Button();
-    public static Texture img_button_verbindungadd_white;
 
     private static boolean issettingsuiopend = false;
     private static boolean issetupuiopend = false;
@@ -85,15 +83,7 @@ public class UI {
         renderer.end();
 
 
-        testbutton.setBounds(Gdx.graphics.getWidth() - UIVar.unteneinteilung + 5, UIVar.untenhohe - 30 - 5, 30, 30);
-        if (Settings.darkmode) {
-            testbutton.setImage(img_button_verbindungadd);
-        } else {
-            testbutton.setImage(img_button_verbindungadd_white);
-        }
-   //     testbutton.draw();
-        testbutton.setVisible(true);
-        testbutton.setDisable(Var.isdialogeopend);
+
 
 
     }
