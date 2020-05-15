@@ -33,7 +33,6 @@ import de.ft.interitus.deviceconnection.arduino.SerialConnection;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.device.BlockTypes.Arduino.Arduino.Wait;
 import de.ft.interitus.projecttypes.device.BlockTypes.BlockTypesVar;
-import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.utils.PositionSaver;
 import de.ft.interitus.utils.animation.Animation;
 
@@ -189,7 +188,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
 
             UI.updatedragui(shapeRenderer, true, batch);
-
+            UI.updatedragui(shapeRenderer, false, batch);
             if (!Var.isloading) {
                 Block Temp = null;
                 for (int i = 0; i < BlockVar.visibleblocks.size(); i = i + 1) {
@@ -233,7 +232,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
                 }
             }
 
-            UI.updatedragui(shapeRenderer, false, batch);
+
 
 
            de.ft.interitus.UI.Viewport.update();
