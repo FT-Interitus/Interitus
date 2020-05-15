@@ -32,17 +32,17 @@ public class RechtsKlick {
 
             if (mob == false) {
                 if(mow) {
-                    ProgrammingSpace.popupmanager.getPopup(1).setShow(false);
+                    //ProgrammingSpace.popupmanager.getPopup(1).setShow(false);
                     ProgrammingSpace.popupmanager.setPossiblepopup(2);
                 }else {
                     mouseoverblockindex = -1;
-                    ProgrammingSpace.popupmanager.getPopup(1).setShow(false);
+                    //ProgrammingSpace.popupmanager.getPopup(1).setShow(false);
                     ProgrammingSpace.popupmanager.setPossiblepopup(0);
                 }
             } else {
 
 
-                    ProgrammingSpace.popupmanager.getPopup(0).setShow(false);
+                    //ProgrammingSpace.popupmanager.getPopup(0).setShow(false);
                     ProgrammingSpace.popupmanager.setPossiblepopup(1);
 
             }
