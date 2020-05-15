@@ -108,6 +108,16 @@ public class ThreadManager {
                         } catch (Exception e) {
                             e.printStackTrace(); //for debug to find errors
                         }
+
+
+                        //Enable or disable Wire System
+
+                        if(BlockVar.ismoving) {
+                            BlockVar.wirezulassung = false;
+                        }else{
+                            BlockVar.wirezulassung = true;
+                        }
+
                     }
                 }, 0, 100);
 
