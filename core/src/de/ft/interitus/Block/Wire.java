@@ -22,7 +22,6 @@ public class Wire {
     private boolean space_between_blocks = false;
     private boolean movebymouse = false;
     private boolean canplaceanewwirenode = false;
-    private final boolean clickedonwire = false;
     final Wire INSTANCE = this;
     RightClickEventListener rightClickEventListener= new RightClickEventListener() {
         @Override
@@ -39,12 +38,14 @@ public class Wire {
         public void buttonclickedinwindow(RightClickButtonSelectEvent e) {
             if (e.getButton().getText().contains("Löschen")) {
                 if(BlockVar.mousehoveredwire==INSTANCE) {
-                    INSTANCE.left_connection.getblock().setRight(null);
-                    INSTANCE.right_connection.getblock().setLeft(null);
-                    INSTANCE.left_connection.setWire_right(null);
-                    INSTANCE.right_connection.setWire_left(null);
-                    INSTANCE.left_connection = null;
-                    EventVar.rightClickEventManager.removeListener(INSTANCE.rightClickEventListener);
+                    try {
+                        INSTANCE.left_connection.getblock().setRight(null);
+                        INSTANCE.right_connection.getblock().setLeft(null);
+                        INSTANCE.left_connection.setWire_right(null);
+                        INSTANCE.right_connection.setWire_left(null);
+                        INSTANCE.left_connection = null;
+                        EventVar.rightClickEventManager.removeListener(INSTANCE.rightClickEventListener);
+                    }catch (Exception ignored){}
                 }
             }
         }
@@ -59,7 +60,7 @@ public class Wire {
 
     public Wire(final VisibleObjects left_connection) {
         this.left_connection = left_connection;
-        final Wire INSTANCE = this;
+        
         EventVar.rightClickEventManager.addListener(rightClickEventListener);
     }
 
@@ -107,7 +108,7 @@ public class Wire {
                                 //Falls hier keine Wire ist
                             }
                             BlockVar.wire_beginn.getBlockupdate().tempwire = null;
-                        } catch (Exception e) {
+                        } catch (Exception ignored) {
 
                         }
 
@@ -135,7 +136,7 @@ public class Wire {
                     try {
 
                         getLeft_connectionObject().getwirenode().setWire_right(null);
-                    } catch (NullPointerException e) {
+                    } catch (NullPointerException ignored) {
 
                     }
 
@@ -288,6 +289,7 @@ public class Wire {
                     }
 
                     if (!ProgrammingSpace.popupmanager.isPopupopen()&&BlockVar.mousehoveredwire == this && !CheckKollision.objectwithrotation(sprite.getX(), sprite.getY(), sprite.getHeight(), sprite.getWidth(), sprite.getRotation(), ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x, ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1, 0)) {
+                        System.out.println("Popup disable");
                         BlockVar.mousehoveredwire = null;
                     }
 
@@ -325,7 +327,7 @@ public class Wire {
                     //Falls der Block der Verbunden ist gerade gelöscht wird
                     try {
                         ProgrammingSpace.batch.end(); //Damit der Render Prozess weiterläuft
-                    } catch (IllegalStateException I) {
+                    } catch (IllegalStateException ignored) {
 
                     }
                 }

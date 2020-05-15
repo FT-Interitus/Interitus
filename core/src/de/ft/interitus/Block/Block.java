@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Frustum;
 import com.badlogic.gdx.math.Vector2;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.RechtsKlick;
 import de.ft.interitus.ThreadManager;
 import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.events.EventVar;
@@ -55,7 +56,7 @@ public class Block implements VisibleObjects {
     private PlatformSpecificBlock blocktype =null;
     private RightClickEventListener rightClickEventListener;
 
-    public Block(int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock) { //Initzialisieren des Blocks
+    public Block(final int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock) { //Initzialisieren des Blocks
        this.blocktype = platformSpecificBlock;
         EventVar.blockEventManager.createBlock(new BlockCreateEvent(this, this));
         this.x = x;
@@ -93,6 +94,7 @@ public class Block implements VisibleObjects {
             public void buttonclickedinwindow(RightClickButtonSelectEvent e) {
 
                 if (e.getButton().getText().contains("Löschen")&&blockupdate.toggle) {
+                    if(RechtsKlick.mouseoverblockindex==BlockVar.blocks.indexOf(instance))
                     instance.delete(false);
                 }
             }
