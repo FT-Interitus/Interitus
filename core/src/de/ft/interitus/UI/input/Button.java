@@ -25,6 +25,8 @@ public class Button {
     private final Check check = new Check();
     private boolean flipX=false;
     private boolean flipY=false;
+    public float hovertransparancy = 0.8f;
+    public static boolean disablepresscolorchange = false;
 
 
     public Button(int x, int y, int w, int h) {
@@ -105,11 +107,11 @@ public class Button {
             } else {
                 batch.begin();
                 if (isMouseover()) {
-                    batch.setColor(1, 1, 1, 0.5f);
+                    batch.setColor(1, 1, 1, hovertransparancy);
                 } else {
                     batch.setColor(1, 1, 1, 1);
                 }
-                if (isMouseover() && Gdx.input.isButtonPressed(0)) {
+                if (isMouseover() && Gdx.input.isButtonPressed(0)&&!disablepresscolorchange) {
                     batch.setColor(1, 0.5f, 0.5f, 1);
                 }
                 if (isDisable()) {

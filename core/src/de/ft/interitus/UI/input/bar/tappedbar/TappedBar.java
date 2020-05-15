@@ -1,7 +1,6 @@
 package de.ft.interitus.UI.input.bar.tappedbar;
 
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -49,8 +48,8 @@ public class TappedBar {
             for(int i=0;i<taps.size();i++){
                 TapContent tb=taps.get(i);
                 //Vector2 tabbuttonsize=new Vector2(64,15);
-                tb.getTab_button().setW(64);
-                tb.getTab_button().setH(15);
+                tb.getTab_button().setW(48);
+                tb.getTab_button().setH(17);
 
                 if(tb.getTab_button().isjustPressednormal()){
                     selectetContent=tb;
@@ -58,11 +57,12 @@ public class TappedBar {
 
 
                 if(selectetContent==taps.get(i)){
-                    tb.getTab_button().setFlipY(true);
+                    tb.getTab_button().setFlipY(false);
                     tb.getTab_button().setBounds(x+(((taps.size()*tb.getTab_button().getW())/taps.size()*i)+mittenpositionX-taps.size()*tb.getTab_button().getW()/2)-    ((taps.size()/2-i)*buttonabstand)    ,y+height+10,tb.getTab_button().getW(),tb.getTab_button().getH());
 
                 }else{
-                    tb.getTab_button().setFlipY(false);
+
+                    tb.getTab_button().setFlipY(true);
 
                     tb.getTab_button().setBounds(x+(((taps.size()*tb.getTab_button().getW())/taps.size()*i)+mittenpositionX-taps.size()*tb.getTab_button().getW()/2)-    ((taps.size()/2-i)*buttonabstand)    ,y+height,tb.getTab_button().getW(),tb.getTab_button().getH());
 
