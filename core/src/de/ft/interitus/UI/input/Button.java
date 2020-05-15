@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import de.ft.interitus.UI.input.check.Check;
+import de.ft.interitus.Var;
 import de.ft.interitus.utils.RoundRectangle;
 
 public class Button {
@@ -52,7 +53,7 @@ public class Button {
 
     public boolean isjustPressed() {
         boolean pressed = false;
-        if (!disable) {
+        if (!disable&&! Var.isdialogeopend) {
 
             pressed = check.isjustPressed(x, y, w, h);
 
@@ -66,7 +67,7 @@ public class Button {
 
     public boolean isjustPressednormal(){
         boolean pressed = false;
-        if (!disable) {
+        if (!disable&&!Var.isdialogeopend) {
 
             pressed = check.isJustPressedNormal(x, y, w, h);
 

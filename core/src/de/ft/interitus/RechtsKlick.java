@@ -30,8 +30,8 @@ public class RechtsKlick {
             }
 
 
-            if (mob == false) {
-                if(mow) {
+            if (mob == false) { //Ist der Mauszeiger auf einem Block
+                if(mow) { //Ist die Maus auf einer Wire
                     //ProgrammingSpace.popupmanager.getPopup(1).setShow(false);
                     ProgrammingSpace.popupmanager.setPossiblepopup(2);
                 }else {

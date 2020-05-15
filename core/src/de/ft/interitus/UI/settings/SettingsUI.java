@@ -354,6 +354,7 @@ public class SettingsUI extends VisWindow {
             sizeBy(600, 450);
 
             centerWindow();
+            //TODO add here the same Listener as in new Project
         }
 
         public boolean testopen() {

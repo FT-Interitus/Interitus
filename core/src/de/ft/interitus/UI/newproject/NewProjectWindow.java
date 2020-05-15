@@ -69,7 +69,11 @@ public class NewProjectWindow {
             setupBuilder.pack();
         }
 
+        Var.isdialogeopend = true;
+
         UI.stage.addActor(setupBuilder);
+
+
     }
 
 
@@ -149,6 +153,23 @@ public class NewProjectWindow {
                     setupBuilder.close();
                 }
             });
+
+            final SetupBuilder INSTANCE = this;
+             ChangeListener listener = null;
+            final ChangeListener finalListener = listener;
+            listener =  new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    if(!testopen()) {
+                        Var.isdialogeopend = true;
+                    }else{
+                        Var.isdialogeopend = false;
+
+                    }
+                }
+            };
+
+            this.addListener(listener);
 
         }
 

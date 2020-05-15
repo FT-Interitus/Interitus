@@ -286,6 +286,7 @@ public class Wire {
                     sprite.draw(ProgrammingSpace.batch);
                     if (CheckKollision.objectwithrotation(sprite.getX(), sprite.getY(), sprite.getHeight(), sprite.getWidth(), sprite.getRotation(), ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x, ProgrammingSpace.cam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1, 0) && BlockVar.mousehoveredwire != this) {
                         BlockVar.mousehoveredwire = this;
+                        System.out.println("Hallo");
 
                     }
 

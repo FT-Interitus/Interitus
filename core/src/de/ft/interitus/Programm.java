@@ -13,6 +13,9 @@ import de.ft.interitus.projecttypes.device.BlockTypes.Init;
 import de.ft.interitus.utils.NetworkScan;
 import org.lwjgl.openal.AL;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class Programm extends Game {
 
     public static Programm INSTANCE;
@@ -27,6 +30,12 @@ public class Programm extends Game {
 
     @Override
     public void create() {
+
+
+
+
+
+
 
         Init.initBlocks();
 
@@ -59,6 +68,16 @@ public class Programm extends Game {
         seachnetwork.start();
         Data.init();
         ExperienceManager.init();
+
+
+        Timer saveprogrammdatatimer  = new Timer();
+        saveprogrammdatatimer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                Data.close();
+            }
+        },1000*60*15,1000*60*15);
+
         setScreen(new Loading());
     }
 

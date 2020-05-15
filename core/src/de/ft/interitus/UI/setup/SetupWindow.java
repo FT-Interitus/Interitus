@@ -106,6 +106,8 @@ public class SetupWindow {
             pack();
 
 
+            //TODO add here the same Listener as in new Project
+
             Button_next.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {

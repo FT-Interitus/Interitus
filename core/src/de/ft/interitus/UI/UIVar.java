@@ -1,4 +1,4 @@
-package de.ft.interitus.UI.setup;
+package de.ft.interitus.UI;
 
 public class UIVar {
     public static int abstandvonRand = 5;

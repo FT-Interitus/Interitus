@@ -18,6 +18,7 @@ import de.ft.interitus.Block.BlockVar;
 import de.ft.interitus.Block.TapBarBlockItem;
 import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.UI;
+import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.input.IntegerAuswahl;
 import de.ft.interitus.UI.input.Switch;
 import de.ft.interitus.UI.input.TextField;
@@ -26,7 +27,6 @@ import de.ft.interitus.UI.input.bar.tappedbar.TappedBar;
 import de.ft.interitus.UI.input.popup.PopupManager;
 import de.ft.interitus.UI.input.popup.PopupMenue;
 import de.ft.interitus.UI.settings.subitems.subitem13;
-import de.ft.interitus.UI.setup.UIVar;
 import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.deviceconnection.arduino.PortUpdate;
 import de.ft.interitus.deviceconnection.arduino.SerialConnection;
@@ -189,6 +189,10 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
             UI.updatedragui(shapeRenderer, true, batch);
             UI.updatedragui(shapeRenderer, false, batch);
+
+            tb.setX(UIVar.BlockBarX+UIVar.BlockBarW/2);
+            tb.setY(UIVar.BlockBarY+UIVar.BlockBarH/2-(tb.getHeight()+UIVar.abstandvonRand*2)/2);
+            tb.draw();
             if (!Var.isloading) {
                 Block Temp = null;
                 for (int i = 0; i < BlockVar.visibleblocks.size(); i = i + 1) {
@@ -271,9 +275,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
         //textfieldtest.setTextAnordnung(1);
         //textfieldtest.draw();
         //tb.setX(UIVar.);
-        tb.setX(UIVar.BlockBarX+UIVar.BlockBarW/2);
-        tb.setY(UIVar.BlockBarY+UIVar.BlockBarH/2-(tb.getHeight()+UIVar.abstandvonRand*2)/2);
-        tb.draw();
+
         try {
             UI.update();
         } catch (NullPointerException e) {

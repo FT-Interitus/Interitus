@@ -41,81 +41,84 @@ public class ThreadManager {
                     @Override
                     public void run() {
 
-                        try {
-                            camfr = ProgrammingSpace.cam.frustum;
+                        if(!Var.isdialogeopend) {
+
+                            try {
+                                camfr = ProgrammingSpace.cam.frustum;
 
 
-                            for (int i = 0; i < BlockVar.blocks.size(); i++) {
-                                //System.out.println("Test"+i);
+                                for (int i = 0; i < BlockVar.blocks.size(); i++) {
+                                    //System.out.println("Test"+i);
 //                            System.out.println(camfr.boundsInFrustum(BlockVar.blocks.get(10).getX(), BlockVar.blocks.get(10).getY(), 0, BlockVar.blocks.get(10).getW(), BlockVar.blocks.get(10).getH(),0));
-                                try {
-                                    Block block = ((BlockUpdate) threads.get(i)).block;
-                                    if (!(camfr.boundsInFrustum(block.getX(), block.getY(), 0, block.getW(), block.getH(), 0)) && block.isMarked() == false && ((BlockUpdate) threads.get(i)).isrunning == true) {
+                                    try {
+                                        Block block = ((BlockUpdate) threads.get(i)).block;
+                                        if (!(camfr.boundsInFrustum(block.getX(), block.getY(), 0, block.getW(), block.getH(), 0)) && block.isMarked() == false && ((BlockUpdate) threads.get(i)).isrunning == true) {
 
-                                        if (((BlockUpdate) threads.get(i)).isrunning) {
-                                            try {
-                                                ((BlockUpdate) threads.get(i)).time.cancel();
-                                            } catch (Exception e) {
+                                            if (((BlockUpdate) threads.get(i)).isrunning) {
+                                                try {
+                                                    ((BlockUpdate) threads.get(i)).time.cancel();
+                                                } catch (Exception e) {
+                                                }
                                             }
+                                            threads.get(i).interrupt();
+                                            ((BlockUpdate) threads.get(i)).isrunning = false;
+                                            BlockVar.visibleblocks.remove(block);
                                         }
-                                        threads.get(i).interrupt();
-                                        ((BlockUpdate) threads.get(i)).isrunning = false;
-                                        BlockVar.visibleblocks.remove(block);
-                                    }
 
-                                    if (camfr.boundsInFrustum(block.getX(), block.getY(), 0, block.getW(), block.getH(), 0) && ((BlockUpdate) threads.get(i)).isrunning == false) {
-                                        BlockVar.visibleblocks.add(block);
-                                        threads.set(i, ((BlockUpdate) threads.get(i)).block.allowedRestart());
-                                        if (Var.verboseoutput) {
-                                            System.out.println("Started " + block.getIndex());
+                                        if (camfr.boundsInFrustum(block.getX(), block.getY(), 0, block.getW(), block.getH(), 0) && ((BlockUpdate) threads.get(i)).isrunning == false) {
+                                            BlockVar.visibleblocks.add(block);
+                                            threads.set(i, ((BlockUpdate) threads.get(i)).block.allowedRestart());
+                                            if (Var.verboseoutput) {
+                                                System.out.println("Started " + block.getIndex());
+                                            }
+                                            ((BlockUpdate) threads.get(i)).isrunning = true;
                                         }
-                                        ((BlockUpdate) threads.get(i)).isrunning = true;
+
+
+                                    } catch (Exception e) {
+                                        DisplayErrors.error = e;
+                                        e.printStackTrace();
                                     }
-
-
-                                } catch (Exception e) {
-                                    DisplayErrors.error = e;
-                                    e.printStackTrace();
                                 }
+
+
+                                for (int i = 0; i < BlockVar.wires.size(); i++) {
+                                    if (BlockVar.wires.get(i).isvisible()) {
+                                        if (BlockVar.visiblewires.indexOf(BlockVar.wires.get(i)) == -1) {
+                                            BlockVar.visiblewires.add(BlockVar.wires.get(i));
+                                        }
+                                    } else {
+                                        if (BlockVar.visiblewires.indexOf(BlockVar.wires.get(i)) != -1) {
+                                            BlockVar.visiblewires.remove(BlockVar.wires.get(i));
+                                        }
+                                    }
+                                }
+
+                                for (int i = 0; i < BlockVar.wireNodes.size(); i++) {
+                                    if (BlockVar.wireNodes.get(i).isVisible()) {
+                                        if (BlockVar.visibleWireNodes.indexOf(BlockVar.wireNodes.get(i)) == -1) {
+                                            BlockVar.visibleWireNodes.add(BlockVar.wireNodes.get(i));
+                                        }
+                                    } else {
+                                        if (BlockVar.visibleWireNodes.indexOf(BlockVar.wireNodes.get(i)) != -1) {
+                                            BlockVar.visibleWireNodes.remove(BlockVar.wireNodes.get(i));
+                                        }
+                                    }
+                                }
+
+
+                            } catch (Exception e) {
+                                e.printStackTrace(); //for debug to find errors
                             }
 
 
-                            for (int i = 0; i < BlockVar.wires.size(); i++) {
-                                if (BlockVar.wires.get(i).isvisible()) {
-                                    if (BlockVar.visiblewires.indexOf(BlockVar.wires.get(i)) == -1) {
-                                        BlockVar.visiblewires.add(BlockVar.wires.get(i));
-                                    }
-                                } else {
-                                    if (BlockVar.visiblewires.indexOf(BlockVar.wires.get(i)) != -1) {
-                                        BlockVar.visiblewires.remove(BlockVar.wires.get(i));
-                                    }
-                                }
+                            //Enable or disable Wire System
+
+                            if (BlockVar.ismoving) {
+                                BlockVar.wirezulassung = false;
+                            } else {
+                                BlockVar.wirezulassung = true;
                             }
-
-                            for (int i = 0; i < BlockVar.wireNodes.size(); i++) {
-                                if (BlockVar.wireNodes.get(i).isVisible()) {
-                                    if (BlockVar.visibleWireNodes.indexOf(BlockVar.wireNodes.get(i)) == -1) {
-                                        BlockVar.visibleWireNodes.add(BlockVar.wireNodes.get(i));
-                                    }
-                                } else {
-                                    if (BlockVar.visibleWireNodes.indexOf(BlockVar.wireNodes.get(i)) != -1) {
-                                        BlockVar.visibleWireNodes.remove(BlockVar.wireNodes.get(i));
-                                    }
-                                }
-                            }
-
-
-                        } catch (Exception e) {
-                            e.printStackTrace(); //for debug to find errors
-                        }
-
-
-                        //Enable or disable Wire System
-
-                        if(BlockVar.ismoving) {
-                            BlockVar.wirezulassung = false;
-                        }else{
-                            BlockVar.wirezulassung = true;
                         }
 
                     }
