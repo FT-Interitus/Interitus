@@ -70,7 +70,11 @@ public class UI {
             } else {
                 renderer.setColor(Colors.whitearea);
             }
-            //RoundRectangle.abgerundetesRechteck(renderer, abstandvonRand, abstandvonRand, Var.w - abstandvonRand * 2 - unteneinteilung, untenhohe - abstandvonRand, radius);
+            UIVar.BlockBarX=UIVar.abstandvonRand;
+            UIVar.BlockBarY=UIVar.abstandvonRand;
+            UIVar.BlockBarW=Var.w - UIVar.abstandvonRand * 2 - UIVar.unteneinteilung;
+            UIVar.BlockBarH=UIVar.untenhohe - UIVar.abstandvonRand;
+            RoundRectangle.abgerundetesRechteck(renderer, UIVar.abstandvonRand, UIVar.abstandvonRand, UIVar.BlockBarW, UIVar.BlockBarH, UIVar.radius);
             if (Settings.darkmode) {
                 renderer.setColor(Colors.darkmode_connections);
             } else {
