@@ -45,8 +45,8 @@ public class PopupManager {
             popups.get(possiblepopup).setShow(true);
         }
         if (possiblepopup != -1) {
-            popups.get(possiblepopup).draw();
             popups.get(possiblepopup).rechtsKlickControlle();
+            popups.get(possiblepopup).draw();
         }
     }
 
