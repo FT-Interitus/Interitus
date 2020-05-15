@@ -1,7 +1,5 @@
 package de.ft.interitus.UI.input.popup;
 
-import com.badlogic.gdx.Gdx;
-
 import java.util.ArrayList;
 
 public class PopupManager {
@@ -36,14 +34,6 @@ public class PopupManager {
     }
 
     public void draw() {
-        if(Gdx.input.isButtonPressed(1)){
-            for(int i=0;i<popups.size();i++){
-                if(popups.get(i)!=popups.get(possiblepopup)) {
-                    popups.get(i).setShow(false);
-                }
-            }
-            popups.get(possiblepopup).setShow(true);
-        }
         if (possiblepopup != -1) {
             popups.get(possiblepopup).draw();
             popups.get(possiblepopup).rechtsKlickControlle();
