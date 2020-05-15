@@ -17,7 +17,7 @@ public class RechtsKlick {
         if (Gdx.input.isButtonPressed(1)) {
             for (int i = 0; i < BlockVar.visibleblocks.size(); i++) {
 
-                if (check.isMouseover(BlockVar.visibleblocks.get(i).getX(), BlockVar.visibleblocks.get(i).getY(), BlockVar.visibleblocks.get(i).getW(), BlockVar.visibleblocks.get(i).getH())) {
+                if (check.isMouseover(BlockVar.visibleblocks.get(i).getX(), BlockVar.visibleblocks.get(i).getY(), BlockVar.visibleblocks.get(i).getW(), BlockVar.visibleblocks.get(i).getH())&&BlockVar.mousehoveredwire==null) {
                     mouseoverblockindex = i;
                     mob = true;
 

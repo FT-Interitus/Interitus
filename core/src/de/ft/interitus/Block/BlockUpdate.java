@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.utils.CheckKollision;
@@ -314,15 +313,19 @@ public class BlockUpdate extends Thread {
 
                         int biggestvalue2 = 0;
                         int biggestindex2 = -1;
+
                         for (int i = 0; i < BlockVar.uberlapptmitmarkedblock.size(); i++) {
                             //if(BlockVar.uberlapptmitmarkedblock.get(i).)
 
                             //System.out.println("flaeche   " + BlockVar.uberlapptmitmarkedblock.get(i).getBlockMarkedblockuberlappungsflache() + "i:   " + i);
-                            if (BlockVar.uberlapptmitmarkedblock.get(i).getBlockMarkedblockuberlappungsflache() > biggestvalue2) {
-                                biggestvalue2 = BlockVar.uberlapptmitmarkedblock.get(i).getBlockMarkedblockuberlappungsflache(); //TODO h
-                                biggestindex2 = i;
-                            }
+                            try {
+                                if (BlockVar.uberlapptmitmarkedblock.get(i).getBlockMarkedblockuberlappungsflache() > biggestvalue2) {
+                                    biggestvalue2 = BlockVar.uberlapptmitmarkedblock.get(i).getBlockMarkedblockuberlappungsflache(); //TODO h
+                                    biggestindex2 = i;
+                                }
+                            }catch (NullPointerException e) {}
                         }
+
                         try {
                             if (BlockVar.uberlapptmitmarkedblock.get(biggestindex2) != BlockVar.blockmitdergrostenuberlappungmitmarkiertemblock) {
                                 BlockVar.blockmitdergrostenuberlappungmitmarkiertemblock = BlockVar.uberlapptmitmarkedblock.get(biggestindex2);
@@ -417,15 +420,14 @@ public class BlockUpdate extends Thread {
                                 b = BlockVar.blocks.indexOf(BlockVar.blocks.get(b).getRight());
                             }
 
-                        } catch (NullPointerException e) {
-                        }
+                        } catch (NullPointerException ignored) {}
 
 
                         block.seted = true;
                     }
 
 
-                    if (de.ft.interitus.utils.CheckKollision.checkmousewithblock(block) == false && Gdx.input.isButtonPressed(0) && !block.isMoving() && block.isMarked()) {
+                    if (!CheckKollision.checkmousewithblock(block) && Gdx.input.isButtonPressed(0) && !block.isMoving() && block.isMarked()) {
                         block.setMarked(false);
                         BlockVar.marked = false;
                         BlockVar.markedblock = null;
@@ -465,44 +467,46 @@ public class BlockUpdate extends Thread {
                             block.setShowdupulicate_rechts(false);
                         }
 
+                        try {
+                            if (CheckKollision.checkblockwithduplicate(BlockVar.markedblock, block, 1) && block.getLeft() == null && BlockVar.markedblock.getWire_right() == null) {  //TODO Fehler beheben
 
-                        if (CheckKollision.checkblockwithduplicate(BlockVar.markedblock, block, 1) && block.getLeft() == null && BlockVar.markedblock.getWire_right() == null) {  //TODO Fehler beheben
-
-                            if (BlockVar.markedblock.isMoving()) {
-
-
-                                block.setShowdupulicate_links(true);
+                                if (BlockVar.markedblock.isMoving()) {
 
 
-                            } else {
+                                    block.setShowdupulicate_links(true);
 
 
-                                if (block.getRight() != BlockVar.markedblock && BlockVar.markedblock.getLeft() != block && block.getLeft() == null && BlockVar.biggestblock == block) {
+                                } else {
 
 
-                                    block.setShowdupulicate_links(false);
+                                    if (block.getRight() != BlockVar.markedblock && BlockVar.markedblock.getLeft() != block && block.getLeft() == null && BlockVar.biggestblock == block) {
 
 
-                                    block.setWire_left(new Wire(BlockVar.markedblock, block));
-                                    BlockVar.markedblock.setWire_right(block.getWire_left());
-                                    BlockVar.wires.add(block.getWire_left());
+                                        block.setShowdupulicate_links(false);
 
 
-                                    block.setLeft(BlockVar.markedblock);
-                                    BlockVar.markedblock.setY(block.getY());
-                                    BlockVar.markedblock.setX(block.getX_dup_links());
+                                        block.setWire_left(new Wire(BlockVar.markedblock, block));
+                                        BlockVar.markedblock.setWire_right(block.getWire_left());
+                                        BlockVar.wires.add(block.getWire_left());
+
+
+                                        block.setLeft(BlockVar.markedblock);
+                                        BlockVar.markedblock.setY(block.getY());
+                                        BlockVar.markedblock.setX(block.getX_dup_links());
+                                    }
+
+
                                 }
-
-
+                            } else {
+                                block.setShowdupulicate_links(false);
                             }
-                        } else {
-                            block.setShowdupulicate_links(false);
-                        }
 
+                        }catch (NullPointerException e) {
+                            e.printStackTrace();
+                        }
                     }
                 } catch (Exception e) {
-                    DisplayErrors.error = e;
-                    e.printStackTrace(); //FOR Debug to find errors
+
                 }
 
             }
