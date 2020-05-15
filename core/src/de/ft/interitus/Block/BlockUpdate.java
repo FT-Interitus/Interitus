@@ -132,7 +132,7 @@ public class BlockUpdate extends Thread {
 
                     if (CheckKollision.checkmousewithobject((int) block.getwireconnector_right().x, (int) block.getwireconnector_right().y, 20, 20, (int) BlockVar.mousepressedold.x, (int) BlockVar.mousepressedold.y) && Gdx.input.isButtonPressed(0) && BlockVar.movingwires == null && !IsMousealreadypressed && block.getWire_right() == null) {
                         if (!(BlockVar.markedblock == block)) {
-                            if (!isconnectorclicked) {
+                            if (!isconnectorclicked&&BlockVar.wirezulassung) {
 
                                 tempwire = new Wire(block);
 
@@ -292,6 +292,8 @@ public class BlockUpdate extends Thread {
 
                     }
 
+
+
                     try {
 
 
@@ -333,29 +335,59 @@ public class BlockUpdate extends Thread {
                     }
 
 
-                    if (block == BlockVar.blockmitdergrostenuberlappungmitmarkiertemblock && block.moved == false && !geschoben) {
-                        block.moved = true;
-                        geschoben = true;
+                    try {
 
-                        int a = BlockVar.blocks.indexOf(BlockVar.blockmitdergrostenuberlappungmitmarkiertemblock);
-                        //System.out.println(a);
-                        block.setX(block.getX() + block.getW());
+                        if (block == BlockVar.blockmitdergrostenuberlappungmitmarkiertemblock && block.moved == false && !geschoben && !block.getWire_left().isSpace_between_blocks() && !block.getWire_right().isSpace_between_blocks()) {
+                            block.moved = true;
+                            geschoben = true;
 
-                        block.seted = false;
+                            int a = BlockVar.blocks.indexOf(BlockVar.blockmitdergrostenuberlappungmitmarkiertemblock);
+                            //System.out.println(a);
+                            block.setX(block.getX() + block.getW());
 
-                        try {
+                            block.seted = false;
 
-                            while (BlockVar.blocks.get(a).getRight().getIndex() != -1) {
+                            try {
 
-                                //block.getRight().setX(block.getRight().getX() + block.getW());
+                                while (BlockVar.blocks.get(a).getRight().getIndex() != -1) {
 
-                                BlockVar.blocks.get(a).getRight().setX(BlockVar.blocks.get(a).getX() + BlockVar.blocks.get(a).getW());
-                                a = BlockVar.blocks.indexOf(BlockVar.blocks.get(a).getRight());
+                                    //block.getRight().setX(block.getRight().getX() + block.getW());
+
+                                    BlockVar.blocks.get(a).getRight().setX(BlockVar.blocks.get(a).getX() + BlockVar.blocks.get(a).getW());
+                                    a = BlockVar.blocks.indexOf(BlockVar.blocks.get(a).getRight());
+                                }
+
+                            } catch (NullPointerException e) {
                             }
 
-                        } catch (NullPointerException e) {
                         }
 
+
+                    }catch (NullPointerException e) { //If there are no wires for example if you delete a block with two wires
+                        if (block == BlockVar.blockmitdergrostenuberlappungmitmarkiertemblock && block.moved == false && !geschoben) {
+                            block.moved = true;
+                            geschoben = true;
+
+                            int a = BlockVar.blocks.indexOf(BlockVar.blockmitdergrostenuberlappungmitmarkiertemblock);
+                            //System.out.println(a);
+                            block.setX(block.getX() + block.getW());
+
+                            block.seted = false;
+
+                            try {
+
+                                while (BlockVar.blocks.get(a).getRight().getIndex() != -1) {
+
+                                    //block.getRight().setX(block.getRight().getX() + block.getW());
+
+                                    BlockVar.blocks.get(a).getRight().setX(BlockVar.blocks.get(a).getX() + BlockVar.blocks.get(a).getW());
+                                    a = BlockVar.blocks.indexOf(BlockVar.blocks.get(a).getRight());
+                                }
+
+                            } catch (NullPointerException z) {
+                            }
+
+                        }
 
                     }
 
