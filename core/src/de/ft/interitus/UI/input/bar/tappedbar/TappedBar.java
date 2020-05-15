@@ -15,8 +15,6 @@ public class TappedBar {
     int height=100;
     int itemabstand=30;
     int buttonabstand=5;
-    SpriteBatch batch = new SpriteBatch();
-    ShapeRenderer renderer = new ShapeRenderer();
     BitmapFont font = new BitmapFont();
     ArrayList<TapContent>taps=new ArrayList<>();
     TapContent selectetContent=null;
@@ -41,10 +39,6 @@ public class TappedBar {
     }
 
     private void drawBar(){
-        renderer.begin(ShapeRenderer.ShapeType.Line);
-        //renderer.rect(x,y,weight,height);
-        //renderer.line(x,y,x,y+height);
-        renderer.end();
             for(int i=0;i<taps.size();i++){
                 TapContent tb=taps.get(i);
                 //Vector2 tabbuttonsize=new Vector2(64,15);
