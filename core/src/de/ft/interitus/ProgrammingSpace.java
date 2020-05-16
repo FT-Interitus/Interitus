@@ -46,11 +46,10 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
     public static SpriteBatch batch;
 
     public static OrthographicCamera cam;
+    public static OrthographicCamera UIcam;
     public static Viewport viewport;
+    public static Viewport UIviewport;
     public static Component saver;
-    //BlockUpdate bu[] = new BlockUpdate[0];
-
-
 
     public static BitmapFont font;
     public static Switch s;
@@ -68,6 +67,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
     public ProgrammingSpace() {
 
+        //TODO in einen INIT verlagern
 
         TapContent content1=new TapContent(AssetLoader.img_mappe1);
         TapBarBlockItem tbbi=new TapBarBlockItem(new Wait(),AssetLoader.img_mappe2);
@@ -82,7 +82,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
         content1.setItems(tbbi,new TapBarBlockItem(new Wait(),AssetLoader.img_mappe3),new TapBarBlockItem(new Wait(),AssetLoader.img_mappe3),new TapBarBlockItem(new Wait(),AssetLoader.img_mappe3),new TapBarBlockItem(new Wait(),AssetLoader.img_mappe3));
         tb.setContent(content1,content2,content3,content4,content5,content6);
 
-
+        //TODO in einen INIT verlagern
         popupmanager.addPopup(new PopupMenue("ein popup"));
         popupmanager.addPopup(new PopupMenue("Löschen", "Fixieren", "Umbenennen", "Befreien"));
         popupmanager.addPopup(new PopupMenue("Löschen", "Node einfügen"));
@@ -92,10 +92,14 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
         font = new BitmapFont();
         shapeRenderer = new ShapeRenderer();
         cam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        UIcam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         viewport = new ScreenViewport(cam);
+        UIviewport = new ScreenViewport(UIcam);
         batch = new SpriteBatch();
         UIbatch = new SpriteBatch();
 
+
+        de.ft.interitus.UI.Viewport.init();
 
         Gdx.graphics.setTitle("New File");
         DataManager.filename = "New File";
@@ -131,7 +135,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
 
         cam.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
-
+        UIcam.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
 
         UI.init();
 
@@ -169,7 +173,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
 
             cam.update();
-
+            UIcam.update();
 
             if (darkmode) {
                 Gdx.gl.glClearColor(60f/255f,63f/255f,65f/255f,1);
@@ -178,6 +182,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
             }
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             batch.setProjectionMatrix(cam.combined);
+            UIbatch.setProjectionMatrix(UIcam.combined);
 
 
             if (input.isKeyJustPressed(Input.Keys.INSERT)) {
@@ -278,6 +283,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
         try {
             UI.update();
+
         } catch (NullPointerException e) {
             //Falls die UI nicht richtig initialisiert werden konnte
         }
@@ -309,10 +315,10 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
         }
         viewport.update(width, height);
-
-
+        UIviewport.update(width, height);
         w = width;
         h = height;
+
 
     }
 

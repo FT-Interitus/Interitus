@@ -87,7 +87,9 @@ public class UI {
 
     public static void init() {
 
-        stage = new Stage(ProgrammingSpace.viewport, ProgrammingSpace.UIbatch);
+
+        stage = new Stage(ProgrammingSpace.UIviewport, ProgrammingSpace.UIbatch);
+
 
         root.setFillParent(true);
         stage.addActor(root);
@@ -202,9 +204,7 @@ public class UI {
         //root.setPosition(0,0);
 
 
-        root.setPosition(ProgrammingSpace.cam.position.x - ((float) Gdx.graphics.getWidth()) / 2, ProgrammingSpace.cam.position.y - ((float) Gdx.graphics.getHeight()) / 2);
-
-
+        root.setPosition(ProgrammingSpace.UIcam.position.x - ((float) Gdx.graphics.getWidth()) / 2, ProgrammingSpace.UIcam.position.y - ((float) Gdx.graphics.getHeight()) / 2);
         stage.draw();
 
         recent.setSubMenu(createSubMenu(Data.filename.size(), GetStringArray(Data.filename)));
