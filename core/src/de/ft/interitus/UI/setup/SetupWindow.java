@@ -17,6 +17,7 @@ import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.setup.steps.ArduinoSteps.Step3;
 import de.ft.interitus.UI.setup.steps.generalSteps.Step1;
 import de.ft.interitus.UI.setup.steps.generalSteps.Step2;
+import de.ft.interitus.Var;
 import de.ft.interitus.data.VerbindungsSpeicher;
 
 public class SetupWindow {
@@ -66,6 +67,8 @@ public class SetupWindow {
             setupBuilder.pack();
         }
 
+        Var.isdialogeopend= true;
+
         UI.stage.addActor(setupBuilder);
     }
 
@@ -106,7 +109,20 @@ public class SetupWindow {
             pack();
 
 
-            //TODO add here the same Listener as in new Project
+            ChangeListener listener = null;
+
+            listener =  new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    if(!testopen()) {
+                        Var.isdialogeopend = true;
+                    }else{
+                        Var.isdialogeopend = false;
+
+                    }
+                }
+            };
+            this.addListener(listener);
 
             Button_next.addListener(new ChangeListener() {
                 @Override
@@ -321,6 +337,7 @@ public class SetupWindow {
 
         public boolean testopen() {
             return super.getParent().isVisible();
+
         }
     }
 

@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.Var;
 import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.utils.CheckKollision;
 
@@ -39,11 +40,14 @@ public class BlockUpdate extends Thread {
 
     @Override
     public void run() {
+
+
         time = new Timer();
 
         time.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
+if(!Var.isdialogeopend) {
 
                 try {
 
@@ -61,7 +65,6 @@ public class BlockUpdate extends Thread {
                     //TODO
                     //TODO      Kommentierung fortsetzen (Abgebrochen da hier noch sehr viele Änderungen passieren werden)
                     //TODO
-
 
 
                     if (!isIsconnectorclicked() && BlockVar.showleftdocker && CheckKollision.object(block.getX_entrance(), block.getY_entrance(), block.getH_entrance(), block.getW_entrance(), (int) ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1) && Gdx.input.isButtonJustPressed(0) && block.getLeft() == null) { //TODO Durch das Just pressed kann es sein das es manchmal verpasst wird dieses Event auszuführen
@@ -131,7 +134,7 @@ public class BlockUpdate extends Thread {
 
                     if (CheckKollision.checkmousewithobject((int) block.getwireconnector_right().x, (int) block.getwireconnector_right().y, 20, 20, (int) BlockVar.mousepressedold.x, (int) BlockVar.mousepressedold.y) && Gdx.input.isButtonPressed(0) && BlockVar.movingwires == null && !IsMousealreadypressed && block.getWire_right() == null) {
                         if (!(BlockVar.markedblock == block)) {
-                            if (!isconnectorclicked&&BlockVar.wirezulassung) {
+                            if (!isconnectorclicked && BlockVar.wirezulassung) {
 
                                 tempwire = new Wire(block);
 
@@ -257,7 +260,7 @@ public class BlockUpdate extends Thread {
 
                     }
 
-                    if(BlockVar.markedblock==null&&block.isMarked()) {
+                    if (BlockVar.markedblock == null && block.isMarked()) {
                         block.setMarked(false);
                     }
 
@@ -292,7 +295,6 @@ public class BlockUpdate extends Thread {
                     }
 
 
-
                     try {
 
 
@@ -323,7 +325,8 @@ public class BlockUpdate extends Thread {
                                     biggestvalue2 = BlockVar.uberlapptmitmarkedblock.get(i).getBlockMarkedblockuberlappungsflache(); //TODO h
                                     biggestindex2 = i;
                                 }
-                            }catch (NullPointerException e) {}
+                            } catch (NullPointerException e) {
+                            }
                         }
 
                         try {
@@ -366,7 +369,7 @@ public class BlockUpdate extends Thread {
                         }
 
 
-                    }catch (NullPointerException e) { //If there are no wires for example if you delete a block with two wires
+                    } catch (NullPointerException e) { //If there are no wires for example if you delete a block with two wires
                         if (block == BlockVar.blockmitdergrostenuberlappungmitmarkiertemblock && block.moved == false && !geschoben) {
                             block.moved = true;
                             geschoben = true;
@@ -420,7 +423,8 @@ public class BlockUpdate extends Thread {
                                 b = BlockVar.blocks.indexOf(BlockVar.blocks.get(b).getRight());
                             }
 
-                        } catch (NullPointerException ignored) {}
+                        } catch (NullPointerException ignored) {
+                        }
 
 
                         block.seted = true;
@@ -501,13 +505,15 @@ public class BlockUpdate extends Thread {
                                 block.setShowdupulicate_links(false);
                             }
 
-                        }catch (NullPointerException e) {
+                        } catch (NullPointerException e) {
                             e.printStackTrace();
                         }
                     }
                 } catch (Exception e) {
 
                 }
+
+            }
 
             }
         }, 0, 20);

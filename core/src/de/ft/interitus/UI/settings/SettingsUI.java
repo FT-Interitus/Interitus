@@ -18,6 +18,7 @@ import com.kotcrab.vis.ui.widget.*;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.settings.subitems.*;
+import de.ft.interitus.Var;
 import de.ft.interitus.plugin.PluginManagerHandler;
 
 
@@ -31,7 +32,7 @@ public class SettingsUI extends VisWindow {
     private static boolean accepteddangerous = false;
     final VisTable container = new VisTable();
     final Padding padding = new Padding(2, 3);
-
+    ChangeListener listener = null;
     public SettingsUI() {
         super("Einstellungen");
         pack();
@@ -78,7 +79,10 @@ public class SettingsUI extends VisWindow {
 
         container.clearChildren();
         instructions.add(container);
-        testBuilder = new TestBuilder("Einstellungen", new StandardTableBuilder(padding));
+
+            testBuilder = new TestBuilder("Einstellungen", new StandardTableBuilder(padding));
+       Var.isdialogeopend=true;
+
         UI.stage.addActor(testBuilder);
 
 
@@ -354,10 +358,29 @@ public class SettingsUI extends VisWindow {
             sizeBy(600, 450);
 
             centerWindow();
-            //TODO add here the same Listener as in new Project
+
+
+
+            listener =  new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    if(!testopen()) {
+                        Var.isdialogeopend = true;
+                    }else{
+                        Var.isdialogeopend = false;
+
+                    }
+                }
+            };
+
+            this.addListener(listener);
         }
 
         public boolean testopen() {
+            if(!super.getParent().isVisible()) {
+                Var.isdialogeopend = false;
+                this.removeListener(listener);
+            }
             return super.getParent().isVisible();
 
 

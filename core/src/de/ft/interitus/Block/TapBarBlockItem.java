@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.UI.input.bar.tappedbar.TapItem;
 import de.ft.interitus.UI.input.check.Check;
+import de.ft.interitus.Var;
 import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
 
 
@@ -28,13 +29,15 @@ public class TapBarBlockItem implements TapItem {
     @Override
     public void draw() {
 
-        if(check.isJustPressedNormal(x,y,w,h)){
-            Block tempblock = new Block(BlockVar.blocks.size(),(int)ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(),Gdx.input.getY(),0)).x,(int)ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(),Gdx.input.getY(),0)).y,150,70,psb);
-            BlockVar.blocks.add(tempblock);
-            tempblock.setMarked(true);
-            tempblock.setMoving(true);
+        if(!Var.isdialogeopend) {
+            if (check.isJustPressedNormal(x, y, w, h)) {
+                Block tempblock = new Block(BlockVar.blocks.size(), (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 150, 70, psb);
+                BlockVar.blocks.add(tempblock);
+                tempblock.setMarked(true);
+                tempblock.setMoving(true);
 
-            BlockVar.unterschiedsave.set(150/2,70/2);
+                BlockVar.unterschiedsave.set(150 / 2, 70 / 2);
+            }
         }
 
         batch.begin();

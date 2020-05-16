@@ -154,9 +154,8 @@ public class NewProjectWindow {
                 }
             });
 
-            final SetupBuilder INSTANCE = this;
              ChangeListener listener = null;
-            final ChangeListener finalListener = listener;
+
             listener =  new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {

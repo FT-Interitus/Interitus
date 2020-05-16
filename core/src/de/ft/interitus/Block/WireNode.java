@@ -37,6 +37,7 @@ public class WireNode implements VisibleObjects {
     }
 
     public void draw() {
+        //TODO add movement protection if dialog is opened
 
         if (CheckKollision.checkmousewithobject(x, y, h, w, (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y) && Gdx.input.isButtonJustPressed(0)) {
 
