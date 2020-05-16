@@ -185,12 +185,6 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
             UIbatch.setProjectionMatrix(UIcam.combined);
 
 
-            if (input.isKeyJustPressed(Input.Keys.INSERT)) {
-
-                BlockVar.blocks.add(new Block(BlockVar.blocks.size(), 100, 200, 150, 70, BlockTypesVar.blocks.get(0).get(0)));
-                DataManager.change(BlockVar.blocks.get(BlockVar.blocks.size() - 1), true, false);
-            }
-
 
             UI.updatedragui(shapeRenderer, true, batch);
             UI.updatedragui(shapeRenderer, false, batch);
