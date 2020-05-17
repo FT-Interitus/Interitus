@@ -523,9 +523,9 @@ public class Block implements VisibleObjects {
                     for (int i = temp; i < BlockVar.blocks.size(); i++) { //Durch alle Indexe des Block Arrays wird durchgegangen alle die einen größeren Index haben //Durch die Temp variable kann der alte Index des Blocks hier wieder verwendet werden
                         try {
                             BlockVar.blocks.get(i).setIndex(BlockVar.blocks.get(i).getIndex() - 1); //Alle anderen Blöcke werden um einen Index verschoben
-                        } catch (Exception e) {
+                        } catch (Exception e) { //Wenn man bei Milliarden von Blöcken der erste und der zweite gelöscht werden gibt es hier fehler
                             DisplayErrors.error = e;
-                            e.printStackTrace(); //Hier können Fehler aufreten wenn die Blöcke in der zwischen Zeit gelööscht worden sind //TODO mit 1000000 Blöcke ausprobieren ob hier die Indexe richtig sich verhalten wenn man 2 blöcke löscht bevor das hier abgschlossen ist
+                            e.printStackTrace();
                         }
 
                     }

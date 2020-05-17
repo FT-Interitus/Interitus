@@ -3,11 +3,20 @@ package de.ft.interitus;
 import com.badlogic.gdx.Gdx;
 import de.ft.interitus.Block.BlockVar;
 import de.ft.interitus.UI.input.check.Check;
+import de.ft.interitus.UI.input.popup.PopupManager;
+import de.ft.interitus.UI.input.popup.PopupMenue;
 
 public class RechtsKlick {
     public static Check check = new Check();
 
     public static int mouseoverblockindex;
+    public static PopupManager popupmanager = new PopupManager();
+
+    public static void Init() {
+        popupmanager.addPopup(new PopupMenue("ein popup"));
+        popupmanager.addPopup(new PopupMenue("Löschen", "Fixieren", "Umbenennen", "Befreien"));
+        popupmanager.addPopup(new PopupMenue("Löschen", "Node einfügen"));
+    }
 
     public static void Rechtsklickupdate() {
         boolean mob = false;
@@ -34,17 +43,17 @@ public class RechtsKlick {
                 if (mob == false) { //Ist der Mauszeiger auf einem Block
                     if (mow) { //Ist die Maus auf einer Wire
                         //ProgrammingSpace.popupmanager.getPopup(1).setShow(false);
-                        ProgrammingSpace.popupmanager.setPossiblepopup(2);
+                        popupmanager.setPossiblepopup(2);
                     } else {
                         mouseoverblockindex = -1;
                         //ProgrammingSpace.popupmanager.getPopup(1).setShow(false);
-                        ProgrammingSpace.popupmanager.setPossiblepopup(0);
+                        popupmanager.setPossiblepopup(0);
                     }
                 } else {
 
 
                     //ProgrammingSpace.popupmanager.getPopup(0).setShow(false);
-                    ProgrammingSpace.popupmanager.setPossiblepopup(1);
+                    popupmanager.setPossiblepopup(1);
 
                 }
 

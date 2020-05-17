@@ -15,23 +15,18 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.BlockVar;
-import de.ft.interitus.Block.TapBarBlockItem;
 import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.input.IntegerAuswahl;
 import de.ft.interitus.UI.input.Switch;
 import de.ft.interitus.UI.input.TextField;
-import de.ft.interitus.UI.input.bar.tappedbar.TapContent;
-import de.ft.interitus.UI.input.bar.tappedbar.TappedBar;
-import de.ft.interitus.UI.input.popup.PopupManager;
-import de.ft.interitus.UI.input.popup.PopupMenue;
+import de.ft.interitus.UI.input.bar.tappedbar.BlockTappedBar;
 import de.ft.interitus.UI.settings.subitems.subitem13;
 import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.deviceconnection.arduino.PortUpdate;
 import de.ft.interitus.deviceconnection.arduino.SerialConnection;
 import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.projecttypes.device.BlockTypes.Arduino.Arduino.Wait;
 import de.ft.interitus.projecttypes.device.BlockTypes.BlockTypesVar;
 import de.ft.interitus.utils.PositionSaver;
 import de.ft.interitus.utils.animation.Animation;
@@ -59,33 +54,14 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
     public static Drawable d;
     public static Animation testanim = new Animation(new Texture("ballfeueranimation.png"), 60, 100, 100, 3);
 
-    public static PopupManager popupmanager = new PopupManager();
     public static ShapeRenderer shapeRenderer;
     IntegerAuswahl ia;
 
-    public static TappedBar tb= new TappedBar(100,100);
-
     public ProgrammingSpace() {
 
-        //TODO in einen INIT verlagern
+        RechtsKlick.Init();
+         BlockTappedBar.init();
 
-        TapContent content1=new TapContent(AssetLoader.img_mappe1);
-        TapBarBlockItem tbbi=new TapBarBlockItem(new Wait(),AssetLoader.img_mappe2);
-
-        TapContent content2=new TapContent(AssetLoader.img_mappe2);
-        TapContent content3=new TapContent(AssetLoader.img_mappe3);
-        TapContent content4=new TapContent(AssetLoader.img_mappe4);
-        TapContent content5=new TapContent(AssetLoader.img_mappe5);
-        TapContent content6=new TapContent(AssetLoader.img_mappe6);
-
-
-        content1.setItems(tbbi,new TapBarBlockItem(new Wait(),AssetLoader.img_mappe3),new TapBarBlockItem(new Wait(),AssetLoader.img_mappe3),new TapBarBlockItem(new Wait(),AssetLoader.img_mappe3),new TapBarBlockItem(new Wait(),AssetLoader.img_mappe3));
-        tb.setContent(content1,content2,content3,content4,content5,content6);
-
-        //TODO in einen INIT verlagern
-        popupmanager.addPopup(new PopupMenue("ein popup"));
-        popupmanager.addPopup(new PopupMenue("Löschen", "Fixieren", "Umbenennen", "Befreien"));
-        popupmanager.addPopup(new PopupMenue("Löschen", "Node einfügen"));
 
         ia = new IntegerAuswahl(400, 400, 50, 25);
         s = new Switch(500, 500);
@@ -115,7 +91,12 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
                     for (int i = 0; i < 1; i = i + 1) {
 
-                        BlockVar.blocks.add(new Block(i, 400, 552, 150, 70, BlockTypesVar.blocks.get(0).get(0)));
+
+                            BlockVar.blocks.add(new Block(i, 400, 552, 150, 70, BlockTypesVar.blocks.get(0).get(0)));
+
+
+
+
 
                         System.out.println(i);
                         //  MainGame.logger.finest(String.valueOf(i));
@@ -189,9 +170,9 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
             UI.updatedragui(shapeRenderer, true, batch);
             UI.updatedragui(shapeRenderer, false, batch);
 
-            tb.setX(UIVar.BlockBarX+UIVar.BlockBarW/2);
-            tb.setY(UIVar.BlockBarY+UIVar.BlockBarH/2-(tb.getHeight()+UIVar.abstandvonRand*2)/2);
-            tb.draw();
+            BlockTappedBar.tb.setX(UIVar.BlockBarX+UIVar.BlockBarW/2);
+            BlockTappedBar.tb.setY(UIVar.BlockBarY+UIVar.BlockBarH/2-(BlockTappedBar.tb.getHeight()+UIVar.abstandvonRand*2)/2);
+            BlockTappedBar.tb.draw();
             if (!Var.isloading) {
                 Block Temp = null;
                 for (int i = 0; i < BlockVar.visibleblocks.size(); i = i + 1) {
@@ -287,7 +268,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 //batch.draw(testanim.getAnimation(),50,50);
         // pm.setBounds(700,200);
 
-        popupmanager.draw(); //Show Popups
+        RechtsKlick.popupmanager.draw(); //Show Popups
 
         DisplayErrors.checkerror(); //Check if there are undisplayed Images
 

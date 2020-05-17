@@ -33,7 +33,7 @@ public class NetworkScan {
                 for (int i = 0; i < 255; i++) {
                     InetAddress testdevice = InetAddress.getByName("192.168." + ip + "." + i);
 
-                    if (testdevice.isReachable(60)) { //TODO bester wert ermittlen
+                    if (testdevice.isReachable(60)) {
                         device.add(testdevice);
                     }
 

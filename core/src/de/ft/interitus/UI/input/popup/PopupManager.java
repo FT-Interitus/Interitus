@@ -13,7 +13,6 @@ public class PopupManager {
         for(int i=0;i<popups.size();i++){
             if(popups.get(i).isShow()){
                 blub=true;
-                System.out.println("PUPUPOFFEN");
             }
         }
     return blub;

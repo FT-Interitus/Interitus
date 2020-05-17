@@ -398,7 +398,7 @@ if(!Var.isdialogeopend) {
                     }
 
                     if (block.seted == false && BlockVar.biggestblock == block && !Gdx.input.isButtonPressed(0)) { //TODO flackern wegmachen!
-//System.out.println("funzt");
+
                         block.seted = true;
                         geschoben = false;
                     }
@@ -406,7 +406,6 @@ if(!Var.isdialogeopend) {
                     if (block.seted == false && BlockVar.biggestblock != block) {
                         geschoben = false;
 
-                        // System.out.println("jezt muss das ruckgangig gemacht werdn");
 
                         int b = BlockVar.blocks.indexOf(block);
 

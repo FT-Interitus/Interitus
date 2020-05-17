@@ -72,7 +72,7 @@ public class IntegerAuswahl {
             buttonOben.draw();
             buttonUnten.draw();
             b.begin();
-            font.draw(b, "" + value, x + 5, y + font.getLineHeight()); //TODO @Felix hier NullPointer manchmal
+            font.draw(b, "" + value, x + 5, y + font.getLineHeight());
             b.end();
         }
     }
