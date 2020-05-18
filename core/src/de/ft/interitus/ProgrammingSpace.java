@@ -168,13 +168,12 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
 
             UI.updatedragui(shapeRenderer, true, batch);
-            UI.updatedragui(shapeRenderer, false, batch);
 
-            BlockTappedBar.tb.setX(UIVar.BlockBarX+UIVar.BlockBarW/2);
-            BlockTappedBar.tb.setY(UIVar.BlockBarY+UIVar.BlockBarH/2-(BlockTappedBar.tb.getHeight()+UIVar.abstandvonRand*2)/2);
-            BlockTappedBar.tb.draw();
+
+
             if (!Var.isloading) {
                 Block Temp = null;
+                Block Temp2 = null;
                 for (int i = 0; i < BlockVar.visibleblocks.size(); i = i + 1) {
                     try {
                         batch.begin();
@@ -185,7 +184,11 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
                     try {
                         if (BlockVar.visibleblocks.get(i).isMarked()) {
-                            Temp = BlockVar.visibleblocks.get(i);
+                            if(BlockVar.visibleblocks.get(i).isMoving()) {
+                                Temp2 = BlockVar.visibleblocks.get(i);
+                            }else {
+                                Temp = BlockVar.visibleblocks.get(i);
+                            }
                         } else {
                             BlockVar.visibleblocks.get(i).draw(batch, shapeRenderer, font);
                         }
@@ -202,18 +205,38 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
                         }
 
 
-                        if (Temp != null) {
-
-                            batch.begin();
-                            Temp.draw(batch, shapeRenderer, font);
-                            batch.end();
-                        }
-
-
                     } catch (Exception e) {
+e.printStackTrace();
+                    }
+                }
+                if (Temp != null) {
+
+                    try {
+                        batch.begin();
+                        Temp.draw(batch, shapeRenderer, font);
+                        batch.end();
+                    }catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                UI.updatedragui(shapeRenderer, false, batch);
+                BlockTappedBar.tb.setX(UIVar.BlockBarX+UIVar.BlockBarW/2);
+                BlockTappedBar.tb.setY(UIVar.BlockBarY+UIVar.BlockBarH/2-(BlockTappedBar.tb.getHeight()+UIVar.abstandvonRand*2)/2);
+                BlockTappedBar.tb.draw();
+
+                if (Temp2 != null) {
+
+                    try {
+                        batch.begin();
+                        Temp2.draw(batch, shapeRenderer, font);
+                        batch.end();
+                    }catch (Exception e) {
 
                     }
                 }
+
+
             }
 
 
