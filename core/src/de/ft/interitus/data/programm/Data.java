@@ -41,6 +41,8 @@ public class Data {
         File settings = new File(System.getProperty("user.home") + "/.itd/settings.json"); // JSON file in dem alle Einstellungen gespeichert werden
         File knowndevices = new File(System.getProperty("user.home") + "/.itd/devices.json"); //JSON file in dem alle konfigurierten Geräte gespeichert werden
         File userexperience = new File(System.getProperty("user.home") + "/.itd/experience.json"); //JSON file in dem User Analytics gespeichert werden
+        File tastenkombinationen = new File(System.getProperty("user.home") + "/.itd/tastenkombinationen.json"); //JSON file in dem User Analytics gespeichert werden
+
         Path path = folder.toPath();
         if (!folder.exists()) {//Wenn der Programm-Ordner noch nicht exsitiert
             System.out.println("Create Programm Data Folder");
@@ -68,7 +70,14 @@ public class Data {
             }
 
             try {
-                userexperience.createNewFile();//Die datei für die bekannten Geröte wird erstellt
+                userexperience.createNewFile();//Die datei für die bekannten Geräte wird erstellt
+            } catch (IOException e) {
+                e.printStackTrace();
+                DisplayErrors.error = e;
+            }
+
+            try {
+                tastenkombinationen.createNewFile();//Die datei für die tastenkombinationen wird erstellt
             } catch (IOException e) {
                 e.printStackTrace();
                 DisplayErrors.error = e;
@@ -208,6 +217,39 @@ public class Data {
                     ExperienceVar.settingstimeinhoures = obj.getDouble("settingstime");
                     ExperienceVar.setuptimeinhoures = obj.getDouble("setuptime");
                     ExperienceVar.starttimes = obj.getInt("starttimes");
+                    //////////// *.* = obj.getInt();/////////////
+
+                    //TODO device laden mit attributen
+
+                } catch (JSONException e) {
+
+                }
+
+
+            }
+
+            if (!tastenkombinationen.exists()) { //siehe recent
+                try {
+                    tastenkombinationen.createNewFile();
+                    Gdx.files.absolute(tastenkombinationen.getAbsolutePath()).writeString("{}", false); //siehe recent
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+
+                try {
+                    FileHandle se = Gdx.files.absolute(System.getProperty("user.home") + "/.itd/tastenkombinationen.json");
+                    if (se.readString() == "") {
+                        se.writeString("{}", false);
+                        return;
+                    }
+                    JSONObject obj = new JSONObject(se.readString());
+
+                    //Datei Lesen:
+                    ////////////////////////////////////////////////////////////////////////////////////////////////////
+                    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
                     //////////// *.* = obj.getInt();/////////////
 
                     //TODO device laden mit attributen
