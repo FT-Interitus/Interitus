@@ -249,7 +249,7 @@ public class ev3 {
                 break;
             }
         }
-        LibUsb.freeDeviceList(list, true);
+        LibUsb.freeDeviceList(list,false);
         if (!found) throw new RuntimeException("Lego EV3 device not found.");
 
         handle = new DeviceHandle();
