@@ -36,6 +36,7 @@ public class DesktopLauncher {
 
 			LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 			config.useGL30 = false;
+			config.allowSoftwareMode = true;
 			config.width = Var.w;
 			config.height = Var.h;
 			config.vSyncEnabled = false;

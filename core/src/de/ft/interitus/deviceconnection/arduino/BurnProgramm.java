@@ -79,7 +79,7 @@ public class BurnProgramm {
 
         port = "/dev/" + port;
         try {
-            Process pr = rt.exec("./libs/avrdude -Clibs/avrdude.conf -v -p" + platform + " -c " + methode + " -P" + port + " -b115200 -D -Uflash:w:libs/" + file + ":i"); //TODO Progress
+            Process pr = rt.exec("./libs/arduino/avrdude -Clibs/arduino/avrdude.conf -v -p" + platform + " -c " + methode + " -P" + port + " -b115200 -D -Uflash:w:libs/arduino/" + file + ":i"); //TODO Progress
 
 
             BufferedReader input = new BufferedReader(new InputStreamReader(pr.getErrorStream()));
@@ -111,7 +111,7 @@ public class BurnProgramm {
 
         port = "" + port;
         try {
-            Process pr = rt.exec("libs\\avrdude.exe -C libs\\avrdude.conf -v -p " + platform + " -c" + methode + " -P" + port + " -b115200 -D -Uflash:w:libs\\" + file + ":i"); //TODO Progress
+            Process pr = rt.exec("libs\\arduino\\avrdude.exe -C libs\\arduino\\avrdude.conf -v -p " + platform + " -c" + methode + " -P" + port + " -b115200 -D -Uflash:w:libs\\arduino\\" + file + ":i"); //TODO Progress
 
 
             BufferedReader input = new BufferedReader(new InputStreamReader(pr.getErrorStream()));
@@ -138,7 +138,7 @@ public class BurnProgramm {
 
         port = "/dev/" + port;
         try {
-            Process pr = rt.exec("libs/avrdudeapple -C libs/avrdude.conf -v -p " + platform + " -c" + methode + " -P" + port + " -b115200 -D -Uflash:w:libs/" + file + ":i"); //TODO Progress
+            Process pr = rt.exec("libs/arduino/avrdudeapple -C libs/arduino/avrdude.conf -v -p " + platform + " -c" + methode + " -P" + port + " -b115200 -D -Uflash:w:libs/arduino/" + file + ":i"); //TODO Progress
 
 
             BufferedReader input = new BufferedReader(new InputStreamReader(pr.getErrorStream()));
