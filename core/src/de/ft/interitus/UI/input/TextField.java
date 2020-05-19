@@ -49,13 +49,13 @@ public class TextField {
                         input = input + key;
                     }
                 }
-                return true;
+                return false;
             }
 
             @Override
             public boolean touchDown(int x, int y, int pointer, int button) {
 
-                return true;
+                return false;
             }
         });
         InputManager.updateMultiplexer();

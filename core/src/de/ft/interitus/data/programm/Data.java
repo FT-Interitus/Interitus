@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Settings;
+import de.ft.interitus.UI.input.shortcut.ShortCut;
 import de.ft.interitus.data.user.experience.ExperienceManager;
 import de.ft.interitus.data.user.experience.ExperienceVar;
 import org.json.JSONException;

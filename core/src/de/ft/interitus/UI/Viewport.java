@@ -34,6 +34,8 @@ public class Viewport {
 
             }
         });
+
+        InputManager.updateMultiplexer();
     }
 
     public static void update() {
