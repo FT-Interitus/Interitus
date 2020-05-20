@@ -7,17 +7,28 @@ import de.ft.interitus.ProgrammingSpace;
 import java.util.ArrayList;
 
 public class ShortCut {
+    String name=null;
     boolean disable=false;
     ArrayList<Integer>kombination=new ArrayList<>();
     public ShortCut(int... kombination) {
         for(int i=0;i<kombination.length;i++){
              this.kombination.add(kombination[i]);
         }
-
-
-
+    }
+    public ShortCut(String name,int... kombination) {
+        this.name=name;
+        for(int i=0;i<kombination.length;i++){
+            this.kombination.add(kombination[i]);
+        }
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public void setShortCut(int... kombination) {
         for(int i=0;i<kombination.length;i++){

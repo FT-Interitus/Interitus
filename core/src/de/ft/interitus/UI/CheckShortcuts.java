@@ -14,17 +14,34 @@ import de.ft.interitus.data.user.DataSaver;
 import de.ft.interitus.data.user.LoadSave;
 import de.ft.interitus.data.user.changes.DataManager;
 
+import java.util.ArrayList;
+
 public class CheckShortcuts {
     public static boolean blockshortcuts = false;
-    public static ShortCut shortCut_newprojektwindow=new ShortCut(SpecialKeys.dualStrg,Input.Keys.N);
-    public static ShortCut shortCut_oefnen=new ShortCut(SpecialKeys.dualStrg, Input.Keys.O);
-    public static ShortCut shortCut_speichern=new ShortCut(SpecialKeys.dualStrg, Input.Keys.S);
-    public static ShortCut shortCut_speichern_unter=new ShortCut(SpecialKeys.dualStrg, SpecialKeys.dualShift, Input.Keys.S);
-    public static ShortCut shortCut_vollbild=new ShortCut(Input.Keys.F11);
+    public static ShortCut shortCut_newprojektwindow=new ShortCut("Neues Projekt",SpecialKeys.dualStrg,Input.Keys.N);
+    public static ShortCut shortCut_oefnen=new ShortCut("öffnen",SpecialKeys.dualStrg, Input.Keys.O);
+    public static ShortCut shortCut_speichern=new ShortCut("speichern",SpecialKeys.dualStrg, Input.Keys.S);
+    public static ShortCut shortCut_speichern_unter=new ShortCut("speichern unter",SpecialKeys.dualStrg, SpecialKeys.dualShift, Input.Keys.S);
+    public static ShortCut shortCut_vollbild=new ShortCut("vollbild",Input.Keys.F11);
 
+    public static boolean einmalausführen=true;
 
+    public static ArrayList<ShortCut>shortCuts=new ArrayList<>();
+
+    public static void loadArryList(){
+        shortCuts.clear();
+        shortCuts.add(shortCut_newprojektwindow);
+        shortCuts.add(shortCut_oefnen);
+        shortCuts.add(shortCut_speichern);
+        shortCuts.add(shortCut_speichern_unter);
+        shortCuts.add(shortCut_vollbild);
+    }
 
     public static void check() {
+        if(einmalausführen)
+            loadArryList();
+
+
         if(shortCut_vollbild.isPressed()){
             if (MenuBar.fullscreen == false) {
                 Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
