@@ -1,8 +1,7 @@
-package de.ft.interitus.UI.input;
+package de.ft.interitus.UI.inputfields;
 
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
-import de.ft.interitus.UI.input.check.InputManager;
+import de.ft.interitus.UI.inputfields.check.InputManager;
 
 import java.util.ArrayList;
 

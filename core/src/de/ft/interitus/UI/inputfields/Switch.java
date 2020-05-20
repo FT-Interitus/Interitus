@@ -1,9 +1,9 @@
-package de.ft.interitus.UI.input;
+package de.ft.interitus.UI.inputfields;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import de.ft.interitus.UI.input.check.Check;
+import de.ft.interitus.UI.inputfields.check.Check;
 
 import java.util.Random;
 

@@ -1,7 +1,4 @@
-package de.ft.interitus.UI.input;
-
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
+package de.ft.interitus.UI.inputfields;
 
 public class SpecialKeys {
     public static final int dualStrg=600;

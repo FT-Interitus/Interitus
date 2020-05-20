@@ -1,11 +1,6 @@
-package de.ft.interitus.UI.input.shortcut;
+package de.ft.interitus.UI.shortcut;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputAdapter;
-import de.ft.interitus.Programm;
 import de.ft.interitus.ProgrammingSpace;
-import de.ft.interitus.UI.input.check.InputManager;
 
 import java.util.ArrayList;
 
@@ -55,7 +50,6 @@ if(!disable) {
     }*/
 for(int i=0;i<kombination.size();i++) {
     if (ProgrammingSpace.pressedKeys.getPressedkeys().indexOf(kombination.get(i)) == -1) {
-        System.out.println("blublubblubblubblab");
         pressed = false;
     }
 }

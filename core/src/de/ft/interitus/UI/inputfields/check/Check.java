@@ -1,4 +1,4 @@
-package de.ft.interitus.UI.input.check;
+package de.ft.interitus.UI.inputfields.check;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;

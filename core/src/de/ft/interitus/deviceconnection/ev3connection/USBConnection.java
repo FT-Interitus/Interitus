@@ -36,21 +36,39 @@ public class USBConnection {
 
 
             command.clear();
-            //command.addAll(Operations.playTone(100, i, 100-i/5));
+           // command.addAll(Operations.playTone(100, 600, 100));
 
+//command.addAll(Operations.blockbackbutton(true));
+        //command.addAll(Operations.updateev3screen());
 
-       // command.addAll(Operations.loadProgrammFiles(1,"../apps/Motor Control/Motor Control.rbf",0,4));
-       // command.addAll(Operations.startProgramm(1,0,4,false));
+      //command.addAll(Operations.stopProgramm(0));
+       // command.addAll(Operations.updateev3screen());
+     //   while(true) {
+            //command.addAll(Operations.releaseKey(ev3.LEFT_BUTTON));
+        //command.addAll(Operations.setbrickname("Tim"));
+//command.addAll(Operations.setbrickname("Hallo"));
 
-        command.addAll(Operations.updateev3screen());
-
-            ev3.sendcommand(command,0,0);
-
+        ev3.sendcommand(command, 0, 0);
+        command.clear();
             try {
-                TimeUnit.MILLISECONDS.sleep(1000);
+                TimeUnit.MILLISECONDS.sleep(7000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+      //  command.addAll(Operations.loadProgrammFiles(4,"../prjs/newUI/test.rbf",0,4));
+       // command.addAll(Operations.startProgramm(4,0,4,false));
+
+      //  ev3.sendcommand(command, 10, 10);
+       // command.clear();
+       // try {
+      //      TimeUnit.MILLISECONDS.sleep(7000);
+      //  } catch (InterruptedException e) {
+     ///       e.printStackTrace();
+     ///   }
+     ///   command.addAll(Operations.stopProgramm(0));
+     //   ev3.sendcommand(command, 10, 10);
+           // command.clear();
+       // }
 
         //command.addAll(Operations.playSound("./ui/DownloadSucces",100,false));
        // command.addAll(Operations.setbrickname("MyEv3"));

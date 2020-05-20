@@ -1,6 +1,4 @@
-package de.ft.interitus.UI.input.bar.tappedbar;
-
-import com.badlogic.gdx.graphics.Texture;
+package de.ft.interitus.UI.tappedbar;
 
 public interface TapItem {
     void draw();

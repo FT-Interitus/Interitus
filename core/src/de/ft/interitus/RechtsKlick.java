@@ -2,9 +2,9 @@ package de.ft.interitus;
 
 import com.badlogic.gdx.Gdx;
 import de.ft.interitus.Block.BlockVar;
-import de.ft.interitus.UI.input.check.Check;
-import de.ft.interitus.UI.input.popup.PopupManager;
-import de.ft.interitus.UI.input.popup.PopupMenue;
+import de.ft.interitus.UI.inputfields.check.Check;
+import de.ft.interitus.UI.popup.PopupManager;
+import de.ft.interitus.UI.popup.PopupMenue;
 
 public class RechtsKlick {
     public static Check check = new Check();

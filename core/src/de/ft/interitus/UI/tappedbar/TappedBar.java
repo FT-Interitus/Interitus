@@ -1,9 +1,7 @@
-package de.ft.interitus.UI.input.bar.tappedbar;
+package de.ft.interitus.UI.tappedbar;
 
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import java.util.ArrayList;
 

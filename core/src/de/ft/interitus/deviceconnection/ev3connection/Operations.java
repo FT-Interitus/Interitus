@@ -4,6 +4,16 @@ import java.util.ArrayList;
 
 public class Operations {
 
+    public static ArrayList<Byte> stopProgramm(int Slot) {
+        ArrayList<Byte> b = new ArrayList<>();
+        b.add(ev3.opProgram_Stop);
+        byte[] temp1 = ev3.LCX(Slot);
+
+        for(int i=0;i<temp1.length;i++) {
+            b.add(temp1[i]);
+        }
+        return b;
+    }
 
     public static ArrayList<Byte> startProgramm(int Slot, int size,int ProgrammReferenzNumber,boolean debug) {
 
@@ -106,6 +116,55 @@ public class Operations {
             b.add(temp2[i]);
         }
 
+
+        return b;
+    }
+    public static ArrayList<Byte> blockscreen(boolean block) {
+        ArrayList<Byte> b = new ArrayList<>();
+        b.add(ev3.opUI_Write);
+        b.add(ev3.SCREEN_BLOCK);
+        byte[] temp;
+        if (block) {
+            temp = ev3.LCX(1);
+
+        } else {
+            temp = ev3.LCX(0);
+        }
+        for (int i = 0; i < temp.length; i++) {
+            b.add(temp[i]);
+        }
+
+        return b;
+    }
+    public static ArrayList<Byte> blockbackbutton(boolean disable) {
+        ArrayList<Byte> b = new ArrayList<>();
+        b.add(ev3.opUI_Button);
+        b.add(ev3.SET_BACK_BLOCK);
+        byte[] temp;
+        if (disable) {
+            temp = ev3.LCX(1);
+
+        } else {
+            temp = ev3.LCX(0);
+        }
+        for (int i = 0; i < temp.length; i++) {
+            b.add(temp[i]);
+        }
+
+        return b;
+    }
+
+    public static ArrayList<Byte> releaseKey(byte Key) {
+        ArrayList<Byte> b = new ArrayList<>();
+        b.add(ev3.opUI_Write);
+        b.add(ev3.RELEASE);
+        b.add(Key);
+        return b;
+    }
+    public static ArrayList<Byte> getblockbackbutton() {
+        ArrayList<Byte> b = new ArrayList<>();
+        b.add(ev3.opUI_Write);
+        b.add(ev3.GET_BACK_BLOCK);
 
         return b;
     }

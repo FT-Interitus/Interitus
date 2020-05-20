@@ -5,8 +5,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.ProgrammingSpace;
-import de.ft.interitus.UI.input.bar.tappedbar.TapItem;
-import de.ft.interitus.UI.input.check.Check;
+import de.ft.interitus.UI.inputfields.check.Check;
+import de.ft.interitus.UI.tappedbar.TapItem;
 import de.ft.interitus.Var;
 import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
 
