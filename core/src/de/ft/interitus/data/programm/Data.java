@@ -258,8 +258,8 @@ public class Data {
 
                     System.out.println("Tastenkombinationen"+i);
                     for (int a = 0; a < i; a++) { //Wird durch alle tastenkombinationen durchgegangen
-                        Data.path.add(obj.getString("tastenkombination" + a)); //tastenkombination wird zum Array hinzugefügt
-                        Data.filename.add(obj.getString("filename" + a)); //Name wird zum Array hinzugefügt
+                        //Data.path.add(obj.getString("tastenkombination" + a)); //tastenkombination wird zum Array hinzugefügt
+                        //Data.filename.add(obj.getString("filename" + a)); //Name wird zum Array hinzugefügt
                     }
                     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
