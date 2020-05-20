@@ -1,7 +1,7 @@
-package de.ft.interitus.UI.input.bar.tappedbar;
+package de.ft.interitus.UI.tappedbar;
 
 import com.badlogic.gdx.graphics.Texture;
-import de.ft.interitus.UI.input.Button;
+import de.ft.interitus.UI.inputfields.Button;
 
 import java.util.ArrayList;
 

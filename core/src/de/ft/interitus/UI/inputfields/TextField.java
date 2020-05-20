@@ -1,4 +1,4 @@
-package de.ft.interitus.UI.input;
+package de.ft.interitus.UI.inputfields;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -7,8 +7,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import de.ft.interitus.UI.input.check.Check;
-import de.ft.interitus.UI.input.check.InputManager;
+import de.ft.interitus.UI.inputfields.check.Check;
+import de.ft.interitus.UI.inputfields.check.InputManager;
 
 public class TextField {
 

@@ -1,4 +1,4 @@
-package de.ft.interitus.UI.input;
+package de.ft.interitus.UI.inputfields;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;

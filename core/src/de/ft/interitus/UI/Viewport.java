@@ -3,7 +3,7 @@ package de.ft.interitus.UI;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import de.ft.interitus.ProgrammingSpace;
-import de.ft.interitus.UI.input.check.InputManager;
+import de.ft.interitus.UI.inputfields.check.InputManager;
 
 import static com.badlogic.gdx.Gdx.input;
 

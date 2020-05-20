@@ -1,4 +1,4 @@
-package de.ft.interitus.UI.input.popup;
+package de.ft.interitus.UI.popup;
 
 import com.badlogic.gdx.Gdx;
 

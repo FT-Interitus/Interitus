@@ -1,6 +1,6 @@
 package de.ft.interitus.events.rightclick;
 
-import de.ft.interitus.UI.input.popup.PopupMenue;
+import de.ft.interitus.UI.popup.PopupMenue;
 
 import java.util.EventObject;
 

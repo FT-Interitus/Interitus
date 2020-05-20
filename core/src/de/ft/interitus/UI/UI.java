@@ -12,7 +12,7 @@ import com.kotcrab.vis.ui.widget.MenuItem;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.Settings;
-import de.ft.interitus.UI.input.check.InputManager;
+import de.ft.interitus.UI.inputfields.check.InputManager;
 import de.ft.interitus.UI.settings.SettingsUI;
 import de.ft.interitus.UI.setup.SetupWindow;
 import de.ft.interitus.Var;

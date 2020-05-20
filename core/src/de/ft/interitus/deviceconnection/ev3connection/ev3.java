@@ -41,6 +41,7 @@ public class ev3 {
     static final byte opFile = (byte) 0xC0;
 
     static final byte opProgram_Start = (byte) 0x03;
+    static final byte opProgram_Stop = (byte) 0x02;
 
 
 
@@ -62,6 +63,10 @@ public class ev3 {
     static final byte RED_FLASH_TWO_TIMES = (byte) 0x08;
     static final byte ORANGE_FLASH_TWO_TIMES = (byte) 0x09;
 
+    static final byte SET_BACK_BLOCK = (byte) 0x0A;
+    static final byte GET_BACK_BLOCK = (byte) 0x0B;
+    static final byte SCREEN_BLOCK = (byte) 0x10;
+
     static final byte UPDATE = (byte) 0x00;
     static final byte TOPLINE = (byte) 0x12;
     static final byte FILLWINDOW = (byte) 0x13;
@@ -70,8 +75,18 @@ public class ev3 {
 
     static final byte LOAD_IMAGE = (byte) 0x08;
 
-    static final byte PRESS = (byte) 0x05;
 
+    static final byte PRESS = (byte) 0x05;
+    static final byte RELEASE = (byte) 0x06;
+
+    static final byte NO_BUTTON = (byte) 0x00;
+    static final byte UP_BUTTON = (byte) 0x01;
+    static final byte ENTER_BUTTON = (byte) 0x02;
+    static final byte DOWN_BUTTON = (byte) 0x03;
+    static final byte RIGHT_BUTTON = (byte) 0x04;
+    static final byte LEFT_BUTTON = (byte) 0x05;
+    static final byte BACK_BUTTON = (byte) 0x06;
+    static final byte ANY_BUTTON = (byte) 0x07;
 
 
     public static byte[] LCS(String string) {
@@ -270,7 +285,37 @@ public class ev3 {
             throw new LibUsbException("Unable to claim interface", result);
         }
     }
+    private static ByteBuffer sendSystemCmd(ArrayList<Byte> operations) { //TODO inarbeit
+        ByteBuffer buffer = ByteBuffer.allocateDirect(operations.size() + 7);
+        buffer.order(ByteOrder.LITTLE_ENDIAN);
+        buffer.putShort((short) 0x01);   // length
+        buffer.putShort((short) 0xA0);                            // counter
+        buffer.put(DIRECT_COMMAND_REPLY);                       // legth of creare
 
+
+        for (int i = 0; i < operations.size(); i++) {         // operations
+            buffer.put(operations.get(i));
+        }
+
+
+        IntBuffer transferred = IntBuffer.allocate(1);
+        int result = LibUsb.bulkTransfer(handle, EP_OUT, buffer, transferred, 100);
+        if (result != LibUsb.SUCCESS) {
+            throw new LibUsbException("Unable to write data", transferred.get(0));
+        }
+        printHex("Sent", buffer);
+
+        buffer = ByteBuffer.allocateDirect(1024);
+        transferred = IntBuffer.allocate(1);
+        result = LibUsb.bulkTransfer(handle, EP_IN, buffer, transferred, 100);
+
+        if (result != LibUsb.SUCCESS) {
+            System.out.println("Restart EV3!");
+        }
+
+        printHex("Recv", buffer);
+        return buffer;
+    }
     private static ByteBuffer sendDirectCmd(ArrayList<Byte> operations,
                                             int local_mem, int global_mem) {
         ByteBuffer buffer = ByteBuffer.allocateDirect(operations.size() + 7);
@@ -326,5 +371,9 @@ public class ev3 {
     public static void sendcommand(ArrayList<Byte> command,int local_mem,int global_mem) {
         ByteBuffer reply = sendDirectCmd(command, local_mem, global_mem);
     }
+    public static void sendsystemcommand(ArrayList<Byte> command) {
+        ByteBuffer reply = sendSystemCmd(command);
+    }
+
 
 }

@@ -1,4 +1,4 @@
-package de.ft.interitus.UI.input.bar.tappedbar;
+package de.ft.interitus.UI.tappedbar;
 
 import de.ft.interitus.Block.TapBarBlockItem;
 import de.ft.interitus.loading.AssetLoader;
