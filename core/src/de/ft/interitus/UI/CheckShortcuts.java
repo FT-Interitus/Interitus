@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.files.FileHandle;
 import com.kotcrab.vis.ui.util.dialog.ConfirmDialogListener;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
+import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.UI.shortcut.SpecialKeys;
 import de.ft.interitus.UI.newproject.NewProjectWindow;
 import de.ft.interitus.UI.shortcut.ShortCut;
@@ -19,11 +20,22 @@ public class CheckShortcuts {
     public static ShortCut shortCut_oefnen=new ShortCut(SpecialKeys.dualStrg, Input.Keys.O);
     public static ShortCut shortCut_speichern=new ShortCut(SpecialKeys.dualStrg, Input.Keys.S);
     public static ShortCut shortCut_speichern_unter=new ShortCut(SpecialKeys.dualStrg, SpecialKeys.dualShift, Input.Keys.S);
+    public static ShortCut shortCut_vollbild=new ShortCut(Input.Keys.F11);
 
 
 
     public static void check() {
-
+        if(shortCut_vollbild.isPressed()){
+            if (MenuBar.fullscreen == false) {
+                Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
+                MenuBar.fullscreen = true;
+            } else {
+                Gdx.graphics.setWindowedMode(Var.w, Var.h);
+                ProgrammingSpace.batch.getProjectionMatrix().setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                Gdx.gl.glViewport(0, 0, Gdx.graphics.getBackBufferWidth(), Gdx.graphics.getBackBufferHeight());
+                MenuBar.fullscreen = false;
+            }
+        }
         if(shortCut_newprojektwindow.isPressed()){
             NewProjectWindow NPW = new NewProjectWindow();
             NPW.show();
