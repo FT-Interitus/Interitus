@@ -3,6 +3,8 @@ package de.ft.interitus.UI.input.shortcut;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
+import de.ft.interitus.Programm;
+import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.UI.input.check.InputManager;
 
 import java.util.ArrayList;
@@ -15,32 +17,6 @@ public class ShortCut {
              this.kombination.add(kombination[i]);
         }
 
-
-
-        InputManager.addProcessor(new InputAdapter() {
-            @Override
-            public boolean keyDown(int keycode) {
-                System.out.println("keyDown  "+Input.Keys.toString(keycode));
-                return super.keyDown(keycode);
-            }
-
-            @Override
-            public boolean keyUp(int keycode) {
-                return super.keyUp(keycode);
-            }
-
-            @Override
-            public boolean keyTyped(char key) {
-                return super.keyTyped(key);
-            }
-
-            @Override
-            public boolean touchDown(int x, int y, int pointer, int button) {
-
-                return super.touchDown(x,y,pointer,button);
-            }
-        });
-        InputManager.updateMultiplexer();
 
 
     }
@@ -56,7 +32,7 @@ public class ShortCut {
     public boolean isPressed(){
         boolean pressed=true;
 if(!disable) {
-    for (int i = 0; i < kombination.size(); i++) {
+   /* for (int i = 0; i < kombination.size(); i++) {
 
         if(kombination.get(i)<600) {
             if (!Gdx.input.isKeyPressed(kombination.get(i))) {
@@ -76,7 +52,17 @@ if(!disable) {
                     break;
             }
         }
+    }*/
+for(int i=0;i<kombination.size();i++) {
+    if (ProgrammingSpace.pressedKeys.getPressedkeys().indexOf(kombination.get(i)) == -1) {
+        System.out.println("blublubblubblubblab");
+        pressed = false;
     }
+}
+if(kombination.size()!=ProgrammingSpace.pressedKeys.getPressedkeys().size()){
+    pressed=false;
+}
+
 }else{
     pressed=false;
 }

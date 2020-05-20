@@ -19,6 +19,7 @@ import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.input.IntegerAuswahl;
+import de.ft.interitus.UI.input.PressedKeys;
 import de.ft.interitus.UI.input.Switch;
 import de.ft.interitus.UI.input.TextField;
 import de.ft.interitus.UI.input.bar.tappedbar.BlockTappedBar;
@@ -57,8 +58,10 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
     public static ShapeRenderer shapeRenderer;
     IntegerAuswahl ia;
 
-    public ProgrammingSpace() {
+    public static PressedKeys pressedKeys;
 
+    public ProgrammingSpace() {
+        pressedKeys=new PressedKeys();
         RechtsKlick.Init();
          BlockTappedBar.init();
 
