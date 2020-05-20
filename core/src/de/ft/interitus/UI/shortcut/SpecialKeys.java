@@ -1,4 +1,4 @@
-package de.ft.interitus.UI.inputfields;
+package de.ft.interitus.UI.shortcut;
 
 public class SpecialKeys {
     public static final int dualStrg=600;
