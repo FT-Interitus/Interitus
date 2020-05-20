@@ -1,4 +1,4 @@
-package de.ft.interitus.UI.input;
+package de.ft.interitus.UI.input.shortcut;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
