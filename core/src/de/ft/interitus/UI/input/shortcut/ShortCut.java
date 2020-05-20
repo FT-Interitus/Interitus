@@ -32,13 +32,31 @@ public class ShortCut {
     public boolean isPressed(){
         boolean pressed=true;
 if(!disable) {
+   /* for (int i = 0; i < kombination.size(); i++) {
 
-
-for(int i=0;i<kombination.size();i++) {
-    if(kombination.get(i)<600) {
-        if (ProgrammingSpace.pressedKeys.getPressedkeys().indexOf(kombination.get(i)) == -1) {
-            pressed = false;
+        if(kombination.get(i)<600) {
+            if (!Gdx.input.isKeyPressed(kombination.get(i))) {
+                pressed = false;
+            }
+        }else{
+            switch (kombination.get(i)){
+                case 600:
+                    if (!Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT) && !Gdx.input.isKeyPressed(Input.Keys.CONTROL_RIGHT)) {
+                        pressed = false;
+                    }
+                    break;
+                case 601:
+                    if (!Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && !Gdx.input.isKeyPressed(Input.Keys.SHIFT_RIGHT)) {
+                        pressed = false;
+                    }
+                    break;
+            }
         }
+    }*/
+for(int i=0;i<kombination.size();i++) {
+    if (ProgrammingSpace.pressedKeys.getPressedkeys().indexOf(kombination.get(i)) == -1) {
+        System.out.println("blublubblubblubblab");
+        pressed = false;
     }
 }
 if(kombination.size()!=ProgrammingSpace.pressedKeys.getPressedkeys().size()){

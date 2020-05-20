@@ -5,7 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.files.FileHandle;
 import com.kotcrab.vis.ui.util.dialog.ConfirmDialogListener;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
-import de.ft.interitus.UI.input.shortcut.SpecialKeys;
+import de.ft.interitus.UI.input.SpecialKeys;
 import de.ft.interitus.UI.input.shortcut.ShortCut;
 import de.ft.interitus.UI.newproject.NewProjectWindow;
 import de.ft.interitus.Var;
