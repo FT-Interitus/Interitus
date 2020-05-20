@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Settings;
+import de.ft.interitus.UI.input.shortcut.ShortCut;
 import de.ft.interitus.data.user.experience.ExperienceManager;
 import de.ft.interitus.data.user.experience.ExperienceVar;
 import org.json.JSONException;
@@ -20,6 +21,7 @@ public class Data {
     public static ArrayList<String> path = new ArrayList<String>(); //Die Pfade der zuletzt geöffneten Projekten
     public static ArrayList<String> filename = new ArrayList<String>(); //Die Namen der Dateien die zuletzt geöffnet wurden
     private static File folder; //Der Ordner in dem alle Programm daten liegen
+    public static ArrayList<ShortCut>shortCuts=new ArrayList<>();
 
 
     /**
@@ -41,6 +43,10 @@ public class Data {
         File settings = new File(System.getProperty("user.home") + "/.itd/settings.json"); // JSON file in dem alle Einstellungen gespeichert werden
         File knowndevices = new File(System.getProperty("user.home") + "/.itd/devices.json"); //JSON file in dem alle konfigurierten Geräte gespeichert werden
         File userexperience = new File(System.getProperty("user.home") + "/.itd/experience.json"); //JSON file in dem User Analytics gespeichert werden
+        File tastenkombinationen = new File(System.getProperty("user.home") + "/.itd/tastenkombinationen.json"); //JSON file in dem tastenkombinationen gespeichert werden
+        File defaulttastenkombinationen = new File(System.getProperty("user.home") + "/.itd/defaulttastenkombinationen.json"); //JSON file in dem defaulttastenkombinationen gespeichert werden (von user nicht veränderbar)
+
+
         Path path = folder.toPath();
         if (!folder.exists()) {//Wenn der Programm-Ordner noch nicht exsitiert
             System.out.println("Create Programm Data Folder");
@@ -68,7 +74,14 @@ public class Data {
             }
 
             try {
-                userexperience.createNewFile();//Die datei für die bekannten Geröte wird erstellt
+                userexperience.createNewFile();//Die datei für die bekannten Geräte wird erstellt
+            } catch (IOException e) {
+                e.printStackTrace();
+                DisplayErrors.error = e;
+            }
+
+            try {
+                tastenkombinationen.createNewFile();//Die datei für die tastenkombinationen wird erstellt
             } catch (IOException e) {
                 e.printStackTrace();
                 DisplayErrors.error = e;
@@ -219,6 +232,48 @@ public class Data {
 
             }
 
+            if (!tastenkombinationen.exists()) { //siehe recent
+                try {
+                    tastenkombinationen.createNewFile();
+                    Gdx.files.absolute(tastenkombinationen.getAbsolutePath()).writeString("{}", false); //siehe recent
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+
+                try {
+                    FileHandle se = Gdx.files.absolute(System.getProperty("user.home") + "/.itd/tastenkombinationen.json");
+                    if (se.readString() == "") {
+                        se.writeString("{}", false);
+                        return;
+                    }
+                    JSONObject obj = new JSONObject(se.readString());
+
+                    //TODO Tastenkombinations Datei Lesen:
+                    ////////////////////////////////////////////////////////////////////////////////////////////////////
+                    int i = 0;
+                    while (obj.has("tastenkombination" + i)) { //Es wird geschaut wie viele Einträge exsistieren
+                        i++;
+                    }
+
+                    System.out.println("Tastenkombinationen"+i);
+                    for (int a = 0; a < i; a++) { //Wird durch alle tastenkombinationen durchgegangen
+                        //Data.path.add(obj.getString("tastenkombination" + a)); //tastenkombination wird zum Array hinzugefügt
+                        //Data.filename.add(obj.getString("filename" + a)); //Name wird zum Array hinzugefügt
+                    }
+                    ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+                    //////////// *.* = obj.getInt();/////////////
+
+
+                } catch (JSONException e) {
+
+                }
+
+
+            }
+
 
         }
 
@@ -233,6 +288,19 @@ public class Data {
 
 
     public static void close() {
+        //////Tastenkombinationen////////////////////////////////////
+
+        FileHandle tastenkombinationen = Gdx.files.absolute(System.getProperty("user.home") + "/.itd/tastenkombinationen.json"); //Lade datei
+        JSONObject tastenkombinationen_obj = new JSONObject(tastenkombinationen);
+        for (int i = 0; i < 10; i++) { //Es wird durch alle Vorhanden einträge durch gegangen
+            tastenkombinationen_obj.put("tastenkombination" + i, "2"); //Und jedes Nacheinander abgespeichert
+        }
+
+
+        tastenkombinationen.writeString(tastenkombinationen_obj.toString(), false); //Datei wird geschrieben
+
+        ////////////////////////////////////////////////////////////////////
+
 
         //for recent////////////////////////////////
         FileHandle recent = Gdx.files.absolute(System.getProperty("user.home") + "/.itd/recent.json"); //Lade datei

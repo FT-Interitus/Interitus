@@ -16,4 +16,5 @@ public class EventVar {
     public static PluginStoreEventManager pluginStoreEventManager = new PluginStoreEventManager();
     public static UIEventManager uiEventManager = new UIEventManager();
 
+
 }
