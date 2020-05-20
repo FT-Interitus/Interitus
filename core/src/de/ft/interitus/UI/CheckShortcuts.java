@@ -15,10 +15,10 @@ import de.ft.interitus.data.user.changes.DataManager;
 
 public class CheckShortcuts {
     public static boolean blockshortcuts = false;
-    public static ShortCut shortCut_newprojektwindow=new ShortCut(Input.Keys.CONTROL_LEFT,Input.Keys.N);
-    public static ShortCut shortCut_oefnen=new ShortCut(Input.Keys.CONTROL_LEFT, Input.Keys.O);
-    public static ShortCut shortCut_speichern=new ShortCut(Input.Keys.CONTROL_LEFT, Input.Keys.S);
-    public static ShortCut shortCut_speichern_unter=new ShortCut(Input.Keys.CONTROL_LEFT, Input.Keys.S,SpecialKeys.dualShift);
+    public static ShortCut shortCut_newprojektwindow=new ShortCut(SpecialKeys.dualStrg,Input.Keys.N);
+    public static ShortCut shortCut_oefnen=new ShortCut(SpecialKeys.dualStrg, Input.Keys.O);
+    public static ShortCut shortCut_speichern=new ShortCut(SpecialKeys.dualStrg, Input.Keys.S);
+    public static ShortCut shortCut_speichern_unter=new ShortCut(SpecialKeys.dualStrg, SpecialKeys.dualShift, Input.Keys.S);
 
 
 
