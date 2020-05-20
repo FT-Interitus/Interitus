@@ -20,6 +20,8 @@ public class CheckShortcuts {
     public static ShortCut shortCut_speichern=new ShortCut(SpecialKeys.dualStrg, Input.Keys.S);
     public static ShortCut shortCut_speichern_unter=new ShortCut(SpecialKeys.dualStrg, Input.Keys.S,SpecialKeys.dualShift);
 
+
+
     public static void check() {
 
         if(shortCut_newprojektwindow.isPressed()){

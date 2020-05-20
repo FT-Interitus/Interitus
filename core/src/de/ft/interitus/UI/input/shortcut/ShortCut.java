@@ -19,17 +19,25 @@ public class ShortCut {
 
         InputManager.addProcessor(new InputAdapter() {
             @Override
+            public boolean keyDown(int keycode) {
+                System.out.println("keyDown  "+Input.Keys.toString(keycode));
+                return super.keyDown(keycode);
+            }
+
+            @Override
+            public boolean keyUp(int keycode) {
+                return super.keyUp(keycode);
+            }
+
+            @Override
             public boolean keyTyped(char key) {
-
-
-
-                return false;
+                return super.keyTyped(key);
             }
 
             @Override
             public boolean touchDown(int x, int y, int pointer, int button) {
 
-                return false;
+                return super.touchDown(x,y,pointer,button);
             }
         });
         InputManager.updateMultiplexer();
