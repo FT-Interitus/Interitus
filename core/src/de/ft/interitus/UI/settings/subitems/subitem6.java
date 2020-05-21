@@ -46,6 +46,7 @@ public class subitem6 {
             tastenkombeauswahl=new VisTextField();
             disablebutton=new VisRadioButton("disable");
 
+            tastenkombeauswahl.setReadOnly(true);
             disablebutton.setChecked(shortCut.isDisable());
 
             disablebutton.addListener(new ChangeListener() {
