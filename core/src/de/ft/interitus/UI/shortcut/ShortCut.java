@@ -36,6 +36,10 @@ public class ShortCut {
         }
     }
 
+    public ArrayList<Integer> getKombination() {
+        return kombination;
+    }
+
     public void setDisable(boolean disable) {
         this.disable = disable;
     }

@@ -1,5 +1,6 @@
 package de.ft.interitus.UI.settings.subitems;
 
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.kotcrab.vis.ui.widget.*;
@@ -48,6 +49,7 @@ public class subitem6 {
 
             tastenkombeauswahl.setReadOnly(true);
             disablebutton.setChecked(shortCut.isDisable());
+            loadkombination(shortCut);
 
             disablebutton.addListener(new ChangeListener() {
                 @Override
@@ -56,9 +58,34 @@ public class subitem6 {
                 }
             });
 
+
+
             table.add(name).expand().fill();
-            table.add(tastenkombeauswahl);
+            table.add(tastenkombeauswahl).width(200);
             table.add(disablebutton).padLeft(10).row();
+        }
+        public void loadkombination(ShortCut shortCut){
+            for(int i=0;i<shortCut.getKombination().size();i++) {
+
+                if(shortCut.getKombination().get(i)<600) {
+                    tastenkombeauswahl.setText(tastenkombeauswahl.getText() + Input.Keys.toString(shortCut.getKombination().get(i)));
+                }else{
+                    switch (shortCut.getKombination().get(i)){
+                        case 600:
+                            tastenkombeauswahl.setText(tastenkombeauswahl.getText() + "dualStrg");
+                            break;
+                        case 601:
+                            tastenkombeauswahl.setText(tastenkombeauswahl.getText() + "dualShift");
+                            break;
+                    }
+                }
+
+                if(i!=shortCut.getKombination().size()-1){
+                    tastenkombeauswahl.setText(tastenkombeauswahl.getText()+" + ");
+                }
+
+
+            }
         }
     }
 }

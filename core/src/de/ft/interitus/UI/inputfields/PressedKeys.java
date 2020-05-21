@@ -14,13 +14,13 @@ public class PressedKeys {
             @Override
             public boolean keyDown(int keycode) {
                 pressedkeys.add(keycode);
-                return super.keyDown(keycode);
+                return false;
             }
 
             @Override
             public boolean keyUp(int keycode) {
                 pressedkeys.remove(pressedkeys.indexOf(keycode));
-                return super.keyUp(keycode);
+                return false;
             }
 
             @Override
@@ -31,7 +31,7 @@ public class PressedKeys {
             @Override
             public boolean touchDown(int x, int y, int pointer, int button) {
 
-                return super.touchDown(x,y,pointer,button);
+                return false;
             }
         });
         InputManager.updateMultiplexer();
