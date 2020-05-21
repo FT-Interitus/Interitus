@@ -19,7 +19,7 @@ public class findStorePluginEntry {
                 findobjects.add(storePluginEntry);
             } else if (storePluginEntry.getDetailed_description().contains(search)) {
                 findobjects.add(storePluginEntry);
-            }//TODO eventuell weitere Such parameter
+            }//TODO eventuell weitere Such parameter eventuell author
 
         }
 

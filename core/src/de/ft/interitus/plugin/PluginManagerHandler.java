@@ -28,7 +28,7 @@ public class PluginManagerHandler {
     public static List<VisTable> plugisettings = new ArrayList<>();
     public static List<Menu> pluginMenubar = new ArrayList<>();
     public static List<ArrayList<PlatformSpecificBlock>> platformSpecificBlock = new ArrayList<>();
-    public List<Plugin> loadedplugins = new ArrayList<>();
+    public static List<Plugin> loadedplugins = new ArrayList<>();
     Exception error = null;
     private int Plugincounter = 0;
 

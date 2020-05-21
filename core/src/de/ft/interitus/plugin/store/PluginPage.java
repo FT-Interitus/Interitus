@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.FileSystemException;
 
 public class PluginPage {
 
@@ -132,10 +133,11 @@ public class PluginPage {
                             });
                 } else {
                     File oldplugin = new File("plugins/" + Storeentry.getName() + ".jar");
+                    // TODO: 21.05.20 Disable Plugin vor dem löschen das Windows sich nicht beschwert -> Exception
                     if (oldplugin.delete()) {
                         download.setText("Programm bitte neustarten");
                         download.setDisabled(true);
-                        String[] möglichkeiten = {"OK", "Abbrechen"};
+                        String[] möglichkeiten = {"Ja", "Nein"};
                         final int nothing = 1;
                         final int everything = 2;
                         Dialogs.showConfirmDialog(UI.stage, "Plugin Deinstallation", "\nUm das Plugin zu deaktivieren musst du das Programm jetzt neustarten!\nWillst du das jetzt tun?\n",
@@ -156,6 +158,9 @@ public class PluginPage {
 
                                     }
                                 });
+                    }else{
+                        DisplayErrors.error = new FileSystemException("Could not delete Plugin. Is the Plugin Folder protected?");
+                        DisplayErrors.customErrorstring = "Das Plugin konnte nicht deinstalliert werden.";
                     }
 
 

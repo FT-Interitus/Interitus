@@ -20,7 +20,7 @@ public class PopupMenue {
     int ispressed;
     private final int buttonheight = 20;
     private final SpriteBatch batch = new SpriteBatch();
-    private final ArrayList<Button> buttons = new ArrayList<>();
+    private final ArrayList<Button> buttons = new ArrayList<>(); //TODO Buttons kontrollieren die Maus kollision nur auf dem Text
     private final Texture popupButtonimage = new Texture("popupbuttonimage.png");
     private boolean show = false;
     private final Check check = new Check();
@@ -30,6 +30,7 @@ public class PopupMenue {
         for (int i = 0; i < it.length; i++) {
             Button b = new Button();
             b.setText(it[i]);
+
             buttons.add(b);
         }
     }
