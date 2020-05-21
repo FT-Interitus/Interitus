@@ -25,7 +25,7 @@ public class PressedKeys {
 
             @Override
             public boolean keyTyped(char key) {
-                return super.keyTyped(key);
+        return false;
             }
 
             @Override

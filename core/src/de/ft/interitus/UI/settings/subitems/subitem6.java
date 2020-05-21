@@ -1,10 +1,17 @@
 package de.ft.interitus.UI.settings.subitems;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Event;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.scenes.scene2d.utils.FocusListener;
 import com.kotcrab.vis.ui.widget.*;
 import de.ft.interitus.UI.CheckShortcuts;
+import de.ft.interitus.UI.inputfields.check.InputManager;
 import de.ft.interitus.UI.shortcut.ShortCut;
 
 import java.util.ArrayList;
@@ -41,7 +48,7 @@ public class subitem6 {
         VisLabel name;
         VisTextField tastenkombeauswahl;
         VisRadioButton disablebutton;
-        boolean disable=false;
+
         public ShortCutEinstellung(int i, VisTable table, final ShortCut shortCut){
             name=new VisLabel(shortCut.getName());
             tastenkombeauswahl=new VisTextField();
@@ -59,6 +66,23 @@ public class subitem6 {
                 }
             });
 
+   tastenkombeauswahl.addListener(new InputListener() {
+       @Override
+       public boolean keyDown(InputEvent event, int keycode) {
+           System.out.println(keycode);
+           if(keycode != Input.Keys.DEL) {
+               shortCut.addTaste(keycode);
+           }
+           if(keycode==Input.Keys.DEL){
+                shortCut.delLast();
+           }
+           loadkombination(shortCut);
+
+           return super.keyDown(event, keycode);
+       }
+   });
+
+
 
 
             table.add(name).expand().fill();
@@ -66,6 +90,7 @@ public class subitem6 {
             table.add(disablebutton).padLeft(10).row();
         }
         public void loadkombination(ShortCut shortCut){
+            tastenkombeauswahl.clearText();
             for(int i=0;i<shortCut.getKombination().size();i++) {
 
                 if(shortCut.getKombination().get(i)<600) {

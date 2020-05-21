@@ -35,6 +35,12 @@ public class ShortCut {
             this.kombination.add(kombination[i]);
         }
     }
+    public void addTaste(int keycode){
+        this.kombination.add(keycode);
+    }
+    public void delLast(){
+        this.kombination.remove(this.kombination.size()-1);
+    }
 
     public ArrayList<Integer> getKombination() {
         return kombination;
