@@ -20,6 +20,9 @@ import de.ft.interitus.UI.setup.steps.generalSteps.Step2;
 import de.ft.interitus.Var;
 import de.ft.interitus.data.VerbindungsSpeicher;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class SetupWindow {
     public static VerbindungsSpeicher tempverbindungsspeicher = new VerbindungsSpeicher();
     public static int currentStep = 1;
@@ -111,18 +114,22 @@ public class SetupWindow {
 
             ChangeListener listener = null;
 
-            listener =  new ChangeListener() {
+            Timer time = new Timer();
+            time.scheduleAtFixedRate(new TimerTask() {
+
                 @Override
-                public void changed(ChangeEvent event, Actor actor) {
-                    if(!testopen()) {
-                        Var.isdialogeopend = true;
-                    }else{
+                public void run() {
+                    if(Var.isdialogeopend&&!SetupWindow.isopend())  {
                         Var.isdialogeopend = false;
 
+                        this.cancel();
+                    }
+
+                    if(!Var.isdialogeopend&&SetupWindow.isopend()) {
+                        Var.isdialogeopend = true;
                     }
                 }
-            };
-            this.addListener(listener);
+            },0,100);
 
             Button_next.addListener(new ChangeListener() {
                 @Override

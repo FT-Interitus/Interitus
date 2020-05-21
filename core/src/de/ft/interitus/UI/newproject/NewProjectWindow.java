@@ -15,6 +15,8 @@ import de.ft.interitus.Var;
 import de.ft.interitus.plugin.PluginManagerHandler;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class NewProjectWindow {
     public static SetupBuilder setupBuilder;
@@ -154,21 +156,22 @@ public class NewProjectWindow {
                 }
             });
 
-             ChangeListener listener = null;
+            Timer time = new Timer();
+            time.scheduleAtFixedRate(new TimerTask() {
 
-            listener =  new ChangeListener() {
                 @Override
-                public void changed(ChangeEvent event, Actor actor) {
-                    if(!testopen()) {
-                        Var.isdialogeopend = true;
-                    }else{
+                public void run() {
+                    if(Var.isdialogeopend&&!NewProjectWindow.isopend())  {
                         Var.isdialogeopend = false;
 
+                        this.cancel();
+                    }
+
+                    if(!Var.isdialogeopend&&NewProjectWindow.isopend()) {
+                        Var.isdialogeopend = true;
                     }
                 }
-            };
-
-            this.addListener(listener);
+            },0,100);
 
         }
 
