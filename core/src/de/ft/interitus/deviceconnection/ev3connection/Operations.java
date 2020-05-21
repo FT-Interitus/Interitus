@@ -156,7 +156,7 @@ public class Operations {
 
     public static ArrayList<Byte> releaseKey(byte Key) {
         ArrayList<Byte> b = new ArrayList<>();
-        b.add(ev3.opUI_Write);
+        b.add(ev3.opUI_Write); //TODO
         b.add(ev3.RELEASE);
         b.add(Key);
         return b;

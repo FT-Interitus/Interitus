@@ -1,18 +1,14 @@
 package de.ft.interitus.UI.settings.subitems;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.FocusListener;
 import com.kotcrab.vis.ui.widget.*;
 import de.ft.interitus.UI.CheckShortcuts;
-import de.ft.interitus.UI.inputfields.check.InputManager;
 import de.ft.interitus.UI.shortcut.ShortCut;
+import de.ft.interitus.Var;
 
 import java.util.ArrayList;
 
@@ -21,6 +17,8 @@ public class subitem6 {
     public static void add(VisTable builder) {
         // ---
 
+
+        Var.disableshortcuts = true;
         VisTable table = new VisTable();
 
         for(int i=0;i< CheckShortcuts.shortCuts.size();i++) {
@@ -91,12 +89,12 @@ public class subitem6 {
         }
         public void loadkombination(ShortCut shortCut){
             tastenkombeauswahl.clearText();
-            for(int i=0;i<shortCut.getKombination().size();i++) {
+            for(int i = 0; i<shortCut.getCombination().size(); i++) {
 
-                if(shortCut.getKombination().get(i)<600) {
-                    tastenkombeauswahl.setText(tastenkombeauswahl.getText() + Input.Keys.toString(shortCut.getKombination().get(i)));
+                if(shortCut.getCombination().get(i)<600) {
+                    tastenkombeauswahl.setText(tastenkombeauswahl.getText() + Input.Keys.toString(shortCut.getCombination().get(i)));
                 }else{
-                    switch (shortCut.getKombination().get(i)){
+                    switch (shortCut.getCombination().get(i)){
                         case 600:
                             tastenkombeauswahl.setText(tastenkombeauswahl.getText() + "dualStrg");
                             break;
@@ -106,7 +104,7 @@ public class subitem6 {
                     }
                 }
 
-                if(i!=shortCut.getKombination().size()-1){
+                if(i!=shortCut.getCombination().size()-1){
                     tastenkombeauswahl.setText(tastenkombeauswahl.getText()+" + ");
                 }
 

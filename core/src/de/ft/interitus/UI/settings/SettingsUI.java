@@ -263,6 +263,9 @@ public class SettingsUI extends VisWindow {
 
                     container.clearChildren();
 
+        if(SelectedItem!=5&&Var.disableshortcuts) {
+            Var.disableshortcuts = false;
+        }
 
                     switch (SelectedItem) {
 
@@ -364,8 +367,12 @@ public class SettingsUI extends VisWindow {
             listener =  new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
+                    System.out.println("Tested false");
                     if(!testopen()) {
+
                         Var.isdialogeopend = true;
+
+
                     }else{
                         Var.isdialogeopend = false;
 

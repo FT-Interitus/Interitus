@@ -24,7 +24,8 @@ public class Var {
 
     public static int w = 1300;
     public static int h = 800;
-    public static ProjektTypes actProjekt = null; 
+    public static ProjektTypes actProjekt = null;
+    public static boolean disableshortcuts=false;
 
 
 }

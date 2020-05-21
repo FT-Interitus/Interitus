@@ -48,6 +48,9 @@ public class USBConnection {
         //command.addAll(Operations.setbrickname("Tim"));
 //command.addAll(Operations.setbrickname("Hallo"));
 
+        command.addAll(Operations.setbrickname("Hallo"));
+        
+
         ev3.sendcommand(command, 0, 0);
         command.clear();
             try {

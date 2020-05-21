@@ -19,7 +19,9 @@ public class PressedKeys {
 
             @Override
             public boolean keyUp(int keycode) {
-                pressedkeys.remove(pressedkeys.indexOf(keycode));
+                if(pressedkeys.indexOf(keycode)!=-1) {
+                    pressedkeys.remove(pressedkeys.indexOf(keycode));
+                }
                 return false;
             }
 
