@@ -21,6 +21,9 @@ import de.ft.interitus.UI.settings.subitems.*;
 import de.ft.interitus.Var;
 import de.ft.interitus.plugin.PluginManagerHandler;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 public class SettingsUI extends VisWindow {
 
@@ -362,30 +365,31 @@ public class SettingsUI extends VisWindow {
 
             centerWindow();
 
+Timer time = new Timer();
+time.scheduleAtFixedRate(new TimerTask() {
+
+    @Override
+    public void run() {
+       if(Var.isdialogeopend&&!SettingsUI.isopend())  {
+           Var.isdialogeopend = false;
+           Var.disableshortcuts = false;
+           this.cancel();
+       }
+
+       if(!Var.isdialogeopend&&SettingsUI.isopend()) {
+           Var.isdialogeopend = true;
+       }
+    }
+},0,100);
 
 
-            listener =  new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor) {
-                    System.out.println("Tested false");
-                    if(!testopen()) {
 
-                        Var.isdialogeopend = true;
-
-
-                    }else{
-                        Var.isdialogeopend = false;
-
-                    }
-                }
-            };
-
-            this.addListener(listener);
         }
 
         public boolean testopen() {
             if(!super.getParent().isVisible()) {
                 Var.isdialogeopend = false;
+                Var.disableshortcuts = false;
                 this.removeListener(listener);
             }
             return super.getParent().isVisible();

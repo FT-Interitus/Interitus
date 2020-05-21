@@ -39,7 +39,7 @@ public class UI {
     protected static MenuItem copy;
     protected static MenuItem paste;
     protected static MenuBar menuBar;
-    protected static SettingsUI set;
+    public static SettingsUI set;
 
     private static boolean issettingsuiopend = false;
     private static boolean issetupuiopend = false;
