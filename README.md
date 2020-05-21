@@ -1,13 +1,14 @@
 # Interitus 
 
-Ist oder soll eine graphische drag'n'drop Programmier-Oberfläche für angehende Entwickler werden.
-Es soll Ev3, Arduino sowie Raspberry Pi (oder per Plugin auch weitere Platformen) unterstützen, dabei den Nutzer aber nicht Limitieren, 
-um den Sprung in eine "echte" Programmiersprache zu schaffen.
+Is or should be a graphical drag'n'drop programming interface for future developers.
+It should support Ev3, Arduino and Raspberry Pi (or other platforms via plugin), but not limit the user,
+to make the leap into a "real" programming language.
 
 [![Build Status](https://travis-ci.com/FT-Interitus/Interitus.svg?branch=master)](https://travis-ci.com/FT-Interitus/Interitus)
 
-Interitus basiert auf dem LibGDX Framework.
+
+Interitus is based on the LibGDX framework.
 
 
 
-Wenn du dem Projekt etwas beisteuern willst lies dir bitte unbedingt das [Wiki](https://github.com/FT-Interitus/Interitus/wiki "Interitus Wiki") durch.
+If you want to contribute something to the project, please read the [Wiki](https://github.com/FT-Interitus/Interitus/wiki "Interitus Wiki").
