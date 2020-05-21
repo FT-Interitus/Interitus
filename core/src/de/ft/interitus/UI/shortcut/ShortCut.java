@@ -36,6 +36,13 @@ public class ShortCut {
         }
     }
 
+    public void setDisable(boolean disable) {
+        this.disable = disable;
+    }
+
+    public boolean isDisable() {
+        return disable;
+    }
 
     public boolean isPressed(){
         boolean pressed=true;

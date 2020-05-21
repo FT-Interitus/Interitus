@@ -1,5 +1,7 @@
 package de.ft.interitus.UI.settings.subitems;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.kotcrab.vis.ui.widget.*;
 import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.shortcut.ShortCut;
@@ -39,10 +41,19 @@ public class subitem6 {
         VisTextField tastenkombeauswahl;
         VisRadioButton disablebutton;
         boolean disable=false;
-        public ShortCutEinstellung(int i, VisTable table, ShortCut shortCut){
+        public ShortCutEinstellung(int i, VisTable table, final ShortCut shortCut){
             name=new VisLabel(shortCut.getName());
             tastenkombeauswahl=new VisTextField();
             disablebutton=new VisRadioButton("disable");
+
+            disablebutton.setChecked(shortCut.isDisable());
+
+            disablebutton.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+                    shortCut.setDisable(disablebutton.isChecked());
+                }
+            });
 
             table.add(name).expand().fill();
             table.add(tastenkombeauswahl);
