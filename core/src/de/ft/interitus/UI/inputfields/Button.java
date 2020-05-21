@@ -90,11 +90,16 @@ public class Button {
 
 
     public boolean isMouseover() {
-        if (!disable) {
 
-            return check.isMouseover(x, y, w, h);
-        } else {
+        if(Var.isdialogeopend) {
             return false;
+        }else {
+            if (!disable) {
+
+                return check.isMouseover(x, y, w, h);
+            } else {
+                return false;
+            }
         }
     }
 
