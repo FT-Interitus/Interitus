@@ -55,6 +55,7 @@ public class subitem6 {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
                     shortCut.setDisable(disablebutton.isChecked());
+                    tastenkombeauswahl.setDisabled(disablebutton.isChecked());
                 }
             });
 
