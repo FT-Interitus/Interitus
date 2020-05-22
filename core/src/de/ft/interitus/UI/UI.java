@@ -194,7 +194,7 @@ public class UI {
 
 
         UIthread.start();
-
+        CheckShortcuts.loadArrayList();
 
     }
 

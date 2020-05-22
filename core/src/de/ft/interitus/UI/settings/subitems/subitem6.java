@@ -17,7 +17,7 @@ public class subitem6 {
     public static int shortcut_margin = 25;
     public static ArrayList<ShortCutEinstellung>shortCutEinstellungen=new ArrayList<>();
     public static void add(VisTable builder) {
-        // ---
+
 
 
         Var.disableshortcuts = true;

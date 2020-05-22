@@ -133,6 +133,8 @@ public class PluginPage {
                             });
                 } else {
                     File oldplugin = new File("plugins/" + Storeentry.getName() + ".jar");
+
+
                     // TODO: 21.05.20 Disable Plugin vor dem löschen das Windows sich nicht beschwert -> Exception
                     if (oldplugin.delete()) {
                         download.setText("Programm bitte neustarten");
