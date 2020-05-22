@@ -23,6 +23,37 @@ public class ShortCut {
         }
     }
 
+
+
+
+    public String getShortcutasString(){
+        String ausgabe="";
+
+        for(int i = 0; i<this.getCombination().size(); i++) {
+
+            if(this.getCombination().get(i)<600) {
+                ausgabe=ausgabe + Input.Keys.toString(this.getCombination().get(i));
+            }else{
+                switch (this.getCombination().get(i)){
+                    case 600:
+                        ausgabe=ausgabe + "Strg";
+                        break;
+                    case 601:
+                        ausgabe=ausgabe + "Shift";
+                        break;
+                }
+            }
+
+            if(i!=this.getCombination().size()-1){
+                ausgabe=ausgabe+" + ";
+            }
+
+
+        }
+        return ausgabe;
+    }
+
+
     public String getName() {
         return name;
     }

@@ -58,7 +58,7 @@ public class subitem6 {
 
             tastenkombeauswahl.setReadOnly(true);
             disablebutton.setChecked(shortCut.isDisable());
-            loadkombination(shortCut);
+            tastenkombeauswahl.setText(shortCut.getShortcutasString());
 
             disablebutton.addListener(new ChangeListener() {
                 @Override
@@ -85,7 +85,8 @@ public class subitem6 {
            if(keycode==Input.Keys.DEL){
                 shortCut.delLast();
            }
-           loadkombination(shortCut);
+
+           tastenkombeauswahl.setText(shortCut.getShortcutasString());
 
            return super.keyDown(event, keycode);
        }
@@ -105,30 +106,14 @@ if(i==0) {
 
 
         }
-        public void loadkombination(ShortCut shortCut){
-            tastenkombeauswahl.clearText();
-            for(int i = 0; i<shortCut.getCombination().size(); i++) {
-
-                if(shortCut.getCombination().get(i)<600) {
-                    tastenkombeauswahl.setText(tastenkombeauswahl.getText() + Input.Keys.toString(shortCut.getCombination().get(i)));
-                }else{
-                    switch (shortCut.getCombination().get(i)){
-                        case 600:
-                            tastenkombeauswahl.setText(tastenkombeauswahl.getText() + "Strg");
-                            break;
-                        case 601:
-                            tastenkombeauswahl.setText(tastenkombeauswahl.getText() + "Shift");
-                            break;
-                    }
-                }
-
-                if(i!=shortCut.getCombination().size()-1){
-                    tastenkombeauswahl.setText(tastenkombeauswahl.getText()+" + ");
-                }
 
 
-            }
-        }
+
+        ////////
+
+
+
+
     }
 }
 
