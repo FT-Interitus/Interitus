@@ -13,7 +13,6 @@ import de.ft.interitus.Block.BlockVar;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.UI.newproject.NewProjectWindow;
 import de.ft.interitus.UI.setup.SetupWindow;
-import de.ft.interitus.UI.shortcut.shortcuts.GlobalShortcuts;
 import de.ft.interitus.Var;
 import de.ft.interitus.data.programm.Data;
 import de.ft.interitus.data.user.DataLoader;
@@ -54,7 +53,7 @@ public class MenuBar {
                 }
 
             }
-        }).setShortcut(GlobalShortcuts.shortCut_vollbild.getShortcutasString()));
+        }).setShortcut("F11"));
 
 
         fileMenu.addItem(new MenuItem("Neues Projekt", new ChangeListener() {
@@ -63,7 +62,7 @@ public class MenuBar {
                 NewProjectWindow NPW = new NewProjectWindow();
                 NPW.show();
             }
-        }).setShortcut(GlobalShortcuts.shortCut_newprojektwindow.getShortcutasString()));
+        }).setShortcut("Strg+N"));
 
    /*     fileMenu.addItem(new MenuItem("Neu", new ChangeListener() {
             @Override
@@ -177,7 +176,7 @@ public class MenuBar {
 
 
             }
-        }).setShortcut(GlobalShortcuts.shortCut_oefnen.getShortcutasString()));
+        }).setShortcut("Strg+O"));
         fileMenu.addItem(new MenuItem("Speichern", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -191,7 +190,7 @@ public class MenuBar {
                     }
                 }
             }
-        }).setShortcut(GlobalShortcuts.shortCut_speichern.getShortcutasString()));
+        }).setShortcut("Strg+S"));
         fileMenu.addItem(new MenuItem("Speichern unter", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -201,14 +200,14 @@ public class MenuBar {
                     LoadSave.saveas();
                 }
             }
-        }).setShortcut(GlobalShortcuts.shortCut_speichern_unter.getShortcutasString()));
+        }).setShortcut("Strg+shift+S"));
         fileMenu.addSeparator();
         fileMenu.addItem(new MenuItem("Einstellungen", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 UI.set.show();
             }
-        }).setShortcut(GlobalShortcuts.shortCut_einstellungen.getShortcutasString()));
+        }).setShortcut("STRG + Alt + S"));
         fileMenu.addItem(new MenuItem("Beenden", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
