@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.kotcrab.vis.ui.widget.*;
 import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.shortcut.ShortCut;
+import de.ft.interitus.UI.shortcut.SpecialKeys;
 import de.ft.interitus.Var;
 
 import java.util.ArrayList;
@@ -69,7 +70,14 @@ public class subitem6 {
        public boolean keyDown(InputEvent event, int keycode) {
            System.out.println(keycode);
            if(keycode != Input.Keys.DEL) {
-               shortCut.addTaste(keycode);
+               if(keycode==Input.Keys.CONTROL_LEFT || keycode==Input.Keys.CONTROL_RIGHT){
+                    shortCut.addTaste(SpecialKeys.dualStrg);
+               }else if(keycode==Input.Keys.SHIFT_LEFT || keycode==Input.Keys.SHIFT_RIGHT){
+                   shortCut.addTaste(SpecialKeys.dualShift);
+
+               }else {
+                   shortCut.addTaste(keycode);
+               }
            }
            if(keycode==Input.Keys.DEL){
                 shortCut.delLast();

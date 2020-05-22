@@ -207,7 +207,7 @@ public class MenuBar {
             public void changed(ChangeEvent event, Actor actor) {
                 UI.set.show();
             }
-        }));
+        }).setShortcut("STRG + Alt + S"));
         fileMenu.addItem(new MenuItem("Beenden", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {

@@ -6,6 +6,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.kotcrab.vis.ui.util.dialog.ConfirmDialogListener;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.UI.settings.SettingsUI;
 import de.ft.interitus.UI.shortcut.SpecialKeys;
 import de.ft.interitus.UI.newproject.NewProjectWindow;
 import de.ft.interitus.UI.shortcut.ShortCut;
@@ -23,6 +24,7 @@ public class CheckShortcuts {
     public static ShortCut shortCut_speichern=new ShortCut("speichern",SpecialKeys.dualStrg, Input.Keys.S);
     public static ShortCut shortCut_speichern_unter=new ShortCut("speichern unter",SpecialKeys.dualStrg, SpecialKeys.dualShift, Input.Keys.S);
     public static ShortCut shortCut_vollbild=new ShortCut("vollbild",Input.Keys.F11);
+    public static ShortCut shortCut_einstellungen=new ShortCut("Einstellungen öffnen",SpecialKeys.dualStrg,Input.Keys.ALT_LEFT,Input.Keys.S);
 
     public static boolean einmalausführen=true;
 
@@ -35,11 +37,16 @@ public class CheckShortcuts {
         shortCuts.add(shortCut_speichern);
         shortCuts.add(shortCut_speichern_unter);
         shortCuts.add(shortCut_vollbild);
+        shortCuts.add(shortCut_einstellungen);
     }
 
     public static void check() {
         if(einmalausführen)
             loadArryList();
+
+        if(shortCut_einstellungen.isPressed() && !SettingsUI.isopend()){
+            UI.set.show();
+        }
 
 
         if(shortCut_vollbild.isPressed()){
