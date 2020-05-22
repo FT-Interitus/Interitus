@@ -3,7 +3,6 @@ package de.ft.interitus.plugin;
 import com.kotcrab.vis.ui.widget.Menu;
 import com.kotcrab.vis.ui.widget.VisTable;
 import de.ft.interitus.DisplayErrors;
-import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.shortcut.ShortCut;
 import de.ft.interitus.UI.shortcut.ShortCutChecker;
 import de.ft.interitus.Var;
@@ -17,10 +16,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
@@ -32,6 +28,8 @@ public class PluginManagerHandler {
     public static List<Menu> pluginMenubar = new ArrayList<>();
     public static List<ArrayList<PlatformSpecificBlock>> platformSpecificBlock = new ArrayList<>();
     public static List<Plugin> loadedplugins = new ArrayList<>();
+    public static ArrayList<ShortCutChecker> pluginshortCutsChecker = new ArrayList<>();
+    public static ArrayList<ShortCut> pluginshortCuts = new ArrayList<>();
     Exception error = null;
     private int Plugincounter = 0;
 
@@ -148,12 +146,12 @@ public class PluginManagerHandler {
         projekttypes.add(PT);
     }
 
-    public static void addShortcut(ShortCut shortCut) {
-        CheckShortcuts.shortCuts.add(shortCut);
+    public static void addShortcut(ShortCut... shortCut) {
+        pluginshortCuts.addAll(Arrays.asList(shortCut));
     }
 
     public static void addShortcutChecker(ShortCutChecker shortCutChecker) {
-        CheckShortcuts.shortCutsChecker.add(shortCutChecker);
+        pluginshortCutsChecker.add(shortCutChecker);
     }
 
 
@@ -281,8 +279,10 @@ public class PluginManagerHandler {
 
     }
 
-    public void unload(PluginRegister pluginRegister) {
+    public static void unload(PluginRegister pluginRegister) {
         registeredplugins.remove(pluginRegister);
+
+
     }
 
     public Plugin getsettings(Plugin pl) {
