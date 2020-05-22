@@ -13,6 +13,7 @@ import de.ft.interitus.Var;
 import java.util.ArrayList;
 
 public class subitem6 {
+    public static int shortcut_margin = 25;
     public static ArrayList<ShortCutEinstellung>shortCutEinstellungen=new ArrayList<>();
     public static void add(VisTable builder) {
         // ---
@@ -29,6 +30,8 @@ public class subitem6 {
                 shortCutEinstellungen.add(new ShortCutEinstellung(i,table,CheckShortcuts.shortCuts.get(i)));
 
             }
+
+
         }
 
         VisScrollPane scrollPane = new VisScrollPane(table);
@@ -38,7 +41,7 @@ public class subitem6 {
         // ---
 
        // add(textArea.createCompatibleScrollPane()).growX().height(100).row();
-       builder.add(scrollPane).width(400).row();
+       builder.add(scrollPane).width(440).row();
 
 
     }
@@ -50,7 +53,7 @@ public class subitem6 {
         public ShortCutEinstellung(int i, VisTable table, final ShortCut shortCut){
             name=new VisLabel(shortCut.getName());
             tastenkombeauswahl=new VisTextField();
-            disablebutton=new VisRadioButton("disable");
+            disablebutton=new VisRadioButton("Disable");
 
             tastenkombeauswahl.setReadOnly(true);
             disablebutton.setChecked(shortCut.isDisable());
@@ -82,10 +85,17 @@ public class subitem6 {
 
 
 
+if(i==0) {
+    table.add(name).expand().fill().padTop(10);
+    table.add(tastenkombeauswahl).width(200).padTop(10);
+    table.add(disablebutton).padLeft(10).padTop(10).row();
+}else {
+    table.add(name).expand().fill().padTop(shortcut_margin);
+    table.add(tastenkombeauswahl).width(200).padTop(shortcut_margin);
+    table.add(disablebutton).padLeft(10).padTop(shortcut_margin).row();
+}
 
-            table.add(name).expand().fill();
-            table.add(tastenkombeauswahl).width(200);
-            table.add(disablebutton).padLeft(10).row();
+
         }
         public void loadkombination(ShortCut shortCut){
             tastenkombeauswahl.clearText();
@@ -96,10 +106,10 @@ public class subitem6 {
                 }else{
                     switch (shortCut.getCombination().get(i)){
                         case 600:
-                            tastenkombeauswahl.setText(tastenkombeauswahl.getText() + "dualStrg");
+                            tastenkombeauswahl.setText(tastenkombeauswahl.getText() + "Strg");
                             break;
                         case 601:
-                            tastenkombeauswahl.setText(tastenkombeauswahl.getText() + "dualShift");
+                            tastenkombeauswahl.setText(tastenkombeauswahl.getText() + "Shift");
                             break;
                     }
                 }

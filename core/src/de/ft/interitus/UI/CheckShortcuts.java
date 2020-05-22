@@ -6,9 +6,9 @@ import com.badlogic.gdx.files.FileHandle;
 import com.kotcrab.vis.ui.util.dialog.ConfirmDialogListener;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import de.ft.interitus.ProgrammingSpace;
-import de.ft.interitus.UI.shortcut.SpecialKeys;
 import de.ft.interitus.UI.newproject.NewProjectWindow;
 import de.ft.interitus.UI.shortcut.ShortCut;
+import de.ft.interitus.UI.shortcut.SpecialKeys;
 import de.ft.interitus.Var;
 import de.ft.interitus.data.user.DataSaver;
 import de.ft.interitus.data.user.LoadSave;
@@ -19,10 +19,10 @@ import java.util.ArrayList;
 public class CheckShortcuts {
     public static boolean blockshortcuts = false;
     public static ShortCut shortCut_newprojektwindow=new ShortCut("Neues Projekt",SpecialKeys.dualStrg,Input.Keys.N);
-    public static ShortCut shortCut_oefnen=new ShortCut("öffnen",SpecialKeys.dualStrg, Input.Keys.O);
-    public static ShortCut shortCut_speichern=new ShortCut("speichern",SpecialKeys.dualStrg, Input.Keys.S);
-    public static ShortCut shortCut_speichern_unter=new ShortCut("speichern unter",SpecialKeys.dualStrg, SpecialKeys.dualShift, Input.Keys.S);
-    public static ShortCut shortCut_vollbild=new ShortCut("vollbild",Input.Keys.F11);
+    public static ShortCut shortCut_oefnen=new ShortCut("Projekt Öffnen",SpecialKeys.dualStrg, Input.Keys.O);
+    public static ShortCut shortCut_speichern=new ShortCut("Speichern",SpecialKeys.dualStrg, Input.Keys.S);
+    public static ShortCut shortCut_speichern_unter=new ShortCut("Speichern unter",SpecialKeys.dualStrg, SpecialKeys.dualShift, Input.Keys.S);
+    public static ShortCut shortCut_vollbild=new ShortCut("Vollbild",Input.Keys.F11);
 
     public static boolean einmalausführen=true;
 
