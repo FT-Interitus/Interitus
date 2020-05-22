@@ -25,7 +25,7 @@ public class NewProjectWindow {
     public static VisTextButton Button_next = new VisTextButton("Erstellen");
     //public static VisTextButton Button_previouse = new VisTextButton("Previouse");
     public static VisTextButton Button_cancle = new VisTextButton("Cancel");
-    public static VisLabel errorLabel = new VisLabel("Das Wichtigste hier DAS ERROR LABLE");
+    public static VisLabel errorLabel = new VisLabel("");
 
     public static VisTextField nameinput = new VisTextField();
     public static VisTextField pfadinput = new VisTextField();

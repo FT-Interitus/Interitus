@@ -1,7 +1,6 @@
 package de.ft.interitus;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
@@ -23,18 +22,17 @@ import de.ft.interitus.UI.inputfields.PressedKeys;
 import de.ft.interitus.UI.inputfields.Switch;
 import de.ft.interitus.UI.inputfields.TextField;
 import de.ft.interitus.UI.settings.subitems.subitem13;
+import de.ft.interitus.UI.shortcut.shortcuts.BlockShortcuts;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.deviceconnection.arduino.PortUpdate;
 import de.ft.interitus.deviceconnection.arduino.SerialConnection;
 import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.projecttypes.device.BlockTypes.BlockTypesVar;
 import de.ft.interitus.utils.PositionSaver;
 import de.ft.interitus.utils.animation.Animation;
 
 import java.awt.*;
 
-import static com.badlogic.gdx.Gdx.input;
 import static de.ft.interitus.Settings.darkmode;
 
 public class ProgrammingSpace extends ScreenAdapter implements Screen {
@@ -86,7 +84,9 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
         s.setBackground(AssetLoader.switch_background);
         s.setBackgroundgreen(AssetLoader.switch_background_green);
         s.setInside(AssetLoader.switch_inside);
-        Thread blockdebugcreater = new Thread() {
+
+
+       /* Thread blockdebugcreater = new Thread() {
             @Override
             public void run() {
                 try {
@@ -116,6 +116,8 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
 
         blockdebugcreater.start();
+
+        */
 
 
         cam.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
@@ -199,7 +201,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
                         if (BlockVar.visibleblocks.get(i).isMarked()) {
 
 
-                            if (input.isKeyJustPressed(Input.Keys.FORWARD_DEL)) {
+                            if (BlockShortcuts.shortCut_deleteBlock.isPressed()) {
                                 BlockVar.visibleblocks.get(i).delete(false);
                             }
 

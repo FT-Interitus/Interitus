@@ -43,7 +43,7 @@ public class ShortCut {
         for(int i = 0; i<this.getCombination().size(); i++) {
 
             if(this.getCombination().get(i)<600) {
-                ausgabe=ausgabe + Input.Keys.toString(this.getCombination().get(i)).replace("L-Alt","Alt").replace("R-Alt","Alt Gr");
+                ausgabe=ausgabe + Input.Keys.toString(this.getCombination().get(i)).replace("L-Alt","Alt").replace("R-Alt","Alt Gr").replace("Forward Delete","Entf");
             }else{
                 switch (this.getCombination().get(i)){
                     case 600:
@@ -79,7 +79,10 @@ public class ShortCut {
         }
     }
     public void addTaste(int keycode){
-        this.combination.add(keycode);
+        if(this.combination.indexOf(keycode)==-1) {
+            this.combination.add(keycode);
+        }
+
     }
     public void delLast(){
 

@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import de.ft.interitus.UI.shortcut.ShortCut;
 import de.ft.interitus.UI.shortcut.ShortCutChecker;
+import de.ft.interitus.UI.shortcut.shortcuts.BlockShortcuts;
 import de.ft.interitus.UI.shortcut.shortcuts.GlobalShortcuts;
 import de.ft.interitus.plugin.PluginManagerHandler;
 
@@ -24,7 +25,8 @@ public class CheckShortcuts {
         shortCuts.addAll(GlobalShortcuts.retunrarray());
         shortCutsChecker.add(new GlobalShortcuts());
         //Add Block shortcuts
-
+        shortCuts.addAll(BlockShortcuts.retunrarray());
+        shortCutsChecker.add(new BlockShortcuts());
 
        // ...
 
