@@ -3,6 +3,9 @@ package de.ft.interitus.plugin;
 import com.kotcrab.vis.ui.widget.Menu;
 import com.kotcrab.vis.ui.widget.VisTable;
 import de.ft.interitus.DisplayErrors;
+import de.ft.interitus.UI.CheckShortcuts;
+import de.ft.interitus.UI.shortcut.ShortCut;
+import de.ft.interitus.UI.shortcut.ShortCutChecker;
 import de.ft.interitus.Var;
 import de.ft.interitus.projecttypes.ProjektTypes;
 import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
@@ -144,6 +147,15 @@ public class PluginManagerHandler {
     public static void addProjectType(ProjektTypes PT) {
         projekttypes.add(PT);
     }
+
+    public static void addShortcut(ShortCut shortCut) {
+        CheckShortcuts.shortCuts.add(shortCut);
+    }
+
+    public static void addShortcutChecker(ShortCutChecker shortCutChecker) {
+        CheckShortcuts.shortCutsChecker.add(shortCutChecker);
+    }
+
 
     public static void addDeviceSpecificBlocks(ArrayList<PlatformSpecificBlock> PT) {
         platformSpecificBlock.add(PT);
