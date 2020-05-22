@@ -28,11 +28,15 @@ import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.deviceconnection.arduino.PortUpdate;
 import de.ft.interitus.deviceconnection.arduino.SerialConnection;
 import de.ft.interitus.loading.AssetLoader;
+import de.ft.interitus.projecttypes.device.BlockTypes.Arduino.Arduino.Wait;
 import de.ft.interitus.projecttypes.device.BlockTypes.BlockTypesVar;
+import de.ft.interitus.projecttypes.device.BlockTypes.Ev3.EV3Block;
 import de.ft.interitus.utils.PositionSaver;
 import de.ft.interitus.utils.animation.Animation;
 
+
 import java.awt.*;
+import java.io.*;
 
 import static com.badlogic.gdx.Gdx.input;
 import static de.ft.interitus.Settings.darkmode;
@@ -140,6 +144,56 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
     @Override
     public void render(float delta) {
+
+if(input.isKeyJustPressed(Input.Keys.C)) {
+
+    File file = new File(System.getProperty("user.dir")+"/libs/ev3/temp.lms");
+
+    FileOutputStream fos = null;
+    try {
+        fos = new FileOutputStream(file);
+    } catch (FileNotFoundException e) {
+        e.printStackTrace();
+    }
+
+    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+
+    try {
+        file.createNewFile();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+
+    try {
+        bw.write("vmthread  MAIN");
+        bw.newLine();
+        bw.write("{");
+        bw.newLine();
+
+        bw.write(((EV3Block) BlockVar.blocks.get(0).getBlocktype()).getCode());
+        bw.newLine();
+        bw.write("}");
+        bw.newLine();
+        bw.close();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    try {
+        fos.close();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+
+
+
+    ProcessBuilder pb = new ProcessBuilder(System.getProperty("user.dir")+"/libs/ev3/", "-jar", "assembler.jar");
+    pb.command("temp");
+    try {
+        Process p = pb.start();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
 
 
         if(Var.actProjekt==null) {

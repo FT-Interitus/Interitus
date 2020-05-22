@@ -7,4 +7,9 @@ public class Arduino implements ProgrammableObjekt {
     public String getName() {
         return "Arduino";
     }
+
+    @Override
+    public void update() {
+
+    }
 }

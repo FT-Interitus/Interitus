@@ -2,7 +2,8 @@ package de.ft.interitus.UI.tappedbar;
 
 import de.ft.interitus.Block.TapBarBlockItem;
 import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.projecttypes.device.BlockTypes.Arduino.Arduino.Wait;
+import de.ft.interitus.projecttypes.device.BlockTypes.Ev3.Wait;
+
 
 public class BlockTappedBar {
     public static TappedBar tb= new TappedBar(100,100);

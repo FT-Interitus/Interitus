@@ -8,7 +8,12 @@ import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Wait implements PlatformSpecificBlock, EV3Block {
+public class Sound implements PlatformSpecificBlock,EV3Block {
+    @Override
+    public String getCode() {
+        return "SOUND(TONE,100,700,1000)";
+    }
+
     @Override
     public ArrayList<Parameter> getBlockParameter() {
         return null;
@@ -16,12 +21,12 @@ public class Wait implements PlatformSpecificBlock, EV3Block {
 
     @Override
     public String getName() {
-        return "Warten";
+        return "Sound";
     }
 
     @Override
     public String getdescription() {
-        return "Mit diesem Block lässt du dein Programm einen bestimmte Zeit warten, das hängt je nach Einstellung ab.";
+        return "Spielt Töne ab";
     }
 
     @Override
@@ -36,11 +41,6 @@ public class Wait implements PlatformSpecificBlock, EV3Block {
 
     @Override
     public BlockCategories getBlockCategoration() {
-        return BlockCategories.Programm_Sequence;
-    }
-
-    @Override
-    public String getCode() {
-        return null;
+        return BlockCategories.ActionBlocks;
     }
 }
