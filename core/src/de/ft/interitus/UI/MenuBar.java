@@ -26,7 +26,19 @@ import de.ft.interitus.utils.ClearActOpenProgramm;
 
 public class MenuBar {
     public static boolean fullscreen = false;
-
+    public static MenuItem menuItem_vollbild;
+    public static MenuItem menuItem_neues_projekt;
+    public static MenuItem menuItem_oeffnen;
+    public static MenuItem menuItem_speichern;
+    public static MenuItem menuItem_speichernunter;
+    public static MenuItem menuItem_einstellungen;
+    public static MenuItem menuItem_beenden;
+    public static MenuItem menuItem_neueverbindung;
+    public static MenuItem menuItem_verbindungsmanager;
+    public static MenuItem menuItem_blockloeschen;
+    public static MenuItem menuItem_ausschneiden;
+    public static MenuItem menuItem_update;
+    public static MenuItem menuItem_ueber;
     protected static void createMenus() {
         Menu fileMenu = new Menu("Datei");
         Menu editMenu = new Menu("Bearbeiten");
@@ -34,7 +46,7 @@ public class MenuBar {
         Menu windowMenu = new Menu("Ansicht");
         Menu helpMenu = new Menu("Hilfe");
 
-        MenuItem menuItem_vollbild=new MenuItem("Vollbild", new ChangeListener() {
+        menuItem_vollbild=new MenuItem("Vollbild", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 if (fullscreen == false) {
@@ -51,7 +63,7 @@ public class MenuBar {
         }).setShortcut("F11");
 
 
-        MenuItem menuItem_neues_projekt=new MenuItem("Neues Projekt", new ChangeListener() {
+        menuItem_neues_projekt=new MenuItem("Neues Projekt", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 NewProjectWindow NPW = new NewProjectWindow();
@@ -61,7 +73,7 @@ public class MenuBar {
 
         UI.recent = new MenuItem("Letzte Öffnen");
 
-        MenuItem menuItem_oeffnen=new MenuItem("Öffnen", new ChangeListener() {
+        menuItem_oeffnen=new MenuItem("Öffnen", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
@@ -116,7 +128,7 @@ public class MenuBar {
             }
         }).setShortcut("Strg+O");
 
-        MenuItem menuItem_speichern=new MenuItem("Speichern", new ChangeListener() {
+        menuItem_speichern=new MenuItem("Speichern", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 if (DataManager.path != "") {
@@ -131,7 +143,7 @@ public class MenuBar {
             }
         }).setShortcut("Strg+S");
 
-        MenuItem menuItem_speichernunter=new MenuItem("Speichern unter", new ChangeListener() {
+        menuItem_speichernunter=new MenuItem("Speichern unter", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
@@ -141,20 +153,20 @@ public class MenuBar {
                 }
             }
         }).setShortcut("Strg+shift+S");
-        MenuItem menuItem_einstellungen=new MenuItem("Einstellungen", new ChangeListener() {
+        menuItem_einstellungen=new MenuItem("Einstellungen", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 UI.set.show();
             }
         }).setShortcut("STRG + Alt + S");
-        MenuItem menuItem_beenden=new MenuItem("Beenden", new ChangeListener() {
+        menuItem_beenden=new MenuItem("Beenden", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 Data.close();
                 System.exit(0);
             }
         }).setShortcut("Alt+F4");
-        MenuItem menuItem_neueverbindung=new MenuItem("Neue Verbindung", new ChangeListener() {
+        menuItem_neueverbindung=new MenuItem("Neue Verbindung", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 try {
@@ -165,25 +177,25 @@ public class MenuBar {
                 }
             }
         });
-        MenuItem menuItem_verbindungsmanager=new MenuItem("Verbindungs Manager", new ChangeListener() {
+        menuItem_verbindungsmanager=new MenuItem("Verbindungs Manager", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 Dialogs.showOKDialog(UI.stage, "++++ )-: ++++", "Dieses Fenster Exestiert noch nicht");
             }
         });
-        MenuItem menuItem_blockloeschen=new MenuItem("Block löschen", new ChangeListener() {
+        menuItem_blockloeschen=new MenuItem("Block löschen", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
             }
         });
-        MenuItem menuItem_ausschneiden=new MenuItem("Ausschneiden", new ChangeListener() {
+        menuItem_ausschneiden=new MenuItem("Ausschneiden", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
             }
         }).setShortcut("Strg+X");
-        MenuItem menuItem_update=new MenuItem("Updates..", new ChangeListener() {
+        menuItem_update=new MenuItem("Updates..", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
@@ -206,7 +218,7 @@ public class MenuBar {
                         });
             }
         });
-        MenuItem menuItem_ueber=new MenuItem("Über", new ChangeListener() {
+        menuItem_ueber=new MenuItem("Über", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 Dialogs.showOKDialog(UI.stage, "Über", "Programm-Version: " + Var.PROGRAMM_VERSION);

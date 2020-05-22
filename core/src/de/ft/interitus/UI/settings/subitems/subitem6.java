@@ -22,14 +22,12 @@ public class subitem6 {
 
         Var.disableshortcuts = true;
         VisTable table = new VisTable();
-
         for(int i=0;i< CheckShortcuts.shortCuts.size();i++) {
-            if(CheckShortcuts.shortCuts.get(i).getName()!=null) {
-                shortCutEinstellungen.add(new ShortCutEinstellung(i,table,CheckShortcuts.shortCuts.get(i)));
 
-            }else{
-                shortCutEinstellungen.add(new ShortCutEinstellung(i,table,CheckShortcuts.shortCuts.get(i)));
-
+            if(CheckShortcuts.shortCuts.get(i).getMenuItem()!=null){
+                shortCutEinstellungen.add(new ShortCutEinstellung(i, table, CheckShortcuts.shortCuts.get(i),CheckShortcuts.shortCuts.get(i).getMenuItem()));
+            }else {
+                shortCutEinstellungen.add(new ShortCutEinstellung(i, table, CheckShortcuts.shortCuts.get(i)));
             }
 
 

@@ -2,6 +2,7 @@ package de.ft.interitus.UI.shortcut;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.kotcrab.vis.ui.widget.MenuItem;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.Var;
 
@@ -10,12 +11,9 @@ import java.util.ArrayList;
 public class ShortCut {
     String name=null;
     boolean disable=false;
+    MenuItem menuItem;
     ArrayList<Integer> combination =new ArrayList<>();
-    public ShortCut(int... combination) {
-        for(int i = 0; i< combination.length; i++){
-             this.combination.add(combination[i]);
-        }
-    }
+
     public ShortCut(String name,int... combination) {
         this.name=name;
         for(int i = 0; i< combination.length; i++){
@@ -23,8 +21,21 @@ public class ShortCut {
         }
     }
 
+    public ShortCut(String name,MenuItem menuItem,int... combination) {
+        this.menuItem=menuItem;
+        this.name=name;
+        for(int i = 0; i< combination.length; i++){
+            this.combination.add(combination[i]);
+        }
+    }
 
+    public MenuItem getMenuItem() {
+        return menuItem;
+    }
 
+    public void setMenuItem(MenuItem menuItem) {
+        this.menuItem = menuItem;
+    }
 
     public String getShortcutasString(){
         String ausgabe="";
