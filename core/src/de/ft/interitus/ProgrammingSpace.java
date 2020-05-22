@@ -28,12 +28,10 @@ import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.deviceconnection.arduino.PortUpdate;
 import de.ft.interitus.deviceconnection.arduino.SerialConnection;
 import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.projecttypes.device.BlockTypes.Arduino.Arduino.Wait;
 import de.ft.interitus.projecttypes.device.BlockTypes.BlockTypesVar;
 import de.ft.interitus.projecttypes.device.BlockTypes.Ev3.EV3Block;
 import de.ft.interitus.utils.PositionSaver;
 import de.ft.interitus.utils.animation.Animation;
-
 
 import java.awt.*;
 import java.io.*;
@@ -185,14 +183,24 @@ if(input.isKeyJustPressed(Input.Keys.C)) {
     }
 
 
+    Runtime rt = Runtime.getRuntime();
 
-    ProcessBuilder pb = new ProcessBuilder(System.getProperty("user.dir")+"/libs/ev3/", "-jar", "assembler.jar");
-    pb.command("temp");
+
+
+
+
+
+
+        ProcessBuilder processBuilder = new ProcessBuilder("java -jar "+ System.getProperty("user.dir")+"/libs/ev3/assembler.jar temp");
+        processBuilder.directory(new File(System.getProperty("user.dir")+"/libs/ev3/"));
+
     try {
-        Process p = pb.start();
+        processBuilder.start();
     } catch (IOException e) {
         e.printStackTrace();
     }
+
+
 }
 
 

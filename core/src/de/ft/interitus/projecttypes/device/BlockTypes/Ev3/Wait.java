@@ -9,6 +9,11 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Wait implements PlatformSpecificBlock, EV3Block {
+
+    public Wait() {
+
+    }
+
     @Override
     public ArrayList<Parameter> getBlockParameter() {
         return null;

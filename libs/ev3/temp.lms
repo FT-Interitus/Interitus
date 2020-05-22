@@ -1,0 +1,4 @@
+vmthread  MAIN
+{
+SOUND(TONE,100,700,1000)
+}
