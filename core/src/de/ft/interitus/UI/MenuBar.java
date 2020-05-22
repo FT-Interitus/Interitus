@@ -152,13 +152,13 @@ public class MenuBar {
                     LoadSave.saveas();
                 }
             }
-        }).setShortcut("Strg+shift+S");
+        }).setShortcut("Strg+Shift+S");
         menuItem_einstellungen=new MenuItem("Einstellungen", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 UI.set.show();
             }
-        }).setShortcut("STRG + Alt + S");
+        }).setShortcut("Strg+Alt+S");
         menuItem_beenden=new MenuItem("Beenden", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {

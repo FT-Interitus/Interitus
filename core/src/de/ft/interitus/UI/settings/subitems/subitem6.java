@@ -141,7 +141,7 @@ public class subitem6 {
            }
 
            tastenkombeauswahl.setText(shortCut.getShortcutasString());
-           menuItem.setShortcut(shortCut.getShortcutasString());
+           menuItem.setShortcut(shortCut.getShortcutasString().replace(" ",""));
 
            return super.keyDown(event, keycode);
        }

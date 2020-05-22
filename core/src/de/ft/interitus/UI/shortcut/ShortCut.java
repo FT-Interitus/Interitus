@@ -43,7 +43,7 @@ public class ShortCut {
         for(int i = 0; i<this.getCombination().size(); i++) {
 
             if(this.getCombination().get(i)<600) {
-                ausgabe=ausgabe + Input.Keys.toString(this.getCombination().get(i));
+                ausgabe=ausgabe + Input.Keys.toString(this.getCombination().get(i)).replace("L-Alt","Alt").replace("R-Alt","Alt Gr");
             }else{
                 switch (this.getCombination().get(i)){
                     case 600:
