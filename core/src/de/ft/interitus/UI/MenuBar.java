@@ -34,12 +34,7 @@ public class MenuBar {
         Menu windowMenu = new Menu("Ansicht");
         Menu helpMenu = new Menu("Hilfe");
 
-        UI.recent = new MenuItem("Letzte Öffnen");
-
-        //recent.setSubMenu(createSubMenu());
-
-
-        windowMenu.addItem(new MenuItem("Vollbild", new ChangeListener() {
+        MenuItem menuItem_vollbild=new MenuItem("Vollbild", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 if (fullscreen == false) {
@@ -53,77 +48,20 @@ public class MenuBar {
                 }
 
             }
-        }).setShortcut("F11"));
+        }).setShortcut("F11");
 
 
-        fileMenu.addItem(new MenuItem("Neues Projekt", new ChangeListener() {
+        MenuItem menuItem_neues_projekt=new MenuItem("Neues Projekt", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 NewProjectWindow NPW = new NewProjectWindow();
                 NPW.show();
             }
-        }).setShortcut("Strg+N"));
+        }).setShortcut("Strg+N");
 
-   /*     fileMenu.addItem(new MenuItem("Neu", new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
+        UI.recent = new MenuItem("Letzte Öffnen");
 
-
-                if (DataManager.changes) {
-
-                    String[] möglichkeiten = {"Verwerfen", "Speichern", "Abbrechen"};
-
-
-                    final int nothing = 1;
-                    final int everything = 2;
-                    final int something = 3;
-
-                    //confirmdialog may return result of any type, here we are just using ints
-                    Dialogs.showConfirmDialog(UI.stage, "Ungespeicherte Änderungen", "\nWenn du eine leere Datei öffnest werden womögich Änderungen verworfen.\n",
-                            möglichkeiten, new Integer[]{nothing, everything, something},
-                            new ConfirmDialogListener<Integer>() {
-                                @Override
-                                public void result(Integer result) {
-                                    if (result == nothing) {
-                                        ClearActOpenProgramm.clear();
-
-                                        ExperienceVar.newprojects++;
-                                    }
-
-                                    if (result == everything) {
-                                        if (DataManager.path != "") {
-                                            FileHandle handle = Gdx.files.external(DataManager.path);
-                                            DataSaver.save(handle);
-                                            DataManager.saved();
-                                        } else {
-                                            LoadSave.saveas();
-                                        }
-
-                                    }
-
-                                    if (result == something) {
-
-                                    }
-                                }
-                            });
-
-                } else {
-                    try {
-                        ClearActOpenProgramm.clear();
-                        ExperienceVar.newprojects++;
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-
-
-            }
-        }).setShortcut("Strg+N"));
-        */
-
-
-        fileMenu.addItem(UI.recent);
-        fileMenu.addItem(new MenuItem("Öffnen", new ChangeListener() {
+        MenuItem menuItem_oeffnen=new MenuItem("Öffnen", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
@@ -176,8 +114,9 @@ public class MenuBar {
 
 
             }
-        }).setShortcut("Strg+O"));
-        fileMenu.addItem(new MenuItem("Speichern", new ChangeListener() {
+        }).setShortcut("Strg+O");
+
+        MenuItem menuItem_speichern=new MenuItem("Speichern", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 if (DataManager.path != "") {
@@ -190,8 +129,9 @@ public class MenuBar {
                     }
                 }
             }
-        }).setShortcut("Strg+S"));
-        fileMenu.addItem(new MenuItem("Speichern unter", new ChangeListener() {
+        }).setShortcut("Strg+S");
+
+        MenuItem menuItem_speichernunter=new MenuItem("Speichern unter", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
@@ -200,27 +140,21 @@ public class MenuBar {
                     LoadSave.saveas();
                 }
             }
-        }).setShortcut("Strg+shift+S"));
-        fileMenu.addSeparator();
-        fileMenu.addItem(new MenuItem("Einstellungen", new ChangeListener() {
+        }).setShortcut("Strg+shift+S");
+        MenuItem menuItem_einstellungen=new MenuItem("Einstellungen", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 UI.set.show();
             }
-        }).setShortcut("STRG + Alt + S"));
-        fileMenu.addItem(new MenuItem("Beenden", new ChangeListener() {
+        }).setShortcut("STRG + Alt + S");
+        MenuItem menuItem_beenden=new MenuItem("Beenden", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 Data.close();
                 System.exit(0);
             }
-        }).setShortcut("Alt+F4"));
-
-
-        // ------------------------------------
-
-
-        ConnectionMenue.addItem(new MenuItem("Neue Verbindung", new ChangeListener() {
+        }).setShortcut("Alt+F4");
+        MenuItem menuItem_neueverbindung=new MenuItem("Neue Verbindung", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 try {
@@ -230,68 +164,26 @@ public class MenuBar {
 
                 }
             }
-        }));
-
-        ConnectionMenue.addItem(new MenuItem("Verbindungs Manager", new ChangeListener() {
+        });
+        MenuItem menuItem_verbindungsmanager=new MenuItem("Verbindungs Manager", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 Dialogs.showOKDialog(UI.stage, "++++ )-: ++++", "Dieses Fenster Exestiert noch nicht");
             }
-        }));
-
-
-// --------------------------------------------
-
-        editMenu.addItem(UI.revert = new MenuItem("Rückgänig", new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                if (!SaveChanges.checkstack()) { //Test if Stack is empty
-                    SaveChanges.revert();
-                }
-            }
-        }).setShortcut("Strg+Z"));
-        editMenu.addItem(UI.redo = new MenuItem("Wiederherstellen", new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                if (!SaveChanges.checkredostack()) {
-                    SaveChanges.redo();
-                }
-            }
-        }).setShortcut("Strg+Y"));
-        editMenu.addSeparator();
-        editMenu.addItem(new MenuItem("Block löschen", new ChangeListener() {
+        });
+        MenuItem menuItem_blockloeschen=new MenuItem("Block löschen", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
             }
-        }));
-        editMenu.addSeparator();
-
-        editMenu.addItem(UI.copy = new MenuItem("Kopieren", new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                if (BlockVar.marked) {
-                    de.ft.interitus.data.user.clipboard.Manager.Copy();
-                }
-            }
-        }).setShortcut("Strg+C"));
-        editMenu.addItem(new MenuItem("Ausschneiden", new ChangeListener() {
+        });
+        MenuItem menuItem_ausschneiden=new MenuItem("Ausschneiden", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
             }
-        }).setShortcut("Strg+X"));
-        editMenu.addItem(UI.paste = new MenuItem("Einfügen", new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                if (de.ft.interitus.data.user.clipboard.Manager.checkcopy()) {
-                    de.ft.interitus.data.user.clipboard.Manager.paste();
-                }
-            }
-        }).setShortcut("Strg+V"));
-
-
-        helpMenu.addItem(new MenuItem("Updates..", new ChangeListener() {
+        }).setShortcut("Strg+X");
+        MenuItem menuItem_update=new MenuItem("Updates..", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
@@ -313,24 +205,75 @@ public class MenuBar {
                             }
                         });
             }
-        }));
-
-        helpMenu.addItem(new MenuItem("Über", new ChangeListener() {
+        });
+        MenuItem menuItem_ueber=new MenuItem("Über", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 Dialogs.showOKDialog(UI.stage, "Über", "Programm-Version: " + Var.PROGRAMM_VERSION);
             }
-        }));
+        });
+        //recent.setSubMenu(createSubMenu());
+
+        windowMenu.addItem(menuItem_vollbild);
+        fileMenu.addItem(menuItem_neues_projekt);
+        fileMenu.addItem(UI.recent);
+        fileMenu.addItem(menuItem_oeffnen);
+        fileMenu.addItem(menuItem_speichern);
+        fileMenu.addItem(menuItem_speichernunter);
+        fileMenu.addSeparator();
+        fileMenu.addItem(menuItem_einstellungen);
+        fileMenu.addItem(menuItem_beenden);
+        // ------------------------------------
+        ConnectionMenue.addItem(menuItem_neueverbindung);
+        ConnectionMenue.addItem(menuItem_verbindungsmanager);
+        // --------------------------------------------
+        editMenu.addItem(UI.revert = new MenuItem("Rückgänig", new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                if (!SaveChanges.checkstack()) { //Test if Stack is empty
+                    SaveChanges.revert();
+                }
+            }
+        }).setShortcut("Strg+Z"));
+        editMenu.addItem(UI.redo = new MenuItem("Wiederherstellen", new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                if (!SaveChanges.checkredostack()) {
+                    SaveChanges.redo();
+                }
+            }
+        }).setShortcut("Strg+Y"));
+        editMenu.addSeparator();
+        editMenu.addItem(menuItem_blockloeschen);
+        editMenu.addSeparator();
+        editMenu.addItem(UI.copy = new MenuItem("Kopieren", new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                if (BlockVar.marked) {
+                    de.ft.interitus.data.user.clipboard.Manager.Copy();
+                }
+            }
+        }).setShortcut("Strg+C"));
+        editMenu.addItem(menuItem_ausschneiden);
+        editMenu.addItem(UI.paste = new MenuItem("Einfügen", new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                if (de.ft.interitus.data.user.clipboard.Manager.checkcopy()) {
+                    de.ft.interitus.data.user.clipboard.Manager.paste();
+                }
+            }
+        }).setShortcut("Strg+V"));
+
+
+        helpMenu.addItem(menuItem_update);
+
+        helpMenu.addItem(menuItem_ueber);
 
 
         UI.menuBar.addMenu(fileMenu);
         UI.menuBar.addMenu(editMenu);
-
-
         UI.menuBar.addMenu(ConnectionMenue);
-
         UI.menuBar.addMenu(windowMenu);
-
         UI.menuBar.addMenu(helpMenu);
 
         for (int i = 0; i < PluginManagerHandler.pluginMenubar.size(); i++) { //Alle Plugins MenuBar werden der MenuBar
