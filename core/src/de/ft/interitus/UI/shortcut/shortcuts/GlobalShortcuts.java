@@ -9,6 +9,7 @@ import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.UI.MenuBar;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.newproject.NewProjectWindow;
+import de.ft.interitus.UI.settings.SettingsUI;
 import de.ft.interitus.UI.shortcut.ShortCut;
 import de.ft.interitus.UI.shortcut.ShortCutChecker;
 import de.ft.interitus.UI.shortcut.SpecialKeys;
@@ -25,6 +26,7 @@ public class GlobalShortcuts implements ShortCutChecker {
     public static ShortCut shortCut_speichern=new ShortCut("Speichern",SpecialKeys.dualStrg, Input.Keys.S);
     public static ShortCut shortCut_speichern_unter=new ShortCut("Speichern unter",SpecialKeys.dualStrg, SpecialKeys.dualShift, Input.Keys.S);
     public static ShortCut shortCut_vollbild=new ShortCut("Vollbild",Input.Keys.F11);
+    public static ShortCut shortCut_einstellungen=new ShortCut("Einstellungen öffnen",SpecialKeys.dualStrg,Input.Keys.ALT_LEFT,Input.Keys.S);
 
 
 
@@ -36,6 +38,7 @@ public class GlobalShortcuts implements ShortCutChecker {
         returnarraylist.add(shortCut_speichern);
         returnarraylist.add(shortCut_speichern_unter);
         returnarraylist.add(shortCut_vollbild);
+        returnarraylist.add(shortCut_einstellungen);
 
         return returnarraylist;
 
@@ -47,6 +50,11 @@ public class GlobalShortcuts implements ShortCutChecker {
 
     @Override
     public void check() {
+
+        if(shortCut_einstellungen.isPressed() && !SettingsUI.isopend()){
+            UI.set.show();
+        }
+
         if(shortCut_vollbild.isPressed()){
             if (MenuBar.fullscreen == false) {
                 Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
