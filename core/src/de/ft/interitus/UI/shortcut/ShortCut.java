@@ -61,6 +61,9 @@ public class ShortCut {
     public boolean isPressed() {
         boolean pressed = true;
 
+if(combination.size()==0) {
+    return false;
+}
 
         if(!Var.disableshortcuts) {
 
