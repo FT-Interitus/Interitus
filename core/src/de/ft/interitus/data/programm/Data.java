@@ -89,7 +89,7 @@ public class Data {
 
             try {
                 Files.setAttribute(path, "dos:hidden", true); //Auf Windows wird das Verzeichnis unsichtbar gemacht (Auf Linux reicht ja schon der punkt davor)
-            } catch (IOException e) {
+            } catch (UnsupportedOperationException | IOException e) {
             }
         } else {
 

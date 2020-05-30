@@ -165,7 +165,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
             } else {
                 Gdx.gl.glClearColor(0.54f, 0.533f, 0.51f, 1);
             }
-            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT | (Gdx.graphics.getBufferFormat().coverageSampling?GL20.GL_COVERAGE_BUFFER_BIT_NV:0));
             batch.setProjectionMatrix(cam.combined);
             UIbatch.setProjectionMatrix(UIcam.combined);
 

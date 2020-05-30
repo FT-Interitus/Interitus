@@ -39,6 +39,7 @@ public class DesktopLauncher {
 			config.allowSoftwareMode = true;
 			config.width = Var.w;
 			config.height = Var.h;
+			config.samples = 3;
 			config.vSyncEnabled = false;
 
 
