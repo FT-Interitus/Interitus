@@ -50,7 +50,7 @@ public class SettingsUI extends VisWindow {
      *
      * 0 = Aussehen
      * 1 = Theme
-     * 2 = item 1.2
+     * 2 = Grafik
      * 3 = item 1.3
      *
      * 4 = Verhalten
@@ -231,7 +231,7 @@ public class SettingsUI extends VisWindow {
 
 
             item1.add(new TestNode(new VisLabel(" Theme"), 1));
-            item1.add(new TestNode(new VisLabel(" item 1.2"), 2));
+            item1.add(new TestNode(new VisLabel(" Grafik"), 2));
             item1.add(new TestNode(new VisLabel(" item 1.3"), 3));
 
             item2.add(new TestNode(new VisLabel(" Tastenkombinationen "), 5));

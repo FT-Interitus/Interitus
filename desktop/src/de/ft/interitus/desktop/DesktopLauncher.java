@@ -14,7 +14,7 @@ public class DesktopLauncher {
 	/***
 	 *
 	 * @param arg -nogui open no window
-	 *            -v Verbose output not included yet
+	 *            -v Verbose output
 	 */
 
 	public static void main (String[] arg) throws FileNotFoundException {

@@ -31,7 +31,7 @@ public class NetworkScan {
                 } catch (UnknownHostException e) {
                 }
                 for (int i = 0; i < 255; i++) {
-                    InetAddress testdevice = InetAddress.getByName("192.168." + ip + "." + i);
+                    InetAddress testdevice = InetAddress.getByName("192.168." + ip + "." + i); //TODO doesn't work on MAC OS
 
                     if (testdevice.isReachable(60)) {
                         device.add(testdevice);
