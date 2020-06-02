@@ -704,6 +704,10 @@ public class Block implements VisibleObjects {
         return blockupdate;
     }
 
+    /***
+     *
+     * @return the Block Type from this Block
+     */
     public PlatformSpecificBlock getBlocktype() {
         return blocktype;
     }

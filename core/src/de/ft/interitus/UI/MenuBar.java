@@ -170,7 +170,7 @@ public class MenuBar {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 try {
-                    SetupWindow sw = new SetupWindow(); //TODO zu debug zwecken
+                    SetupWindow sw = new SetupWindow();
                     sw.show();
                 } catch (NullPointerException e) {
 

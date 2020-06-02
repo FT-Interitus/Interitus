@@ -279,7 +279,7 @@ if(!Var.isdialogeopend) {
                     int biggestindex = -1;
                     for (int i = 0; i < BlockVar.showduplicat.size(); i++) {
 
-                        try {           //TODO unerklärte Nullpointer bitte behebn //THORIE in der for wird der wert geändert
+                        try {
                             if (BlockVar.showduplicat.get(i).getDublicatmarkedblockuberlappungsflache() > biggestvalue) {
                                 biggestvalue = BlockVar.showduplicat.get(i).getDublicatmarkedblockuberlappungsflache();
                                 biggestindex = i;
@@ -471,7 +471,7 @@ if(!Var.isdialogeopend) {
                         }
 
                         try {
-                            if (CheckKollision.checkblockwithduplicate(BlockVar.markedblock, block, 1) && block.getLeft() == null && BlockVar.markedblock.getWire_right() == null) {  //TODO Fehler beheben
+                            if (CheckKollision.checkblockwithduplicate(BlockVar.markedblock, block, 1) && block.getLeft() == null && BlockVar.markedblock.getWire_right() == null) {
 
                                 if (BlockVar.markedblock.isMoving()) {
 
