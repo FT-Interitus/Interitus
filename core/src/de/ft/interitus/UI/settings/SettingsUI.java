@@ -30,7 +30,7 @@ public class SettingsUI extends VisWindow {
     public static VisTextField updateurlfield;
     public static RowLayout rowLayout;
     public static VisCheckBox darktoggle;
-    public static VisCheckBox developertoggle;
+
     public static TestBuilder testBuilder;
     public static int SelectedItem = -1;
     private static boolean accepteddangerous = false;
@@ -141,16 +141,7 @@ public class SettingsUI extends VisWindow {
             });
 
 
-            developertoggle = new VisCheckBox("Schaltet den Developer-Mode an und aus");
-            developertoggle.setChecked(Var.developermode);
-            developertoggle.addListener(new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor) {
 
-
-                    Var.developermode = developertoggle.isChecked();
-                }
-            });
 
             updateurlfield = new VisTextField(Settings.updateurl);
             updateurlfield.setDisabled(true);
