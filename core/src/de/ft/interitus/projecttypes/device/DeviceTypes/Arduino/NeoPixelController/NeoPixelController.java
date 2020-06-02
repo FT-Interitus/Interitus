@@ -7,4 +7,9 @@ public class NeoPixelController implements ProgrammableObjekt {
     public String getName() {
         return "NeoPixelController";
     }
+
+    @Override
+    public void update() {
+
+    }
 }

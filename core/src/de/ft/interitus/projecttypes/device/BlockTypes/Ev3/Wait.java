@@ -10,7 +10,7 @@ import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Wait implements PlatformSpecificBlock {
+public class Wait implements PlatformSpecificBlock, Ev3Block {
     @Override
     public ArrayList<Parameter> getBlockParameter() {
         return null;
@@ -48,6 +48,12 @@ public class Wait implements PlatformSpecificBlock {
 
     @Override
     public Texture getImage() {
+        return null;
+    }
+
+
+    @Override
+    public String getCode() {
         return null;
     }
 }

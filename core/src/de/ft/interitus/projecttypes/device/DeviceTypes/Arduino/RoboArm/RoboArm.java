@@ -7,4 +7,9 @@ public class RoboArm implements ProgrammableObjekt {
     public String getName() {
         return "RoboArm";
     }
+
+    @Override
+    public void update() {
+
+    }
 }
