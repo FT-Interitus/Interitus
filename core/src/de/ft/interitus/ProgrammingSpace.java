@@ -293,7 +293,7 @@ e.printStackTrace();
         try {
             UI.update();
 
-        } catch (NullPointerException e) {
+        } catch (Exception e) {
             //Falls die UI nicht richtig initialisiert werden konnte
         }
 
