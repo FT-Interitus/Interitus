@@ -32,6 +32,10 @@ public class TapContent {
         items.add(ti);
     }
 
+    public void clear() {
+        items.clear();
+    }
+
     public void setItems(TapItem... ti){
         items.clear();
         for(int i=0;i<ti.length;i++){

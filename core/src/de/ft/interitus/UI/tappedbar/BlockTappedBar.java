@@ -11,17 +11,21 @@ import org.lwjgl.Sys;
 public class BlockTappedBar {
     public static TappedBar tb= new TappedBar(100,100);
 
+    static TapContent ActionBlocks=new TapContent(AssetLoader.img_mappe1);
+    static TapContent Programm_Sequence=new TapContent(AssetLoader.img_mappe2);
+    static TapContent Sensors=new TapContent(AssetLoader.img_mappe3);
+    static TapContent Data_Operation=new TapContent(AssetLoader.img_mappe4);
+    static TapContent Specials=new TapContent(AssetLoader.img_mappe5);
+    static TapContent OwnBlocks=new TapContent(AssetLoader.img_mappe6);
     public static void init() {
 
 
-        TapBarBlockItem tbbi=new TapBarBlockItem(new Wait(),AssetLoader.img_mappe2);
-
-        TapContent ActionBlocks=new TapContent(AssetLoader.img_mappe1);
-        TapContent Programm_Sequence=new TapContent(AssetLoader.img_mappe2);
-        TapContent Sensors=new TapContent(AssetLoader.img_mappe3);
-        TapContent Data_Operation=new TapContent(AssetLoader.img_mappe4);
-        TapContent Specials=new TapContent(AssetLoader.img_mappe5);
-        TapContent OwnBlocks=new TapContent(AssetLoader.img_mappe6);
+        ActionBlocks.clear();
+        Programm_Sequence.clear();
+        Sensors.clear();
+        Data_Operation.clear();
+        Specials.clear();
+        OwnBlocks.clear();
 
 
 for(int i=0;i<Var.actProjekt.getProjectblocks().size();i++) {
@@ -47,6 +51,7 @@ for(int i=0;i<Var.actProjekt.getProjectblocks().size();i++) {
 
         }
     }catch (Exception e) {
+        e.printStackTrace();
         DisplayErrors.customErrorstring = "Fehler beim Laden der Blöcke!";
         DisplayErrors.error = e;
     }
