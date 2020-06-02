@@ -46,7 +46,7 @@ public class Wait implements PlatformSpecificBlock {
 
     @Override
     public BlockCategories getBlockCategoration() {
-        return null;
+        return BlockCategories.Programm_Sequence;
     }
 
     @Override

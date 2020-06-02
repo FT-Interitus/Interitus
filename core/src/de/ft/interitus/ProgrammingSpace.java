@@ -63,7 +63,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
         //TODO Debug hier wird immer ein Ev3 Project erstellt
 
-        Var.actProjekt = ProjectTypesVar.projectTypes.get(2);
+        Var.actProjekt = ProjectTypesVar.projectTypes.get(0);
 
 
         pressedKeys=new PressedKeys();

@@ -1,6 +1,7 @@
 package de.ft.interitus.UI.tappedbar;
 
 import de.ft.interitus.Block.TapBarBlockItem;
+import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Var;
 import de.ft.interitus.data.user.DataLoader;
 import de.ft.interitus.loading.AssetLoader;
@@ -24,25 +25,30 @@ public class BlockTappedBar {
 
 
 for(int i=0;i<Var.actProjekt.getProjectblocks().size();i++) {
-    switch (Var.actProjekt.getProjectblocks().get(i).getBlockCategoration()) {
-        case ActionBlocks:
-            ActionBlocks.addItem(new TapBarBlockItem(Var.actProjekt.getProjectblocks().get(i),Var.actProjekt.getProjectblocks().get(i).getSmallImage()));
-            break;
-        case Programm_Sequence:
-            Programm_Sequence.addItem(new TapBarBlockItem(Var.actProjekt.getProjectblocks().get(i),Var.actProjekt.getProjectblocks().get(i).getSmallImage()));
-            break;
-        case Sensors:
-            Sensors.addItem(new TapBarBlockItem(Var.actProjekt.getProjectblocks().get(i),Var.actProjekt.getProjectblocks().get(i).getSmallImage()));
-            break;
-        case Data_Operation:
-            Data_Operation.addItem(new TapBarBlockItem(Var.actProjekt.getProjectblocks().get(i),Var.actProjekt.getProjectblocks().get(i).getSmallImage()));
-            break;
-        case Specials:
-            Specials.addItem(new TapBarBlockItem(Var.actProjekt.getProjectblocks().get(i),Var.actProjekt.getProjectblocks().get(i).getSmallImage()));
-        case OwnBlocks:
-            System.out.println("Unallowed Block was registered!");
-            break;
+    try {
+        switch (Var.actProjekt.getProjectblocks().get(i).getBlockCategoration()) {
+            case ActionBlocks:
+                ActionBlocks.addItem(new TapBarBlockItem(Var.actProjekt.getProjectblocks().get(i), Var.actProjekt.getProjectblocks().get(i).getSmallImage()));
+                break;
+            case Programm_Sequence:
+                Programm_Sequence.addItem(new TapBarBlockItem(Var.actProjekt.getProjectblocks().get(i), Var.actProjekt.getProjectblocks().get(i).getSmallImage()));
+                break;
+            case Sensors:
+                Sensors.addItem(new TapBarBlockItem(Var.actProjekt.getProjectblocks().get(i), Var.actProjekt.getProjectblocks().get(i).getSmallImage()));
+                break;
+            case Data_Operation:
+                Data_Operation.addItem(new TapBarBlockItem(Var.actProjekt.getProjectblocks().get(i), Var.actProjekt.getProjectblocks().get(i).getSmallImage()));
+                break;
+            case Specials:
+                Specials.addItem(new TapBarBlockItem(Var.actProjekt.getProjectblocks().get(i), Var.actProjekt.getProjectblocks().get(i).getSmallImage()));
+            case OwnBlocks:
+                System.out.println("Unallowed Block was registered!");
+                break;
 
+        }
+    }catch (Exception e) {
+        DisplayErrors.customErrorstring = "Fehler beim Laden der Blöcke!";
+        DisplayErrors.error = e;
     }
 }
 
