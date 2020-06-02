@@ -1,6 +1,8 @@
 package de.ft.interitus.projecttypes.device.BlockTypes.Arduino.NeopxielController;
 
+import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
+import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.device.BlockTypes.BlockCategories;
 import de.ft.interitus.projecttypes.device.BlockTypes.BlockTopParameter;
 import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
@@ -36,6 +38,16 @@ public class SetTableColor implements PlatformSpecificBlock { //TODO Description
 
     @Override
     public BlockCategories getBlockCategoration() {
+        return null;
+    }
+
+    @Override
+    public Texture getSmallImage() {
+        return AssetLoader.img_mappe1;
+    }
+
+    @Override
+    public Texture getImage() {
         return null;
     }
 }

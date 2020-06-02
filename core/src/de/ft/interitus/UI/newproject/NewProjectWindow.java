@@ -13,6 +13,7 @@ import de.ft.interitus.Settings;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.Var;
 import de.ft.interitus.plugin.PluginManagerHandler;
+import de.ft.interitus.projecttypes.device.BlockTypes.ProjectTypesVar;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -95,9 +96,9 @@ public class NewProjectWindow {
             selectProjectType = new VisSelectBox<String>();
 
             final ArrayList<String> items = new ArrayList<>();
-            for (int i = 0; i < PluginManagerHandler.projekttypes.size(); i++) {
-                if (PluginManagerHandler.projekttypes.get(i).getPO() != null) {
-                    items.add(PluginManagerHandler.projekttypes.get(i).getName());
+            for (int i = 0; i < ProjectTypesVar.projectTypes.size(); i++) {
+                if (ProjectTypesVar.projectTypes.get(i).getPO() != null) {
+                    items.add(ProjectTypesVar.projectTypes.get(i).getName());
                 }
             }
 
@@ -150,7 +151,7 @@ public class NewProjectWindow {
             Button_next.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
-                    Var.actProjekt = PluginManagerHandler.projekttypes.get(items.indexOf(selectProjectType.getSelected()));
+                    Var.actProjekt = ProjectTypesVar.projectTypes.get(items.indexOf(selectProjectType.getSelected()));
                     //TODO project init
                     setupBuilder.close();
                 }

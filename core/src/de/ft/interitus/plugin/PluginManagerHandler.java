@@ -6,7 +6,7 @@ import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.UI.shortcut.ShortCut;
 import de.ft.interitus.UI.shortcut.ShortCutChecker;
 import de.ft.interitus.Var;
-import de.ft.interitus.projecttypes.ProjektTypes;
+import de.ft.interitus.projecttypes.ProjectTypes;
 import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
 import org.usb4java.LoaderException;
 
@@ -22,11 +22,10 @@ import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 
 public class PluginManagerHandler {
-    public static ArrayList<ProjektTypes> projekttypes = new ArrayList<>();
+    public static ArrayList<ProjectTypes> pluginprojekttypes = new ArrayList<>();
     public static List<PluginRegister> registeredplugins = new ArrayList<>();
     public static List<VisTable> plugisettings = new ArrayList<>();
     public static List<Menu> pluginMenubar = new ArrayList<>();
-    public static List<ArrayList<PlatformSpecificBlock>> platformSpecificBlock = new ArrayList<>();
     public static List<Plugin> loadedplugins = new ArrayList<>();
     public static ArrayList<ShortCutChecker> pluginshortCutsChecker = new ArrayList<>();
     public static ArrayList<ShortCut> pluginshortCuts = new ArrayList<>();
@@ -142,8 +141,8 @@ public class PluginManagerHandler {
         pluginMenubar.add(menuentry);
     }
 
-    public static void addProjectType(ProjektTypes PT) {
-        projekttypes.add(PT);
+    public static void addProjectType(ProjectTypes PT) {
+        pluginprojekttypes.add(PT);
     }
 
     public static void addShortcut(ShortCut... shortCut) {
@@ -155,9 +154,7 @@ public class PluginManagerHandler {
     }
 
 
-    public static void addDeviceSpecificBlocks(ArrayList<PlatformSpecificBlock> PT) {
-        platformSpecificBlock.add(PT);
-    }
+
 
     public Exception init() {
 

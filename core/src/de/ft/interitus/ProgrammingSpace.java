@@ -28,6 +28,7 @@ import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.deviceconnection.arduino.PortUpdate;
 import de.ft.interitus.deviceconnection.arduino.SerialConnection;
 import de.ft.interitus.loading.AssetLoader;
+import de.ft.interitus.projecttypes.device.BlockTypes.ProjectTypesVar;
 import de.ft.interitus.utils.PositionSaver;
 import de.ft.interitus.utils.animation.Animation;
 
@@ -59,9 +60,15 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
     public static PressedKeys pressedKeys;
 
     public ProgrammingSpace() {
+
+        //TODO Debug hier wird immer ein Ev3 Project erstellt
+
+        Var.actProjekt = ProjectTypesVar.projectTypes.get(2);
+
+
         pressedKeys=new PressedKeys();
         RechtsKlick.Init();
-         BlockTappedBar.init();
+         BlockTappedBar.init(); //TODO reinit after new Project was created or loaded
 
 
         ia = new IntegerAuswahl(400, 400, 50, 25);

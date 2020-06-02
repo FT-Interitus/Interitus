@@ -32,12 +32,11 @@ public class Programm extends Game {
     public void create() {
 
 
+        String str = System.getProperty("user.name");
+        System.out.println(str.substring(0, 1).toUpperCase() + str.substring(1));
 
 
 
-
-
-        Init.initBlocks();
 
         //  SSHConnection.update("192.168.2.112","pi","Pi-Server");
         Thread loadplugins = new Thread() {
@@ -59,12 +58,14 @@ public class Programm extends Game {
             Var.nointernetconnection = true;
         }
 
+        Init.initBlocks();
+
         Thread seachnetwork = new Thread() {
             @Override
             public void run() {
                 NetworkScan.get();
             }
-        };
+        }; //TODO doenst work on Mac
         seachnetwork.start();
         Data.init();
         ExperienceManager.init();

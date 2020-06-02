@@ -1,7 +1,6 @@
 package de.ft.interitus.projecttypes.device.BlockTypes.Arduino.Arduino;
 
-import de.ft.interitus.plugin.PluginManagerHandler;
-import de.ft.interitus.projecttypes.ProjektTypes;
+import de.ft.interitus.projecttypes.ProjectTypes;
 import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.device.DeviceTypes.Arduino.Arduino.Arduino;
 
@@ -13,17 +12,17 @@ public class InitArduino {
 
 
 
-    public static ArrayList<PlatformSpecificBlock> init() {
+    public static ProjectTypes init() {
 
 
         blocks.add(new Wait());
 
 
 
-        PluginManagerHandler.projekttypes.add(new ProjektTypes(new Arduino(),"Arduino-Projekt",blocks));
 
 
 
-        return blocks;
+
+        return new ProjectTypes(new Arduino(),"Arduino-Projekt",blocks);
     }
 }

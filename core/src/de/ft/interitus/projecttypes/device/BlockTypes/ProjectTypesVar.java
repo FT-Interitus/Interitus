@@ -1,8 +1,10 @@
 package de.ft.interitus.projecttypes.device.BlockTypes;
 
+import de.ft.interitus.projecttypes.ProjectTypes;
+
 import java.util.ArrayList;
 
-public class BlockTypesVar {
+public class ProjectTypesVar {
 
 
     /**
@@ -13,6 +15,6 @@ public class BlockTypesVar {
      * 4 -> Arduino RoboArm
      * ... -> Plugins
      */
-   public static ArrayList<ArrayList<PlatformSpecificBlock>> blocks = new ArrayList<>();
+   public static ArrayList<ProjectTypes> projectTypes = new ArrayList<>();
 
 }

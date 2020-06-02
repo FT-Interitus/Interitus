@@ -28,6 +28,10 @@ public class TapContent {
 
         tab_button.setImage(img);
     }
+    public void addItem(TapItem ti) {
+        items.add(ti);
+    }
+
     public void setItems(TapItem... ti){
         items.clear();
         for(int i=0;i<ti.length;i++){

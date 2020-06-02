@@ -11,14 +11,15 @@ public class Init {
 
     public static void initBlocks() {
 
-        BlockTypesVar.blocks.add( InitArduino.init());
-        BlockTypesVar.blocks.add( InitRaspberryPI.init());
-        BlockTypesVar.blocks.add( InitEv3.init());
-        BlockTypesVar.blocks.add(InitNeoPixelController.init());
-        BlockTypesVar.blocks.add(InitRoboArm.init());
-        for(int i=0;i< PluginManagerHandler.platformSpecificBlock.size();i++) {
+        ProjectTypesVar.projectTypes.add( InitArduino.init());
+        ProjectTypesVar.projectTypes.add( InitRaspberryPI.init());
+        ProjectTypesVar.projectTypes.add( InitEv3.init());
+        ProjectTypesVar.projectTypes.add(InitNeoPixelController.init());
+        ProjectTypesVar.projectTypes.add(InitRoboArm.init());
 
-            BlockTypesVar.blocks.add( PluginManagerHandler.platformSpecificBlock.get(i));
-        }
+
+
+        ProjectTypesVar.projectTypes.addAll(PluginManagerHandler.pluginprojekttypes);
+
     }
 }

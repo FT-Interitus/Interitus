@@ -5,12 +5,12 @@ import de.ft.interitus.projecttypes.device.ProgrammableObjekt;
 
 import java.util.ArrayList;
 
-public class ProjektTypes {
+public class ProjectTypes {
     ProgrammableObjekt PO;
     String name;
     ArrayList<PlatformSpecificBlock> projectblocks;
 
-    public ProjektTypes(ProgrammableObjekt PO, String name,ArrayList<PlatformSpecificBlock> blocks) {
+    public ProjectTypes(ProgrammableObjekt PO, String name, ArrayList<PlatformSpecificBlock> blocks) {
         this.projectblocks = blocks;
         this.PO = PO;
         this.name = name;

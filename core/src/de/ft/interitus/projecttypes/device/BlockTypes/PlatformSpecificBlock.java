@@ -1,5 +1,6 @@
 package de.ft.interitus.projecttypes.device.BlockTypes;
 
+import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
 
 import java.awt.*;
@@ -14,6 +15,9 @@ public interface PlatformSpecificBlock {
     ArrayList<BlockTopParameter> getblocktopparamter();
     Color blockcolor();
     BlockCategories getBlockCategoration();
+    Texture getSmallImage();
+    Texture getImage();
+
 
 
 }

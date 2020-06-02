@@ -1,7 +1,7 @@
 package de.ft.interitus;
 
 import de.ft.interitus.plugin.PluginManagerHandler;
-import de.ft.interitus.projecttypes.ProjektTypes;
+import de.ft.interitus.projecttypes.ProjectTypes;
 
 import java.util.ArrayList;
 
@@ -24,7 +24,7 @@ public class Var {
 
     public static int w = 1300;
     public static int h = 800;
-    public static ProjektTypes actProjekt = null;
+    public static ProjectTypes actProjekt = null;
     public static boolean disableshortcuts=false;
 
 
