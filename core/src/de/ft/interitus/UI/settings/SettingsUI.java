@@ -30,6 +30,7 @@ public class SettingsUI extends VisWindow {
     public static VisTextField updateurlfield;
     public static RowLayout rowLayout;
     public static VisCheckBox darktoggle;
+    public static VisCheckBox developertoggle;
     public static TestBuilder testBuilder;
     public static int SelectedItem = -1;
     private static boolean accepteddangerous = false;
@@ -61,7 +62,7 @@ public class SettingsUI extends VisWindow {
      * 8 = Programme Einstellungen
      * 9 = Daten
      * 10 = item 3.2
-     * 11 = item 3.3
+     * 11 = Erweitert
      *
      * 12 = Plugin Store
      * 13.. Plguin
@@ -136,6 +137,18 @@ public class SettingsUI extends VisWindow {
 
 
                     Settings.darkmode = darktoggle.isChecked();
+                }
+            });
+
+
+            developertoggle = new VisCheckBox("Schaltet den Developer-Mode an und aus");
+            developertoggle.setChecked(Var.developermode);
+            developertoggle.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent event, Actor actor) {
+
+
+                    Var.developermode = developertoggle.isChecked();
                 }
             });
 
@@ -240,7 +253,7 @@ public class SettingsUI extends VisWindow {
 
             item3.add(new TestNode(new VisLabel(" Daten"), 9));
             item3.add(new TestNode(new VisLabel(" item 3.2"), 10));
-            item3.add(new TestNode(new VisLabel(" item 3.3"), 11));
+            item3.add(new TestNode(new VisLabel(" Erweitert"), 11));
 
             for (int i = 0; i < PluginManagerHandler.plugisettings.size(); i++) {
                 item4.add(new TestNode(new VisLabel(" " + PluginManagerHandler.registeredplugins.get(i).getName() + " "), 13 + i));
