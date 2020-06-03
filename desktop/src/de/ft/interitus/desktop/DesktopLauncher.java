@@ -2,11 +2,15 @@ package de.ft.interitus.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import de.ft.interitus.Programm;
 import de.ft.interitus.Var;
 
 import java.io.FileNotFoundException;
 import java.util.Arrays;
+
+import static org.lwjgl.glfw.GLFW.glfwWindowHint;
 
 public class DesktopLauncher {
 	DesktopLauncher SESSION = this;
@@ -34,17 +38,15 @@ public class DesktopLauncher {
 
 
 
-			LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-			config.useGL30 = true;
-			config.allowSoftwareMode = true;
-			config.width = Var.w;
-			config.height = Var.h;
-			config.samples = 3;
-			config.vSyncEnabled = false;
+			Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 
 
+config.setWindowedMode(Var.w,Var.h);
 
-			 new LwjglApplication(new Programm(), config);
+			config.useVsync(false);
+			//glfwWindowHint(GLFW_SAMPLES, 4);
+
+			 new Lwjgl3Application(new Programm(), config);
 
 		}else{
 

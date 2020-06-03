@@ -6,7 +6,7 @@ import de.ft.interitus.Var;
 import de.ft.interitus.data.user.DataLoader;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.device.BlockTypes.Arduino.Arduino.Wait;
-import org.lwjgl.Sys;
+
 
 public class BlockTappedBar {
     public static TappedBar tb= new TappedBar(100,100);

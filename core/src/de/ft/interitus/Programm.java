@@ -84,7 +84,8 @@ public class Programm extends Game {
 
         Data.close();
 
-        AL.destroy(); //Destroy Sound System
+       // AL.destroy(); //Destroy Sound System //TODO lwjgl 3
+
        System.exit(0);
 
     }
