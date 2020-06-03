@@ -1,16 +1,41 @@
 package de.ft.interitus;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import de.ft.interitus.loading.AssetLoader;
+
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 import static de.ft.interitus.Settings.darkmode;
 
 public class Welcome extends ScreenAdapter implements Screen {
 
+
+    public static SpriteBatch batch = new SpriteBatch();
+
+    public static boolean forward = false;
+
     public Welcome() {
         Gdx.graphics.setWindowedMode(Var.w, Var.h);
+
+        final Timer time = new Timer();
+        time.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+
+               forward = true;
+                this.cancel();
+
+            }
+        },2000,1000);
     }
 
     @Override
@@ -26,10 +51,28 @@ public class Welcome extends ScreenAdapter implements Screen {
 
 
 
-  Programm.INSTANCE.setScreen(new ProgrammingSpace());
+ // Programm.INSTANCE.setScreen(new ProgrammingSpace());
 
+        if (darkmode) {
+
+            AssetLoader.welcomefont.setColor(1,1,1,1);
+        } else {
+            AssetLoader.welcomefont.setColor(0,0,0,1);
+        }
+    batch.begin();
+    AssetLoader.welcomefont.draw(batch,"Hallo " + Var.username,55,Gdx.graphics.getHeight()-50);
+    batch.end();
+
+if(forward) {
+    Programm.INSTANCE.setScreen(new ProgrammingSpace());
+    forward = false;
+    super.dispose();
+}
 
     }
+
+
+
 
     @Override
     public void dispose() {

@@ -11,6 +11,7 @@ import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.plugin.store.ReadStorePlugins;
 import de.ft.interitus.projecttypes.device.BlockTypes.Init;
 import de.ft.interitus.utils.NetworkScan;
+import de.ft.interitus.utils.UserNameGetter;
 import org.lwjgl.openal.AL;
 
 import java.util.Timer;
@@ -31,14 +32,8 @@ public class Programm extends Game {
     @Override
     public void create() {
 
+        Var.username = UserNameGetter.get();
 
-        String str = System.getProperty("user.name");
-        System.out.println(str.substring(0, 1).toUpperCase() + str.substring(1));
-
-
-
-
-        //  SSHConnection.update("192.168.2.112","pi","Pi-Server");
         Thread loadplugins = new Thread() {
             @Override
             public void run() {
