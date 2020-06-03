@@ -31,7 +31,7 @@ import de.ft.interitus.utils.CheckKollision;
  *
  */
 
-public class Block implements VisibleObjects {
+public abstract class Block implements VisibleObjects {
     public boolean seted = true; //Ob der Block losgelassen wurde bzw ob der Block eine statische Position hat
     public boolean moved = false; // Ob der Block gerade mit der Maus bewegt wird
     Frustum camfr = ProgrammingSpace.cam.frustum; //getten der Camera werte um zu überprüfen ob der Block gerade sichtbar ist.

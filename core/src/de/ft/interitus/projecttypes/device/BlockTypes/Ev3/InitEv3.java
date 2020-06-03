@@ -1,5 +1,6 @@
 package de.ft.interitus.projecttypes.device.BlockTypes.Ev3;
 
+import de.ft.interitus.Block.Interitus.DefaultBlockGenerator;
 import de.ft.interitus.projecttypes.ProjectTypes;
 import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.device.DeviceTypes.Ev3;
@@ -11,6 +12,6 @@ public class InitEv3 {
     public static ProjectTypes init() {
 
         platformSpecificBlocks.add(new Wait());
-        return new ProjectTypes(new Ev3(),"Ev3-Projekt",platformSpecificBlocks);
+        return new ProjectTypes(new Ev3(),"Ev3-Projekt",platformSpecificBlocks,new DefaultBlockGenerator());
     }
 }

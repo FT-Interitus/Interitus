@@ -1,5 +1,7 @@
 package de.ft.interitus.projecttypes.device.BlockTypes.Arduino.Arduino;
 
+import de.ft.interitus.Block.Interitus.DefaultBlock;
+import de.ft.interitus.Block.Interitus.DefaultBlockGenerator;
 import de.ft.interitus.projecttypes.ProjectTypes;
 import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.device.DeviceTypes.Arduino.Arduino.Arduino;
@@ -23,6 +25,6 @@ public class InitArduino {
 
 
 
-        return new ProjectTypes(new Arduino(),"Arduino-Projekt",blocks);
+        return new ProjectTypes(new Arduino(),"Arduino-Projekt",blocks, new DefaultBlockGenerator());
     }
 }
