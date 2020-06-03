@@ -1,8 +1,11 @@
 package de.ft.interitus.loading;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.plugin.store.StorePluginsVar;
 import de.ft.interitus.utils.DownloadFile;
@@ -86,7 +89,7 @@ public class AssetLoader {
     public static Texture img_mappe6;
 
 
-
+    public static BitmapFont welcomefont;//font
 
 
 
@@ -119,6 +122,18 @@ public class AssetLoader {
 
 
         try {
+
+            group = "Schriftarten";
+            try {
+                //schriftart
+                FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("comicsans.ttf"));
+                FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+                parameter.size = 50;
+                welcomefont = generator.generateFont(parameter); // font size 12 pixels
+                generator.dispose(); // don't forget to dispose to avoid memory leaks!
+            } catch (Exception e) {
+                System.out.println("Fehler beim Laden der Schrift");
+            }
 
             group = "mappen";
             manager.load(workingdirectory+"Bar/Mappe1.png",Texture.class);

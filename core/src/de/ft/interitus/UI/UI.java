@@ -45,7 +45,14 @@ public class UI {
     private static boolean issetupuiopend = false;
     Vector3 pos = new Vector3();
 
+    public static void userresize(){
+        if(Gdx.input.getX()>UIVar.BlockBarW+UIVar.abstandvonRand && Gdx.input.getX()<UIVar.BlockBarW+UIVar.abstandvonRand*2){
+            System.out.println("mouse over");
+        }
+    }
+
     public static void updatedragui(ShapeRenderer renderer, boolean flaeche, SpriteBatch batch) {
+        userresize();
        // Var.w=Gdx.graphics.getWidth();
         //Var.h=Gdx.graphics.getHeight();
         renderer.begin(ShapeRenderer.ShapeType.Filled);
