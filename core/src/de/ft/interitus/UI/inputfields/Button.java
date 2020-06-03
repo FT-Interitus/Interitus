@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import de.ft.interitus.Programm;
+import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.UI.inputfields.check.Check;
 import de.ft.interitus.Var;
 import de.ft.interitus.utils.RoundRectangle;
@@ -20,7 +22,7 @@ public class Button {
     private Texture image = null;
     private boolean visible = true;
     private boolean disable = false;
-    private final SpriteBatch batch = new SpriteBatch();
+    //private final SpriteBatch batch = new SpriteBatch();
     private final ShapeRenderer s = new ShapeRenderer();
     private final GlyphLayout glyphLayout = new GlyphLayout();
     private final Check check = new Check();
@@ -43,6 +45,8 @@ public class Button {
 
     }
 
+
+
     public void setBounds(int x, int y, int w, int h) {
         this.x = x;
         this.y = y;
@@ -50,6 +54,7 @@ public class Button {
         this.h = h;
 
     }
+
 
     public boolean isjustPressed() {
         boolean pressed = false;
@@ -111,29 +116,29 @@ public class Button {
                 RoundRectangle.abgerundetesRechteck(s, this.x, this.y, this.w, this.h, 5);
                 s.end();
             } else {
-                batch.begin();
+                ProgrammingSpace.UIbatch.begin();
                 if (isMouseover()) {
-                    batch.setColor(1, 1, 1, hovertransparancy);
+                    ProgrammingSpace.UIbatch.setColor(1, 1, 1, hovertransparancy);
                 } else {
-                    batch.setColor(1, 1, 1, 1);
+                    ProgrammingSpace.UIbatch.setColor(1, 1, 1, 1);
                 }
                 if (isMouseover() && Gdx.input.isButtonPressed(0)&&!disablepresscolorchange) {
-                    batch.setColor(1, 0.5f, 0.5f, 1);
+                    ProgrammingSpace.UIbatch.setColor(1, 0.5f, 0.5f, 1);
                 }
                 if (isDisable()) {
-                    batch.setColor(1, 1, 1, 0.2f);
+                    ProgrammingSpace.UIbatch.setColor(1, 1, 1, 0.2f);
                 }
                 //batch.draw(image, this.x, this.y, this.w, this.h);
-                batch.draw(image,this.x,this.y,this.w,this.h,0,0,image.getWidth(),image.getHeight(),this.flipX,this.flipY);
-                batch.end();
+                ProgrammingSpace.UIbatch.draw(image,this.x,this.y,this.w,this.h,0,0,image.getWidth(),image.getHeight(),this.flipX,this.flipY);
+                ProgrammingSpace.UIbatch.end();
             }
             if (text != null) {
-                batch.begin();
+                ProgrammingSpace.UIbatch.begin();
 
                 glyphLayout.setText(font, this.text);
-                font.draw(batch, glyphLayout, x + 5, y + glyphLayout.height + h / 2 - glyphLayout.height / 2);
+                font.draw(ProgrammingSpace.UIbatch, glyphLayout, x + 5, y + glyphLayout.height + h / 2 - glyphLayout.height / 2);
 
-                batch.end();
+                ProgrammingSpace.UIbatch.end();
             }
         }
     }
@@ -217,6 +222,9 @@ public class Button {
     public boolean isFlipY() {
         return flipY;
     }
+
+
+
 }
 
 

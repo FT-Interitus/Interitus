@@ -40,9 +40,9 @@ public class TapBarBlockItem implements TapItem {
             }
         }
 
-        batch.begin();
-        batch.draw(img,this.x,this.y,this.w,this.h);
-        batch.end();
+        ProgrammingSpace.UIbatch.begin();
+        ProgrammingSpace.UIbatch.draw(img,this.x,this.y,this.w,this.h);
+        ProgrammingSpace.UIbatch.end();
     }
 
     @Override

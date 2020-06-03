@@ -141,7 +141,6 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
         SerialConnection.searchArduino();
 
         PortUpdate.UpdateConnectionWindowPortsList();
-        Gdx.graphics.setWindowedMode(Var.w, Var.h);
 
 
     }
@@ -175,6 +174,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT | (Gdx.graphics.getBufferFormat().coverageSampling?GL20.GL_COVERAGE_BUFFER_BIT_NV:0));
             batch.setProjectionMatrix(cam.combined);
             UIbatch.setProjectionMatrix(UIcam.combined);
+            shapeRenderer.setProjectionMatrix(UIcam.combined);
 
 
 
@@ -327,6 +327,7 @@ e.printStackTrace();
         UIviewport.update(width, height);
         w = width;
         h = height;
+
 
 
     }
