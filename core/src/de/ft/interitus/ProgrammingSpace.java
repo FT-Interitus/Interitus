@@ -28,6 +28,7 @@ import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.deviceconnection.arduino.PortUpdate;
 import de.ft.interitus.deviceconnection.arduino.SerialConnection;
 import de.ft.interitus.loading.AssetLoader;
+import de.ft.interitus.projecttypes.device.BlockTypes.Ev3.Wait;
 import de.ft.interitus.projecttypes.device.BlockTypes.ProjectTypesVar;
 import de.ft.interitus.utils.PositionSaver;
 import de.ft.interitus.utils.animation.Animation;
@@ -92,8 +93,8 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
         s.setBackgroundgreen(AssetLoader.switch_background_green);
         s.setInside(AssetLoader.switch_inside);
 
-
-       /* Thread blockdebugcreater = new Thread() {
+/*
+        Thread blockdebugcreater = new Thread() {
             @Override
             public void run() {
                 try {
@@ -102,7 +103,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
                     for (int i = 0; i < 1; i = i + 1) {
 
 
-                            BlockVar.blocks.add(new Block(i, 400, 552, 150, 70, BlockTypesVar.blocks.get(0).get(0)));
+                            BlockVar.blocks.add(new Block(i, 400+i*250, 552, 150, 70, new Wait()));
 
 
 
@@ -124,7 +125,9 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
         blockdebugcreater.start();
 
-        */
+
+ */
+
 
 
         cam.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);

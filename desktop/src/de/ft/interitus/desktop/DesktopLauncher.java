@@ -44,7 +44,9 @@ public class DesktopLauncher {
 config.setWindowedMode(Var.w,Var.h);
 
 			config.useVsync(false);
+			config.setBackBufferConfig(8,8,8,8,16,0,4);
 			//glfwWindowHint(GLFW_SAMPLES, 4);
+
 
 			 new Lwjgl3Application(new Programm(), config);
 
