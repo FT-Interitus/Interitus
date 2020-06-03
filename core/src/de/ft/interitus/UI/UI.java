@@ -92,6 +92,7 @@ public class UI {
         stage = new Stage(ProgrammingSpace.UIviewport, ProgrammingSpace.UIbatch);
 
 
+
         root.setFillParent(true);
         stage.addActor(root);
 

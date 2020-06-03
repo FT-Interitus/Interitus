@@ -28,7 +28,7 @@ public class Var {
     public static ProjectTypes actProjekt = null;
     public static boolean disableshortcuts=false;
 
-    public static boolean developermode = false;
+
 
 
 }
