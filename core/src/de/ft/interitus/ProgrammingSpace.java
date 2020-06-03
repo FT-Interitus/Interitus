@@ -149,29 +149,6 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
         PortUpdate.UpdateConnectionWindowPortsList();
 
 
-        EventVar.globalEventManager.addListener(new GlobalEventListener() {
-            @Override
-            public void loadingdone(GlobalLoadingDoneEvent e) {
-
-            }
-
-            @Override
-            public void loadingstart(GlobalLoadingStartEvent e) {
-
-            }
-
-            @Override
-            public void erroroccurred(GlobalErrorOccurredEvent e) {
-
-            }
-
-            @Override
-            public void filedroped(GlobalFileDropedEvent e, String[] filepaths) {
-        for(int i=0;i<filepaths.length;i++) {
-           System.out.println(filepaths[i]);
-        }
-            }
-        });
 
     }
 
