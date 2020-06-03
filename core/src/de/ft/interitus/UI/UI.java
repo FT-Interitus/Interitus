@@ -70,7 +70,7 @@ public class UI {
             }
     }
 
-        if(curserstate==0 && Gdx.input.isButtonPressed(0)){
+        if(curserstate==0 && Gdx.input.isButtonJustPressed(0)){
             verticalrezising=true;
             curserveränderungsblockade=true;
         }
@@ -90,7 +90,7 @@ public class UI {
 
         }
 
-        if(curserstate==2 && Gdx.input.isButtonPressed(0)){
+        if(curserstate==2 && Gdx.input.isButtonJustPressed(0)){
             horizontalrezising=true;
             curserveränderungsblockade=true;
         }
