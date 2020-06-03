@@ -693,7 +693,7 @@ public class Block implements VisibleObjects {
 
     /**
      * restart the Block Thread if the block is in the cam frustrum again
-     * ATTENTION DO NOT CALL THIS FUNKTION OUTSIDE THREADMANAGER THIS MAY CAUSE PERFORMANCE PROBLEMS
+     * ATTENTION DO NOT CALL THIS FUNKTION OUTSIDE THREADMANAGER THIS MAY CAUSE PERFORMANCE PROBLEMS AND CAN END IN A CRASH
      *
      * @return the block Thread
      */
