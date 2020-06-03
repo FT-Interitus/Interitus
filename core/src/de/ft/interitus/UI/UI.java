@@ -1,6 +1,8 @@
 package de.ft.interitus.UI;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Cursor;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
@@ -9,13 +11,11 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.kotcrab.vis.ui.widget.MenuBar;
 import com.kotcrab.vis.ui.widget.MenuItem;
-import de.ft.interitus.DisplayErrors;
-import de.ft.interitus.ProgrammingSpace;
-import de.ft.interitus.Settings;
+import de.ft.interitus.*;
 import de.ft.interitus.UI.inputfields.check.InputManager;
 import de.ft.interitus.UI.settings.SettingsUI;
 import de.ft.interitus.UI.setup.SetupWindow;
-import de.ft.interitus.Var;
+import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.data.programm.Data;
 import de.ft.interitus.data.user.changes.SaveChanges;
 import de.ft.interitus.data.user.experience.ExperienceManager;
@@ -23,6 +23,7 @@ import de.ft.interitus.utils.RoundRectangle;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -43,12 +44,69 @@ public class UI {
 
     private static boolean issettingsuiopend = false;
     private static boolean issetupuiopend = false;
+    private static int curserstate=0;
     Vector3 pos = new Vector3();
 
-    public static void userresize(){
-        if(Gdx.input.getX()>UIVar.BlockBarW+UIVar.abstandvonRand && Gdx.input.getX()<UIVar.BlockBarW+UIVar.abstandvonRand*2){
-            System.out.println("mouse over");
+    private static boolean verticalrezising=false;
+    private static boolean horizontalrezising=false;
+    public static boolean curserveränderungsblockade=false;
+
+    public static void userresize() {
+        if (!curserveränderungsblockade){
+            if (Gdx.input.getX() > UIVar.BlockBarW + UIVar.abstandvonRand && Gdx.input.getX() < UIVar.BlockBarW + UIVar.abstandvonRand * 2 && Gdx.graphics.getHeight() - Gdx.input.getY() > UIVar.abstandvonRand && Gdx.graphics.getHeight() - Gdx.input.getY() < UIVar.abstandvonRand + UIVar.BlockBarH) {
+                if (curserstate != 0) {
+                    Gdx.graphics.setSystemCursor(Cursor.SystemCursor.HorizontalResize);
+                    curserstate = 0;
+                }
+
+            } else if (Gdx.graphics.getHeight() - Gdx.input.getY() > UIVar.abstandvonRand + UIVar.BlockBarH && Gdx.graphics.getHeight() - Gdx.input.getY() < UIVar.abstandvonRand * 2 + UIVar.BlockBarH) {
+                if (curserstate != 2) {
+                    Gdx.graphics.setSystemCursor(Cursor.SystemCursor.VerticalResize);
+                    curserstate = 2;
+                }
+            } else if (curserstate != 1) {
+                Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Arrow);
+                curserstate = 1;
+            }
+    }
+
+        if(curserstate==0 && Gdx.input.isButtonPressed(0)){
+            verticalrezising=true;
+            curserveränderungsblockade=true;
         }
+        if(!Gdx.input.isButtonPressed(0)){
+            verticalrezising=false;
+            curserveränderungsblockade=false;
+        }
+        if(verticalrezising){
+                UIVar.unteneinteilung = Gdx.graphics.getWidth() - Gdx.input.getX() - UIVar.abstandvonRand / 2;
+                 if(Gdx.graphics.getWidth()-UIVar.unteneinteilung<BlockTappedBar.tb.getTaps().size()*BlockTappedBar.tb.getTaps().get(0).getTab_button().getW()+ BlockTappedBar.tb.getButtonabstand()*BlockTappedBar.tb.getTaps().size()+20) {
+                        UIVar.unteneinteilung=Gdx.graphics.getWidth()-(BlockTappedBar.tb.getTaps().size()*BlockTappedBar.tb.getTaps().get(0).getTab_button().getW()+ BlockTappedBar.tb.getButtonabstand()*BlockTappedBar.tb.getTaps().size()+20);
+                 }
+                 if(Gdx.graphics.getWidth()-UIVar.unteneinteilung>Gdx.graphics.getWidth()-UIVar.rechtseinraste){
+                     UIVar.unteneinteilung=UIVar.rechtseinraste;
+
+                 }
+
+        }
+
+        if(curserstate==2 && Gdx.input.isButtonPressed(0)){
+            horizontalrezising=true;
+            curserveränderungsblockade=true;
+        }
+        if(!Gdx.input.isButtonPressed(0)){
+            horizontalrezising=false;
+            curserveränderungsblockade=false;
+        }
+        if(horizontalrezising){
+            UIVar.untenhohe=Gdx.graphics.getHeight()-Gdx.input.getY()-UIVar.abstandvonRand/2;
+            if(UIVar.untenhohe<UIVar.untenkante){
+                    UIVar.untenhohe=UIVar.untenkante;
+            }
+        }
+
+
+
     }
 
     public static void updatedragui(ShapeRenderer renderer, boolean flaeche, SpriteBatch batch) {

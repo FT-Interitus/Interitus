@@ -123,4 +123,16 @@ public class TappedBar {
     public int getWeight() {
         return weight;
     }
+
+    public ArrayList<TapContent> getTaps() {
+        return taps;
+    }
+
+    public void setButtonabstand(int buttonabstand) {
+        this.buttonabstand = buttonabstand;
+    }
+
+    public int getButtonabstand() {
+        return buttonabstand;
+    }
 }
