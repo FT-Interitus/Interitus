@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.Event;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -27,6 +28,8 @@ import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.deviceconnection.arduino.PortUpdate;
 import de.ft.interitus.deviceconnection.arduino.SerialConnection;
+import de.ft.interitus.events.EventVar;
+import de.ft.interitus.events.global.*;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.device.BlockTypes.Ev3.Wait;
 import de.ft.interitus.projecttypes.device.BlockTypes.ProjectTypesVar;
@@ -145,6 +148,30 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
         PortUpdate.UpdateConnectionWindowPortsList();
 
+
+        EventVar.globalEventManager.addListener(new GlobalEventListener() {
+            @Override
+            public void loadingdone(GlobalLoadingDoneEvent e) {
+
+            }
+
+            @Override
+            public void loadingstart(GlobalLoadingStartEvent e) {
+
+            }
+
+            @Override
+            public void erroroccurred(GlobalErrorOccurredEvent e) {
+
+            }
+
+            @Override
+            public void filedroped(GlobalFileDropedEvent e, String[] filepaths) {
+        for(int i=0;i<filepaths.length;i++) {
+           System.out.println(filepaths[i]);
+        }
+            }
+        });
 
     }
 

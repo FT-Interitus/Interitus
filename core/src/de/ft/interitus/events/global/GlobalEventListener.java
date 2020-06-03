@@ -6,4 +6,6 @@ public interface GlobalEventListener {
     void loadingstart(GlobalLoadingStartEvent e);
 
     void erroroccurred(GlobalErrorOccurredEvent e);
+
+    void filedroped(GlobalFileDropedEvent e, String[] filepaths);
 }
