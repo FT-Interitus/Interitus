@@ -1,6 +1,7 @@
 package de.ft.interitus.projecttypes.device.BlockTypes.Arduino.RoboArm;
 
 import de.ft.interitus.Block.Interitus.DefaultBlockGenerator;
+import de.ft.interitus.Block.Interitus.DefaultBlockUpdateGenerator;
 import de.ft.interitus.projecttypes.ProjectTypes;
 import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.device.DeviceTypes.Arduino.RoboArm.RoboArm;
@@ -16,6 +17,6 @@ public class InitRoboArm {
 
 
 
-        return new ProjectTypes(new RoboArm(),"Arduino-RoboterArm-Projekt",blocks,new DefaultBlockGenerator());
+        return new ProjectTypes(new RoboArm(),"Arduino-RoboterArm-Projekt",blocks,new DefaultBlockGenerator(), new DefaultBlockUpdateGenerator());
     }
 }

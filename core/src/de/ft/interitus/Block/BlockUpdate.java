@@ -13,7 +13,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
-public class BlockUpdate extends Thread {
+public abstract class BlockUpdate extends Thread {
     public Block block; //Der zugehörige Block den die Klasse updated
     public boolean isrunning = true; //Läuft der Thread gerade?
     public Timer time; //das  ist der Timer in dem alle Update Vorgänge laufen
@@ -28,7 +28,7 @@ public class BlockUpdate extends Thread {
     private boolean IsMousealreadypressed = false;
 
 
-    BlockUpdate(Block block) {
+   public BlockUpdate(Block block) {
         this.block = block; //Der Block wird zugewiesen
 
         temp1 = new Vector2(0, 0);//Temp Vectoren init
@@ -521,5 +521,13 @@ if(!Var.isdialogeopend) {
 
     public boolean isIsconnectorclicked() {
         return isconnectorclicked;
+    }
+
+    public void setBlock(Block block) {
+        this.block = block;
+    }
+
+    public Block getBlock() {
+        return block;
     }
 }

@@ -55,8 +55,9 @@ public abstract class Block implements VisibleObjects {
     private Wire wire_right = null; //rechte verbunde Wire
     private PlatformSpecificBlock blocktype =null;
     private RightClickEventListener rightClickEventListener;
+    private BlockUpdateGenerator blockUpdateGenerator;
 
-    public Block(final int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock) { //Initzialisieren des Blocks
+    public Block(final int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock,BlockUpdateGenerator update) { //Initzialisieren des Blocks
        this.blocktype = platformSpecificBlock;
         EventVar.blockEventManager.createBlock(new BlockCreateEvent(this, this));
         this.x = x;
@@ -67,7 +68,9 @@ public abstract class Block implements VisibleObjects {
         this.x_dup_links = this.x - this.w;//Duplicats positionen werden berechnet
         wireconnector_right.set(x + w, y + h / 3);
         this.index = index;
-        blockupdate = new BlockUpdate(this); //BlockUpdate Klasse wird initzilisieren
+        this.blockUpdateGenerator = update;
+        this.blockupdate = update.generate(this); //BlockUpdate Klasse wird initzilisieren
+
 
         if (this.isVisible()) { //Wenn der Block sichtbar ist...  //Das passiert deshalb weil nicht für nicht sichbare Blöcke ein Thread laufen muss
             blockupdate.start(); //...wird der updater gestartet
@@ -698,7 +701,7 @@ public abstract class Block implements VisibleObjects {
      * @return the block Thread
      */
     public Thread allowedRestart() { //WARNUNG diese Methode darf nur von ThreadMananger aufgerufen werden
-        blockupdate = new BlockUpdate(this); //Wenn der Block wieder in den Sichtbereich Rückt
+        blockupdate = blockUpdateGenerator.generate(this); //Wenn der Block wieder in den Sichtbereich Rückt
         blockupdate.start(); //             ...wird der update Thread gestarted
 
         return blockupdate;

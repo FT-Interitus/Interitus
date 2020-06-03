@@ -2,6 +2,7 @@ package de.ft.interitus.projecttypes;
 
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.BlockGenerator;
+import de.ft.interitus.Block.BlockUpdateGenerator;
 import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.device.ProgrammableObjekt;
 
@@ -12,12 +13,14 @@ public class ProjectTypes {
     String name;
     ArrayList<PlatformSpecificBlock> projectblocks;
     BlockGenerator blockGenerator =null;
+    BlockUpdateGenerator blockUpdateGenerator = null;
 
-    public ProjectTypes(ProgrammableObjekt PO, String name, ArrayList<PlatformSpecificBlock> blocks,BlockGenerator generator) {
+    public ProjectTypes(ProgrammableObjekt PO, String name, ArrayList<PlatformSpecificBlock> blocks, BlockGenerator blockgenerator, BlockUpdateGenerator updategenerator) {
         this.projectblocks = blocks;
         this.PO = PO;
         this.name = name;
-        this.blockGenerator = generator;
+        this.blockGenerator = blockgenerator;
+        this.blockUpdateGenerator = updategenerator;
     }
 
     public ProgrammableObjekt getPO() {
@@ -50,5 +53,13 @@ public class ProjectTypes {
 
     public void setBlockGenerator(BlockGenerator blockGenerator) {
         this.blockGenerator = blockGenerator;
+    }
+
+    public void setBlockUpdateGenerator(BlockUpdateGenerator blockUpdateGenerator) {
+        this.blockUpdateGenerator = blockUpdateGenerator;
+    }
+
+    public BlockUpdateGenerator getBlockUpdateGenerator() {
+        return blockUpdateGenerator;
     }
 }

@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
+import de.ft.interitus.Block.Interitus.DefaultBlockUpdateGenerator;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.UI.inputfields.check.Check;
 import de.ft.interitus.UI.tappedbar.TapItem;
@@ -32,7 +33,7 @@ public class TapBarBlockItem implements TapItem {
         if(!Var.isdialogeopend) {
             if (check.isJustPressedNormal(x, y, w, h)) {
 
-                Block tempblock = Var.actProjekt.getBlockGenerator().generateBlock(BlockVar.blocks.size(), (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 150, 70, psb);
+                Block tempblock = Var.actProjekt.getBlockGenerator().generateBlock(BlockVar.blocks.size(), (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 150, 70, psb,Var.actProjekt.getBlockUpdateGenerator());
 
                 BlockVar.blocks.add(tempblock);
                 tempblock.setMarked(true);
