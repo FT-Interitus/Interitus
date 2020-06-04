@@ -2,6 +2,7 @@ package de.ft.interitus;
 
 import com.badlogic.gdx.Game;
 import com.kotcrab.vis.ui.VisUI;
+import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.Theme.ThemeManager;
 import de.ft.interitus.data.programm.Data;
 import de.ft.interitus.data.user.experience.ExperienceManager;
@@ -59,7 +60,7 @@ public class Programm extends Game {
         }
 
         Init.initBlocks();
-
+        CheckShortcuts.loadArrayList();
         Thread seachnetwork = new Thread() {
             @Override
             public void run() {

@@ -74,6 +74,7 @@ public class ShortCut {
     }
 
     public void setShortCut(int... combination) {
+        this.combination.clear();
         for(int i=0;i<combination.length;i++){
             this.combination.add(combination[i]);
         }

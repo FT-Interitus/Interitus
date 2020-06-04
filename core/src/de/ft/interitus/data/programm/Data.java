@@ -279,16 +279,24 @@ public class Data {
                     System.out.println("Tastenkombinationen"+i);
                     for (int a = 0; a < i; a++) { //Wird durch alle tastenkombinationen durchgegangen
                     System.out.println(obj.getJSONArray("tastenkombination"+a));
-                    //CheckShortcuts.shortCuts.clear();
-                    //CheckShortcuts.shortCuts.add()
+                    CheckShortcuts.shortCuts.get(a).setShortCut();
+                    CheckShortcuts.shortCuts.get(a).setDisable((boolean)obj.getJSONArray("tastenkombination"+a).get(0));
+                    System.out.println((boolean)obj.getJSONArray("tastenkombination"+a).get(0));
+                    for(int b=0;b<obj.getJSONArray("tastenkombination"+a).length()-1;b++) {
+                         CheckShortcuts.shortCuts.get(a).addTaste(Integer.parseInt(obj.getJSONArray("tastenkombination"+a).get(b+1).toString()));
+                        System.out.println("ich bin da wo ich jetzt nicht mehr seien sollte");
 
                     }
+
+                    }
+                    System.out.println("ich bin hier ");
+
                     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
                 } catch (JSONException e) {
-
+                        e.printStackTrace();
                 }
 
 
@@ -315,6 +323,7 @@ public class Data {
         for(int i=0;i< CheckShortcuts.shortCuts.size();i++){//Es wird durch alle einträge durchgegangen
             ShortCut aktualshortcut=CheckShortcuts.shortCuts.get(i);
             JSONArray array=new JSONArray();
+            array.put(aktualshortcut.isDisable());
             for(int j=0;j<aktualshortcut.getCombination().size();j++){//Es wird durch alle tasten des shortcuts durchgegangen
                 array.put(aktualshortcut.getCombination().get(j));
             }
