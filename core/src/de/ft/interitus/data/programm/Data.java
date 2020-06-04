@@ -4,9 +4,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Settings;
+import de.ft.interitus.UI.CheckShortcuts;
+import de.ft.interitus.UI.settings.subitems.subitem6;
 import de.ft.interitus.UI.shortcut.ShortCut;
 import de.ft.interitus.data.user.experience.ExperienceManager;
 import de.ft.interitus.data.user.experience.ExperienceVar;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -21,7 +24,6 @@ public class Data {
     public static ArrayList<String> path = new ArrayList<String>(); //Die Pfade der zuletzt geöffneten Projekten
     public static ArrayList<String> filename = new ArrayList<String>(); //Die Namen der Dateien die zuletzt geöffnet wurden
     private static File folder; //Der Ordner in dem alle Programm daten liegen
-    public static ArrayList<ShortCut>shortCuts=new ArrayList<>();
 
 
     /**
@@ -289,12 +291,21 @@ public class Data {
 
     public static void close() {
         //////Tastenkombinationen////////////////////////////////////
-
         FileHandle tastenkombinationen = Gdx.files.absolute(System.getProperty("user.home") + "/.itd/tastenkombinationen.json"); //Lade datei
         JSONObject tastenkombinationen_obj = new JSONObject(tastenkombinationen);
-        for (int i = 0; i < 10; i++) { //Es wird durch alle Vorhanden einträge durch gegangen
-            tastenkombinationen_obj.put("tastenkombination" + i, "2"); //Und jedes Nacheinander abgespeichert
+
+        for(int i=0;i< CheckShortcuts.shortCuts.size();i++){//Es wird durch alle einträge durchgegangen
+            ShortCut aktualshortcut=CheckShortcuts.shortCuts.get(i);
+            JSONArray array=new JSONArray();
+            for(int j=0;j<aktualshortcut.getCombination().size();j++){//Es wird durch alle tasten des shortcuts durchgegangen
+                array.put(aktualshortcut.getCombination().get(j));
+            }
+            tastenkombinationen_obj.put("tastenkombination"+i,array); //Und jedes Nacheinander abgespeichert
+
+
         }
+
+
 
 
         tastenkombinationen.writeString(tastenkombinationen_obj.toString(), false); //Datei wird geschrieben
