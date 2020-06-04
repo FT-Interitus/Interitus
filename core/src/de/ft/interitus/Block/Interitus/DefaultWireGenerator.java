@@ -1,6 +1,7 @@
 package de.ft.interitus.Block.Interitus;
 
 import de.ft.interitus.Block.*;
+import de.ft.interitus.Block.Generators.WireGenerator;
 
 public class DefaultWireGenerator implements WireGenerator {
 

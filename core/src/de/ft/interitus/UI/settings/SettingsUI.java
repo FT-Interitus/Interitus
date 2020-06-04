@@ -61,7 +61,7 @@ public class SettingsUI extends VisWindow {
      *
      * 8 = Programme Einstellungen
      * 9 = Daten
-     * 10 = item 3.2
+     * 10 = Interitus Mobil
      * 11 = Erweitert
      *
      * 12 = Plugin Store
@@ -243,7 +243,10 @@ public class SettingsUI extends VisWindow {
             item2.add(new TestNode(new VisLabel(" item 2.3"), 7));
 
             item3.add(new TestNode(new VisLabel(" Daten"), 9));
-            item3.add(new TestNode(new VisLabel(" item 3.2"), 10));
+
+            TestNode InteritusMobil = new TestNode(new VisLabel(" Interitus Mobil"), 10);
+            //ADD Advanced Settings to ITM if Device is connect
+            item3.add(InteritusMobil);
             item3.add(new TestNode(new VisLabel(" Erweitert"), 11));
 
             for (int i = 0; i < PluginManagerHandler.plugisettings.size(); i++) {

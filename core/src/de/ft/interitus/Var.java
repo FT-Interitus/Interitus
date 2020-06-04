@@ -28,6 +28,7 @@ public class Var {
     public static ProjectTypes actProjekt = null;
     public static boolean disableshortcuts=false;
     public static String username = "";
+    public static boolean disablePluginSubSystem = false;
 
 
 

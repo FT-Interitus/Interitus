@@ -34,6 +34,9 @@ public class DesktopLauncher {
 			LoggingSystem.RedirectLog();
 		}
 
+		if(Var.programmarguments.indexOf("-dps")!=-1)  {
+			Var.disablePluginSubSystem = true;
+		}
 
 		if(Var.programmarguments.indexOf("-nogui")==-1) {
 

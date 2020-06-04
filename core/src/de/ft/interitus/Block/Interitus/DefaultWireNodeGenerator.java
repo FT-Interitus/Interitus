@@ -2,7 +2,7 @@ package de.ft.interitus.Block.Interitus;
 
 import de.ft.interitus.Block.Wire;
 import de.ft.interitus.Block.WireNode;
-import de.ft.interitus.Block.WireNodeGenerator;
+import de.ft.interitus.Block.Generators.WireNodeGenerator;
 
 public class DefaultWireNodeGenerator implements WireNodeGenerator {
     @Override

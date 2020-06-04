@@ -95,7 +95,7 @@ public class PluginManagerHandler {
                         pluginthread.clear();
 
                         //TODO erkennen ob ein Plugin zu langsam ist (starttime>19)
-
+                        //TODO darf nicht für jedes Plugin gestartet werden!!!!!!! PRIO 1
                         finish.clear();
                         starttime.clear();
 

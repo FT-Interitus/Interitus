@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Frustum;
 import com.badlogic.gdx.math.Vector2;
+import de.ft.interitus.Block.Generators.BlockUpdateGenerator;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.RechtsKlick;
