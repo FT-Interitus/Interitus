@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector3;
+import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.RechtsKlick;
 import de.ft.interitus.Var;
@@ -14,6 +15,9 @@ import de.ft.interitus.events.rightclick.RightClickEventListener;
 import de.ft.interitus.events.rightclick.RightClickOpenEvent;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.utils.CheckKollision;
+
+import java.io.IOError;
+import java.io.IOException;
 
 public class Wire {
     private final Vector3 tempvector = new Vector3();
@@ -146,7 +150,7 @@ public class Wire {
 
                 }
 
-                if (Gdx.input.isKeyJustPressed(Input.Keys.N) && canplaceanewwirenode) {
+                if (Gdx.input.isKeyJustPressed(Input.Keys.N) && canplaceanewwirenode&&BlockVar.movingwires!=null) {
 
 
 
@@ -157,11 +161,14 @@ public class Wire {
 
                     this.right_connection = tempwirenode;
 
-
-                    BlockVar.movingwires.movebymouse = false;
-                    BlockVar.movingwires.space_between_blocks = true;
-                    BlockVar.movingwires.right_connection = tempwirenode;
-
+        try {
+            BlockVar.movingwires.movebymouse = false;
+            BlockVar.movingwires.space_between_blocks = true;
+            BlockVar.movingwires.right_connection = tempwirenode;
+        }catch (NullPointerException e ) {
+            DisplayErrors.customErrorstring = "Keine WireNodes in der Luft plazieren!";
+            DisplayErrors.error = e;
+        }
 
                     BlockVar.movingwires = null;
 
