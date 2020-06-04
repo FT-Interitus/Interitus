@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.kotcrab.vis.ui.VisUI;
 import de.ft.interitus.Block.BlockVar;
+import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.Theme.ThemeManager;
 import de.ft.interitus.data.programm.Data;
 import de.ft.interitus.data.user.experience.ExperienceManager;
@@ -17,10 +18,6 @@ import de.ft.interitus.utils.NetworkScan;
 import de.ft.interitus.utils.UserNameGetter;
 import org.lwjgl.openal.AL;
 
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -38,10 +35,6 @@ public class Programm extends Game {
 
     @Override
     public void create() {
-
-
-
-
 
         Var.username = UserNameGetter.get();
 
@@ -69,7 +62,7 @@ public class Programm extends Game {
         }
 
         Init.initBlocks();
-
+        CheckShortcuts.loadArrayList();
         Thread seachnetwork = new Thread() {
             @Override
             public void run() {
