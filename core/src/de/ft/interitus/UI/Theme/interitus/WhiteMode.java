@@ -53,6 +53,6 @@ public class WhiteMode implements Theme {
 
     @Override
     public String getName() {
-        return "WhiteMode";
+        return "White Mode";
     }
 }
