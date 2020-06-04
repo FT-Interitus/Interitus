@@ -2,6 +2,7 @@ package de.ft.interitus;
 
 import com.badlogic.gdx.Game;
 import com.kotcrab.vis.ui.VisUI;
+import de.ft.interitus.UI.Theme.ThemeManager;
 import de.ft.interitus.data.programm.Data;
 import de.ft.interitus.data.user.experience.ExperienceManager;
 import de.ft.interitus.events.EventVar;
@@ -33,6 +34,8 @@ public class Programm extends Game {
     public void create() {
 
         Var.username = UserNameGetter.get();
+
+        ThemeManager.register(); //Load all Themes
 
         Thread loadplugins = new Thread() {
             @Override

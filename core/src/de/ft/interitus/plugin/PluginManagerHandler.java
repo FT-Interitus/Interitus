@@ -3,6 +3,8 @@ package de.ft.interitus.plugin;
 import com.kotcrab.vis.ui.widget.Menu;
 import com.kotcrab.vis.ui.widget.VisTable;
 import de.ft.interitus.DisplayErrors;
+import de.ft.interitus.UI.Theme.RegisteredThemes;
+import de.ft.interitus.UI.Theme.Theme;
 import de.ft.interitus.UI.shortcut.ShortCut;
 import de.ft.interitus.UI.shortcut.ShortCutChecker;
 import de.ft.interitus.Var;
@@ -151,6 +153,10 @@ public class PluginManagerHandler {
 
     public static void addShortcutChecker(ShortCutChecker shortCutChecker) {
         pluginshortCutsChecker.add(shortCutChecker);
+    }
+
+    public static void registerTheme(Theme theme) {
+        RegisteredThemes.themes.add(theme);
     }
 
 

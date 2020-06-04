@@ -29,7 +29,6 @@ public class SettingsUI extends VisWindow {
 
     public static VisTextField updateurlfield;
     public static RowLayout rowLayout;
-    public static VisCheckBox darktoggle;
 
     public static TestBuilder testBuilder;
     public static int SelectedItem = -1;
@@ -129,17 +128,7 @@ public class SettingsUI extends VisWindow {
             // setScale(200,200);
 
 
-            darktoggle = new VisCheckBox("Schaltet den Dark-Mode an und aus");
-            darktoggle.setChecked(Settings.darkmode);
-            darktoggle.addListener(new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor) {
-
-
-                    Settings.darkmode = darktoggle.isChecked();
-                }
-            });
-
+          //TODO Theme switcher
 
 
 
