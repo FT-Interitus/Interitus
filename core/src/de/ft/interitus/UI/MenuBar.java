@@ -40,8 +40,11 @@ public class MenuBar {
     public static MenuItem menuItem_ausschneiden;
     public static MenuItem menuItem_update;
     public static MenuItem menuItem_ueber;
+
+    public static Menu fileMenu;
+
     protected static void createMenus() {
-        Menu fileMenu = new Menu("Datei");
+        fileMenu = new Menu("Datei");
         Menu editMenu = new Menu("Bearbeiten");
         Menu ConnectionMenue = new Menu("Verbindungen");
         Menu windowMenu = new Menu("Ansicht");

@@ -19,6 +19,7 @@ import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.data.programm.Data;
 import de.ft.interitus.data.user.changes.SaveChanges;
 import de.ft.interitus.data.user.experience.ExperienceManager;
+import de.ft.interitus.network.bettertogether.SharedVar;
 import de.ft.interitus.utils.RoundRectangle;
 
 import java.io.File;
@@ -251,6 +252,10 @@ public class UI {
 
                         ///////////////////Check if shortcut is pressed//////////
 
+
+                        if(SharedVar.amiclinet) {
+                            de.ft.interitus.UI.MenuBar.fileMenu.setVisible(false);
+                        }
 
                         ///////////////////////////
                     }

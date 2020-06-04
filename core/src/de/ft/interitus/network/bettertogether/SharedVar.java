@@ -6,4 +6,6 @@ public class SharedVar {
 
     public static Vector2 otherMousepos = new Vector2();
 
+    public static boolean amiclinet = false;
+
 }
