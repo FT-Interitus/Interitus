@@ -1,5 +1,6 @@
 package de.ft.interitus.projecttypes.device.BlockTypes;
 
+import de.ft.interitus.plugin.PluginGateway;
 import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.projecttypes.device.BlockTypes.Arduino.Arduino.InitArduino;
 import de.ft.interitus.projecttypes.device.BlockTypes.Arduino.NeopxielController.InitNeoPixelController;
@@ -19,7 +20,7 @@ public class Init {
 
 
 
-        ProjectTypesVar.projectTypes.addAll(PluginManagerHandler.pluginprojekttypes);
+        ProjectTypesVar.projectTypes.addAll(PluginGateway.pluginprojekttypes);
 
     }
 }

@@ -19,6 +19,7 @@ import de.ft.interitus.Settings;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.settings.subitems.*;
 import de.ft.interitus.Var;
+import de.ft.interitus.plugin.PluginGateway;
 import de.ft.interitus.plugin.PluginManagerHandler;
 
 import java.util.Timer;
@@ -238,7 +239,7 @@ public class SettingsUI extends VisWindow {
             item3.add(InteritusMobil);
             item3.add(new TestNode(new VisLabel(" Erweitert"), 11));
 
-            for (int i = 0; i < PluginManagerHandler.plugisettings.size(); i++) {
+            for (int i = 0; i < PluginGateway.plugisettings.size(); i++) {
                 item4.add(new TestNode(new VisLabel(" " + PluginManagerHandler.registeredplugins.get(i).getName() + " "), 13 + i));
             }
 
@@ -317,7 +318,7 @@ public class SettingsUI extends VisWindow {
                         default:
 
                             if (SelectedItem > 12) {
-                                container.add(PluginManagerHandler.plugisettings.get(SelectedItem - 13));
+                                container.add(PluginGateway.plugisettings.get(SelectedItem - 13));
                             }
 
 

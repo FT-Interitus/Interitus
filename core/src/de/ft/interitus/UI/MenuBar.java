@@ -20,6 +20,7 @@ import de.ft.interitus.data.user.DataSaver;
 import de.ft.interitus.data.user.LoadSave;
 import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.data.user.changes.SaveChanges;
+import de.ft.interitus.plugin.PluginGateway;
 import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.utils.ClearActOpenProgramm;
 
@@ -288,8 +289,8 @@ public class MenuBar {
         UI.menuBar.addMenu(windowMenu);
         UI.menuBar.addMenu(helpMenu);
 
-        for (int i = 0; i < PluginManagerHandler.pluginMenubar.size(); i++) { //Alle Plugins MenuBar werden der MenuBar
-            UI.menuBar.addMenu(PluginManagerHandler.pluginMenubar.get(i));
+        for (int i = 0; i < PluginGateway.pluginMenubar.size(); i++) { //Alle Plugins MenuBar werden der MenuBar
+            UI.menuBar.addMenu(PluginGateway.pluginMenubar.get(i));
         }
 
     }

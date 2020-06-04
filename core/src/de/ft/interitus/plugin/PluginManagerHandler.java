@@ -24,13 +24,11 @@ import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 
 public class PluginManagerHandler {
-    public static ArrayList<ProjectTypes> pluginprojekttypes = new ArrayList<>();
+
     public static List<PluginRegister> registeredplugins = new ArrayList<>();
-    public static List<VisTable> plugisettings = new ArrayList<>();
-    public static List<Menu> pluginMenubar = new ArrayList<>();
+
     public static List<Plugin> loadedplugins = new ArrayList<>();
-    public static ArrayList<ShortCutChecker> pluginshortCutsChecker = new ArrayList<>();
-    public static ArrayList<ShortCut> pluginshortCuts = new ArrayList<>();
+
     Exception error = null;
     private int Plugincounter = 0;
 
@@ -39,7 +37,7 @@ public class PluginManagerHandler {
         registeredplugins.add(pluginRegister);
 
 
-        if (registeredplugins.size() == Var.pluginManager.Plugincounter) {
+        if (registeredplugins.size() == Var.pluginManager.Plugincounter) { //The last Plugin start the loop for all Plugins
             String[] names = new String[registeredplugins.size()];
             for (int i = 0; i < names.length; i++) {
                 names[i] = registeredplugins.get(i).getName();
@@ -80,7 +78,14 @@ public class PluginManagerHandler {
                     if (registeredplugins.get(i).getVersion() > 0.0) {
                         System.out.println(registeredplugins.get(i).getName() + " geladen. In der Version " + registeredplugins.get(i).getVersion());
 
+                    }else{
+                        System.out.println(registeredplugins.get(i).getName() + " hasn't a valid Version");
+                        registeredplugins.remove(i);
                     }
+                }else{
+                    System.out.println(registeredplugins.get(i).getName() + " hasn't a valid Configuration");
+                    registeredplugins.remove(i);
+
                 }
             }
 
@@ -97,7 +102,7 @@ public class PluginManagerHandler {
                         pluginthread.clear();
 
                         //TODO erkennen ob ein Plugin zu langsam ist (starttime>19)
-                        //TODO darf nicht für jedes Plugin gestartet werden!!!!!!! PRIO 1
+
                         finish.clear();
                         starttime.clear();
 
@@ -135,26 +140,46 @@ public class PluginManagerHandler {
 
     }
 
+
+    /**
+     * @deprecated use PluginGateway
+     *
+     */
     public static void addsettings(VisTable settingsclass) {
-        plugisettings.add(settingsclass);
+        PluginGateway.plugisettings.add(settingsclass);
     }
+    /**
+     * @deprecated use PluginGateway
 
+     */
     public static void addMenuEntry(Menu menuentry) {
-        pluginMenubar.add(menuentry);
+        PluginGateway.pluginMenubar.add(menuentry);
     }
+    /**
+     * @deprecated use PluginGateway
 
+     */
     public static void addProjectType(ProjectTypes PT) {
-        pluginprojekttypes.add(PT);
+        PluginGateway.pluginprojekttypes.add(PT);
     }
+    /**
+     * @deprecated use PluginGateway
 
+     */
     public static void addShortcut(ShortCut... shortCut) {
-        pluginshortCuts.addAll(Arrays.asList(shortCut));
+        PluginGateway.pluginshortCuts.addAll(Arrays.asList(shortCut));
     }
+    /**
+     * @deprecated use PluginGateway
 
+     */
     public static void addShortcutChecker(ShortCutChecker shortCutChecker) {
-        pluginshortCutsChecker.add(shortCutChecker);
+        PluginGateway.pluginshortCutsChecker.add(shortCutChecker);
     }
+    /**
+     * @deprecated use PluginGateway
 
+     */
     public static void registerTheme(Theme theme) {
         RegisteredThemes.themes.add(theme);
     }
@@ -167,20 +192,23 @@ public class PluginManagerHandler {
 
         File[] files = new File("plugins").listFiles(); //Aus dem Ordner Plugins werden alle Files aufgelistet
         for (File f : files) {
+            if (f.getName().split("\\.")[1].contains("itp") && f.getName().split("\\.")[1].endsWith("itp")) {
 
-            try {
-                loadPlugin(f); //jedes gefundene Plugin bekommt den Befehel zu laden
-                Plugincounter++;
-            } catch (Exception e) {
-                System.out.println("Plugin lade Fehler");
-                DisplayErrors.customErrorstring = "Plugin Lade-Fehler";
-                DisplayErrors.error = e;
-                e.printStackTrace();
-            } catch (UnsupportedClassVersionError a) {
-                System.out.println("Das Plugin " + f.getName() + " wurde in der falschen Version geschrieben");
+
+                try {
+                    loadPlugin(f); //jedes gefundene Plugin bekommt den Befehel zu laden
+                    Plugincounter++;
+                } catch (Exception e) {
+                    System.out.println("Plugin lade Fehler");
+                    DisplayErrors.customErrorstring = "Plugin Lade-Fehler";
+                    DisplayErrors.error = e;
+                    e.printStackTrace();
+                } catch (UnsupportedClassVersionError a) {
+                    System.out.println("Das Plugin " + f.getName() + " wurde in der falschen Version geschrieben");
+
+                }
 
             }
-
         }
         for (Plugin pi : loadedplugins) {
 
@@ -213,7 +241,7 @@ public class PluginManagerHandler {
             file = new JarFile(filetest);
         } catch (IOException e) {
             error = e;
-            e.printStackTrace();
+
         }
 
 
@@ -223,7 +251,9 @@ public class PluginManagerHandler {
             manifest = file.getManifest();
         } catch (IOException e) {
             error = e;
-            e.printStackTrace();
+
+        }catch (NullPointerException e) {
+
         }
 
 
