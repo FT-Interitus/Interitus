@@ -11,6 +11,7 @@ import de.ft.interitus.data.user.experience.ExperienceManager;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.UI.UILoadEvent;
 import de.ft.interitus.loading.Loading;
+import de.ft.interitus.network.bettertogether.Manager;
 import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.plugin.store.ReadStorePlugins;
 import de.ft.interitus.projecttypes.device.BlockTypes.Init;
@@ -35,6 +36,8 @@ public class Programm extends Game {
 
     @Override
     public void create() {
+
+        Manager.init();
 
         Var.username = UserNameGetter.get();
 

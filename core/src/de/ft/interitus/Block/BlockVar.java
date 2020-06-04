@@ -42,4 +42,6 @@ public class BlockVar {
     public static Block wire_beginn = null;  //um bei verbindungen über eine Node trotzdem noch den Nachbar erfahren zu können
 
     public static Wire mousehoveredwire = null;
+
+    public static Block ismarkedbyother = null; // Gibt an welcher Block bei einem anderen Client makiert ist
 }

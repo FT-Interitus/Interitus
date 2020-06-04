@@ -134,10 +134,6 @@ public class SettingsUI extends VisWindow {
             // setScale(200,200);
 
 
-          //TODO Theme switcher
-
-
-
             updateurlfield = new VisTextField(Settings.updateurl);
             updateurlfield.setDisabled(true);
 

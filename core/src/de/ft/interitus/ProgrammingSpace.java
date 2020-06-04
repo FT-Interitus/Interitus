@@ -30,6 +30,7 @@ import de.ft.interitus.deviceconnection.arduino.SerialConnection;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.device.BlockTypes.ProjectTypesVar;
 import de.ft.interitus.utils.PositionSaver;
+import de.ft.interitus.utils.Unproject;
 import de.ft.interitus.utils.animation.Animation;
 
 import java.awt.*;
@@ -151,6 +152,8 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
     @Override
     public void render(float delta) {
 
+
+     //   System.out.println("X: "+Unproject.unproject().x+" Y: "+Unproject.unproject().y);
 
         if(Var.actProjekt==null) {
            // Programm.INSTANCE.setScreen(new Welcome()); //TODO auskommentiert zu debug zwecken

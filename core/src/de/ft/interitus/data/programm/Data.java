@@ -134,6 +134,8 @@ public class Data {
 
                 } catch (JSONException e) {
 
+                }catch (Exception e) {
+
                 }
             }
 
@@ -181,6 +183,8 @@ public class Data {
 
                 } catch (JSONException e) {
 
+                }catch (Exception e) {
+
                 }
 
 
@@ -211,6 +215,8 @@ public class Data {
                     //TODO device laden mit attributen
 
                 } catch (JSONException e) {
+
+                }catch (Exception e) {
 
                 }
 
@@ -246,6 +252,8 @@ public class Data {
                     //TODO device laden mit attributen
 
                 } catch (JSONException e) {
+
+                }catch (Exception e) {
 
                 }
 
@@ -297,6 +305,8 @@ public class Data {
 
                 } catch (JSONException e) {
                         e.printStackTrace();
+                }catch (Exception e ) {
+
                 }
 
 
