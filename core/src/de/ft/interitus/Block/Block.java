@@ -41,7 +41,7 @@ public abstract class Block implements VisibleObjects {
     private int y; //Die Y Koordinate des Blocks
     private int w; //Die Weite des Blocks
     private int h; //Die Höhe des Blocks
-    private int index; //Der Index des Blocks (Der Gleiche wie im Array BlockVar.blocks)
+    private int index; //Der Index des Blocks (Der Gleiche wie im Array BlckVar.blocks)o
     private boolean showdupulicate_rechts; //Ob das Duplicat rechts angezeigt werden soll d.h. ob der Block der gerade bewegt wird hier hin springen wird
     private boolean showdupulicate_links; //Ob das Duplicat links ...
     private int x_dup_rechts; // Die X Position des Duplicates

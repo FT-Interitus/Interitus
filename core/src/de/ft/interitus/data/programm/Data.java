@@ -44,7 +44,7 @@ public class Data {
         File knowndevices = new File(System.getProperty("user.home") + "/.itd/devices.json"); //JSON file in dem alle konfigurierten Geräte gespeichert werden
         File userexperience = new File(System.getProperty("user.home") + "/.itd/experience.json"); //JSON file in dem User Analytics gespeichert werden
         File tastenkombinationen = new File(System.getProperty("user.home") + "/.itd/tastenkombinationen.json"); //JSON file in dem tastenkombinationen gespeichert werden
-        File defaulttastenkombinationen = new File(System.getProperty("user.home") + "/.itd/defaulttastenkombinationen.json"); //JSON file in dem defaulttastenkombinationen gespeichert werden (von user nicht veränderbar)
+        //File defaulttastenkombinationen = new File(System.getProperty("user.home") + "/.itd/defaulttastenkombinationen.json"); //JSON file in dem defaulttastenkombinationen gespeichert werden (von user nicht veränderbar)
 
 
         Path path = folder.toPath();

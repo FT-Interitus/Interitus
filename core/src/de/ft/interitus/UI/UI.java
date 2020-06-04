@@ -90,6 +90,7 @@ public class UI {
 
         }
 
+
         if(curserstate==2 && Gdx.input.isButtonJustPressed(0)){
             horizontalrezising=true;
             curserveränderungsblockade=true;
@@ -102,6 +103,9 @@ public class UI {
             UIVar.untenhohe=Gdx.graphics.getHeight()-Gdx.input.getY()-UIVar.abstandvonRand/2;
             if(UIVar.untenhohe<UIVar.untenkante){
                     UIVar.untenhohe=UIVar.untenkante;
+            }
+            if(UIVar.untenhohe>Gdx.graphics.getHeight()/2){
+                UIVar.untenhohe=Gdx.graphics.getHeight()/2;
             }
         }
 

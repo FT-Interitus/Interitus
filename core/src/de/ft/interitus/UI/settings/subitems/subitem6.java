@@ -49,13 +49,16 @@ public class subitem6 {
         VisTextField tastenkombeauswahl;
         VisRadioButton disablebutton;
         MenuItem menuItem;
-        public ShortCutEinstellung(int i, VisTable table, final ShortCut shortCut){
+        ShortCut shortCut;
+        public ShortCutEinstellung(int i, VisTable table, final ShortCut shortCutt){//shortcut ohne menuitem
+            shortCut=shortCutt;
             name=new VisLabel(shortCut.getName());
             tastenkombeauswahl=new VisTextField();
             disablebutton=new VisRadioButton("Disable");
 
             tastenkombeauswahl.setReadOnly(true);
             disablebutton.setChecked(shortCut.isDisable());
+            tastenkombeauswahl.setDisabled(shortCut.isDisable());
             tastenkombeauswahl.setText(shortCut.getShortcutasString());
 
             disablebutton.addListener(new ChangeListener() {
@@ -104,7 +107,7 @@ public class subitem6 {
 
 
         }
-        public ShortCutEinstellung(int i, VisTable table, final ShortCut shortCut, final MenuItem menuItem){
+        public ShortCutEinstellung(int i, VisTable table, final ShortCut shortCut, final MenuItem menuItem){ //shortcut mit menueItem
             this.menuItem=menuItem;
             name=new VisLabel(shortCut.getName());
             tastenkombeauswahl=new VisTextField();
@@ -113,6 +116,8 @@ public class subitem6 {
             tastenkombeauswahl.setReadOnly(true);
             disablebutton.setChecked(shortCut.isDisable());
             tastenkombeauswahl.setText(shortCut.getShortcutasString());
+            tastenkombeauswahl.setDisabled(shortCut.isDisable());
+
 
             disablebutton.addListener(new ChangeListener() {
                 @Override
@@ -167,8 +172,13 @@ if(i==0) {
         ////////
 
 
+        public ShortCut getShortCut() {
+            return shortCut;
+        }
 
-
+        public void setShortCut(ShortCut shortCut) {
+            this.shortCut = shortCut;
+        }
     }
 }
 
