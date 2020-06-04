@@ -6,6 +6,7 @@ import de.ft.interitus.UI.shortcut.ShortCut;
 import de.ft.interitus.UI.shortcut.ShortCutChecker;
 import de.ft.interitus.UI.shortcut.shortcuts.BlockShortcuts;
 import de.ft.interitus.UI.shortcut.shortcuts.GlobalShortcuts;
+import de.ft.interitus.plugin.PluginGateway;
 import de.ft.interitus.plugin.PluginManagerHandler;
 
 import java.util.ArrayList;
@@ -31,8 +32,8 @@ public class CheckShortcuts {
        // ...
 
         //plugins
-        shortCuts.addAll(PluginManagerHandler.pluginshortCuts);
-        shortCutsChecker.addAll(PluginManagerHandler.pluginshortCutsChecker);
+        shortCuts.addAll(PluginGateway.pluginshortCuts);
+        shortCutsChecker.addAll(PluginGateway.pluginshortCutsChecker);
 
     }
 

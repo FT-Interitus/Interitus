@@ -14,7 +14,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
-import static de.ft.interitus.Settings.darkmode;
 
 public class Welcome extends ScreenAdapter implements Screen {
 
@@ -42,23 +41,24 @@ public class Welcome extends ScreenAdapter implements Screen {
     public void render(float delta) {
 
 
-        if (darkmode) {
-            Gdx.gl.glClearColor(43f/255f,43f/255f,43f/255f,1);
-        } else {
-            Gdx.gl.glClearColor(1f, 1f, 1f, 1);
-        }
+
+
+
+            Gdx.gl.glClearColor(Settings.theme.WelcomeScreenBackgroundColor().r,Settings.theme.WelcomeScreenBackgroundColor().g,Settings.theme.WelcomeScreenBackgroundColor().b,Settings.theme.WelcomeScreenBackgroundColor().a);
+
+
+
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT | (Gdx.graphics.getBufferFormat().coverageSampling?GL20.GL_COVERAGE_BUFFER_BIT_NV:0));
 
 
 
  // Programm.INSTANCE.setScreen(new ProgrammingSpace());
 
-        if (darkmode) {
 
-            AssetLoader.welcomefont.setColor(1,1,1,1);
-        } else {
-            AssetLoader.welcomefont.setColor(0,0,0,1);
-        }
+            AssetLoader.welcomefont.setColor(Settings.theme.WelcomeScreenFontColor());
+
+
+
     batch.begin();
     AssetLoader.welcomefont.draw(batch,"Hallo " + Var.username,55,Gdx.graphics.getHeight()-50);
     batch.end();

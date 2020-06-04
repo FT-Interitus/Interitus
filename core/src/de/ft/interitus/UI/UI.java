@@ -119,32 +119,27 @@ public class UI {
         //Var.h=Gdx.graphics.getHeight();
         renderer.begin(ShapeRenderer.ShapeType.Filled);
 
-        if (Settings.darkmode) {
-            renderer.setColor(Colors.darkmode_middle);
-        } else {
-            renderer.setColor(Colors.whitearea);
-        }
+
+            renderer.setColor(Settings.theme.ProgrammSpaceColor());
+
+
+
 
 
         if (flaeche == true) {
             RoundRectangle.abgerundetesRechteck(renderer, UIVar.abstandvonRand, UIVar.untenhohe + UIVar.abstandvonRand, Gdx.graphics.getWidth() - UIVar.abstandvonRand * 2, Gdx.graphics.getHeight() - UIVar.untenhohe + UIVar.abstandvonRand - 45 - UIVar.abstandvonRand, UIVar.radius);
         } else {
-            if (Settings.darkmode) {
-                renderer.setColor(Colors.darkmode_blockbar);
 
-            } else {
-                renderer.setColor(Colors.whitearea);
-            }
+                renderer.setColor(Settings.theme.BlocksColor());
+
             UIVar.BlockBarX=UIVar.abstandvonRand;
             UIVar.BlockBarY=UIVar.abstandvonRand;
             UIVar.BlockBarW=Gdx.graphics.getWidth() - UIVar.abstandvonRand * 2 - UIVar.unteneinteilung;
             UIVar.BlockBarH=UIVar.untenhohe - UIVar.abstandvonRand;
             RoundRectangle.abgerundetesRechteck(renderer, UIVar.abstandvonRand, UIVar.abstandvonRand, UIVar.BlockBarW, UIVar.BlockBarH, UIVar.radius);
-            if (Settings.darkmode) {
-                renderer.setColor(Colors.darkmode_connections);
-            } else {
-                renderer.setColor(Colors.whitearea);
-            }
+
+                renderer.setColor(Settings.theme.DeviceConnectionColor());
+
             RoundRectangle.abgerundetesRechteck(renderer, Gdx.graphics.getWidth() - UIVar.unteneinteilung, UIVar.abstandvonRand, UIVar.unteneinteilung - UIVar.abstandvonRand, UIVar.untenhohe - UIVar.abstandvonRand, UIVar.radius);
         }
         renderer.end();

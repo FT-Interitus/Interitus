@@ -6,6 +6,7 @@ import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.settings.subitems.subitem6;
+import de.ft.interitus.UI.Theme.RegisteredThemes;
 import de.ft.interitus.UI.shortcut.ShortCut;
 import de.ft.interitus.data.user.experience.ExperienceManager;
 import de.ft.interitus.data.user.experience.ExperienceVar;
@@ -69,7 +70,7 @@ public class Data {
             }
 
             try {
-                knowndevices.createNewFile();//Die datei für die bekannten Geröte wird erstellt
+                knowndevices.createNewFile();//Die datei für die bekannten Geräte wird erstellt
             } catch (IOException e) {
                 e.printStackTrace();
                 DisplayErrors.error = e;
@@ -155,7 +156,24 @@ public class Data {
                     }
                     JSONObject obj = new JSONObject(se.readString());
 
-                    Settings.darkmode = obj.getBoolean("dark"); //Einstellungen werden je nach Daten Typ geladem
+
+                    try {
+                        for (int i = 0; i < RegisteredThemes.themes.size(); i++) {
+
+
+                            if (RegisteredThemes.themes.get(i).getName().contains(obj.getString("theme"))) {
+                                Settings.theme = RegisteredThemes.themes.get(i);
+                                break;
+                            }
+                        }
+                    }catch (JSONException e) {
+                        Settings.theme = RegisteredThemes.themes.get(0); //Load White Mode if Theme Attribut is unavailable
+                    }
+
+                    if(Settings.theme==null)  {
+                        Settings.theme = RegisteredThemes.themes.get(0); //Load White Mode if Theme is unavailable
+                    }
+
                     Settings.updateurl = obj.getString("updateurl");
                     Settings.defaultpfad = obj.getString("defaultpath");
 
@@ -328,7 +346,7 @@ public class Data {
 
         FileHandle settings = Gdx.files.absolute(System.getProperty("user.home") + "/.itd/settings.json"); //Lade Datei
         JSONObject settings_obj = new JSONObject(settings); //Einstellungen werden je nach Daten Typ abgespeichert
-        settings_obj.put("dark", Settings.darkmode);
+        settings_obj.put("theme", Settings.theme.getName());
         settings_obj.put("updateurl", Settings.updateurl);
         settings_obj.put("defaultpath", Settings.defaultpfad);
 

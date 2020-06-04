@@ -3,6 +3,7 @@ package de.ft.interitus;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -38,7 +39,6 @@ import de.ft.interitus.utils.animation.Animation;
 
 import java.awt.*;
 
-import static de.ft.interitus.Settings.darkmode;
 
 public class ProgrammingSpace extends ScreenAdapter implements Screen {
     public static SpriteBatch UIbatch;
@@ -173,11 +173,8 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
             cam.update();
             UIcam.update();
 
-            if (darkmode) {
-                Gdx.gl.glClearColor(60f/255f,63f/255f,65f/255f,1);
-            } else {
-                Gdx.gl.glClearColor(0.54f, 0.533f, 0.51f, 1);
-            }
+            Gdx.gl.glClearColor(Settings.theme.ClearColor().r,Settings.theme.ClearColor().g,Settings.theme.ClearColor().b,Settings.theme.ClearColor().a);
+
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT | (Gdx.graphics.getBufferFormat().coverageSampling?GL20.GL_COVERAGE_BUFFER_BIT_NV:0));
             batch.setProjectionMatrix(cam.combined);
             UIbatch.setProjectionMatrix(UIcam.combined);
@@ -269,7 +266,7 @@ e.printStackTrace();
         }
 
 
-        if (darkmode) {
+        if (Settings.theme.isdark()) {
             s.setBackground(AssetLoader.switch_background);
             s.setBackgroundgreen(AssetLoader.switch_background_green);
             s.setInside(AssetLoader.switch_inside);
