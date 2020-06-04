@@ -1,8 +1,6 @@
 package de.ft.interitus.projecttypes;
 
-import de.ft.interitus.Block.Block;
-import de.ft.interitus.Block.BlockGenerator;
-import de.ft.interitus.Block.BlockUpdateGenerator;
+import de.ft.interitus.Block.*;
 import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.device.ProgrammableObjekt;
 
@@ -14,13 +12,16 @@ public class ProjectTypes {
     ArrayList<PlatformSpecificBlock> projectblocks;
     BlockGenerator blockGenerator =null;
     BlockUpdateGenerator blockUpdateGenerator = null;
-
-    public ProjectTypes(ProgrammableObjekt PO, String name, ArrayList<PlatformSpecificBlock> blocks, BlockGenerator blockgenerator, BlockUpdateGenerator updategenerator) {
+private WireGenerator wireGenerator;
+private  WireNodeGenerator wireNodeGenerator;
+    public ProjectTypes(ProgrammableObjekt PO, String name, ArrayList<PlatformSpecificBlock> blocks, BlockGenerator blockgenerator, BlockUpdateGenerator updategenerator, WireGenerator wireGenerator, WireNodeGenerator wireNodeGenerator) {
         this.projectblocks = blocks;
         this.PO = PO;
         this.name = name;
         this.blockGenerator = blockgenerator;
         this.blockUpdateGenerator = updategenerator;
+        this.wireGenerator = wireGenerator;
+        this.wireNodeGenerator = wireNodeGenerator;
     }
 
     public ProgrammableObjekt getPO() {
@@ -62,4 +63,23 @@ public class ProjectTypes {
     public BlockUpdateGenerator getBlockUpdateGenerator() {
         return blockUpdateGenerator;
     }
+
+
+    public void setWireGenerator(WireGenerator wireGenerator) {
+        this.wireGenerator = wireGenerator;
+    }
+
+    public WireGenerator getWireGenerator() {
+        return wireGenerator;
+    }
+
+    public void setWireNodeGenerator(WireNodeGenerator wireNodeGenerator) {
+        this.wireNodeGenerator = wireNodeGenerator;
+    }
+
+    public WireNodeGenerator getWireNodeGenerator() {
+        return wireNodeGenerator;
+    }
+
+
 }

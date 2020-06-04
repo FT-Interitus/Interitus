@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.RechtsKlick;
+import de.ft.interitus.Var;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.rightclick.RightClickButtonSelectEvent;
 import de.ft.interitus.events.rightclick.RightClickCloseEvent;
@@ -148,7 +149,8 @@ public class Wire {
                 if (Gdx.input.isKeyJustPressed(Input.Keys.N) && canplaceanewwirenode) {
 
 
-                    WireNode tempwirenode = new WireNode(BlockVar.movingwires, (int) ProgrammingSpace.viewport.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, WireNode.public_w, WireNode.public_h);
+
+                    WireNode tempwirenode = Var.actProjekt.getWireNodeGenerator().generate(BlockVar.movingwires, (int) ProgrammingSpace.viewport.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, WireNode.public_w, WireNode.public_h);
 
                     BlockVar.wireNodes.add(tempwirenode);
                     BlockVar.visibleWireNodes.add(tempwirenode);

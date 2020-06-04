@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.Var;
 import de.ft.interitus.data.user.changes.DataManager;
@@ -136,7 +137,8 @@ if(!Var.isdialogeopend) {
                         if (!(BlockVar.markedblock == block)) {
                             if (!isconnectorclicked && BlockVar.wirezulassung) {
 
-                                tempwire = new Wire(block);
+
+                                  tempwire = Var.actProjekt.getWireGenerator().generate(block);
 
                                 tempwire.setMovebymouse(true);
 
@@ -455,7 +457,8 @@ if(!Var.isdialogeopend) {
                                     //System.out.println("test");
                                     block.setShowdupulicate_rechts(false);
 
-                                    block.setWire_right(new Wire(block, BlockVar.markedblock));
+
+                                    block.setWire_right(Var.actProjekt.getWireGenerator().generate(block,BlockVar.markedblock));
                                     BlockVar.markedblock.setWire_left(block.getWire_right());
                                     BlockVar.wires.add(block.getWire_right());
 
@@ -488,7 +491,8 @@ if(!Var.isdialogeopend) {
                                         block.setShowdupulicate_links(false);
 
 
-                                        block.setWire_left(new Wire(BlockVar.markedblock, block));
+
+                                        block.setWire_left(Var.actProjekt.getWireGenerator().generate(BlockVar.markedblock,block));
                                         BlockVar.markedblock.setWire_right(block.getWire_left());
                                         BlockVar.wires.add(block.getWire_left());
 
@@ -509,7 +513,8 @@ if(!Var.isdialogeopend) {
                         }
                     }
                 } catch (Exception e) {
-
+                    DisplayErrors.customErrorstring = "Fehler in einem "+block.getBlocktype().getName()+" Block";
+                    DisplayErrors.error = e;
                 }
 
             }

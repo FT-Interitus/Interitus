@@ -3,6 +3,7 @@ package de.ft.interitus.Block.Interitus;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.BlockGenerator;
 import de.ft.interitus.Block.BlockUpdateGenerator;
+import de.ft.interitus.Block.WireGenerator;
 import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
 
 public class DefaultBlockGenerator implements BlockGenerator {
