@@ -269,27 +269,27 @@ public class Data {
                     }
                     JSONObject obj = new JSONObject(se.readString());
 
-                    //TODO Tastenkombinations Datei Lesen:
+
                     ////////////////////////////////////////////////////////////////////////////////////////////////////
                     int i = 0;
                     while (obj.has("tastenkombination" + i)) { //Es wird geschaut wie viele Einträge exsistieren
                         i++;
                     }
 
-                    System.out.println("Tastenkombinationen"+i);
+
                     for (int a = 0; a < i; a++) { //Wird durch alle tastenkombinationen durchgegangen
-                    System.out.println(obj.getJSONArray("tastenkombination"+a));
+
                     CheckShortcuts.shortCuts.get(a).setShortCut();
                     CheckShortcuts.shortCuts.get(a).setDisable((boolean)obj.getJSONArray("tastenkombination"+a).get(0));
-                    System.out.println((boolean)obj.getJSONArray("tastenkombination"+a).get(0));
+
                     for(int b=0;b<obj.getJSONArray("tastenkombination"+a).length()-1;b++) {
                          CheckShortcuts.shortCuts.get(a).addTaste(Integer.parseInt(obj.getJSONArray("tastenkombination"+a).get(b+1).toString()));
-                        System.out.println("ich bin da wo ich jetzt nicht mehr seien sollte");
+
 
                     }
 
                     }
-                    System.out.println("ich bin hier ");
+
 
                     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
