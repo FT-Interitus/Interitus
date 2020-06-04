@@ -1,7 +1,12 @@
 package de.ft.interitus.UI;
 
+import com.badlogic.gdx.Gdx;
+
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.input.GestureDetector;
+import com.badlogic.gdx.math.Vector2;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.UI.inputfields.check.InputManager;
 
@@ -11,6 +16,10 @@ public class Viewport {
 
     public static void init()   {
         InputManager.addProcessor(new InputAdapter(){
+
+
+
+
             @Override
             public boolean scrolled(int amount) {
 
@@ -26,7 +35,7 @@ public class Viewport {
                         }
                     }
                 }
-                return super.scrolled(amount);
+                return false;
 
 
 
@@ -34,6 +43,22 @@ public class Viewport {
 
             }
         });
+
+       InputManager.addProcessor(new GestureDetector(new GestureDetector.GestureAdapter() {
+           @Override
+           public boolean pan(float x, float y, float deltaX, float deltaY) {
+
+               if(input.isButtonPressed(Input.Buttons.MIDDLE)) {
+                   ProgrammingSpace.cam.position.x -= deltaX;
+                   ProgrammingSpace.cam.position.y += deltaY;
+                   ProgrammingSpace.cam.update();
+               }
+
+
+               return false;
+           }
+       }));
+
 
         InputManager.updateMultiplexer();
     }
@@ -61,5 +86,11 @@ public class Viewport {
         if(input.isKeyJustPressed(Input.Keys.MINUS)) {
             ProgrammingSpace.cam.zoom= ProgrammingSpace.cam.zoom+0.2f;
         }
+
+
+
+
+
+
     }
 }
