@@ -61,11 +61,16 @@ public class SettingsUI extends VisWindow {
      *
      * 8 = Programme Einstellungen
      * 9 = Daten
-     * 10 = Interitus Mobil
+     * 10 = item
      * 11 = Erweitert
      *
-     * 12 = Plugin Store
-     * 13.. Plguin
+     * 12 Netzwerk
+     * 13 Interitus Mobil
+     * 14 Better Togetter
+     * 15 Erweitert
+     *
+     * 16 = Plugin Store
+     * 17.. Plguin
      *
      */
 
@@ -220,8 +225,9 @@ public class SettingsUI extends VisWindow {
             TestNode item1 = new TestNode(new VisLabel(" Aussehen "), 0);
             TestNode item2 = new TestNode(new VisLabel(" Verhalten "), 4);
             TestNode item3 = new TestNode(new VisLabel(" Programm Einstellungen "), 8);
-            TestNode item4;
-            item4 = new TestNode(new VisLabel(" Plugins"), 12);
+            TestNode item4 = new TestNode(new VisLabel(" Netzwerk "), 12);
+            TestNode item5;
+            item5 = new TestNode(new VisLabel(" Plugins"), 16);
 
 
             item1.add(new TestNode(new VisLabel(" Theme"), 1));
@@ -233,24 +239,28 @@ public class SettingsUI extends VisWindow {
             item2.add(new TestNode(new VisLabel(" item 2.3"), 7));
 
             item3.add(new TestNode(new VisLabel(" Daten"), 9));
-
-            TestNode InteritusMobil = new TestNode(new VisLabel(" Interitus Mobil"), 10);
-            //ADD Advanced Settings to ITM if Device is connect
-            item3.add(InteritusMobil);
+            item3.add(new TestNode(new VisLabel(" item"), 10));
             item3.add(new TestNode(new VisLabel(" Erweitert"), 11));
 
+            item4.add(new TestNode(new VisLabel(" Interitus Mobil"),13));
+            item4.add(new TestNode(new VisLabel(" Better Together"),14));
+            item4.add(new TestNode(new VisLabel(" Erweitert"),15));
+            //ADD Advanced Settings to ITM if Device is connect
+
             for (int i = 0; i < PluginGateway.plugisettings.size(); i++) {
-                item4.add(new TestNode(new VisLabel(" " + PluginManagerHandler.registeredplugins.get(i).getName() + " "), 13 + i));
+                item5.add(new TestNode(new VisLabel(" " + PluginManagerHandler.registeredplugins.get(i).getName() + " "), 17 + i));
             }
 
             item1.setExpanded(true);
             item2.setExpanded(true);
             item3.setExpanded(true);
+            item4.setExpanded(true);
 
             tree.add(item1);
             tree.add(item2);
             tree.add(item3);
             tree.add(item4);
+            tree.add(item5);
 
 
             tree.addListener(new ChangeListener() {
@@ -314,11 +324,24 @@ public class SettingsUI extends VisWindow {
                             subitem12.add(container);
                             break;
                         case 12:
-                            subitem13.add(container, 0);
+                            subitem13.add(container);
+                            break;
+                        case 13:
+                            subitem14.add(container);
+                            break;
+                        case 14:
+                            subitem15.add(container);
+                            break;
+                        case 15:
+                            subitem16.add(container);
+                            break;
+                        case 16:
+                            subitem17.add(container, 0);
+                            break;
                         default:
 
-                            if (SelectedItem > 12) {
-                                container.add(PluginGateway.plugisettings.get(SelectedItem - 13));
+                            if (SelectedItem > 16) {
+                                container.add(PluginGateway.plugisettings.get(SelectedItem - 17));
                             }
 
 

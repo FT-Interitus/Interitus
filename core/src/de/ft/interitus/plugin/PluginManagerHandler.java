@@ -237,6 +237,7 @@ public class PluginManagerHandler {
         //Erzeugen des JAR-Objekts
 
         JarFile file = null;
+
         try {
             file = new JarFile(filetest);
         } catch (IOException e) {
@@ -313,6 +314,7 @@ public class PluginManagerHandler {
     }
 
     public static void unload(PluginRegister pluginRegister) {
+
         registeredplugins.remove(pluginRegister);
 
 

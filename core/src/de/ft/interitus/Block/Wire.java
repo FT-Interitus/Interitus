@@ -19,7 +19,7 @@ import de.ft.interitus.utils.CheckKollision;
 import java.io.IOError;
 import java.io.IOException;
 
-public class Wire {
+public abstract class Wire {
     private final Vector3 tempvector = new Vector3();
     private final Vector3 tempvector1 = new Vector3();
     private final float dicke = 3.5f;
@@ -173,7 +173,7 @@ public class Wire {
                     BlockVar.movingwires = null;
 
 
-                    tempwirenode.setWire_right(new Wire(tempwirenode));
+                    tempwirenode.setWire_right(Var.actProjekt.getWireGenerator().generate(tempwirenode));
                     //tempwirenode.getWire_right().space_between_blocks = false;
                     tempwirenode.getWire_right().movebymouse = true;
                     tempwirenode.getWire_right().space_between_blocks = true;

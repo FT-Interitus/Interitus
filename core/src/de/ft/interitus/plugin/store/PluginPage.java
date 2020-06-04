@@ -11,7 +11,7 @@ import com.kotcrab.vis.ui.widget.VisTextButton;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.settings.SettingsUI;
-import de.ft.interitus.UI.settings.subitems.subitem13;
+import de.ft.interitus.UI.settings.subitems.subitem17;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.plugin.store.PluginInstalledNewEvent;
 import de.ft.interitus.plugin.PluginManagerHandler;
@@ -46,12 +46,12 @@ public class PluginPage {
             public void changed(ChangeEvent event, Actor actor) {
                 SettingsUI.SelectedItem = 12;
                 table.clearChildren();
-                subitem13.add(table, scrollpercent);
+                subitem17.add(table, scrollpercent);
             }
         });
 
         table.add(back).padTop(-540).padLeft(-360);
-        table.add(subitem13.pluginimage.get(Storeentry.id - 1)).padTop(-360).padLeft(-340);
+        table.add(subitem17.pluginimage.get(Storeentry.id - 1)).padTop(-360).padLeft(-340);
         table.add(new VisLabel(Storeentry.getName())).padTop(-430).padLeft(-140);
 
         final VisTextButton download = new VisTextButton("Installieren", "blue");
