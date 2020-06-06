@@ -87,7 +87,7 @@ public class subitem6 {
 
                     tastenkombeauswahl.setText(shortCut.getShortcutasString());
 
-                    return super.keyDown(event, keycode);
+                    return false;
                 }
             });
 

@@ -5,4 +5,9 @@ public class UiEventAdapter implements UIEventListener{
     public void UILoadEvent(UILoadEvent e) {
 
     }
+
+    @Override
+    public void UIOpenSettingsEvent(UIOpenSettingsEvent e) {
+
+    }
 }
