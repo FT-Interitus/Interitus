@@ -52,8 +52,7 @@ public class GlobalShortcuts implements ShortCutChecker {
     public void check() {
 
         if(shortCut_einstellungen.isPressed() && !SettingsUI.isopend()){
-            //UI.set.show();
-            System.out.println("einstellungen oeffnen");
+            UI.set.show();
         }
 
         if(shortCut_vollbild.isPressed()){

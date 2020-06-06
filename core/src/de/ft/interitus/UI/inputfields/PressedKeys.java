@@ -1,5 +1,7 @@
 package de.ft.interitus.UI.inputfields;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import de.ft.interitus.UI.inputfields.check.InputManager;
 
@@ -41,6 +43,9 @@ public class PressedKeys {
     }
 
     public ArrayList<Integer> getPressedkeys() {
+        if(!Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
+            pressedkeys.clear();
+        }
         return pressedkeys;
     }
 }

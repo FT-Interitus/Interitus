@@ -1,6 +1,7 @@
 package de.ft.interitus;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
@@ -149,7 +150,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
     @Override
     public void render(float delta) {
-        System.out.println("DisableShortCuts "+Var.disableshortcuts);
+        System.out.println(pressedKeys.getPressedkeys());
         //System.out.println("debugausgabe: "+ CheckShortcuts.shortCuts.size());
 
         if(Var.actProjekt==null) {
@@ -355,6 +356,8 @@ e.printStackTrace();
 
         //Um alle shortcuts für das Programm zu überprüfen
         CheckShortcuts.check();
+
+
         //Import all Donwloaded images
         if(AssetLoader.finishpluginimageloading) { //Import all
 
