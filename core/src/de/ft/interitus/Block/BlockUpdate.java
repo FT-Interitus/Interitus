@@ -513,7 +513,7 @@ if(!Var.isdialogeopend) {
                         }
                     }
                 } catch (Exception e) {
-                    DisplayErrors.customErrorstring = "Fehler in einem "+block.getBlocktype().getName()+" Block";
+                    DisplayErrors.customErrorstring = "Fehler in einem "+block.getBlocktype().getName()+" Block mit der ID "+block.getIndex();
                     DisplayErrors.error = e;
                 }
 
