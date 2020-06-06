@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Frustum;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.Var;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.utils.CheckKollision;
 
@@ -37,20 +38,20 @@ public abstract class WireNode implements VisibleObjects {
     }
 
     public void draw() {
-        //TODO add movement protection if dialog is opened
+
 
         if (CheckKollision.checkmousewithobject(x, y, h, w, (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y) && Gdx.input.isButtonJustPressed(0)) {
 
             if (!gemerkt) {
                 gemerktvector.set(Gdx.input.getX() - x, Gdx.graphics.getHeight() - Gdx.input.getY() - y);
-                System.out.println("gemerktvector: : :   " + gemerktvector);
+
                 gemerkt = true;
             }
 
 
         }
 
-        if (!Gdx.input.isButtonPressed(0)) {
+        if (!Gdx.input.isButtonPressed(0)|| Var.isdialogeopend) {
             gemerkt = false;
         }
 
