@@ -75,7 +75,7 @@ public class ShortCut {
 
     void menubaraktualisieren(){
         if(menuItem!=null && !disable){
-            menuItem.setShortcut(this.getShortcutasString());
+            menuItem.setShortcut(this.getShortcutasString().replace(" ",""));
         }
     }
     public void setShortCut(int... combination) {

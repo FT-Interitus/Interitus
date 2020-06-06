@@ -149,6 +149,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
     @Override
     public void render(float delta) {
+        System.out.println("DisableShortCuts "+Var.disableshortcuts);
         //System.out.println("debugausgabe: "+ CheckShortcuts.shortCuts.size());
 
         if(Var.actProjekt==null) {
