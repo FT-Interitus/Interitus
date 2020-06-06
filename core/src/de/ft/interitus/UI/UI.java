@@ -20,6 +20,9 @@ import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.data.programm.Data;
 import de.ft.interitus.data.user.changes.SaveChanges;
 import de.ft.interitus.data.user.experience.ExperienceManager;
+import de.ft.interitus.events.EventVar;
+import de.ft.interitus.events.UI.UIOpenSettingsEvent;
+import de.ft.interitus.events.UI.UiEventAdapter;
 import de.ft.interitus.network.bettertogether.SharedVar;
 import de.ft.interitus.utils.RoundRectangle;
 
@@ -178,6 +181,14 @@ public class UI {
 
 
         de.ft.interitus.UI.MenuBar.createMenus();
+
+
+        EventVar.uiEventManager.addListener(new UiEventAdapter() {
+            @Override
+            public void UIOpenSettingsEvent(UIOpenSettingsEvent e) {
+               set.show();
+            }
+        });
 
 
         Thread UIthread = new Thread() {

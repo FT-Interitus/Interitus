@@ -15,7 +15,9 @@ public class PressedKeys {
         InputManager.addProcessor(new InputAdapter() {
             @Override
             public boolean keyDown(int keycode) {
+
                 pressedkeys.add(keycode);
+
                 return false;
             }
 

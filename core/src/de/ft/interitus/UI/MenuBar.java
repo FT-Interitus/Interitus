@@ -20,6 +20,8 @@ import de.ft.interitus.data.user.DataSaver;
 import de.ft.interitus.data.user.LoadSave;
 import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.data.user.changes.SaveChanges;
+import de.ft.interitus.events.EventVar;
+import de.ft.interitus.events.UI.UIOpenSettingsEvent;
 import de.ft.interitus.plugin.PluginGateway;
 import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.utils.ClearActOpenProgramm;
@@ -160,7 +162,7 @@ public class MenuBar {
         menuItem_einstellungen=new MenuItem("Einstellungen", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                UI.set.show();
+                EventVar.uiEventManager.UIOpenSettingsEvent(new UIOpenSettingsEvent(this));
             }
         }).setShortcut("Strg+Alt+S");
         menuItem_beenden=new MenuItem("Beenden", new ChangeListener() {

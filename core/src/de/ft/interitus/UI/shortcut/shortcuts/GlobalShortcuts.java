@@ -17,6 +17,8 @@ import de.ft.interitus.Var;
 import de.ft.interitus.data.user.DataSaver;
 import de.ft.interitus.data.user.LoadSave;
 import de.ft.interitus.data.user.changes.DataManager;
+import de.ft.interitus.events.EventVar;
+import de.ft.interitus.events.UI.UIOpenSettingsEvent;
 
 import java.util.ArrayList;
 
@@ -52,7 +54,7 @@ public class GlobalShortcuts implements ShortCutChecker {
     public void check() {
 
         if(shortCut_einstellungen.isPressed() && !SettingsUI.isopend()){
-            UI.set.show();
+            EventVar.uiEventManager.UIOpenSettingsEvent(new UIOpenSettingsEvent(this));
         }
 
         if(shortCut_vollbild.isPressed()){
