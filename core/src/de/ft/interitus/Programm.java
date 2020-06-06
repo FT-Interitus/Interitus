@@ -6,6 +6,7 @@ import com.kotcrab.vis.ui.VisUI;
 import de.ft.interitus.Block.BlockVar;
 import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.Theme.ThemeManager;
+import de.ft.interitus.UI.UI;
 import de.ft.interitus.data.programm.Data;
 import de.ft.interitus.data.user.experience.ExperienceManager;
 import de.ft.interitus.events.EventVar;

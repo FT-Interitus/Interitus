@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.BlockVar;
 import de.ft.interitus.UI.CheckShortcuts;
+import de.ft.interitus.UI.MenuBar;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.inputfields.IntegerAuswahl;
@@ -23,7 +24,9 @@ import de.ft.interitus.UI.inputfields.Switch;
 import de.ft.interitus.UI.inputfields.TextField;
 import de.ft.interitus.UI.settings.subitems.subitem17;
 import de.ft.interitus.UI.shortcut.shortcuts.BlockShortcuts;
+import de.ft.interitus.UI.shortcut.shortcuts.GlobalShortcuts;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
+import de.ft.interitus.data.programm.Data;
 import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.deviceconnection.arduino.PortUpdate;
 import de.ft.interitus.deviceconnection.arduino.SerialConnection;
@@ -131,8 +134,8 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
         cam.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
         UIcam.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
-
         UI.init();
+
 
         textfieldtest = new TextField(500, 600, 100, 25);
 
@@ -151,9 +154,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
     @Override
     public void render(float delta) {
-
-
-     //   System.out.println("X: "+Unproject.unproject().x+" Y: "+Unproject.unproject().y);
+        System.out.println("debugausgabe: "+ MenuBar.menuItem_neues_projekt);
 
         if(Var.actProjekt==null) {
            // Programm.INSTANCE.setScreen(new Welcome()); //TODO auskommentiert zu debug zwecken
