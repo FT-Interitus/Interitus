@@ -28,14 +28,7 @@ public class GlobalShortcuts implements ShortCutChecker {
     public static ShortCut shortCut_vollbild=new ShortCut("Vollbild",MenuBar.menuItem_vollbild,Input.Keys.F11);
     public static ShortCut shortCut_einstellungen=new ShortCut("Einstellungen öffnen",MenuBar.menuItem_einstellungen,SpecialKeys.dualStrg,Input.Keys.ALT_LEFT,Input.Keys.S);
 
-    public static void generateshortcuts(){
-        shortCut_newprojektwindow=new ShortCut("Neues Projekt",MenuBar.menuItem_neues_projekt, SpecialKeys.dualStrg, Input.Keys.N);
-        shortCut_oefnen=new ShortCut("Projekt Öffnen",MenuBar.menuItem_oeffnen,SpecialKeys.dualStrg, Input.Keys.O);
-        shortCut_speichern=new ShortCut("Speichern",MenuBar.menuItem_speichern,SpecialKeys.dualStrg, Input.Keys.S);
-        shortCut_speichern_unter=new ShortCut("Speichern unter",MenuBar.menuItem_speichernunter,SpecialKeys.dualStrg, SpecialKeys.dualShift, Input.Keys.S);
-        shortCut_vollbild=new ShortCut("Vollbild",MenuBar.menuItem_vollbild,Input.Keys.F11);
-        shortCut_einstellungen=new ShortCut("Einstellungen öffnen",MenuBar.menuItem_einstellungen,SpecialKeys.dualStrg,Input.Keys.ALT_LEFT,Input.Keys.S);
-    }
+
 
     public static ArrayList<ShortCut> retunrarray() {
 
