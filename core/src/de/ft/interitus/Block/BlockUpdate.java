@@ -48,7 +48,8 @@ public abstract class BlockUpdate extends Thread {
         time.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-if(!Var.isdialogeopend) {
+
+                if(!Var.isdialogeopend) {
 
                 try {
 
@@ -355,8 +356,6 @@ if(!Var.isdialogeopend) {
 
                             block.seted = false;
 
-                            try {
-
                                 while (BlockVar.blocks.get(a).getRight() != -1) {
 
                                     //block.getRight().setX(block.getRight().getX() + block.getW());
@@ -365,8 +364,6 @@ if(!Var.isdialogeopend) {
                                     a = BlockVar.blocks.indexOf(BlockVar.blocks.get(a).getRight());
                                 }
 
-                            } catch (NullPointerException e) {
-                            }
 
                         }
 
@@ -385,6 +382,7 @@ if(!Var.isdialogeopend) {
                             try {
 
                                 while (BlockVar.blocks.get(a).getRight() != -1) {
+                                    System.out.println("numero");
 
                                     //block.getRight().setX(block.getRight().getX() + block.getW());
 
