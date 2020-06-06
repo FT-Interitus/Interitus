@@ -122,14 +122,6 @@ public class SettingsUI extends VisWindow {
             closeOnEscape();
             addCloseButton();
 
-            addListener(new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor) {
-
-
-                }
-            });
-
 
             // setScale(200,200);
 
@@ -230,7 +222,7 @@ public class SettingsUI extends VisWindow {
             item1.add(new TestNode(new VisLabel(" Grafik"), 2));
             item1.add(new TestNode(new VisLabel(" item 1.3"), 3));
 
-            item2.add(new TestNode(new VisLabel(" Tastenkombinationen "), 5));
+            item2.add(new TestNode(new VisLabel(" Tastenkombinationen"), 5));
             item2.add(new TestNode(new VisLabel(" Tipps"), 6));
             item2.add(new TestNode(new VisLabel(" item 2.3"), 7));
 

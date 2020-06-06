@@ -28,6 +28,9 @@ import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.deviceconnection.arduino.PortUpdate;
 import de.ft.interitus.deviceconnection.arduino.SerialConnection;
+import de.ft.interitus.events.EventVar;
+import de.ft.interitus.events.UI.UIOpenSettingsEvent;
+import de.ft.interitus.events.UI.UiEventAdapter;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.device.BlockTypes.ProjectTypesVar;
 import de.ft.interitus.utils.PositionSaver;
@@ -57,6 +60,17 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
     public static PressedKeys pressedKeys;
 
     public ProgrammingSpace() {
+
+
+        EventVar.uiEventManager.addListener(new UiEventAdapter(){
+            @Override
+            public void UIOpenSettingsEvent(UIOpenSettingsEvent e) {
+
+                UI.set.show();
+
+
+            }
+        });
 
         //TODO Debug hier wird immer ein Ev3 Project erstellt
 
@@ -149,6 +163,8 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
     @Override
     public void render(float delta) {
+
+
         //System.out.println("debugausgabe: "+ CheckShortcuts.shortCuts.size());
 
         if(Var.actProjekt==null) {
@@ -353,7 +369,9 @@ e.printStackTrace();
 
 
         //Um alle shortcuts für das Programm zu überprüfen
-        CheckShortcuts.check();
+
+            CheckShortcuts.check();
+
         //Import all Donwloaded images
         if(AssetLoader.finishpluginimageloading) { //Import all
 

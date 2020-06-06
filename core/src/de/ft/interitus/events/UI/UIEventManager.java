@@ -23,4 +23,11 @@ public class UIEventManager implements UIEventListener {
             ((UIEventListener) listener.elementAt(i)).
                     UILoadEvent(e);
     }
+
+    @Override
+    public void UIOpenSettingsEvent(UIOpenSettingsEvent e) {
+        for (int i = 0; i < listener.size(); i++)
+            ((UIEventListener) listener.elementAt(i)).
+                    UIOpenSettingsEvent(e);
+    }
 }

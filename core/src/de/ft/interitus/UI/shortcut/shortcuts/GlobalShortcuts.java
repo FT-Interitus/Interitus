@@ -17,6 +17,9 @@ import de.ft.interitus.Var;
 import de.ft.interitus.data.user.DataSaver;
 import de.ft.interitus.data.user.LoadSave;
 import de.ft.interitus.data.user.changes.DataManager;
+import de.ft.interitus.events.EventVar;
+import de.ft.interitus.events.UI.UIOpenSettingsEvent;
+import sun.awt.geom.Crossings;
 
 import java.util.ArrayList;
 
@@ -27,7 +30,7 @@ public class GlobalShortcuts implements ShortCutChecker {
     public static ShortCut shortCut_speichern_unter=new ShortCut("Speichern unter",MenuBar.menuItem_speichernunter,SpecialKeys.dualStrg, SpecialKeys.dualShift, Input.Keys.S);
     public static ShortCut shortCut_vollbild=new ShortCut("Vollbild",MenuBar.menuItem_vollbild,Input.Keys.F11);
     public static ShortCut shortCut_einstellungen=new ShortCut("Einstellungen öffnen",MenuBar.menuItem_einstellungen,SpecialKeys.dualStrg,Input.Keys.ALT_LEFT,Input.Keys.S);
-
+    public static boolean test = false;
 
 
     public static ArrayList<ShortCut> retunrarray() {
@@ -51,88 +54,90 @@ public class GlobalShortcuts implements ShortCutChecker {
     @Override
     public void check() {
 
-        if(shortCut_einstellungen.isPressed() && !SettingsUI.isopend()){
-            UI.set.show();
-        }
 
-        if(shortCut_vollbild.isPressed()){
-            if (MenuBar.fullscreen == false) {
-                Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
-                MenuBar.fullscreen = true;
-            } else {
-                Gdx.graphics.setWindowedMode(Var.w, Var.h);
-                ProgrammingSpace.batch.getProjectionMatrix().setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-                Gdx.gl.glViewport(0, 0, Gdx.graphics.getBackBufferWidth(), Gdx.graphics.getBackBufferHeight());
-                MenuBar.fullscreen = false;
+            if (shortCut_einstellungen.isPressed() && !SettingsUI.isopend()) {
+                EventVar.uiEventManager.UIOpenSettingsEvent(new UIOpenSettingsEvent(this));
             }
-        }
-        if(shortCut_newprojektwindow.isPressed()){
-            NewProjectWindow NPW = new NewProjectWindow();
-            NPW.show();
-        }
-        if(shortCut_oefnen.isPressed() && !LoadSave.isopenopen()){
-            if (!Var.isclearing) {
-                if (DataManager.changes) {
-                    String[] möglichkeiten = {"Verwerfen", "Speichern", "Abbrechen"};
+
+           if (shortCut_vollbild.isPressed()) {
+                if (MenuBar.fullscreen == false) {
+                    Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
+                    MenuBar.fullscreen = true;
+                } else {
+                    Gdx.graphics.setWindowedMode(Var.w, Var.h);
+                    ProgrammingSpace.batch.getProjectionMatrix().setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                    Gdx.gl.glViewport(0, 0, Gdx.graphics.getBackBufferWidth(), Gdx.graphics.getBackBufferHeight());
+                    MenuBar.fullscreen = false;
+                }
+            }
+            if (shortCut_newprojektwindow.isPressed()) {
+                NewProjectWindow NPW = new NewProjectWindow();
+                NPW.show();
+            }
+            if (shortCut_oefnen.isPressed() && !LoadSave.isopenopen()) {
+                if (!Var.isclearing) {
+                    if (DataManager.changes) {
+                        String[] möglichkeiten = {"Verwerfen", "Speichern", "Abbrechen"};
 
 
-                    final int nothing = 1;
-                    final int everything = 2;
-                    final int something = 3;
+                        final int nothing = 1;
+                        final int everything = 2;
+                        final int something = 3;
 
-                    //confirmdialog may return result of any type, here we are just using ints
-                    Dialogs.showConfirmDialog(UI.stage, "Ungespeicherte Änderungen", "\nWenn du eine neue Datei öffnest werden womögich Änderungen verworfen.\n",
-                            möglichkeiten, new Integer[]{nothing, everything, something},
-                            new ConfirmDialogListener<Integer>() {
-                                @Override
-                                public void result(Integer result) {
-                                    if (result == nothing) {
+                        //confirmdialog may return result of any type, here we are just using ints
+                        Dialogs.showConfirmDialog(UI.stage, "Ungespeicherte Änderungen", "\nWenn du eine neue Datei öffnest werden womögich Änderungen verworfen.\n",
+                                möglichkeiten, new Integer[]{nothing, everything, something},
+                                new ConfirmDialogListener<Integer>() {
+                                    @Override
+                                    public void result(Integer result) {
+                                        if (result == nothing) {
 
-                                        LoadSave.open();
-                                    }
+                                            LoadSave.open();
+                                        }
 
-                                    if (result == everything) {
-                                        if (DataManager.path != "") {
-                                            FileHandle handle = Gdx.files.external(DataManager.path);
-                                            DataSaver.save(handle);
-                                            DataManager.saved();
-                                        } else {
-                                            LoadSave.saveas();
+                                        if (result == everything) {
+                                            if (DataManager.path != "") {
+                                                FileHandle handle = Gdx.files.external(DataManager.path);
+                                                DataSaver.save(handle);
+                                                DataManager.saved();
+                                            } else {
+                                                LoadSave.saveas();
+                                            }
+                                        }
+
+                                        if (result == something) {
+
+
                                         }
                                     }
-
-                                    if (result == something) {
-
-
-                                    }
-                                }
-                            });
+                                });
 
 
+                    } else {
+                        LoadSave.open();
+                    }
                 } else {
-                    LoadSave.open();
+                    Dialogs.showOKDialog(UI.stage, "Bitte Warten", "Das Programm ist gerade mit deinem zuletzt Geöffnetem Programm beschäftigt. Bitte warte noch bis es fertig ist");
                 }
-            } else {
-                Dialogs.showOKDialog(UI.stage, "Bitte Warten", "Das Programm ist gerade mit deinem zuletzt Geöffnetem Programm beschäftigt. Bitte warte noch bis es fertig ist");
             }
-        }
 
-        if(shortCut_speichern.isPressed()){
-            if (DataManager.path != "") {
-                FileHandle handle = Gdx.files.absolute(DataManager.path);
-                DataSaver.save(handle);
-                DataManager.saved();
-            } else {
+            if (shortCut_speichern.isPressed()) {
+                if (DataManager.path != "") {
+                    FileHandle handle = Gdx.files.absolute(DataManager.path);
+                    DataSaver.save(handle);
+                    DataManager.saved();
+                } else {
+                    if (!LoadSave.issaveopen()) {
+                        LoadSave.saveas();
+                    }
+                }
+            }
+
+            if (shortCut_speichern_unter.isPressed()) {
                 if (!LoadSave.issaveopen()) {
                     LoadSave.saveas();
                 }
             }
-        }
 
-        if(shortCut_speichern_unter.isPressed()){
-            if (!LoadSave.issaveopen()) {
-                LoadSave.saveas();
-            }
-        }
     }
 }
