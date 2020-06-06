@@ -47,9 +47,8 @@ public class subitem6 {
         VisLabel name;
         VisTextField tastenkombeauswahl;
         VisRadioButton disablebutton;
-        MenuItem menuItem;
         ShortCut shortCut;
-        public ShortCutEinstellung(int i, VisTable table, final ShortCut shortCutt){//shortcut ohne menuitem
+        public ShortCutEinstellung(int i, VisTable table, final ShortCut shortCutt){//shortcut einstellung
             shortCut=shortCutt;
             name=new VisLabel(shortCut.getName());
             tastenkombeauswahl=new VisTextField();
