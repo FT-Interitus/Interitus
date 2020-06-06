@@ -23,6 +23,8 @@ import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.utils.CheckKollision;
 
+import java.io.Serializable;
+
 /***
  *
  * @author Felix & Tim
@@ -32,10 +34,10 @@ import de.ft.interitus.utils.CheckKollision;
  *
  */
 
-public abstract class Block implements VisibleObjects {
+public abstract class Block implements VisibleObjects, Serializable {
     public boolean seted = true; //Ob der Block losgelassen wurde bzw ob der Block eine statische Position hat
     public boolean moved = false; // Ob der Block gerade mit der Maus bewegt wird
-    Frustum camfr = ProgrammingSpace.cam.frustum; //getten der Camera werte um zu überprüfen ob der Block gerade sichtbar ist.
+
     private boolean marked = false; //Ob der Block gerade makiert ist
     private int x; //Die x Koordinate des Blocks
     private int y; //Die Y Koordinate des Blocks
@@ -119,7 +121,7 @@ public abstract class Block implements VisibleObjects {
      */
     @Override
     public boolean isVisible() {
-        return camfr.boundsInFrustum(this.getX(), this.getY(), 0, this.getW(), this.getH(), 0); //Ist der Block im Camera bereich?
+        return ProgrammingSpace.cam.frustum.boundsInFrustum(this.getX(), this.getY(), 0, this.getW(), this.getH(), 0); //Ist der Block im Camera bereich?
     }
 
     /***

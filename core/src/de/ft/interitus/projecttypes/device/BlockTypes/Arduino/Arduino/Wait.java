@@ -8,9 +8,10 @@ import de.ft.interitus.projecttypes.device.BlockTypes.BlockTopParameter;
 import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
 
 import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Wait implements PlatformSpecificBlock {
+public class Wait implements PlatformSpecificBlock, Serializable {
 
     ArrayList<Parameter> parameters = new ArrayList<>();
 
