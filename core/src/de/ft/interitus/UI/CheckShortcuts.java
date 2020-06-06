@@ -23,6 +23,7 @@ public class CheckShortcuts {
     public static void loadArrayList(){
 
         //Add global Shortcuts
+        //GlobalShortcuts.generateshortcuts();
         shortCuts.addAll(GlobalShortcuts.retunrarray());
         shortCutsChecker.add(new GlobalShortcuts());
         //Add Block shortcuts

@@ -4,8 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
-import de.ft.interitus.Block.Interitus.DefaultBlockUpdateGenerator;
 import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.inputfields.check.Check;
 import de.ft.interitus.UI.tappedbar.TapItem;
 import de.ft.interitus.Var;
@@ -43,9 +43,9 @@ public class TapBarBlockItem implements TapItem {
             }
         }
 
-        ProgrammingSpace.UIbatch.begin();
-        ProgrammingSpace.UIbatch.draw(img,this.x,this.y,this.w,this.h);
-        ProgrammingSpace.UIbatch.end();
+        UI.UIbatch.begin();
+        UI.UIbatch.draw(img,this.x,this.y,this.w,this.h);
+        UI.UIbatch.end();
     }
 
     @Override

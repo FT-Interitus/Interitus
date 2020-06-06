@@ -2,13 +2,14 @@ package de.ft.interitus.UI;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Cursor;
-import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.kotcrab.vis.ui.widget.MenuBar;
 import com.kotcrab.vis.ui.widget.MenuItem;
 import de.ft.interitus.*;
@@ -24,7 +25,6 @@ import de.ft.interitus.utils.RoundRectangle;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Currency;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -33,7 +33,9 @@ import static de.ft.interitus.UI.MenuBar.createSubMenu;
 public class UI {
     static final Table root = new Table();
     public static Stage stage;
-    private static final Vector2 lastframecamposition = new Vector2(ProgrammingSpace.cam.position.x, ProgrammingSpace.cam.position.y);
+    public static Viewport UIviewport;
+    public static OrthographicCamera UIcam;
+    public static SpriteBatch UIbatch;
 
     protected static MenuItem recent;
     protected static MenuItem revert;
@@ -152,9 +154,11 @@ public class UI {
     }
 
     public static void init() {
+        UI.UIbatch = new SpriteBatch();
+        UI.UIcam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        UI.UIviewport = new ScreenViewport(UI.UIcam);
 
-
-        stage = new Stage(ProgrammingSpace.UIviewport, ProgrammingSpace.UIbatch);
+        stage = new Stage(UIviewport, UIbatch);
 
 
 
@@ -275,7 +279,7 @@ public class UI {
         //root.setPosition(0,0);
 
 
-        root.setPosition(ProgrammingSpace.UIcam.position.x - ((float) Gdx.graphics.getWidth()) / 2, ProgrammingSpace.UIcam.position.y - ((float) Gdx.graphics.getHeight()) / 2);
+        root.setPosition(UIcam.position.x - ((float) Gdx.graphics.getWidth()) / 2, UIcam.position.y - ((float) Gdx.graphics.getHeight()) / 2);
         stage.draw();
 
         recent.setSubMenu(createSubMenu(Data.filename.size(), GetStringArray(Data.filename)));

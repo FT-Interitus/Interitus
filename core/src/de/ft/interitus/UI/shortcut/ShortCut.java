@@ -73,23 +73,32 @@ public class ShortCut {
         this.name = name;
     }
 
+    void menubaraktualisieren(){
+        if(menuItem!=null && !disable){
+            menuItem.setShortcut(this.getShortcutasString());
+        }
+    }
     public void setShortCut(int... combination) {
         this.combination.clear();
         for(int i=0;i<combination.length;i++){
             this.combination.add(combination[i]);
         }
+
+        menubaraktualisieren();
     }
     public void addTaste(int keycode){
         if(this.combination.indexOf(keycode)==-1) {
             this.combination.add(keycode);
         }
-
+        menubaraktualisieren();
     }
     public void delLast(){
 
         if(this.combination.size()>0) {
             this.combination.remove(this.combination.size() - 1);
         }
+        menubaraktualisieren();
+
     }
 
     public ArrayList<Integer> getCombination() {

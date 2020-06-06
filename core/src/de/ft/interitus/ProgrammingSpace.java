@@ -15,7 +15,6 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.BlockVar;
 import de.ft.interitus.UI.CheckShortcuts;
-import de.ft.interitus.UI.MenuBar;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.inputfields.IntegerAuswahl;
@@ -26,27 +25,22 @@ import de.ft.interitus.UI.settings.subitems.subitem17;
 import de.ft.interitus.UI.shortcut.shortcuts.BlockShortcuts;
 import de.ft.interitus.UI.shortcut.shortcuts.GlobalShortcuts;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
-import de.ft.interitus.data.programm.Data;
 import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.deviceconnection.arduino.PortUpdate;
 import de.ft.interitus.deviceconnection.arduino.SerialConnection;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.device.BlockTypes.ProjectTypesVar;
 import de.ft.interitus.utils.PositionSaver;
-import de.ft.interitus.utils.Unproject;
 import de.ft.interitus.utils.animation.Animation;
 
 import java.awt.*;
 
 
 public class ProgrammingSpace extends ScreenAdapter implements Screen {
-    public static SpriteBatch UIbatch;
     public static SpriteBatch batch;
 
     public static OrthographicCamera cam;
-    public static OrthographicCamera UIcam;
     public static Viewport viewport;
-    public static Viewport UIviewport;
     public static Component saver;
 
     public static BitmapFont font;
@@ -79,11 +73,11 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
         font = new BitmapFont();
         shapeRenderer = new ShapeRenderer();
         cam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        UIcam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+
         viewport = new ScreenViewport(cam);
-        UIviewport = new ScreenViewport(UIcam);
+
         batch = new SpriteBatch();
-        UIbatch = new SpriteBatch();
+
 
 
         de.ft.interitus.UI.Viewport.init();
@@ -133,8 +127,9 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
 
         cam.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
-        UIcam.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
-        UI.init();
+        UI.UIcam.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
+
+
 
 
         textfieldtest = new TextField(500, 600, 100, 25);
@@ -154,7 +149,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
     @Override
     public void render(float delta) {
-        System.out.println("debugausgabe: "+ MenuBar.menuItem_neues_projekt);
+        //System.out.println("debugausgabe: "+ CheckShortcuts.shortCuts.size());
 
         if(Var.actProjekt==null) {
            // Programm.INSTANCE.setScreen(new Welcome()); //TODO auskommentiert zu debug zwecken
@@ -170,14 +165,14 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
 
             cam.update();
-            UIcam.update();
+            UI.UIcam.update();
 
             Gdx.gl.glClearColor(Settings.theme.ClearColor().r,Settings.theme.ClearColor().g,Settings.theme.ClearColor().b,Settings.theme.ClearColor().a);
 
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT | (Gdx.graphics.getBufferFormat().coverageSampling?GL20.GL_COVERAGE_BUFFER_BIT_NV:0));
             batch.setProjectionMatrix(cam.combined);
-            UIbatch.setProjectionMatrix(UIcam.combined);
-            shapeRenderer.setProjectionMatrix(UIcam.combined);
+            UI.UIbatch.setProjectionMatrix(UI.UIcam.combined);
+            shapeRenderer.setProjectionMatrix(UI.UIcam.combined);
 
 
 
@@ -327,7 +322,7 @@ e.printStackTrace();
 
         }
         viewport.update(width, height);
-        UIviewport.update(width, height);
+        UI.UIviewport.update(width, height);
         w = width;
         h = height;
 

@@ -3,8 +3,10 @@ package de.ft.interitus;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.kotcrab.vis.ui.VisUI;
+import com.kotcrab.vis.ui.widget.MenuItem;
 import de.ft.interitus.Block.BlockVar;
 import de.ft.interitus.UI.CheckShortcuts;
+import de.ft.interitus.UI.MenuBar;
 import de.ft.interitus.UI.Theme.ThemeManager;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.data.programm.Data;
@@ -38,7 +40,7 @@ public class Programm extends Game {
     @Override
     public void create() {
 
-        Manager.init();
+      //  Manager.init();
 
         Var.username = UserNameGetter.get();
 
@@ -66,7 +68,8 @@ public class Programm extends Game {
         }
 
         Init.initBlocks();
-        CheckShortcuts.loadArrayList();
+        UI.init();
+        CheckShortcuts.loadArrayList();//bevor CheckShortcuts.loatArraylist muss die ui schon die menuebar eleente erstellt haben!!!!!!!!!
         Thread seachnetwork = new Thread() {
             @Override
             public void run() {

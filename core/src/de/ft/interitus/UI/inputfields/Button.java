@@ -4,10 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import de.ft.interitus.Programm;
-import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.inputfields.check.Check;
 import de.ft.interitus.Var;
 import de.ft.interitus.utils.RoundRectangle;
@@ -116,29 +114,29 @@ public class Button {
                 RoundRectangle.abgerundetesRechteck(s, this.x, this.y, this.w, this.h, 5);
                 s.end();
             } else {
-                ProgrammingSpace.UIbatch.begin();
+                UI.UIbatch.begin();
                 if (isMouseover()) {
-                    ProgrammingSpace.UIbatch.setColor(1, 1, 1, hovertransparancy);
+                    UI.UIbatch.setColor(1, 1, 1, hovertransparancy);
                 } else {
-                    ProgrammingSpace.UIbatch.setColor(1, 1, 1, 1);
+                    UI.UIbatch.setColor(1, 1, 1, 1);
                 }
                 if (isMouseover() && Gdx.input.isButtonPressed(0)&&!disablepresscolorchange) {
-                    ProgrammingSpace.UIbatch.setColor(1, 0.5f, 0.5f, 1);
+                    UI.UIbatch.setColor(1, 0.5f, 0.5f, 1);
                 }
                 if (isDisable()) {
-                    ProgrammingSpace.UIbatch.setColor(1, 1, 1, 0.2f);
+                    UI.UIbatch.setColor(1, 1, 1, 0.2f);
                 }
                 //batch.draw(image, this.x, this.y, this.w, this.h);
-                ProgrammingSpace.UIbatch.draw(image,this.x,this.y,this.w,this.h,0,0,image.getWidth(),image.getHeight(),this.flipX,this.flipY);
-                ProgrammingSpace.UIbatch.end();
+                UI.UIbatch.draw(image,this.x,this.y,this.w,this.h,0,0,image.getWidth(),image.getHeight(),this.flipX,this.flipY);
+                UI.UIbatch.end();
             }
             if (text != null) {
-                ProgrammingSpace.UIbatch.begin();
+                UI.UIbatch.begin();
 
                 glyphLayout.setText(font, this.text);
-                font.draw(ProgrammingSpace.UIbatch, glyphLayout, x + 5, y + glyphLayout.height + h / 2 - glyphLayout.height / 2);
+                font.draw(UI.UIbatch, glyphLayout, x + 5, y + glyphLayout.height + h / 2 - glyphLayout.height / 2);
 
-                ProgrammingSpace.UIbatch.end();
+                UI.UIbatch.end();
             }
         }
     }
