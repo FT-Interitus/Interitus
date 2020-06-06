@@ -12,7 +12,7 @@ public class DataManager {
             changes = true;
             //Gdx.graphics.setTitle(filename+ "*"); //TODO Windows problems
         }
-        SaveChanges.changedValue(block, created, deleted); //Die Änderung wird in den Rückgänig Stack geschrieben
+        //SaveChanges.changedValue(block, created, deleted); //Die Änderung wird in den Rückgänig Stack geschrieben
     }
 
     public static void saved() { //Wird aufgerufen wenn das programm gespeichert wurde und somit keine Ungespeicherten änderungen vorliegen

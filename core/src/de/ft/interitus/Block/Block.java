@@ -48,8 +48,8 @@ public abstract class Block implements VisibleObjects {
     private int x_dup_links; //Die Y Position des Duplicates  //Die Weite und Höhe ergeben sich aus der Block weite und Höhe
     private boolean moving = false; //Ob der Block gerade durch den Nutzer bewegt wird
     private BlockUpdate blockupdate; // Die Block update methode hier werden user actionen engegengenommen und verarbeitet
-    private Block left = null; //Der rechte verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
-    private Block right = null; //Der linke verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
+    private int left = -1; //Der rechte verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
+    private int right = -1; //Der linke verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
     private final Vector2 wireconnector_right = new Vector2(0, 0); //Die rechte wire-Anschluss Position
     private final Vector2 wireconnector_left = new Vector2(0, 0); //Die linke wire-Anschluss Position
     private Wire wire_left = null; //linke verbundene Wire
@@ -345,7 +345,7 @@ public abstract class Block implements VisibleObjects {
         this.wire_right = wire_right;
     }
 
-    public Block getLeft() {
+    public int getLeft() {
         return left; //Gibt den linken VERBUNDENEN Nachbar zurück
     }
 
@@ -356,15 +356,15 @@ public abstract class Block implements VisibleObjects {
      *
      */
 
-    public void setLeft(Block left) { //Setzt einen neuen linken nachbar
+    public void setLeft(int left) { //Setzt einen neuen linken nachbar
 
 
         if (this.left != left) { //Wenn der linke Nachbar nicht der schon der Gleiche Block ist (Sonst tritt hier ein OverFlow auf siehe set Right)
             this.left = left;      //Block wird als Nachbar aufgenommen
         }
-        if (left != null) { //Wenn der Block nicht null ist...
-            if (left.getRight() != this) { //Und der wenn der Rechte Nachbar vom linken Block nicht man selbst ist
-                left.setRight(this); //Wird auch diese Verbindung neu gesetzt (Um Nachbarsetzten zu erleichtern (Aus der Schlussfolgerung das der Rechte Nachbar vom linken Nachbar man selbst ist) )
+        if (left != -1) { //Wenn der Block nicht null ist...
+            if (BlockVar.blocks.get(left).getRight() != this.index) { //Und der wenn der Rechte Nachbar vom linken Block nicht man selbst ist
+                BlockVar.blocks.get(left).setRight(this.index); //Wird auch diese Verbindung neu gesetzt (Um Nachbarsetzten zu erleichtern (Aus der Schlussfolgerung das der Rechte Nachbar vom linken Nachbar man selbst ist) )
             }
         }
 
@@ -375,18 +375,18 @@ public abstract class Block implements VisibleObjects {
      * See Block.setLeft
      */
 
-    public Block getRight() {
+    public int getRight() {
         return right; //Rück gabe des rechts VERBUNDENEN Nachbars
     }
 
-    public void setRight(Block right) {
+    public void setRight(int right) {
 
         if (this.right != right) { //Wenn der rechte Nachbar nicht der schon der Gleiche Block ist (Sonst tritt hier ein OverFlow auf siehe set Left)
             this.right = right;//Block wird als Nachbar aufgenommen
         }
-        if (right != null) {//Wenn der Block nicht null ist..
-            if (right.getLeft() != this) {//Und der wenn der linke Nachbar vom rechten Block nicht man selbst ist
-                right.setLeft(this);//Wird auch diese Verbindung neu gesetzt (Um Nachbarsetzten zu erleichtern (Aus der Schlussfolgerung das der linke Nachbar vom rechten Nachbar man selbst ist))
+        if (right != -1) {//Wenn der Block nicht null ist..
+            if (BlockVar.blocks.get(right).getLeft() != this.index) {//Und der wenn der linke Nachbar vom rechten Block nicht man selbst ist
+                BlockVar.blocks.get(right).setLeft(this.index);//Wird auch diese Verbindung neu gesetzt (Um Nachbarsetzten zu erleichtern (Aus der Schlussfolgerung das der linke Nachbar vom rechten Nachbar man selbst ist))
             }
         }
 
@@ -476,29 +476,29 @@ public abstract class Block implements VisibleObjects {
         final int temp = this.getIndex(); // Der Index des Blocks wird in eine Temp Variable verlegt, da er später nochmal gebraucht wird
         DataManager.change(this, false, true); // Ein Block Abbild wird erstellt um ein eventuelles Rückgänig machen
         this.setIndex(-1); //Der Index wird auf -1 gesetzt dann merkt der BlockUpdater das der laufenden Timer beendet werden soll
-        if (left != null) { //Wenn ein linker Nachbar exsistiert
-            left.setRight(null); //wird dem linken Nachbar gesagt das er keinen Rechten Nachbar mehr hat
+        if (left != -1) { //Wenn ein linker Nachbar exsistiert
+            BlockVar.blocks.get(left).setRight(-1); //wird dem linken Nachbar gesagt das er keinen Rechten Nachbar mehr hat
 
             try {
-                left.setWire_right(null); //Die Wire des nachbar block wird gelöscht damit die Wire kein zweites mal gelöscht wird (passiert nur bei ganz vielen wire nodes)
+                BlockVar.blocks.get(left).setWire_right(null); //Die Wire des nachbar block wird gelöscht damit die Wire kein zweites mal gelöscht wird (passiert nur bei ganz vielen wire nodes)
             } catch (NullPointerException e) {
                 //Falls es gar keine Wire gab
             }
         }
 
-        if (right != null) { // wenn ein Rechter nachbar exsitiert
-            right.setLeft(null); // wird dem rechten Nachbar gesagt das er keinen linken nachbar mehr hat
+        if (right != -1) { // wenn ein Rechter nachbar exsitiert
+            BlockVar.blocks.get(right).setLeft(-1); // wird dem rechten Nachbar gesagt das er keinen linken nachbar mehr hat
 
             try {
-                right.setWire_left(null); //Die Wire des nachbar block wird gelöscht damit die Wire kein zweites mal gelöscht wird (passiert nur bei ganz vielen wire nodes)
+                BlockVar.blocks.get(right).setWire_left(null); //Die Wire des nachbar block wird gelöscht damit die Wire kein zweites mal gelöscht wird (passiert nur bei ganz vielen wire nodes)
             } catch (NullPointerException e) {
                 //Falls es gar keine Wire gab
             }
         }
 
 
-        left = null; //Die Referenzierung zum linken Nachbar wird gelöscht
-        right = null; //Die Referenzierung zum rechten Nachbar wird gelöscht
+        left = -1; //Die Referenzierung zum linken Nachbar wird gelöscht
+        right = -1; //Die Referenzierung zum rechten Nachbar wird gelöscht
 
         if (ThreadManager.threads.indexOf(this.blockupdate) != -1) { //Überprüfen ob Thread überhaupt läuft
             ThreadManager.threads.remove(this.blockupdate); //Wenn ja wird er aus dem Array der Threads entfernt
@@ -620,11 +620,11 @@ public abstract class Block implements VisibleObjects {
             batch.begin();
         }
 
-        if (!this.blockupdate.isIsconnectorclicked() && BlockVar.showleftdocker && this.getLeft() == null) {
+        if (!this.blockupdate.isIsconnectorclicked() && BlockVar.showleftdocker && this.getLeft() == -1) {
             batch.draw(AssetLoader.connector_offerd, getWireconnector_left().x, getWireconnector_left().y, 20, 20);
         }
 
-        if (this.getRight() == null) {
+        if (this.getRight() == -1) {
             batch.draw(AssetLoader.connector, getwireconnector_right().x, getwireconnector_right().y, 20, 20);
         }
 

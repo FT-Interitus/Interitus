@@ -45,8 +45,8 @@ public abstract class Wire {
             if (e.getButton().getText().contains("Löschen")) {
                 if(BlockVar.mousehoveredwire==INSTANCE) {
                     try {
-                        INSTANCE.left_connection.getblock().setRight(null);
-                        INSTANCE.right_connection.getblock().setLeft(null);
+                        INSTANCE.left_connection.getblock().setRight(-1);
+                        INSTANCE.right_connection.getblock().setLeft(-1);
                         INSTANCE.left_connection.setWire_right(null);
                         INSTANCE.right_connection.setWire_left(null);
                         INSTANCE.left_connection = null;
