@@ -361,7 +361,7 @@ public abstract class BlockUpdate extends Thread {
                                     //block.getRight().setX(block.getRight().getX() + block.getW());
 
                                     BlockVar.blocks.get(BlockVar.blocks.get(a).getRight()).setX(BlockVar.blocks.get(a).getX() + BlockVar.blocks.get(a).getW());
-                                    a = BlockVar.blocks.indexOf(BlockVar.blocks.get(a).getRight());
+                                    a = BlockVar.blocks.get(a).getRight();
                                 }
 
 
@@ -378,20 +378,17 @@ public abstract class BlockUpdate extends Thread {
 
                             block.seted = false;
 
-                            try {
 
                                 while (BlockVar.blocks.get(a).getRight() != -1) {
-                                    System.out.println("numero");
 
                                     //block.getRight().setX(block.getRight().getX() + block.getW());
 
                                     BlockVar.blocks.get(BlockVar.blocks.get(a).getRight()).setX(BlockVar.blocks.get(a).getX() + BlockVar.blocks.get(a).getW());
-                                    a = BlockVar.blocks.indexOf(BlockVar.blocks.get(a).getRight());
+                                    a = BlockVar.blocks.get(a).getRight();
+
                                 }
 
-                            } catch (NullPointerException z) {
 
-                            }
 
                         }
 
@@ -412,18 +409,16 @@ public abstract class BlockUpdate extends Thread {
                         block.setX(block.getX() - block.getW());
 
 
-                        try {
 
                             while (BlockVar.blocks.get(b).getRight() != -1) {
 
                                 //block.getRight().setX(block.getRight().getX() + block.getW());
 
                                 BlockVar.blocks.get(BlockVar.blocks.get(b).getRight()).setX(BlockVar.blocks.get(BlockVar.blocks.get(b).getRight()).getX() - BlockVar.blocks.get(b).getW());//TODO tim ist sich nicht sicher
-                                b = BlockVar.blocks.indexOf(BlockVar.blocks.get(b).getRight());
+                                b = BlockVar.blocks.get(b).getRight();
                             }
 
-                        } catch (NullPointerException ignored) {
-                        }
+
 
 
                         block.seted = true;
