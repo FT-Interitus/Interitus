@@ -350,7 +350,7 @@ public abstract class BlockUpdate extends Thread {
                             block.moved = true;
                             geschoben = true;
 
-                            int a = BlockVar.blocks.indexOf(BlockVar.blockmitdergrostenuberlappungmitmarkiertemblock);
+                            int a = block.getIndex();
                             //System.out.println(a);
                             block.setX(block.getX() + block.getW());
 
@@ -373,8 +373,7 @@ public abstract class BlockUpdate extends Thread {
                             block.moved = true;
                             geschoben = true;
 
-                            int a = BlockVar.blocks.indexOf(BlockVar.blockmitdergrostenuberlappungmitmarkiertemblock);
-                            //System.out.println(a);
+                            int a = block.getIndex();
                             block.setX(block.getX() + block.getW());
 
                             block.seted = false;
@@ -391,6 +390,7 @@ public abstract class BlockUpdate extends Thread {
                                 }
 
                             } catch (NullPointerException z) {
+
                             }
 
                         }
@@ -407,7 +407,7 @@ public abstract class BlockUpdate extends Thread {
                         geschoben = false;
 
 
-                        int b = BlockVar.blocks.indexOf(block);
+                        int b = block.getIndex();
 
                         block.setX(block.getX() - block.getW());
 
