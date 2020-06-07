@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Frustum;
 import com.badlogic.gdx.math.Vector2;
 import de.ft.interitus.Block.Generators.BlockUpdateGenerator;
+import de.ft.interitus.Block.Generators.BlocktoSaveGenerator;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.RechtsKlick;
@@ -57,8 +58,9 @@ public abstract class Block implements VisibleObjects {
     private PlatformSpecificBlock blocktype =null;
     private RightClickEventListener rightClickEventListener;
     private BlockUpdateGenerator blockUpdateGenerator;
+    private BlocktoSaveGenerator blocktoSaveGenerator;
 
-    public Block(final int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock,BlockUpdateGenerator update) { //Initzialisieren des Blocks
+    public Block(final int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock,BlockUpdateGenerator update,BlocktoSaveGenerator blocktoSaveGenerator) { //Initzialisieren des Blocks
        this.blocktype = platformSpecificBlock;
         EventVar.blockEventManager.createBlock(new BlockCreateEvent(this, this));
         this.x = x;
@@ -71,7 +73,7 @@ public abstract class Block implements VisibleObjects {
         this.index = index;
         this.blockUpdateGenerator = update;
         this.blockupdate = update.generate(this); //BlockUpdate Klasse wird initzilisieren
-
+        this.blocktoSaveGenerator = blocktoSaveGenerator;
 
         if (this.isVisible()) { //Wenn der Block sichtbar ist...  //Das passiert deshalb weil nicht für nicht sichbare Blöcke ein Thread laufen muss
             blockupdate.start(); //...wird der updater gestartet
@@ -718,5 +720,9 @@ public abstract class Block implements VisibleObjects {
 
     public void setBlocktype(PlatformSpecificBlock blocktype) {
         this.blocktype = blocktype;
+    }
+
+    public BlocktoSaveGenerator getBlocktoSaveGenerator() {
+        return blocktoSaveGenerator;
     }
 }

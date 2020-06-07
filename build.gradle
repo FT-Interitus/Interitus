@@ -63,10 +63,12 @@ project(":core") {
         compile 'com.fazecast:jSerialComm:[2.0.0,3.0.0)'
         compile "com.kotcrab.vis:vis-ui:$visuiVersion"
         compile 'org.json:json:20171018'
+        compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.2.4'
         api "com.badlogicgames.gdx:gdx:$gdxVersion"
         api "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         api "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         api "com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion"
-        
+
+
     }
 }
