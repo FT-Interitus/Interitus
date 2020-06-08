@@ -502,7 +502,7 @@ public abstract class BlockUpdate extends Thread {
                             }
 
                         } catch (NullPointerException e) {
-                            e.printStackTrace();
+
                         }
                     }
                 } catch (Exception e) {
