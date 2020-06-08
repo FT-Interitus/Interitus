@@ -1,6 +1,7 @@
 package de.ft.interitus.Block;
 
 
+
 import java.io.Serializable;
 
 public abstract class SaveBlock implements Serializable {
@@ -16,6 +17,7 @@ this.y = y;
 this.index = index;
 this.index_links = index_links;
 this.index_rechts = index_rechts;
+
     }
 
     public int getY() {

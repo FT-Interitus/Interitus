@@ -69,5 +69,6 @@ project(":core") {
         api "com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion"
 
 
+
     }
 }
