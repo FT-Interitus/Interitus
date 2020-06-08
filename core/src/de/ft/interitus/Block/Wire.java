@@ -150,6 +150,8 @@ public abstract class Wire {
 
                 }
 
+
+
                 if (Gdx.input.isKeyJustPressed(Input.Keys.N) && canplaceanewwirenode&&BlockVar.movingwires!=null) {
 
 
@@ -260,6 +262,8 @@ public abstract class Wire {
                     }
 
                 }
+
+
 
 
                 try {

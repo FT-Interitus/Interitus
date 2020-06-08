@@ -51,25 +51,27 @@ public class DataLoader {
 
                         }else{
                             for(int j=0;j<readedblocks.get(i).getNodes().size();j++) {
-                                BlockVar.wires.add(Var.actProjekt.getWireGenerator().generate(BlockVar.blocks.get(i)));
+                                if(j==0) {
+                                    BlockVar.wires.add(Var.actProjekt.getWireGenerator().generate(BlockVar.blocks.get(i)));
+                                    BlockVar.blocks.get(i).setWire_right(BlockVar.wires.get(BlockVar.wires.size() - 1)); // Der linke Block bekommt die Wire zugeteilt
 
-                              BlockVar.wireNodes.add(Var.actProjekt.getWireNodeGenerator().generate(BlockVar.wires.get(BlockVar.wires.size()-1), readedblocks.get(j).getNodes().get(j).get(0), readedblocks.get(j).getNodes().get(j).get(1), readedblocks.get(j).getNodes().get(j).get(2), readedblocks.get(j).getNodes().get(j).get(3)));
-                                BlockVar.wires.get(BlockVar.wires.size()-1).setSpace_between_blocks(false);
-                                /*
-                                BlockVar.wireNodes.get(BlockVar.wireNodes.size()-1).setWire_right(BlockVar.wires.get(BlockVar.wires.size()-1));
-                                if(j>1) {
-                                    BlockVar.wireNodes.get(BlockVar.wireNodes.size()-1).setWire_left(BlockVar.wires.get(BlockVar.wires.size()-2));
                                 }else{
-                                    BlockVar.wireNodes.get(BlockVar.wireNodes.size()-1).setWire_left();
+                                    BlockVar.wires.add(Var.actProjekt.getWireGenerator().generate(BlockVar.wireNodes.get(BlockVar.wireNodes.size()-1)));
+                                    BlockVar.wireNodes.get(BlockVar.wireNodes.size()-1).setWire_right(BlockVar.wires.get(BlockVar.wires.size()-1));
                                 }
+                                BlockVar.wires.get(BlockVar.wires.size()-1).setSpace_between_blocks(true);
 
-                                 */
-                                BlockVar.wires.get(BlockVar.wires.size()-1).setRight_connection(BlockVar.wireNodes.get(BlockVar.wireNodes.size()-1));
+
+                              BlockVar.wireNodes.add(Var.actProjekt.getWireNodeGenerator().generate(BlockVar.wires.get(BlockVar.wires.size()-1), readedblocks.get(i).getNodes().get(j).get(0), readedblocks.get(i).getNodes().get(j).get(1), readedblocks.get(i).getNodes().get(j).get(2), readedblocks.get(i).getNodes().get(j).get(3)));
+
+                               BlockVar.wires.get(BlockVar.wires.size()-1).setRight_connection(BlockVar.wireNodes.get(BlockVar.wireNodes.size()-1)); //TODO fehler
+
+                               BlockVar.visiblewires.add(BlockVar.wires.get(BlockVar.wires.size()-1));
+
                             }
                             BlockVar.wires.add(Var.actProjekt.getWireGenerator().generate(BlockVar.wireNodes.get(BlockVar.wireNodes.size()-1),BlockVar.blocks.get(readedblocks.get(i).getIndex_rechts())));
-                            BlockVar.blocks.get(i).setWire_right(BlockVar.wires.get(BlockVar.wires.size() - 1)); // Der Rechte Block bekommt die Wire zugeteilt
-                            BlockVar.blocks.get(BlockVar.blocks.get(i).getRight()).setWire_left(BlockVar.wires.get(BlockVar.wires.size() - 1));// Der Linke Block bekommt die Wire zugeteilt
-                            BlockVar.wires.get(BlockVar.wires.size()-1).setSpace_between_blocks(false);
+                            BlockVar.blocks.get(BlockVar.blocks.get(i).getRight()).setWire_left(BlockVar.wires.get(BlockVar.wires.size() - 1));// Der rechte Block bekommt die Wire zugeteilt
+                            BlockVar.wires.get(BlockVar.wires.size()-1).setSpace_between_blocks(true);
 
                         }
                         }
@@ -83,6 +85,8 @@ public class DataLoader {
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }catch (Exception e) {
                     e.printStackTrace();
                 }
 

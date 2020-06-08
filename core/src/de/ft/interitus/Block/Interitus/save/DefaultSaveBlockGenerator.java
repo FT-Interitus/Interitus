@@ -23,20 +23,25 @@ nodes=new ArrayList<>();
             Wire gofrom = block.getWire_right();
             while(!goout) {
                 try {
-                    if (!gofrom.getRight_connection().amiablock()) {
+                    if (!gofrom.getRight_connectionObject().amiablock()) {
+
                        actnode.clear();
                         nodecounter++;
-                        gofrom = gofrom.getRight_connection().getWire_right();
-                        actnode.add(gofrom.getRight_connection().getX());
-                        actnode.add(gofrom.getRight_connection().getY());
-                        actnode.add(gofrom.getRight_connection().getW());
-                        actnode.add(gofrom.getRight_connection().getH());
-                        nodes.add( actnode);
+                        actnode.add(gofrom.getRight_connectionObject().getwirenode().getX());
+                        actnode.add(gofrom.getRight_connectionObject().getwirenode().getY());
+                        actnode.add(gofrom.getRight_connectionObject().getwirenode().getW());
+                        actnode.add(gofrom.getRight_connectionObject().getwirenode().getH());
+                        gofrom = gofrom.getRight_connectionObject().getwirenode().getWire_right();
+
+                        nodes.add((ArrayList<Integer>) actnode.clone());
+                        System.out.println("Node detected");
                     } else {
                         goout = true;
+                        System.out.println("Out2");
                     }
 
                 }catch (NullPointerException e)  {
+                    System.out.println("Out1");
                     goout = true;
                     break;
                 }
