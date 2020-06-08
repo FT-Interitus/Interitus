@@ -27,7 +27,7 @@ public class LoadSave {
 
                     JFileChooser fileChooser = new JFileChooser();
                     fileChooser.setDialogTitle("Speichern unter...");
-                    fileChooser.setFileFilter(new FileNameExtensionFilter("Projektdatei (.rac)", "rac"));
+                    fileChooser.setFileFilter(new FileNameExtensionFilter("Projektdatei (.itp)", "itp"));
 
                     int userSelection = fileChooser.showSaveDialog(saver);
                     fileChooser.setMultiSelectionEnabled(false);
@@ -38,15 +38,15 @@ public class LoadSave {
                         System.out.println("Save as file: " + fileToSave.getName());
 
 
-                        if (fileToSave.getAbsolutePath().contains(".rac")) {
+                        if (fileToSave.getAbsolutePath().contains(".itp")) {
                             DataManager.path = fileToSave.getAbsolutePath();
                             DataSaver.save(Gdx.files.absolute(fileToSave.getAbsolutePath()));
                             DataManager.filename = fileToSave.getName();
 
                         } else {
-                            DataManager.path = fileToSave.getAbsolutePath() + ".rac";
-                            DataSaver.save(Gdx.files.absolute(fileToSave.getAbsolutePath() + ".rac"));
-                            DataManager.filename = fileToSave.getName() + ".rac";
+                            DataManager.path = fileToSave.getAbsolutePath() + ".itp";
+                            DataSaver.save(Gdx.files.absolute(fileToSave.getAbsolutePath() + ".itp"));
+                            DataManager.filename = fileToSave.getName() + ".itp";
                         }
                         System.out.println(DataManager.path);
 
@@ -90,7 +90,7 @@ public class LoadSave {
             public void run() {
                 JFileChooser fileChooser = new JFileChooser();
 
-                fileChooser.setFileFilter(new FileNameExtensionFilter("Projektdatei (.rac)", "rac"));
+                fileChooser.setFileFilter(new FileNameExtensionFilter("Projektdatei (.itp)", "itp"));
                 int result = fileChooser.showOpenDialog(ProgrammingSpace.saver);
                 if (result == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile();
