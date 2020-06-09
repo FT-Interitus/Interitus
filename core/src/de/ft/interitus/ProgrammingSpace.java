@@ -58,24 +58,12 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
     public static PressedKeys pressedKeys;
 
-    public static ButtonBar buttonbar;
-    public static Button button_projectstructus;
-    public static Button button_start;
-    public static Button button_stop;
+
 
 
 
     public ProgrammingSpace() {
-        button_projectstructus=new Button();
-        button_projectstructus.setImage(AssetLoader.img_mappe1);
-        button_start=new Button();
-        button_start.setImage(AssetLoader.img_mappe2);
-        button_stop=new Button();
-        button_stop.setImage(AssetLoader.img_mappe3);
-        buttonbar=new ButtonBar(0,0,20,20);
-        buttonbar.addButton(button_projectstructus);
-        buttonbar.addButton(button_start);
-        buttonbar.addButton(button_stop);
+
 
 
         //TODO Debug hier wird immer ein Ev3 Project erstellt
@@ -328,9 +316,6 @@ e.printStackTrace();
 
         loader(); //Load Images in OpenGL context
 
-        buttonbar.setX(Gdx.graphics.getWidth());
-        buttonbar.setY(Gdx.graphics.getHeight()-buttonbar.getButton_h()-20);
-        buttonbar.draw(UI.UIbatch);
 
 
 

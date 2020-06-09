@@ -13,6 +13,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.kotcrab.vis.ui.widget.MenuBar;
 import com.kotcrab.vis.ui.widget.MenuItem;
 import de.ft.interitus.*;
+import de.ft.interitus.UI.inputfields.Button;
+import de.ft.interitus.UI.inputfields.ButtonBar;
 import de.ft.interitus.UI.inputfields.check.InputManager;
 import de.ft.interitus.UI.settings.SettingsUI;
 import de.ft.interitus.UI.setup.SetupWindow;
@@ -23,6 +25,7 @@ import de.ft.interitus.data.user.experience.ExperienceManager;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.UI.UIOpenSettingsEvent;
 import de.ft.interitus.events.UI.UiEventAdapter;
+import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.network.bettertogether.SharedVar;
 import de.ft.interitus.utils.RoundRectangle;
 
@@ -56,6 +59,11 @@ public class UI {
     private static boolean verticalrezising=false;
     private static boolean horizontalrezising=false;
     public static boolean curserveränderungsblockade=false;
+
+    public static ButtonBar buttonbar;
+    public static Button button_projectstructus;
+    public static Button button_start;
+    public static Button button_stop;
 
     public static void userresize() {
         if (!curserveränderungsblockade){
@@ -133,7 +141,9 @@ public class UI {
 
 
         if (flaeche == true) {/////////////   \/  \/  \/  \/  die programmierfläche wird gedrawd
-            RoundRectangle.abgerundetesRechteck(renderer, UIVar.abstandvonRand, UIVar.untenhohe + UIVar.abstandvonRand, Gdx.graphics.getWidth() - UIVar.abstandvonRand * 2, Gdx.graphics.getHeight() - (UIVar.untenhohe + UIVar.abstandvonRand)  - UIVar.abstandvonRand - (int)menuBar.getTable().getHeight() , UIVar.radius);
+            UIVar.programmflaeche_h=Gdx.graphics.getHeight() - (UIVar.untenhohe + UIVar.abstandvonRand)  - UIVar.abstandvonRand - (int)menuBar.getTable().getHeight() - UIVar.buttonbarzeile_h - UIVar.abstandvonRand;
+            UIVar.programmflaeche_y=UIVar.untenhohe + UIVar.abstandvonRand;
+            RoundRectangle.abgerundetesRechteck(renderer, UIVar.abstandvonRand, UIVar.programmflaeche_y, Gdx.graphics.getWidth() - UIVar.abstandvonRand * 2, UIVar.programmflaeche_h, UIVar.radius);
         } else {
 
                 renderer.setColor(Settings.theme.BlocksColor());
@@ -150,6 +160,9 @@ public class UI {
         }
         renderer.end();
 
+        buttonbar.setX(Gdx.graphics.getWidth());
+        buttonbar.setY(UIVar.programmflaeche_y+UIVar.programmflaeche_h+UIVar.abstandvonRand);
+        buttonbar.draw(UIbatch);
 
 
 
@@ -189,6 +202,10 @@ public class UI {
                set.show();
             }
         });
+
+
+
+
 
 
         Thread UIthread = new Thread() {
@@ -277,6 +294,20 @@ public class UI {
         UIthread.start();
 
 
+    }
+
+    public static void initnachassetsloading(){
+        /////////////////Button Bar zusammensetzung//////////////////////
+        button_projectstructus=new Button();
+        button_projectstructus.setImage(AssetLoader.img_mappe1);
+        button_start=new Button();
+        button_start.setImage(AssetLoader.img_mappe2);
+        button_stop=new Button();
+        button_stop.setImage(AssetLoader.img_mappe3);
+        buttonbar=new ButtonBar(0,0,20,20);
+        buttonbar.addButton(button_projectstructus);
+        buttonbar.addButton(button_start);
+        buttonbar.addButton(button_stop);
     }
 
     public static void update() {
