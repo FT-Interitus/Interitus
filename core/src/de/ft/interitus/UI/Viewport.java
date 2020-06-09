@@ -158,6 +158,7 @@ public static long movedelay = 580;
     }
 
     public static void limitfps() {
+        ProgrammingSpace.rendertimediff =System.currentTimeMillis() - ProgrammingSpace.renderstarttime;
         if(Settings.limitfps!=0) {
             ProgrammingSpace.rendersleeptime = (int) (1000 / Settings.limitfps - ProgrammingSpace.rendertimediff);
         }else {

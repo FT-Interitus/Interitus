@@ -49,7 +49,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
     public static Drawable d;
     public static Animation testanim = new Animation(new Texture("ballfeueranimation.png"), 60, 100, 100, 3);
 
-    private static long renderstarttime = 0;
+    public static long renderstarttime = 0;
     public static long rendertimediff = 0;
     public static long rendersleeptime = 0;
 
@@ -319,7 +319,7 @@ e.printStackTrace();
 
 
 
-        rendertimediff =System.currentTimeMillis() - renderstarttime;
+
         de.ft.interitus.UI.Viewport.limitfps();
 
 
