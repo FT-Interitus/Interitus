@@ -272,7 +272,9 @@ e.printStackTrace();
         }
 
         for (int i = 0; i < BlockVar.visiblewires.size(); i++) {
-            BlockVar.visiblewires.get(i).draw();
+            if(!Var.isloading) {
+                BlockVar.visiblewires.get(i).draw();
+            }
         }
         for (int i = 0; i < BlockVar.visibleWireNodes.size(); i++) {
             BlockVar.visibleWireNodes.get(i).draw();
