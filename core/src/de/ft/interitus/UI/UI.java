@@ -160,9 +160,8 @@ public class UI {
         }
         renderer.end();
 
-        buttonbar.setX(Gdx.graphics.getWidth());
-        buttonbar.setY(UIVar.programmflaeche_y+UIVar.programmflaeche_h+UIVar.abstandvonRand);
-        buttonbar.draw(UIbatch);
+
+
 
 
 
@@ -320,6 +319,10 @@ public class UI {
         stage.draw();
 
         recent.setSubMenu(createSubMenu(Data.filename.size(), GetStringArray(Data.filename)));
+
+        buttonbar.setX(Gdx.graphics.getWidth());
+        buttonbar.setY(UIVar.programmflaeche_y+UIVar.programmflaeche_h+UIVar.abstandvonRand);
+        buttonbar.draw(UIbatch);
 
     }
 
