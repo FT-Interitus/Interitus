@@ -18,9 +18,8 @@ import de.ft.interitus.Block.BlockVar;
 import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIVar;
-import de.ft.interitus.UI.inputfields.IntegerAuswahl;
-import de.ft.interitus.UI.inputfields.PressedKeys;
-import de.ft.interitus.UI.inputfields.Switch;
+import de.ft.interitus.UI.inputfields.*;
+import de.ft.interitus.UI.inputfields.Button;
 import de.ft.interitus.UI.inputfields.TextField;
 import de.ft.interitus.UI.settings.subitems.subitem17;
 import de.ft.interitus.UI.shortcut.shortcuts.BlockShortcuts;
@@ -52,12 +51,32 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
     public static Drawable d;
     public static Animation testanim = new Animation(new Texture("ballfeueranimation.png"), 60, 100, 100, 3);
 
+
+
     public static ShapeRenderer shapeRenderer;
     IntegerAuswahl ia;
 
     public static PressedKeys pressedKeys;
 
+    public static ButtonBar buttonbar;
+    public static Button button_projectstructus;
+    public static Button button_start;
+    public static Button button_stop;
+
+
+
     public ProgrammingSpace() {
+        button_projectstructus=new Button();
+        button_projectstructus.setImage(AssetLoader.img_mappe1);
+        button_start=new Button();
+        button_start.setImage(AssetLoader.img_mappe2);
+        button_stop=new Button();
+        button_stop.setImage(AssetLoader.img_mappe3);
+        buttonbar=new ButtonBar(0,0,20,20);
+        buttonbar.addButton(button_projectstructus);
+        buttonbar.addButton(button_start);
+        buttonbar.addButton(button_stop);
+
 
         //TODO Debug hier wird immer ein Ev3 Project erstellt
 
@@ -308,6 +327,10 @@ e.printStackTrace();
         DisplayErrors.checkerror(); //Check if there are undisplayed Images
 
         loader(); //Load Images in OpenGL context
+
+        buttonbar.setX(Gdx.graphics.getWidth());
+        buttonbar.setY(Gdx.graphics.getHeight()-buttonbar.getButton_h()-20);
+        buttonbar.draw(UI.UIbatch);
 
 
 
