@@ -13,4 +13,12 @@ public class UIVar {
     public static int BlockBarY=0;
     public static int BlockBarW=0;
     public static int BlockBarH=0;
+
+    public static int programmflaeche_y;
+    public static int programmflaeche_h=0;
+
+
+
+
+    public static int buttonbarzeile_h=20;
 }

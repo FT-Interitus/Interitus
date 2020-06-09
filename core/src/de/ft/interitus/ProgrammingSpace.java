@@ -66,8 +66,6 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
 
     public ProgrammingSpace() {
-
-
         button_projectstructus=new Button();
         button_projectstructus.setImage(AssetLoader.img_mappe1);
         button_start=new Button();

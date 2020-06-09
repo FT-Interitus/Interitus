@@ -4,6 +4,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import de.ft.interitus.Programm;
+import de.ft.interitus.UI.UI;
 import de.ft.interitus.Welcome;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.global.GlobalLoadingDoneEvent;
@@ -28,6 +29,7 @@ try {
             Programm.inLoading = false;
             this.dispose();
             EventVar.globalEventManager.loadingdone(new GlobalLoadingDoneEvent(this));
+            UI.initnachassetsloading();
             Programm.INSTANCE.setScreen(new Welcome());
 
         }
