@@ -1,7 +1,6 @@
 package de.ft.interitus;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
@@ -23,7 +22,6 @@ import de.ft.interitus.UI.inputfields.Button;
 import de.ft.interitus.UI.inputfields.TextField;
 import de.ft.interitus.UI.settings.subitems.subitem17;
 import de.ft.interitus.UI.shortcut.shortcuts.BlockShortcuts;
-import de.ft.interitus.UI.shortcut.shortcuts.GlobalShortcuts;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.deviceconnection.arduino.PortUpdate;
@@ -51,7 +49,9 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
     public static Drawable d;
     public static Animation testanim = new Animation(new Texture("ballfeueranimation.png"), 60, 100, 100, 3);
 
-
+    private static long renderstarttime = 0;
+    public static long rendertimediff = 0;
+    public static long rendersleeptime = 0;
 
     public static ShapeRenderer shapeRenderer;
     IntegerAuswahl ia;
@@ -156,10 +156,12 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
     @Override
     public void render(float delta) {
-        //System.out.println("debugausgabe: "+ CheckShortcuts.shortCuts.size());
+        renderstarttime = System.currentTimeMillis();
+
+
 
         if(Var.actProjekt==null) {
-           // Programm.INSTANCE.setScreen(new Welcome()); //TODO auskommentiert zu debug zwecken
+           Programm.INSTANCE.setScreen(new Welcome());
         }
 
         RechtsKlick.Rechtsklickupdate();
@@ -317,6 +319,8 @@ e.printStackTrace();
 
 
 
+        rendertimediff =System.currentTimeMillis() - renderstarttime;
+        de.ft.interitus.UI.Viewport.limitfps();
 
 
     }

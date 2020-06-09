@@ -8,6 +8,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
 import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.Settings;
 import de.ft.interitus.UI.inputfields.check.InputManager;
 
 import static com.badlogic.gdx.Gdx.input;
@@ -26,6 +27,8 @@ private static double time_pressed_down = 0;
 public static long movedelay = 580;
     public static long firstmovedelay = 600;
     public static void init()   {
+        Gdx.graphics.setVSync(Settings.Vsync);
+
         InputManager.addProcessor(new InputAdapter(){
 
 
@@ -152,5 +155,18 @@ public static long movedelay = 580;
 
 
 
+    }
+
+    public static void limitfps() {
+        if(Settings.limitfps!=0) {
+            ProgrammingSpace.rendersleeptime = (int) (1000 / Settings.limitfps - ProgrammingSpace.rendertimediff);
+        }else {
+            Settings.limitfps =0;
+        }
+        if(ProgrammingSpace.rendersleeptime > 0&&!Settings.Vsync){
+            try {
+                Thread.sleep(ProgrammingSpace.rendersleeptime);
+            } catch (InterruptedException e) {}
+        }
     }
 }

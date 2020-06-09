@@ -79,7 +79,7 @@ public class Programm extends Game {
         seachnetwork.start();
         Data.init();
         ExperienceManager.init();
-
+        Gdx.graphics.setVSync(Settings.Vsync);
 
         Timer saveprogrammdatatimer  = new Timer();
         saveprogrammdatatimer.scheduleAtFixedRate(new TimerTask() {
