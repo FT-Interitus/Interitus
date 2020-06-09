@@ -252,7 +252,7 @@ e.printStackTrace();
 
 
 
-           de.ft.interitus.UI.Viewport.update();
+           de.ft.interitus.UI.Viewport.update(delta);
 
 
         } catch (Exception e) {
