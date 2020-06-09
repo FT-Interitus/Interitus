@@ -35,7 +35,7 @@ public class DataLoader {
                     BlockVar.blocks.add(Var.actProjekt.getBlockGenerator().generateBlock(i,readedblocks.get(i).getX(),readedblocks.get(i).getY(),150,70,new Wait(),Var.actProjekt.getBlockUpdateGenerator(),Var.actProjekt.getBlocktoSaveGenerator()));
                 }
 
-                for(int i=0;i<readedblocks.size();i++) {
+                for(int i=0;i<readedblocks.size();i++) {//TODO aktuelles problem liegt darin, das beim laden von zwei nodes die mit index 1 wire_right nicht definiert hat und damit eine kettenreaktion auslößt
 
                     BlockVar.blocks.get(i).setRight(readedblocks.get(i).getIndex_rechts()); //Set Nachbar rechts
                     BlockVar.blocks.get(i).setLeft(readedblocks.get(i).getIndex_links()); //set Nachbar links
