@@ -21,6 +21,9 @@ public class DesktopLauncher {
 	 *
 	 * @param arg -nogui open no window
 	 *            -v Verbose output
+	 *            -dps disable Plugin-Sub-System
+	 *            -do redirect log in file (You can also use Terminal Pips)
+	 *
 	 */
 
 	public static void main (String[] arg) throws FileNotFoundException {
@@ -38,9 +41,8 @@ public class DesktopLauncher {
 
 			config.setWindowedMode(Var.w,Var.h);
 
-			config.useVsync(false);
+
 			config.setBackBufferConfig(8,8,8,8,16,0,4);
-			//glfwWindowHint(GLFW_SAMPLES, 4);
 			config.setWindowSizeLimits(1000,500,-1,-1);
 			config.setWindowListener(new Lwjgl3WindowAdapter() {
 				@Override

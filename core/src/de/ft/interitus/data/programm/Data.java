@@ -38,6 +38,9 @@ public class Data {
      * <p>
      * In the devices file are the whole configurated devices saved
      * In the experienced file the user level, ... is saved
+     * <p>
+     * In the shortcut file are all shurtcuts
+     * And booleans if a shortcut is disabled
      */
     public static void init() {
 
@@ -183,7 +186,8 @@ if(!tempfolder.exists()) {
 
                     Settings.updateurl = obj.getString("updateurl");
                     Settings.defaultpfad = obj.getString("defaultpath");
-
+                    Settings.Vsync = obj.getBoolean("vsync");
+                    Settings.limitfps = obj.getInt("limitfps");
                     //TODO weitere einstellugen Laden
 
                 } catch (JSONException e) {
@@ -373,6 +377,8 @@ if(!tempfolder.exists()) {
         settings_obj.put("theme", Settings.theme.getName());
         settings_obj.put("updateurl", Settings.updateurl);
         settings_obj.put("defaultpath", Settings.defaultpfad);
+        settings_obj.put("vsync",Settings.Vsync);
+        settings_obj.put("limitfps",Settings.limitfps);
 
         //TODO weitere Einstellugen speichern
         settings.writeString(settings_obj.toString(), false); //Datei wird geschrieben
