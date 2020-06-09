@@ -97,7 +97,6 @@ public class ClearActOpenProgramm {
         BlockVar.wire_beginn = null;
 
 
-        SaveChanges.clearstacks();
         //clear.start();
         blockstoclear.clear();
         Var.isclearing = false;

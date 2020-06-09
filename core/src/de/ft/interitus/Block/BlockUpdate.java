@@ -48,7 +48,8 @@ public abstract class BlockUpdate extends Thread {
         time.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-if(!Var.isdialogeopend) {
+
+                if(!Var.isdialogeopend) {
 
                 try {
 
@@ -68,14 +69,14 @@ if(!Var.isdialogeopend) {
                     //TODO
 
 
-                    if (!isIsconnectorclicked() && BlockVar.showleftdocker && CheckKollision.object(block.getX_entrance(), block.getY_entrance(), block.getH_entrance(), block.getW_entrance(), (int) ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1) && Gdx.input.isButtonJustPressed(0) && block.getLeft() == null) { //TODO Durch das Just pressed kann es sein das es manchmal verpasst wird dieses Event auszuführen
+                    if (!isIsconnectorclicked() && BlockVar.showleftdocker && CheckKollision.object(block.getX_entrance(), block.getY_entrance(), block.getH_entrance(), block.getW_entrance(), (int) ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1) && Gdx.input.isButtonJustPressed(0) && block.getLeft() == -1) { //TODO Durch das Just pressed kann es sein das es manchmal verpasst wird dieses Event auszuführen
                         BlockVar.showleftdocker = false;
                         BlockVar.movingwires.setMovebymouse(false);
                         BlockVar.movingwires.setRight_connection(block);
                         BlockVar.movingwires.setSpace_between_blocks(true);
                         block.setWire_left(BlockVar.movingwires);
                         try {
-                            BlockVar.wire_beginn.setRight(block);
+                            BlockVar.wire_beginn.setRight(block.getIndex());
                         } catch (NullPointerException e) {
 
                             //Falls die eine Node dazwischen ist und der Nachbar über die Node gesetzt werden muss
@@ -85,7 +86,7 @@ if(!Var.isdialogeopend) {
 
                         }
 
-                        BlockVar.movingwires.getRight_connection().getLeft().getBlockupdate().isconnectorclicked = false;
+                        BlockVar.blocks.get(BlockVar.movingwires.getRight_connection().getLeft()).getBlockupdate().isconnectorclicked = false;
                         BlockVar.movingwires = null;
 
 
@@ -225,8 +226,8 @@ if(!Var.isdialogeopend) {
 
                         if (block.getWire_left() != null) {
                             if (!block.getWire_left().isSpace_between_blocks()) {
-                                if (block.getLeft() != null) {
-                                    block.getLeft().setRight(null);
+                                if (block.getLeft() != -1) {
+                                    BlockVar.blocks.get(block.getLeft()).setRight(-1);
 
                                     block.getWire_left().getLeft_connection().setWire_right(null); //löschen der Wire die zwischen den Blöcken war
                                     BlockVar.wires.remove(block.getWire_left());
@@ -234,22 +235,22 @@ if(!Var.isdialogeopend) {
 
 
                                 }
-                                block.setLeft(null);
+                                block.setLeft(-1);
 
                             }
                         }
 
                         if (block.getWire_right() != null) {
                             if (!block.getWire_right().isSpace_between_blocks()) {
-                                if (block.getRight() != null) {
-                                    block.getRight().setLeft(null);
+                                if (block.getRight() != -1) {
+                                    BlockVar.blocks.get(block.getRight()).setLeft(-1);
 
                                     block.getWire_right().getRight_connection().setWire_left(null);//löschen der Wire die zwischen den Blöcken war
                                     BlockVar.wires.remove(block.getWire_right());
                                     block.setWire_right(null);
 
                                 }
-                                block.setRight(null);
+                                block.setRight(-1);
                             }
 
                         }
@@ -349,24 +350,20 @@ if(!Var.isdialogeopend) {
                             block.moved = true;
                             geschoben = true;
 
-                            int a = BlockVar.blocks.indexOf(BlockVar.blockmitdergrostenuberlappungmitmarkiertemblock);
+                            int a = block.getIndex();
                             //System.out.println(a);
                             block.setX(block.getX() + block.getW());
 
                             block.seted = false;
 
-                            try {
-
-                                while (BlockVar.blocks.get(a).getRight().getIndex() != -1) {
+                                while (BlockVar.blocks.get(a).getRight() != -1) {
 
                                     //block.getRight().setX(block.getRight().getX() + block.getW());
 
-                                    BlockVar.blocks.get(a).getRight().setX(BlockVar.blocks.get(a).getX() + BlockVar.blocks.get(a).getW());
-                                    a = BlockVar.blocks.indexOf(BlockVar.blocks.get(a).getRight());
+                                    BlockVar.blocks.get(BlockVar.blocks.get(a).getRight()).setX(BlockVar.blocks.get(a).getX() + BlockVar.blocks.get(a).getW());
+                                    a = BlockVar.blocks.get(a).getRight();
                                 }
 
-                            } catch (NullPointerException e) {
-                            }
 
                         }
 
@@ -376,24 +373,22 @@ if(!Var.isdialogeopend) {
                             block.moved = true;
                             geschoben = true;
 
-                            int a = BlockVar.blocks.indexOf(BlockVar.blockmitdergrostenuberlappungmitmarkiertemblock);
-                            //System.out.println(a);
+                            int a = block.getIndex();
                             block.setX(block.getX() + block.getW());
 
                             block.seted = false;
 
-                            try {
 
-                                while (BlockVar.blocks.get(a).getRight().getIndex() != -1) {
+                                while (BlockVar.blocks.get(a).getRight() != -1) {
 
                                     //block.getRight().setX(block.getRight().getX() + block.getW());
 
-                                    BlockVar.blocks.get(a).getRight().setX(BlockVar.blocks.get(a).getX() + BlockVar.blocks.get(a).getW());
-                                    a = BlockVar.blocks.indexOf(BlockVar.blocks.get(a).getRight());
+                                    BlockVar.blocks.get(BlockVar.blocks.get(a).getRight()).setX(BlockVar.blocks.get(a).getX() + BlockVar.blocks.get(a).getW());
+                                    a = BlockVar.blocks.get(a).getRight();
+
                                 }
 
-                            } catch (NullPointerException z) {
-                            }
+
 
                         }
 
@@ -409,23 +404,21 @@ if(!Var.isdialogeopend) {
                         geschoben = false;
 
 
-                        int b = BlockVar.blocks.indexOf(block);
+                        int b = block.getIndex();
 
                         block.setX(block.getX() - block.getW());
 
 
-                        try {
 
-                            while (BlockVar.blocks.get(b).getRight().getIndex() != -1) {
+                            while (BlockVar.blocks.get(b).getRight() != -1) {
 
                                 //block.getRight().setX(block.getRight().getX() + block.getW());
 
-                                BlockVar.blocks.get(b).getRight().setX(BlockVar.blocks.get(b).getRight().getX() - BlockVar.blocks.get(b).getW());
-                                b = BlockVar.blocks.indexOf(BlockVar.blocks.get(b).getRight());
+                                BlockVar.blocks.get(BlockVar.blocks.get(b).getRight()).setX(BlockVar.blocks.get(BlockVar.blocks.get(b).getRight()).getX() - BlockVar.blocks.get(b).getW());//TODO tim ist sich nicht sicher
+                                b = BlockVar.blocks.get(b).getRight();
                             }
 
-                        } catch (NullPointerException ignored) {
-                        }
+
 
 
                         block.seted = true;
@@ -441,7 +434,7 @@ if(!Var.isdialogeopend) {
 
                     if (BlockVar.marked && !block.isMarked()) {
 
-                        if (CheckKollision.checkblockwithduplicate(BlockVar.markedblock, block, 0) && block.getRight() == null && BlockVar.markedblock.getWire_left() == null) {
+                        if (CheckKollision.checkblockwithduplicate(BlockVar.markedblock, block, 0) && block.getRight() == -1 && BlockVar.markedblock.getWire_left() == null) {
                             if (BlockVar.markedblock.isMoving()) {
                                 //System.out.println("Kollision!");
 
@@ -452,7 +445,7 @@ if(!Var.isdialogeopend) {
                             } else {
 
 
-                                if (block.getRight() != BlockVar.markedblock && BlockVar.markedblock.getLeft() != block && block.getRight() == null && BlockVar.biggestblock == block) {
+                                if (block.getRight() != BlockVar.markedblock.getIndex() && BlockVar.markedblock.getLeft() != block.getIndex() && block.getRight() == -1 && BlockVar.biggestblock == block) {
 
                                     //System.out.println("test");
                                     block.setShowdupulicate_rechts(false);
@@ -462,7 +455,7 @@ if(!Var.isdialogeopend) {
                                     BlockVar.markedblock.setWire_left(block.getWire_right());
                                     BlockVar.wires.add(block.getWire_right());
 
-                                    block.setRight(BlockVar.markedblock);
+                                    block.setRight(BlockVar.markedblock.getIndex());
                                     BlockVar.markedblock.setY(block.getY());
                                     BlockVar.markedblock.setX(block.getX_dup_rechts());
                                 }
@@ -474,7 +467,7 @@ if(!Var.isdialogeopend) {
                         }
 
                         try {
-                            if (CheckKollision.checkblockwithduplicate(BlockVar.markedblock, block, 1) && block.getLeft() == null && BlockVar.markedblock.getWire_right() == null) {
+                            if (CheckKollision.checkblockwithduplicate(BlockVar.markedblock, block, 1) && block.getLeft() == -1 && BlockVar.markedblock.getWire_right() == null) {
 
                                 if (BlockVar.markedblock.isMoving()) {
 
@@ -485,7 +478,7 @@ if(!Var.isdialogeopend) {
                                 } else {
 
 
-                                    if (block.getRight() != BlockVar.markedblock && BlockVar.markedblock.getLeft() != block && block.getLeft() == null && BlockVar.biggestblock == block) {
+                                    if (block.getRight() != BlockVar.markedblock.getIndex() && BlockVar.markedblock.getLeft() != block.getIndex() && block.getLeft() == -1 && BlockVar.biggestblock == block) {
 
 
                                         block.setShowdupulicate_links(false);
@@ -497,7 +490,7 @@ if(!Var.isdialogeopend) {
                                         BlockVar.wires.add(block.getWire_left());
 
 
-                                        block.setLeft(BlockVar.markedblock);
+                                        block.setLeft(BlockVar.markedblock.getIndex());
                                         BlockVar.markedblock.setY(block.getY());
                                         BlockVar.markedblock.setX(block.getX_dup_links());
                                     }
@@ -509,7 +502,7 @@ if(!Var.isdialogeopend) {
                             }
 
                         } catch (NullPointerException e) {
-                            e.printStackTrace();
+
                         }
                     }
                 } catch (Exception e) {

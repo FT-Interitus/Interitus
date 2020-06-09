@@ -33,7 +33,7 @@ public class TapBarBlockItem implements TapItem {
         if(!Var.isdialogeopend) {
             if (check.isJustPressedNormal(x, y, w, h)) {
 
-                Block tempblock = Var.actProjekt.getBlockGenerator().generateBlock(BlockVar.blocks.size(), (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 150, 70, psb,Var.actProjekt.getBlockUpdateGenerator());
+                Block tempblock = Var.actProjekt.getBlockGenerator().generateBlock(BlockVar.blocks.size(), (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 150, 70, psb,Var.actProjekt.getBlockUpdateGenerator(), Var.actProjekt.getBlocktoSaveGenerator());
 
                 BlockVar.blocks.add(tempblock);
                 tempblock.setMarked(true);

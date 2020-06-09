@@ -1,9 +1,6 @@
 package de.ft.interitus.projecttypes;
 
-import de.ft.interitus.Block.Generators.BlockGenerator;
-import de.ft.interitus.Block.Generators.BlockUpdateGenerator;
-import de.ft.interitus.Block.Generators.WireGenerator;
-import de.ft.interitus.Block.Generators.WireNodeGenerator;
+import de.ft.interitus.Block.Generators.*;
 import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.device.ProgrammableObjekt;
 
@@ -17,7 +14,8 @@ public class ProjectTypes {
     BlockUpdateGenerator blockUpdateGenerator = null;
 private WireGenerator wireGenerator;
 private WireNodeGenerator wireNodeGenerator;
-    public ProjectTypes(ProgrammableObjekt PO, String name, ArrayList<PlatformSpecificBlock> blocks, BlockGenerator blockgenerator, BlockUpdateGenerator updategenerator, WireGenerator wireGenerator, WireNodeGenerator wireNodeGenerator) {
+private BlocktoSaveGenerator blocktoSaveGenerator;
+    public ProjectTypes(ProgrammableObjekt PO, String name, ArrayList<PlatformSpecificBlock> blocks, BlockGenerator blockgenerator, BlockUpdateGenerator updategenerator, WireGenerator wireGenerator, WireNodeGenerator wireNodeGenerator,BlocktoSaveGenerator blocktoSaveGenerator) {
         this.projectblocks = blocks;
         this.PO = PO;
         this.name = name;
@@ -25,6 +23,7 @@ private WireNodeGenerator wireNodeGenerator;
         this.blockUpdateGenerator = updategenerator;
         this.wireGenerator = wireGenerator;
         this.wireNodeGenerator = wireNodeGenerator;
+        this.blocktoSaveGenerator = blocktoSaveGenerator;
     }
 
     public ProgrammableObjekt getPO() {
@@ -84,5 +83,11 @@ private WireNodeGenerator wireNodeGenerator;
         return wireNodeGenerator;
     }
 
+    public BlocktoSaveGenerator getBlocktoSaveGenerator() {
+        return blocktoSaveGenerator;
+    }
 
+    public void setBlocktoSaveGenerator(BlocktoSaveGenerator blocktoSaveGenerator) {
+        this.blocktoSaveGenerator = blocktoSaveGenerator;
+    }
 }

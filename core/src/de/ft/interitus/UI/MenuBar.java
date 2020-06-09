@@ -248,17 +248,13 @@ public class MenuBar {
         editMenu.addItem(UI.revert = new MenuItem("Rückgänig", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                if (!SaveChanges.checkstack()) { //Test if Stack is empty
-                    SaveChanges.revert();
-                }
+
             }
         }).setShortcut("Strg+Z"));
         editMenu.addItem(UI.redo = new MenuItem("Wiederherstellen", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                if (!SaveChanges.checkredostack()) {
-                    SaveChanges.redo();
-                }
+
             }
         }).setShortcut("Strg+Y"));
         editMenu.addSeparator();

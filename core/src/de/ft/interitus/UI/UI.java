@@ -220,12 +220,7 @@ public class UI {
 
                             /////////////revert//////////////
 
-                            revert.setDisabled(SaveChanges.checkstack());
 
-                            ///////Redo//////////////
-
-
-                            redo.setDisabled(SaveChanges.checkredostack());
 
                         } catch (Exception e) {
                             DisplayErrors.error = e;

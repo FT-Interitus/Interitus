@@ -25,7 +25,7 @@ public class Data {
     public static ArrayList<String> path = new ArrayList<String>(); //Die Pfade der zuletzt geöffneten Projekten
     public static ArrayList<String> filename = new ArrayList<String>(); //Die Namen der Dateien die zuletzt geöffnet wurden
     private static File folder; //Der Ordner in dem alle Programm daten liegen
-
+    public static File tempfolder; //Der Ordner in dem alle Programm daten liegen
 
     /**
      * load the Programm data from the UserFolder/.itd
@@ -42,6 +42,7 @@ public class Data {
     public static void init() {
 
         folder = new File(System.getProperty("user.home") + "/.itd"); //Order der Programmdaten
+        tempfolder = new File(System.getProperty("user.home") + "/.itd/temp"); //Order der Programmdaten
         File recent = new File(System.getProperty("user.home") + "/.itd/recent.json"); //JSON file in dem die zuletzt geöffneten Projekte gespeichert werden
         File settings = new File(System.getProperty("user.home") + "/.itd/settings.json"); // JSON file in dem alle Einstellungen gespeichert werden
         File knowndevices = new File(System.getProperty("user.home") + "/.itd/devices.json"); //JSON file in dem alle konfigurierten Geräte gespeichert werden
@@ -55,6 +56,7 @@ public class Data {
             System.out.println("Create Programm Data Folder");
 
             folder.mkdir(); //der Ordner wird erstellt
+            tempfolder.mkdir();
             try {
                 recent.createNewFile(); //Die datei für die letzten Projekte wird erstellt
             } catch (IOException e) {
@@ -96,6 +98,9 @@ public class Data {
             }
         } else {
 
+if(!tempfolder.exists()) {
+    tempfolder.mkdir();
+}
 
             if (!recent.exists()) { //Wenn die Datei der letzten Projekte noch nicht exsisiert
 

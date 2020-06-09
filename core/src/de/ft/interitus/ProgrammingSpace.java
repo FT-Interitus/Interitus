@@ -150,7 +150,6 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
     @Override
     public void render(float delta) {
-        System.out.println(pressedKeys.getPressedkeys());
         //System.out.println("debugausgabe: "+ CheckShortcuts.shortCuts.size());
 
         if(Var.actProjekt==null) {
@@ -273,7 +272,9 @@ e.printStackTrace();
         }
 
         for (int i = 0; i < BlockVar.visiblewires.size(); i++) {
-            BlockVar.visiblewires.get(i).draw();
+            if(!Var.isloading) {
+                BlockVar.visiblewires.get(i).draw();
+            }
         }
         for (int i = 0; i < BlockVar.visibleWireNodes.size(); i++) {
             BlockVar.visibleWireNodes.get(i).draw();
