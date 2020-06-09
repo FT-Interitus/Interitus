@@ -6,6 +6,7 @@ import com.badlogic.gdx.backends.lwjgl3.*;
 import de.ft.interitus.Programm;
 import de.ft.interitus.Var;
 import de.ft.interitus.events.EventVar;
+import de.ft.interitus.events.global.GlobalCloseEvent;
 import de.ft.interitus.events.global.GlobalFileDropedEvent;
 
 import java.io.FileNotFoundException;
@@ -26,17 +27,7 @@ public class DesktopLauncher {
 
 		Var.programmarguments.addAll(Arrays.asList(arg));
 
-		if(Var.programmarguments.indexOf("-v")!=-1) {
-			Var.verboseoutput = true;
-		}
-
-		if(Var.programmarguments.indexOf("-do")!=-1) {
-			LoggingSystem.RedirectLog();
-		}
-
-		if(Var.programmarguments.indexOf("-dps")!=-1)  {
-			Var.disablePluginSubSystem = true;
-		}
+		CheckArguments.check();
 
 		if(Var.programmarguments.indexOf("-nogui")==-1) {
 
@@ -45,7 +36,7 @@ public class DesktopLauncher {
 			Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 
 
-config.setWindowedMode(Var.w,Var.h);
+			config.setWindowedMode(Var.w,Var.h);
 
 			config.useVsync(false);
 			config.setBackBufferConfig(8,8,8,8,16,0,4);
@@ -79,7 +70,8 @@ config.setWindowedMode(Var.w,Var.h);
 
 				@Override
 				public boolean closeRequested() {
-					return true; //TODO add request as event
+					boolean close = EventVar.globalEventManager.closeprogramm(new GlobalCloseEvent(this));
+					return close;
 				}
 
 				@Override
