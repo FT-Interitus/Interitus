@@ -8,4 +8,6 @@ public interface GlobalEventListener {
     void erroroccurred(GlobalErrorOccurredEvent e);
 
     void filedroped(GlobalFileDropedEvent e, String[] filepaths);
+
+    boolean closeprogramm(GlobalCloseEvent e);
 }

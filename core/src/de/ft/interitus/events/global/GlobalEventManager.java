@@ -44,5 +44,18 @@ public class GlobalEventManager implements GlobalEventListener {
                     filedroped(e,filepaths);
     }
 
+    @Override
+    public boolean closeprogramm(GlobalCloseEvent e) {
+        boolean close = true;
+        for (int i = 0; i < listener.size(); i++) {
+           if(!((GlobalEventListener) listener.elementAt(i)).closeprogramm(e)) {
+               close=false;
+           }
+
+        }
+
+        return close;
+    }
+
 
 }

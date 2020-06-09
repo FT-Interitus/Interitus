@@ -28,12 +28,16 @@ import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.deviceconnection.arduino.PortUpdate;
 import de.ft.interitus.deviceconnection.arduino.SerialConnection;
+import de.ft.interitus.events.EventVar;
+import de.ft.interitus.events.global.GlobalCloseEvent;
+import de.ft.interitus.events.global.GlobalEventAdapter;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.device.BlockTypes.ProjectTypesVar;
 import de.ft.interitus.utils.PositionSaver;
 import de.ft.interitus.utils.animation.Animation;
 
 import java.awt.*;
+import java.util.EventObject;
 
 
 public class ProgrammingSpace extends ScreenAdapter implements Screen {
@@ -66,6 +70,8 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
 
     public ProgrammingSpace() {
+
+
         button_projectstructus=new Button();
         button_projectstructus.setImage(AssetLoader.img_mappe1);
         button_start=new Button();
