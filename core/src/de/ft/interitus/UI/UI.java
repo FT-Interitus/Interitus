@@ -132,8 +132,8 @@ public class UI {
 
 
 
-        if (flaeche == true) {
-            RoundRectangle.abgerundetesRechteck(renderer, UIVar.abstandvonRand, UIVar.untenhohe + UIVar.abstandvonRand, Gdx.graphics.getWidth() - UIVar.abstandvonRand * 2, Gdx.graphics.getHeight() - UIVar.untenhohe + UIVar.abstandvonRand - 45 - UIVar.abstandvonRand, UIVar.radius);
+        if (flaeche == true) {/////////////   \/  \/  \/  \/  die programmierfläche wird gedrawd
+            RoundRectangle.abgerundetesRechteck(renderer, UIVar.abstandvonRand, UIVar.untenhohe + UIVar.abstandvonRand, Gdx.graphics.getWidth() - UIVar.abstandvonRand * 2, Gdx.graphics.getHeight() - (UIVar.untenhohe + UIVar.abstandvonRand)  - UIVar.abstandvonRand - (int)menuBar.getTable().getHeight() , UIVar.radius);
         } else {
 
                 renderer.setColor(Settings.theme.BlocksColor());
@@ -141,7 +141,7 @@ public class UI {
             UIVar.BlockBarX=UIVar.abstandvonRand;
             UIVar.BlockBarY=UIVar.abstandvonRand;
             UIVar.BlockBarW=Gdx.graphics.getWidth() - UIVar.abstandvonRand * 2 - UIVar.unteneinteilung;
-            UIVar.BlockBarH=UIVar.untenhohe - UIVar.abstandvonRand;
+            UIVar.BlockBarH=UIVar.untenhohe - UIVar.abstandvonRand;//  \/  \/ blockbar wird gedrawed
             RoundRectangle.abgerundetesRechteck(renderer, UIVar.abstandvonRand, UIVar.abstandvonRand, UIVar.BlockBarW, UIVar.BlockBarH, UIVar.radius);
 
                 renderer.setColor(Settings.theme.DeviceConnectionColor());
