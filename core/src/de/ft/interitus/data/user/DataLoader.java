@@ -6,10 +6,12 @@ import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.BlockVar;
 import de.ft.interitus.Block.SaveBlock;
 import de.ft.interitus.DisplayErrors;
+import de.ft.interitus.UI.MenuBar;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.Var;
 import de.ft.interitus.data.programm.Data;
 import de.ft.interitus.projecttypes.ProjectVar;
+import de.ft.interitus.projecttypes.VCS;
 import de.ft.interitus.projecttypes.device.BlockTypes.Ev3.Wait;
 import de.ft.interitus.projecttypes.device.BlockTypes.ProjectTypesVar;
 import de.ft.interitus.utils.ClearActOpenProgramm;
@@ -34,6 +36,12 @@ public class DataLoader {
                     FileHandle settingsfile = new FileHandle(Data.tempfolder.getAbsolutePath()+"/"+"Settings.itps");
                     JSONObject settings = new JSONObject(settingsfile.readString());
                     ProjectVar.vcs = settings.getInt("vcs");
+
+                    if(ProjectVar.vcs== VCS.NONE) {
+                        MenuBar.menuItem_speichern.setText("Speichern");
+                    }else if(ProjectVar.vcs==VCS.ITEV) {
+                        MenuBar.menuItem_speichern.setText("Revision speichern");
+                    }
 
                     String typetemp = settings.getString("type");
                     for(int i=0;i< ProjectTypesVar.projectTypes.size();i++) {
