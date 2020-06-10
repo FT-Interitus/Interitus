@@ -298,7 +298,9 @@ public class UI {
     public static void initnachassetsloading(){
         /////////////////Button Bar zusammensetzung//////////////////////
         button_projectstructus=new Button();
-        button_projectstructus.setImage(AssetLoader.img_mappe1);
+        button_projectstructus.setImage(AssetLoader.img_projectstructur);
+        button_projectstructus.setImage_mouseover(AssetLoader.img_projectstructur_mouseover);
+        button_projectstructus.setImage_pressed(AssetLoader.img_projectstructur_pressed);
         button_start=new Button();
         button_start.setImage(AssetLoader.img_startbutton);
         button_start.setImage_mouseover(AssetLoader.img_startbutton_mouseover);
