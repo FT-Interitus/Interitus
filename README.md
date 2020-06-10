@@ -27,7 +27,7 @@ to make the leap into a "real" programming language.
 - Try it is very easy to use
 
 > Bugs, New Featurs or Ideas?
- - Write an <a href="https://github.com/ft-interitus/interitus/issus">Issus</a>
+ - Write an <a href="https://github.com/ft-interitus/interitus/issus">Issues</a>
 
 > Tips
 
@@ -98,7 +98,7 @@ to make the leap into a "real" programming language.
 
 ## Support
 
-- Write an <a href="http://github.com/ft-interitus/interitus/issus" target="_blank">`issus!`</a>
+- Write an <a href="http://github.com/ft-interitus/interitus/issues" target="_blank">`issus!`</a>
 
 ---
 
