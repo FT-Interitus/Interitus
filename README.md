@@ -5,7 +5,7 @@
 > It should support Ev3, Arduino and Raspberry Pi (or other platforms via plugin), but not limit the user,
 to make the leap into a "real" programming language.
 
-[![Interitus](https://raw.githubusercontent.com/FT-Interitus/Interitus/master/Screenshot_20200610_202036.png)]()
+[![Interitus](https://github.com/FT-Interitus/Interitus/blob/master/img/Screenshot_20200610_202036.png?raw=true)]()
 
 **Featurs**
 
