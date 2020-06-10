@@ -104,6 +104,10 @@ public class AssetLoader {
     public static Texture img_projectstructur_mouseover;
     public static Texture img_projectstructur_pressed;
 
+    public static Texture img_debugstart;
+    public static Texture img_debugstart_mouseover;
+    public static Texture img_debugstart_pressed;
+
 
 
 
@@ -160,6 +164,10 @@ public class AssetLoader {
             manager.load(workingdirectory+"ButtonBar/projektstrukturbutton.png",Texture.class);
             manager.load(workingdirectory+"ButtonBar/projektstrukturbutton_mouseover.png", Texture.class);
             manager.load(workingdirectory+"ButtonBar/projektstrukturbutton_pressed.png", Texture.class);
+
+            manager.load(workingdirectory+"ButtonBar/debugbutton.png",Texture.class);
+            manager.load(workingdirectory+"ButtonBar/debugbutton_mouseover.png", Texture.class);
+            manager.load(workingdirectory+"ButtonBar/debugbutton_pressed.png", Texture.class);
 
 
             group = "mappen";
@@ -266,6 +274,12 @@ public class AssetLoader {
             img_projectstructur = manager.get(workingdirectory+"ButtonBar/projektstrukturbutton.png");
             img_projectstructur_mouseover = manager.get(workingdirectory+"ButtonBar/projektstrukturbutton_mouseover.png");
             img_projectstructur_pressed = manager.get(workingdirectory+"ButtonBar/projektstrukturbutton_pressed.png");
+
+            img_debugstart = manager.get(workingdirectory+"ButtonBar/debugbutton.png");
+            img_debugstart_mouseover = manager.get(workingdirectory+"ButtonBar/debugbutton_mouseover.png");
+            img_debugstart_pressed = manager.get(workingdirectory+"ButtonBar/debugbutton_pressed.png");
+
+
 
             img_mappe1 = manager.get(workingdirectory+"Bar/Mappe1.png",Texture.class);
             img_mappe2 = manager.get(workingdirectory+"Bar/Mappe2.png",Texture.class);

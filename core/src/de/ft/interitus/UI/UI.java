@@ -64,6 +64,7 @@ public class UI {
     public static Button button_projectstructus;
     public static Button button_start;
     public static Button button_stop;
+    public static Button button_debugstart;
 
     public static void userresize() {
         if (!curserveränderungsblockade){
@@ -297,6 +298,10 @@ public class UI {
 
     public static void initnachassetsloading(){
         /////////////////Button Bar zusammensetzung//////////////////////
+        button_debugstart=new Button();
+        button_debugstart.setImage(AssetLoader.img_debugstart);
+        button_debugstart.setImage_mouseover(AssetLoader.img_debugstart_mouseover);
+        button_debugstart.setImage_pressed(AssetLoader.img_debugstart_pressed);
         button_projectstructus=new Button();
         button_projectstructus.setImage(AssetLoader.img_projectstructur);
         button_projectstructus.setImage_mouseover(AssetLoader.img_projectstructur_mouseover);
@@ -312,6 +317,7 @@ public class UI {
         buttonbar=new ButtonBar(0,0,20,20);
         buttonbar.addButton(button_projectstructus);
         buttonbar.addButton(button_stop);
+        buttonbar.addButton(button_debugstart);
         buttonbar.addButton(button_start);
 
     }
