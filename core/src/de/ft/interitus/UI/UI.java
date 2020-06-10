@@ -327,7 +327,7 @@ public class UI {
 
         recent.setSubMenu(createSubMenu(Data.filename.size(), GetStringArray(Data.filename)));
 
-        buttonbar.setX(Gdx.graphics.getWidth());
+        buttonbar.setX(Gdx.graphics.getWidth()-10);
         buttonbar.setY(UIVar.programmflaeche_y+UIVar.programmflaeche_h+UIVar.abstandvonRand);
         buttonbar.draw(UIbatch);
 
