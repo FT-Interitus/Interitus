@@ -64,7 +64,7 @@ public class DataLoader {
 
                               BlockVar.wireNodes.add(Var.actProjekt.getWireNodeGenerator().generate(BlockVar.wires.get(BlockVar.wires.size()-1), readedblocks.get(i).getNodes().get(j).get(0), readedblocks.get(i).getNodes().get(j).get(1), readedblocks.get(i).getNodes().get(j).get(2), readedblocks.get(i).getNodes().get(j).get(3)));
 
-                               BlockVar.wires.get(BlockVar.wires.size()-1).setRight_connection(BlockVar.wireNodes.get(BlockVar.wireNodes.size()-1)); //TODO fehler
+                               BlockVar.wires.get(BlockVar.wires.size()-1).setRight_connection(BlockVar.wireNodes.get(BlockVar.wireNodes.size()-1));
 
                                BlockVar.visiblewires.add(BlockVar.wires.get(BlockVar.wires.size()-1));
 
