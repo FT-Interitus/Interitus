@@ -1,7 +1,6 @@
 package de.ft.interitus.desktop;
 
-import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
-import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.badlogic.gdx.Files;
 import com.badlogic.gdx.backends.lwjgl3.*;
 import de.ft.interitus.Programm;
 import de.ft.interitus.Var;
@@ -11,8 +10,6 @@ import de.ft.interitus.events.global.GlobalFileDropedEvent;
 
 import java.io.FileNotFoundException;
 import java.util.Arrays;
-
-import static org.lwjgl.glfw.GLFW.glfwWindowHint;
 
 public class DesktopLauncher {
 	DesktopLauncher SESSION = this;
@@ -41,7 +38,7 @@ public class DesktopLauncher {
 
 			config.setWindowedMode(Var.w,Var.h);
 
-
+			config.setWindowIcon(Files.FileType.Internal, "Icon/iteritus.png");
 			config.setBackBufferConfig(8,8,8,8,16,0,4);
 			config.setWindowSizeLimits(1000,500,-1,-1);
 			config.setWindowListener(new Lwjgl3WindowAdapter() {

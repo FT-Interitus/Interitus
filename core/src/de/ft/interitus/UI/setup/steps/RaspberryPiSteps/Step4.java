@@ -31,6 +31,7 @@ public class Step4 {
         builder.add(password).padRight(70).padLeft(-150); //.padLeft(-250)
         builder.row();
 
+        SetupWindow.Button_previouse.setDisabled(false);
         builder.add(new VisLabel("Falls du nicht weißt was du hier einsetzen sollst:\n\nHier wird angegeben wie sich das Programm am Raspberry Pi anmeldet.\nWenn du deinen Pi frisch Installiert hast kannst du hier die Werte unverändert lassen.")).padBottom(-230).padTop(100).padRight(-80);
         builder.row();
 
@@ -40,29 +41,53 @@ public class Step4 {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
-                if (trytoconnect.isPressed()) {
-                    username.setDisabled(true);
-                    password.setDisabled(true);
-                    SetupWindow.Button_next.setDisabled(true);
 
-                    if (SSHConnection.checkconnection(SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().ip, username.getText(), password.getText())) {
-                        SetupWindow.errorLabel.setColor(0, 1, 0, 1);
-                        SetupWindow.errorLabel.setText("Verbindung erfolgreich");
-                        SetupWindow.Button_next.setDisabled(false);
-                        trytoconnect.setDisabled(true);
-                        SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().password = password.getText();
-                        SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().username = username.getText();
-                    } else {
-                        SetupWindow.Button_next.setDisabled(false);
-                        password.setDisabled(false);
-                        username.setDisabled(false);
-                        SetupWindow.errorLabel.setColor(1, 0, 0, 1);
-                        SetupWindow.errorLabel.setText("Keine Verbindung möglich");
-                        trytoconnect.setDisabled(false);
-                        SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().password = password.getText();
-                        SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().username = username.getText();
+
+
+                Thread connectthread = new Thread() {
+
+                    @Override
+                    public void run() {
+
+
+                        if(trytoconnect.isPressed())
+
+                        {
+                            SetupWindow.Button_cancle.setDisabled(true);
+                            SetupWindow.Button_previouse.setDisabled(true);
+                            trytoconnect.setDisabled(true);
+
+                            username.setDisabled(true);
+                            password.setDisabled(true);
+                            SetupWindow.Button_next.setDisabled(true);
+
+                            if (SSHConnection.checkconnection(SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().ip, username.getText(), password.getText())) {
+                                SetupWindow.errorLabel.setColor(0, 1, 0, 1);
+                                SetupWindow.errorLabel.setText("Verbindung erfolgreich");
+                                SetupWindow.Button_next.setDisabled(false);
+                                trytoconnect.setDisabled(true);
+                                SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().password = password.getText();
+                                SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().username = username.getText();
+                            } else {
+
+                                SetupWindow.Button_next.setDisabled(true);
+
+                                password.setDisabled(false);
+                                username.setDisabled(false);
+                                SetupWindow.errorLabel.setColor(1, 0, 0, 1);
+                                SetupWindow.errorLabel.setText("Keine Verbindung möglich");
+                                trytoconnect.setDisabled(false);
+                                SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().password = password.getText();
+                                SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().username = username.getText();
+                            }
+                            SetupWindow.Button_cancle.setDisabled(false);
+                            SetupWindow.Button_previouse.setDisabled(false);
+                            trytoconnect.setDisabled(false);
+                        }
                     }
-                }
+                };
+
+                connectthread.start();
             }
         });
 
