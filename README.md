@@ -41,23 +41,7 @@ to make the leap into a "real" programming language.
 
 ---
 
-![Interitus](http://g.recordit.co/iLN6A0vSD8.gif)
 
-
----
-
-
-## Installation
-
-- See Contributing
-
-
----
-
-## Features
-
-
----
 
 ## Contributing
 
@@ -85,6 +69,12 @@ to make the leap into a "real" programming language.
 ### Step 3
 
 - 🔃 Create a new pull request using <a href="https://github.com/ft-interitus/interitus/compare/" target="_blank">`https://github.com/ft-interitus/interitus/compare/`</a>.
+
+---
+
+> See Interitus in Action
+
+![Interitus](https://github.com/FT-Interitus/Interitus/blob/master/ezgif-3-fb6325e4ebe9.gif?raw=true)
 
 ---
 
