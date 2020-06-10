@@ -4,6 +4,6 @@ import com.kotcrab.vis.ui.widget.VisTable;
 
 public class Informations {
     public static void add(VisTable builder) {
-        builder.add();
+        builder.add(); //TODO add Stats
     }
 }

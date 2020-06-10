@@ -1,6 +1,7 @@
 package de.ft.interitus.UI.settings.subitems;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
@@ -26,6 +27,7 @@ public class subitem3 {
           final VisSelectBox<String> limitfps = new VisSelectBox<String>();
 
         final Array<String> stringArray = new Array<>();
+
         stringArray.add("20");
         stringArray.add("30");
         stringArray.add("40");
@@ -35,6 +37,9 @@ public class subitem3 {
         stringArray.add("120");
         stringArray.add("240");
         stringArray.add("Unlimited");
+        if(Gdx.input.isKeyPressed(Input.Keys.E)||Settings.limitfps<=5) { //Easteregg
+            stringArray.add("5");
+        }
         limitfps.setItems( stringArray.toArray());
 
         if(Settings.limitfps==0) {
@@ -87,6 +92,9 @@ limitfps.addListener(new ChangeListener() {
                   break;
               case "Unlimited":
                   Settings.limitfps = 0;
+                  break;
+              case "5": //Easteregg
+                  Settings.limitfps = 5;
                   break;
 
 
