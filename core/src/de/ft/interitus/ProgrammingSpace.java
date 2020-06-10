@@ -304,6 +304,8 @@ e.printStackTrace();
 
         } catch (Exception e) {
             //Falls die UI nicht richtig initialisiert werden konnte
+            DisplayErrors.error = e;
+            DisplayErrors.customErrorstring = "Fehler in der UI";
         }
 
 

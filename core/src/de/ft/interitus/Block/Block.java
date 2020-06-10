@@ -492,8 +492,7 @@ public abstract class Block implements VisibleObjects {
             try {
                 BlockVar.blocks.get(right).setLeft(-1); // wird dem rechten Nachbar gesagt das er keinen linken nachbar mehr hat
             }catch (IndexOutOfBoundsException e) {
-                DisplayErrors.customErrorstring = "Beim Löschen eines Blocks ist ein Fehler aufgetreten!";
-                DisplayErrors.error = e;
+
 
             }
             try {
