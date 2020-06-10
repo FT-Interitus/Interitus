@@ -41,6 +41,7 @@ public class DesktopLauncher {
 			config.setWindowIcon(Files.FileType.Internal, "Icon/iteritus.png");
 			config.setBackBufferConfig(8,8,8,8,16,0,4);
 			config.setWindowSizeLimits(1000,500,-1,-1);
+			config.disableAudio(true);
 			config.setWindowListener(new Lwjgl3WindowAdapter() {
 				@Override
 				public void created(Lwjgl3Window window) {
