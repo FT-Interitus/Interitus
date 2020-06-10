@@ -5,6 +5,8 @@
 > It should support Ev3, Arduino and Raspberry Pi (or other platforms via plugin), but not limit the user,
 to make the leap into a "real" programming language.
 
+[![Interitus](https://raw.githubusercontent.com/FT-Interitus/Interitus/master/Screenshot_20200610_202036.png)]()
+
 **Featurs**
 
 - Build project
@@ -15,10 +17,6 @@ to make the leap into a "real" programming language.
 - Themes
 - etc.
 
-
-***Screenshots from Interitus***
-
-[![Interitus](https://raw.githubusercontent.com/FT-Interitus/Interitus/master/Screenshot_20200610_202036.png)]()
 
 - Try it is very easy to use
 
