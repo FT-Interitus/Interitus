@@ -5,6 +5,7 @@ import com.fazecast.jSerialComm.SerialPort;
 import com.fazecast.jSerialComm.SerialPortDataListener;
 import com.fazecast.jSerialComm.SerialPortEvent;
 import de.ft.interitus.UI.setup.steps.ArduinoSteps.Step3;
+import jssc.SerialPortList;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -33,7 +34,7 @@ public class SerialConnection {
 
         String[] items = new String[SerialConnection.getPorts().length];
 
-        for (int i = 0; i < SerialConnection.getPorts().length; i++) {
+        for (int i = 0; i < SerialPortList.getPortNames().length; i++) {
 
             String ssv = "";
             String arduinoerkannt = "";
@@ -92,7 +93,7 @@ public class SerialConnection {
     public static String empfangen(SerialPort port) {
         String empfangen = "";
 
-
+        BufferedReader b = new BufferedReader(new InputStreamReader(port.getInputStream()));
         try {
 
 
@@ -100,7 +101,7 @@ public class SerialConnection {
 
 
             if (port.bytesAvailable() > 0) {
-                empfangen = is.readLine(); //fehler
+                empfangen =  Character.toString((char)b.read()); //fehler
             }
 
 
@@ -109,19 +110,13 @@ public class SerialConnection {
 
         } catch (Exception e) {
         }
-        if (empfangen != "") {
 
-
-            System.out.println(empfangen);
-
-        }
         return empfangen;
     }
 
 
     static void empfangenListener(SerialPort port) {
         final BufferedReader b = new BufferedReader(new InputStreamReader(port.getInputStream()));
-
 
         port.addDataListener(new SerialPortDataListener() {
             @Override
@@ -135,17 +130,16 @@ public class SerialConnection {
                     return;
                 try {
 
-                    String input = b.readLine();
+                    int input = b.read();
+                    System.out.println("asdf  "+(char)input);
 
-
-                    Authentifikation.checkvalidaten(input);
+                   /////// Authentifikation.checkvalidaten(input);
 
                     //    Authentifikation.getPart()
 
 
                     //  System.out.println(input);
                 } catch (IOException e) {
-                    e.printStackTrace();
                 }
             }
         });
@@ -158,7 +152,7 @@ public class SerialConnection {
 
 
     public static class Authentifikation {
-        private static final int abtastzeit = 20000;
+        private static final int abtastzeit = 10000;
         private static final int arduinoneustartzeit = 0;
         private static String output;
 
@@ -166,12 +160,8 @@ public class SerialConnection {
             return output;
         }
 
+/*
 
-        /***
-         *
-         * @param input checks the String with the checksum
-         * @return
-         */
 
         public static void checkvalidaten(String input) {
 
@@ -193,6 +183,8 @@ public class SerialConnection {
 
         }
 
+
+ */
 
         public static long getPart(String identify, String Input) {
 
@@ -218,8 +210,7 @@ public class SerialConnection {
             //is= new BufferedReader(new InputStreamReader(checkport.getInputStream()));
 
             empfangenListener(checkport);
-
-            while (System.currentTimeMillis() < save) {                                                           //für jeden port werden 5 sekunden lang überprüft ob er eine ID sendet
+            while (System.currentTimeMillis() < save) {
 
                 //if (empfangen(checkport).contains("defaultID")) {  //fehler
                 ///////////////////////////////////////////TODO hier muss dem arduino noch eine neue ID zugewiesen werden
