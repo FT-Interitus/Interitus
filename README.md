@@ -1,9 +1,5 @@
 <a href="#"><img src="https://avatars0.githubusercontent.com/u/63862361?s=400&u=a579cadd40dddd17795b000fc583f046d6c0e40b&v=4" title="Interitus" alt="Interitus"></a>
 
-
-
-# Intertius
-
 > Is or should be a graphical drag'n'drop programming interface for future developers
 
 > It should support Ev3, Arduino and Raspberry Pi (or other platforms via plugin), but not limit the user,
