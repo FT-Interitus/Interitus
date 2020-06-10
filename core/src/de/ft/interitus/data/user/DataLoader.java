@@ -72,8 +72,8 @@ public class DataLoader {
 
 
                             }
-                            BlockVar.wireNodes.get(BlockVar.wireNodes.size()-1).setWire_right(BlockVar.wires.get(BlockVar.wires.size()-1));
                             BlockVar.wires.add(Var.actProjekt.getWireGenerator().generate(BlockVar.wireNodes.get(BlockVar.wireNodes.size()-1),BlockVar.blocks.get(readedblocks.get(i).getIndex_rechts())));
+                            BlockVar.wireNodes.get(BlockVar.wireNodes.size()-1).setWire_right(BlockVar.wires.get(BlockVar.wires.size()-1));
                             BlockVar.blocks.get(BlockVar.blocks.get(i).getRight()).setWire_left(BlockVar.wires.get(BlockVar.wires.size() - 1));// Der rechte Block bekommt die Wire zugeteilt
                             BlockVar.wires.get(BlockVar.wires.size()-1).setSpace_between_blocks(true);
 
