@@ -228,8 +228,11 @@ public abstract class BlockUpdate extends Thread {
                             if (!block.getWire_left().isSpace_between_blocks()) {
                                 if (block.getLeft() != -1) {
                                     BlockVar.blocks.get(block.getLeft()).setRight(-1);
-
-                                    block.getWire_left().getLeft_connection().setWire_right(null); //löschen der Wire die zwischen den Blöcken war
+                                    try {
+                                        block.getWire_left().getLeft_connection().setWire_right(null); //löschen der Wire die zwischen den Blöcken war
+                                    }catch (Exception e) {
+                                        //Falls die Wire schon ein anderer Block gelöscht hat
+                                    }
                                     BlockVar.wires.remove(block.getWire_left());
                                     block.setWire_left(null);
 
@@ -433,38 +436,42 @@ public abstract class BlockUpdate extends Thread {
 
 
                     if (BlockVar.marked && !block.isMarked()) {
-
-                        if (CheckKollision.checkblockwithduplicate(BlockVar.markedblock, block, 0) && block.getRight() == -1 && BlockVar.markedblock.getWire_left() == null) {
-                            if (BlockVar.markedblock.isMoving()) {
-                                //System.out.println("Kollision!");
-
-
-                                block.setShowdupulicate_rechts(true);
+                        try {
+                            if (CheckKollision.checkblockwithduplicate(BlockVar.markedblock, block, 0) && block.getRight() == -1 && BlockVar.markedblock.getWire_left() == null) {
+                                if (BlockVar.markedblock.isMoving()) {
+                                    //System.out.println("Kollision!");
 
 
-                            } else {
+                                    block.setShowdupulicate_rechts(true);
 
 
-                                if (block.getRight() != BlockVar.markedblock.getIndex() && BlockVar.markedblock.getLeft() != block.getIndex() && block.getRight() == -1 && BlockVar.biggestblock == block) {
-
-                                    //System.out.println("test");
-                                    block.setShowdupulicate_rechts(false);
+                                } else {
 
 
-                                    block.setWire_right(Var.actProjekt.getWireGenerator().generate(block,BlockVar.markedblock));
-                                    BlockVar.markedblock.setWire_left(block.getWire_right());
-                                    BlockVar.wires.add(block.getWire_right());
+                                    if (block.getRight() != BlockVar.markedblock.getIndex() && BlockVar.markedblock.getLeft() != block.getIndex() && block.getRight() == -1 && BlockVar.biggestblock == block) {
 
-                                    block.setRight(BlockVar.markedblock.getIndex());
-                                    BlockVar.markedblock.setY(block.getY());
-                                    BlockVar.markedblock.setX(block.getX_dup_rechts());
+                                        //System.out.println("test");
+                                        block.setShowdupulicate_rechts(false);
+
+
+                                        block.setWire_right(Var.actProjekt.getWireGenerator().generate(block, BlockVar.markedblock));
+                                        BlockVar.markedblock.setWire_left(block.getWire_right());
+                                        BlockVar.wires.add(block.getWire_right());
+
+                                        block.setRight(BlockVar.markedblock.getIndex());
+                                        BlockVar.markedblock.setY(block.getY());
+                                        BlockVar.markedblock.setX(block.getX_dup_rechts());
+                                    }
+
+
                                 }
-
-
+                            } else {
+                                block.setShowdupulicate_rechts(false);
                             }
-                        } else {
-                            block.setShowdupulicate_rechts(false);
+                        }catch (Exception e) {
+
                         }
+
 
                         try {
                             if (CheckKollision.checkblockwithduplicate(BlockVar.markedblock, block, 1) && block.getLeft() == -1 && BlockVar.markedblock.getWire_right() == null) {
