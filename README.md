@@ -68,7 +68,7 @@ to make the leap into a "real" programming language.
 
 > See Interitus in Action
 
-![Interitus](https://github.com/FT-Interitus/Interitus/blob/master/ezgif-3-fb6325e4ebe9.gif?raw=true)
+![Interitus](https://github.com/FT-Interitus/Interitus/blob/master/img/ezgif-3-fb6325e4ebe9.gif?raw=true)
 
 ---
 
