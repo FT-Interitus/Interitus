@@ -320,7 +320,11 @@ e.printStackTrace();
 
         RechtsKlick.popupmanager.draw(); //Show Popups
 
-        DisplayErrors.checkerror(); //Check if there are undisplayed Images
+        try {
+            DisplayErrors.checkerror(); //Check if there are undisplayed Errors
+        }catch (IllegalStateException e) {
+            //Bei eienem VisUI absturz
+        }
 
         loader(); //Load Images in OpenGL context
 
