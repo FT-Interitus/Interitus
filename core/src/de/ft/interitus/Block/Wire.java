@@ -14,6 +14,7 @@ import de.ft.interitus.events.rightclick.RightClickCloseEvent;
 import de.ft.interitus.events.rightclick.RightClickEventListener;
 import de.ft.interitus.events.rightclick.RightClickOpenEvent;
 import de.ft.interitus.loading.AssetLoader;
+import de.ft.interitus.projecttypes.ProjectVar;
 import de.ft.interitus.utils.CheckKollision;
 
 import java.io.IOError;
@@ -156,7 +157,7 @@ public abstract class Wire {
 
 
 
-                    WireNode tempwirenode = Var.actProjekt.getWireNodeGenerator().generate(BlockVar.movingwires, (int) ProgrammingSpace.viewport.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, WireNode.public_w, WireNode.public_h);
+                    WireNode tempwirenode =  ProjectVar.projectType.getWireNodeGenerator().generate(BlockVar.movingwires, (int) ProgrammingSpace.viewport.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, WireNode.public_w, WireNode.public_h);
 
                     BlockVar.wireNodes.add(tempwirenode);
                     BlockVar.visibleWireNodes.add(tempwirenode);
@@ -175,7 +176,7 @@ public abstract class Wire {
                     BlockVar.movingwires = null;
 
 
-                    tempwirenode.setWire_right(Var.actProjekt.getWireGenerator().generate(tempwirenode));
+                    tempwirenode.setWire_right( ProjectVar.projectType.getWireGenerator().generate(tempwirenode));
                     //tempwirenode.getWire_right().space_between_blocks = false;
                     tempwirenode.getWire_right().movebymouse = true;
                     tempwirenode.getWire_right().space_between_blocks = true;

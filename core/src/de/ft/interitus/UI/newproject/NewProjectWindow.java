@@ -14,6 +14,7 @@ import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.Var;
 import de.ft.interitus.plugin.PluginManagerHandler;
+import de.ft.interitus.projecttypes.ProjectVar;
 import de.ft.interitus.projecttypes.device.BlockTypes.Init;
 import de.ft.interitus.projecttypes.device.BlockTypes.ProjectTypesVar;
 import de.ft.interitus.utils.ClearActOpenProgramm;
@@ -155,7 +156,7 @@ public class NewProjectWindow {
             Button_next.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
-                    Var.actProjekt = ProjectTypesVar.projectTypes.get(items.indexOf(selectProjectType.getSelected()));
+                     ProjectVar.projectType = ProjectTypesVar.projectTypes.get(items.indexOf(selectProjectType.getSelected()));
                     //TODO init new project
                     //TODO check if there are unsaved changes
 
