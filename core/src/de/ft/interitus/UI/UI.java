@@ -298,15 +298,22 @@ public class UI {
     public static void initnachassetsloading(){
         /////////////////Button Bar zusammensetzung//////////////////////
         button_projectstructus=new Button();
-        button_projectstructus.setImage(AssetLoader.img_mappe1);
+        button_projectstructus.setImage(AssetLoader.img_projectstructur);
+        button_projectstructus.setImage_mouseover(AssetLoader.img_projectstructur_mouseover);
+        button_projectstructus.setImage_pressed(AssetLoader.img_projectstructur_pressed);
         button_start=new Button();
-        button_start.setImage(AssetLoader.img_mappe2);
+        button_start.setImage(AssetLoader.img_startbutton);
+        button_start.setImage_mouseover(AssetLoader.img_startbutton_mouseover);
+        button_start.setImage_pressed(AssetLoader.img_startbutton_pressed);
         button_stop=new Button();
-        button_stop.setImage(AssetLoader.img_mappe3);
+        button_stop.setImage(AssetLoader.img_stopbutton);
+        button_stop.setImage_mouseover(AssetLoader.img_stopbutton_mouseover);
+        button_stop.setImage_pressed(AssetLoader.img_stopbutton_pressed);
         buttonbar=new ButtonBar(0,0,20,20);
         buttonbar.addButton(button_projectstructus);
-        buttonbar.addButton(button_start);
         buttonbar.addButton(button_stop);
+        buttonbar.addButton(button_start);
+
     }
 
     public static void update() {
