@@ -300,13 +300,16 @@ public class UI {
         button_projectstructus=new Button();
         button_projectstructus.setImage(AssetLoader.img_mappe1);
         button_start=new Button();
-        button_start.setImage(AssetLoader.img_mappe2);
+        button_start.setImage(AssetLoader.img_startbutton);
+        button_start.setImage_mouseover(AssetLoader.img_startbutton_mouseover);
+        button_start.setImage_pressed(AssetLoader.img_startbutton_pressed);
         button_stop=new Button();
         button_stop.setImage(AssetLoader.img_mappe3);
         buttonbar=new ButtonBar(0,0,20,20);
         buttonbar.addButton(button_projectstructus);
-        buttonbar.addButton(button_start);
         buttonbar.addButton(button_stop);
+        buttonbar.addButton(button_start);
+
     }
 
     public static void update() {

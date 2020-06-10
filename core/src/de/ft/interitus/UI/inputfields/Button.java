@@ -18,6 +18,8 @@ public class Button {
     private int h;
     private String text;
     private Texture image = null;
+    private Texture image_mouseover = null;
+    private Texture image_pressed = null;
     private boolean visible = true;
     private boolean disable = false;
     //private final SpriteBatch batch = new SpriteBatch();
@@ -113,7 +115,7 @@ public class Button {
                 s.begin(ShapeRenderer.ShapeType.Filled);
                 RoundRectangle.abgerundetesRechteck(s, this.x, this.y, this.w, this.h, 5);
                 s.end();
-            } else {
+            } else if(image_mouseover == null) {
                 UI.UIbatch.begin();
                 if (isMouseover()) {
                     UI.UIbatch.setColor(1, 1, 1, hovertransparancy);
@@ -129,10 +131,29 @@ public class Button {
                 //batch.draw(image, this.x, this.y, this.w, this.h);
                 UI.UIbatch.draw(image,this.x,this.y,this.w,this.h,0,0,image.getWidth(),image.getHeight(),this.flipX,this.flipY);
                 UI.UIbatch.end();
+            }else if(image_pressed==null){
+                UI.UIbatch.begin();
+                if(isMouseover()){
+                    UI.UIbatch.draw(image_mouseover,this.x,this.y,this.w,this.h,0,0,image.getWidth(),image.getHeight(),this.flipX,this.flipY);
+                }else{
+                    UI.UIbatch.draw(image,this.x,this.y,this.w,this.h,0,0,image.getWidth(),image.getHeight(),this.flipX,this.flipY);
+                }
+                UI.UIbatch.end();
+            }else{
+                UI.UIbatch.begin();
+                if(isMouseover()){
+                    UI.UIbatch.draw(image_mouseover,this.x,this.y,this.w,this.h,0,0,image.getWidth(),image.getHeight(),this.flipX,this.flipY);
+                }else{
+                    UI.UIbatch.draw(image,this.x,this.y,this.w,this.h,0,0,image.getWidth(),image.getHeight(),this.flipX,this.flipY);
+                }
+                if (isMouseover() && Gdx.input.isButtonPressed(0)) {
+                    UI.UIbatch.draw(image_pressed,this.x,this.y,this.w,this.h,0,0,image.getWidth(),image.getHeight(),this.flipX,this.flipY);
+                }
+                UI.UIbatch.end();
             }
             if (text != null) {
                 UI.UIbatch.begin();
-
+                UI.UIbatch.setColor(1, 1, 1, 1);
                 glyphLayout.setText(font, this.text);
                 font.draw(UI.UIbatch, glyphLayout, x + 5, y + glyphLayout.height + h / 2 - glyphLayout.height / 2);
 
@@ -187,6 +208,14 @@ public class Button {
 
     public void setImage(Texture image) {
         this.image = image;
+    }
+
+    public void setImage_mouseover(Texture image_mouseover) {
+        this.image_mouseover = image_mouseover;
+    }
+
+    public void setImage_pressed(Texture image_pressed) {
+        this.image_pressed = image_pressed;
     }
 
     public boolean isVisible() {

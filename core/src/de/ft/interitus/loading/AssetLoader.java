@@ -91,6 +91,11 @@ public class AssetLoader {
 
     public static BitmapFont welcomefont;//font
 
+    /////////////////////-ButtonBar-//////////////////////////
+    public static Texture img_startbutton;
+    public static Texture img_startbutton_mouseover;
+    public static Texture img_startbutton_pressed;
+
 
 
 
@@ -134,6 +139,13 @@ public class AssetLoader {
             } catch (Exception e) {
                 System.out.println("Fehler beim Laden der Schrift");
             }
+
+
+            group= "ButtonBar";
+            manager.load(workingdirectory+"ButtonBar/startbutton.png",Texture.class);
+            manager.load(workingdirectory+"ButtonBar/startbutton_mouseover.png", Texture.class);
+            manager.load(workingdirectory+"ButtonBar/startbutton_pressed.png", Texture.class);
+
 
             group = "mappen";
             manager.load(workingdirectory+"Bar/Mappe1.png",Texture.class);
@@ -227,6 +239,10 @@ public class AssetLoader {
 
         try {
             group = "";
+
+            img_startbutton = manager.get(workingdirectory+"ButtonBar/startbutton.png");
+            img_startbutton_mouseover = manager.get(workingdirectory+"ButtonBar/startbutton_mouseover.png");
+            img_startbutton_pressed = manager.get(workingdirectory+"ButtonBar/startbutton_pressed.png");
 
             img_mappe1 = manager.get(workingdirectory+"Bar/Mappe1.png",Texture.class);
             img_mappe2 = manager.get(workingdirectory+"Bar/Mappe2.png",Texture.class);
