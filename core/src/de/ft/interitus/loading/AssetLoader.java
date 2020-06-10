@@ -96,6 +96,10 @@ public class AssetLoader {
     public static Texture img_startbutton_mouseover;
     public static Texture img_startbutton_pressed;
 
+    public static Texture img_stopbutton;
+    public static Texture img_stopbutton_mouseover;
+    public static Texture img_stopbutton_pressed;
+
 
 
 
@@ -145,6 +149,10 @@ public class AssetLoader {
             manager.load(workingdirectory+"ButtonBar/startbutton.png",Texture.class);
             manager.load(workingdirectory+"ButtonBar/startbutton_mouseover.png", Texture.class);
             manager.load(workingdirectory+"ButtonBar/startbutton_pressed.png", Texture.class);
+
+            manager.load(workingdirectory+"ButtonBar/stopbutton.png",Texture.class);
+            manager.load(workingdirectory+"ButtonBar/stopbutton_mouseover.png", Texture.class);
+            manager.load(workingdirectory+"ButtonBar/stopbutton_pressed.png", Texture.class);
 
 
             group = "mappen";
@@ -243,6 +251,10 @@ public class AssetLoader {
             img_startbutton = manager.get(workingdirectory+"ButtonBar/startbutton.png");
             img_startbutton_mouseover = manager.get(workingdirectory+"ButtonBar/startbutton_mouseover.png");
             img_startbutton_pressed = manager.get(workingdirectory+"ButtonBar/startbutton_pressed.png");
+
+            img_stopbutton = manager.get(workingdirectory+"ButtonBar/stopbutton.png");
+            img_stopbutton_mouseover = manager.get(workingdirectory+"ButtonBar/stopbutton_mouseover.png");
+            img_stopbutton_pressed = manager.get(workingdirectory+"ButtonBar/stopbutton_pressed.png");
 
             img_mappe1 = manager.get(workingdirectory+"Bar/Mappe1.png",Texture.class);
             img_mappe2 = manager.get(workingdirectory+"Bar/Mappe2.png",Texture.class);

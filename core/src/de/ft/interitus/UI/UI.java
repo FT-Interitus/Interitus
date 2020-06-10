@@ -304,7 +304,9 @@ public class UI {
         button_start.setImage_mouseover(AssetLoader.img_startbutton_mouseover);
         button_start.setImage_pressed(AssetLoader.img_startbutton_pressed);
         button_stop=new Button();
-        button_stop.setImage(AssetLoader.img_mappe3);
+        button_stop.setImage(AssetLoader.img_stopbutton);
+        button_stop.setImage_mouseover(AssetLoader.img_stopbutton_mouseover);
+        button_stop.setImage_pressed(AssetLoader.img_stopbutton_pressed);
         buttonbar=new ButtonBar(0,0,20,20);
         buttonbar.addButton(button_projectstructus);
         buttonbar.addButton(button_stop);
