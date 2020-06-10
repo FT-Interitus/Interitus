@@ -42,9 +42,11 @@ public class DataLoader {
                         }
                     }
 
+
+
                     if(ProjectVar.projectType==null) {
 
-                        Dialogs.showErrorDialog(UI.stage,"Das Plugin das mit diesem Projekt verbunden ist, ist nicht installiert.");
+                        Dialogs.showErrorDialog(UI.stage,"Das Plugin das mit diesem Projekt verbunden ist, ist nicht installiert."); //TODO more Informations (link to plugin)
 
                         this.interrupt();
                         return;
