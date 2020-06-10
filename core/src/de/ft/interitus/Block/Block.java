@@ -489,12 +489,18 @@ public abstract class Block implements VisibleObjects {
         }
 
         if (right != -1) { // wenn ein Rechter nachbar exsitiert
-            BlockVar.blocks.get(right).setLeft(-1); // wird dem rechten Nachbar gesagt das er keinen linken nachbar mehr hat
+            try {
+                BlockVar.blocks.get(right).setLeft(-1); // wird dem rechten Nachbar gesagt das er keinen linken nachbar mehr hat
+            }catch (IndexOutOfBoundsException e) {
 
+
+            }
             try {
                 BlockVar.blocks.get(right).setWire_left(null); //Die Wire des nachbar block wird gelöscht damit die Wire kein zweites mal gelöscht wird (passiert nur bei ganz vielen wire nodes)
             } catch (NullPointerException e) {
                 //Falls es gar keine Wire gab
+            }catch (IndexOutOfBoundsException e) {
+
             }
         }
 
@@ -513,8 +519,7 @@ public abstract class Block implements VisibleObjects {
             blockupdate.interrupt(); // Der Thread wird interrupted
             blockupdate.block = null; //Die referenzierung des Threads BLocks wird getrennt
         } catch (Exception e) {
-            DisplayErrors.error = e;
-            e.printStackTrace();
+
 
         }
 

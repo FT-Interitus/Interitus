@@ -16,6 +16,7 @@ import de.ft.interitus.*;
 import de.ft.interitus.UI.inputfields.Button;
 import de.ft.interitus.UI.inputfields.ButtonBar;
 import de.ft.interitus.UI.inputfields.check.InputManager;
+import de.ft.interitus.UI.projectsettings.ProjectSettingsUI;
 import de.ft.interitus.UI.settings.SettingsUI;
 import de.ft.interitus.UI.setup.SetupWindow;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
@@ -50,6 +51,7 @@ public class UI {
     protected static MenuItem paste;
     protected static MenuBar menuBar;
     public static SettingsUI set;
+    public static ProjectSettingsUI proset;
 
     private static boolean issettingsuiopend = false;
     private static boolean issetupuiopend = false;
@@ -185,6 +187,7 @@ public class UI {
         InputManager.updateMultiplexer();
 
         set = new SettingsUI();
+        proset = new ProjectSettingsUI();
 
         menuBar = new MenuBar();
 
@@ -336,6 +339,13 @@ public class UI {
         buttonbar.setX(Gdx.graphics.getWidth()-10);
         buttonbar.setY(UIVar.programmflaeche_y+UIVar.programmflaeche_h+UIVar.abstandvonRand);
         buttonbar.draw(UIbatch);
+
+
+        if(button_projectstructus.isjustPressednormal()) {
+
+            proset.show();
+
+        }
 
     }
 
