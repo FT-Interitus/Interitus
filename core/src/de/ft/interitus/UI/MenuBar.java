@@ -24,6 +24,8 @@ import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.UI.UIOpenSettingsEvent;
 import de.ft.interitus.plugin.PluginGateway;
 import de.ft.interitus.plugin.PluginManagerHandler;
+import de.ft.interitus.projecttypes.ProjectVar;
+import de.ft.interitus.projecttypes.VCS;
 import de.ft.interitus.utils.ClearActOpenProgramm;
 
 
@@ -105,12 +107,16 @@ public class MenuBar {
                                             }
 
                                             if (result == everything) {
-                                                if (DataManager.path != "") {
-                                                    FileHandle handle = Gdx.files.external(DataManager.path);
-                                                    DataSaver.save(handle);
-                                                    DataManager.saved();
-                                                } else {
-                                                    LoadSave.saveas();
+                                                if(ProjectVar.vcs== VCS.NONE) {
+                                                    if (DataManager.path != "") {
+                                                        FileHandle handle = Gdx.files.external(DataManager.path);
+                                                        DataSaver.save(handle);
+                                                        DataManager.saved();
+                                                    } else {
+                                                        LoadSave.saveas();
+                                                    }
+                                                }else if(ProjectVar.vcs==VCS.ITEV) {
+
                                                 }
                                             }
 
@@ -137,14 +143,19 @@ public class MenuBar {
         menuItem_speichern=new MenuItem("Speichern", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                if (DataManager.path != "") {
-                    FileHandle handle = Gdx.files.absolute(DataManager.path);
-                    DataSaver.save(handle);
-                    DataManager.saved();
-                } else {
-                    if (!LoadSave.issaveopen()) {
-                        LoadSave.saveas();
+
+                if(ProjectVar.vcs== VCS.NONE) {
+                    if (DataManager.path != "") {
+                        FileHandle handle = Gdx.files.absolute(DataManager.path);
+                        DataSaver.save(handle);
+                        DataManager.saved();
+                    } else {
+                        if (!LoadSave.issaveopen()) {
+                            LoadSave.saveas();
+                        }
                     }
+                }else if(ProjectVar.vcs==VCS.ITEV){
+
                 }
             }
         }).setShortcut("Strg+S");

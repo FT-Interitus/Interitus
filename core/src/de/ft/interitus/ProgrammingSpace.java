@@ -27,6 +27,10 @@ import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.deviceconnection.arduino.PortUpdate;
 import de.ft.interitus.deviceconnection.arduino.SerialConnection;
 import de.ft.interitus.loading.AssetLoader;
+import de.ft.interitus.plugin.Configuration;
+import de.ft.interitus.plugin.PluginRegister;
+import de.ft.interitus.projecttypes.ProjectTypes;
+import de.ft.interitus.projecttypes.ProjectVar;
 import de.ft.interitus.projecttypes.device.BlockTypes.ProjectTypesVar;
 import de.ft.interitus.utils.PositionSaver;
 import de.ft.interitus.utils.animation.Animation;
@@ -40,7 +44,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
     public static OrthographicCamera cam;
     public static Viewport viewport;
     public static Component saver;
-
+    public static PluginRegister nativ;
     public static BitmapFont font;
     public static Switch s;
     public static TextField textfieldtest;
@@ -67,14 +71,15 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
         //TODO Debug hier wird immer ein Ev3 Project erstellt
 
-        Var.actProjekt = ProjectTypesVar.projectTypes.get(0);
+        ProjectVar.projectType = ProjectTypesVar.projectTypes.get(0);
 
 
         pressedKeys=new PressedKeys();
         RechtsKlick.Init();
          BlockTappedBar.init(); //TODO reinit after new Project was created or loaded
 
-
+        nativ = new PluginRegister();
+        nativ.config(Configuration.name,"Nativ");
         ia = new IntegerAuswahl(400, 400, 50, 25);
         s = new Switch(500, 500);
         font = new BitmapFont();
@@ -155,12 +160,12 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
 
     @Override
-    public void render(float delta) {
+    public void render(float delta)  {
         renderstarttime = System.currentTimeMillis();
 
 
 
-        if(Var.actProjekt==null) {
+        if(ProjectVar.projectType==null) {
            Programm.INSTANCE.setScreen(new Welcome());
         }
 
@@ -315,7 +320,11 @@ e.printStackTrace();
 
         RechtsKlick.popupmanager.draw(); //Show Popups
 
-        DisplayErrors.checkerror(); //Check if there are undisplayed Images
+        try {
+            DisplayErrors.checkerror(); //Check if there are undisplayed Errors
+        }catch (IllegalStateException e) {
+            //Bei eienem VisUI absturz
+        }
 
         loader(); //Load Images in OpenGL context
 

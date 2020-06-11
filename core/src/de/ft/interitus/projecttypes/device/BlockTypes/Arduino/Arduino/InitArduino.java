@@ -2,6 +2,7 @@ package de.ft.interitus.projecttypes.device.BlockTypes.Arduino.Arduino;
 
 import de.ft.interitus.Block.Interitus.*;
 import de.ft.interitus.Block.Interitus.save.DefaultSaveBlockGenerator;
+import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.projecttypes.ProjectTypes;
 import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.device.DeviceTypes.Arduino.Arduino.Arduino;
@@ -25,6 +26,6 @@ public class InitArduino {
 
 
 
-        return new ProjectTypes(new Arduino(),"Arduino-Projekt",blocks, new DefaultBlockGenerator(),new DefaultBlockUpdateGenerator(),new DefaultWireGenerator(),new DefaultWireNodeGenerator(),new DefaultSaveBlockGenerator());
+        return new ProjectTypes(ProgrammingSpace.nativ,new Arduino(),"Arduino-Projekt",blocks, new DefaultBlockGenerator(),new DefaultBlockUpdateGenerator(),new DefaultWireGenerator(),new DefaultWireNodeGenerator(),new DefaultSaveBlockGenerator());
     }
 }
