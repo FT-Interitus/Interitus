@@ -357,9 +357,7 @@ e.printStackTrace();
     }
 
 
-    public void hide() {
-        System.out.println("Stop");
-    }
+
 
     public void dispose() {
 

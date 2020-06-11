@@ -1,13 +1,21 @@
 package de.ft.interitus.UI.projectsettings.subitems;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
+import com.kotcrab.vis.ui.util.dialog.ConfirmDialogListener;
+import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisRadioButton;
 import com.kotcrab.vis.ui.widget.VisTable;
 import com.kotcrab.vis.ui.widget.VisTextButton;
 import de.ft.interitus.UI.MenuBar;
+import de.ft.interitus.UI.UI;
+import de.ft.interitus.data.user.DataSaver;
+import de.ft.interitus.data.user.LoadSave;
+import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.projecttypes.ProjectVar;
 import de.ft.interitus.projecttypes.VCS;
 
@@ -131,16 +139,47 @@ apply.setDisabled(true);
             public void changed(ChangeEvent event, Actor actor) {
 
                 if(none.isChecked()) {
-                    ProjectVar.vcs = VCS.NONE;
-                    MenuBar.menuItem_speichern.setText("Speichern");
+                    if(ProjectVar.vcs==VCS.ITEV) {
+                        String[] möglichkeiten = {"OK", "Abbrechen"};
+
+
+                        final int nothing = 1;
+                        final int everything = 2;
+
+
+                        //confirmdialog may return result of any type, here we are just using ints
+                        Dialogs.showConfirmDialog(UI.stage, "Änderung des VCS", "\nAchtung wenn du von ITEV auf kein VCS wechselst, werden alle Revisionen in eine zusammengefasst.\n" +
+                                        "Du kannst danach die Revisionen nicht wiederherstellen.\n",
+                                möglichkeiten, new Integer[]{nothing, everything},
+                                new ConfirmDialogListener<Integer>() {
+                                    @Override
+                                    public void result(Integer result) {
+                                        if (result == nothing) {
+                                            ProjectVar.vcs = VCS.NONE;
+                                            MenuBar.menuItem_speichern.setText("Speichern");
+                                            apply.setDisabled(true);
+                                        }
+
+                                        if (result == everything) {
+                                            itev.setChecked(true);
+                                            none.setChecked(false);
+
+                                        }
+
+                                    }
+                                });
+                    }
+
                 } else if(git.isChecked()) {
                     ProjectVar.vcs = VCS.GIT;
+                    apply.setDisabled(true);
                 }else if(itev.isChecked()) {
                     ProjectVar.vcs = VCS.ITEV;
                     MenuBar.menuItem_speichern.setText("Revision speichern");
+                    apply.setDisabled(true);
                 }
 
-                apply.setDisabled(true);
+
 
             }
         });

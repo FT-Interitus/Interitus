@@ -37,7 +37,7 @@ public class subitem3 {
         stringArray.add("120");
         stringArray.add("240");
         stringArray.add("Unlimited");
-        if(Gdx.input.isKeyPressed(Input.Keys.E)||Settings.limitfps<=5) { //Easteregg
+        if(Gdx.input.isKeyPressed(Input.Keys.E)||Settings.limitfps<=5&&Settings.limitfps!=0) { //Easteregg
             stringArray.add("5");
         }
         limitfps.setItems( stringArray.toArray());
