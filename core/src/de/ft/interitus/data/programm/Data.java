@@ -31,7 +31,7 @@ public class Data {
      * load the Programm data from the UserFolder/.itd
      * <p>
      * On Linux the Folder with a dot is default invisible
-     * On Windows we need to set the file attributes
+     * On Windows we need to set the file attribute
      * <p>
      * In the recent file there are the projects which were opened recently
      * In the settings file the Settings from the user are Saved

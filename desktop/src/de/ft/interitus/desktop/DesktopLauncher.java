@@ -2,7 +2,9 @@ package de.ft.interitus.desktop;
 
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.backends.lwjgl3.*;
+import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import de.ft.interitus.Programm;
+import de.ft.interitus.UI.UI;
 import de.ft.interitus.Var;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.global.GlobalCloseEvent;
@@ -72,6 +74,7 @@ public class DesktopLauncher {
 				public boolean closeRequested() {
 					boolean close = EventVar.globalEventManager.closeprogramm(new GlobalCloseEvent(this));
 					return close;
+
 				}
 
 				@Override
@@ -92,6 +95,7 @@ public class DesktopLauncher {
 			System.out.println("No GUI opend");
 
 		}
+
 
 
 	}

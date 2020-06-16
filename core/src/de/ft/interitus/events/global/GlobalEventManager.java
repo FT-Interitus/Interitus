@@ -38,10 +38,20 @@ public class GlobalEventManager implements GlobalEventListener {
     }
 
     @Override
-    public void filedroped(GlobalFileDropedEvent e, String[] filepaths) {
-        for (int i = 0; i < listener.size(); i++)
-            ((GlobalEventListener) listener.elementAt(i)).
-                    filedroped(e,filepaths);
+    public boolean filedroped(GlobalFileDropedEvent e, String[] filepaths) {
+        boolean handeled= false;
+        for (int i = 0; i < listener.size(); i++) {
+            if( ((GlobalEventListener) listener.elementAt(i)).filedroped(e, filepaths)) {
+                handeled=true;
+            }
+
+        }
+
+        if(!handeled) {
+            System.out.println("Datei konnte nicht verarbeitet werden"); //TODO Popup
+        }
+
+        return false;
     }
 
     @Override

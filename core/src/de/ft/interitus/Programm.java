@@ -10,6 +10,7 @@ import de.ft.interitus.UI.MenuBar;
 import de.ft.interitus.UI.Theme.ThemeManager;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.data.programm.Data;
+import de.ft.interitus.data.user.UserDataInit;
 import de.ft.interitus.data.user.experience.ExperienceManager;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.UI.UILoadEvent;
@@ -78,6 +79,7 @@ public class Programm extends Game {
         }; //TODO doenst work on Mac
         seachnetwork.start();
         Data.init();
+        UserDataInit.init();
         ExperienceManager.init();
         Gdx.graphics.setVSync(Settings.Vsync);
 
