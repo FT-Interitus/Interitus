@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3WindowConfiguration;
+import de.ft.interitus.Var;
 
 
 public class Window {
@@ -34,13 +35,23 @@ public class Window {
     }
 
    public void create() {
-        Lwjgl3Application app = (Lwjgl3Application)Gdx.app;
-        window = app.newWindow(listener, config);
+
+        Thread createWindow = new Thread() {
+            @Override
+            public void run() {
+                Lwjgl3Application app = (Lwjgl3Application)Gdx.app;
+                window =app.newWindow(listener,config);
+            }
+
+
+        };
+       createWindow.start();
 
     }
     public void destroy() {
         try {
             window.closeWindow();
+            Var.extendsWindows.remove(this);
         }catch (NullPointerException e) {
 
         }
