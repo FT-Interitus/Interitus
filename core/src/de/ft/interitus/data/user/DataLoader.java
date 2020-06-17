@@ -4,6 +4,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import de.ft.interitus.Block.SaveBlock;
 import de.ft.interitus.DisplayErrors;
+import de.ft.interitus.ThreadManager;
 import de.ft.interitus.UI.MenuBar;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
@@ -53,6 +54,7 @@ public class DataLoader {
                         this.interrupt();
                         return;
                     }else{
+                        ThreadManager.stopall();
                        Var.openprojects.add( temptype.init());
 
                        Var.openprojectindex = Var.openprojects.size()-1;

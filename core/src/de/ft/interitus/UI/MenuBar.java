@@ -358,7 +358,7 @@ public class MenuBar {
 
                     } else {
 
-                        ClearActOpenProgramm.clear();
+                        //ClearActOpenProgramm.clear();
                         DataManager.saved();
                         DataManager.filename = Data.filename.get(finalI);
                         DataManager.path = Data.path.get(finalI);

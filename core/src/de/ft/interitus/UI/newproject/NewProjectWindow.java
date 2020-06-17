@@ -10,6 +10,7 @@ import com.kotcrab.vis.ui.building.utilities.CellWidget;
 import com.kotcrab.vis.ui.building.utilities.Padding;
 import com.kotcrab.vis.ui.widget.*;
 import de.ft.interitus.Settings;
+import de.ft.interitus.ThreadManager;
 import de.ft.interitus.UI.MenuBar;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
@@ -155,6 +156,7 @@ public class NewProjectWindow {
             Button_next.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
+                    ThreadManager.stopall();
                    Var.openprojects.add( ProjectTypesVar.projectTypes.get(items.indexOf(selectProjectType.getSelected())).init());
                     Var.openprojectindex = Var.openprojects.size()-1;
 
