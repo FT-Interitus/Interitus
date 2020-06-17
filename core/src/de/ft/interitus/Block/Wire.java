@@ -14,11 +14,7 @@ import de.ft.interitus.events.rightclick.RightClickCloseEvent;
 import de.ft.interitus.events.rightclick.RightClickEventListener;
 import de.ft.interitus.events.rightclick.RightClickOpenEvent;
 import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.projecttypes.ProjectVar;
 import de.ft.interitus.utils.CheckKollision;
-
-import java.io.IOError;
-import java.io.IOException;
 
 public abstract class Wire {
     private final Vector3 tempvector = new Vector3();
@@ -44,7 +40,7 @@ public abstract class Wire {
         @Override
         public void buttonclickedinwindow(RightClickButtonSelectEvent e) {
             if (e.getButton().getText().contains("Löschen")) {
-                if(BlockVar.mousehoveredwire==INSTANCE) {
+                if(Var.openprojects.get(Var.openprojectindex).mousehoveredwire==INSTANCE) {
                     try {
                         INSTANCE.left_connection.getblock().setRight(-1);
                         INSTANCE.right_connection.getblock().setLeft(-1);
@@ -87,9 +83,9 @@ public abstract class Wire {
 
                 if (Gdx.input.isButtonJustPressed(0)) {
                     int counter = 0;
-                    for (int i = 0; i < BlockVar.visibleblocks.size(); i++) {
+                    for (int i = 0; i < Var.openprojects.get(Var.openprojectindex).visibleblocks.size(); i++) {
                         //TODO hier auch nach nodes testen eventuell will man die nur verschieben
-                        if (CheckKollision.object(BlockVar.visibleblocks.get(i).getX_entrance(), BlockVar.visibleblocks.get(i).getY_entrance(), BlockVar.visibleblocks.get(i).getH_entrance(), BlockVar.visibleblocks.get(i).getW_entrance(), (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1)) {
+                        if (CheckKollision.object(Var.openprojects.get(Var.openprojectindex).visibleblocks.get(i).getX_entrance(), Var.openprojects.get(Var.openprojectindex).visibleblocks.get(i).getY_entrance(), Var.openprojects.get(Var.openprojectindex).visibleblocks.get(i).getH_entrance(), Var.openprojects.get(Var.openprojectindex).visibleblocks.get(i).getW_entrance(), (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1)) {
                             counter++;
                         }
 
@@ -98,28 +94,28 @@ public abstract class Wire {
 
                     if (counter == 0) {
 
-                        BlockVar.wire_beginn.getBlockupdate().isconnectorclicked = false;
-                        BlockVar.showleftdocker = false;
+                        Var.openprojects.get(Var.openprojectindex).wire_beginn.getBlockupdate().isconnectorclicked = false;
+                        Var.openprojects.get(Var.openprojectindex).showleftdocker = false;
 
                         try {
-                            BlockVar.wire_beginn.getBlockupdate().tempwire.getLeft_connection().setWire_right(null);
-                            BlockVar.visiblewires.remove(BlockVar.wire_beginn.getBlockupdate().tempwire);
-                            BlockVar.wires.remove(BlockVar.wire_beginn.getBlockupdate().tempwire);
+                            Var.openprojects.get(Var.openprojectindex).wire_beginn.getBlockupdate().tempwire.getLeft_connection().setWire_right(null);
+                            Var.openprojects.get(Var.openprojectindex).visiblewires.remove(Var.openprojects.get(Var.openprojectindex).wire_beginn.getBlockupdate().tempwire);
+                            Var.openprojects.get(Var.openprojectindex).wires.remove(Var.openprojects.get(Var.openprojectindex).wire_beginn.getBlockupdate().tempwire);
 
                             try {
 
-                                BlockVar.wire_beginn.getBlockupdate().tempwire.getRight_connectionObject().getwirenode().setWire_left(null);
-                                BlockVar.wire_beginn.getBlockupdate().tempwire.setRight_connection(null);
+                                Var.openprojects.get(Var.openprojectindex).wire_beginn.getBlockupdate().tempwire.getRight_connectionObject().getwirenode().setWire_left(null);
+                                Var.openprojects.get(Var.openprojectindex).wire_beginn.getBlockupdate().tempwire.setRight_connection(null);
 
                             } catch (NullPointerException e) {
                                 //Falls hier keine Wire ist
                             }
-                            BlockVar.wire_beginn.getBlockupdate().tempwire = null;
+                            Var.openprojects.get(Var.openprojectindex).wire_beginn.getBlockupdate().tempwire = null;
                         } catch (Exception ignored) {
 
                         }
 
-                        BlockVar.movingwires = null;
+                        Var.openprojects.get(Var.openprojectindex).movingwires = null;
 
                     }
 
@@ -127,10 +123,10 @@ public abstract class Wire {
 
 
                 if (left_connection == null) { //Selbst zerstören wenn ein Block gelöscht wird mit der die Wire verbunden war
-                    BlockVar.wires.remove(this);
-                    BlockVar.visiblewires.remove(this);
-                    BlockVar.movingwires = null;
-                    BlockVar.showleftdocker = false;
+                    Var.openprojects.get(Var.openprojectindex).wires.remove(this);
+                    Var.openprojects.get(Var.openprojectindex).visiblewires.remove(this);
+                    Var.openprojects.get(Var.openprojectindex).movingwires = null;
+                    Var.openprojects.get(Var.openprojectindex).showleftdocker = false;
 
 
                     try {
@@ -153,36 +149,36 @@ public abstract class Wire {
 
 
 
-                if (Gdx.input.isKeyJustPressed(Input.Keys.N) && canplaceanewwirenode&&BlockVar.movingwires!=null) {
+                if (Gdx.input.isKeyJustPressed(Input.Keys.N) && canplaceanewwirenode&&Var.openprojects.get(Var.openprojectindex).movingwires!=null) {
 
 
 
-                    WireNode tempwirenode =  ProjectVar.projectType.getWireNodeGenerator().generate(BlockVar.movingwires, (int) ProgrammingSpace.viewport.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, WireNode.public_w, WireNode.public_h);
+                    WireNode tempwirenode =  Var.openprojects.get(Var.openprojectindex).projectType.getWireNodeGenerator().generate(Var.openprojects.get(Var.openprojectindex).movingwires, (int) ProgrammingSpace.viewport.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, WireNode.public_w, WireNode.public_h);
 
-                    BlockVar.wireNodes.add(tempwirenode);
-                    BlockVar.visibleWireNodes.add(tempwirenode);
+                    Var.openprojects.get(Var.openprojectindex).wireNodes.add(tempwirenode);
+                    Var.openprojects.get(Var.openprojectindex).visibleWireNodes.add(tempwirenode);
 
                     this.right_connection = tempwirenode;
 
         try {
-            BlockVar.movingwires.movebymouse = false;
-            BlockVar.movingwires.space_between_blocks = true;
-            BlockVar.movingwires.right_connection = tempwirenode;
+            Var.openprojects.get(Var.openprojectindex).movingwires.movebymouse = false;
+            Var.openprojects.get(Var.openprojectindex).movingwires.space_between_blocks = true;
+            Var.openprojects.get(Var.openprojectindex).movingwires.right_connection = tempwirenode;
         }catch (NullPointerException e ) {
             DisplayErrors.customErrorstring = "Keine WireNodes in der Luft plazieren!";
             DisplayErrors.error = e;
         }
 
-                    BlockVar.movingwires = null;
+                    Var.openprojects.get(Var.openprojectindex).movingwires = null;
 
 
-                    tempwirenode.setWire_right( ProjectVar.projectType.getWireGenerator().generate(tempwirenode));
+                    tempwirenode.setWire_right( Var.openprojects.get(Var.openprojectindex).projectType.getWireGenerator().generate(tempwirenode));
                     //tempwirenode.getWire_right().space_between_blocks = false;
                     tempwirenode.getWire_right().movebymouse = true;
                     tempwirenode.getWire_right().space_between_blocks = true;
-                    BlockVar.movingwires = tempwirenode.getWire_right();
-                    BlockVar.visiblewires.add(tempwirenode.getWire_right());
-                    //BlockVar.wires.add(tempwirenode.getWire_right());
+                    Var.openprojects.get(Var.openprojectindex).movingwires = tempwirenode.getWire_right();
+                    Var.openprojects.get(Var.openprojectindex).visiblewires.add(tempwirenode.getWire_right());
+                    //Var.openprojects.get(Var.openprojectindex).wires.add(tempwirenode.getWire_right());
 
 
                 }
@@ -247,8 +243,8 @@ public abstract class Wire {
 
 
                 if (left_connection == null || right_connection == null) { //Selbst zerstören wenn ein Block gelöscht wird mit der die Wire verbunden war
-                    BlockVar.wires.remove(this);
-                    BlockVar.visiblewires.remove(this);
+                    Var.openprojects.get(Var.openprojectindex).wires.remove(this);
+                    Var.openprojects.get(Var.openprojectindex).visiblewires.remove(this);
 
 
                     if (right_connection != null) {
@@ -299,14 +295,14 @@ public abstract class Wire {
 
 
                     sprite.draw(ProgrammingSpace.batch);
-                    if (CheckKollision.objectwithrotation(sprite.getX(), sprite.getY(), sprite.getHeight(), sprite.getWidth(), sprite.getRotation(), ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x, ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1, 0) && BlockVar.mousehoveredwire != this) {
-                        BlockVar.mousehoveredwire = this;
+                    if (CheckKollision.objectwithrotation(sprite.getX(), sprite.getY(), sprite.getHeight(), sprite.getWidth(), sprite.getRotation(), ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x, ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1, 0) && Var.openprojects.get(Var.openprojectindex).mousehoveredwire != this) {
+                        Var.openprojects.get(Var.openprojectindex).mousehoveredwire = this;
 
                     }
 
-                    if (!RechtsKlick.popupmanager.isPopupopen()&&BlockVar.mousehoveredwire == this && !CheckKollision.objectwithrotation(sprite.getX(), sprite.getY(), sprite.getHeight(), sprite.getWidth(), sprite.getRotation(), ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x, ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1, 0)) {
+                    if (!RechtsKlick.popupmanager.isPopupopen()&&Var.openprojects.get(Var.openprojectindex).mousehoveredwire == this && !CheckKollision.objectwithrotation(sprite.getX(), sprite.getY(), sprite.getHeight(), sprite.getWidth(), sprite.getRotation(), ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x, ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1, 0)) {
                         System.out.println("Popup disable"); //TODO here is an error
-                        BlockVar.mousehoveredwire = null;
+                        Var.openprojects.get(Var.openprojectindex).mousehoveredwire = null;
                     }
 
 
@@ -325,11 +321,11 @@ public abstract class Wire {
                         node.setWire_right(newwire);
                         node.setWire_left(this);
 
-                        BlockVar.wires.add(newwire);
-                        BlockVar.visiblewires.add(newwire);
+                        Var.openprojects.get(Var.openprojectindex).wires.add(newwire);
+                        Var.openprojects.get(Var.openprojectindex).visiblewires.add(newwire);
 
-                        BlockVar.wireNodes.add(node);
-                        BlockVar.visibleWireNodes.add(node);
+                        Var.openprojects.get(Var.openprojectindex).wireNodes.add(node);
+                        Var.openprojects.get(Var.openprojectindex).visibleWireNodes.add(node);
 
 
                     }

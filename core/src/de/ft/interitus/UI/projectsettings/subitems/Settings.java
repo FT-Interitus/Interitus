@@ -1,7 +1,5 @@
 package de.ft.interitus.UI.projectsettings.subitems;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.Align;
@@ -13,10 +11,7 @@ import com.kotcrab.vis.ui.widget.VisTable;
 import com.kotcrab.vis.ui.widget.VisTextButton;
 import de.ft.interitus.UI.MenuBar;
 import de.ft.interitus.UI.UI;
-import de.ft.interitus.data.user.DataSaver;
-import de.ft.interitus.data.user.LoadSave;
-import de.ft.interitus.data.user.changes.DataManager;
-import de.ft.interitus.projecttypes.ProjectVar;
+import de.ft.interitus.Var;
 import de.ft.interitus.projecttypes.VCS;
 
 public class Settings {
@@ -34,19 +29,19 @@ public class Settings {
         apply = new VisTextButton("Anwenden");
 apply.setDisabled(true);
 
-        if(ProjectVar.vcs== VCS.NONE) {
+        if(Var.openprojects.get(Var.openprojectindex).vcs== VCS.NONE) {
             none.setChecked(true);
             itev.setChecked(false);
             git.setChecked(false);
         }
 
-        if(ProjectVar.vcs== VCS.ITEV) {
+        if(Var.openprojects.get(Var.openprojectindex).vcs== VCS.ITEV) {
             none.setChecked(false);
             itev.setChecked(true);
             git.setChecked(false);
         }
 
-        if(ProjectVar.vcs== VCS.GIT) {
+        if(Var.openprojects.get(Var.openprojectindex).vcs== VCS.GIT) {
             none.setChecked(false);
             itev.setChecked(false);
             git.setChecked(true);
@@ -60,7 +55,7 @@ apply.setDisabled(true);
             public void changed(ChangeEvent event, Actor actor) {
                 if(none.isChecked()) {
 
-                    if(ProjectVar.vcs== VCS.NONE) {
+                    if(Var.openprojects.get(Var.openprojectindex).vcs== VCS.NONE) {
                         apply.setDisabled(true);
 
                     }else{
@@ -87,7 +82,7 @@ apply.setDisabled(true);
             public void changed(ChangeEvent event, Actor actor) {
                 if(itev.isChecked())   {
 
-                    if(ProjectVar.vcs== VCS.ITEV) {
+                    if(Var.openprojects.get(Var.openprojectindex).vcs== VCS.ITEV) {
                         apply.setDisabled(true);
 
                     }else{
@@ -113,7 +108,7 @@ apply.setDisabled(true);
             public void changed(ChangeEvent event, Actor actor) {
                 if(git.isChecked()) {
 
-                    if(ProjectVar.vcs== VCS.GIT) {
+                    if(Var.openprojects.get(Var.openprojectindex).vcs== VCS.GIT) {
                         apply.setDisabled(true);
 
                     }else{
@@ -139,7 +134,7 @@ apply.setDisabled(true);
             public void changed(ChangeEvent event, Actor actor) {
 
                 if(none.isChecked()) {
-                    if(ProjectVar.vcs==VCS.ITEV) {
+                    if(Var.openprojects.get(Var.openprojectindex).vcs==VCS.ITEV) {
                         String[] möglichkeiten = {"OK", "Abbrechen"};
 
 
@@ -155,7 +150,7 @@ apply.setDisabled(true);
                                     @Override
                                     public void result(Integer result) {
                                         if (result == nothing) {
-                                            ProjectVar.vcs = VCS.NONE;
+                                            Var.openprojects.get(Var.openprojectindex).vcs = VCS.NONE;
                                             MenuBar.menuItem_speichern.setText("Speichern");
                                             apply.setDisabled(true);
                                         }
@@ -171,10 +166,10 @@ apply.setDisabled(true);
                     }
 
                 } else if(git.isChecked()) {
-                    ProjectVar.vcs = VCS.GIT;
+                    Var.openprojects.get(Var.openprojectindex).vcs = VCS.GIT;
                     apply.setDisabled(true);
                 }else if(itev.isChecked()) {
-                    ProjectVar.vcs = VCS.ITEV;
+                    Var.openprojects.get(Var.openprojectindex).vcs = VCS.ITEV;
                     MenuBar.menuItem_speichern.setText("Revision speichern");
                     apply.setDisabled(true);
                 }

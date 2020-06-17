@@ -76,8 +76,8 @@ public abstract class WireNode implements VisibleObjects {
         }
 
         if (wire_left == null || wire_right == null) {
-            BlockVar.wireNodes.remove(this);
-            BlockVar.visibleWireNodes.remove(this);
+            Var.openprojects.get(Var.openprojectindex).wireNodes.remove(this);
+            Var.openprojects.get(Var.openprojectindex).visibleWireNodes.remove(this);
 
             if (wire_right != null) {
                 wire_right.setLeft_connection(null);

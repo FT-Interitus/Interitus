@@ -9,7 +9,6 @@ import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.inputfields.check.Check;
 import de.ft.interitus.UI.tappedbar.TapItem;
 import de.ft.interitus.Var;
-import de.ft.interitus.projecttypes.ProjectVar;
 import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
 
 
@@ -34,13 +33,13 @@ public class TapBarBlockItem implements TapItem {
         if(!Var.isdialogeopend) {
             if (check.isJustPressedNormal(x, y, w, h)) {
 
-                Block tempblock =  ProjectVar.projectType.getBlockGenerator().generateBlock(BlockVar.blocks.size(), (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 150, 70, psb, ProjectVar.projectType.getBlockUpdateGenerator(),  ProjectVar.projectType.getBlocktoSaveGenerator());
+                Block tempblock =  Var.openprojects.get(Var.openprojectindex).projectType.getBlockGenerator().generateBlock(Var.openprojects.get(Var.openprojectindex).blocks.size(), (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 150, 70, psb, Var.openprojects.get(Var.openprojectindex).projectType.getBlockUpdateGenerator(),  Var.openprojects.get(Var.openprojectindex).projectType.getBlocktoSaveGenerator());
 
-                BlockVar.blocks.add(tempblock);
+                Var.openprojects.get(Var.openprojectindex).blocks.add(tempblock);
                 tempblock.setMarked(true);
                 tempblock.setMoving(true);
 
-                BlockVar.unterschiedsave.set(150 / 2, 70 / 2);
+                Var.openprojects.get(Var.openprojectindex).unterschiedsave.set(150 / 2, 70 / 2);
             }
         }
 

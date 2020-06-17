@@ -47,7 +47,7 @@ public class ThreadManager {
                                 camfr = ProgrammingSpace.cam.frustum;
 
 
-                                for (int i = 0; i < BlockVar.blocks.size(); i++) {
+                                for (int i = 0; i < Var.openprojects.get(Var.openprojectindex).blocks.size(); i++) {
                                     //System.out.println("Test"+i);
 //                            System.out.println(camfr.boundsInFrustum(BlockVar.blocks.get(10).getX(), BlockVar.blocks.get(10).getY(), 0, BlockVar.blocks.get(10).getW(), BlockVar.blocks.get(10).getH(),0));
                                     try {
@@ -62,11 +62,11 @@ public class ThreadManager {
                                             }
                                             threads.get(i).interrupt();
                                             ((BlockUpdate) threads.get(i)).isrunning = false;
-                                            BlockVar.visibleblocks.remove(block);
+                                            Var.openprojects.get(Var.openprojectindex).visibleblocks.remove(block);
                                         }
 
                                         if (camfr.boundsInFrustum(block.getX(), block.getY(), 0, block.getW(), block.getH(), 0) && ((BlockUpdate) threads.get(i)).isrunning == false) {
-                                            BlockVar.visibleblocks.add(block);
+                                            Var.openprojects.get(Var.openprojectindex).visibleblocks.add(block);
                                             threads.set(i, ((BlockUpdate) threads.get(i)).block.allowedRestart());
                                             if (Var.verboseoutput) {
                                                 System.out.println("Started " + block.getIndex());
@@ -82,26 +82,26 @@ public class ThreadManager {
                                 }
 
 
-                                for (int i = 0; i < BlockVar.wires.size(); i++) {
-                                    if (BlockVar.wires.get(i).isvisible()) {
-                                        if (BlockVar.visiblewires.indexOf(BlockVar.wires.get(i)) == -1) {
-                                            BlockVar.visiblewires.add(BlockVar.wires.get(i));
+                                for (int i = 0; i < Var.openprojects.get(Var.openprojectindex).wires.size(); i++) {
+                                    if (Var.openprojects.get(Var.openprojectindex).wires.get(i).isvisible()) {
+                                        if (Var.openprojects.get(Var.openprojectindex).visiblewires.indexOf(Var.openprojects.get(Var.openprojectindex).wires.get(i)) == -1) {
+                                            Var.openprojects.get(Var.openprojectindex).visiblewires.add(Var.openprojects.get(Var.openprojectindex).wires.get(i));
                                         }
                                     } else {
-                                        if (BlockVar.visiblewires.indexOf(BlockVar.wires.get(i)) != -1) {
-                                            BlockVar.visiblewires.remove(BlockVar.wires.get(i));
+                                        if (Var.openprojects.get(Var.openprojectindex).visiblewires.indexOf(Var.openprojects.get(Var.openprojectindex).wires.get(i)) != -1) {
+                                            Var.openprojects.get(Var.openprojectindex).visiblewires.remove(Var.openprojects.get(Var.openprojectindex).wires.get(i));
                                         }
                                     }
                                 }
 
-                                for (int i = 0; i < BlockVar.wireNodes.size(); i++) {
-                                    if (BlockVar.wireNodes.get(i).isVisible()) {
-                                        if (BlockVar.visibleWireNodes.indexOf(BlockVar.wireNodes.get(i)) == -1) {
-                                            BlockVar.visibleWireNodes.add(BlockVar.wireNodes.get(i));
+                                for (int i = 0; i < Var.openprojects.get(Var.openprojectindex).wireNodes.size(); i++) {
+                                    if (Var.openprojects.get(Var.openprojectindex).wireNodes.get(i).isVisible()) {
+                                        if (Var.openprojects.get(Var.openprojectindex).visibleWireNodes.indexOf(Var.openprojects.get(Var.openprojectindex).wireNodes.get(i)) == -1) {
+                                            Var.openprojects.get(Var.openprojectindex).visibleWireNodes.add(Var.openprojects.get(Var.openprojectindex).wireNodes.get(i));
                                         }
                                     } else {
-                                        if (BlockVar.visibleWireNodes.indexOf(BlockVar.wireNodes.get(i)) != -1) {
-                                            BlockVar.visibleWireNodes.remove(BlockVar.wireNodes.get(i));
+                                        if (Var.openprojects.get(Var.openprojectindex).visibleWireNodes.indexOf(Var.openprojects.get(Var.openprojectindex).wireNodes.get(i)) != -1) {
+                                            Var.openprojects.get(Var.openprojectindex).visibleWireNodes.remove(Var.openprojects.get(Var.openprojectindex).wireNodes.get(i));
                                         }
                                     }
                                 }
@@ -114,10 +114,10 @@ public class ThreadManager {
 
                             //Enable or disable Wire System
 
-                            if (BlockVar.ismoving) {
-                                BlockVar.wirezulassung = false;
+                            if (Var.openprojects.get(Var.openprojectindex).ismoving) {
+                                Var.openprojects.get(Var.openprojectindex).wirezulassung = false;
                             } else {
-                                BlockVar.wirezulassung = true;
+                                Var.openprojects.get(Var.openprojectindex).wirezulassung = true;
                             }
                         }
 

@@ -26,6 +26,6 @@ public class InitArduino {
 
 
 
-        return new ProjectTypes(ProgrammingSpace.nativ,new Arduino(),"Arduino-Projekt",blocks, new DefaultBlockGenerator(),new DefaultBlockUpdateGenerator(),new DefaultWireGenerator(),new DefaultWireNodeGenerator(),new DefaultSaveBlockGenerator());
+        return new ProjectTypes(ProgrammingSpace.nativ,new Arduino(),"Arduino-Projekt",blocks, new DefaultBlockGenerator(),new DefaultBlockUpdateGenerator(),new DefaultWireGenerator(),new DefaultWireNodeGenerator(),new DefaultSaveBlockGenerator(), new DefaultBlockVarGenerator());
     }
 }

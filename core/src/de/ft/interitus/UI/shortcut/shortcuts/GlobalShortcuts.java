@@ -19,7 +19,6 @@ import de.ft.interitus.data.user.LoadSave;
 import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.UI.UIOpenSettingsEvent;
-import de.ft.interitus.projecttypes.ProjectVar;
 import de.ft.interitus.projecttypes.VCS;
 
 import java.util.ArrayList;
@@ -96,7 +95,7 @@ public class GlobalShortcuts implements ShortCutChecker {
                                     }
 
                                     if (result == everything) {
-                                        if(ProjectVar.vcs== VCS.NONE) {
+                                        if(Var.openprojects.get(Var.openprojectindex).vcs== VCS.NONE) {
                                             if (DataManager.path != "") {
                                                 FileHandle handle = Gdx.files.external(DataManager.path);
                                                 DataSaver.save(handle);
@@ -104,7 +103,7 @@ public class GlobalShortcuts implements ShortCutChecker {
                                             } else {
                                                 LoadSave.saveas();
                                             }
-                                        }else if(ProjectVar.vcs==VCS.ITEV) {
+                                        }else if(Var.openprojects.get(Var.openprojectindex).vcs==VCS.ITEV) {
 
                                         }
                                     }
@@ -126,7 +125,7 @@ public class GlobalShortcuts implements ShortCutChecker {
         }
 
         if(shortCut_speichern.isPressed()) {
-            if (ProjectVar.vcs == VCS.NONE) {
+            if (Var.openprojects.get(Var.openprojectindex).vcs == VCS.NONE) {
                 if (DataManager.path != "") {
                     FileHandle handle = Gdx.files.absolute(DataManager.path);
                     DataSaver.save(handle);
@@ -136,7 +135,7 @@ public class GlobalShortcuts implements ShortCutChecker {
                         LoadSave.saveas();
                     }
                 }
-            }else if(ProjectVar.vcs ==VCS.ITEV) {
+            }else if(Var.openprojects.get(Var.openprojectindex).vcs ==VCS.ITEV) {
 
             }
         }

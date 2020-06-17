@@ -25,16 +25,16 @@ public class RechtsKlick {
         if(!Var.isdialogeopend) {
 
             if (Gdx.input.isButtonPressed(1)) {
-                for (int i = 0; i < BlockVar.visibleblocks.size(); i++) {
+                for (int i = 0; i < Var.openprojects.get(Var.openprojectindex).visibleblocks.size(); i++) {
 
-                    if (check.isMouseover(BlockVar.visibleblocks.get(i).getX(), BlockVar.visibleblocks.get(i).getY(), BlockVar.visibleblocks.get(i).getW(), BlockVar.visibleblocks.get(i).getH()) && BlockVar.mousehoveredwire == null) {
+                    if (check.isMouseover(Var.openprojects.get(Var.openprojectindex).visibleblocks.get(i).getX(), Var.openprojects.get(Var.openprojectindex).visibleblocks.get(i).getY(), Var.openprojects.get(Var.openprojectindex).visibleblocks.get(i).getW(), Var.openprojects.get(Var.openprojectindex).visibleblocks.get(i).getH()) && Var.openprojects.get(Var.openprojectindex).mousehoveredwire == null) {
                         mouseoverblockindex = i;
                         mob = true;
 
                     }
                 }
 
-                if (BlockVar.mousehoveredwire != null) {
+                if (Var.openprojects.get(Var.openprojectindex).mousehoveredwire != null) {
                     mow = true;
 
                 }

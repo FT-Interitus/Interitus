@@ -1,9 +1,6 @@
 package de.ft.interitus.projecttypes.device.BlockTypes.Arduino.RoboArm;
 
-import de.ft.interitus.Block.Interitus.DefaultBlockGenerator;
-import de.ft.interitus.Block.Interitus.DefaultBlockUpdateGenerator;
-import de.ft.interitus.Block.Interitus.DefaultWireGenerator;
-import de.ft.interitus.Block.Interitus.DefaultWireNodeGenerator;
+import de.ft.interitus.Block.Interitus.*;
 import de.ft.interitus.Block.Interitus.save.DefaultSaveBlockGenerator;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.projecttypes.ProjectTypes;
@@ -21,6 +18,6 @@ public class InitRoboArm {
 
 
 
-        return new ProjectTypes(ProgrammingSpace.nativ,new RoboArm(),"Arduino-RoboterArm-Projekt",blocks,new DefaultBlockGenerator(), new DefaultBlockUpdateGenerator(),new DefaultWireGenerator(),new DefaultWireNodeGenerator(), new DefaultSaveBlockGenerator());
+        return new ProjectTypes(ProgrammingSpace.nativ,new RoboArm(),"Arduino-RoboterArm-Projekt",blocks,new DefaultBlockGenerator(), new DefaultBlockUpdateGenerator(),new DefaultWireGenerator(),new DefaultWireNodeGenerator(), new DefaultSaveBlockGenerator(), new DefaultBlockVarGenerator());
     }
 }

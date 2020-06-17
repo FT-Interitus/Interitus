@@ -9,7 +9,6 @@ import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import com.kotcrab.vis.ui.widget.Menu;
 import com.kotcrab.vis.ui.widget.MenuItem;
 import com.kotcrab.vis.ui.widget.PopupMenu;
-import de.ft.interitus.Block.BlockVar;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.UI.newproject.NewProjectWindow;
 import de.ft.interitus.UI.setup.SetupWindow;
@@ -19,12 +18,9 @@ import de.ft.interitus.data.user.DataLoader;
 import de.ft.interitus.data.user.DataSaver;
 import de.ft.interitus.data.user.LoadSave;
 import de.ft.interitus.data.user.changes.DataManager;
-import de.ft.interitus.data.user.changes.SaveChanges;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.UI.UIOpenSettingsEvent;
 import de.ft.interitus.plugin.PluginGateway;
-import de.ft.interitus.plugin.PluginManagerHandler;
-import de.ft.interitus.projecttypes.ProjectVar;
 import de.ft.interitus.projecttypes.VCS;
 import de.ft.interitus.utils.ClearActOpenProgramm;
 
@@ -107,7 +103,7 @@ public class MenuBar {
                                             }
 
                                             if (result == everything) {
-                                                if(ProjectVar.vcs== VCS.NONE) {
+                                                if(Var.openprojects.get(Var.openprojectindex).vcs== VCS.NONE) {
                                                     if (DataManager.path != "") {
                                                         FileHandle handle = Gdx.files.external(DataManager.path);
                                                         DataSaver.save(handle);
@@ -115,7 +111,7 @@ public class MenuBar {
                                                     } else {
                                                         LoadSave.saveas();
                                                     }
-                                                }else if(ProjectVar.vcs==VCS.ITEV) {
+                                                }else if(Var.openprojects.get(Var.openprojectindex).vcs==VCS.ITEV) {
 
                                                 }
                                             }
@@ -144,7 +140,7 @@ public class MenuBar {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
-                if(ProjectVar.vcs== VCS.NONE) {
+                if(Var.openprojects.get(Var.openprojectindex).vcs== VCS.NONE) {
                     if (DataManager.path != "") {
                         FileHandle handle = Gdx.files.absolute(DataManager.path);
                         DataSaver.save(handle);
@@ -154,7 +150,7 @@ public class MenuBar {
                             LoadSave.saveas();
                         }
                     }
-                }else if(ProjectVar.vcs==VCS.ITEV){
+                }else if(Var.openprojects.get(Var.openprojectindex).vcs==VCS.ITEV){
 
                 }
             }
@@ -274,7 +270,7 @@ public class MenuBar {
         editMenu.addItem(UI.copy = new MenuItem("Kopieren", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                if (BlockVar.marked) {
+                if (Var.openprojects.get(Var.openprojectindex).marked) {
                     de.ft.interitus.data.user.clipboard.Manager.Copy();
                 }
             }

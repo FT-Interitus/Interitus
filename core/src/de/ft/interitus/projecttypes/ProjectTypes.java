@@ -1,5 +1,6 @@
 package de.ft.interitus.projecttypes;
 
+import de.ft.interitus.Block.BlockVar;
 import de.ft.interitus.Block.Generators.*;
 import de.ft.interitus.plugin.PluginRegister;
 import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
@@ -17,7 +18,8 @@ private WireGenerator wireGenerator;
 private WireNodeGenerator wireNodeGenerator;
 private BlocktoSaveGenerator blocktoSaveGenerator;
 private de.ft.interitus.plugin.PluginRegister pluginRegister;
-    public ProjectTypes(PluginRegister pluginRegister, ProgrammableObjekt PO, String name, ArrayList<PlatformSpecificBlock> blocks, BlockGenerator blockgenerator, BlockUpdateGenerator updategenerator, WireGenerator wireGenerator, WireNodeGenerator wireNodeGenerator, BlocktoSaveGenerator blocktoSaveGenerator) {
+private BlockVarGenerator blockVarGenerator;
+    public ProjectTypes(PluginRegister pluginRegister, ProgrammableObjekt PO, String name, ArrayList<PlatformSpecificBlock> blocks, BlockGenerator blockgenerator, BlockUpdateGenerator updategenerator, WireGenerator wireGenerator, WireNodeGenerator wireNodeGenerator, BlocktoSaveGenerator blocktoSaveGenerator,BlockVarGenerator blockVarGenerator) {
         this.projectblocks = blocks;
         this.PO = PO;
         this.name = name;
@@ -27,6 +29,7 @@ private de.ft.interitus.plugin.PluginRegister pluginRegister;
         this.wireNodeGenerator = wireNodeGenerator;
         this.blocktoSaveGenerator = blocktoSaveGenerator;
         this.pluginRegister = pluginRegister;
+        this.blockVarGenerator = blockVarGenerator;
     }
 
     public ProgrammableObjekt getPO() {
@@ -97,4 +100,12 @@ private de.ft.interitus.plugin.PluginRegister pluginRegister;
     public PluginRegister getPluginRegister() {
         return pluginRegister;
     }
+
+
+    public BlockVar init() {
+      return this.blockVarGenerator.generate();
+
+    }
+
+
 }

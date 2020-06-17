@@ -17,7 +17,7 @@ public class ClearActOpenProgramm {
 
     public static void clear() {
         Var.isclearing = true;
-        blockstoclear = (ArrayList<Block>) BlockVar.blocks.clone();
+        blockstoclear = (ArrayList<Block>) Var.openprojects.get(Var.openprojectindex).blocks.clone();
 
 
 
@@ -27,7 +27,7 @@ public class ClearActOpenProgramm {
 
                 try {
 
-                    blockstoclear.removeAll(BlockVar.visibleblocks);
+                    blockstoclear.removeAll(Var.openprojects.get(Var.openprojectindex).visibleblocks);
 
 
                     try {
@@ -54,9 +54,9 @@ public class ClearActOpenProgramm {
 
 
         try {
-            while (BlockVar.visibleblocks.size() != 0) {
-                BlockVar.visibleblocks.get(0).delete(true);
-                BlockVar.visibleblocks.remove(0);
+            while (Var.openprojects.get(Var.openprojectindex).visibleblocks.size() != 0) {
+                Var.openprojects.get(Var.openprojectindex).visibleblocks.get(0).delete(true);
+                Var.openprojects.get(Var.openprojectindex).visibleblocks.remove(0);
 
 
             }
@@ -69,32 +69,32 @@ public class ClearActOpenProgramm {
             System.exit(-121);
         }
 
-        BlockVar.visibleblocks.clear();
+        Var.openprojects.get(Var.openprojectindex).visibleblocks.clear();
 
-        BlockVar.blocks.clear();
+        Var.openprojects.get(Var.openprojectindex).blocks.clear();
 
-        BlockVar.biggestblock = null;
-        BlockVar.markedblock = null;
-        BlockVar.ismoving = false;
-        BlockVar.showduplicat.clear();
+        Var.openprojects.get(Var.openprojectindex).biggestblock = null;
+        Var.openprojects.get(Var.openprojectindex).markedblock = null;
+        Var.openprojects.get(Var.openprojectindex).ismoving = false;
+        Var.openprojects.get(Var.openprojectindex).showduplicat.clear();
 
 
-        BlockVar.uberlapptmitmarkedblock.clear();
-        BlockVar.blockmitdergrostenuberlappungmitmarkiertemblock = null;
+        Var.openprojects.get(Var.openprojectindex).uberlapptmitmarkedblock.clear();
+        Var.openprojects.get(Var.openprojectindex).blockmitdergrostenuberlappungmitmarkiertemblock = null;
 
         DataManager.saved();
         DataManager.filename = "New File";
         DataManager.path = "";
 
 
-        BlockVar.wireNodes.clear();
-        BlockVar.showleftdocker = false;
-        BlockVar.connetor_offerd_hoverd_block = null;
-        BlockVar.wires.clear();
-        BlockVar.movingwires = null;
-        BlockVar.visiblewires.clear();
-        BlockVar.visibleWireNodes.clear();
-        BlockVar.wire_beginn = null;
+        Var.openprojects.get(Var.openprojectindex).wireNodes.clear();
+        Var.openprojects.get(Var.openprojectindex).showleftdocker = false;
+        Var.openprojects.get(Var.openprojectindex).connetor_offerd_hoverd_block = null;
+        Var.openprojects.get(Var.openprojectindex).wires.clear();
+        Var.openprojects.get(Var.openprojectindex).movingwires = null;
+        Var.openprojects.get(Var.openprojectindex).visiblewires.clear();
+        Var.openprojects.get(Var.openprojectindex).visibleWireNodes.clear();
+        Var.openprojects.get(Var.openprojectindex).wire_beginn = null;
 
 
         //clear.start();

@@ -13,12 +13,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.ft.interitus.Block.Block;
-import de.ft.interitus.Block.BlockVar;
 import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.inputfields.*;
-import de.ft.interitus.UI.inputfields.Button;
 import de.ft.interitus.UI.inputfields.TextField;
 import de.ft.interitus.UI.settings.subitems.subitem17;
 import de.ft.interitus.UI.shortcut.shortcuts.BlockShortcuts;
@@ -29,8 +27,6 @@ import de.ft.interitus.deviceconnection.arduino.SerialConnection;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.plugin.Configuration;
 import de.ft.interitus.plugin.PluginRegister;
-import de.ft.interitus.projecttypes.ProjectTypes;
-import de.ft.interitus.projecttypes.ProjectVar;
 import de.ft.interitus.projecttypes.device.BlockTypes.ProjectTypesVar;
 import de.ft.interitus.utils.PositionSaver;
 import de.ft.interitus.utils.animation.Animation;
@@ -71,8 +67,9 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
         //TODO Debug hier wird immer ein Ev3 Project erstellt
 
-        ProjectVar.projectType = ProjectTypesVar.projectTypes.get(0);
 
+        Var.openprojects.add(ProjectTypesVar.projectTypes.get(0).init());
+        Var.openprojects.get(Var.openprojectindex).projectType = ProjectTypesVar.projectTypes.get(0);
 
         pressedKeys=new PressedKeys();
         RechtsKlick.Init();
@@ -165,8 +162,9 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
 
 
-        if(ProjectVar.projectType==null) {
-           Programm.INSTANCE.setScreen(new Welcome());
+        if(Var.openprojects.get(Var.openprojectindex).projectType==null) {
+           //Programm.INSTANCE.setScreen(new Welcome()); todo
+            System.out.println("return welcome");
         }
 
         RechtsKlick.Rechtsklickupdate();
@@ -197,7 +195,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
             if (!Var.isloading) {
                 Block Temp = null;
                 Block Temp2 = null;
-                for (int i = 0; i < BlockVar.visibleblocks.size(); i = i + 1) {
+                for (int i = 0; i < Var.openprojects.get(Var.openprojectindex).visibleblocks.size(); i = i + 1) {
                     try {
                         batch.begin();
                     } catch (IllegalStateException e) {
@@ -206,22 +204,22 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
                     }
 
                     try {
-                        if (BlockVar.visibleblocks.get(i).isMarked()) {
-                            if(BlockVar.visibleblocks.get(i).isMoving()) {
-                                Temp2 = BlockVar.visibleblocks.get(i);
+                        if (Var.openprojects.get(Var.openprojectindex).visibleblocks.get(i).isMarked()) {
+                            if(Var.openprojects.get(Var.openprojectindex).visibleblocks.get(i).isMoving()) {
+                                Temp2 = Var.openprojects.get(Var.openprojectindex).visibleblocks.get(i);
                             }else {
-                                Temp = BlockVar.visibleblocks.get(i);
+                                Temp = Var.openprojects.get(Var.openprojectindex).visibleblocks.get(i);
                             }
                         } else {
-                            BlockVar.visibleblocks.get(i).draw(batch, shapeRenderer, font);
+                            Var.openprojects.get(Var.openprojectindex).visibleblocks.get(i).draw(batch, shapeRenderer, font);
                         }
 
                         batch.end();
-                        if (BlockVar.visibleblocks.get(i).isMarked()) {
+                        if (Var.openprojects.get(Var.openprojectindex).visibleblocks.get(i).isMarked()) {
 
 
                             if (BlockShortcuts.shortCut_deleteBlock.isPressed()) {
-                                BlockVar.visibleblocks.get(i).delete(false);
+                                Var.openprojects.get(Var.openprojectindex).visibleblocks.get(i).delete(false);
                             }
 
 
@@ -284,13 +282,13 @@ e.printStackTrace();
             s.setInside(AssetLoader.switch_inside);
         }
 
-        for (int i = 0; i < BlockVar.visiblewires.size(); i++) {
+        for (int i = 0; i < Var.openprojects.get(Var.openprojectindex).visiblewires.size(); i++) {
             if(!Var.isloading) {
-                BlockVar.visiblewires.get(i).draw();
+                Var.openprojects.get(Var.openprojectindex).visiblewires.get(i).draw();
             }
         }
-        for (int i = 0; i < BlockVar.visibleWireNodes.size(); i++) {
-            BlockVar.visibleWireNodes.get(i).draw();
+        for (int i = 0; i < Var.openprojects.get(Var.openprojectindex).visibleWireNodes.size(); i++) {
+            Var.openprojects.get(Var.openprojectindex).visibleWireNodes.get(i).draw();
         }
 
 
@@ -309,8 +307,9 @@ e.printStackTrace();
 
         } catch (Exception e) {
             //Falls die UI nicht richtig initialisiert werden konnte
-            DisplayErrors.error = e;
             DisplayErrors.customErrorstring = "Fehler in der UI";
+            DisplayErrors.error = e;
+
         }
 
 

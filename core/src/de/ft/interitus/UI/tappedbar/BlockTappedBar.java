@@ -3,10 +3,7 @@ package de.ft.interitus.UI.tappedbar;
 import de.ft.interitus.Block.TapBarBlockItem;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Var;
-import de.ft.interitus.data.user.DataLoader;
 import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.projecttypes.ProjectVar;
-import de.ft.interitus.projecttypes.device.BlockTypes.Arduino.Arduino.Wait;
 
 
 public class BlockTappedBar {
@@ -29,23 +26,23 @@ public class BlockTappedBar {
         OwnBlocks.clear();
 
 
-for(int i = 0; i< ProjectVar.projectType.getProjectblocks().size(); i++) {
+for(int i = 0; i< Var.openprojects.get(Var.openprojectindex).projectType.getProjectblocks().size(); i++) {
     try {
-        switch ( ProjectVar.projectType.getProjectblocks().get(i).getBlockCategoration()) {
+        switch ( Var.openprojects.get(Var.openprojectindex).projectType.getProjectblocks().get(i).getBlockCategoration()) {
             case ActionBlocks:
-                ActionBlocks.addItem(new TapBarBlockItem( ProjectVar.projectType.getProjectblocks().get(i),  ProjectVar.projectType.getProjectblocks().get(i).getSmallImage()));
+                ActionBlocks.addItem(new TapBarBlockItem( Var.openprojects.get(Var.openprojectindex).projectType.getProjectblocks().get(i),  Var.openprojects.get(Var.openprojectindex).projectType.getProjectblocks().get(i).getSmallImage()));
                 break;
             case Programm_Sequence:
-                Programm_Sequence.addItem(new TapBarBlockItem( ProjectVar.projectType.getProjectblocks().get(i),  ProjectVar.projectType.getProjectblocks().get(i).getSmallImage()));
+                Programm_Sequence.addItem(new TapBarBlockItem( Var.openprojects.get(Var.openprojectindex).projectType.getProjectblocks().get(i),  Var.openprojects.get(Var.openprojectindex).projectType.getProjectblocks().get(i).getSmallImage()));
                 break;
             case Sensors:
-                Sensors.addItem(new TapBarBlockItem( ProjectVar.projectType.getProjectblocks().get(i),  ProjectVar.projectType.getProjectblocks().get(i).getSmallImage()));
+                Sensors.addItem(new TapBarBlockItem( Var.openprojects.get(Var.openprojectindex).projectType.getProjectblocks().get(i),  Var.openprojects.get(Var.openprojectindex).projectType.getProjectblocks().get(i).getSmallImage()));
                 break;
             case Data_Operation:
-                Data_Operation.addItem(new TapBarBlockItem( ProjectVar.projectType.getProjectblocks().get(i),  ProjectVar.projectType.getProjectblocks().get(i).getSmallImage()));
+                Data_Operation.addItem(new TapBarBlockItem( Var.openprojects.get(Var.openprojectindex).projectType.getProjectblocks().get(i),  Var.openprojects.get(Var.openprojectindex).projectType.getProjectblocks().get(i).getSmallImage()));
                 break;
             case Specials:
-                Specials.addItem(new TapBarBlockItem( ProjectVar.projectType.getProjectblocks().get(i),  ProjectVar.projectType.getProjectblocks().get(i).getSmallImage()));
+                Specials.addItem(new TapBarBlockItem( Var.openprojects.get(Var.openprojectindex).projectType.getProjectblocks().get(i),  Var.openprojects.get(Var.openprojectindex).projectType.getProjectblocks().get(i).getSmallImage()));
             case OwnBlocks:
                 System.out.println("Unallowed Block was registered!");
                 break;
