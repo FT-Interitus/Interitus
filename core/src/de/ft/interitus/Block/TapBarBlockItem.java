@@ -19,7 +19,6 @@ public class TapBarBlockItem implements TapItem {
     int h=50;
     Texture img;
     PlatformSpecificBlock psb;
-    SpriteBatch batch=new SpriteBatch();
     Check check = new Check();
 
     public TapBarBlockItem(PlatformSpecificBlock psb,Texture img){

@@ -118,7 +118,13 @@ public class PluginManagerHandler {
 
 
                                     starttime.add(System.currentTimeMillis());
-                                    finish.add(Var.pluginManager.loadedplugins.get(finalI).run());
+                                    try {
+                                        finish.add(Var.pluginManager.loadedplugins.get(finalI).run());
+                                    }catch (Exception e) {
+                                        DisplayErrors.customErrorstring = "Fehler in einem Plugin. Es wurde deaktiviert!";
+                                        DisplayErrors.error = e;
+                                        registeredplugins.remove(Var.pluginManager.loadedplugins.get(finalI));
+                                    }
 
 
                                 }

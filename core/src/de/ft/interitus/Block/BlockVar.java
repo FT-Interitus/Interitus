@@ -2,6 +2,7 @@ package de.ft.interitus.Block;
 
 import com.badlogic.gdx.math.Vector2;
 import de.ft.interitus.projecttypes.ProjectTypes;
+import de.ft.interitus.projecttypes.VCS;
 
 import java.util.ArrayList;
 
@@ -44,7 +45,7 @@ public abstract class BlockVar {
 
     public  Block ismarkedbyother = null; // Gibt an welcher Block bei einem anderen Client makiert ist
 
-    public int vcs =0;
+    public int vcs = VCS.NONE;
     public  ProjectTypes projectType = null;
 
     public BlockVar() {

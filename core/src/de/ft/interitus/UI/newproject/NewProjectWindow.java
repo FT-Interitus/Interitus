@@ -155,8 +155,10 @@ public class NewProjectWindow {
             Button_next.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
-                 //    ProjectVar.projectType = ProjectTypesVar.projectTypes.get(items.indexOf(selectProjectType.getSelected()));
-                   //  ProjectVar.vcs = VCS.NONE; //TODO add new Project important
+                   Var.openprojects.add( ProjectTypesVar.projectTypes.get(items.indexOf(selectProjectType.getSelected())).init());
+                    Var.openprojectindex = Var.openprojects.size()-1;
+
+
                     MenuBar.menuItem_speichern.setText("Speichern");
 
                     //TODO init new project

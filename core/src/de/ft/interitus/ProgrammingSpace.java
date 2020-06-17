@@ -69,7 +69,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
 
         Var.openprojects.add(ProjectTypesVar.projectTypes.get(0).init());
-        Var.openprojects.get(Var.openprojectindex).projectType = ProjectTypesVar.projectTypes.get(0);
+
 
         pressedKeys=new PressedKeys();
         RechtsKlick.Init();

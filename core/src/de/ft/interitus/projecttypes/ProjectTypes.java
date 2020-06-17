@@ -103,7 +103,9 @@ private BlockVarGenerator blockVarGenerator;
 
 
     public BlockVar init() {
-      return this.blockVarGenerator.generate();
+        BlockVar blockvar =this.blockVarGenerator.generate();
+        blockvar.projectType=this;
+      return blockvar;
 
     }
 

@@ -6,6 +6,7 @@ import de.ft.interitus.Block.SaveBlock;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.UI.MenuBar;
 import de.ft.interitus.UI.UI;
+import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.Var;
 import de.ft.interitus.data.programm.Data;
 import de.ft.interitus.projecttypes.ProjectTypes;
@@ -55,7 +56,7 @@ public class DataLoader {
                        Var.openprojects.add( temptype.init());
 
                        Var.openprojectindex = Var.openprojects.size()-1;
-                        Var.openprojects.get(Var.openprojectindex).projectType = temptype;
+                        BlockTappedBar.init();
 
                        System.out.println("changed tab");
                        //TODO Change Tab to this
