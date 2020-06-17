@@ -1,15 +1,20 @@
 package de.ft.interitus;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.*;
+import com.badlogic.gdx.Graphics;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3WindowAdapter;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3WindowConfiguration;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.ft.interitus.Block.Block;
@@ -21,6 +26,8 @@ import de.ft.interitus.UI.inputfields.TextField;
 import de.ft.interitus.UI.settings.subitems.subitem17;
 import de.ft.interitus.UI.shortcut.shortcuts.BlockShortcuts;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
+import de.ft.interitus.UI.window.CreateWindow;
+import de.ft.interitus.UI.window.Window;
 import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.deviceconnection.arduino.PortUpdate;
 import de.ft.interitus.deviceconnection.arduino.SerialConnection;
@@ -58,6 +65,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
     public static PressedKeys pressedKeys;
 
+   static Lwjgl3Window latestWindow;
 
 
 
@@ -69,6 +77,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
 
         Var.openprojects.add(ProjectTypesVar.projectTypes.get(0).init());
+
 
 
         pressedKeys=new PressedKeys();
@@ -156,15 +165,15 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
     }
 
 
+
+
     @Override
     public void render(float delta)  {
         renderstarttime = System.currentTimeMillis();
-
-
+        CreateWindow.createdebugwindow();
 
         if(Var.openprojects.get(Var.openprojectindex).projectType==null) {
-           //Programm.INSTANCE.setScreen(new Welcome()); todo
-            System.out.println("return welcome");
+           Programm.INSTANCE.setScreen(new Welcome());
         }
 
         RechtsKlick.Rechtsklickupdate();

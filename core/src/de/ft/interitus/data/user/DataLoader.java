@@ -54,7 +54,7 @@ public class DataLoader {
                         this.interrupt();
                         return;
                     }else{
-                        ThreadManager.stopall();
+                        //ThreadManager.stopall();
                        Var.openprojects.add( temptype.init());
 
                        Var.openprojectindex = Var.openprojects.size()-1;

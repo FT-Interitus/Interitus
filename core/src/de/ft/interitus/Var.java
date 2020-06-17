@@ -2,6 +2,7 @@ package de.ft.interitus;
 
 import com.badlogic.gdx.math.Vector2;
 import de.ft.interitus.Block.BlockVar;
+import de.ft.interitus.UI.window.Window;
 import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.projecttypes.ProjectTypes;
 
@@ -38,4 +39,6 @@ public class Var {
 
 
     public static Vector2 mousepressedold = new Vector2(1, 1); //Wo war die Maus als das letzte mal eine Taste gedrückt wurde
+
+    public static ArrayList<Window> extendsWindows = new ArrayList<>();
 }
