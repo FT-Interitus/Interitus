@@ -1,7 +1,7 @@
 package de.ft.interitus.events.rightclick;
 
 
-import de.ft.interitus.UI.inputfields.Button;
+import de.ft.interitus.UI.UIElements.Button;
 
 import java.util.EventObject;
 public class RightClickButtonSelectEvent extends EventObject {

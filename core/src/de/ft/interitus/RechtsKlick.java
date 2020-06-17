@@ -1,8 +1,7 @@
 package de.ft.interitus;
 
 import com.badlogic.gdx.Gdx;
-import de.ft.interitus.Block.BlockVar;
-import de.ft.interitus.UI.inputfields.check.Check;
+import de.ft.interitus.UI.UIElements.check.Check;
 import de.ft.interitus.UI.popup.PopupManager;
 import de.ft.interitus.UI.popup.PopupMenue;
 

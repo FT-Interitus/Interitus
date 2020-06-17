@@ -13,15 +13,15 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.kotcrab.vis.ui.widget.MenuBar;
 import com.kotcrab.vis.ui.widget.MenuItem;
 import de.ft.interitus.*;
-import de.ft.interitus.UI.inputfields.Button;
-import de.ft.interitus.UI.inputfields.ButtonBar;
-import de.ft.interitus.UI.inputfields.check.InputManager;
+import de.ft.interitus.UI.UIElements.Button;
+import de.ft.interitus.UI.UIElements.ButtonBar;
+import de.ft.interitus.UI.UIElements.TabBar.TabBar;
+import de.ft.interitus.UI.UIElements.check.InputManager;
 import de.ft.interitus.UI.projectsettings.ProjectSettingsUI;
 import de.ft.interitus.UI.settings.SettingsUI;
 import de.ft.interitus.UI.setup.SetupWindow;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.data.programm.Data;
-import de.ft.interitus.data.user.changes.SaveChanges;
 import de.ft.interitus.data.user.experience.ExperienceManager;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.UI.UIOpenSettingsEvent;
@@ -67,6 +67,8 @@ public class UI {
     public static Button button_start;
     public static Button button_stop;
     public static Button button_debugstart;
+
+    public static TabBar tabbar;
 
     public static void userresize() {
         if (!curserveränderungsblockade){
@@ -322,6 +324,9 @@ public class UI {
         buttonbar.addButton(button_stop);
         buttonbar.addButton(button_debugstart);
         buttonbar.addButton(button_start);
+
+        tabbar=new TabBar();
+        //tabbar.addTab();
 
     }
 

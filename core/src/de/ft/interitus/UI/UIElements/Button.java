@@ -1,4 +1,4 @@
-package de.ft.interitus.UI.inputfields;
+package de.ft.interitus.UI.UIElements;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import de.ft.interitus.UI.UI;
-import de.ft.interitus.UI.inputfields.check.Check;
+import de.ft.interitus.UI.UIElements.check.Check;
 import de.ft.interitus.Var;
 import de.ft.interitus.utils.RoundRectangle;
 

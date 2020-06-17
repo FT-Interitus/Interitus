@@ -1,4 +1,4 @@
-package de.ft.interitus.UI.inputfields;
+package de.ft.interitus.UI.UIElements;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 

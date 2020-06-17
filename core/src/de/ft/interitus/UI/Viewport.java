@@ -4,12 +4,10 @@ import com.badlogic.gdx.Gdx;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.input.GestureDetector;
-import com.badlogic.gdx.math.Vector2;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.Settings;
-import de.ft.interitus.UI.inputfields.check.InputManager;
+import de.ft.interitus.UI.UIElements.check.InputManager;
 
 import static com.badlogic.gdx.Gdx.input;
 

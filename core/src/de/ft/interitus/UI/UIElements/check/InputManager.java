@@ -1,4 +1,4 @@
-package de.ft.interitus.UI.inputfields.check;
+package de.ft.interitus.UI.UIElements.check;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
