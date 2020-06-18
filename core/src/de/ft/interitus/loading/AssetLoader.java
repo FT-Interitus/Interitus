@@ -108,6 +108,9 @@ public class AssetLoader {
     public static Texture img_debugstart_mouseover;
     public static Texture img_debugstart_pressed;
 
+    //////////////////////////-TabBar-//////////////////////////////
+    public static Texture img_Tab;
+
 
 
 
@@ -151,6 +154,9 @@ public class AssetLoader {
                 System.out.println("Fehler beim Laden der Schrift");
             }
 
+
+            group= "TabBar";
+            manager.load(workingdirectory+"TabBar/Tabimage.png",Texture.class);
 
             group= "ButtonBar";
             manager.load(workingdirectory+"ButtonBar/startbutton.png",Texture.class);
@@ -262,6 +268,8 @@ public class AssetLoader {
 
         try {
             group = "";
+
+            img_Tab = manager.get(workingdirectory+"TabBar/Tabimage.png");
 
             img_startbutton = manager.get(workingdirectory+"ButtonBar/startbutton.png");
             img_startbutton_mouseover = manager.get(workingdirectory+"ButtonBar/startbutton_mouseover.png");

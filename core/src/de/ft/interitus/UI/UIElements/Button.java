@@ -31,6 +31,9 @@ public class Button {
     public float hovertransparancy = 0.8f;
     public static boolean disablepresscolorchange = false;
 
+    public boolean widthoverText=false;
+    public int widthoverTextlinksrandabstand=5;
+
 
     public Button(int x, int y, int w, int h) {
         this.x = x;
@@ -109,6 +112,14 @@ public class Button {
     }
 
     public void draw() {
+        if(text!=null) {
+            glyphLayout.setText(font, this.text);
+            if(widthoverText){
+                this.w=(int)glyphLayout.width+2*widthoverTextlinksrandabstand;
+            }
+        }
+
+
         if (isVisible()) {
             if (image == null) {
 
@@ -154,8 +165,8 @@ public class Button {
             if (text != null) {
                 UI.UIbatch.begin();
                 UI.UIbatch.setColor(1, 1, 1, 1);
-                glyphLayout.setText(font, this.text);
-                font.draw(UI.UIbatch, glyphLayout, x + 5, y + glyphLayout.height + h / 2 - glyphLayout.height / 2);
+                font.draw(UI.UIbatch, glyphLayout, x + widthoverTextlinksrandabstand, y + glyphLayout.height + h / 2 - glyphLayout.height / 2);
+
 
                 UI.UIbatch.end();
             }

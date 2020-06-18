@@ -15,6 +15,7 @@ import com.kotcrab.vis.ui.widget.MenuItem;
 import de.ft.interitus.*;
 import de.ft.interitus.UI.UIElements.Button;
 import de.ft.interitus.UI.UIElements.ButtonBar;
+import de.ft.interitus.UI.UIElements.TabBar.Tab;
 import de.ft.interitus.UI.UIElements.TabBar.TabBar;
 import de.ft.interitus.UI.UIElements.check.InputManager;
 import de.ft.interitus.UI.projectsettings.ProjectSettingsUI;
@@ -326,7 +327,18 @@ public class UI {
         buttonbar.addButton(button_start);
 
         tabbar=new TabBar();
-        //tabbar.addTab();
+        Tab testtab = new Tab();
+        testtab.getTabButton().setImage(AssetLoader.img_Tab);
+        testtab.getTabButton().setW(300);
+        testtab.getTabButton().setText("hallo tim");
+        testtab.getTabButton().widthoverText=true;
+        tabbar.addTab(testtab);
+        Tab testtab2 = new Tab();
+        testtab2.getTabButton().setImage(AssetLoader.img_Tab);
+        testtab2.getTabButton().setW(300);
+        testtab2.getTabButton().setText("2.tabasdölkghjkjhgjkkjgjjgkjgjjkkjgjgkgkgjasdflkjasdflökjasdfölkjasdf");
+        testtab2.getTabButton().widthoverText=true;
+        tabbar.addTab(testtab2);
 
     }
 
@@ -351,6 +363,18 @@ public class UI {
             proset.show();
 
         }
+        tabbar.setTabs();
+        for(int i=0;i<Var.openprojects.size();i++){
+            Tab temptab=new Tab();
+            temptab.getTabButton().setImage(AssetLoader.img_Tab);
+            temptab.getTabButton().setW(300);
+            temptab.getTabButton().setText("2.tabasdölkghjkjhgjkkjgjjgkjgjjkkjgjgkgkgjasdflkjasdflökjasdfölkjasdf");
+            temptab.getTabButton().widthoverText=true;
+            temptab.getTabButton().setText(Var.openprojects.get(i).filename);
+            tabbar.addTab(temptab);
+        }
+        tabbar.setBounds(UIVar.abstandvonRand,UIVar.programmflaeche_h+UIVar.programmflaeche_y,300,20);
+        tabbar.draw();
 
     }
 
