@@ -1,11 +1,10 @@
 package de.ft.interitus;
 
 import com.badlogic.gdx.math.Vector2;
-import de.ft.interitus.Block.BlockVar;
+import de.ft.interitus.projecttypes.ProjectVar;
 import de.ft.interitus.UI.UIElements.TabBar.Tab;
 import de.ft.interitus.UI.window.Window;
 import de.ft.interitus.plugin.PluginManagerHandler;
-import de.ft.interitus.projecttypes.ProjectTypes;
 
 import java.util.ArrayList;
 
@@ -34,7 +33,7 @@ public class Var {
     public static String username = "";
     public static boolean disablePluginSubSystem = false;
 
-    public static ArrayList<BlockVar> openprojects = new ArrayList<>();
+    public static ArrayList<ProjectVar> openprojects = new ArrayList<>();
 
     public static int openprojectindex = 0;
 

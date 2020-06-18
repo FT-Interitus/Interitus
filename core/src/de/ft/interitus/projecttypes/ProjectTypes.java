@@ -1,6 +1,5 @@
 package de.ft.interitus.projecttypes;
 
-import de.ft.interitus.Block.BlockVar;
 import de.ft.interitus.Block.Generators.*;
 import de.ft.interitus.plugin.PluginRegister;
 import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
@@ -102,8 +101,8 @@ private BlockVarGenerator blockVarGenerator;
     }
 
 
-    public BlockVar init() {
-        BlockVar blockvar =this.blockVarGenerator.generate();
+    public ProjectVar init() {
+        ProjectVar blockvar =this.blockVarGenerator.generate();
         blockvar.projectType=this;
       return blockvar;
 

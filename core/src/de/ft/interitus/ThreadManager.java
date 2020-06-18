@@ -3,7 +3,6 @@ package de.ft.interitus;
 import com.badlogic.gdx.math.Frustum;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.BlockUpdate;
-import de.ft.interitus.Block.BlockVar;
 
 import java.util.ArrayList;
 import java.util.Timer;

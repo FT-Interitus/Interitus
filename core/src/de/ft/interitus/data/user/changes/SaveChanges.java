@@ -1,10 +1,5 @@
 package de.ft.interitus.data.user.changes;
 
-import de.ft.interitus.Block.Block;
-import de.ft.interitus.Block.BlockVar;
-
-import java.util.Stack;
-
 /***
  * @deprecated
  */

@@ -1,12 +1,15 @@
-package de.ft.interitus.Block;
+package de.ft.interitus.projecttypes;
 
 import com.badlogic.gdx.math.Vector2;
+import de.ft.interitus.Block.Block;
+import de.ft.interitus.Block.Wire;
+import de.ft.interitus.Block.WireNode;
 import de.ft.interitus.projecttypes.ProjectTypes;
 import de.ft.interitus.projecttypes.VCS;
 
 import java.util.ArrayList;
 
-public abstract class BlockVar {
+public abstract class ProjectVar {
 
     public  boolean wirezulassung=true;  //Wires können blockiert werden
     //Anmerkung ganz wichtig hier alle beim clearen auf null setzen damit alle referenzierungen auf einen Block gelöscht werden damit der Speicherplatz freigegeben werden kann
@@ -53,7 +56,7 @@ public abstract class BlockVar {
     public  volatile String path = ""; // Wo ist die aktuell geöffnete Datei gespeichert
 
 
-    public BlockVar() {
+    public ProjectVar() {
 
     }
 }

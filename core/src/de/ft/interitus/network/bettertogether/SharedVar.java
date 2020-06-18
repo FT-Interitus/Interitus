@@ -1,7 +1,6 @@
 package de.ft.interitus.network.bettertogether;
 
 import com.badlogic.gdx.math.Vector2;
-import de.ft.interitus.Block.BlockVar;
 
 public class SharedVar {
 

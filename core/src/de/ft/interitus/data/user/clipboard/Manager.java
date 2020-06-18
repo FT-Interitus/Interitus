@@ -1,6 +1,5 @@
 package de.ft.interitus.data.user.clipboard;
 
-import de.ft.interitus.Block.BlockVar;
 import de.ft.interitus.Var;
 
 public class Manager {

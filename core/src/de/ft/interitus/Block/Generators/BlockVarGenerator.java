@@ -1,7 +1,7 @@
 package de.ft.interitus.Block.Generators;
 
-import de.ft.interitus.Block.BlockVar;
+import de.ft.interitus.projecttypes.ProjectVar;
 
 public interface BlockVarGenerator {
-    BlockVar generate();
+    ProjectVar generate();
 }
