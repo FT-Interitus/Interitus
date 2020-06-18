@@ -124,6 +124,9 @@ public class PluginManagerHandler {
                                         DisplayErrors.customErrorstring = "Fehler in einem Plugin. Es wurde deaktiviert!";
                                         DisplayErrors.error = e;
                                         registeredplugins.remove(Var.pluginManager.loadedplugins.get(finalI));
+                                    }catch (NoClassDefFoundError e){
+
+                                        registeredplugins.remove(Var.pluginManager.loadedplugins.get(finalI));
                                     }
 
 
