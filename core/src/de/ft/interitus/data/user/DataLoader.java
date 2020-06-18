@@ -21,7 +21,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class DataLoader {
-    public static void load(final FileHandle handle) {
+    public static void load(final FileHandle handle, final String name, final String path) {
 
 
         Thread laden = new Thread() {
@@ -58,6 +58,9 @@ public class DataLoader {
                        Var.openprojects.add( temptype.init());
 
                        Var.openprojectindex = Var.openprojects.size()-1;
+                        Var.openprojects.get(Var.openprojectindex).filename = name;
+                        Var.openprojects.get(Var.openprojectindex).path = path;
+
                         BlockTappedBar.init();
 
                        System.out.println("changed tab");

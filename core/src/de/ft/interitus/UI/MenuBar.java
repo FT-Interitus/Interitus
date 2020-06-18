@@ -328,13 +328,11 @@ public class MenuBar {
                                     @Override
                                     public void result(Integer result) {
                                         if (result == nothing) {
-                                            ClearActOpenProgramm.clear();
+
                                             DataManager.saved();
-                                            Var.openprojects.get(Var.openprojectindex).filename = Data.filename.get(finalI);
-                                            Var.openprojects.get(Var.openprojectindex).path = Data.path.get(finalI);
 
                                             FileHandle handle = Gdx.files.absolute(Data.path.get(finalI));
-                                            DataLoader.load(handle);
+                                            DataLoader.load(handle,Data.filename.get(finalI),Data.path.get(finalI));
 
                                         }
 
@@ -360,11 +358,10 @@ public class MenuBar {
 
                         //ClearActOpenProgramm.clear();
                         DataManager.saved();
-                        Var.openprojects.get(Var.openprojectindex).filename = Data.filename.get(finalI);
-                        Var.openprojects.get(Var.openprojectindex).path = Data.path.get(finalI);
+
 
                         FileHandle handle = Gdx.files.absolute(Data.path.get(finalI));
-                        DataLoader.load(handle);
+                        DataLoader.load(handle,Data.filename.get(finalI),Data.path.get(finalI));
                     }
 
 

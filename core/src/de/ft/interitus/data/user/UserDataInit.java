@@ -27,7 +27,7 @@ public class UserDataInit {
 
                 if(extension!="") {
                     if(extension.contains("itp")) {
-                        DataLoader.load(Gdx.files.internal(filepaths[0]));
+                        DataLoader.load(Gdx.files.internal(filepaths[0]),filepaths[0],filepaths[0]); //TODO correct Name
                         return true;
                     }
                 }

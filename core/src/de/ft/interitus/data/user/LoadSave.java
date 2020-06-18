@@ -47,7 +47,7 @@ public class LoadSave {
                         } else {
                             Var.openprojects.get(Var.openprojectindex).path = fileToSave.getAbsolutePath() + ".itp";
                             DataSaver.save(Gdx.files.absolute(fileToSave.getAbsolutePath() + ".itp"));
-                            Var.openprojects.get(Var.openprojectindex).filename = fileToSave.getName() + ".itp";
+                            Var.openprojects.get(Var.openprojectindex).filename = fileToSave.getName() + "";
                         }
                         System.out.println(Var.openprojects.get(Var.openprojectindex).path);
 
@@ -98,11 +98,11 @@ public class LoadSave {
 
                     System.out.println("Selected file: " + selectedFile.getName());
                     FileHandle handle = Gdx.files.internal(selectedFile.getAbsolutePath());
-                    Var.openprojects.get(Var.openprojectindex).path = selectedFile.getAbsolutePath();
-                    Var.openprojects.get(Var.openprojectindex).filename = selectedFile.getName();
-                    DataLoader.load(handle);
+
+                    DataLoader.load(handle,selectedFile.getName(),selectedFile.getAbsolutePath());
+
                     DataManager.saved();
-                    Var.openprojects.get(Var.openprojectindex).filename = selectedFile.getName();
+
 
                     if (Data.filename.size() > 9) {
                         Data.filename.remove(0);
