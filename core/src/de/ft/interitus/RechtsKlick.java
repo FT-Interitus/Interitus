@@ -7,7 +7,8 @@ import de.ft.interitus.UI.popup.PopupMenue;
 
 public class RechtsKlick {
     public static Check check = new Check();
-
+    static boolean mob = false;
+   static boolean mow = false;
     public static int mouseoverblockindex;
     public static PopupManager popupmanager = new PopupManager();
 
@@ -18,8 +19,7 @@ public class RechtsKlick {
     }
 
     public static void Rechtsklickupdate() {
-        boolean mob = false;
-        boolean mow = false;
+
 
         if(!Var.isdialogeopend) {
 
