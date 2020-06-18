@@ -198,8 +198,11 @@ public class PluginManagerHandler {
 
     public Exception init() {
 
+        if(!new File(System.getProperty("user.home") + "/.itd/plugins").exists()) {
+            new File(System.getProperty("user.home") + "/.itd/plugins").mkdir();
+        }
 
-        File[] files = new File("plugins").listFiles(); //Aus dem Ordner Plugins werden alle Files aufgelistet
+        File[] files = new File(System.getProperty("user.home") + "/.itd/plugins").listFiles(); //Aus dem Ordner Plugins werden alle Files aufgelistet
         for (File f : files) {
             if (f.getName().split("\\.")[1].contains("itp") && f.getName().split("\\.")[1].endsWith("itp")) {
 
