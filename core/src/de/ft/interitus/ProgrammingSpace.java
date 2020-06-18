@@ -122,7 +122,7 @@ public class ProgrammingSpace extends ScreenAdapter {
 
       //  SerialConnection.searchArduino();
 
-      //  PortUpdate.UpdateConnectionWindowPortsList();
+     //   PortUpdate.UpdateConnectionWindowPortsList();
 
 
 
@@ -133,7 +133,9 @@ public class ProgrammingSpace extends ScreenAdapter {
 
     @Override
     public void render(float delta)  {
-System.gc();
+if(Gdx.input.isKeyJustPressed(Input.Keys.R)) {
+    System.gc();
+}
         renderstarttime = System.currentTimeMillis();
 
         if(Var.openprojects.get(Var.openprojectindex).projectType==null) {

@@ -40,7 +40,7 @@ public class MenuBar {
     public static MenuItem menuItem_ausschneiden;
     public static MenuItem menuItem_update;
     public static MenuItem menuItem_ueber;
-
+    public static MenuItem menuItem_clearram;
     public static Menu fileMenu;
 
     protected static void createMenus() {
@@ -237,6 +237,13 @@ public class MenuBar {
                 Dialogs.showOKDialog(UI.stage, "Über", "Programm-Version: " + Var.PROGRAMM_VERSION);
             }
         });
+
+        menuItem_clearram = new MenuItem("Clear RAM", new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                System.gc();
+            }
+        });
         //recent.setSubMenu(createSubMenu());
 
         windowMenu.addItem(menuItem_vollbild);
@@ -287,6 +294,9 @@ public class MenuBar {
 
 
         helpMenu.addItem(menuItem_update);
+        helpMenu.addItem(menuItem_clearram);
+
+        helpMenu.addSeparator();
 
         helpMenu.addItem(menuItem_ueber);
 

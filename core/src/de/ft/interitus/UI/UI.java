@@ -347,23 +347,25 @@ File testpath = new File("");
 
     public static void update() {
 
+if(Var.openprojects.size()!=tabbar.getTabbs().size()) {
+    tabbar.setTabs();
 
-        tabbar.setTabs();
-        /*
-        for(int i=0;i<Var.openprojects.size();i++){
-            Tab temptab=new Tab(); //TODO ganz gefährlich
-            temptab.getTabButton().setImage(AssetLoader.img_Tab);
-            temptab.getTabButton().setW(300);
-            temptab.getTabButton().widthoverText=true;
-            temptab.getTabButton().setText(Var.openprojects.get(i).filename);
-            temptab.setIndex(i);
-            tabbar.addTab(temptab);
-        }
+    for (int i = 0; i < Var.openprojects.size(); i++) {
+        Tab temptab = new Tab(); //TODO ganz gefährlich
+        temptab.getTabButton().setImage(AssetLoader.img_Tab);
+        temptab.getTabButton().setW(300);
+        temptab.getTabButton().widthoverText = true;
+        temptab.getTabButton().setText(Var.openprojects.get(i).filename);
+        temptab.setIndex(i);
+        tabbar.addTab(temptab);
+    }
 
-         */
+}
         if(tabbar.getSelectedTab()!=null) {
             if (tabbar.getSelectedTab().getIndex() != -1 ) {
-                 Var.openprojectindex = tabbar.getSelectedTab().getIndex();
+                if(Var.openprojectindex!=tabbar.getSelectedTab().getIndex()) {
+                    Var.openprojectindex = tabbar.getSelectedTab().getIndex();
+                }
             }
         }
         tabbar.setBounds(UIVar.abstandvonRand,UIVar.programmflaeche_h+UIVar.programmflaeche_y,300,20);
