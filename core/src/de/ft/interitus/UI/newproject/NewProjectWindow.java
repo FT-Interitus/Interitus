@@ -164,12 +164,10 @@ public class NewProjectWindow {
                     MenuBar.menuItem_speichern.setText("Speichern");
 
 
-                    //TODO check if there are unsaved changes
-
 
                     BlockTappedBar.init();
                     Var.isdialogeopend = false;
-                    ClearActOpenProgramm.clear();
+                   // ClearActOpenProgramm.clear();
 
                     setupBuilder.close();
                 }
