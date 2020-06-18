@@ -56,6 +56,10 @@ public class TabBar {
 
     }
 
+    public ArrayList<Tab> getTabbs() {
+        return tabbs;
+    }
+
     public Tab getSelectedTab() {
         return selectedTab;
     }

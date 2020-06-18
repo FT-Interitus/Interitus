@@ -343,6 +343,27 @@ public class UI {
     }
 
     public static void update() {
+
+
+        tabbar.setTabs();
+        for(int i=0;i<Var.openprojects.size();i++){
+            Tab temptab=new Tab();
+            temptab.getTabButton().setImage(AssetLoader.img_Tab);
+            temptab.getTabButton().setW(300);
+            temptab.getTabButton().widthoverText=true;
+            temptab.getTabButton().setText(Var.openprojects.get(i).filename);
+            temptab.setIndex(i);
+            tabbar.addTab(temptab);
+        }
+        if(tabbar.getSelectedTab()!=null) {
+            if (tabbar.getSelectedTab().getIndex() != -1 ) {
+                 Var.openprojectindex = tabbar.getSelectedTab().getIndex();
+            }
+        }
+        tabbar.setBounds(UIVar.abstandvonRand,UIVar.programmflaeche_h+UIVar.programmflaeche_y,300,20);
+        tabbar.draw();
+
+
         stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 60f));
 
         //root.setPosition(0,0);
@@ -363,18 +384,7 @@ public class UI {
             proset.show();
 
         }
-        tabbar.setTabs();
-        for(int i=0;i<Var.openprojects.size();i++){
-            Tab temptab=new Tab();
-            temptab.getTabButton().setImage(AssetLoader.img_Tab);
-            temptab.getTabButton().setW(300);
-            temptab.getTabButton().setText("2.tabasdölkghjkjhgjkkjgjjgkjgjjkkjgjgkgkgjasdflkjasdflökjasdfölkjasdf");
-            temptab.getTabButton().widthoverText=true;
-            temptab.getTabButton().setText(Var.openprojects.get(i).filename);
-            tabbar.addTab(temptab);
-        }
-        tabbar.setBounds(UIVar.abstandvonRand,UIVar.programmflaeche_h+UIVar.programmflaeche_y,300,20);
-        tabbar.draw();
+
 
     }
 
