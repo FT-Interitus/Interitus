@@ -83,7 +83,7 @@ public class MenuBar {
 
                 if (!LoadSave.isopenopen()) {
                     if (!Var.isclearing) {
-                        if (DataManager.changes) {
+                        if (Var.openprojects.get(Var.openprojectindex).changes) {
                             String[] möglichkeiten = {"Verwerfen", "Speichern", "Abbrechen"};
 
 
@@ -104,8 +104,8 @@ public class MenuBar {
 
                                             if (result == everything) {
                                                 if(Var.openprojects.get(Var.openprojectindex).vcs== VCS.NONE) {
-                                                    if (DataManager.path != "") {
-                                                        FileHandle handle = Gdx.files.external(DataManager.path);
+                                                    if (Var.openprojects.get(Var.openprojectindex).path != "") {
+                                                        FileHandle handle = Gdx.files.external(Var.openprojects.get(Var.openprojectindex).path);
                                                         DataSaver.save(handle);
                                                         DataManager.saved();
                                                     } else {
@@ -141,8 +141,8 @@ public class MenuBar {
             public void changed(ChangeEvent event, Actor actor) {
 
                 if(Var.openprojects.get(Var.openprojectindex).vcs== VCS.NONE) {
-                    if (DataManager.path != "") {
-                        FileHandle handle = Gdx.files.absolute(DataManager.path);
+                    if (Var.openprojects.get(Var.openprojectindex).path != "") {
+                        FileHandle handle = Gdx.files.absolute(Var.openprojects.get(Var.openprojectindex).path);
                         DataSaver.save(handle);
                         DataManager.saved();
                     } else {
@@ -315,7 +315,7 @@ public class MenuBar {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
 
-                    if (DataManager.changes) {
+                    if (Var.openprojects.get(Var.openprojectindex).changes) {
 
                         String[] möglichkeiten = {"Verwerfen", "Speichern", "Abbrechen"};
                         final int nothing = 1;
@@ -330,8 +330,8 @@ public class MenuBar {
                                         if (result == nothing) {
                                             ClearActOpenProgramm.clear();
                                             DataManager.saved();
-                                            DataManager.filename = Data.filename.get(finalI);
-                                            DataManager.path = Data.path.get(finalI);
+                                            Var.openprojects.get(Var.openprojectindex).filename = Data.filename.get(finalI);
+                                            Var.openprojects.get(Var.openprojectindex).path = Data.path.get(finalI);
 
                                             FileHandle handle = Gdx.files.absolute(Data.path.get(finalI));
                                             DataLoader.load(handle);
@@ -339,8 +339,8 @@ public class MenuBar {
                                         }
 
                                         if (result == everything) {
-                                            if (DataManager.path != "") {
-                                                FileHandle handle = Gdx.files.external(DataManager.path);
+                                            if (Var.openprojects.get(Var.openprojectindex).path != "") {
+                                                FileHandle handle = Gdx.files.external(Var.openprojects.get(Var.openprojectindex).path);
                                                 DataSaver.save(handle);
                                                 DataManager.saved();
                                             } else {
@@ -360,8 +360,8 @@ public class MenuBar {
 
                         //ClearActOpenProgramm.clear();
                         DataManager.saved();
-                        DataManager.filename = Data.filename.get(finalI);
-                        DataManager.path = Data.path.get(finalI);
+                        Var.openprojects.get(Var.openprojectindex).filename = Data.filename.get(finalI);
+                        Var.openprojects.get(Var.openprojectindex).path = Data.path.get(finalI);
 
                         FileHandle handle = Gdx.files.absolute(Data.path.get(finalI));
                         DataLoader.load(handle);

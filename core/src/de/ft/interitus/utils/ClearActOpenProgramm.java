@@ -83,8 +83,8 @@ public class ClearActOpenProgramm {
         Var.openprojects.get(Var.openprojectindex).blockmitdergrostenuberlappungmitmarkiertemblock = null;
 
         DataManager.saved();
-        DataManager.filename = "New File";
-        DataManager.path = "";
+        Var.openprojects.get(Var.openprojectindex).filename = "New File";
+        Var.openprojects.get(Var.openprojectindex).path = "";
 
 
         Var.openprojects.get(Var.openprojectindex).wireNodes.clear();

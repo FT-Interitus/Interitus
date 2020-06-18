@@ -8,8 +8,10 @@ import com.badlogic.gdx.backends.lwjgl3.Lwjgl3WindowAdapter;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3WindowConfiguration;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
@@ -39,6 +41,7 @@ import de.ft.interitus.utils.PositionSaver;
 import de.ft.interitus.utils.animation.Animation;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 
 public class ProgrammingSpace extends ScreenAdapter implements Screen {
@@ -64,9 +67,6 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
     IntegerAuswahl ia;
 
     public static PressedKeys pressedKeys;
-
-   static Lwjgl3Window latestWindow;
-
 
 
 
@@ -101,47 +101,11 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
         de.ft.interitus.UI.Viewport.init();
 
         Gdx.graphics.setTitle("New File");
-        DataManager.filename = "New File";
+        Var.openprojects.get(Var.openprojectindex).filename = "New File";
 
         s.setBackground(AssetLoader.switch_background);
         s.setBackgroundgreen(AssetLoader.switch_background_green);
         s.setInside(AssetLoader.switch_inside);
-
-/*
-        Thread blockdebugcreater = new Thread() {
-            @Override
-            public void run() {
-                try {
-
-
-                    for (int i = 0; i < 1; i = i + 1) {
-
-
-                            BlockVar.blocks.add(new Block(i, 400+i*250, 552, 150, 70, new Wait()));
-
-
-
-
-
-                        System.out.println(i);
-                        //  MainGame.logger.finest(String.valueOf(i));
-                    }
-
-
-                    System.out.println("Block creating done");
-                } catch (Exception e) {
-                    DisplayErrors.error = e;
-                    e.printStackTrace(); //for debug to find errors
-                }
-            }
-        };
-
-
-        blockdebugcreater.start();
-
-
- */
-
 
 
         cam.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);

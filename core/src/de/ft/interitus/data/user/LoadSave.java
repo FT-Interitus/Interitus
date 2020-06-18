@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.Var;
 import de.ft.interitus.data.programm.Data;
 import de.ft.interitus.data.user.changes.DataManager;
 
@@ -39,16 +40,16 @@ public class LoadSave {
 
 
                         if (fileToSave.getAbsolutePath().contains(".itp")) {
-                            DataManager.path = fileToSave.getAbsolutePath();
+                            Var.openprojects.get(Var.openprojectindex).path = fileToSave.getAbsolutePath();
                             DataSaver.save(Gdx.files.absolute(fileToSave.getAbsolutePath()));
-                            DataManager.filename = fileToSave.getName();
+                            Var.openprojects.get(Var.openprojectindex).filename = fileToSave.getName();
 
                         } else {
-                            DataManager.path = fileToSave.getAbsolutePath() + ".itp";
+                            Var.openprojects.get(Var.openprojectindex).path = fileToSave.getAbsolutePath() + ".itp";
                             DataSaver.save(Gdx.files.absolute(fileToSave.getAbsolutePath() + ".itp"));
-                            DataManager.filename = fileToSave.getName() + ".itp";
+                            Var.openprojects.get(Var.openprojectindex).filename = fileToSave.getName() + ".itp";
                         }
-                        System.out.println(DataManager.path);
+                        System.out.println(Var.openprojects.get(Var.openprojectindex).path);
 
                         if (Data.filename.size() > 9) {
                             Data.filename.remove(0);
@@ -97,11 +98,11 @@ public class LoadSave {
 
                     System.out.println("Selected file: " + selectedFile.getName());
                     FileHandle handle = Gdx.files.internal(selectedFile.getAbsolutePath());
-                    DataManager.path = selectedFile.getAbsolutePath();
-                    DataManager.filename = selectedFile.getName();
+                    Var.openprojects.get(Var.openprojectindex).path = selectedFile.getAbsolutePath();
+                    Var.openprojects.get(Var.openprojectindex).filename = selectedFile.getName();
                     DataLoader.load(handle);
                     DataManager.saved();
-                    DataManager.filename = selectedFile.getName();
+                    Var.openprojects.get(Var.openprojectindex).filename = selectedFile.getName();
 
                     if (Data.filename.size() > 9) {
                         Data.filename.remove(0);
