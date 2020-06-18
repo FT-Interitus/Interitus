@@ -82,7 +82,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
         pressedKeys=new PressedKeys();
         RechtsKlick.Init();
-         BlockTappedBar.init(); //TODO reinit after new Project was created or loaded
+         BlockTappedBar.init();
 
         nativ = new PluginRegister();
         nativ.config(Configuration.name,"Nativ");
@@ -170,7 +170,6 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
     @Override
     public void render(float delta)  {
         renderstarttime = System.currentTimeMillis();
-        CreateWindow.createdebugwindow();
 
         if(Var.openprojects.get(Var.openprojectindex).projectType==null) {
            Programm.INSTANCE.setScreen(new Welcome());

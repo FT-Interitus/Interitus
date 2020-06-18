@@ -2,6 +2,7 @@ package de.ft.interitus;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Graphics;
 import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.widget.MenuItem;
 import de.ft.interitus.Block.BlockVar;
@@ -15,6 +16,7 @@ import de.ft.interitus.data.user.experience.ExperienceManager;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.UI.UILoadEvent;
 import de.ft.interitus.loading.Loading;
+import de.ft.interitus.loading.SplashScreen;
 import de.ft.interitus.network.bettertogether.Manager;
 import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.plugin.store.ReadStorePlugins;
@@ -40,6 +42,9 @@ public class Programm extends Game {
 
     @Override
     public void create() {
+        ((Lwjgl3Graphics)Gdx.graphics).getWindow().iconifyWindow();
+        Var.splashscreen = SplashScreen.create();
+
 
       //  Manager.init();
 

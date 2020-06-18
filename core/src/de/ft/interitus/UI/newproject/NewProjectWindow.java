@@ -163,7 +163,7 @@ public class NewProjectWindow {
 
                     MenuBar.menuItem_speichern.setText("Speichern");
 
-                    //TODO init new project
+
                     //TODO check if there are unsaved changes
 
 

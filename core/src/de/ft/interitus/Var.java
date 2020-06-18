@@ -42,6 +42,9 @@ public class Var {
     public static Vector2 mousepressedold = new Vector2(1, 1); //Wo war die Maus als das letzte mal eine Taste gedrückt wurde
 
     public static ArrayList<Window> extendsWindows = new ArrayList<>();
+    public static Window splashscreen = null;
 
     public static ArrayList<Tab>ProjektTabs=new ArrayList<>();
+
+
 }

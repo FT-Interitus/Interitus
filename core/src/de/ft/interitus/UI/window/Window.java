@@ -9,10 +9,10 @@ import de.ft.interitus.Var;
 
 
 public class Window {
-    ApplicationListener listener;
-    Lwjgl3WindowConfiguration config;
+    private ApplicationListener listener;
+    private Lwjgl3WindowConfiguration config;
     private Lwjgl3Window window;
-    public Window(ApplicationListener listener, Lwjgl3WindowConfiguration config) {
+   protected Window(ApplicationListener listener, Lwjgl3WindowConfiguration config) {
         this.listener = listener;
         this.config = config;
     }
