@@ -12,8 +12,18 @@ public class Var {
 
     public static PluginManagerHandler pluginManager;
 
-    public static double PROGRAMM_VERSION_ID = 1.0;
-    public static double PROGRAMM_VERSION = 1.0;
+    public static double PROGRAMM_VERSION_ID = 01;
+
+
+    /**
+     * Erklärung
+     *  Änderung an der letzen Zahl bei kleineren Änderungen (Bugfixes, Typos, ...)
+     *           an der zweiten Zahl bei neuen Featurs,..
+     *           an der Erste Zahl bei größern Update Packeten
+     *
+     */
+    public static String PROGRAMM_VERSION = "0.0.1";
+
     public static double API_VERSION = 1.0;
     public static boolean isloading = false;
     public static boolean isclearing = false;
