@@ -2,7 +2,6 @@ package de.ft.interitus.data.user;
 
 import com.badlogic.gdx.files.FileHandle;
 import de.ft.interitus.Block.SaveBlock;
-import de.ft.interitus.Var;
 import de.ft.interitus.data.programm.Data;
 import de.ft.interitus.projecttypes.ProjectManager;
 import org.json.JSONObject;
@@ -27,8 +26,8 @@ public class DataSaver {
 
                 ArrayList<SaveBlock> saveBlocks = new ArrayList<>();
 
-                for (int i = 0; i < Var.openprojects.get(Var.openprojectindex).blocks.size(); i++) {
-                    saveBlocks.add(Var.openprojects.get(Var.openprojectindex).blocks.get(i).getBlocktoSaveGenerator().generate(Var.openprojects.get(Var.openprojectindex).blocks.get(i)));
+                for (int i = 0; i < ProjectManager.getActProjectVar().blocks.size(); i++) {
+                    saveBlocks.add(ProjectManager.getActProjectVar().blocks.get(i).getBlocktoSaveGenerator().generate(ProjectManager.getActProjectVar().blocks.get(i)));
                 }
 
 
@@ -45,11 +44,11 @@ public class DataSaver {
                 }
 
                 JSONObject settings = new JSONObject();
-                settings.put("vcs", Var.openprojects.get(Var.openprojectindex).vcs);
-                settings.put("type",Var.openprojects.get(Var.openprojectindex).projectType.getName());
-                settings.put("zoom", ProjectManager.getactProjectVar().zoom);
-                settings.put("pos_x",ProjectManager.getactProjectVar().cam_pos.x);
-                settings.put("pos_y",ProjectManager.getactProjectVar().cam_pos.y);
+                settings.put("vcs", ProjectManager.getActProjectVar().vcs);
+                settings.put("type",ProjectManager.getActProjectVar().projectType.getName());
+                settings.put("zoom", ProjectManager.getActProjectVar().zoom);
+                settings.put("pos_x",ProjectManager.getActProjectVar().cam_pos.x);
+                settings.put("pos_y",ProjectManager.getActProjectVar().cam_pos.y);
                 try {
                     Files.write(Paths.get(Data.tempfolder + "/" + generateprojektsettingsname), settings.toString().getBytes());
                 } catch (IOException e) {

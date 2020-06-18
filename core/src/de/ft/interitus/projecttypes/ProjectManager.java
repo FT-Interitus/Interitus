@@ -12,7 +12,7 @@ public class ProjectManager {
         Var.openprojectindex = index;
     }
 
-    public static ProjectVar getactProjectVar() {
+    public static ProjectVar getActProjectVar() {
         return Var.openprojects.get(Var.openprojectindex);
     }
 }

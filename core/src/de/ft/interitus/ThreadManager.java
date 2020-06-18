@@ -3,8 +3,8 @@ package de.ft.interitus;
 import com.badlogic.gdx.math.Frustum;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.BlockUpdate;
+import de.ft.interitus.projecttypes.ProjectManager;
 
-import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -16,14 +16,14 @@ public class ThreadManager {
 
     public static Thread add(Thread thread, Object obj) {
         Thread createThread = new Thread();
-        Var.openprojects.get(Var.openprojectindex).threads.add(thread);
-        Var.openprojects.get(Var.openprojectindex).requestobj.add(obj);
+        ProjectManager.getActProjectVar().threads.add(thread);
+        ProjectManager.getActProjectVar().requestobj.add(obj);
         return createThread;
     }
 
     public static void stopall() {
-        for(int i=0;i<Var.openprojects.get(Var.openprojectindex).threads.size();i++) {
-            ((BlockUpdate) Var.openprojects.get(Var.openprojectindex).threads.get(i)).time.cancel();
+        for(int i = 0; i< ProjectManager.getActProjectVar().threads.size(); i++) {
+            ((BlockUpdate) ProjectManager.getActProjectVar().threads.get(i)).time.cancel();
         }
     }
 
@@ -45,31 +45,31 @@ public class ThreadManager {
                                 camfr = ProgrammingSpace.cam.frustum;
 
 
-                                for (int i = 0; i < Var.openprojects.get(Var.openprojectindex).blocks.size(); i++) {
+                                for (int i = 0; i < ProjectManager.getActProjectVar().blocks.size(); i++) {
                                     //System.out.println("Test"+i);
 //                            System.out.println(camfr.boundsInFrustum(BlockVar.blocks.get(10).getX(), BlockVar.blocks.get(10).getY(), 0, BlockVar.blocks.get(10).getW(), BlockVar.blocks.get(10).getH(),0));
                                     try {
-                                        Block block = ((BlockUpdate) Var.openprojects.get(Var.openprojectindex).threads.get(i)).block;
-                                        if (!(camfr.boundsInFrustum(block.getX(), block.getY(), 0, block.getW(), block.getH(), 0)) && block.isMarked() == false && ((BlockUpdate) Var.openprojects.get(Var.openprojectindex).threads.get(i)).isrunning == true) {
+                                        Block block = ((BlockUpdate) ProjectManager.getActProjectVar().threads.get(i)).block;
+                                        if (!(camfr.boundsInFrustum(block.getX(), block.getY(), 0, block.getW(), block.getH(), 0)) && block.isMarked() == false && ((BlockUpdate) ProjectManager.getActProjectVar().threads.get(i)).isrunning == true) {
 
-                                            if (((BlockUpdate) Var.openprojects.get(Var.openprojectindex).threads.get(i)).isrunning) {
+                                            if (((BlockUpdate) ProjectManager.getActProjectVar().threads.get(i)).isrunning) {
                                                 try {
-                                                    ((BlockUpdate) Var.openprojects.get(Var.openprojectindex).threads.get(i)).time.cancel();
+                                                    ((BlockUpdate) ProjectManager.getActProjectVar().threads.get(i)).time.cancel();
                                                 } catch (Exception e) {
                                                 }
                                             }
-                                            Var.openprojects.get(Var.openprojectindex).threads.get(i).interrupt();
-                                            ((BlockUpdate) Var.openprojects.get(Var.openprojectindex).threads.get(i)).isrunning = false;
-                                            Var.openprojects.get(Var.openprojectindex).visibleblocks.remove(block);
+                                            ProjectManager.getActProjectVar().threads.get(i).interrupt();
+                                            ((BlockUpdate) ProjectManager.getActProjectVar().threads.get(i)).isrunning = false;
+                                            ProjectManager.getActProjectVar().visibleblocks.remove(block);
                                         }
 
-                                        if (camfr.boundsInFrustum(block.getX(), block.getY(), 0, block.getW(), block.getH(), 0) && ((BlockUpdate) Var.openprojects.get(Var.openprojectindex).threads.get(i)).isrunning == false) {
-                                            Var.openprojects.get(Var.openprojectindex).visibleblocks.add(block);
-                                            Var.openprojects.get(Var.openprojectindex).threads.set(i, ((BlockUpdate) Var.openprojects.get(Var.openprojectindex).threads.get(i)).block.allowedRestart());
+                                        if (camfr.boundsInFrustum(block.getX(), block.getY(), 0, block.getW(), block.getH(), 0) && ((BlockUpdate) ProjectManager.getActProjectVar().threads.get(i)).isrunning == false) {
+                                            ProjectManager.getActProjectVar().visibleblocks.add(block);
+                                            ProjectManager.getActProjectVar().threads.set(i, ((BlockUpdate) ProjectManager.getActProjectVar().threads.get(i)).block.allowedRestart());
                                             if (Var.verboseoutput) {
                                                 System.out.println("Started " + block.getIndex());
                                             }
-                                            ((BlockUpdate) Var.openprojects.get(Var.openprojectindex).threads.get(i)).isrunning = true;
+                                            ((BlockUpdate) ProjectManager.getActProjectVar().threads.get(i)).isrunning = true;
                                         }
 
 
@@ -80,26 +80,26 @@ public class ThreadManager {
                                 }
 
 
-                                for (int i = 0; i < Var.openprojects.get(Var.openprojectindex).wires.size(); i++) {
-                                    if (Var.openprojects.get(Var.openprojectindex).wires.get(i).isvisible()) {
-                                        if (Var.openprojects.get(Var.openprojectindex).visiblewires.indexOf(Var.openprojects.get(Var.openprojectindex).wires.get(i)) == -1) {
-                                            Var.openprojects.get(Var.openprojectindex).visiblewires.add(Var.openprojects.get(Var.openprojectindex).wires.get(i));
+                                for (int i = 0; i < ProjectManager.getActProjectVar().wires.size(); i++) {
+                                    if (ProjectManager.getActProjectVar().wires.get(i).isvisible()) {
+                                        if (ProjectManager.getActProjectVar().visiblewires.indexOf(ProjectManager.getActProjectVar().wires.get(i)) == -1) {
+                                            ProjectManager.getActProjectVar().visiblewires.add(ProjectManager.getActProjectVar().wires.get(i));
                                         }
                                     } else {
-                                        if (Var.openprojects.get(Var.openprojectindex).visiblewires.indexOf(Var.openprojects.get(Var.openprojectindex).wires.get(i)) != -1) {
-                                            Var.openprojects.get(Var.openprojectindex).visiblewires.remove(Var.openprojects.get(Var.openprojectindex).wires.get(i));
+                                        if (ProjectManager.getActProjectVar().visiblewires.indexOf(ProjectManager.getActProjectVar().wires.get(i)) != -1) {
+                                            ProjectManager.getActProjectVar().visiblewires.remove(ProjectManager.getActProjectVar().wires.get(i));
                                         }
                                     }
                                 }
 
-                                for (int i = 0; i < Var.openprojects.get(Var.openprojectindex).wireNodes.size(); i++) {
-                                    if (Var.openprojects.get(Var.openprojectindex).wireNodes.get(i).isVisible()) {
-                                        if (Var.openprojects.get(Var.openprojectindex).visibleWireNodes.indexOf(Var.openprojects.get(Var.openprojectindex).wireNodes.get(i)) == -1) {
-                                            Var.openprojects.get(Var.openprojectindex).visibleWireNodes.add(Var.openprojects.get(Var.openprojectindex).wireNodes.get(i));
+                                for (int i = 0; i < ProjectManager.getActProjectVar().wireNodes.size(); i++) {
+                                    if (ProjectManager.getActProjectVar().wireNodes.get(i).isVisible()) {
+                                        if (ProjectManager.getActProjectVar().visibleWireNodes.indexOf(ProjectManager.getActProjectVar().wireNodes.get(i)) == -1) {
+                                            ProjectManager.getActProjectVar().visibleWireNodes.add(ProjectManager.getActProjectVar().wireNodes.get(i));
                                         }
                                     } else {
-                                        if (Var.openprojects.get(Var.openprojectindex).visibleWireNodes.indexOf(Var.openprojects.get(Var.openprojectindex).wireNodes.get(i)) != -1) {
-                                            Var.openprojects.get(Var.openprojectindex).visibleWireNodes.remove(Var.openprojects.get(Var.openprojectindex).wireNodes.get(i));
+                                        if (ProjectManager.getActProjectVar().visibleWireNodes.indexOf(ProjectManager.getActProjectVar().wireNodes.get(i)) != -1) {
+                                            ProjectManager.getActProjectVar().visibleWireNodes.remove(ProjectManager.getActProjectVar().wireNodes.get(i));
                                         }
                                     }
                                 }
@@ -112,10 +112,10 @@ public class ThreadManager {
 
                             //Enable or disable Wire System
 
-                            if (Var.openprojects.get(Var.openprojectindex).ismoving) {
-                                Var.openprojects.get(Var.openprojectindex).wirezulassung = false;
+                            if (ProjectManager.getActProjectVar().ismoving) {
+                                ProjectManager.getActProjectVar().wirezulassung = false;
                             } else {
-                                Var.openprojects.get(Var.openprojectindex).wirezulassung = true;
+                                ProjectManager.getActProjectVar().wirezulassung = true;
                             }
                         }
 

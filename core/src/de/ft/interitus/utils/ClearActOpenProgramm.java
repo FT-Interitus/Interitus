@@ -4,6 +4,7 @@ import de.ft.interitus.Block.Block;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Var;
 import de.ft.interitus.data.user.changes.DataManager;
+import de.ft.interitus.projecttypes.ProjectManager;
 
 import java.util.ArrayList;
 
@@ -15,7 +16,7 @@ public class ClearActOpenProgramm {
 
     public static void clear() {
         Var.isclearing = true;
-        blockstoclear = (ArrayList<Block>) Var.openprojects.get(Var.openprojectindex).blocks.clone();
+        blockstoclear = (ArrayList<Block>) ProjectManager.getActProjectVar().blocks.clone();
 
 
 
@@ -25,7 +26,7 @@ public class ClearActOpenProgramm {
 
                 try {
 
-                    blockstoclear.removeAll(Var.openprojects.get(Var.openprojectindex).visibleblocks);
+                    blockstoclear.removeAll(ProjectManager.getActProjectVar().visibleblocks);
 
 
                     try {
@@ -52,9 +53,9 @@ public class ClearActOpenProgramm {
 
 
         try {
-            while (Var.openprojects.get(Var.openprojectindex).visibleblocks.size() != 0) {
-                Var.openprojects.get(Var.openprojectindex).visibleblocks.get(0).delete(true);
-                Var.openprojects.get(Var.openprojectindex).visibleblocks.remove(0);
+            while (ProjectManager.getActProjectVar().visibleblocks.size() != 0) {
+                ProjectManager.getActProjectVar().visibleblocks.get(0).delete(true);
+                ProjectManager.getActProjectVar().visibleblocks.remove(0);
 
 
             }
@@ -67,32 +68,32 @@ public class ClearActOpenProgramm {
             System.exit(-121);
         }
 
-        Var.openprojects.get(Var.openprojectindex).visibleblocks.clear();
+        ProjectManager.getActProjectVar().visibleblocks.clear();
 
-        Var.openprojects.get(Var.openprojectindex).blocks.clear();
+        ProjectManager.getActProjectVar().blocks.clear();
 
-        Var.openprojects.get(Var.openprojectindex).biggestblock = null;
-        Var.openprojects.get(Var.openprojectindex).markedblock = null;
-        Var.openprojects.get(Var.openprojectindex).ismoving = false;
-        Var.openprojects.get(Var.openprojectindex).showduplicat.clear();
+        ProjectManager.getActProjectVar().biggestblock = null;
+        ProjectManager.getActProjectVar().markedblock = null;
+        ProjectManager.getActProjectVar().ismoving = false;
+        ProjectManager.getActProjectVar().showduplicat.clear();
 
 
-        Var.openprojects.get(Var.openprojectindex).uberlapptmitmarkedblock.clear();
-        Var.openprojects.get(Var.openprojectindex).blockmitdergrostenuberlappungmitmarkiertemblock = null;
+        ProjectManager.getActProjectVar().uberlapptmitmarkedblock.clear();
+        ProjectManager.getActProjectVar().blockmitdergrostenuberlappungmitmarkiertemblock = null;
 
         DataManager.saved();
-        Var.openprojects.get(Var.openprojectindex).filename = "New File";
-        Var.openprojects.get(Var.openprojectindex).path = "";
+        ProjectManager.getActProjectVar().filename = "New File";
+        ProjectManager.getActProjectVar().path = "";
 
 
-        Var.openprojects.get(Var.openprojectindex).wireNodes.clear();
-        Var.openprojects.get(Var.openprojectindex).showleftdocker = false;
-        Var.openprojects.get(Var.openprojectindex).connetor_offerd_hoverd_block = null;
-        Var.openprojects.get(Var.openprojectindex).wires.clear();
-        Var.openprojects.get(Var.openprojectindex).movingwires = null;
-        Var.openprojects.get(Var.openprojectindex).visiblewires.clear();
-        Var.openprojects.get(Var.openprojectindex).visibleWireNodes.clear();
-        Var.openprojects.get(Var.openprojectindex).wire_beginn = null;
+        ProjectManager.getActProjectVar().wireNodes.clear();
+        ProjectManager.getActProjectVar().showleftdocker = false;
+        ProjectManager.getActProjectVar().connetor_offerd_hoverd_block = null;
+        ProjectManager.getActProjectVar().wires.clear();
+        ProjectManager.getActProjectVar().movingwires = null;
+        ProjectManager.getActProjectVar().visiblewires.clear();
+        ProjectManager.getActProjectVar().visibleWireNodes.clear();
+        ProjectManager.getActProjectVar().wire_beginn = null;
 
 
         //clear.start();

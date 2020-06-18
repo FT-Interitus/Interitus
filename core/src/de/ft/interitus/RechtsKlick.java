@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import de.ft.interitus.UI.UIElements.check.Check;
 import de.ft.interitus.UI.popup.PopupManager;
 import de.ft.interitus.UI.popup.PopupMenue;
+import de.ft.interitus.projecttypes.ProjectManager;
 
 public class RechtsKlick {
     public static Check check = new Check();
@@ -24,16 +25,16 @@ public class RechtsKlick {
         if(!Var.isdialogeopend) {
 
             if (Gdx.input.isButtonPressed(1)) {
-                for (int i = 0; i < Var.openprojects.get(Var.openprojectindex).visibleblocks.size(); i++) {
+                for (int i = 0; i < ProjectManager.getActProjectVar().visibleblocks.size(); i++) {
 
-                    if (check.isMouseover(Var.openprojects.get(Var.openprojectindex).visibleblocks.get(i).getX(), Var.openprojects.get(Var.openprojectindex).visibleblocks.get(i).getY(), Var.openprojects.get(Var.openprojectindex).visibleblocks.get(i).getW(), Var.openprojects.get(Var.openprojectindex).visibleblocks.get(i).getH()) && Var.openprojects.get(Var.openprojectindex).mousehoveredwire == null) {
+                    if (check.isMouseover(ProjectManager.getActProjectVar().visibleblocks.get(i).getX(), ProjectManager.getActProjectVar().visibleblocks.get(i).getY(), ProjectManager.getActProjectVar().visibleblocks.get(i).getW(), ProjectManager.getActProjectVar().visibleblocks.get(i).getH()) && ProjectManager.getActProjectVar().mousehoveredwire == null) {
                         mouseoverblockindex = i;
                         mob = true;
 
                     }
                 }
 
-                if (Var.openprojects.get(Var.openprojectindex).mousehoveredwire != null) {
+                if (ProjectManager.getActProjectVar().mousehoveredwire != null) {
                     mow = true;
 
                 }

@@ -21,8 +21,8 @@ import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.UI.UIOpenSettingsEvent;
 import de.ft.interitus.plugin.PluginGateway;
+import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.VCS;
-import de.ft.interitus.utils.ClearActOpenProgramm;
 
 
 public class MenuBar {
@@ -83,7 +83,7 @@ public class MenuBar {
 
                 if (!LoadSave.isopenopen()) {
                     if (!Var.isclearing) {
-                        if (Var.openprojects.get(Var.openprojectindex).changes) {
+                        if (ProjectManager.getActProjectVar().changes) {
                             String[] möglichkeiten = {"Verwerfen", "Speichern", "Abbrechen"};
 
 
@@ -103,15 +103,15 @@ public class MenuBar {
                                             }
 
                                             if (result == everything) {
-                                                if(Var.openprojects.get(Var.openprojectindex).vcs== VCS.NONE) {
-                                                    if (Var.openprojects.get(Var.openprojectindex).path != "") {
-                                                        FileHandle handle = Gdx.files.external(Var.openprojects.get(Var.openprojectindex).path);
+                                                if(ProjectManager.getActProjectVar().vcs== VCS.NONE) {
+                                                    if (ProjectManager.getActProjectVar().path != "") {
+                                                        FileHandle handle = Gdx.files.external(ProjectManager.getActProjectVar().path);
                                                         DataSaver.save(handle);
                                                         DataManager.saved();
                                                     } else {
                                                         LoadSave.saveas();
                                                     }
-                                                }else if(Var.openprojects.get(Var.openprojectindex).vcs==VCS.ITEV) {
+                                                }else if(ProjectManager.getActProjectVar().vcs==VCS.ITEV) {
 
                                                 }
                                             }
@@ -140,9 +140,9 @@ public class MenuBar {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
-                if(Var.openprojects.get(Var.openprojectindex).vcs== VCS.NONE) {
-                    if (Var.openprojects.get(Var.openprojectindex).path != "") {
-                        FileHandle handle = Gdx.files.absolute(Var.openprojects.get(Var.openprojectindex).path);
+                if(ProjectManager.getActProjectVar().vcs== VCS.NONE) {
+                    if (ProjectManager.getActProjectVar().path != "") {
+                        FileHandle handle = Gdx.files.absolute(ProjectManager.getActProjectVar().path);
                         DataSaver.save(handle);
                         DataManager.saved();
                     } else {
@@ -150,7 +150,7 @@ public class MenuBar {
                             LoadSave.saveas();
                         }
                     }
-                }else if(Var.openprojects.get(Var.openprojectindex).vcs==VCS.ITEV){
+                }else if(ProjectManager.getActProjectVar().vcs==VCS.ITEV){
 
                 }
             }
@@ -277,7 +277,7 @@ public class MenuBar {
         editMenu.addItem(UI.copy = new MenuItem("Kopieren", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                if (Var.openprojects.get(Var.openprojectindex).marked) {
+                if (ProjectManager.getActProjectVar().marked) {
                     de.ft.interitus.data.user.clipboard.Manager.Copy();
                 }
             }
@@ -325,7 +325,7 @@ public class MenuBar {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
 
-                    if (Var.openprojects.get(Var.openprojectindex).changes) {
+                    if (ProjectManager.getActProjectVar().changes) {
 
                         String[] möglichkeiten = {"Verwerfen", "Speichern", "Abbrechen"};
                         final int nothing = 1;
@@ -347,8 +347,8 @@ public class MenuBar {
                                         }
 
                                         if (result == everything) {
-                                            if (Var.openprojects.get(Var.openprojectindex).path != "") {
-                                                FileHandle handle = Gdx.files.external(Var.openprojects.get(Var.openprojectindex).path);
+                                            if (ProjectManager.getActProjectVar().path != "") {
+                                                FileHandle handle = Gdx.files.external(ProjectManager.getActProjectVar().path);
                                                 DataSaver.save(handle);
                                                 DataManager.saved();
                                             } else {

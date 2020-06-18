@@ -10,15 +10,12 @@ import com.kotcrab.vis.ui.building.utilities.CellWidget;
 import com.kotcrab.vis.ui.building.utilities.Padding;
 import com.kotcrab.vis.ui.widget.*;
 import de.ft.interitus.Settings;
-import de.ft.interitus.ThreadManager;
 import de.ft.interitus.UI.MenuBar;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.Var;
 import de.ft.interitus.projecttypes.ProjectManager;
-import de.ft.interitus.projecttypes.VCS;
 import de.ft.interitus.projecttypes.device.BlockTypes.ProjectTypesVar;
-import de.ft.interitus.utils.ClearActOpenProgramm;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -160,7 +157,7 @@ public class NewProjectWindow {
                     //ThreadManager.stopall();
                    Var.openprojects.add( ProjectTypesVar.projectTypes.get(items.indexOf(selectProjectType.getSelected())).init());
                     ProjectManager.change(Var.openprojects.size()-1);
-                    Var.openprojects.get(Var.openprojectindex).filename = nameinput.getText();
+                    ProjectManager.getActProjectVar().filename = nameinput.getText();
 
                     MenuBar.menuItem_speichern.setText("Speichern");
 

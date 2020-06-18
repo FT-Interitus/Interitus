@@ -18,6 +18,7 @@ import de.ft.interitus.events.rightclick.RightClickCloseEvent;
 import de.ft.interitus.events.rightclick.RightClickEventListener;
 import de.ft.interitus.events.rightclick.RightClickOpenEvent;
 import de.ft.interitus.loading.AssetLoader;
+import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.utils.CheckKollision;
 
@@ -74,7 +75,7 @@ public abstract class Block implements VisibleObjects {
 
         if (this.isVisible()) { //Wenn der Block sichtbar ist...  //Das passiert deshalb weil nicht für nicht sichbare Blöcke ein Thread laufen muss
             blockupdate.start(); //...wird der updater gestartet
-            Var.openprojects.get(Var.openprojectindex).visibleblocks.add(this); //und wird zum Array der sichtbaren Blöcke hinzugefüt
+            ProjectManager.getActProjectVar().visibleblocks.add(this); //und wird zum Array der sichtbaren Blöcke hinzugefüt
         } else {
             blockupdate.isrunning = false; //...wenn nicht dann nicht
         }
@@ -97,7 +98,7 @@ public abstract class Block implements VisibleObjects {
             public void buttonclickedinwindow(RightClickButtonSelectEvent e) {
 
                 if (e.getButton().getText().contains("Löschen")&&blockupdate.toggle) {
-                    if(RechtsKlick.mouseoverblockindex==Var.openprojects.get(Var.openprojectindex).blocks.indexOf(instance))
+                    if(RechtsKlick.mouseoverblockindex==ProjectManager.getActProjectVar().blocks.indexOf(instance))
                     instance.delete(false);
                 }
             }
@@ -118,7 +119,7 @@ public abstract class Block implements VisibleObjects {
      */
     @Override
     public boolean isVisible() {
-        return camfr.boundsInFrustum(this.getX(), this.getY(), 0, this.getW(), this.getH(), 0)&&Var.openprojects.get(Var.openprojectindex).blocks.contains(this); //Ist der Block im Camera bereich?
+        return camfr.boundsInFrustum(this.getX(), this.getY(), 0, this.getW(), this.getH(), 0)&&ProjectManager.getActProjectVar().blocks.contains(this); //Ist der Block im Camera bereich?
     }
 
     /***
@@ -362,8 +363,8 @@ public abstract class Block implements VisibleObjects {
             this.left = left;      //Block wird als Nachbar aufgenommen
         }
         if (left != -1) { //Wenn der Block nicht null ist...
-            if (Var.openprojects.get(Var.openprojectindex).blocks.get(left).getRight() != this.index) { //Und der wenn der Rechte Nachbar vom linken Block nicht man selbst ist
-                Var.openprojects.get(Var.openprojectindex).blocks.get(left).setRight(this.index); //Wird auch diese Verbindung neu gesetzt (Um Nachbarsetzten zu erleichtern (Aus der Schlussfolgerung das der Rechte Nachbar vom linken Nachbar man selbst ist) )
+            if (ProjectManager.getActProjectVar().blocks.get(left).getRight() != this.index) { //Und der wenn der Rechte Nachbar vom linken Block nicht man selbst ist
+                ProjectManager.getActProjectVar().blocks.get(left).setRight(this.index); //Wird auch diese Verbindung neu gesetzt (Um Nachbarsetzten zu erleichtern (Aus der Schlussfolgerung das der Rechte Nachbar vom linken Nachbar man selbst ist) )
             }
         }
 
@@ -384,8 +385,8 @@ public abstract class Block implements VisibleObjects {
             this.right = right;//Block wird als Nachbar aufgenommen
         }
         if (right != -1) {//Wenn der Block nicht null ist..
-            if (Var.openprojects.get(Var.openprojectindex).blocks.get(right).getLeft() != this.index) {//Und der wenn der linke Nachbar vom rechten Block nicht man selbst ist
-                Var.openprojects.get(Var.openprojectindex).blocks.get(right).setLeft(this.index);//Wird auch diese Verbindung neu gesetzt (Um Nachbarsetzten zu erleichtern (Aus der Schlussfolgerung das der linke Nachbar vom rechten Nachbar man selbst ist))
+            if (ProjectManager.getActProjectVar().blocks.get(right).getLeft() != this.index) {//Und der wenn der linke Nachbar vom rechten Block nicht man selbst ist
+                ProjectManager.getActProjectVar().blocks.get(right).setLeft(this.index);//Wird auch diese Verbindung neu gesetzt (Um Nachbarsetzten zu erleichtern (Aus der Schlussfolgerung das der linke Nachbar vom rechten Nachbar man selbst ist))
             }
         }
 
@@ -438,7 +439,7 @@ public abstract class Block implements VisibleObjects {
 
     /**
      * Getter and Setter for the Index of the Block
-     * Must be the same as in the Var.openprojects.get(Var.openprojectindex).blocks array
+     * Must be the same as in the ProjectManager.getactProjectVar().blocks array
      *
      * @return
      */
@@ -446,7 +447,7 @@ public abstract class Block implements VisibleObjects {
         return index;
     }
 
-    public void setIndex(int index) { //Der Index wird gesetzt WARNUNG nur aufrufen in Kombination mit einer Var.openprojects.get(Var.openprojectindex).blocks Array aktion
+    public void setIndex(int index) { //Der Index wird gesetzt WARNUNG nur aufrufen in Kombination mit einer ProjectManager.getactProjectVar().blocks Array aktion
         this.index = index;
     }
 
@@ -459,9 +460,9 @@ public abstract class Block implements VisibleObjects {
     public void delete(boolean complete) { //Der Block soll gelöscht werden (complete beduetet das alle Blöcke gelöscht werden sollen)
         EventVar.rightClickEventManager.removeListener(this.rightClickEventListener);
         EventVar.blockEventManager.deleteBlock(new BlockDeleteEvent(this, this)); //Fire Delete Event
-        Var.openprojects.get(Var.openprojectindex).markedblock = null; //Der Makierte Block wird auf null gesetzt da nur ein makierter block gelöscht werden kann //Anmerkung falls das ganze Programm gelöscht wird spielt das sowieso keine Rolle
-        Var.openprojects.get(Var.openprojectindex).marked = false; //Ob ein Block makiert ist wird auf false gesetzt da nur ein makierter Block gelöscht werden kann
-        Var.openprojects.get(Var.openprojectindex).ismoving = false; // Ob ein Block bewegt wird, wird auf false gesetzt da wenn ein Block bewegt und gelöscht wird kann es nur der bewegte Block sein
+        ProjectManager.getActProjectVar().markedblock = null; //Der Makierte Block wird auf null gesetzt da nur ein makierter block gelöscht werden kann //Anmerkung falls das ganze Programm gelöscht wird spielt das sowieso keine Rolle
+        ProjectManager.getActProjectVar().marked = false; //Ob ein Block makiert ist wird auf false gesetzt da nur ein makierter Block gelöscht werden kann
+        ProjectManager.getActProjectVar().ismoving = false; // Ob ein Block bewegt wird, wird auf false gesetzt da wenn ein Block bewegt und gelöscht wird kann es nur der bewegte Block sein
 
 
         if (this.getWire_left() != null) {
@@ -476,10 +477,10 @@ public abstract class Block implements VisibleObjects {
         DataManager.change(this, false, true); // Ein Block Abbild wird erstellt um ein eventuelles Rückgänig machen
         this.setIndex(-1); //Der Index wird auf -1 gesetzt dann merkt der BlockUpdater das der laufenden Timer beendet werden soll
         if (left != -1) { //Wenn ein linker Nachbar exsistiert
-            Var.openprojects.get(Var.openprojectindex).blocks.get(left).setRight(-1); //wird dem linken Nachbar gesagt das er keinen Rechten Nachbar mehr hat
+            ProjectManager.getActProjectVar().blocks.get(left).setRight(-1); //wird dem linken Nachbar gesagt das er keinen Rechten Nachbar mehr hat
 
             try {
-                Var.openprojects.get(Var.openprojectindex).blocks.get(left).setWire_right(null); //Die Wire des nachbar block wird gelöscht damit die Wire kein zweites mal gelöscht wird (passiert nur bei ganz vielen wire nodes)
+                ProjectManager.getActProjectVar().blocks.get(left).setWire_right(null); //Die Wire des nachbar block wird gelöscht damit die Wire kein zweites mal gelöscht wird (passiert nur bei ganz vielen wire nodes)
             } catch (NullPointerException e) {
                 //Falls es gar keine Wire gab
             }
@@ -487,13 +488,13 @@ public abstract class Block implements VisibleObjects {
 
         if (right != -1) { // wenn ein Rechter nachbar exsitiert
             try {
-                Var.openprojects.get(Var.openprojectindex).blocks.get(right).setLeft(-1); // wird dem rechten Nachbar gesagt das er keinen linken nachbar mehr hat
+                ProjectManager.getActProjectVar().blocks.get(right).setLeft(-1); // wird dem rechten Nachbar gesagt das er keinen linken nachbar mehr hat
             }catch (IndexOutOfBoundsException e) {
 
 
             }
             try {
-                Var.openprojects.get(Var.openprojectindex).blocks.get(right).setWire_left(null); //Die Wire des nachbar block wird gelöscht damit die Wire kein zweites mal gelöscht wird (passiert nur bei ganz vielen wire nodes)
+                ProjectManager.getActProjectVar().blocks.get(right).setWire_left(null); //Die Wire des nachbar block wird gelöscht damit die Wire kein zweites mal gelöscht wird (passiert nur bei ganz vielen wire nodes)
             } catch (NullPointerException e) {
                 //Falls es gar keine Wire gab
             }catch (IndexOutOfBoundsException e) {
@@ -505,8 +506,8 @@ public abstract class Block implements VisibleObjects {
         left = -1; //Die Referenzierung zum linken Nachbar wird gelöscht
         right = -1; //Die Referenzierung zum rechten Nachbar wird gelöscht
 
-        if (Var.openprojects.get(Var.openprojectindex).threads.indexOf(this.blockupdate) != -1) { //Überprüfen ob Thread überhaupt läuft
-            Var.openprojects.get(Var.openprojectindex).threads.remove(this.blockupdate); //Wenn ja wird er aus dem Array der Threads entfernt
+        if (ProjectManager.getActProjectVar().threads.indexOf(this.blockupdate) != -1) { //Überprüfen ob Thread überhaupt läuft
+            ProjectManager.getActProjectVar().threads.remove(this.blockupdate); //Wenn ja wird er aus dem Array der Threads entfernt
         }
 
 
@@ -521,16 +522,16 @@ public abstract class Block implements VisibleObjects {
         }
 
         if (!complete) { //das trifft nur nicht zu wenn das ganze programm gecleart wird
-            Var.openprojects.get(Var.openprojectindex).blocks.remove(this); //Der block wird aus dem Blocks Array entfernt
-            Var.openprojects.get(Var.openprojectindex).visibleblocks.remove(this); //Der block wird aus dem Visible Blocks Array entfernt
+            ProjectManager.getActProjectVar().blocks.remove(this); //Der block wird aus dem Blocks Array entfernt
+            ProjectManager.getActProjectVar().visibleblocks.remove(this); //Der block wird aus dem Visible Blocks Array entfernt
 
 
             Thread calcnew = new Thread() { //Da dies relativ lange dauert dauert in einem eigenen Thread
                 @Override
                 public void run() {
-                    for (int i = temp; i < Var.openprojects.get(Var.openprojectindex).blocks.size(); i++) { //Durch alle Indexe des Block Arrays wird durchgegangen alle die einen größeren Index haben //Durch die Temp variable kann der alte Index des Blocks hier wieder verwendet werden
+                    for (int i = temp; i < ProjectManager.getActProjectVar().blocks.size(); i++) { //Durch alle Indexe des Block Arrays wird durchgegangen alle die einen größeren Index haben //Durch die Temp variable kann der alte Index des Blocks hier wieder verwendet werden
                         try {
-                            Var.openprojects.get(Var.openprojectindex).blocks.get(i).setIndex(Var.openprojects.get(Var.openprojectindex).blocks.get(i).getIndex() - 1); //Alle anderen Blöcke werden um einen Index verschoben
+                            ProjectManager.getActProjectVar().blocks.get(i).setIndex(ProjectManager.getActProjectVar().blocks.get(i).getIndex() - 1); //Alle anderen Blöcke werden um einen Index verschoben
                         } catch (Exception e) { //Wenn man bei Milliarden von Blöcken der erste und der zweite gelöscht werden gibt es hier fehler
                             DisplayErrors.error = e;
                             e.printStackTrace();
@@ -544,7 +545,7 @@ public abstract class Block implements VisibleObjects {
 
 
             try {
-                Var.openprojects.get(Var.openprojectindex).blocks.remove(this); //Der Block entfernet sich selbst aus dem Blocks Array
+                ProjectManager.getActProjectVar().blocks.remove(this); //Der Block entfernet sich selbst aus dem Blocks Array
             } catch (Exception e) {
 
             }
@@ -583,7 +584,7 @@ public abstract class Block implements VisibleObjects {
         if (this.isMarked()) {
             batch.draw(AssetLoader.img_marked, this.getX(), this.getY(), this.getW(), this.getH()); // Wenn der Block makiert ist
         }
-        if (Var.openprojects.get(Var.openprojectindex).biggestblock == this) {
+        if (ProjectManager.getActProjectVar().biggestblock == this) {
             if (this.isShowdupulicate_rechts()) {
                 batch.setColor(1, 1, 1, 0.5f);
                 batch.draw(AssetLoader.img_block, this.x_dup_rechts, this.y, this.getW(), this.getH()); //Wenn der Block die größte überlappung hat wird er als show duplicat angezigt
@@ -616,7 +617,7 @@ public abstract class Block implements VisibleObjects {
         }
 
  */
-        if (this == Var.openprojects.get(Var.openprojectindex).biggestblock) { //DEBUG Wer ist der größte Block?
+        if (this == ProjectManager.getActProjectVar().biggestblock) { //DEBUG Wer ist der größte Block?
             batch.end();
             shape.begin(ShapeRenderer.ShapeType.Filled);
             shape.rect(x, y, 20, 20);
@@ -624,7 +625,7 @@ public abstract class Block implements VisibleObjects {
             batch.begin();
         }
 
-        if (!this.blockupdate.isIsconnectorclicked() && Var.openprojects.get(Var.openprojectindex).showleftdocker && this.getLeft() == -1) {
+        if (!this.blockupdate.isIsconnectorclicked() && ProjectManager.getActProjectVar().showleftdocker && this.getLeft() == -1) {
             batch.draw(AssetLoader.connector_offerd, getWireconnector_left().x, getWireconnector_left().y, 20, 20);
         }
 
@@ -667,7 +668,7 @@ public abstract class Block implements VisibleObjects {
 
             try {
 
-                flaeche = (CheckKollision.flache(this.getX_dup_rechts(), this.getY(), this.getW(), this.getH(), Var.openprojects.get(Var.openprojectindex).markedblock.getX(), Var.openprojects.get(Var.openprojectindex).markedblock.getY())); //Fläsche mit der die Blöcke überlappen um zu brechenen an welchen Block der Block springen wird
+                flaeche = (CheckKollision.flache(this.getX_dup_rechts(), this.getY(), this.getW(), this.getH(), ProjectManager.getActProjectVar().markedblock.getX(), ProjectManager.getActProjectVar().markedblock.getY())); //Fläsche mit der die Blöcke überlappen um zu brechenen an welchen Block der Block springen wird
 
             } catch (NullPointerException ignored) {
 
@@ -680,7 +681,7 @@ public abstract class Block implements VisibleObjects {
         if (this.isShowdupulicate_links()) { //Für links
             try {
 
-                flaeche = (CheckKollision.flache(this.getX_dup_links(), this.getY(), this.getW(), this.getH(), Var.openprojects.get(Var.openprojectindex).markedblock.getX(), Var.openprojects.get(Var.openprojectindex).markedblock.getY()));//Fläsche mit der die Blöcke überlappen um zu brechenen an welchen Block der Block springen wird
+                flaeche = (CheckKollision.flache(this.getX_dup_links(), this.getY(), this.getW(), this.getH(), ProjectManager.getActProjectVar().markedblock.getX(), ProjectManager.getActProjectVar().markedblock.getY()));//Fläsche mit der die Blöcke überlappen um zu brechenen an welchen Block der Block springen wird
 
             } catch (NullPointerException ignored) {
 
@@ -693,7 +694,7 @@ public abstract class Block implements VisibleObjects {
     public int getBlockMarkedblockuberlappungsflache() {
         int flaeche = 0;
         try {
-            flaeche = CheckKollision.flache(this.getX(), this.getY(), this.getW(), this.getH(), Var.openprojects.get(Var.openprojectindex).markedblock.getX(), Var.openprojects.get(Var.openprojectindex).markedblock.getY()); //Fläche des Markierten Blocks
+            flaeche = CheckKollision.flache(this.getX(), this.getY(), this.getW(), this.getH(), ProjectManager.getActProjectVar().markedblock.getX(), ProjectManager.getActProjectVar().markedblock.getY()); //Fläche des Markierten Blocks
         } catch (NullPointerException e) {
         }
         return flaeche;

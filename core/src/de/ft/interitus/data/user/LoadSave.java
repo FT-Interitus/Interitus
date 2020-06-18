@@ -4,9 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.ProgrammingSpace;
-import de.ft.interitus.Var;
 import de.ft.interitus.data.programm.Data;
 import de.ft.interitus.data.user.changes.DataManager;
+import de.ft.interitus.projecttypes.ProjectManager;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -40,16 +40,16 @@ public class LoadSave {
 
 
                         if (fileToSave.getAbsolutePath().contains(".itp")) {
-                            Var.openprojects.get(Var.openprojectindex).path = fileToSave.getAbsolutePath();
+                            ProjectManager.getActProjectVar().path = fileToSave.getAbsolutePath();
                             DataSaver.save(Gdx.files.absolute(fileToSave.getAbsolutePath()));
-                            Var.openprojects.get(Var.openprojectindex).filename = fileToSave.getName();
+                            ProjectManager.getActProjectVar().filename = fileToSave.getName();
 
                         } else {
-                            Var.openprojects.get(Var.openprojectindex).path = fileToSave.getAbsolutePath() + ".itp";
+                            ProjectManager.getActProjectVar().path = fileToSave.getAbsolutePath() + ".itp";
                             DataSaver.save(Gdx.files.absolute(fileToSave.getAbsolutePath() + ".itp"));
-                            Var.openprojects.get(Var.openprojectindex).filename = fileToSave.getName() + "";
+                            ProjectManager.getActProjectVar().filename = fileToSave.getName() + "";
                         }
-                        System.out.println(Var.openprojects.get(Var.openprojectindex).path);
+                        System.out.println(ProjectManager.getActProjectVar().path);
 
                         if (Data.filename.size() > 9) {
                             Data.filename.remove(0);

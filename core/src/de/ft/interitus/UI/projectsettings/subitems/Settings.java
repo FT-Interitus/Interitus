@@ -11,7 +11,7 @@ import com.kotcrab.vis.ui.widget.VisTable;
 import com.kotcrab.vis.ui.widget.VisTextButton;
 import de.ft.interitus.UI.MenuBar;
 import de.ft.interitus.UI.UI;
-import de.ft.interitus.Var;
+import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.VCS;
 
 public class Settings {
@@ -29,19 +29,19 @@ public class Settings {
         apply = new VisTextButton("Anwenden");
 apply.setDisabled(true);
 
-        if(Var.openprojects.get(Var.openprojectindex).vcs== VCS.NONE) {
+        if(ProjectManager.getActProjectVar().vcs== VCS.NONE) {
             none.setChecked(true);
             itev.setChecked(false);
             git.setChecked(false);
         }
 
-        if(Var.openprojects.get(Var.openprojectindex).vcs== VCS.ITEV) {
+        if(ProjectManager.getActProjectVar().vcs== VCS.ITEV) {
             none.setChecked(false);
             itev.setChecked(true);
             git.setChecked(false);
         }
 
-        if(Var.openprojects.get(Var.openprojectindex).vcs== VCS.GIT) {
+        if(ProjectManager.getActProjectVar().vcs== VCS.GIT) {
             none.setChecked(false);
             itev.setChecked(false);
             git.setChecked(true);
@@ -55,7 +55,7 @@ apply.setDisabled(true);
             public void changed(ChangeEvent event, Actor actor) {
                 if(none.isChecked()) {
 
-                    if(Var.openprojects.get(Var.openprojectindex).vcs== VCS.NONE) {
+                    if(ProjectManager.getActProjectVar().vcs== VCS.NONE) {
                         apply.setDisabled(true);
 
                     }else{
@@ -82,7 +82,7 @@ apply.setDisabled(true);
             public void changed(ChangeEvent event, Actor actor) {
                 if(itev.isChecked())   {
 
-                    if(Var.openprojects.get(Var.openprojectindex).vcs== VCS.ITEV) {
+                    if(ProjectManager.getActProjectVar().vcs== VCS.ITEV) {
                         apply.setDisabled(true);
 
                     }else{
@@ -108,7 +108,7 @@ apply.setDisabled(true);
             public void changed(ChangeEvent event, Actor actor) {
                 if(git.isChecked()) {
 
-                    if(Var.openprojects.get(Var.openprojectindex).vcs== VCS.GIT) {
+                    if(ProjectManager.getActProjectVar().vcs== VCS.GIT) {
                         apply.setDisabled(true);
 
                     }else{
@@ -134,7 +134,7 @@ apply.setDisabled(true);
             public void changed(ChangeEvent event, Actor actor) {
 
                 if(none.isChecked()) {
-                    if(Var.openprojects.get(Var.openprojectindex).vcs==VCS.ITEV) {
+                    if(ProjectManager.getActProjectVar().vcs==VCS.ITEV) {
                         String[] möglichkeiten = {"OK", "Abbrechen"};
 
 
@@ -150,7 +150,7 @@ apply.setDisabled(true);
                                     @Override
                                     public void result(Integer result) {
                                         if (result == nothing) {
-                                            Var.openprojects.get(Var.openprojectindex).vcs = VCS.NONE;
+                                            ProjectManager.getActProjectVar().vcs = VCS.NONE;
                                             MenuBar.menuItem_speichern.setText("Speichern");
                                             apply.setDisabled(true);
                                         }
@@ -166,10 +166,10 @@ apply.setDisabled(true);
                     }
 
                 } else if(git.isChecked()) {
-                    Var.openprojects.get(Var.openprojectindex).vcs = VCS.GIT;
+                    ProjectManager.getActProjectVar().vcs = VCS.GIT;
                     apply.setDisabled(true);
                 }else if(itev.isChecked()) {
-                    Var.openprojects.get(Var.openprojectindex).vcs = VCS.ITEV;
+                    ProjectManager.getActProjectVar().vcs = VCS.ITEV;
                     MenuBar.menuItem_speichern.setText("Revision speichern");
                     apply.setDisabled(true);
                 }

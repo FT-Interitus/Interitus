@@ -48,7 +48,7 @@ public static long movedelay = 580;
                         }
                     }
 
-                    ProjectManager.getactProjectVar().zoom=ProgrammingSpace.cam.zoom;
+                    ProjectManager.getActProjectVar().zoom=ProgrammingSpace.cam.zoom;
 
                 }
                 return false;
@@ -153,7 +153,7 @@ public static long movedelay = 580;
         }
 
 
-        ProjectManager.getactProjectVar().cam_pos.set(ProgrammingSpace.cam.position.x,ProgrammingSpace.cam.position.y);
+        ProjectManager.getActProjectVar().cam_pos.set(ProgrammingSpace.cam.position.x,ProgrammingSpace.cam.position.y);
 
 
 

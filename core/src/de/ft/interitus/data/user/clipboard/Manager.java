@@ -1,6 +1,6 @@
 package de.ft.interitus.data.user.clipboard;
 
-import de.ft.interitus.Var;
+import de.ft.interitus.projecttypes.ProjectManager;
 
 public class Manager {
 
@@ -15,7 +15,7 @@ public class Manager {
         //TODO hier eventuelle Array anpassen wenn mehrere Makiert werden sollen
 
 
-        sb = new SavedBlock(Var.openprojects.get(Var.openprojectindex).markedblock.getX(), Var.openprojects.get(Var.openprojectindex).markedblock.getY(), Var.openprojects.get(Var.openprojectindex).markedblock.getW(), Var.openprojects.get(Var.openprojectindex).markedblock.getH(), Var.openprojects.get(Var.openprojectindex).markedblock.getIndex());
+        sb = new SavedBlock(ProjectManager.getActProjectVar().markedblock.getX(), ProjectManager.getActProjectVar().markedblock.getY(), ProjectManager.getActProjectVar().markedblock.getW(), ProjectManager.getActProjectVar().markedblock.getH(), ProjectManager.getActProjectVar().markedblock.getIndex());
 
 
     }

@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.Var;
 import de.ft.interitus.loading.AssetLoader;
+import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.CheckKollision;
 
 public abstract class WireNode implements VisibleObjects {
@@ -79,8 +80,8 @@ public abstract class WireNode implements VisibleObjects {
         }
 
         if (wire_left == null || wire_right == null) {
-            Var.openprojects.get(Var.openprojectindex).wireNodes.remove(this);
-            Var.openprojects.get(Var.openprojectindex).visibleWireNodes.remove(this);
+            ProjectManager.getActProjectVar().wireNodes.remove(this);
+            ProjectManager.getActProjectVar().visibleWireNodes.remove(this);
 
             if (wire_right != null) {
                 wire_right.setLeft_connection(null);
