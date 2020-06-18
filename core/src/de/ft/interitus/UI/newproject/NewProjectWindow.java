@@ -159,7 +159,7 @@ public class NewProjectWindow {
                     //ThreadManager.stopall();
                    Var.openprojects.add( ProjectTypesVar.projectTypes.get(items.indexOf(selectProjectType.getSelected())).init());
                     Var.openprojectindex = Var.openprojects.size()-1;
-
+                    Var.openprojects.get(Var.openprojectindex).filename = nameinput.getText();
 
                     MenuBar.menuItem_speichern.setText("Speichern");
 
