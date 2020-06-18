@@ -13,6 +13,9 @@ public abstract class WireNode implements VisibleObjects {
     public static int public_w = 10;
     public static int public_h = 10;
     private final Vector2 gemerktvector = new Vector2(0, 0);
+    private Vector3 tempvector = new Vector3();
+    private Vector3 tempvector1 = new Vector3();
+
     private Wire wire_left;
     private Wire wire_right;
     private int x;
@@ -40,7 +43,7 @@ public abstract class WireNode implements VisibleObjects {
     public void draw() {
 
 
-        if (CheckKollision.checkmousewithobject(x, y, h, w, (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y) && Gdx.input.isButtonJustPressed(0)) {
+        if (CheckKollision.checkmousewithobject(x, y, h, w, (int) ProgrammingSpace.viewport.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y) && Gdx.input.isButtonJustPressed(0)) {
 
             if (!gemerkt) {
                 gemerktvector.set(Gdx.input.getX() - x, Gdx.graphics.getHeight() - Gdx.input.getY() - y);

@@ -15,7 +15,7 @@ import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 
-public class Welcome extends ScreenAdapter implements Screen {
+public class Welcome extends ScreenAdapter  {
 
 
     public static SpriteBatch batch = new SpriteBatch();

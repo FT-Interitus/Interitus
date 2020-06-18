@@ -20,8 +20,8 @@ import de.ft.interitus.events.global.GlobalLoadingStartEvent;
 
 import java.awt.*;
 
-public class Loading extends ScreenAdapter implements Screen {
-
+public class Loading extends ScreenAdapter   {
+public Loading loading = this;
     public Loading() {
 
         EventVar.globalEventManager.loadingstart(new GlobalLoadingStartEvent(this));
@@ -49,6 +49,7 @@ try {
             Var.splashscreen.destroy();
             Programm.INSTANCE.setScreen(new Welcome());
             ((Lwjgl3Graphics)Gdx.graphics).getWindow().restoreWindow();
+            this.dispose();
 
         }
     }

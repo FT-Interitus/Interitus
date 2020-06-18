@@ -7,9 +7,7 @@ import com.kotcrab.vis.ui.widget.VisSelectBox;
 import com.kotcrab.vis.ui.widget.VisTable;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.Theme.RegisteredThemes;
-import de.ft.interitus.UI.settings.SettingsUI;
 
-import java.util.ArrayList;
 
 public class subitem2 {
     public static VisSelectBox<String> themes;

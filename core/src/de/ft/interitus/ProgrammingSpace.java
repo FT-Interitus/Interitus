@@ -44,7 +44,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 
-public class ProgrammingSpace extends ScreenAdapter implements Screen {
+public class ProgrammingSpace extends ScreenAdapter {
     public static SpriteBatch batch;
 
     public static OrthographicCamera cam;
@@ -133,6 +133,7 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
 
     @Override
     public void render(float delta)  {
+
         renderstarttime = System.currentTimeMillis();
 
         if(Var.openprojects.get(Var.openprojectindex).projectType==null) {
@@ -152,8 +153,8 @@ public class ProgrammingSpace extends ScreenAdapter implements Screen {
             UI.UIcam.update();
 
             Gdx.gl.glClearColor(Settings.theme.ClearColor().r,Settings.theme.ClearColor().g,Settings.theme.ClearColor().b,Settings.theme.ClearColor().a);
-
-            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT | (Gdx.graphics.getBufferFormat().coverageSampling?GL20.GL_COVERAGE_BUFFER_BIT_NV:0));
+            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+            //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT | (Gdx.graphics.getBufferFormat().coverageSampling?GL20.GL_COVERAGE_BUFFER_BIT_NV:0));
             batch.setProjectionMatrix(cam.combined);
             UI.UIbatch.setProjectionMatrix(UI.UIcam.combined);
             shapeRenderer.setProjectionMatrix(UI.UIcam.combined);

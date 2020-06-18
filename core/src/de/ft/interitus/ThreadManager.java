@@ -120,7 +120,7 @@ public class ThreadManager {
                         }
 
                     }
-                }, 0, 100);
+                }, 0, 200);
 
 
             }
