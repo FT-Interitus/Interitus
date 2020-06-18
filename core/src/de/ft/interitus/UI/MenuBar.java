@@ -24,6 +24,8 @@ import de.ft.interitus.plugin.PluginGateway;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.VCS;
 
+import java.nio.ByteBuffer;
+
 
 public class MenuBar {
     public static boolean fullscreen = false;
@@ -40,6 +42,7 @@ public class MenuBar {
     public static MenuItem menuItem_ausschneiden;
     public static MenuItem menuItem_update;
     public static MenuItem menuItem_ueber;
+    public static MenuItem menuItem_showruntimeinfo;
     public static MenuItem menuItem_clearram;
     public static Menu fileMenu;
 
@@ -237,6 +240,13 @@ public class MenuBar {
                 Dialogs.showOKDialog(UI.stage, "Über", "Programm-Version: " + Var.PROGRAMM_VERSION);
             }
         });
+        menuItem_showruntimeinfo=new MenuItem("Laufzeit-Info", new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+
+                Dialogs.showOKDialog(UI.stage, "Laufzeit-Info", "Verfügbarer Arbeitsspeicher: "+ Runtime.getRuntime().maxMemory()/1000000 +" MB" +"\nGenutzer RAM: "+(Gdx.app.getNativeHeap()+Gdx.app.getJavaHeap())/1000000+" MB");
+            }
+        });
 
         menuItem_clearram = new MenuItem("Clear RAM", new ChangeListener() {
             @Override
@@ -294,6 +304,7 @@ public class MenuBar {
 
 
         helpMenu.addItem(menuItem_update);
+        helpMenu.addItem(menuItem_showruntimeinfo);
         helpMenu.addItem(menuItem_clearram);
 
         helpMenu.addSeparator();
