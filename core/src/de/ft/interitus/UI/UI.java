@@ -213,6 +213,7 @@ public class UI {
 
 
 
+File testpath = new File("");
 
         Thread UIthread = new Thread() {
 
@@ -229,11 +230,13 @@ public class UI {
 
 
                             for (int i = 0; i < Data.path.size(); i++) {
-                                if (!(new File(Data.path.get(i)).exists())) {
+                                if (!(new File(Data.path.get(i)).exists())) { //TODO new vermeiden
                                     Data.path.remove(i);
                                     Data.filename.remove(i);
                                 }
                             }
+
+
 
                             recent.setDisabled(Data.path.size() == 0);
 
@@ -346,8 +349,9 @@ public class UI {
 
 
         tabbar.setTabs();
+        /*
         for(int i=0;i<Var.openprojects.size();i++){
-            Tab temptab=new Tab();
+            Tab temptab=new Tab(); //TODO ganz gefährlich
             temptab.getTabButton().setImage(AssetLoader.img_Tab);
             temptab.getTabButton().setW(300);
             temptab.getTabButton().widthoverText=true;
@@ -355,6 +359,8 @@ public class UI {
             temptab.setIndex(i);
             tabbar.addTab(temptab);
         }
+
+         */
         if(tabbar.getSelectedTab()!=null) {
             if (tabbar.getSelectedTab().getIndex() != -1 ) {
                  Var.openprojectindex = tabbar.getSelectedTab().getIndex();

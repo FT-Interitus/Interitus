@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 public class NetworkScan {
     public static ArrayList<InetAddress> device = new ArrayList<>();
+
     public static String piaddress = "";
 
     public static void get() {

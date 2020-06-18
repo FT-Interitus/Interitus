@@ -120,9 +120,9 @@ public class ProgrammingSpace extends ScreenAdapter {
         ThreadManager.init();
 
 
-        SerialConnection.searchArduino();
+      //  SerialConnection.searchArduino();
 
-        PortUpdate.UpdateConnectionWindowPortsList();
+      //  PortUpdate.UpdateConnectionWindowPortsList();
 
 
 
@@ -133,7 +133,7 @@ public class ProgrammingSpace extends ScreenAdapter {
 
     @Override
     public void render(float delta)  {
-
+System.gc();
         renderstarttime = System.currentTimeMillis();
 
         if(Var.openprojects.get(Var.openprojectindex).projectType==null) {
