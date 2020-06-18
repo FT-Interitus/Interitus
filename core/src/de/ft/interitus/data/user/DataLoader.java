@@ -10,6 +10,7 @@ import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.Var;
 import de.ft.interitus.data.programm.Data;
+import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.ProjectTypes;
 import de.ft.interitus.projecttypes.VCS;
 import de.ft.interitus.projecttypes.device.BlockTypes.Ev3.Wait;
@@ -57,7 +58,12 @@ public class DataLoader {
                         //ThreadManager.stopall();
                        Var.openprojects.add( temptype.init());
 
-                       Var.openprojectindex = Var.openprojects.size()-1;
+                        Var.openprojects.get(Var.openprojects.size()-1).zoom = settings.getFloat("zoom"); //Befor change to not ignore this change
+                        Var.openprojects.get(Var.openprojects.size()-1).cam_pos.set(settings.getFloat("pos_x"),settings.getFloat("pos_y"));
+
+                        ProjectManager.change(Var.openprojects.size()-1);
+
+
                         Var.openprojects.get(Var.openprojectindex).filename = name;
                         Var.openprojects.get(Var.openprojectindex).path = path;
 
@@ -68,6 +74,7 @@ public class DataLoader {
                     }
 
                     Var.openprojects.get(Var.openprojectindex).vcs = settings.getInt("vcs");
+
 
                     if(Var.openprojects.get(Var.openprojectindex).vcs== VCS.NONE) {
                         MenuBar.menuItem_speichern.setText("Speichern");

@@ -29,6 +29,7 @@ import de.ft.interitus.events.UI.UIOpenSettingsEvent;
 import de.ft.interitus.events.UI.UiEventAdapter;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.network.bettertogether.SharedVar;
+import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.RoundRectangle;
 
 import java.io.File;
@@ -364,7 +365,7 @@ if(Var.openprojects.size()!=tabbar.getTabbs().size()) {
         if(tabbar.getSelectedTab()!=null) {
             if (tabbar.getSelectedTab().getIndex() != -1 ) {
                 if(Var.openprojectindex!=tabbar.getSelectedTab().getIndex()) {
-                    Var.openprojectindex = tabbar.getSelectedTab().getIndex();
+                    ProjectManager.change(tabbar.getSelectedTab().getIndex());
                 }
             }
         }

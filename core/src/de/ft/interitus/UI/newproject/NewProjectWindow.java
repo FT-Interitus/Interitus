@@ -15,6 +15,7 @@ import de.ft.interitus.UI.MenuBar;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.Var;
+import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.VCS;
 import de.ft.interitus.projecttypes.device.BlockTypes.ProjectTypesVar;
 import de.ft.interitus.utils.ClearActOpenProgramm;
@@ -158,7 +159,7 @@ public class NewProjectWindow {
                 public void changed(ChangeEvent event, Actor actor) {
                     //ThreadManager.stopall();
                    Var.openprojects.add( ProjectTypesVar.projectTypes.get(items.indexOf(selectProjectType.getSelected())).init());
-                    Var.openprojectindex = Var.openprojects.size()-1;
+                    ProjectManager.change(Var.openprojects.size()-1);
                     Var.openprojects.get(Var.openprojectindex).filename = nameinput.getText();
 
                     MenuBar.menuItem_speichern.setText("Speichern");

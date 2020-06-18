@@ -21,6 +21,8 @@ public abstract class ProjectVar {
     public  Wire movingwires = null; //Liste aller Wires die bewegt werden //Die erste ist die "master moving wire"
     public  ArrayList<WireNode> wireNodes = new ArrayList<>(); //Liste aller gesetzer Nodes
     public  ArrayList<WireNode> visibleWireNodes = new ArrayList<>(); //Liste aller sichtbaren Nodes
+    public Vector2 cam_pos =new Vector2();
+    public float zoom =1;
 
     //TODO Für multi select hier eventuel ArrayList
     public  Block markedblock = null; // Welcher Block ist makiert ?

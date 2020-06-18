@@ -8,6 +8,7 @@ import com.badlogic.gdx.input.GestureDetector;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.UIElements.check.InputManager;
+import de.ft.interitus.projecttypes.ProjectManager;
 
 import static com.badlogic.gdx.Gdx.input;
 
@@ -46,6 +47,9 @@ public static long movedelay = 580;
                             ProgrammingSpace.cam.zoom=ProgrammingSpace.cam.zoom+0.1f;
                         }
                     }
+
+                    ProjectManager.getactProjectVar().zoom=ProgrammingSpace.cam.zoom;
+
                 }
                 return false;
 
@@ -149,7 +153,7 @@ public static long movedelay = 580;
         }
 
 
-
+        ProjectManager.getactProjectVar().cam_pos.set(ProgrammingSpace.cam.position.x,ProgrammingSpace.cam.position.y);
 
 
 
