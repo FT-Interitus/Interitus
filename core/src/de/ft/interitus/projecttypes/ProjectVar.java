@@ -54,7 +54,8 @@ public abstract class ProjectVar {
     public  boolean changes = false; //Wurde etwas geändert seit dem letzten speichern
     public  String filename = ""; //Der Name der aktuell geöffneten Datei
     public  volatile String path = ""; // Wo ist die aktuell geöffnete Datei gespeichert
-
+    public  ArrayList<Thread> threads = new ArrayList<>();
+    public  ArrayList<Object> requestobj = new ArrayList<>();
 
     public ProjectVar() {
 

@@ -118,7 +118,7 @@ public abstract class Block implements VisibleObjects {
      */
     @Override
     public boolean isVisible() {
-        return camfr.boundsInFrustum(this.getX(), this.getY(), 0, this.getW(), this.getH(), 0); //Ist der Block im Camera bereich?
+        return camfr.boundsInFrustum(this.getX(), this.getY(), 0, this.getW(), this.getH(), 0)&&Var.openprojects.get(Var.openprojectindex).blocks.contains(this); //Ist der Block im Camera bereich?
     }
 
     /***
@@ -505,8 +505,8 @@ public abstract class Block implements VisibleObjects {
         left = -1; //Die Referenzierung zum linken Nachbar wird gelöscht
         right = -1; //Die Referenzierung zum rechten Nachbar wird gelöscht
 
-        if (ThreadManager.threads.indexOf(this.blockupdate) != -1) { //Überprüfen ob Thread überhaupt läuft
-            ThreadManager.threads.remove(this.blockupdate); //Wenn ja wird er aus dem Array der Threads entfernt
+        if (Var.openprojects.get(Var.openprojectindex).threads.indexOf(this.blockupdate) != -1) { //Überprüfen ob Thread überhaupt läuft
+            Var.openprojects.get(Var.openprojectindex).threads.remove(this.blockupdate); //Wenn ja wird er aus dem Array der Threads entfernt
         }
 
 

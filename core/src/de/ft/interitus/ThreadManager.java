@@ -9,22 +9,21 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class ThreadManager {
-    public static ArrayList<Thread> threads = new ArrayList<>();
-    public static ArrayList<Object> requestobj = new ArrayList<>();
+
 
 
     static Frustum camfr;
 
     public static Thread add(Thread thread, Object obj) {
         Thread createThread = new Thread();
-        threads.add(thread);
-        requestobj.add(obj);
+        Var.openprojects.get(Var.openprojectindex).threads.add(thread);
+        Var.openprojects.get(Var.openprojectindex).requestobj.add(obj);
         return createThread;
     }
 
     public static void stopall() {
-        for(int i=0;i<threads.size();i++) {
-            ((BlockUpdate) threads.get(i)).time.cancel();
+        for(int i=0;i<Var.openprojects.get(Var.openprojectindex).threads.size();i++) {
+            ((BlockUpdate) Var.openprojects.get(Var.openprojectindex).threads.get(i)).time.cancel();
         }
     }
 
@@ -50,27 +49,27 @@ public class ThreadManager {
                                     //System.out.println("Test"+i);
 //                            System.out.println(camfr.boundsInFrustum(BlockVar.blocks.get(10).getX(), BlockVar.blocks.get(10).getY(), 0, BlockVar.blocks.get(10).getW(), BlockVar.blocks.get(10).getH(),0));
                                     try {
-                                        Block block = ((BlockUpdate) threads.get(i)).block;
-                                        if (!(camfr.boundsInFrustum(block.getX(), block.getY(), 0, block.getW(), block.getH(), 0)) && block.isMarked() == false && ((BlockUpdate) threads.get(i)).isrunning == true) {
+                                        Block block = ((BlockUpdate) Var.openprojects.get(Var.openprojectindex).threads.get(i)).block;
+                                        if (!(camfr.boundsInFrustum(block.getX(), block.getY(), 0, block.getW(), block.getH(), 0)) && block.isMarked() == false && ((BlockUpdate) Var.openprojects.get(Var.openprojectindex).threads.get(i)).isrunning == true) {
 
-                                            if (((BlockUpdate) threads.get(i)).isrunning) {
+                                            if (((BlockUpdate) Var.openprojects.get(Var.openprojectindex).threads.get(i)).isrunning) {
                                                 try {
-                                                    ((BlockUpdate) threads.get(i)).time.cancel();
+                                                    ((BlockUpdate) Var.openprojects.get(Var.openprojectindex).threads.get(i)).time.cancel();
                                                 } catch (Exception e) {
                                                 }
                                             }
-                                            threads.get(i).interrupt();
-                                            ((BlockUpdate) threads.get(i)).isrunning = false;
+                                            Var.openprojects.get(Var.openprojectindex).threads.get(i).interrupt();
+                                            ((BlockUpdate) Var.openprojects.get(Var.openprojectindex).threads.get(i)).isrunning = false;
                                             Var.openprojects.get(Var.openprojectindex).visibleblocks.remove(block);
                                         }
 
-                                        if (camfr.boundsInFrustum(block.getX(), block.getY(), 0, block.getW(), block.getH(), 0) && ((BlockUpdate) threads.get(i)).isrunning == false) {
+                                        if (camfr.boundsInFrustum(block.getX(), block.getY(), 0, block.getW(), block.getH(), 0) && ((BlockUpdate) Var.openprojects.get(Var.openprojectindex).threads.get(i)).isrunning == false) {
                                             Var.openprojects.get(Var.openprojectindex).visibleblocks.add(block);
-                                            threads.set(i, ((BlockUpdate) threads.get(i)).block.allowedRestart());
+                                            Var.openprojects.get(Var.openprojectindex).threads.set(i, ((BlockUpdate) Var.openprojects.get(Var.openprojectindex).threads.get(i)).block.allowedRestart());
                                             if (Var.verboseoutput) {
                                                 System.out.println("Started " + block.getIndex());
                                             }
-                                            ((BlockUpdate) threads.get(i)).isrunning = true;
+                                            ((BlockUpdate) Var.openprojects.get(Var.openprojectindex).threads.get(i)).isrunning = true;
                                         }
 
 

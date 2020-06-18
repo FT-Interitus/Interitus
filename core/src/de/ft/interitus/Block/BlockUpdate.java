@@ -49,6 +49,13 @@ public abstract class BlockUpdate extends Thread {
             @Override
             public void run() {
 
+
+                if(Var.openprojects.get(Var.openprojectindex).blocks.indexOf(block)==-1) {
+                    isrunning = false;
+                    currentThread().interrupt();
+                    this.cancel();
+                }
+
                 if(!Var.isdialogeopend) {
 
                 try {
