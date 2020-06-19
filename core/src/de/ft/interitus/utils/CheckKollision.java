@@ -11,11 +11,11 @@ public class CheckKollision {
     static Vector3 temp4 = new Vector3();
     static Rectangle rec1 = new Rectangle();
     static Rectangle rec2 = new Rectangle();
-    private static final int mousesize = 0;
+    private static final int mousesize = 1;
     Vector2 temp1 = new Vector2();
     Vector2 temp2 = new Vector2();
 
-    public static boolean object(float obj1_x, float obj1_y, float obj1_h, float obj1_w, float obj2_x, float obj2_y, float obj2_h, float obj2_w) {
+    public static boolean object(float obj1_x, float obj1_y, float obj1_w, float obj1_h, float obj2_x, float obj2_y, float obj2_w, float obj2_h) {
 
 
         rec1.set(obj1_x, obj1_y, obj1_w, obj1_h);
@@ -24,7 +24,7 @@ public class CheckKollision {
         return rec1.overlaps(rec2);
 
     }
-    public static boolean objectwithrotation(float obj1_x, float obj1_y, float obj1_h, float obj1_w, float obj1_angle, float obj2_x, float obj2_y, int obj2_h, int obj2_w, float obj2_angle) {
+    public static boolean objectwithrotation(float obj1_x, float obj1_y, float obj1_w, float obj1_h, float obj1_angle, float obj2_x, float obj2_y, int obj2_h, int obj2_w, float obj2_angle) {
 
 
         Polygon obj1 = new Polygon(new float[]{0, 0, obj1_w, 0, obj1_w, obj1_h, 0, obj1_h});
@@ -42,19 +42,19 @@ public class CheckKollision {
     public static boolean checkmousewithblock(Block block) {
 
 
-        return object(block.getX(), block.getY(), block.getH(), block.getW(), (int) ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, mousesize, mousesize);
+        return object(block.getX(), block.getY(), block.getW(), block.getH(), (int) ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, mousesize, mousesize);
 
     }
 
 
-    public static boolean checkmousewithobject(int obj1_x, int obj1_y, int obj1_h, int obj1_w, Vector2 mousepos) {
+    public static boolean checkmousewithobject(int obj1_x, int obj1_y, int obj1_w, int obj1_h, Vector2 mousepos) {
 
 
         return object(obj1_x, obj1_y, obj1_w, obj1_h, (int) mousepos.x, (int) mousepos.y, mousesize, mousesize);
 
     }
 
-    public static boolean checkmousewithobject(int obj1_x, int obj1_y, int obj1_h, int obj1_w, float x, float y) {
+    public static boolean checkmousewithobject(int obj1_x, int obj1_y, int obj1_w, int obj1_h, float x, float y) {
 
 
         return object(obj1_x, obj1_y, obj1_w, obj1_h, x, y, mousesize, mousesize);
@@ -65,15 +65,15 @@ public class CheckKollision {
     public static boolean checkmousewithblock(Block block, Vector2 mousepos) {
 
 
-        return object(block.getX(), block.getY(), block.getH(), block.getW(), (int) mousepos.x, (int) mousepos.y, mousesize, mousesize);
+        return object(block.getX(), block.getY(), block.getW(), block.getH(), (int) mousepos.x, (int) mousepos.y, mousesize, mousesize);
 
     }
 
     public static boolean checkblockwithduplicate(Block normal, Block duplicate, int rl) {
         if (rl == 0) {
-            return object(normal.getX(), normal.getY(), normal.getH(), normal.getW(), duplicate.getX_dup_rechts(), duplicate.getY(), duplicate.getH(), 60);
+            return object(normal.getX(), normal.getY(), normal.getW(), normal.getH(), duplicate.getX_dup_rechts(), duplicate.getY(), 60, duplicate.getH());
         } else {
-            return object(normal.getX(), normal.getY(), normal.getH(), normal.getW(), duplicate.getX_dup_links() + duplicate.getW() - 60, duplicate.getY(), duplicate.getH(), 60);
+            return object(normal.getX(), normal.getY(), normal.getW(), normal.getH(), duplicate.getX_dup_links() + duplicate.getW() - 60, duplicate.getY(), 60, duplicate.getH());
         }
     }
 

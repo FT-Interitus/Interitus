@@ -86,7 +86,7 @@ public abstract class Wire {
                     int counter = 0;
                     for (int i = 0; i < ProjectManager.getActProjectVar().visibleblocks.size(); i++) {
                         //TODO hier auch nach nodes testen eventuell will man die nur verschieben
-                        if (CheckKollision.object(ProjectManager.getActProjectVar().visibleblocks.get(i).getX_entrance(), ProjectManager.getActProjectVar().visibleblocks.get(i).getY_entrance(), ProjectManager.getActProjectVar().visibleblocks.get(i).getH_entrance(), ProjectManager.getActProjectVar().visibleblocks.get(i).getW_entrance(), (int) ProgrammingSpace.viewport.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1)) {
+                        if (CheckKollision.object(ProjectManager.getActProjectVar().visibleblocks.get(i).getX_entrance(), ProjectManager.getActProjectVar().visibleblocks.get(i).getY_entrance(), ProjectManager.getActProjectVar().visibleblocks.get(i).getW_entrance(), ProjectManager.getActProjectVar().visibleblocks.get(i).getH_entrance(), (int) ProgrammingSpace.viewport.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1)) {
                             counter++;
                         }
 
@@ -296,12 +296,12 @@ public abstract class Wire {
 
 
                     sprite.draw(ProgrammingSpace.batch);
-                    if (CheckKollision.objectwithrotation(sprite.getX(), sprite.getY(), sprite.getHeight(), sprite.getWidth(), sprite.getRotation(), ProgrammingSpace.viewport.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, ProgrammingSpace.viewport.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1, 0) && ProjectManager.getActProjectVar().mousehoveredwire != this) {
+                    if (CheckKollision.objectwithrotation(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight(), sprite.getRotation(), ProgrammingSpace.viewport.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, ProgrammingSpace.viewport.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1, 0) && ProjectManager.getActProjectVar().mousehoveredwire != this) {
                         ProjectManager.getActProjectVar().mousehoveredwire = this;
 
                     }
 
-                    if (!RechtsKlick.popupmanager.isPopupopen()&&ProjectManager.getActProjectVar().mousehoveredwire == this && !CheckKollision.objectwithrotation(sprite.getX(), sprite.getY(), sprite.getHeight(), sprite.getWidth(), sprite.getRotation(), ProgrammingSpace.viewport.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, ProgrammingSpace.viewport.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1, 0)) {
+                    if (!RechtsKlick.popupmanager.isPopupopen()&&ProjectManager.getActProjectVar().mousehoveredwire == this && !CheckKollision.objectwithrotation(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight(), sprite.getRotation(), ProgrammingSpace.viewport.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, ProgrammingSpace.viewport.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1, 0)) {
                         System.out.println("Popup disable"); //TODO here is an error
                         ProjectManager.getActProjectVar().mousehoveredwire = null;
                     }

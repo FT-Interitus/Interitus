@@ -6,10 +6,12 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.Var;
 import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.CheckKollision;
+import de.ft.interitus.utils.Unproject;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -22,6 +24,9 @@ public abstract class BlockUpdate extends Thread {
     public boolean isconnectorclicked = false;//Ist der connector des zuständigen Blocks ausgelöst
     public boolean geschoben = false;
     public Wire tempwire;
+    private  boolean willbedelete = false;
+    private boolean deleteonend = false;
+
     boolean toggle; // Ist der Block von der mouse gehovert?
     Vector2 temp1; //Temp vectoren für berechnungs zwischen schritte
     Vector2 temp2;//Temp vectoren für berechnungs zwischen schritte
@@ -77,7 +82,7 @@ public abstract class BlockUpdate extends Thread {
                     //TODO
 
 
-                    if (!isIsconnectorclicked() && ProjectManager.getActProjectVar().showleftdocker && CheckKollision.object(block.getX_entrance(), block.getY_entrance(), block.getH_entrance(), block.getW_entrance(), (int) ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1) && Gdx.input.isButtonJustPressed(0) && block.getLeft() ==null) { //TODO Durch das Just pressed kann es sein das es manchmal verpasst wird dieses Event auszuführen
+                    if (!isIsconnectorclicked() && ProjectManager.getActProjectVar().showleftdocker && CheckKollision.object(block.getX_entrance(), block.getY_entrance(), block.getW_entrance(), block.getH_entrance(), (int) ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1) && Gdx.input.isButtonJustPressed(0) && block.getLeft() ==null) { //TODO Durch das Just pressed kann es sein das es manchmal verpasst wird dieses Event auszuführen
                         ProjectManager.getActProjectVar().showleftdocker = false;
                         ProjectManager.getActProjectVar().movingwires.setMovebymouse(false);
                         ProjectManager.getActProjectVar().movingwires.setRight_connection(block);
@@ -198,6 +203,9 @@ public abstract class BlockUpdate extends Thread {
 
                     if (ProjectManager.getActProjectVar().ismoving == false && !block.isMoving() && block.isMarked() && Gdx.input.isButtonPressed(0) && CheckKollision.checkmousewithblock(block)) {
 
+
+
+
                         if (!CheckKollision.checkmousewithobject((int) block.getwireconnector_right().x, (int) block.getwireconnector_right().y, 20, 20, (int) Var.mousepressedold.x, (int) Var.mousepressedold.y)) {
 
 
@@ -222,15 +230,22 @@ public abstract class BlockUpdate extends Thread {
 
                     if (block.isMoving() && Gdx.input.isButtonPressed(0)) {
 
+
+                        //Wenn der Mauszeiger die Ablagefläche berührt
+                        if(CheckKollision.checkmousewithobject(UIVar.BlockBarX,UIVar.BlockBarY,UIVar.BlockBarW,UIVar.BlockBarH, Unproject.unproject())) {
+                            willbedelete = true;
+                            //TODO change mousepointer
+                        }else {
+                            willbedelete = false;
+                        }
+
+
+                        //Ändere die Aktuelle Blockposition auf die Maus Position
                         block.setX((int) (ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x - ProjectManager.getActProjectVar().unterschiedsave.x));
                         block.setY((int) (ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y - ProjectManager.getActProjectVar().unterschiedsave.y));
 
-                        //Wenn der Mauszeiger die Ablagefläche berührt
-                        // if(CheckKollision.checkmousewithobject(,Gdx.input.getY())) {
-                        // gotodelete = true;
-                        // }else{
-                        //gotodelete = false;
-                        //}
+
+
 
                         if (block.getWire_left() != null) {
                             if (!block.getWire_left().isSpace_between_blocks()) {
@@ -268,8 +283,17 @@ public abstract class BlockUpdate extends Thread {
 
 
                     } else if (block.isMoving()) {
+
+
+
                         ProjectManager.getActProjectVar().ismoving = false;
                         block.setMoving(false);
+                        if(willbedelete) {
+                            deleteonend=true;
+
+                        }
+
+
 
 
                     }
@@ -312,7 +336,7 @@ public abstract class BlockUpdate extends Thread {
                     try {
 
 
-                        if (CheckKollision.object(ProjectManager.getActProjectVar().markedblock.getX(), ProjectManager.getActProjectVar().markedblock.getY(), ProjectManager.getActProjectVar().markedblock.getH(), ProjectManager.getActProjectVar().markedblock.getW(), block.getX(), block.getY(), block.getH(), block.getW()) && CheckKollision.flache(ProjectManager.getActProjectVar().markedblock.getX(), ProjectManager.getActProjectVar().markedblock.getY(), ProjectManager.getActProjectVar().markedblock.getW(), ProjectManager.getActProjectVar().markedblock.getH(), block.getX(), block.getY()) > 7000 && block != ProjectManager.getActProjectVar().markedblock) {
+                        if (CheckKollision.object(ProjectManager.getActProjectVar().markedblock.getX(), ProjectManager.getActProjectVar().markedblock.getY(), ProjectManager.getActProjectVar().markedblock.getW(), ProjectManager.getActProjectVar().markedblock.getH(), block.getX(), block.getY(), block.getW(), block.getH()) && CheckKollision.flache(ProjectManager.getActProjectVar().markedblock.getX(), ProjectManager.getActProjectVar().markedblock.getY(), ProjectManager.getActProjectVar().markedblock.getW(), ProjectManager.getActProjectVar().markedblock.getH(), block.getX(), block.getY()) > 7000 && block != ProjectManager.getActProjectVar().markedblock) {
                             // System.out.println("überschneidung von markedblock und einem block");
 
                             if (ProjectManager.getActProjectVar().uberlapptmitmarkedblock.indexOf(block) == -1) {
@@ -520,7 +544,14 @@ public abstract class BlockUpdate extends Thread {
 
                         }
                     }
+
+                    if(deleteonend) {
+                        block.delete(false);
+                        this.cancel();
+                    }
+
                 } catch (Exception e) {
+                    e.printStackTrace();
                     DisplayErrors.customErrorstring = "Fehler in einem "+block.getBlocktype().getName()+" Block mit der ID "+block.getIndex();
                     DisplayErrors.error = e;
                 }

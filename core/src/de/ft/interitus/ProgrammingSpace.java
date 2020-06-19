@@ -24,7 +24,9 @@ import de.ft.interitus.plugin.Configuration;
 import de.ft.interitus.plugin.PluginRegister;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.device.BlockTypes.ProjectTypesVar;
+import de.ft.interitus.utils.CheckKollision;
 import de.ft.interitus.utils.PositionSaver;
+import de.ft.interitus.utils.Unproject;
 import de.ft.interitus.utils.animation.Animation;
 
 import java.awt.*;
@@ -121,9 +123,7 @@ public class ProgrammingSpace extends ScreenAdapter {
 
     @Override
     public void render(float delta)  {
-if(Gdx.input.isKeyJustPressed(Input.Keys.R)) {
-    System.gc();
-}
+
         renderstarttime = System.currentTimeMillis();
 
         if(ProjectManager.getActProjectVar().projectType==null) {
