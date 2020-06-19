@@ -234,7 +234,7 @@ public class AssetLoader {
                        load = StorePluginsVar.pluginEntries.size();
                    }
                    for (int i = 0; i < load; i++) {
-                       System.out.println("load" + i);
+
                        byte[] download = new byte[0];
                        try {
                            download = DownloadFile.downloadBytes(StorePluginsVar.pluginEntries.get(i).getImage());

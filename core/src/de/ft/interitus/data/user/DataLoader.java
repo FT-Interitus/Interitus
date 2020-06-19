@@ -72,6 +72,7 @@ public class DataLoader {
                     }
 
                     ProjectManager.getActProjectVar().vcs = settings.getInt("vcs");
+                    ProjectManager.getActProjectVar().programmingtime = settings.getLong("time");
 
 
                     if(ProjectManager.getActProjectVar().vcs== VCS.NONE) {

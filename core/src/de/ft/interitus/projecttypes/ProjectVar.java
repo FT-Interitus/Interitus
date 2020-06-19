@@ -58,8 +58,11 @@ public abstract class ProjectVar {
     public  volatile String path = ""; // Wo ist die aktuell geöffnete Datei gespeichert
     public  ArrayList<Thread> threads = new ArrayList<>();
     public  ArrayList<Object> requestobj = new ArrayList<>();
+    public long programmingtime = 0;
+    public long currentstarttime = 0;
 
     public ProjectVar() {
+            currentstarttime = System.currentTimeMillis();
 
     }
 }

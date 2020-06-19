@@ -107,10 +107,10 @@ public class ShortCut {
 
     public void setDisable(boolean disable) {
         this.disable = disable;
-        System.out.println(menuItem);
+
 
         if(menuItem!=null){
-            System.out.println("shortcut text fweg");
+
 
             if(disable) {
                 menuItem.setShortcut("");

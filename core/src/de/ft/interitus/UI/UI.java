@@ -214,7 +214,7 @@ public class UI {
 
 
 
-File testpath = new File("");
+
 
         Thread UIthread = new Thread() {
 
