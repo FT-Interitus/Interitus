@@ -150,52 +150,6 @@ public class PluginManagerHandler {
     }
 
 
-    /**
-     * @deprecated use PluginGateway
-     *
-     */
-    public static void addsettings(VisTable settingsclass) {
-        PluginGateway.plugisettings.add(settingsclass);
-    }
-    /**
-     * @deprecated use PluginGateway
-
-     */
-    public static void addMenuEntry(Menu menuentry) {
-        PluginGateway.pluginMenubar.add(menuentry);
-    }
-    /**
-     * @deprecated use PluginGateway
-
-     */
-    public static void addProjectType(ProjectTypes PT) {
-        PluginGateway.pluginprojekttypes.add(PT);
-    }
-    /**
-     * @deprecated use PluginGateway
-
-     */
-    public static void addShortcut(ShortCut... shortCut) {
-        PluginGateway.pluginshortCuts.addAll(Arrays.asList(shortCut));
-    }
-    /**
-     * @deprecated use PluginGateway
-
-     */
-    public static void addShortcutChecker(ShortCutChecker shortCutChecker) {
-        PluginGateway.pluginshortCutsChecker.add(shortCutChecker);
-    }
-    /**
-     * @deprecated use PluginGateway
-
-     */
-    public static void registerTheme(Theme theme) {
-        RegisteredThemes.themes.add(theme);
-    }
-
-
-
-
     public Exception init() {
 
         if(!new File(System.getProperty("user.home") + "/.itd/plugins").exists()) {

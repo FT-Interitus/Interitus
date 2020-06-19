@@ -77,14 +77,14 @@ public abstract class BlockUpdate extends Thread {
                     //TODO
 
 
-                    if (!isIsconnectorclicked() && ProjectManager.getActProjectVar().showleftdocker && CheckKollision.object(block.getX_entrance(), block.getY_entrance(), block.getH_entrance(), block.getW_entrance(), (int) ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1) && Gdx.input.isButtonJustPressed(0) && block.getLeft() == -1) { //TODO Durch das Just pressed kann es sein das es manchmal verpasst wird dieses Event auszuführen
+                    if (!isIsconnectorclicked() && ProjectManager.getActProjectVar().showleftdocker && CheckKollision.object(block.getX_entrance(), block.getY_entrance(), block.getH_entrance(), block.getW_entrance(), (int) ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1) && Gdx.input.isButtonJustPressed(0) && block.getLeft() ==null) { //TODO Durch das Just pressed kann es sein das es manchmal verpasst wird dieses Event auszuführen
                         ProjectManager.getActProjectVar().showleftdocker = false;
                         ProjectManager.getActProjectVar().movingwires.setMovebymouse(false);
                         ProjectManager.getActProjectVar().movingwires.setRight_connection(block);
                         ProjectManager.getActProjectVar().movingwires.setSpace_between_blocks(true);
                         block.setWire_left(ProjectManager.getActProjectVar().movingwires);
                         try {
-                            ProjectManager.getActProjectVar().wire_beginn.setRight(block.getIndex());
+                            ProjectManager.getActProjectVar().wire_beginn.setRight(block);
                         } catch (NullPointerException e) {
 
                             //Falls die eine Node dazwischen ist und der Nachbar über die Node gesetzt werden muss
@@ -94,7 +94,7 @@ public abstract class BlockUpdate extends Thread {
 
                         }
 
-                        ProjectManager.getActProjectVar().blocks.get(ProjectManager.getActProjectVar().movingwires.getRight_connection().getLeft()).getBlockupdate().isconnectorclicked = false;
+                        ProjectManager.getActProjectVar().movingwires.getRight_connection().getLeft().getBlockupdate().isconnectorclicked = false;
                         ProjectManager.getActProjectVar().movingwires = null;
 
 
@@ -234,8 +234,8 @@ public abstract class BlockUpdate extends Thread {
 
                         if (block.getWire_left() != null) {
                             if (!block.getWire_left().isSpace_between_blocks()) {
-                                if (block.getLeft() != -1) {
-                                    ProjectManager.getActProjectVar().blocks.get(block.getLeft()).setRight(-1);
+                                if (block.getLeft() != null) {
+                                    block.getLeft().setRight(null);
                                     try {
                                         block.getWire_left().getLeft_connection().setWire_right(null); //löschen der Wire die zwischen den Blöcken war
                                     }catch (Exception e) {
@@ -246,22 +246,22 @@ public abstract class BlockUpdate extends Thread {
 
 
                                 }
-                                block.setLeft(-1);
+                                block.setLeft(null);
 
                             }
                         }
 
                         if (block.getWire_right() != null) {
                             if (!block.getWire_right().isSpace_between_blocks()) {
-                                if (block.getRight() != -1) {
-                                    ProjectManager.getActProjectVar().blocks.get(block.getRight()).setLeft(-1);
+                                if (block.getRight() != null) {
+                                    block.getRight().setLeft(null);
 
                                     block.getWire_right().getRight_connection().setWire_left(null);//löschen der Wire die zwischen den Blöcken war
                                     ProjectManager.getActProjectVar().wires.remove(block.getWire_right());
                                     block.setWire_right(null);
 
                                 }
-                                block.setRight(-1);
+                                block.setRight(null);
                             }
 
                         }
@@ -361,18 +361,18 @@ public abstract class BlockUpdate extends Thread {
                             block.moved = true;
                             geschoben = true;
 
-                            int a = block.getIndex();
+                            Block a = block;
                             //System.out.println(a);
                             block.setX(block.getX() + block.getW());
 
                             block.seted = false;
 
-                                while (ProjectManager.getActProjectVar().blocks.get(a).getRight() != -1) {
+                                while (a.getRight() != null) {
 
                                     //block.getRight().setX(block.getRight().getX() + block.getW());
 
-                                    ProjectManager.getActProjectVar().blocks.get(ProjectManager.getActProjectVar().blocks.get(a).getRight()).setX(ProjectManager.getActProjectVar().blocks.get(a).getX() + ProjectManager.getActProjectVar().blocks.get(a).getW());
-                                    a = ProjectManager.getActProjectVar().blocks.get(a).getRight();
+                                    a.getRight().setX(a.getX() + a.getW());
+                                    a = a.getRight();
                                 }
 
 
@@ -384,18 +384,18 @@ public abstract class BlockUpdate extends Thread {
                             block.moved = true;
                             geschoben = true;
 
-                            int a = block.getIndex();
+                            Block a = block;
                             block.setX(block.getX() + block.getW());
 
                             block.seted = false;
 
 
-                                while (ProjectManager.getActProjectVar().blocks.get(a).getRight() != -1) {
+                                while (a.getRight() != null) {
 
                                     //block.getRight().setX(block.getRight().getX() + block.getW());
 
-                                    ProjectManager.getActProjectVar().blocks.get(ProjectManager.getActProjectVar().blocks.get(a).getRight()).setX(ProjectManager.getActProjectVar().blocks.get(a).getX() + ProjectManager.getActProjectVar().blocks.get(a).getW());
-                                    a = ProjectManager.getActProjectVar().blocks.get(a).getRight();
+                                    a.getRight().setX(a.getX() + a.getW());
+                                    a = a.getRight();
 
                                 }
 
@@ -415,18 +415,18 @@ public abstract class BlockUpdate extends Thread {
                         geschoben = false;
 
 
-                        int b = block.getIndex();
+                        Block b = block;
 
                         block.setX(block.getX() - block.getW());
 
 
 
-                            while (ProjectManager.getActProjectVar().blocks.get(b).getRight() != -1) {
+                            while (b.getRight() != null) {
 
                                 //block.getRight().setX(block.getRight().getX() + block.getW());
 
-                                ProjectManager.getActProjectVar().blocks.get(ProjectManager.getActProjectVar().blocks.get(b).getRight()).setX(ProjectManager.getActProjectVar().blocks.get(ProjectManager.getActProjectVar().blocks.get(b).getRight()).getX() - ProjectManager.getActProjectVar().blocks.get(b).getW());//TODO tim ist sich nicht sicher
-                                b = ProjectManager.getActProjectVar().blocks.get(b).getRight();
+                               b.getRight().setX(b.getRight().getX() - b.getW());//TODO tim ist sich nicht sicher
+                                b = b.getRight();
                             }
 
 
@@ -445,7 +445,7 @@ public abstract class BlockUpdate extends Thread {
 
                     if (ProjectManager.getActProjectVar().marked && !block.isMarked()) {
                         try {
-                            if (CheckKollision.checkblockwithduplicate(ProjectManager.getActProjectVar().markedblock, block, 0) && block.getRight() == -1 && ProjectManager.getActProjectVar().markedblock.getWire_left() == null) {
+                            if (CheckKollision.checkblockwithduplicate(ProjectManager.getActProjectVar().markedblock, block, 0) && block.getRight() == null && ProjectManager.getActProjectVar().markedblock.getWire_left() == null) {
                                 if (ProjectManager.getActProjectVar().markedblock.isMoving()) {
                                     //System.out.println("Kollision!");
 
@@ -456,7 +456,7 @@ public abstract class BlockUpdate extends Thread {
                                 } else {
 
 
-                                    if (block.getRight() != ProjectManager.getActProjectVar().markedblock.getIndex() && ProjectManager.getActProjectVar().markedblock.getLeft() != block.getIndex() && block.getRight() == -1 && ProjectManager.getActProjectVar().biggestblock == block) {
+                                    if (block.getRight() != ProjectManager.getActProjectVar().markedblock && ProjectManager.getActProjectVar().markedblock.getLeft() != block && block.getRight() == null && ProjectManager.getActProjectVar().biggestblock == block) {
 
                                         //System.out.println("test");
                                         block.setShowdupulicate_rechts(false);
@@ -466,7 +466,7 @@ public abstract class BlockUpdate extends Thread {
                                         ProjectManager.getActProjectVar().markedblock.setWire_left(block.getWire_right());
                                         ProjectManager.getActProjectVar().wires.add(block.getWire_right());
 
-                                        block.setRight(ProjectManager.getActProjectVar().markedblock.getIndex());
+                                        block.setRight(ProjectManager.getActProjectVar().markedblock);
                                         ProjectManager.getActProjectVar().markedblock.setY(block.getY());
                                         ProjectManager.getActProjectVar().markedblock.setX(block.getX_dup_rechts());
                                     }
@@ -482,7 +482,7 @@ public abstract class BlockUpdate extends Thread {
 
 
                         try {
-                            if (CheckKollision.checkblockwithduplicate(ProjectManager.getActProjectVar().markedblock, block, 1) && block.getLeft() == -1 && ProjectManager.getActProjectVar().markedblock.getWire_right() == null) {
+                            if (CheckKollision.checkblockwithduplicate(ProjectManager.getActProjectVar().markedblock, block, 1) && block.getLeft() == null && ProjectManager.getActProjectVar().markedblock.getWire_right() == null) {
 
                                 if (ProjectManager.getActProjectVar().markedblock.isMoving()) {
 
@@ -493,7 +493,7 @@ public abstract class BlockUpdate extends Thread {
                                 } else {
 
 
-                                    if (block.getRight() != ProjectManager.getActProjectVar().markedblock.getIndex() && ProjectManager.getActProjectVar().markedblock.getLeft() != block.getIndex() && block.getLeft() == -1 && ProjectManager.getActProjectVar().biggestblock == block) {
+                                    if (block.getRight() != ProjectManager.getActProjectVar().markedblock && ProjectManager.getActProjectVar().markedblock.getLeft() != block && block.getLeft() == null && ProjectManager.getActProjectVar().biggestblock == block) {
 
 
                                         block.setShowdupulicate_links(false);
@@ -505,7 +505,7 @@ public abstract class BlockUpdate extends Thread {
                                         ProjectManager.getActProjectVar().wires.add(block.getWire_left());
 
 
-                                        block.setLeft(ProjectManager.getActProjectVar().markedblock.getIndex());
+                                        block.setLeft(ProjectManager.getActProjectVar().markedblock);
                                         ProjectManager.getActProjectVar().markedblock.setY(block.getY());
                                         ProjectManager.getActProjectVar().markedblock.setX(block.getX_dup_links());
                                     }

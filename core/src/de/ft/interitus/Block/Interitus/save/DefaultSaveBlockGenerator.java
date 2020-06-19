@@ -56,17 +56,17 @@ nodes=new ArrayList<>();
 
         }
 
-        if(block.getRight()!=-1) {
+        if(block.getRight()!=null) {
 
             if(block.getWire_right().isSpace_between_blocks()) {
-                return new DefaultSaveBlock(block.getX(),block.getY(),block.getIndex(),block.getLeft(),block.getRight(),true,nodes);
+                return new DefaultSaveBlock(block.getX(),block.getY(),block.getIndex(),block.getLeft().getIndex(),block.getRight().getIndex(),true,nodes);
             }else{
-                return new DefaultSaveBlock(block.getX(),block.getY(),block.getIndex(),block.getLeft(),block.getRight(),false,nodes);
+                return new DefaultSaveBlock(block.getX(),block.getY(),block.getIndex(),block.getLeft().getIndex(),block.getRight().getIndex(),false,nodes);
 
             }
 
         }else {
-            return new DefaultSaveBlock(block.getX(),block.getY(),block.getIndex(),block.getLeft(),block.getRight(),false,nodes);
+            return new DefaultSaveBlock(block.getX(),block.getY(),block.getIndex(),block.getLeft().getIndex(),block.getRight().getIndex(),false,nodes);
         }
 
     }

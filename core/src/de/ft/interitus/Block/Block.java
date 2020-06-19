@@ -34,7 +34,6 @@ import de.ft.interitus.utils.CheckKollision;
 public abstract class Block implements VisibleObjects {
     public boolean seted = true; //Ob der Block losgelassen wurde bzw ob der Block eine statische Position hat
     public boolean moved = false; // Ob der Block gerade mit der Maus bewegt wird
-    Frustum camfr = ProgrammingSpace.cam.frustum; //getten der Camera werte um zu überprüfen ob der Block gerade sichtbar ist.
     private boolean marked = false; //Ob der Block gerade makiert ist
     private int x; //Die x Koordinate des Blocks
     private int y; //Die Y Koordinate des Blocks
@@ -47,8 +46,8 @@ public abstract class Block implements VisibleObjects {
     private int x_dup_links; //Die Y Position des Duplicates  //Die Weite und Höhe ergeben sich aus der Block weite und Höhe
     private boolean moving = false; //Ob der Block gerade durch den Nutzer bewegt wird
     private BlockUpdate blockupdate; // Die Block update methode hier werden user actionen engegengenommen und verarbeitet
-    private int left = -1; //Der rechte verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
-    private int right = -1; //Der linke verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
+    private Block left = null; //Der rechte verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
+    private Block right = null; //Der linke verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
     private final Vector2 wireconnector_right = new Vector2(0, 0); //Die rechte wire-Anschluss Position
     private final Vector2 wireconnector_left = new Vector2(0, 0); //Die linke wire-Anschluss Position
     private Wire wire_left = null; //linke verbundene Wire
@@ -117,9 +116,12 @@ public abstract class Block implements VisibleObjects {
      *
      * @return if the Block is visible
      */
+
     @Override
     public boolean isVisible() {
-        return camfr.boundsInFrustum(this.getX(), this.getY(), 0, this.getW(), this.getH(), 0)&&ProjectManager.getActProjectVar().blocks.contains(this); //Ist der Block im Camera bereich?
+        return ProgrammingSpace.cam.frustum.boundsInFrustum(this.getX(), this.getY(), 0, this.getW(), this.getH(), 0); //Ist der Block im Camera bereich?
+
+
     }
 
     /***
@@ -345,7 +347,7 @@ public abstract class Block implements VisibleObjects {
         this.wire_right = wire_right;
     }
 
-    public int getLeft() {
+    public Block getLeft() {
         return left; //Gibt den linken VERBUNDENEN Nachbar zurück
     }
 
@@ -356,15 +358,15 @@ public abstract class Block implements VisibleObjects {
      *
      */
 
-    public void setLeft(int left) { //Setzt einen neuen linken nachbar
+    public void setLeft(Block left) { //Setzt einen neuen linken nachbar
 
 
         if (this.left != left) { //Wenn der linke Nachbar nicht der schon der Gleiche Block ist (Sonst tritt hier ein OverFlow auf siehe set Right)
             this.left = left;      //Block wird als Nachbar aufgenommen
         }
-        if (left != -1) { //Wenn der Block nicht null ist...
-            if (ProjectManager.getActProjectVar().blocks.get(left).getRight() != this.index) { //Und der wenn der Rechte Nachbar vom linken Block nicht man selbst ist
-                ProjectManager.getActProjectVar().blocks.get(left).setRight(this.index); //Wird auch diese Verbindung neu gesetzt (Um Nachbarsetzten zu erleichtern (Aus der Schlussfolgerung das der Rechte Nachbar vom linken Nachbar man selbst ist) )
+        if (left != null) { //Wenn der Block nicht null ist...
+            if (left.getRight() != this) { //Und der wenn der Rechte Nachbar vom linken Block nicht man selbst ist
+                left.setRight(this); //Wird auch diese Verbindung neu gesetzt (Um Nachbarsetzten zu erleichtern (Aus der Schlussfolgerung das der Rechte Nachbar vom linken Nachbar man selbst ist) )
             }
         }
 
@@ -375,18 +377,18 @@ public abstract class Block implements VisibleObjects {
      * See Block.setLeft
      */
 
-    public int getRight() {
+    public Block getRight() {
         return right; //Rück gabe des rechts VERBUNDENEN Nachbars
     }
 
-    public void setRight(int right) {
+    public void setRight(Block right) {
 
         if (this.right != right) { //Wenn der rechte Nachbar nicht der schon der Gleiche Block ist (Sonst tritt hier ein OverFlow auf siehe set Left)
             this.right = right;//Block wird als Nachbar aufgenommen
         }
-        if (right != -1) {//Wenn der Block nicht null ist..
-            if (ProjectManager.getActProjectVar().blocks.get(right).getLeft() != this.index) {//Und der wenn der linke Nachbar vom rechten Block nicht man selbst ist
-                ProjectManager.getActProjectVar().blocks.get(right).setLeft(this.index);//Wird auch diese Verbindung neu gesetzt (Um Nachbarsetzten zu erleichtern (Aus der Schlussfolgerung das der linke Nachbar vom rechten Nachbar man selbst ist))
+        if (right != null) {//Wenn der Block nicht null ist..
+            if (right.getLeft() != this) {//Und der wenn der linke Nachbar vom rechten Block nicht man selbst ist
+                right.setLeft(this);//Wird auch diese Verbindung neu gesetzt (Um Nachbarsetzten zu erleichtern (Aus der Schlussfolgerung das der linke Nachbar vom rechten Nachbar man selbst ist))
             }
         }
 
@@ -473,28 +475,27 @@ public abstract class Block implements VisibleObjects {
             this.getWire_right().setLeft_connection(null);
         }
 
-        final int temp = this.getIndex(); // Der Index des Blocks wird in eine Temp Variable verlegt, da er später nochmal gebraucht wird
         DataManager.change(this, false, true); // Ein Block Abbild wird erstellt um ein eventuelles Rückgänig machen
         this.setIndex(-1); //Der Index wird auf -1 gesetzt dann merkt der BlockUpdater das der laufenden Timer beendet werden soll
-        if (left != -1) { //Wenn ein linker Nachbar exsistiert
-            ProjectManager.getActProjectVar().blocks.get(left).setRight(-1); //wird dem linken Nachbar gesagt das er keinen Rechten Nachbar mehr hat
+        if (left != null) { //Wenn ein linker Nachbar exsistiert
+            left.setRight(null); //wird dem linken Nachbar gesagt das er keinen Rechten Nachbar mehr hat
 
             try {
-                ProjectManager.getActProjectVar().blocks.get(left).setWire_right(null); //Die Wire des nachbar block wird gelöscht damit die Wire kein zweites mal gelöscht wird (passiert nur bei ganz vielen wire nodes)
+                left.setWire_right(null); //Die Wire des nachbar block wird gelöscht damit die Wire kein zweites mal gelöscht wird (passiert nur bei ganz vielen wire nodes)
             } catch (NullPointerException e) {
                 //Falls es gar keine Wire gab
             }
         }
 
-        if (right != -1) { // wenn ein Rechter nachbar exsitiert
+        if (right != null) { // wenn ein Rechter nachbar exsitiert
             try {
-                ProjectManager.getActProjectVar().blocks.get(right).setLeft(-1); // wird dem rechten Nachbar gesagt das er keinen linken nachbar mehr hat
+                right.setLeft(null); // wird dem rechten Nachbar gesagt das er keinen linken nachbar mehr hat
             }catch (IndexOutOfBoundsException e) {
 
 
             }
             try {
-                ProjectManager.getActProjectVar().blocks.get(right).setWire_left(null); //Die Wire des nachbar block wird gelöscht damit die Wire kein zweites mal gelöscht wird (passiert nur bei ganz vielen wire nodes)
+                right.setWire_left(null); //Die Wire des nachbar block wird gelöscht damit die Wire kein zweites mal gelöscht wird (passiert nur bei ganz vielen wire nodes)
             } catch (NullPointerException e) {
                 //Falls es gar keine Wire gab
             }catch (IndexOutOfBoundsException e) {
@@ -503,8 +504,8 @@ public abstract class Block implements VisibleObjects {
         }
 
 
-        left = -1; //Die Referenzierung zum linken Nachbar wird gelöscht
-        right = -1; //Die Referenzierung zum rechten Nachbar wird gelöscht
+        left = null; //Die Referenzierung zum linken Nachbar wird gelöscht
+        right = null; //Die Referenzierung zum rechten Nachbar wird gelöscht
 
         if (ProjectManager.getActProjectVar().threads.indexOf(this.blockupdate) != -1) { //Überprüfen ob Thread überhaupt läuft
             ProjectManager.getActProjectVar().threads.remove(this.blockupdate); //Wenn ja wird er aus dem Array der Threads entfernt
@@ -525,13 +526,20 @@ public abstract class Block implements VisibleObjects {
             ProjectManager.getActProjectVar().blocks.remove(this); //Der block wird aus dem Blocks Array entfernt
             ProjectManager.getActProjectVar().visibleblocks.remove(this); //Der block wird aus dem Visible Blocks Array entfernt
 
+            try {
+                ProjectManager.getActProjectVar().blocks.remove(this); //Der Block entfernet sich selbst aus dem Blocks Array
+            } catch (Exception e) {
+
+            }
 
             Thread calcnew = new Thread() { //Da dies relativ lange dauert dauert in einem eigenen Thread
                 @Override
                 public void run() {
-                    for (int i = temp; i < ProjectManager.getActProjectVar().blocks.size(); i++) { //Durch alle Indexe des Block Arrays wird durchgegangen alle die einen größeren Index haben //Durch die Temp variable kann der alte Index des Blocks hier wieder verwendet werden
+                    for (int i = 0; i < ProjectManager.getActProjectVar().visibleblocks.size(); i++) { //Durch alle Indexe des Block Arrays wird durchgegangen alle die einen größeren Index haben //Durch die Temp variable kann der alte Index des Blocks hier wieder verwendet werden
                         try {
-                            ProjectManager.getActProjectVar().blocks.get(i).setIndex(ProjectManager.getActProjectVar().blocks.get(i).getIndex() - 1); //Alle anderen Blöcke werden um einen Index verschoben
+                            if(ProjectManager.getActProjectVar().visibleblocks.get(i)!=getblock()) {
+                                ProjectManager.getActProjectVar().visibleblocks.get(i).findnewindex(); //Alle anderen Blöcke werden um einen Index verschoben
+                            }
                         } catch (Exception e) { //Wenn man bei Milliarden von Blöcken der erste und der zweite gelöscht werden gibt es hier fehler
                             DisplayErrors.error = e;
                             e.printStackTrace();
@@ -544,13 +552,13 @@ public abstract class Block implements VisibleObjects {
             calcnew.start(); //Der Thread wird gestarted
 
 
-            try {
-                ProjectManager.getActProjectVar().blocks.remove(this); //Der Block entfernet sich selbst aus dem Blocks Array
-            } catch (Exception e) {
 
-            }
         }
 
+    }
+
+    private void findnewindex() {
+        this.index = ProjectManager.getActProjectVar().blocks.indexOf(this);
     }
 
     /**
@@ -625,11 +633,11 @@ public abstract class Block implements VisibleObjects {
             batch.begin();
         }
 
-        if (!this.blockupdate.isIsconnectorclicked() && ProjectManager.getActProjectVar().showleftdocker && this.getLeft() == -1) {
+        if (!this.blockupdate.isIsconnectorclicked() && ProjectManager.getActProjectVar().showleftdocker && this.getLeft() == null) {
             batch.draw(AssetLoader.connector_offerd, getWireconnector_left().x, getWireconnector_left().y, 20, 20);
         }
 
-        if (this.getRight() == -1) {
+        if (this.getRight() == null) {
             batch.draw(AssetLoader.connector, getwireconnector_right().x, getwireconnector_right().y, 20, 20);
         }
 
@@ -707,6 +715,7 @@ public abstract class Block implements VisibleObjects {
      * @return the block Thread
      */
     public Thread allowedRestart() { //WARNUNG diese Methode darf nur von ThreadMananger aufgerufen werden
+        this.findnewindex();
         blockupdate = blockUpdateGenerator.generate(this); //Wenn der Block wieder in den Sichtbereich Rückt
         blockupdate.start(); //             ...wird der update Thread gestarted
 

@@ -91,16 +91,21 @@ public class DataLoader {
 
                 for(int i=0;i<readedblocks.size();i++) {
 
-                    ProjectManager.getActProjectVar().blocks.get(i).setRight(readedblocks.get(i).getIndex_rechts()); //Set Nachbar rechts
-                    ProjectManager.getActProjectVar().blocks.get(i).setLeft(readedblocks.get(i).getIndex_links()); //set Nachbar links
+                    if (readedblocks.get(i).getIndex_rechts() != -1) {
+                        ProjectManager.getActProjectVar().blocks.get(i).setRight(ProjectManager.getActProjectVar().blocks.get(readedblocks.get(i).getIndex_rechts())); //Set Nachbar rechts
+                    }
+                    if (readedblocks.get(i).getIndex_links() != -1) {
+                        ProjectManager.getActProjectVar().blocks.get(i).setLeft(ProjectManager.getActProjectVar().blocks.get(readedblocks.get(i).getIndex_links())); //set Nachbar links
+                    }
+
 
                     if(readedblocks.get(i).getIndex_rechts()!=-1) { //Wenn der Block einen Rechten Nachbar hat
 
                         if(readedblocks.get(i).getNodes()==null) {
 
-                            ProjectManager.getActProjectVar().wires.add( ProjectManager.getActProjectVar().projectType.getWireGenerator().generate(ProjectManager.getActProjectVar().blocks.get(i), ProjectManager.getActProjectVar().blocks.get(ProjectManager.getActProjectVar().blocks.get(i).getRight()))); //Eine Wire mit den entsprechenen Blöcken wird erstellt
+                            ProjectManager.getActProjectVar().wires.add( ProjectManager.getActProjectVar().projectType.getWireGenerator().generate(ProjectManager.getActProjectVar().blocks.get(i), ProjectManager.getActProjectVar().blocks.get(i).getRight())); //Eine Wire mit den entsprechenen Blöcken wird erstellt
                             ProjectManager.getActProjectVar().blocks.get(i).setWire_right(ProjectManager.getActProjectVar().wires.get(ProjectManager.getActProjectVar().wires.size() - 1)); // Der Rechte Block bekommt die Wire zugeteilt
-                            ProjectManager.getActProjectVar().blocks.get(ProjectManager.getActProjectVar().blocks.get(i).getRight()).setWire_left(ProjectManager.getActProjectVar().wires.get(ProjectManager.getActProjectVar().wires.size() - 1));// Der Linke Block bekommt die Wire zugeteilt
+                            ProjectManager.getActProjectVar().blocks.get(i).getRight().setWire_left(ProjectManager.getActProjectVar().wires.get(ProjectManager.getActProjectVar().wires.size() - 1));// Der Linke Block bekommt die Wire zugeteilt
                             ProjectManager.getActProjectVar().wires.get(ProjectManager.getActProjectVar().wires.size() - 1).setSpace_between_blocks(readedblocks.get(i).isIsspacebetweenrightblock()); //Die Wire wird sichtbar gemacht
 
                         }else{
@@ -128,7 +133,7 @@ public class DataLoader {
                             }
                             ProjectManager.getActProjectVar().wires.add( ProjectManager.getActProjectVar().projectType.getWireGenerator().generate(ProjectManager.getActProjectVar().wireNodes.get(ProjectManager.getActProjectVar().wireNodes.size()-1),ProjectManager.getActProjectVar().blocks.get(readedblocks.get(i).getIndex_rechts())));
                             ProjectManager.getActProjectVar().wireNodes.get(ProjectManager.getActProjectVar().wireNodes.size()-1).setWire_right(ProjectManager.getActProjectVar().wires.get(ProjectManager.getActProjectVar().wires.size()-1));
-                            ProjectManager.getActProjectVar().blocks.get(ProjectManager.getActProjectVar().blocks.get(i).getRight()).setWire_left(ProjectManager.getActProjectVar().wires.get(ProjectManager.getActProjectVar().wires.size() - 1));// Der rechte Block bekommt die Wire zugeteilt
+                            ProjectManager.getActProjectVar().blocks.get(i).getRight().setWire_left(ProjectManager.getActProjectVar().wires.get(ProjectManager.getActProjectVar().wires.size() - 1));// Der rechte Block bekommt die Wire zugeteilt
                             ProjectManager.getActProjectVar().wires.get(ProjectManager.getActProjectVar().wires.size()-1).setSpace_between_blocks(true);
 
 
@@ -141,6 +146,8 @@ public class DataLoader {
 
 
                 }catch (Exception e) {
+                    e.printStackTrace();
+                    Var.openprojects.remove(Var.openprojects.size()-1);
                     DisplayErrors.customErrorstring ="Fehler beim Laden des Projekts";
                     DisplayErrors.error =e;
 
