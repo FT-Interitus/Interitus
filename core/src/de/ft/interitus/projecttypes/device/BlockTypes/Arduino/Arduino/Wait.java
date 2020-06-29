@@ -3,9 +3,11 @@ package de.ft.interitus.projecttypes.device.BlockTypes.Arduino.Arduino;
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.loading.AssetLoader;
+import de.ft.interitus.projecttypes.ProjectTypes;
 import de.ft.interitus.projecttypes.device.BlockTypes.BlockCategories;
 import de.ft.interitus.projecttypes.device.BlockTypes.BlockTopParameter;
 import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
+import de.ft.interitus.projecttypes.device.BlockTypes.ProjectTypesVar;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -14,8 +16,11 @@ public class Wait implements PlatformSpecificBlock {
 
     ArrayList<Parameter> parameters = new ArrayList<>();
 
-    public Wait()  {
+    private ProjectTypes type;
 
+    public Wait(ProjectTypes arduino)  {
+
+        this.type = arduino;
     }
 
 
@@ -57,5 +62,15 @@ public class Wait implements PlatformSpecificBlock {
     @Override
     public Texture getImage() {
         return null;
+    }
+
+    @Override
+    public int getID() {
+        return ProjectTypesVar.projectTypes.get(ProjectTypesVar.projectTypes.indexOf(type)).getProjectblocks().indexOf(this);
+    }
+
+    @Override
+    public ProjectTypes getProjectType() {
+        return type;
     }
 }

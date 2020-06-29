@@ -12,13 +12,14 @@ import java.util.ArrayList;
 
 public class InitNeoPixelController {
     static ArrayList<PlatformSpecificBlock> blocks  = new ArrayList<>();
+    static ProjectTypes type = new ProjectTypes(ProgrammingSpace.nativ,new NeoPixelController(),"Arduino-Neopixel-Projekt",blocks,new DefaultBlockGenerator(), new DefaultBlockUpdateGenerator(),new DefaultWireGenerator(),new DefaultWireNodeGenerator(), new DefaultSaveBlockGenerator(), new DefaultBlockVarGenerator());
 
     public static ProjectTypes init() {
-        blocks.add(new SetTableColor());
+        blocks.add(new SetTableColor(type));
 
 
 
 
-        return new ProjectTypes(ProgrammingSpace.nativ,new NeoPixelController(),"Arduino-Neopixel-Projekt",blocks,new DefaultBlockGenerator(), new DefaultBlockUpdateGenerator(),new DefaultWireGenerator(),new DefaultWireNodeGenerator(), new DefaultSaveBlockGenerator(), new DefaultBlockVarGenerator());
+        return type;
     }
 }

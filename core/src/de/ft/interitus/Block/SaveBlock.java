@@ -16,9 +16,10 @@ public abstract class SaveBlock implements Serializable {
     int index_links=-1;
     int index_rechts=-1;
     boolean isspacebetweenrightblock = false;
+    int platformspecificblockid = 0;
 
 
-    public SaveBlock(int x, int y, int index, int index_links, int index_rechts, boolean isspacebetweenrightblock, ArrayList<ArrayList<Integer>> nodes) {
+    public SaveBlock(int x, int y, int index, int index_links, int index_rechts, boolean isspacebetweenrightblock, ArrayList<ArrayList<Integer>> nodes, int platformspecificblockid) {
 this.x = x;
 this.y = y;
 this.index = index;
@@ -26,6 +27,7 @@ this.index_links = index_links;
 this.index_rechts = index_rechts;
 this.isspacebetweenrightblock = isspacebetweenrightblock;
 this.nodes = nodes;
+this.platformspecificblockid = platformspecificblockid;
 
 
     }
@@ -56,5 +58,9 @@ this.nodes = nodes;
 
     public ArrayList<ArrayList<Integer>> getNodes() {
         return nodes;
+    }
+
+    public int getPlatformspecificblockid() {
+        return platformspecificblockid;
     }
 }

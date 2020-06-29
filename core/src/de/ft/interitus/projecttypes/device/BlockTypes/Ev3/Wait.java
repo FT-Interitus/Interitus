@@ -3,6 +3,7 @@ package de.ft.interitus.projecttypes.device.BlockTypes.Ev3;
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.loading.AssetLoader;
+import de.ft.interitus.projecttypes.ProjectTypes;
 import de.ft.interitus.projecttypes.device.BlockTypes.BlockCategories;
 import de.ft.interitus.projecttypes.device.BlockTypes.BlockTopParameter;
 import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
@@ -48,6 +49,16 @@ public class Wait implements PlatformSpecificBlock, Ev3Block {
 
     @Override
     public Texture getImage() {
+        return null;
+    }
+
+    @Override
+    public int getID() {
+        return 0;
+    }
+
+    @Override
+    public ProjectTypes getProjectType() {
         return null;
     }
 

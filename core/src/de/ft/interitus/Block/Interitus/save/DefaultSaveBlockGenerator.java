@@ -59,14 +59,63 @@ nodes=new ArrayList<>();
         if(block.getRight()!=null) {
 
             if(block.getWire_right().isSpace_between_blocks()) {
-                return new DefaultSaveBlock(block.getX(),block.getY(),block.getIndex(),block.getLeft().getIndex(),block.getRight().getIndex(),true,nodes);
+
+
+                if(block.getLeft()==null&&block.getRight()!=null) {
+                    return new DefaultSaveBlock(block.getX(),block.getY(),block.getIndex(),-1,block.getRight().getIndex(),true,nodes, block.getBlocktype().getID());
+
+                }else if(block.getLeft()!=null&&block.getRight()==null){
+                    return new DefaultSaveBlock(block.getX(),block.getY(),block.getIndex(),block.getLeft().getIndex(),-1,true,nodes,block.getBlocktype().getID());
+                }else if(block.getLeft()!=null&&block.getRight()!=null) {
+                    return new DefaultSaveBlock(block.getX(),block.getY(),block.getIndex(),block.getLeft().getIndex(),block.getRight().getIndex(),false,nodes,block.getBlocktype().getID());
+
+                }else if(block.getLeft()==null&&block.getRight()==null) {
+                    return new DefaultSaveBlock(block.getX(),block.getY(),block.getIndex(),-1,-1,true,nodes,block.getBlocktype().getID());
+
+                }else{
+                    return new DefaultSaveBlock(block.getX(),block.getY(),block.getIndex(),-1,-1,true,nodes,block.getBlocktype().getID());
+                }
+
+
+
             }else{
-                return new DefaultSaveBlock(block.getX(),block.getY(),block.getIndex(),block.getLeft().getIndex(),block.getRight().getIndex(),false,nodes);
+
+                if(block.getLeft()==null&&block.getRight()!=null) {
+                    return new DefaultSaveBlock(block.getX(),block.getY(),block.getIndex(),-1,block.getRight().getIndex(),false,nodes,block.getBlocktype().getID());
+
+                }else if(block.getLeft()!=null&&block.getRight()==null){
+                    return new DefaultSaveBlock(block.getX(),block.getY(),block.getIndex(),block.getLeft().getIndex(),-1,false,nodes,block.getBlocktype().getID());
+                }else if(block.getLeft()!=null&&block.getRight()!=null) {
+                    return new DefaultSaveBlock(block.getX(),block.getY(),block.getIndex(),block.getLeft().getIndex(),block.getRight().getIndex(),false,nodes,block.getBlocktype().getID());
+
+                }else if(block.getLeft()==null&&block.getRight()==null) {
+                    return new DefaultSaveBlock(block.getX(),block.getY(),block.getIndex(),-1,-1,false,nodes,block.getBlocktype().getID());
+
+                }else{
+                    return new DefaultSaveBlock(block.getX(),block.getY(),block.getIndex(),-1,-1,false,nodes,block.getBlocktype().getID());
+                }
 
             }
 
         }else {
-            return new DefaultSaveBlock(block.getX(),block.getY(),block.getIndex(),block.getLeft().getIndex(),block.getRight().getIndex(),false,nodes);
+
+            if(block.getLeft()==null&&block.getRight()!=null) {
+                return new DefaultSaveBlock(block.getX(),block.getY(),block.getIndex(),-1,block.getRight().getIndex(),false,nodes,block.getBlocktype().getID());
+
+            }else if(block.getLeft()!=null&&block.getRight()==null){
+                return new DefaultSaveBlock(block.getX(),block.getY(),block.getIndex(),block.getLeft().getIndex(),-1,false,nodes,block.getBlocktype().getID());
+            }else if(block.getLeft()!=null&&block.getRight()!=null) {
+                return new DefaultSaveBlock(block.getX(),block.getY(),block.getIndex(),block.getLeft().getIndex(),block.getRight().getIndex(),false,nodes,block.getBlocktype().getID());
+
+            }else if(block.getLeft()==null&&block.getRight()==null) {
+                return new DefaultSaveBlock(block.getX(),block.getY(),block.getIndex(),-1,-1,false,nodes,block.getBlocktype().getID());
+
+            }else{
+                return new DefaultSaveBlock(block.getX(),block.getY(),block.getIndex(),-1,-1,false,nodes,block.getBlocktype().getID());
+            }
+
+
+
         }
 
     }

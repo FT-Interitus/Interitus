@@ -1,4 +1,5 @@
-package de.ft.interitus.projecttypes.device.BlockTypes.Arduino.NeopxielController;
+package de.ft.interitus.projecttypes.device.BlockTypes.Arduino.Arduino;
+
 
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
@@ -11,12 +12,14 @@ import de.ft.interitus.projecttypes.device.BlockTypes.ProjectTypesVar;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Properties;
 
-public class SetTableColor implements PlatformSpecificBlock {
-    ProjectTypes type;
-    public SetTableColor(ProjectTypes type) {
-        this.type = type;
-    } //TODO Description
+public class Debug implements PlatformSpecificBlock {
+    private ProjectTypes type;
+    public Debug(ProjectTypes arduino) {
+this.type = arduino;
+    }
+
     @Override
     public ArrayList<Parameter> getBlockParameter() {
         return null;
@@ -24,12 +27,12 @@ public class SetTableColor implements PlatformSpecificBlock {
 
     @Override
     public String getName() {
-        return "Neopixel-Farben";
+        return "Debug Block";
     }
 
     @Override
     public String getdescription() {
-        return null;
+        return "Block debug";
     }
 
     @Override
@@ -44,12 +47,12 @@ public class SetTableColor implements PlatformSpecificBlock {
 
     @Override
     public BlockCategories getBlockCategoration() {
-        return null;
+        return BlockCategories.ActionBlocks;
     }
 
     @Override
     public Texture getSmallImage() {
-        return AssetLoader.img_mappe1;
+        return AssetLoader.img_mappe2;
     }
 
     @Override

@@ -87,7 +87,7 @@ public class DataLoader {
                 ArrayList<SaveBlock> readedblocks = ((ArrayList<SaveBlock>) ois.readObject());
 
                 for(int i=0;i<readedblocks.size();i++) {
-                    ProjectManager.getActProjectVar().blocks.add( ProjectManager.getActProjectVar().projectType.getBlockGenerator().generateBlock(i,readedblocks.get(i).getX(),readedblocks.get(i).getY(),150,70,new Wait(), ProjectManager.getActProjectVar().projectType.getBlockUpdateGenerator(), ProjectManager.getActProjectVar().projectType.getBlocktoSaveGenerator()));
+                    ProjectManager.getActProjectVar().blocks.add( ProjectManager.getActProjectVar().projectType.getBlockGenerator().generateBlock(i,readedblocks.get(i).getX(),readedblocks.get(i).getY(),150,70,ProjectManager.getActProjectVar().projectType.getProjectblocks().get(readedblocks.get(i).getPlatformspecificblockid()), ProjectManager.getActProjectVar().projectType.getBlockUpdateGenerator(), ProjectManager.getActProjectVar().projectType.getBlocktoSaveGenerator()));
                 }
 
                 for(int i=0;i<readedblocks.size();i++) {
