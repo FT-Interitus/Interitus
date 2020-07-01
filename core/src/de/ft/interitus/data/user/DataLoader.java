@@ -26,7 +26,7 @@ public class DataLoader {
         Thread laden = new Thread() {
             public void run() {
 
-               // ClearActOpenProgramm.clear();
+
 
 
                 try {

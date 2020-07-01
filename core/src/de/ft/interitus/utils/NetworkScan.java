@@ -26,8 +26,10 @@ public class NetworkScan {
 
                 try {
                     InetAddress raspberrypi = InetAddress.getByName("raspberrypi");
-                    System.out.println("Found Raspberry at " + raspberrypi.getHostAddress());
-                    piaddress = raspberrypi.getHostAddress();
+                    if(raspberrypi.isReachable(300)) {
+                        System.out.println("Found Raspberry at " + raspberrypi.getHostAddress());
+                        piaddress = raspberrypi.getHostAddress();
+                    }
 
                 } catch (UnknownHostException e) {
                 }
