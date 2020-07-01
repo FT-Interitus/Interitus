@@ -1,1 +1,4 @@
-echo test
+cd /usr/lib
+mkdir interitus
+cd interitus
+wget https://github.com/FT-Interitus/Interitus/blob/master/desktop/desktop-1.0.jar
