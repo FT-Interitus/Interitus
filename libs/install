@@ -3,4 +3,4 @@ mkdir interitus
 cd interitus
 echo -e "${GREEN}Downloading${RED} Interitus"
 wget -q https://github.com/FT-Interitus/Interitus/blob/master/desktop/desktop-1.0.jar
-mv desktop-1.0.jar interitus.jar
+sudo mv -f desktop-1.0.jar interitus.jar
