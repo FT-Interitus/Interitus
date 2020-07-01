@@ -6,6 +6,5 @@ wget -q https://github.com/FT-Interitus/Interitus/blob/master/desktop/desktop-1.
 sudo mv -f desktop-1.0.jar interitus.jar
 wget -q https://github.com/FT-Interitus/Installation/blob/master/linux/jre14.tar.gz
 tar -zxvf jre14.tar.gz
-rm jre14.tar.gz
 
 
