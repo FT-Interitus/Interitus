@@ -1,6 +1,6 @@
 cd /usr/lib
-mkdir -f -q interitus
+mkdir interitus
 cd interitus
-echo -e "I ${GREEN}Downloading${RED} Interitus"
+echo -e "${GREEN}Downloading${RED} Interitus"
 wget -q https://github.com/FT-Interitus/Interitus/blob/master/desktop/desktop-1.0.jar
 mv desktop-1.0.jar interitus.jar
