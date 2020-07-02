@@ -29,4 +29,11 @@ public class BlockEventManager implements BlockEventListener {
             ((BlockEventListener) listener.elementAt(i)).
                     deleteBlock(e);
     }
+
+    @Override
+    public void killmovingwires(BlockKillMovingWiresEvent e) {
+        for (int i = 0; i < listener.size(); i++)
+            ((BlockEventListener) listener.elementAt(i)).
+                    killmovingwires(e);
+    }
 }

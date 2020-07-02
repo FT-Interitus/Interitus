@@ -37,7 +37,7 @@ public class LoggerInit {
         }
 
         if(new File(System.getProperty("user.home")+"/.itd/it.lock").exists() ){
-            DisplayErrors.errorStringwithoutException="Das Programm wurde unerwartet beendet! \n Error LOGs findest du hier: \n"+System.getProperty("user.home")+"/.itd/log";
+            DisplayErrors.errorStringwithoutException="Das Programm wurde unerwartet beendet! \nError LOGs findest du hier: \n"+System.getProperty("user.home")+"/.itd/log";
         }else{
             try {
                 new File(System.getProperty("user.home")+"/.itd/it.lock").createNewFile();

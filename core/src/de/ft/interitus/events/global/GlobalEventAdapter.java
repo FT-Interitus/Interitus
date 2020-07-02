@@ -28,4 +28,9 @@ public class GlobalEventAdapter implements GlobalEventListener {
     public boolean closeprogramm(GlobalCloseEvent e) {
         return true;
     }
+
+    @Override
+    public void focuslost(GlobalFocusLostEvent e) {
+
+    }
 }

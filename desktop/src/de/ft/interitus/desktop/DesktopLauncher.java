@@ -9,6 +9,7 @@ import de.ft.interitus.Var;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.global.GlobalCloseEvent;
 import de.ft.interitus.events.global.GlobalFileDropedEvent;
+import de.ft.interitus.events.global.GlobalFocusLostEvent;
 
 import java.io.FileNotFoundException;
 import java.util.Arrays;
@@ -64,6 +65,7 @@ public class DesktopLauncher {
 				@Override
 				public void focusLost() {
 
+					EventVar.globalEventManager.focuslost(new GlobalFocusLostEvent(this));
 				}
 
 				@Override

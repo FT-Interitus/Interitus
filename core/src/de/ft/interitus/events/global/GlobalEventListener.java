@@ -10,4 +10,6 @@ public interface GlobalEventListener {
     boolean filedroped(GlobalFileDropedEvent e, String[] filepaths);
 
     boolean closeprogramm(GlobalCloseEvent e);
+
+    void focuslost(GlobalFocusLostEvent e);
 }

@@ -7,6 +7,10 @@ import com.badlogic.gdx.input.GestureDetector;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.UIElements.check.InputManager;
+import de.ft.interitus.events.EventVar;
+import de.ft.interitus.events.block.BlockKillMovingWiresEvent;
+import de.ft.interitus.events.global.GlobalEventAdapter;
+import de.ft.interitus.events.global.GlobalFocusLostEvent;
 import de.ft.interitus.projecttypes.ProjectManager;
 
 import static com.badlogic.gdx.Gdx.input;
@@ -70,6 +74,17 @@ public class Viewport {
 
 
         InputManager.updateMultiplexer();
+
+        EventVar.globalEventManager.addListener(new GlobalEventAdapter() {
+            @Override
+            public void focuslost(GlobalFocusLostEvent e) {
+                EventVar.blockEventManager.killmovingwires(new BlockKillMovingWiresEvent(this));
+            }
+        });
+
+
+
+
     }
 
     public static void update(float delta) {

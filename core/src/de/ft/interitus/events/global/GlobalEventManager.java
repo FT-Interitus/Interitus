@@ -69,5 +69,12 @@ public class GlobalEventManager implements GlobalEventListener {
         return close;
     }
 
+    @Override
+    public void focuslost(GlobalFocusLostEvent e) {
+        for (int i = 0; i < listener.size(); i++)
+            ((GlobalEventListener) listener.elementAt(i)).
+                    focuslost(e);
+    }
+
 
 }

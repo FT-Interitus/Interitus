@@ -114,7 +114,7 @@ public class ProgrammingSpace extends ScreenAdapter {
         //   PortUpdate.UpdateConnectionWindowPortsList();
 
 
-        System.gc();
+        System.gc(); //Clean RAM after Loading
 
 
     }

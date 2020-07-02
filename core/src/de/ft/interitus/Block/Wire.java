@@ -8,6 +8,8 @@ import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.RechtsKlick;
 import de.ft.interitus.events.EventVar;
+import de.ft.interitus.events.block.BlockEventAdapter;
+import de.ft.interitus.events.block.BlockKillMovingWiresEvent;
 import de.ft.interitus.events.rightclick.RightClickButtonSelectEvent;
 import de.ft.interitus.events.rightclick.RightClickCloseEvent;
 import de.ft.interitus.events.rightclick.RightClickEventListener;
@@ -96,28 +98,7 @@ public abstract class Wire {
 
                     if (counter == 0) {
 
-                        ProjectManager.getActProjectVar().wire_beginn.getBlockupdate().isconnectorclicked = false;
-                        ProjectManager.getActProjectVar().showleftdocker = false;
-
-                        try {
-                            ProjectManager.getActProjectVar().wire_beginn.getBlockupdate().tempwire.getLeft_connection().setWire_right(null);
-                            ProjectManager.getActProjectVar().visiblewires.remove(ProjectManager.getActProjectVar().wire_beginn.getBlockupdate().tempwire);
-                            ProjectManager.getActProjectVar().wires.remove(ProjectManager.getActProjectVar().wire_beginn.getBlockupdate().tempwire);
-
-                            try {
-
-                                ProjectManager.getActProjectVar().wire_beginn.getBlockupdate().tempwire.getRight_connectionObject().getwirenode().setWire_left(null);
-                                ProjectManager.getActProjectVar().wire_beginn.getBlockupdate().tempwire.setRight_connection(null);
-
-                            } catch (NullPointerException e) {
-                                //Falls hier keine Wire ist
-                            }
-                            ProjectManager.getActProjectVar().wire_beginn.getBlockupdate().tempwire = null;
-                        } catch (Exception ignored) {
-
-                        }
-
-                        ProjectManager.getActProjectVar().movingwires = null;
+                        EventVar.blockEventManager.killmovingwires(new BlockKillMovingWiresEvent(this));
 
                     }
 

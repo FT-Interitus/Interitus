@@ -6,6 +6,7 @@ public interface BlockEventListener extends java.util.EventListener {
     void createBlock(BlockCreateEvent e);
 
     void deleteBlock(BlockDeleteEvent e);
+    void killmovingwires(BlockKillMovingWiresEvent e);
 
     //TODO Disable ALl Thread from Blocks if Block is open Important
 }

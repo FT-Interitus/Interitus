@@ -13,4 +13,9 @@ public class BlockEventAdapter implements BlockEventListener {
     public void deleteBlock(BlockDeleteEvent e) {
 
     }
+
+    @Override
+    public void killmovingwires(BlockKillMovingWiresEvent e) {
+
+    }
 }
