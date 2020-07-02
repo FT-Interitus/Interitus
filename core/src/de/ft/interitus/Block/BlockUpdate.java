@@ -535,7 +535,11 @@ public abstract class BlockUpdate extends Thread {
 
                     } catch (Exception e) {
                         e.printStackTrace();
-                        DisplayErrors.customErrorstring = "Fehler in einem " + block.getBlocktype().getName() + " Block mit der ID " + block.getIndex();
+                        try {
+                            DisplayErrors.customErrorstring = "Fehler in einem " + block.getBlocktype().getName() + " Block mit der ID " + block.getIndex();
+                        }catch (Exception v) {
+                            DisplayErrors.customErrorstring="Fehler in einem Block";
+                        }
                         DisplayErrors.error = e;
                     }
 

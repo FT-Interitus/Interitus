@@ -40,8 +40,13 @@ public class LoggerOutputStream extends OutputStream {
      */
     @Override
     public void flush() {
-        logger.log(level, mem + "\n");
-        mem = "";
+        if(level==Level.INFO) {
+            logger.log(level, mem + "\n");
+            mem = "";
+        }else{
+            logger.log(level, mem + "");
+            mem = "";
+        }
 
     }
 

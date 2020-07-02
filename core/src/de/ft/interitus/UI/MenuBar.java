@@ -23,6 +23,7 @@ import de.ft.interitus.events.UI.UIOpenSettingsEvent;
 import de.ft.interitus.plugin.PluginGateway;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.VCS;
+import de.ft.interitus.utils.RefreshProgramm;
 
 
 public class MenuBar {
@@ -42,6 +43,7 @@ public class MenuBar {
     public static MenuItem menuItem_ueber;
     public static MenuItem menuItem_showruntimeinfo;
     public static MenuItem menuItem_clearram;
+    public static MenuItem menuItem_updateproject;
     public static Menu fileMenu;
 
     protected static void createMenus() {
@@ -252,6 +254,13 @@ public class MenuBar {
                 System.gc();
             }
         });
+        menuItem_updateproject = new MenuItem("Update Projekt", new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                RefreshProgramm.refresh();
+            }
+        });
+
         //recent.setSubMenu(createSubMenu());
 
         windowMenu.addItem(menuItem_vollbild);
@@ -304,6 +313,7 @@ public class MenuBar {
         helpMenu.addItem(menuItem_update);
         helpMenu.addItem(menuItem_showruntimeinfo);
         helpMenu.addItem(menuItem_clearram);
+        helpMenu.addItem(menuItem_updateproject);
 
         helpMenu.addSeparator();
 

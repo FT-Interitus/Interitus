@@ -34,14 +34,13 @@ public class DefaultSaveBlockGenerator implements BlocktoSaveGenerator {
                         gofrom = gofrom.getRight_connectionObject().getwirenode().getWire_right();
 
                         nodes.add((ArrayList<Integer>) actnode.clone());
-                        System.out.println("Node detected");
+
                     } else {
                         goout = true;
-                        System.out.println("Out2");
+
                     }
 
                 } catch (NullPointerException e) {
-                    System.out.println("Out1");
                     goout = true;
                     break;
                 }

@@ -43,7 +43,6 @@ public class ThreadManager {
                             try {
                                 camfr = ProgrammingSpace.cam.frustum;
 
-
                                 for (int i = 0; i < ProjectManager.getActProjectVar().blocks.size(); i++) {
                                     //System.out.println("Test"+i);
 //                            System.out.println(camfr.boundsInFrustum(BlockVar.blocks.get(10).getX(), BlockVar.blocks.get(10).getY(), 0, BlockVar.blocks.get(10).getW(), BlockVar.blocks.get(10).getH(),0));
@@ -66,7 +65,8 @@ public class ThreadManager {
                                             ProjectManager.getActProjectVar().visibleblocks.add(block);
                                             ProjectManager.getActProjectVar().threads.set(i, ((BlockUpdate) ProjectManager.getActProjectVar().threads.get(i)).block.allowedRestart());
                                             if (Var.verboseoutput) {
-                                                System.out.println("Started " + block.getIndex());
+
+                                                Programm.logger.config("Started " + block.getIndex());
                                             }
                                             ((BlockUpdate) ProjectManager.getActProjectVar().threads.get(i)).isrunning = true;
                                         }

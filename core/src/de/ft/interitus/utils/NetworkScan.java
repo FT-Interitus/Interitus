@@ -46,7 +46,7 @@ public class NetworkScan {
 
                 for (int i = 0; i < device.size(); i++) {
 
-                    //   System.out.println(device.get(i).getHostName());
+
                     Programm.logger.config(device.get(i).getHostName());
 
                 }
