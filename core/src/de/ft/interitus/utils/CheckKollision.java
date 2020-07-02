@@ -7,11 +7,11 @@ import de.ft.interitus.ProgrammingSpace;
 
 public class CheckKollision {
 
+    private static final int mousesize = 1;
     static Vector3 temp3 = new Vector3();
     static Vector3 temp4 = new Vector3();
     static Rectangle rec1 = new Rectangle();
     static Rectangle rec2 = new Rectangle();
-    private static final int mousesize = 1;
     Vector2 temp1 = new Vector2();
     Vector2 temp2 = new Vector2();
 
@@ -24,13 +24,14 @@ public class CheckKollision {
         return rec1.overlaps(rec2);
 
     }
+
     public static boolean objectwithrotation(float obj1_x, float obj1_y, float obj1_w, float obj1_h, float obj1_angle, float obj2_x, float obj2_y, int obj2_h, int obj2_w, float obj2_angle) {
 
 
         Polygon obj1 = new Polygon(new float[]{0, 0, obj1_w, 0, obj1_w, obj1_h, 0, obj1_h});
         Polygon obj2 = new Polygon(new float[]{0, 0, obj2_w, 0, obj2_w, obj2_h, 0, obj2_h});
-        obj1.setOrigin(0,0);
-        obj2.setOrigin(0,0);
+        obj1.setOrigin(0, 0);
+        obj2.setOrigin(0, 0);
         obj1.setPosition(obj1_x, obj1_y);
         obj2.setPosition(obj2_x, obj2_y);
         obj1.setRotation(obj1_angle);
@@ -39,6 +40,7 @@ public class CheckKollision {
         return Intersector.overlapConvexPolygons(obj1, obj2);
 
     }
+
     public static boolean checkmousewithblock(Block block) {
 
 

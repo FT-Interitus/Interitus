@@ -14,9 +14,11 @@ import java.util.ArrayList;
 
 public class SetTableColor implements PlatformSpecificBlock {
     ProjectTypes type;
+
     public SetTableColor(ProjectTypes type) {
         this.type = type;
     } //TODO Description
+
     @Override
     public ArrayList<Parameter> getBlockParameter() {
         return null;

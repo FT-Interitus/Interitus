@@ -5,11 +5,12 @@ import de.ft.interitus.UI.popup.PopupMenue;
 import java.util.EventObject;
 
 public class RightClickCloseEvent extends EventObject {
-    private PopupMenue popupMenue;
+    private final PopupMenue popupMenue;
+
     /**
      * Constructs a prototypical Event.
      *
-     * @param source the object on which the Event initially occurred
+     * @param source     the object on which the Event initially occurred
      * @param popupMenue the popup menu which was closed
      * @throws IllegalArgumentException if source is null
      */

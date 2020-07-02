@@ -155,17 +155,16 @@ public class NewProjectWindow {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
                     //ThreadManager.stopall();
-                   Var.openprojects.add( ProjectTypesVar.projectTypes.get(items.indexOf(selectProjectType.getSelected())).init());
-                    ProjectManager.change(Var.openprojects.size()-1);
+                    Var.openprojects.add(ProjectTypesVar.projectTypes.get(items.indexOf(selectProjectType.getSelected())).init());
+                    ProjectManager.change(Var.openprojects.size() - 1);
                     ProjectManager.getActProjectVar().filename = nameinput.getText();
 
                     MenuBar.menuItem_speichern.setText("Speichern");
 
 
-
                     BlockTappedBar.init();
                     Var.isdialogeopend = false;
-                   // ClearActOpenProgramm.clear();
+                    // ClearActOpenProgramm.clear();
 
                     setupBuilder.close();
                 }
@@ -176,17 +175,17 @@ public class NewProjectWindow {
 
                 @Override
                 public void run() {
-                    if(Var.isdialogeopend&&!NewProjectWindow.isopend())  {
+                    if (Var.isdialogeopend && !NewProjectWindow.isopend()) {
                         Var.isdialogeopend = false;
 
                         this.cancel();
                     }
 
-                    if(!Var.isdialogeopend&&NewProjectWindow.isopend()) {
+                    if (!Var.isdialogeopend && NewProjectWindow.isopend()) {
                         Var.isdialogeopend = true;
                     }
                 }
-            },0,100);
+            }, 0, 100);
 
         }
 

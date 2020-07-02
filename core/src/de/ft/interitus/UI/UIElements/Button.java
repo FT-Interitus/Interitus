@@ -11,6 +11,14 @@ import de.ft.interitus.Var;
 import de.ft.interitus.utils.RoundRectangle;
 
 public class Button {
+    public static boolean disablepresscolorchange = false;
+    //private final SpriteBatch batch = new SpriteBatch();
+    private final ShapeRenderer s = new ShapeRenderer();
+    private final GlyphLayout glyphLayout = new GlyphLayout();
+    private final Check check = new Check();
+    public float hovertransparancy = 0.8f;
+    public boolean widthoverText = false;
+    public int widthoverTextlinksrandabstand = 5;
     BitmapFont font = new BitmapFont();
     private int x;
     private int y;
@@ -22,17 +30,8 @@ public class Button {
     private Texture image_pressed = null;
     private boolean visible = true;
     private boolean disable = false;
-    //private final SpriteBatch batch = new SpriteBatch();
-    private final ShapeRenderer s = new ShapeRenderer();
-    private final GlyphLayout glyphLayout = new GlyphLayout();
-    private final Check check = new Check();
-    private boolean flipX=false;
-    private boolean flipY=false;
-    public float hovertransparancy = 0.8f;
-    public static boolean disablepresscolorchange = false;
-
-    public boolean widthoverText=false;
-    public int widthoverTextlinksrandabstand=5;
+    private boolean flipX = false;
+    private boolean flipY = false;
 
 
     public Button(int x, int y, int w, int h) {
@@ -49,7 +48,6 @@ public class Button {
     }
 
 
-
     public void setBounds(int x, int y, int w, int h) {
         this.x = x;
         this.y = y;
@@ -61,7 +59,7 @@ public class Button {
 
     public boolean isjustPressed() {
         boolean pressed = false;
-        if (!disable&&! Var.isdialogeopend) {
+        if (!disable && !Var.isdialogeopend) {
 
             pressed = check.isjustPressed(x, y, w, h);
 
@@ -73,9 +71,9 @@ public class Button {
 
     }
 
-    public boolean isjustPressednormal(){
+    public boolean isjustPressednormal() {
         boolean pressed = false;
-        if (!disable&&!Var.isdialogeopend) {
+        if (!disable && !Var.isdialogeopend) {
 
             pressed = check.isJustPressedNormal(x, y, w, h);
 
@@ -99,9 +97,9 @@ public class Button {
 
     public boolean isMouseover() {
 
-        if(Var.isdialogeopend) {
+        if (Var.isdialogeopend) {
             return false;
-        }else {
+        } else {
             if (!disable) {
 
                 return check.isMouseover(x, y, w, h);
@@ -112,10 +110,10 @@ public class Button {
     }
 
     public void draw() {
-        if(text!=null) {
+        if (text != null) {
             glyphLayout.setText(font, this.text);
-            if(widthoverText){
-                this.w=(int)glyphLayout.width+2*widthoverTextlinksrandabstand;
+            if (widthoverText) {
+                this.w = (int) glyphLayout.width + 2 * widthoverTextlinksrandabstand;
             }
         }
 
@@ -126,39 +124,39 @@ public class Button {
                 s.begin(ShapeRenderer.ShapeType.Filled);
                 RoundRectangle.abgerundetesRechteck(s, this.x, this.y, this.w, this.h, 5);
                 s.end();
-            } else if(image_mouseover == null) {
+            } else if (image_mouseover == null) {
                 UI.UIbatch.begin();
                 if (isMouseover()) {
                     UI.UIbatch.setColor(1, 1, 1, hovertransparancy);
                 } else {
                     UI.UIbatch.setColor(1, 1, 1, 1);
                 }
-                if (isMouseover() && Gdx.input.isButtonPressed(0)&&!disablepresscolorchange) {
+                if (isMouseover() && Gdx.input.isButtonPressed(0) && !disablepresscolorchange) {
                     UI.UIbatch.setColor(1, 0.5f, 0.5f, 1);
                 }
                 if (isDisable()) {
                     UI.UIbatch.setColor(1, 1, 1, 0.2f);
                 }
                 //batch.draw(image, this.x, this.y, this.w, this.h);
-                UI.UIbatch.draw(image,this.x,this.y,this.w,this.h,0,0,image.getWidth(),image.getHeight(),this.flipX,this.flipY);
+                UI.UIbatch.draw(image, this.x, this.y, this.w, this.h, 0, 0, image.getWidth(), image.getHeight(), this.flipX, this.flipY);
                 UI.UIbatch.end();
-            }else if(image_pressed==null){
+            } else if (image_pressed == null) {
                 UI.UIbatch.begin();
-                if(isMouseover()){
-                    UI.UIbatch.draw(image_mouseover,this.x,this.y,this.w,this.h,0,0,image.getWidth(),image.getHeight(),this.flipX,this.flipY);
-                }else{
-                    UI.UIbatch.draw(image,this.x,this.y,this.w,this.h,0,0,image.getWidth(),image.getHeight(),this.flipX,this.flipY);
+                if (isMouseover()) {
+                    UI.UIbatch.draw(image_mouseover, this.x, this.y, this.w, this.h, 0, 0, image.getWidth(), image.getHeight(), this.flipX, this.flipY);
+                } else {
+                    UI.UIbatch.draw(image, this.x, this.y, this.w, this.h, 0, 0, image.getWidth(), image.getHeight(), this.flipX, this.flipY);
                 }
                 UI.UIbatch.end();
-            }else{
+            } else {
                 UI.UIbatch.begin();
-                if(isMouseover()){
-                    UI.UIbatch.draw(image_mouseover,this.x,this.y,this.w,this.h,0,0,image.getWidth(),image.getHeight(),this.flipX,this.flipY);
-                }else{
-                    UI.UIbatch.draw(image,this.x,this.y,this.w,this.h,0,0,image.getWidth(),image.getHeight(),this.flipX,this.flipY);
+                if (isMouseover()) {
+                    UI.UIbatch.draw(image_mouseover, this.x, this.y, this.w, this.h, 0, 0, image.getWidth(), image.getHeight(), this.flipX, this.flipY);
+                } else {
+                    UI.UIbatch.draw(image, this.x, this.y, this.w, this.h, 0, 0, image.getWidth(), image.getHeight(), this.flipX, this.flipY);
                 }
                 if (isMouseover() && Gdx.input.isButtonPressed(0)) {
-                    UI.UIbatch.draw(image_pressed,this.x,this.y,this.w,this.h,0,0,image.getWidth(),image.getHeight(),this.flipX,this.flipY);
+                    UI.UIbatch.draw(image_pressed, this.x, this.y, this.w, this.h, 0, 0, image.getWidth(), image.getHeight(), this.flipX, this.flipY);
                 }
                 UI.UIbatch.end();
             }
@@ -245,22 +243,21 @@ public class Button {
         this.disable = disable;
     }
 
-    public void setFlipX(boolean flipX) {
-        this.flipX = flipX;
-    }
-
-    public void setFlipY(boolean flipY) {
-        this.flipY = flipY;
-    }
-
     public boolean isFlipX() {
         return flipX;
+    }
+
+    public void setFlipX(boolean flipX) {
+        this.flipX = flipX;
     }
 
     public boolean isFlipY() {
         return flipY;
     }
 
+    public void setFlipY(boolean flipY) {
+        this.flipY = flipY;
+    }
 
 
 }

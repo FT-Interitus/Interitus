@@ -12,12 +12,12 @@ import de.ft.interitus.projecttypes.device.BlockTypes.ProjectTypesVar;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Properties;
 
 public class Debug implements PlatformSpecificBlock {
-    private ProjectTypes type;
+    private final ProjectTypes type;
+
     public Debug(ProjectTypes arduino) {
-this.type = arduino;
+        this.type = arduino;
     }
 
     @Override

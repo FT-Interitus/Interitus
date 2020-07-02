@@ -16,9 +16,9 @@ public class Wait implements PlatformSpecificBlock {
 
     ArrayList<Parameter> parameters = new ArrayList<>();
 
-    private ProjectTypes type;
+    private final ProjectTypes type;
 
-    public Wait(ProjectTypes arduino)  {
+    public Wait(ProjectTypes arduino) {
 
         this.type = arduino;
     }

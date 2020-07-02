@@ -7,6 +7,7 @@ import java.util.EventObject;
 public class PluginUnloadEvent extends EventObject {
     //TODO unload Plugin in PluginManager
     PluginRegister pluginRegister;
+
     /**
      * Constructs a prototypical Event.
      *

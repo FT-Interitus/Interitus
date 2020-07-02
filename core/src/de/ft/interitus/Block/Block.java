@@ -4,11 +4,13 @@ package de.ft.interitus.Block;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Frustum;
 import com.badlogic.gdx.math.Vector2;
-import de.ft.interitus.*;
 import de.ft.interitus.Block.Generators.BlockUpdateGenerator;
 import de.ft.interitus.Block.Generators.BlocktoSaveGenerator;
+import de.ft.interitus.DisplayErrors;
+import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.RechtsKlick;
+import de.ft.interitus.ThreadManager;
 import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.block.BlockCreateEvent;
@@ -32,6 +34,8 @@ import de.ft.interitus.utils.CheckKollision;
  */
 
 public abstract class Block implements VisibleObjects {
+    private final Vector2 wireconnector_right = new Vector2(0, 0); //Die rechte wire-Anschluss Position
+    private final Vector2 wireconnector_left = new Vector2(0, 0); //Die linke wire-Anschluss Position
     public boolean seted = true; //Ob der Block losgelassen wurde bzw ob der Block eine statische Position hat
     public boolean moved = false; // Ob der Block gerade mit der Maus bewegt wird
     private boolean marked = false; //Ob der Block gerade makiert ist
@@ -48,17 +52,15 @@ public abstract class Block implements VisibleObjects {
     private BlockUpdate blockupdate; // Die Block update methode hier werden user actionen engegengenommen und verarbeitet
     private Block left = null; //Der rechte verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
     private Block right = null; //Der linke verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
-    private final Vector2 wireconnector_right = new Vector2(0, 0); //Die rechte wire-Anschluss Position
-    private final Vector2 wireconnector_left = new Vector2(0, 0); //Die linke wire-Anschluss Position
     private Wire wire_left = null; //linke verbundene Wire
     private Wire wire_right = null; //rechte verbunde Wire
-    private PlatformSpecificBlock blocktype =null;
-    private RightClickEventListener rightClickEventListener;
-    private BlockUpdateGenerator blockUpdateGenerator;
-    private BlocktoSaveGenerator blocktoSaveGenerator;
+    private final RightClickEventListener rightClickEventListener;
+    private final BlockUpdateGenerator blockUpdateGenerator;
+    private final BlocktoSaveGenerator blocktoSaveGenerator;
+    private PlatformSpecificBlock blocktype = null;
 
-    public Block(final int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock,BlockUpdateGenerator update,BlocktoSaveGenerator blocktoSaveGenerator) { //Initzialisieren des Blocks
-       this.blocktype = platformSpecificBlock;
+    public Block(final int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock, BlockUpdateGenerator update, BlocktoSaveGenerator blocktoSaveGenerator) { //Initzialisieren des Blocks
+        this.blocktype = platformSpecificBlock;
         EventVar.blockEventManager.createBlock(new BlockCreateEvent(this, this));
         this.x = x;
         this.y = y;
@@ -96,20 +98,15 @@ public abstract class Block implements VisibleObjects {
             @Override
             public void buttonclickedinwindow(RightClickButtonSelectEvent e) {
 
-                if (e.getButton().getText().contains("Löschen")&&blockupdate.toggle) {
-                    if(RechtsKlick.mouseoverblockindex==ProjectManager.getActProjectVar().blocks.indexOf(instance))
-                    instance.delete(false);
+                if (e.getButton().getText().contains("Löschen") && blockupdate.toggle) {
+                    if (RechtsKlick.mouseoverblockindex == ProjectManager.getActProjectVar().blocks.indexOf(instance))
+                        instance.delete(false);
                 }
             }
         };
         EventVar.rightClickEventManager.addListener(rightClickEventListener);
 
     }
-
-
-
-
-
 
 
     /***
@@ -490,7 +487,7 @@ public abstract class Block implements VisibleObjects {
         if (right != null) { // wenn ein Rechter nachbar exsitiert
             try {
                 right.setLeft(null); // wird dem rechten Nachbar gesagt das er keinen linken nachbar mehr hat
-            }catch (IndexOutOfBoundsException e) {
+            } catch (IndexOutOfBoundsException e) {
 
 
             }
@@ -498,7 +495,7 @@ public abstract class Block implements VisibleObjects {
                 right.setWire_left(null); //Die Wire des nachbar block wird gelöscht damit die Wire kein zweites mal gelöscht wird (passiert nur bei ganz vielen wire nodes)
             } catch (NullPointerException e) {
                 //Falls es gar keine Wire gab
-            }catch (IndexOutOfBoundsException e) {
+            } catch (IndexOutOfBoundsException e) {
 
             }
         }
@@ -537,7 +534,7 @@ public abstract class Block implements VisibleObjects {
                 public void run() {
                     for (int i = 0; i < ProjectManager.getActProjectVar().visibleblocks.size(); i++) { //Durch alle Indexe des Block Arrays wird durchgegangen alle die einen größeren Index haben //Durch die Temp variable kann der alte Index des Blocks hier wieder verwendet werden
                         try {
-                            if(ProjectManager.getActProjectVar().visibleblocks.get(i)!=getblock()) {
+                            if (ProjectManager.getActProjectVar().visibleblocks.get(i) != getblock()) {
                                 ProjectManager.getActProjectVar().visibleblocks.get(i).findnewindex(); //Alle anderen Blöcke werden um einen Index verschoben
                             }
                         } catch (Exception e) { //Wenn man bei Milliarden von Blöcken der erste und der zweite gelöscht werden gibt es hier fehler
@@ -550,7 +547,6 @@ public abstract class Block implements VisibleObjects {
             };
 
             calcnew.start(); //Der Thread wird gestarted
-
 
 
         }
@@ -582,9 +578,9 @@ public abstract class Block implements VisibleObjects {
 
 
         if (!this.blockupdate.toggle) {
-            batch.draw(AssetLoader.img_block, this.getX()+10, this.getY(), this.getW()-15-10, this.getH()); // Block ohne das er makiert ist
-            batch.draw(AssetLoader.img_block_left,this.getX(),this.getY(),10,this.getH());
-            batch.draw(AssetLoader.img_block_right,this.getX()+this.getW()-15,this.getY(),15,this.getH());
+            batch.draw(AssetLoader.img_block, this.getX() + 10, this.getY(), this.getW() - 15 - 10, this.getH()); // Block ohne das er makiert ist
+            batch.draw(AssetLoader.img_block_left, this.getX(), this.getY(), 10, this.getH());
+            batch.draw(AssetLoader.img_block_right, this.getX() + this.getW() - 15, this.getY(), 15, this.getH());
         } else {
             batch.draw(AssetLoader.img_block_mouseover, this.getX(), this.getY(), this.getW(), this.getH()); // Block wenn er makiert ist
         }
@@ -641,7 +637,7 @@ public abstract class Block implements VisibleObjects {
             batch.draw(AssetLoader.connector, getwireconnector_right().x, getwireconnector_right().y, 20, 20);
         }
 
-        font.draw(batch, "index:  " + this.getIndex()+" Block: "+this.getBlocktype().getName(), this.getX() + 5, this.getY() + 30); //DEBUG Block Index auf dem Block anzeigen
+        font.draw(batch, "index:  " + this.getIndex() + " Block: " + this.getBlocktype().getName(), this.getX() + 5, this.getY() + 30); //DEBUG Block Index auf dem Block anzeigen
     }
 
     /**
@@ -649,7 +645,7 @@ public abstract class Block implements VisibleObjects {
      */
 
     public Vector2 getwireconnector_right() {
-        wireconnector_right.set(x + w - 7, y + h / 3+12);
+        wireconnector_right.set(x + w - 7, y + h / 3 + 12);
         return wireconnector_right;
     }
 
@@ -657,11 +653,9 @@ public abstract class Block implements VisibleObjects {
      * @return the position of the two connectors
      */
     public Vector2 getWireconnector_left() {
-        wireconnector_left.set(x + 2, y + h / 3+9);
+        wireconnector_left.set(x + 2, y + h / 3 + 9);
         return wireconnector_left;
     }
-
-
 
 
     /**

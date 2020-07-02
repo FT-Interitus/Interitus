@@ -25,14 +25,17 @@ import de.ft.interitus.projecttypes.VCS;
 import java.util.ArrayList;
 
 public class GlobalShortcuts implements ShortCutChecker {
-    public static ShortCut shortCut_newprojektwindow=new ShortCut("Neues Projekt",MenuBar.menuItem_neues_projekt, SpecialKeys.dualStrg, Input.Keys.N);
-    public static ShortCut shortCut_oefnen=new ShortCut("Projekt Öffnen",MenuBar.menuItem_oeffnen,SpecialKeys.dualStrg, Input.Keys.O);
-    public static ShortCut shortCut_speichern=new ShortCut("Speichern",MenuBar.menuItem_speichern,SpecialKeys.dualStrg, Input.Keys.S);
-    public static ShortCut shortCut_speichern_unter=new ShortCut("Speichern unter",MenuBar.menuItem_speichernunter,SpecialKeys.dualStrg, SpecialKeys.dualShift, Input.Keys.S);
-    public static ShortCut shortCut_vollbild=new ShortCut("Vollbild",MenuBar.menuItem_vollbild,Input.Keys.F11);
-    public static ShortCut shortCut_einstellungen=new ShortCut("Einstellungen öffnen",MenuBar.menuItem_einstellungen,SpecialKeys.dualStrg,Input.Keys.ALT_LEFT,Input.Keys.S);
+    public static ShortCut shortCut_newprojektwindow = new ShortCut("Neues Projekt", MenuBar.menuItem_neues_projekt, SpecialKeys.dualStrg, Input.Keys.N);
+    public static ShortCut shortCut_oefnen = new ShortCut("Projekt Öffnen", MenuBar.menuItem_oeffnen, SpecialKeys.dualStrg, Input.Keys.O);
+    public static ShortCut shortCut_speichern = new ShortCut("Speichern", MenuBar.menuItem_speichern, SpecialKeys.dualStrg, Input.Keys.S);
+    public static ShortCut shortCut_speichern_unter = new ShortCut("Speichern unter", MenuBar.menuItem_speichernunter, SpecialKeys.dualStrg, SpecialKeys.dualShift, Input.Keys.S);
+    public static ShortCut shortCut_vollbild = new ShortCut("Vollbild", MenuBar.menuItem_vollbild, Input.Keys.F11);
+    public static ShortCut shortCut_einstellungen = new ShortCut("Einstellungen öffnen", MenuBar.menuItem_einstellungen, SpecialKeys.dualStrg, Input.Keys.ALT_LEFT, Input.Keys.S);
 
 
+    public GlobalShortcuts() {
+
+    }
 
     public static ArrayList<ShortCut> retunrarray() {
 
@@ -48,18 +51,14 @@ public class GlobalShortcuts implements ShortCutChecker {
 
     }
 
-    public GlobalShortcuts() {
-
-    }
-
     @Override
     public void check() {
 
-        if(shortCut_einstellungen.isPressed() && !SettingsUI.isopend()){
+        if (shortCut_einstellungen.isPressed() && !SettingsUI.isopend()) {
             EventVar.uiEventManager.UIOpenSettingsEvent(new UIOpenSettingsEvent(this));
         }
 
-        if(shortCut_vollbild.isPressed()){
+        if (shortCut_vollbild.isPressed()) {
             if (MenuBar.fullscreen == false) {
                 Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
                 MenuBar.fullscreen = true;
@@ -70,11 +69,11 @@ public class GlobalShortcuts implements ShortCutChecker {
                 MenuBar.fullscreen = false;
             }
         }
-        if(shortCut_newprojektwindow.isPressed()){
+        if (shortCut_newprojektwindow.isPressed()) {
             NewProjectWindow NPW = new NewProjectWindow();
             NPW.show();
         }
-        if(shortCut_oefnen.isPressed() && !LoadSave.isopenopen()){
+        if (shortCut_oefnen.isPressed() && !LoadSave.isopenopen()) {
             if (!Var.isclearing) {
                 if (ProjectManager.getActProjectVar().changes) {
                     String[] möglichkeiten = {"Verwerfen", "Speichern", "Abbrechen"};
@@ -96,7 +95,7 @@ public class GlobalShortcuts implements ShortCutChecker {
                                     }
 
                                     if (result == everything) {
-                                        if(ProjectManager.getActProjectVar().vcs== VCS.NONE) {
+                                        if (ProjectManager.getActProjectVar().vcs == VCS.NONE) {
                                             if (ProjectManager.getActProjectVar().path != "") {
                                                 FileHandle handle = Gdx.files.external(ProjectManager.getActProjectVar().path);
                                                 DataSaver.save(handle);
@@ -104,7 +103,7 @@ public class GlobalShortcuts implements ShortCutChecker {
                                             } else {
                                                 LoadSave.saveas();
                                             }
-                                        }else if(ProjectManager.getActProjectVar().vcs==VCS.ITEV) {
+                                        } else if (ProjectManager.getActProjectVar().vcs == VCS.ITEV) {
 
                                         }
                                     }
@@ -125,7 +124,7 @@ public class GlobalShortcuts implements ShortCutChecker {
             }
         }
 
-        if(shortCut_speichern.isPressed()) {
+        if (shortCut_speichern.isPressed()) {
             if (ProjectManager.getActProjectVar().vcs == VCS.NONE) {
                 if (ProjectManager.getActProjectVar().path != "") {
                     FileHandle handle = Gdx.files.absolute(ProjectManager.getActProjectVar().path);
@@ -136,12 +135,12 @@ public class GlobalShortcuts implements ShortCutChecker {
                         LoadSave.saveas();
                     }
                 }
-            }else if(ProjectManager.getActProjectVar().vcs ==VCS.ITEV) {
+            } else if (ProjectManager.getActProjectVar().vcs == VCS.ITEV) {
 
             }
         }
 
-        if(shortCut_speichern_unter.isPressed()){
+        if (shortCut_speichern_unter.isPressed()) {
             if (!LoadSave.issaveopen()) {
                 LoadSave.saveas();
             }

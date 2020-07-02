@@ -5,7 +5,6 @@ import com.badlogic.gdx.files.FileHandle;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.CheckShortcuts;
-import de.ft.interitus.UI.settings.subitems.subitem6;
 import de.ft.interitus.UI.Theme.RegisteredThemes;
 import de.ft.interitus.UI.shortcut.ShortCut;
 import de.ft.interitus.data.user.experience.ExperienceManager;
@@ -24,8 +23,8 @@ public class Data {
     //ANMERKUNG Die Programmdaten sind je nach Benutzer unterschiedlich, deswegen liegen sie auch direkt im Bentzter Ordner
     public static ArrayList<String> path = new ArrayList<String>(); //Die Pfade der zuletzt geöffneten Projekten
     public static ArrayList<String> filename = new ArrayList<String>(); //Die Namen der Dateien die zuletzt geöffnet wurden
-    private static File folder; //Der Ordner in dem alle Programm daten liegen
     public static File tempfolder; //Der Ordner in dem alle Programm daten liegen
+    private static File folder; //Der Ordner in dem alle Programm daten liegen
 
     /**
      * load the Programm data from the UserFolder/.itd
@@ -101,9 +100,9 @@ public class Data {
             }
         } else {
 
-if(!tempfolder.exists()) {
-    tempfolder.mkdir();
-}
+            if (!tempfolder.exists()) {
+                tempfolder.mkdir();
+            }
 
             if (!recent.exists()) { //Wenn die Datei der letzten Projekte noch nicht exsisiert
 
@@ -142,7 +141,7 @@ if(!tempfolder.exists()) {
 
                 } catch (JSONException e) {
 
-                }catch (Exception e) {
+                } catch (Exception e) {
 
                 }
             }
@@ -176,11 +175,11 @@ if(!tempfolder.exists()) {
                                 break;
                             }
                         }
-                    }catch (JSONException e) {
+                    } catch (JSONException e) {
                         Settings.theme = RegisteredThemes.themes.get(0); //Load White Mode if Theme Attribut is unavailable
                     }
 
-                    if(Settings.theme==null)  {
+                    if (Settings.theme == null) {
                         Settings.theme = RegisteredThemes.themes.get(0); //Load White Mode if Theme is unavailable
                     }
 
@@ -192,7 +191,7 @@ if(!tempfolder.exists()) {
 
                 } catch (JSONException e) {
 
-                }catch (Exception e) {
+                } catch (Exception e) {
 
                 }
 
@@ -225,7 +224,7 @@ if(!tempfolder.exists()) {
 
                 } catch (JSONException e) {
 
-                }catch (Exception e) {
+                } catch (Exception e) {
 
                 }
 
@@ -262,7 +261,7 @@ if(!tempfolder.exists()) {
 
                 } catch (JSONException e) {
 
-                }catch (Exception e) {
+                } catch (Exception e) {
 
                 }
 
@@ -296,14 +295,14 @@ if(!tempfolder.exists()) {
 
                     for (int a = 0; a < i; a++) { //Wird durch alle tastenkombinationen durchgegangen
 
-                    CheckShortcuts.shortCuts.get(a).setShortCut();
-                    CheckShortcuts.shortCuts.get(a).setDisable((boolean)obj.getJSONArray("tastenkombination"+a).get(0));
+                        CheckShortcuts.shortCuts.get(a).setShortCut();
+                        CheckShortcuts.shortCuts.get(a).setDisable((boolean) obj.getJSONArray("tastenkombination" + a).get(0));
 
-                    for(int b=0;b<obj.getJSONArray("tastenkombination"+a).length()-1;b++) {
-                         CheckShortcuts.shortCuts.get(a).addTaste(Integer.parseInt(obj.getJSONArray("tastenkombination"+a).get(b+1).toString()));
+                        for (int b = 0; b < obj.getJSONArray("tastenkombination" + a).length() - 1; b++) {
+                            CheckShortcuts.shortCuts.get(a).addTaste(Integer.parseInt(obj.getJSONArray("tastenkombination" + a).get(b + 1).toString()));
 
 
-                    }
+                        }
 
                     }
 
@@ -311,10 +310,9 @@ if(!tempfolder.exists()) {
                     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
                 } catch (JSONException e) {
-                        e.printStackTrace();
-                }catch (Exception e ) {
+                    e.printStackTrace();
+                } catch (Exception e) {
 
                 }
 
@@ -339,19 +337,17 @@ if(!tempfolder.exists()) {
         FileHandle tastenkombinationen = Gdx.files.absolute(System.getProperty("user.home") + "/.itd/tastenkombinationen.json"); //Lade datei
         JSONObject tastenkombinationen_obj = new JSONObject(tastenkombinationen);
 
-        for(int i=0;i< CheckShortcuts.shortCuts.size();i++){//Es wird durch alle einträge durchgegangen
-            ShortCut aktualshortcut=CheckShortcuts.shortCuts.get(i);
-            JSONArray array=new JSONArray();
+        for (int i = 0; i < CheckShortcuts.shortCuts.size(); i++) {//Es wird durch alle einträge durchgegangen
+            ShortCut aktualshortcut = CheckShortcuts.shortCuts.get(i);
+            JSONArray array = new JSONArray();
             array.put(aktualshortcut.isDisable());
-            for(int j=0;j<aktualshortcut.getCombination().size();j++){//Es wird durch alle tasten des shortcuts durchgegangen
+            for (int j = 0; j < aktualshortcut.getCombination().size(); j++) {//Es wird durch alle tasten des shortcuts durchgegangen
                 array.put(aktualshortcut.getCombination().get(j));
             }
-            tastenkombinationen_obj.put("tastenkombination"+i,array); //Und jedes Nacheinander abgespeichert
+            tastenkombinationen_obj.put("tastenkombination" + i, array); //Und jedes Nacheinander abgespeichert
 
 
         }
-
-
 
 
         tastenkombinationen.writeString(tastenkombinationen_obj.toString(), false); //Datei wird geschrieben
@@ -377,8 +373,8 @@ if(!tempfolder.exists()) {
         settings_obj.put("theme", Settings.theme.getName());
         settings_obj.put("updateurl", Settings.updateurl);
         settings_obj.put("defaultpath", Settings.defaultpfad);
-        settings_obj.put("vsync",Settings.Vsync);
-        settings_obj.put("limitfps",Settings.limitfps);
+        settings_obj.put("vsync", Settings.Vsync);
+        settings_obj.put("limitfps", Settings.limitfps);
 
         //TODO weitere Einstellugen speichern
         settings.writeString(settings_obj.toString(), false); //Datei wird geschrieben

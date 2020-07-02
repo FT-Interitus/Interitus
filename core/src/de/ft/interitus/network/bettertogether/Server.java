@@ -9,6 +9,7 @@ import java.net.Socket;
 
 public class Server {
     private static ServerSocket server;
+
     public static void start() throws IOException {
         server = new ServerSocket(3141);
 
@@ -21,13 +22,11 @@ public class Server {
                 PrintStream raus = new PrintStream(socket.getOutputStream());
                 String s;
 
-                while(rein.ready()) {
+                while (rein.ready()) {
                     s = rein.readLine();
                     raus.println(s);
                 }
-            }
-
-            catch (IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             } finally {
                 if (socket != null)

@@ -11,15 +11,23 @@ public interface PlatformSpecificBlock {
 
 
     ArrayList<Parameter> getBlockParameter();
+
     String getName();
+
     String getdescription();
+
     ArrayList<BlockTopParameter> getblocktopparamter();
+
     Color blockcolor();
+
     BlockCategories getBlockCategoration();
+
     Texture getSmallImage();
+
     Texture getImage();
 
 
     int getID();
+
     ProjectTypes getProjectType();
 }

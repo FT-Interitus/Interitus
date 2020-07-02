@@ -6,14 +6,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class IntegerAuswahl {
-    private int x, y, w, h;
     private final SpriteBatch b = new SpriteBatch();
-    private Texture Textfeldmitte;
-    private Texture ButtonObenImage;
-    private Texture ButtonUntenImage;
     private final Button buttonOben = new Button();
     private final Button buttonUnten = new Button();
     private final BitmapFont font;
+    private int x, y, w, h;
+    private Texture Textfeldmitte;
+    private Texture ButtonObenImage;
+    private Texture ButtonUntenImage;
     private int buttonposition = 0;
     private int value = 0;
     private int grenzel = -999;

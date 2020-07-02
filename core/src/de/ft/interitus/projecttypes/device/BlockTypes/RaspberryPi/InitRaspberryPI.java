@@ -12,10 +12,11 @@ import java.util.ArrayList;
 
 public class InitRaspberryPI {
     static ArrayList<PlatformSpecificBlock> platformSpecificBlocks = new ArrayList<>();
+
     public static ProjectTypes init() {
 
         platformSpecificBlocks.add(new Wait());
 
-        return new ProjectTypes(ProgrammingSpace.nativ,new Ev3(),"RaspberryPi-Projekt",platformSpecificBlocks,new DefaultBlockGenerator(), new DefaultBlockUpdateGenerator(),new DefaultWireGenerator(),new DefaultWireNodeGenerator(), new DefaultSaveBlockGenerator(), new DefaultBlockVarGenerator());
+        return new ProjectTypes(ProgrammingSpace.nativ, new Ev3(), "RaspberryPi-Projekt", platformSpecificBlocks, new DefaultBlockGenerator(), new DefaultBlockUpdateGenerator(), new DefaultWireGenerator(), new DefaultWireNodeGenerator(), new DefaultSaveBlockGenerator(), new DefaultBlockVarGenerator());
     }
 }

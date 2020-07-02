@@ -6,10 +6,11 @@ import java.util.EventObject;
 
 public class PluginInstalledNewEvent extends EventObject {
     StorePluginEntry storePluginEntry;
+
     /**
      * Constructs a prototypical Event.
      *
-     * @param source the object on which the Event initially occurred
+     * @param source           the object on which the Event initially occurred
      * @param storePluginEntry
      * @throws IllegalArgumentException if source is null
      */

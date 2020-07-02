@@ -1,13 +1,12 @@
 package de.ft.interitus.loading;
 
 import com.badlogic.gdx.ApplicationListener;
-import com.badlogic.gdx.Gdx;
 import de.ft.interitus.UI.window.CreateWindow;
 import de.ft.interitus.UI.window.Window;
 
 public class SplashScreen {
     public static Window create() {
-         Window window;
+        Window window;
 
         window = CreateWindow.addWindow("Loading", new ApplicationListener() {
             @Override
@@ -42,8 +41,7 @@ public class SplashScreen {
         });
 
 
-
-        window.getConfig().setWindowPosition(-1,-1);
+        window.getConfig().setWindowPosition(-1, -1);
         window.getConfig().setDecorated(false);
 
 

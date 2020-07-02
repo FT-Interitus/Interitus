@@ -4,10 +4,11 @@ import de.ft.interitus.UI.UIElements.Button;
 
 public class Tab {
     Button TabButton;
-    Object objekt=null;
-    int index=-1;
-    public Tab(){
-        TabButton=new Button();
+    Object objekt = null;
+    int index = -1;
+
+    public Tab() {
+        TabButton = new Button();
     }
 
     public Button getTabButton() {
@@ -18,12 +19,12 @@ public class Tab {
         TabButton = tabButton;
     }
 
-    public void setObjekt(Object objekt) {
-        this.objekt = objekt;
-    }
-
     public Object getObjekt() {
         return objekt;
+    }
+
+    public void setObjekt(Object objekt) {
+        this.objekt = objekt;
     }
 
     public int getIndex() {

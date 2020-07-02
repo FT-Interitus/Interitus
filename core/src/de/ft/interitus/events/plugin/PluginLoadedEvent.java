@@ -6,6 +6,7 @@ import java.util.EventObject;
 
 public class PluginLoadedEvent extends EventObject {
     PluginRegister pluginRegister;
+
     /**
      * Constructs a prototypical Event.
      *

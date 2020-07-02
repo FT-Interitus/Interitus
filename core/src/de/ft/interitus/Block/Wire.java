@@ -17,17 +17,14 @@ import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.CheckKollision;
 
 public abstract class Wire {
+    final Wire INSTANCE = this;
     private final Vector3 tempvector = new Vector3();
     private final Vector3 tempvector1 = new Vector3();
-    private Sprite sprite = new Sprite();
     private final float dicke = 3.5f;
+    private final Sprite sprite = new Sprite();
     private VisibleObjects left_connection;
     private VisibleObjects right_connection;
-    private boolean space_between_blocks = false;
-    private boolean movebymouse = false;
-    private boolean canplaceanewwirenode = false;
-    final Wire INSTANCE = this;
-    RightClickEventListener rightClickEventListener= new RightClickEventListener() {
+    RightClickEventListener rightClickEventListener = new RightClickEventListener() {
         @Override
         public void openrightclickwindow(RightClickOpenEvent e) {
 
@@ -41,7 +38,7 @@ public abstract class Wire {
         @Override
         public void buttonclickedinwindow(RightClickButtonSelectEvent e) {
             if (e.getButton().getText().contains("Löschen")) {
-                if(ProjectManager.getActProjectVar().mousehoveredwire==INSTANCE) {
+                if (ProjectManager.getActProjectVar().mousehoveredwire == INSTANCE) {
                     try {
                         INSTANCE.left_connection.getblock().setRight(null);
                         INSTANCE.right_connection.getblock().setLeft(null);
@@ -49,11 +46,15 @@ public abstract class Wire {
                         INSTANCE.right_connection.setWire_left(null);
                         INSTANCE.left_connection = null;
                         EventVar.rightClickEventManager.removeListener(INSTANCE.rightClickEventListener);
-                    }catch (Exception ignored){}
+                    } catch (Exception ignored) {
+                    }
                 }
             }
         }
     };
+    private boolean space_between_blocks = false;
+    private boolean movebymouse = false;
+    private boolean canplaceanewwirenode = false;
 
     public Wire(final VisibleObjects left_connection, final Block right_connection) {
         this.left_connection = left_connection;
@@ -64,7 +65,7 @@ public abstract class Wire {
 
     public Wire(final VisibleObjects left_connection) {
         this.left_connection = left_connection;
-        
+
         EventVar.rightClickEventManager.addListener(rightClickEventListener);
     }
 
@@ -149,31 +150,29 @@ public abstract class Wire {
                 }
 
 
-
-                if (Gdx.input.isKeyJustPressed(Input.Keys.N) && canplaceanewwirenode&&ProjectManager.getActProjectVar().movingwires!=null) {
-
+                if (Gdx.input.isKeyJustPressed(Input.Keys.N) && canplaceanewwirenode && ProjectManager.getActProjectVar().movingwires != null) {
 
 
-                    WireNode tempwirenode =  ProjectManager.getActProjectVar().projectType.getWireNodeGenerator().generate(ProjectManager.getActProjectVar().movingwires, (int) ProgrammingSpace.viewport.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, WireNode.public_w, WireNode.public_h);
+                    WireNode tempwirenode = ProjectManager.getActProjectVar().projectType.getWireNodeGenerator().generate(ProjectManager.getActProjectVar().movingwires, (int) ProgrammingSpace.viewport.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, WireNode.public_w, WireNode.public_h);
 
                     ProjectManager.getActProjectVar().wireNodes.add(tempwirenode);
                     ProjectManager.getActProjectVar().visibleWireNodes.add(tempwirenode);
 
                     this.right_connection = tempwirenode;
 
-        try {
-            ProjectManager.getActProjectVar().movingwires.movebymouse = false;
-            ProjectManager.getActProjectVar().movingwires.space_between_blocks = true;
-            ProjectManager.getActProjectVar().movingwires.right_connection = tempwirenode;
-        }catch (NullPointerException e ) {
-            DisplayErrors.customErrorstring = "Keine WireNodes in der Luft plazieren!";
-            DisplayErrors.error = e;
-        }
+                    try {
+                        ProjectManager.getActProjectVar().movingwires.movebymouse = false;
+                        ProjectManager.getActProjectVar().movingwires.space_between_blocks = true;
+                        ProjectManager.getActProjectVar().movingwires.right_connection = tempwirenode;
+                    } catch (NullPointerException e) {
+                        DisplayErrors.customErrorstring = "Keine WireNodes in der Luft plazieren!";
+                        DisplayErrors.error = e;
+                    }
 
                     ProjectManager.getActProjectVar().movingwires = null;
 
 
-                    tempwirenode.setWire_right( ProjectManager.getActProjectVar().projectType.getWireGenerator().generate(tempwirenode));
+                    tempwirenode.setWire_right(ProjectManager.getActProjectVar().projectType.getWireGenerator().generate(tempwirenode));
                     //tempwirenode.getWire_right().space_between_blocks = false;
                     tempwirenode.getWire_right().movebymouse = true;
                     tempwirenode.getWire_right().space_between_blocks = true;
@@ -192,7 +191,6 @@ public abstract class Wire {
                 }
 
                 sprite.setTexture(AssetLoader.wire);
-
 
 
                 float a = left_connection.getX_exit() - ProgrammingSpace.viewport.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x;
@@ -223,8 +221,6 @@ public abstract class Wire {
                 //   sprite.setSize(50,50);
                 //  sprite.setRotation(20);
                 // sprite.setRotation();
-
-
 
 
                 sprite.draw(ProgrammingSpace.batch);
@@ -259,8 +255,6 @@ public abstract class Wire {
                     }
 
                 }
-
-
 
 
                 try {
@@ -301,13 +295,10 @@ public abstract class Wire {
 
                     }
 
-                    if (!RechtsKlick.popupmanager.isPopupopen()&&ProjectManager.getActProjectVar().mousehoveredwire == this && !CheckKollision.objectwithrotation(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight(), sprite.getRotation(), ProgrammingSpace.viewport.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, ProgrammingSpace.viewport.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1, 0)) {
+                    if (!RechtsKlick.popupmanager.isPopupopen() && ProjectManager.getActProjectVar().mousehoveredwire == this && !CheckKollision.objectwithrotation(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight(), sprite.getRotation(), ProgrammingSpace.viewport.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, ProgrammingSpace.viewport.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1, 0)) {
                         System.out.println("Popup disable"); //TODO here is an error
                         ProjectManager.getActProjectVar().mousehoveredwire = null;
                     }
-
-
-
 
 
                     if (temp) {

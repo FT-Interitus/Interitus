@@ -12,7 +12,8 @@ public class Window {
     private ApplicationListener listener;
     private Lwjgl3WindowConfiguration config;
     private Lwjgl3Window window;
-   protected Window(ApplicationListener listener, Lwjgl3WindowConfiguration config) {
+
+    protected Window(ApplicationListener listener, Lwjgl3WindowConfiguration config) {
         this.listener = listener;
         this.config = config;
     }
@@ -34,25 +35,26 @@ public class Window {
         this.config = config;
     }
 
-   public void create() {
+    public void create() {
 
         Thread createWindow = new Thread() {
             @Override
             public void run() {
-                Lwjgl3Application app = (Lwjgl3Application)Gdx.app;
-                window =app.newWindow(listener,config);
+                Lwjgl3Application app = (Lwjgl3Application) Gdx.app;
+                window = app.newWindow(listener, config);
             }
 
 
         };
-       createWindow.start();
+        createWindow.start();
 
     }
+
     public void destroy() {
         try {
             window.closeWindow();
             Var.extendsWindows.remove(this);
-        }catch (NullPointerException e) {
+        } catch (NullPointerException e) {
 
         }
     }

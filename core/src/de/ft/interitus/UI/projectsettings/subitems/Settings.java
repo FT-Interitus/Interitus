@@ -19,29 +19,29 @@ public class Settings {
     private static VisRadioButton itev;
     private static VisRadioButton git;
     private static VisTextButton apply;
-    public static void add(VisTable builder) {
 
+    public static void add(VisTable builder) {
 
 
         none = new VisRadioButton("Kein");
         itev = new VisRadioButton("ITEV");
         git = new VisRadioButton("Git");
         apply = new VisTextButton("Anwenden");
-apply.setDisabled(true);
+        apply.setDisabled(true);
 
-        if(ProjectManager.getActProjectVar().vcs== VCS.NONE) {
+        if (ProjectManager.getActProjectVar().vcs == VCS.NONE) {
             none.setChecked(true);
             itev.setChecked(false);
             git.setChecked(false);
         }
 
-        if(ProjectManager.getActProjectVar().vcs== VCS.ITEV) {
+        if (ProjectManager.getActProjectVar().vcs == VCS.ITEV) {
             none.setChecked(false);
             itev.setChecked(true);
             git.setChecked(false);
         }
 
-        if(ProjectManager.getActProjectVar().vcs== VCS.GIT) {
+        if (ProjectManager.getActProjectVar().vcs == VCS.GIT) {
             none.setChecked(false);
             itev.setChecked(false);
             git.setChecked(true);
@@ -53,24 +53,19 @@ apply.setDisabled(true);
         none.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                if(none.isChecked()) {
+                if (none.isChecked()) {
 
-                    if(ProjectManager.getActProjectVar().vcs== VCS.NONE) {
-                        apply.setDisabled(true);
+                    apply.setDisabled(ProjectManager.getActProjectVar().vcs == VCS.NONE);
 
-                    }else{
-                        apply.setDisabled(false);
+
+                    if (itev.isChecked()) {
+                        itev.setChecked(false);
                     }
-
-
-                   if(itev.isChecked()) {
-                       itev.setChecked(false);
-                   }
-                    if(git.isChecked()) {
+                    if (git.isChecked()) {
                         git.setChecked(false);
                     }
-                }else{
-                    if(none.isOver()) {
+                } else {
+                    if (none.isOver()) {
                         none.setChecked(true);
                     }
                 }
@@ -80,23 +75,18 @@ apply.setDisabled(true);
         itev.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                if(itev.isChecked())   {
+                if (itev.isChecked()) {
 
-                    if(ProjectManager.getActProjectVar().vcs== VCS.ITEV) {
-                        apply.setDisabled(true);
+                    apply.setDisabled(ProjectManager.getActProjectVar().vcs == VCS.ITEV);
 
-                    }else{
-                        apply.setDisabled(false);
-                    }
-
-                    if(git.isChecked()) {
+                    if (git.isChecked()) {
                         git.setChecked(false);
                     }
-                    if(none.isChecked()) {
+                    if (none.isChecked()) {
                         none.setChecked(false);
                     }
-                }else if(!itev.isChecked()){
-                    if(itev.isOver()) {
+                } else if (!itev.isChecked()) {
+                    if (itev.isOver()) {
                         itev.setChecked(true);
                     }
                 }
@@ -106,23 +96,18 @@ apply.setDisabled(true);
         git.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                if(git.isChecked()) {
+                if (git.isChecked()) {
 
-                    if(ProjectManager.getActProjectVar().vcs== VCS.GIT) {
-                        apply.setDisabled(true);
+                    apply.setDisabled(ProjectManager.getActProjectVar().vcs == VCS.GIT);
 
-                    }else{
-                        apply.setDisabled(false);
-                    }
-
-                    if(itev.isChecked()) {
+                    if (itev.isChecked()) {
                         itev.setChecked(false);
                     }
-                    if(none.isChecked()) {
+                    if (none.isChecked()) {
                         none.setChecked(false);
                     }
-                }else{
-                    if(git.isOver()) {
+                } else {
+                    if (git.isOver()) {
                         git.setChecked(true);
                     }
                 }
@@ -133,8 +118,8 @@ apply.setDisabled(true);
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
-                if(none.isChecked()) {
-                    if(ProjectManager.getActProjectVar().vcs==VCS.ITEV) {
+                if (none.isChecked()) {
+                    if (ProjectManager.getActProjectVar().vcs == VCS.ITEV) {
                         String[] möglichkeiten = {"OK", "Abbrechen"};
 
 
@@ -165,15 +150,14 @@ apply.setDisabled(true);
                                 });
                     }
 
-                } else if(git.isChecked()) {
+                } else if (git.isChecked()) {
                     ProjectManager.getActProjectVar().vcs = VCS.GIT;
                     apply.setDisabled(true);
-                }else if(itev.isChecked()) {
+                } else if (itev.isChecked()) {
                     ProjectManager.getActProjectVar().vcs = VCS.ITEV;
                     MenuBar.menuItem_speichern.setText("Revision speichern");
                     apply.setDisabled(true);
                 }
-
 
 
             }

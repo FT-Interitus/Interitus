@@ -1,7 +1,6 @@
 package de.ft.interitus;
 
 import de.ft.interitus.UI.Theme.Theme;
-import de.ft.interitus.UI.Theme.interitus.WhiteMode;
 
 public class Settings {
     public static Theme theme = null;

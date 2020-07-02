@@ -101,7 +101,7 @@ public class SerialConnection {
 
 
             if (port.bytesAvailable() > 0) {
-                empfangen =  Character.toString((char)b.read()); //fehler
+                empfangen = Character.toString((char) b.read()); //fehler
             }
 
 
@@ -131,9 +131,9 @@ public class SerialConnection {
                 try {
 
                     int input = b.read();
-                    System.out.println("asdf  "+(char)input);
+                    System.out.println("asdf  " + (char) input);
 
-                   /////// Authentifikation.checkvalidaten(input);
+                    /////// Authentifikation.checkvalidaten(input);
 
                     //    Authentifikation.getPart()
 

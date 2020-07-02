@@ -1,13 +1,16 @@
 package de.ft.interitus.data.user;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
 public class Zip {
-    public static void zipFiles(String ziparchiv,String... srcFiles) throws IOException {
+    public static void zipFiles(String ziparchiv, String... srcFiles) throws IOException {
         //List<String> srcFiles = Arrays.asList("test1.txt", "test2.txt");
         FileOutputStream fos = new FileOutputStream(ziparchiv);
         ZipOutputStream zipOut = new ZipOutputStream(fos);
@@ -19,7 +22,7 @@ public class Zip {
 
             byte[] bytes = new byte[1024];
             int length;
-            while((length = fis.read(bytes)) >= 0) {
+            while ((length = fis.read(bytes)) >= 0) {
                 zipOut.write(bytes, 0, length);
             }
             fis.close();
@@ -41,7 +44,7 @@ public class Zip {
 
             byte[] bytes = new byte[1024];
             int length;
-            while((length = fis.read(bytes)) >= 0) {
+            while ((length = fis.read(bytes)) >= 0) {
                 zipOut.write(bytes, 0, length);
             }
             fis.close();
@@ -50,7 +53,8 @@ public class Zip {
         zipOut.close();
         fos.close();
     }
-    public static void zipFiles(String ziparchiv,File... srcFiles) throws IOException {
+
+    public static void zipFiles(String ziparchiv, File... srcFiles) throws IOException {
         //List<String> srcFiles = Arrays.asList("test1.txt", "test2.txt");
         FileOutputStream fos = new FileOutputStream(ziparchiv);
         ZipOutputStream zipOut = new ZipOutputStream(fos);
@@ -62,7 +66,7 @@ public class Zip {
 
             byte[] bytes = new byte[1024];
             int length;
-            while((length = fis.read(bytes)) >= 0) {
+            while ((length = fis.read(bytes)) >= 0) {
                 zipOut.write(bytes, 0, length);
             }
             fis.close();
@@ -70,11 +74,6 @@ public class Zip {
         zipOut.close();
         fos.close();
     }
-
-
-
-
-
 
 
     public static File newFile(File destinationDir, ZipEntry zipEntry) throws IOException {
@@ -89,6 +88,7 @@ public class Zip {
 
         return destFile;
     }
+
     public static void unzip(String fileZip, String destDirstr) throws IOException {
         File destDir = new File(destDirstr);
         byte[] buffer = new byte[1024];

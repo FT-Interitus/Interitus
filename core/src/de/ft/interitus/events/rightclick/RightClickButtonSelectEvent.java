@@ -4,6 +4,7 @@ package de.ft.interitus.events.rightclick;
 import de.ft.interitus.UI.UIElements.Button;
 
 import java.util.EventObject;
+
 public class RightClickButtonSelectEvent extends EventObject {
     Button button;
 
@@ -12,7 +13,6 @@ public class RightClickButtonSelectEvent extends EventObject {
      *
      * @param source the object on which the Event initially occurred
      * @throws IllegalArgumentException if source is null
-     *
      */
 
     public RightClickButtonSelectEvent(Object source, Button button) {

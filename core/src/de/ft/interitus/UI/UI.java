@@ -12,7 +12,8 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.kotcrab.vis.ui.widget.MenuBar;
 import com.kotcrab.vis.ui.widget.MenuItem;
-import de.ft.interitus.*;
+import de.ft.interitus.DisplayErrors;
+import de.ft.interitus.Settings;
 import de.ft.interitus.UI.UIElements.Button;
 import de.ft.interitus.UI.UIElements.ButtonBar;
 import de.ft.interitus.UI.UIElements.TabBar.Tab;
@@ -22,6 +23,7 @@ import de.ft.interitus.UI.projectsettings.ProjectSettingsUI;
 import de.ft.interitus.UI.settings.SettingsUI;
 import de.ft.interitus.UI.setup.SetupWindow;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
+import de.ft.interitus.Var;
 import de.ft.interitus.data.programm.Data;
 import de.ft.interitus.data.user.experience.ExperienceManager;
 import de.ft.interitus.events.EventVar;
@@ -45,35 +47,30 @@ public class UI {
     public static Viewport UIviewport;
     public static OrthographicCamera UIcam;
     public static SpriteBatch UIbatch;
-
+    public static SettingsUI set;
+    public static ProjectSettingsUI proset;
+    public static boolean curserveränderungsblockade = false;
+    public static ButtonBar buttonbar;
+    public static Button button_projectstructus;
+    public static Button button_start;
+    public static Button button_stop;
+    public static Button button_debugstart;
+    public static TabBar tabbar;
     protected static MenuItem recent;
     protected static MenuItem revert;
     protected static MenuItem redo;
     protected static MenuItem copy;
     protected static MenuItem paste;
     protected static MenuBar menuBar;
-    public static SettingsUI set;
-    public static ProjectSettingsUI proset;
-
     private static boolean issettingsuiopend = false;
     private static boolean issetupuiopend = false;
-    private static int curserstate=0;
+    private static int curserstate = 0;
+    private static boolean verticalrezising = false;
+    private static boolean horizontalrezising = false;
     Vector3 pos = new Vector3();
 
-    private static boolean verticalrezising=false;
-    private static boolean horizontalrezising=false;
-    public static boolean curserveränderungsblockade=false;
-
-    public static ButtonBar buttonbar;
-    public static Button button_projectstructus;
-    public static Button button_start;
-    public static Button button_stop;
-    public static Button button_debugstart;
-
-    public static TabBar tabbar;
-
     public static void userresize() {
-        if (!curserveränderungsblockade){
+        if (!curserveränderungsblockade) {
             if (Gdx.input.getX() > UIVar.BlockBarW + UIVar.abstandvonRand && Gdx.input.getX() < UIVar.BlockBarW + UIVar.abstandvonRand * 2 && Gdx.graphics.getHeight() - Gdx.input.getY() > UIVar.abstandvonRand && Gdx.graphics.getHeight() - Gdx.input.getY() < UIVar.abstandvonRand + UIVar.BlockBarH) {
                 if (curserstate != 0) {
                     Gdx.graphics.setSystemCursor(Cursor.SystemCursor.HorizontalResize);
@@ -89,88 +86,79 @@ public class UI {
                 Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Arrow);
                 curserstate = 1;
             }
-    }
-
-        if(curserstate==0 && Gdx.input.isButtonJustPressed(0)){
-            verticalrezising=true;
-            curserveränderungsblockade=true;
-        }
-        if(!Gdx.input.isButtonPressed(0)){
-            verticalrezising=false;
-            curserveränderungsblockade=false;
-        }
-        if(verticalrezising){
-                UIVar.unteneinteilung = Gdx.graphics.getWidth() - Gdx.input.getX() - UIVar.abstandvonRand / 2;
-                 if(Gdx.graphics.getWidth()-UIVar.unteneinteilung<BlockTappedBar.tb.getTaps().size()*BlockTappedBar.tb.getTaps().get(0).getTab_button().getW()+ BlockTappedBar.tb.getButtonabstand()*BlockTappedBar.tb.getTaps().size()+20) {
-                        UIVar.unteneinteilung=Gdx.graphics.getWidth()-(BlockTappedBar.tb.getTaps().size()*BlockTappedBar.tb.getTaps().get(0).getTab_button().getW()+ BlockTappedBar.tb.getButtonabstand()*BlockTappedBar.tb.getTaps().size()+20);
-                 }
-                 if(Gdx.graphics.getWidth()-UIVar.unteneinteilung>Gdx.graphics.getWidth()-UIVar.rechtseinraste){
-                     UIVar.unteneinteilung=UIVar.rechtseinraste;
-
-                 }
-
         }
 
-
-        if(curserstate==2 && Gdx.input.isButtonJustPressed(0)){
-            horizontalrezising=true;
-            curserveränderungsblockade=true;
+        if (curserstate == 0 && Gdx.input.isButtonJustPressed(0)) {
+            verticalrezising = true;
+            curserveränderungsblockade = true;
         }
-        if(!Gdx.input.isButtonPressed(0)){
-            horizontalrezising=false;
-            curserveränderungsblockade=false;
+        if (!Gdx.input.isButtonPressed(0)) {
+            verticalrezising = false;
+            curserveränderungsblockade = false;
         }
-        if(horizontalrezising){
-            UIVar.untenhohe=Gdx.graphics.getHeight()-Gdx.input.getY()-UIVar.abstandvonRand/2;
-            if(UIVar.untenhohe<UIVar.untenkante){
-                    UIVar.untenhohe=UIVar.untenkante;
+        if (verticalrezising) {
+            UIVar.unteneinteilung = Gdx.graphics.getWidth() - Gdx.input.getX() - UIVar.abstandvonRand / 2;
+            if (Gdx.graphics.getWidth() - UIVar.unteneinteilung < BlockTappedBar.tb.getTaps().size() * BlockTappedBar.tb.getTaps().get(0).getTab_button().getW() + BlockTappedBar.tb.getButtonabstand() * BlockTappedBar.tb.getTaps().size() + 20) {
+                UIVar.unteneinteilung = Gdx.graphics.getWidth() - (BlockTappedBar.tb.getTaps().size() * BlockTappedBar.tb.getTaps().get(0).getTab_button().getW() + BlockTappedBar.tb.getButtonabstand() * BlockTappedBar.tb.getTaps().size() + 20);
             }
-            if(UIVar.untenhohe>Gdx.graphics.getHeight()/2){
-                UIVar.untenhohe=Gdx.graphics.getHeight()/2;
+            if (Gdx.graphics.getWidth() - UIVar.unteneinteilung > Gdx.graphics.getWidth() - UIVar.rechtseinraste) {
+                UIVar.unteneinteilung = UIVar.rechtseinraste;
+
             }
+
         }
 
+
+        if (curserstate == 2 && Gdx.input.isButtonJustPressed(0)) {
+            horizontalrezising = true;
+            curserveränderungsblockade = true;
+        }
+        if (!Gdx.input.isButtonPressed(0)) {
+            horizontalrezising = false;
+            curserveränderungsblockade = false;
+        }
+        if (horizontalrezising) {
+            UIVar.untenhohe = Gdx.graphics.getHeight() - Gdx.input.getY() - UIVar.abstandvonRand / 2;
+            if (UIVar.untenhohe < UIVar.untenkante) {
+                UIVar.untenhohe = UIVar.untenkante;
+            }
+            if (UIVar.untenhohe > Gdx.graphics.getHeight() / 2) {
+                UIVar.untenhohe = Gdx.graphics.getHeight() / 2;
+            }
+        }
 
 
     }
 
     public static void updatedragui(ShapeRenderer renderer, boolean flaeche, SpriteBatch batch) {
         userresize();
-       // Var.w=Gdx.graphics.getWidth();
+        // Var.w=Gdx.graphics.getWidth();
         //Var.h=Gdx.graphics.getHeight();
         renderer.begin(ShapeRenderer.ShapeType.Filled);
 
 
-            renderer.setColor(Settings.theme.ProgrammSpaceColor());
-
-
-
+        renderer.setColor(Settings.theme.ProgrammSpaceColor());
 
 
         if (flaeche == true) {/////////////   \/  \/  \/  \/  die programmierfläche wird gedrawd
-            UIVar.programmflaeche_h=Gdx.graphics.getHeight() - (UIVar.untenhohe + UIVar.abstandvonRand)  - UIVar.abstandvonRand - (int)menuBar.getTable().getHeight() - UIVar.buttonbarzeile_h - UIVar.abstandvonRand;
-            UIVar.programmflaeche_y=UIVar.untenhohe + UIVar.abstandvonRand;
+            UIVar.programmflaeche_h = Gdx.graphics.getHeight() - (UIVar.untenhohe + UIVar.abstandvonRand) - UIVar.abstandvonRand - (int) menuBar.getTable().getHeight() - UIVar.buttonbarzeile_h - UIVar.abstandvonRand;
+            UIVar.programmflaeche_y = UIVar.untenhohe + UIVar.abstandvonRand;
             RoundRectangle.abgerundetesRechteck(renderer, UIVar.abstandvonRand, UIVar.programmflaeche_y, Gdx.graphics.getWidth() - UIVar.abstandvonRand * 2, UIVar.programmflaeche_h, UIVar.radius);
         } else {
 
-                renderer.setColor(Settings.theme.BlocksColor());
+            renderer.setColor(Settings.theme.BlocksColor());
 
-            UIVar.BlockBarX=UIVar.abstandvonRand;
-            UIVar.BlockBarY=UIVar.abstandvonRand;
-            UIVar.BlockBarW=Gdx.graphics.getWidth() - UIVar.abstandvonRand * 2 - UIVar.unteneinteilung;
-            UIVar.BlockBarH=UIVar.untenhohe - UIVar.abstandvonRand;//  \/  \/ blockbar wird gedrawed
+            UIVar.BlockBarX = UIVar.abstandvonRand;
+            UIVar.BlockBarY = UIVar.abstandvonRand;
+            UIVar.BlockBarW = Gdx.graphics.getWidth() - UIVar.abstandvonRand * 2 - UIVar.unteneinteilung;
+            UIVar.BlockBarH = UIVar.untenhohe - UIVar.abstandvonRand;//  \/  \/ blockbar wird gedrawed
             RoundRectangle.abgerundetesRechteck(renderer, UIVar.abstandvonRand, UIVar.abstandvonRand, UIVar.BlockBarW, UIVar.BlockBarH, UIVar.radius);
 
-                renderer.setColor(Settings.theme.DeviceConnectionColor());
+            renderer.setColor(Settings.theme.DeviceConnectionColor());
 
             RoundRectangle.abgerundetesRechteck(renderer, Gdx.graphics.getWidth() - UIVar.unteneinteilung, UIVar.abstandvonRand, UIVar.unteneinteilung - UIVar.abstandvonRand, UIVar.untenhohe - UIVar.abstandvonRand, UIVar.radius);
         }
         renderer.end();
-
-
-
-
-
 
 
     }
@@ -181,7 +169,6 @@ public class UI {
         UI.UIviewport = new ScreenViewport(UI.UIcam);
 
         stage = new Stage(UIviewport, UIbatch);
-
 
 
         root.setFillParent(true);
@@ -206,14 +193,9 @@ public class UI {
         EventVar.uiEventManager.addListener(new UiEventAdapter() {
             @Override
             public void UIOpenSettingsEvent(UIOpenSettingsEvent e) {
-               set.show();
+                set.show();
             }
         });
-
-
-
-
-
 
 
         Thread UIthread = new Thread() {
@@ -238,7 +220,6 @@ public class UI {
                             }
 
 
-
                             recent.setDisabled(Data.path.size() == 0);
 
 
@@ -246,7 +227,6 @@ public class UI {
 
 
                             /////////////revert//////////////
-
 
 
                         } catch (Exception e) {
@@ -290,7 +270,7 @@ public class UI {
                         ///////////////////Check if shortcut is pressed//////////
 
 
-                        if(SharedVar.amiclinet) {
+                        if (SharedVar.amiclinet) {
                             de.ft.interitus.UI.MenuBar.fileMenu.setVisible(false);
                         }
 
@@ -306,70 +286,70 @@ public class UI {
 
     }
 
-    public static void initnachassetsloading(){
+    public static void initnachassetsloading() {
         /////////////////Button Bar zusammensetzung//////////////////////
-        button_debugstart=new Button();
+        button_debugstart = new Button();
         button_debugstart.setImage(AssetLoader.img_debugstart);
         button_debugstart.setImage_mouseover(AssetLoader.img_debugstart_mouseover);
         button_debugstart.setImage_pressed(AssetLoader.img_debugstart_pressed);
-        button_projectstructus=new Button();
+        button_projectstructus = new Button();
         button_projectstructus.setImage(AssetLoader.img_projectstructur);
         button_projectstructus.setImage_mouseover(AssetLoader.img_projectstructur_mouseover);
         button_projectstructus.setImage_pressed(AssetLoader.img_projectstructur_pressed);
-        button_start=new Button();
+        button_start = new Button();
         button_start.setImage(AssetLoader.img_startbutton);
         button_start.setImage_mouseover(AssetLoader.img_startbutton_mouseover);
         button_start.setImage_pressed(AssetLoader.img_startbutton_pressed);
-        button_stop=new Button();
+        button_stop = new Button();
         button_stop.setImage(AssetLoader.img_stopbutton);
         button_stop.setImage_mouseover(AssetLoader.img_stopbutton_mouseover);
         button_stop.setImage_pressed(AssetLoader.img_stopbutton_pressed);
-        buttonbar=new ButtonBar(0,0,20,20);
+        buttonbar = new ButtonBar(0, 0, 20, 20);
         buttonbar.addButton(button_projectstructus);
         buttonbar.addButton(button_stop);
         buttonbar.addButton(button_debugstart);
         buttonbar.addButton(button_start);
 
-        tabbar=new TabBar();
+        tabbar = new TabBar();
         Tab testtab = new Tab();
         testtab.getTabButton().setImage(AssetLoader.img_Tab);
         testtab.getTabButton().setW(300);
         testtab.getTabButton().setText("hallo tim");
-        testtab.getTabButton().widthoverText=true;
+        testtab.getTabButton().widthoverText = true;
         tabbar.addTab(testtab);
         Tab testtab2 = new Tab();
         testtab2.getTabButton().setImage(AssetLoader.img_Tab);
         testtab2.getTabButton().setW(300);
         testtab2.getTabButton().setText("2.tabasdölkghjkjhgjkkjgjjgkjgjjkkjgjgkgkgjasdflkjasdflökjasdfölkjasdf");
-        testtab2.getTabButton().widthoverText=true;
+        testtab2.getTabButton().widthoverText = true;
         tabbar.addTab(testtab2);
 
     }
 
     public static void update() {
 
-if(Var.openprojects.size()!=tabbar.getTabbs().size()) {
-    tabbar.setTabs();
+        if (Var.openprojects.size() != tabbar.getTabbs().size()) {
+            tabbar.setTabs();
 
-    for (int i = 0; i < Var.openprojects.size(); i++) {
-        Tab temptab = new Tab(); //TODO ganz gefährlich
-        temptab.getTabButton().setImage(AssetLoader.img_Tab);
-        temptab.getTabButton().setW(300);
-        temptab.getTabButton().widthoverText = true;
-        temptab.getTabButton().setText(Var.openprojects.get(i).filename);
-        temptab.setIndex(i);
-        tabbar.addTab(temptab);
-    }
+            for (int i = 0; i < Var.openprojects.size(); i++) {
+                Tab temptab = new Tab(); //TODO ganz gefährlich
+                temptab.getTabButton().setImage(AssetLoader.img_Tab);
+                temptab.getTabButton().setW(300);
+                temptab.getTabButton().widthoverText = true;
+                temptab.getTabButton().setText(Var.openprojects.get(i).filename);
+                temptab.setIndex(i);
+                tabbar.addTab(temptab);
+            }
 
-}
-        if(tabbar.getSelectedTab()!=null) {
-            if (tabbar.getSelectedTab().getIndex() != -1 ) {
-                if(Var.openprojectindex!=tabbar.getSelectedTab().getIndex()) {
+        }
+        if (tabbar.getSelectedTab() != null) {
+            if (tabbar.getSelectedTab().getIndex() != -1) {
+                if (Var.openprojectindex != tabbar.getSelectedTab().getIndex()) {
                     ProjectManager.change(tabbar.getSelectedTab().getIndex());
                 }
             }
         }
-        tabbar.setBounds(UIVar.abstandvonRand,UIVar.programmflaeche_h+UIVar.programmflaeche_y,300,20);
+        tabbar.setBounds(UIVar.abstandvonRand, UIVar.programmflaeche_h + UIVar.programmflaeche_y, 300, 20);
         tabbar.draw();
 
 
@@ -383,12 +363,12 @@ if(Var.openprojects.size()!=tabbar.getTabbs().size()) {
 
         recent.setSubMenu(createSubMenu(Data.filename.size(), GetStringArray(Data.filename)));
 
-        buttonbar.setX(Gdx.graphics.getWidth()-10);
-        buttonbar.setY(UIVar.programmflaeche_y+UIVar.programmflaeche_h+UIVar.abstandvonRand);
+        buttonbar.setX(Gdx.graphics.getWidth() - 10);
+        buttonbar.setY(UIVar.programmflaeche_y + UIVar.programmflaeche_h + UIVar.abstandvonRand);
         buttonbar.draw(UIbatch);
 
 
-        if(button_projectstructus.isjustPressednormal()) {
+        if (button_projectstructus.isjustPressednormal()) {
 
             proset.show();
 

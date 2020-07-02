@@ -11,14 +11,15 @@ public class ProjectTypes {
     ProgrammableObjekt PO;
     String name;
     ArrayList<PlatformSpecificBlock> projectblocks;
-    BlockGenerator blockGenerator =null;
+    private final de.ft.interitus.plugin.PluginRegister pluginRegister;
     BlockUpdateGenerator blockUpdateGenerator = null;
-private WireGenerator wireGenerator;
-private WireNodeGenerator wireNodeGenerator;
-private BlocktoSaveGenerator blocktoSaveGenerator;
-private de.ft.interitus.plugin.PluginRegister pluginRegister;
-private BlockVarGenerator blockVarGenerator;
-    public ProjectTypes(PluginRegister pluginRegister, ProgrammableObjekt PO, String name, ArrayList<PlatformSpecificBlock> blocks, BlockGenerator blockgenerator, BlockUpdateGenerator updategenerator, WireGenerator wireGenerator, WireNodeGenerator wireNodeGenerator, BlocktoSaveGenerator blocktoSaveGenerator,BlockVarGenerator blockVarGenerator) {
+    private final BlockVarGenerator blockVarGenerator;
+    BlockGenerator blockGenerator = null;
+    private WireGenerator wireGenerator;
+    private WireNodeGenerator wireNodeGenerator;
+    private BlocktoSaveGenerator blocktoSaveGenerator;
+
+    public ProjectTypes(PluginRegister pluginRegister, ProgrammableObjekt PO, String name, ArrayList<PlatformSpecificBlock> blocks, BlockGenerator blockgenerator, BlockUpdateGenerator updategenerator, WireGenerator wireGenerator, WireNodeGenerator wireNodeGenerator, BlocktoSaveGenerator blocktoSaveGenerator, BlockVarGenerator blockVarGenerator) {
         this.projectblocks = blocks;
         this.PO = PO;
         this.name = name;
@@ -43,16 +44,16 @@ private BlockVarGenerator blockVarGenerator;
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public ArrayList<PlatformSpecificBlock> getProjectblocks() {
         return projectblocks;
     }
 
     public void setProjectblocks(ArrayList<PlatformSpecificBlock> projectblocks) {
         this.projectblocks = projectblocks;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public BlockGenerator getBlockGenerator() {
@@ -63,29 +64,28 @@ private BlockVarGenerator blockVarGenerator;
         this.blockGenerator = blockGenerator;
     }
 
-    public void setBlockUpdateGenerator(BlockUpdateGenerator blockUpdateGenerator) {
-        this.blockUpdateGenerator = blockUpdateGenerator;
-    }
-
     public BlockUpdateGenerator getBlockUpdateGenerator() {
         return blockUpdateGenerator;
     }
 
-
-    public void setWireGenerator(WireGenerator wireGenerator) {
-        this.wireGenerator = wireGenerator;
+    public void setBlockUpdateGenerator(BlockUpdateGenerator blockUpdateGenerator) {
+        this.blockUpdateGenerator = blockUpdateGenerator;
     }
 
     public WireGenerator getWireGenerator() {
         return wireGenerator;
     }
 
-    public void setWireNodeGenerator(WireNodeGenerator wireNodeGenerator) {
-        this.wireNodeGenerator = wireNodeGenerator;
+    public void setWireGenerator(WireGenerator wireGenerator) {
+        this.wireGenerator = wireGenerator;
     }
 
     public WireNodeGenerator getWireNodeGenerator() {
         return wireNodeGenerator;
+    }
+
+    public void setWireNodeGenerator(WireNodeGenerator wireNodeGenerator) {
+        this.wireNodeGenerator = wireNodeGenerator;
     }
 
     public BlocktoSaveGenerator getBlocktoSaveGenerator() {
@@ -102,9 +102,9 @@ private BlockVarGenerator blockVarGenerator;
 
 
     public ProjectVar init() {
-        ProjectVar blockvar =this.blockVarGenerator.generate();
-        blockvar.projectType=this;
-      return blockvar;
+        ProjectVar blockvar = this.blockVarGenerator.generate();
+        blockvar.projectType = this;
+        return blockvar;
 
     }
 

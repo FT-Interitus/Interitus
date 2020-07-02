@@ -11,7 +11,6 @@ import java.util.TimerTask;
 public class ThreadManager {
 
 
-
     static Frustum camfr;
 
     public static Thread add(Thread thread, Object obj) {
@@ -22,7 +21,7 @@ public class ThreadManager {
     }
 
     public static void stopall() {
-        for(int i = 0; i< ProjectManager.getActProjectVar().threads.size(); i++) {
+        for (int i = 0; i < ProjectManager.getActProjectVar().threads.size(); i++) {
             ((BlockUpdate) ProjectManager.getActProjectVar().threads.get(i)).time.cancel();
         }
     }
@@ -39,7 +38,7 @@ public class ThreadManager {
                     @Override
                     public void run() {
 
-                        if(!Var.isdialogeopend) {
+                        if (!Var.isdialogeopend) {
 
                             try {
                                 camfr = ProgrammingSpace.cam.frustum;
@@ -112,11 +111,7 @@ public class ThreadManager {
 
                             //Enable or disable Wire System
 
-                            if (ProjectManager.getActProjectVar().ismoving) {
-                                ProjectManager.getActProjectVar().wirezulassung = false;
-                            } else {
-                                ProjectManager.getActProjectVar().wirezulassung = true;
-                            }
+                            ProjectManager.getActProjectVar().wirezulassung = !ProjectManager.getActProjectVar().ismoving;
                         }
 
                     }

@@ -1,16 +1,8 @@
 package de.ft.interitus.plugin;
 
-import com.kotcrab.vis.ui.widget.Menu;
-import com.kotcrab.vis.ui.widget.VisTable;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Programm;
-import de.ft.interitus.UI.Theme.RegisteredThemes;
-import de.ft.interitus.UI.Theme.Theme;
-import de.ft.interitus.UI.shortcut.ShortCut;
-import de.ft.interitus.UI.shortcut.ShortCutChecker;
 import de.ft.interitus.Var;
-import de.ft.interitus.projecttypes.ProjectTypes;
-import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
 import org.usb4java.LoaderException;
 
 import java.io.File;
@@ -19,7 +11,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
@@ -72,18 +67,18 @@ public class PluginManagerHandler {
             }
 
 
-            for (int i = 0; i < Var.pluginManager.loadedplugins.size(); i++) {
+            for (int i = 0; i < loadedplugins.size(); i++) {
 
 
                 if (registeredplugins.get(i).getName() != "" && registeredplugins.get(i).getName() != " " && registeredplugins.get(i).getName().length() > 2 && !registeredplugins.get(i).getName().endsWith(" ") && !registeredplugins.get(i).getName().startsWith(" ")) {
                     if (registeredplugins.get(i).getVersion() > 0.0) {
-                       System.out.println(registeredplugins.get(i).getName() + " geladen. In der Version " + registeredplugins.get(i).getVersion());
+                        System.out.println(registeredplugins.get(i).getName() + " geladen. In der Version " + registeredplugins.get(i).getVersion());
 
-                    }else{
+                    } else {
                         Programm.logger.warning(registeredplugins.get(i).getName() + " hasn't a valid Version");
                         registeredplugins.remove(i);
                     }
-                }else{
+                } else {
                     Programm.logger.warning(registeredplugins.get(i).getName() + " hasn't a valid Configuration");
                     registeredplugins.remove(i);
 
@@ -120,14 +115,14 @@ public class PluginManagerHandler {
 
                                     starttime.add(System.currentTimeMillis());
                                     try {
-                                        finish.add(Var.pluginManager.loadedplugins.get(finalI).run());
-                                    }catch (Exception e) {
+                                        finish.add(loadedplugins.get(finalI).run());
+                                    } catch (Exception e) {
                                         DisplayErrors.customErrorstring = "Fehler in einem Plugin. Es wurde deaktiviert!";
                                         DisplayErrors.error = e;
-                                        registeredplugins.remove(Var.pluginManager.loadedplugins.get(finalI));
-                                    }catch (NoClassDefFoundError e){
+                                        registeredplugins.remove(loadedplugins.get(finalI));
+                                    } catch (NoClassDefFoundError e) {
                                         e.printStackTrace();
-                                        registeredplugins.remove(Var.pluginManager.loadedplugins.get(finalI));
+                                        registeredplugins.remove(loadedplugins.get(finalI));
                                     }
 
 
@@ -150,10 +145,16 @@ public class PluginManagerHandler {
 
     }
 
+    public static void unload(PluginRegister pluginRegister) {
+
+        registeredplugins.remove(pluginRegister);
+
+
+    }
 
     public Exception init() {
 
-        if(!new File(System.getProperty("user.home") + "/.itd/plugins").exists()) {
+        if (!new File(System.getProperty("user.home") + "/.itd/plugins").exists()) {
             new File(System.getProperty("user.home") + "/.itd/plugins").mkdir();
         }
 
@@ -181,7 +182,7 @@ public class PluginManagerHandler {
 
             try {
                 pi.register();  //jedes gefundene Plugin bekommt den Befehl sich zu registrieren
-            }catch (NoSuchMethodError e) {
+            } catch (NoSuchMethodError e) {
                 try {
                     throw new PluginSDKDeprecatedException("A Plugin dosn't use the newest Interitus-SDK version!");
                 } catch (PluginSDKDeprecatedException pluginSDKDeprecatedException) {
@@ -220,7 +221,7 @@ public class PluginManagerHandler {
         } catch (IOException e) {
             error = e;
 
-        }catch (NullPointerException e) {
+        } catch (NullPointerException e) {
 
         }
 
@@ -276,13 +277,6 @@ public class PluginManagerHandler {
         } else {
             System.out.println("Fehlerhaftes Plugin");
         }
-
-
-    }
-
-    public static void unload(PluginRegister pluginRegister) {
-
-        registeredplugins.remove(pluginRegister);
 
 
     }

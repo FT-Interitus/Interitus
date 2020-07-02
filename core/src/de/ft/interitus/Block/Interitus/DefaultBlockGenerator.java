@@ -8,8 +8,8 @@ import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
 
 public class DefaultBlockGenerator implements BlockGenerator {
 
-@Override
+    @Override
     public Block generateBlock(int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock, BlockUpdateGenerator generator, BlocktoSaveGenerator blocktoSaveGenerator) {
-         return new DefaultBlock(index,x,y,w,h,platformSpecificBlock,generator, blocktoSaveGenerator);
+        return new DefaultBlock(index, x, y, w, h, platformSpecificBlock, generator, blocktoSaveGenerator);
     }
 }

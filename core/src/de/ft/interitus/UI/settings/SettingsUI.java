@@ -37,6 +37,7 @@ public class SettingsUI extends VisWindow {
     final VisTable container = new VisTable();
     final Padding padding = new Padding(2, 3);
     ChangeListener listener = null;
+
     public SettingsUI() {
         super("Einstellungen");
         pack();
@@ -89,8 +90,8 @@ public class SettingsUI extends VisWindow {
         container.clearChildren();
         instructions.add(container);
 
-            testBuilder = new TestBuilder("Einstellungen", new StandardTableBuilder(padding));
-       Var.isdialogeopend=true;
+        testBuilder = new TestBuilder("Einstellungen", new StandardTableBuilder(padding));
+        Var.isdialogeopend = true;
 
         UI.stage.addActor(testBuilder);
 
@@ -230,9 +231,9 @@ public class SettingsUI extends VisWindow {
             item3.add(new TestNode(new VisLabel(" item"), 10));
             item3.add(new TestNode(new VisLabel(" Erweitert"), 11));
 
-            item4.add(new TestNode(new VisLabel(" Interitus Mobil"),13));
-            item4.add(new TestNode(new VisLabel(" Better Together"),14));
-            item4.add(new TestNode(new VisLabel(" Erweitert"),15));
+            item4.add(new TestNode(new VisLabel(" Interitus Mobil"), 13));
+            item4.add(new TestNode(new VisLabel(" Better Together"), 14));
+            item4.add(new TestNode(new VisLabel(" Erweitert"), 15));
             //ADD Advanced Settings to ITM if Device is connect
 
             for (int i = 0; i < PluginGateway.plugisettings.size(); i++) {
@@ -261,9 +262,9 @@ public class SettingsUI extends VisWindow {
 
                     container.clearChildren();
 
-        if(SelectedItem!=5&&Var.disableshortcuts) {
-            Var.disableshortcuts = false;
-        }
+                    if (SelectedItem != 5 && Var.disableshortcuts) {
+                        Var.disableshortcuts = false;
+                    }
 
                     switch (SelectedItem) {
 
@@ -373,29 +374,28 @@ public class SettingsUI extends VisWindow {
 
             centerWindow();
 
-Timer time = new Timer();
-time.scheduleAtFixedRate(new TimerTask() {
+            Timer time = new Timer();
+            time.scheduleAtFixedRate(new TimerTask() {
 
-    @Override
-    public void run() {
-       if(Var.isdialogeopend&&!SettingsUI.isopend())  {
-           Var.isdialogeopend = false;
-           Var.disableshortcuts = false;
-           this.cancel();
-       }
+                @Override
+                public void run() {
+                    if (Var.isdialogeopend && !SettingsUI.isopend()) {
+                        Var.isdialogeopend = false;
+                        Var.disableshortcuts = false;
+                        this.cancel();
+                    }
 
-       if(!Var.isdialogeopend&&SettingsUI.isopend()) {
-           Var.isdialogeopend = true;
-       }
-    }
-},0,100);
-
+                    if (!Var.isdialogeopend && SettingsUI.isopend()) {
+                        Var.isdialogeopend = true;
+                    }
+                }
+            }, 0, 100);
 
 
         }
 
         public boolean testopen() {
-            if(!super.getParent().isVisible()) {
+            if (!super.getParent().isVisible()) {
                 Var.isdialogeopend = false;
                 Var.disableshortcuts = false;
                 this.removeListener(listener);

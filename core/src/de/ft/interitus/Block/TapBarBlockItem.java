@@ -15,24 +15,24 @@ import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
 public class TapBarBlockItem implements TapItem {
     int x;
     int y;
-    int w=40;
-    int h=50;
+    int w = 40;
+    int h = 50;
     Texture img;
     PlatformSpecificBlock psb;
     Check check = new Check();
 
-    public TapBarBlockItem(PlatformSpecificBlock psb,Texture img){
-        this.img=img;
-        this.psb=psb;
+    public TapBarBlockItem(PlatformSpecificBlock psb, Texture img) {
+        this.img = img;
+        this.psb = psb;
     }
 
     @Override
     public void draw() {
 
-        if(!Var.isdialogeopend) {
+        if (!Var.isdialogeopend) {
             if (check.isJustPressedNormal(x, y, w, h)) {
 
-                Block tempblock =  ProjectManager.getActProjectVar().projectType.getBlockGenerator().generateBlock(ProjectManager.getActProjectVar().blocks.size(), (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 150, 70, psb, ProjectManager.getActProjectVar().projectType.getBlockUpdateGenerator(),  ProjectManager.getActProjectVar().projectType.getBlocktoSaveGenerator());
+                Block tempblock = ProjectManager.getActProjectVar().projectType.getBlockGenerator().generateBlock(ProjectManager.getActProjectVar().blocks.size(), (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 150, 70, psb, ProjectManager.getActProjectVar().projectType.getBlockUpdateGenerator(), ProjectManager.getActProjectVar().projectType.getBlocktoSaveGenerator());
 
                 ProjectManager.getActProjectVar().blocks.add(tempblock);
                 tempblock.setMarked(true);
@@ -43,7 +43,7 @@ public class TapBarBlockItem implements TapItem {
         }
 
         UI.UIbatch.begin();
-        UI.UIbatch.draw(img,this.x,this.y,this.w,this.h);
+        UI.UIbatch.draw(img, this.x, this.y, this.w, this.h);
         UI.UIbatch.end();
     }
 
@@ -53,8 +53,18 @@ public class TapBarBlockItem implements TapItem {
     }
 
     @Override
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    @Override
     public int getY() {
         return y;
+    }
+
+    @Override
+    public void setY(int y) {
+        this.y = y;
     }
 
     @Override
@@ -63,28 +73,18 @@ public class TapBarBlockItem implements TapItem {
     }
 
     @Override
+    public void setW(int w) {
+        this.w = w;
+    }
+
+    @Override
     public int getH() {
         return h;
     }
 
     @Override
-    public void setX(int x) {
-        this.x=x;
-    }
-
-    @Override
-    public void setY(int y) {
-        this.y=y;
-    }
-
-    @Override
-    public void setW(int w) {
-        this.w=w;
-    }
-
-    @Override
     public void setH(int h) {
-        this.h=h;
+        this.h = h;
     }
 
 

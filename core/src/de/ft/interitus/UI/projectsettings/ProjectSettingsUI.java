@@ -12,30 +12,23 @@ import com.kotcrab.vis.ui.building.TableBuilder;
 import com.kotcrab.vis.ui.building.utilities.CellWidget;
 import com.kotcrab.vis.ui.building.utilities.Padding;
 import com.kotcrab.vis.ui.building.utilities.layouts.ActorLayout;
-import com.kotcrab.vis.ui.util.dialog.ConfirmDialogListener;
-import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import com.kotcrab.vis.ui.widget.*;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.projectsettings.subitems.Informations;
 import de.ft.interitus.UI.projectsettings.subitems.Settings;
-import de.ft.interitus.UI.settings.SettingsUI;
-import de.ft.interitus.UI.settings.subitems.*;
 import de.ft.interitus.Var;
-import de.ft.interitus.plugin.PluginGateway;
-import de.ft.interitus.plugin.PluginManagerHandler;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class ProjectSettingsUI extends VisWindow {
     public static RowLayout rowLayout;
-    private  VisTree tree;
     public static TestBuilder testBuilder;
     public static int SelectedItem = 0;
-
     final VisTable container = new VisTable();
     final Padding padding = new Padding(2, 3);
     ChangeListener listener = null;
+    private VisTree tree;
 
     public ProjectSettingsUI() {
         super("Projekt-Einstellungen");
@@ -45,7 +38,6 @@ public class ProjectSettingsUI extends VisWindow {
 
         new GridTableBuilder(4);
     }
-
 
 
     public static boolean isopend() {
@@ -62,8 +54,8 @@ public class ProjectSettingsUI extends VisWindow {
         container.clearChildren();
         Informations.add(container);
 
-        testBuilder = new  TestBuilder("Projekt-Einstellungen", new StandardTableBuilder(padding));
-        Var.isdialogeopend=true;
+        testBuilder = new TestBuilder("Projekt-Einstellungen", new StandardTableBuilder(padding));
+        Var.isdialogeopend = true;
 
         UI.stage.addActor(testBuilder);
 
@@ -88,16 +80,12 @@ public class ProjectSettingsUI extends VisWindow {
             super(name);
 
 
-            rowLayout = new  RowLayout(new Padding(0, 0, 0, 5));
+            rowLayout = new RowLayout(new Padding(0, 0, 0, 5));
 
 
             setModal(true);
             closeOnEscape();
             addCloseButton();
-
-
-
-
 
 
             ActorLayout layout = new ActorLayout() {
@@ -118,13 +106,12 @@ public class ProjectSettingsUI extends VisWindow {
 
             builder.setTablePadding(new Padding(20, 30, 20, 30));
 
-        tree = new VisTree();
+            tree = new VisTree();
 
-            TestNode item1 = new  TestNode(new VisLabel(" Informationen "), 0);
-            TestNode item2 = new  TestNode(new VisLabel(" Einstellungen "), 1);
+            TestNode item1 = new TestNode(new VisLabel(" Informationen "), 0);
+            TestNode item2 = new TestNode(new VisLabel(" Einstellungen "), 1);
 
             //ADD Advanced Settings to ITM if Device is connect
-
 
 
             item1.setExpanded(true);
@@ -135,18 +122,17 @@ public class ProjectSettingsUI extends VisWindow {
             tree.add(item2);
 
 
-
             tree.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
 
 
-                     SelectedItem = (( TestNode) tree.getSelectedNode()).Mode;
+                    SelectedItem = ((TestNode) tree.getSelectedNode()).Mode;
 
 
                     container.clearChildren();
 
-                    if(SelectedItem!=5&&Var.disableshortcuts) {
+                    if (SelectedItem != 5 && Var.disableshortcuts) {
                         Var.disableshortcuts = false;
                     }
 
@@ -189,24 +175,23 @@ public class ProjectSettingsUI extends VisWindow {
 
                 @Override
                 public void run() {
-                    if(Var.isdialogeopend&&! isopend())  {
+                    if (Var.isdialogeopend && !isopend()) {
                         Var.isdialogeopend = false;
                         Var.disableshortcuts = false;
                         this.cancel();
                     }
 
-                    if(!Var.isdialogeopend&& isopend()) {
+                    if (!Var.isdialogeopend && isopend()) {
                         Var.isdialogeopend = true;
                     }
                 }
-            },0,100);
-
+            }, 0, 100);
 
 
         }
 
         public boolean testopen() {
-            if(!super.getParent().isVisible()) {
+            if (!super.getParent().isVisible()) {
                 Var.isdialogeopend = false;
                 Var.disableshortcuts = false;
                 this.removeListener(listener);

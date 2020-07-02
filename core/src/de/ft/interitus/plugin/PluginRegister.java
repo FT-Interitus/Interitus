@@ -6,16 +6,16 @@ import de.ft.interitus.events.plugin.PluginLoadedEvent;
 public class PluginRegister {
     private String name = "";
     private double version;
-    private String author ="";
-    private String description="";
-    private String detailed_description="";
+    private String author = "";
+    private String description = "";
+    private String detailed_description = "";
 
     public PluginRegister() {
-        EventVar.pluginEventManager.pluginload(new PluginLoadedEvent(this,this));
+        EventVar.pluginEventManager.pluginload(new PluginLoadedEvent(this, this));
     }
 
     public PluginRegister(String name) {
-        EventVar.pluginEventManager.pluginload(new PluginLoadedEvent(this,this));
+        EventVar.pluginEventManager.pluginload(new PluginLoadedEvent(this, this));
     }
 
     public void config(Configuration option, String selection) {

@@ -9,13 +9,11 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.plugin.store.StorePluginsVar;
 import de.ft.interitus.utils.DownloadFile;
-import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class AssetLoader {
-
 
 
     public static ArrayList<Texture> storeimages = new ArrayList<>();
@@ -59,9 +57,6 @@ public class AssetLoader {
     public static Texture pluginwait;
 
 
-
-
-
     //////////////////-Tap Block Bar-////////////////////////////
     //////////////////-Aktionsblöck-////////////////////////////
     public static Texture aktion_mittlerermotor;
@@ -78,7 +73,6 @@ public class AssetLoader {
     public static Texture programmablauf_schalter;
     public static Texture programmablauf_interrupt;
     //////////////////-Sensorblöcke-////////////////////////////
-
 
 
     public static Texture img_mappe1;
@@ -112,20 +106,9 @@ public class AssetLoader {
     public static Texture img_Tab;
 
 
-
-
-
-
-
-
-
-
-
-
-
     public static AssetManager manager = new AssetManager();
 
-    public static  ArrayList<Pixmap> pixmap = new ArrayList<>();
+    public static ArrayList<Pixmap> pixmap = new ArrayList<>();
     public static boolean finishpluginimageloading = false;
 
     public static void loadmore(String file, Class type) {
@@ -155,45 +138,45 @@ public class AssetLoader {
             }
 
 
-            group= "TabBar";
-            manager.load(workingdirectory+"TabBar/Tabimage.png",Texture.class);
+            group = "TabBar";
+            manager.load(workingdirectory + "TabBar/Tabimage.png", Texture.class);
 
-            group= "ButtonBar";
-            manager.load(workingdirectory+"ButtonBar/startbutton.png",Texture.class);
-            manager.load(workingdirectory+"ButtonBar/startbutton_mouseover.png", Texture.class);
-            manager.load(workingdirectory+"ButtonBar/startbutton_pressed.png", Texture.class);
+            group = "ButtonBar";
+            manager.load(workingdirectory + "ButtonBar/startbutton.png", Texture.class);
+            manager.load(workingdirectory + "ButtonBar/startbutton_mouseover.png", Texture.class);
+            manager.load(workingdirectory + "ButtonBar/startbutton_pressed.png", Texture.class);
 
-            manager.load(workingdirectory+"ButtonBar/stopbutton.png",Texture.class);
-            manager.load(workingdirectory+"ButtonBar/stopbutton_mouseover.png", Texture.class);
-            manager.load(workingdirectory+"ButtonBar/stopbutton_pressed.png", Texture.class);
+            manager.load(workingdirectory + "ButtonBar/stopbutton.png", Texture.class);
+            manager.load(workingdirectory + "ButtonBar/stopbutton_mouseover.png", Texture.class);
+            manager.load(workingdirectory + "ButtonBar/stopbutton_pressed.png", Texture.class);
 
-            manager.load(workingdirectory+"ButtonBar/projektstrukturbutton.png",Texture.class);
-            manager.load(workingdirectory+"ButtonBar/projektstrukturbutton_mouseover.png", Texture.class);
-            manager.load(workingdirectory+"ButtonBar/projektstrukturbutton_pressed.png", Texture.class);
+            manager.load(workingdirectory + "ButtonBar/projektstrukturbutton.png", Texture.class);
+            manager.load(workingdirectory + "ButtonBar/projektstrukturbutton_mouseover.png", Texture.class);
+            manager.load(workingdirectory + "ButtonBar/projektstrukturbutton_pressed.png", Texture.class);
 
-            manager.load(workingdirectory+"ButtonBar/debugbutton.png",Texture.class);
-            manager.load(workingdirectory+"ButtonBar/debugbutton_mouseover.png", Texture.class);
-            manager.load(workingdirectory+"ButtonBar/debugbutton_pressed.png", Texture.class);
+            manager.load(workingdirectory + "ButtonBar/debugbutton.png", Texture.class);
+            manager.load(workingdirectory + "ButtonBar/debugbutton_mouseover.png", Texture.class);
+            manager.load(workingdirectory + "ButtonBar/debugbutton_pressed.png", Texture.class);
 
 
             group = "mappen";
-            manager.load(workingdirectory+"Bar/Mappe1.png",Texture.class);
-            manager.load(workingdirectory+"Bar/Mappe2.png",Texture.class);
-            manager.load(workingdirectory+"Bar/Mappe3.png",Texture.class);
-            manager.load(workingdirectory+"Bar/Mappe4.png",Texture.class);
-            manager.load(workingdirectory+"Bar/Mappe5.png",Texture.class);
-            manager.load(workingdirectory+"Bar/Mappe6.png",Texture.class);
+            manager.load(workingdirectory + "Bar/Mappe1.png", Texture.class);
+            manager.load(workingdirectory + "Bar/Mappe2.png", Texture.class);
+            manager.load(workingdirectory + "Bar/Mappe3.png", Texture.class);
+            manager.load(workingdirectory + "Bar/Mappe4.png", Texture.class);
+            manager.load(workingdirectory + "Bar/Mappe5.png", Texture.class);
+            manager.load(workingdirectory + "Bar/Mappe6.png", Texture.class);
 
 
             group = "Blöcke";
             //Block Textures
-            manager.load(workingdirectory+ "Block/Blockrechts.png", Texture.class);
-            manager.load(workingdirectory+ "Block/Blocklinks.png", Texture.class);
-            manager.load(workingdirectory+ "Block/Blockmitte.png", Texture.class);
-            manager.load(workingdirectory+"block_mouseover.png", Texture.class);
-            manager.load(workingdirectory+"block_marked.png", Texture.class);
-            manager.load(workingdirectory+"connector.png",Texture.class);
-            manager.load(workingdirectory+"connector_offerd.png",Texture.class);
+            manager.load(workingdirectory + "Block/Blockrechts.png", Texture.class);
+            manager.load(workingdirectory + "Block/Blocklinks.png", Texture.class);
+            manager.load(workingdirectory + "Block/Blockmitte.png", Texture.class);
+            manager.load(workingdirectory + "block_mouseover.png", Texture.class);
+            manager.load(workingdirectory + "block_marked.png", Texture.class);
+            manager.load(workingdirectory + "connector.png", Texture.class);
+            manager.load(workingdirectory + "connector_offerd.png", Texture.class);
 
             group = "Switches";
             //Switch
@@ -219,40 +202,37 @@ public class AssetLoader {
             manager.load(workingdirectory + "node.png", Texture.class);
             group = "Plugin";
             manager.load(workingdirectory + "pluginwaiting.png", Texture.class);
-            group="Blöcke";
-            manager.load(workingdirectory+"TabBarBlockBilder/antikaeferblock.png", Texture.class);
+            group = "Blöcke";
+            manager.load(workingdirectory + "TabBarBlockBilder/antikaeferblock.png", Texture.class);
 
 
-           Thread loadimagesfromweb = new Thread() {
-               @Override
-               public void run() {
-                   int load = 0;
+            Thread loadimagesfromweb = new Thread() {
+                @Override
+                public void run() {
+                    int load = 0;
 
-                   if (StorePluginsVar.pluginEntries.size() > 10) {
-                       load = 10;
-                   } else {
-                       load = StorePluginsVar.pluginEntries.size();
-                   }
-                   for (int i = 0; i < load; i++) {
+                    if (StorePluginsVar.pluginEntries.size() > 10) {
+                        load = 10;
+                    } else {
+                        load = StorePluginsVar.pluginEntries.size();
+                    }
+                    for (int i = 0; i < load; i++) {
 
-                       byte[] download = new byte[0];
-                       try {
-                           download = DownloadFile.downloadBytes(StorePluginsVar.pluginEntries.get(i).getImage());
-                       } catch (IOException e) {
-                           DisplayErrors.error = e;
-                       }
-                       pixmap.add( new Pixmap(download, 0, download.length));
-                       //storeimages.add(new Texture(pixmap));
-                   }
-                   finishpluginimageloading=true;
-               }
-           };
-
+                        byte[] download = new byte[0];
+                        try {
+                            download = DownloadFile.downloadBytes(StorePluginsVar.pluginEntries.get(i).getImage());
+                        } catch (IOException e) {
+                            DisplayErrors.error = e;
+                        }
+                        pixmap.add(new Pixmap(download, 0, download.length));
+                        //storeimages.add(new Texture(pixmap));
+                    }
+                    finishpluginimageloading = true;
+                }
+            };
 
 
             loadimagesfromweb.start();
-
-
 
 
         } catch (Exception e) {
@@ -269,43 +249,41 @@ public class AssetLoader {
         try {
             group = "";
 
-            img_Tab = manager.get(workingdirectory+"TabBar/Tabimage.png");
+            img_Tab = manager.get(workingdirectory + "TabBar/Tabimage.png");
 
-            img_startbutton = manager.get(workingdirectory+"ButtonBar/startbutton.png");
-            img_startbutton_mouseover = manager.get(workingdirectory+"ButtonBar/startbutton_mouseover.png");
-            img_startbutton_pressed = manager.get(workingdirectory+"ButtonBar/startbutton_pressed.png");
+            img_startbutton = manager.get(workingdirectory + "ButtonBar/startbutton.png");
+            img_startbutton_mouseover = manager.get(workingdirectory + "ButtonBar/startbutton_mouseover.png");
+            img_startbutton_pressed = manager.get(workingdirectory + "ButtonBar/startbutton_pressed.png");
 
-            img_stopbutton = manager.get(workingdirectory+"ButtonBar/stopbutton.png");
-            img_stopbutton_mouseover = manager.get(workingdirectory+"ButtonBar/stopbutton_mouseover.png");
-            img_stopbutton_pressed = manager.get(workingdirectory+"ButtonBar/stopbutton_pressed.png");
+            img_stopbutton = manager.get(workingdirectory + "ButtonBar/stopbutton.png");
+            img_stopbutton_mouseover = manager.get(workingdirectory + "ButtonBar/stopbutton_mouseover.png");
+            img_stopbutton_pressed = manager.get(workingdirectory + "ButtonBar/stopbutton_pressed.png");
 
-            img_projectstructur = manager.get(workingdirectory+"ButtonBar/projektstrukturbutton.png");
-            img_projectstructur_mouseover = manager.get(workingdirectory+"ButtonBar/projektstrukturbutton_mouseover.png");
-            img_projectstructur_pressed = manager.get(workingdirectory+"ButtonBar/projektstrukturbutton_pressed.png");
+            img_projectstructur = manager.get(workingdirectory + "ButtonBar/projektstrukturbutton.png");
+            img_projectstructur_mouseover = manager.get(workingdirectory + "ButtonBar/projektstrukturbutton_mouseover.png");
+            img_projectstructur_pressed = manager.get(workingdirectory + "ButtonBar/projektstrukturbutton_pressed.png");
 
-            img_debugstart = manager.get(workingdirectory+"ButtonBar/debugbutton.png");
-            img_debugstart_mouseover = manager.get(workingdirectory+"ButtonBar/debugbutton_mouseover.png");
-            img_debugstart_pressed = manager.get(workingdirectory+"ButtonBar/debugbutton_pressed.png");
+            img_debugstart = manager.get(workingdirectory + "ButtonBar/debugbutton.png");
+            img_debugstart_mouseover = manager.get(workingdirectory + "ButtonBar/debugbutton_mouseover.png");
+            img_debugstart_pressed = manager.get(workingdirectory + "ButtonBar/debugbutton_pressed.png");
 
 
-
-            img_mappe1 = manager.get(workingdirectory+"Bar/Mappe1.png",Texture.class);
-            img_mappe2 = manager.get(workingdirectory+"Bar/Mappe2.png",Texture.class);
-            img_mappe3 = manager.get(workingdirectory+"Bar/Mappe3.png",Texture.class);
-            img_mappe4 = manager.get(workingdirectory+"Bar/Mappe4.png",Texture.class);
-            img_mappe5 = manager.get(workingdirectory+"Bar/Mappe5.png",Texture.class);
-            img_mappe6 = manager.get(workingdirectory+"Bar/Mappe6.png",Texture.class);
-
+            img_mappe1 = manager.get(workingdirectory + "Bar/Mappe1.png", Texture.class);
+            img_mappe2 = manager.get(workingdirectory + "Bar/Mappe2.png", Texture.class);
+            img_mappe3 = manager.get(workingdirectory + "Bar/Mappe3.png", Texture.class);
+            img_mappe4 = manager.get(workingdirectory + "Bar/Mappe4.png", Texture.class);
+            img_mappe5 = manager.get(workingdirectory + "Bar/Mappe5.png", Texture.class);
+            img_mappe6 = manager.get(workingdirectory + "Bar/Mappe6.png", Texture.class);
 
 
             //Block
-            img_block_right = manager.get(workingdirectory+ "Block/Blockrechts.png", Texture.class);
-            img_block_left = manager.get(workingdirectory+ "Block/Blocklinks.png", Texture.class);
-            img_block = manager.get(workingdirectory+"Block/Blockmitte.png", Texture.class);
-            img_block_mouseover = manager.get(workingdirectory+"block_mouseover.png", Texture.class);
-            img_marked = manager.get(workingdirectory+"block_marked.png", Texture.class);
-            connector =  manager.get(workingdirectory+"connector.png",Texture.class);
-            connector_offerd = manager.get(workingdirectory+"connector_offerd.png",Texture.class);
+            img_block_right = manager.get(workingdirectory + "Block/Blockrechts.png", Texture.class);
+            img_block_left = manager.get(workingdirectory + "Block/Blocklinks.png", Texture.class);
+            img_block = manager.get(workingdirectory + "Block/Blockmitte.png", Texture.class);
+            img_block_mouseover = manager.get(workingdirectory + "block_mouseover.png", Texture.class);
+            img_marked = manager.get(workingdirectory + "block_marked.png", Texture.class);
+            connector = manager.get(workingdirectory + "connector.png", Texture.class);
+            connector_offerd = manager.get(workingdirectory + "connector_offerd.png", Texture.class);
 
             //Switch
             switch_background = manager.get(workingdirectory + "switchbackground.png", Texture.class);
@@ -327,7 +305,7 @@ public class AssetLoader {
             //Plugin
             pluginwait = manager.get(workingdirectory + "pluginwaiting.png", Texture.class);
 
-            aktion_mittlerermotor=manager.get(workingdirectory+"TabBarBlockBilder/antikaeferblock.png");
+            aktion_mittlerermotor = manager.get(workingdirectory + "TabBarBlockBilder/antikaeferblock.png");
 
         } catch (Exception e) {
             e.printStackTrace();

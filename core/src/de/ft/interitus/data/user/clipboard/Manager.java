@@ -23,7 +23,7 @@ public class Manager {
     public static void paste() {
         //Block paste = new Block(BlockVar.blocks.size(), sb.getX(), sb.getY(), sb.getW(), sb.getH());
 
-     //   BlockVar.blocks.add(paste);
+        //   BlockVar.blocks.add(paste);
 
     }
 

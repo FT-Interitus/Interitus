@@ -18,7 +18,7 @@ public class Manager {
 
         serverthread.start();
 
-        Client.connect("192.168.2.143",3141);
+        Client.connect("192.168.2.143", 3141);
 
     }
 

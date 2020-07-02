@@ -7,27 +7,29 @@ import java.util.ArrayList;
 
 public class TapContent {
 
-    Button tab_button=new Button();
-    ArrayList<TapItem>items=new ArrayList<>();
+    Button tab_button = new Button();
+    ArrayList<TapItem> items = new ArrayList<>();
 
-    public TapContent(Texture img,TapItem... ti){
+    public TapContent(Texture img, TapItem... ti) {
 
         //items.add(new TapBarBlockItem( new Wait(), AssetLoader.aktion_mittlerermotor));
         items.clear();
-        for(int i=0;i<ti.length;i++){
+        for (int i = 0; i < ti.length; i++) {
             items.add(ti[i]);
         }
-        tab_button.disablepresscolorchange = true;
+        Button.disablepresscolorchange = true;
         tab_button.hovertransparancy = 0.9f;
         tab_button.setImage(img);
     }
-    public TapContent(Texture img){
-        tab_button.disablepresscolorchange = true;
+
+    public TapContent(Texture img) {
+        Button.disablepresscolorchange = true;
         tab_button.hovertransparancy = 0.9f;
         //items.add(new TapBarBlockItem( new Wait(), AssetLoader.aktion_mittlerermotor));
 
         tab_button.setImage(img);
     }
+
     public void addItem(TapItem ti) {
         items.add(ti);
     }
@@ -36,9 +38,9 @@ public class TapContent {
         items.clear();
     }
 
-    public void setItems(TapItem... ti){
+    public void setItems(TapItem... ti) {
         items.clear();
-        for(int i=0;i<ti.length;i++){
+        for (int i = 0; i < ti.length; i++) {
             items.add(ti[i]);
         }
     }

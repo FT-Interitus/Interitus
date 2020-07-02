@@ -1,12 +1,11 @@
 package de.ft.interitus.deviceconnection.ev3connection;
 
-import de.ft.interitus.DisplayErrors;
 import org.usb4java.*;
 
-import java.io.UnsupportedEncodingException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.IntBuffer;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +24,6 @@ import java.util.List;
 public class ev3 {
 
 
-
     static final byte opCom_Set = (byte) 0xD4;
 
     static final byte opSound = (byte) 0x94;
@@ -42,7 +40,6 @@ public class ev3 {
 
     static final byte opProgram_Start = (byte) 0x03;
     static final byte opProgram_Stop = (byte) 0x02;
-
 
 
     static final byte SET_BRICKNAME = (byte) 0x08;
@@ -87,30 +84,32 @@ public class ev3 {
     static final byte LEFT_BUTTON = (byte) 0x05;
     static final byte BACK_BUTTON = (byte) 0x06;
     static final byte ANY_BUTTON = (byte) 0x07;
+    /**
+     * EV3 Connection
+     */
 
+    static final short ID_VENDOR_LEGO = (short) 0x0694;
+    static final short ID_PRODUCT_EV3 = (short) 0x0005;
+    static final byte EP_IN = (byte) 0x81;
+    static final byte EP_OUT = (byte) 0x01;
+    static final byte DIRECT_COMMAND_REPLY = (byte) 0x00;
+    static DeviceHandle handle;
 
     public static byte[] LCS(String string) {
-        try {
 
-            byte[] b = string.getBytes("UTF-8");
-            byte[] a = new byte[string.getBytes("UTF-8").length + 2];
+        byte[] b = string.getBytes(StandardCharsets.UTF_8);
+        byte[] a = new byte[string.getBytes(StandardCharsets.UTF_8).length + 2];
 
-            a[0] = (byte) 0x84;
-            for (int i = 0; i < string.getBytes("UTF-8").length; i++) {
-                a[i + 1] = string.getBytes("UTF-8")[i];
-            }
-
-            a[string.getBytes("UTF-8").length + 1] = (byte) 0x00;
-
-            return a;
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-            DisplayErrors.error = e;
+        a[0] = (byte) 0x84;
+        for (int i = 0; i < string.getBytes(StandardCharsets.UTF_8).length; i++) {
+            a[i + 1] = string.getBytes(StandardCharsets.UTF_8)[i];
         }
 
-        return null;
-    }
+        a[string.getBytes(StandardCharsets.UTF_8).length + 1] = (byte) 0x00;
 
+        return a;
+
+    }
 
     public static byte[] LCX(int value) { //TODO eventuell ist hier das = in den if s falsch
 
@@ -165,7 +164,6 @@ public class ev3 {
 
     }
 
-
     public static byte[] LVX(int value) {
         List<Byte> ops = new ArrayList<>();
         if (value < 0) {
@@ -187,11 +185,11 @@ public class ev3 {
             ops.add((byte) (value >> 24));
         }
         byte[] returnarray = new byte[ops.size()];
-       for(int i=0;i<ops.size();i++) {
-           returnarray[i] = ops.get(i);
-       }
+        for (int i = 0; i < ops.size(); i++) {
+            returnarray[i] = ops.get(i);
+        }
 
-       return returnarray;
+        return returnarray;
 
     }
 
@@ -217,28 +215,13 @@ public class ev3 {
             ops.add((byte) (value >> 24));
         }
         byte[] returnarray = new byte[ops.size()];
-        for(int i=0;i<ops.size();i++) {
+        for (int i = 0; i < ops.size(); i++) {
             returnarray[i] = ops.get(i);
         }
 
         return returnarray;
 
     }
-
-
-    /**
-     *  EV3 Connection
-     *
-     *
-     */
-
-    static final short ID_VENDOR_LEGO = (short) 0x0694;
-    static final short ID_PRODUCT_EV3 = (short) 0x0005;
-    static final byte EP_IN = (byte) 0x81;
-    static final byte EP_OUT = (byte) 0x01;
-    static final byte DIRECT_COMMAND_REPLY = (byte) 0x00;
-
-    static DeviceHandle handle;
 
     private static void connectUsb() {
         int result = LibUsb.init(null);
@@ -264,7 +247,7 @@ public class ev3 {
                 break;
             }
         }
-        LibUsb.freeDeviceList(list,false);
+        LibUsb.freeDeviceList(list, false);
         if (!found) throw new RuntimeException("Lego EV3 device not found.");
 
         handle = new DeviceHandle();
@@ -285,6 +268,7 @@ public class ev3 {
             throw new LibUsbException("Unable to claim interface", result);
         }
     }
+
     private static ByteBuffer sendSystemCmd(ArrayList<Byte> operations) { //TODO inarbeit
         ByteBuffer buffer = ByteBuffer.allocateDirect(operations.size() + 7);
         buffer.order(ByteOrder.LITTLE_ENDIAN);
@@ -316,6 +300,7 @@ public class ev3 {
         printHex("Recv", buffer);
         return buffer;
     }
+
     private static ByteBuffer sendDirectCmd(ArrayList<Byte> operations,
                                             int local_mem, int global_mem) {
         ByteBuffer buffer = ByteBuffer.allocateDirect(operations.size() + 7);
@@ -368,9 +353,10 @@ public class ev3 {
     }
 
 
-    public static void sendcommand(ArrayList<Byte> command,int local_mem,int global_mem) {
+    public static void sendcommand(ArrayList<Byte> command, int local_mem, int global_mem) {
         ByteBuffer reply = sendDirectCmd(command, local_mem, global_mem);
     }
+
     public static void sendsystemcommand(ArrayList<Byte> command) {
         ByteBuffer reply = sendSystemCmd(command);
     }

@@ -13,19 +13,19 @@ import de.ft.interitus.UI.UIElements.check.InputManager;
 public class TextField {
 
     private static final GlyphLayout glyphLayout = new GlyphLayout();
+    private final int x;
+    private final int y;
+    private final int w;
+    private final int h;
+    private final int begrenzung = -1;
     SpriteBatch b = new SpriteBatch();
     BitmapFont font = new BitmapFont();
     Texture background;
     Texture Backgroundactive;
     Check check = new Check();
     Texture curser;
-    private final int x;
-    private final int y;
-    private final int w;
-    private final int h;
     private boolean active = false;
     private String input = "default";
-    private final int begrenzung = -1;
     private boolean cursorstate = true;
     private long cursersave;
     private int TextAnordnung = 0;

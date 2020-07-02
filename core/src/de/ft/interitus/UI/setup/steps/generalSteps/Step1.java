@@ -40,7 +40,7 @@ public class Step1 {
         time = new Timer(30, new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
 
-                if (!name.isEmpty()&&name.getText().length()>3&&!name.getText().startsWith(" ")&&!name.getText().endsWith(" ")) {
+                if (!name.isEmpty() && name.getText().length() > 3 && !name.getText().startsWith(" ") && !name.getText().endsWith(" ")) {
 
                     SetupWindow.errorLabel.setColor(new Color(0, 1, 0, 1));
                     SetupWindow.errorLabel.setText("Alle Voraussetzungen erfüllt");

@@ -8,10 +8,10 @@ import de.ft.interitus.projecttypes.ProjectManager;
 
 public class RechtsKlick {
     public static Check check = new Check();
-    static boolean mob = false;
-   static boolean mow = false;
     public static int mouseoverblockindex;
     public static PopupManager popupmanager = new PopupManager();
+    static boolean mob = false;
+    static boolean mow = false;
 
     public static void Init() {
         popupmanager.addPopup(new PopupMenue("ein popup"));
@@ -22,7 +22,7 @@ public class RechtsKlick {
     public static void Rechtsklickupdate() {
 
 
-        if(!Var.isdialogeopend) {
+        if (!Var.isdialogeopend) {
 
             if (Gdx.input.isButtonPressed(1)) {
                 for (int i = 0; i < ProjectManager.getActProjectVar().visibleblocks.size(); i++) {

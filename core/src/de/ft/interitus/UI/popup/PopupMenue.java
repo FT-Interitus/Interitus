@@ -11,19 +11,17 @@ import de.ft.interitus.events.rightclick.RightClickButtonSelectEvent;
 import java.util.ArrayList;
 
 public class PopupMenue {
-    private int x;
-    private int y;
-
-    private int ausgleichX = 0;
-    private int ausgleichY = 0;
-
-    int ispressed;
     private final int buttonheight = 20;
     private final SpriteBatch batch = new SpriteBatch();
     private final ArrayList<Button> buttons = new ArrayList<>(); //TODO Buttons kontrollieren die Maus kollision nur auf dem Text
     private final Texture popupButtonimage = new Texture("popupbuttonimage.png");
-    private boolean show = false;
     private final Check check = new Check();
+    int ispressed;
+    private int x;
+    private int y;
+    private int ausgleichX = 0;
+    private int ausgleichY = 0;
+    private boolean show = false;
 
     public PopupMenue(String... it) {
         buttons.clear();
@@ -38,10 +36,6 @@ public class PopupMenue {
     public PopupMenue(int x, int y) {
         this.x = x;
         this.y = y;
-    }
-
-    public void setShow(boolean show) {
-        this.show = show;
     }
 
     public void setBounds(int x, int y) {
@@ -65,6 +59,10 @@ public class PopupMenue {
 
     public boolean isShow() {
         return show;
+    }
+
+    public void setShow(boolean show) {
+        this.show = show;
     }
 
     public void draw() {
@@ -101,13 +99,12 @@ public class PopupMenue {
         }
 
         ispressed = getPressed();
-        if (ispressed!=-1) {
+        if (ispressed != -1) {
             EventVar.rightClickEventManager.buttonclickedinwindow(new RightClickButtonSelectEvent(this, buttons.get(ispressed)));
             ispressed = -1;
             this.show = false;
 
         }
-
 
 
     }

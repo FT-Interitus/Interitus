@@ -15,6 +15,6 @@ public class ProjectTypesVar {
      * 4 -> Arduino RoboArm
      * ... -> Plugins
      */
-   public static ArrayList<ProjectTypes> projectTypes = new ArrayList<>();
+    public static ArrayList<ProjectTypes> projectTypes = new ArrayList<>();
 
 }

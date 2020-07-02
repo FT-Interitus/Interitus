@@ -160,7 +160,7 @@ public class PluginPage {
 
                                     }
                                 });
-                    }else{
+                    } else {
                         DisplayErrors.error = new FileSystemException("Could not delete Plugin. Is the Plugin Folder protected?");
                         DisplayErrors.customErrorstring = "Das Plugin konnte nicht deinstalliert werden.";
                     }

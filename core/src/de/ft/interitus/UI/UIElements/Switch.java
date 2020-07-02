@@ -8,6 +8,13 @@ import de.ft.interitus.UI.UIElements.check.Check;
 import java.util.Random;
 
 public class Switch {
+    private final int wecht = 50;
+    private final int hecht = 25;
+    private final int dmecht = 19;
+    private final int multiplikatorecht = 3;
+    private final float[] farbehebel = {1, 1, 1, 1};
+    private final Vector2 mousesave = new Vector2();
+    private final Check check = new Check();
     Texture background;
     SpriteBatch b = new SpriteBatch();
     Random random = new Random();
@@ -15,15 +22,12 @@ public class Switch {
     private int y;
     private int w = 50;
     private int h = 25;
-    private final int wecht = 50;
-    private final int hecht = 25;
     private int xecht;
     private int yecht;
     private boolean state = false;
     private boolean ismoving = false;
     private int switchpos = 0;
     private int dm = 19;
-    private final int dmecht = 19;
     private boolean wackeln = true;
     private boolean visible = true;
     private boolean disable = false;
@@ -31,10 +35,6 @@ public class Switch {
     private long wwwave = 0;
     private float size = 1;
     private int multiplikator = 3;
-    private final int multiplikatorecht = 3;
-    private final float[] farbehebel = {1, 1, 1, 1};
-    private final Vector2 mousesave = new Vector2();
-    private final Check check = new Check();
     private boolean touched;
     private Texture Backgroundgreen;
     private Texture inside;

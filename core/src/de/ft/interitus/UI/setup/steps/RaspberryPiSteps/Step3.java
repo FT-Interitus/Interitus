@@ -18,10 +18,10 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 public class Step3 {
+    private static final String[] ipselectable = new String[NetworkScan.device.size() + 1]; //Plus eins weil noch ein Bitte auswählen hinzugefügt wird
     public static Timer time;
     public static VisValidatableTextField ipadresse;
     public static VisSelectBox<String> selectIPAdress;
-    private static final String[] ipselectable = new String[NetworkScan.device.size() + 1]; //Plus eins weil noch ein Bitte auswählen hinzugefügt wird
 
     public static void step3(VisTable builder) {
 

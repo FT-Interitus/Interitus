@@ -1,6 +1,7 @@
 package de.ft.interitus;
 
-import com.badlogic.gdx.*;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -13,9 +14,11 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.UI;
-import de.ft.interitus.UI.UIVar;
-import de.ft.interitus.UI.UIElements.*;
+import de.ft.interitus.UI.UIElements.IntegerAuswahl;
+import de.ft.interitus.UI.UIElements.PressedKeys;
+import de.ft.interitus.UI.UIElements.Switch;
 import de.ft.interitus.UI.UIElements.TextField;
+import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.settings.subitems.subitem17;
 import de.ft.interitus.UI.shortcut.shortcuts.BlockShortcuts;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
@@ -24,9 +27,7 @@ import de.ft.interitus.plugin.Configuration;
 import de.ft.interitus.plugin.PluginRegister;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.device.BlockTypes.ProjectTypesVar;
-import de.ft.interitus.utils.CheckKollision;
 import de.ft.interitus.utils.PositionSaver;
-import de.ft.interitus.utils.Unproject;
 import de.ft.interitus.utils.animation.Animation;
 
 import java.awt.*;
@@ -52,10 +53,8 @@ public class ProgrammingSpace extends ScreenAdapter {
     public static long rendersleeptime = 0;
 
     public static ShapeRenderer shapeRenderer;
-    IntegerAuswahl ia;
-
     public static PressedKeys pressedKeys;
-
+    IntegerAuswahl ia;
 
 
     public ProgrammingSpace() {
@@ -67,13 +66,12 @@ public class ProgrammingSpace extends ScreenAdapter {
         Var.openprojects.add(ProjectTypesVar.projectTypes.get(0).init());
 
 
-
-        pressedKeys=new PressedKeys();
+        pressedKeys = new PressedKeys();
         RechtsKlick.Init();
-         BlockTappedBar.init();
+        BlockTappedBar.init();
 
         nativ = new PluginRegister();
-        nativ.config(Configuration.name,"Nativ");
+        nativ.config(Configuration.name, "Nativ");
         ia = new IntegerAuswahl(400, 400, 50, 25);
         s = new Switch(500, 500);
         font = new BitmapFont();
@@ -83,7 +81,6 @@ public class ProgrammingSpace extends ScreenAdapter {
         viewport = new ScreenViewport(cam);
 
         batch = new SpriteBatch();
-
 
 
         de.ft.interitus.UI.Viewport.init();
@@ -100,17 +97,15 @@ public class ProgrammingSpace extends ScreenAdapter {
         UI.UIcam.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
 
 
-
-
         textfieldtest = new TextField(500, 600, 100, 25);
 
 
         ThreadManager.init();
 
 
-      //  SerialConnection.searchArduino();
+        //  SerialConnection.searchArduino();
 
-     //   PortUpdate.UpdateConnectionWindowPortsList();
+        //   PortUpdate.UpdateConnectionWindowPortsList();
 
 
         System.gc();
@@ -119,15 +114,13 @@ public class ProgrammingSpace extends ScreenAdapter {
     }
 
 
-
-
     @Override
-    public void render(float delta)  {
+    public void render(float delta) {
 
         renderstarttime = System.currentTimeMillis();
 
-        if(ProjectManager.getActProjectVar().projectType==null) {
-           Programm.INSTANCE.setScreen(new Welcome());
+        if (ProjectManager.getActProjectVar().projectType == null) {
+            Programm.INSTANCE.setScreen(new Welcome());
         }
 
         RechtsKlick.Rechtsklickupdate();
@@ -142,7 +135,7 @@ public class ProgrammingSpace extends ScreenAdapter {
             cam.update();
             UI.UIcam.update();
 
-            Gdx.gl.glClearColor(Settings.theme.ClearColor().r,Settings.theme.ClearColor().g,Settings.theme.ClearColor().b,Settings.theme.ClearColor().a);
+            Gdx.gl.glClearColor(Settings.theme.ClearColor().r, Settings.theme.ClearColor().g, Settings.theme.ClearColor().b, Settings.theme.ClearColor().a);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT | (Gdx.graphics.getBufferFormat().coverageSampling?GL20.GL_COVERAGE_BUFFER_BIT_NV:0));
             batch.setProjectionMatrix(cam.combined);
@@ -150,9 +143,7 @@ public class ProgrammingSpace extends ScreenAdapter {
             shapeRenderer.setProjectionMatrix(UI.UIcam.combined);
 
 
-
             UI.updatedragui(shapeRenderer, true, batch);
-
 
 
             if (!Var.isloading) {
@@ -168,9 +159,9 @@ public class ProgrammingSpace extends ScreenAdapter {
 
                     try {
                         if (ProjectManager.getActProjectVar().visibleblocks.get(i).isMarked()) {
-                            if(ProjectManager.getActProjectVar().visibleblocks.get(i).isMoving()) {
+                            if (ProjectManager.getActProjectVar().visibleblocks.get(i).isMoving()) {
                                 Temp2 = ProjectManager.getActProjectVar().visibleblocks.get(i);
-                            }else {
+                            } else {
                                 Temp = ProjectManager.getActProjectVar().visibleblocks.get(i);
                             }
                         } else {
@@ -190,7 +181,7 @@ public class ProgrammingSpace extends ScreenAdapter {
 
 
                     } catch (Exception e) {
-e.printStackTrace();
+                        e.printStackTrace();
                     }
                 }
                 if (Temp != null) {
@@ -199,14 +190,14 @@ e.printStackTrace();
                         batch.begin();
                         Temp.draw(batch, shapeRenderer, font);
                         batch.end();
-                    }catch (Exception e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
 
                 UI.updatedragui(shapeRenderer, false, batch);
-                BlockTappedBar.tb.setX(UIVar.BlockBarX+UIVar.BlockBarW/2);
-                BlockTappedBar.tb.setY(UIVar.BlockBarY+UIVar.BlockBarH/2-(BlockTappedBar.tb.getHeight()+UIVar.abstandvonRand*2)/2);
+                BlockTappedBar.tb.setX(UIVar.BlockBarX + UIVar.BlockBarW / 2);
+                BlockTappedBar.tb.setY(UIVar.BlockBarY + UIVar.BlockBarH / 2 - (BlockTappedBar.tb.getHeight() + UIVar.abstandvonRand * 2) / 2);
                 BlockTappedBar.tb.draw();
 
                 if (Temp2 != null) {
@@ -215,7 +206,7 @@ e.printStackTrace();
                         batch.begin();
                         Temp2.draw(batch, shapeRenderer, font);
                         batch.end();
-                    }catch (Exception e) {
+                    } catch (Exception e) {
 
                     }
                 }
@@ -224,9 +215,7 @@ e.printStackTrace();
             }
 
 
-
-
-           de.ft.interitus.UI.Viewport.update(delta);
+            de.ft.interitus.UI.Viewport.update(delta);
 
 
         } catch (Exception e) {
@@ -246,7 +235,7 @@ e.printStackTrace();
         }
 
         for (int i = 0; i < ProjectManager.getActProjectVar().visiblewires.size(); i++) {
-            if(!Var.isloading) {
+            if (!Var.isloading) {
                 ProjectManager.getActProjectVar().visiblewires.get(i).draw();
             }
         }
@@ -258,7 +247,7 @@ e.printStackTrace();
         //s.setSize(1);
         //s.setSize(1f);
         //s.setWackelstärke(1);
-       // s.draw();
+        // s.draw();
         //ia.setButtonposition(1);
         //ia.draw(shapeRenderer, batch);
         //textfieldtest.setTextAnordnung(1);
@@ -276,7 +265,7 @@ e.printStackTrace();
         }
 
 
-      //  testanim.startAnimation();
+        //  testanim.startAnimation();
 //batch.draw(testanim.getAnimation(),50,50);
         // pm.setBounds(700,200);
 
@@ -284,13 +273,11 @@ e.printStackTrace();
 
         try {
             DisplayErrors.checkerror(); //Check if there are undisplayed Errors
-        }catch (IllegalStateException e) {
+        } catch (IllegalStateException e) {
             //Bei eienem VisUI absturz
         }
 
         loader(); //Load Images in OpenGL context
-
-
 
 
         de.ft.interitus.UI.Viewport.limitfps();
@@ -315,15 +302,10 @@ e.printStackTrace();
         h = height;
 
 
-
     }
 
 
-
-
     public void dispose() {
-
-
 
 
         batch.dispose();
@@ -343,9 +325,9 @@ e.printStackTrace();
 
 
         //Import all Donwloaded images
-        if(AssetLoader.finishpluginimageloading) { //Import all
+        if (AssetLoader.finishpluginimageloading) { //Import all
 
-            for(int i=0;i<AssetLoader.pixmap.size();i++) {
+            for (int i = 0; i < AssetLoader.pixmap.size(); i++) {
                 AssetLoader.storeimages.add(new Texture(AssetLoader.pixmap.get(i)));
             }
 

@@ -14,8 +14,8 @@ public abstract class WireNode implements VisibleObjects {
     public static int public_w = 10;
     public static int public_h = 10;
     private final Vector2 gemerktvector = new Vector2(0, 0);
-    private Vector3 tempvector = new Vector3();
-    private Vector3 tempvector1 = new Vector3();
+    private final Vector3 tempvector = new Vector3();
+    private final Vector3 tempvector1 = new Vector3();
 
     private Wire wire_left;
     private Wire wire_right;
@@ -55,7 +55,7 @@ public abstract class WireNode implements VisibleObjects {
 
         }
 
-        if (!Gdx.input.isButtonPressed(0)|| Var.isdialogeopend) {
+        if (!Gdx.input.isButtonPressed(0) || Var.isdialogeopend) {
             gemerkt = false;
         }
 
@@ -124,7 +124,6 @@ public abstract class WireNode implements VisibleObjects {
 
 
     }
-
 
 
     @Override

@@ -7,7 +7,6 @@ import de.ft.interitus.UI.shortcut.ShortCutChecker;
 import de.ft.interitus.UI.shortcut.shortcuts.BlockShortcuts;
 import de.ft.interitus.UI.shortcut.shortcuts.GlobalShortcuts;
 import de.ft.interitus.plugin.PluginGateway;
-import de.ft.interitus.plugin.PluginManagerHandler;
 
 import java.util.ArrayList;
 
@@ -15,12 +14,10 @@ public class CheckShortcuts {
     public static boolean blockshortcuts = false;
 
 
+    public static ArrayList<ShortCut> shortCuts = new ArrayList<>();
+    public static ArrayList<ShortCutChecker> shortCutsChecker = new ArrayList<>();
 
-
-    public static ArrayList<ShortCut>shortCuts=new ArrayList<>();
-    public static ArrayList<ShortCutChecker>shortCutsChecker=new ArrayList<>();
-
-    public static void loadArrayList(){
+    public static void loadArrayList() {
 
         //Add global Shortcuts
         //GlobalShortcuts.generateshortcuts();
@@ -30,7 +27,7 @@ public class CheckShortcuts {
         shortCuts.addAll(BlockShortcuts.retunrarray());
         shortCutsChecker.add(new BlockShortcuts());
 
-       // ...
+        // ...
 
         //plugins
         shortCuts.addAll(PluginGateway.pluginshortCuts);
@@ -41,19 +38,14 @@ public class CheckShortcuts {
     public static void check() {
 
 
-
-       for(int i=0;i<shortCutsChecker.size();i++) {
-           shortCutsChecker.get(i).check();
-       }
+        for (int i = 0; i < shortCutsChecker.size(); i++) {
+            shortCutsChecker.get(i).check();
+        }
 
         if (!blockshortcuts) {
 
             //TODO Changeable in the Settings   <- Deswegen habe ich erstmal nur Datei gemacht
             if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT) || Gdx.input.isKeyPressed(Input.Keys.CONTROL_RIGHT)) {
-
-
-
-
 
 
             }

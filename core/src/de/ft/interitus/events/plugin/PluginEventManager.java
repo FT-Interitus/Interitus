@@ -2,7 +2,7 @@ package de.ft.interitus.events.plugin;
 
 import java.util.Vector;
 
-public class PluginEventManager implements PluginEventListener{
+public class PluginEventManager implements PluginEventListener {
 
     protected Vector listener = new Vector();
 

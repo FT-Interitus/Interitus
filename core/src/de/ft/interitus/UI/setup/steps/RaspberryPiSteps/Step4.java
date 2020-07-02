@@ -42,17 +42,13 @@ public class Step4 {
             public void changed(ChangeEvent event, Actor actor) {
 
 
-
-
                 Thread connectthread = new Thread() {
 
                     @Override
                     public void run() {
 
 
-                        if(trytoconnect.isPressed())
-
-                        {
+                        if (trytoconnect.isPressed()) {
                             SetupWindow.Button_cancle.setDisabled(true);
                             SetupWindow.Button_previouse.setDisabled(true);
                             trytoconnect.setDisabled(true);

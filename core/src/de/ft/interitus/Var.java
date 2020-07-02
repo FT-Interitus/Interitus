@@ -1,10 +1,10 @@
 package de.ft.interitus;
 
 import com.badlogic.gdx.math.Vector2;
-import de.ft.interitus.projecttypes.ProjectVar;
 import de.ft.interitus.UI.UIElements.TabBar.Tab;
 import de.ft.interitus.UI.window.Window;
 import de.ft.interitus.plugin.PluginManagerHandler;
+import de.ft.interitus.projecttypes.ProjectVar;
 
 import java.util.ArrayList;
 
@@ -17,10 +17,9 @@ public class Var {
 
     /**
      * Erklärung
-     *  Änderung an der letzen Zahl bei kleineren Änderungen (Bugfixes, Typos, ...)
-     *           an der zweiten Zahl bei neuen Featurs,..
-     *           an der Erste Zahl bei größern Update Packeten
-     *
+     * Änderung an der letzen Zahl bei kleineren Änderungen (Bugfixes, Typos, ...)
+     * an der zweiten Zahl bei neuen Featurs,..
+     * an der Erste Zahl bei größern Update Packeten
      */
     public static String PROGRAMM_VERSION = "0.0.1";
 
@@ -40,7 +39,7 @@ public class Var {
     public static int w = 1300;
     public static int h = 800;
 
-    public static boolean disableshortcuts=false;
+    public static boolean disableshortcuts = false;
     public static String username = "";
     public static boolean disablePluginSubSystem = false;
 
@@ -54,7 +53,7 @@ public class Var {
     public static ArrayList<Window> extendsWindows = new ArrayList<>();
     public static Window splashscreen = null;
 
-    public static ArrayList<Tab>ProjektTabs=new ArrayList<>();
+    public static ArrayList<Tab> ProjektTabs = new ArrayList<>();
 
 
 }

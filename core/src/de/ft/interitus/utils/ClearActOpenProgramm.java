@@ -19,7 +19,6 @@ public class ClearActOpenProgramm {
         blockstoclear = (ArrayList<Block>) ProjectManager.getActProjectVar().blocks.clone();
 
 
-
         clear = new Thread() {
             @Override
             public void run() {

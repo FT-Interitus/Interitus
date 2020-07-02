@@ -99,7 +99,7 @@ public class LoadSave {
                     System.out.println("Selected file: " + selectedFile.getName());
                     FileHandle handle = Gdx.files.internal(selectedFile.getAbsolutePath());
 
-                    DataLoader.load(handle,selectedFile.getName(),selectedFile.getAbsolutePath());
+                    DataLoader.load(handle, selectedFile.getName(), selectedFile.getAbsolutePath());
 
                     DataManager.saved();
 

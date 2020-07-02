@@ -9,13 +9,13 @@ public class Operations {
         b.add(ev3.opProgram_Stop);
         byte[] temp1 = ev3.LCX(Slot);
 
-        for(int i=0;i<temp1.length;i++) {
+        for (int i = 0; i < temp1.length; i++) {
             b.add(temp1[i]);
         }
         return b;
     }
 
-    public static ArrayList<Byte> startProgramm(int Slot, int size,int ProgrammReferenzNumber,boolean debug) {
+    public static ArrayList<Byte> startProgramm(int Slot, int size, int ProgrammReferenzNumber, boolean debug) {
 
         ArrayList<Byte> b = new ArrayList<>();
 
@@ -23,28 +23,28 @@ public class Operations {
 
         byte[] temp1 = ev3.LCX(Slot);
 
-        for(int i=0;i<temp1.length;i++) {
+        for (int i = 0; i < temp1.length; i++) {
             b.add(temp1[i]);
         }
 
         byte[] temp2 = ev3.LVX(size);
-        for(int i=0;i<temp2.length;i++) {
+        for (int i = 0; i < temp2.length; i++) {
             b.add(temp2[i]);
         }
 
         byte[] temp3 = ev3.LVX(ProgrammReferenzNumber);
-        for(int i=0;i<temp3.length;i++) {
+        for (int i = 0; i < temp3.length; i++) {
             b.add(temp3[i]);
         }
 
         byte[] temp4 = null;
-        if(debug) {
-           temp4 =  ev3.LCX(1);
-        }else{
-            temp4 =  ev3.LCX(0);
+        if (debug) {
+            temp4 = ev3.LCX(1);
+        } else {
+            temp4 = ev3.LCX(0);
         }
 
-        for(int i=0;i<temp4.length;i++) {
+        for (int i = 0; i < temp4.length; i++) {
             b.add(temp4[i]);
         }
 
@@ -61,22 +61,22 @@ public class Operations {
 
         byte[] temp1 = ev3.LCX(Slot);
 
-        for(int i=0;i<temp1.length;i++) {
+        for (int i = 0; i < temp1.length; i++) {
             b.add(temp1[i]);
         }
 
         byte[] temp2 = ev3.LCS(path);
-        for(int i=0;i<temp2.length;i++) {
+        for (int i = 0; i < temp2.length; i++) {
             b.add(temp2[i]);
         }
 
         byte[] temp3 = ev3.LVX(size);
-        for(int i=0;i<temp3.length;i++) {
+        for (int i = 0; i < temp3.length; i++) {
             b.add(temp3[i]);
         }
 
         byte[] temp4 = ev3.LVX(ProgrammReferenzNumber);
-        for(int i=0;i<temp4.length;i++) {
+        for (int i = 0; i < temp4.length; i++) {
             b.add(temp4[i]);
         }
 
@@ -85,7 +85,7 @@ public class Operations {
 
     }
 
-    public static ArrayList<Byte> newWaitTimer(int TimetoWait,int TimerReferezNumber) {
+    public static ArrayList<Byte> newWaitTimer(int TimetoWait, int TimerReferezNumber) {
         ArrayList<Byte> b = new ArrayList<>();
         b.add(ev3.opTimer_Wait);
 
@@ -119,6 +119,7 @@ public class Operations {
 
         return b;
     }
+
     public static ArrayList<Byte> blockscreen(boolean block) {
         ArrayList<Byte> b = new ArrayList<>();
         b.add(ev3.opUI_Write);
@@ -136,6 +137,7 @@ public class Operations {
 
         return b;
     }
+
     public static ArrayList<Byte> blockbackbutton(boolean disable) {
         ArrayList<Byte> b = new ArrayList<>();
         b.add(ev3.opUI_Button);
@@ -161,6 +163,7 @@ public class Operations {
         b.add(Key);
         return b;
     }
+
     public static ArrayList<Byte> getblockbackbutton() {
         ArrayList<Byte> b = new ArrayList<>();
         b.add(ev3.opUI_Write);
@@ -169,7 +172,7 @@ public class Operations {
         return b;
     }
 
-    public static ArrayList<Byte> drawline(boolean white,int xstart,int ystart,int xend,int yend) {
+    public static ArrayList<Byte> drawline(boolean white, int xstart, int ystart, int xend, int yend) {
 
         ArrayList<Byte> b = new ArrayList<>();
         b.clear();
@@ -220,23 +223,18 @@ public class Operations {
         return b;
 
 
-
-
-
-
     }
 
     /**
-     *
      * @param white
      * @param ystart must be smaller than 127
      * @param ysize
      * @return
      */
-    public static ArrayList<Byte> fillwindow(boolean white,int ystart,int ysize) {
+    public static ArrayList<Byte> fillwindow(boolean white, int ystart, int ysize) {
 
-    ArrayList<Byte> b = new ArrayList<>();
-    b.clear();
+        ArrayList<Byte> b = new ArrayList<>();
+        b.clear();
 
         if (ystart > 127) {
             return null;
@@ -269,16 +267,12 @@ public class Operations {
             b.add(temp3[i]);
         }
 
-System.out.println("Test"+b);
+        System.out.println("Test" + b);
 
-    return b;
-
-
+        return b;
 
 
-
-
-}
+    }
 
     public static ArrayList<Byte> updateev3screen() {
         ArrayList<Byte> b = new ArrayList<>();

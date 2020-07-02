@@ -8,10 +8,12 @@ import java.util.ArrayList;
 
 public class BlockShortcuts implements ShortCutChecker {
 
-    public static ShortCut shortCut_deleteBlock=new ShortCut("Block löschen", Input.Keys.FORWARD_DEL);
+    public static ShortCut shortCut_deleteBlock = new ShortCut("Block löschen", Input.Keys.FORWARD_DEL);
 
 
+    public BlockShortcuts() {
 
+    }
 
     public static ArrayList<ShortCut> retunrarray() {
 
@@ -20,10 +22,6 @@ public class BlockShortcuts implements ShortCutChecker {
 
 
         return returnarraylist;
-
-    }
-
-    public BlockShortcuts() {
 
     }
 

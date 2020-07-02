@@ -5,21 +5,16 @@
 
 package de.ft.interitus.Logging;
 
-import de.ft.interitus.Programm;
-
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class LoggerOutputStream extends OutputStream {
     public Logger logger;
-    private String mem="";
-    Level level;
     public ArrayList<Byte> bytes = new ArrayList<>();
+    Level level;
+    private String mem = "";
 
     public LoggerOutputStream(Logger log, Level level) {
         super();
@@ -45,8 +40,8 @@ public class LoggerOutputStream extends OutputStream {
      */
     @Override
     public void flush() {
-        logger.log(level, mem+"\n");
-        mem ="";
+        logger.log(level, mem + "\n");
+        mem = "";
 
     }
 

@@ -5,7 +5,7 @@ public class Parameter {
 
     private Object Parameter;
 
-    public Parameter(Object parameter)  {
+    public Parameter(Object parameter) {
 
         this.Parameter = parameter;
 

@@ -24,8 +24,6 @@ import de.ft.interitus.plugin.PluginGateway;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.VCS;
 
-import java.nio.ByteBuffer;
-
 
 public class MenuBar {
     public static boolean fullscreen = false;
@@ -53,7 +51,7 @@ public class MenuBar {
         Menu windowMenu = new Menu("Ansicht");
         Menu helpMenu = new Menu("Hilfe");
 
-        menuItem_vollbild=new MenuItem("Vollbild", new ChangeListener() {
+        menuItem_vollbild = new MenuItem("Vollbild", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 if (fullscreen == false) {
@@ -70,7 +68,7 @@ public class MenuBar {
         }).setShortcut("F11");
 
 
-        menuItem_neues_projekt=new MenuItem("Neues Projekt", new ChangeListener() {
+        menuItem_neues_projekt = new MenuItem("Neues Projekt", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 NewProjectWindow NPW = new NewProjectWindow();
@@ -80,7 +78,7 @@ public class MenuBar {
 
         UI.recent = new MenuItem("Letzte Öffnen");
 
-        menuItem_oeffnen=new MenuItem("Öffnen", new ChangeListener() {
+        menuItem_oeffnen = new MenuItem("Öffnen", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
@@ -106,7 +104,7 @@ public class MenuBar {
                                             }
 
                                             if (result == everything) {
-                                                if(ProjectManager.getActProjectVar().vcs== VCS.NONE) {
+                                                if (ProjectManager.getActProjectVar().vcs == VCS.NONE) {
                                                     if (ProjectManager.getActProjectVar().path != "") {
                                                         FileHandle handle = Gdx.files.external(ProjectManager.getActProjectVar().path);
                                                         DataSaver.save(handle);
@@ -114,7 +112,7 @@ public class MenuBar {
                                                     } else {
                                                         LoadSave.saveas();
                                                     }
-                                                }else if(ProjectManager.getActProjectVar().vcs==VCS.ITEV) {
+                                                } else if (ProjectManager.getActProjectVar().vcs == VCS.ITEV) {
 
                                                 }
                                             }
@@ -139,11 +137,11 @@ public class MenuBar {
             }
         }).setShortcut("Strg+O");
 
-        menuItem_speichern=new MenuItem("Speichern", new ChangeListener() {
+        menuItem_speichern = new MenuItem("Speichern", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
-                if(ProjectManager.getActProjectVar().vcs== VCS.NONE) {
+                if (ProjectManager.getActProjectVar().vcs == VCS.NONE) {
                     if (ProjectManager.getActProjectVar().path != "") {
                         FileHandle handle = Gdx.files.absolute(ProjectManager.getActProjectVar().path);
                         DataSaver.save(handle);
@@ -153,13 +151,13 @@ public class MenuBar {
                             LoadSave.saveas();
                         }
                     }
-                }else if(ProjectManager.getActProjectVar().vcs==VCS.ITEV){
+                } else if (ProjectManager.getActProjectVar().vcs == VCS.ITEV) {
 
                 }
             }
         }).setShortcut("Strg+S");
 
-        menuItem_speichernunter=new MenuItem("Speichern unter", new ChangeListener() {
+        menuItem_speichernunter = new MenuItem("Speichern unter", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
@@ -169,20 +167,20 @@ public class MenuBar {
                 }
             }
         }).setShortcut("Strg+Shift+S");
-        menuItem_einstellungen=new MenuItem("Einstellungen", new ChangeListener() {
+        menuItem_einstellungen = new MenuItem("Einstellungen", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 EventVar.uiEventManager.UIOpenSettingsEvent(new UIOpenSettingsEvent(this));
             }
         }).setShortcut("Strg+Alt+S");
-        menuItem_beenden=new MenuItem("Beenden", new ChangeListener() {
+        menuItem_beenden = new MenuItem("Beenden", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 Data.close();
                 System.exit(0);
             }
         }).setShortcut("Alt+F4");
-        menuItem_neueverbindung=new MenuItem("Neue Verbindung", new ChangeListener() {
+        menuItem_neueverbindung = new MenuItem("Neue Verbindung", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 try {
@@ -193,25 +191,25 @@ public class MenuBar {
                 }
             }
         });
-        menuItem_verbindungsmanager=new MenuItem("Verbindungs Manager", new ChangeListener() {
+        menuItem_verbindungsmanager = new MenuItem("Verbindungs Manager", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 Dialogs.showOKDialog(UI.stage, "++++ )-: ++++", "Dieses Fenster Exestiert noch nicht");
             }
         });
-        menuItem_blockloeschen=new MenuItem("Block löschen", new ChangeListener() {
+        menuItem_blockloeschen = new MenuItem("Block löschen", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
             }
         });
-        menuItem_ausschneiden=new MenuItem("Ausschneiden", new ChangeListener() {
+        menuItem_ausschneiden = new MenuItem("Ausschneiden", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
             }
         }).setShortcut("Strg+X");
-        menuItem_update=new MenuItem("Updates..", new ChangeListener() {
+        menuItem_update = new MenuItem("Updates..", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
@@ -234,17 +232,17 @@ public class MenuBar {
                         });
             }
         });
-        menuItem_ueber=new MenuItem("Über", new ChangeListener() {
+        menuItem_ueber = new MenuItem("Über", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 Dialogs.showOKDialog(UI.stage, "Über", "Programm-Version: " + Var.PROGRAMM_VERSION);
             }
         });
-        menuItem_showruntimeinfo=new MenuItem("Laufzeit-Info", new ChangeListener() {
+        menuItem_showruntimeinfo = new MenuItem("Laufzeit-Info", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
-                Dialogs.showOKDialog(UI.stage, "Laufzeit-Info", "Verfügbarer Arbeitsspeicher: "+ Runtime.getRuntime().maxMemory()/1000000 +" MB" +"\nGenutzer RAM: "+(Gdx.app.getNativeHeap()+Gdx.app.getJavaHeap())/1000000+" MB");
+                Dialogs.showOKDialog(UI.stage, "Laufzeit-Info", "Verfügbarer Arbeitsspeicher: " + Runtime.getRuntime().maxMemory() / 1000000 + " MB" + "\nGenutzer RAM: " + (Gdx.app.getNativeHeap() + Gdx.app.getJavaHeap()) / 1000000 + " MB");
             }
         });
 
@@ -353,7 +351,7 @@ public class MenuBar {
                                             DataManager.saved();
 
                                             FileHandle handle = Gdx.files.absolute(Data.path.get(finalI));
-                                            DataLoader.load(handle,Data.filename.get(finalI),Data.path.get(finalI));
+                                            DataLoader.load(handle, Data.filename.get(finalI), Data.path.get(finalI));
 
                                         }
 
@@ -382,7 +380,7 @@ public class MenuBar {
 
 
                         FileHandle handle = Gdx.files.absolute(Data.path.get(finalI));
-                        DataLoader.load(handle,Data.filename.get(finalI),Data.path.get(finalI));
+                        DataLoader.load(handle, Data.filename.get(finalI), Data.path.get(finalI));
                     }
 
 

@@ -70,7 +70,7 @@ public class SetupWindow {
             setupBuilder.pack();
         }
 
-        Var.isdialogeopend= true;
+        Var.isdialogeopend = true;
 
         UI.stage.addActor(setupBuilder);
     }
@@ -119,17 +119,17 @@ public class SetupWindow {
 
                 @Override
                 public void run() {
-                    if(Var.isdialogeopend&&!SetupWindow.isopend())  {
+                    if (Var.isdialogeopend && !SetupWindow.isopend()) {
                         Var.isdialogeopend = false;
 
                         this.cancel();
                     }
 
-                    if(!Var.isdialogeopend&&SetupWindow.isopend()) {
+                    if (!Var.isdialogeopend && SetupWindow.isopend()) {
                         Var.isdialogeopend = true;
                     }
                 }
-            },0,100);
+            }, 0, 100);
 
             Button_next.addListener(new ChangeListener() {
                 @Override

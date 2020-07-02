@@ -10,14 +10,11 @@ import de.ft.interitus.projecttypes.device.DeviceTypes.Arduino.RoboArm.RoboArm;
 import java.util.ArrayList;
 
 public class InitRoboArm {
-    static ArrayList<PlatformSpecificBlock> blocks  = new ArrayList<>();
+    static ArrayList<PlatformSpecificBlock> blocks = new ArrayList<>();
 
     public static ProjectTypes init() {
 
 
-
-
-
-        return new ProjectTypes(ProgrammingSpace.nativ,new RoboArm(),"Arduino-RoboterArm-Projekt",blocks,new DefaultBlockGenerator(), new DefaultBlockUpdateGenerator(),new DefaultWireGenerator(),new DefaultWireNodeGenerator(), new DefaultSaveBlockGenerator(), new DefaultBlockVarGenerator());
+        return new ProjectTypes(ProgrammingSpace.nativ, new RoboArm(), "Arduino-RoboterArm-Projekt", blocks, new DefaultBlockGenerator(), new DefaultBlockUpdateGenerator(), new DefaultWireGenerator(), new DefaultWireNodeGenerator(), new DefaultSaveBlockGenerator(), new DefaultBlockVarGenerator());
     }
 }

@@ -4,13 +4,13 @@ import com.badlogic.gdx.graphics.Color;
 import de.ft.interitus.UI.Theme.Theme;
 
 public class WhiteMode implements Theme {
-    private final static Color clearColor = new Color(0.54f, 0.533f, 0.51f, 1);
-    private final static Color welcomeFont = new Color(0,0,0,1);
-    private final static Color welcomeBackground = new Color(1f, 1f, 1f, 1);
     public final static Color ProgrammSpace = new Color(1f, 1f, 1f, 1);
     public final static Color BlockBarColor = new Color(1f, 1f, 1f, 1);
-
     public final static Color DeviceConnection = new Color(1f, 1f, 1f, 1);
+    private final static Color clearColor = new Color(0.54f, 0.533f, 0.51f, 1);
+    private final static Color welcomeFont = new Color(0, 0, 0, 1);
+    private final static Color welcomeBackground = new Color(1f, 1f, 1f, 1);
+
     @Override
     public Theme gettheme() {
         return this;

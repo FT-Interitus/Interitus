@@ -5,7 +5,6 @@
 
 package de.ft.interitus.Logging;
 
-import de.ft.interitus.Programm;
 import de.ft.interitus.Var;
 
 import java.time.LocalDateTime;
@@ -15,8 +14,6 @@ import java.util.logging.Level;
 import java.util.logging.LogRecord;
 
 public class LogColorFormater extends Formatter {
-    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
-
     // ANSI escape code
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_BLACK = "\u001B[30m";
@@ -28,14 +25,14 @@ public class LogColorFormater extends Formatter {
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_CRAY = "\u001B[37m";
     public static final String ANSI_WHITE = "\u001b[37;1m";
-
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
 
     @Override
     public String format(LogRecord record) {
         LocalDateTime now = LocalDateTime.now();
         StringBuilder builder = new StringBuilder();
 
-        if(record.getLevel()== Level.INFO) {
+        if (record.getLevel() == Level.INFO) {
 
             builder.append(ANSI_CRAY);
 
@@ -45,15 +42,15 @@ public class LogColorFormater extends Formatter {
             builder.append(dtf.format(now));
             builder.append("] ");
 
-            builder.append(record.getSourceClassName().split("\\.")[record.getSourceClassName().split("\\.").length-1]);
+            builder.append(record.getSourceClassName().split("\\.")[record.getSourceClassName().split("\\.").length - 1]);
 
             builder.append(": ");
             builder.append(ANSI_CRAY);
             builder.append(record.getMessage());
         }
 
-        if(record.getLevel()==Level.CONFIG) {
-            if(Var.debug) {
+        if (record.getLevel() == Level.CONFIG) {
+            if (Var.debug) {
                 builder.append(ANSI_YELLOW);
                 builder.append("[DEBUG]   ");
                 builder.append(ANSI_CRAY);
@@ -62,7 +59,7 @@ public class LogColorFormater extends Formatter {
                 builder.append("[");
                 builder.append(dtf.format(now));
                 builder.append("] ");
-                builder.append(record.getSourceClassName().split("\\.")[record.getSourceClassName().split("\\.").length-1]);
+                builder.append(record.getSourceClassName().split("\\.")[record.getSourceClassName().split("\\.").length - 1]);
                 builder.append(": ");
                 builder.append(ANSI_CRAY);
                 builder.append(record.getMessage());
@@ -70,9 +67,8 @@ public class LogColorFormater extends Formatter {
             }
         }
 
-        if(record.getLevel()==Level.SEVERE) {
+        if (record.getLevel() == Level.SEVERE) {
             builder.append(ANSI_RED);
-
 
 
             builder.append("[ERROR]   ");
@@ -81,7 +77,7 @@ public class LogColorFormater extends Formatter {
             builder.append(dtf.format(now));
             builder.append("] ");
 
-            builder.append(record.getSourceClassName().split("\\.")[record.getSourceClassName().split("\\.").length-1]);
+            builder.append(record.getSourceClassName().split("\\.")[record.getSourceClassName().split("\\.").length - 1]);
 
             builder.append(": ");
             builder.append(ANSI_RED);
@@ -90,8 +86,7 @@ public class LogColorFormater extends Formatter {
         }
 
 
-
-        if(record.getLevel()==Level.WARNING) {
+        if (record.getLevel() == Level.WARNING) {
             builder.append(ANSI_YELLOW);
 
             builder.append("[WARNING] ");
@@ -99,7 +94,7 @@ public class LogColorFormater extends Formatter {
             builder.append(dtf.format(now));
             builder.append("] ");
 
-            builder.append(record.getSourceClassName().split("\\.")[record.getSourceClassName().split("\\.").length-1]);
+            builder.append(record.getSourceClassName().split("\\.")[record.getSourceClassName().split("\\.").length - 1]);
 
             builder.append(": ");
             builder.append(ANSI_YELLOW);
@@ -107,7 +102,7 @@ public class LogColorFormater extends Formatter {
             builder.append("\n");
         }
 
-        if(record.getLevel()==Level.FINEST) {
+        if (record.getLevel() == Level.FINEST) {
 
             builder.append("\n");
         }

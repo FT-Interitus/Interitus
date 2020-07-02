@@ -9,22 +9,21 @@ public class PopupManager {
     ArrayList<PopupMenue> popups = new ArrayList<>();
     private int possiblepopup = -1;
 
-    public boolean isPopupopen(){
-        boolean blub=false;
-        for(int i=0;i<popups.size();i++){
-            if(popups.get(i).isShow()){
-                blub=true;
-            }
-        }
-    return blub;
-    }
-
-
     public PopupManager(PopupMenue... popup) {
         popups.clear();
         for (int i = 0; i < popup.length; i++) {
             popups.add(popup[i]);
         }
+    }
+
+    public boolean isPopupopen() {
+        boolean blub = false;
+        for (int i = 0; i < popups.size(); i++) {
+            if (popups.get(i).isShow()) {
+                blub = true;
+            }
+        }
+        return blub;
     }
 
     public int getPossiblepopup() {
@@ -36,8 +35,8 @@ public class PopupManager {
     }
 
     public void draw() {
-        if(Gdx.input.isButtonPressed(1)){
-            if(!Var.isdialogeopend) {
+        if (Gdx.input.isButtonPressed(1)) {
+            if (!Var.isdialogeopend) {
                 for (int i = 0; i < popups.size(); i++) {
                     if (popups.get(i) != popups.get(possiblepopup)) {
                         popups.get(i).setShow(false);

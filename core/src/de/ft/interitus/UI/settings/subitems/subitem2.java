@@ -12,13 +12,14 @@ import de.ft.interitus.UI.Theme.RegisteredThemes;
 public class subitem2 {
     public static VisSelectBox<String> themes;
     static String[] items;
+
     public static void add(VisTable builder) {
         themes = new VisSelectBox<>();
 
         items = new String[RegisteredThemes.themes.size()];
 
 
-        for(int i=0;i< RegisteredThemes.themes.size();i++) {
+        for (int i = 0; i < RegisteredThemes.themes.size(); i++) {
 
             items[i] = RegisteredThemes.themes.get(i).getName();
         }
@@ -29,8 +30,8 @@ public class subitem2 {
         themes.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                for(int i=0;i<RegisteredThemes.themes.size();i++) {
-                    if(RegisteredThemes.themes.get(i).getName().contains(themes.getSelected())) {
+                for (int i = 0; i < RegisteredThemes.themes.size(); i++) {
+                    if (RegisteredThemes.themes.get(i).getName().contains(themes.getSelected())) {
                         Settings.theme = RegisteredThemes.themes.get(i);
                         break;
                     }

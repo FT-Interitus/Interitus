@@ -10,9 +10,8 @@ import de.ft.interitus.projecttypes.device.DeviceTypes.Arduino.Arduino.Arduino;
 import java.util.ArrayList;
 
 public class InitArduino {
-   static ArrayList<PlatformSpecificBlock> blocks  = new ArrayList<>();
-    static ProjectTypes arduino = new ProjectTypes(ProgrammingSpace.nativ,new Arduino(),"Arduino-Projekt",blocks, new DefaultBlockGenerator(),new DefaultBlockUpdateGenerator(),new DefaultWireGenerator(),new DefaultWireNodeGenerator(),new DefaultSaveBlockGenerator(), new DefaultBlockVarGenerator());
-
+    static ArrayList<PlatformSpecificBlock> blocks = new ArrayList<>();
+    static ProjectTypes arduino = new ProjectTypes(ProgrammingSpace.nativ, new Arduino(), "Arduino-Projekt", blocks, new DefaultBlockGenerator(), new DefaultBlockUpdateGenerator(), new DefaultWireGenerator(), new DefaultWireNodeGenerator(), new DefaultSaveBlockGenerator(), new DefaultBlockVarGenerator());
 
 
     public static ProjectTypes init() {
@@ -20,11 +19,6 @@ public class InitArduino {
 
         blocks.add(new Wait(arduino));
         blocks.add(new Debug(arduino));
-
-
-
-
-
 
 
         return arduino;

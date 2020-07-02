@@ -4,8 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 
 public class Check {
-    private boolean touched;
     private final Vector2 mousesave = new Vector2();
+    private boolean touched;
 
     public boolean isjustPressed(int x, int y, int w, int h) {
         boolean pressed = false;
@@ -36,7 +36,7 @@ public class Check {
 
     }
 
-    public boolean isJustPressedNormal(int x,int y,int w,int h){
+    public boolean isJustPressedNormal(int x, int y, int w, int h) {
         return Gdx.input.getX() > x && Gdx.input.getX() < x + w && Gdx.input.getY() > Gdx.graphics.getHeight() - y - h && Gdx.input.getY() < Gdx.graphics.getHeight() - y && Gdx.input.isButtonJustPressed(0);
 
     }

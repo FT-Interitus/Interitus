@@ -5,7 +5,7 @@ import java.util.EventObject;
 public class GlobalCloseEvent extends EventObject {
     /**
      * Constructs a prototypical Event.
-     *
+     * <p>
      * return false to not close the programm
      */
     public GlobalCloseEvent(Object source) {
