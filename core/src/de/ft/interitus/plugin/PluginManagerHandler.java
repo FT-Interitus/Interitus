@@ -3,6 +3,7 @@ package de.ft.interitus.plugin;
 import com.kotcrab.vis.ui.widget.Menu;
 import com.kotcrab.vis.ui.widget.VisTable;
 import de.ft.interitus.DisplayErrors;
+import de.ft.interitus.Programm;
 import de.ft.interitus.UI.Theme.RegisteredThemes;
 import de.ft.interitus.UI.Theme.Theme;
 import de.ft.interitus.UI.shortcut.ShortCut;
@@ -76,14 +77,14 @@ public class PluginManagerHandler {
 
                 if (registeredplugins.get(i).getName() != "" && registeredplugins.get(i).getName() != " " && registeredplugins.get(i).getName().length() > 2 && !registeredplugins.get(i).getName().endsWith(" ") && !registeredplugins.get(i).getName().startsWith(" ")) {
                     if (registeredplugins.get(i).getVersion() > 0.0) {
-                        System.out.println(registeredplugins.get(i).getName() + " geladen. In der Version " + registeredplugins.get(i).getVersion());
+                       System.out.println(registeredplugins.get(i).getName() + " geladen. In der Version " + registeredplugins.get(i).getVersion());
 
                     }else{
-                        System.out.println(registeredplugins.get(i).getName() + " hasn't a valid Version");
+                        Programm.logger.warning(registeredplugins.get(i).getName() + " hasn't a valid Version");
                         registeredplugins.remove(i);
                     }
                 }else{
-                    System.out.println(registeredplugins.get(i).getName() + " hasn't a valid Configuration");
+                    Programm.logger.warning(registeredplugins.get(i).getName() + " hasn't a valid Configuration");
                     registeredplugins.remove(i);
 
                 }
@@ -262,7 +263,7 @@ public class PluginManagerHandler {
                     error = e;
                     e.printStackTrace();
                 }
-                System.out.println("Loaded " + filetest.getName());
+                Programm.logger.config("Loaded " + filetest.getName());
                 loadedplugins.add(plugin);
             } catch (InstantiationException e) {
                 error = e;

@@ -1,6 +1,7 @@
 package de.ft.interitus.utils;
 
 import de.ft.interitus.DisplayErrors;
+import de.ft.interitus.Programm;
 
 import java.io.IOException;
 import java.net.DatagramSocket;
@@ -27,7 +28,7 @@ public class NetworkScan {
                 try {
                     InetAddress raspberrypi = InetAddress.getByName("raspberrypi");
                     if(raspberrypi.isReachable(300)) {
-                        System.out.println("Found Raspberry at " + raspberrypi.getHostAddress());
+                        Programm.logger.info("Found Raspberry at " + raspberrypi.getHostAddress());
                         piaddress = raspberrypi.getHostAddress();
                     }
 
@@ -46,7 +47,8 @@ public class NetworkScan {
                 for (int i = 0; i < device.size(); i++) {
 
                     //   System.out.println(device.get(i).getHostName());
-                    System.out.println(device.get(i).getHostName());
+                    Programm.logger.config(device.get(i).getHostName());
+
                 }
 
 

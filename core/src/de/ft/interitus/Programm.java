@@ -4,6 +4,10 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Graphics;
 import com.kotcrab.vis.ui.VisUI;
+import de.ft.interitus.Logging.DebugPrinter;
+import de.ft.interitus.Logging.LogColorFormater;
+import de.ft.interitus.Logging.LoggerInit;
+import de.ft.interitus.Logging.LoggerOutputStream;
 import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.Theme.ThemeManager;
 import de.ft.interitus.UI.UI;
@@ -20,13 +24,20 @@ import de.ft.interitus.projecttypes.device.BlockTypes.Init;
 import de.ft.interitus.utils.NetworkScan;
 import de.ft.interitus.utils.UserNameGetter;
 
+import java.io.*;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Programm extends Game {
 
     public static Programm INSTANCE;
     public static boolean inLoading = true;
+    public static  Logger logger = Logger.getLogger(Programm.class.getName());
+
 
 
     public Programm() {
@@ -37,8 +48,16 @@ public class Programm extends Game {
 
     @Override
     public void create() {
+
+
+
+        LoggerInit.init();
+        DebugPrinter.detect();
+
+
         ((Lwjgl3Graphics)Gdx.graphics).getWindow().iconifyWindow();
         Var.splashscreen = SplashScreen.create();
+
 
 
       //  Manager.init();
@@ -65,6 +84,7 @@ public class Programm extends Game {
                 ReadStorePlugins.read(); //Ersten 10 Plugins im Store laden
             }
         } catch (Exception e) {
+            Programm.logger.warning("No Internet Connection!");
             Var.nointernetconnection = true;
         }
 
