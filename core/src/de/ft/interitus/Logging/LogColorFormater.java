@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Author Tim & Felix
+ */
+
 package de.ft.interitus.Logging;
 
 import de.ft.interitus.Programm;
@@ -45,7 +50,6 @@ public class LogColorFormater extends Formatter {
             builder.append(": ");
             builder.append(ANSI_CRAY);
             builder.append(record.getMessage());
-            builder.append("\n");
         }
 
         if(record.getLevel()==Level.CONFIG) {

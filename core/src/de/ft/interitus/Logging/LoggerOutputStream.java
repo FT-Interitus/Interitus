@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Author Tim & Felix
+ */
+
 package de.ft.interitus.Logging;
 
 import de.ft.interitus.Programm;
@@ -12,7 +17,7 @@ import java.util.logging.Logger;
 
 public class LoggerOutputStream extends OutputStream {
     public Logger logger;
-    private String mem;
+    private String mem="";
     Level level;
     public ArrayList<Byte> bytes = new ArrayList<>();
 
@@ -20,7 +25,6 @@ public class LoggerOutputStream extends OutputStream {
         super();
         this.logger = log;
         this.level = level;
-
 
     }
 
