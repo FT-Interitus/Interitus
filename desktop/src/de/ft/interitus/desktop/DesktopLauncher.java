@@ -19,7 +19,7 @@ public class DesktopLauncher {
 	/***
 	 *
 	 * @param arg -nogui open no window
-	 *            -v Verbose output
+	 *            -d Debug Mode
 	 *            -dps disable Plugin-Sub-System
 	 *            -do redirect log in file (You can also use Terminal Pips)
 	 *

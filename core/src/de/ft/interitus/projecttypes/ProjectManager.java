@@ -1,5 +1,6 @@
 package de.ft.interitus.projecttypes;
 
+import de.ft.interitus.Programm;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.Var;
 
@@ -13,6 +14,7 @@ public class ProjectManager {
         ProgrammingSpace.cam.zoom = Var.openprojects.get(index).zoom;
         Var.openprojectindex = index;
         getActProjectVar().currentstarttime = System.currentTimeMillis();
+        Programm.logger.config("changed tab");
     }
 
     public static ProjectVar getActProjectVar() {

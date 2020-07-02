@@ -1,6 +1,7 @@
 package de.ft.interitus;
 
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
+import com.sun.source.doctree.SeeTree;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.global.GlobalErrorOccurredEvent;
@@ -8,6 +9,7 @@ import de.ft.interitus.events.global.GlobalErrorOccurredEvent;
 public class DisplayErrors {
     public static Exception error;
     public static String customErrorstring = "Ein Fehler ist aufgetreten!";
+    public static String errorStringwithoutException = "";
 
     public static void checkerror() {
         if (error != null) {
@@ -21,6 +23,13 @@ public class DisplayErrors {
             customErrorstring = "Ein Fehler ist aufgetreten!";
 
 
+
+
+
+        }
+        if(errorStringwithoutException!="") {
+            Dialogs.showErrorDialog(UI.stage,errorStringwithoutException);
+            errorStringwithoutException="";
         }
     }
 

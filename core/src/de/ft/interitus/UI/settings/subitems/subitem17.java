@@ -78,7 +78,7 @@ public class subitem17 {
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
 
-                        System.out.println("So jetztz" + visTables.indexOf(event.getListenerActor()));
+
 
                     }
                 });

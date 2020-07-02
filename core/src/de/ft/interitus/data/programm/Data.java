@@ -3,10 +3,13 @@ package de.ft.interitus.data.programm;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import de.ft.interitus.DisplayErrors;
+import de.ft.interitus.Logging.LoggerInit;
+import de.ft.interitus.Programm;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.Theme.RegisteredThemes;
 import de.ft.interitus.UI.shortcut.ShortCut;
+import de.ft.interitus.Var;
 import de.ft.interitus.data.user.experience.ExperienceManager;
 import de.ft.interitus.data.user.experience.ExperienceVar;
 import org.json.JSONArray;
@@ -55,12 +58,13 @@ public class Data {
 
         Path path = folder.toPath();
         if (!folder.exists()) {//Wenn der Programm-Ordner noch nicht exsitiert
-            System.out.println("Create Programm Data Folder");
+            Programm.logger.info("Create Programm Data Folder");
 
             folder.mkdir(); //der Ordner wird erstellt
             tempfolder.mkdir();
             try {
                 recent.createNewFile(); //Die datei für die letzten Projekte wird erstellt
+
             } catch (IOException e) {
                 e.printStackTrace();
                 DisplayErrors.error = e;
@@ -68,6 +72,7 @@ public class Data {
 
             try {
                 settings.createNewFile();//Die datei für die Einstellungen wird erstellt
+
             } catch (IOException e) {
                 e.printStackTrace();
                 DisplayErrors.error = e;
@@ -75,6 +80,7 @@ public class Data {
 
             try {
                 knowndevices.createNewFile();//Die datei für die bekannten Geräte wird erstellt
+
             } catch (IOException e) {
                 e.printStackTrace();
                 DisplayErrors.error = e;
@@ -82,6 +88,7 @@ public class Data {
 
             try {
                 userexperience.createNewFile();//Die datei für die bekannten Geräte wird erstellt
+
             } catch (IOException e) {
                 e.printStackTrace();
                 DisplayErrors.error = e;
@@ -89,6 +96,7 @@ public class Data {
 
             try {
                 tastenkombinationen.createNewFile();//Die datei für die tastenkombinationen wird erstellt
+
             } catch (IOException e) {
                 e.printStackTrace();
                 DisplayErrors.error = e;
@@ -97,6 +105,7 @@ public class Data {
             try {
                 Files.setAttribute(path, "dos:hidden", true); //Auf Windows wird das Verzeichnis unsichtbar gemacht (Auf Linux reicht ja schon der punkt davor)
             } catch (UnsupportedOperationException | IOException e) {
+                Programm.logger.config("Cannot hidden file");
             }
         } else {
 
@@ -105,7 +114,7 @@ public class Data {
             }
 
             if (!recent.exists()) { //Wenn die Datei der letzten Projekte noch nicht exsisiert
-
+                Programm.logger.config("Recent not found");
                 try {
                     recent.createNewFile();
                     Gdx.files.absolute(recent.getAbsolutePath()).writeString("{}", false); //Wird in das Verzeichnis mit {} als JSON indikator geschrieben
@@ -148,6 +157,7 @@ public class Data {
 
 
             if (!settings.exists()) { //siehe recent
+                Programm.logger.config("Settings not found");
                 try {
                     settings.createNewFile();
                     Gdx.files.absolute(settings.getAbsolutePath()).writeString("{}", false); //siehe recent
@@ -201,6 +211,7 @@ public class Data {
 
             if (!knowndevices.exists()) { //siehe recent
                 try {
+                    Programm.logger.config("knowndevices not found");
                     knowndevices.createNewFile();
                     Gdx.files.absolute(knowndevices.getAbsolutePath()).writeString("{}", false); //siehe recent
                 } catch (IOException e) {
@@ -234,6 +245,8 @@ public class Data {
 
             if (!userexperience.exists()) { //siehe recent
                 try {
+                    Programm.logger.config("userexperience not found");
+
                     userexperience.createNewFile();
                     Gdx.files.absolute(userexperience.getAbsolutePath()).writeString("{}", false); //siehe recent
                 } catch (IOException e) {
@@ -270,6 +283,7 @@ public class Data {
 
             if (!tastenkombinationen.exists()) { //siehe recent
                 try {
+                    Programm.logger.config("tastenkombinationen not found");
                     tastenkombinationen.createNewFile();
                     Gdx.files.absolute(tastenkombinationen.getAbsolutePath()).writeString("{}", false); //siehe recent
                 } catch (IOException e) {
@@ -407,6 +421,14 @@ public class Data {
         userexperience.writeString(userexperience_obj.toString(), false); //Datei wird geschrieben
 
 ///////////////////////////////////////////////////////////////////////
+        new File(System.getProperty("user.home")+"/.itd/it.lock").delete();
+        if(!Var.keeplog) {
+            LoggerInit.fh.close();
+            new File(Var.logname).delete();
+        }else{
+            LoggerInit.fh.close();
+            new File(Var.logname).renameTo(new File(System.getProperty("user.home")+"/KeepLog_"+Var.lognamefile));
+        }
     }
 
 

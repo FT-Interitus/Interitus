@@ -2,6 +2,7 @@ package de.ft.interitus.deviceconnection.raspberrypi;
 
 import com.jcraft.jsch.*;
 import de.ft.interitus.DisplayErrors;
+import de.ft.interitus.Programm;
 
 import java.io.InputStream;
 
@@ -79,7 +80,7 @@ public class SSHConnection {
                 }
                 if (channel.isClosed()) {
                     if (in.available() > 0) continue;
-                    System.out.println("exit-status: " + channel.getExitStatus());
+                    Programm.logger.config("exit-status: " + channel.getExitStatus());
                     break;
                 }
                 try {
@@ -123,7 +124,7 @@ public class SSHConnection {
                 }
                 if (channel.isClosed()) {
                     if (in.available() > 0) continue;
-                    System.out.println("exit-status: " + channel.getExitStatus());
+                    Programm.logger.config("exit-status: " + channel.getExitStatus());
                     break;
                 }
                 try {

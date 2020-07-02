@@ -1,6 +1,7 @@
 package de.ft.interitus.loading;
 
 import com.badlogic.gdx.ApplicationListener;
+import de.ft.interitus.Programm;
 import de.ft.interitus.UI.window.CreateWindow;
 import de.ft.interitus.UI.window.Window;
 
@@ -11,7 +12,7 @@ public class SplashScreen {
         window = CreateWindow.addWindow("Loading", new ApplicationListener() {
             @Override
             public void create() {
-
+                Programm.logger.config("Created Splash Screen");
             }
 
             @Override

@@ -72,7 +72,7 @@ public class subitem6 {
             tastenkombeauswahl.addListener(new InputListener() {
                 @Override
                 public boolean keyDown(InputEvent event, int keycode) {
-                    System.out.println(keycode);
+
                     if (keycode != Input.Keys.DEL) {
                         if (keycode == Input.Keys.CONTROL_LEFT || keycode == Input.Keys.CONTROL_RIGHT) {
                             shortCut.addTaste(SpecialKeys.dualStrg);

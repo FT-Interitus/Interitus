@@ -64,10 +64,10 @@ public class ThreadManager {
                                         if (camfr.boundsInFrustum(block.getX(), block.getY(), 0, block.getW(), block.getH(), 0) && ((BlockUpdate) ProjectManager.getActProjectVar().threads.get(i)).isrunning == false) {
                                             ProjectManager.getActProjectVar().visibleblocks.add(block);
                                             ProjectManager.getActProjectVar().threads.set(i, ((BlockUpdate) ProjectManager.getActProjectVar().threads.get(i)).block.allowedRestart());
-                                            if (Var.verboseoutput) {
+
 
                                                 Programm.logger.config("Started " + block.getIndex());
-                                            }
+
                                             ((BlockUpdate) ProjectManager.getActProjectVar().threads.get(i)).isrunning = true;
                                         }
 

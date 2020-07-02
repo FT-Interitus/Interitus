@@ -2,6 +2,7 @@ package de.ft.interitus.utils;
 
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.DisplayErrors;
+import de.ft.interitus.Programm;
 import de.ft.interitus.Var;
 import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.projecttypes.ProjectManager;
@@ -58,9 +59,9 @@ public class ClearActOpenProgramm {
 
 
             }
-            if (Var.verboseoutput) {
-                System.out.println("Clearing Finished");
-            }
+
+                Programm.logger.config("Clearing Finished");
+
         } catch (Exception e) {
             DisplayErrors.error = e;
             e.printStackTrace();

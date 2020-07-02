@@ -31,7 +31,7 @@ public class Step3 {
 
     public static void brennen() {
         final String[] getrennt = selectportlist.getSelected().split(" ");
-        System.out.println(getrennt[0]);
+
         Thread burningThread = new Thread() {
             @Override
             public void run() {

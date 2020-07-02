@@ -33,11 +33,13 @@ public class Var {
 
     public static ArrayList<String> programmarguments = new ArrayList<>();
 
-    public static boolean verboseoutput = false;
+
     public static boolean debug = false;
 
     public static int w = 1300;
     public static int h = 800;
+    public static String logname = "";
+    public static String lognamefile = "";
 
     public static boolean disableshortcuts = false;
     public static String username = "";
@@ -46,6 +48,7 @@ public class Var {
     public static ArrayList<ProjectVar> openprojects = new ArrayList<>();
 
     public static int openprojectindex = 0;
+    public static boolean keeplog = false;
 
 
     public static Vector2 mousepressedold = new Vector2(1, 1); //Wo war die Maus als das letzte mal eine Taste gedrückt wurde

@@ -44,6 +44,7 @@ public class MenuBar {
     public static MenuItem menuItem_showruntimeinfo;
     public static MenuItem menuItem_clearram;
     public static MenuItem menuItem_updateproject;
+    public static MenuItem menuItem_keeplog;
     public static Menu fileMenu;
 
     protected static void createMenus() {
@@ -260,6 +261,15 @@ public class MenuBar {
                 RefreshProgramm.refresh();
             }
         });
+        menuItem_keeplog = new MenuItem("Log behalten", new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Var.keeplog=true;
+                menuItem_keeplog.setText("Wird behalten");
+                menuItem_keeplog.setDisabled(true);
+
+            }
+        });
 
         //recent.setSubMenu(createSubMenu());
 
@@ -314,6 +324,7 @@ public class MenuBar {
         helpMenu.addItem(menuItem_showruntimeinfo);
         helpMenu.addItem(menuItem_clearram);
         helpMenu.addItem(menuItem_updateproject);
+        helpMenu.addItem(menuItem_keeplog);
 
         helpMenu.addSeparator();
 

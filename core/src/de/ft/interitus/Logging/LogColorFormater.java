@@ -47,6 +47,9 @@ public class LogColorFormater extends Formatter {
             builder.append(": ");
             builder.append(ANSI_CRAY);
             builder.append(record.getMessage());
+            if(!record.getMessage().endsWith("\n")) {
+                builder.append("\n");
+            }
         }
 
         if (record.getLevel() == Level.CONFIG) {
@@ -68,6 +71,7 @@ public class LogColorFormater extends Formatter {
         }
 
         if (record.getLevel() == Level.SEVERE) {
+
             builder.append(ANSI_RED);
 
 
@@ -87,6 +91,7 @@ public class LogColorFormater extends Formatter {
 
 
         if (record.getLevel() == Level.WARNING) {
+
             builder.append(ANSI_YELLOW);
 
             builder.append("[WARNING] ");

@@ -72,7 +72,7 @@ public class PluginManagerHandler {
 
                 if (registeredplugins.get(i).getName() != "" && registeredplugins.get(i).getName() != " " && registeredplugins.get(i).getName().length() > 2 && !registeredplugins.get(i).getName().endsWith(" ") && !registeredplugins.get(i).getName().startsWith(" ")) {
                     if (registeredplugins.get(i).getVersion() > 0.0) {
-                        System.out.println(registeredplugins.get(i).getName() + " geladen. In der Version " + registeredplugins.get(i).getVersion());
+                        Programm.logger.info(registeredplugins.get(i).getName() + " geladen. In der Version " + registeredplugins.get(i).getVersion());
 
                     } else {
                         Programm.logger.warning(registeredplugins.get(i).getName() + " hasn't a valid Version");
@@ -141,6 +141,7 @@ public class PluginManagerHandler {
                     }
                 }
             }, 0, 16);
+            Programm.logger.config("Registered "+ registeredplugins.size()+" Plugins");
         }
 
     }
@@ -159,6 +160,7 @@ public class PluginManagerHandler {
         }
 
         File[] files = new File(System.getProperty("user.home") + "/.itd/plugins").listFiles(); //Aus dem Ordner Plugins werden alle Files aufgelistet
+        Programm.logger.config("Found "+files.length+" Plugins in Plugin Folder");
         for (File f : files) {
             if (f.getName().split("\\.")[1].contains("itp") && f.getName().split("\\.")[1].endsWith("itp")) {
 
@@ -191,6 +193,7 @@ public class PluginManagerHandler {
 
             }
         }
+
 
         return error;
     }

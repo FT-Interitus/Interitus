@@ -71,6 +71,7 @@ public class Programm extends Game {
             }
         };
         VisUI.load(VisUI.SkinScale.X1);
+        Programm.logger.config("Loaded Vis-UI");
 
         EventVar.uiEventManager.UILoadEvent(new UILoadEvent(this));
 
@@ -78,6 +79,7 @@ public class Programm extends Game {
             if (!Var.disablePluginSubSystem) {
                 loadplugins.start(); //Plugins laden
                 ReadStorePlugins.read(); //Ersten 10 Plugins im Store laden
+                Programm.logger.config("Loaded 10 Store Plugin Entrys");
             }
         } catch (Exception e) {
             Programm.logger.warning("No Internet Connection!");
@@ -85,17 +87,27 @@ public class Programm extends Game {
         }
 
         Init.initBlocks();
+        Programm.logger.config("Block loaded");
         UI.init();
+        Programm.logger.config("UI element loaded");
         CheckShortcuts.loadArrayList();//bevor CheckShortcuts.loatArraylist muss die ui schon die menuebar eleente erstellt haben!!!!!!!!!
+        Programm.logger.config("Shortcuts loaded");
         Thread seachnetwork = new Thread() {
             @Override
             public void run() {
                 NetworkScan.get();
             }
         }; //TODO doenst work on Mac
+        Programm.logger.config("Triggerd Network Scan");
         seachnetwork.start();
         Data.init();
+        Programm.logger.finest("");
+        Programm.logger.config("Theme: "+Settings.theme.getName());
+        Programm.logger.config("Limit-FPS: "+Settings.limitfps);
+        Programm.logger.config("Vsync: "+Settings.Vsync );
+        Programm.logger.finest("");
         UserDataInit.init();
+        Programm.logger.config("Setted File drop Listener");
         ExperienceManager.init();
         Gdx.graphics.setVSync(Settings.Vsync);
 

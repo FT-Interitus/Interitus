@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.DisplayErrors;
+import de.ft.interitus.Programm;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.Var;
@@ -93,7 +94,7 @@ public abstract class BlockUpdate extends Thread {
 
                                 //Falls die eine Node dazwischen ist und der Nachbar über die Node gesetzt werden muss
 
-                                System.out.println("Konnte Nachbar nicht setzten");
+                                Programm.logger.severe("Konnte Nachbar nicht setzten");
 
 
                             }

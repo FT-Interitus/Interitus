@@ -65,8 +65,8 @@ public class DataLoader {
 
                         BlockTappedBar.init();
 
-                        System.out.println("changed tab");
-                        //TODO Change Tab to this
+
+
                     }
 
                     ProjectManager.getActProjectVar().vcs = settings.getInt("vcs");

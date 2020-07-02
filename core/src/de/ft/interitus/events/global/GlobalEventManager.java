@@ -1,5 +1,7 @@
 package de.ft.interitus.events.global;
 
+import de.ft.interitus.Programm;
+
 import java.util.Vector;
 
 public class GlobalEventManager implements GlobalEventListener {
@@ -48,7 +50,7 @@ public class GlobalEventManager implements GlobalEventListener {
         }
 
         if (!handeled) {
-            System.out.println("Datei konnte nicht verarbeitet werden"); //TODO Popup
+            Programm.logger.severe("Datei konnte nicht verarbeitet werden"); //TODO Popup
         }
 
         return false;

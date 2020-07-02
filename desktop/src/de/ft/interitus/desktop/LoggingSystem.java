@@ -1,15 +1,18 @@
 package de.ft.interitus.desktop;
 
+import de.ft.interitus.Programm;
 import de.ft.interitus.Var;
 
+import java.awt.*;
 import java.io.*;
 
 public class LoggingSystem {
-    public static void RedirectLog() {
+    public static void RedirectLog() { //TODO doenst work with the new log system
         try {
 
             if(Var.programmarguments.get(Var.programmarguments.indexOf("-do")+1).contains("-")) {
                 throw new AfterIndexIsAnOtherArguementException();
+
             }
             String output =  Var.programmarguments.get(Var.programmarguments.indexOf("-do")+1);
             File file = new File(output);
@@ -30,7 +33,7 @@ public class LoggingSystem {
         }catch (IndexOutOfBoundsException | FileNotFoundException | AfterIndexIsAnOtherArguementException e) {
 
             String output = "LOG_"+System.currentTimeMillis();
-            System.out.println("Using default Output File");
+            Programm.logger.warning("Using default Output File");
             File file = new File(output);
             if(!file.exists()) {
                 try {
