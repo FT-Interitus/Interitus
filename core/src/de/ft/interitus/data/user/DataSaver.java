@@ -6,10 +6,7 @@ import de.ft.interitus.data.programm.Data;
 import de.ft.interitus.projecttypes.ProjectManager;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -24,11 +21,9 @@ public class DataSaver {
             public void run() {
 
 
-                ArrayList<SaveBlock> saveBlocks = new ArrayList<>();
+                ArrayList<SaveBlock> saveBlocks = BlockCalculator.save();
 
-                for (int i = 0; i < ProjectManager.getActProjectVar().blocks.size(); i++) {
-                    saveBlocks.add(ProjectManager.getActProjectVar().blocks.get(i).getBlocktoSaveGenerator().generate(ProjectManager.getActProjectVar().blocks.get(i)));
-                }
+
 
 
                 String generateprojektname = "project" + System.currentTimeMillis();
