@@ -67,7 +67,7 @@ public class PluginPage {
             }
         }
         if (isinstalled) {
-            if (!new File(System.getProperty("user.home") + "/"+ Data.foldername+"/plugins/" + Storeentry.getName() + ".jar").exists()) {
+            if (!new File(System.getProperty("user.home") + "/"+ Data.foldername+"/plugins/" + Storeentry.getName() + ".itpl").exists()) {
                 download.setText("Programm bitte neustarten");
                 download.setDisabled(true);
             } else {
@@ -75,7 +75,7 @@ public class PluginPage {
             }
 
         } else {
-            if (new File(System.getProperty("user.home") + "/"+Data.foldername+"/plugins/" + Storeentry.getName() + ".jar").exists()) {
+            if (new File(System.getProperty("user.home") + "/"+Data.foldername+"/plugins/" + Storeentry.getName() + ".itpl").exists()) {
                 download.setText("Programm bitte neustarten");
                 download.setDisabled(true);
             }

@@ -163,7 +163,7 @@ public class PluginManagerHandler {
         File[] files = new File(System.getProperty("user.home") + "/"+Data.foldername+"/plugins").listFiles(); //Aus dem Ordner Plugins werden alle Files aufgelistet
         Programm.logger.config("Found "+files.length+" Plugins in Plugin Folder");
         for (File f : files) {
-            if (f.getName().split("\\.")[1].contains("itp") && f.getName().split("\\.")[1].endsWith("itp")) {
+            if (f.getName().split("\\.")[1].contains("itpl") && f.getName().split("\\.")[1].endsWith("itpl")) {
 
 
                 try {

@@ -1,7 +1,10 @@
 package de.ft.interitus.loading;
 
 import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
 import de.ft.interitus.Programm;
+import de.ft.interitus.Settings;
 import de.ft.interitus.UI.window.CreateWindow;
 import de.ft.interitus.UI.window.Window;
 
@@ -22,7 +25,8 @@ public class SplashScreen {
 
             @Override
             public void render() {
-
+                Gdx.gl.glClearColor(Settings.theme.ClearColor().r, Settings.theme.ClearColor().g, Settings.theme.ClearColor().b, Settings.theme.ClearColor().a);
+                Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             }
 
             @Override

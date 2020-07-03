@@ -34,7 +34,7 @@ public class subitem3 {
         if (Gdx.input.isKeyPressed(Input.Keys.E) || Settings.limitfps <= 5 && Settings.limitfps != 0) { //Easteregg
             stringArray.add("5");
         }
-        limitfps.setItems(stringArray.toArray());
+       // limitfps.setItems(stringArray.toArray()); todo hier stimmt eetwas nicht
 
         if (Settings.limitfps == 0) {
             limitfps.setSelected("Unlimited");
