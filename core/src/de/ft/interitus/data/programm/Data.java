@@ -13,6 +13,7 @@ import de.ft.interitus.UI.shortcut.ShortCut;
 import de.ft.interitus.Var;
 import de.ft.interitus.data.user.experience.ExperienceManager;
 import de.ft.interitus.data.user.experience.ExperienceVar;
+import de.ft.interitus.utils.FolderUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -121,10 +122,26 @@ public class Data {
                 Programm.logger.config("Cannot hidden file");
             }
         } else {
+            Programm.logger.config("Load Programm Instance: "+folder.getAbsolutePath());
 
             if( new File(System.getProperty("user.home")+"/"+Data.foldername+"/save.mode").exists() ) {
-                Programm.logger.severe("Das Öffnen von Interits aus einer Abgesicherten Modus Instanz ist nicht erlaubt");
-                System.exit(-1);
+                if(!Var.savemode) {
+                    Programm.logger.severe("Das Öffnen von Interits aus einer Abgesicherten Modus Instanz ist nicht erlaubt");
+                    System.exit(-1);
+                }else{
+                    try {
+                        FolderUtils.deleteFileOrFolder(Path.of(System.getProperty("user.home")+"/"+Data.foldername));
+
+                        Data.init();
+                        return;
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+
+
+                }
             }
 
             if (!tempfolder.exists()) {

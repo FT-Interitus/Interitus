@@ -54,10 +54,13 @@ public class Programm extends Game {
     public void create() {
 
 
+
         LoggerInit.init();
         DebugPrinter.detect();
 
-
+        if(Var.savemode) {
+            logger.warning("Programm is running in savemode");
+        }
         ((Lwjgl3Graphics) Gdx.graphics).getWindow().iconifyWindow();
         Var.splashscreen = SplashScreen.create();
 
