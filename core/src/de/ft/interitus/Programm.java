@@ -9,6 +9,8 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Graphics;
 import com.kotcrab.vis.ui.VisUI;
+import com.kotcrab.vis.ui.util.dialog.Dialogs;
+import com.kotcrab.vis.ui.widget.file.FileUtils;
 import de.ft.interitus.Logging.DebugPrinter;
 import de.ft.interitus.Logging.LoggerInit;
 import de.ft.interitus.UI.CheckShortcuts;
@@ -24,9 +26,13 @@ import de.ft.interitus.loading.SplashScreen;
 import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.plugin.store.ReadStorePlugins;
 import de.ft.interitus.projecttypes.device.BlockTypes.Init;
+import de.ft.interitus.utils.FolderUtils;
 import de.ft.interitus.utils.NetworkScan;
 import de.ft.interitus.utils.UserNameGetter;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Logger;
@@ -79,7 +85,7 @@ public class Programm extends Game {
             if (!Var.disablePluginSubSystem) {
                 loadplugins.start(); //Plugins laden
                 ReadStorePlugins.read(); //Ersten 10 Plugins im Store laden
-                Programm.logger.config("Loaded 10 Store Plugin Entrys");
+
             }
         } catch (Exception e) {
             Programm.logger.warning("No Internet Connection!");
@@ -87,11 +93,13 @@ public class Programm extends Game {
         }
 
         Init.initBlocks();
-        Programm.logger.config("Block loaded");
+
         UI.init();
         Programm.logger.config("UI element loaded");
-        CheckShortcuts.loadArrayList();//bevor CheckShortcuts.loatArraylist muss die ui schon die menuebar eleente erstellt haben!!!!!!!!!
-        Programm.logger.config("Shortcuts loaded");
+        if(!Var.savemode) {
+            CheckShortcuts.loadArrayList();//bevor CheckShortcuts.loatArraylist muss die ui schon die menuebar eleente erstellt haben!!!!!!!!!
+        }
+
         Thread seachnetwork = new Thread() {
             @Override
             public void run() {
@@ -100,13 +108,20 @@ public class Programm extends Game {
         }; //TODO doenst work on Mac
         Programm.logger.config("Triggerd Network Scan");
         seachnetwork.start();
-        Data.init();
+        if(!Var.savemode) {
+            Data.init();
+        }else{
+            Dialogs.showErrorDialog(UI.stage,"Achtung Interitus läuft im Abgesicherten Modus!\nAlle Einstellungen die die hier vornimmst werden nicht übernommen.\nDieser Modus dient nur dazu, Projekte zu retten und um Plugins zu testen.");
+            Data.init(".temp");
+        }
         Programm.logger.finest("");
         Programm.logger.config("Theme: "+Settings.theme.getName());
         Programm.logger.config("Limit-FPS: "+Settings.limitfps);
         Programm.logger.config("Vsync: "+Settings.Vsync );
         Programm.logger.finest("");
-        UserDataInit.init();
+        if(!Var.savemode) {
+            UserDataInit.init();
+        }
         Programm.logger.config("Setted File drop Listener");
         ExperienceManager.init();
         Gdx.graphics.setVSync(Settings.Vsync);
@@ -128,6 +143,14 @@ public class Programm extends Game {
         ThreadManager.stopall();
 
         Data.close();
+
+        if(Var.savemode) {
+            try {
+                FolderUtils.deleteFileOrFolder(Path.of(System.getProperty("user.home")+"/"+Data.foldername));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
         // AL.destroy(); //Destroy Sound System //TODO lwjgl 3
 

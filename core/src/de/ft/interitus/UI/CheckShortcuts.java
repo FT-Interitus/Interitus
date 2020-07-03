@@ -2,6 +2,7 @@ package de.ft.interitus.UI;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import de.ft.interitus.Programm;
 import de.ft.interitus.UI.shortcut.ShortCut;
 import de.ft.interitus.UI.shortcut.ShortCutChecker;
 import de.ft.interitus.UI.shortcut.shortcuts.BlockShortcuts;
@@ -32,7 +33,7 @@ public class CheckShortcuts {
         //plugins
         shortCuts.addAll(PluginGateway.pluginshortCuts);
         shortCutsChecker.addAll(PluginGateway.pluginshortCutsChecker);
-
+        Programm.logger.config("Shortcuts loaded");
     }
 
     public static void check() {

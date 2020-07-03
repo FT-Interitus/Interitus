@@ -1,5 +1,6 @@
 package de.ft.interitus.projecttypes.device.BlockTypes;
 
+import de.ft.interitus.Programm;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.block.BlockEventAdapter;
 import de.ft.interitus.events.block.BlockKillMovingWiresEvent;
@@ -54,6 +55,6 @@ public class Init {
             }
         });
 
-
+        Programm.logger.config("Block loaded");
     }
 }

@@ -12,6 +12,7 @@ import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.settings.SettingsUI;
 import de.ft.interitus.UI.settings.subitems.subitem17;
+import de.ft.interitus.data.programm.Data;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.plugin.store.PluginInstalledNewEvent;
 import de.ft.interitus.plugin.PluginManagerHandler;
@@ -66,7 +67,7 @@ public class PluginPage {
             }
         }
         if (isinstalled) {
-            if (!new File(System.getProperty("user.home") + "/.itd/plugins/" + Storeentry.getName() + ".jar").exists()) {
+            if (!new File(System.getProperty("user.home") + "/"+ Data.foldername+"/plugins/" + Storeentry.getName() + ".jar").exists()) {
                 download.setText("Programm bitte neustarten");
                 download.setDisabled(true);
             } else {
@@ -74,7 +75,7 @@ public class PluginPage {
             }
 
         } else {
-            if (new File(System.getProperty("user.home") + "/.itd/plugins/" + Storeentry.getName() + ".jar").exists()) {
+            if (new File(System.getProperty("user.home") + "/"+Data.foldername+"/plugins/" + Storeentry.getName() + ".jar").exists()) {
                 download.setText("Programm bitte neustarten");
                 download.setDisabled(true);
             }
@@ -90,7 +91,7 @@ public class PluginPage {
                     download.setDisabled(true);
 
                     try (BufferedInputStream in = new BufferedInputStream(new URL(Storeentry.path).openStream());
-                         FileOutputStream fileOutputStream = new FileOutputStream(System.getProperty("user.home") + "/.itd/plugins/" + Storeentry.getName() + ".jar")) {
+                         FileOutputStream fileOutputStream = new FileOutputStream(System.getProperty("user.home") + "/"+Data.foldername+"/plugins/" + Storeentry.getName() + ".jar")) {
                         byte[] dataBuffer = new byte[1024];
                         int bytesRead;
                         while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
@@ -132,7 +133,7 @@ public class PluginPage {
                                 }
                             });
                 } else {
-                    File oldplugin = new File(System.getProperty("user.home") + "/.itd/plugins/" + Storeentry.getName() + ".jar");
+                    File oldplugin = new File(System.getProperty("user.home") + "/"+Data.foldername+"/plugins/" + Storeentry.getName() + ".jar");
 
 
                     // TODO: 21.05.20 Disable Plugin vor dem löschen das Windows sich nicht beschwert -> Exception

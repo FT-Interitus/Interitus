@@ -3,6 +3,7 @@ package de.ft.interitus.plugin;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Programm;
 import de.ft.interitus.Var;
+import de.ft.interitus.data.programm.Data;
 import org.usb4java.LoaderException;
 
 import java.io.File;
@@ -155,11 +156,11 @@ public class PluginManagerHandler {
 
     public Exception init() {
 
-        if (!new File(System.getProperty("user.home") + "/.itd/plugins").exists()) {
-            new File(System.getProperty("user.home") + "/.itd/plugins").mkdir();
+        if (!new File(System.getProperty("user.home") + "/"+ Data.foldername+"/plugins").exists()) {
+            new File(System.getProperty("user.home") + "/"+Data.foldername+"/plugins").mkdir();
         }
 
-        File[] files = new File(System.getProperty("user.home") + "/.itd/plugins").listFiles(); //Aus dem Ordner Plugins werden alle Files aufgelistet
+        File[] files = new File(System.getProperty("user.home") + "/"+Data.foldername+"/plugins").listFiles(); //Aus dem Ordner Plugins werden alle Files aufgelistet
         Programm.logger.config("Found "+files.length+" Plugins in Plugin Folder");
         for (File f : files) {
             if (f.getName().split("\\.")[1].contains("itp") && f.getName().split("\\.")[1].endsWith("itp")) {
@@ -169,12 +170,12 @@ public class PluginManagerHandler {
                     loadPlugin(f); //jedes gefundene Plugin bekommt den Befehel zu laden
                     Plugincounter++;
                 } catch (Exception e) {
-                    System.out.println("Plugin lade Fehler");
+                    Programm.logger.severe("Plugin lade Fehler");
                     DisplayErrors.customErrorstring = "Plugin Lade-Fehler";
                     DisplayErrors.error = e;
                     e.printStackTrace();
                 } catch (UnsupportedClassVersionError a) {
-                    System.out.println("Das Plugin " + f.getName() + " wurde in der falschen Version geschrieben");
+                    Programm.logger.severe("Das Plugin " + f.getName() + " wurde in der falschen Version geschrieben");
 
                 }
 

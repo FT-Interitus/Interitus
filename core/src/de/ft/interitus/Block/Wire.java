@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.DisplayErrors;
+import de.ft.interitus.Programm;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.RechtsKlick;
 import de.ft.interitus.events.EventVar;
@@ -277,7 +278,7 @@ public abstract class Wire {
                     }
 
                     if (!RechtsKlick.popupmanager.isPopupopen() && ProjectManager.getActProjectVar().mousehoveredwire == this && !CheckKollision.objectwithrotation(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight(), sprite.getRotation(), ProgrammingSpace.viewport.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, ProgrammingSpace.viewport.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1, 0)) {
-                        System.out.println("Popup disable"); //TODO here is an error
+                        Programm.logger.fine("Popup disable"); //TODO here is an error
                         ProjectManager.getActProjectVar().mousehoveredwire = null;
                     }
 

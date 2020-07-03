@@ -22,7 +22,8 @@ public class DesktopLauncher {
 	 * @param arg -nogui open no window
 	 *            -d Debug Mode
 	 *            -dps disable Plugin-Sub-System
-	 *            -do redirect log in file (You can also use Terminal Pips)
+	 *            -a SaveMode (Settings wont be saved)
+	 *            -ud [PATH] Another Place to store User Data
 	 *
 	 */
 

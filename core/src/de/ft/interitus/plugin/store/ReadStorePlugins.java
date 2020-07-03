@@ -1,6 +1,7 @@
 package de.ft.interitus.plugin.store;
 
 import de.ft.interitus.DisplayErrors;
+import de.ft.interitus.Programm;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.utils.DownloadFile;
 import org.json.JSONException;
@@ -57,7 +58,7 @@ public class ReadStorePlugins {
             e.printStackTrace();
         }
 
-
+        Programm.logger.config("Loaded 10 Store Plugin Entrys");
     }
 
 

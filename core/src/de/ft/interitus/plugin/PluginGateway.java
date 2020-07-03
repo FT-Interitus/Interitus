@@ -2,6 +2,7 @@ package de.ft.interitus.plugin;
 
 import com.kotcrab.vis.ui.widget.Menu;
 import com.kotcrab.vis.ui.widget.VisTable;
+import de.ft.interitus.Programm;
 import de.ft.interitus.UI.Theme.RegisteredThemes;
 import de.ft.interitus.UI.Theme.Theme;
 import de.ft.interitus.UI.shortcut.ShortCut;

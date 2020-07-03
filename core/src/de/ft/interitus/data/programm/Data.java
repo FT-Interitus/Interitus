@@ -8,6 +8,7 @@ import de.ft.interitus.Programm;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.Theme.RegisteredThemes;
+import de.ft.interitus.UI.Theme.ThemeManager;
 import de.ft.interitus.UI.shortcut.ShortCut;
 import de.ft.interitus.Var;
 import de.ft.interitus.data.user.experience.ExperienceManager;
@@ -28,9 +29,10 @@ public class Data {
     public static ArrayList<String> filename = new ArrayList<String>(); //Die Namen der Dateien die zuletzt geöffnet wurden
     public static File tempfolder; //Der Ordner in dem alle Programm daten liegen
     private static File folder; //Der Ordner in dem alle Programm daten liegen
+    public static String foldername = ".itd";
 
     /**
-     * load the Programm data from the UserFolder/.itd
+     * load the Programm data from the UserFolder/"+foldername+"
      * <p>
      * On Linux the Folder with a dot is default invisible
      * On Windows we need to set the file attribute
@@ -46,14 +48,14 @@ public class Data {
      */
     public static void init() {
 
-        folder = new File(System.getProperty("user.home") + "/.itd"); //Order der Programmdaten
-        tempfolder = new File(System.getProperty("user.home") + "/.itd/temp"); //Order der Programmdaten
-        File recent = new File(System.getProperty("user.home") + "/.itd/recent.json"); //JSON file in dem die zuletzt geöffneten Projekte gespeichert werden
-        File settings = new File(System.getProperty("user.home") + "/.itd/settings.json"); // JSON file in dem alle Einstellungen gespeichert werden
-        File knowndevices = new File(System.getProperty("user.home") + "/.itd/devices.json"); //JSON file in dem alle konfigurierten Geräte gespeichert werden
-        File userexperience = new File(System.getProperty("user.home") + "/.itd/experience.json"); //JSON file in dem User Analytics gespeichert werden
-        File tastenkombinationen = new File(System.getProperty("user.home") + "/.itd/tastenkombinationen.json"); //JSON file in dem tastenkombinationen gespeichert werden
-        //File defaulttastenkombinationen = new File(System.getProperty("user.home") + "/.itd/defaulttastenkombinationen.json"); //JSON file in dem defaulttastenkombinationen gespeichert werden (von user nicht veränderbar)
+        folder = new File(System.getProperty("user.home") + "/"+foldername); //Order der Programmdaten
+        tempfolder = new File(System.getProperty("user.home") + "/"+foldername+"/temp"); //Order der Programmdaten
+        File recent = new File(System.getProperty("user.home") + "/"+foldername+"/recent.json"); //JSON file in dem die zuletzt geöffneten Projekte gespeichert werden
+        File settings = new File(System.getProperty("user.home") + "/"+foldername+"/settings.json"); // JSON file in dem alle Einstellungen gespeichert werden
+        File knowndevices = new File(System.getProperty("user.home") + "/"+foldername+"/devices.json"); //JSON file in dem alle konfigurierten Geräte gespeichert werden
+        File userexperience = new File(System.getProperty("user.home") + "/"+foldername+"/experience.json"); //JSON file in dem User Analytics gespeichert werden
+        File tastenkombinationen = new File(System.getProperty("user.home") + "/"+foldername+"/tastenkombinationen.json"); //JSON file in dem tastenkombinationen gespeichert werden
+        //File defaulttastenkombinationen = new File(System.getProperty("user.home") + "/"+foldername+"/defaulttastenkombinationen.json"); //JSON file in dem defaulttastenkombinationen gespeichert werden (von user nicht veränderbar)
 
 
         Path path = folder.toPath();
@@ -72,6 +74,7 @@ public class Data {
 
             try {
                 settings.createNewFile();//Die datei für die Einstellungen wird erstellt
+                Settings.theme= RegisteredThemes.themes.get(0);
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -109,6 +112,11 @@ public class Data {
             }
         } else {
 
+            if( new File(System.getProperty("user.home")+"/"+Data.foldername+"/save.mode").exists() ) {
+                Programm.logger.severe("Das Öffnen von Interits aus einer Abgesicherten Modus Instanz ist nicht erlaubt");
+                Gdx.app.exit();
+            }
+
             if (!tempfolder.exists()) {
                 tempfolder.mkdir();
             }
@@ -127,7 +135,7 @@ public class Data {
             } else { //Wenn es exsistiert
                 try {
 
-                    FileHandle re = Gdx.files.absolute(System.getProperty("user.home") + "/.itd/recent.json");
+                    FileHandle re = Gdx.files.absolute(System.getProperty("user.home") + "/"+foldername+"/recent.json");
 
                     if (re.readString() == "") {
                         re.writeString("{}", false);
@@ -165,10 +173,11 @@ public class Data {
                     DisplayErrors.error = e;
                     e.printStackTrace();
                 }
+                Settings.theme= RegisteredThemes.themes.get(0);
             } else {
 
                 try {
-                    FileHandle se = Gdx.files.absolute(System.getProperty("user.home") + "/.itd/settings.json");  //Datei wird geladen
+                    FileHandle se = Gdx.files.absolute(System.getProperty("user.home") + "/"+foldername+"/settings.json");  //Datei wird geladen
                     if (se.readString() == "") {
                         se.writeString("{}", false);
                         return;
@@ -220,7 +229,7 @@ public class Data {
             } else {
 
                 try {
-                    FileHandle se = Gdx.files.absolute(System.getProperty("user.home") + "/.itd/devices.json");
+                    FileHandle se = Gdx.files.absolute(System.getProperty("user.home") + "/"+foldername+"/devices.json");
                     if (se.readString() == "") {
                         se.writeString("{}", false);
                         return;
@@ -255,7 +264,7 @@ public class Data {
             } else {
 
                 try {
-                    FileHandle se = Gdx.files.absolute(System.getProperty("user.home") + "/.itd/experience.json");
+                    FileHandle se = Gdx.files.absolute(System.getProperty("user.home") + "/"+foldername+"/experience.json");
                     if (se.readString() == "") {
                         se.writeString("{}", false);
                         return;
@@ -292,7 +301,7 @@ public class Data {
             } else {
 
                 try {
-                    FileHandle se = Gdx.files.absolute(System.getProperty("user.home") + "/.itd/tastenkombinationen.json");
+                    FileHandle se = Gdx.files.absolute(System.getProperty("user.home") + "/"+foldername+"/tastenkombinationen.json");
                     if (se.readString() == "") {
                         se.writeString("{}", false);
                         return;
@@ -342,13 +351,14 @@ public class Data {
 
         //////////////////////////////////////////////////////////////////7
 
+        Programm.logger.config("Programm Data Loading fininsh");
 
     }
 
 
     public static void close() {
         //////Tastenkombinationen////////////////////////////////////
-        FileHandle tastenkombinationen = Gdx.files.absolute(System.getProperty("user.home") + "/.itd/tastenkombinationen.json"); //Lade datei
+        FileHandle tastenkombinationen = Gdx.files.absolute(System.getProperty("user.home") + "/"+foldername+"/tastenkombinationen.json"); //Lade datei
         JSONObject tastenkombinationen_obj = new JSONObject(tastenkombinationen);
 
         for (int i = 0; i < CheckShortcuts.shortCuts.size(); i++) {//Es wird durch alle einträge durchgegangen
@@ -370,7 +380,7 @@ public class Data {
 
 
         //for recent////////////////////////////////
-        FileHandle recent = Gdx.files.absolute(System.getProperty("user.home") + "/.itd/recent.json"); //Lade datei
+        FileHandle recent = Gdx.files.absolute(System.getProperty("user.home") + "/"+foldername+"/recent.json"); //Lade datei
         JSONObject recent_obj = new JSONObject(recent);
         for (int i = 0; i < Data.path.size(); i++) { //Es wird durch alle Vorhanden einträge durch gegangen
             recent_obj.put("path" + i, Data.path.get(i)); //Und jedes Nacheinander abgespeichert
@@ -382,7 +392,7 @@ public class Data {
         /////////////////////////////////////////////////////////////////////
 
 
-        FileHandle settings = Gdx.files.absolute(System.getProperty("user.home") + "/.itd/settings.json"); //Lade Datei
+        FileHandle settings = Gdx.files.absolute(System.getProperty("user.home") + "/"+foldername+"/settings.json"); //Lade Datei
         JSONObject settings_obj = new JSONObject(settings); //Einstellungen werden je nach Daten Typ abgespeichert
         settings_obj.put("theme", Settings.theme.getName());
         settings_obj.put("updateurl", Settings.updateurl);
@@ -395,7 +405,7 @@ public class Data {
 
         ////////////////////////////////////////////////////////////////////
 
-        FileHandle knowndevices = Gdx.files.absolute(System.getProperty("user.home") + "/.itd/devices.json");//Lade Datei
+        FileHandle knowndevices = Gdx.files.absolute(System.getProperty("user.home") + "/"+foldername+"/devices.json");//Lade Datei
         JSONObject knowndevices_obj = new JSONObject(settings);
 
         ///  knowndevices_obj.put("",Variable);///
@@ -406,7 +416,7 @@ public class Data {
         knowndevices.writeString(knowndevices_obj.toString(), false); //Datei wird geschrieben
 
         ///////////////////////////////////////////////////////////////
-        FileHandle userexperience = Gdx.files.absolute(System.getProperty("user.home") + "/.itd/experience.json"); //Lade Datei
+        FileHandle userexperience = Gdx.files.absolute(System.getProperty("user.home") + "/"+foldername+"/experience.json"); //Lade Datei
         JSONObject userexperience_obj = new JSONObject(userexperience); //UserExperience wird je nach Daten Typ abgespeichert
 
 
@@ -421,7 +431,7 @@ public class Data {
         userexperience.writeString(userexperience_obj.toString(), false); //Datei wird geschrieben
 
 ///////////////////////////////////////////////////////////////////////
-        new File(System.getProperty("user.home")+"/.itd/it.lock").delete();
+        new File(System.getProperty("user.home")+"/"+foldername+"/it.lock").delete();
         if(!Var.keeplog) {
             LoggerInit.fh.close();
             new File(Var.logname).delete();
@@ -448,6 +458,20 @@ public class Data {
 
     public static void delete() { //TODO Experimentell
         folder.delete(); //Der Ordner wird gelöscht
+
+    }
+
+    public static void init(String s) {
+        foldername=s;
+        if(Var.savemode){
+            try {
+                new File(System.getProperty("user.home")+"/"+Data.foldername+"/save.mode").createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        init();
+
 
     }
 }

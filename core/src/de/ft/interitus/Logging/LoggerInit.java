@@ -11,6 +11,7 @@ import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Programm;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.Var;
+import de.ft.interitus.data.programm.Data;
 import de.ft.interitus.utils.FolderUtils;
 
 import java.io.File;
@@ -32,21 +33,30 @@ public class LoggerInit {
         Programm.logger.setLevel(Level.ALL);
 
         Handler handler = new ConsoleHandler();
-        if(!new File(System.getProperty("user.home")+"/.itd/log").isDirectory()) {
-            new File(System.getProperty("user.home")+"/.itd/log").mkdir();
+        if(!new File(System.getProperty("user.home")+"/"+ Data.foldername+"/log").isDirectory()) {
+            new File(System.getProperty("user.home")+"/"+Data.foldername+"/log").mkdir();
         }
 
-        if(new File(System.getProperty("user.home")+"/.itd/it.lock").exists() ){
-            DisplayErrors.errorStringwithoutException="Das Programm wurde unerwartet beendet! \nError LOGs findest du hier: \n"+System.getProperty("user.home")+"/.itd/log";
+        if(new File(System.getProperty("user.home")+"/"+Data.foldername+"/it.lock").exists() ){
+            if(!Var.savemode) {
+                DisplayErrors.errorStringwithoutException = "Das Programm wurde unerwartet beendet! \nError LOGs findest du hier: \n" + System.getProperty("user.home") + "/" + Data.foldername + "/log";
+            }
         }else{
             try {
-                new File(System.getProperty("user.home")+"/.itd/it.lock").createNewFile();
+                if(!new File(System.getProperty("user.home")+"/"+Data.foldername).exists()) {
+                    new File(System.getProperty("user.home")+"/"+Data.foldername).mkdir();
+                }
+                new File(System.getProperty("user.home")+"/"+Data.foldername+"/it.lock").createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
         Var.lognamefile =System.currentTimeMillis()+"_LOG.log";
-        Var.logname=System.getProperty("user.home")+"/.itd/log/"+Var.lognamefile;
+        Var.logname=System.getProperty("user.home")+"/"+Data.foldername+"/log/"+Var.lognamefile;
+
+        if(!new File(System.getProperty("user.home")+"/"+Data.foldername+"/log/").exists()) {
+            new File(System.getProperty("user.home")+"/"+Data.foldername+"/log/").mkdir();
+        }
 
         if(!new File(Var.logname).exists()) {
             try {
