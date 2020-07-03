@@ -52,7 +52,7 @@ public class LogColorFormater extends Formatter {
             }
         }
 
-        if (record.getLevel() == Level.CONFIG) {
+        if (record.getLevel() == Level.CONFIG) { //CONFIG == DEBUG
             if (Var.debug) {
                 builder.append(ANSI_YELLOW);
                 builder.append("[DEBUG]   ");

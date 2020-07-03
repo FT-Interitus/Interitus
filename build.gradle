@@ -58,12 +58,12 @@ project(":core") {
 
 
     dependencies {
-        compile group: 'org.usb4java', name: 'usb4java', version: '1.2.0'
-        compile 'com.jcraft:jsch:0.1.54'
-        compile 'com.fazecast:jSerialComm:[2.0.0,3.0.0)'
-        compile "com.kotcrab.vis:vis-ui:$visuiVersion"
-        compile 'org.json:json:20171018'
-        compile group: 'org.scream3r', name: 'jssc', version: '2.8.0'
+        api group: 'org.usb4java', name: 'usb4java', version: '1.2.0'
+        api 'com.jcraft:jsch:0.1.54'
+        api 'com.fazecast:jSerialComm:[2.0.0,3.0.0)'
+        api "com.kotcrab.vis:vis-ui:$visuiVersion"
+        api 'org.json:json:20171018'
+        api group: 'org.scream3r', name: 'jssc', version: '2.8.0'
         api "com.badlogicgames.gdx:gdx:$gdxVersion"
         api "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         api "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
