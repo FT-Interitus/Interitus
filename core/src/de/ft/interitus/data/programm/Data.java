@@ -64,6 +64,16 @@ public class Data {
 
             folder.mkdir(); //der Ordner wird erstellt
             tempfolder.mkdir();
+
+            if(Var.savemode){
+                try {
+                    new File(System.getProperty("user.home")+"/"+Data.foldername+"/save.mode").createNewFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
+
             try {
                 recent.createNewFile(); //Die datei für die letzten Projekte wird erstellt
 
@@ -114,7 +124,7 @@ public class Data {
 
             if( new File(System.getProperty("user.home")+"/"+Data.foldername+"/save.mode").exists() ) {
                 Programm.logger.severe("Das Öffnen von Interits aus einer Abgesicherten Modus Instanz ist nicht erlaubt");
-                Gdx.app.exit();
+                System.exit(-1);
             }
 
             if (!tempfolder.exists()) {
@@ -463,13 +473,7 @@ public class Data {
 
     public static void init(String s) {
         foldername=s;
-        if(Var.savemode){
-            try {
-                new File(System.getProperty("user.home")+"/"+Data.foldername+"/save.mode").createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+
         init();
 
 

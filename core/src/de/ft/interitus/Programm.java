@@ -151,6 +151,7 @@ public class Programm extends Game {
                 e.printStackTrace();
             }
         }
+       //TODO empty temp folder
 
         // AL.destroy(); //Destroy Sound System //TODO lwjgl 3
 
