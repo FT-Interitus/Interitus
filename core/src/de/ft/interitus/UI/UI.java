@@ -83,7 +83,9 @@ public class UI {
                     curserstate = 2;
                 }
             } else if (curserstate != 1) {
-                Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Arrow);
+                if(!ProjectManager.getActProjectVar().removeblock) {
+                    Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Arrow);
+                }
                 curserstate = 1;
             }
         }

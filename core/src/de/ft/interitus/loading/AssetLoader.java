@@ -19,6 +19,7 @@ public class AssetLoader {
     public static ArrayList<Texture> storeimages = new ArrayList<>();
     public static ArrayList<ArrayList<Object>> pluginimages = new ArrayList<>();
 
+    public static Pixmap backcursor;
 
     public static String group = "";
     public static String workingdirectory = "";
@@ -139,6 +140,12 @@ public class AssetLoader {
 
 
             group = "TabBar";
+
+
+            backcursor = new Pixmap(Gdx.files.internal("backcursor.png"));
+
+
+
             manager.load(workingdirectory + "TabBar/Tabimage.png", Texture.class);
 
             group = "ButtonBar";

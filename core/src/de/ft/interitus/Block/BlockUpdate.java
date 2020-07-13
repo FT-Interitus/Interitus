@@ -2,6 +2,8 @@ package de.ft.interitus.Block;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Cursor;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.DisplayErrors;
@@ -10,6 +12,7 @@ import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.Var;
 import de.ft.interitus.data.user.changes.DataManager;
+import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.CheckKollision;
 import de.ft.interitus.utils.Unproject;
@@ -33,7 +36,8 @@ public abstract class BlockUpdate extends Thread {
     private boolean willbedelete = false;
     private boolean deleteonend = false;
     private boolean IsMousealreadypressed = false;
-
+    private boolean changewillbedeleted=false;
+    private boolean tempdelete=false;
 
     public BlockUpdate(Block block) {
         this.block = block; //Der Block wird zugewiesen
@@ -229,10 +233,29 @@ public abstract class BlockUpdate extends Thread {
                         if (block.isMoving() && Gdx.input.isButtonPressed(0)) {
 
 
-                            //Wenn der Mauszeiger die Ablagefläche berührt
-                            //TODO change mousepointer
-                            willbedelete = CheckKollision.checkmousewithobject(UIVar.BlockBarX, UIVar.BlockBarY, UIVar.BlockBarW, UIVar.BlockBarH, Unproject.unproject());
 
+                            tempdelete = CheckKollision.checkmousewithobject(UIVar.BlockBarX, UIVar.BlockBarY, UIVar.BlockBarW, UIVar.BlockBarH, Unproject.unproject());
+
+
+                            if(tempdelete!=willbedelete) {
+                                changewillbedeleted=true;
+                                willbedelete = tempdelete;
+                            }else{
+                                changewillbedeleted=false;
+                            }
+
+                            if(changewillbedeleted) {
+                                //Wenn der Mauszeiger die Ablagefläche berührt
+
+                                if(willbedelete) {
+                                    Gdx.graphics.setCursor(Gdx.graphics.newCursor(AssetLoader.backcursor, 0, 0));
+                                    ProjectManager.getActProjectVar().removeblock = true;
+                                }else{
+                                    Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Arrow);
+                                    ProjectManager.getActProjectVar().removeblock = false;
+                                }
+
+                            }
 
                             //Ändere die Aktuelle Blockposition auf die Maus Position
                             block.setX((int) (ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x - ProjectManager.getActProjectVar().unterschiedsave.x));
@@ -530,6 +553,8 @@ public abstract class BlockUpdate extends Thread {
                         }
 
                         if (deleteonend) {
+                            ProjectManager.getActProjectVar().removeblock = false;
+                            Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Arrow);
                             block.delete(false);
                             this.cancel();
                         }

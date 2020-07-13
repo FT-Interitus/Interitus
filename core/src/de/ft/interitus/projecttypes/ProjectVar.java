@@ -47,6 +47,7 @@ public abstract class ProjectVar {
     public Wire mousehoveredwire = null;
 
     public Block ismarkedbyother = null; // Gibt an welcher Block bei einem anderen Client makiert ist
+    public boolean removeblock = false; //Wenn ein Block über die ablage Fläche gehalten wird
 
     public int vcs = VCS.NONE;
     public ProjectTypes projectType = null;

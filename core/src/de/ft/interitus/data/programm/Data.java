@@ -150,6 +150,7 @@ public class Data {
 
             if (!recent.exists()) { //Wenn die Datei der letzten Projekte noch nicht exsisiert
                 Programm.logger.config("Recent not found");
+
                 try {
                     recent.createNewFile();
                     Gdx.files.absolute(recent.getAbsolutePath()).writeString("{}", false); //Wird in das Verzeichnis mit {} als JSON indikator geschrieben
