@@ -111,7 +111,7 @@ public class ev3 {
 
     }
 
-    public static byte[] LCX(int value) { //TODO eventuell ist hier das = in den if s falsch
+    public static byte[] LCX(int value) {
 
 
         byte count1 = (byte) 0x01;
