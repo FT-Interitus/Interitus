@@ -4,14 +4,22 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.UI.UI;
+import de.ft.interitus.projecttypes.device.ProgrammableObjekt;
 
 public class Unproject {
 
     static Vector2 temp1 = new Vector2();
     static Vector3 temp3 = new Vector3();
     static Vector3 temp4 = new Vector3();
+    static Vector2 temp5 = new Vector2();
 
     public static Vector2 unproject() {
-        return temp1.set(ProgrammingSpace.cam.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, ProgrammingSpace.cam.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y);
+        return temp1.set(UI.UIviewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, UI.UIviewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y);
     }
+
+    public static Vector2 projected()  {
+return temp5.set(Gdx.input.getX(),Gdx.input.getY());
+    }
+
 }
