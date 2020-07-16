@@ -49,7 +49,7 @@ public class UI {
     public static SpriteBatch UIbatch;
     public static SettingsUI set;
     public static ProjectSettingsUI proset;
-    public static boolean curserveränderungsblockade = false;
+    public static boolean curserveränderungsblockade = false; //If a Block is over the Block Space
     public static ButtonBar buttonbar;
     public static Button button_projectstructus;
     public static Button button_start;
@@ -67,7 +67,6 @@ public class UI {
     private static int curserstate = 0;
     private static boolean verticalrezising = false;
     private static boolean horizontalrezising = false;
-    Vector3 pos = new Vector3();
 
     public static void userresize() {
         if (!curserveränderungsblockade) {

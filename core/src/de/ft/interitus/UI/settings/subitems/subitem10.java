@@ -26,7 +26,7 @@ public class subitem10 {
 
         delete.addListener(new ChangeListener() {
             @Override
-            public void changed(ChangeEvent event, Actor actor) { //TODO hier dangerous settings häckchen einbauen
+            public void changed(ChangeEvent event, Actor actor) {
 
                 String[] möglichkeiten = {"Nein", "Ja"};
 

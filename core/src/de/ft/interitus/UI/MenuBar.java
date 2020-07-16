@@ -20,6 +20,7 @@ import de.ft.interitus.data.user.LoadSave;
 import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.UI.UIOpenSettingsEvent;
+import de.ft.interitus.network.bettertogether.Manager;
 import de.ft.interitus.plugin.PluginGateway;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.VCS;
@@ -36,6 +37,9 @@ public class MenuBar {
     public static MenuItem menuItem_einstellungen;
     public static MenuItem menuItem_beenden;
     public static MenuItem menuItem_neueverbindung;
+//Better together
+    public static MenuItem menuItem_openserver;
+    public static MenuItem menuItem_connecttoserver;
     public static MenuItem menuItem_verbindungsmanager;
     public static MenuItem menuItem_blockloeschen;
     public static MenuItem menuItem_ausschneiden;
@@ -270,6 +274,25 @@ public class MenuBar {
 
             }
         });
+
+           menuItem_openserver = new MenuItem("Server starten", new ChangeListener() {
+               @Override
+               public void changed(ChangeEvent event, Actor actor) {
+                   Manager.startserver();
+               }
+           });
+        menuItem_connecttoserver = new MenuItem("Mit Server verbinden", new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Manager.startclient();
+
+
+
+            }
+        });
+
+        ConnectionMenue.addItem(menuItem_openserver);
+        ConnectionMenue.addItem(menuItem_connecttoserver);
 
         //recent.setSubMenu(createSubMenu());
 

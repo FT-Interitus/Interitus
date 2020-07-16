@@ -25,11 +25,14 @@ import de.ft.interitus.UI.settings.subitems.subitem17;
 import de.ft.interitus.UI.shortcut.shortcuts.BlockShortcuts;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.loading.AssetLoader;
+import de.ft.interitus.network.bettertogether.Manager;
+import de.ft.interitus.network.bettertogether.SharedVar;
 import de.ft.interitus.plugin.Configuration;
 import de.ft.interitus.plugin.PluginRegister;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.device.BlockTypes.ProjectTypesVar;
 import de.ft.interitus.utils.PositionSaver;
+import de.ft.interitus.utils.StringUtils;
 import de.ft.interitus.utils.animation.Animation;
 
 import java.awt.*;
@@ -64,6 +67,7 @@ public class ProgrammingSpace extends ScreenAdapter {
 
 
     public ProgrammingSpace() {
+
 
 
         //TODO Debug hier wird immer ein Ev3 Project erstellt
@@ -122,6 +126,8 @@ public class ProgrammingSpace extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
+
+
 
 
 
@@ -213,6 +219,9 @@ public class ProgrammingSpace extends ScreenAdapter {
                     try {
                         batch.begin();
                         Temp2.draw(batch, shapeRenderer, font);
+
+
+
                         batch.end();
                     } catch (Exception e) {
 
@@ -287,6 +296,13 @@ public class ProgrammingSpace extends ScreenAdapter {
 
         loader(); //Load Images in OpenGL context
 
+
+batch.begin();
+
+        batch.draw(AssetLoader.wire_node, SharedVar.otherMousepos.x,SharedVar.otherMousepos.y,10,10);
+
+
+batch.end();
 
         de.ft.interitus.UI.Viewport.limitfps();
 

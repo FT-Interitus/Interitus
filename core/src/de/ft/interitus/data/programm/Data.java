@@ -234,7 +234,9 @@ public class Data {
                     Settings.defaultpfad = obj.getString("defaultpath");
                     Settings.Vsync = obj.getBoolean("vsync");
                     Settings.limitfps = obj.getInt("limitfps");
-                    //TODO weitere einstellugen Laden
+                    Settings.hints = obj.getBoolean("hints");
+                    Settings.personalhits = obj.getBoolean("personalhints");
+                    // weitere einstellugen Laden
 
                 } catch (JSONException e) {
 
@@ -427,8 +429,10 @@ public class Data {
         settings_obj.put("defaultpath", Settings.defaultpfad);
         settings_obj.put("vsync", Settings.Vsync);
         settings_obj.put("limitfps", Settings.limitfps);
+        settings_obj.put("hints",Settings.hints);
+        settings_obj.put("personalhints",Settings.personalhits);
 
-        //TODO weitere Einstellugen speichern
+        //hier weitere Einstellugen speichern
         settings.writeString(settings_obj.toString(), false); //Datei wird geschrieben
 
         ////////////////////////////////////////////////////////////////////
@@ -455,7 +459,7 @@ public class Data {
         userexperience_obj.put("setuptime", ExperienceVar.setuptimeinhoures + ExperienceManager.setupthistime);
         userexperience_obj.put("starttimes", ExperienceVar.starttimes + 1);
 
-        //TODO weitere Einstellugen speichern
+        // weitere User Experience speichern
         userexperience.writeString(userexperience_obj.toString(), false); //Datei wird geschrieben
 
 ///////////////////////////////////////////////////////////////////////

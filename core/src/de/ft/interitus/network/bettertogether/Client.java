@@ -1,44 +1,82 @@
 package de.ft.interitus.network.bettertogether;
 
+import de.ft.interitus.Programm;
+import de.ft.interitus.Var;
+import de.ft.interitus.utils.StringUtils;
+import de.ft.interitus.utils.Unproject;
+
 import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class Client {
 
     public static void connect(String ip, int Port) {
-        Socket socket = null;
         try {
-            socket = new Socket(ip, Port);
+            Socket socket = new Socket(ip,Port);
+            ArrayList<String> titleList = new ArrayList<String>();
+            try {
 
-            OutputStream raus = socket.getOutputStream();
-            PrintStream ps = new PrintStream(raus, true);
-            ps.println("Hallo Welt!");
-            ps.println("Hallo Otto!");
+                OutputStreamWriter outputStreamWriter = new OutputStreamWriter(socket.getOutputStream());
+                outputStreamWriter.write("!R!V"+ Var.PROGRAMM_VERSION+"\\|"+"U"+Var.username+"\n");
+                outputStreamWriter.flush();
 
-            InputStream rein = socket.getInputStream();
-            System.out.println("verf\u00FCgbare Bytes: " + rein.available());
-            BufferedReader buff = new BufferedReader(new InputStreamReader(rein));
 
-            while (buff.ready()) {
-                System.out.println(buff.readLine());
-            }
+                Reader reader;
+                reader = new InputStreamReader(socket.getInputStream());
+                BufferedReader bfreader = new BufferedReader(reader);
 
-        } catch (UnknownHostException e) {
-            System.out.println("Unknown Host...");
-            e.printStackTrace();
-        } catch (IOException e) {
-            System.out.println("IOProbleme...");
-            e.printStackTrace();
-        } finally {
-            if (socket != null)
-                try {
+                if(bfreader.readLine().contains("ok")) {
+                    Programm.logger.config("Accepted");
+
+
+
+                    boolean test = true;
+                    while(test) {
+                        outputStreamWriter.write((int)Unproject.unproject().x+"t"+(int)Unproject.unproject().y+"\n");
+                        outputStreamWriter.flush();
+                        Programm.logger.config(Unproject.unproject().x+"t"+Unproject.unproject().y);
+                        try {
+                            TimeUnit.MILLISECONDS.sleep(500);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+
+
+
+                }else{
+                    Programm.logger.config("Error");
                     socket.close();
-                    System.out.println("Socket geschlossen...");
-                } catch (IOException e) {
-                    System.out.println("Socket nicht zu schliessen...");
+                    return;
+                }
+
+
+                ObjectInputStream objectInput = new ObjectInputStream(socket.getInputStream());
+                try {
+                    Object object = objectInput.readObject();
+                    titleList =  (ArrayList<String>) object;
+                    System.out.println(titleList.get(1));
+                } catch (ClassNotFoundException e) {
+                    System.out.println("The title list has not come from the server");
                     e.printStackTrace();
                 }
+            } catch (IOException e) {
+                System.out.println("The socket for reading the object has problem");
+                e.printStackTrace();
+            }
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
+
+
+
+
+
 }

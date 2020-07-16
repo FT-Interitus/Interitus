@@ -23,13 +23,16 @@ import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.UI.UILoadEvent;
 import de.ft.interitus.loading.Loading;
 import de.ft.interitus.loading.SplashScreen;
+import de.ft.interitus.network.bettertogether.Manager;
 import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.plugin.store.ReadStorePlugins;
 import de.ft.interitus.projecttypes.device.BlockTypes.Init;
 import de.ft.interitus.utils.FolderUtils;
 import de.ft.interitus.utils.NetworkScan;
 import de.ft.interitus.utils.UserNameGetter;
+import org.lwjgl.openal.AL;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -58,6 +61,7 @@ public class Programm extends Game {
         LoggerInit.init();
         DebugPrinter.detect();
 
+
         if(Var.savemode) {
             logger.warning("Programm is running in savemode");
         }
@@ -65,7 +69,7 @@ public class Programm extends Game {
         Var.splashscreen = SplashScreen.create();
 
 
-        //Manager.init();
+
 
         Var.username = UserNameGetter.get();
 
@@ -81,7 +85,7 @@ public class Programm extends Game {
         };
         VisUI.load(VisUI.SkinScale.X1);
         Programm.logger.config("Loaded Vis-UI");
-
+/*
         EventVar.uiEventManager.UILoadEvent(new UILoadEvent(this));
 
         try {
@@ -95,9 +99,14 @@ public class Programm extends Game {
             Var.nointernetconnection = true;
         }
 
+
+ */
+
+
         Init.initBlocks();
 
         UI.init();
+
         Programm.logger.config("UI element loaded");
         if(!Var.savemode) {
             CheckShortcuts.loadArrayList();//bevor CheckShortcuts.loatArraylist muss die ui schon die menuebar eleente erstellt haben!!!!!!!!!
@@ -154,9 +163,10 @@ public class Programm extends Game {
                 e.printStackTrace();
             }
         }
-       //TODO empty temp folder
+
 
         // AL.destroy(); //Destroy Sound System //TODO lwjgl 3
+
 
         System.exit(0);
 

@@ -3,13 +3,18 @@ package de.ft.interitus.network.bettertogether;
 import java.io.IOException;
 
 public class Manager {
-    public static void init() {
-        Thread serverthread = new Thread() {
+
+
+    public static void startserver() {
+       Thread serverthread = new Thread() {
             @Override
             public void run() {
                 try {
-                    Server.start();
-                } catch (IOException e) {
+                    Server.start(9990);
+
+
+
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -17,9 +22,16 @@ public class Manager {
 
 
         serverthread.start();
+    }
 
-        Client.connect("192.168.2.143", 3141);
-
+    public static void startclient() {
+        Thread thread = new Thread()  {
+            @Override
+            public void run() {
+                Client.connect("localhost", 9990);
+            }
+        };
+        thread.start();
     }
 
 

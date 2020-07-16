@@ -8,6 +8,8 @@ public class Settings {
     public static String defaultpfad = System.getProperty("user.home") + "/Interitus-Projects/";
     public static boolean Vsync = true;
     public static int limitfps = 0;
+    public static boolean personalhits = true;
+    public static boolean hints = true;
 
 
 }
