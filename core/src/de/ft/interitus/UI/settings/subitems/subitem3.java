@@ -11,6 +11,8 @@ import com.kotcrab.vis.ui.widget.VisSelectBox;
 import com.kotcrab.vis.ui.widget.VisTable;
 import de.ft.interitus.Settings;
 
+import java.util.ArrayList;
+
 public class subitem3 {
     public static void add(VisTable builder) {
         builder.add(new VisLabel("Grafik Settings")).expandX().fillY();
@@ -20,7 +22,7 @@ public class subitem3 {
         final VisCheckBox checkBox = new VisCheckBox("VSync aktivieren", Settings.Vsync);
         final VisSelectBox<String> limitfps = new VisSelectBox<String>();
 
-        final Array<String> stringArray = new Array<>();
+        final Array<Object> stringArray = new Array<>();
 
         stringArray.add("20");
         stringArray.add("30");
@@ -34,7 +36,16 @@ public class subitem3 {
         if (Gdx.input.isKeyPressed(Input.Keys.E) || Settings.limitfps <= 5 && Settings.limitfps != 0) { //Easteregg
             stringArray.add("5");
         }
-       // limitfps.setItems(stringArray.toArray()); todo hier stimmt eetwas nicht
+
+        String entrys[] = new String[stringArray.size];
+
+        for(int i=0;i<stringArray.size;i++) {
+            entrys[i] = ((String) stringArray.get(i));
+        }
+
+
+        limitfps.setItems(entrys);
+        //todo hier stimmt eetwas nicht
 
         if (Settings.limitfps == 0) {
             limitfps.setSelected("Unlimited");
