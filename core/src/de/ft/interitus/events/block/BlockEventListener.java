@@ -1,5 +1,7 @@
 package de.ft.interitus.events.block;
 
+import de.ft.interitus.Block.Block;
+
 public interface BlockEventListener extends java.util.EventListener {
 
     //TODO Block moved hovered marked Event...
@@ -7,6 +9,5 @@ public interface BlockEventListener extends java.util.EventListener {
 
     void deleteBlock(BlockDeleteEvent e);
     void killmovingwires(BlockKillMovingWiresEvent e);
-
-    //TODO Disable ALl Thread from Blocks if Block is open Important
+    void setNeighbor(BlockNeighborSetEvent e, Block block, Block neightbour, boolean right);
 }

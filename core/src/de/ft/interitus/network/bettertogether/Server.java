@@ -5,13 +5,16 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.Vector2;
 import com.kotcrab.vis.ui.util.dialog.ConfirmDialogListener;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
+import de.ft.interitus.Block.SaveBlock;
 import de.ft.interitus.Programm;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.Var;
+import de.ft.interitus.data.user.BlockCalculator;
 import de.ft.interitus.data.user.DataSaver;
 import de.ft.interitus.data.user.LoadSave;
 import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.projecttypes.ProjectManager;
+import de.ft.interitus.projecttypes.ProjectTypes;
 import de.ft.interitus.projecttypes.VCS;
 import de.ft.interitus.utils.StringUtils;
 
@@ -42,15 +45,6 @@ public class Server {
 
 
 
-                ArrayList<String> my = new ArrayList<String>();
-                my.add("Bernard");
-                my.add("Grey");
-                try {
-                    ObjectOutputStream objectOutput = new ObjectOutputStream(skt.getOutputStream());
-                    objectOutput.writeObject(my);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             }
         }
         catch(IOException e)
@@ -107,9 +101,27 @@ public class Server {
 
     private static void inputhandler(String readLine) {
 
+        if(readLine==null) {
+            return;
+        }
+
         if(readLine.startsWith("!R!")) {
             if(register(readLine)==0) {
                 sendstring("ok");
+
+
+
+                ArrayList<SaveBlock> blocks = BlockCalculator.save();
+
+                try {
+                    ObjectOutputStream objectOutput = new ObjectOutputStream(skt.getOutputStream());
+                    objectOutput.writeObject(blocks);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+
             }else{
                 sendstring("error");
 
@@ -119,11 +131,29 @@ public class Server {
                     e.printStackTrace();
                 }
             }
-        }else{
-            Programm.logger.config(readLine);
-            SharedVar.otherMousepos = tempVector.set(Integer.parseInt(readLine.split("t")[0]),Integer.parseInt(readLine.split("t")[0].replace("t","")));
+        }else if(readLine.startsWith("!M!")){
+
+            SharedVar.otherMousepos = tempVector.set(Integer.parseInt(readLine.split("t")[0].replace("!M!","")),Integer.parseInt(readLine.split("t")[1].replace("t","")));
 
 
+        }else if(readLine.startsWith("!BM!")) {
+            ProjectManager.getActProjectVar().blocks.get(Integer.parseInt(readLine.split("t")[0].replace("!BM!",""))).setX(Integer.parseInt(readLine.split("t")[1].replace("t","")));
+            ProjectManager.getActProjectVar().blocks.get(Integer.parseInt(readLine.split("t")[0].replace("!BM!",""))).setY(Integer.parseInt(readLine.split("t")[2].replace("t","")));
+        }else if(readLine.startsWith("!BNL!")) {
+            if(Integer.parseInt(readLine.split("t")[1].replace("t",""))!=-1) {
+                ProjectManager.getActProjectVar().blocks.get(Integer.parseInt(readLine.split("t")[0].replace("!BNL!",""))).setLeft(ProjectManager.getActProjectVar().blocks.get(Integer.parseInt(readLine.split("t")[1].replace("t",""))));
+
+            }else {
+                ProjectManager.getActProjectVar().blocks.get(Integer.parseInt(readLine.split("t")[0].replace("!BNL!", ""))).setLeft(null);
+            }
+        }else if(readLine.startsWith("!BNR!")) {
+            if(Integer.parseInt(readLine.split("t")[1].replace("t",""))!=-1) {
+                ProjectManager.getActProjectVar().blocks.get(Integer.parseInt(readLine.split("t")[0].replace("!BNR!",""))).setRight(ProjectManager.getActProjectVar().blocks.get(Integer.parseInt(readLine.split("t")[1].replace("t",""))));
+
+            }else {
+                ProjectManager.getActProjectVar().blocks.get(Integer.parseInt(readLine.split("t")[0].replace("!BNR!", ""))).setRight(null);
+
+            }
         }
 
 

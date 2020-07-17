@@ -1,7 +1,15 @@
 package de.ft.interitus.network.bettertogether;
 
+import de.ft.interitus.Block.Block;
+import de.ft.interitus.Block.SaveBlock;
 import de.ft.interitus.Programm;
 import de.ft.interitus.Var;
+import de.ft.interitus.data.user.BlockCalculator;
+import de.ft.interitus.events.EventVar;
+import de.ft.interitus.events.block.BlockEventAdapter;
+import de.ft.interitus.events.block.BlockNeighborSetEvent;
+import de.ft.interitus.projecttypes.ProjectManager;
+import de.ft.interitus.projecttypes.ProjectTypes;
 import de.ft.interitus.utils.StringUtils;
 import de.ft.interitus.utils.Unproject;
 
@@ -9,14 +17,43 @@ import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 public class Client {
 
+   private static ArrayList<String> sendinglist = new ArrayList<>();
     public static void connect(String ip, int Port) {
+
+        EventVar.blockEventManager.addListener(new BlockEventAdapter() {
+            @Override
+            public void setNeighbor(BlockNeighborSetEvent e, Block block, Block neightbour,boolean right) {
+
+
+                if(right) {
+                    if(neightbour==null) {
+                        sendinglist.add("!BNR!"+block.getIndex()+"t"+"-1"+"\n");
+                    }else {
+                        sendinglist.add("!BNR!" + block.getIndex() + "t" + neightbour.getIndex() + "\n");
+                    }
+                }else{
+                    if(neightbour==null) {
+                        sendinglist.add("!BNL!" + block.getIndex() + "t" + "-1" + "\n");
+                    }else {
+                        sendinglist.add("!BNL!" + block.getIndex() + "t" + neightbour.getIndex() + "\n");
+                    }
+                }
+
+
+
+
+            }
+        });
+
         try {
             Socket socket = new Socket(ip,Port);
-            ArrayList<String> titleList = new ArrayList<String>();
+
             try {
 
                 OutputStreamWriter outputStreamWriter = new OutputStreamWriter(socket.getOutputStream());
@@ -32,14 +69,69 @@ public class Client {
                     Programm.logger.config("Accepted");
 
 
+                    ObjectInputStream objectInput = new ObjectInputStream(socket.getInputStream());
+                    try {
+                        ArrayList<SaveBlock> titleList;
+                        Object object = objectInput.readObject();
+                        titleList =  (ArrayList<SaveBlock>) object;
+                        BlockCalculator.extract(titleList);
+                    } catch (ClassNotFoundException e) {
+                        System.out.println("The title list has not come from the server");
+                        e.printStackTrace();
+                    }
 
-                    boolean test = true;
-                    while(test) {
-                        outputStreamWriter.write((int)Unproject.unproject().x+"t"+(int)Unproject.unproject().y+"\n");
+
+                    Timer blockmovingtimer = new Timer();
+                    blockmovingtimer.scheduleAtFixedRate(new TimerTask() {
+                        @Override
+                        public void run() {
+                            if(ProjectManager.getActProjectVar().markedblock!=null) {
+                               sendinglist.add("!BM!"+ProjectManager.getActProjectVar().markedblock.getIndex()+"t"+ProjectManager.getActProjectVar().markedblock.getX()+"t"+ProjectManager.getActProjectVar().markedblock.getY()+"\n");
+
+                            }
+
+
+                        }
+                    },50,50);
+
+
+
+                    sendinglist.clear();
+
+                    while(true) {
+
+                        while(sendinglist.size()!=0) {
+
+                            outputStreamWriter.write(sendinglist.get(0));
+                            outputStreamWriter.flush();
+                            sendinglist.remove(0);
+
+
+                            try {
+                                TimeUnit.MILLISECONDS.sleep(10);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+
+                            outputStreamWriter.write("!M!"+(int)Unproject.unproject().x+"t"+(int)Unproject.unproject().y+"\n");
+                            outputStreamWriter.flush();
+
+                        }
+
+
+                        outputStreamWriter.write("!M!"+(int)Unproject.unproject().x+"t"+(int)Unproject.unproject().y+"\n");
                         outputStreamWriter.flush();
-                        Programm.logger.config(Unproject.unproject().x+"t"+Unproject.unproject().y);
+
+
+
+
+
+
+
+
+
                         try {
-                            TimeUnit.MILLISECONDS.sleep(500);
+                            TimeUnit.MILLISECONDS.sleep(50);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -55,15 +147,7 @@ public class Client {
                 }
 
 
-                ObjectInputStream objectInput = new ObjectInputStream(socket.getInputStream());
-                try {
-                    Object object = objectInput.readObject();
-                    titleList =  (ArrayList<String>) object;
-                    System.out.println(titleList.get(1));
-                } catch (ClassNotFoundException e) {
-                    System.out.println("The title list has not come from the server");
-                    e.printStackTrace();
-                }
+
             } catch (IOException e) {
                 System.out.println("The socket for reading the object has problem");
                 e.printStackTrace();

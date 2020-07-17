@@ -15,6 +15,7 @@ import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.block.BlockCreateEvent;
 import de.ft.interitus.events.block.BlockDeleteEvent;
+import de.ft.interitus.events.block.BlockNeighborSetEvent;
 import de.ft.interitus.events.rightclick.RightClickButtonSelectEvent;
 import de.ft.interitus.events.rightclick.RightClickCloseEvent;
 import de.ft.interitus.events.rightclick.RightClickEventListener;
@@ -358,6 +359,14 @@ public abstract class Block implements VisibleObjects {
     public void setLeft(Block left) { //Setzt einen neuen linken nachbar
 
 
+        if(left==null) {
+            if(this.left!=null) {
+                if(this.left.getRight()==null) {
+                    this.left.setRight(null);
+                }
+            }
+        }
+
         if (this.left != left) { //Wenn der linke Nachbar nicht der schon der Gleiche Block ist (Sonst tritt hier ein OverFlow auf siehe set Right)
             this.left = left;      //Block wird als Nachbar aufgenommen
         }
@@ -366,6 +375,9 @@ public abstract class Block implements VisibleObjects {
                 left.setRight(this); //Wird auch diese Verbindung neu gesetzt (Um Nachbarsetzten zu erleichtern (Aus der Schlussfolgerung das der Rechte Nachbar vom linken Nachbar man selbst ist) )
             }
         }
+
+
+        EventVar.blockEventManager.setNeighbor(new BlockNeighborSetEvent(this),this,left,false);
 
     }
 
@@ -380,6 +392,14 @@ public abstract class Block implements VisibleObjects {
 
     public void setRight(Block right) {
 
+        if(right==null) {
+            if(this.right!=null) {
+                if(this.right.getLeft()==null) {
+                    this.right.setLeft(null);
+                }
+            }
+        }
+
         if (this.right != right) { //Wenn der rechte Nachbar nicht der schon der Gleiche Block ist (Sonst tritt hier ein OverFlow auf siehe set Left)
             this.right = right;//Block wird als Nachbar aufgenommen
         }
@@ -388,6 +408,8 @@ public abstract class Block implements VisibleObjects {
                 right.setLeft(this);//Wird auch diese Verbindung neu gesetzt (Um Nachbarsetzten zu erleichtern (Aus der Schlussfolgerung das der linke Nachbar vom rechten Nachbar man selbst ist))
             }
         }
+
+        EventVar.blockEventManager.setNeighbor(new BlockNeighborSetEvent(this),this,right,true);
 
     }
 
