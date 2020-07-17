@@ -116,6 +116,13 @@ public class Client {
                             outputStreamWriter.write("!M!"+(int)Unproject.unproject().x+"t"+(int)Unproject.unproject().y+"\n");
                             outputStreamWriter.flush();
 
+                            try {
+                                TimeUnit.MILLISECONDS.sleep(10);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+
+
                         }
 
 
