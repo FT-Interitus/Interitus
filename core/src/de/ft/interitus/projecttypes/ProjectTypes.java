@@ -4,6 +4,7 @@ import de.ft.interitus.Block.Generators.*;
 import de.ft.interitus.plugin.PluginRegister;
 import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.device.ProgrammableObjekt;
+import de.ft.interitus.projecttypes.types.ProjectCreator;
 
 import java.util.ArrayList;
 
@@ -18,8 +19,9 @@ public class ProjectTypes {
     private WireGenerator wireGenerator;
     private WireNodeGenerator wireNodeGenerator;
     private BlocktoSaveGenerator blocktoSaveGenerator;
+    private ProjectCreator projectCreator;
 
-    public ProjectTypes(PluginRegister pluginRegister, ProgrammableObjekt PO, String name, ArrayList<PlatformSpecificBlock> blocks, BlockGenerator blockgenerator, BlockUpdateGenerator updategenerator, WireGenerator wireGenerator, WireNodeGenerator wireNodeGenerator, BlocktoSaveGenerator blocktoSaveGenerator, BlockVarGenerator blockVarGenerator) {
+    public ProjectTypes(PluginRegister pluginRegister, ProgrammableObjekt PO, String name, ArrayList<PlatformSpecificBlock> blocks, BlockGenerator blockgenerator, BlockUpdateGenerator updategenerator, WireGenerator wireGenerator, WireNodeGenerator wireNodeGenerator, BlocktoSaveGenerator blocktoSaveGenerator, BlockVarGenerator blockVarGenerator, ProjectCreator projectCreator) {
         this.projectblocks = blocks;
         this.PO = PO;
         this.name = name;
@@ -30,6 +32,7 @@ public class ProjectTypes {
         this.blocktoSaveGenerator = blocktoSaveGenerator;
         this.pluginRegister = pluginRegister;
         this.blockVarGenerator = blockVarGenerator;
+        this.projectCreator = projectCreator;
     }
 
     public ProgrammableObjekt getPO() {
@@ -109,4 +112,7 @@ public class ProjectTypes {
     }
 
 
+  public void initProject() {
+        projectCreator.create();
+  }
 }

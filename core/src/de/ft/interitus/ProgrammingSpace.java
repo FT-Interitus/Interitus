@@ -24,6 +24,7 @@ import de.ft.interitus.UI.projectsettings.subitems.Informations;
 import de.ft.interitus.UI.settings.subitems.subitem17;
 import de.ft.interitus.UI.shortcut.shortcuts.BlockShortcuts;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
+import de.ft.interitus.compiler.Arduino.ArduinoCompiler;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.network.bettertogether.Manager;
 import de.ft.interitus.network.bettertogether.SharedVar;
@@ -73,12 +74,10 @@ public class ProgrammingSpace extends ScreenAdapter {
         //TODO Debug hier wird immer ein Ev3 Project erstellt
 
 
-        Var.openprojects.add(ProjectTypesVar.projectTypes.get(0).init());
 
 
         pressedKeys = new PressedKeys();
-        RechtsKlick.Init();
-        BlockTappedBar.init();
+
 
         nativ = new PluginRegister();
         nativ.config(Configuration.name, "Nativ");
@@ -92,6 +91,18 @@ public class ProgrammingSpace extends ScreenAdapter {
 
         batch = new SpriteBatch();
 
+        cam.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
+        UI.UIcam.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
+
+
+        Var.openprojects.add(ProjectTypesVar.projectTypes.get(0).init());
+
+        UI.updatedragui(shapeRenderer, true, batch);
+        ProjectManager.getActProjectVar().projectType.initProject();
+
+        RechtsKlick.Init();
+        BlockTappedBar.init();
+
 
         de.ft.interitus.UI.Viewport.init();
 
@@ -103,8 +114,6 @@ public class ProgrammingSpace extends ScreenAdapter {
         s.setInside(AssetLoader.switch_inside);
 
 
-        cam.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
-        UI.UIcam.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
 
 
         textfieldtest = new TextField(500, 600, 100, 25);
@@ -118,6 +127,8 @@ public class ProgrammingSpace extends ScreenAdapter {
         //   PortUpdate.UpdateConnectionWindowPortsList();
 
 
+
+
         System.gc(); //Clean RAM after Loading
 
 
@@ -128,6 +139,12 @@ public class ProgrammingSpace extends ScreenAdapter {
     public void render(float delta) {
 
 
+
+
+
+        if(UI.button_start.isjustPressednormal()){
+            ArduinoCompiler.compile();
+        }
 
 
 

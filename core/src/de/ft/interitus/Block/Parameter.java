@@ -1,12 +1,15 @@
 package de.ft.interitus.Block;
 
 
+import com.badlogic.gdx.graphics.Texture;
+
 public class Parameter {
 
     private Object Parameter;
+    private Texture ParameterTexture;
 
-    public Parameter(Object parameter) {
-
+    public Parameter(Object parameter, Texture ParameterTexture) {
+        this.ParameterTexture=ParameterTexture;
         this.Parameter = parameter;
 
      /*   if(parameter instanceof String) {
@@ -22,7 +25,17 @@ public class Parameter {
         return Parameter;
     }
 
+
+
     public void setParameter(Object parameter) {
         Parameter = parameter;
+    }
+
+    public void setParameterTexture(Texture parameterTexture) {
+        ParameterTexture = parameterTexture;
+    }
+
+    public Texture getParameterTexture() {
+        return ParameterTexture;
     }
 }

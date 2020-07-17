@@ -166,6 +166,11 @@ public class NewProjectWindow {
                     Var.isdialogeopend = false;
                     // ClearActOpenProgramm.clear();
 
+
+
+                    ProjectManager.getActProjectVar().projectType.initProject();
+
+
                     setupBuilder.close();
                 }
             });

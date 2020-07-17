@@ -102,6 +102,9 @@ public class AssetLoader {
     public static Texture img_debugstart;
     public static Texture img_debugstart_mouseover;
     public static Texture img_debugstart_pressed;
+    
+    ///////////////////////////-BlockParameter Bilder-/////////////////////////////
+    public static Texture img_WaitBlock_warteZeit_Parameter;
 
     //////////////////////////-TabBar-//////////////////////////////
     public static Texture img_Tab;
@@ -185,6 +188,8 @@ public class AssetLoader {
             manager.load(workingdirectory + "connector.png", Texture.class);
             manager.load(workingdirectory + "connector_offerd.png", Texture.class);
 
+            manager.load(workingdirectory + "Block/Parameter/WaitBlock/WaitParameter.png", Texture.class);
+
             group = "Switches";
             //Switch
             //Switch Dark
@@ -255,6 +260,9 @@ public class AssetLoader {
 
         try {
             group = "";
+
+            manager.load(workingdirectory + "Block/Parameter/WaitBlock/WaitParameter.png", Texture.class);
+            img_WaitBlock_warteZeit_Parameter = manager.get(workingdirectory + "Block/Parameter/WaitBlock/WaitParameter.png");
 
             img_Tab = manager.get(workingdirectory + "TabBar/Tabimage.png");
 

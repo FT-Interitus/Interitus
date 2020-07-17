@@ -15,6 +15,6 @@ public class InitRoboArm {
     public static ProjectTypes init() {
 
 
-        return new ProjectTypes(ProgrammingSpace.nativ, new RoboArm(), "Arduino-RoboterArm-Projekt", blocks, new DefaultBlockGenerator(), new DefaultBlockUpdateGenerator(), new DefaultWireGenerator(), new DefaultWireNodeGenerator(), new DefaultSaveBlockGenerator(), new DefaultBlockVarGenerator());
+        return new ProjectTypes(ProgrammingSpace.nativ, new RoboArm(), "Arduino-RoboterArm-Projekt", blocks, new DefaultBlockGenerator(), new DefaultBlockUpdateGenerator(), new DefaultWireGenerator(), new DefaultWireNodeGenerator(), new DefaultSaveBlockGenerator(), new DefaultBlockVarGenerator(),null);
     }
 }

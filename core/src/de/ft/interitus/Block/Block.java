@@ -2,6 +2,7 @@ package de.ft.interitus.Block;
 
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
@@ -59,6 +60,9 @@ public abstract class Block implements VisibleObjects {
     private final BlockUpdateGenerator blockUpdateGenerator;
     private final BlocktoSaveGenerator blocktoSaveGenerator;
     private PlatformSpecificBlock blocktype = null;
+
+    private GlyphLayout glyphLayout = new GlyphLayout();
+
 
     public Block(final int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock, BlockUpdateGenerator update, BlocktoSaveGenerator blocktoSaveGenerator) { //Initzialisieren des Blocks
         this.blocktype = platformSpecificBlock;
@@ -659,7 +663,21 @@ public abstract class Block implements VisibleObjects {
             batch.draw(AssetLoader.connector, getwireconnector_right().x, getwireconnector_right().y, 20, 20);
         }
 
-        font.draw(batch, "index:  " + this.getIndex() + " Block: " + this.getBlocktype().getName(), this.getX() + 5, this.getY() + 30); //DEBUG Block Index auf dem Block anzeigen
+        //font.draw(batch, "index:  " + this.getIndex() + " Block: " + this.getBlocktype().getName(), this.getX() + 5, this.getY() + 30); //DEBUG Block Index auf dem Block anzeigen
+        font.draw(batch,this.getBlocktype().getName(), this.getX() + 5, this.getY() + this.getH() - 10); //DEBUG Block Index auf dem Block anzeigen
+
+
+            ///////////////////////////////PARAMETER//ANZEIGE/////////////////////////////////////////////////
+try {
+    for (int i = 0; i < this.getBlocktype().getBlockParameter().size(); i++) {
+        glyphLayout.setText(font, "" + ((int) this.getBlocktype().getBlockParameter().get(i).getParameter()));//TODO var type!!
+        float x=this.getX() + (20 * i) + 20;
+        float y=this.getY() + glyphLayout.height + 5;
+        batch.draw(AssetLoader.img_WaitBlock_warteZeit_Parameter,x+glyphLayout.width/2-10,y+10,20,20);
+        font.draw(batch, glyphLayout, x, y);
+    }
+}catch(NullPointerException e){}
+
     }
 
     /**
