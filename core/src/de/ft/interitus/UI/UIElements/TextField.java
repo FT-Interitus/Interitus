@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.check.Check;
 import de.ft.interitus.UI.UIElements.check.InputManager;
 
@@ -18,7 +19,6 @@ public class TextField {
     private final int w;
     private final int h;
     private final int begrenzung = -1;
-    SpriteBatch b = new SpriteBatch();
     BitmapFont font = new BitmapFont();
     Texture background;
     Texture Backgroundactive;
@@ -84,12 +84,12 @@ public class TextField {
         }
 
 
-        b.begin();
+        UI.UIbatch.begin();
         if (active) {
-            b.draw(Backgroundactive, x, y, w, h);
+            UI.UIbatch.draw(Backgroundactive, x, y, w, h);
 
         } else {
-            b.draw(background, x, y, w, h);
+            UI.UIbatch.draw(background, x, y, w, h);
 
         }
         //  font.draw(b, input, x+5, y + font.getLineHeight());
@@ -98,26 +98,26 @@ public class TextField {
         switch (TextAnordnung) {
             case 0:
                 glyphLayout.setText(font, input);
-                font.draw(b, glyphLayout, x + 5, y + glyphLayout.height + h / 2 - glyphLayout.height / 2);
+                font.draw(UI.UIbatch, glyphLayout, x + 5, y + glyphLayout.height + h / 2 - glyphLayout.height / 2);
 
 
                 if (active && cursorstate) {
-                    b.draw(curser, x + glyphLayout.width + 7, y + 4, 2, 17);
+                    UI.UIbatch.draw(curser, x + glyphLayout.width + 7, y + 4, 2, 17);
                 }
 
                 break;
             case 1:
                 glyphLayout.setText(font, input);
-                font.draw(b, glyphLayout, x + w / 2 - glyphLayout.width / 2, y + glyphLayout.height + h / 2 - glyphLayout.height / 2);
+                font.draw(UI.UIbatch, glyphLayout, x + w / 2 - glyphLayout.width / 2, y + glyphLayout.height + h / 2 - glyphLayout.height / 2);
 
 
                 if (active && cursorstate) {
-                    b.draw(curser, x + w / 2 + glyphLayout.width / 2 + 2, y + 4, 2, 17);
+                    UI.UIbatch.draw(curser, x + w / 2 + glyphLayout.width / 2 + 2, y + 4, 2, 17);
                 }
                 break;
         }
 
-        b.end();
+        UI.UIbatch.end();
 
 
         if (System.currentTimeMillis() > cursersave) {

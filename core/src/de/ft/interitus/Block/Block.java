@@ -670,11 +670,11 @@ public abstract class Block implements VisibleObjects {
             ///////////////////////////////PARAMETER//ANZEIGE/////////////////////////////////////////////////
 try {
     for (int i = 0; i < this.getBlocktype().getBlockParameter().size(); i++) {
-        glyphLayout.setText(font, "" + ((int) this.getBlocktype().getBlockParameter().get(i).getParameter()));//TODO var type!!
-        float x=this.getX() + (20 * i) + 20;
+        glyphLayout.setText(font, "" +  this.getBlocktype().getBlockParameter().get(i).getParameter());//TODO var type!!
+        float x=this.getX() + (25 * i) + 20;
         float y=this.getY() + glyphLayout.height + 5;
-        batch.draw(AssetLoader.img_WaitBlock_warteZeit_Parameter,x+glyphLayout.width/2-10,y+10,20,20);
-        font.draw(batch, glyphLayout, x, y);
+        batch.draw(AssetLoader.img_WaitBlock_warteZeit_Parameter,x-10,y+10,20,20);
+        font.draw(batch, glyphLayout, x-glyphLayout.width/2, y);
     }
 }catch(NullPointerException e){}
 

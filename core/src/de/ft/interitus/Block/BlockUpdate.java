@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Programm;
 import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.Var;
 import de.ft.interitus.data.user.changes.DataManager;
@@ -468,7 +469,7 @@ public abstract class BlockUpdate extends Thread {
                         }
 
 
-                        if (!CheckKollision.checkmousewithblock(block) && Gdx.input.isButtonPressed(0) && !block.isMoving() && block.isMarked()) {
+                        if (!CheckKollision.checkmousewithblock(block) && Gdx.input.isButtonPressed(0) && !block.isMoving() && block.isMarked()&& (!UI.check.isMouseover(UIVar.blockeinstellungen_x,UIVar.blockeinstellungen_y,UIVar.blockeinstellungen_w,UIVar.blockeinstellungen_h)||!UIVar.isBlockSettingsopen)) {
                             block.setMarked(false);
                             ProjectManager.getActProjectVar().marked = false;
                             ProjectManager.getActProjectVar().markedblock = null;

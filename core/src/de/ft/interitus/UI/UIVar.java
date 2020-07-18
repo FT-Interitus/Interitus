@@ -19,4 +19,13 @@ public class UIVar {
 
 
     public static int buttonbarzeile_h = 20;
+
+    public static int blockeinstellungen_x=0;
+    public static int blockeinstellungen_y=0;
+    public static int blockeinstellungen_w=0;
+    public static int blockeinstellungen_h=0;
+    public static int abstandzwischenparametern=10;
+    public static int abstandText=5;
+    public static boolean isBlockSettingsopen=false;
+
 }

@@ -8,19 +8,26 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.kotcrab.vis.ui.widget.MenuBar;
 import com.kotcrab.vis.ui.widget.MenuItem;
+import com.kotcrab.vis.ui.widget.VisTextField;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.DisplayErrors;
+import de.ft.interitus.Programm;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.UIElements.Button;
 import de.ft.interitus.UI.UIElements.ButtonBar;
 import de.ft.interitus.UI.UIElements.TabBar.Tab;
 import de.ft.interitus.UI.UIElements.TabBar.TabBar;
+import de.ft.interitus.UI.UIElements.TextField;
+import de.ft.interitus.UI.UIElements.check.Check;
 import de.ft.interitus.UI.UIElements.check.InputManager;
 import de.ft.interitus.UI.projectsettings.ProjectSettingsUI;
 import de.ft.interitus.UI.settings.SettingsUI;
@@ -72,6 +79,10 @@ public class UI {
     private static boolean horizontalrezising = false;
     public static GlyphLayout glyphLayout = new GlyphLayout();
     public static BitmapFont font = new BitmapFont();
+    public static Check check=new Check();
+
+    static ArrayList<VisTextField> textFielder = new ArrayList<>();
+
 
     public static void userresize() {
         if (!curserveränderungsblockade) {
@@ -168,32 +179,69 @@ public class UI {
 
 
 
+
         Block block=ProjectManager.getActProjectVar().markedblock;
         if (block!=null && block.getBlocktype().getBlockParameter() != null) {
 
-            int w=150;
-            int h=UIVar.programmflaeche_h-UIVar.abstandvonRand*2;
-            int x=Gdx.graphics.getWidth()-UIVar.abstandvonRand*2-w;
-            int y=UIVar.programmflaeche_y+UIVar.abstandvonRand;
+
+            Programm.logger.config("Schleife");
+
+            UIVar.blockeinstellungen_w=170;
+            UIVar.blockeinstellungen_h=UIVar.programmflaeche_h-UIVar.abstandvonRand*2;
+            UIVar.blockeinstellungen_x=Gdx.graphics.getWidth()-UIVar.abstandvonRand*2-UIVar.blockeinstellungen_w;
+            UIVar.blockeinstellungen_y=UIVar.programmflaeche_y+UIVar.abstandvonRand;
+
 
             renderer.begin(ShapeRenderer.ShapeType.Filled);
-            renderer.setColor(14f/255f, 105f/255f, 161f/255f,1f);
-            renderer.rect(x,y,w,h);
+            renderer.setColor(81f/255f, 97f/255f, 114f/255f,1f);
+            renderer.rect(UIVar.blockeinstellungen_x,UIVar.blockeinstellungen_y,UIVar.blockeinstellungen_w,UIVar.blockeinstellungen_h);
             renderer.end();
 UIbatch.begin();
+
+
             for (int i = 0; i < block.getBlocktype().getBlockParameter().size(); i++) {
-                glyphLayout.setText(font,block.getBlocktype().getBlockParameter().get(i).getParameterName());
-                font.draw(UIbatch,glyphLayout,x+3,y+h-3-(i*glyphLayout.height+3));
+
+                if(! UIVar.isBlockSettingsopen) {
+                textFielder.add(new VisTextField(block.getBlocktype().getBlockParameter().get(i).getParameter().toString()));
+                textFielder.get(textFielder.size() - 1).addListener(new ChangeListener() {
+                    @Override
+                    public void changed(ChangeEvent event, Actor actor) {
+                        ProjectManager.getActProjectVar().markedblock.getBlocktype().getBlockParameter().get(textFielder.indexOf(actor)).setParameter(((VisTextField) actor).getText());
+                    }
+                });
+
+                UI.stage.addActor(textFielder.get(i));
+                glyphLayout.setText(font, block.getBlocktype().getBlockParameter().get(i).getParameterName());
+                textFielder.get(i).setWidth(UIVar.blockeinstellungen_w - 10);
+                textFielder.get(i).setPosition(UIVar.blockeinstellungen_x + 5, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - UIVar.abstandText - glyphLayout.height - (i * (glyphLayout.height + UIVar.abstandzwischenparametern + UIVar.abstandText + textFielder.get(i).getHeight()) + 3) - textFielder.get(i).getHeight());
             }
+                font.draw(UIbatch, glyphLayout, UIVar.blockeinstellungen_x + 5, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - (i * (glyphLayout.height + textFielder.get(i).getHeight() + UIVar.abstandzwischenparametern + UIVar.abstandText) + 3));
+
+
+            }
+            UIVar.isBlockSettingsopen=true;
             UIbatch.end();
 
+        }else if(textFielder.size()>0){
+            UIVar.isBlockSettingsopen=false;
+            for(int i=0;i<textFielder.size();i++){
+                textFielder.get(i).removeListener(textFielder.get(i).getListeners().get(0));
+                textFielder.get(i).remove();
+            }
+            textFielder.clear();
         }
-
 
 
     }
 
     public static void init() {
+
+
+
+
+
+
+
         UI.UIbatch = new SpriteBatch();
         UI.UIcam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         UI.UIviewport = new ScreenViewport(UI.UIcam);
@@ -211,7 +259,6 @@ UIbatch.begin();
         proset = new ProjectSettingsUI();
 
         menuBar = new MenuBar();
-
 
         root.add(menuBar.getTable()).expandX().fillX().row();
         root.add().expand().fill().row();
