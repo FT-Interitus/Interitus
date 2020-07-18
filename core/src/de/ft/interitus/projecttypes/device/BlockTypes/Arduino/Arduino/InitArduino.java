@@ -3,6 +3,7 @@ package de.ft.interitus.projecttypes.device.BlockTypes.Arduino.Arduino;
 import de.ft.interitus.Block.Interitus.*;
 import de.ft.interitus.Block.Interitus.save.DefaultSaveBlockGenerator;
 import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.compiler.Arduino.ArduinoCompiler;
 import de.ft.interitus.projecttypes.ProjectTypes;
 import de.ft.interitus.projecttypes.device.BlockTypes.Arduino.Arduino.programmablauf.Wait;
 import de.ft.interitus.projecttypes.device.BlockTypes.Arduino.Arduino.programmablauf.WhileLoopEnd;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
 
 public class InitArduino {
     static ArrayList<PlatformSpecificBlock> blocks = new ArrayList<>();
-    static ProjectTypes arduino = new ProjectTypes(ProgrammingSpace.nativ, new Arduino(), "Arduino-Projekt", blocks, new DefaultBlockGenerator(), new DefaultBlockUpdateGenerator(), new DefaultWireGenerator(), new DefaultWireNodeGenerator(), new DefaultSaveBlockGenerator(), new DefaultBlockVarGenerator(),new ArduinoCreator());
+    static ProjectTypes arduino = new ProjectTypes(ProgrammingSpace.nativ, new Arduino(), "Arduino-Projekt", blocks, new DefaultBlockGenerator(), new DefaultBlockUpdateGenerator(), new DefaultWireGenerator(), new DefaultWireNodeGenerator(), new DefaultSaveBlockGenerator(), new DefaultBlockVarGenerator(),new ArduinoCreator(),new ArduinoCompiler());
 
 
     public static ProjectTypes init() {

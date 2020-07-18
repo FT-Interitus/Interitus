@@ -38,6 +38,9 @@ import de.ft.interitus.utils.CheckKollision;
 public abstract class Block implements VisibleObjects {
     private final Vector2 wireconnector_right = new Vector2(0, 0); //Die rechte wire-Anschluss Position
     private final Vector2 wireconnector_left = new Vector2(0, 0); //Die linke wire-Anschluss Position
+    private final RightClickEventListener rightClickEventListener;
+    private final BlockUpdateGenerator blockUpdateGenerator;
+    private final BlocktoSaveGenerator blocktoSaveGenerator;
     public boolean seted = true; //Ob der Block losgelassen wurde bzw ob der Block eine statische Position hat
     public boolean moved = false; // Ob der Block gerade mit der Maus bewegt wird
     private boolean marked = false; //Ob der Block gerade makiert ist
@@ -56,9 +59,6 @@ public abstract class Block implements VisibleObjects {
     private Block right = null; //Der linke verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
     private Wire wire_left = null; //linke verbundene Wire
     private Wire wire_right = null; //rechte verbunde Wire
-    private final RightClickEventListener rightClickEventListener;
-    private final BlockUpdateGenerator blockUpdateGenerator;
-    private final BlocktoSaveGenerator blocktoSaveGenerator;
     private PlatformSpecificBlock blocktype = null;
 
     private GlyphLayout glyphLayout = new GlyphLayout();
@@ -363,9 +363,9 @@ public abstract class Block implements VisibleObjects {
     public void setLeft(Block left) { //Setzt einen neuen linken nachbar
 
 
-        if(left==null) {
-            if(this.left!=null) {
-                if(this.left.getRight()==null) {
+        if (left == null) {
+            if (this.left != null) {
+                if (this.left.getRight() == null) {
                     this.left.setRight(null);
                 }
             }
@@ -381,7 +381,7 @@ public abstract class Block implements VisibleObjects {
         }
 
 
-        EventVar.blockEventManager.setNeighbor(new BlockNeighborSetEvent(this),this,left,false);
+        EventVar.blockEventManager.setNeighbor(new BlockNeighborSetEvent(this), this, left, false);
 
     }
 
@@ -396,9 +396,9 @@ public abstract class Block implements VisibleObjects {
 
     public void setRight(Block right) {
 
-        if(right==null) {
-            if(this.right!=null) {
-                if(this.right.getLeft()==null) {
+        if (right == null) {
+            if (this.right != null) {
+                if (this.right.getLeft() == null) {
                     this.right.setLeft(null);
                 }
             }
@@ -413,7 +413,7 @@ public abstract class Block implements VisibleObjects {
             }
         }
 
-        EventVar.blockEventManager.setNeighbor(new BlockNeighborSetEvent(this),this,right,true);
+        EventVar.blockEventManager.setNeighbor(new BlockNeighborSetEvent(this), this, right, true);
 
     }
 

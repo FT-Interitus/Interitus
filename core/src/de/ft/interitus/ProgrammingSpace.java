@@ -143,7 +143,7 @@ public class ProgrammingSpace extends ScreenAdapter {
 
 
         if(UI.button_start.isjustPressednormal()){
-            ArduinoCompiler.compile();
+            ProjectManager.getActProjectVar().projectType.getCompiler().compile();
         }
 
 

@@ -1,16 +1,16 @@
 package de.ft.interitus.compiler.Arduino;
 
 import de.ft.interitus.Block.Block;
+import de.ft.interitus.compiler.Compiler;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.device.BlockTypes.Arduino.Arduino.ArduinoBlock;
 
-public class ArduinoCompiler {
-    public static String Programm="";
+public class ArduinoCompiler implements Compiler {
 
 
-    public static void compile() {
-        /////////////Setup Teil
-
+    @Override
+    public String compile() {
+String Programm = "";
         Block a = ProjectManager.getActProjectVar().blocks.get(0);
 
         Programm = ((ArduinoBlock) a.getBlocktype()).getCode()+"\n";
@@ -42,8 +42,6 @@ public class ArduinoCompiler {
 
 
         System.out.println("Code:   \n"+ Programm);
-
+        return Programm;
     }
-
-
 }
