@@ -47,7 +47,7 @@ public class LoopBlock implements PlatformSpecificBlock, ArduinoBlock {
 
     @Override
     public BlockCategories getBlockCategoration() {
-        return BlockCategories.Programm_Sequence;
+        return null;
     }
 
     @Override
