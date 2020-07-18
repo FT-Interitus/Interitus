@@ -2,6 +2,7 @@ package de.ft.interitus.projecttypes.device.BlockTypes.Arduino.Arduino.programma
 
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
+import de.ft.interitus.Programm;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.ProjectTypes;
 import de.ft.interitus.projecttypes.device.BlockTypes.Arduino.Arduino.ArduinoBlock;
@@ -62,7 +63,16 @@ public class SetupBlock implements PlatformSpecificBlock, ArduinoBlock {
 
     @Override
     public int getID() {
-        return ProjectTypesVar.projectTypes.get(ProjectTypesVar.projectTypes.indexOf(type)).getProjectblocks().indexOf(this);
+        for(int i=0;i<ProjectTypesVar.projectTypes.get(ProjectTypesVar.projectTypes.indexOf(type)).getProjectblocks().size();i++) {
+
+            if(ProjectTypesVar.projectTypes.get(ProjectTypesVar.projectTypes.indexOf(type)).getProjectblocks().get(i).getClass()==this.getClass()) {
+
+                return i;
+            }
+
+        }
+
+        return -1;
     }
 
     @Override
