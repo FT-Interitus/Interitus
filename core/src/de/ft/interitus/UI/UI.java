@@ -3,6 +3,8 @@ package de.ft.interitus.UI;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
@@ -68,6 +70,8 @@ public class UI {
     private static int curserstate = 0;
     private static boolean verticalrezising = false;
     private static boolean horizontalrezising = false;
+    public static GlyphLayout glyphLayout = new GlyphLayout();
+    public static BitmapFont font = new BitmapFont();
 
     public static void userresize() {
         if (!curserveränderungsblockade) {
@@ -160,6 +164,7 @@ public class UI {
 
             RoundRectangle.abgerundetesRechteck(renderer, Gdx.graphics.getWidth() - UIVar.unteneinteilung, UIVar.abstandvonRand, UIVar.unteneinteilung - UIVar.abstandvonRand, UIVar.untenhohe - UIVar.abstandvonRand, UIVar.radius);
         }
+        renderer.end();
 
 
 
@@ -171,16 +176,20 @@ public class UI {
             int x=Gdx.graphics.getWidth()-UIVar.abstandvonRand*2-w;
             int y=UIVar.programmflaeche_y+UIVar.abstandvonRand;
 
+            renderer.begin(ShapeRenderer.ShapeType.Filled);
             renderer.setColor(14f/255f, 105f/255f, 161f/255f,1f);
             renderer.rect(x,y,w,h);
-
+            renderer.end();
+UIbatch.begin();
             for (int i = 0; i < block.getBlocktype().getBlockParameter().size(); i++) {
-                System.out.println(block.getBlocktype().getBlockParameter().get(i).getParameterName());
+                glyphLayout.setText(font,block.getBlocktype().getBlockParameter().get(i).getParameterName());
+                font.draw(UIbatch,glyphLayout,x+3,y+h-3-(i*glyphLayout.height+3));
             }
+            UIbatch.end();
+
         }
 
 
-        renderer.end();
 
     }
 
