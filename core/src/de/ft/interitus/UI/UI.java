@@ -184,7 +184,7 @@ public class UI {
         if (block!=null && block.getBlocktype().getBlockParameter() != null) {
 
 
-            Programm.logger.config("Schleife");
+
 
             UIVar.blockeinstellungen_w=170;
             UIVar.blockeinstellungen_h=UIVar.programmflaeche_h-UIVar.abstandvonRand*2;
