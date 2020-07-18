@@ -7,10 +7,14 @@ public class Parameter {
 
     private Object Parameter;
     private Texture ParameterTexture;
+    private String ParameterName;
+    private String ParameterDescription;
 
-    public Parameter(Object parameter, Texture ParameterTexture) {
+    public Parameter(Object parameter, Texture ParameterTexture, String ParameterName, String ParameterDescription) {
         this.ParameterTexture=ParameterTexture;
         this.Parameter = parameter;
+        this.ParameterName = ParameterName;
+        this.ParameterDescription = ParameterDescription;
 
      /*   if(parameter instanceof String) {
             System.out.println("Test");
