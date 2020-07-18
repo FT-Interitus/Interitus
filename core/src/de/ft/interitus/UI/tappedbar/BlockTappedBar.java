@@ -30,26 +30,28 @@ public class BlockTappedBar {
 
         for (int i = 0; i < ProjectManager.getActProjectVar().projectType.getProjectblocks().size(); i++) {
             try {
-                switch (ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i).getBlockCategoration()) {
-                    case ActionBlocks:
-                        ActionBlocks.addItem(new TapBarBlockItem(ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i), ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i).getSmallImage()));
-                        break;
-                    case Programm_Sequence:
-                        Programm_Sequence.addItem(new TapBarBlockItem(ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i), ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i).getSmallImage()));
-                        break;
-                    case Sensors:
-                        Sensors.addItem(new TapBarBlockItem(ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i), ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i).getSmallImage()));
-                        break;
-                    case Data_Operation:
-                        Data_Operation.addItem(new TapBarBlockItem(ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i), ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i).getSmallImage()));
-                        break;
-                    case Specials:
-                        Specials.addItem(new TapBarBlockItem(ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i), ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i).getSmallImage()));
-                        break;
-                    case OwnBlocks:
-                        Programm.logger.severe("Unallowed Block was registered from Plugin "+ProjectManager.getActProjectVar().projectType.getPluginRegister().getName());
-                        break;
+                if(ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i).getBlockCategoration()!=null) {
+                    switch (ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i).getBlockCategoration()) {
+                        case ActionBlocks:
+                            ActionBlocks.addItem(new TapBarBlockItem(ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i), ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i).getSmallImage()));
+                            break;
+                        case Programm_Sequence:
+                            Programm_Sequence.addItem(new TapBarBlockItem(ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i), ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i).getSmallImage()));
+                            break;
+                        case Sensors:
+                            Sensors.addItem(new TapBarBlockItem(ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i), ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i).getSmallImage()));
+                            break;
+                        case Data_Operation:
+                            Data_Operation.addItem(new TapBarBlockItem(ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i), ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i).getSmallImage()));
+                            break;
+                        case Specials:
+                            Specials.addItem(new TapBarBlockItem(ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i), ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i).getSmallImage()));
+                            break;
+                        case OwnBlocks:
+                            Programm.logger.severe("Unallowed Block was registered from Plugin " + ProjectManager.getActProjectVar().projectType.getPluginRegister().getName());
+                            break;
 
+                    }
                 }
             } catch (Exception e) {
                 e.printStackTrace();

@@ -14,10 +14,14 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Debug implements PlatformSpecificBlock {
-    private final ProjectTypes type;
+    private  ProjectTypes type;
+
 
     public Debug(ProjectTypes arduino) {
         this.type = arduino;
+
+
+
     }
 
     @Override
@@ -62,8 +66,16 @@ public class Debug implements PlatformSpecificBlock {
 
     @Override
     public int getID() {
-        return ProjectTypesVar.projectTypes.get(ProjectTypesVar.projectTypes.indexOf(type)).getProjectblocks().indexOf(this);
-    }
+        for(int i=0;i<ProjectTypesVar.projectTypes.get(ProjectTypesVar.projectTypes.indexOf(type)).getProjectblocks().size();i++) {
+
+            if(ProjectTypesVar.projectTypes.get(ProjectTypesVar.projectTypes.indexOf(type)).getProjectblocks().get(i).getClass()==this.getClass()) {
+
+                return i;
+            }
+
+        }
+
+        return -1;    }
 
     @Override
     public ProjectTypes getProjectType() {

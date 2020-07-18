@@ -28,7 +28,7 @@ public class Manager {
         Thread thread = new Thread()  {
             @Override
             public void run() {
-                Client.connect("80.142.253.28", 9990);
+                Client.connect("localhost", 9990);
             }
         };
         thread.start();
