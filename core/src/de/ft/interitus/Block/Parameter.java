@@ -30,6 +30,21 @@ public class Parameter {
     }
 
 
+    public String getParameterDescription() {
+        return ParameterDescription;
+    }
+
+    public String getParameterName() {
+        return ParameterName;
+    }
+
+    public void setParameterDescription(String parameterDescription) {
+        ParameterDescription = parameterDescription;
+    }
+
+    public void setParameterName(String parameterName) {
+        ParameterName = parameterName;
+    }
 
     public void setParameter(Object parameter) {
         Parameter = parameter;

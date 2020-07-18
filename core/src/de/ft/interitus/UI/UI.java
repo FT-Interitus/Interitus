@@ -12,6 +12,7 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.kotcrab.vis.ui.widget.MenuBar;
 import com.kotcrab.vis.ui.widget.MenuItem;
+import de.ft.interitus.Block.Block;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.UIElements.Button;
@@ -160,16 +161,26 @@ public class UI {
             RoundRectangle.abgerundetesRechteck(renderer, Gdx.graphics.getWidth() - UIVar.unteneinteilung, UIVar.abstandvonRand, UIVar.unteneinteilung - UIVar.abstandvonRand, UIVar.untenhohe - UIVar.abstandvonRand, UIVar.radius);
         }
 
-        int w=150;
-        int h=UIVar.programmflaeche_h-UIVar.abstandvonRand*2;
-        int x=Gdx.graphics.getWidth()-UIVar.abstandvonRand*2-w;
-        int y=UIVar.programmflaeche_y+UIVar.abstandvonRand;
 
-        renderer.setColor(14f/255f, 105f/255f, 161f/255f,1f);
-        renderer.rect(x,y,w,h);
+
+        Block block=ProjectManager.getActProjectVar().markedblock;
+        if (block!=null && block.getBlocktype().getBlockParameter() != null) {
+
+            int w=150;
+            int h=UIVar.programmflaeche_h-UIVar.abstandvonRand*2;
+            int x=Gdx.graphics.getWidth()-UIVar.abstandvonRand*2-w;
+            int y=UIVar.programmflaeche_y+UIVar.abstandvonRand;
+
+            renderer.setColor(14f/255f, 105f/255f, 161f/255f,1f);
+            renderer.rect(x,y,w,h);
+
+            for (int i = 0; i < block.getBlocktype().getBlockParameter().size(); i++) {
+                System.out.println(block.getBlocktype().getBlockParameter().get(i).getParameterName());
+            }
+        }
+
 
         renderer.end();
-
 
     }
 
