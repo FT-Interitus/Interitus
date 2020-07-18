@@ -235,7 +235,7 @@ public abstract class BlockUpdate extends Thread {
 
 
 
-                            tempdelete = CheckKollision.checkmousewithobject(UIVar.BlockBarX, UIVar.BlockBarY, UIVar.BlockBarW, UIVar.BlockBarH, Unproject.unproject());
+                            tempdelete = UI.check.isMouseover(UIVar.BlockBarX,UIVar.BlockBarY,UIVar.BlockBarW,UIVar.BlockBarH);
 
 
                             if(tempdelete!=willbedelete) {
