@@ -32,7 +32,7 @@ public class WhileLoopEnd implements PlatformSpecificBlock, ArduinoBlock {
 
     @Override
     public String getdescription() {
-        return "Das ist ein Block um eine while schleife zu Beenden mehr dazu findest du auf der GitHub Seite von Interitus.";
+        return "";
     }
 
     @Override

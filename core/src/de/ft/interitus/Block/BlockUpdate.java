@@ -469,7 +469,7 @@ public abstract class BlockUpdate extends Thread {
                         }
 
 
-                        if (!CheckKollision.checkmousewithblock(block) && Gdx.input.isButtonPressed(0) && !block.isMoving() && block.isMarked()&& (!UI.check.isMouseover(UIVar.blockeinstellungen_x,UIVar.blockeinstellungen_y,UIVar.blockeinstellungen_w,UIVar.blockeinstellungen_h)||!UIVar.isBlockSettingsopen)) {
+                        if (!CheckKollision.checkmousewithblock(block) && Gdx.input.isButtonPressed(0) && !block.isMoving() && block.isMarked()&& (!UI.check.isMouseover(UIVar.blockeinstellungen_x,UIVar.blockeinstellungen_y,UIVar.blockeinstellungen_w,UIVar.blockeinstellungen_h)&&!UI.check.wasMousePressed(UIVar.blockeinstellungen_x,UIVar.blockeinstellungen_y,UIVar.blockeinstellungen_w,UIVar.blockeinstellungen_h)||!UIVar.isBlockSettingsopen)) {
                             block.setMarked(false);
                             ProjectManager.getActProjectVar().marked = false;
                             ProjectManager.getActProjectVar().markedblock = null;
