@@ -25,7 +25,7 @@ public class Wait implements PlatformSpecificBlock, ArduinoBlock {
     public Wait(ProjectTypes arduino) {
 
         this.type = arduino;
-        waitdauer=new Parameter(0, AssetLoader.img_WaitBlock_warteZeit_Parameter, "Warte-Zeit", "Die Zeit die abgewartet werden soll");
+        waitdauer=new Parameter(0, AssetLoader.img_WaitBlock_warteZeit_Parameter, "Warte-Zeit", "Die Zeit die abgewartet werden soll","ms");
 
 
         parameters.add(waitdauer);

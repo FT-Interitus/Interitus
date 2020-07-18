@@ -9,12 +9,14 @@ public class Parameter {
     private Texture ParameterTexture;
     private String ParameterName;
     private String ParameterDescription;
+    private String Unit;
 
-    public Parameter(Object parameter, Texture ParameterTexture, String ParameterName, String ParameterDescription) {
+    public Parameter(Object parameter, Texture ParameterTexture, String ParameterName, String ParameterDescription,String Unit) {
         this.ParameterTexture=ParameterTexture;
         this.Parameter = parameter;
         this.ParameterName = ParameterName;
         this.ParameterDescription = ParameterDescription;
+        this.Unit = Unit;
 
      /*   if(parameter instanceof String) {
             System.out.println("Test");
@@ -56,5 +58,9 @@ public class Parameter {
 
     public Texture getParameterTexture() {
         return ParameterTexture;
+    }
+
+    public String getUnit() {
+        return Unit;
     }
 }
