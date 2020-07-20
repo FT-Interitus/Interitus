@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.UI.UI;
+import de.ft.interitus.Var;
 import de.ft.interitus.data.programm.Data;
 import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.projecttypes.ProjectManager;
@@ -65,6 +67,8 @@ public class LoadSave {
 
                         Data.filename.add(fileToSave.getName());
                         Data.path.add(fileToSave.getAbsolutePath());
+
+                        UI.tabbar.getTabbs().get(Var.openprojectindex).getTabButton().setText(fileToSave.getName());
 
                         DataManager.saved();
 

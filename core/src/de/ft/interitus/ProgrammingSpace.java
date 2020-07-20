@@ -203,7 +203,7 @@ public class ProgrammingSpace extends ScreenAdapter {
                         if (ProjectManager.getActProjectVar().visibleblocks.get(i).isMarked()) {
 
 
-                            if (BlockShortcuts.shortCut_deleteBlock.isPressed()) {
+                            if (BlockShortcuts.shortCut_deleteBlock.isPressed()&&ProjectManager.getActProjectVar().visibleblocks.get(i).getBlocktype().canbedeleted()) {
                                 ProjectManager.getActProjectVar().visibleblocks.get(i).delete(false);
                             }
 
@@ -314,12 +314,7 @@ public class ProgrammingSpace extends ScreenAdapter {
         loader(); //Load Images in OpenGL context
 
 
-batch.begin();
 
-        batch.draw(AssetLoader.wire_node, SharedVar.otherMousepos.x,SharedVar.otherMousepos.y,10,10);
-
-
-batch.end();
 
         de.ft.interitus.UI.Viewport.limitfps();
 

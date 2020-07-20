@@ -348,6 +348,9 @@ public class UI {
             }
 
         }
+
+
+
         if (tabbar.getSelectedTab() != null) {
             if (tabbar.getSelectedTab().getIndex() != -1) {
                 if (Var.openprojectindex != tabbar.getSelectedTab().getIndex()) {

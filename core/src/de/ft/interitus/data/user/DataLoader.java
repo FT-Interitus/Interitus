@@ -54,7 +54,7 @@ public class DataLoader {
                         //ThreadManager.stopall();
                         Var.openprojects.add(temptype.init());
 
-                        ProjectManager.getActProjectVar().projectType.initProject();
+
 
                         Var.openprojects.get(Var.openprojects.size() - 1).zoom = settings.getFloat("zoom"); //Befor change to not ignore this change
                         Var.openprojects.get(Var.openprojects.size() - 1).cam_pos.set(settings.getFloat("pos_x"), settings.getFloat("pos_y"));
@@ -64,6 +64,8 @@ public class DataLoader {
 
                         ProjectManager.getActProjectVar().filename = name;
                         ProjectManager.getActProjectVar().path = path;
+
+
 
                         BlockTappedBar.init();
 
