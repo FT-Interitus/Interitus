@@ -24,6 +24,7 @@ public class DesktopLauncher {
 	 *            -dps disable Plugin-Sub-System
 	 *            -a SaveMode (Settings wont be saved)
 	 *            -ud [PATH] Another Place to store User Data
+	 *            -inc Ignore not correctly closed Programm
 	 *
 	 */
 

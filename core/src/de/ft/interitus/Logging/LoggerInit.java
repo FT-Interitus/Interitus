@@ -39,8 +39,10 @@ public class LoggerInit {
 
         if(new File(System.getProperty("user.home")+"/"+Data.foldername+"/it.lock").exists() ){
             if(!Var.savemode) {
-                DisplayErrors.errorStringwithoutException = "Das Programm wurde unerwartet beendet! \nError LOGs findest du hier: \n" + System.getProperty("user.home") + "/" + Data.foldername + "/log";
-            }
+                if(Var.programmarguments.indexOf("-inc")!=-1) {
+                    DisplayErrors.errorStringwithoutException = "Das Programm wurde unerwartet beendet! \nError LOGs findest du hier: \n" + System.getProperty("user.home") + "/" + Data.foldername + "/log";
+                }
+                }
         }else{
             try {
                 if(!new File(System.getProperty("user.home")+"/"+Data.foldername).exists()) {

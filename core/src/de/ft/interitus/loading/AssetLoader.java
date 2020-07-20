@@ -242,7 +242,7 @@ public class AssetLoader {
             manager.load(workingdirectory + "Block/Block_DigitalWrite/links.png", Texture.class);
             manager.load(workingdirectory + "Block/Block_DigitalWrite/rechts.png", Texture.class);
             manager.load(workingdirectory + "Block/Block_DigitalWrite/mitte.png", Texture.class);
-            manager.load(workingdirectory + "Block/Block_DigitalWrite/Parameter_HIGH_LOW.png", Texture.class);
+            manager.load(workingdirectory + "Block/Block_DigitalWrite/parameter_high_low.png", Texture.class);
             manager.load(workingdirectory + "Block/mouseover_links.png", Texture.class);
             manager.load(workingdirectory + "Block/mouseover_rechts.png", Texture.class);
             manager.load(workingdirectory + "Block/mouseover_mitte.png", Texture.class);
@@ -377,7 +377,7 @@ public class AssetLoader {
             DigitalWrite_left = manager.get(workingdirectory + "Block/Block_DigitalWrite/links.png", Texture.class);
             DigitalWrite_right = manager.get(workingdirectory + "Block/Block_DigitalWrite/rechts.png", Texture.class);
             DigitalWrite_middle = manager.get(workingdirectory + "Block/Block_DigitalWrite/mitte.png", Texture.class);
-            Parameter_High_Low = manager.get(workingdirectory + "Block/Block_DigitalWrite/Parameter_HIGH_LOW.png", Texture.class);
+            Parameter_High_Low = manager.get(workingdirectory + "Block/Block_DigitalWrite/parameter_high_low.png", Texture.class);
             mouse_over_rechts = manager.get(workingdirectory + "Block/mouseover_rechts.png", Texture.class);
             mouseover_links = manager.get(workingdirectory + "Block/mouseover_links.png", Texture.class);
             mouse_over_mitte = manager.get(workingdirectory + "Block/mouseover_mitte.png", Texture.class);
