@@ -121,12 +121,12 @@ public class AssetLoader {
     public static Texture LoopBlock_left;
     public static Texture LoopBlock_right;
     public static Texture LoopBlock_middle;
-    /////////LoopBlock////////////
+    /////////PinModeBlock////////////
     public static Texture PinModeBlock_left;
     public static Texture PinModeBlock_right;
     public static Texture PinModeBlock_middle;
-
-    /////////LoopBlock////////////
+    public static Texture PinModeBlock_smallimage;
+    /////////DigitalWriteBlock////////////
     public static Texture DigitalWrite_left;
     public static Texture DigitalWrite_right;
     public static Texture DigitalWrite_middle;
@@ -249,6 +249,8 @@ public class AssetLoader {
             manager.load(workingdirectory + "Block/market_links.png", Texture.class);
             manager.load(workingdirectory + "Block/market_rechts.png", Texture.class);
             manager.load(workingdirectory + "Block/market_mitte.png", Texture.class);
+            manager.load(workingdirectory + "Block/Block_PinMode/smallblock.png", Texture.class);
+
 
             group = "Switches";
             //Switch
@@ -384,6 +386,8 @@ public class AssetLoader {
             marked_rechts = manager.get(workingdirectory + "Block/market_rechts.png", Texture.class);
             marked_links = manager.get(workingdirectory + "Block/market_links.png", Texture.class);
             marked_mitte = manager.get(workingdirectory + "Block/market_mitte.png", Texture.class);
+            PinModeBlock_smallimage = manager.get(workingdirectory + "Block/Block_PinMode/smallblock.png", Texture.class);
+
 
 
 

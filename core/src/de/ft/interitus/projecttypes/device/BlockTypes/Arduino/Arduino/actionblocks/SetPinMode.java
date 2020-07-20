@@ -79,7 +79,7 @@ public class SetPinMode implements PlatformSpecificBlock, ArduinoBlock {
 
     @Override
     public Texture getSmallImage() {
-        return AssetLoader.img_mappe1;
+        return AssetLoader.PinModeBlock_smallimage;
     }
 
     @Override

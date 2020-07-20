@@ -19,8 +19,8 @@ import javax.print.attribute.standard.OrientationRequested;
 public class TapBarBlockItem implements TapItem {
     int x;
     int y;
-    int w = 40;
-    int h = 50;
+    int w = 50;
+    int h = 60;
     Texture img;
     PlatformSpecificBlock psb;
     Check check = new Check();
