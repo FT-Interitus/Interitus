@@ -543,7 +543,7 @@ public abstract class BlockUpdate extends Thread {
 
                                             block.setLeft(ProjectManager.getActProjectVar().markedblock);
                                             ProjectManager.getActProjectVar().markedblock.setY(block.getY());
-                                            ProjectManager.getActProjectVar().markedblock.setX(block.getX_dup_links());
+                                            ProjectManager.getActProjectVar().markedblock.setX(block.getX()-ProjectManager.getActProjectVar().markedblock.getW());
                                         }
 
 
