@@ -31,8 +31,8 @@ public class SetPinMode implements PlatformSpecificBlock, ArduinoBlock {
     public SetPinMode(ProjectTypes type) {
 
 
-        pin = new Parameter(0, AssetLoader.Parameter_Pin,"Pin","",null);
-        mode = new Parameter(1,AssetLoader.Parameter_IO,"Mode(I/O)","",null);
+        pin = new Parameter("", AssetLoader.Parameter_Pin,"Pin","",null);
+        mode = new Parameter("",AssetLoader.Parameter_IO,"Mode(I/O)","",null);
 
 
         parameters.add(pin);

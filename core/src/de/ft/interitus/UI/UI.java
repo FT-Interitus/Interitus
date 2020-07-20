@@ -1,16 +1,13 @@
 package de.ft.interitus.UI;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -20,13 +17,11 @@ import com.kotcrab.vis.ui.widget.MenuItem;
 import com.kotcrab.vis.ui.widget.VisTextField;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.DisplayErrors;
-import de.ft.interitus.Programm;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.UIElements.Button;
 import de.ft.interitus.UI.UIElements.ButtonBar;
 import de.ft.interitus.UI.UIElements.TabBar.Tab;
 import de.ft.interitus.UI.UIElements.TabBar.TabBar;
-import de.ft.interitus.UI.UIElements.TextField;
 import de.ft.interitus.UI.UIElements.check.Check;
 import de.ft.interitus.UI.UIElements.check.InputManager;
 import de.ft.interitus.UI.projectsettings.ProjectSettingsUI;
@@ -59,96 +54,28 @@ public class UI {
     public static SpriteBatch UIbatch;
     public static SettingsUI set;
     public static ProjectSettingsUI proset;
-    public static boolean curserveränderungsblockade = false; //If a Block is over the Block Space
+
     public static ButtonBar buttonbar;
     public static Button button_projectstructus;
     public static Button button_start;
     public static Button button_stop;
     public static Button button_debugstart;
     public static TabBar tabbar;
+    public static GlyphLayout glyphLayout = new GlyphLayout();
+    public static BitmapFont font = new BitmapFont();
+    public static Check check = new Check();
     protected static MenuItem recent;
     protected static MenuItem revert;
     protected static MenuItem redo;
     protected static MenuItem copy;
     protected static MenuItem paste;
     protected static MenuBar menuBar;
+    static ArrayList<VisTextField> textFielder = new ArrayList<>();
     private static boolean issettingsuiopend = false;
     private static boolean issetupuiopend = false;
-    private static int curserstate = 0;
-    private static boolean verticalrezising = false;
-    private static boolean horizontalrezising = false;
-    public static GlyphLayout glyphLayout = new GlyphLayout();
-    public static BitmapFont font = new BitmapFont();
-    public static Check check=new Check();
-
-    static ArrayList<VisTextField> textFielder = new ArrayList<>();
-
-
-    public static void userresize() {
-        if (!curserveränderungsblockade) {
-            if (Gdx.input.getX() > UIVar.BlockBarW + UIVar.abstandvonRand && Gdx.input.getX() < UIVar.BlockBarW + UIVar.abstandvonRand * 2 && Gdx.graphics.getHeight() - Gdx.input.getY() > UIVar.abstandvonRand && Gdx.graphics.getHeight() - Gdx.input.getY() < UIVar.abstandvonRand + UIVar.BlockBarH) {
-                if (curserstate != 0) {
-                    Gdx.graphics.setSystemCursor(Cursor.SystemCursor.HorizontalResize);
-                    curserstate = 0;
-                }
-
-            } else if (Gdx.graphics.getHeight() - Gdx.input.getY() > UIVar.abstandvonRand + UIVar.BlockBarH && Gdx.graphics.getHeight() - Gdx.input.getY() < UIVar.abstandvonRand * 2 + UIVar.BlockBarH) {
-                if (curserstate != 2) {
-                    Gdx.graphics.setSystemCursor(Cursor.SystemCursor.VerticalResize);
-                    curserstate = 2;
-                }
-            } else if (curserstate != 1) {
-                if(!ProjectManager.getActProjectVar().removeblock) {
-                    Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Arrow);
-                }
-                curserstate = 1;
-            }
-        }
-
-        if (curserstate == 0 && Gdx.input.isButtonJustPressed(0)) {
-            verticalrezising = true;
-            curserveränderungsblockade = true;
-        }
-        if (!Gdx.input.isButtonPressed(0)) {
-            verticalrezising = false;
-            curserveränderungsblockade = false;
-        }
-        if (verticalrezising) {
-            UIVar.unteneinteilung = Gdx.graphics.getWidth() - Gdx.input.getX() - UIVar.abstandvonRand / 2;
-            if (Gdx.graphics.getWidth() - UIVar.unteneinteilung < BlockTappedBar.tb.getTaps().size() * BlockTappedBar.tb.getTaps().get(0).getTab_button().getW() + BlockTappedBar.tb.getButtonabstand() * BlockTappedBar.tb.getTaps().size() + 20) {
-                UIVar.unteneinteilung = Gdx.graphics.getWidth() - (BlockTappedBar.tb.getTaps().size() * BlockTappedBar.tb.getTaps().get(0).getTab_button().getW() + BlockTappedBar.tb.getButtonabstand() * BlockTappedBar.tb.getTaps().size() + 20);
-            }
-            if (Gdx.graphics.getWidth() - UIVar.unteneinteilung > Gdx.graphics.getWidth() - UIVar.rechtseinraste) {
-                UIVar.unteneinteilung = UIVar.rechtseinraste;
-
-            }
-
-        }
-
-
-        if (curserstate == 2 && Gdx.input.isButtonJustPressed(0)) {
-            horizontalrezising = true;
-            curserveränderungsblockade = true;
-        }
-        if (!Gdx.input.isButtonPressed(0)) {
-            horizontalrezising = false;
-            curserveränderungsblockade = false;
-        }
-        if (horizontalrezising) {
-            UIVar.untenhohe = Gdx.graphics.getHeight() - Gdx.input.getY() - UIVar.abstandvonRand / 2;
-            if (UIVar.untenhohe < UIVar.untenkante) {
-                UIVar.untenhohe = UIVar.untenkante;
-            }
-            if (UIVar.untenhohe > Gdx.graphics.getHeight() / 2) {
-                UIVar.untenhohe = Gdx.graphics.getHeight() / 2;
-            }
-        }
-
-
-    }
 
     public static void updatedragui(ShapeRenderer renderer, boolean flaeche, SpriteBatch batch) {
-        userresize();
+        BlockTappedBar.userresize();
         // Var.w=Gdx.graphics.getWidth();
         //Var.h=Gdx.graphics.getHeight();
         renderer.begin(ShapeRenderer.ShapeType.Filled);
@@ -178,64 +105,60 @@ public class UI {
         renderer.end();
 
 
+        Block block = ProjectManager.getActProjectVar().markedblock;
+        if (block != null && block.getBlocktype().getBlockParameter() != null) {
 
 
-        Block block=ProjectManager.getActProjectVar().markedblock;
-        if (block!=null && block.getBlocktype().getBlockParameter() != null) {
-
-
-
-
-            UIVar.blockeinstellungen_w=170;
-            UIVar.blockeinstellungen_h=UIVar.programmflaeche_h-UIVar.abstandvonRand*2;
-            UIVar.blockeinstellungen_x=Gdx.graphics.getWidth()-UIVar.abstandvonRand*2-UIVar.blockeinstellungen_w;
-            UIVar.blockeinstellungen_y=UIVar.programmflaeche_y+UIVar.abstandvonRand;
+            UIVar.blockeinstellungen_w = 170;
+            UIVar.blockeinstellungen_h = UIVar.programmflaeche_h - UIVar.abstandvonRand * 2;
+            UIVar.blockeinstellungen_x = Gdx.graphics.getWidth() - UIVar.abstandvonRand * 2 - UIVar.blockeinstellungen_w;
+            UIVar.blockeinstellungen_y = UIVar.programmflaeche_y + UIVar.abstandvonRand;
 
 
             renderer.begin(ShapeRenderer.ShapeType.Filled);
-            renderer.setColor(81f/255f, 97f/255f, 114f/255f,1f);
-            renderer.rect(UIVar.blockeinstellungen_x,UIVar.blockeinstellungen_y,UIVar.blockeinstellungen_w,UIVar.blockeinstellungen_h);
+            renderer.setColor(81f / 255f, 97f / 255f, 114f / 255f, 1f);
+            renderer.rect(UIVar.blockeinstellungen_x, UIVar.blockeinstellungen_y, UIVar.blockeinstellungen_w, UIVar.blockeinstellungen_h);
             renderer.end();
-UIbatch.begin();
+            UIbatch.begin();
 
 
             for (int i = 0; i < block.getBlocktype().getBlockParameter().size(); i++) {
-try {
-    if (!UIVar.isBlockSettingsopen) {
-        textFielder.add(new VisTextField(block.getBlocktype().getBlockParameter().get(i).getParameter().toString()));
-        textFielder.get(textFielder.size() - 1).addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                ProjectManager.getActProjectVar().markedblock.getBlocktype().getBlockParameter().get(textFielder.indexOf(actor)).setParameter(((VisTextField) actor).getText());
+                try {
+                    if (!UIVar.isBlockSettingsopen) {
+                        textFielder.add(new VisTextField(block.getBlocktype().getBlockParameter().get(i).getParameter().toString()));
+                        textFielder.get(textFielder.size() - 1).addListener(new ChangeListener() {
+                            @Override
+                            public void changed(ChangeEvent event, Actor actor) {
+                                ProjectManager.getActProjectVar().markedblock.getBlocktype().getBlockParameter().get(textFielder.indexOf(actor)).setParameter(((VisTextField) actor).getText());
+                            }
+                        });
+
+                        UI.stage.addActor(textFielder.get(i));
+                    }
+
+                    textFielder.get(i).setWidth(UIVar.blockeinstellungen_w - 40);
+                    textFielder.get(i).setPosition(UIVar.blockeinstellungen_x + 5, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - UIVar.abstandText - glyphLayout.height - (i * (glyphLayout.height + UIVar.abstandzwischenparametern + UIVar.abstandText + textFielder.get(i).getHeight()) + 3) - textFielder.get(i).getHeight());
+                    glyphLayout.setText(font, block.getBlocktype().getBlockParameter().get(i).getParameterName());
+
+                    font.draw(UIbatch, glyphLayout, UIVar.blockeinstellungen_x + 5, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - (i * (glyphLayout.height + textFielder.get(i).getHeight() + UIVar.abstandzwischenparametern + UIVar.abstandText) + 3));
+
+                    if (block.getBlocktype().getBlockParameter().get(i).getUnit() != null) {
+                        glyphLayout.setText(font, block.getBlocktype().getBlockParameter().get(i).getUnit());
+                        font.draw(UIbatch, glyphLayout, UIVar.blockeinstellungen_x + 5 + UIVar.blockeinstellungen_w - 30, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - UIVar.abstandText - glyphLayout.height - (i * (glyphLayout.height + UIVar.abstandzwischenparametern + UIVar.abstandText + textFielder.get(i).getHeight()) + 3) - textFielder.get(i).getHeight() / 3f);
+
+                    }
+                } catch (Exception e) {
+                    if (batch.isDrawing()) {
+                        batch.end();
+                    }
+                }
             }
-        });
-
-        UI.stage.addActor(textFielder.get(i));
-    }
-
-    textFielder.get(i).setWidth(UIVar.blockeinstellungen_w - 40);
-    textFielder.get(i).setPosition(UIVar.blockeinstellungen_x + 5, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - UIVar.abstandText - glyphLayout.height - (i * (glyphLayout.height + UIVar.abstandzwischenparametern + UIVar.abstandText + textFielder.get(i).getHeight()) + 3) - textFielder.get(i).getHeight());
-    glyphLayout.setText(font, block.getBlocktype().getBlockParameter().get(i).getParameterName());
-
-    font.draw(UIbatch, glyphLayout, UIVar.blockeinstellungen_x + 5, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - (i * (glyphLayout.height + textFielder.get(i).getHeight() + UIVar.abstandzwischenparametern + UIVar.abstandText) + 3));
-
-    if (block.getBlocktype().getBlockParameter().get(i).getUnit() != null) {
-        glyphLayout.setText(font, block.getBlocktype().getBlockParameter().get(i).getUnit());
-        font.draw(UIbatch, glyphLayout, UIVar.blockeinstellungen_x + 5 + UIVar.blockeinstellungen_w - 30, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - UIVar.abstandText - glyphLayout.height - (i * (glyphLayout.height + UIVar.abstandzwischenparametern + UIVar.abstandText + textFielder.get(i).getHeight()) + 3) - textFielder.get(i).getHeight() / 3f);
-
-    }
-}catch (Exception e) {
-    if(batch.isDrawing()) {
-        batch.end();
-    }
-}
-            }
-            UIVar.isBlockSettingsopen=true;
+            UIVar.isBlockSettingsopen = true;
             UIbatch.end();
 
-        }else if(textFielder.size()>0){
-            UIVar.isBlockSettingsopen=false;
-            for(int i=0;i<textFielder.size();i++){
+        } else if (textFielder.size() > 0) {
+            UIVar.isBlockSettingsopen = false;
+            for (int i = 0; i < textFielder.size(); i++) {
                 textFielder.get(i).removeListener(textFielder.get(i).getListeners().get(0));
                 textFielder.get(i).remove();
             }
@@ -246,11 +169,6 @@ try {
     }
 
     public static void init() {
-
-
-
-
-
 
 
         UI.UIbatch = new SpriteBatch();
@@ -430,6 +348,9 @@ try {
             }
 
         }
+
+
+
         if (tabbar.getSelectedTab() != null) {
             if (tabbar.getSelectedTab().getIndex() != -1) {
                 if (Var.openprojectindex != tabbar.getSelectedTab().getIndex()) {

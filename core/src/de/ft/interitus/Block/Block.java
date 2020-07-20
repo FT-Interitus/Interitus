@@ -104,7 +104,7 @@ public abstract class Block implements VisibleObjects {
             public void buttonclickedinwindow(RightClickButtonSelectEvent e) {
 
                 if (e.getButton().getText().contains("Löschen") && blockupdate.toggle) {
-                    if (RechtsKlick.mouseoverblockindex == ProjectManager.getActProjectVar().blocks.indexOf(instance))
+                    if (RechtsKlick.mouseoverblockindex == ProjectManager.getActProjectVar().blocks.indexOf(instance)&&getBlocktype().canbedeleted())
                         instance.delete(false);
                 }
             }
@@ -476,9 +476,9 @@ public abstract class Block implements VisibleObjects {
      * @param complete means that the whole Programm is clearing for example if you open a new Project
      */
 
-    public boolean delete(boolean complete) { //Der Block soll gelöscht werden (complete beduetet das alle Blöcke gelöscht werden sollen)
+    public void delete(boolean complete) { //Der Block soll gelöscht werden (complete beduetet das alle Blöcke gelöscht werden sollen)
 
-        if (complete || getBlocktype().canbedeleted()) {
+
 
             EventVar.rightClickEventManager.removeListener(this.rightClickEventListener);
         EventVar.blockEventManager.deleteBlock(new BlockDeleteEvent(this, this)); //Fire Delete Event
@@ -573,10 +573,7 @@ public abstract class Block implements VisibleObjects {
 
 
         }
-        return true;
-    }else{
-            return false;
-        }
+
     }
 
     private void findnewindex() {
