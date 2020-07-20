@@ -200,31 +200,35 @@ UIbatch.begin();
 
 
             for (int i = 0; i < block.getBlocktype().getBlockParameter().size(); i++) {
-
-                if(! UIVar.isBlockSettingsopen) {
-                textFielder.add(new VisTextField(block.getBlocktype().getBlockParameter().get(i).getParameter().toString()));
-                textFielder.get(textFielder.size() - 1).addListener(new ChangeListener() {
-                    @Override
-                    public void changed(ChangeEvent event, Actor actor) {
-                        ProjectManager.getActProjectVar().markedblock.getBlocktype().getBlockParameter().get(textFielder.indexOf(actor)).setParameter(((VisTextField) actor).getText());
-                    }
-                });
-
-                UI.stage.addActor(textFielder.get(i));
+try {
+    if (!UIVar.isBlockSettingsopen) {
+        textFielder.add(new VisTextField(block.getBlocktype().getBlockParameter().get(i).getParameter().toString()));
+        textFielder.get(textFielder.size() - 1).addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                ProjectManager.getActProjectVar().markedblock.getBlocktype().getBlockParameter().get(textFielder.indexOf(actor)).setParameter(((VisTextField) actor).getText());
             }
+        });
 
-                textFielder.get(i).setWidth(UIVar.blockeinstellungen_w - 40);
-                textFielder.get(i).setPosition(UIVar.blockeinstellungen_x + 5, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - UIVar.abstandText - glyphLayout.height - (i * (glyphLayout.height + UIVar.abstandzwischenparametern + UIVar.abstandText + textFielder.get(i).getHeight()) + 3) - textFielder.get(i).getHeight());
-                glyphLayout.setText(font, block.getBlocktype().getBlockParameter().get(i).getParameterName());
+        UI.stage.addActor(textFielder.get(i));
+    }
 
-                font.draw(UIbatch, glyphLayout, UIVar.blockeinstellungen_x + 5, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - (i * (glyphLayout.height + textFielder.get(i).getHeight() + UIVar.abstandzwischenparametern + UIVar.abstandText) + 3));
+    textFielder.get(i).setWidth(UIVar.blockeinstellungen_w - 40);
+    textFielder.get(i).setPosition(UIVar.blockeinstellungen_x + 5, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - UIVar.abstandText - glyphLayout.height - (i * (glyphLayout.height + UIVar.abstandzwischenparametern + UIVar.abstandText + textFielder.get(i).getHeight()) + 3) - textFielder.get(i).getHeight());
+    glyphLayout.setText(font, block.getBlocktype().getBlockParameter().get(i).getParameterName());
 
-                if(block.getBlocktype().getBlockParameter().get(i).getUnit()!=null) {
-                    glyphLayout.setText(font, block.getBlocktype().getBlockParameter().get(i).getUnit());
-                    font.draw(UIbatch, glyphLayout, UIVar.blockeinstellungen_x + 5 + UIVar.blockeinstellungen_w - 30, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - UIVar.abstandText - glyphLayout.height - (i * (glyphLayout.height + UIVar.abstandzwischenparametern + UIVar.abstandText + textFielder.get(i).getHeight()) + 3) - textFielder.get(i).getHeight() / 3f);
+    font.draw(UIbatch, glyphLayout, UIVar.blockeinstellungen_x + 5, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - (i * (glyphLayout.height + textFielder.get(i).getHeight() + UIVar.abstandzwischenparametern + UIVar.abstandText) + 3));
 
-                }
+    if (block.getBlocktype().getBlockParameter().get(i).getUnit() != null) {
+        glyphLayout.setText(font, block.getBlocktype().getBlockParameter().get(i).getUnit());
+        font.draw(UIbatch, glyphLayout, UIVar.blockeinstellungen_x + 5 + UIVar.blockeinstellungen_w - 30, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - UIVar.abstandText - glyphLayout.height - (i * (glyphLayout.height + UIVar.abstandzwischenparametern + UIVar.abstandText + textFielder.get(i).getHeight()) + 3) - textFielder.get(i).getHeight() / 3f);
 
+    }
+}catch (Exception e) {
+    if(batch.isDrawing()) {
+        batch.end();
+    }
+}
             }
             UIVar.isBlockSettingsopen=true;
             UIbatch.end();
