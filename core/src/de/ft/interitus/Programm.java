@@ -85,7 +85,7 @@ public class Programm extends Game {
         };
         VisUI.load(VisUI.SkinScale.X1);
         Programm.logger.config("Loaded Vis-UI");
-/*
+
         EventVar.uiEventManager.UILoadEvent(new UILoadEvent(this));
 
         try {
@@ -100,7 +100,6 @@ public class Programm extends Game {
         }
 
 
- */
 
 
         Init.initBlocks();
