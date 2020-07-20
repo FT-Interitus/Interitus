@@ -55,10 +55,6 @@ public class LoopBlock implements PlatformSpecificBlock, ArduinoBlock {
         return AssetLoader.img_block;
     }
 
-    @Override
-    public Texture getImage() {
-        return AssetLoader.img_block;
-    }
 
     @Override
     public int getID() {
@@ -79,6 +75,20 @@ public class LoopBlock implements PlatformSpecificBlock, ArduinoBlock {
         return 150;
     }
 
+    @Override
+    public boolean canbedeleted() {
+        return false;
+    }
+
+    @Override
+    public boolean canhasrightconnector() {
+        return true;
+    }
+
+    @Override
+    public boolean canhasleftconnect() {
+        return false;
+    }
 
 
     @Override

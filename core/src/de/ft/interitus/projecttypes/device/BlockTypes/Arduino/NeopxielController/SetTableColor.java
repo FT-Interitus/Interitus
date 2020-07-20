@@ -54,10 +54,7 @@ public class SetTableColor implements PlatformSpecificBlock {
         return AssetLoader.img_mappe1;
     }
 
-    @Override
-    public Texture getImage() {
-        return null;
-    }
+
 
     @Override
     public int getID() {
@@ -72,6 +69,21 @@ public class SetTableColor implements PlatformSpecificBlock {
     @Override
     public int getWidth() {
         return 150;
+    }
+
+    @Override
+    public boolean canbedeleted() {
+        return true;
+    }
+
+    @Override
+    public boolean canhasrightconnector() {
+        return true;
+    }
+
+    @Override
+    public boolean canhasleftconnect() {
+        return true;
     }
 
 }

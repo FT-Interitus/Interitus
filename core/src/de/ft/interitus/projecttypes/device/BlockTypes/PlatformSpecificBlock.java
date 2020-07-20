@@ -24,7 +24,10 @@ public interface PlatformSpecificBlock {
 
     Texture getSmallImage();
 
-    Texture getImage();
+
+    Texture getImageRight();
+    Texture getImageLeft();
+    Texture getImageCenter();
 
 
     int getID();
@@ -32,4 +35,10 @@ public interface PlatformSpecificBlock {
     ProjectTypes getProjectType();
 
     int getWidth();
+
+    boolean canbedeleted();
+
+    boolean canhasrightconnector();
+
+    boolean canhasleftconnect();
 }

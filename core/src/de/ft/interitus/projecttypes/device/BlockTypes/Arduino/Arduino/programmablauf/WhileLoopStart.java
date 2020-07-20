@@ -55,10 +55,7 @@ public class WhileLoopStart implements PlatformSpecificBlock, ArduinoBlock {
         return AssetLoader.img_block;
     }
 
-    @Override
-    public Texture getImage() {
-        return AssetLoader.img_block;
-    }
+
 
     @Override
     public int getID() {
@@ -81,6 +78,21 @@ public class WhileLoopStart implements PlatformSpecificBlock, ArduinoBlock {
     @Override
     public int getWidth() {
         return 150;
+    }
+
+    @Override
+    public boolean canbedeleted() {
+        return true;
+    }
+
+    @Override
+    public boolean canhasrightconnector() {
+        return true;
+    }
+
+    @Override
+    public boolean canhasleftconnect() {
+        return true;
     }
 
 

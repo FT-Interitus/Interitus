@@ -59,10 +59,7 @@ public class Debug implements PlatformSpecificBlock {
         return AssetLoader.img_mappe2;
     }
 
-    @Override
-    public Texture getImage() {
-        return null;
-    }
+
 
     @Override
     public int getID() {
@@ -81,6 +78,21 @@ public class Debug implements PlatformSpecificBlock {
     @Override
     public int getWidth() {
         return 150;
+    }
+
+    @Override
+    public boolean canbedeleted() {
+        return true;
+    }
+
+    @Override
+    public boolean canhasrightconnector() {
+        return true;
+    }
+
+    @Override
+    public boolean canhasleftconnect() {
+        return true;
     }
 
     @Override
