@@ -6,6 +6,7 @@
 package de.ft.interitus.data.user;
 
 import de.ft.interitus.Block.SaveBlock;
+import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.ProjectTypes;
 
@@ -23,7 +24,7 @@ public class BlockCalculator {
     }
     public static void extract(ArrayList<SaveBlock> saveBlocks) {
         for (int i = 0; i < saveBlocks.size(); i++) {
-            ProjectManager.getActProjectVar().blocks.add(ProjectManager.getActProjectVar().projectType.getBlockGenerator().generateBlock(i, saveBlocks.get(i).getX(), saveBlocks.get(i).getY(), ProjectManager.getActProjectVar().projectType.getProjectblocks().get(saveBlocks.get(i).getPlatformspecificblockid()).getWidth(), 70, ProjectManager.getActProjectVar().projectType.getProjectblocks().get(saveBlocks.get(i).getPlatformspecificblockid()), ProjectManager.getActProjectVar().projectType.getBlockUpdateGenerator(), ProjectManager.getActProjectVar().projectType.getBlocktoSaveGenerator()));
+            ProjectManager.getActProjectVar().blocks.add(ProjectManager.getActProjectVar().projectType.getBlockGenerator().generateBlock(i, saveBlocks.get(i).getX(), saveBlocks.get(i).getY(), ProjectManager.getActProjectVar().projectType.getProjectblocks().get(saveBlocks.get(i).getPlatformspecificblockid()).getWidth(), UIVar.BlockHeight, ProjectManager.getActProjectVar().projectType.getProjectblocks().get(saveBlocks.get(i).getPlatformspecificblockid()), ProjectManager.getActProjectVar().projectType.getBlockUpdateGenerator(), ProjectManager.getActProjectVar().projectType.getBlocktoSaveGenerator()));
         }
 
         for (int i = 0; i < saveBlocks.size(); i++) {
