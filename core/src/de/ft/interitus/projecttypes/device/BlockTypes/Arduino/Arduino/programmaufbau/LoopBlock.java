@@ -57,17 +57,17 @@ public class LoopBlock implements PlatformSpecificBlock, ArduinoBlock {
 
     @Override
     public Texture getImageRight() {
-        return AssetLoader.WaitBlock_right;
+        return AssetLoader.LoopBlock_right;
     }
 
     @Override
     public Texture getImageLeft() {
-        return AssetLoader.WaitBlock_left;
+        return AssetLoader.LoopBlock_left;
     }
 
     @Override
     public Texture getImageCenter() {
-        return AssetLoader.WaitBlock_middle;
+        return AssetLoader.LoopBlock_middle;
     }
 
 
@@ -87,7 +87,7 @@ public class LoopBlock implements PlatformSpecificBlock, ArduinoBlock {
 
     @Override
     public int getWidth() {
-        return 150;
+        return 74;
     }
 
     @Override

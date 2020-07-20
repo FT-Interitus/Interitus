@@ -114,6 +114,18 @@ public class AssetLoader {
     public static Texture WaitBlock_left;
     public static Texture WaitBlock_right;
     public static Texture WaitBlock_middle;
+    /////////SetupBlock////////////
+    public static Texture SetupBlock_left;
+    public static Texture SetupBlock_right;
+    public static Texture SetupBlock_middle;
+    /////////LoopBlock////////////
+    public static Texture LoopBlock_left;
+    public static Texture LoopBlock_right;
+    public static Texture LoopBlock_middle;
+    /////////LoopBlock////////////
+    public static Texture PinModeBlock_left;
+    public static Texture PinModeBlock_right;
+    public static Texture PinModeBlock_middle;
 
 
 
@@ -200,6 +212,15 @@ public class AssetLoader {
             manager.load(workingdirectory + "Block/Block_Wait/links.png", Texture.class);
             manager.load(workingdirectory + "Block/Block_Wait/rechts.png", Texture.class);
             manager.load(workingdirectory + "Block/Block_Wait/mitte.png", Texture.class);
+            manager.load(workingdirectory + "Block/Block_Setup/links.png", Texture.class);
+            manager.load(workingdirectory + "Block/Block_Setup/rechts.png", Texture.class);
+            manager.load(workingdirectory + "Block/Block_Setup/mitte.png", Texture.class);
+            manager.load(workingdirectory + "Block/Block_Loop/links.png", Texture.class);
+            manager.load(workingdirectory + "Block/Block_Loop/rechts.png", Texture.class);
+            manager.load(workingdirectory + "Block/Block_Loop/mitte.png", Texture.class);
+            manager.load(workingdirectory + "Block/Block_PinMode/links.png", Texture.class);
+            manager.load(workingdirectory + "Block/Block_PinMode/rechts.png", Texture.class);
+            manager.load(workingdirectory + "Block/Block_PinMode/mitte.png", Texture.class);
 
             group = "Switches";
             //Switch
@@ -314,6 +335,15 @@ public class AssetLoader {
             WaitBlock_left = manager.get(workingdirectory + "Block/Block_Wait/links.png", Texture.class);
             WaitBlock_right = manager.get(workingdirectory + "Block/Block_Wait/rechts.png", Texture.class);
             WaitBlock_middle = manager.get(workingdirectory + "Block/Block_Wait/mitte.png", Texture.class);
+            SetupBlock_left = manager.get(workingdirectory + "Block/Block_Setup/links.png", Texture.class);
+            SetupBlock_right = manager.get(workingdirectory + "Block/Block_Setup/rechts.png", Texture.class);
+            SetupBlock_middle = manager.get(workingdirectory + "Block/Block_Setup/mitte.png", Texture.class);
+            LoopBlock_left = manager.get(workingdirectory + "Block/Block_Loop/links.png", Texture.class);
+            LoopBlock_right = manager.get(workingdirectory + "Block/Block_Loop/rechts.png", Texture.class);
+            LoopBlock_middle = manager.get(workingdirectory + "Block/Block_Loop/mitte.png", Texture.class);
+            PinModeBlock_left = manager.get(workingdirectory + "Block/Block_PinMode/links.png", Texture.class);
+            PinModeBlock_right = manager.get(workingdirectory + "Block/Block_PinMode/rechts.png", Texture.class);
+            PinModeBlock_middle = manager.get(workingdirectory + "Block/Block_PinMode/mitte.png", Texture.class);
 
 
             //Switch

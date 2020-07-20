@@ -610,9 +610,9 @@ public abstract class Block implements VisibleObjects {
 
 
         if (!this.blockupdate.toggle) {
-            batch.draw(AssetLoader.img_block, this.getX() + 10, this.getY(), this.getW() - 15 - 10, this.getH()); // Block ohne das er makiert ist
-            batch.draw(AssetLoader.img_block_left, this.getX(), this.getY(), 10, this.getH());
-            batch.draw(AssetLoader.img_block_right, this.getX() + this.getW() - 15, this.getY(), 15, this.getH());
+            batch.draw(getBlocktype().getImageCenter(), this.getX() + 6, this.getY(), this.getW() - 12, this.getH()); // Block ohne das er makiert ist
+            batch.draw(getBlocktype().getImageLeft(), this.getX(), this.getY(), 6, this.getH());
+            batch.draw(getBlocktype().getImageRight(), this.getX() + this.getW() - 6, this.getY(), 6, this.getH());
         } else {
             batch.draw(AssetLoader.img_block_mouseover, this.getX(), this.getY(), this.getW(), this.getH()); // Block wenn er makiert ist
         }
@@ -670,7 +670,7 @@ public abstract class Block implements VisibleObjects {
         }
 
         //font.draw(batch, "index:  " + this.getIndex() + " Block: " + this.getBlocktype().getName(), this.getX() + 5, this.getY() + 30); //DEBUG Block Index auf dem Block anzeigen
-        font.draw(batch,this.getBlocktype().getName(), this.getX() + 5, this.getY() + this.getH() - 10); //DEBUG Block Index auf dem Block anzeigen
+        //font.draw(batch,this.getBlocktype().getName(), this.getX() + 5, this.getY() + this.getH() - 10); //DEBUG Block Index auf dem Block anzeigen
 
 
             ///////////////////////////////PARAMETER//ANZEIGE/////////////////////////////////////////////////
