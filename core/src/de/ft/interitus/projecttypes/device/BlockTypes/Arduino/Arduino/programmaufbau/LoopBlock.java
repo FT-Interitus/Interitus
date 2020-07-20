@@ -73,6 +73,14 @@ public class LoopBlock implements PlatformSpecificBlock, ArduinoBlock {
 
         return -1;    }
 
+
+    @Override
+    public int getWidth() {
+        return 150;
+    }
+
+
+
     @Override
     public ProjectTypes getProjectType() {
         return this.type;

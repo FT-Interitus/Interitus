@@ -30,4 +30,6 @@ public interface PlatformSpecificBlock {
     int getID();
 
     ProjectTypes getProjectType();
+
+    int getWidth();
 }

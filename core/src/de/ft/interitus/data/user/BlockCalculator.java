@@ -23,7 +23,7 @@ public class BlockCalculator {
     }
     public static void extract(ArrayList<SaveBlock> saveBlocks) {
         for (int i = 0; i < saveBlocks.size(); i++) {
-            ProjectManager.getActProjectVar().blocks.add(ProjectManager.getActProjectVar().projectType.getBlockGenerator().generateBlock(i, saveBlocks.get(i).getX(), saveBlocks.get(i).getY(), 150, 70, ProjectManager.getActProjectVar().projectType.getProjectblocks().get(saveBlocks.get(i).getPlatformspecificblockid()), ProjectManager.getActProjectVar().projectType.getBlockUpdateGenerator(), ProjectManager.getActProjectVar().projectType.getBlocktoSaveGenerator()));
+            ProjectManager.getActProjectVar().blocks.add(ProjectManager.getActProjectVar().projectType.getBlockGenerator().generateBlock(i, saveBlocks.get(i).getX(), saveBlocks.get(i).getY(), ProjectManager.getActProjectVar().projectType.getProjectblocks().get(saveBlocks.get(i).getPlatformspecificblockid()).getWidth(), 70, ProjectManager.getActProjectVar().projectType.getProjectblocks().get(saveBlocks.get(i).getPlatformspecificblockid()), ProjectManager.getActProjectVar().projectType.getBlockUpdateGenerator(), ProjectManager.getActProjectVar().projectType.getBlocktoSaveGenerator()));
         }
 
         for (int i = 0; i < saveBlocks.size(); i++) {

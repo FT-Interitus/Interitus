@@ -92,6 +92,11 @@ public class Wait implements PlatformSpecificBlock, ArduinoBlock {
     }
 
     @Override
+    public int getWidth() {
+        return 150;
+    }
+
+    @Override
     public String getCode() {
         return "delay("+this.parameters.get(0).getParameter()+");";
     }

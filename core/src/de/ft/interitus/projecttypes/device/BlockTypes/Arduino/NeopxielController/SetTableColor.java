@@ -68,4 +68,10 @@ public class SetTableColor implements PlatformSpecificBlock {
     public ProjectTypes getProjectType() {
         return type;
     }
+
+    @Override
+    public int getWidth() {
+        return 150;
+    }
+
 }

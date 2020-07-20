@@ -79,6 +79,12 @@ public class WhileLoopEnd implements PlatformSpecificBlock, ArduinoBlock {
     }
 
     @Override
+    public int getWidth() {
+        return 150;
+    }
+
+
+    @Override
     public String getCode() {
         return "}";
     }

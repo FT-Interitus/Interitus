@@ -81,6 +81,12 @@ public class SetupBlock implements PlatformSpecificBlock, ArduinoBlock {
     }
 
     @Override
+    public int getWidth() {
+        return 150;
+    }
+
+
+    @Override
     public String getCode() {
         return "void setup(){";
     }

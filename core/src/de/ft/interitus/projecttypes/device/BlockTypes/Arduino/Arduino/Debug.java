@@ -77,6 +77,12 @@ public class Debug implements PlatformSpecificBlock {
 
         return -1;    }
 
+
+    @Override
+    public int getWidth() {
+        return 150;
+    }
+
     @Override
     public ProjectTypes getProjectType() {
         return type;

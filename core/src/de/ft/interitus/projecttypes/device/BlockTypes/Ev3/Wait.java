@@ -62,6 +62,10 @@ public class Wait implements PlatformSpecificBlock, Ev3Block {
         return null;
     }
 
+    @Override
+    public int getWidth() {
+        return 150;
+    }
 
     @Override
     public String getCode() {
