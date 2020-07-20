@@ -45,6 +45,7 @@ public class Var {
     public static String username = "";
     public static boolean disablePluginSubSystem = false;
     public static boolean savemode = false;
+    public static boolean disableprogrammnotclosedwarniung = false;
 
     public static ArrayList<ProjectVar> openprojects = new ArrayList<>();
 

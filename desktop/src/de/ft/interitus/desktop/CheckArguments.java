@@ -13,6 +13,10 @@ public class CheckArguments {
         if(Var.programmarguments.indexOf("-dps")!=-1)  {
             Var.disablePluginSubSystem = true;
         }
+
+        if(Var.programmarguments.indexOf("-inc")!=-1)  {
+            Var.disableprogrammnotclosedwarniung = true;
+        }
         if(Var.programmarguments.indexOf("-d")!=-1) {
             Var.debug=true;
         }

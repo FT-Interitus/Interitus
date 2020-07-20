@@ -39,7 +39,7 @@ public class LoggerInit {
 
         if(new File(System.getProperty("user.home")+"/"+Data.foldername+"/it.lock").exists() ){
             if(!Var.savemode) {
-                if(Var.programmarguments.indexOf("-inc")!=-1) {
+                if(!Var.disableprogrammnotclosedwarniung) {
                     DisplayErrors.errorStringwithoutException = "Das Programm wurde unerwartet beendet! \nError LOGs findest du hier: \n" + System.getProperty("user.home") + "/" + Data.foldername + "/log";
                 }
                 }
