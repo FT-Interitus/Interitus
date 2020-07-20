@@ -54,7 +54,20 @@ public class SetTableColor implements PlatformSpecificBlock {
         return AssetLoader.img_mappe1;
     }
 
+    @Override
+    public Texture getImageRight() {
+        return AssetLoader.WaitBlock_right;
+    }
 
+    @Override
+    public Texture getImageLeft() {
+        return AssetLoader.WaitBlock_left;
+    }
+
+    @Override
+    public Texture getImageCenter() {
+        return AssetLoader.WaitBlock_middle;
+    }
 
     @Override
     public int getID() {

@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.plugin.store.StorePluginsVar;
+import de.ft.interitus.projecttypes.device.BlockTypes.Ev3.Wait;
 import de.ft.interitus.utils.DownloadFile;
 
 import java.io.IOException;
@@ -109,6 +110,13 @@ public class AssetLoader {
     //////////////////////////-TabBar-//////////////////////////////
     public static Texture img_Tab;
 
+    /////////WaitBlock////////////
+    public static Texture WaitBlock_left;
+    public static Texture WaitBlock_right;
+    public static Texture WaitBlock_middle;
+
+
+
 
     public static AssetManager manager = new AssetManager();
 
@@ -187,8 +195,11 @@ public class AssetLoader {
             manager.load(workingdirectory + "block_marked.png", Texture.class);
             manager.load(workingdirectory + "connector.png", Texture.class);
             manager.load(workingdirectory + "connector_offerd.png", Texture.class);
-
             manager.load(workingdirectory + "Block/Parameter/WaitBlock/WaitParameter.png", Texture.class);
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////
+            manager.load(workingdirectory + "Block/Block_Wait/links.png", Texture.class);
+            manager.load(workingdirectory + "Block/Block_Wait/rechts.png", Texture.class);
+            manager.load(workingdirectory + "Block/Block_Wait/mitte.png", Texture.class);
 
             group = "Switches";
             //Switch
@@ -299,6 +310,11 @@ public class AssetLoader {
             img_marked = manager.get(workingdirectory + "block_marked.png", Texture.class);
             connector = manager.get(workingdirectory + "connector.png", Texture.class);
             connector_offerd = manager.get(workingdirectory + "connector_offerd.png", Texture.class);
+
+            WaitBlock_left = manager.get(workingdirectory + "Block/Block_Wait/links.png", Texture.class);
+            WaitBlock_right = manager.get(workingdirectory + "Block/Block_Wait/rechts.png", Texture.class);
+            WaitBlock_middle = manager.get(workingdirectory + "Block/Block_Wait/mitte.png", Texture.class);
+
 
             //Switch
             switch_background = manager.get(workingdirectory + "switchbackground.png", Texture.class);

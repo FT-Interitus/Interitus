@@ -26,7 +26,6 @@ public class InitArduino {
         blocks.add(new SetupBlock(arduino));
         blocks.add(new LoopBlock(arduino));
         blocks.add(new Wait(arduino));
-        blocks.add(new Debug(arduino));
         blocks.add(new WhileLoopStart(arduino));
         blocks.add(new WhileLoopEnd(arduino));
 
