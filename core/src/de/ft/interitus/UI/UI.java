@@ -219,9 +219,11 @@ UIbatch.begin();
 
                 font.draw(UIbatch, glyphLayout, UIVar.blockeinstellungen_x + 5, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - (i * (glyphLayout.height + textFielder.get(i).getHeight() + UIVar.abstandzwischenparametern + UIVar.abstandText) + 3));
 
-                glyphLayout.setText(font,block.getBlocktype().getBlockParameter().get(i).getUnit());
-                font.draw(UIbatch,glyphLayout,UIVar.blockeinstellungen_x + 5+UIVar.blockeinstellungen_w - 30, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - UIVar.abstandText - glyphLayout.height - (i * (glyphLayout.height + UIVar.abstandzwischenparametern + UIVar.abstandText + textFielder.get(i).getHeight()) + 3) - textFielder.get(i).getHeight()/3f);
+                if(block.getBlocktype().getBlockParameter().get(i).getUnit()!=null) {
+                    glyphLayout.setText(font, block.getBlocktype().getBlockParameter().get(i).getUnit());
+                    font.draw(UIbatch, glyphLayout, UIVar.blockeinstellungen_x + 5 + UIVar.blockeinstellungen_w - 30, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - UIVar.abstandText - glyphLayout.height - (i * (glyphLayout.height + UIVar.abstandzwischenparametern + UIVar.abstandText + textFielder.get(i).getHeight()) + 3) - textFielder.get(i).getHeight() / 3f);
 
+                }
 
             }
             UIVar.isBlockSettingsopen=true;

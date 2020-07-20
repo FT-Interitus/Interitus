@@ -5,6 +5,8 @@ import de.ft.interitus.Block.Interitus.save.DefaultSaveBlockGenerator;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.compiler.Arduino.ArduinoCompiler;
 import de.ft.interitus.projecttypes.ProjectTypes;
+import de.ft.interitus.projecttypes.device.BlockTypes.Arduino.Arduino.actionblocks.SetPinMode;
+import de.ft.interitus.projecttypes.device.BlockTypes.Arduino.Arduino.actionblocks.digitalWrite;
 import de.ft.interitus.projecttypes.device.BlockTypes.Arduino.Arduino.programmablauf.Wait;
 import de.ft.interitus.projecttypes.device.BlockTypes.Arduino.Arduino.programmablauf.WhileLoopEnd;
 import de.ft.interitus.projecttypes.device.BlockTypes.Arduino.Arduino.programmablauf.WhileLoopStart;
@@ -28,6 +30,8 @@ public class InitArduino {
         blocks.add(new Wait(arduino));
         blocks.add(new WhileLoopStart(arduino));
         blocks.add(new WhileLoopEnd(arduino));
+        blocks.add(new SetPinMode(arduino));
+        blocks.add(new digitalWrite(arduino));
 
 
 
