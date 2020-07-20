@@ -58,17 +58,17 @@ public class SetupBlock implements PlatformSpecificBlock, ArduinoBlock {
 
     @Override
     public Texture getImageRight() {
-        return AssetLoader.WaitBlock_right;
+        return AssetLoader.SetupBlock_right;
     }
 
     @Override
     public Texture getImageLeft() {
-        return AssetLoader.WaitBlock_left;
+        return AssetLoader.SetupBlock_left;
     }
 
     @Override
     public Texture getImageCenter() {
-        return AssetLoader.WaitBlock_middle;
+        return AssetLoader.SetupBlock_middle;
     }
 
 
@@ -93,7 +93,7 @@ public class SetupBlock implements PlatformSpecificBlock, ArduinoBlock {
 
     @Override
     public int getWidth() {
-        return 150;
+        return 74;
     }
 
 

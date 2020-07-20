@@ -104,7 +104,7 @@ public class Wait implements PlatformSpecificBlock, ArduinoBlock {
 
     @Override
     public int getWidth() {
-        return 150;
+        return 50;
     }
 
     @Override
