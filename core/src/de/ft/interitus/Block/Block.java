@@ -52,7 +52,7 @@ public abstract class Block implements VisibleObjects {
     private boolean showdupulicate_rechts; //Ob das Duplicat rechts angezeigt werden soll d.h. ob der Block der gerade bewegt wird hier hin springen wird
     private boolean showdupulicate_links; //Ob das Duplicat links ...
     private int x_dup_rechts; // Die X Position des Duplicates
-    private int x_dup_links; //Die Y Position des Duplicates  //Die Weite und Höhe ergeben sich aus der Block weite und Höhe
+    //Die Y Position des Duplicates  //Die Weite und Höhe ergeben sich aus der Block weite und Höhe
     private boolean moving = false; //Ob der Block gerade durch den Nutzer bewegt wird
     private BlockUpdate blockupdate; // Die Block update methode hier werden user actionen engegengenommen und verarbeitet
     private Block left = null; //Der rechte verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
@@ -72,7 +72,7 @@ public abstract class Block implements VisibleObjects {
         this.w = w;
         this.h = h;
         this.x_dup_rechts = this.x + this.w; //Duplicats positionen werden berechnet
-        this.x_dup_links = this.x - this.w;//Duplicats positionen werden berechnet
+
         wireconnector_right.set(x + w, y + h / 3);
         this.index = index;
         this.blockUpdateGenerator = update;
@@ -257,13 +257,7 @@ public abstract class Block implements VisibleObjects {
         return x_dup_rechts; //Gibt die X Position des rechten duplicates zurück
     }
 
-    /***
-     *
-     * @return the duplication is visible if a block offers the neighbours place
-     */
-    public int getX_dup_links() {
-        return x_dup_links;  //Gibt die X Position des linken duplicates zurück
-    }
+
 
     /***
      *
@@ -427,7 +421,7 @@ public abstract class Block implements VisibleObjects {
     public void setX(int x) {
         this.x = x; //Die X Position wird geupdated
         this.x_dup_rechts = this.x + this.w; //Im gleichen Zug werden auch die beiden Duplikate auf ihre neue Poisition gesetzt
-        this.x_dup_links = this.x - this.w;
+
     }
 
     public int getY() {
@@ -453,7 +447,7 @@ public abstract class Block implements VisibleObjects {
         this.x = x;
         this.y = y;
         this.x_dup_rechts = this.x + this.w;
-        this.x_dup_links = this.x - this.w;
+
     }
 
 
@@ -638,7 +632,7 @@ public abstract class Block implements VisibleObjects {
 
             if (this.isShowdupulicate_links()) {
                 batch.setColor(1, 1, 1, 0.5f);
-                batch.draw(AssetLoader.img_block, this.x_dup_links, this.y, this.getW(), this.getH()); //das gleiche für links
+                batch.draw(AssetLoader.img_block, this.x-ProjectManager.getActProjectVar().markedblock.getW(), this.y, ProjectManager.getActProjectVar().markedblock.getW(), this.getH()); //das gleiche für links
                 batch.setColor(1, 1, 1, 1);
             }
         }
@@ -738,7 +732,7 @@ try {
         if (this.isShowdupulicate_links()) { //Für links
             try {
 
-                flaeche = (CheckKollision.flache(this.getX_dup_links(), this.getY(), this.getW(), this.getH(), ProjectManager.getActProjectVar().markedblock.getX(), ProjectManager.getActProjectVar().markedblock.getY()));//Fläsche mit der die Blöcke überlappen um zu brechenen an welchen Block der Block springen wird
+                flaeche = (CheckKollision.flache(this.x-ProjectManager.getActProjectVar().markedblock.getW(), this.getY(), this.getW(), this.getH(), ProjectManager.getActProjectVar().markedblock.getX(), ProjectManager.getActProjectVar().markedblock.getY()));//Fläsche mit der die Blöcke überlappen um zu brechenen an welchen Block der Block springen wird
 
             } catch (NullPointerException ignored) {
 
