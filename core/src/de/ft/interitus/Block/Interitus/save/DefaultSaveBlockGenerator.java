@@ -4,11 +4,13 @@ import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.Generators.BlocktoSaveGenerator;
 import de.ft.interitus.Block.SaveBlock;
 import de.ft.interitus.Block.Wire;
+import org.lwjgl.system.CallbackI;
 
 import java.util.ArrayList;
 
 public class DefaultSaveBlockGenerator implements BlocktoSaveGenerator {
     ArrayList<ArrayList<Integer>> nodes;
+    ArrayList<String> parameters = new ArrayList<>();
 
     @Override
     public SaveBlock generate(Block block) {
@@ -55,42 +57,56 @@ public class DefaultSaveBlockGenerator implements BlocktoSaveGenerator {
 
         }
 
+
+
+        parameters.clear();
+
+        if(block.getBlocktype().getBlockParameter()!=null) {
+            for (int i = 0; i < block.getBlocktype().getBlockParameter().size(); i++) {
+                parameters.add(block.getBlocktype().getBlockParameter().get(i).getParameter().toString());
+            }
+
+        }
+
+
         if (block.getRight() != null) {
 
             if (block.getWire_right().isSpace_between_blocks()) {
 
 
+
+
                 if (block.getLeft() == null && block.getRight() != null) {
-                    return new DefaultSaveBlock(block.getX(), block.getY(), block.getIndex(), -1, block.getRight().getIndex(), true, nodes, block.getBlocktype().getID());
+                    return new DefaultSaveBlock(block.getX(), block.getY(), block.getIndex(), -1, block.getRight().getIndex(), true, nodes, block.getBlocktype().getID(),parameters);
 
                 } else if (block.getLeft() != null && block.getRight() == null) {
-                    return new DefaultSaveBlock(block.getX(), block.getY(), block.getIndex(), block.getLeft().getIndex(), -1, true, nodes, block.getBlocktype().getID());
+                    return new DefaultSaveBlock(block.getX(), block.getY(), block.getIndex(), block.getLeft().getIndex(), -1, true, nodes, block.getBlocktype().getID(),parameters);
                 } else if (block.getLeft() != null && block.getRight() != null) {
-                    return new DefaultSaveBlock(block.getX(), block.getY(), block.getIndex(), block.getLeft().getIndex(), block.getRight().getIndex(), false, nodes, block.getBlocktype().getID());
+                    return new DefaultSaveBlock(block.getX(), block.getY(), block.getIndex(), block.getLeft().getIndex(), block.getRight().getIndex(), false, nodes, block.getBlocktype().getID(),parameters);
 
                 } else if (block.getLeft() == null && block.getRight() == null) {
-                    return new DefaultSaveBlock(block.getX(), block.getY(), block.getIndex(), -1, -1, true, nodes, block.getBlocktype().getID());
+                    return new DefaultSaveBlock(block.getX(), block.getY(), block.getIndex(), -1, -1, true, nodes, block.getBlocktype().getID(),parameters);
 
                 } else {
-                    return new DefaultSaveBlock(block.getX(), block.getY(), block.getIndex(), -1, -1, true, nodes, block.getBlocktype().getID());
+                    return new DefaultSaveBlock(block.getX(), block.getY(), block.getIndex(), -1, -1, true, nodes, block.getBlocktype().getID(),parameters);
                 }
 
 
             } else {
 
                 if (block.getLeft() == null && block.getRight() != null) {
-                    return new DefaultSaveBlock(block.getX(), block.getY(), block.getIndex(), -1, block.getRight().getIndex(), false, nodes, block.getBlocktype().getID());
+                    return new DefaultSaveBlock(block.getX(), block.getY(), block.getIndex(), -1, block.getRight().getIndex(), false, nodes, block.getBlocktype().getID(),parameters);
 
                 } else if (block.getLeft() != null && block.getRight() == null) {
-                    return new DefaultSaveBlock(block.getX(), block.getY(), block.getIndex(), block.getLeft().getIndex(), -1, false, nodes, block.getBlocktype().getID());
+                    return new DefaultSaveBlock(block.getX(), block.getY(), block.getIndex(), block.getLeft().getIndex(), -1, false, nodes, block.getBlocktype().getID(),parameters);
                 } else if (block.getLeft() != null && block.getRight() != null) {
-                    return new DefaultSaveBlock(block.getX(), block.getY(), block.getIndex(), block.getLeft().getIndex(), block.getRight().getIndex(), false, nodes, block.getBlocktype().getID());
+                    return new DefaultSaveBlock(block.getX(), block.getY(), block.getIndex(), block.getLeft().getIndex(), block.getRight().getIndex(), false, nodes, block.getBlocktype().getID(),parameters);
 
                 } else if (block.getLeft() == null && block.getRight() == null) {
-                    return new DefaultSaveBlock(block.getX(), block.getY(), block.getIndex(), -1, -1, false, nodes, block.getBlocktype().getID());
+                    return new DefaultSaveBlock(block.getX(), block.getY(), block.getIndex(), -1, -1, false, nodes, block.getBlocktype().getID(),parameters);
 
                 } else {
-                    return new DefaultSaveBlock(block.getX(), block.getY(), block.getIndex(), -1, -1, false, nodes, block.getBlocktype().getID());
+                    return new DefaultSaveBlock(block.getX(), block.getY(), block.getIndex(), -1, -1, false, nodes, block.getBlocktype().getID(),parameters);
                 }
 
             }
@@ -98,18 +114,18 @@ public class DefaultSaveBlockGenerator implements BlocktoSaveGenerator {
         } else {
 
             if (block.getLeft() == null && block.getRight() != null) {
-                return new DefaultSaveBlock(block.getX(), block.getY(), block.getIndex(), -1, block.getRight().getIndex(), false, nodes, block.getBlocktype().getID());
+                return new DefaultSaveBlock(block.getX(), block.getY(), block.getIndex(), -1, block.getRight().getIndex(), false, nodes, block.getBlocktype().getID(),parameters);
 
             } else if (block.getLeft() != null && block.getRight() == null) {
-                return new DefaultSaveBlock(block.getX(), block.getY(), block.getIndex(), block.getLeft().getIndex(), -1, false, nodes, block.getBlocktype().getID());
+                return new DefaultSaveBlock(block.getX(), block.getY(), block.getIndex(), block.getLeft().getIndex(), -1, false, nodes, block.getBlocktype().getID(),parameters);
             } else if (block.getLeft() != null && block.getRight() != null) {
-                return new DefaultSaveBlock(block.getX(), block.getY(), block.getIndex(), block.getLeft().getIndex(), block.getRight().getIndex(), false, nodes, block.getBlocktype().getID());
+                return new DefaultSaveBlock(block.getX(), block.getY(), block.getIndex(), block.getLeft().getIndex(), block.getRight().getIndex(), false, nodes, block.getBlocktype().getID(),parameters);
 
             } else if (block.getLeft() == null && block.getRight() == null) {
-                return new DefaultSaveBlock(block.getX(), block.getY(), block.getIndex(), -1, -1, false, nodes, block.getBlocktype().getID());
+                return new DefaultSaveBlock(block.getX(), block.getY(), block.getIndex(), -1, -1, false, nodes, block.getBlocktype().getID(),parameters);
 
             } else {
-                return new DefaultSaveBlock(block.getX(), block.getY(), block.getIndex(), -1, -1, false, nodes, block.getBlocktype().getID());
+                return new DefaultSaveBlock(block.getX(), block.getY(), block.getIndex(), -1, -1, false, nodes, block.getBlocktype().getID(),parameters);
             }
 
 

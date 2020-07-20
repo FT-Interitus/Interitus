@@ -7,6 +7,7 @@ package de.ft.interitus.data.user;
 
 import de.ft.interitus.Block.SaveBlock;
 import de.ft.interitus.projecttypes.ProjectManager;
+import de.ft.interitus.projecttypes.ProjectTypes;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -74,8 +75,13 @@ public class BlockCalculator {
                 }
             }
 
+            //Load Parameters
+            if (ProjectManager.getActProjectVar().blocks.get(i).getBlocktype().getBlockParameter() != null) {
+                for (int j = 0; j < saveBlocks.get(i).getParameters().size(); j++) {
+                    ProjectManager.getActProjectVar().blocks.get(i).getBlocktype().getBlockParameter().get(j).setParameter(saveBlocks.get(i).getParameters().get(j));
+                }
 
-
+            }
         }
     }
 }

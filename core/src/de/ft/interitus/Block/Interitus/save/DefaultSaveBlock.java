@@ -5,10 +5,9 @@ import de.ft.interitus.Block.SaveBlock;
 import java.util.ArrayList;
 
 public class DefaultSaveBlock extends SaveBlock {
-    public DefaultSaveBlock(int x, int y, int index, int index_left, int index_right, boolean isspacebetweenrightblock, ArrayList<ArrayList<Integer>> nodes, int platformspecificblockid) {
-        super(x, y, index, index_left, index_right, isspacebetweenrightblock, nodes, platformspecificblockid);
 
 
+    public DefaultSaveBlock(int x, int y, int index, int index_links, int index_rechts, boolean isspacebetweenrightblock, ArrayList<ArrayList<Integer>> nodes, int platformspecificblockid, ArrayList<String> parameters) {
+        super(x, y, index, index_links, index_rechts, isspacebetweenrightblock, nodes, platformspecificblockid, parameters);
     }
-
 }
