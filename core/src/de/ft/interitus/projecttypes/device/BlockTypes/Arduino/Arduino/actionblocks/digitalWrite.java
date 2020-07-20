@@ -16,7 +16,6 @@ import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.device.BlockTypes.ProjectTypesVar;
 
 import java.awt.*;
-import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 
 public class digitalWrite implements PlatformSpecificBlock, ArduinoBlock {
@@ -32,8 +31,8 @@ public class digitalWrite implements PlatformSpecificBlock, ArduinoBlock {
     public digitalWrite(ProjectTypes type) {
 
 
-        pin = new Parameter(0, AssetLoader.img_WaitBlock_warteZeit_Parameter,"Pin","",null);
-        mode = new Parameter(1,AssetLoader.img_WaitBlock_warteZeit_Parameter,"Mode","",null);
+        pin = new Parameter(0, AssetLoader.Parameter_Pin,"Pin","",null);
+        mode = new Parameter(1,AssetLoader.Parameter_High_Low,"Mode","",null);
 
 
         parameters.add(pin);
@@ -85,17 +84,17 @@ public class digitalWrite implements PlatformSpecificBlock, ArduinoBlock {
 
     @Override
     public Texture getImageRight() {
-        return AssetLoader.WaitBlock_right;
+        return AssetLoader.DigitalWrite_right;
     }
 
     @Override
     public Texture getImageLeft() {
-        return AssetLoader.WaitBlock_left;
+        return AssetLoader.DigitalWrite_left;
     }
 
     @Override
     public Texture getImageCenter() {
-        return AssetLoader.WaitBlock_middle;
+        return AssetLoader.DigitalWrite_middle;
     }
 
 

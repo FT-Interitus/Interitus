@@ -614,12 +614,21 @@ public abstract class Block implements VisibleObjects {
             batch.draw(getBlocktype().getImageLeft(), this.getX(), this.getY(), 6, this.getH());
             batch.draw(getBlocktype().getImageRight(), this.getX() + this.getW() - 6, this.getY(), 6, this.getH());
         } else {
-            batch.draw(AssetLoader.img_block_mouseover, this.getX(), this.getY(), this.getW(), this.getH()); // Block wenn er makiert ist
+            batch.draw(getBlocktype().getImageCenter(), this.getX() + 6, this.getY(), this.getW() - 12, this.getH()); // Block ohne das er makiert ist
+            batch.draw(getBlocktype().getImageLeft(), this.getX(), this.getY(), 6, this.getH());
+            batch.draw(getBlocktype().getImageRight(), this.getX() + this.getW() - 6, this.getY(), 6, this.getH());
+            batch.draw(AssetLoader.mouse_over_mitte, this.getX() + 6, this.getY(), this.getW() - 12, this.getH()); // Block ohne das er makiert ist
+            batch.draw(AssetLoader.mouseover_links, this.getX(), this.getY(), 6, this.getH());
+            batch.draw(AssetLoader.mouse_over_rechts, this.getX() + this.getW() - 6, this.getY(), 6, this.getH());
         }
 
         if (this.isMarked()) {
-            batch.draw(AssetLoader.img_marked, this.getX(), this.getY(), this.getW(), this.getH()); // Wenn der Block makiert ist
-        }
+            batch.draw(getBlocktype().getImageCenter(), this.getX() + 6, this.getY(), this.getW() - 12, this.getH()); // Block ohne das er makiert ist
+            batch.draw(getBlocktype().getImageLeft(), this.getX(), this.getY(), 6, this.getH());
+            batch.draw(getBlocktype().getImageRight(), this.getX() + this.getW() - 6, this.getY(), 6, this.getH());
+            batch.draw(AssetLoader.marked_mitte, this.getX() + 6, this.getY(), this.getW() - 12, this.getH()); // Block ohne das er makiert ist
+            batch.draw(AssetLoader.marked_links, this.getX(), this.getY(), 6, this.getH());
+            batch.draw(AssetLoader.marked_rechts, this.getX() + this.getW() - 6, this.getY(), 6, this.getH());        }
         if (ProjectManager.getActProjectVar().biggestblock == this) {
             if (this.isShowdupulicate_rechts()) {
                 batch.setColor(1, 1, 1, 0.5f);
@@ -679,7 +688,7 @@ try {
         glyphLayout.setText(font, "" +  this.getBlocktype().getBlockParameter().get(i).getParameter());//TODO var type!!
         float x=this.getX() + (25 * i) + 20;
         float y=this.getY() + glyphLayout.height + 5;
-        batch.draw(AssetLoader.img_WaitBlock_warteZeit_Parameter,x-10,y+10,20,20);
+        batch.draw(this.getBlocktype().getBlockParameter().get(i).getParameterTexture(),x-10,y+10,20,20);
         font.draw(batch, glyphLayout, x-glyphLayout.width/2, y);
     }
 }catch(NullPointerException e){}

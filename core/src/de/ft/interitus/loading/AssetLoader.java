@@ -8,7 +8,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.plugin.store.StorePluginsVar;
-import de.ft.interitus.projecttypes.device.BlockTypes.Ev3.Wait;
 import de.ft.interitus.utils.DownloadFile;
 
 import java.io.IOException;
@@ -127,6 +126,23 @@ public class AssetLoader {
     public static Texture PinModeBlock_right;
     public static Texture PinModeBlock_middle;
 
+    /////////LoopBlock////////////
+    public static Texture DigitalWrite_left;
+    public static Texture DigitalWrite_right;
+    public static Texture DigitalWrite_middle;
+
+    public static Texture Parameter_High_Low;
+    public static Texture Parameter_Pin;
+    public static Texture Parameter_IO;
+
+    public static Texture mouseover_links;
+    public static Texture mouse_over_rechts;
+    public static Texture mouse_over_mitte;
+
+    public static Texture marked_links;
+    public static Texture marked_rechts;
+    public static Texture marked_mitte;
+
 
 
 
@@ -221,6 +237,18 @@ public class AssetLoader {
             manager.load(workingdirectory + "Block/Block_PinMode/links.png", Texture.class);
             manager.load(workingdirectory + "Block/Block_PinMode/rechts.png", Texture.class);
             manager.load(workingdirectory + "Block/Block_PinMode/mitte.png", Texture.class);
+            manager.load(workingdirectory + "Block/Block_PinMode/Parameter_Pin.png", Texture.class);
+            manager.load(workingdirectory + "Block/Block_PinMode/Parameter_IO.png", Texture.class);
+            manager.load(workingdirectory + "Block/Block_DigitalWrite/links.png", Texture.class);
+            manager.load(workingdirectory + "Block/Block_DigitalWrite/rechts.png", Texture.class);
+            manager.load(workingdirectory + "Block/Block_DigitalWrite/mitte.png", Texture.class);
+            manager.load(workingdirectory + "Block/Block_DigitalWrite/Parameter_HIGH_LOW.png", Texture.class);
+            manager.load(workingdirectory + "Block/mouseover_links.png", Texture.class);
+            manager.load(workingdirectory + "Block/mouseover_rechts.png", Texture.class);
+            manager.load(workingdirectory + "Block/mouseover_mitte.png", Texture.class);
+            manager.load(workingdirectory + "Block/market_links.png", Texture.class);
+            manager.load(workingdirectory + "Block/market_rechts.png", Texture.class);
+            manager.load(workingdirectory + "Block/market_mitte.png", Texture.class);
 
             group = "Switches";
             //Switch
@@ -344,6 +372,20 @@ public class AssetLoader {
             PinModeBlock_left = manager.get(workingdirectory + "Block/Block_PinMode/links.png", Texture.class);
             PinModeBlock_right = manager.get(workingdirectory + "Block/Block_PinMode/rechts.png", Texture.class);
             PinModeBlock_middle = manager.get(workingdirectory + "Block/Block_PinMode/mitte.png", Texture.class);
+            Parameter_Pin = manager.get(workingdirectory + "Block/Block_PinMode/Parameter_Pin.png", Texture.class);
+            Parameter_IO = manager.get(workingdirectory + "Block/Block_PinMode/Parameter_IO.png", Texture.class);
+            DigitalWrite_left = manager.get(workingdirectory + "Block/Block_DigitalWrite/links.png", Texture.class);
+            DigitalWrite_right = manager.get(workingdirectory + "Block/Block_DigitalWrite/rechts.png", Texture.class);
+            DigitalWrite_middle = manager.get(workingdirectory + "Block/Block_DigitalWrite/mitte.png", Texture.class);
+            Parameter_High_Low = manager.get(workingdirectory + "Block/Block_DigitalWrite/Parameter_HIGH_LOW.png", Texture.class);
+            mouse_over_rechts = manager.get(workingdirectory + "Block/mouseover_rechts.png", Texture.class);
+            mouseover_links = manager.get(workingdirectory + "Block/mouseover_links.png", Texture.class);
+            mouse_over_mitte = manager.get(workingdirectory + "Block/mouseover_mitte.png", Texture.class);
+            marked_rechts = manager.get(workingdirectory + "Block/market_rechts.png", Texture.class);
+            marked_links = manager.get(workingdirectory + "Block/market_links.png", Texture.class);
+            marked_mitte = manager.get(workingdirectory + "Block/market_mitte.png", Texture.class);
+
+
 
 
             //Switch
