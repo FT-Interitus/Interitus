@@ -79,7 +79,7 @@ public class digitalWrite implements PlatformSpecificBlock, ArduinoBlock {
 
     @Override
     public Texture getSmallImage() {
-        return AssetLoader.img_mappe1;
+        return AssetLoader.DigitalWrite_smallimage;
     }
 
     @Override

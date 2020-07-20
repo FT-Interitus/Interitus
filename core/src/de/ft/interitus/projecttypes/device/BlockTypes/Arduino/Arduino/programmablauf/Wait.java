@@ -65,7 +65,7 @@ public class Wait implements PlatformSpecificBlock, ArduinoBlock {
 
     @Override
     public Texture getSmallImage() {
-        return AssetLoader.img_mappe1;
+        return AssetLoader.WaitBlock_smallimage;
     }
 
     @Override

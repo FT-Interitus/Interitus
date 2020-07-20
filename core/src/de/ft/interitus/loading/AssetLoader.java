@@ -113,6 +113,7 @@ public class AssetLoader {
     public static Texture WaitBlock_left;
     public static Texture WaitBlock_right;
     public static Texture WaitBlock_middle;
+    public static Texture WaitBlock_smallimage;
     /////////SetupBlock////////////
     public static Texture SetupBlock_left;
     public static Texture SetupBlock_right;
@@ -130,6 +131,7 @@ public class AssetLoader {
     public static Texture DigitalWrite_left;
     public static Texture DigitalWrite_right;
     public static Texture DigitalWrite_middle;
+    public static Texture DigitalWrite_smallimage;
 
     public static Texture Parameter_High_Low;
     public static Texture Parameter_Pin;
@@ -250,6 +252,10 @@ public class AssetLoader {
             manager.load(workingdirectory + "Block/market_rechts.png", Texture.class);
             manager.load(workingdirectory + "Block/market_mitte.png", Texture.class);
             manager.load(workingdirectory + "Block/Block_PinMode/smallblock.png", Texture.class);
+            manager.load(workingdirectory + "Block/Block_DigitalWrite/smallblock.png", Texture.class);
+            manager.load(workingdirectory + "Block/Block_Wait/smallblock.png", Texture.class);
+
+
 
 
             group = "Switches";
@@ -387,6 +393,10 @@ public class AssetLoader {
             marked_links = manager.get(workingdirectory + "Block/market_links.png", Texture.class);
             marked_mitte = manager.get(workingdirectory + "Block/market_mitte.png", Texture.class);
             PinModeBlock_smallimage = manager.get(workingdirectory + "Block/Block_PinMode/smallblock.png", Texture.class);
+            DigitalWrite_smallimage = manager.get(workingdirectory + "Block/Block_DigitalWrite/smallblock.png", Texture.class);
+            WaitBlock_smallimage = manager.get(workingdirectory + "Block/Block_Wait/smallblock.png", Texture.class);
+
+
 
 
 
