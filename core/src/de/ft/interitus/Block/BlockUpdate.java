@@ -373,14 +373,14 @@ public abstract class BlockUpdate extends Thread {
                                 //System.out.println("flaeche   " + ProjectManager.getactProjectVar().uberlapptmitmarkedblock.get(i).getBlockMarkedblockuberlappungsflache() + "i:   " + i);
                                 try {
                                     if (ProjectManager.getActProjectVar().uberlapptmitmarkedblock.get(i).getBlockMarkedblockuberlappungsflache() > biggestvalue2) {
-                                        try {
+
                                             biggestvalue2 = ProjectManager.getActProjectVar().uberlapptmitmarkedblock.get(i).getBlockMarkedblockuberlappungsflache(); //TODO h
                                             biggestindex2 = i;
-                                        }catch (IndexOutOfBoundsException e) {
-                                            break;
-                                        }
+
                                     }
                                 } catch (NullPointerException e) {
+                                }catch (IndexOutOfBoundsException e) {
+
                                 }
                             }
 
