@@ -18,7 +18,7 @@ import de.ft.interitus.datamanager.programmdata.Updater;
 import de.ft.interitus.datamanager.userdata.load.DataLoader;
 import de.ft.interitus.datamanager.userdata.save.DataSaver;
 import de.ft.interitus.datamanager.userdata.UserInteractDataManagerDialog;
-import de.ft.interitus.data.user.changes.DataManager;
+
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.UI.UIOpenSettingsEvent;
 import de.ft.interitus.network.bettertogether.Manager;

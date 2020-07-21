@@ -122,7 +122,7 @@ public class PluginManagerHandler {
                                         DisplayErrors.error = e;
                                         registeredplugins.remove(loadedplugins.get(finalI));
                                     } catch (NoClassDefFoundError e) {
-                                        e.printStackTrace();
+
                                         registeredplugins.remove(loadedplugins.get(finalI));
                                     }
 

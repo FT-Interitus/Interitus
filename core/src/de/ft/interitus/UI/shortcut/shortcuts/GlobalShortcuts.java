@@ -16,7 +16,7 @@ import de.ft.interitus.UI.shortcut.SpecialKeys;
 import de.ft.interitus.Var;
 import de.ft.interitus.datamanager.userdata.save.DataSaver;
 import de.ft.interitus.datamanager.userdata.UserInteractDataManagerDialog;
-import de.ft.interitus.data.user.changes.DataManager;
+
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.UI.UIOpenSettingsEvent;
 import de.ft.interitus.projecttypes.ProjectManager;

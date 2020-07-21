@@ -4,7 +4,7 @@ import de.ft.interitus.Block.Block;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Programm;
 import de.ft.interitus.Var;
-import de.ft.interitus.data.user.changes.DataManager;
+
 import de.ft.interitus.projecttypes.ProjectManager;
 
 import java.util.ArrayList;

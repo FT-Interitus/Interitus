@@ -12,7 +12,7 @@ import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.RechtsKlick;
 import de.ft.interitus.ThreadManager;
-import de.ft.interitus.data.user.changes.DataManager;
+
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.block.BlockCreateEvent;
 import de.ft.interitus.events.block.BlockDeleteEvent;
