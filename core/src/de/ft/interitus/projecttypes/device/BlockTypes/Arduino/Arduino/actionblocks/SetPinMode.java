@@ -99,7 +99,7 @@ public class SetPinMode implements PlatformSpecificBlock, ArduinoBlock {
 
     @Override
     public Texture getDescriptionImage() {
-        return null;
+        return AssetLoader.PinModeBlock_description_image;
     }
 
 
