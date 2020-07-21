@@ -8,7 +8,7 @@ import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisTable;
 import com.kotcrab.vis.ui.widget.VisTextButton;
 import de.ft.interitus.UI.UI;
-import de.ft.interitus.data.programm.Data;
+import de.ft.interitus.datamanager.programmdata.Data;
 
 public class subitem10 {
     static VisTextButton delete = new VisTextButton("Daten Löschen");

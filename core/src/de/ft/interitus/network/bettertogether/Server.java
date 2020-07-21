@@ -1,22 +1,13 @@
 package de.ft.interitus.network.bettertogether;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.math.Vector2;
 import com.kotcrab.vis.ui.util.dialog.ConfirmDialogListener;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import de.ft.interitus.Block.SaveBlock;
-import de.ft.interitus.Programm;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.Var;
-import de.ft.interitus.data.user.BlockCalculator;
-import de.ft.interitus.data.user.DataSaver;
-import de.ft.interitus.data.user.LoadSave;
-import de.ft.interitus.data.user.changes.DataManager;
+import de.ft.interitus.datamanager.BlockCalculator;
 import de.ft.interitus.projecttypes.ProjectManager;
-import de.ft.interitus.projecttypes.ProjectTypes;
-import de.ft.interitus.projecttypes.VCS;
-import de.ft.interitus.utils.StringUtils;
 
 import java.io.*;
 import java.net.ServerSocket;

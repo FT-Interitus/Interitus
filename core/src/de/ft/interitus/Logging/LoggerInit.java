@@ -5,22 +5,14 @@
 
 package de.ft.interitus.Logging;
 
-import com.badlogic.gdx.files.FileHandle;
-import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Programm;
-import de.ft.interitus.UI.UI;
 import de.ft.interitus.Var;
-import de.ft.interitus.data.programm.Data;
-import de.ft.interitus.utils.FolderUtils;
+import de.ft.interitus.datamanager.programmdata.Data;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
 import java.util.logging.Handler;

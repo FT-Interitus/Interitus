@@ -12,7 +12,7 @@ import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.settings.SettingsUI;
 import de.ft.interitus.UI.settings.subitems.subitem17;
-import de.ft.interitus.data.programm.Data;
+import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.plugin.store.PluginInstalledNewEvent;
 import de.ft.interitus.plugin.PluginManagerHandler;

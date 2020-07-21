@@ -1,7 +1,7 @@
 package de.ft.interitus.Block.Generators;
 
 import de.ft.interitus.Block.Block;
-import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
+import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 
 
 public interface BlockGenerator {

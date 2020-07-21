@@ -3,7 +3,7 @@ package de.ft.interitus.compiler.Arduino;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.compiler.Compiler;
 import de.ft.interitus.projecttypes.ProjectManager;
-import de.ft.interitus.projecttypes.device.BlockTypes.Arduino.Arduino.ArduinoBlock;
+import de.ft.interitus.projecttypes.BlockTypes.Arduino.ArduinoBlock;
 
 public class ArduinoCompiler implements Compiler {
 

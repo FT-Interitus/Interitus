@@ -3,9 +3,9 @@ package de.ft.interitus.projecttypes.VCSManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import de.ft.interitus.Block.SaveBlock;
-import de.ft.interitus.data.programm.Data;
-import de.ft.interitus.data.user.BlockCalculator;
-import de.ft.interitus.data.user.Zip;
+import de.ft.interitus.datamanager.programmdata.Data;
+import de.ft.interitus.datamanager.BlockCalculator;
+import de.ft.interitus.datamanager.userdata.Zip;
 import de.ft.interitus.projecttypes.ProjectManager;
 import org.json.JSONObject;
 

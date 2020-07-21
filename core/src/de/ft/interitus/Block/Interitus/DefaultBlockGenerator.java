@@ -6,9 +6,7 @@ import de.ft.interitus.Block.Generators.BlockUpdateGenerator;
 import de.ft.interitus.Block.Generators.BlocktoSaveGenerator;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.ProjectTypes;
-import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
-
-import java.lang.reflect.InvocationTargetException;
+import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 
 public class DefaultBlockGenerator implements BlockGenerator {
 

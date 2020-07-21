@@ -4,8 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.ProgrammingSpace;
-import de.ft.interitus.UI.UI;
-import de.ft.interitus.projecttypes.device.ProgrammableObjekt;
 
 public class Unproject {
 

@@ -3,9 +3,7 @@ package de.ft.interitus.projecttypes;
 import de.ft.interitus.Block.Generators.*;
 import de.ft.interitus.compiler.Compiler;
 import de.ft.interitus.plugin.PluginRegister;
-import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
-import de.ft.interitus.projecttypes.device.ProgrammableObjekt;
-import de.ft.interitus.projecttypes.types.ProjectCreator;
+import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 
 import java.util.ArrayList;
 

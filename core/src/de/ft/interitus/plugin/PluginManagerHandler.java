@@ -3,7 +3,7 @@ package de.ft.interitus.plugin;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Programm;
 import de.ft.interitus.Var;
-import de.ft.interitus.data.programm.Data;
+import de.ft.interitus.datamanager.programmdata.Data;
 import org.usb4java.LoaderException;
 
 import java.io.File;

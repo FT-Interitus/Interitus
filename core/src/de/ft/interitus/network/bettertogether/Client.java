@@ -4,13 +4,11 @@ import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.SaveBlock;
 import de.ft.interitus.Programm;
 import de.ft.interitus.Var;
-import de.ft.interitus.data.user.BlockCalculator;
+import de.ft.interitus.datamanager.BlockCalculator;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.block.BlockEventAdapter;
 import de.ft.interitus.events.block.BlockNeighborSetEvent;
 import de.ft.interitus.projecttypes.ProjectManager;
-import de.ft.interitus.projecttypes.ProjectTypes;
-import de.ft.interitus.utils.StringUtils;
 import de.ft.interitus.utils.Unproject;
 
 import java.io.*;

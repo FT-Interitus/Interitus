@@ -12,7 +12,7 @@ import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.Var;
-import de.ft.interitus.data.user.changes.DataManager;
+
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.CheckKollision;
@@ -218,7 +218,6 @@ public abstract class BlockUpdate extends Thread {
                                         ProjectManager.getActProjectVar().unterschiedsave.set(ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x - block.getX(), ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y - block.getY());
 
 
-                                        DataManager.change(block, false, false);
                                         block.setMoving(true);
                                         ProjectManager.getActProjectVar().ismoving = true;
 

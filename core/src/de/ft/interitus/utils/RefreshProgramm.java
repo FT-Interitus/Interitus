@@ -6,7 +6,7 @@
 package de.ft.interitus.utils;
 
 import de.ft.interitus.Block.SaveBlock;
-import de.ft.interitus.data.user.BlockCalculator;
+import de.ft.interitus.datamanager.BlockCalculator;
 
 import java.util.ArrayList;
 

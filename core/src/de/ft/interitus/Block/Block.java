@@ -23,7 +23,7 @@ import de.ft.interitus.events.rightclick.RightClickEventListener;
 import de.ft.interitus.events.rightclick.RightClickOpenEvent;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.ProjectManager;
-import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
+import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.utils.CheckKollision;
 
 /***
@@ -495,7 +495,6 @@ public abstract class Block implements VisibleObjects {
             this.getWire_right().setLeft_connection(null);
         }
 
-        DataManager.change(this, false, true); // Ein Block Abbild wird erstellt um ein eventuelles Rückgänig machen
         this.setIndex(-1); //Der Index wird auf -1 gesetzt dann merkt der BlockUpdater das der laufenden Timer beendet werden soll
         if (left != null) { //Wenn ein linker Nachbar exsistiert
             left.setRight(null); //wird dem linken Nachbar gesagt das er keinen Rechten Nachbar mehr hat

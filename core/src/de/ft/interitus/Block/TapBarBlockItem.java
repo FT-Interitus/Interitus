@@ -10,10 +10,7 @@ import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.tappedbar.TapItem;
 import de.ft.interitus.Var;
 import de.ft.interitus.projecttypes.ProjectManager;
-import de.ft.interitus.projecttypes.ProjectTypes;
-import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
-
-import javax.print.attribute.standard.OrientationRequested;
+import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 
 
 public class TapBarBlockItem implements TapItem {

@@ -1,7 +1,6 @@
 package de.ft.interitus;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -20,27 +19,18 @@ import de.ft.interitus.UI.UIElements.PressedKeys;
 import de.ft.interitus.UI.UIElements.Switch;
 import de.ft.interitus.UI.UIElements.TextField;
 import de.ft.interitus.UI.UIVar;
-import de.ft.interitus.UI.projectsettings.subitems.Informations;
 import de.ft.interitus.UI.settings.subitems.subitem17;
 import de.ft.interitus.UI.shortcut.shortcuts.BlockShortcuts;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
-import de.ft.interitus.compiler.Arduino.ArduinoCompiler;
 import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.network.bettertogether.Manager;
-import de.ft.interitus.network.bettertogether.SharedVar;
 import de.ft.interitus.plugin.Configuration;
 import de.ft.interitus.plugin.PluginRegister;
 import de.ft.interitus.projecttypes.ProjectManager;
-import de.ft.interitus.projecttypes.device.BlockTypes.ProjectTypesVar;
+import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
 import de.ft.interitus.utils.PositionSaver;
-import de.ft.interitus.utils.StringUtils;
 import de.ft.interitus.utils.animation.Animation;
 
 import java.awt.*;
-import java.awt.desktop.QuitEvent;
-import java.awt.desktop.QuitHandler;
-import java.awt.desktop.QuitResponse;
-import java.io.File;
 
 
 public class ProgrammingSpace extends ScreenAdapter {

@@ -18,7 +18,7 @@ import de.ft.interitus.UI.setup.steps.ArduinoSteps.Step3;
 import de.ft.interitus.UI.setup.steps.generalSteps.Step1;
 import de.ft.interitus.UI.setup.steps.generalSteps.Step2;
 import de.ft.interitus.Var;
-import de.ft.interitus.data.VerbindungsSpeicher;
+import de.ft.interitus.datamanager.programmdata.VerbindungsSpeicher;
 
 import java.util.Timer;
 import java.util.TimerTask;

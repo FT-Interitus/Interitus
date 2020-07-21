@@ -2,7 +2,7 @@ package de.ft.interitus.desktop;
 
 import de.ft.interitus.Programm;
 import de.ft.interitus.Var;
-import de.ft.interitus.data.programm.Data;
+import de.ft.interitus.datamanager.programmdata.Data;
 
 public class CheckArguments {
     public static void check() {

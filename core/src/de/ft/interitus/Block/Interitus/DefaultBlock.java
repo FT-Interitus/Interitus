@@ -3,7 +3,7 @@ package de.ft.interitus.Block.Interitus;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.Generators.BlockUpdateGenerator;
 import de.ft.interitus.Block.Generators.BlocktoSaveGenerator;
-import de.ft.interitus.projecttypes.device.BlockTypes.PlatformSpecificBlock;
+import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 
 public class DefaultBlock extends Block {
 

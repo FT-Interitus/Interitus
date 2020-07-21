@@ -13,10 +13,11 @@ import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.UI.newproject.NewProjectWindow;
 import de.ft.interitus.UI.setup.SetupWindow;
 import de.ft.interitus.Var;
-import de.ft.interitus.data.programm.Data;
-import de.ft.interitus.data.user.DataLoader;
-import de.ft.interitus.data.user.DataSaver;
-import de.ft.interitus.data.user.LoadSave;
+import de.ft.interitus.datamanager.programmdata.Data;
+import de.ft.interitus.datamanager.programmdata.Updater;
+import de.ft.interitus.datamanager.userdata.load.DataLoader;
+import de.ft.interitus.datamanager.userdata.save.DataSaver;
+import de.ft.interitus.datamanager.userdata.UserInteractDataManagerDialog;
 import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.UI.UIOpenSettingsEvent;
@@ -89,7 +90,7 @@ public class MenuBar {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
-                if (!LoadSave.isopenopen()) {
+                if (!UserInteractDataManagerDialog.isopenopen()) {
                     if (!Var.isclearing) {
                         if (ProjectManager.getActProjectVar().changes) {
                             String[] möglichkeiten = {"Verwerfen", "Speichern", "Abbrechen"};
@@ -107,7 +108,7 @@ public class MenuBar {
                                         public void result(Integer result) {
                                             if (result == nothing) {
 
-                                                LoadSave.open();
+                                                UserInteractDataManagerDialog.open();
                                             }
 
                                             if (result == everything) {
@@ -115,9 +116,9 @@ public class MenuBar {
                                                     if (ProjectManager.getActProjectVar().path != "") {
                                                         FileHandle handle = Gdx.files.external(ProjectManager.getActProjectVar().path);
                                                         DataSaver.save(handle);
-                                                        DataManager.saved();
+                                                        //DataManager.saved();
                                                     } else {
-                                                        LoadSave.saveas();
+                                                        UserInteractDataManagerDialog.saveas();
                                                     }
                                                 } else if (ProjectManager.getActProjectVar().vcs == VCS.ITEV) {
 
@@ -133,7 +134,7 @@ public class MenuBar {
 
 
                         } else {
-                            LoadSave.open();
+                            UserInteractDataManagerDialog.open();
                         }
                     } else {
                         Dialogs.showOKDialog(UI.stage, "Bitte Warten", "Das Programm ist gerade mit deinem zuletzt Geöffnetem Programm beschäftigt. Bitte warte noch bis es fertig ist");
@@ -152,10 +153,10 @@ public class MenuBar {
                     if (ProjectManager.getActProjectVar().path != "") {
                         FileHandle handle = Gdx.files.absolute(ProjectManager.getActProjectVar().path);
                         DataSaver.save(handle);
-                        DataManager.saved();
+                       // DataManager.saved();
                     } else {
-                        if (!LoadSave.issaveopen()) {
-                            LoadSave.saveas();
+                        if (!UserInteractDataManagerDialog.issaveopen()) {
+                            UserInteractDataManagerDialog.saveas();
                         }
                     }
                 } else if (ProjectManager.getActProjectVar().vcs == VCS.ITEV) {
@@ -169,8 +170,8 @@ public class MenuBar {
             public void changed(ChangeEvent event, Actor actor) {
 
 
-                if (!LoadSave.issaveopen()) {
-                    LoadSave.saveas();
+                if (!UserInteractDataManagerDialog.issaveopen()) {
+                    UserInteractDataManagerDialog.saveas();
                 }
             }
         }).setShortcut("Strg+Shift+S");
@@ -232,7 +233,7 @@ public class MenuBar {
                             public void result(Integer result) {
 
                                 if (result == yes) {
-                                    de.ft.interitus.data.programm.Updater.check(true);
+                                    Updater.check(true);
                                 }
 
                             }
@@ -327,18 +328,14 @@ public class MenuBar {
         editMenu.addItem(UI.copy = new MenuItem("Kopieren", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                if (ProjectManager.getActProjectVar().marked) {
-                    de.ft.interitus.data.user.clipboard.Manager.Copy();
-                }
+
             }
         }).setShortcut("Strg+C"));
         editMenu.addItem(menuItem_ausschneiden);
         editMenu.addItem(UI.paste = new MenuItem("Einfügen", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                if (de.ft.interitus.data.user.clipboard.Manager.checkcopy()) {
-                    de.ft.interitus.data.user.clipboard.Manager.paste();
-                }
+
             }
         }).setShortcut("Strg+V"));
 
@@ -392,7 +389,7 @@ public class MenuBar {
                                     public void result(Integer result) {
                                         if (result == nothing) {
 
-                                            DataManager.saved();
+                                         //   DataManager.saved();
 
                                             FileHandle handle = Gdx.files.absolute(Data.path.get(finalI));
                                             DataLoader.load(handle, Data.filename.get(finalI), Data.path.get(finalI));
@@ -403,9 +400,9 @@ public class MenuBar {
                                             if (ProjectManager.getActProjectVar().path != "") {
                                                 FileHandle handle = Gdx.files.external(ProjectManager.getActProjectVar().path);
                                                 DataSaver.save(handle);
-                                                DataManager.saved();
+                                         //       DataManager.saved();
                                             } else {
-                                                LoadSave.saveas();
+                                                UserInteractDataManagerDialog.saveas();
                                             }
                                         }
 
@@ -420,7 +417,7 @@ public class MenuBar {
                     } else {
 
                         //ClearActOpenProgramm.clear();
-                        DataManager.saved();
+                       // DataManager.saved();
 
 
                         FileHandle handle = Gdx.files.absolute(Data.path.get(finalI));

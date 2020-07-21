@@ -14,8 +14,8 @@ import de.ft.interitus.UI.shortcut.ShortCut;
 import de.ft.interitus.UI.shortcut.ShortCutChecker;
 import de.ft.interitus.UI.shortcut.SpecialKeys;
 import de.ft.interitus.Var;
-import de.ft.interitus.data.user.DataSaver;
-import de.ft.interitus.data.user.LoadSave;
+import de.ft.interitus.datamanager.userdata.save.DataSaver;
+import de.ft.interitus.datamanager.userdata.UserInteractDataManagerDialog;
 import de.ft.interitus.data.user.changes.DataManager;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.UI.UIOpenSettingsEvent;
@@ -73,7 +73,7 @@ public class GlobalShortcuts implements ShortCutChecker {
             NewProjectWindow NPW = new NewProjectWindow();
             NPW.show();
         }
-        if (shortCut_oefnen.isPressed() && !LoadSave.isopenopen()) {
+        if (shortCut_oefnen.isPressed() && !UserInteractDataManagerDialog.isopenopen()) {
             if (!Var.isclearing) {
                 if (ProjectManager.getActProjectVar().changes) {
                     String[] möglichkeiten = {"Verwerfen", "Speichern", "Abbrechen"};
@@ -91,7 +91,7 @@ public class GlobalShortcuts implements ShortCutChecker {
                                 public void result(Integer result) {
                                     if (result == nothing) {
 
-                                        LoadSave.open();
+                                        UserInteractDataManagerDialog.open();
                                     }
 
                                     if (result == everything) {
@@ -99,9 +99,9 @@ public class GlobalShortcuts implements ShortCutChecker {
                                             if (ProjectManager.getActProjectVar().path != "") {
                                                 FileHandle handle = Gdx.files.external(ProjectManager.getActProjectVar().path);
                                                 DataSaver.save(handle);
-                                                DataManager.saved();
+                                          //      DataManager.saved();
                                             } else {
-                                                LoadSave.saveas();
+                                                UserInteractDataManagerDialog.saveas();
                                             }
                                         } else if (ProjectManager.getActProjectVar().vcs == VCS.ITEV) {
 
@@ -117,7 +117,7 @@ public class GlobalShortcuts implements ShortCutChecker {
 
 
                 } else {
-                    LoadSave.open();
+                    UserInteractDataManagerDialog.open();
                 }
             } else {
                 Dialogs.showOKDialog(UI.stage, "Bitte Warten", "Das Programm ist gerade mit deinem zuletzt Geöffnetem Programm beschäftigt. Bitte warte noch bis es fertig ist");
@@ -129,10 +129,10 @@ public class GlobalShortcuts implements ShortCutChecker {
                 if (ProjectManager.getActProjectVar().path != "") {
                     FileHandle handle = Gdx.files.absolute(ProjectManager.getActProjectVar().path);
                     DataSaver.save(handle);
-                    DataManager.saved();
+               //     DataManager.saved();
                 } else {
-                    if (!LoadSave.issaveopen()) {
-                        LoadSave.saveas();
+                    if (!UserInteractDataManagerDialog.issaveopen()) {
+                        UserInteractDataManagerDialog.saveas();
                     }
                 }
             } else if (ProjectManager.getActProjectVar().vcs == VCS.ITEV) {
@@ -141,8 +141,8 @@ public class GlobalShortcuts implements ShortCutChecker {
         }
 
         if (shortCut_speichern_unter.isPressed()) {
-            if (!LoadSave.issaveopen()) {
-                LoadSave.saveas();
+            if (!UserInteractDataManagerDialog.issaveopen()) {
+                UserInteractDataManagerDialog.saveas();
             }
         }
     }
