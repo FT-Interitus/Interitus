@@ -99,7 +99,7 @@ public class digitalWrite implements PlatformSpecificBlock, ArduinoBlock {
 
     @Override
     public Texture getDescriptionImage() {
-        return null;
+        return AssetLoader.DigitalWrite_description_image;
     }
 
 
