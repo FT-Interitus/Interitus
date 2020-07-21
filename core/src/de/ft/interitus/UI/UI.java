@@ -73,6 +73,7 @@ public class UI {
     static ArrayList<VisTextField> textFielder = new ArrayList<>();
     private static boolean issettingsuiopend = false;
     private static boolean issetupuiopend = false;
+    private static Block markedblock;
 
     public static void updatedragui(ShapeRenderer renderer, boolean flaeche, SpriteBatch batch) {
         BlockTappedBar.userresize();
@@ -105,8 +106,19 @@ public class UI {
         renderer.end();
 
 
-        Block block = ProjectManager.getActProjectVar().markedblock;
-        if (block != null && block.getBlocktype().getBlockParameter() != null) {
+
+
+        if(markedblock!=ProjectManager.getActProjectVar().markedblock) {
+            UIVar.isBlockSettingsopen = false;
+            for (int i = 0; i < textFielder.size(); i++) {
+                textFielder.get(i).removeListener(textFielder.get(i).getListeners().get(0));
+                textFielder.get(i).remove();
+            }
+            textFielder.clear();
+        }
+
+         markedblock = ProjectManager.getActProjectVar().markedblock;
+        if (markedblock != null && markedblock.getBlocktype().getBlockParameter() != null) {
 
 
             UIVar.blockeinstellungen_w = 170;
@@ -122,10 +134,10 @@ public class UI {
             UIbatch.begin();
 
 
-            for (int i = 0; i < block.getBlocktype().getBlockParameter().size(); i++) {
+            for (int i = 0; i < markedblock.getBlocktype().getBlockParameter().size(); i++) {
                 try {
                     if (!UIVar.isBlockSettingsopen) {
-                        textFielder.add(new VisTextField(block.getBlocktype().getBlockParameter().get(i).getParameter().toString()));
+                        textFielder.add(new VisTextField(markedblock.getBlocktype().getBlockParameter().get(i).getParameter().toString()));
                         textFielder.get(textFielder.size() - 1).addListener(new ChangeListener() {
                             @Override
                             public void changed(ChangeEvent event, Actor actor) {
@@ -138,12 +150,12 @@ public class UI {
 
                     textFielder.get(i).setWidth(UIVar.blockeinstellungen_w - 40);
                     textFielder.get(i).setPosition(UIVar.blockeinstellungen_x + 5, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - UIVar.abstandText - glyphLayout.height - (i * (glyphLayout.height + UIVar.abstandzwischenparametern + UIVar.abstandText + textFielder.get(i).getHeight()) + 3) - textFielder.get(i).getHeight());
-                    glyphLayout.setText(font, block.getBlocktype().getBlockParameter().get(i).getParameterName());
+                    glyphLayout.setText(font, markedblock.getBlocktype().getBlockParameter().get(i).getParameterName());
 
                     font.draw(UIbatch, glyphLayout, UIVar.blockeinstellungen_x + 5, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - (i * (glyphLayout.height + textFielder.get(i).getHeight() + UIVar.abstandzwischenparametern + UIVar.abstandText) + 3));
 
-                    if (block.getBlocktype().getBlockParameter().get(i).getUnit() != null) {
-                        glyphLayout.setText(font, block.getBlocktype().getBlockParameter().get(i).getUnit());
+                    if (markedblock.getBlocktype().getBlockParameter().get(i).getUnit() != null) {
+                        glyphLayout.setText(font, markedblock.getBlocktype().getBlockParameter().get(i).getUnit());
                         font.draw(UIbatch, glyphLayout, UIVar.blockeinstellungen_x + 5 + UIVar.blockeinstellungen_w - 30, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - UIVar.abstandText - glyphLayout.height - (i * (glyphLayout.height + UIVar.abstandzwischenparametern + UIVar.abstandText + textFielder.get(i).getHeight()) + 3) - textFielder.get(i).getHeight() / 3f);
 
                     }
@@ -317,28 +329,17 @@ public class UI {
         buttonbar.addButton(button_start);
 
         tabbar = new TabBar();
-        Tab testtab = new Tab();
-        testtab.getTabButton().setImage(AssetLoader.img_Tab);
-        testtab.getTabButton().setW(300);
-        testtab.getTabButton().setText("hallo tim");
-        testtab.getTabButton().widthoverText = true;
-        tabbar.addTab(testtab);
-        Tab testtab2 = new Tab();
-        testtab2.getTabButton().setImage(AssetLoader.img_Tab);
-        testtab2.getTabButton().setW(300);
-        testtab2.getTabButton().setText("2.tabasdölkghjkjhgjkkjgjjgkjgjjkkjgjgkgkgjasdflkjasdflökjasdfölkjasdf");
-        testtab2.getTabButton().widthoverText = true;
-        tabbar.addTab(testtab2);
+
 
     }
 
     public static void update() {
 
-        if (Var.openprojects.size() != tabbar.getTabbs().size()) {
+        if (Var.openprojects.size() != tabbar.getTabbs().size()) { //TODO nicht die ganze Bar neu erstellen
             tabbar.setTabs();
 
             for (int i = 0; i < Var.openprojects.size(); i++) {
-                Tab temptab = new Tab(); //TODO ganz gefährlich
+                Tab temptab = new Tab();
                 temptab.getTabButton().setImage(AssetLoader.img_Tab);
                 temptab.getTabButton().setW(300);
                 temptab.getTabButton().widthoverText = true;

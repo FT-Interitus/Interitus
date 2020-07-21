@@ -622,7 +622,7 @@ public abstract class Block implements VisibleObjects {
         if (ProjectManager.getActProjectVar().biggestblock == this) {
             if (this.isShowdupulicate_rechts()) {
                 batch.setColor(1, 1, 1, 0.5f);
-                batch.draw(AssetLoader.img_block, this.x_dup_rechts, this.y, this.getW(), this.getH()); //Wenn der Block die größte überlappung hat wird er als show duplicat angezigt
+                batch.draw(AssetLoader.img_block, this.x_dup_rechts, this.y, ProjectManager.getActProjectVar().markedblock.getW(), this.getH()); //Wenn der Block die größte überlappung hat wird er als show duplicat angezigt
                 batch.setColor(1, 1, 1, 1);
             }
 
