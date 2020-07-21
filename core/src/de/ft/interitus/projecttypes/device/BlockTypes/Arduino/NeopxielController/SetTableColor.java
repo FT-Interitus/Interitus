@@ -70,6 +70,11 @@ public class SetTableColor implements PlatformSpecificBlock {
     }
 
     @Override
+    public Texture getDescriptionImage() {
+        return null;
+    }
+
+    @Override
     public int getID() {
         return ProjectTypesVar.projectTypes.get(ProjectTypesVar.projectTypes.indexOf(type)).getProjectblocks().indexOf(this);
     }

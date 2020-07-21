@@ -63,6 +63,11 @@ public class Wait implements PlatformSpecificBlock, Ev3Block {
     }
 
     @Override
+    public Texture getDescriptionImage() {
+        return null;
+    }
+
+    @Override
     public int getID() {
         return 0;
     }

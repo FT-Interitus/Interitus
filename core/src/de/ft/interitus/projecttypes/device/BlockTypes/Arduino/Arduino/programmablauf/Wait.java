@@ -83,6 +83,11 @@ public class Wait implements PlatformSpecificBlock, ArduinoBlock {
         return AssetLoader.WaitBlock_middle;
     }
 
+    @Override
+    public Texture getDescriptionImage() {
+        return AssetLoader.WaitBlock_description_image;
+    }
+
 
     @Override
     public int getID() {
@@ -104,7 +109,7 @@ public class Wait implements PlatformSpecificBlock, ArduinoBlock {
 
     @Override
     public int getWidth() {
-        return 50;
+        return 80;
     }
 
     @Override

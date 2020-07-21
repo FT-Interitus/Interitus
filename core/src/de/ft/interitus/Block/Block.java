@@ -674,10 +674,19 @@ public abstract class Block implements VisibleObjects {
 
 
             ///////////////////////////////PARAMETER//ANZEIGE/////////////////////////////////////////////////
-try {
+        if(this.getBlocktype().getDescriptionImage()!=null) {
+            batch.draw(this.getBlocktype().getDescriptionImage(), this.getX() + 5, this.getY() + this.getH() - this.getBlocktype().getDescriptionImage().getWidth()-15);
+        }
+
+        try {
     for (int i = 0; i < this.getBlocktype().getBlockParameter().size(); i++) {
         glyphLayout.setText(font, "" +  this.getBlocktype().getBlockParameter().get(i).getParameter());//TODO var type!!
-        float x=this.getX() + (25 * i) + 20;
+        float x;
+        if(this.getBlocktype().getDescriptionImage()!=null) {
+            x = this.getX() + (25 * i) + 5 + this.getBlocktype().getDescriptionImage().getWidth() + 15;
+        }else{
+            x = this.getX() + (25 * i) + 20;
+        }
         float y=this.getY() + glyphLayout.height + 5;
         batch.draw(this.getBlocktype().getBlockParameter().get(i).getParameterTexture(),x-10,y+10,20,20);
         font.draw(batch, glyphLayout, x-glyphLayout.width/2, y);

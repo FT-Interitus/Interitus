@@ -114,6 +114,7 @@ public class AssetLoader {
     public static Texture WaitBlock_right;
     public static Texture WaitBlock_middle;
     public static Texture WaitBlock_smallimage;
+    public static Texture WaitBlock_description_image;
     /////////SetupBlock////////////
     public static Texture SetupBlock_left;
     public static Texture SetupBlock_right;
@@ -254,6 +255,7 @@ public class AssetLoader {
             manager.load(workingdirectory + "Block/Block_PinMode/smallblock.png", Texture.class);
             manager.load(workingdirectory + "Block/Block_DigitalWrite/smallblock.png", Texture.class);
             manager.load(workingdirectory + "Block/Block_Wait/smallblock.png", Texture.class);
+            manager.load(workingdirectory + "Block/Block_Wait/beschreibungsbild.png", Texture.class);
 
 
 
@@ -395,6 +397,7 @@ public class AssetLoader {
             PinModeBlock_smallimage = manager.get(workingdirectory + "Block/Block_PinMode/smallblock.png", Texture.class);
             DigitalWrite_smallimage = manager.get(workingdirectory + "Block/Block_DigitalWrite/smallblock.png", Texture.class);
             WaitBlock_smallimage = manager.get(workingdirectory + "Block/Block_Wait/smallblock.png", Texture.class);
+            WaitBlock_description_image = manager.get(workingdirectory + "Block/Block_Wait/beschreibungsbild.png", Texture.class);
 
 
 

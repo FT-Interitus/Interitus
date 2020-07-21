@@ -97,6 +97,11 @@ public class digitalWrite implements PlatformSpecificBlock, ArduinoBlock {
         return AssetLoader.DigitalWrite_middle;
     }
 
+    @Override
+    public Texture getDescriptionImage() {
+        return null;
+    }
+
 
     @Override
     public ProjectTypes getProjectType() {

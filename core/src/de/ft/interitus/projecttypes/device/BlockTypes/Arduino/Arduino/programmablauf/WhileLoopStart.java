@@ -111,6 +111,11 @@ public class WhileLoopStart implements PlatformSpecificBlock, ArduinoBlock {
     }
 
     @Override
+    public Texture getDescriptionImage() {
+        return null;
+    }
+
+    @Override
     public String getCode() {
         return "while(true){";
     }

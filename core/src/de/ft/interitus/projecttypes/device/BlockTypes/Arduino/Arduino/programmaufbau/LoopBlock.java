@@ -70,6 +70,11 @@ public class LoopBlock implements PlatformSpecificBlock, ArduinoBlock {
         return AssetLoader.LoopBlock_middle;
     }
 
+    @Override
+    public Texture getDescriptionImage() {
+        return null;
+    }
+
 
     @Override
     public int getID() {

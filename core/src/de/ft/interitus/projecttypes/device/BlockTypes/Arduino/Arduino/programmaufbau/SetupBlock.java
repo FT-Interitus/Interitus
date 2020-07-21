@@ -71,6 +71,11 @@ public class SetupBlock implements PlatformSpecificBlock, ArduinoBlock {
         return AssetLoader.SetupBlock_middle;
     }
 
+    @Override
+    public Texture getDescriptionImage() {
+        return null;
+    }
+
 
     @Override
     public int getID() {

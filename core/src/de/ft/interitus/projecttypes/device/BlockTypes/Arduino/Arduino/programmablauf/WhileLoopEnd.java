@@ -71,6 +71,11 @@ public class WhileLoopEnd implements PlatformSpecificBlock, ArduinoBlock {
     }
 
     @Override
+    public Texture getDescriptionImage() {
+        return null;
+    }
+
+    @Override
     public int getID() {
         for(int i=0;i<ProjectTypesVar.projectTypes.get(ProjectTypesVar.projectTypes.indexOf(type)).getProjectblocks().size();i++) {
 

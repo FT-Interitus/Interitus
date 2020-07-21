@@ -23,11 +23,10 @@ public interface PlatformSpecificBlock {
     BlockCategories getBlockCategoration();
 
     Texture getSmallImage();
-
-
     Texture getImageRight();
     Texture getImageLeft();
     Texture getImageCenter();
+    Texture getDescriptionImage();
 
 
     int getID();
