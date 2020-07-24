@@ -148,6 +148,8 @@ public class AssetLoader {
     public static Texture marked_rechts;
     public static Texture marked_mitte;
 
+    public static Texture Plug_ZahlParameter;
+
 
 
 
@@ -181,6 +183,10 @@ public class AssetLoader {
             } catch (Exception e) {
                 System.out.println("Fehler beim Laden der Schrift");
             }
+
+            group = "Plugs";
+            manager.load(workingdirectory + "Block/ParameterStecker/ZahlParameterStecker.png", Texture.class);
+
 
 
             group = "TabBar";
@@ -339,6 +345,9 @@ public class AssetLoader {
 
             manager.load(workingdirectory + "Block/Parameter/WaitBlock/WaitParameter.png", Texture.class);
             img_WaitBlock_warteZeit_Parameter = manager.get(workingdirectory + "Block/Parameter/WaitBlock/WaitParameter.png");
+
+            Plug_ZahlParameter = manager.get(workingdirectory + "Block/ParameterStecker/ZahlParameterStecker.png", Texture.class);
+
 
             img_Tab = manager.get(workingdirectory + "TabBar/Tabimage.png");
 

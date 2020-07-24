@@ -673,6 +673,22 @@ public abstract class Block implements VisibleObjects {
 
 
             ///////////////////////////////PARAMETER//ANZEIGE/////////////////////////////////////////////////
+
+        if(this.getBlocktype().getBlockParameter()!=null&&this.getBlocktype().getBlockParameter().size()>0) {
+            float aktualX = this.getX();
+
+            aktualX += 5;
+            batch.draw(this.getBlocktype().getDescriptionImage(), aktualX, this.getY() + this.getH() - 30 - 15, 30, 30);
+            aktualX+=35;
+            for(int i=0;i<this.getBlocktype().getBlockParameter().size();i++){
+                batch.draw(AssetLoader.Plug_ZahlParameter,aktualX,this.getY(),30,30);
+                font.getData().setScale(0.9f);
+                glyphLayout.setText(font, "" +  this.getBlocktype().getBlockParameter().get(i).getParameter());//TODO var type!!
+                font.draw(batch,glyphLayout,aktualX+15-glyphLayout.width/2,y+glyphLayout.height*1.5f);
+                aktualX+=30;
+            }
+        }
+        /*
         if(this.getBlocktype().getDescriptionImage()!=null) {
             batch.draw(this.getBlocktype().getDescriptionImage(), this.getX() + 5, this.getY() + this.getH() - this.getBlocktype().getDescriptionImage().getWidth()-15);
         }
@@ -691,6 +707,7 @@ public abstract class Block implements VisibleObjects {
         font.draw(batch, glyphLayout, x-glyphLayout.width/2, y);
     }
 }catch(NullPointerException e){}
+        */
 
     }
 

@@ -10,5 +10,12 @@ public class DefaultBlock extends Block {
 
     public DefaultBlock(int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock, BlockUpdateGenerator update, BlocktoSaveGenerator blocktoSaveGenerator) {
         super(index, x, y, w, h, platformSpecificBlock, update, blocktoSaveGenerator);
+
+
+        if(platformSpecificBlock.getBlockParameter()!=null) {
+            for (int i = 0; i < platformSpecificBlock.getBlockParameter().size(); i++) {
+                platformSpecificBlock.getBlockParameter().get(i).setBlock(this);
+            }
+        }
     }
 }

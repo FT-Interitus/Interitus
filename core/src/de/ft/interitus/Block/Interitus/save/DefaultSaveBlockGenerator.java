@@ -70,7 +70,6 @@ public class DefaultSaveBlockGenerator implements BlocktoSaveGenerator {
 
 
         if (block.getRight() != null) {
-
             if (block.getWire_right().isSpace_between_blocks()) {
 
 

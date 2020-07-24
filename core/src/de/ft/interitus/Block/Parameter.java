@@ -10,6 +10,7 @@ public class Parameter {
     private String ParameterName;
     private String ParameterDescription;
     private String Unit;
+    private Block block;
 
     public Parameter(Object parameter, Texture ParameterTexture, String ParameterName, String ParameterDescription,String Unit) {
         this.ParameterTexture=ParameterTexture;
@@ -18,12 +19,7 @@ public class Parameter {
         this.ParameterDescription = ParameterDescription;
         this.Unit = Unit;
 
-     /*   if(parameter instanceof String) {
-            System.out.println("Test");
-            TODO um Type zu bestimmen
-        }
 
-      */
 
     }
 
@@ -62,5 +58,14 @@ public class Parameter {
 
     public String getUnit() {
         return Unit;
+    }
+
+
+    public void setBlock(Block block) {
+        this.block = block;
+    }
+
+    public Block getBlock() {
+        return block;
     }
 }
