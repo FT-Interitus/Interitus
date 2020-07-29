@@ -61,6 +61,7 @@ public abstract class Block implements VisibleObjects {
     private Wire wire_right = null; //rechte verbunde Wire
     private PlatformSpecificBlock blocktype = null;
 
+
     private GlyphLayout glyphLayout = new GlyphLayout();
 
 
@@ -479,6 +480,9 @@ public abstract class Block implements VisibleObjects {
     public void delete(boolean complete) { //Der Block soll gelöscht werden (complete beduetet das alle Blöcke gelöscht werden sollen)
 
 
+        if(ProjectManager.getActProjectVar().Blockwitherrors.contains(this.getIndex())) {
+            ProjectManager.getActProjectVar().Blockwitherrors.remove((Object)this.getIndex());
+        }
 
             EventVar.rightClickEventManager.removeListener(this.rightClickEventListener);
         EventVar.blockEventManager.deleteBlock(new BlockDeleteEvent(this, this)); //Fire Delete Event
@@ -596,7 +600,14 @@ public abstract class Block implements VisibleObjects {
      */
 
     public void draw(SpriteBatch batch, ShapeRenderer shape, BitmapFont font) {
-        batch.setColor(1, 1, 1, 1);
+
+        if(ProjectManager.getActProjectVar().Blockwitherrors.contains(this.getIndex())) {
+            batch.setColor(1, 0.8f, 0.8f, 1);
+        }else{
+            batch.setColor(1, 1, 1, 1);
+        }
+
+
 
 
         if (!this.blockupdate.toggle) {

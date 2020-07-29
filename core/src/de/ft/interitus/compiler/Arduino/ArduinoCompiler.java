@@ -6,21 +6,21 @@ import de.ft.interitus.compiler.Compiler;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.BlockTypes.Arduino.ArduinoBlock;
-import de.ft.interitus.projecttypes.ProjectTypes;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.*;
-import java.net.URL;
 import java.util.ArrayList;
 
 public class ArduinoCompiler implements Compiler {
 
     private static final String OS = System.getProperty("os.name").toLowerCase();
+    private static ArrayList<String> errorstring = new ArrayList<>();
 
     @Override
     public String compile() {
 
+        errorstring.clear();
         return compilesketch();
     }
 
@@ -61,9 +61,12 @@ public class ArduinoCompiler implements Compiler {
 
         try (PrintWriter out = new PrintWriter(System.getProperty("user.home") + "/"+ Data.foldername+"/temp/"+folder+"/"+filename)) {
             out.println(compile());
+
+
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
 
 
         if(!new File(System.getProperty("user.home") + "/"+".arduino15").exists()){
@@ -91,15 +94,37 @@ public class ArduinoCompiler implements Compiler {
 
         } else if (isUnix()) {
 
-            compile_to_hex = "./libs/arduino/cli/linux/arduino-cli compile -b "+ device.getJSONArray("boards").getJSONObject(0).getString("FQBN")+" "+System.getProperty("user.home") + "/"+ Data.foldername+"/temp/"+folder+"/"+filename;
+            compile_to_hex = "./libs/arduino/cli/linux/arduino-cli compile -b "+ device.getJSONArray("boards").getJSONObject(0).getString("FQBN")+" "+System.getProperty("user.home") + "/"+ Data.foldername+"/temp/"+folder+"/"+filename+" ";
 
             upload = "./libs/arduino/cli/linux/arduino-cli upload -b "+device.getJSONArray("boards").getJSONObject(0).getString("FQBN")+" "+ System.getProperty("user.home") + "/"+ Data.foldername+"/temp/"+folder+"/"+" -p " + device.getString("address")+" -v";
         } else {
             Programm.logger.severe("You OS is not supported");
         }
 
-        runcommand(compile_to_hex);
-        runcommand(upload);
+        errorstring.clear();
+        runcommand(compile_to_hex,true);
+
+        try {
+            if (errorstring.size() > 0) {
+                for (int i = 0; i < errorstring.size(); i++) {
+
+                    if (errorstring.get(i).contains("^")) {
+
+                        if(!ProjectManager.getActProjectVar().Blockwitherrors.contains(Integer.parseInt(errorstring.get(i - 1).split("//")[1].replace(" ","")))) {
+                            ProjectManager.getActProjectVar().Blockwitherrors.add(Integer.parseInt(errorstring.get(i - 1).split("//")[1].replace(" ","")));
+                        }
+
+
+                        Programm.logger.severe("Fehler-Block: " + errorstring.get(i - 1).split("//")[1]);
+                    }
+                }
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        runcommand(upload,false);
 
         new File(System.getProperty("user.home") + "/"+ Data.foldername+"/temp/"+folder+"/"+filename).delete();
 
@@ -119,7 +144,7 @@ public class ArduinoCompiler implements Compiler {
             //block.getRight().setX(block.getRight().getX() + block.getW());
             a = a.getRight();
 
-            Programm = Programm + ((ArduinoBlock) a.getBlocktype()).getCode()+"\n";
+            Programm = Programm + ((ArduinoBlock) a.getBlocktype()).getCode()+"//"+a.getIndex()+" \n";
 
         }
         Programm=Programm+"}\n";
@@ -134,7 +159,7 @@ public class ArduinoCompiler implements Compiler {
             //block.getRight().setX(block.getRight().getX() + block.getW());
             a = a.getRight();
 
-            Programm = Programm + ((ArduinoBlock) a.getBlocktype()).getCode()+"\n";
+            Programm = Programm + ((ArduinoBlock) a.getBlocktype()).getCode()+"//"+a.getIndex()+" \n";
 
         }
         Programm=Programm+"}\n";
@@ -147,18 +172,7 @@ public class ArduinoCompiler implements Compiler {
 
 
 
-    private static void downloaddeviceconfig() {
-        try (BufferedInputStream inputStream = new BufferedInputStream(new URL("https://downloads.arduino.cc/packages/package_index.json").openStream());
-             FileOutputStream fileOS = new FileOutputStream(System.getProperty("user.home") + "/"+".arduino15/package_index.json")) {
-            byte data[] = new byte[1024];
-            int byteContent;
-            while ((byteContent = inputStream.read(data, 0, 1024)) != -1) {
-                fileOS.write(data, 0, byteContent);
-            }
-        } catch (IOException e) {
-            // handles IO exceptions
-        }
-    }
+
 
     //OS tesster
     private static boolean isWindows() {
@@ -179,7 +193,7 @@ public class ArduinoCompiler implements Compiler {
 
     }
 
-    private static String runcommand(String command) {
+    private static String runcommand(String command, boolean geterror) {
 
         Runtime rt = Runtime.getRuntime();
         Process pr = null;
@@ -192,11 +206,14 @@ public class ArduinoCompiler implements Compiler {
 
 
         BufferedReader input = new BufferedReader(new InputStreamReader(pr.getInputStream()));
+        BufferedReader error = new BufferedReader(new InputStreamReader(pr.getErrorStream()));
         String line = null;
         String output = null;
         String outputfromcli = "";
+        String errorfromcli = "";
 
         String strCurrentLine;
+        String strCurrenterrorLine;
         while (true) {
             try {
                 if ((strCurrentLine = input.readLine()) == null){
@@ -211,6 +228,24 @@ public class ArduinoCompiler implements Compiler {
             }
 
         }
+if(geterror) {
+    while (true) {
+        try {
+            if ((strCurrenterrorLine = error.readLine()) == null) {
+
+                break;
+            } else {
+                Programm.logger.severe(strCurrenterrorLine);
+                errorstring.add(strCurrenterrorLine);
+                errorfromcli += strCurrenterrorLine;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+}
+
 
 
 return outputfromcli;
@@ -240,10 +275,10 @@ return outputfromcli;
             Programm.logger.severe("You OS is not supported");
         }
 
-        runcommand(install_avr);
-        runcommand(update_index);
+        runcommand(install_avr, false);
+        runcommand(update_index, false);
 
-       return new JSONArray(runcommand(get_device));
+       return new JSONArray(runcommand(get_device, false));
     }
 
 

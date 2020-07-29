@@ -401,7 +401,7 @@ public class UI {
                 }
             };
 
-            compile_thread.run();
+            compile_thread.start();
 
         }
 
