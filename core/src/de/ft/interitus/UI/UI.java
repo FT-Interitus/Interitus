@@ -339,7 +339,7 @@ public class UI {
         button_editor.setImage_mouseover(null);
         button_editor.setImage_pressed(null);
         button_editor.setIsworking(true);
-        button_editor.setWorking_animation(new Animation(AssetLoader.waitforfinishbuild));
+        button_editor.setWorking_animation(new Animation(AssetLoader.waitforfinishbuild,60, 64,64,8));
         buttonbar = new ButtonBar(0, 0, 20, 20);
         buttonbar.addButton(button_projectstructus);
         buttonbar.addButton(button_editor);

@@ -174,7 +174,7 @@ public class Button {
                         UI.UIbatch.draw(image_pressed, this.x, this.y, this.w, this.h, 0, 0, image.getWidth(), image.getHeight(), this.flipX, this.flipY);
                     }
                 }else {
-
+                    UI.UIbatch.draw(this.working_animation.getAnimation(),x,y,w,h);
                 }
                 UI.UIbatch.end();
             }
