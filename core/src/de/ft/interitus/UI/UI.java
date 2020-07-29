@@ -15,10 +15,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.kotcrab.vis.ui.widget.MenuBar;
 import com.kotcrab.vis.ui.widget.MenuItem;
 import com.kotcrab.vis.ui.widget.VisTextField;
+import de.ft.interitus.*;
 import de.ft.interitus.Block.Block;
-import de.ft.interitus.DisplayErrors;
-import de.ft.interitus.Programm;
-import de.ft.interitus.Settings;
 import de.ft.interitus.UI.UIElements.Button;
 import de.ft.interitus.UI.UIElements.ButtonBar;
 import de.ft.interitus.UI.UIElements.TabBar.Tab;
@@ -29,7 +27,6 @@ import de.ft.interitus.UI.projectsettings.ProjectSettingsUI;
 import de.ft.interitus.UI.settings.SettingsUI;
 import de.ft.interitus.UI.setup.SetupWindow;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
-import de.ft.interitus.Var;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.datamanager.programmdata.experience.ExperienceManager;
 import de.ft.interitus.events.EventVar;
@@ -75,6 +72,7 @@ public class UI {
     private static boolean issettingsuiopend = false;
     private static boolean issetupuiopend = false;
     private static Block markedblock;
+    private static int wishaniposition=-170-UIVar.abstandvonRand;
 
     public static void updatedragui(ShapeRenderer renderer, boolean flaeche, SpriteBatch batch) {
         BlockTappedBar.userresize();
@@ -109,7 +107,7 @@ public class UI {
 
 
 
-        if(markedblock!=ProjectManager.getActProjectVar().markedblock) {
+        if(markedblock!=ProjectManager.getActProjectVar().markedblock) {//TODO Blocke verschwinden einfach, wires hüpfen durch die gegend, alles Flacket, interitus ist ein Bug
             UIVar.isBlockSettingsopen = false;
             for (int i = 0; i < textFielder.size(); i++) {
                 textFielder.get(i).removeListener(textFielder.get(i).getListeners().get(0));
@@ -124,8 +122,12 @@ public class UI {
 
             UIVar.blockeinstellungen_w = 170;
             UIVar.blockeinstellungen_h = UIVar.programmflaeche_h - UIVar.abstandvonRand * 2;
-            UIVar.blockeinstellungen_x = Gdx.graphics.getWidth() - UIVar.abstandvonRand * 2 - UIVar.blockeinstellungen_w;
+            UIVar.blockeinstellungen_x = Gdx.graphics.getWidth() - UIVar.abstandvonRand * 2 - UIVar.blockeinstellungen_w - wishaniposition;
             UIVar.blockeinstellungen_y = UIVar.programmflaeche_y + UIVar.abstandvonRand;
+
+            if(wishaniposition<0){
+                wishaniposition+=(0-wishaniposition)*0.1f;
+            }
 
 
             renderer.begin(ShapeRenderer.ShapeType.Filled);
@@ -169,13 +171,16 @@ public class UI {
             UIVar.isBlockSettingsopen = true;
             UIbatch.end();
 
-        } else if (textFielder.size() > 0) {
-            UIVar.isBlockSettingsopen = false;
-            for (int i = 0; i < textFielder.size(); i++) {
-                textFielder.get(i).removeListener(textFielder.get(i).getListeners().get(0));
-                textFielder.get(i).remove();
+        } else {
+            wishaniposition=-UIVar.blockeinstellungen_w-UIVar.abstandvonRand;
+            if (textFielder.size() > 0) {
+                UIVar.isBlockSettingsopen = false;
+                for (int i = 0; i < textFielder.size(); i++) {
+                    textFielder.get(i).removeListener(textFielder.get(i).getListeners().get(0));
+                    textFielder.get(i).remove();
+                }
+                textFielder.clear();
             }
-            textFielder.clear();
         }
 
 
