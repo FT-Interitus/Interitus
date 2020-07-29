@@ -29,7 +29,7 @@ public class Welcome extends ScreenAdapter {
                 this.cancel();
 
             }
-        }, 2000, 1000);
+        }, 0, 1000);
     }
 
     @Override

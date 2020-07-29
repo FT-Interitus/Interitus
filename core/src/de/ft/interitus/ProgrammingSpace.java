@@ -54,6 +54,7 @@ public class ProgrammingSpace extends ScreenAdapter {
 
     public static ShapeRenderer shapeRenderer;
     public static PressedKeys pressedKeys;
+    public static float delta;
     IntegerAuswahl ia;
 
 
@@ -130,7 +131,7 @@ public class ProgrammingSpace extends ScreenAdapter {
 
 
 
-
+        this.delta=delta;
 
 
 
