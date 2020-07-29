@@ -26,7 +26,20 @@ public class ArduinoCompiler implements Compiler {
 
     @Override
     public boolean compileandrun() {
-        compileandrun(getBoards().getJSONObject(0));
+
+
+        JSONArray array = getBoards();
+
+        int board = 0;
+
+        for(int i=0;i<array.length();i++) {
+           if(array.getJSONObject(i).has("boards")) {
+               board =i;
+           }
+        }
+
+        compileandrun(array.getJSONObject(board));
+
         return true;
     }
 
@@ -55,9 +68,9 @@ public class ArduinoCompiler implements Compiler {
 
         if(!new File(System.getProperty("user.home") + "/"+".arduino15").exists()){
             new File(System.getProperty("user.home") + "/"+".arduino15").mkdir();
-            downloaddeviceconfig();
+
         }else if(!new File(System.getProperty("user.home") + "/"+".arduino15/package_index.json").exists()) {
-            downloaddeviceconfig();
+
         }
 
 
@@ -70,6 +83,9 @@ public class ArduinoCompiler implements Compiler {
         String upload = "";
 
         if (isWindows()) {
+            compile_to_hex = "libs\\arduino\\cli\\Windows\\arduino-cli.exe compile -b "+ device.getJSONArray("boards").getJSONObject(0).getString("FQBN")+" "+(System.getProperty("user.home") + "/"+ Data.foldername+"/temp/"+folder+"/"+filename).replace("/","\\");
+
+            upload = "libs\\arduino\\cli\\Windows\\arduino-cli.exe upload -b "+device.getJSONArray("boards").getJSONObject(0).getString("FQBN")+" "+ (System.getProperty("user.home") + "/"+ Data.foldername+"/temp/"+folder+"/").replace("/","\\")+" -p " + device.getString("address")+" -v";
 
         } else if (isMac()) {
 
@@ -209,7 +225,9 @@ return outputfromcli;
         String install_avr="";
 
         if (isWindows()) {
-
+            get_device = "libs\\arduino\\cli\\Windows\\arduino-cli.exe board list --format json";
+            install_avr ="libs\\arduino\\cli\\Windows\\arduino-cli.exe core install arduino:avr@1.6.21";
+            update_index ="libs\\arduino\\cli\\Windows\\arduino-cli.exe core update-index";
         } else if (isMac()) {
 
         } else if (isUnix()) {
