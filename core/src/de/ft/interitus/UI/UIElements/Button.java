@@ -9,6 +9,7 @@ import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.check.Check;
 import de.ft.interitus.Var;
 import de.ft.interitus.utils.RoundRectangle;
+import de.ft.interitus.utils.animation.Animation;
 
 public class Button {
     public static boolean disablepresscolorchange = false;
@@ -18,6 +19,7 @@ public class Button {
     private final Check check = new Check();
     public float hovertransparancy = 0.8f;
     public boolean widthoverText = false;
+    private boolean isworking = false;
     public int widthoverTextlinksrandabstand = 5;
     BitmapFont font = new BitmapFont();
     private int x;
@@ -28,10 +30,12 @@ public class Button {
     private Texture image = null;
     private Texture image_mouseover = null;
     private Texture image_pressed = null;
+    private Animation working_animation = null;
     private boolean visible = true;
     private boolean disable = false;
     private boolean flipX = false;
     private boolean flipY = false;
+
 
 
     public Button(int x, int y, int w, int h) {
@@ -269,6 +273,13 @@ public class Button {
     }
 
 
+    public void setIsworking(boolean isworking) {
+        this.isworking = isworking;
+    }
+
+    public boolean isIsworking() {
+        return isworking;
+    }
 }
 
 

@@ -58,6 +58,7 @@ public class UI {
     public static Button button_start;
     public static Button button_stop;
     public static Button button_debugstart;
+    public static Button button_editor;
     public static TabBar tabbar;
     public static GlyphLayout glyphLayout = new GlyphLayout();
     public static BitmapFont font = new BitmapFont();
@@ -316,23 +317,33 @@ public class UI {
         button_debugstart.setImage(AssetLoader.img_debugstart);
         button_debugstart.setImage_mouseover(AssetLoader.img_debugstart_mouseover);
         button_debugstart.setImage_pressed(AssetLoader.img_debugstart_pressed);
+
         button_projectstructus = new Button();
         button_projectstructus.setImage(AssetLoader.img_projectstructur);
         button_projectstructus.setImage_mouseover(AssetLoader.img_projectstructur_mouseover);
         button_projectstructus.setImage_pressed(AssetLoader.img_projectstructur_pressed);
+
         button_start = new Button();
         button_start.setImage(AssetLoader.img_startbutton);
         button_start.setImage_mouseover(AssetLoader.img_startbutton_mouseover);
         button_start.setImage_pressed(AssetLoader.img_startbutton_pressed);
+
         button_stop = new Button();
         button_stop.setImage(AssetLoader.img_stopbutton);
         button_stop.setImage_mouseover(AssetLoader.img_stopbutton_mouseover);
         button_stop.setImage_pressed(AssetLoader.img_stopbutton_pressed);
+
+        button_editor = new Button();
+        button_editor.setImage(null);
+        button_editor.setImage_mouseover(null);
+        button_editor.setImage_pressed(null);
         buttonbar = new ButtonBar(0, 0, 20, 20);
         buttonbar.addButton(button_projectstructus);
+        buttonbar.addButton(button_editor);
         buttonbar.addButton(button_stop);
         buttonbar.addButton(button_debugstart);
         buttonbar.addButton(button_start);
+
 
         tabbar = new TabBar();
 
@@ -392,7 +403,7 @@ public class UI {
 
 
         if(UI.button_start.isjustPressednormal()){
-            UI.button_start.setDisable(true);
+          //  UI.button_start.setDisable(true);
 
             Thread compile_thread = new Thread()  {
                 @Override
