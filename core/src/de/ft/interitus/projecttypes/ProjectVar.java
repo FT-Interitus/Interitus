@@ -52,6 +52,8 @@ public abstract class ProjectVar {
     public int vcs = VCS.NONE;
     public ProjectTypes projectType = null;
 
+    public static ArrayList<Integer> Blockwitherrors = new ArrayList<>();
+
     public boolean changes = false; //Wurde etwas geändert seit dem letzten speichern
     public String filename = ""; //Der Name der aktuell geöffneten Datei
     public volatile String path = ""; // Wo ist die aktuell geöffnete Datei gespeichert
