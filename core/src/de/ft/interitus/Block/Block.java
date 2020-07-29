@@ -486,8 +486,10 @@ public abstract class Block implements VisibleObjects {
 
             EventVar.rightClickEventManager.removeListener(this.rightClickEventListener);
         EventVar.blockEventManager.deleteBlock(new BlockDeleteEvent(this, this)); //Fire Delete Event
-        ProjectManager.getActProjectVar().markedblock = null; //Der Makierte Block wird auf null gesetzt da nur ein makierter block gelöscht werden kann //Anmerkung falls das ganze Programm gelöscht wird spielt das sowieso keine Rolle
-        ProjectManager.getActProjectVar().marked = false; //Ob ein Block makiert ist wird auf false gesetzt da nur ein makierter Block gelöscht werden kann
+        if(ProjectManager.getActProjectVar().markedblock.contains(this)) {
+            ProjectManager.getActProjectVar().markedblock.remove(this); //Der Makierte Block wird auf null gesetzt da nur ein makierter block gelöscht werden kann //Anmerkung falls das ganze Programm gelöscht wird spielt das sowieso keine Rolle
+        }
+            ProjectManager.getActProjectVar().marked = false; //Ob ein Block makiert ist wird auf false gesetzt da nur ein makierter Block gelöscht werden kann
         ProjectManager.getActProjectVar().ismoving = false; // Ob ein Block bewegt wird, wird auf false gesetzt da wenn ein Block bewegt und gelöscht wird kann es nur der bewegte Block sein
 
 
@@ -633,13 +635,13 @@ public abstract class Block implements VisibleObjects {
         if (ProjectManager.getActProjectVar().biggestblock == this) {
             if (this.isShowdupulicate_rechts()) {
                 batch.setColor(1, 1, 1, 0.5f);
-                batch.draw(AssetLoader.img_block, this.x_dup_rechts, this.y, ProjectManager.getActProjectVar().markedblock.getW(), this.getH()); //Wenn der Block die größte überlappung hat wird er als show duplicat angezigt
+                batch.draw(AssetLoader.img_block, this.x_dup_rechts, this.y, ProjectManager.getActProjectVar().markedblock.get(0).getW(), this.getH()); //Wenn der Block die größte überlappung hat wird er als show duplicat angezigt
                 batch.setColor(1, 1, 1, 1);
             }
 
             if (this.isShowdupulicate_links()) {
                 batch.setColor(1, 1, 1, 0.5f);
-                batch.draw(AssetLoader.img_block, this.x-ProjectManager.getActProjectVar().markedblock.getW(), this.y, ProjectManager.getActProjectVar().markedblock.getW(), this.getH()); //das gleiche für links
+                batch.draw(AssetLoader.img_block, this.x-ProjectManager.getActProjectVar().markedblock.get(ProjectManager.getActProjectVar().markedblock.size()-1).getW(), this.y, ProjectManager.getActProjectVar().markedblock.get(ProjectManager.getActProjectVar().markedblock.size()-1).getW(), this.getH()); //das gleiche für links
                 batch.setColor(1, 1, 1, 1);
             }
         }
@@ -752,7 +754,7 @@ public abstract class Block implements VisibleObjects {
 
             try {
 
-                flaeche = (CheckKollision.flache(this.getX_dup_rechts(), this.getY(), this.getW(), this.getH(), ProjectManager.getActProjectVar().markedblock.getX(), ProjectManager.getActProjectVar().markedblock.getY())); //Fläsche mit der die Blöcke überlappen um zu brechenen an welchen Block der Block springen wird
+                flaeche = (CheckKollision.flache(this.getX_dup_rechts(), this.getY(), this.getW(), this.getH(), ProjectManager.getActProjectVar().markedblock.get(0).getX(), ProjectManager.getActProjectVar().markedblock.get(0).getY())); //Fläsche mit der die Blöcke überlappen um zu brechenen an welchen Block der Block springen wird
 
             } catch (NullPointerException ignored) {
 
@@ -765,7 +767,7 @@ public abstract class Block implements VisibleObjects {
         if (this.isShowdupulicate_links()) { //Für links
             try {
 
-                flaeche = (CheckKollision.flache(this.x-ProjectManager.getActProjectVar().markedblock.getW(), this.getY(), this.getW(), this.getH(), ProjectManager.getActProjectVar().markedblock.getX(), ProjectManager.getActProjectVar().markedblock.getY()));//Fläsche mit der die Blöcke überlappen um zu brechenen an welchen Block der Block springen wird
+                flaeche = (CheckKollision.flache(this.x-ProjectManager.getActProjectVar().markedblock.get(ProjectManager.getActProjectVar().markedblock.size()-1).getW(), this.getY(), this.getW(), this.getH(), ProjectManager.getActProjectVar().markedblock.get(ProjectManager.getActProjectVar().markedblock.size()-1).getX(), ProjectManager.getActProjectVar().markedblock.get(ProjectManager.getActProjectVar().markedblock.size()-1).getY()));//Fläsche mit der die Blöcke überlappen um zu brechenen an welchen Block der Block springen wird
 
             } catch (NullPointerException ignored) {
 
@@ -778,7 +780,7 @@ public abstract class Block implements VisibleObjects {
     public int getBlockMarkedblockuberlappungsflache() {
         int flaeche = 0;
         try {
-            flaeche = CheckKollision.flache(this.getX(), this.getY(), this.getW(), this.getH(), ProjectManager.getActProjectVar().markedblock.getX(), ProjectManager.getActProjectVar().markedblock.getY()); //Fläche des Markierten Blocks
+            flaeche = CheckKollision.flache(this.getX(), this.getY(), this.getW(), this.getH(), ProjectManager.getActProjectVar().markedblock.get(0).getX(), ProjectManager.getActProjectVar().markedblock.get(0).getY()); //Fläche des Markierten Blocks
         } catch (NullPointerException e) {
         }
         return flaeche;

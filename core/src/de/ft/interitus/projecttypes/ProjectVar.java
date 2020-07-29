@@ -23,9 +23,9 @@ public abstract class ProjectVar {
     public float zoom = 1;
 
     //TODO Für multi select hier eventuel ArrayList
-    public Block markedblock = null; // Welcher Block ist makiert ?
+    public ArrayList<Block> markedblock = new ArrayList<>(); // Welcher Block ist makiert ?
 
-    public Vector2 unterschiedsave = new Vector2(); //Unterschied zwischen Blöckem die scih überllappen
+    public ArrayList<Vector2> unterschiedsave = new ArrayList<>(); //Unterschied zwischen Blöckem die sich bewegen
 
     public boolean ismoving = false; //Wird ein Block bewegt
 

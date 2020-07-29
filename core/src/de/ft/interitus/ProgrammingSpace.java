@@ -31,6 +31,7 @@ import de.ft.interitus.utils.PositionSaver;
 import de.ft.interitus.utils.animation.Animation;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 
 public class ProgrammingSpace extends ScreenAdapter {
@@ -55,6 +56,8 @@ public class ProgrammingSpace extends ScreenAdapter {
     public static ShapeRenderer shapeRenderer;
     public static PressedKeys pressedKeys;
     public static float delta;
+   static ArrayList<Block> Temp = new ArrayList<>();
+   static ArrayList<Block> Temp2 = new ArrayList<>();
     IntegerAuswahl ia;
 
 
@@ -168,8 +171,8 @@ public class ProgrammingSpace extends ScreenAdapter {
 
 
             if (!Var.isloading) {
-                Block Temp = null;
-                Block Temp2 = null;
+                Temp.clear();
+                Temp2.clear();
                 for (int i = 0; i < ProjectManager.getActProjectVar().visibleblocks.size(); i = i + 1) {
                     try {
                         batch.begin();
@@ -181,9 +184,9 @@ public class ProgrammingSpace extends ScreenAdapter {
                     try {
                         if (ProjectManager.getActProjectVar().visibleblocks.get(i).isMarked()) {
                             if (ProjectManager.getActProjectVar().visibleblocks.get(i).isMoving()) {
-                                Temp2 = ProjectManager.getActProjectVar().visibleblocks.get(i);
+                                Temp2.add(ProjectManager.getActProjectVar().visibleblocks.get(i));
                             } else {
-                                Temp = ProjectManager.getActProjectVar().visibleblocks.get(i);
+                                Temp.add(ProjectManager.getActProjectVar().visibleblocks.get(i));
                             }
                         } else {
                             ProjectManager.getActProjectVar().visibleblocks.get(i).draw(batch, shapeRenderer, font);
@@ -209,7 +212,9 @@ public class ProgrammingSpace extends ScreenAdapter {
 
                     try {
                         batch.begin();
-                        Temp.draw(batch, shapeRenderer, font);
+                        for(int i=0;i<Temp.size();i++) {
+                            Temp.get(i).draw(batch, shapeRenderer, font);
+                        }
                         batch.end();
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -225,8 +230,9 @@ public class ProgrammingSpace extends ScreenAdapter {
 
                     try {
                         batch.begin();
-                        Temp2.draw(batch, shapeRenderer, font);
-
+                        for(int i =0;i<Temp2.size();i++) {
+                            Temp2.get(i).draw(batch, shapeRenderer, font);
+                        }
 
 
                         batch.end();

@@ -73,7 +73,7 @@ public class ClearActOpenProgramm {
         ProjectManager.getActProjectVar().blocks.clear();
 
         ProjectManager.getActProjectVar().biggestblock = null;
-        ProjectManager.getActProjectVar().markedblock = null;
+        ProjectManager.getActProjectVar().markedblock.clear();
         ProjectManager.getActProjectVar().ismoving = false;
         ProjectManager.getActProjectVar().showduplicat.clear();
 

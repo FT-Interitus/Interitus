@@ -2,6 +2,7 @@ package de.ft.interitus.Block;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.UI.UI;
@@ -35,7 +36,7 @@ public class TapBarBlockItem implements TapItem {
 
                 Block tempblock = ProjectManager.getActProjectVar().projectType.getBlockGenerator().generateBlock(ProjectManager.getActProjectVar().blocks.size(), (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y, psb.getWidth(), UIVar.BlockHeight, psb, ProjectManager.getActProjectVar().projectType.getBlockUpdateGenerator(), ProjectManager.getActProjectVar().projectType.getBlocktoSaveGenerator());
 
-                ProjectManager.getActProjectVar().markedblock=tempblock;
+                ProjectManager.getActProjectVar().markedblock.add(tempblock);
                 ProjectManager.getActProjectVar().marked = true;
 
                 ProjectManager.getActProjectVar().blocks.add(tempblock);
@@ -44,7 +45,7 @@ public class TapBarBlockItem implements TapItem {
                 tempblock.setMarked(true);
                 tempblock.setMoving(true);
 
-                ProjectManager.getActProjectVar().unterschiedsave.set(psb.getWidth() / 2, UIVar.BlockHeight / 2);
+                ProjectManager.getActProjectVar().unterschiedsave.add(new Vector2(psb.getWidth() / 2, UIVar.BlockHeight / 2));
             }
         }
 

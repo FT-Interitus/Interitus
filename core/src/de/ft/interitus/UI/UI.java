@@ -115,7 +115,7 @@ public class UI {
 
 
 
-        if(markedblock!=ProjectManager.getActProjectVar().markedblock) {
+        if(!ProjectManager.getActProjectVar().markedblock.contains(markedblock)) {
             UIVar.isBlockSettingsopen = false;
             for (int i = 0; i < textFielder.size(); i++) {
                 textFielder.get(i).removeListener(textFielder.get(i).getListeners().get(0));
@@ -125,7 +125,7 @@ public class UI {
         }
 
 
-        if (markedblock != null && markedblock.getBlocktype().getBlockParameter() != null&&markedblock==ProjectManager.getActProjectVar().markedblock) {
+        if (markedblock != null && markedblock.getBlocktype().getBlockParameter() != null&&ProjectManager.getActProjectVar().markedblock.contains(markedblock)&&ProjectManager.getActProjectVar().markedblock.size()==1) {
 
 
             UIVar.blockeinstellungen_w = 170;
@@ -152,7 +152,7 @@ public class UI {
                         textFielder.get(textFielder.size() - 1).addListener(new ChangeListener() {
                             @Override
                             public void changed(ChangeEvent event, Actor actor) {
-                                ProjectManager.getActProjectVar().markedblock.getBlocktype().getBlockParameter().get(textFielder.indexOf(actor)).setParameter(((VisTextField) actor).getText());
+                                ProjectManager.getActProjectVar().markedblock.get(0).getBlocktype().getBlockParameter().get(textFielder.indexOf(actor)).setParameter(((VisTextField) actor).getText());
                             }
                         });
 
@@ -180,7 +180,11 @@ public class UI {
             UIbatch.end();
 
         } else {
-            markedblock = ProjectManager.getActProjectVar().markedblock;
+            try {
+                markedblock = ProjectManager.getActProjectVar().markedblock.get(0);
+            }catch (Exception e){
+                markedblock =null;
+            }
             wishaniposition=-UIVar.blockeinstellungen_w-UIVar.abstandvonRand;
             if (textFielder.size() > 0) {
                 UIVar.isBlockSettingsopen = false;
