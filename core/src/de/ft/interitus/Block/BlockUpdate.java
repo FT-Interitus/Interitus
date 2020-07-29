@@ -61,6 +61,13 @@ public abstract class BlockUpdate extends Thread {
             public void run() {
 
 
+                if(block.isMarked()) {
+                    if(block!=ProjectManager.getActProjectVar().markedblock) {
+                        block.setMarked(false);
+                    }
+
+                }
+
                 if (ProjectManager.getActProjectVar().blocks.indexOf(block) == -1) {
                     isrunning = false;
                     currentThread().interrupt();

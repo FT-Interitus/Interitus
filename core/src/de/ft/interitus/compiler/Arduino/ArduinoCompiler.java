@@ -101,6 +101,7 @@ public class ArduinoCompiler implements Compiler {
             Programm.logger.severe("You OS is not supported");
         }
 
+        ProjectManager.getActProjectVar().Blockwitherrors.clear();
         errorstring.clear();
         runcommand(compile_to_hex,true);
 
