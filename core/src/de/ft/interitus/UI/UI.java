@@ -115,7 +115,7 @@ public class UI {
 
 
 
-        if(markedblock!=ProjectManager.getActProjectVar().markedblock) {//TODO Blocke verschwinden einfach, wires hüpfen durch die gegend, alles Flacket, interitus ist ein Bug
+        if(markedblock!=ProjectManager.getActProjectVar().markedblock) {
             UIVar.isBlockSettingsopen = false;
             for (int i = 0; i < textFielder.size(); i++) {
                 textFielder.get(i).removeListener(textFielder.get(i).getListeners().get(0));
@@ -124,8 +124,8 @@ public class UI {
             textFielder.clear();
         }
 
-         markedblock = ProjectManager.getActProjectVar().markedblock;
-        if (markedblock != null && markedblock.getBlocktype().getBlockParameter() != null) {
+
+        if (markedblock != null && markedblock.getBlocktype().getBlockParameter() != null&&markedblock==ProjectManager.getActProjectVar().markedblock) {
 
 
             UIVar.blockeinstellungen_w = 170;
@@ -180,6 +180,7 @@ public class UI {
             UIbatch.end();
 
         } else {
+            markedblock = ProjectManager.getActProjectVar().markedblock;
             wishaniposition=-UIVar.blockeinstellungen_w-UIVar.abstandvonRand;
             if (textFielder.size() > 0) {
                 UIVar.isBlockSettingsopen = false;
