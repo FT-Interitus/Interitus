@@ -142,14 +142,23 @@ public class Button {
                 UI.UIbatch.end();
             } else if (image_pressed == null) {
                 UI.UIbatch.begin();
+
                 if (isMouseover()) {
                     UI.UIbatch.draw(image_mouseover, this.x, this.y, this.w, this.h, 0, 0, image.getWidth(), image.getHeight(), this.flipX, this.flipY);
                 } else {
                     UI.UIbatch.draw(image, this.x, this.y, this.w, this.h, 0, 0, image.getWidth(), image.getHeight(), this.flipX, this.flipY);
                 }
+
+
+
                 UI.UIbatch.end();
             } else {
                 UI.UIbatch.begin();
+                if (isDisable()) {
+                    UI.UIbatch.setColor(1, 1, 1, 0.3f);
+                }
+
+
                 if (isMouseover()) {
                     UI.UIbatch.draw(image_mouseover, this.x, this.y, this.w, this.h, 0, 0, image.getWidth(), image.getHeight(), this.flipX, this.flipY);
                 } else {

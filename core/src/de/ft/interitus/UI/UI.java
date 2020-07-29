@@ -392,6 +392,7 @@ public class UI {
 
 
         if(UI.button_start.isjustPressednormal()){
+            UI.button_start.setDisable(true);
 
             Thread compile_thread = new Thread()  {
                 @Override
