@@ -132,9 +132,6 @@ public class ProgrammingSpace extends ScreenAdapter {
 
 
 
-        if(UI.button_start.isjustPressednormal()){
-            ProjectManager.getActProjectVar().projectType.getCompiler().compile();
-        }
 
 
 

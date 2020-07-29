@@ -17,6 +17,7 @@ import com.kotcrab.vis.ui.widget.MenuItem;
 import com.kotcrab.vis.ui.widget.VisTextField;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.DisplayErrors;
+import de.ft.interitus.Programm;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.UIElements.Button;
 import de.ft.interitus.UI.UIElements.ButtonBar;
@@ -381,6 +382,21 @@ public class UI {
         if (button_projectstructus.isjustPressednormal()) {
 
             proset.show();
+
+        }
+
+
+        if(UI.button_start.isjustPressednormal()){
+
+            Thread compile_thread = new Thread()  {
+                @Override
+                public void run() {
+
+                    ProjectManager.getActProjectVar().projectType.getCompiler().compileandrun();
+                }
+            };
+
+            compile_thread.run();
 
         }
 
