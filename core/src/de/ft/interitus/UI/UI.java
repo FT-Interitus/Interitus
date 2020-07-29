@@ -36,6 +36,7 @@ import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.network.bettertogether.SharedVar;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.RoundRectangle;
+import de.ft.interitus.utils.animation.Animation;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -337,6 +338,8 @@ public class UI {
         button_editor.setImage(null);
         button_editor.setImage_mouseover(null);
         button_editor.setImage_pressed(null);
+        button_editor.setIsworking(true);
+        button_editor.setWorking_animation(new Animation(AssetLoader.waitforfinishbuild));
         buttonbar = new ButtonBar(0, 0, 20, 20);
         buttonbar.addButton(button_projectstructus);
         buttonbar.addButton(button_editor);

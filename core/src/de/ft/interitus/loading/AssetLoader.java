@@ -102,6 +102,8 @@ public class AssetLoader {
     public static Texture img_debugstart;
     public static Texture img_debugstart_mouseover;
     public static Texture img_debugstart_pressed;
+
+    public static Texture waitforfinishbuild;
     
     ///////////////////////////-BlockParameter Bilder-/////////////////////////////
     public static Texture img_WaitBlock_warteZeit_Parameter;
@@ -215,6 +217,7 @@ public class AssetLoader {
             manager.load(workingdirectory + "ButtonBar/debugbutton_mouseover.png", Texture.class);
             manager.load(workingdirectory + "ButtonBar/debugbutton_pressed.png", Texture.class);
 
+            manager.load(workingdirectory+"loadinganimation.png",Texture.class);
 
             group = "mappen";
             manager.load(workingdirectory + "Bar/Mappe1.png", Texture.class);
@@ -366,6 +369,8 @@ public class AssetLoader {
             img_debugstart = manager.get(workingdirectory + "ButtonBar/debugbutton.png");
             img_debugstart_mouseover = manager.get(workingdirectory + "ButtonBar/debugbutton_mouseover.png");
             img_debugstart_pressed = manager.get(workingdirectory + "ButtonBar/debugbutton_pressed.png");
+
+            waitforfinishbuild = manager.get(workingdirectory+"loadinganimation.png",Texture.class);
 
 
             img_mappe1 = manager.get(workingdirectory + "Bar/Mappe1.png", Texture.class);

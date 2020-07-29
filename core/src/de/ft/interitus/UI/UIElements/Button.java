@@ -158,18 +158,23 @@ public class Button {
                 UI.UIbatch.end();
             } else {
                 UI.UIbatch.begin();
-                if (isDisable()) {
-                    UI.UIbatch.setColor(1, 1, 1, 0.3f);
-                }
+
+                if(!isworking) {
+                    if (isDisable()) {
+                        UI.UIbatch.setColor(1, 1, 1, 0.3f);
+                    }
 
 
-                if (isMouseover()) {
-                    UI.UIbatch.draw(image_mouseover, this.x, this.y, this.w, this.h, 0, 0, image.getWidth(), image.getHeight(), this.flipX, this.flipY);
-                } else {
-                    UI.UIbatch.draw(image, this.x, this.y, this.w, this.h, 0, 0, image.getWidth(), image.getHeight(), this.flipX, this.flipY);
-                }
-                if (isMouseover() && Gdx.input.isButtonPressed(0)) {
-                    UI.UIbatch.draw(image_pressed, this.x, this.y, this.w, this.h, 0, 0, image.getWidth(), image.getHeight(), this.flipX, this.flipY);
+                    if (isMouseover()) {
+                        UI.UIbatch.draw(image_mouseover, this.x, this.y, this.w, this.h, 0, 0, image.getWidth(), image.getHeight(), this.flipX, this.flipY);
+                    } else {
+                        UI.UIbatch.draw(image, this.x, this.y, this.w, this.h, 0, 0, image.getWidth(), image.getHeight(), this.flipX, this.flipY);
+                    }
+                    if (isMouseover() && Gdx.input.isButtonPressed(0)) {
+                        UI.UIbatch.draw(image_pressed, this.x, this.y, this.w, this.h, 0, 0, image.getWidth(), image.getHeight(), this.flipX, this.flipY);
+                    }
+                }else {
+
                 }
                 UI.UIbatch.end();
             }
@@ -279,6 +284,15 @@ public class Button {
 
     public boolean isIsworking() {
         return isworking;
+    }
+
+
+    public void setWorking_animation(Animation working_animation) {
+        this.working_animation = working_animation;
+    }
+
+    public Animation getWorking_animation() {
+        return working_animation;
     }
 }
 
