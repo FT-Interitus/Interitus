@@ -113,12 +113,18 @@ public class ArduinoCompiler implements Compiler {
 
                     if (errorstring.get(i).contains("^")) {
 
-                        if(!ProjectManager.getActProjectVar().Blockwitherrors.contains(Integer.parseInt(errorstring.get(i - 1).split("//")[1].replace(" ","")))) {
-                            ProjectManager.getActProjectVar().Blockwitherrors.add(Integer.parseInt(errorstring.get(i - 1).split("//")[1].replace(" ",""))); //Get Block Index
+                        try {
+                            if (!ProjectManager.getActProjectVar().Blockwitherrors.contains(Integer.parseInt(errorstring.get(i - 1).split("//")[1].replace(" ", "")))) {
+                                ProjectManager.getActProjectVar().Blockwitherrors.add(Integer.parseInt(errorstring.get(i - 1).split("//")[1].replace(" ", ""))); //Get Block Index
+                            }
+
+                            Programm.logger.severe("Fehler-Block: " + errorstring.get(i - 1).split("//")[1]);
+                        }catch (Exception e) {
+
                         }
 
 
-                        Programm.logger.severe("Fehler-Block: " + errorstring.get(i - 1).split("//")[1]);
+
                     }
                 }
             }
@@ -170,7 +176,7 @@ public class ArduinoCompiler implements Compiler {
         Programm=Programm+"}\n";
 
 
-
+        System.out.println(Programm);
 
         return Programm;
     }
