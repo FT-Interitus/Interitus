@@ -101,17 +101,20 @@ public class ArduinoCompiler implements Compiler {
             Programm.logger.severe("You OS is not supported");
         }
 
+
+        //Error Highlighting
+        ProjectManager.getActProjectVar().Blockwitherrors.clear();
         errorstring.clear();
         runcommand(compile_to_hex,true);
 
         try {
-            if (errorstring.size() > 0) {
+            if (errorstring.size() > 0) { //Geht Errors in an Array
                 for (int i = 0; i < errorstring.size(); i++) {
 
                     if (errorstring.get(i).contains("^")) {
 
                         if(!ProjectManager.getActProjectVar().Blockwitherrors.contains(Integer.parseInt(errorstring.get(i - 1).split("//")[1].replace(" ","")))) {
-                            ProjectManager.getActProjectVar().Blockwitherrors.add(Integer.parseInt(errorstring.get(i - 1).split("//")[1].replace(" ","")));
+                            ProjectManager.getActProjectVar().Blockwitherrors.add(Integer.parseInt(errorstring.get(i - 1).split("//")[1].replace(" ",""))); //Get Block Index
                         }
 
 
@@ -122,6 +125,8 @@ public class ArduinoCompiler implements Compiler {
         }catch (Exception e) {
             e.printStackTrace();
         }
+
+
 
 
         runcommand(upload,false);
