@@ -335,11 +335,13 @@ public class UI {
         button_stop.setImage_pressed(AssetLoader.img_stopbutton_pressed);
 
         button_editor = new Button();
-        button_editor.setImage(null);
-        button_editor.setImage_mouseover(null);
-        button_editor.setImage_pressed(null);
+        button_editor.setImage(AssetLoader.img_stopbutton);
+        button_editor.setImage_mouseover(AssetLoader.img_stopbutton_mouseover);
+        button_editor.setImage_pressed(AssetLoader.img_stopbutton_pressed);
         button_editor.setIsworking(true);
-        button_editor.setWorking_animation(new Animation(AssetLoader.waitforfinishbuild,60, 64,64,8));
+        button_editor.setWorking_animation(new Animation(AssetLoader.waitforfinishbuild,60, 64,64,7));
+        button_editor.getWorking_animation().startAnimation();
+        button_editor.setIsworking(true);
         buttonbar = new ButtonBar(0, 0, 20, 20);
         buttonbar.addButton(button_projectstructus);
         buttonbar.addButton(button_editor);
