@@ -7,6 +7,7 @@ import com.badlogic.gdx.input.GestureDetector;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.UIElements.check.InputManager;
+import de.ft.interitus.Var;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.block.BlockKillMovingWiresEvent;
 import de.ft.interitus.events.global.GlobalEventAdapter;
@@ -36,19 +37,23 @@ public class Viewport {
             @Override
             public boolean scrolled(int amount) {
 
-                if (input.isKeyPressed(Input.Keys.CONTROL_LEFT) || input.isKeyPressed(Input.Keys.CONTROL_RIGHT)) {
-                    if (amount == -1) {
-                        if (ProgrammingSpace.cam.zoom > 0.4f) {
-                            ProgrammingSpace.cam.zoom = ProgrammingSpace.cam.zoom - 0.1f;
+                if(!  Var.isdialogeopend) {
+
+                    if (input.isKeyPressed(Input.Keys.CONTROL_LEFT) || input.isKeyPressed(Input.Keys.CONTROL_RIGHT)) {
+                        if (amount == -1) {
+                            if (ProgrammingSpace.cam.zoom > 0.4f) {
+                                ProgrammingSpace.cam.zoom = ProgrammingSpace.cam.zoom - 0.1f;
+                            }
+
+                        } else {
+                            if (ProgrammingSpace.cam.zoom < 2.0f) {
+                                ProgrammingSpace.cam.zoom = ProgrammingSpace.cam.zoom + 0.1f;
+                            }
                         }
 
-                    } else {
-                        if (ProgrammingSpace.cam.zoom < 2.0f) {
-                            ProgrammingSpace.cam.zoom = ProgrammingSpace.cam.zoom + 0.1f;
-                        }
+                        ProjectManager.getActProjectVar().zoom = ProgrammingSpace.cam.zoom;
+
                     }
-
-                    ProjectManager.getActProjectVar().zoom = ProgrammingSpace.cam.zoom;
 
                 }
                 return false;
@@ -60,11 +65,13 @@ public class Viewport {
         InputManager.addProcessor(new GestureDetector(new GestureDetector.GestureAdapter() {
             @Override
             public boolean pan(float x, float y, float deltaX, float deltaY) {
+                if(!  Var.isdialogeopend) {
 
-                if (input.isButtonPressed(Input.Buttons.MIDDLE)) {
-                    ProgrammingSpace.cam.position.x -= deltaX;
-                    ProgrammingSpace.cam.position.y += deltaY;
-                    ProgrammingSpace.cam.update();
+                    if (input.isButtonPressed(Input.Buttons.MIDDLE)) {
+                        ProgrammingSpace.cam.position.x -= deltaX;
+                        ProgrammingSpace.cam.position.y += deltaY;
+                        ProgrammingSpace.cam.update();
+                    }
                 }
 
 
@@ -88,81 +95,83 @@ public class Viewport {
     }
 
     public static void update(float delta) {
+        if(!  Var.isdialogeopend) {
 
-        if (input.isKeyPressed(Input.Keys.LEFT)) {
-            if (!run_left) {
-                time_pressed_left = System.currentTimeMillis();
-                run_left = true;
-                ProgrammingSpace.cam.position.set(ProgrammingSpace.cam.position.x -= 20, ProgrammingSpace.cam.position.y, 0);
-            } else {
-                if (System.currentTimeMillis() - time_pressed_left > firstmovedelay) {
-                    time_pressed_left = System.currentTimeMillis() - movedelay;
+            if (input.isKeyPressed(Input.Keys.LEFT)) {
+                if (!run_left) {
+                    time_pressed_left = System.currentTimeMillis();
+                    run_left = true;
                     ProgrammingSpace.cam.position.set(ProgrammingSpace.cam.position.x -= 20, ProgrammingSpace.cam.position.y, 0);
+                } else {
+                    if (System.currentTimeMillis() - time_pressed_left > firstmovedelay) {
+                        time_pressed_left = System.currentTimeMillis() - movedelay;
+                        ProgrammingSpace.cam.position.set(ProgrammingSpace.cam.position.x -= 20, ProgrammingSpace.cam.position.y, 0);
+                    }
                 }
-            }
-        } else {
-            run_left = false;
-        }
-
-
-        if (input.isKeyPressed(Input.Keys.RIGHT)) {
-            if (!run_right) {
-                time_pressed_right = System.currentTimeMillis();
-                run_right = true;
-                ProgrammingSpace.cam.position.set(ProgrammingSpace.cam.position.x += 20, ProgrammingSpace.cam.position.y, 0);
             } else {
-                if (System.currentTimeMillis() - time_pressed_right > firstmovedelay) {
-                    time_pressed_right = System.currentTimeMillis() - movedelay;
+                run_left = false;
+            }
+
+
+            if (input.isKeyPressed(Input.Keys.RIGHT)) {
+                if (!run_right) {
+                    time_pressed_right = System.currentTimeMillis();
+                    run_right = true;
                     ProgrammingSpace.cam.position.set(ProgrammingSpace.cam.position.x += 20, ProgrammingSpace.cam.position.y, 0);
+                } else {
+                    if (System.currentTimeMillis() - time_pressed_right > firstmovedelay) {
+                        time_pressed_right = System.currentTimeMillis() - movedelay;
+                        ProgrammingSpace.cam.position.set(ProgrammingSpace.cam.position.x += 20, ProgrammingSpace.cam.position.y, 0);
+                    }
                 }
-            }
-        } else {
-            run_right = false;
-        }
-
-
-        if (input.isKeyPressed(Input.Keys.UP)) {
-            if (!run_up) {
-                time_pressed_up = System.currentTimeMillis();
-                run_up = true;
-                ProgrammingSpace.cam.position.set(ProgrammingSpace.cam.position.x, ProgrammingSpace.cam.position.y += 20, 0);
             } else {
-                if (System.currentTimeMillis() - time_pressed_up > firstmovedelay) {
-                    time_pressed_up = System.currentTimeMillis() - movedelay;
+                run_right = false;
+            }
+
+
+            if (input.isKeyPressed(Input.Keys.UP)) {
+                if (!run_up) {
+                    time_pressed_up = System.currentTimeMillis();
+                    run_up = true;
                     ProgrammingSpace.cam.position.set(ProgrammingSpace.cam.position.x, ProgrammingSpace.cam.position.y += 20, 0);
+                } else {
+                    if (System.currentTimeMillis() - time_pressed_up > firstmovedelay) {
+                        time_pressed_up = System.currentTimeMillis() - movedelay;
+                        ProgrammingSpace.cam.position.set(ProgrammingSpace.cam.position.x, ProgrammingSpace.cam.position.y += 20, 0);
+                    }
                 }
-            }
-        } else {
-            run_up = false;
-        }
-
-
-        if (input.isKeyPressed(Input.Keys.DOWN)) {
-            if (!run_down) {
-                time_pressed_down = System.currentTimeMillis();
-                run_down = true;
-                ProgrammingSpace.cam.position.set(ProgrammingSpace.cam.position.x, ProgrammingSpace.cam.position.y -= 20, 0);
             } else {
-                if (System.currentTimeMillis() - time_pressed_down > firstmovedelay) {
-                    time_pressed_down = System.currentTimeMillis() - movedelay;
-                    ProgrammingSpace.cam.position.set(ProgrammingSpace.cam.position.x, ProgrammingSpace.cam.position.y -= 20, 0);
-                }
+                run_up = false;
             }
-        } else {
-            run_down = false;
+
+
+            if (input.isKeyPressed(Input.Keys.DOWN)) {
+                if (!run_down) {
+                    time_pressed_down = System.currentTimeMillis();
+                    run_down = true;
+                    ProgrammingSpace.cam.position.set(ProgrammingSpace.cam.position.x, ProgrammingSpace.cam.position.y -= 20, 0);
+                } else {
+                    if (System.currentTimeMillis() - time_pressed_down > firstmovedelay) {
+                        time_pressed_down = System.currentTimeMillis() - movedelay;
+                        ProgrammingSpace.cam.position.set(ProgrammingSpace.cam.position.x, ProgrammingSpace.cam.position.y -= 20, 0);
+                    }
+                }
+            } else {
+                run_down = false;
+            }
+
+
+            if (input.isKeyJustPressed(Input.Keys.PLUS)) {
+                ProgrammingSpace.cam.zoom = ProgrammingSpace.cam.zoom - 0.2f;
+            }
+            if (input.isKeyJustPressed(Input.Keys.MINUS)) {
+                ProgrammingSpace.cam.zoom = ProgrammingSpace.cam.zoom + 0.2f;
+            }
+
+
+            ProjectManager.getActProjectVar().cam_pos.set(ProgrammingSpace.cam.position.x, ProgrammingSpace.cam.position.y);
+
         }
-
-
-        if (input.isKeyJustPressed(Input.Keys.PLUS)) {
-            ProgrammingSpace.cam.zoom = ProgrammingSpace.cam.zoom - 0.2f;
-        }
-        if (input.isKeyJustPressed(Input.Keys.MINUS)) {
-            ProgrammingSpace.cam.zoom = ProgrammingSpace.cam.zoom + 0.2f;
-        }
-
-
-        ProjectManager.getActProjectVar().cam_pos.set(ProgrammingSpace.cam.position.x, ProgrammingSpace.cam.position.y);
-
 
     }
 

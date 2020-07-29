@@ -14,4 +14,11 @@ public class InputManager {
     public static void addProcessor(InputProcessor p) {
         multiplexer.addProcessor(p);
     }
+    public static void remove(InputProcessor p) {
+        multiplexer.removeProcessor(p);
+    }
+
+    public static boolean contains(InputProcessor p) {
+       return multiplexer.getProcessors().contains(p,true);
+    }
 }

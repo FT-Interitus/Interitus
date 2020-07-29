@@ -1,6 +1,7 @@
 package de.ft.interitus.UI;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
@@ -23,6 +24,7 @@ import de.ft.interitus.UI.UIElements.TabBar.Tab;
 import de.ft.interitus.UI.UIElements.TabBar.TabBar;
 import de.ft.interitus.UI.UIElements.check.Check;
 import de.ft.interitus.UI.UIElements.check.InputManager;
+import de.ft.interitus.UI.editor.Editor;
 import de.ft.interitus.UI.projectsettings.ProjectSettingsUI;
 import de.ft.interitus.UI.settings.SettingsUI;
 import de.ft.interitus.UI.setup.SetupWindow;
@@ -75,9 +77,13 @@ public class UI {
     private static boolean issetupuiopend = false;
     private static Block markedblock;
     private static int wishaniposition=-170-UIVar.abstandvonRand;
+    boolean actiondone = false;
+    static boolean isuilock = false;
 
     public static void updatedragui(ShapeRenderer renderer, boolean flaeche, SpriteBatch batch) {
-        BlockTappedBar.userresize();
+        if(!Var.uilocked) {
+            BlockTappedBar.userresize();
+        }
         // Var.w=Gdx.graphics.getWidth();
         //Var.h=Gdx.graphics.getHeight();
         renderer.begin(ShapeRenderer.ShapeType.Filled);
@@ -338,10 +344,10 @@ public class UI {
         button_editor.setImage(AssetLoader.img_stopbutton);
         button_editor.setImage_mouseover(AssetLoader.img_stopbutton_mouseover);
         button_editor.setImage_pressed(AssetLoader.img_stopbutton_pressed);
-        button_editor.setIsworking(true);
+        button_editor.setIsworking(false);
         button_editor.setWorking_animation(new Animation(AssetLoader.waitforfinishbuild,60, 64,64,7));
         button_editor.getWorking_animation().startAnimation();
-        button_editor.setIsworking(true);
+
         buttonbar = new ButtonBar(0, 0, 20, 20);
         buttonbar.addButton(button_projectstructus);
         buttonbar.addButton(button_editor);
@@ -384,8 +390,28 @@ public class UI {
         tabbar.setBounds(UIVar.abstandvonRand, UIVar.programmflaeche_h + UIVar.programmflaeche_y, 300, 20);
         tabbar.draw();
 
+        if(Var.uilocked!=isuilock) {
+            isuilock = Var.uilocked;
 
-        stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 60f));
+            if(Var.uilocked) {
+                if(InputManager.contains(stage)) {
+                    InputManager.remove(stage);
+                }
+            }else{
+                if(!InputManager.contains(stage)) {
+                    InputManager.addProcessor(stage);
+                }
+            }
+
+        }
+
+
+
+
+
+        if(!Var.uilocked) {
+            stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 60f));
+        }
 
         //root.setPosition(0,0);
 
@@ -420,6 +446,12 @@ public class UI {
 
             compile_thread.start();
 
+        }
+
+        if(UI.button_editor.isjustPressednormal()) {
+
+
+            Editor.open();
         }
 
 

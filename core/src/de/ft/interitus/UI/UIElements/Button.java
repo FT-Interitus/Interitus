@@ -22,6 +22,7 @@ public class Button {
     private boolean isworking = false;
     public int widthoverTextlinksrandabstand = 5;
     BitmapFont font = new BitmapFont();
+    private boolean ignore_uilock = false;
     private int x;
     private int y;
     private int w;
@@ -76,24 +77,32 @@ public class Button {
     }
 
     public boolean isjustPressednormal() {
-        boolean pressed = false;
-        if (!disable && !Var.isdialogeopend) {
+        if(!Var.uilocked||this.isIgnore_uilock()) {
+            boolean pressed = false;
+            if (!disable && !Var.isdialogeopend) {
 
-            pressed = check.isJustPressedNormal(x, y, w, h);
+                pressed = check.isJustPressedNormal(x, y, w, h);
 
-        } else {
+            } else {
+                return false;
+            }
+
+            return pressed;
+        }else{
             return false;
         }
-
-        return pressed;
     }
 
 
     public boolean isPresseded() {
-        if (!disable) {
+        if(!Var.uilocked||this.isIgnore_uilock()) {
+            if (!disable) {
 
-            return check.isPressed(x, y, w, h);
-        } else {
+                return check.isPressed(x, y, w, h);
+            } else {
+                return false;
+            }
+        }else{
             return false;
         }
     }
@@ -101,15 +110,20 @@ public class Button {
 
     public boolean isMouseover() {
 
-        if (Var.isdialogeopend) {
-            return false;
-        } else {
-            if (!disable) {
+        if(!Var.uilocked||this.isIgnore_uilock()) {
 
-                return check.isMouseover(x, y, w, h);
-            } else {
+            if (Var.isdialogeopend) {
                 return false;
+            } else {
+                if (!disable) {
+
+                    return check.isMouseover(x, y, w, h);
+                } else {
+                    return false;
+                }
             }
+        }else{
+            return false;
         }
     }
 
@@ -293,6 +307,14 @@ public class Button {
 
     public Animation getWorking_animation() {
         return working_animation;
+    }
+
+    public void setIgnore_uilock(boolean ignore_uilock) {
+        this.ignore_uilock = ignore_uilock;
+    }
+
+    public boolean isIgnore_uilock() {
+        return ignore_uilock;
     }
 }
 
