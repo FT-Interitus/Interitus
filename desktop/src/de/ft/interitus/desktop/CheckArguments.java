@@ -40,6 +40,9 @@ public class CheckArguments {
 
         }
 
+        if(Var.programmarguments.indexOf("-ni")!=-1) {
+            Var.nointernetconnection = true;
+        }
 
     }
 }

@@ -32,10 +32,11 @@ public class ReadStorePlugins {
 
 
         try {
-            for (plugincounter = plugincounter; plugincounter < 999999999; plugincounter++) { //TODO replace with while loop
+            while(true) {
                 if (!jsonObject.has("plugin" + plugincounter)) {
                     break;
                 }
+                plugincounter++;
             }
 
             for (int i = 0; i < plugincounter; i++) {

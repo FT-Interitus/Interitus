@@ -84,7 +84,7 @@ public class Programm extends Game {
         EventVar.uiEventManager.UILoadEvent(new UILoadEvent(this));
 
         try {
-            if (!Var.disablePluginSubSystem) {
+            if (!Var.disablePluginSubSystem&&!Var.nointernetconnection) {
                 loadplugins.start(); //Plugins laden
                 ReadStorePlugins.read(); //Ersten 10 Plugins im Store laden
 

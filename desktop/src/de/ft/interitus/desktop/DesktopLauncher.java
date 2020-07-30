@@ -25,6 +25,7 @@ public class DesktopLauncher {
 	 *            -a SaveMode (Settings wont be saved)
 	 *            -ud [PATH] Another Place to store User Data
 	 *            -inc Ignore not correctly closed Programm
+	 *            -ni Do not use Internet Connection (Offline Mode)
 	 *
 	 */
 

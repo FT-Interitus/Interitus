@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import de.ft.interitus.DisplayErrors;
+import de.ft.interitus.Var;
 import de.ft.interitus.plugin.store.StorePluginsVar;
 import de.ft.interitus.utils.DownloadFile;
 
@@ -328,8 +329,10 @@ public class AssetLoader {
                 }
             };
 
+if(!Var.disablePluginSubSystem&&!Var.nointernetconnection) {
+    loadimagesfromweb.start();
 
-            loadimagesfromweb.start();
+}
 
 
         } catch (Exception e) {

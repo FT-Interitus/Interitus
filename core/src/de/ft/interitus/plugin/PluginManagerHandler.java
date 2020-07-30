@@ -125,7 +125,7 @@ public class PluginManagerHandler {
 
 
                     //Disable Plugin if it is too slow
-                    if (after - before > 20) {
+                    if (after - before > 80) {
                         Programm.logger.warning((after-before)+"");
                         Programm.logger.warning("Das Plugin " + loadedplugins.get(i).getName() + " ist zu langsam und wurde deshalb deaktiviert");
                         loadedplugins.get(i).stop();
