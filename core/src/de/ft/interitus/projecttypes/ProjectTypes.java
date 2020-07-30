@@ -2,7 +2,8 @@ package de.ft.interitus.projecttypes;
 
 import de.ft.interitus.Block.Generators.*;
 import de.ft.interitus.compiler.Compiler;
-import de.ft.interitus.plugin.PluginRegister;
+import de.ft.interitus.events.plugin.store.PluginStoreEventManager;
+import de.ft.interitus.plugin.Plugin;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 
 import de.ft.interitus.utils.ArrayList;
@@ -11,7 +12,7 @@ public class ProjectTypes {
     ProgrammableObjekt PO;
     String name;
     ArrayList<PlatformSpecificBlock> projectblocks;
-    private final de.ft.interitus.plugin.PluginRegister pluginRegister;
+    private final de.ft.interitus.plugin.Plugin pluginRegister;
     BlockUpdateGenerator blockUpdateGenerator = null;
     private final BlockVarGenerator blockVarGenerator;
     BlockGenerator blockGenerator = null;
@@ -21,7 +22,7 @@ public class ProjectTypes {
     private ProjectCreator projectCreator;
     private Compiler compiler;
 
-    public ProjectTypes(PluginRegister pluginRegister, ProgrammableObjekt PO, String name, ArrayList<PlatformSpecificBlock> blocks, BlockGenerator blockgenerator, BlockUpdateGenerator updategenerator, WireGenerator wireGenerator, WireNodeGenerator wireNodeGenerator, BlocktoSaveGenerator blocktoSaveGenerator, BlockVarGenerator blockVarGenerator, ProjectCreator projectCreator,Compiler compiler) {
+    public ProjectTypes(Plugin pluginRegister, ProgrammableObjekt PO, String name, ArrayList<PlatformSpecificBlock> blocks, BlockGenerator blockgenerator, BlockUpdateGenerator updategenerator, WireGenerator wireGenerator, WireNodeGenerator wireNodeGenerator, BlocktoSaveGenerator blocktoSaveGenerator, BlockVarGenerator blockVarGenerator, ProjectCreator projectCreator, Compiler compiler) {
         this.projectblocks = blocks;
         this.PO = PO;
         this.name = name;
@@ -100,7 +101,7 @@ public class ProjectTypes {
         this.blocktoSaveGenerator = blocktoSaveGenerator;
     }
 
-    public PluginRegister getPluginRegister() {
+    public Plugin getPluginRegister() {
         return pluginRegister;
     }
 

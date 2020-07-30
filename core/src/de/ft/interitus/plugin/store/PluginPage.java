@@ -58,8 +58,8 @@ public class PluginPage {
         final VisTextButton download = new VisTextButton("Installieren", "blue");
 
         boolean isinstalled = false;
-        for (int i = 0; i < PluginManagerHandler.registeredplugins.size(); i++) {
-            if (PluginManagerHandler.registeredplugins.get(i).getName().toLowerCase().contains(Storeentry.getName().toLowerCase())) {
+        for (int i = 0; i < PluginManagerHandler.loadedplugins.size(); i++) {
+            if (PluginManagerHandler.loadedplugins.get(i).getName().toLowerCase().contains(Storeentry.getName().toLowerCase())) {
                 isinstalled = true;
 
 

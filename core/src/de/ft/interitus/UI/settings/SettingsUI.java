@@ -237,8 +237,8 @@ public class SettingsUI extends VisWindow {
             item4.add(new TestNode(new VisLabel(" Erweitert"), 15));
             //ADD Advanced Settings to ITM if Device is connect
 
-            for (int i = 0; i < PluginGateway.plugisettings.size(); i++) {
-                item5.add(new TestNode(new VisLabel(" " + PluginManagerHandler.registeredplugins.get(i).getName() + " "), 17 + i));
+            for (int i = 0; i < PluginGateway.pluginsettings.size(); i++) {
+                item5.add(new TestNode(new VisLabel(" " + PluginManagerHandler.loadedplugins.get(i).getName() + " "), 17 + i));
             }
 
             item1.setExpanded(true);
@@ -331,7 +331,7 @@ public class SettingsUI extends VisWindow {
                         default:
 
                             if (SelectedItem > 16) {
-                                container.add(PluginGateway.plugisettings.get(SelectedItem - 17));
+                                container.add(PluginGateway.pluginsettings.get(SelectedItem - 17));
                             }
 
 

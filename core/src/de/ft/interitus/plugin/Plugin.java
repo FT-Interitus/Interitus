@@ -7,5 +7,13 @@ public interface Plugin {
 
     boolean run();
 
+    String getName();
+
+    double getVersion();
+    String getDescription();
+    String getLongDescription();
+    String getAuthor();
+
+
 
 }

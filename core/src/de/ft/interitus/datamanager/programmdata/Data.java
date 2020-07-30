@@ -60,7 +60,7 @@ public class Data {
 
         Path path = folder.toPath();
         if (!folder.exists()) {//Wenn der Programm-Ordner noch nicht exsitiert
-            Programm.logger.info("Create Programm Data Folder");
+            Programm.logger.warning("Create Programm Data Folder");
 
             folder.mkdir(); //der Ordner wird erstellt
             tempfolder.mkdir();

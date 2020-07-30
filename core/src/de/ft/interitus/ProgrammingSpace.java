@@ -24,7 +24,8 @@ import de.ft.interitus.UI.shortcut.shortcuts.BlockShortcuts;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.plugin.Configuration;
-import de.ft.interitus.plugin.PluginRegister;
+import de.ft.interitus.plugin.Nativ;
+import de.ft.interitus.plugin.Plugin;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
 import de.ft.interitus.utils.PositionSaver;
@@ -39,7 +40,7 @@ public class ProgrammingSpace extends ScreenAdapter {
     public static OrthographicCamera cam;
     public static Viewport viewport;
     public static Component saver;
-    public static PluginRegister nativ;
+
     public static BitmapFont font;
     public static Switch s;
     public static TextField textfieldtest;
@@ -55,6 +56,7 @@ public class ProgrammingSpace extends ScreenAdapter {
     public static ShapeRenderer shapeRenderer;
     public static PressedKeys pressedKeys;
     public static float delta;
+    public static Plugin nativ = new Nativ();
     IntegerAuswahl ia;
 
 
@@ -70,8 +72,7 @@ public class ProgrammingSpace extends ScreenAdapter {
         pressedKeys = new PressedKeys();
 
 
-        nativ = new PluginRegister();
-        nativ.config(Configuration.name, "Nativ");
+
         ia = new IntegerAuswahl(400, 400, 50, 25);
         s = new Switch(500, 500);
         font = new BitmapFont();
