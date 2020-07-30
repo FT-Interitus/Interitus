@@ -95,7 +95,7 @@ public class PluginGateway {
     }
 
 
-    static void removeplugin(Plugin plugin) {
+    static void removepluginregisters(Plugin plugin) {
 
         for(int i=0;i<pluginsettingsplugins.size();i++) {
             if(pluginsettingsplugins.get(i)==plugin) {
@@ -108,6 +108,7 @@ public class PluginGateway {
             if(pluginMenubarplugins.get(i)==plugin) {
                 pluginMenubar.remove(i);
                 pluginMenubarplugins.remove(i);
+                //TODO update MenuBar
             }
         }
 
@@ -136,9 +137,12 @@ public class PluginGateway {
         for(int i=0;i<themesplugins.size();i++) {
             if(themesplugins.get(i)==plugin) {
                 themesplugins.remove(i);
-                RegisteredThemes.themes.remove(i);
+                RegisteredThemes.themes.remove(i+2);
             }
         }
+
+
+
 
 
 

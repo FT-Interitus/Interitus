@@ -89,12 +89,18 @@ public abstract class Wire {
                 if (Gdx.input.isButtonJustPressed(0)) {
                     int counter = 0;
                     for (int i = 0; i < ProjectManager.getActProjectVar().visibleblocks.size(); i++) {
-                        //TODO hier auch nach nodes testen eventuell will man die nur verschieben
-                        if (CheckKollision.object(ProjectManager.getActProjectVar().visibleblocks.get(i).getX_entrance(), ProjectManager.getActProjectVar().visibleblocks.get(i).getY_entrance(), ProjectManager.getActProjectVar().visibleblocks.get(i).getW_entrance(), ProjectManager.getActProjectVar().visibleblocks.get(i).getH_entrance(), (int) ProgrammingSpace.viewport.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1)) {
+
+                        if (CheckKollision.object(ProjectManager.getActProjectVar().visibleblocks.get(i).getX(), ProjectManager.getActProjectVar().visibleblocks.get(i).getY(), ProjectManager.getActProjectVar().visibleblocks.get(i).getW(), ProjectManager.getActProjectVar().visibleblocks.get(i).getH(), (int) ProgrammingSpace.viewport.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1)) {
                             counter++;
                         }
 
 
+                    }
+
+                    for(int i =0;i<ProjectManager.getActProjectVar().visibleWireNodes.size();i++) {
+                        if(CheckKollision.object(ProjectManager.getActProjectVar().visibleWireNodes.get(i).getX(),ProjectManager.getActProjectVar().visibleWireNodes.get(i).getY(),WireNode.public_w,WireNode.public_h, (int) ProgrammingSpace.viewport.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1)){
+                            counter++;
+                        }
                     }
 
                     if (counter == 0) {

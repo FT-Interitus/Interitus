@@ -57,37 +57,46 @@ public class PluginManagerHandler {
     private static void startPluginLifeCycle() {
 
 
-        for (Plugin plugin : loadedplugins) {
+        for (int i=0;i<loadedplugins.size();i++) {
             try {
 
 
-                if (plugin.getName().length() <= 3 || plugin.getName().startsWith(" ") || plugin.getName().endsWith(" ") || plugin.getName().length() > 50) {
-                    loadedplugins.remove(plugin);
+
+                if (loadedplugins.get(i).getName().length() <= 3 || loadedplugins.get(i).getName().startsWith(" ") || loadedplugins.get(i).getName().endsWith(" ") || loadedplugins.get(i).getName().length() > 50) {
+                    loadedplugins.remove(loadedplugins.get(i));
 
                 }
 
-                if (plugin.getVersion() <= 0.0) {
-                    loadedplugins.remove(plugin);
+                if (loadedplugins.get(i).getVersion() <= 0.0) {
+                    loadedplugins.remove(loadedplugins.get(i));
                 }
 
-                if (plugin.getAuthor().length() <= 3 || plugin.getAuthor().startsWith(" ") || plugin.getAuthor().endsWith(" ")) {
-                    loadedplugins.remove(plugin);
+                if (loadedplugins.get(i).getAuthor().length() <= 3 || loadedplugins.get(i).getAuthor().startsWith(" ") || loadedplugins.get(i).getAuthor().endsWith(" ")) {
+                    loadedplugins.remove(loadedplugins.get(i));
                 }
 
-                if (plugin.getDescription() == "") {
-                    loadedplugins.remove(plugin);
+                if (loadedplugins.get(i).getDescription() == "") {
+                    loadedplugins.remove(loadedplugins.get(i));
                 }
             } catch (Throwable e) {
-                loadedplugins.remove(plugin);
+                e.printStackTrace();
+                loadedplugins.remove(loadedplugins.get(i));
             }
+            try {
 
-            if (!loadedplugins.contains(plugin)) {
-                Programm.logger.warning("Das Plugin " + plugin.getName() + " konnte nicht geladen werden.");
-            } else {
-                Thread thread = new Thread(() -> plugin.register());
-                thread.start();
+                if (!loadedplugins.contains(loadedplugins.get(i))) {
+                    Programm.logger.warning("Das Plugin " + loadedplugins.get(i).getName() + " konnte nicht geladen werden.");
+                    i--;
+                } else {
+                    int finalI = i;
+                    Thread thread = new Thread(() -> loadedplugins.get(finalI).register());
+                    thread.start();
 
 
+                }
+            }catch (Throwable e) {
+                e.printStackTrace();
+                loadedplugins.remove(loadedplugins.get(i));
             }
 
         }
@@ -108,17 +117,19 @@ public class PluginManagerHandler {
                         DisplayErrors.customErrorstring = "Im Plugin " + loadedplugins.get(i).getName() + " ist ein Fehler aufgetreten und es wurde deaktiviert";
                         DisplayErrors.error = e;
 
-                        PluginGateway.removeplugin(loadedplugins.get(i));
+                        PluginGateway.removepluginregisters(loadedplugins.get(i));
                         loadedplugins.remove(loadedplugins.get(i));
 
                     }
                     after = System.currentTimeMillis();
 
 
+                    //Disable Plugin if it is too slow
                     if (after - before > 20) {
+                        Programm.logger.warning((after-before)+"");
                         Programm.logger.warning("Das Plugin " + loadedplugins.get(i).getName() + " ist zu langsam und wurde deshalb deaktiviert");
                         loadedplugins.get(i).stop();
-                        PluginGateway.removeplugin(loadedplugins.get(i));
+                        PluginGateway.removepluginregisters(loadedplugins.get(i));
                         loadedplugins.remove(loadedplugins.get(i));
 
                     }

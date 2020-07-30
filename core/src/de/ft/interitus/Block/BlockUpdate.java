@@ -468,7 +468,7 @@ public abstract class BlockUpdate extends Thread {
 
                                 //block.getRight().setX(block.getRight().getX() + block.getW());
 
-                                b.getRight().setX(b.getRight().getX() - b.getW());//TODO tim ist sich nicht sicher
+                                b.getRight().setX(b.getRight().getX() - b.getW());
                                 b = b.getRight();
                             }
 
