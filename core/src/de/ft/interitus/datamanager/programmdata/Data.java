@@ -470,6 +470,14 @@ public class Data {
             LoggerInit.fh.close();
             new File(Var.logname).renameTo(new File(System.getProperty("user.home")+"/KeepLog_"+Var.lognamefile));
         }
+
+
+        try {
+            FolderUtils.deleteFileOrFolder(Path.of(System.getProperty("user.home")+"/"+foldername+"/temp/"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 
