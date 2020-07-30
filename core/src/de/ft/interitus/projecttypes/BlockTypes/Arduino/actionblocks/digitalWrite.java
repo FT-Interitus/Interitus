@@ -137,7 +137,7 @@ public class digitalWrite implements PlatformSpecificBlock, ArduinoBlock {
     }
 
     @Override
-    public boolean canhasleftconnect() {
+    public boolean canhasleftconnector() {
         return true;
     }
 }

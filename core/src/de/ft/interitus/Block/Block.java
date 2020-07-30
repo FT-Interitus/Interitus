@@ -631,13 +631,13 @@ public abstract class Block implements VisibleObjects {
             batch.draw(AssetLoader.marked_links, this.getX(), this.getY(), 6, this.getH());
             batch.draw(AssetLoader.marked_rechts, this.getX() + this.getW() - 6, this.getY(), 6, this.getH());        }
         if (ProjectManager.getActProjectVar().biggestblock == this) {
-            if (this.isShowdupulicate_rechts()) {
+            if (this.isShowdupulicate_rechts()&&this.getBlocktype().canhasrightconnector()) {
                 batch.setColor(1, 1, 1, 0.5f);
                 batch.draw(AssetLoader.img_block, this.x_dup_rechts, this.y, ProjectManager.getActProjectVar().markedblock.getW(), this.getH()); //Wenn der Block die größte überlappung hat wird er als show duplicat angezigt
                 batch.setColor(1, 1, 1, 1);
             }
 
-            if (this.isShowdupulicate_links()) {
+            if (this.isShowdupulicate_links()&&this.getBlocktype().canhasleftconnector()) {
                 batch.setColor(1, 1, 1, 0.5f);
                 batch.draw(AssetLoader.img_block, this.x-ProjectManager.getActProjectVar().markedblock.getW(), this.y, ProjectManager.getActProjectVar().markedblock.getW(), this.getH()); //das gleiche für links
                 batch.setColor(1, 1, 1, 1);
@@ -671,11 +671,11 @@ public abstract class Block implements VisibleObjects {
             batch.begin();
         }
 
-        if (!this.blockupdate.isIsconnectorclicked() && ProjectManager.getActProjectVar().showleftdocker && this.getLeft() == null) {
+        if (!this.blockupdate.isIsconnectorclicked() && ProjectManager.getActProjectVar().showleftdocker && this.getLeft() == null &&this.getBlocktype().canhasleftconnector()) {
             batch.draw(AssetLoader.connector_offerd, getWireconnector_left().x, getWireconnector_left().y, 20, 20);
         }
 
-        if (this.getRight() == null) {
+        if (this.getRight() == null&&this.getBlocktype().canhasrightconnector()) {
             batch.draw(AssetLoader.connector, getwireconnector_right().x, getwireconnector_right().y, 20, 20);
         }
 

@@ -123,7 +123,7 @@ public class Wait implements PlatformSpecificBlock, ArduinoBlock {
     }
 
     @Override
-    public boolean canhasleftconnect() {
+    public boolean canhasleftconnector() {
         return true;
     }
 

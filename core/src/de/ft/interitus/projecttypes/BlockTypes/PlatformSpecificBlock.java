@@ -39,5 +39,5 @@ public interface PlatformSpecificBlock {
 
     boolean canhasrightconnector();
 
-    boolean canhasleftconnect();
+    boolean canhasleftconnector();
 }

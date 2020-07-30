@@ -92,7 +92,7 @@ public abstract class BlockUpdate extends Thread {
                         //TODO
 
 
-                        if (!isIsconnectorclicked() && ProjectManager.getActProjectVar().showleftdocker && CheckKollision.object(block.getX_entrance(), block.getY_entrance(), block.getW_entrance(), block.getH_entrance(), (int) ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1) && Gdx.input.isButtonJustPressed(0) && block.getLeft() == null) { //TODO Durch das Just pressed kann es sein das es manchmal verpasst wird dieses Event auszuführen
+                        if (block.getBlocktype().canhasleftconnector()&&!isIsconnectorclicked() && ProjectManager.getActProjectVar().showleftdocker && CheckKollision.object(block.getX_entrance(), block.getY_entrance(), block.getW_entrance(), block.getH_entrance(), (int) ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1) && Gdx.input.isButtonJustPressed(0) && block.getLeft() == null) { //TODO Durch das Just pressed kann es sein das es manchmal verpasst wird dieses Event auszuführen
                             ProjectManager.getActProjectVar().showleftdocker = false;
                             ProjectManager.getActProjectVar().movingwires.setMovebymouse(false);
                             ProjectManager.getActProjectVar().movingwires.setRight_connection(block);
@@ -320,7 +320,7 @@ public abstract class BlockUpdate extends Thread {
                         }
 
 
-                        if (block.isShowdupulicate_links() || block.isShowdupulicate_rechts()) {
+                        if ((block.isShowdupulicate_links()&&block.getBlocktype().canhasleftconnector()) || (block.isShowdupulicate_rechts()&&block.getBlocktype().canhasrightconnector())) {
                             if (ProjectManager.getActProjectVar().showduplicat.indexOf(block) == -1) {
                                 ProjectManager.getActProjectVar().showduplicat.add(block);
                             }
@@ -484,9 +484,10 @@ public abstract class BlockUpdate extends Thread {
                         }
 
 
+                        //Setzt die Nachbaren
                         if (ProjectManager.getActProjectVar().marked && !block.isMarked()) {
                             try {
-                                if (CheckKollision.checkblockwithduplicate(ProjectManager.getActProjectVar().markedblock, block, 0) && block.getRight() == null && ProjectManager.getActProjectVar().markedblock.getWire_left() == null) {
+                                if (CheckKollision.checkblockwithduplicate(ProjectManager.getActProjectVar().markedblock, block, 0) && block.getRight() == null && ProjectManager.getActProjectVar().markedblock.getWire_left() == null&&ProjectManager.getActProjectVar().markedblock.getBlocktype().canhasleftconnector()) {
                                     if (ProjectManager.getActProjectVar().markedblock.isMoving()) {
                                         //System.out.println("Kollision!");
 
@@ -523,7 +524,7 @@ public abstract class BlockUpdate extends Thread {
 
 
                             try {
-                                if (CheckKollision.checkblockwithduplicate(ProjectManager.getActProjectVar().markedblock, block, 1) && block.getLeft() == null && ProjectManager.getActProjectVar().markedblock.getWire_right() == null) {
+                                if (CheckKollision.checkblockwithduplicate(ProjectManager.getActProjectVar().markedblock, block, 1) && block.getLeft() == null && ProjectManager.getActProjectVar().markedblock.getWire_right() == null&&ProjectManager.getActProjectVar().markedblock.getBlocktype().canhasrightconnector()) {
 
                                     if (ProjectManager.getActProjectVar().markedblock.isMoving()) {
 

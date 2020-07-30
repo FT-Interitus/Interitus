@@ -106,7 +106,7 @@ public class LoopBlock implements PlatformSpecificBlock, ArduinoBlock {
     }
 
     @Override
-    public boolean canhasleftconnect() {
+    public boolean canhasleftconnector() {
         return false;
     }
 

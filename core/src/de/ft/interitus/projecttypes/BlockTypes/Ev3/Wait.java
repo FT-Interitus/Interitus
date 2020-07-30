@@ -93,7 +93,7 @@ public class Wait implements PlatformSpecificBlock, Ev3Block {
     }
 
     @Override
-    public boolean canhasleftconnect() {
+    public boolean canhasleftconnector() {
         return true;
     }
 
