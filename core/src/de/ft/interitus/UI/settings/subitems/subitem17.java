@@ -19,7 +19,7 @@ import de.ft.interitus.plugin.store.search.findStorePluginEntry;
 import de.ft.interitus.utils.DownloadFile;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 

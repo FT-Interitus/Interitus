@@ -2,7 +2,7 @@ package de.ft.interitus.Block;
 
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public abstract class SaveBlock implements Serializable {
 

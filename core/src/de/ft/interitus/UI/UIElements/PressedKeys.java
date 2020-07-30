@@ -5,7 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import de.ft.interitus.UI.UIElements.check.InputManager;
 
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public class PressedKeys {
     ArrayList<Integer> pressedkeys = new ArrayList<>();

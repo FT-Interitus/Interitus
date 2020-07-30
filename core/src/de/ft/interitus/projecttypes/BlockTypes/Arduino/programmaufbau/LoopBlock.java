@@ -11,7 +11,7 @@ import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
 
 import java.awt.*;
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public class LoopBlock implements PlatformSpecificBlock, ArduinoBlock {
     ProjectTypes type;

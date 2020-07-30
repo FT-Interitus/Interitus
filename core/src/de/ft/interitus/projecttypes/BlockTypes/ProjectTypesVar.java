@@ -2,7 +2,7 @@ package de.ft.interitus.projecttypes.BlockTypes;
 
 import de.ft.interitus.projecttypes.ProjectTypes;
 
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public class ProjectTypesVar {
 

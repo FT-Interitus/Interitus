@@ -18,7 +18,7 @@ import de.ft.interitus.Var;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
 
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 

@@ -9,7 +9,7 @@ import de.ft.interitus.UI.shortcut.shortcuts.BlockShortcuts;
 import de.ft.interitus.UI.shortcut.shortcuts.GlobalShortcuts;
 import de.ft.interitus.plugin.PluginGateway;
 
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public class CheckShortcuts {
     public static boolean blockshortcuts = false;

@@ -3,7 +3,7 @@ package de.ft.interitus.UI.tappedbar;
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.UI.UIElements.Button;
 
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public class TapContent {
 

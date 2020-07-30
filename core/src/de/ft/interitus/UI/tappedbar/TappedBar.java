@@ -3,7 +3,7 @@ package de.ft.interitus.UI.tappedbar;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public class TappedBar {
     int mittenpositionX;

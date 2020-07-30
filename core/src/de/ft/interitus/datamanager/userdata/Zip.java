@@ -1,7 +1,7 @@
 package de.ft.interitus.datamanager.userdata;
 
 import java.io.*;
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;

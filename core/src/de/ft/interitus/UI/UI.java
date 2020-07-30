@@ -40,7 +40,7 @@ import de.ft.interitus.utils.RoundRectangle;
 import de.ft.interitus.utils.animation.Animation;
 
 import java.io.File;
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 

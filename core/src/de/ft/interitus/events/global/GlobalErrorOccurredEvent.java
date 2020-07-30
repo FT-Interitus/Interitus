@@ -3,7 +3,7 @@ package de.ft.interitus.events.global;
 import java.util.EventObject;
 
 public class GlobalErrorOccurredEvent extends EventObject {
-    Exception e;
+    Throwable e;
 
     /**
      * Constructs a prototypical Event.
@@ -11,13 +11,13 @@ public class GlobalErrorOccurredEvent extends EventObject {
      * @param source the object on which the Event initially occurred
      * @throws IllegalArgumentException if source is null
      */
-    public GlobalErrorOccurredEvent(Object source, Exception e) {
+    public GlobalErrorOccurredEvent(Object source, Throwable e) {
 
         super(source);
         this.e = e;
     }
 
-    public Exception getE() {
+    public Throwable getE() {
         return e;
     }
 }

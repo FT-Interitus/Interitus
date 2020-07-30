@@ -12,7 +12,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -117,12 +117,9 @@ public class PluginManagerHandler {
                                     starttime.add(System.currentTimeMillis());
                                     try {
                                         finish.add(loadedplugins.get(finalI).run());
-                                    } catch (Exception e) {
-                                        DisplayErrors.customErrorstring = "Fehler in einem Plugin. Es wurde deaktiviert!";
-                                        DisplayErrors.error = e;
-                                        registeredplugins.remove(loadedplugins.get(finalI));
-                                    } catch (NoClassDefFoundError e) {
-
+                                    } catch (Throwable e) {
+                                        //DisplayErrors.customErrorstring = "Fehler in einem Plugin. Es wurde deaktiviert!";
+                                       // DisplayErrors.error = e;
                                         registeredplugins.remove(loadedplugins.get(finalI));
                                     }
 

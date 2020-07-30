@@ -9,7 +9,7 @@ import de.ft.interitus.UI.shortcut.ShortCut;
 import de.ft.interitus.UI.shortcut.ShortCutChecker;
 import de.ft.interitus.projecttypes.ProjectTypes;
 
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

@@ -11,7 +11,7 @@ import com.kotcrab.vis.ui.widget.VisSelectBox;
 import com.kotcrab.vis.ui.widget.VisTable;
 import de.ft.interitus.Settings;
 
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public class subitem3 {
     public static void add(VisTable builder) {

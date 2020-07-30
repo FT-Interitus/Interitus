@@ -7,7 +7,7 @@ import de.ft.interitus.Var;
 
 import de.ft.interitus.projecttypes.ProjectManager;
 
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public class ClearActOpenProgramm {
 

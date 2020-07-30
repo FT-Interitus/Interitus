@@ -6,7 +6,7 @@ import de.ft.interitus.Block.SaveBlock;
 import de.ft.interitus.Block.Wire;
 import org.lwjgl.system.CallbackI;
 
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public class DefaultSaveBlockGenerator implements BlocktoSaveGenerator {
     ArrayList<ArrayList<Integer>> nodes;

@@ -3,7 +3,7 @@ package de.ft.interitus.plugin.store.search;
 import de.ft.interitus.plugin.store.StorePluginEntry;
 import de.ft.interitus.plugin.store.StorePluginsVar;
 
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public class findStorePluginEntry {
     static ArrayList<StorePluginEntry> findobjects = new ArrayList<>();

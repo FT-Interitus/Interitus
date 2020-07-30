@@ -6,7 +6,7 @@
 package de.ft.interitus.Logging;
 
 import java.io.OutputStream;
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

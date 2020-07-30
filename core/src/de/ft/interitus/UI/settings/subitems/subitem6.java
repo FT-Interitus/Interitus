@@ -11,7 +11,7 @@ import de.ft.interitus.UI.shortcut.ShortCut;
 import de.ft.interitus.UI.shortcut.SpecialKeys;
 import de.ft.interitus.Var;
 
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public class subitem6 {
     public static int shortcut_margin = 25;

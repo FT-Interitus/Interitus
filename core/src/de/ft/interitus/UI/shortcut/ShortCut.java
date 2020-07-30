@@ -6,7 +6,7 @@ import com.kotcrab.vis.ui.widget.MenuItem;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.Var;
 
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public class ShortCut {
     String name = null;

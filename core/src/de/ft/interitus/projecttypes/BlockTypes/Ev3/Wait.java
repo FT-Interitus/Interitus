@@ -9,7 +9,7 @@ import de.ft.interitus.projecttypes.BlockTypes.BlockTopParameter;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 
 import java.awt.*;
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public class Wait implements PlatformSpecificBlock, Ev3Block {
     @Override

@@ -11,7 +11,7 @@ import de.ft.interitus.plugin.store.StorePluginsVar;
 import de.ft.interitus.utils.DownloadFile;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public class AssetLoader {
 

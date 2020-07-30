@@ -2,7 +2,7 @@ package de.ft.interitus.datamanager.programmdata;
 
 import de.ft.interitus.Block.Devices;
 
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public class VerbindungsSpeicher {
     public static ArrayList<VerbindungsSpeicher> verbundungen = new ArrayList<VerbindungsSpeicher>();

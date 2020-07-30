@@ -22,7 +22,7 @@ import de.ft.interitus.events.UI.UIOpenSettingsEvent;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.VCS;
 
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public class GlobalShortcuts implements ShortCutChecker {
     public static ShortCut shortCut_newprojektwindow = new ShortCut("Neues Projekt", MenuBar.menuItem_neues_projekt, SpecialKeys.dualStrg, Input.Keys.N);

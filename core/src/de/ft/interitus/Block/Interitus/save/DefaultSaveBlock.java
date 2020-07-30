@@ -2,7 +2,7 @@ package de.ft.interitus.Block.Interitus.save;
 
 import de.ft.interitus.Block.SaveBlock;
 
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public class DefaultSaveBlock extends SaveBlock {
 

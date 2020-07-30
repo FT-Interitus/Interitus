@@ -6,7 +6,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.IntBuffer;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 import java.util.List;
 
 /***

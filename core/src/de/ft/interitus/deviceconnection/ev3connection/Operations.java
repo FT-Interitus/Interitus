@@ -1,6 +1,6 @@
 package de.ft.interitus.deviceconnection.ev3connection;
 
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public class Operations {
 

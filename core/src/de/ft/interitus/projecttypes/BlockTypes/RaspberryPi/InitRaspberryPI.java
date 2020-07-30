@@ -8,7 +8,7 @@ import de.ft.interitus.projecttypes.BlockTypes.Ev3.Wait;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.DeviceTypes.Ev3;
 
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public class InitRaspberryPI {
     static ArrayList<PlatformSpecificBlock> platformSpecificBlocks = new ArrayList<>();

@@ -2,7 +2,7 @@ package de.ft.interitus.UI.UIElements;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public class ButtonBar {
     ArrayList<Button> buttons = new ArrayList<>();

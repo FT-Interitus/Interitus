@@ -5,7 +5,7 @@ import de.ft.interitus.compiler.Compiler;
 import de.ft.interitus.plugin.PluginRegister;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public class ProjectTypes {
     ProgrammableObjekt PO;

@@ -12,7 +12,7 @@ import de.ft.interitus.projecttypes.ProjectManager;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class Server {

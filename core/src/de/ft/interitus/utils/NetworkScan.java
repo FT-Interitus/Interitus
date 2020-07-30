@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public class NetworkScan {
     public static ArrayList<InetAddress> device = new ArrayList<>();

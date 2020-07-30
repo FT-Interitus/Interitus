@@ -20,7 +20,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public class DataLoader {
     public static void load(final FileHandle handle, final String name, final String path) {

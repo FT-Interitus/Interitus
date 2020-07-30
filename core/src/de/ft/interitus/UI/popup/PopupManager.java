@@ -3,7 +3,7 @@ package de.ft.interitus.UI.popup;
 import com.badlogic.gdx.Gdx;
 import de.ft.interitus.UI.UIVar;
 
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public class PopupManager {
     ArrayList<PopupMenue> popups = new ArrayList<>();

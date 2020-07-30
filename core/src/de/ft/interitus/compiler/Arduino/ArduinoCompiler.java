@@ -10,7 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.*;
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public class ArduinoCompiler implements Compiler {
 

@@ -5,7 +5,7 @@ import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.Wire;
 import de.ft.interitus.Block.WireNode;
 
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public abstract class ProjectVar {
 

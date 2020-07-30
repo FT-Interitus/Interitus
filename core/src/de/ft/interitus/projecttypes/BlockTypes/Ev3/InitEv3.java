@@ -7,7 +7,7 @@ import de.ft.interitus.projecttypes.ProjectTypes;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.DeviceTypes.Ev3;
 
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public class InitEv3 {
     static ArrayList<PlatformSpecificBlock> platformSpecificBlocks = new ArrayList<>();

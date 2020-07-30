@@ -7,7 +7,7 @@ import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.global.GlobalErrorOccurredEvent;
 
 public class DisplayErrors {
-    public static Exception error;
+    public static Throwable error;
     public static String customErrorstring = "Ein Fehler ist aufgetreten!";
     public static String errorStringwithoutException = "";
 
@@ -17,7 +17,7 @@ public class DisplayErrors {
 
             Dialogs.showErrorDialog(UI.stage, customErrorstring, error);
 
-            EventVar.globalEventManager.erroroccurred(new GlobalErrorOccurredEvent(Programm.INSTANCE, error));
+            EventVar.globalEventManager.erroroccurred(new GlobalErrorOccurredEvent(Programm.INSTANCE,  error));
 
             error = null;
             customErrorstring = "Ein Fehler ist aufgetreten!";

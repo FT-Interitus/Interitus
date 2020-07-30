@@ -5,7 +5,7 @@ import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.projecttypes.ProjectTypes;
 
 import java.awt.*;
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public interface PlatformSpecificBlock {
 

@@ -1,6 +1,6 @@
 package de.ft.interitus.UI.UIElements.TabBar;
 
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 
 public class TabBar {

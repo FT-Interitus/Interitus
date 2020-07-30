@@ -6,7 +6,7 @@ import de.ft.interitus.UI.window.Window;
 import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.projecttypes.ProjectVar;
 
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public class Var {
 

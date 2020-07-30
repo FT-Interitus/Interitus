@@ -8,7 +8,7 @@ import de.ft.interitus.UI.UIElements.check.Check;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.rightclick.RightClickButtonSelectEvent;
 
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public class PopupMenue {
     private final int buttonheight = 20;
