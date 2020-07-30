@@ -10,7 +10,7 @@ import de.ft.interitus.utils.ArrayList;
 
 public class Var {
 
-    public static PluginManagerHandler pluginManager;
+
 
     public static double PROGRAMM_VERSION_ID = 01;
 
