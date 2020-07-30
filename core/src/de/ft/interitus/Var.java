@@ -26,9 +26,6 @@ public class Var {
     public static double API_VERSION = 1.0;
     public static boolean isloading = false;
     public static boolean isclearing = false;
-    public static boolean isdialogeopend = false;
-    public static boolean uilocked =false;
-
     public static boolean nointernetconnection = false;
 
 
@@ -63,6 +60,7 @@ public class Var {
     public static Window splashscreen = null;
 
     public static ArrayList<Tab> ProjektTabs = new ArrayList<>();
+
 
 
 }

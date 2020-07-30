@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Frustum;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.ProgrammingSpace;
-import de.ft.interitus.Var;
+import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.CheckKollision;
@@ -55,7 +55,7 @@ public abstract class WireNode implements VisibleObjects {
 
         }
 
-        if (!Gdx.input.isButtonPressed(0) || Var.isdialogeopend) {
+        if (!Gdx.input.isButtonPressed(0) || UIVar.isdialogeopend) {
             gemerkt = false;
         }
 

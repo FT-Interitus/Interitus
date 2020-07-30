@@ -1,9 +1,9 @@
 package de.ft.interitus.UI.editor;
 
 import com.badlogic.gdx.ApplicationListener;
+import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.window.CreateWindow;
 import de.ft.interitus.UI.window.Window;
-import de.ft.interitus.Var;
 
 public class Editor {
     public static void open() {
@@ -21,8 +21,8 @@ public class Editor {
 
             @Override
             public void render() {
-                Var.isdialogeopend = true;
-                Var.uilocked = true;
+                UIVar.isdialogeopend = true;
+                UIVar.uilocked = true;
             }
 
             @Override
@@ -37,8 +37,8 @@ public class Editor {
 
             @Override
             public void dispose() {
-                Var.isdialogeopend = false;
-                Var.uilocked = false;
+                UIVar.isdialogeopend = false;
+                UIVar.uilocked = false;
             }
         });
 

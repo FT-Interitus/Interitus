@@ -14,10 +14,10 @@ import com.kotcrab.vis.ui.widget.VisTextButton;
 import com.kotcrab.vis.ui.widget.VisWindow;
 import de.ft.interitus.Block.Devices;
 import de.ft.interitus.UI.UI;
+import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.setup.steps.ArduinoSteps.Step3;
 import de.ft.interitus.UI.setup.steps.generalSteps.Step1;
 import de.ft.interitus.UI.setup.steps.generalSteps.Step2;
-import de.ft.interitus.Var;
 import de.ft.interitus.datamanager.programmdata.VerbindungsSpeicher;
 
 import java.util.Timer;
@@ -70,7 +70,7 @@ public class SetupWindow {
             setupBuilder.pack();
         }
 
-        Var.isdialogeopend = true;
+        UIVar.isdialogeopend = true;
 
         UI.stage.addActor(setupBuilder);
     }
@@ -119,14 +119,14 @@ public class SetupWindow {
 
                 @Override
                 public void run() {
-                    if (Var.isdialogeopend && !SetupWindow.isopend()) {
-                        Var.isdialogeopend = false;
+                    if (UIVar.isdialogeopend && !SetupWindow.isopend()) {
+                        UIVar.isdialogeopend = false;
 
                         this.cancel();
                     }
 
-                    if (!Var.isdialogeopend && SetupWindow.isopend()) {
-                        Var.isdialogeopend = true;
+                    if (!UIVar.isdialogeopend && SetupWindow.isopend()) {
+                        UIVar.isdialogeopend = true;
                     }
                 }
             }, 0, 100);

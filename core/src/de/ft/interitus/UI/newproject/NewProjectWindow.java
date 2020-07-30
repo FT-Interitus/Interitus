@@ -12,6 +12,7 @@ import com.kotcrab.vis.ui.widget.*;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.MenuBar;
 import de.ft.interitus.UI.UI;
+import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.Var;
 import de.ft.interitus.projecttypes.ProjectManager;
@@ -74,7 +75,7 @@ public class NewProjectWindow {
             setupBuilder.pack();
         }
 
-        Var.isdialogeopend = true;
+        UIVar.isdialogeopend = true;
 
         UI.stage.addActor(setupBuilder);
 
@@ -145,7 +146,7 @@ public class NewProjectWindow {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
 
-                    Var.isdialogeopend = false;
+                    UIVar.isdialogeopend = false;
                     setupBuilder.close();
                 }
             });
@@ -163,7 +164,7 @@ public class NewProjectWindow {
 
 
                     BlockTappedBar.init();
-                    Var.isdialogeopend = false;
+                    UIVar.isdialogeopend = false;
                     // ClearActOpenProgramm.clear();
 
 
@@ -180,14 +181,14 @@ public class NewProjectWindow {
 
                 @Override
                 public void run() {
-                    if (Var.isdialogeopend && !NewProjectWindow.isopend()) {
-                        Var.isdialogeopend = false;
+                    if (UIVar.isdialogeopend && !NewProjectWindow.isopend()) {
+                        UIVar.isdialogeopend = false;
 
                         this.cancel();
                     }
 
-                    if (!Var.isdialogeopend && NewProjectWindow.isopend()) {
-                        Var.isdialogeopend = true;
+                    if (!UIVar.isdialogeopend && NewProjectWindow.isopend()) {
+                        UIVar.isdialogeopend = true;
                     }
                 }
             }, 0, 100);

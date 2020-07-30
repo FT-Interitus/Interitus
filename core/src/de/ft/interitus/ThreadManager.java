@@ -3,6 +3,7 @@ package de.ft.interitus;
 import com.badlogic.gdx.math.Frustum;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.BlockUpdate;
+import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.projecttypes.ProjectManager;
 
 import java.util.Timer;
@@ -38,7 +39,7 @@ public class ThreadManager {
                     @Override
                     public void run() {
 
-                        if (!Var.isdialogeopend) {
+                        if (!UIVar.isdialogeopend) {
 
                             try {
                                 camfr = ProgrammingSpace.cam.frustum;

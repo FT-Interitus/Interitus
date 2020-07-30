@@ -1,7 +1,7 @@
 package de.ft.interitus.UI.popup;
 
 import com.badlogic.gdx.Gdx;
-import de.ft.interitus.Var;
+import de.ft.interitus.UI.UIVar;
 
 import java.util.ArrayList;
 
@@ -36,7 +36,7 @@ public class PopupManager {
 
     public void draw() {
         if (Gdx.input.isButtonPressed(1)) {
-            if (!Var.isdialogeopend) {
+            if (!UIVar.isdialogeopend) {
                 for (int i = 0; i < popups.size(); i++) {
                     if (popups.get(i) != popups.get(possiblepopup)) {
                         popups.get(i).setShow(false);

@@ -1,7 +1,6 @@
 package de.ft.interitus.UI;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
@@ -81,7 +80,7 @@ public class UI {
     static boolean isuilock = false;
 
     public static void updatedragui(ShapeRenderer renderer, boolean flaeche, SpriteBatch batch) {
-        if(!Var.uilocked) {
+        if(!UIVar.uilocked) {
             BlockTappedBar.userresize();
         }
         // Var.w=Gdx.graphics.getWidth();
@@ -123,6 +122,18 @@ public class UI {
             }
             textFielder.clear();
         }
+
+/**
+ * If you move the Cursor in a TextField the program should not move itself
+ */
+        var lock = false;
+        for (VisTextField visTextField : textFielder) {
+            if (visTextField.hasKeyboardFocus()) {
+                lock = true;
+            }
+        }
+        UIVar.moveprogrammlock = lock;
+
 
 
         if (markedblock != null && markedblock.getBlocktype().getBlockParameter() != null&&markedblock==ProjectManager.getActProjectVar().markedblock) {
@@ -391,10 +402,10 @@ public class UI {
         tabbar.setBounds(UIVar.abstandvonRand, UIVar.programmflaeche_h + UIVar.programmflaeche_y, 300, 20);
         tabbar.draw();
 
-        if(Var.uilocked!=isuilock) {
-            isuilock = Var.uilocked;
+        if(UIVar.uilocked!=isuilock) {
+            isuilock = UIVar.uilocked;
 
-            if(Var.uilocked) {
+            if(UIVar.uilocked) {
                 if(InputManager.contains(stage)) {
                     InputManager.remove(stage);
                 }
@@ -410,7 +421,7 @@ public class UI {
 
 
 
-        if(!Var.uilocked) {
+        if(!UIVar.uilocked) {
             stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 60f));
         }
 

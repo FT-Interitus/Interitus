@@ -31,7 +31,7 @@ public class UIVar {
     public static boolean isBlockSettingsopen=false;
 
 
-
-
-
+    public static boolean isdialogeopend = false;
+    public static boolean uilocked =false;
+    public static boolean moveprogrammlock = false; //To not move the Programm when you Move the Cursor in a Textfield
 }

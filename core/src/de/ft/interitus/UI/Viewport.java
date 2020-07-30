@@ -7,7 +7,6 @@ import com.badlogic.gdx.input.GestureDetector;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.UIElements.check.InputManager;
-import de.ft.interitus.Var;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.block.BlockKillMovingWiresEvent;
 import de.ft.interitus.events.global.GlobalEventAdapter;
@@ -37,7 +36,7 @@ public class Viewport {
             @Override
             public boolean scrolled(int amount) {
 
-                if(!  Var.isdialogeopend) {
+                if(!  UIVar.isdialogeopend) {
 
                     if (input.isKeyPressed(Input.Keys.CONTROL_LEFT) || input.isKeyPressed(Input.Keys.CONTROL_RIGHT)) {
                         if (amount == -1) {
@@ -65,7 +64,7 @@ public class Viewport {
         InputManager.addProcessor(new GestureDetector(new GestureDetector.GestureAdapter() {
             @Override
             public boolean pan(float x, float y, float deltaX, float deltaY) {
-                if(!  Var.isdialogeopend) {
+                if(!  UIVar.isdialogeopend) {
 
                     if (input.isButtonPressed(Input.Buttons.MIDDLE)) {
                         ProgrammingSpace.cam.position.x -= deltaX;
@@ -95,7 +94,7 @@ public class Viewport {
     }
 
     public static void update(float delta) {
-        if(!  Var.isdialogeopend) {
+        if(!  UIVar.isdialogeopend&&!UIVar.moveprogrammlock) {
 
             if (input.isKeyPressed(Input.Keys.LEFT)) {
                 if (!run_left) {

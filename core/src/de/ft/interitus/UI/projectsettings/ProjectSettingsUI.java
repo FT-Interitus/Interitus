@@ -14,6 +14,7 @@ import com.kotcrab.vis.ui.building.utilities.Padding;
 import com.kotcrab.vis.ui.building.utilities.layouts.ActorLayout;
 import com.kotcrab.vis.ui.widget.*;
 import de.ft.interitus.UI.UI;
+import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.projectsettings.subitems.Informations;
 import de.ft.interitus.UI.projectsettings.subitems.Settings;
 import de.ft.interitus.Var;
@@ -55,7 +56,7 @@ public class ProjectSettingsUI extends VisWindow {
         Informations.add(container);
 
         testBuilder = new TestBuilder("Projekt-Einstellungen", new StandardTableBuilder(padding));
-        Var.isdialogeopend = true;
+        UIVar.isdialogeopend = true;
 
         UI.stage.addActor(testBuilder);
 
@@ -175,14 +176,14 @@ public class ProjectSettingsUI extends VisWindow {
 
                 @Override
                 public void run() {
-                    if (Var.isdialogeopend && !isopend()) {
-                        Var.isdialogeopend = false;
+                    if (UIVar.isdialogeopend && !isopend()) {
+                        UIVar.isdialogeopend = false;
                         Var.disableshortcuts = false;
                         this.cancel();
                     }
 
-                    if (!Var.isdialogeopend && isopend()) {
-                        Var.isdialogeopend = true;
+                    if (!UIVar.isdialogeopend && isopend()) {
+                        UIVar.isdialogeopend = true;
                     }
                 }
             }, 0, 100);
@@ -192,7 +193,7 @@ public class ProjectSettingsUI extends VisWindow {
 
         public boolean testopen() {
             if (!super.getParent().isVisible()) {
-                Var.isdialogeopend = false;
+                UIVar.isdialogeopend = false;
                 Var.disableshortcuts = false;
                 this.removeListener(listener);
             }

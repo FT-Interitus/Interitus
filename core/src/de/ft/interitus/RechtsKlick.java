@@ -2,6 +2,7 @@ package de.ft.interitus;
 
 import com.badlogic.gdx.Gdx;
 import de.ft.interitus.UI.UIElements.check.Check;
+import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.popup.PopupManager;
 import de.ft.interitus.UI.popup.PopupMenue;
 import de.ft.interitus.projecttypes.ProjectManager;
@@ -22,7 +23,7 @@ public class RechtsKlick {
     public static void Rechtsklickupdate() {
 
 
-        if (!Var.isdialogeopend) {
+        if (!UIVar.isdialogeopend) {
 
             if (Gdx.input.isButtonPressed(1)) {
                 for (int i = 0; i < ProjectManager.getActProjectVar().visibleblocks.size(); i++) {

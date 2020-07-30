@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.check.Check;
-import de.ft.interitus.Var;
+import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.utils.RoundRectangle;
 import de.ft.interitus.utils.animation.Animation;
 
@@ -64,7 +64,7 @@ public class Button {
 
     public boolean isjustPressed() {
         boolean pressed = false;
-        if (!disable && !Var.isdialogeopend) {
+        if (!disable && !UIVar.isdialogeopend) {
 
             pressed = check.isjustPressed(x, y, w, h);
 
@@ -77,9 +77,9 @@ public class Button {
     }
 
     public boolean isjustPressednormal() {
-        if(!Var.uilocked||this.isIgnore_uilock()) {
+        if(!UIVar.uilocked||this.isIgnore_uilock()) {
             boolean pressed = false;
-            if (!disable && !Var.isdialogeopend) {
+            if (!disable && !UIVar.isdialogeopend) {
 
                 pressed = check.isJustPressedNormal(x, y, w, h);
 
@@ -95,7 +95,7 @@ public class Button {
 
 
     public boolean isPresseded() {
-        if(!Var.uilocked||this.isIgnore_uilock()) {
+        if(!UIVar.uilocked||this.isIgnore_uilock()) {
             if (!disable) {
 
                 return check.isPressed(x, y, w, h);
@@ -110,9 +110,9 @@ public class Button {
 
     public boolean isMouseover() {
 
-        if(!Var.uilocked||this.isIgnore_uilock()) {
+        if(!UIVar.uilocked||this.isIgnore_uilock()) {
 
-            if (Var.isdialogeopend) {
+            if (UIVar.isdialogeopend) {
                 return false;
             } else {
                 if (!disable) {

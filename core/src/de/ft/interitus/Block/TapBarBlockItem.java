@@ -8,7 +8,6 @@ import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.check.Check;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.tappedbar.TapItem;
-import de.ft.interitus.Var;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 
@@ -30,7 +29,7 @@ public class TapBarBlockItem implements TapItem {
     @Override
     public void draw() {
 
-        if (!Var.isdialogeopend) {
+        if (!UIVar.isdialogeopend) {
             if (check.isJustPressedNormal(x, y, w, h)) {
 
                 Block tempblock = ProjectManager.getActProjectVar().projectType.getBlockGenerator().generateBlock(ProjectManager.getActProjectVar().blocks.size(), (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y, psb.getWidth(), UIVar.BlockHeight, psb, ProjectManager.getActProjectVar().projectType.getBlockUpdateGenerator(), ProjectManager.getActProjectVar().projectType.getBlocktoSaveGenerator());

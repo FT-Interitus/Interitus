@@ -3,7 +3,6 @@ package de.ft.interitus.Block;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Cursor;
-import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.DisplayErrors;
@@ -16,7 +15,6 @@ import de.ft.interitus.Var;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.CheckKollision;
-import de.ft.interitus.utils.Unproject;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -74,7 +72,7 @@ public abstract class BlockUpdate extends Thread {
                     this.cancel();
                 }
 
-                if (!Var.isdialogeopend) {
+                if (!UIVar.isdialogeopend) {
 
                     try {
 
