@@ -371,11 +371,7 @@ public class UI {
 
 
         runselection=new DropDownMenue(100,100,new Color(94f/255f,96f/255f,96f/255f,1),Settings.theme.ClearColor());
-        runselection.addelement(new DropDownElement(AssetLoader.WaitBlock_smallimage,"ArduinoLauncher"));
-        runselection.addelement(new DropDownElement(AssetLoader.WaitBlock_smallimage,"Element_1"));
-        runselection.addelement(new DropDownElement(AssetLoader.WaitBlock_smallimage,"Element_2"));
-        runselection.addelement(new DropDownElement(AssetLoader.WaitBlock_smallimage,"Element_3"));
-        runselection.addelement(new DropDownElement(AssetLoader.WaitBlock_smallimage,"Element_4"));
+
 
 
 

@@ -104,6 +104,10 @@ public class AssetLoader {
     public static Texture img_debugstart_mouseover;
     public static Texture img_debugstart_pressed;
 
+    public static Texture img_editor;
+    public static Texture img_editor_mouseover;
+    public static Texture img_editor_pressed;
+
     public static Texture waitforfinishbuild;
     
     ///////////////////////////-BlockParameter Bilder-/////////////////////////////
