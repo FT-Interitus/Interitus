@@ -70,7 +70,7 @@ public class UI {
     protected static MenuItem redo;
     protected static MenuItem copy;
     protected static MenuItem paste;
-    protected static MenuBar menuBar;
+     public static MenuBar menuBar;
     static ArrayList<VisTextField> textFielder = new ArrayList<>();
     private static boolean issettingsuiopend = false;
     private static boolean issetupuiopend = false;
