@@ -1,6 +1,7 @@
 package de.ft.interitus.projecttypes;
 
 import de.ft.interitus.Block.Generators.*;
+import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.compiler.Compiler;
 import de.ft.interitus.events.plugin.store.PluginStoreEventManager;
 import de.ft.interitus.plugin.Plugin;
@@ -116,6 +117,22 @@ public class ProjectTypes {
 
   public void initProject() {
         projectCreator.create();
+  }
+
+  public void update() {
+        try {
+
+            projectCreator.update();
+
+        }catch (Throwable e) {
+
+            DisplayErrors.customErrorstring="Fehler im ProjectTyp";
+            DisplayErrors.error = e;
+
+            e.printStackTrace();
+        }
+
+
   }
 
     public Compiler getCompiler() {

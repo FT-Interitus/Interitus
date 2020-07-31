@@ -13,4 +13,9 @@ public class ArduinoCreator implements ProjectCreator {
         ProjectManager.getActProjectVar().blocks.add(ProjectManager.getActProjectVar().projectType.getBlockGenerator().generateBlock(0,UIVar.abstandvonRand+20, UIVar.programmflaeche_h+UIVar.untenhohe-70- UIVar.buttonbarzeile_h- 250,ProjectManager.getActProjectVar().projectType.getProjectblocks().get(1).getWidth(),UIVar.BlockHeight,ProjectManager.getActProjectVar().projectType.getProjectblocks().get(1),ProjectManager.getActProjectVar().projectType.getBlockUpdateGenerator(),ProjectManager.getActProjectVar().projectType.getBlocktoSaveGenerator()));
 
     }
+
+    @Override
+    public void update() {
+
+    }
 }

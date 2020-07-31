@@ -63,38 +63,7 @@ public class ReadStorePlugins {
     }
 
 
-    /***
-     * @deprecated every entry will be loaded by the first loader Methode now without the images
-     * @return
-     */
-    public static int loadmore() {
-        JSONObject jsonObject = new JSONObject(jsonfile);
-        int oldplugin = AssetLoader.storeimages.size();
-        int limit = AssetLoader.storeimages.size() + StorePluginsVar.loadinglimit;
-        for (int i = AssetLoader.storeimages.size(); i < limit; i++) {
-            if (!jsonObject.has("plugin" + i)) {
 
-                break;
-            }
-        }
-
-        for (int i = oldplugin; i < limit; i++) {
-
-            int id = jsonObject.getJSONObject("plugin" + i).getInt("id");
-            String name = jsonObject.getJSONObject("plugin" + i).getString("name");
-            double version = jsonObject.getJSONObject("plugin" + i).getDouble("version");
-            String path = jsonObject.getJSONObject("plugin" + i).getString("path");
-            String description = jsonObject.getJSONObject("plugin" + i).getString("description");
-            String image = jsonObject.getJSONObject("plugin" + i).getString("image");
-            String detailed_description = jsonObject.getJSONObject("plugin" + i).getString("detailed_description");
-            StorePluginsVar.pluginEntries.add(new StorePluginEntry(id, name, version, path, description, image, detailed_description));
-        }
-
-
-        System.out.println("Plugin " + (AssetLoader.storeimages.size() - oldplugin));
-        return AssetLoader.storeimages.size() - oldplugin;
-
-    }
 
 
 }

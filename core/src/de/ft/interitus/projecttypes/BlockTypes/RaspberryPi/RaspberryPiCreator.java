@@ -7,4 +7,9 @@ public class RaspberryPiCreator implements ProjectCreator {
     public void create() {
 
     }
+
+    @Override
+    public void update() {
+
+    }
 }
