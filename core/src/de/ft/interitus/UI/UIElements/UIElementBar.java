@@ -6,30 +6,30 @@ import de.ft.interitus.UI.UIElements.UIElements.Button;
 import de.ft.interitus.UI.UIElements.UIElements.UIElement;
 import de.ft.interitus.utils.ArrayList;
 
-public class ButtonBar {
+public class UIElementBar {
     ArrayList<UIElement> buttons = new ArrayList<>();
     int x, y,  button_h;
     int button_abstand = 3;
 
-    public ButtonBar() {
+    public UIElementBar() {
     }
 
-    public ButtonBar(int x, int y, int button_h, Button... buttons) {
+    public UIElementBar(int x, int y, int button_h, UIElement... elemente) {
         this.x = x;
         this.y = y;
         this.button_h = button_h;
-        for (int i = 0; i < buttons.length; i++) {
-            this.buttons.add(buttons[i]);
+        for (int i = 0; i < elemente.length; i++) {
+            this.buttons.add(elemente[i]);
         }
     }
 
-    public void setButtons(int x, int y, int button_h, Button... buttons) {
+    public void setButtons(int x, int y, int button_h, UIElement... elements) {
         this.buttons.clear();
         this.x = x;
         this.y = y;
         this.button_h = button_h;
-        for (int i = 0; i < buttons.length; i++) {
-            this.buttons.add(buttons[i]);
+        for (int i = 0; i < elements.length; i++) {
+            this.buttons.add(elements[i]);
         }
     }
 
