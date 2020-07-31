@@ -3,59 +3,65 @@ package de.ft.interitus.UI.UIElements;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import de.ft.interitus.UI.UIElements.UIElements.Button;
+import de.ft.interitus.UI.UIElements.UIElements.UIElement;
 import de.ft.interitus.utils.ArrayList;
 
 public class ButtonBar {
-    ArrayList<Button> buttons = new ArrayList<>();
-    int x, y, button_w, button_h;
+    ArrayList<UIElement> buttons = new ArrayList<>();
+    int x, y,  button_h;
     int button_abstand = 3;
 
     public ButtonBar() {
     }
 
-    public ButtonBar(int x, int y, int button_w, int button_h, Button... buttons) {
+    public ButtonBar(int x, int y, int button_h, Button... buttons) {
         this.x = x;
         this.y = y;
-        this.button_w = button_w;
         this.button_h = button_h;
         for (int i = 0; i < buttons.length; i++) {
             this.buttons.add(buttons[i]);
         }
     }
 
-    public void setButtons(int x, int y, int button_w, int button_h, Button... buttons) {
+    public void setButtons(int x, int y, int button_h, Button... buttons) {
         this.buttons.clear();
         this.x = x;
         this.y = y;
-        this.button_w = button_w;
         this.button_h = button_h;
         for (int i = 0; i < buttons.length; i++) {
             this.buttons.add(buttons[i]);
         }
     }
 
-    public void setButtons(int x, int y, int button_w, int button_h) {
+    public void setButtons(int x, int y, int button_h) {
         this.buttons.clear();
         this.x = x;
         this.y = y;
-        this.button_w = button_w;
         this.button_h = button_h;
 
     }
 
-    public void addButton(Button button) {
+    public void addButton(UIElement button) {
         buttons.add(button);
     }
 
-    public ArrayList<Button> getButtons() {
+    public ArrayList<UIElement> getButtons() {
         return buttons;
     }
 
     public void draw(SpriteBatch batch) {
-        for (int i = 0; i < this.buttons.size(); i++) {
-            Button akutalbutton = this.buttons.get(i);
+        /*for (int i = 0; i < this.buttons.size(); i++) {
+            UIElement akutalbutton = this.buttons.get(i);
             akutalbutton.setBounds(this.x - this.button_w - (this.button_w * i) - button_abstand * i, this.y, this.button_w, this.button_h);
             akutalbutton.draw();
+        }*/
+        int aktualXPosition=this.x;
+        for (int i = 0; i < this.buttons.size(); i++) {
+            aktualXPosition-=this.buttons.get(i).getW();
+            aktualXPosition-=button_abstand;
+            this.buttons.get(i).setBounds(aktualXPosition,this.y,this.buttons.get(i).getW(),button_h);
+            this.buttons.get(i).draw();
+
         }
     }
 
@@ -91,11 +97,5 @@ public class ButtonBar {
         this.button_h = button_h;
     }
 
-    public int getButton_w() {
-        return button_w;
-    }
 
-    public void setButton_w(int button_w) {
-        this.button_w = button_w;
-    }
 }

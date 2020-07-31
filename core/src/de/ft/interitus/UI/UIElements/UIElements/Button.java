@@ -10,7 +10,7 @@ import de.ft.interitus.UI.UIElements.check.Check;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.utils.animation.Animation;
 
-public class Button {
+public class Button implements UIElement{
     public static boolean disablepresscolorchange = false;
     //private final SpriteBatch batch = new SpriteBatch();
     private final ShapeRenderer s = new ShapeRenderer();

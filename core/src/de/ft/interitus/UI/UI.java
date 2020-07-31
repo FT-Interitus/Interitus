@@ -1,6 +1,7 @@
 package de.ft.interitus.UI;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
@@ -339,21 +340,25 @@ public class UI {
         button_debugstart.setImage(AssetLoader.img_debugstart);
         button_debugstart.setImage_mouseover(AssetLoader.img_debugstart_mouseover);
         button_debugstart.setImage_pressed(AssetLoader.img_debugstart_pressed);
+        button_debugstart.setW(20);
 
         button_projectstructus = new Button();
         button_projectstructus.setImage(AssetLoader.img_projectstructur);
         button_projectstructus.setImage_mouseover(AssetLoader.img_projectstructur_mouseover);
         button_projectstructus.setImage_pressed(AssetLoader.img_projectstructur_pressed);
+        button_projectstructus.setW(20);
 
         button_start = new Button();
         button_start.setImage(AssetLoader.img_startbutton);
         button_start.setImage_mouseover(AssetLoader.img_startbutton_mouseover);
         button_start.setImage_pressed(AssetLoader.img_startbutton_pressed);
+        button_start.setW(20);
 
         button_stop = new Button();
         button_stop.setImage(AssetLoader.img_stopbutton);
         button_stop.setImage_mouseover(AssetLoader.img_stopbutton_mouseover);
         button_stop.setImage_pressed(AssetLoader.img_stopbutton_pressed);
+        button_stop.setW(20);
 
         button_editor = new Button();
         button_editor.setImage(AssetLoader.img_stopbutton);
@@ -362,18 +367,24 @@ public class UI {
         button_editor.setIsworking(false);
         button_editor.setWorking_animation(new Animation(AssetLoader.waitforfinishbuild,60, 64,64,7));
         button_editor.getWorking_animation().startAnimation();
+        button_editor.setW(20);
 
-        buttonbar = new ButtonBar(0, 0, 20, 20);
+
+        runselection=new DropDownMenue(100,100,new Color(94f/255f,96f/255f,96f/255f,1),Settings.theme.ClearColor());
+
+
+        buttonbar = new ButtonBar(0, 0,  20);
         buttonbar.addButton(button_projectstructus);
         buttonbar.addButton(button_editor);
         buttonbar.addButton(button_stop);
         buttonbar.addButton(button_debugstart);
         buttonbar.addButton(button_start);
+        buttonbar.addButton(runselection);
+
 
 
         tabbar = new TabBar();
 
-        runselection=new DropDownMenue(100,100,new Color(1,0,0,1),new Color(0,1,0,1));
 
 
     }
