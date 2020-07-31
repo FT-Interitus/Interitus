@@ -1,7 +1,7 @@
 package de.ft.interitus.UI.tappedbar;
 
 import com.badlogic.gdx.graphics.Texture;
-import de.ft.interitus.UI.UIElements.Button;
+import de.ft.interitus.UI.UIElements.UIElements.Button;
 
 import de.ft.interitus.utils.ArrayList;
 

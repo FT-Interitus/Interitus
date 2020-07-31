@@ -2,6 +2,7 @@ package de.ft.interitus.UI.UIElements;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import de.ft.interitus.UI.UIElements.UIElements.Button;
 import de.ft.interitus.utils.ArrayList;
 
 public class ButtonBar {

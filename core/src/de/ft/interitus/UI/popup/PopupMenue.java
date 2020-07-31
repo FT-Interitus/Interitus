@@ -3,7 +3,7 @@ package de.ft.interitus.UI.popup;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import de.ft.interitus.UI.UIElements.Button;
+import de.ft.interitus.UI.UIElements.UIElements.Button;
 import de.ft.interitus.UI.UIElements.check.Check;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.rightclick.RightClickButtonSelectEvent;

@@ -4,7 +4,7 @@ package de.ft.interitus.Block;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import de.ft.interitus.utils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import de.ft.interitus.Block.Generators.BlockUpdateGenerator;
 import de.ft.interitus.Block.Generators.BlocktoSaveGenerator;
@@ -692,6 +692,7 @@ public abstract class Block implements VisibleObjects {
             batch.draw(this.getBlocktype().getDescriptionImage(), aktualX, this.getY() + this.getH() - 30 - 15, 30, 30);
             aktualX+=35;
             for(int i=0;i<this.getBlocktype().getBlockParameter().size();i++){
+                batch.draw(this.getBlocktype().getBlockParameter().get(i).getParameterTexture(),aktualX+5,this.getY()+30,20,20);
                 batch.draw(AssetLoader.Plug_ZahlParameter,aktualX,this.getY(),30,30);
                 font.getData().setScale(0.9f);
                 glyphLayout.setText(font, "" +  this.getBlocktype().getBlockParameter().get(i).getParameter());//TODO var type!!
