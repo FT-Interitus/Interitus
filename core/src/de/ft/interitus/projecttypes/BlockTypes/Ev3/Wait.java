@@ -11,7 +11,11 @@ import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 import java.awt.*;
 import de.ft.interitus.utils.ArrayList;
 
-public class Wait implements PlatformSpecificBlock, Ev3Block {
+public class Wait extends PlatformSpecificBlock implements Ev3Block {
+    public Wait(ProjectTypes projectTypes) {
+        super(projectTypes);
+    }
+
     @Override
     public ArrayList<Parameter> getBlockParameter() {
         return null;
@@ -67,15 +71,7 @@ public class Wait implements PlatformSpecificBlock, Ev3Block {
         return null;
     }
 
-    @Override
-    public int getID() {
-        return 0;
-    }
 
-    @Override
-    public ProjectTypes getProjectType() {
-        return null;
-    }
 
     @Override
     public int getWidth() {

@@ -13,18 +13,19 @@ import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
 import java.awt.*;
 import de.ft.interitus.utils.ArrayList;
 
-public class Wait implements PlatformSpecificBlock, ArduinoBlock {
+public class Wait extends PlatformSpecificBlock implements ArduinoBlock {
 
     ArrayList<Parameter> parameters = new ArrayList<>();
     Parameter waitdauer;
 
 
 
-    private final ProjectTypes type;
+
 
     public Wait(ProjectTypes arduino) {
+        super(arduino);
 
-        this.type = arduino;
+
         waitdauer=new Parameter(0, AssetLoader.img_WaitBlock_warteZeit_Parameter, "Warte-Zeit", "Die Zeit die abgewartet werden soll","ms");
 
 
@@ -89,23 +90,6 @@ public class Wait implements PlatformSpecificBlock, ArduinoBlock {
     }
 
 
-    @Override
-    public int getID() {
-        for(int i=0;i<ProjectTypesVar.projectTypes.get(ProjectTypesVar.projectTypes.indexOf(type)).getProjectblocks().size();i++) {
-
-            if(ProjectTypesVar.projectTypes.get(ProjectTypesVar.projectTypes.indexOf(type)).getProjectblocks().get(i).getClass()==this.getClass()) {
-
-                return i;
-            }
-
-        }
-
-        return -1;    }
-
-    @Override
-    public ProjectTypes getProjectType() {
-        return type;
-    }
 
     @Override
     public int getWidth() {

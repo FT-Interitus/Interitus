@@ -18,7 +18,7 @@ import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
 import java.awt.*;
 import de.ft.interitus.utils.ArrayList;
 
-public class SetPinMode implements PlatformSpecificBlock, ArduinoBlock {
+public class SetPinMode extends PlatformSpecificBlock implements ArduinoBlock {
 
     ArrayList<Parameter> parameters = new ArrayList<>();
     Parameter pin;
@@ -26,9 +26,10 @@ public class SetPinMode implements PlatformSpecificBlock, ArduinoBlock {
 
 
 
-    private final ProjectTypes type;
+
 
     public SetPinMode(ProjectTypes type) {
+        super(type);
 
 
         pin = new Parameter("", AssetLoader.Parameter_Pin,"Pin","",null);
@@ -37,7 +38,7 @@ public class SetPinMode implements PlatformSpecificBlock, ArduinoBlock {
 
         parameters.add(pin);
         parameters.add(mode);
-        this.type = type;
+
 
 
 
@@ -103,28 +104,14 @@ public class SetPinMode implements PlatformSpecificBlock, ArduinoBlock {
     }
 
 
-    @Override
-    public ProjectTypes getProjectType() {
-        return null;
-    }
+
 
     @Override
     public int getWidth() {
         return 150;
     }
 
-    @Override
-    public int getID() {
-        for(int i = 0; i< ProjectTypesVar.projectTypes.get(ProjectTypesVar.projectTypes.indexOf(type)).getProjectblocks().size(); i++) {
 
-            if(ProjectTypesVar.projectTypes.get(ProjectTypesVar.projectTypes.indexOf(type)).getProjectblocks().get(i).getClass()==this.getClass()) {
-
-                return i;
-            }
-
-        }
-
-        return -1;    }
 
     @Override
     public boolean canbedeleted() {

@@ -13,10 +13,11 @@ import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
 import java.awt.*;
 import de.ft.interitus.utils.ArrayList;
 
-public class WhileLoopEnd implements PlatformSpecificBlock, ArduinoBlock {
-    ProjectTypes type;
+public class WhileLoopEnd extends PlatformSpecificBlock implements ArduinoBlock {
+
     public WhileLoopEnd(ProjectTypes arduino) {
-        this.type = arduino;
+        super(arduino);
+
 
     }
 
@@ -75,23 +76,7 @@ public class WhileLoopEnd implements PlatformSpecificBlock, ArduinoBlock {
         return null;
     }
 
-    @Override
-    public int getID() {
-        for(int i=0;i<ProjectTypesVar.projectTypes.get(ProjectTypesVar.projectTypes.indexOf(type)).getProjectblocks().size();i++) {
 
-            if(ProjectTypesVar.projectTypes.get(ProjectTypesVar.projectTypes.indexOf(type)).getProjectblocks().get(i).getClass()==this.getClass()) {
-
-                return i;
-            }
-
-        }
-
-        return -1;    }
-
-    @Override
-    public ProjectTypes getProjectType() {
-        return this.type;
-    }
 
     @Override
     public int getWidth() {
