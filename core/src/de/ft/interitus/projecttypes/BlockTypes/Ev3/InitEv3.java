@@ -15,6 +15,6 @@ public class InitEv3 {
     public static ProjectTypes init() {
 
         platformSpecificBlocks.add(new Wait());
-        return new ProjectTypes(ProgrammingSpace.nativ, new Ev3(), "Ev3-Projekt", platformSpecificBlocks, new DefaultBlockGenerator(), new DefaultBlockUpdateGenerator(), new DefaultWireGenerator(), new DefaultWireNodeGenerator(), new DefaultSaveBlockGenerator(), new DefaultBlockVarGenerator(), new EV3Creator(),null);
+        return new ProjectTypes(ProgrammingSpace.nativ, new Ev3(), "Ev3-Projekt", platformSpecificBlocks, new DefaultBlockGenerator(), new DefaultBlockUpdateGenerator(), new DefaultWireGenerator(), new DefaultWireNodeGenerator(), new DefaultSaveBlockGenerator(), new DefaultBlockVarGenerator(), new EV3Funktions(),null);
     }
 }

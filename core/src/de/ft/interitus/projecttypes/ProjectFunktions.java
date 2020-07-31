@@ -1,6 +1,6 @@
 package de.ft.interitus.projecttypes;
 
-public interface ProjectCreator {
+public interface ProjectFunktions {
     void create();
     void update();
 }

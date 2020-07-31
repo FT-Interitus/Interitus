@@ -19,7 +19,7 @@ import de.ft.interitus.utils.ArrayList;
 
 public class InitArduino {
     static ArrayList<PlatformSpecificBlock> blocks = new ArrayList<>();
-    static ProjectTypes arduino = new ProjectTypes(ProgrammingSpace.nativ, new Arduino(), "Arduino-Projekt", blocks, new DefaultBlockGenerator(), new DefaultBlockUpdateGenerator(), new DefaultWireGenerator(), new DefaultWireNodeGenerator(), new DefaultSaveBlockGenerator(), new DefaultBlockVarGenerator(),new ArduinoCreator(),new ArduinoCompiler());
+    static ProjectTypes arduino = new ProjectTypes(ProgrammingSpace.nativ, new Arduino(), "Arduino-Projekt", blocks, new DefaultBlockGenerator(), new DefaultBlockUpdateGenerator(), new DefaultWireGenerator(), new DefaultWireNodeGenerator(), new DefaultSaveBlockGenerator(), new DefaultBlockVarGenerator(),new ArduinoFunktions(),new ArduinoCompiler());
 
 
     public static ProjectTypes init() {

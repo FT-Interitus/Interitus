@@ -3,7 +3,6 @@ package de.ft.interitus.projecttypes;
 import de.ft.interitus.Block.Generators.*;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.compiler.Compiler;
-import de.ft.interitus.events.plugin.store.PluginStoreEventManager;
 import de.ft.interitus.plugin.Plugin;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 
@@ -20,10 +19,10 @@ public class ProjectTypes {
     private WireGenerator wireGenerator;
     private WireNodeGenerator wireNodeGenerator;
     private BlocktoSaveGenerator blocktoSaveGenerator;
-    private ProjectCreator projectCreator;
+    private ProjectFunktions projectFunktions;
     private Compiler compiler;
 
-    public ProjectTypes(Plugin pluginRegister, ProgrammableObjekt PO, String name, ArrayList<PlatformSpecificBlock> blocks, BlockGenerator blockgenerator, BlockUpdateGenerator updategenerator, WireGenerator wireGenerator, WireNodeGenerator wireNodeGenerator, BlocktoSaveGenerator blocktoSaveGenerator, BlockVarGenerator blockVarGenerator, ProjectCreator projectCreator, Compiler compiler) {
+    public ProjectTypes(Plugin pluginRegister, ProgrammableObjekt PO, String name, ArrayList<PlatformSpecificBlock> blocks, BlockGenerator blockgenerator, BlockUpdateGenerator updategenerator, WireGenerator wireGenerator, WireNodeGenerator wireNodeGenerator, BlocktoSaveGenerator blocktoSaveGenerator, BlockVarGenerator blockVarGenerator, ProjectFunktions projectFunktions, Compiler compiler) {
         this.projectblocks = blocks;
         this.PO = PO;
         this.name = name;
@@ -34,7 +33,7 @@ public class ProjectTypes {
         this.blocktoSaveGenerator = blocktoSaveGenerator;
         this.pluginRegister = pluginRegister;
         this.blockVarGenerator = blockVarGenerator;
-        this.projectCreator = projectCreator;
+        this.projectFunktions = projectFunktions;
         this.compiler = compiler;
     }
 
@@ -116,13 +115,13 @@ public class ProjectTypes {
 
 
   public void initProject() {
-        projectCreator.create();
+        projectFunktions.create();
   }
 
   public void update() {
         try {
 
-            projectCreator.update();
+            projectFunktions.update();
 
         }catch (Throwable e) {
 

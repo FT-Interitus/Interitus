@@ -1,10 +1,11 @@
 package de.ft.interitus.projecttypes.BlockTypes.Arduino;
 
+import de.ft.interitus.Programm;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.projecttypes.ProjectManager;
-import de.ft.interitus.projecttypes.ProjectCreator;
+import de.ft.interitus.projecttypes.ProjectFunktions;
 
-public class ArduinoCreator implements ProjectCreator {
+public class ArduinoFunktions implements ProjectFunktions {
 
     @Override
     public void create() {

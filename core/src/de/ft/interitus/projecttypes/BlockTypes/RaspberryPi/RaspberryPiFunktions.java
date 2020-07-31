@@ -1,8 +1,8 @@
 package de.ft.interitus.projecttypes.BlockTypes.RaspberryPi;
 
-import de.ft.interitus.projecttypes.ProjectCreator;
+import de.ft.interitus.projecttypes.ProjectFunktions;
 
-public class RaspberryPiCreator implements ProjectCreator {
+public class RaspberryPiFunktions implements ProjectFunktions {
     @Override
     public void create() {
 
