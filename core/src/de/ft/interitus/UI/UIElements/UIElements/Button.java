@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.utils.ShapeRenderer;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.check.Check;
@@ -13,14 +15,14 @@ import de.ft.interitus.utils.animation.Animation;
 public class Button implements UIElement{
     public static boolean disablepresscolorchange = false;
     //private final SpriteBatch batch = new SpriteBatch();
-    private final ShapeRenderer s = new ShapeRenderer();
+
     private final GlyphLayout glyphLayout = new GlyphLayout();
     private final Check check = new Check();
     public float hovertransparancy = 0.8f;
     public boolean widthoverText = false;
     private boolean isworking = false;
     public int widthoverTextlinksrandabstand = 5;
-    BitmapFont font = new BitmapFont();
+
     private boolean ignore_uilock = false;
     private int x;
     private int y;
@@ -128,7 +130,7 @@ public class Button implements UIElement{
 
     public void draw() {
         if (text != null) {
-            glyphLayout.setText(font, this.text);
+            glyphLayout.setText(ProgrammingSpace.font, this.text);
             if (widthoverText) {
                 this.w = (int) glyphLayout.width + 2 * widthoverTextlinksrandabstand;
             }
@@ -138,9 +140,9 @@ public class Button implements UIElement{
         if (isVisible()) {
             if (image == null) {
 
-                s.begin(ShapeRenderer.ShapeType.Filled);
-                s.roundendrect(this.x, this.y, this.w, this.h, 5);
-                s.end();
+                ProgrammingSpace.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+                ProgrammingSpace.shapeRenderer.roundendrect(this.x, this.y, this.w, this.h, 5);
+                ProgrammingSpace.shapeRenderer.end();
             } else if (image_mouseover == null) {
                 UI.UIbatch.begin();
                 if (isMouseover()) {
@@ -194,7 +196,7 @@ public class Button implements UIElement{
             if (text != null) {
                 UI.UIbatch.begin();
                 UI.UIbatch.setColor(1, 1, 1, 1);
-                font.draw(UI.UIbatch, glyphLayout, x + widthoverTextlinksrandabstand, y + glyphLayout.height + h / 2 - glyphLayout.height / 2);
+                ProgrammingSpace.font.draw(UI.UIbatch, glyphLayout, x + widthoverTextlinksrandabstand, y + glyphLayout.height + h / 2 - glyphLayout.height / 2);
 
 
                 UI.UIbatch.end();

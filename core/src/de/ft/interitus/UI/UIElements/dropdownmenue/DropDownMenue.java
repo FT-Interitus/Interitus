@@ -139,4 +139,13 @@ public class DropDownMenue implements UIElement {
         }
 
     }
+
+    public ArrayList<DropDownElement> getElements() {
+        return elements;
+    }
+
+    public void clear() {
+        selectedElement = null;
+        elements.clear();
+    }
 }

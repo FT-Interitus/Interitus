@@ -83,6 +83,7 @@ public class ProgrammingSpace extends ScreenAdapter {
 
 
         Var.openprojects.add(ProjectTypesVar.projectTypes.get(0).init());
+        ProjectManager.change(0);
 
         UI.updatedragui(shapeRenderer, true, batch);
         ProjectManager.getActProjectVar().projectType.initProject();
@@ -282,7 +283,6 @@ public class ProgrammingSpace extends ScreenAdapter {
 
         }
 
-        ProjectManager.getActProjectVar().projectType.update();
 
 
 
