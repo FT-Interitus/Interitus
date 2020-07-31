@@ -2,6 +2,7 @@ package de.ft.interitus.compiler.Arduino;
 
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Programm;
+import de.ft.interitus.UI.UI;
 import de.ft.interitus.compiler.Compiler;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.projecttypes.ProjectManager;
@@ -30,15 +31,15 @@ public class ArduinoCompiler implements Compiler {
 
         JSONArray array = getBoards();
 
-        int board = 0;
+        JSONObject board = null;
 
         for(int i=0;i<array.length();i++) {
-           if(array.getJSONObject(i).has("boards")) {
-               board =i;
+           if(array.getJSONObject(i).getString("address").contains(((String) UI.runselection.getSelectedElement().getIdentifier()))) {
+               board =array.getJSONObject(i);
            }
         }
 
-        compileandrun(array.getJSONObject(board));
+        compileandrun(board);
 
         return true;
     }

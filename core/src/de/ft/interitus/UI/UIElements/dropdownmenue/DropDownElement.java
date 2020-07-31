@@ -7,10 +7,12 @@ public class DropDownElement {
     private Texture ElementImage;
     private String Text;
     Button button;
-    public DropDownElement(Texture elementImage, String text) {
+    private Object identifier;
+    public DropDownElement(Texture elementImage, String text,Object identifier) {
         ElementImage = elementImage;
         Text = text;
         button=new Button();
+        this.identifier = identifier;
         button.setVisible(false);
     }
 
@@ -32,5 +34,13 @@ public class DropDownElement {
 
     public void setText(String text) {
         Text = text;
+    }
+
+    public Object getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(Object identifier) {
+        this.identifier = identifier;
     }
 }
