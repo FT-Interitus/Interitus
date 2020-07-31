@@ -153,6 +153,8 @@ public class AssetLoader {
 
     public static Texture Plug_ZahlParameter;
 
+    public static Texture aufklapppfeil;
+
 
 
 
@@ -270,6 +272,8 @@ public class AssetLoader {
             manager.load(workingdirectory + "Block/Block_Wait/beschreibungsbild.png", Texture.class);
             manager.load(workingdirectory + "Block/Block_PinMode/beschreibungsbild.png", Texture.class);
             manager.load(workingdirectory + "Block/Block_DigitalWrite/beschreibungsbild.png", Texture.class);
+            manager.load(workingdirectory + "aufklapppfeil.png", Texture.class);
+
 
 
 
@@ -423,6 +427,8 @@ if(!Var.disablePluginSubSystem&&!Var.nointernetconnection) {
             WaitBlock_description_image = manager.get(workingdirectory + "Block/Block_Wait/beschreibungsbild.png", Texture.class);
             PinModeBlock_description_image = manager.get(workingdirectory + "Block/Block_PinMode/beschreibungsbild.png", Texture.class);
             DigitalWrite_description_image = manager.get(workingdirectory + "Block/Block_DigitalWrite/beschreibungsbild.png", Texture.class);
+            aufklapppfeil = manager.get(workingdirectory + "aufklapppfeil.png", Texture.class);
+
 
 
 
