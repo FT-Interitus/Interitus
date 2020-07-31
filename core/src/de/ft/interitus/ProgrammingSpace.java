@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import de.ft.interitus.utils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -17,19 +16,17 @@ import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.IntegerAuswahl;
 import de.ft.interitus.UI.UIElements.PressedKeys;
 import de.ft.interitus.UI.UIElements.Switch;
-import de.ft.interitus.UI.UIElements.TextField;
-import de.ft.interitus.UI.UIElements.dropdownmenue.DropDownMenue;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.settings.subitems.subitem17;
 import de.ft.interitus.UI.shortcut.shortcuts.BlockShortcuts;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.plugin.Configuration;
 import de.ft.interitus.plugin.Nativ;
 import de.ft.interitus.plugin.Plugin;
-import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
+import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.PositionSaver;
+import de.ft.interitus.utils.ShapeRenderer;
 import de.ft.interitus.utils.animation.Animation;
 
 import java.awt.*;
@@ -44,11 +41,8 @@ public class ProgrammingSpace extends ScreenAdapter {
 
     public static BitmapFont font;
     public static Switch s;
-    public static TextField textfieldtest;
-    public static int w = 0;
-    public static int h = 0;
-    public static Drawable d;
-    public static Animation testanim = new Animation(new Texture("ballfeueranimation.png"), 60, 100, 100, 3);
+
+
 
     public static long renderstarttime = 0;
     public static long rendertimediff = 0;
@@ -109,7 +103,7 @@ public class ProgrammingSpace extends ScreenAdapter {
 
 
 
-        textfieldtest = new TextField(500, 600, 100, 25);
+
 
 
         ThreadManager.init();
@@ -141,7 +135,7 @@ public class ProgrammingSpace extends ScreenAdapter {
 
         renderstarttime = System.currentTimeMillis();
 
-        if (ProjectManager.getActProjectVar().projectType == null) {
+        if (Var.openprojects.size()!=0 &&ProjectManager.getActProjectVar().projectType == null) {
             Programm.INSTANCE.setScreen(new Welcome());
         }
 
@@ -231,7 +225,7 @@ public class ProgrammingSpace extends ScreenAdapter {
 
 
                         batch.end();
-                    } catch (Exception e) {
+                    } catch (Exception ignored) {
 
                     }
                 }
@@ -252,12 +246,11 @@ public class ProgrammingSpace extends ScreenAdapter {
         if (Settings.theme.isdark()) {
             s.setBackground(AssetLoader.switch_background);
             s.setBackgroundgreen(AssetLoader.switch_background_green);
-            s.setInside(AssetLoader.switch_inside);
         } else {
             s.setBackground(AssetLoader.switch_background_white);
             s.setBackgroundgreen(AssetLoader.switch_background_green_white);
-            s.setInside(AssetLoader.switch_inside);
         }
+        s.setInside(AssetLoader.switch_inside);
 
         for (int i = 0; i < ProjectManager.getActProjectVar().visiblewires.size(); i++) {
             if (!Var.isloading) {
@@ -288,6 +281,9 @@ public class ProgrammingSpace extends ScreenAdapter {
             DisplayErrors.error = e;
 
         }
+
+        ProjectManager.getActProjectVar().projectType.update();
+
 
 
         //  testanim.startAnimation();
@@ -325,8 +321,7 @@ public class ProgrammingSpace extends ScreenAdapter {
         }
         viewport.update(width, height);
         UI.UIviewport.update(width, height);
-        w = width;
-        h = height;
+
 
 
     }

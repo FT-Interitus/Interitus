@@ -11,7 +11,7 @@ import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.check.Check;
 import de.ft.interitus.UI.UIElements.check.InputManager;
 
-public class TextField {
+public class TextField  {
 
     private static final GlyphLayout glyphLayout = new GlyphLayout();
     private final int x;
@@ -29,6 +29,18 @@ public class TextField {
     private boolean cursorstate = true;
     private long cursersave;
     private int TextAnordnung = 0;
+
+    /**
+     *
+     *
+     * @deprecated Use VisUI
+     *
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     */
+
 
     public TextField(int x, int y, int w, int h) {
         this.x = x;
