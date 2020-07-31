@@ -370,7 +370,7 @@ public class UI {
         button_editor.setW(20);
 
 
-        runselection=new DropDownMenue(100,100,new Color(94f/255f,96f/255f,96f/255f,1),Settings.theme.ClearColor());
+        runselection=new DropDownMenue(100,100,new Color(94f/255f,96f/255f,96f/255f,1),Settings.theme.ClearColor(),"");
 
 
 
@@ -471,7 +471,7 @@ public class UI {
                 @Override
                 public void run() {
 
-                    ProjectManager.getActProjectVar().projectType.getCompiler().compileandrun();
+                    ProjectManager.getActProjectVar().projectType.getCompiler().compileandrun(); //TODO if false there was an error
                 }
             };
 

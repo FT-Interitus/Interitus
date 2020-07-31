@@ -29,7 +29,7 @@ public class ProjectManager {
         ProjectManager.getActProjectVar().projectType.update();
 
     }
-    },0,10);
+    },0,1000);
 
 
 

@@ -16,6 +16,7 @@ import javax.swing.*;
 
 public class ArduinoFunktions implements ProjectFunktions {
 int counter = 0;
+String savedidentifier = "";
 
     @Override
     public void create() {
@@ -32,6 +33,9 @@ int counter = 0;
 
 
        JSONArray array = ArduinoCompiler.getBoards();
+       if(array==null) {
+           return;//TODO there was an error
+       }
 counter=0;
         for(int i=0;i<array.length();i++) {
             if(array.getJSONObject(i).has("boards")) {
@@ -42,15 +46,32 @@ counter++;
         }
 
 
+
+
         if(counter!=UI.runselection.getElements().size()) {
+            if(UI.runselection.getSelectedElement()!=null) {
+                savedidentifier = ((String) UI.runselection.getSelectedElement().getIdentifier());
+            }
+
             UI.runselection.clear();
 
             for(int i=0;i<array.length();i++) {
                 if(array.getJSONObject(i).has("boards")) {
-                    UI.runselection.addelement(new DropDownElement(AssetLoader.DigitalWrite_description_image,array.getJSONObject(i).getJSONArray("boards").getJSONObject(0).getString("name")));
 
+                    UI.runselection.addelement(new DropDownElement(AssetLoader.DigitalWrite_description_image,array.getJSONObject(i).getJSONArray("boards").getJSONObject(0).getString("name"),array.getJSONObject(i).getString("address")));
+                    if(array.getJSONObject(i).getString("address").contains(savedidentifier)) {
+                        UI.runselection.setSelectedElement(UI.runselection.getElements().get(UI.runselection.getElements().size()-1));
+                    }
                 }
             }
+            if(UI.runselection.getSelectedElement()==null&&UI.runselection.getElements().size()>0) {
+                UI.runselection.setSelectedElement(UI.runselection.getElements().get(0));
+            }
+
+            if(UI.runselection.getSelectedElement()==null) {
+                UI.runselection.setDefaultText("Bitte Gerät verbinden");
+            }
+
         }
 
 

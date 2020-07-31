@@ -2,11 +2,13 @@ package de.ft.interitus.compiler.Arduino;
 
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Programm;
+import de.ft.interitus.UI.UI;
 import de.ft.interitus.compiler.Compiler;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.BlockTypes.Arduino.ArduinoBlock;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
@@ -27,18 +29,22 @@ public class ArduinoCompiler implements Compiler {
     @Override
     public boolean compileandrun() {
 
-
+        UI.button_start.setDisable(true);
+        UI.button_debugstart.setDisable(true);
         JSONArray array = getBoards();
+        if(array==null) {
+            return false;        }
 
-        int board = 0;
+        JSONObject board = null;
 
         for(int i=0;i<array.length();i++) {
-           if(array.getJSONObject(i).has("boards")) {
-               board =i;
+           if(array.getJSONObject(i).getString("address").contains(((String) UI.runselection.getSelectedElement().getIdentifier()))) {
+               board =array.getJSONObject(i);
            }
         }
 
-        compileandrun(array.getJSONObject(board));
+
+        compileandrun(board);
 
         return true;
     }
@@ -139,7 +145,8 @@ public class ArduinoCompiler implements Compiler {
 
         new File(System.getProperty("user.home") + "/"+ Data.foldername+"/temp/"+folder+"/"+filename).delete();
 
-
+        UI.button_start.setDisable(false);
+        UI.button_debugstart.setDisable(false);
 
         return true;
     }
@@ -231,7 +238,7 @@ public class ArduinoCompiler implements Compiler {
 
                     break;
                 }else{
-                    Programm.logger.config(strCurrentLine);
+                  //  Programm.logger.config(strCurrentLine);
                      outputfromcli+=strCurrentLine;
                 }
             } catch (IOException e) {
@@ -288,8 +295,11 @@ return outputfromcli;
 
         runcommand(install_avr, false);
         runcommand(update_index, false);
-
-       return new JSONArray(runcommand(get_device, false));
+try {
+    return new JSONArray(runcommand(get_device, false));
+}catch (JSONException e){
+    return null;
+}
     }
 
 

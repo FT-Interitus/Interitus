@@ -26,15 +26,17 @@ public class DropDownMenue implements UIElement {
     DropDownElement selectedElement=null;
     GlyphLayout glyphLayout=new GlyphLayout();
     Button aufklappbutton;
+    String defaultText;
 
 
-    public DropDownMenue(int x, int y, Color bordercolor, Color fillColor) {
+    public DropDownMenue(int x, int y, Color bordercolor, Color fillColor,String defaultText) {
         this.x = x;
         this.y = y;
         this.bordercolor = bordercolor;
         this.fillColor = fillColor;
         aufklappbutton=new Button();
         aufklappbutton.setVisible(false);
+        this.defaultText = defaultText;
     }
 
     private void longestText(){
@@ -97,6 +99,10 @@ public class DropDownMenue implements UIElement {
                 UI.UIbatch.draw(selectedElement.getElementImage(),x+5,y+2,16,16);
                 UI.font.draw(UI.UIbatch, glyphLayout, x+16+10, y + h / 2 + glyphLayout.height / 2);
                 UI.UIbatch.draw(AssetLoader.aufklapppfeil, x+16+10+glyphLayout.width+5,y+5);
+            }else{
+                glyphLayout.setText(UI.font, defaultText);
+                this.w=(int)glyphLayout.width+16+20+10;
+                UI.font.draw(UI.UIbatch, glyphLayout, x+16+10, y + h / 2 + glyphLayout.height / 2);
             }
         UI.UIbatch.end();
 
@@ -147,5 +153,17 @@ public class DropDownMenue implements UIElement {
     public void clear() {
         selectedElement = null;
         elements.clear();
+    }
+
+    public void setSelectedElement(DropDownElement selectedElement) {
+        this.selectedElement = selectedElement;
+    }
+
+    public String getDefaultText() {
+        return defaultText;
+    }
+
+    public void setDefaultText(String defaultText) {
+        this.defaultText = defaultText;
     }
 }

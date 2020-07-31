@@ -78,7 +78,7 @@ public class ProgrammingSpace extends ScreenAdapter {
 
         batch = new SpriteBatch();
 
-        cam.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
+        cam.position.set(Gdx.graphics.getWidth() / 2+50, Gdx.graphics.getHeight() / 2, 0);
         UI.UIcam.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
 
 
