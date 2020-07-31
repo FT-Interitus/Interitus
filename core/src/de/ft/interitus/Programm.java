@@ -8,6 +8,8 @@ package de.ft.interitus;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Graphics;
+import com.badlogic.gdx.backends.lwjgl3.audio.OpenALAudioDevice;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import de.ft.interitus.Logging.DebugPrinter;
@@ -28,6 +30,8 @@ import de.ft.interitus.projecttypes.BlockTypes.Init;
 import de.ft.interitus.utils.FolderUtils;
 import de.ft.interitus.utils.NetworkScan;
 import de.ft.interitus.utils.UserNameGetter;
+import org.lwjgl.openal.AL;
+import org.lwjgl.openal.ALC;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -42,6 +46,7 @@ public class Programm extends Game {
     public static Logger logger = Logger.getLogger(Programm.class.getName());
 
 
+
     public Programm() {
 
 
@@ -52,8 +57,8 @@ public class Programm extends Game {
     public void create() {
 
 
-
         LoggerInit.init();
+
         DebugPrinter.detect();
 
 
@@ -68,6 +73,7 @@ public class Programm extends Game {
 
         Var.username = UserNameGetter.get();
 
+
         ThemeManager.register(); //Load all Themes
 
         Thread loadplugins = new Thread() {
@@ -78,10 +84,11 @@ public class Programm extends Game {
 
             }
         };
+
         VisUI.load(VisUI.SkinScale.X1);
         Programm.logger.config("Loaded Vis-UI");
 
-        EventVar.uiEventManager.UILoadEvent(new UILoadEvent(this));
+
 
         try {
             if (!Var.disablePluginSubSystem&&!Var.nointernetconnection) {
@@ -94,7 +101,7 @@ public class Programm extends Game {
             Var.nointernetconnection = true;
         }
 
-
+        EventVar.uiEventManager.UILoadEvent(new UILoadEvent(this));
 
 
         Init.initBlocks();
@@ -139,6 +146,8 @@ public class Programm extends Game {
                 Data.close();
             }
         }, 1000 * 60 * 15, 1000 * 60 * 15);
+
+
         setScreen(new Loading());
 
     }
@@ -159,7 +168,8 @@ public class Programm extends Game {
         }
 
 
-        // AL.destroy(); //Destroy Sound System //TODO lwjgl 3
+        //ALC.destroy();//Destroy Sound System todo lwjgl3
+
 
 
         System.exit(0);

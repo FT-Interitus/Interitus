@@ -17,7 +17,15 @@ public class ProjectManager {
         Programm.logger.config("changed tab");
     }
 
+    /***
+     *
+     * @return the opened ProjectsVar
+     */
     public static ProjectVar getActProjectVar() {
-        return Var.openprojects.get(Var.openprojectindex);
+        if(Var.openprojects.size()==0) {
+            return null;
+        }else {
+            return Var.openprojects.get(Var.openprojectindex);
+        }
     }
 }

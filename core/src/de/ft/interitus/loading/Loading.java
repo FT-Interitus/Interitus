@@ -41,7 +41,11 @@ public class Loading extends ScreenAdapter {
                     this.dispose();
                     EventVar.globalEventManager.loadingdone(new GlobalLoadingDoneEvent(this));
                     UI.initnachassetsloading();
+
+
+
                     Var.splashscreen.destroy();
+
                     Programm.INSTANCE.setScreen(new Welcome());
                     ((Lwjgl3Graphics) Gdx.graphics).getWindow().restoreWindow();
                     this.dispose();
