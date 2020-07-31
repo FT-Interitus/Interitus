@@ -1,10 +1,12 @@
 package de.ft.interitus.projecttypes;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.Wire;
 import de.ft.interitus.Block.WireNode;
 
+import de.ft.interitus.UI.UI;
 import de.ft.interitus.utils.ArrayList;
 
 public abstract class ProjectVar {
@@ -64,6 +66,7 @@ public abstract class ProjectVar {
 
     public ProjectVar() {
         currentstarttime = System.currentTimeMillis();
+        cam_pos.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
 
     }
 }

@@ -33,6 +33,9 @@ String savedidentifier = "";
 
 
        JSONArray array = ArduinoCompiler.getBoards();
+       if(array==null) {
+           return;//TODO there was an error
+       }
 counter=0;
         for(int i=0;i<array.length();i++) {
             if(array.getJSONObject(i).has("boards")) {

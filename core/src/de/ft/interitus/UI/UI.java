@@ -471,7 +471,7 @@ public class UI {
                 @Override
                 public void run() {
 
-                    ProjectManager.getActProjectVar().projectType.getCompiler().compileandrun();
+                    ProjectManager.getActProjectVar().projectType.getCompiler().compileandrun(); //TODO if false there was an error
                 }
             };
 
