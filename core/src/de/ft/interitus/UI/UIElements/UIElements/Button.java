@@ -1,14 +1,13 @@
-package de.ft.interitus.UI.UIElements;
+package de.ft.interitus.UI.UIElements.UIElements;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import de.ft.interitus.utils.ShapeRenderer;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.check.Check;
 import de.ft.interitus.UI.UIVar;
-import de.ft.interitus.utils.RoundRectangle;
 import de.ft.interitus.utils.animation.Animation;
 
 public class Button {
@@ -140,7 +139,7 @@ public class Button {
             if (image == null) {
 
                 s.begin(ShapeRenderer.ShapeType.Filled);
-                RoundRectangle.abgerundetesRechteck(s, this.x, this.y, this.w, this.h, 5);
+                s.roundendrect(this.x, this.y, this.w, this.h, 5);
                 s.end();
             } else if (image_mouseover == null) {
                 UI.UIbatch.begin();

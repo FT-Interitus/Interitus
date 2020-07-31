@@ -3,7 +3,8 @@ package de.ft.interitus.UI.UIElements;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import de.ft.interitus.UI.UIElements.UIElements.Button;
+import de.ft.interitus.utils.ShapeRenderer;
 
 public class IntegerAuswahl {
     private final SpriteBatch b = new SpriteBatch();
