@@ -84,6 +84,7 @@ public class UI {
     private static Block markedblock;
     private static int wishaniposition = -170 - UIVar.abstandvonRand;
     public static final ManualConfigUI MANUALCONFIG = new ManualConfigUI();
+    private static Thread compile_thread;
     boolean actiondone = false;
 
     public static void updatedragui(ShapeRenderer renderer, boolean flaeche, SpriteBatch batch) {
@@ -448,15 +449,16 @@ public class UI {
 
         //root.setPosition(0,0);
 
+        buttonbar.setX(Gdx.graphics.getWidth() - 10);
+        buttonbar.setY(UIVar.programmflaeche_y + UIVar.programmflaeche_h + UIVar.abstandvonRand);
+        buttonbar.draw();
 
         root.setPosition(UIcam.position.x - ((float) Gdx.graphics.getWidth()) / 2, UIcam.position.y - ((float) Gdx.graphics.getHeight()) / 2);
         stage.draw();
 
         recent.setSubMenu(createSubMenu(Data.filename.size(), GetStringArray(Data.filename)));
 
-        buttonbar.setX(Gdx.graphics.getWidth() - 10);
-        buttonbar.setY(UIVar.programmflaeche_y + UIVar.programmflaeche_h + UIVar.abstandvonRand);
-        buttonbar.draw(UIbatch);
+
 
 
         if (button_projectstructus.isjustPressednormal()) {
@@ -469,7 +471,7 @@ public class UI {
         if (UI.button_start.isjustPressednormal()) {
             //  UI.button_start.setDisable(true);
 
-            Thread compile_thread = new Thread() {
+             compile_thread = new Thread() {
                 @Override
                 public void run() {
 
@@ -480,6 +482,8 @@ public class UI {
             compile_thread.start();
 
         }
+
+
 
         if (UI.button_editor.isjustPressednormal()) {
 
@@ -497,7 +501,7 @@ public class UI {
     }
 
 
-    public static String[] GetStringArray(ArrayList<String> arr) {
+    private static String[] GetStringArray(ArrayList<String> arr) {
 
         // declaration and initialise String Array
         String[] str = new String[arr.size()];

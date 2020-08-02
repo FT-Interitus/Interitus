@@ -5,6 +5,7 @@ import de.ft.interitus.UI.Theme.Theme;
 
 public class WhiteMode implements Theme {
     public final static Color ProgrammSpace = new Color(1f, 1f, 1f, 1);
+    public final static Color popup = new Color(1f, 1f, 1f, 1);
     public final static Color BlockBarColor = new Color(1f, 1f, 1f, 1);
     public final static Color DeviceConnection = new Color(1f, 1f, 1f, 1);
     private final static Color clearColor = new Color(0.54f, 0.533f, 0.51f, 1);
@@ -44,6 +45,11 @@ public class WhiteMode implements Theme {
     @Override
     public Color WelcomeScreenFontColor() {
         return welcomeFont;
+    }
+
+    @Override
+    public Color PopUpColor() {
+        return popup;
     }
 
     @Override

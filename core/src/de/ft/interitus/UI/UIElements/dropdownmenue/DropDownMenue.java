@@ -3,6 +3,7 @@ package de.ft.interitus.UI.UIElements.dropdownmenue;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import de.ft.interitus.Settings;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.UIElements.Button;
 import de.ft.interitus.UI.UIElements.UIElements.UIElement;
@@ -41,10 +42,10 @@ public class DropDownMenue implements UIElement {
 
     private void longestText(){
 
-        for(int i=0;i<elements.size();i++){
-            glyphLayout.setText(UI.font,elements.get(i).getText());
-            if(glyphLayout.width>this.longestText){
-                this.longestText=(int)glyphLayout.width;
+        for (DropDownElement element : elements) {
+            glyphLayout.setText(UI.font, element.getText());
+            if (glyphLayout.width > this.longestText) {
+                this.longestText = (int) glyphLayout.width;
             }
         }
     }
@@ -92,17 +93,18 @@ public class DropDownMenue implements UIElement {
         ProgrammingSpace.shapeRenderer.roundendrect(x+1,y+1,w-2,h-2,radius);
         ProgrammingSpace.shapeRenderer.end();
         UI.UIbatch.begin();
+        UI.UIbatch.setColor(1,1,1,1);
 
             if(selectedElement!=null) {
                 glyphLayout.setText(UI.font, selectedElement.getText());
                 this.w=(int)glyphLayout.width+16+20+10;
                 UI.UIbatch.draw(selectedElement.getElementImage(),x+5,y+2,16,16);
-                UI.font.draw(UI.UIbatch, glyphLayout, x+16+10, y + h / 2 + glyphLayout.height / 2);
+                UI.font.draw(UI.UIbatch, glyphLayout, x+16+10, y + h / 2f + glyphLayout.height / 2);
                 UI.UIbatch.draw(AssetLoader.aufklapppfeil, x+16+10+glyphLayout.width+5,y+5);
             }else{
                 glyphLayout.setText(UI.font, defaultText);
                 this.w=(int)glyphLayout.width+16+20+10;
-                UI.font.draw(UI.UIbatch, glyphLayout, x+16+10, y + h / 2 + glyphLayout.height / 2);
+               UI.font.draw(UI.UIbatch, glyphLayout, x+16+10, y + h / 2f + glyphLayout.height / 2);
             }
         UI.UIbatch.end();
 
@@ -112,24 +114,24 @@ public class DropDownMenue implements UIElement {
             }
 
             if(opened){
-                DropDownElement aktualelement;
+                DropDownElement actualelement;
 
                 ProgrammingSpace.shapeRenderer.begin(com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType.Filled);
-                ProgrammingSpace.shapeRenderer.setColor(1,1,0,1);
+                ProgrammingSpace.shapeRenderer.setColor(Settings.theme.PopUpColor());
                 longestText();
                 ProgrammingSpace.shapeRenderer.rect(this.x,this.y-this.h*elements.size(),longestText+16+20+10,this.h*elements.size());
                 ProgrammingSpace.shapeRenderer.end();
 
                 for(int i=0;i<elements.size();i++){
-                    aktualelement=elements.get(i);
 
-                    int aktualY=this.y-this.h-(i*this.h);
+                    actualelement=elements.get(i);
+                    int actualY=this.y-this.h-(i*this.h);
                     UI.UIbatch.begin();
 
-                    glyphLayout.setText(UI.font, aktualelement.getText());
-                    UI.UIbatch.draw(aktualelement.getElementImage(),x+5,aktualY+2,16,16);
-                    UI.font.draw(UI.UIbatch, glyphLayout, x+16+10, aktualY + h / 2 + glyphLayout.height / 2);
-                    elements.get(i).getButton().setBounds(x,aktualY,longestText+16+20+10,h);
+                    glyphLayout.setText(UI.font, actualelement.getText());
+                    UI.UIbatch.draw(actualelement.getElementImage(),x+5,actualY+2,16,16);
+                    UI.font.draw(UI.UIbatch, glyphLayout, x+16+10, actualY + h / 2f + glyphLayout.height / 2);
+                    elements.get(i).getButton().setBounds(x,actualY,longestText+16+20+10,h);
                     if(elements.get(i).getButton().isPresseded()){
                         selectedElement=elements.get(i);
                     }

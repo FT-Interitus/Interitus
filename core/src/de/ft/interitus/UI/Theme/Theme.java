@@ -12,11 +12,13 @@ public interface Theme {
 
     Color DeviceConnectionColor();
 
-    Color ClearColor(); //TODO wird ersetzt
+    Color ClearColor();
 
     Color WelcomeScreenBackgroundColor(); //TODO wird erstezt durch Bild
 
     Color WelcomeScreenFontColor();
+
+    Color PopUpColor();
 
     boolean isdark();
 

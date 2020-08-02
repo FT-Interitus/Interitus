@@ -10,6 +10,7 @@ public class DarkMode implements Theme {
     private final static Color ProgrammSpace = new Color(43f / 255f, 43f / 255f, 43f / 255f, 1);
     private final static Color darkmode_blockbar = new Color(43f / 255f, 43f / 255f, 43f / 255f, 1);
     private final static Color connections = new Color(49f / 255f, 52f / 255f, 53f / 255f, 1);
+    private final static Color popups = new Color(49f / 255f, 52f / 255f, 53f / 255f, 1);
 
     @Override
     public Theme gettheme() {
@@ -44,6 +45,11 @@ public class DarkMode implements Theme {
     @Override
     public Color WelcomeScreenFontColor() {
         return welcomeFont;
+    }
+
+    @Override
+    public Color PopUpColor() {
+        return popups;
     }
 
     @Override

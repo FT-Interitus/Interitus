@@ -1,6 +1,6 @@
 package de.ft.interitus.plugin;
 
-public class Nativ implements Plugin {
+public class Native implements Plugin {
     @Override
     public boolean register() {
         return false;

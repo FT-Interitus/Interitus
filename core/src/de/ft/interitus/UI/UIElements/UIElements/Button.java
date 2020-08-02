@@ -161,6 +161,7 @@ public class Button implements UIElement{
                 UI.UIbatch.end();
             } else if (image_pressed == null) {
                 UI.UIbatch.begin();
+                UI.UIbatch.setColor(1, 1, 1, 1);
 
                 if (isMouseover()) {
                     UI.UIbatch.draw(image_mouseover, this.x, this.y, this.w, this.h, 0, 0, image.getWidth(), image.getHeight(), this.flipX, this.flipY);
@@ -177,6 +178,8 @@ public class Button implements UIElement{
                 if(!isworking) {
                     if (isDisable()) {
                         UI.UIbatch.setColor(1, 1, 1, 0.3f);
+                    }else{
+                        UI.UIbatch.setColor(1, 1, 1, 1);
                     }
 
 
@@ -189,6 +192,7 @@ public class Button implements UIElement{
                         UI.UIbatch.draw(image_pressed, this.x, this.y, this.w, this.h, 0, 0, image.getWidth(), image.getHeight(), this.flipX, this.flipY);
                     }
                 }else {
+                    UI.UIbatch.setColor(1, 1, 1, 1);
                     UI.UIbatch.draw(this.working_animation.getAnimation(),x,y,w,h);
                 }
                 UI.UIbatch.end();

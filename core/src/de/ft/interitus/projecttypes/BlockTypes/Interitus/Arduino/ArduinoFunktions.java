@@ -3,9 +3,13 @@ package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Align;
+import com.kotcrab.vis.ui.util.dialog.Dialogs;
+import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisTable;
 import com.kotcrab.vis.ui.widget.VisTextField;
 import de.ft.interitus.UI.ManualConfig.DeviceConfiguration;
+import de.ft.interitus.UI.ManualConfig.ManualConfigUI;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.dropdownmenue.DropDownElement;
 import de.ft.interitus.UI.UIVar;
@@ -25,11 +29,19 @@ public class ArduinoFunktions implements ProjectFunktions {
     private DeviceConfiguration activeConfiguration;
 
     public ArduinoFunktions() {
+
+        configurationname.setMaxLength(ManualConfigUI.MAX_NAME_LENGTH);
+
         configurationname.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 if(activeConfiguration!=null) {
                     activeConfiguration.setName(((VisTextField) actor).getText());
+                    if(configurationname.getText().length()==0) {
+                        configurationname.setColor(1, 0, 0, 1);
+                    }else{
+                        configurationname.setColor(1,1,1,1);
+                    }
                     activeConfiguration.updateEntry();
                 }
             }
@@ -51,7 +63,8 @@ public class ArduinoFunktions implements ProjectFunktions {
 
         JSONArray array = ArduinoCompiler.getBoards();
         if (array == null) {
-            return;//TODO there was an error
+            Dialogs.showErrorDialog(UI.stage,"Fehler beim Laden der Arduino Boards");
+            return;
         }
         counter = 0;
         for (int i = 0; i < array.length(); i++) {
@@ -73,22 +86,13 @@ public class ArduinoFunktions implements ProjectFunktions {
             for (int i = 0; i < array.length(); i++) {
                 if (array.getJSONObject(i).has("boards")) {
 
-                    Texture image;
+                    Texture image = switch (array.getJSONObject(i).getJSONArray("boards").getJSONObject(0).getString("FQBN")) {
+                        case "arduino:avr:uno" -> AssetLoader.arduinounoimage;
+                        case "arduino:avr:mega" -> AssetLoader.arduinomegaimage;
+                        case "arduino:avr:nano" -> AssetLoader.arduinonanoimage;
+                        default -> AssetLoader.connector_offerd; //TODO image questionmark
+                    };
 
-
-                    switch (array.getJSONObject(i).getJSONArray("boards").getJSONObject(0).getString("FQBN")) {
-                        case "arduino:avr:uno":
-                            image = AssetLoader.arduinounoimage;
-                            break;
-                        case "arduino:avr:mega":
-                            image = AssetLoader.arduinomegaimage;
-                            break;
-                        case "arduino:avr:nano":
-                            image = AssetLoader.arduinonanoimage;
-                            break;
-                        default:
-                            image = AssetLoader.connector_offerd; //TODO image questionmark
-                    }
 
                     UI.runselection.addelement(new DropDownElement(image, array.getJSONObject(i).getJSONArray("boards").getJSONObject(0).getString("name"), array.getJSONObject(i).getString("address")));
                     if (array.getJSONObject(i).getString("address").contains(savedidentifier)) {
@@ -114,9 +118,19 @@ public class ArduinoFunktions implements ProjectFunktions {
     @Override
     public void runconfigsettings(VisTable builder, DeviceConfiguration configuration) {
 
+
+
         activeConfiguration = configuration;
         configurationname.setText(configuration.getName());
-        builder.add(configurationname).expandX().fillY();
+
+        if(configurationname.getText().length()==0) {
+            configurationname.setColor(1, 0, 0, 1);
+        }else{
+            configurationname.setColor(1,1,1,1);
+        }
+
+        builder.add(new VisLabel("Name: ")).expandX().padTop(-(builder.getHeight()/15*14));
+        builder.add(configurationname).expandX().padTop(-(builder.getHeight()/15*14)).padLeft(-70).row();
 
 
 

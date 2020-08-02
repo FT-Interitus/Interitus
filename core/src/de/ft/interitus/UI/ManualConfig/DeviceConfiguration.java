@@ -11,6 +11,7 @@ public class DeviceConfiguration implements Serializable {
 
     private String name;
     private ArrayList<DeviceParameter> parameters = new ArrayList<>();
+    public static final String DEFAULT_NAME = "New Config";
 
     public DeviceConfiguration(String name, ArrayList<DeviceParameter> parameters) {
         this.name = name;
@@ -22,6 +23,9 @@ public class DeviceConfiguration implements Serializable {
     }
 
     public void setName(String name) {
+        if(name.length()==0) {
+            name = DEFAULT_NAME;
+        }
         this.name = name;
     }
 
@@ -46,8 +50,8 @@ public class DeviceConfiguration implements Serializable {
 
        if(ID!=-1) {
 
-           UI.MANUALCONFIG.updateNodeText(ID,this.name);
-           return true;
+
+           return  UI.MANUALCONFIG.updateNodeText(ID,this.name);
        }else{
            return false;
        }

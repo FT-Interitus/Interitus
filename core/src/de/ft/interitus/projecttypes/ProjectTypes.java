@@ -19,8 +19,8 @@ public class ProjectTypes {
     private WireGenerator wireGenerator;
     private WireNodeGenerator wireNodeGenerator;
     private BlocktoSaveGenerator blocktoSaveGenerator;
-    private ProjectFunktions projectFunktions;
-    private Compiler compiler;
+    private final ProjectFunktions projectFunktions;
+    private final Compiler compiler;
 
     public ProjectTypes(Plugin pluginRegister, String name, ArrayList<PlatformSpecificBlock> blocks, BlockGenerator blockgenerator, BlockUpdateGenerator updategenerator, WireGenerator wireGenerator, WireNodeGenerator wireNodeGenerator, BlocktoSaveGenerator blocktoSaveGenerator, BlockVarGenerator blockVarGenerator, ProjectFunktions projectFunktions, Compiler compiler) {
         this.projectblocks = blocks;

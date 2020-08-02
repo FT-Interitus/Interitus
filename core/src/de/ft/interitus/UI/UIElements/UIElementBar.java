@@ -2,14 +2,15 @@ package de.ft.interitus.UI.UIElements;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import de.ft.interitus.UI.UIElements.UIElements.Button;
 import de.ft.interitus.UI.UIElements.UIElements.UIElement;
 import de.ft.interitus.utils.ArrayList;
+
+import java.util.Arrays;
 
 public class UIElementBar {
     private final ArrayList<UIElement> buttons = new ArrayList<>();
     private int x, y, button_h;
-    private int button_abstand = 4;
+    private int button_distance = 4;
 
     public UIElementBar() {
     }
@@ -18,9 +19,7 @@ public class UIElementBar {
         this.x = x;
         this.y = y;
         this.button_h = button_h;
-        for (int i = 0; i < elemente.length; i++) {
-            this.buttons.add(elemente[i]);
-        }
+        this.buttons.addAll(Arrays.asList(elemente));
     }
 
     public void setButtons(int x, int y, int button_h, UIElement... elements) {
@@ -28,9 +27,7 @@ public class UIElementBar {
         this.x = x;
         this.y = y;
         this.button_h = button_h;
-        for (int i = 0; i < elements.length; i++) {
-            this.buttons.add(elements[i]);
-        }
+        this.buttons.addAll(Arrays.asList(elements));
     }
 
     public void setButtons(int x, int y, int button_h) {
@@ -49,28 +46,25 @@ public class UIElementBar {
         return buttons;
     }
 
-    public void draw(SpriteBatch batch) {
-        /*for (int i = 0; i < this.buttons.size(); i++) {
-            UIElement akutalbutton = this.buttons.get(i);
-            akutalbutton.setBounds(this.x - this.button_w - (this.button_w * i) - button_abstand * i, this.y, this.button_w, this.button_h);
-            akutalbutton.draw();
-        }*/
+    public void draw() {
+
         int aktualXPosition = this.x;
-        for (int i = 0; i < this.buttons.size(); i++) {
-            aktualXPosition -= this.buttons.get(i).getW();
-            aktualXPosition -= button_abstand;
-            this.buttons.get(i).setBounds(aktualXPosition, this.y, this.buttons.get(i).getW(), button_h);
-            this.buttons.get(i).draw();
+        for (UIElement button : this.buttons) {
+            aktualXPosition -= button.getW();
+            aktualXPosition -= button_distance;
+            button.setBounds(aktualXPosition, this.y, button.getW(), button_h);
+            button.draw();
 
         }
+
     }
 
-    public int getButton_abstand() {
-        return button_abstand;
+    public int getButton_distance() {
+        return button_distance;
     }
 
-    public void setButton_abstand(int button_abstand) {
-        this.button_abstand = button_abstand;
+    public void setButton_distance(int button_distance) {
+        this.button_distance = button_distance;
     }
 
     public int getX() {
