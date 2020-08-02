@@ -9,7 +9,7 @@ import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.utils.ArrayList;
 
 public class ProjectTypes {
-    ProgrammableObjekt PO;
+
     String name;
     ArrayList<PlatformSpecificBlock> projectblocks;
     private final de.ft.interitus.plugin.Plugin pluginRegister;
@@ -22,9 +22,9 @@ public class ProjectTypes {
     private ProjectFunktions projectFunktions;
     private Compiler compiler;
 
-    public ProjectTypes(Plugin pluginRegister, ProgrammableObjekt PO, String name, ArrayList<PlatformSpecificBlock> blocks, BlockGenerator blockgenerator, BlockUpdateGenerator updategenerator, WireGenerator wireGenerator, WireNodeGenerator wireNodeGenerator, BlocktoSaveGenerator blocktoSaveGenerator, BlockVarGenerator blockVarGenerator, ProjectFunktions projectFunktions, Compiler compiler) {
+    public ProjectTypes(Plugin pluginRegister, String name, ArrayList<PlatformSpecificBlock> blocks, BlockGenerator blockgenerator, BlockUpdateGenerator updategenerator, WireGenerator wireGenerator, WireNodeGenerator wireNodeGenerator, BlocktoSaveGenerator blocktoSaveGenerator, BlockVarGenerator blockVarGenerator, ProjectFunktions projectFunktions, Compiler compiler) {
         this.projectblocks = blocks;
-        this.PO = PO;
+
         this.name = name;
         this.blockGenerator = blockgenerator;
         this.blockUpdateGenerator = updategenerator;
@@ -37,13 +37,6 @@ public class ProjectTypes {
         this.compiler = compiler;
     }
 
-    public ProgrammableObjekt getPO() {
-        return PO;
-    }
-
-    public void setPO(ProgrammableObjekt PO) {
-        this.PO = PO;
-    }
 
     public String getName() {
         return name;

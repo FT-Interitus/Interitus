@@ -80,7 +80,7 @@ public class ManualConfigUI extends VisWindow {
 
     protected void updateNodeText(int ID,String name) {
 
-        Programm.logger.config(ID+" test: " +this.tree.getNodes().size);
+
         ((TestNode) this.tree.getNodes().get(ID)).getLabel().setText(name);
 
     }

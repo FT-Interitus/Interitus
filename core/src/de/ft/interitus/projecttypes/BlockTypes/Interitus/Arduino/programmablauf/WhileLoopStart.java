@@ -1,9 +1,10 @@
-package de.ft.interitus.projecttypes.BlockTypes.Ev3;
+package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf;
 
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.ProjectTypes;
+import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
 import de.ft.interitus.projecttypes.BlockTypes.BlockTopParameter;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
@@ -11,9 +12,12 @@ import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 import java.awt.*;
 import de.ft.interitus.utils.ArrayList;
 
-public class Wait extends PlatformSpecificBlock implements Ev3Block {
-    public Wait(ProjectTypes projectTypes) {
-        super(projectTypes);
+public class WhileLoopStart extends PlatformSpecificBlock implements ArduinoBlock {
+
+    public WhileLoopStart(ProjectTypes arduino) {
+        super(arduino);
+
+
     }
 
     @Override
@@ -23,12 +27,12 @@ public class Wait extends PlatformSpecificBlock implements Ev3Block {
 
     @Override
     public String getName() {
-        return "Warten";
+        return "WhileLoopStart";
     }
 
     @Override
     public String getdescription() {
-        return "Mit diesem Block lässt du dein Programm einen bestimmte Zeit warten, das hängt je nach Einstellung ab.";
+        return "Das ist ein Block um eine while schleife zu starten mehr dazu findest du auf der GitHub Seite von Interitus.";
     }
 
     @Override
@@ -48,28 +52,9 @@ public class Wait extends PlatformSpecificBlock implements Ev3Block {
 
     @Override
     public Texture getSmallImage() {
-        return AssetLoader.img_mappe1;
+        return AssetLoader.img_block;
     }
 
-    @Override
-    public Texture getImageRight() {
-        return AssetLoader.WaitBlock_right;
-    }
-
-    @Override
-    public Texture getImageLeft() {
-        return AssetLoader.WaitBlock_left;
-    }
-
-    @Override
-    public Texture getImageCenter() {
-        return AssetLoader.WaitBlock_middle;
-    }
-
-    @Override
-    public Texture getDescriptionImage() {
-        return null;
-    }
 
 
 
@@ -94,7 +79,29 @@ public class Wait extends PlatformSpecificBlock implements Ev3Block {
     }
 
     @Override
-    public String getCode() {
+    public Texture getImageRight() {
+        return AssetLoader.WaitBlock_right;
+    }
+
+    @Override
+    public Texture getImageLeft() {
+        return AssetLoader.WaitBlock_left;
+    }
+
+    @Override
+    public Texture getImageCenter() {
+        return AssetLoader.WaitBlock_middle;
+    }
+
+    @Override
+    public Texture getDescriptionImage() {
         return null;
     }
+
+    @Override
+    public String getCode() {
+        return "while(true){";
+    }
+
+
 }

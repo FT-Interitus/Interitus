@@ -1,10 +1,10 @@
-package de.ft.interitus.projecttypes.BlockTypes.Ev3;
+package de.ft.interitus.projecttypes.BlockTypes.Interitus.RaspberryPi;
 
 import com.kotcrab.vis.ui.widget.VisTable;
 import de.ft.interitus.UI.ManualConfig.DeviceConfiguration;
 import de.ft.interitus.projecttypes.ProjectFunktions;
 
-public class EV3Funktions implements ProjectFunktions {
+public class RaspberryPiFunktions implements ProjectFunktions {
     @Override
     public void create() {
 

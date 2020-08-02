@@ -1,6 +1,7 @@
 package de.ft.interitus;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -18,6 +19,7 @@ import de.ft.interitus.UI.UIElements.PressedKeys;
 import de.ft.interitus.UI.UIElements.Switch;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.settings.subitems.subitem17;
+import de.ft.interitus.UI.setup.SetupWindow;
 import de.ft.interitus.UI.shortcut.shortcuts.BlockShortcuts;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.loading.AssetLoader;
@@ -128,6 +130,13 @@ public class ProgrammingSpace extends ScreenAdapter {
     @Override
     public void render(float delta) {
 
+
+        //DEBUG todo remove
+
+        if(Gdx.input.isKeyJustPressed(Input.Keys.D)&&Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)&&Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
+            SetupWindow sw = new SetupWindow();
+            sw.show();
+        }
 
         this.delta=delta;
 

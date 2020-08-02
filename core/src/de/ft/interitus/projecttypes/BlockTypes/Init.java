@@ -6,10 +6,10 @@ import de.ft.interitus.events.block.BlockEventAdapter;
 import de.ft.interitus.events.block.BlockKillMovingWiresEvent;
 import de.ft.interitus.plugin.PluginGateway;
 import de.ft.interitus.projecttypes.ProjectManager;
-import de.ft.interitus.projecttypes.BlockTypes.Arduino.InitArduino;
+import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.InitArduino;
 
-import de.ft.interitus.projecttypes.BlockTypes.Ev3.InitEv3;
-import de.ft.interitus.projecttypes.BlockTypes.RaspberryPi.InitRaspberryPI;
+import de.ft.interitus.projecttypes.BlockTypes.Interitus.Ev3.InitEv3;
+import de.ft.interitus.projecttypes.BlockTypes.Interitus.RaspberryPi.InitRaspberryPI;
 
 public class Init {
 

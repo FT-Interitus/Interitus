@@ -1,24 +1,19 @@
-package de.ft.interitus.projecttypes.BlockTypes.Arduino.programmablauf;
+package de.ft.interitus.projecttypes.BlockTypes.Interitus.Ev3;
 
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.ProjectTypes;
-import de.ft.interitus.projecttypes.BlockTypes.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
 import de.ft.interitus.projecttypes.BlockTypes.BlockTopParameter;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
-import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
 
 import java.awt.*;
 import de.ft.interitus.utils.ArrayList;
 
-public class WhileLoopStart extends PlatformSpecificBlock implements ArduinoBlock {
-
-    public WhileLoopStart(ProjectTypes arduino) {
-        super(arduino);
-
-
+public class Wait extends PlatformSpecificBlock implements Ev3Block {
+    public Wait(ProjectTypes projectTypes) {
+        super(projectTypes);
     }
 
     @Override
@@ -28,12 +23,12 @@ public class WhileLoopStart extends PlatformSpecificBlock implements ArduinoBloc
 
     @Override
     public String getName() {
-        return "WhileLoopStart";
+        return "Warten";
     }
 
     @Override
     public String getdescription() {
-        return "Das ist ein Block um eine while schleife zu starten mehr dazu findest du auf der GitHub Seite von Interitus.";
+        return "Mit diesem Block lässt du dein Programm einen bestimmte Zeit warten, das hängt je nach Einstellung ab.";
     }
 
     @Override
@@ -53,9 +48,28 @@ public class WhileLoopStart extends PlatformSpecificBlock implements ArduinoBloc
 
     @Override
     public Texture getSmallImage() {
-        return AssetLoader.img_block;
+        return AssetLoader.img_mappe1;
     }
 
+    @Override
+    public Texture getImageRight() {
+        return AssetLoader.WaitBlock_right;
+    }
+
+    @Override
+    public Texture getImageLeft() {
+        return AssetLoader.WaitBlock_left;
+    }
+
+    @Override
+    public Texture getImageCenter() {
+        return AssetLoader.WaitBlock_middle;
+    }
+
+    @Override
+    public Texture getDescriptionImage() {
+        return null;
+    }
 
 
 
@@ -80,29 +94,7 @@ public class WhileLoopStart extends PlatformSpecificBlock implements ArduinoBloc
     }
 
     @Override
-    public Texture getImageRight() {
-        return AssetLoader.WaitBlock_right;
-    }
-
-    @Override
-    public Texture getImageLeft() {
-        return AssetLoader.WaitBlock_left;
-    }
-
-    @Override
-    public Texture getImageCenter() {
-        return AssetLoader.WaitBlock_middle;
-    }
-
-    @Override
-    public Texture getDescriptionImage() {
+    public String getCode() {
         return null;
     }
-
-    @Override
-    public String getCode() {
-        return "while(true){";
-    }
-
-
 }

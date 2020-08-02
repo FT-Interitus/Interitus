@@ -100,9 +100,8 @@ public class NewProjectWindow {
 
             final ArrayList<String> items = new ArrayList<>();
             for (int i = 0; i < ProjectTypesVar.projectTypes.size(); i++) {
-                if (ProjectTypesVar.projectTypes.get(i).getPO() != null) {
-                    items.add(ProjectTypesVar.projectTypes.get(i).getName());
-                }
+                items.add(ProjectTypesVar.projectTypes.get(i).getName());
+
             }
 
 

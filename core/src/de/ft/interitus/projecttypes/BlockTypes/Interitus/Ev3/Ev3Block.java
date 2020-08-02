@@ -1,4 +1,4 @@
-package de.ft.interitus.projecttypes.BlockTypes.Ev3;
+package de.ft.interitus.projecttypes.BlockTypes.Interitus.Ev3;
 
 public interface Ev3Block {
     /**

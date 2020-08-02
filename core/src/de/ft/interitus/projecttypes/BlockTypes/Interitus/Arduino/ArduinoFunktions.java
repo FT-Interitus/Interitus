@@ -1,7 +1,6 @@
-package de.ft.interitus.projecttypes.BlockTypes.Arduino;
+package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino;
 
 import com.kotcrab.vis.ui.widget.VisTable;
-import de.ft.interitus.Programm;
 import de.ft.interitus.UI.ManualConfig.DeviceConfiguration;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.dropdownmenue.DropDownElement;
@@ -11,9 +10,6 @@ import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.ProjectFunktions;
 import org.json.JSONArray;
-import org.json.JSONObject;
-
-import javax.swing.*;
 
 
 public class ArduinoFunktions implements ProjectFunktions {

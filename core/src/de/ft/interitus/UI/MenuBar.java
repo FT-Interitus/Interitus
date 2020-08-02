@@ -37,11 +37,11 @@ public class MenuBar {
     public static MenuItem menuItem_speichernunter;
     public static MenuItem menuItem_einstellungen;
     public static MenuItem menuItem_beenden;
-    public static MenuItem menuItem_neueverbindung;
+
 //Better together
     public static MenuItem menuItem_openserver;
     public static MenuItem menuItem_connecttoserver;
-    public static MenuItem menuItem_verbindungsmanager;
+
     public static MenuItem menuItem_blockloeschen;
     public static MenuItem menuItem_ausschneiden;
     public static MenuItem menuItem_update;
@@ -188,23 +188,8 @@ public class MenuBar {
                 System.exit(0);
             }
         }).setShortcut("Alt+F4");
-        menuItem_neueverbindung = new MenuItem("Neue Verbindung", new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                try {
-                    SetupWindow sw = new SetupWindow();
-                    sw.show();
-                } catch (NullPointerException e) {
 
-                }
-            }
-        });
-        menuItem_verbindungsmanager = new MenuItem("Verbindungs Manager", new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                Dialogs.showOKDialog(UI.stage, "++++ )-: ++++", "Dieses Fenster Exestiert noch nicht");
-            }
-        });
+
         menuItem_blockloeschen = new MenuItem("Block löschen", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -307,8 +292,7 @@ public class MenuBar {
         fileMenu.addItem(menuItem_einstellungen);
         fileMenu.addItem(menuItem_beenden);
         // ------------------------------------
-        ConnectionMenue.addItem(menuItem_neueverbindung);
-        ConnectionMenue.addItem(menuItem_verbindungsmanager);
+
         // --------------------------------------------
         editMenu.addItem(UI.revert = new MenuItem("Rückgänig", new ChangeListener() {
             @Override

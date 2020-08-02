@@ -6,7 +6,7 @@ import de.ft.interitus.UI.UI;
 import de.ft.interitus.compiler.Compiler;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.projecttypes.ProjectManager;
-import de.ft.interitus.projecttypes.BlockTypes.Arduino.ArduinoBlock;
+import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
