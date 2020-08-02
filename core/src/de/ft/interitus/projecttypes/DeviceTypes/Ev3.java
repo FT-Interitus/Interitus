@@ -8,8 +8,5 @@ public class Ev3 implements ProgrammableObjekt {
         return "Ev3";
     }
 
-    @Override
-    public void update() {
 
-    }
 }

@@ -8,8 +8,5 @@ public class Arduino implements ProgrammableObjekt {
         return "Arduino";
     }
 
-    @Override
-    public void update() {
 
-    }
 }

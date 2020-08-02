@@ -6,8 +6,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import de.ft.interitus.UI.ManualConfig.ManualConfig;
-import de.ft.interitus.UI.UIElements.dropdownmenue.DropDownElement;
+import de.ft.interitus.UI.ManualConfig.ManualConfigUI;
 import de.ft.interitus.UI.UIElements.dropdownmenue.DropDownMenue;
 import de.ft.interitus.utils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -84,7 +83,7 @@ public class UI {
     private static boolean issetupuiopend = false;
     private static Block markedblock;
     private static int wishaniposition = -170 - UIVar.abstandvonRand;
-    public static final ManualConfig manualconfig = new ManualConfig();
+    public static final ManualConfigUI MANUALCONFIG = new ManualConfigUI();
     boolean actiondone = false;
 
     public static void updatedragui(ShapeRenderer renderer, boolean flaeche, SpriteBatch batch) {
@@ -489,7 +488,7 @@ public class UI {
         }
 
         if(UI.button_addrunconfig.isjustPressednormal()) {
-            manualconfig.show();
+            MANUALCONFIG.show();
         }
 
 

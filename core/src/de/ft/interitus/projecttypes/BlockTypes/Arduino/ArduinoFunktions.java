@@ -83,6 +83,11 @@ counter++;
     @Override
     public void runconfigsettings(VisTable builder, DeviceConfiguration configuration) {
 
+
+        configuration.setName("test");
+
+        configuration.updateEntry();
+
     }
 
 }

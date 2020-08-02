@@ -14,15 +14,20 @@ import com.kotcrab.vis.ui.building.utilities.CellWidget;
 import com.kotcrab.vis.ui.building.utilities.Padding;
 import com.kotcrab.vis.ui.building.utilities.layouts.ActorLayout;
 import com.kotcrab.vis.ui.widget.*;
+import de.ft.interitus.Programm;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.Var;
 import de.ft.interitus.projecttypes.ProjectManager;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class ManualConfig extends VisWindow {
+public class ManualConfigUI extends VisWindow {
+
+    private static final int MAX_CONFIGURATIONS = 18;
+
     final VisTable container = new VisTable();
     final Padding padding = new Padding(2, 3);
     private RowLayout rowLayout;
@@ -31,12 +36,66 @@ public class ManualConfig extends VisWindow {
     private EventListener listener;
     private VisTextButton create = new VisTextButton("Neu");
     private VisTextButton delete = new VisTextButton("Entfernen");
-
-    public ManualConfig() {
+   private final VisTree tree = new VisTree();
+    public ManualConfigUI() {
         super("");
         pack();
         setPosition(31, 35);
         new GridTableBuilder(4);
+
+        delete.addListener(new ChangeListener() {
+
+
+
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+
+
+                    ProjectManager.getActProjectVar().deviceConfigurations.remove(SelectedItem);
+                    SelectedItem = 0;
+                    container.clearChildren();
+                    RunConfigInformation.add(container);
+                    rebuildtree();
+
+            }
+        });
+        create.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                if(!(tree.getNodes().size>=MAX_CONFIGURATIONS)) {
+                    ProjectManager.getActProjectVar().deviceConfigurations.add(new DeviceConfiguration("New Config", new ArrayList<DeviceParameter>()));
+                    SelectedItem = ProjectManager.getActProjectVar().deviceConfigurations.size() - 1;
+                    container.clearChildren();
+                    rebuildtree();
+                    ProjectManager.getActProjectVar().projectType.getProjectFunktions().runconfigsettings(container, ProjectManager.getActProjectVar().deviceConfigurations.getLastObject());
+
+                }else{
+                    create.setDisabled(true);
+                }
+            }
+        });
+
+
+    }
+
+    protected void updateNodeText(int ID,String name) {
+
+        Programm.logger.config(ID+" test: " +this.tree.getNodes().size);
+        ((TestNode) this.tree.getNodes().get(ID)).getLabel().setText(name);
+
+    }
+
+    private void rebuildtree() {
+        tree.clearChildren();
+        int i=0;
+
+        for(DeviceConfiguration configuration: ProjectManager.getActProjectVar().deviceConfigurations) {
+
+            tree.add(new TestNode(new VisLabel(" "+configuration.getName()+" "),i));
+
+            i++;
+        }
+
     }
 
     public static boolean isopend() {
@@ -97,31 +156,29 @@ public class ManualConfig extends VisWindow {
 
 
 
-            final VisTree tree = new VisTree();
 
-
-          int i=0;
-
-          for(DeviceConfiguration configuration: ProjectManager.getActProjectVar().deviceConfigurations) {
-
-              tree.add(new TestNode(new VisLabel(" "+configuration.getName()+" "),i));
-              i++;
-          }
 
             tree.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
 
 
-                    SelectedItem = ((TestNode) tree.getSelectedNode()).Mode;
+                    try {
+                        SelectedItem = ((TestNode) tree.getSelectedNode()).Mode;
+                        container.clearChildren();
+                        ProjectManager.getActProjectVar().projectType.getProjectFunktions().runconfigsettings(container,ProjectManager.getActProjectVar().deviceConfigurations.get(SelectedItem));
+
+                    }catch (NullPointerException e) {
+                        container.clearChildren();
+                        RunConfigInformation.add(container);
+
+                    }
 
 
-                    container.clearChildren();
 
 
 
 
-                    ProjectManager.getActProjectVar().projectType.getProjectFunktions().runconfigsettings(container,ProjectManager.getActProjectVar().deviceConfigurations.get(SelectedItem));
 
 
                     //testBuilder.pack();
@@ -156,15 +213,30 @@ public class ManualConfig extends VisWindow {
 
                 @Override
                 public void run() {
-                    if (UIVar.isdialogeopend && !ManualConfig.isopend()) {
+                    if (UIVar.isdialogeopend && !ManualConfigUI.isopend()) {
                         UIVar.isdialogeopend = false;
                         Var.disableshortcuts = false;
                         this.cancel();
                     }
 
-                    if (!UIVar.isdialogeopend && ManualConfig.isopend()) {
+                    if (!UIVar.isdialogeopend && ManualConfigUI.isopend()) {
                         UIVar.isdialogeopend = true;
                     }
+
+
+                    if(tree.getSelectedNode()==null) {
+                        delete.setDisabled(true);
+                    }else{
+                        delete.setDisabled(false);
+                    }
+
+
+                    if(tree.getNodes().size>=MAX_CONFIGURATIONS) {
+                        create.setDisabled(true);
+                    }else{
+                        create.setDisabled(false);
+                    }
+
                 }
             }, 0, 100);
 
@@ -225,7 +297,7 @@ public class ManualConfig extends VisWindow {
     }
 
     static class TestNode extends Tree.Node {
-        public VisLabel label;
+        private VisLabel label;
         public int Mode;
 
         public TestNode(Actor actor, int Mode) {
@@ -234,7 +306,18 @@ public class ManualConfig extends VisWindow {
             this.Mode = Mode;
         }
 
+        public VisLabel getLabel() {
+            return label;
+        }
+
+
 
     }
+
+
+
+
+
+
 
 }
