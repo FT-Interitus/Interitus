@@ -25,6 +25,11 @@ public class AssetLoader {
     public static String group = "";
     public static String workingdirectory = "";
 
+    //Arduino Block Images
+    public static Texture arduinonanoimage;
+    public static Texture arduinounoimage;
+    public static Texture arduinomegaimage;
+
     //Block Textures
     public static Texture img_block;
     public static Texture img_block_right;
@@ -211,6 +216,11 @@ public class AssetLoader {
 
             manager.load(workingdirectory + "TabBar/Tabimage.png", Texture.class);
 
+
+            manager.load(workingdirectory + "arduinomegaminiimage.png", Texture.class);
+            manager.load(workingdirectory + "arduinonanominiimage.png", Texture.class);
+            manager.load(workingdirectory + "arduinounominiimage.png", Texture.class);
+
             group = "ButtonBar";
             manager.load(workingdirectory + "ButtonBar/startbutton.png", Texture.class);
             manager.load(workingdirectory + "ButtonBar/startbutton_mouseover.png", Texture.class);
@@ -373,6 +383,11 @@ if(!Var.disablePluginSubSystem&&!Var.nointernetconnection) {
             img_WaitBlock_warteZeit_Parameter = manager.get(workingdirectory + "Block/Parameter/WaitBlock/WaitParameter.png", Texture.class);
 
             Plug_ZahlParameter = manager.get(workingdirectory + "Block/ParameterStecker/ZahlParameterStecker.png", Texture.class);
+
+
+          arduinomegaimage =  manager.get(workingdirectory + "arduinomegaminiimage.png", Texture.class);
+           arduinonanoimage = manager.get(workingdirectory + "arduinonanominiimage.png", Texture.class);
+           arduinounoimage = manager.get(workingdirectory + "arduinounominiimage.png", Texture.class);
 
 
             img_Tab = manager.get(workingdirectory + "TabBar/Tabimage.png", Texture.class);

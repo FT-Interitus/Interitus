@@ -7,4 +7,10 @@ public interface ProjectFunktions {
     void create();
     void update();
     void runconfigsettings(VisTable builder, DeviceConfiguration  configuration);
+
+    /**
+     * will be called by chancing the current run config to an other on
+     */
+    void changedrunconfig();
+
 }

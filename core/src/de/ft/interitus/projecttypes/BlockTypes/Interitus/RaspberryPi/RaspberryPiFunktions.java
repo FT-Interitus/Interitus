@@ -20,5 +20,10 @@ public class RaspberryPiFunktions implements ProjectFunktions {
 
     }
 
+    @Override
+    public void changedrunconfig() {
+
+    }
+
 
 }

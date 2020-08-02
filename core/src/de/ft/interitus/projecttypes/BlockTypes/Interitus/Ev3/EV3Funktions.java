@@ -20,5 +20,10 @@ public class EV3Funktions implements ProjectFunktions {
 
     }
 
+    @Override
+    public void changedrunconfig() {
+
+    }
+
 
 }

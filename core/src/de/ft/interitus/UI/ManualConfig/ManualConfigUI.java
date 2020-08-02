@@ -164,6 +164,9 @@ public class ManualConfigUI extends VisWindow {
 
 
                     try {
+                        if(SelectedItem != ((TestNode) tree.getSelectedNode()).Mode) {
+                            ProjectManager.getActProjectVar().projectType.getProjectFunktions().changedrunconfig();
+                        }
                         SelectedItem = ((TestNode) tree.getSelectedNode()).Mode;
                         container.clearChildren();
                         ProjectManager.getActProjectVar().projectType.getProjectFunktions().runconfigsettings(container,ProjectManager.getActProjectVar().deviceConfigurations.get(SelectedItem));

@@ -15,7 +15,7 @@ import java.io.*;
 import de.ft.interitus.utils.ArrayList;
 
 public class ArduinoCompiler implements Compiler {
-
+//TODO APPLE SUPPORT
     private static final String OS = System.getProperty("os.name").toLowerCase();
     private static ArrayList<String> errorstring = new ArrayList<>();
 
@@ -47,6 +47,15 @@ public class ArduinoCompiler implements Compiler {
         compileandrun(board);
 
         return true;
+    }
+
+    @Override
+    public String getCompilerVersion() {
+
+
+
+
+        return ""; //TODO get version from arduino cli
     }
 
 

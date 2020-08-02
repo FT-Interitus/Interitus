@@ -337,7 +337,7 @@ public class MenuBar {
 
         UI.menuBar.addMenu(fileMenu);
         UI.menuBar.addMenu(editMenu);
-        UI.menuBar.addMenu(ConnectionMenue);
+       // UI.menuBar.addMenu(ConnectionMenue);
         UI.menuBar.addMenu(windowMenu);
         UI.menuBar.addMenu(helpMenu);
 
