@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import de.ft.interitus.UI.ManualConfig.ManualConfig;
 import de.ft.interitus.UI.UIElements.dropdownmenue.DropDownElement;
 import de.ft.interitus.UI.UIElements.dropdownmenue.DropDownMenue;
 import de.ft.interitus.utils.ShapeRenderer;
@@ -42,7 +43,9 @@ import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.animation.Animation;
 
 import java.io.File;
+
 import de.ft.interitus.utils.ArrayList;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -63,27 +66,29 @@ public class UI {
     public static Button button_stop;
     public static Button button_debugstart;
     public static Button button_editor;
+    public static Button button_addrunconfig;
     public static TabBar tabbar;
     public static GlyphLayout glyphLayout = new GlyphLayout();
     public static BitmapFont font = new BitmapFont();
     public static Check check = new Check();
+    public static MenuBar menuBar;
+    public static DropDownMenue runselection;
     protected static MenuItem recent;
     protected static MenuItem revert;
     protected static MenuItem redo;
     protected static MenuItem copy;
     protected static MenuItem paste;
-     public static MenuBar menuBar;
     static ArrayList<VisTextField> textFielder = new ArrayList<>();
+    static boolean isuilock = false;
     private static boolean issettingsuiopend = false;
     private static boolean issetupuiopend = false;
     private static Block markedblock;
-    private static int wishaniposition=-170-UIVar.abstandvonRand;
+    private static int wishaniposition = -170 - UIVar.abstandvonRand;
+    public static final ManualConfig manualconfig = new ManualConfig();
     boolean actiondone = false;
-    static boolean isuilock = false;
-    public static DropDownMenue runselection;
 
     public static void updatedragui(ShapeRenderer renderer, boolean flaeche, SpriteBatch batch) {
-        if(!UIVar.uilocked) {
+        if (!UIVar.uilocked) {
             BlockTappedBar.userresize();
         }
         // Var.w=Gdx.graphics.getWidth();
@@ -106,18 +111,16 @@ public class UI {
             UIVar.BlockBarY = UIVar.abstandvonRand;
             UIVar.BlockBarW = Gdx.graphics.getWidth() - UIVar.abstandvonRand * 2 - UIVar.unteneinteilung;
             UIVar.BlockBarH = UIVar.untenhohe - UIVar.abstandvonRand;//  \/  \/ blockbar wird gedrawed
-            renderer.roundendrect( UIVar.abstandvonRand, UIVar.abstandvonRand, UIVar.BlockBarW, UIVar.BlockBarH, UIVar.radius);
+            renderer.roundendrect(UIVar.abstandvonRand, UIVar.abstandvonRand, UIVar.BlockBarW, UIVar.BlockBarH, UIVar.radius);
 
             renderer.setColor(Settings.theme.DeviceConnectionColor());
 
-            renderer.roundendrect( Gdx.graphics.getWidth() - UIVar.unteneinteilung, UIVar.abstandvonRand, UIVar.unteneinteilung - UIVar.abstandvonRand, UIVar.untenhohe - UIVar.abstandvonRand, UIVar.radius);
+            renderer.roundendrect(Gdx.graphics.getWidth() - UIVar.unteneinteilung, UIVar.abstandvonRand, UIVar.unteneinteilung - UIVar.abstandvonRand, UIVar.untenhohe - UIVar.abstandvonRand, UIVar.radius);
         }
         renderer.end();
 
 
-
-
-        if(markedblock!=ProjectManager.getActProjectVar().markedblock) {
+        if (markedblock != ProjectManager.getActProjectVar().markedblock) {
             UIVar.isBlockSettingsopen = false;
             for (int i = 0; i < textFielder.size(); i++) {
                 textFielder.get(i).removeListener(textFielder.get(i).getListeners().get(0));
@@ -138,8 +141,7 @@ public class UI {
         UIVar.moveprogrammlock = lock;
 
 
-
-        if (markedblock != null && markedblock.getBlocktype().getBlockParameter() != null&&markedblock==ProjectManager.getActProjectVar().markedblock) {
+        if (markedblock != null && markedblock.getBlocktype().getBlockParameter() != null && markedblock == ProjectManager.getActProjectVar().markedblock) {
 
 
             UIVar.blockeinstellungen_w = 170;
@@ -147,8 +149,8 @@ public class UI {
             UIVar.blockeinstellungen_x = Gdx.graphics.getWidth() - UIVar.abstandvonRand * 2 - UIVar.blockeinstellungen_w - wishaniposition;
             UIVar.blockeinstellungen_y = UIVar.programmflaeche_y + UIVar.abstandvonRand;
 
-            if(wishaniposition<0){
-                wishaniposition+=(0-wishaniposition)*0.1f;
+            if (wishaniposition < 0) {
+                wishaniposition += (0 - wishaniposition) * 0.1f;
             }
 
 
@@ -195,7 +197,7 @@ public class UI {
 
         } else {
             markedblock = ProjectManager.getActProjectVar().markedblock;
-            wishaniposition=-UIVar.blockeinstellungen_w-UIVar.abstandvonRand;
+            wishaniposition = -UIVar.blockeinstellungen_w - UIVar.abstandvonRand;
             if (textFielder.size() > 0) {
                 UIVar.isBlockSettingsopen = false;
                 for (int i = 0; i < textFielder.size(); i++) {
@@ -361,33 +363,38 @@ public class UI {
         button_stop.setW(20);
 
         button_editor = new Button();
-        button_editor.setImage(AssetLoader.img_stopbutton);
-        button_editor.setImage_mouseover(AssetLoader.img_stopbutton_mouseover);
-        button_editor.setImage_pressed(AssetLoader.img_stopbutton_pressed);
+        button_editor.setImage(AssetLoader.img_editor);
+        button_editor.setImage_mouseover(AssetLoader.img_editor_mouseover);
+        button_editor.setImage_pressed(AssetLoader.img_editor_pressed);
         button_editor.setIsworking(false);
-        button_editor.setWorking_animation(new Animation(AssetLoader.waitforfinishbuild,60, 64,64,7));
+        button_editor.setWorking_animation(new Animation(AssetLoader.waitforfinishbuild, 60, 64, 64, 7));
         button_editor.getWorking_animation().startAnimation();
         button_editor.setW(20);
 
+        button_addrunconfig = new Button();
+        button_addrunconfig.setImage(AssetLoader.img_addrunconfig);
+        button_addrunconfig.setImage_mouseover(AssetLoader.img_addrunconfig_mouseover);
+        button_addrunconfig.setImage_pressed(AssetLoader.img_addrunconfig_pressed);
+        button_addrunconfig.setIsworking(false);
+        button_addrunconfig.setWorking_animation(new Animation(AssetLoader.waitforfinishbuild, 60, 64, 64, 7));
+        button_addrunconfig.getWorking_animation().startAnimation();
+        button_addrunconfig.setW(20);
 
-        runselection=new DropDownMenue(100,100,new Color(94f/255f,96f/255f,96f/255f,1),Settings.theme.ClearColor(),"");
+
+        runselection = new DropDownMenue(100, 100, new Color(94f / 255f, 96f / 255f, 96f / 255f, 1), Settings.theme.ClearColor(), "");
 
 
-
-
-
-        buttonbar = new UIElementBar(0, 0,  20);
+        buttonbar = new UIElementBar(0, 0, 20);
         buttonbar.addButton(button_projectstructus);
         buttonbar.addButton(button_editor);
         buttonbar.addButton(button_stop);
         buttonbar.addButton(button_debugstart);
         buttonbar.addButton(button_start);
         buttonbar.addButton(runselection);
-
+        buttonbar.addButton(button_addrunconfig);
 
 
         tabbar = new TabBar();
-
 
 
     }
@@ -410,7 +417,6 @@ public class UI {
         }
 
 
-
         if (tabbar.getSelectedTab() != null) {
             if (tabbar.getSelectedTab().getIndex() != -1) {
                 if (Var.openprojectindex != tabbar.getSelectedTab().getIndex()) {
@@ -421,15 +427,15 @@ public class UI {
         tabbar.setBounds(UIVar.abstandvonRand, UIVar.programmflaeche_h + UIVar.programmflaeche_y, 300, 20);
         tabbar.draw();
 
-        if(UIVar.uilocked!=isuilock) {
+        if (UIVar.uilocked != isuilock) {
             isuilock = UIVar.uilocked;
 
-            if(UIVar.uilocked) {
-                if(InputManager.contains(stage)) {
+            if (UIVar.uilocked) {
+                if (InputManager.contains(stage)) {
                     InputManager.remove(stage);
                 }
-            }else{
-                if(!InputManager.contains(stage)) {
+            } else {
+                if (!InputManager.contains(stage)) {
                     InputManager.addProcessor(stage);
                 }
             }
@@ -437,10 +443,7 @@ public class UI {
         }
 
 
-
-
-
-        if(!UIVar.uilocked) {
+        if (!UIVar.uilocked) {
             stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 60f));
         }
 
@@ -464,10 +467,10 @@ public class UI {
         }
 
 
-        if(UI.button_start.isjustPressednormal()){
-          //  UI.button_start.setDisable(true);
+        if (UI.button_start.isjustPressednormal()) {
+            //  UI.button_start.setDisable(true);
 
-            Thread compile_thread = new Thread()  {
+            Thread compile_thread = new Thread() {
                 @Override
                 public void run() {
 
@@ -479,11 +482,17 @@ public class UI {
 
         }
 
-        if(UI.button_editor.isjustPressednormal()) {
+        if (UI.button_editor.isjustPressednormal()) {
 
-
+            UI.button_editor.setIsworking(true); // TODO: 02.08.20 Build Project
             Editor.open();
         }
+
+        if(UI.button_addrunconfig.isjustPressednormal()) {
+            manualconfig.show();
+        }
+
+
 
 
     }
@@ -508,7 +517,6 @@ public class UI {
     public static void updateView(int width, int height) {
         stage.getViewport().update(width, height, true);
     }
-
 
 
 }

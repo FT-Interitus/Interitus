@@ -136,6 +136,10 @@ public class ProjectTypes {
 
   }
 
+  public ProjectFunktions getProjectFunktions() {
+        return projectFunktions;
+  }
+
     public Compiler getCompiler() {
         return compiler;
     }

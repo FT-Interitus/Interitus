@@ -11,8 +11,8 @@ import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.CheckKollision;
 
 public abstract class WireNode implements VisibleObjects {
-    public static int public_w = 10;
-    public static int public_h = 10;
+    public final static int public_w = 10;
+    public final static int public_h = 10;
     private final Vector2 gemerktvector = new Vector2(0, 0);
     private final Vector3 tempvector = new Vector3();
     private final Vector3 tempvector1 = new Vector3();

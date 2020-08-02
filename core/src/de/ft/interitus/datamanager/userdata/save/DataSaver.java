@@ -30,11 +30,20 @@ public class DataSaver {
 
                 String generateprojektname = "project" + System.currentTimeMillis();
                 String generateprojektsettingsname = "projectsettings" + System.currentTimeMillis();
+                String generaterunconfigurationen = "runconfig" + System.currentTimeMillis();
 
 
                 try (FileOutputStream fos = new FileOutputStream(Data.tempfolder + "/" + generateprojektname);
                      ObjectOutputStream oos = new ObjectOutputStream(fos)) {
                     oos.writeObject(saveBlocks);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+                try (FileOutputStream fos = new FileOutputStream(Data.tempfolder + "/" + generaterunconfigurationen);
+                     ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+                    oos.writeObject(ProjectManager.getActProjectVar().deviceConfigurations);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -59,7 +68,8 @@ public class DataSaver {
                     ArrayList<String> names = new ArrayList<>();
                     names.add("Program.itid");
                     names.add("Settings.itps");
-                    Zip.zipFiles(names, handle.file().getAbsolutePath(), Data.tempfolder + "/" + generateprojektname, Data.tempfolder + "/" + generateprojektsettingsname);
+                    names.add("RunConfig.itrc");
+                    Zip.zipFiles(names, handle.file().getAbsolutePath(), Data.tempfolder + "/" + generateprojektname, Data.tempfolder + "/" + generateprojektsettingsname,Data.tempfolder + "/" + generaterunconfigurationen);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

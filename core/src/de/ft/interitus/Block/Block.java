@@ -791,7 +791,7 @@ public abstract class Block implements VisibleObjects {
      *
      * @return the block Thread
      */
-    public Thread allowedRestart() { //WARNUNG diese Methode darf nur von ThreadMananger aufgerufen werden
+    public final Thread allowedRestart() { //WARNUNG diese Methode darf nur von ThreadMananger aufgerufen werden
         this.findnewindex();
         blockupdate = blockUpdateGenerator.generate(this); //Wenn der Block wieder in den Sichtbereich Rückt
         blockupdate.start(); //             ...wird der update Thread gestarted

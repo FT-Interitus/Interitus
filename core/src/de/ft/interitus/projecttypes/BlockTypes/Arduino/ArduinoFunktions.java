@@ -1,6 +1,8 @@
 package de.ft.interitus.projecttypes.BlockTypes.Arduino;
 
+import com.kotcrab.vis.ui.widget.VisTable;
 import de.ft.interitus.Programm;
+import de.ft.interitus.UI.ManualConfig.DeviceConfiguration;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.dropdownmenue.DropDownElement;
 import de.ft.interitus.UI.UIVar;
@@ -77,4 +79,10 @@ counter++;
 
 
     }
+
+    @Override
+    public void runconfigsettings(VisTable builder, DeviceConfiguration configuration) {
+
+    }
+
 }

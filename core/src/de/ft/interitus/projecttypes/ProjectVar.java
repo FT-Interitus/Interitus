@@ -6,6 +6,7 @@ import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.Wire;
 import de.ft.interitus.Block.WireNode;
 
+import de.ft.interitus.UI.ManualConfig.DeviceConfiguration;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.utils.ArrayList;
 
@@ -61,6 +62,9 @@ public abstract class ProjectVar {
     public volatile String path = ""; // Wo ist die aktuell geöffnete Datei gespeichert
     public ArrayList<Thread> threads = new ArrayList<>();
     public ArrayList<Object> requestobj = new ArrayList<>();
+
+    public ArrayList<DeviceConfiguration> deviceConfigurations = new ArrayList<>();
+
     public long programmingtime = 0;
     public long currentstarttime = 0;
 

@@ -13,13 +13,13 @@ import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 
 
 public class TapBarBlockItem implements TapItem {
-    int x;
-    int y;
-    int w = 50;
-    int h = 60;
-    Texture img;
-    PlatformSpecificBlock psb;
-    Check check = new Check();
+    private int x;
+    private int y;
+    private int w = 50;
+    private int h = 60;
+    private final Texture img;
+    private final PlatformSpecificBlock psb;
+    private final Check check = new Check();
 
     public TapBarBlockItem(PlatformSpecificBlock psb, Texture img) {
         this.img = img;
@@ -34,7 +34,7 @@ public class TapBarBlockItem implements TapItem {
 
                 Block tempblock = ProjectManager.getActProjectVar().projectType.getBlockGenerator().generateBlock(ProjectManager.getActProjectVar().blocks.size(), (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y, psb.getWidth(), UIVar.BlockHeight, psb, ProjectManager.getActProjectVar().projectType.getBlockUpdateGenerator(), ProjectManager.getActProjectVar().projectType.getBlocktoSaveGenerator());
 
-                ProjectManager.getActProjectVar().markedblock=tempblock;
+                ProjectManager.getActProjectVar().markedblock = tempblock;
                 ProjectManager.getActProjectVar().marked = true;
 
                 ProjectManager.getActProjectVar().blocks.add(tempblock);

@@ -4,6 +4,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import de.ft.interitus.Block.SaveBlock;
 import de.ft.interitus.DisplayErrors;
+import de.ft.interitus.UI.ManualConfig.DeviceConfiguration;
 import de.ft.interitus.UI.MenuBar;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
@@ -34,6 +35,7 @@ public class DataLoader {
                     Zip.unzip(handle.file().getAbsolutePath(), Data.tempfolder.getAbsolutePath());
                     FileHandle file = new FileHandle(Data.tempfolder.getAbsolutePath() + "/" + "Program.itid");
                     FileHandle settingsfile = new FileHandle(Data.tempfolder.getAbsolutePath() + "/" + "Settings.itps");
+                    FileHandle runconfig = new FileHandle(Data.tempfolder.getAbsolutePath() + "/" + "RunConfig.itrc");
                     JSONObject settings = new JSONObject(settingsfile.readString());
 
 
@@ -91,6 +93,12 @@ public class DataLoader {
                     ArrayList<SaveBlock> readedblocks = ((ArrayList<SaveBlock>) ois.readObject());
 
                     BlockCalculator.extract(readedblocks);
+
+
+                    FileInputStream runconfig_fis = new FileInputStream(runconfig.file());
+                    ObjectInputStream runconfig_ois = new ObjectInputStream(runconfig_fis);
+
+                  ProjectManager.getActProjectVar().deviceConfigurations = ((ArrayList<DeviceConfiguration>) runconfig_ois.readObject());
 
 
                 } catch (Exception e) {

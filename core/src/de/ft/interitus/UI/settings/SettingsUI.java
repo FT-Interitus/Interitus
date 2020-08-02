@@ -89,7 +89,7 @@ public class SettingsUI extends VisWindow {
     public void show() {
 
         container.clearChildren();
-        instructions.add(container);
+        Instructions.add(container);
 
         testBuilder = new TestBuilder("Einstellungen", new StandardTableBuilder(padding));
         UIVar.isdialogeopend = true;
@@ -271,7 +271,7 @@ public class SettingsUI extends VisWindow {
 
 
                         case -1:
-                            instructions.add(container);
+                            Instructions.add(container);
 
                         case 0:
                             subitem1.add(container);

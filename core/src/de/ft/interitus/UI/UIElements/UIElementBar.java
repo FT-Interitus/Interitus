@@ -7,9 +7,9 @@ import de.ft.interitus.UI.UIElements.UIElements.UIElement;
 import de.ft.interitus.utils.ArrayList;
 
 public class UIElementBar {
-    ArrayList<UIElement> buttons = new ArrayList<>();
-    int x, y,  button_h;
-    int button_abstand = 3;
+    private final ArrayList<UIElement> buttons = new ArrayList<>();
+    private int x, y, button_h;
+    private int button_abstand = 4;
 
     public UIElementBar() {
     }
@@ -55,11 +55,11 @@ public class UIElementBar {
             akutalbutton.setBounds(this.x - this.button_w - (this.button_w * i) - button_abstand * i, this.y, this.button_w, this.button_h);
             akutalbutton.draw();
         }*/
-        int aktualXPosition=this.x;
+        int aktualXPosition = this.x;
         for (int i = 0; i < this.buttons.size(); i++) {
-            aktualXPosition-=this.buttons.get(i).getW();
-            aktualXPosition-=button_abstand;
-            this.buttons.get(i).setBounds(aktualXPosition,this.y,this.buttons.get(i).getW(),button_h);
+            aktualXPosition -= this.buttons.get(i).getW();
+            aktualXPosition -= button_abstand;
+            this.buttons.get(i).setBounds(aktualXPosition, this.y, this.buttons.get(i).getW(), button_h);
             this.buttons.get(i).draw();
 
         }

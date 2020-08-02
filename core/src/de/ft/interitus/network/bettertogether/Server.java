@@ -107,6 +107,7 @@ public class Server {
                 try {
                     ObjectOutputStream objectOutput = new ObjectOutputStream(skt.getOutputStream());
                     objectOutput.writeObject(blocks);
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

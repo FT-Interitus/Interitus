@@ -108,6 +108,10 @@ public class AssetLoader {
     public static Texture img_editor_mouseover;
     public static Texture img_editor_pressed;
 
+    public static Texture img_addrunconfig;
+    public static Texture img_addrunconfig_mouseover;
+    public static Texture img_addrunconfig_pressed;
+
     public static Texture waitforfinishbuild;
     
     ///////////////////////////-BlockParameter Bilder-/////////////////////////////
@@ -199,7 +203,7 @@ public class AssetLoader {
 
 
             group = "TabBar";
-
+            manager.load(workingdirectory + "Block/Parameter/WaitBlock/WaitParameter.png", Texture.class);
 
             backcursor = new Pixmap(Gdx.files.internal("backcursor.png"));
 
@@ -223,6 +227,14 @@ public class AssetLoader {
             manager.load(workingdirectory + "ButtonBar/debugbutton.png", Texture.class);
             manager.load(workingdirectory + "ButtonBar/debugbutton_mouseover.png", Texture.class);
             manager.load(workingdirectory + "ButtonBar/debugbutton_pressed.png", Texture.class);
+
+            manager.load(workingdirectory + "ButtonBar/editorbutton.png", Texture.class);
+            manager.load(workingdirectory + "ButtonBar/editorbutton_mouseover.png", Texture.class);
+            manager.load(workingdirectory + "ButtonBar/editorbutton_pressed.png", Texture.class);
+
+             manager.load(workingdirectory + "ButtonBar/addrunconfig.png", Texture.class);
+            manager.load(workingdirectory + "ButtonBar/addrunconfig_mouseover.png", Texture.class);
+            manager.load(workingdirectory + "ButtonBar/addrunconfig_pressed.png", Texture.class);
 
             manager.load(workingdirectory+"loadinganimation.png",Texture.class);
 
@@ -357,29 +369,38 @@ if(!Var.disablePluginSubSystem&&!Var.nointernetconnection) {
         try {
             group = "";
 
-            manager.load(workingdirectory + "Block/Parameter/WaitBlock/WaitParameter.png", Texture.class);
-            img_WaitBlock_warteZeit_Parameter = manager.get(workingdirectory + "Block/Parameter/WaitBlock/WaitParameter.png");
+
+            img_WaitBlock_warteZeit_Parameter = manager.get(workingdirectory + "Block/Parameter/WaitBlock/WaitParameter.png", Texture.class);
 
             Plug_ZahlParameter = manager.get(workingdirectory + "Block/ParameterStecker/ZahlParameterStecker.png", Texture.class);
 
 
-            img_Tab = manager.get(workingdirectory + "TabBar/Tabimage.png");
+            img_Tab = manager.get(workingdirectory + "TabBar/Tabimage.png", Texture.class);
 
-            img_startbutton = manager.get(workingdirectory + "ButtonBar/startbutton.png");
-            img_startbutton_mouseover = manager.get(workingdirectory + "ButtonBar/startbutton_mouseover.png");
-            img_startbutton_pressed = manager.get(workingdirectory + "ButtonBar/startbutton_pressed.png");
+            img_startbutton = manager.get(workingdirectory + "ButtonBar/startbutton.png", Texture.class);
+            img_startbutton_mouseover = manager.get(workingdirectory + "ButtonBar/startbutton_mouseover.png", Texture.class);
+            img_startbutton_pressed = manager.get(workingdirectory + "ButtonBar/startbutton_pressed.png", Texture.class);
 
-            img_stopbutton = manager.get(workingdirectory + "ButtonBar/stopbutton.png");
-            img_stopbutton_mouseover = manager.get(workingdirectory + "ButtonBar/stopbutton_mouseover.png");
-            img_stopbutton_pressed = manager.get(workingdirectory + "ButtonBar/stopbutton_pressed.png");
+            img_stopbutton = manager.get(workingdirectory + "ButtonBar/stopbutton.png", Texture.class);
+            img_stopbutton_mouseover = manager.get(workingdirectory + "ButtonBar/stopbutton_mouseover.png", Texture.class);
+            img_stopbutton_pressed = manager.get(workingdirectory + "ButtonBar/stopbutton_pressed.png", Texture.class);
 
-            img_projectstructur = manager.get(workingdirectory + "ButtonBar/projektstrukturbutton.png");
-            img_projectstructur_mouseover = manager.get(workingdirectory + "ButtonBar/projektstrukturbutton_mouseover.png");
-            img_projectstructur_pressed = manager.get(workingdirectory + "ButtonBar/projektstrukturbutton_pressed.png");
+            img_projectstructur = manager.get(workingdirectory + "ButtonBar/projektstrukturbutton.png", Texture.class);
+            img_projectstructur_mouseover = manager.get(workingdirectory + "ButtonBar/projektstrukturbutton_mouseover.png", Texture.class);
+            img_projectstructur_pressed = manager.get(workingdirectory + "ButtonBar/projektstrukturbutton_pressed.png", Texture.class);
 
-            img_debugstart = manager.get(workingdirectory + "ButtonBar/debugbutton.png");
-            img_debugstart_mouseover = manager.get(workingdirectory + "ButtonBar/debugbutton_mouseover.png");
-            img_debugstart_pressed = manager.get(workingdirectory + "ButtonBar/debugbutton_pressed.png");
+            img_debugstart = manager.get(workingdirectory + "ButtonBar/debugbutton.png", Texture.class);
+            img_debugstart_mouseover = manager.get(workingdirectory + "ButtonBar/debugbutton_mouseover.png", Texture.class);
+            img_debugstart_pressed = manager.get(workingdirectory + "ButtonBar/debugbutton_pressed.png", Texture.class);
+
+           img_editor = manager.get(workingdirectory + "ButtonBar/editorbutton.png", Texture.class);
+            img_editor_mouseover =   manager.get(workingdirectory + "ButtonBar/editorbutton_mouseover.png", Texture.class);
+            img_editor_pressed =  manager.get(workingdirectory + "ButtonBar/editorbutton_pressed.png", Texture.class);
+
+           img_addrunconfig = manager.get(workingdirectory + "ButtonBar/addrunconfig.png", Texture.class);
+            img_addrunconfig_mouseover = manager.get(workingdirectory + "ButtonBar/addrunconfig_mouseover.png", Texture.class);
+            img_addrunconfig_pressed = manager.get(workingdirectory + "ButtonBar/addrunconfig_pressed.png", Texture.class);
+
 
             waitforfinishbuild = manager.get(workingdirectory+"loadinganimation.png",Texture.class);
 

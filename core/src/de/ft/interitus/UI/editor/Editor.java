@@ -1,6 +1,7 @@
 package de.ft.interitus.UI.editor;
 
 import com.badlogic.gdx.ApplicationListener;
+import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.window.CreateWindow;
 import de.ft.interitus.UI.window.Window;
@@ -37,6 +38,8 @@ public class Editor {
 
             @Override
             public void dispose() {
+                UI.button_editor.setIsworking(false);
+
                 UIVar.isdialogeopend = false;
                 UIVar.uilocked = false;
             }

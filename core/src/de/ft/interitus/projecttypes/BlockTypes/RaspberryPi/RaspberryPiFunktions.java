@@ -1,5 +1,7 @@
 package de.ft.interitus.projecttypes.BlockTypes.RaspberryPi;
 
+import com.kotcrab.vis.ui.widget.VisTable;
+import de.ft.interitus.UI.ManualConfig.DeviceConfiguration;
 import de.ft.interitus.projecttypes.ProjectFunktions;
 
 public class RaspberryPiFunktions implements ProjectFunktions {
@@ -12,4 +14,11 @@ public class RaspberryPiFunktions implements ProjectFunktions {
     public void update() {
 
     }
+
+    @Override
+    public void runconfigsettings(VisTable builder, DeviceConfiguration configuration) {
+
+    }
+
+
 }
