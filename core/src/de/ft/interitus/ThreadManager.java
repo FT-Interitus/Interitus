@@ -10,6 +10,7 @@ import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.BlockUpdate;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.projecttypes.ProjectManager;
+import de.ft.interitus.projecttypes.ProjectVar;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -45,36 +46,37 @@ public class ThreadManager {
                     public void run() {
 
                         if (!UIVar.isdialogeopend) {
-
+                            ProjectVar projectVar =ProjectManager.getActProjectVar();
                             try {
                                 camfr = ProgrammingSpace.cam.frustum;
 
-                                for (int i = 0; i < ProjectManager.getActProjectVar().blocks.size(); i++) {
+
+                                for (int i = 0; i < projectVar.blocks.size(); i++) {
                                     //System.out.println("Test"+i);
 //                            System.out.println(camfr.boundsInFrustum(BlockVar.blocks.get(10).getX(), BlockVar.blocks.get(10).getY(), 0, BlockVar.blocks.get(10).getW(), BlockVar.blocks.get(10).getH(),0));
                                     try {
-                                        Block block = ((BlockUpdate) ProjectManager.getActProjectVar().threads.get(i)).block;
-                                        if (!(camfr.boundsInFrustum(block.getX(), block.getY(), 0, block.getW(), block.getH(), 0)) && block.isMarked() == false && ((BlockUpdate) ProjectManager.getActProjectVar().threads.get(i)).isrunning == true) {
+                                        Block block = ((BlockUpdate) projectVar.threads.get(i)).block;
+                                        if (!(camfr.boundsInFrustum(block.getX(), block.getY(), 0, block.getW(), block.getH(), 0)) && block.isMarked() == false && ((BlockUpdate) projectVar.threads.get(i)).isrunning == true) {
 
-                                            if (((BlockUpdate) ProjectManager.getActProjectVar().threads.get(i)).isrunning) {
+                                            if (((BlockUpdate) projectVar.threads.get(i)).isrunning) {
                                                 try {
-                                                    ((BlockUpdate) ProjectManager.getActProjectVar().threads.get(i)).time.cancel();
+                                                    ((BlockUpdate) projectVar.threads.get(i)).time.cancel();
                                                 } catch (Exception e) {
                                                 }
                                             }
-                                            ProjectManager.getActProjectVar().threads.get(i).interrupt();
-                                            ((BlockUpdate) ProjectManager.getActProjectVar().threads.get(i)).isrunning = false;
-                                            ProjectManager.getActProjectVar().visibleblocks.remove(block);
+                                            projectVar.threads.get(i).interrupt();
+                                            ((BlockUpdate) projectVar.threads.get(i)).isrunning = false;
+                                            projectVar.visibleblocks.remove(block);
                                         }
 
-                                        if (camfr.boundsInFrustum(block.getX(), block.getY(), 0, block.getW(), block.getH(), 0) && ((BlockUpdate) ProjectManager.getActProjectVar().threads.get(i)).isrunning == false) {
-                                            ProjectManager.getActProjectVar().visibleblocks.add(block);
-                                            ProjectManager.getActProjectVar().threads.set(i, ((BlockUpdate) ProjectManager.getActProjectVar().threads.get(i)).block.allowedRestart());
+                                        if (camfr.boundsInFrustum(block.getX(), block.getY(), 0, block.getW(), block.getH(), 0) && ((BlockUpdate) projectVar.threads.get(i)).isrunning == false) {
+                                            projectVar.visibleblocks.add(block);
+                                            projectVar.threads.set(i, ((BlockUpdate) projectVar.threads.get(i)).block.allowedRestart());
 
 
                                             Programm.logger.config("Started " + block.getIndex());
 
-                                            ((BlockUpdate) ProjectManager.getActProjectVar().threads.get(i)).isrunning = true;
+                                            ((BlockUpdate) projectVar.threads.get(i)).isrunning = true;
                                         }
 
 
@@ -85,26 +87,26 @@ public class ThreadManager {
                                 }
 
 
-                                for (int i = 0; i < ProjectManager.getActProjectVar().wires.size(); i++) {
-                                    if (ProjectManager.getActProjectVar().wires.get(i).isvisible()) {
-                                        if (ProjectManager.getActProjectVar().visiblewires.indexOf(ProjectManager.getActProjectVar().wires.get(i)) == -1) {
-                                            ProjectManager.getActProjectVar().visiblewires.add(ProjectManager.getActProjectVar().wires.get(i));
+                                for (int i = 0; i < projectVar.wires.size(); i++) {
+                                    if (projectVar.wires.get(i).isvisible()) {
+                                        if (projectVar.visiblewires.indexOf(projectVar.wires.get(i)) == -1) {
+                                            projectVar.visiblewires.add(projectVar.wires.get(i));
                                         }
                                     } else {
-                                        if (ProjectManager.getActProjectVar().visiblewires.indexOf(ProjectManager.getActProjectVar().wires.get(i)) != -1) {
-                                            ProjectManager.getActProjectVar().visiblewires.remove(ProjectManager.getActProjectVar().wires.get(i));
+                                        if (projectVar.visiblewires.indexOf(projectVar.wires.get(i)) != -1) {
+                                            projectVar.visiblewires.remove(projectVar.wires.get(i));
                                         }
                                     }
                                 }
 
-                                for (int i = 0; i < ProjectManager.getActProjectVar().wireNodes.size(); i++) {
-                                    if (ProjectManager.getActProjectVar().wireNodes.get(i).isVisible()) {
-                                        if (ProjectManager.getActProjectVar().visibleWireNodes.indexOf(ProjectManager.getActProjectVar().wireNodes.get(i)) == -1) {
-                                            ProjectManager.getActProjectVar().visibleWireNodes.add(ProjectManager.getActProjectVar().wireNodes.get(i));
+                                for (int i = 0; i < projectVar.wireNodes.size(); i++) {
+                                    if (projectVar.wireNodes.get(i).isVisible()) {
+                                        if (projectVar.visibleWireNodes.indexOf(projectVar.wireNodes.get(i)) == -1) {
+                                            projectVar.visibleWireNodes.add(projectVar.wireNodes.get(i));
                                         }
                                     } else {
-                                        if (ProjectManager.getActProjectVar().visibleWireNodes.indexOf(ProjectManager.getActProjectVar().wireNodes.get(i)) != -1) {
-                                            ProjectManager.getActProjectVar().visibleWireNodes.remove(ProjectManager.getActProjectVar().wireNodes.get(i));
+                                        if (projectVar.visibleWireNodes.indexOf(projectVar.wireNodes.get(i)) != -1) {
+                                            projectVar.visibleWireNodes.remove(projectVar.wireNodes.get(i));
                                         }
                                     }
                                 }
@@ -117,7 +119,7 @@ public class ThreadManager {
 
                             //Enable or disable Wire System
 
-                            ProjectManager.getActProjectVar().wirezulassung = !ProjectManager.getActProjectVar().ismoving;
+                            projectVar.wirezulassung = !projectVar.ismoving;
                         }
 
                     }

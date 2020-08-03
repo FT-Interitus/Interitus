@@ -7,14 +7,17 @@ package de.ft.interitus.projecttypes;
 
 import de.ft.interitus.Programm;
 import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.Var;
 import de.ft.interitus.utils.ClearActOpenProgramm;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
+
 public class ProjectManager {
     static Timer time = new Timer();
+    static Timer lock = new Timer();
 
     public static void change(int index) {
 
@@ -29,7 +32,17 @@ public class ProjectManager {
         time.purge();
         time = new Timer();
 
+        UIVar.isdialogeopend = true;
 
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        UIVar.isdialogeopend = false;
+                    }
+                },
+                2000
+        );
         time.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -37,6 +50,7 @@ public class ProjectManager {
 
             }
         }, 0, 1000);
+
 
 
         Programm.logger.config("changed tab");

@@ -285,6 +285,9 @@ public class ProgrammingSpace extends ScreenAdapter {
 
         RechtsKlick.popupmanager.draw(); //Show Popups
 
+
+
+
         try {
             DisplayErrors.checkerror(); //Check if there are undisplayed Errors
         } catch (IllegalStateException e) {
