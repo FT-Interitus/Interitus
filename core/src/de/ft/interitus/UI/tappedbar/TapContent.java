@@ -1,8 +1,12 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.UI.tappedbar;
 
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.UI.UIElements.UIElements.Button;
-
 import de.ft.interitus.utils.ArrayList;
 
 public class TapContent {

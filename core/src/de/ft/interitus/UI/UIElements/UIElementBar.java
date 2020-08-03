@@ -1,6 +1,9 @@
-package de.ft.interitus.UI.UIElements;
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+package de.ft.interitus.UI.UIElements;
 
 import de.ft.interitus.UI.UIElements.UIElements.UIElement;
 import de.ft.interitus.utils.ArrayList;

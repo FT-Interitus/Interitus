@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.datamanager.userdata.save;
 
 import com.badlogic.gdx.files.FileHandle;
@@ -6,12 +11,15 @@ import de.ft.interitus.datamanager.BlockCalculator;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.datamanager.userdata.Zip;
 import de.ft.interitus.projecttypes.ProjectManager;
+import de.ft.interitus.utils.ArrayList;
 import org.json.JSONObject;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import de.ft.interitus.utils.ArrayList;
 
 public class DataSaver {
 
@@ -24,8 +32,6 @@ public class DataSaver {
 
 
                 ArrayList<SaveBlock> saveBlocks = BlockCalculator.save();
-
-
 
 
                 String generateprojektname = "project" + System.currentTimeMillis();
@@ -69,7 +75,7 @@ public class DataSaver {
                     names.add("Program.itid");
                     names.add("Settings.itps");
                     names.add("RunConfig.itrc");
-                    Zip.zipFiles(names, handle.file().getAbsolutePath(), Data.tempfolder + "/" + generateprojektname, Data.tempfolder + "/" + generateprojektsettingsname,Data.tempfolder + "/" + generaterunconfigurationen);
+                    Zip.zipFiles(names, handle.file().getAbsolutePath(), Data.tempfolder + "/" + generateprojektname, Data.tempfolder + "/" + generateprojektsettingsname, Data.tempfolder + "/" + generaterunconfigurationen);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

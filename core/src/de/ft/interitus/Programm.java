@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2020.
- * Author Tim & Felix
+ * Copyright by Tim and Felix
  */
 
 package de.ft.interitus;
@@ -8,8 +8,6 @@ package de.ft.interitus;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Graphics;
-import com.badlogic.gdx.backends.lwjgl3.audio.OpenALAudioDevice;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import de.ft.interitus.Logging.DebugPrinter;
@@ -18,8 +16,8 @@ import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.Theme.ThemeManager;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.datamanager.programmdata.Data;
-import de.ft.interitus.datamanager.userdata.UserDataInit;
 import de.ft.interitus.datamanager.programmdata.experience.ExperienceManager;
+import de.ft.interitus.datamanager.userdata.UserDataInit;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.UI.UILoadEvent;
 import de.ft.interitus.loading.Loading;
@@ -30,8 +28,6 @@ import de.ft.interitus.projecttypes.BlockTypes.Init;
 import de.ft.interitus.utils.FolderUtils;
 import de.ft.interitus.utils.NetworkScan;
 import de.ft.interitus.utils.UserNameGetter;
-import org.lwjgl.openal.AL;
-import org.lwjgl.openal.ALC;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -44,7 +40,6 @@ public class Programm extends Game {
     public static Programm INSTANCE;
     public static boolean inLoading = true;
     public static Logger logger = Logger.getLogger(Programm.class.getName());
-
 
 
     public Programm() {
@@ -62,13 +57,11 @@ public class Programm extends Game {
         DebugPrinter.detect();
 
 
-        if(Var.savemode) {
+        if (Var.savemode) {
             logger.warning("Programm is running in savemode");
         }
         ((Lwjgl3Graphics) Gdx.graphics).getWindow().iconifyWindow();
         Var.splashscreen = SplashScreen.create();
-
-
 
 
         Var.username = UserNameGetter.get();
@@ -89,9 +82,8 @@ public class Programm extends Game {
         Programm.logger.config("Loaded Vis-UI");
 
 
-
         try {
-            if (!Var.disablePluginSubSystem&&!Var.nointernetconnection) {
+            if (!Var.disablePluginSubSystem && !Var.nointernetconnection) {
                 loadplugins.start(); //Plugins laden
                 ReadStorePlugins.read(); //Ersten 10 Plugins im Store laden
 
@@ -109,7 +101,7 @@ public class Programm extends Game {
         UI.init();
 
         Programm.logger.config("UI element loaded");
-        if(!Var.savemode) {
+        if (!Var.savemode) {
             CheckShortcuts.loadArrayList();//bevor CheckShortcuts.loatArraylist muss die ui schon die menuebar eleente erstellt haben!!!!!!!!!
         }
 
@@ -121,18 +113,18 @@ public class Programm extends Game {
         }; //TODO doenst work on Mac
         Programm.logger.config("Triggerd Network Scan");
         seachnetwork.start();
-        if(!Var.savemode) {
+        if (!Var.savemode) {
             Data.init();
-        }else{
-            Dialogs.showErrorDialog(UI.stage,"Achtung Interitus läuft im Abgesicherten Modus!\nAlle Einstellungen die die hier vornimmst werden nicht übernommen.\nDieser Modus dient nur dazu, Projekte zu retten und um Plugins zu testen.");
+        } else {
+            Dialogs.showErrorDialog(UI.stage, "Achtung Interitus läuft im Abgesicherten Modus!\nAlle Einstellungen die die hier vornimmst werden nicht übernommen.\nDieser Modus dient nur dazu, Projekte zu retten und um Plugins zu testen.");
             Data.init(".temp");
         }
         Programm.logger.finest("");
-        Programm.logger.config("Theme: "+Settings.theme.getName());
-        Programm.logger.config("Limit-FPS: "+Settings.limitfps);
-        Programm.logger.config("Vsync: "+Settings.Vsync );
+        Programm.logger.config("Theme: " + Settings.theme.getName());
+        Programm.logger.config("Limit-FPS: " + Settings.limitfps);
+        Programm.logger.config("Vsync: " + Settings.Vsync);
         Programm.logger.finest("");
-        if(!Var.savemode) {
+        if (!Var.savemode) {
             UserDataInit.init();
         }
         Programm.logger.config("Setted File drop Listener");
@@ -159,9 +151,9 @@ public class Programm extends Game {
 
         Data.close();
 
-        if(Var.savemode) {
+        if (Var.savemode) {
             try {
-                FolderUtils.deleteFileOrFolder(Path.of(System.getProperty("user.home")+"/"+Data.foldername));
+                FolderUtils.deleteFileOrFolder(Path.of(System.getProperty("user.home") + "/" + Data.foldername));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -169,7 +161,6 @@ public class Programm extends Game {
 
 
         //ALC.destroy();//Destroy Sound System todo lwjgl3
-
 
 
         System.exit(0);

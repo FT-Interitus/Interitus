@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2020.
- * Author Tim & Felix
+ * Copyright by Tim and Felix
  */
 
 package de.ft.interitus.Logging;
@@ -47,7 +47,7 @@ public class LogColorFormater extends Formatter {
             builder.append(": ");
             builder.append(ANSI_CRAY);
             builder.append(record.getMessage());
-            if(!record.getMessage().endsWith("\n")) {
+            if (!record.getMessage().endsWith("\n")) {
                 builder.append("\n");
             }
         }

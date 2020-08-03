@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.UI.UIElements;
 
 import com.badlogic.gdx.Gdx;
@@ -6,12 +11,11 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.check.Check;
 import de.ft.interitus.UI.UIElements.check.InputManager;
 
-public class TextField  {
+public class TextField {
 
     private static final GlyphLayout glyphLayout = new GlyphLayout();
     private final int x;
@@ -31,14 +35,11 @@ public class TextField  {
     private int TextAnordnung = 0;
 
     /**
-     *
-     *
-     * @deprecated Use VisUI
-     *
      * @param x
      * @param y
      * @param w
      * @param h
+     * @deprecated Use VisUI
      */
 
 

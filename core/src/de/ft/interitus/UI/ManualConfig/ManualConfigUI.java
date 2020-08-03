@@ -1,6 +1,10 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.UI.ManualConfig;
 
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.Tree;
@@ -114,14 +118,12 @@ public class ManualConfigUI extends VisWindow {
     public void show() {
         rebuildtree();
         container.clearChildren();
-        if(ProjectManager.getActProjectVar().deviceConfigurations.size()>0) {
+        if (ProjectManager.getActProjectVar().deviceConfigurations.size() > 0) {
             ProjectManager.getActProjectVar().projectType.getProjectFunktions().runconfigsettings(container, ProjectManager.getActProjectVar().deviceConfigurations.get(0));
 
-        }else{
+        } else {
             RunConfigInformation.add(container);
         }
-
-
 
 
         testBuilder = new TestBuilder("Run Konfiguration", new StandardTableBuilder(padding));

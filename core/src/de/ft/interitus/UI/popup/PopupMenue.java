@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.UI.popup;
 
 import com.badlogic.gdx.Gdx;
@@ -7,7 +12,6 @@ import de.ft.interitus.UI.UIElements.UIElements.Button;
 import de.ft.interitus.UI.UIElements.check.Check;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.rightclick.RightClickButtonSelectEvent;
-
 import de.ft.interitus.utils.ArrayList;
 
 public class PopupMenue {

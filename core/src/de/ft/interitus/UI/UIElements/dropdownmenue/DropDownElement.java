@@ -1,17 +1,23 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.UI.UIElements.dropdownmenue;
 
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.UI.UIElements.UIElements.Button;
 
-public class DropDownElement {
+public class DropDownElement implements DropDownElementInterface{
+    Button button;
     private Texture ElementImage;
     private String Text;
-    Button button;
     private Object identifier;
-    public DropDownElement(Texture elementImage, String text,Object identifier) {
+
+    public DropDownElement(Texture elementImage, String text, Object identifier) {
         ElementImage = elementImage;
         Text = text;
-        button=new Button();
+        button = new Button();
         this.identifier = identifier;
         button.setVisible(false);
     }
@@ -28,6 +34,7 @@ public class DropDownElement {
         ElementImage = elementImage;
     }
 
+    @Override
     public String getText() {
         return Text;
     }
@@ -43,4 +50,13 @@ public class DropDownElement {
     public void setIdentifier(Object identifier) {
         this.identifier = identifier;
     }
+
+    @Override
+    public DropDownElement getSelectedElement() {
+        return this;
+    }
+
+
+
+
 }

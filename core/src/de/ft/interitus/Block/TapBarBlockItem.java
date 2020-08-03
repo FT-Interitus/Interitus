@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.Block;
 
 import com.badlogic.gdx.Gdx;
@@ -8,18 +13,18 @@ import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.check.Check;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.tappedbar.TapItem;
-import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
+import de.ft.interitus.projecttypes.ProjectManager;
 
 
 public class TapBarBlockItem implements TapItem {
+    private final Texture img;
+    private final PlatformSpecificBlock psb;
+    private final Check check = new Check();
     private int x;
     private int y;
     private int w = 50;
     private int h = 60;
-    private final Texture img;
-    private final PlatformSpecificBlock psb;
-    private final Check check = new Check();
 
     public TapBarBlockItem(PlatformSpecificBlock psb, Texture img) {
         this.img = img;

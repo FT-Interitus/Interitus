@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.UI.UIElements.check;
 
 import com.badlogic.gdx.Gdx;
@@ -14,11 +19,12 @@ public class InputManager {
     public static void addProcessor(InputProcessor p) {
         multiplexer.addProcessor(p);
     }
+
     public static void remove(InputProcessor p) {
         multiplexer.removeProcessor(p);
     }
 
     public static boolean contains(InputProcessor p) {
-       return multiplexer.getProcessors().contains(p,true);
+        return multiplexer.getProcessors().contains(p, true);
     }
 }

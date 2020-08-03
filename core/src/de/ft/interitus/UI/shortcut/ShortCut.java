@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.UI.shortcut;
 
 import com.badlogic.gdx.Gdx;
@@ -5,7 +10,6 @@ import com.badlogic.gdx.Input;
 import com.kotcrab.vis.ui.widget.MenuItem;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.Var;
-
 import de.ft.interitus.utils.ArrayList;
 
 public class ShortCut {

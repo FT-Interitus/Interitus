@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.UI.newproject;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -15,10 +20,10 @@ import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.Var;
-import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
-
+import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.ArrayList;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -165,7 +170,6 @@ public class NewProjectWindow {
                     BlockTappedBar.init();
                     UIVar.isdialogeopend = false;
                     // ClearActOpenProgramm.clear();
-
 
 
                     ProjectManager.getActProjectVar().projectType.initProject();

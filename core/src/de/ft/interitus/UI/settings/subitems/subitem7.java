@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.UI.settings.subitems;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -10,6 +15,7 @@ import de.ft.interitus.Settings;
 public class subitem7 {
     public static VisCheckBox tipps = new VisCheckBox("Tipps aktivieren");
     public static VisCheckBox personaltipps = new VisCheckBox("Personalisiere Tipps");
+
     public static void add(VisTable builder) {
 
 
@@ -17,15 +23,11 @@ public class subitem7 {
         personaltipps.setChecked(Settings.personalhits);
 
 
-        if(!tipps.isChecked()) {
-            personaltipps.setDisabled(true);
-        }else{
-            personaltipps.setDisabled(false);
-        }
+        personaltipps.setDisabled(!tipps.isChecked());
 
 
         builder.add(new VisLabel("Personalisyte Tipps")).expandX().fillY();
-    builder.row();
+        builder.row();
         builder.add(tipps).expandX().fillY().padTop(25);
         builder.row();
         builder.add(personaltipps).expandX().fillY().padTop(10);
@@ -37,11 +39,7 @@ public class subitem7 {
 
                 Settings.hints = tipps.isChecked();
 
-                if(tipps.isChecked()) {
-                    personaltipps.setDisabled(false);
-                }else{
-                    personaltipps.setDisabled(true);
-                }
+                personaltipps.setDisabled(!tipps.isChecked());
 
             }
         });

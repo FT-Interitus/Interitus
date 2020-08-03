@@ -1,10 +1,14 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.Block;
 
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import de.ft.interitus.utils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import de.ft.interitus.Block.Generators.BlockUpdateGenerator;
 import de.ft.interitus.Block.Generators.BlocktoSaveGenerator;
@@ -12,7 +16,6 @@ import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.RechtsKlick;
 import de.ft.interitus.ThreadManager;
-
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.block.BlockCreateEvent;
 import de.ft.interitus.events.block.BlockDeleteEvent;
@@ -22,9 +25,10 @@ import de.ft.interitus.events.rightclick.RightClickCloseEvent;
 import de.ft.interitus.events.rightclick.RightClickEventListener;
 import de.ft.interitus.events.rightclick.RightClickOpenEvent;
 import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
+import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.CheckKollision;
+import de.ft.interitus.utils.ShapeRenderer;
 
 import java.util.Objects;
 
@@ -43,6 +47,7 @@ public abstract class Block implements VisibleObjects {
     private final RightClickEventListener rightClickEventListener;
     private final BlockUpdateGenerator blockUpdateGenerator;
     private final BlocktoSaveGenerator blocktoSaveGenerator;
+    private final GlyphLayout glyphLayout = new GlyphLayout();
     public boolean seted = true; //Ob der Block losgelassen wurde bzw ob der Block eine statische Position hat
     public boolean moved = false; // Ob der Block gerade mit der Maus bewegt wird
     private boolean marked = false; //Ob der Block gerade makiert ist
@@ -62,9 +67,6 @@ public abstract class Block implements VisibleObjects {
     private Wire wire_left = null; //linke verbundene Wire
     private Wire wire_right = null; //rechte verbunde Wire
     private PlatformSpecificBlock blocktype;
-
-
-    private final GlyphLayout glyphLayout = new GlyphLayout();
 
 
     public Block(final int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock, BlockUpdateGenerator update, BlocktoSaveGenerator blocktoSaveGenerator) { //Initzialisieren des Blocks
@@ -107,7 +109,7 @@ public abstract class Block implements VisibleObjects {
             public void buttonclickedinwindow(RightClickButtonSelectEvent e) {
 
                 if (e.getButton().getText().contains("Löschen") && blockupdate.toggle) {
-                    if (RechtsKlick.mouseoverblockindex == Objects.requireNonNull(ProjectManager.getActProjectVar()).blocks.indexOf(instance)&&getBlocktype().canbedeleted())
+                    if (RechtsKlick.mouseoverblockindex == Objects.requireNonNull(ProjectManager.getActProjectVar()).blocks.indexOf(instance) && getBlocktype().canbedeleted())
                         instance.delete(false);
                 }
             }
@@ -259,7 +261,6 @@ public abstract class Block implements VisibleObjects {
     public int getX_dup_rechts() {
         return x_dup_rechts; //Gibt die X Position des rechten duplicates zurück
     }
-
 
 
     /***
@@ -482,11 +483,11 @@ public abstract class Block implements VisibleObjects {
     public void delete(boolean complete) { //Der Block soll gelöscht werden (complete beduetet das alle Blöcke gelöscht werden sollen)
 
 
-        if(ProjectManager.getActProjectVar().Blockwitherrors.contains(this.getIndex())) {
-            ProjectManager.getActProjectVar().Blockwitherrors.remove((Object)this.getIndex());
+        if (ProjectManager.getActProjectVar().Blockwitherrors.contains(this.getIndex())) {
+            ProjectManager.getActProjectVar().Blockwitherrors.remove((Object) this.getIndex());
         }
 
-            EventVar.rightClickEventManager.removeListener(this.rightClickEventListener);
+        EventVar.rightClickEventManager.removeListener(this.rightClickEventListener);
         EventVar.blockEventManager.deleteBlock(new BlockDeleteEvent(this, this)); //Fire Delete Event
         ProjectManager.getActProjectVar().markedblock = null; //Der Makierte Block wird auf null gesetzt da nur ein makierter block gelöscht werden kann //Anmerkung falls das ganze Programm gelöscht wird spielt das sowieso keine Rolle
         ProjectManager.getActProjectVar().marked = false; //Ob ein Block makiert ist wird auf false gesetzt da nur ein makierter Block gelöscht werden kann
@@ -603,13 +604,11 @@ public abstract class Block implements VisibleObjects {
 
     public void draw(SpriteBatch batch, ShapeRenderer shape, BitmapFont font) {
 
-        if(ProjectManager.getActProjectVar().Blockwitherrors.contains(this.getIndex())) {
+        if (ProjectManager.getActProjectVar().Blockwitherrors.contains(this.getIndex())) {
             batch.setColor(1, 0.8f, 0.8f, 1);
-        }else{
+        } else {
             batch.setColor(1, 1, 1, 1);
         }
-
-
 
 
         if (!this.blockupdate.toggle) {
@@ -631,17 +630,18 @@ public abstract class Block implements VisibleObjects {
             batch.draw(getBlocktype().getImageRight(), this.getX() + this.getW() - 6, this.getY(), 6, this.getH());
             batch.draw(AssetLoader.marked_mitte, this.getX() + 6, this.getY(), this.getW() - 12, this.getH()); // Block ohne das er makiert ist
             batch.draw(AssetLoader.marked_links, this.getX(), this.getY(), 6, this.getH());
-            batch.draw(AssetLoader.marked_rechts, this.getX() + this.getW() - 6, this.getY(), 6, this.getH());        }
+            batch.draw(AssetLoader.marked_rechts, this.getX() + this.getW() - 6, this.getY(), 6, this.getH());
+        }
         if (ProjectManager.getActProjectVar().biggestblock == this) {
-            if (this.isShowdupulicate_rechts()&&this.getBlocktype().canhasrightconnector()) {
+            if (this.isShowdupulicate_rechts() && this.getBlocktype().canhasrightconnector()) {
                 batch.setColor(1, 1, 1, 0.5f);
                 batch.draw(AssetLoader.img_block, this.x_dup_rechts, this.y, ProjectManager.getActProjectVar().markedblock.getW(), this.getH()); //Wenn der Block die größte überlappung hat wird er als show duplicat angezigt
                 batch.setColor(1, 1, 1, 1);
             }
 
-            if (this.isShowdupulicate_links()&&this.getBlocktype().canhasleftconnector()) {
+            if (this.isShowdupulicate_links() && this.getBlocktype().canhasleftconnector()) {
                 batch.setColor(1, 1, 1, 0.5f);
-                batch.draw(AssetLoader.img_block, this.x-ProjectManager.getActProjectVar().markedblock.getW(), this.y, ProjectManager.getActProjectVar().markedblock.getW(), this.getH()); //das gleiche für links
+                batch.draw(AssetLoader.img_block, this.x - ProjectManager.getActProjectVar().markedblock.getW(), this.y, ProjectManager.getActProjectVar().markedblock.getW(), this.getH()); //das gleiche für links
                 batch.setColor(1, 1, 1, 1);
             }
         }
@@ -673,11 +673,11 @@ public abstract class Block implements VisibleObjects {
             batch.begin();
         }
 
-        if (!this.blockupdate.isIsconnectorclicked() && ProjectManager.getActProjectVar().showleftdocker && this.getLeft() == null &&this.getBlocktype().canhasleftconnector()) {
+        if (!this.blockupdate.isIsconnectorclicked() && ProjectManager.getActProjectVar().showleftdocker && this.getLeft() == null && this.getBlocktype().canhasleftconnector()) {
             batch.draw(AssetLoader.connector_offerd, getWireconnector_left().x, getWireconnector_left().y, 20, 20);
         }
 
-        if (this.getRight() == null&&this.getBlocktype().canhasrightconnector()) {
+        if (this.getRight() == null && this.getBlocktype().canhasrightconnector()) {
             batch.draw(AssetLoader.connector, getwireconnector_right().x, getwireconnector_right().y, 20, 20);
         }
 
@@ -685,21 +685,21 @@ public abstract class Block implements VisibleObjects {
         //font.draw(batch,this.getBlocktype().getName(), this.getX() + 5, this.getY() + this.getH() - 10); //DEBUG Block Index auf dem Block anzeigen
 
 
-            ///////////////////////////////PARAMETER//ANZEIGE/////////////////////////////////////////////////
+        ///////////////////////////////PARAMETER//ANZEIGE/////////////////////////////////////////////////
 
-        if(this.getBlocktype().getBlockParameter()!=null&&this.getBlocktype().getBlockParameter().size()>0) {
+        if (this.getBlocktype().getBlockParameter() != null && this.getBlocktype().getBlockParameter().size() > 0) {
             float aktualX = this.getX();
 
             aktualX += 5;
             batch.draw(this.getBlocktype().getDescriptionImage(), aktualX, this.getY() + this.getH() - 30 - 15, 30, 30);
-            aktualX+=35;
-            for(int i=0;i<this.getBlocktype().getBlockParameter().size();i++){
-                batch.draw(this.getBlocktype().getBlockParameter().get(i).getParameterTexture(),aktualX+5,this.getY()+30,20,20);
-                batch.draw(AssetLoader.Plug_ZahlParameter,aktualX,this.getY(),30,30);
+            aktualX += 35;
+            for (int i = 0; i < this.getBlocktype().getBlockParameter().size(); i++) {
+                batch.draw(this.getBlocktype().getBlockParameter().get(i).getParameterTexture(), aktualX + 5, this.getY() + 30, 20, 20);
+                batch.draw(AssetLoader.Plug_ZahlParameter, aktualX, this.getY(), 30, 30);
                 font.getData().setScale(0.9f);
-                glyphLayout.setText(font, "" +  this.getBlocktype().getBlockParameter().get(i).getParameter());//TODO var type!!
-                font.draw(batch,glyphLayout,aktualX+15-glyphLayout.width/2,y+glyphLayout.height*1.5f);
-                aktualX+=30;
+                glyphLayout.setText(font, "" + this.getBlocktype().getBlockParameter().get(i).getParameter());//TODO var type!!
+                font.draw(batch, glyphLayout, aktualX + 15 - glyphLayout.width / 2, y + glyphLayout.height * 1.5f);
+                aktualX += 30;
             }
         }
         /*
@@ -768,7 +768,7 @@ public abstract class Block implements VisibleObjects {
         if (this.isShowdupulicate_links()) { //Für links
             try {
 
-                flaeche = (CheckKollision.flache(this.x-ProjectManager.getActProjectVar().markedblock.getW(), this.getY(), this.getW(), this.getH(), ProjectManager.getActProjectVar().markedblock.getX(), ProjectManager.getActProjectVar().markedblock.getY()));//Fläsche mit der die Blöcke überlappen um zu brechenen an welchen Block der Block springen wird
+                flaeche = (CheckKollision.flache(this.x - ProjectManager.getActProjectVar().markedblock.getW(), this.getY(), this.getW(), this.getH(), ProjectManager.getActProjectVar().markedblock.getX(), ProjectManager.getActProjectVar().markedblock.getY()));//Fläsche mit der die Blöcke überlappen um zu brechenen an welchen Block der Block springen wird
 
             } catch (NullPointerException ignored) {
 

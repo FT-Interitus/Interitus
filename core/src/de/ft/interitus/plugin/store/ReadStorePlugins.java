@@ -1,8 +1,12 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.plugin.store;
 
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Programm;
-import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.utils.DownloadFile;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,7 +36,7 @@ public class ReadStorePlugins {
 
 
         try {
-            while(true) {
+            while (true) {
                 if (!jsonObject.has("plugin" + plugincounter)) {
                     break;
                 }
@@ -61,9 +65,6 @@ public class ReadStorePlugins {
 
         Programm.logger.config("Loaded 10 Store Plugin Entrys");
     }
-
-
-
 
 
 }

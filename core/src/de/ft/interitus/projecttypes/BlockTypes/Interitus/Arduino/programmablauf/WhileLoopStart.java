@@ -1,16 +1,21 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf;
 
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.projecttypes.ProjectTypes;
-import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
 import de.ft.interitus.projecttypes.BlockTypes.BlockTopParameter;
+import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
+import de.ft.interitus.projecttypes.ProjectTypes;
+import de.ft.interitus.utils.ArrayList;
 
 import java.awt.*;
-import de.ft.interitus.utils.ArrayList;
 
 public class WhileLoopStart extends PlatformSpecificBlock implements ArduinoBlock {
 
@@ -54,8 +59,6 @@ public class WhileLoopStart extends PlatformSpecificBlock implements ArduinoBloc
     public Texture getSmallImage() {
         return AssetLoader.img_block;
     }
-
-
 
 
     @Override

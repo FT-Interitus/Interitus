@@ -1,12 +1,13 @@
 /*
  * Copyright (c) 2020.
- * Author Tim & Felix
+ * Copyright by Tim and Felix
  */
 
 package de.ft.interitus.Logging;
 
-import java.io.OutputStream;
 import de.ft.interitus.utils.ArrayList;
+
+import java.io.OutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -40,10 +41,10 @@ public class LoggerOutputStream extends OutputStream {
      */
     @Override
     public void flush() {
-        if(level==Level.INFO) {
+        if (level == Level.INFO) {
             logger.log(level, mem + "\n");
             mem = "";
-        }else{
+        } else {
             logger.log(level, mem + "");
             mem = "";
         }

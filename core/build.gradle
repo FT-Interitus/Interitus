@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 apply plugin: "java"
 
 sourceCompatibility = 1.14

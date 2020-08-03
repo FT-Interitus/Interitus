@@ -9,7 +9,6 @@ import de.ft.interitus.Block.Interitus.*;
 import de.ft.interitus.Block.Interitus.save.DefaultSaveBlockGenerator;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.compiler.Interitus.Arduino.ArduinoCompiler;
-import de.ft.interitus.projecttypes.ProjectTypes;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.actionblocks.SetPinMode;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.actionblocks.digitalWrite;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.Wait;
@@ -18,13 +17,12 @@ import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmaufbau.LoopBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmaufbau.SetupBlock;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
-
-
+import de.ft.interitus.projecttypes.ProjectTypes;
 import de.ft.interitus.utils.ArrayList;
 
 public class InitArduino {
     static ArrayList<PlatformSpecificBlock> blocks = new ArrayList<>();
-    static ProjectTypes arduino = new ProjectTypes(ProgrammingSpace.nativ, "Arduino-Projekt", blocks, new DefaultBlockGenerator(), new DefaultBlockUpdateGenerator(), new DefaultWireGenerator(), new DefaultWireNodeGenerator(), new DefaultSaveBlockGenerator(), new DefaultBlockVarGenerator(),new ArduinoFunktions(),new ArduinoCompiler());
+    static ProjectTypes arduino = new ProjectTypes(ProgrammingSpace.nativ, "Arduino-Projekt", blocks, new DefaultBlockGenerator(), new DefaultBlockUpdateGenerator(), new DefaultWireGenerator(), new DefaultWireNodeGenerator(), new DefaultSaveBlockGenerator(), new DefaultBlockVarGenerator(), new ArduinoFunktions(), new ArduinoCompiler());
 
 
     public static ProjectTypes init() {
@@ -36,8 +34,6 @@ public class InitArduino {
         blocks.add(new WhileLoopEnd(arduino));
         blocks.add(new SetPinMode(arduino));
         blocks.add(new digitalWrite(arduino));
-
-
 
 
         return arduino;

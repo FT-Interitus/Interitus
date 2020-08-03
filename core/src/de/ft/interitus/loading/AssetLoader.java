@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.loading;
 
 import com.badlogic.gdx.Gdx;
@@ -9,10 +14,10 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Var;
 import de.ft.interitus.plugin.store.StorePluginsVar;
+import de.ft.interitus.utils.ArrayList;
 import de.ft.interitus.utils.DownloadFile;
 
 import java.io.IOException;
-import de.ft.interitus.utils.ArrayList;
 
 public class AssetLoader {
 
@@ -118,7 +123,7 @@ public class AssetLoader {
     public static Texture img_addrunconfig_pressed;
 
     public static Texture waitforfinishbuild;
-    
+
     ///////////////////////////-BlockParameter Bilder-/////////////////////////////
     public static Texture img_WaitBlock_warteZeit_Parameter;
 
@@ -169,8 +174,6 @@ public class AssetLoader {
     public static Texture aufklapppfeil;
 
 
-
-
     public static AssetManager manager = new AssetManager();
 
     public static ArrayList<Pixmap> pixmap = new ArrayList<>();
@@ -206,12 +209,10 @@ public class AssetLoader {
             manager.load(workingdirectory + "Block/ParameterStecker/ZahlParameterStecker.png", Texture.class);
 
 
-
             group = "TabBar";
             manager.load(workingdirectory + "Block/Parameter/WaitBlock/WaitParameter.png", Texture.class);
 
             backcursor = new Pixmap(Gdx.files.internal("backcursor.png"));
-
 
 
             manager.load(workingdirectory + "TabBar/Tabimage.png", Texture.class);
@@ -242,11 +243,11 @@ public class AssetLoader {
             manager.load(workingdirectory + "ButtonBar/editorbutton_mouseover.png", Texture.class);
             manager.load(workingdirectory + "ButtonBar/editorbutton_pressed.png", Texture.class);
 
-             manager.load(workingdirectory + "ButtonBar/addrunconfig.png", Texture.class);
+            manager.load(workingdirectory + "ButtonBar/addrunconfig.png", Texture.class);
             manager.load(workingdirectory + "ButtonBar/addrunconfig_mouseover.png", Texture.class);
             manager.load(workingdirectory + "ButtonBar/addrunconfig_pressed.png", Texture.class);
 
-            manager.load(workingdirectory+"loadinganimation.png",Texture.class);
+            manager.load(workingdirectory + "loadinganimation.png", Texture.class);
 
             group = "mappen";
             manager.load(workingdirectory + "Bar/Mappe1.png", Texture.class);
@@ -299,11 +300,6 @@ public class AssetLoader {
             manager.load(workingdirectory + "Block/Block_PinMode/beschreibungsbild.png", Texture.class);
             manager.load(workingdirectory + "Block/Block_DigitalWrite/beschreibungsbild.png", Texture.class);
             manager.load(workingdirectory + "aufklapppfeil.png", Texture.class);
-
-
-
-
-
 
 
             group = "Switches";
@@ -359,10 +355,10 @@ public class AssetLoader {
                 }
             };
 
-if(!Var.disablePluginSubSystem&&!Var.nointernetconnection) {
-    loadimagesfromweb.start();
+            if (!Var.disablePluginSubSystem && !Var.nointernetconnection) {
+                loadimagesfromweb.start();
 
-}
+            }
 
 
         } catch (Exception e) {
@@ -385,9 +381,9 @@ if(!Var.disablePluginSubSystem&&!Var.nointernetconnection) {
             Plug_ZahlParameter = manager.get(workingdirectory + "Block/ParameterStecker/ZahlParameterStecker.png", Texture.class);
 
 
-          arduinomegaimage =  manager.get(workingdirectory + "arduinomegaminiimage.png", Texture.class);
-           arduinonanoimage = manager.get(workingdirectory + "arduinonanominiimage.png", Texture.class);
-           arduinounoimage = manager.get(workingdirectory + "arduinounominiimage.png", Texture.class);
+            arduinomegaimage = manager.get(workingdirectory + "arduinomegaminiimage.png", Texture.class);
+            arduinonanoimage = manager.get(workingdirectory + "arduinonanominiimage.png", Texture.class);
+            arduinounoimage = manager.get(workingdirectory + "arduinounominiimage.png", Texture.class);
 
 
             img_Tab = manager.get(workingdirectory + "TabBar/Tabimage.png", Texture.class);
@@ -408,16 +404,16 @@ if(!Var.disablePluginSubSystem&&!Var.nointernetconnection) {
             img_debugstart_mouseover = manager.get(workingdirectory + "ButtonBar/debugbutton_mouseover.png", Texture.class);
             img_debugstart_pressed = manager.get(workingdirectory + "ButtonBar/debugbutton_pressed.png", Texture.class);
 
-           img_editor = manager.get(workingdirectory + "ButtonBar/editorbutton.png", Texture.class);
-            img_editor_mouseover =   manager.get(workingdirectory + "ButtonBar/editorbutton_mouseover.png", Texture.class);
-            img_editor_pressed =  manager.get(workingdirectory + "ButtonBar/editorbutton_pressed.png", Texture.class);
+            img_editor = manager.get(workingdirectory + "ButtonBar/editorbutton.png", Texture.class);
+            img_editor_mouseover = manager.get(workingdirectory + "ButtonBar/editorbutton_mouseover.png", Texture.class);
+            img_editor_pressed = manager.get(workingdirectory + "ButtonBar/editorbutton_pressed.png", Texture.class);
 
-           img_addrunconfig = manager.get(workingdirectory + "ButtonBar/addrunconfig.png", Texture.class);
+            img_addrunconfig = manager.get(workingdirectory + "ButtonBar/addrunconfig.png", Texture.class);
             img_addrunconfig_mouseover = manager.get(workingdirectory + "ButtonBar/addrunconfig_mouseover.png", Texture.class);
             img_addrunconfig_pressed = manager.get(workingdirectory + "ButtonBar/addrunconfig_pressed.png", Texture.class);
 
 
-            waitforfinishbuild = manager.get(workingdirectory+"loadinganimation.png",Texture.class);
+            waitforfinishbuild = manager.get(workingdirectory + "loadinganimation.png", Texture.class);
 
 
             img_mappe1 = manager.get(workingdirectory + "Bar/Mappe1.png", Texture.class);
@@ -468,13 +464,6 @@ if(!Var.disablePluginSubSystem&&!Var.nointernetconnection) {
             PinModeBlock_description_image = manager.get(workingdirectory + "Block/Block_PinMode/beschreibungsbild.png", Texture.class);
             DigitalWrite_description_image = manager.get(workingdirectory + "Block/Block_DigitalWrite/beschreibungsbild.png", Texture.class);
             aufklapppfeil = manager.get(workingdirectory + "aufklapppfeil.png", Texture.class);
-
-
-
-
-
-
-
 
 
             //Switch

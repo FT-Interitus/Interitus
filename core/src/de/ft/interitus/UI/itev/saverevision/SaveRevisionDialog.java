@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2020.
- * Author Tim & Felix
+ * Copyright by Tim and Felix
  */
 
 package de.ft.interitus.UI.itev.saverevision;

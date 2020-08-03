@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.plugin;
 
 import com.kotcrab.vis.ui.widget.Menu;
@@ -18,18 +23,17 @@ import java.util.List;
  * Plugin bridge into the Programm
  */
 public class PluginGateway {
-    public static ArrayList<ProjectTypes> pluginprojekttypes = new ArrayList<>();
-    public static List<VisTable> pluginsettings = new ArrayList<>();
-    public static List<Menu> pluginMenubar = new ArrayList<>();
-    public static ArrayList<ShortCutChecker> pluginshortCutsChecker = new ArrayList<>();
-    public static ArrayList<ShortCut> pluginshortCuts = new ArrayList<>();
     private static final ArrayList<Plugin> pluginprojekttypesplugins = new ArrayList<>();
     private static final ArrayList<Plugin> pluginsettingsplugins = new ArrayList<>();
     private static final ArrayList<Plugin> pluginMenubarplugins = new ArrayList<>();
     private static final ArrayList<Plugin> pluginshortCutsCheckerplugins = new ArrayList<>();
     private static final ArrayList<Plugin> pluginshortCutsplugins = new ArrayList<>();
-
     private static final ArrayList<Plugin> themesplugins = new ArrayList<>();
+    public static ArrayList<ProjectTypes> pluginprojekttypes = new ArrayList<>();
+    public static List<VisTable> pluginsettings = new ArrayList<>();
+    public static List<Menu> pluginMenubar = new ArrayList<>();
+    public static ArrayList<ShortCutChecker> pluginshortCutsChecker = new ArrayList<>();
+    public static ArrayList<ShortCut> pluginshortCuts = new ArrayList<>();
 
     public static boolean addsettings(VisTable settingsclass, Plugin requestedplugin) {
         if (PluginManagerHandler.loadedplugins.contains(requestedplugin)) {
@@ -167,7 +171,7 @@ public class PluginGateway {
                     RegisteredThemes.themes.remove(i + 2); //<- Because there are 2 Native Themes yet
                 }
             }
-        }catch (Throwable e) {
+        } catch (Throwable e) {
             e.printStackTrace();
         }
 

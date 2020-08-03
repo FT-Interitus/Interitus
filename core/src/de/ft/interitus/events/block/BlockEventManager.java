@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.events.block;
 
 import de.ft.interitus.Block.Block;
@@ -40,10 +45,10 @@ public class BlockEventManager implements BlockEventListener {
     }
 
     @Override
-    public void setNeighbor(BlockNeighborSetEvent e, Block block, Block neightbour,boolean right) {
+    public void setNeighbor(BlockNeighborSetEvent e, Block block, Block neightbour, boolean right) {
         for (int i = 0; i < listener.size(); i++)
             ((BlockEventListener) listener.elementAt(i)).
-                    setNeighbor(e,block, neightbour,right);
+                    setNeighbor(e, block, neightbour, right);
     }
 
 

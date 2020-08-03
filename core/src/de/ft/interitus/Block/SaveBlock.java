@@ -1,15 +1,21 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.Block;
 
 
-import java.io.Serializable;
-
 import de.ft.interitus.utils.ArrayList;
+
+import java.io.Serializable;
 
 public abstract class SaveBlock implements Serializable {
 
 
     private static final long serialVersionUID = 2637840000001L; //Achtung änderungen können bewirken das ältere Programme nicht geladen werden können
     private final ArrayList<ArrayList<Integer>> nodes;
+    private final ArrayList<String> parameters;
     private int x = 0;
     private int y = 0;
     private int index = -1;
@@ -17,7 +23,6 @@ public abstract class SaveBlock implements Serializable {
     private int index_rechts = -1;
     private boolean isspacebetweenrightblock = false;
     private int platformspecificblockid = 0;
-    private final ArrayList<String> parameters;
 
 
     public SaveBlock(int x, int y, int index, int index_links, int index_rechts, boolean isspacebetweenrightblock, ArrayList<ArrayList<Integer>> nodes, int platformspecificblockid, ArrayList<String> parameters) {

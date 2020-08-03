@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.network.bettertogether;
 
 import de.ft.interitus.Block.Block;
@@ -9,53 +14,52 @@ import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.block.BlockEventAdapter;
 import de.ft.interitus.events.block.BlockNeighborSetEvent;
 import de.ft.interitus.projecttypes.ProjectManager;
+import de.ft.interitus.utils.ArrayList;
 import de.ft.interitus.utils.Unproject;
 
 import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import de.ft.interitus.utils.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
 public class Client {
 
-   private static ArrayList<String> sendinglist = new ArrayList<>();
+    private static final ArrayList<String> sendinglist = new ArrayList<>();
+
     public static void connect(String ip, int Port) {
 
         EventVar.blockEventManager.addListener(new BlockEventAdapter() {
             @Override
-            public void setNeighbor(BlockNeighborSetEvent e, Block block, Block neightbour,boolean right) {
+            public void setNeighbor(BlockNeighborSetEvent e, Block block, Block neightbour, boolean right) {
 
 
-                if(right) {
-                    if(neightbour==null) {
-                        sendinglist.add("!BNR!"+block.getIndex()+"t"+"-1"+"\n");
-                    }else {
+                if (right) {
+                    if (neightbour == null) {
+                        sendinglist.add("!BNR!" + block.getIndex() + "t" + "-1" + "\n");
+                    } else {
                         sendinglist.add("!BNR!" + block.getIndex() + "t" + neightbour.getIndex() + "\n");
                     }
-                }else{
-                    if(neightbour==null) {
+                } else {
+                    if (neightbour == null) {
                         sendinglist.add("!BNL!" + block.getIndex() + "t" + "-1" + "\n");
-                    }else {
+                    } else {
                         sendinglist.add("!BNL!" + block.getIndex() + "t" + neightbour.getIndex() + "\n");
                     }
                 }
-
-
 
 
             }
         });
 
         try {
-            Socket socket = new Socket(ip,Port);
+            Socket socket = new Socket(ip, Port);
 
             try {
 
                 OutputStreamWriter outputStreamWriter = new OutputStreamWriter(socket.getOutputStream());
-                outputStreamWriter.write("!R!V"+ Var.PROGRAMM_VERSION+"\\|"+"U"+Var.username+"\n");
+                outputStreamWriter.write("!R!V" + Var.PROGRAMM_VERSION + "\\|" + "U" + Var.username + "\n");
                 outputStreamWriter.flush();
 
 
@@ -63,7 +67,7 @@ public class Client {
                 reader = new InputStreamReader(socket.getInputStream());
                 BufferedReader bfreader = new BufferedReader(reader);
 
-                if(bfreader.readLine().contains("ok")) {
+                if (bfreader.readLine().contains("ok")) {
                     Programm.logger.config("Accepted");
 
 
@@ -71,7 +75,7 @@ public class Client {
                     try {
                         ArrayList<SaveBlock> titleList;
                         Object object = objectInput.readObject();
-                        titleList =  (ArrayList<SaveBlock>) object;
+                        titleList = (ArrayList<SaveBlock>) object;
                         BlockCalculator.extract(titleList);
                     } catch (ClassNotFoundException e) {
                         System.out.println("The title list has not come from the server");
@@ -83,22 +87,21 @@ public class Client {
                     blockmovingtimer.scheduleAtFixedRate(new TimerTask() {
                         @Override
                         public void run() {
-                            if(ProjectManager.getActProjectVar().markedblock!=null) {
-                               sendinglist.add("!BM!"+ProjectManager.getActProjectVar().markedblock.getIndex()+"t"+ProjectManager.getActProjectVar().markedblock.getX()+"t"+ProjectManager.getActProjectVar().markedblock.getY()+"\n");
+                            if (ProjectManager.getActProjectVar().markedblock != null) {
+                                sendinglist.add("!BM!" + ProjectManager.getActProjectVar().markedblock.getIndex() + "t" + ProjectManager.getActProjectVar().markedblock.getX() + "t" + ProjectManager.getActProjectVar().markedblock.getY() + "\n");
 
                             }
 
 
                         }
-                    },50,50);
-
+                    }, 50, 50);
 
 
                     sendinglist.clear();
 
-                    while(true) {
+                    while (true) {
 
-                        while(sendinglist.size()!=0) {
+                        while (sendinglist.size() != 0) {
 
                             outputStreamWriter.write(sendinglist.get(0));
                             outputStreamWriter.flush();
@@ -111,7 +114,7 @@ public class Client {
                                 e.printStackTrace();
                             }
 
-                            outputStreamWriter.write("!M!"+(int)Unproject.unproject().x+"t"+(int)Unproject.unproject().y+"\n");
+                            outputStreamWriter.write("!M!" + (int) Unproject.unproject().x + "t" + (int) Unproject.unproject().y + "\n");
                             outputStreamWriter.flush();
 
                             try {
@@ -124,15 +127,8 @@ public class Client {
                         }
 
 
-                        outputStreamWriter.write("!M!"+(int)Unproject.unproject().x+"t"+(int)Unproject.unproject().y+"\n");
+                        outputStreamWriter.write("!M!" + (int) Unproject.unproject().x + "t" + (int) Unproject.unproject().y + "\n");
                         outputStreamWriter.flush();
-
-
-
-
-
-
-
 
 
                         try {
@@ -143,14 +139,11 @@ public class Client {
                     }
 
 
-
-
-                }else{
+                } else {
                     Programm.logger.config("Error");
                     socket.close();
                     return;
                 }
-
 
 
             } catch (IOException e) {
@@ -163,9 +156,6 @@ public class Client {
             e.printStackTrace();
         }
     }
-
-
-
 
 
 }

@@ -1,7 +1,13 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.datamanager.userdata;
 
-import java.io.*;
 import de.ft.interitus.utils.ArrayList;
+
+import java.io.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
@@ -52,7 +58,6 @@ public class Zip {
     }
 
 
-
     public static void addFilesToExistingZip(File zipFile,
                                              File[] files) throws IOException {
         // get a temp file
@@ -60,10 +65,9 @@ public class Zip {
         // delete it, otherwise you cannot rename your existing zip to it.
         tempFile.delete();
 
-        boolean renameOk=zipFile.renameTo(tempFile);
-        if (!renameOk)
-        {
-            throw new RuntimeException("could not rename the file "+zipFile.getAbsolutePath()+" to "+tempFile.getAbsolutePath());
+        boolean renameOk = zipFile.renameTo(tempFile);
+        if (!renameOk) {
+            throw new RuntimeException("could not rename the file " + zipFile.getAbsolutePath() + " to " + tempFile.getAbsolutePath());
         }
         byte[] buf = new byte[1024];
 

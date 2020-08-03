@@ -1,8 +1,12 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.plugin.store.search;
 
 import de.ft.interitus.plugin.store.StorePluginEntry;
 import de.ft.interitus.plugin.store.StorePluginsVar;
-
 import de.ft.interitus.utils.ArrayList;
 
 public class findStorePluginEntry {

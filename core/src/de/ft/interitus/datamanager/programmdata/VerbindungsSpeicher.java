@@ -1,7 +1,11 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.datamanager.programmdata;
 
 import de.ft.interitus.Block.Devices;
-
 import de.ft.interitus.utils.ArrayList;
 
 /***

@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.UI.setup;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;

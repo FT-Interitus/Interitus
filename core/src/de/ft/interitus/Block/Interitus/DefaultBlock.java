@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.Block.Interitus;
 
 import de.ft.interitus.Block.Block;
@@ -12,7 +17,7 @@ public class DefaultBlock extends Block {
         super(index, x, y, w, h, platformSpecificBlock, update, blocktoSaveGenerator);
 
 
-        if(platformSpecificBlock.getBlockParameter()!=null) {
+        if (platformSpecificBlock.getBlockParameter() != null) {
             for (int i = 0; i < platformSpecificBlock.getBlockParameter().size(); i++) {
                 platformSpecificBlock.getBlockParameter().get(i).setBlock(this);
             }

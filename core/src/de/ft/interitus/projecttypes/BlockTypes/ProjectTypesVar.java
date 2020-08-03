@@ -1,7 +1,11 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.projecttypes.BlockTypes;
 
 import de.ft.interitus.projecttypes.ProjectTypes;
-
 import de.ft.interitus.utils.ArrayList;
 
 public class ProjectTypesVar {

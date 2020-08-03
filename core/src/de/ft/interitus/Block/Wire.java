@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.Block;
 
 import com.badlogic.gdx.Gdx;
@@ -9,7 +14,6 @@ import de.ft.interitus.Programm;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.RechtsKlick;
 import de.ft.interitus.events.EventVar;
-import de.ft.interitus.events.block.BlockEventAdapter;
 import de.ft.interitus.events.block.BlockKillMovingWiresEvent;
 import de.ft.interitus.events.rightclick.RightClickButtonSelectEvent;
 import de.ft.interitus.events.rightclick.RightClickCloseEvent;
@@ -97,8 +101,8 @@ public abstract class Wire {
 
                     }
 
-                    for(int i =0;i<ProjectManager.getActProjectVar().visibleWireNodes.size();i++) {
-                        if(CheckKollision.object(ProjectManager.getActProjectVar().visibleWireNodes.get(i).getX(),ProjectManager.getActProjectVar().visibleWireNodes.get(i).getY(),WireNode.public_w,WireNode.public_h, (int) ProgrammingSpace.viewport.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1)){
+                    for (int i = 0; i < ProjectManager.getActProjectVar().visibleWireNodes.size(); i++) {
+                        if (CheckKollision.object(ProjectManager.getActProjectVar().visibleWireNodes.get(i).getX(), ProjectManager.getActProjectVar().visibleWireNodes.get(i).getY(), WireNode.public_w, WireNode.public_h, (int) ProgrammingSpace.viewport.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1)) {
                             counter++;
                         }
                     }

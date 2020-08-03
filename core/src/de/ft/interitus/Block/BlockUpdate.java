@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.Block;
 
 import com.badlogic.gdx.Gdx;
@@ -11,7 +16,6 @@ import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.Var;
-
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.CheckKollision;
@@ -35,8 +39,8 @@ public abstract class BlockUpdate extends Thread {
     private boolean willbedelete = false;
     private boolean deleteonend = false;
     private boolean IsMousealreadypressed = false;
-    private boolean changewillbedeleted=false;
-    private boolean tempdelete=false;
+    private boolean changewillbedeleted = false;
+    private boolean tempdelete = false;
 
     public BlockUpdate(Block block) {
         this.block = block; //Der Block wird zugewiesen
@@ -59,8 +63,8 @@ public abstract class BlockUpdate extends Thread {
             public void run() {
 
 
-                if(block.isMarked()) {
-                    if(block!=ProjectManager.getActProjectVar().markedblock) {
+                if (block.isMarked()) {
+                    if (block != ProjectManager.getActProjectVar().markedblock) {
                         block.setMarked(false);
                     }
 
@@ -92,7 +96,7 @@ public abstract class BlockUpdate extends Thread {
                         //TODO
 
 
-                        if (block.getBlocktype().canhasleftconnector()&&!isIsconnectorclicked() && ProjectManager.getActProjectVar().showleftdocker && CheckKollision.object(block.getX_entrance(), block.getY_entrance(), block.getW_entrance(), block.getH_entrance(), (int) ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1) && Gdx.input.isButtonJustPressed(0) && block.getLeft() == null) { //TODO Durch das Just pressed kann es sein das es manchmal verpasst wird dieses Event auszuführen
+                        if (block.getBlocktype().canhasleftconnector() && !isIsconnectorclicked() && ProjectManager.getActProjectVar().showleftdocker && CheckKollision.object(block.getX_entrance(), block.getY_entrance(), block.getW_entrance(), block.getH_entrance(), (int) ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1) && Gdx.input.isButtonJustPressed(0) && block.getLeft() == null) { //TODO Durch das Just pressed kann es sein das es manchmal verpasst wird dieses Event auszuführen
                             ProjectManager.getActProjectVar().showleftdocker = false;
                             ProjectManager.getActProjectVar().movingwires.setMovebymouse(false);
                             ProjectManager.getActProjectVar().movingwires.setRight_connection(block);
@@ -238,24 +242,23 @@ public abstract class BlockUpdate extends Thread {
                         if (block.isMoving() && Gdx.input.isButtonPressed(0)) {
 
 
+                            tempdelete = UI.check.isMouseover(UIVar.BlockBarX, UIVar.BlockBarY, UIVar.BlockBarW, UIVar.BlockBarH) && block.getBlocktype().canbedeleted();
 
-                            tempdelete = UI.check.isMouseover(UIVar.BlockBarX,UIVar.BlockBarY,UIVar.BlockBarW,UIVar.BlockBarH)&&block.getBlocktype().canbedeleted();
 
-
-                            if(tempdelete!=willbedelete) {
-                                changewillbedeleted=true;
+                            if (tempdelete != willbedelete) {
+                                changewillbedeleted = true;
                                 willbedelete = tempdelete;
-                            }else{
-                                changewillbedeleted=false;
+                            } else {
+                                changewillbedeleted = false;
                             }
 
-                            if(changewillbedeleted) {
+                            if (changewillbedeleted) {
                                 //Wenn der Mauszeiger die Ablagefläche berührt
 
-                                if(willbedelete) {
+                                if (willbedelete) {
                                     Gdx.graphics.setCursor(Gdx.graphics.newCursor(AssetLoader.backcursor, 0, 0));
                                     ProjectManager.getActProjectVar().removeblock = true;
-                                }else{
+                                } else {
                                     Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Arrow);
                                     ProjectManager.getActProjectVar().removeblock = false;
                                 }
@@ -320,7 +323,7 @@ public abstract class BlockUpdate extends Thread {
                         }
 
 
-                        if ((block.isShowdupulicate_links()&&block.getBlocktype().canhasleftconnector()) || (block.isShowdupulicate_rechts()&&block.getBlocktype().canhasrightconnector())) {
+                        if ((block.isShowdupulicate_links() && block.getBlocktype().canhasleftconnector()) || (block.isShowdupulicate_rechts() && block.getBlocktype().canhasrightconnector())) {
                             if (ProjectManager.getActProjectVar().showduplicat.indexOf(block) == -1) {
                                 ProjectManager.getActProjectVar().showduplicat.add(block);
                             }
@@ -378,12 +381,12 @@ public abstract class BlockUpdate extends Thread {
                                 try {
                                     if (ProjectManager.getActProjectVar().uberlapptmitmarkedblock.get(i).getBlockMarkedblockuberlappungsflache() > biggestvalue2) {
 
-                                            biggestvalue2 = ProjectManager.getActProjectVar().uberlapptmitmarkedblock.get(i).getBlockMarkedblockuberlappungsflache(); //TODO h
-                                            biggestindex2 = i;
+                                        biggestvalue2 = ProjectManager.getActProjectVar().uberlapptmitmarkedblock.get(i).getBlockMarkedblockuberlappungsflache(); //TODO h
+                                        biggestindex2 = i;
 
                                     }
                                 } catch (NullPointerException e) {
-                                }catch (IndexOutOfBoundsException e) {
+                                } catch (IndexOutOfBoundsException e) {
 
                                 }
                             }
@@ -477,7 +480,7 @@ public abstract class BlockUpdate extends Thread {
                         }
 
 
-                        if (!CheckKollision.checkmousewithblock(block) && Gdx.input.isButtonPressed(0) && !block.isMoving() && block.isMarked()&& (!UI.check.isMouseover(UIVar.blockeinstellungen_x,UIVar.blockeinstellungen_y,UIVar.blockeinstellungen_w,UIVar.blockeinstellungen_h)&&!UI.check.wasMousePressed(UIVar.blockeinstellungen_x,UIVar.blockeinstellungen_y,UIVar.blockeinstellungen_w,UIVar.blockeinstellungen_h)||!UIVar.isBlockSettingsopen)) {
+                        if (!CheckKollision.checkmousewithblock(block) && Gdx.input.isButtonPressed(0) && !block.isMoving() && block.isMarked() && (!UI.check.isMouseover(UIVar.blockeinstellungen_x, UIVar.blockeinstellungen_y, UIVar.blockeinstellungen_w, UIVar.blockeinstellungen_h) && !UI.check.wasMousePressed(UIVar.blockeinstellungen_x, UIVar.blockeinstellungen_y, UIVar.blockeinstellungen_w, UIVar.blockeinstellungen_h) || !UIVar.isBlockSettingsopen)) {
                             block.setMarked(false);
                             ProjectManager.getActProjectVar().marked = false;
                             ProjectManager.getActProjectVar().markedblock = null;
@@ -487,7 +490,7 @@ public abstract class BlockUpdate extends Thread {
                         //Setzt die Nachbaren
                         if (ProjectManager.getActProjectVar().marked && !block.isMarked()) {
                             try {
-                                if (CheckKollision.checkblockwithduplicate(ProjectManager.getActProjectVar().markedblock, block, 0) && block.getRight() == null && ProjectManager.getActProjectVar().markedblock.getWire_left() == null&&ProjectManager.getActProjectVar().markedblock.getBlocktype().canhasleftconnector()) {
+                                if (CheckKollision.checkblockwithduplicate(ProjectManager.getActProjectVar().markedblock, block, 0) && block.getRight() == null && ProjectManager.getActProjectVar().markedblock.getWire_left() == null && ProjectManager.getActProjectVar().markedblock.getBlocktype().canhasleftconnector()) {
                                     if (ProjectManager.getActProjectVar().markedblock.isMoving()) {
                                         //System.out.println("Kollision!");
 
@@ -524,7 +527,7 @@ public abstract class BlockUpdate extends Thread {
 
 
                             try {
-                                if (CheckKollision.checkblockwithduplicate(ProjectManager.getActProjectVar().markedblock, block, 1) && block.getLeft() == null && ProjectManager.getActProjectVar().markedblock.getWire_right() == null&&ProjectManager.getActProjectVar().markedblock.getBlocktype().canhasrightconnector()) {
+                                if (CheckKollision.checkblockwithduplicate(ProjectManager.getActProjectVar().markedblock, block, 1) && block.getLeft() == null && ProjectManager.getActProjectVar().markedblock.getWire_right() == null && ProjectManager.getActProjectVar().markedblock.getBlocktype().canhasrightconnector()) {
 
                                     if (ProjectManager.getActProjectVar().markedblock.isMoving()) {
 
@@ -548,7 +551,7 @@ public abstract class BlockUpdate extends Thread {
 
                                             block.setLeft(ProjectManager.getActProjectVar().markedblock);
                                             ProjectManager.getActProjectVar().markedblock.setY(block.getY());
-                                            ProjectManager.getActProjectVar().markedblock.setX(block.getX()-ProjectManager.getActProjectVar().markedblock.getW());
+                                            ProjectManager.getActProjectVar().markedblock.setX(block.getX() - ProjectManager.getActProjectVar().markedblock.getW());
                                         }
 
 
@@ -573,8 +576,8 @@ public abstract class BlockUpdate extends Thread {
                         e.printStackTrace();
                         try {
                             DisplayErrors.customErrorstring = "Fehler in einem " + block.getBlocktype().getName() + " Block mit der ID " + block.getIndex();
-                        }catch (Exception v) {
-                            DisplayErrors.customErrorstring="Fehler in einem Block";
+                        } catch (Exception v) {
+                            DisplayErrors.customErrorstring = "Fehler in einem Block";
                         }
                         DisplayErrors.error = e;
                     }

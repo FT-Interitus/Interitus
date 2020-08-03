@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.UI;
 
 import com.badlogic.gdx.Gdx;
@@ -6,9 +11,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import de.ft.interitus.UI.ManualConfig.ManualConfigUI;
-import de.ft.interitus.UI.UIElements.dropdownmenue.DropDownMenue;
-import de.ft.interitus.utils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -18,19 +20,23 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.kotcrab.vis.ui.widget.MenuBar;
 import com.kotcrab.vis.ui.widget.MenuItem;
 import com.kotcrab.vis.ui.widget.VisTextField;
-import de.ft.interitus.*;
 import de.ft.interitus.Block.Block;
-import de.ft.interitus.UI.UIElements.UIElements.Button;
-import de.ft.interitus.UI.UIElements.UIElementBar;
+import de.ft.interitus.DisplayErrors;
+import de.ft.interitus.Settings;
+import de.ft.interitus.UI.ManualConfig.ManualConfigUI;
 import de.ft.interitus.UI.UIElements.TabBar.Tab;
 import de.ft.interitus.UI.UIElements.TabBar.TabBar;
+import de.ft.interitus.UI.UIElements.UIElementBar;
+import de.ft.interitus.UI.UIElements.UIElements.Button;
 import de.ft.interitus.UI.UIElements.check.Check;
 import de.ft.interitus.UI.UIElements.check.InputManager;
+import de.ft.interitus.UI.UIElements.dropdownmenue.DropDownMenue;
 import de.ft.interitus.UI.editor.Editor;
 import de.ft.interitus.UI.projectsettings.ProjectSettingsUI;
 import de.ft.interitus.UI.settings.SettingsUI;
 import de.ft.interitus.UI.setup.SetupWindow;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
+import de.ft.interitus.Var;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.datamanager.programmdata.experience.ExperienceManager;
 import de.ft.interitus.events.EventVar;
@@ -39,18 +45,18 @@ import de.ft.interitus.events.UI.UiEventAdapter;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.network.bettertogether.SharedVar;
 import de.ft.interitus.projecttypes.ProjectManager;
+import de.ft.interitus.utils.ArrayList;
+import de.ft.interitus.utils.ShapeRenderer;
 import de.ft.interitus.utils.animation.Animation;
 
 import java.io.File;
-
-import de.ft.interitus.utils.ArrayList;
-
 import java.util.Timer;
 import java.util.TimerTask;
 
 import static de.ft.interitus.UI.MenuBar.createSubMenu;
 
 public class UI {
+    public static final ManualConfigUI MANUALCONFIG = new ManualConfigUI();
     static final Table root = new Table();
     public static Stage stage;
     public static Viewport UIviewport;
@@ -58,7 +64,6 @@ public class UI {
     public static SpriteBatch UIbatch;
     public static SettingsUI set;
     public static ProjectSettingsUI proset;
-
     public static UIElementBar buttonbar;
     public static Button button_projectstructus;
     public static Button button_start;
@@ -67,9 +72,9 @@ public class UI {
     public static Button button_editor;
     public static Button button_addrunconfig;
     public static TabBar tabbar;
-    public static GlyphLayout glyphLayout = new GlyphLayout();
-    public static BitmapFont font = new BitmapFont();
-    public static Check check = new Check();
+    public final static GlyphLayout glyphLayout = new GlyphLayout();
+    public final static BitmapFont font = new BitmapFont();
+    public final static Check check = new Check();
     public static MenuBar menuBar;
     public static DropDownMenue runselection;
     protected static MenuItem recent;
@@ -83,7 +88,6 @@ public class UI {
     private static boolean issetupuiopend = false;
     private static Block markedblock;
     private static int wishaniposition = -170 - UIVar.abstandvonRand;
-    public static final ManualConfigUI MANUALCONFIG = new ManualConfigUI();
     private static Thread compile_thread;
     boolean actiondone = false;
 
@@ -459,8 +463,6 @@ public class UI {
         recent.setSubMenu(createSubMenu(Data.filename.size(), GetStringArray(Data.filename)));
 
 
-
-
         if (button_projectstructus.isjustPressednormal()) {
 
             proset.show();
@@ -471,7 +473,7 @@ public class UI {
         if (UI.button_start.isjustPressednormal()) {
             //  UI.button_start.setDisable(true);
 
-             compile_thread = new Thread() {
+            compile_thread = new Thread() {
                 @Override
                 public void run() {
 
@@ -484,18 +486,15 @@ public class UI {
         }
 
 
-
         if (UI.button_editor.isjustPressednormal()) {
 
             UI.button_editor.setIsworking(true); // TODO: 02.08.20 Build Project
             Editor.open();
         }
 
-        if(UI.button_addrunconfig.isjustPressednormal()) {
+        if (UI.button_addrunconfig.isjustPressednormal()) {
             MANUALCONFIG.show();
         }
-
-
 
 
     }

@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.projecttypes;
 
 import de.ft.interitus.Block.Generators.*;
@@ -5,22 +10,21 @@ import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.compiler.Compiler;
 import de.ft.interitus.plugin.Plugin;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
-
 import de.ft.interitus.utils.ArrayList;
 
 public class ProjectTypes {
 
+    private final de.ft.interitus.plugin.Plugin pluginRegister;
+    private final BlockVarGenerator blockVarGenerator;
+    private final ProjectFunktions projectFunktions;
+    private final Compiler compiler;
     String name;
     ArrayList<PlatformSpecificBlock> projectblocks;
-    private final de.ft.interitus.plugin.Plugin pluginRegister;
     BlockUpdateGenerator blockUpdateGenerator = null;
-    private final BlockVarGenerator blockVarGenerator;
     BlockGenerator blockGenerator = null;
     private WireGenerator wireGenerator;
     private WireNodeGenerator wireNodeGenerator;
     private BlocktoSaveGenerator blocktoSaveGenerator;
-    private final ProjectFunktions projectFunktions;
-    private final Compiler compiler;
 
     public ProjectTypes(Plugin pluginRegister, String name, ArrayList<PlatformSpecificBlock> blocks, BlockGenerator blockgenerator, BlockUpdateGenerator updategenerator, WireGenerator wireGenerator, WireNodeGenerator wireNodeGenerator, BlocktoSaveGenerator blocktoSaveGenerator, BlockVarGenerator blockVarGenerator, ProjectFunktions projectFunktions, Compiler compiler) {
         this.projectblocks = blocks;
@@ -107,31 +111,31 @@ public class ProjectTypes {
     }
 
 
-  public void initProject() {
+    public void initProject() {
         projectFunktions.create();
-  }
+    }
 
-  public void update() {
+    public void update() {
 
 
         try {
 
             projectFunktions.update();
 
-        }catch (Throwable e) {
+        } catch (Throwable e) {
 
-            DisplayErrors.customErrorstring="Fehler im ProjectTyp";
+            DisplayErrors.customErrorstring = "Fehler im ProjectTyp";
             DisplayErrors.error = e;
 
             e.printStackTrace();
         }
 
 
-  }
+    }
 
-  public ProjectFunktions getProjectFunktions() {
+    public ProjectFunktions getProjectFunktions() {
         return projectFunktions;
-  }
+    }
 
     public Compiler getCompiler() {
         return compiler;

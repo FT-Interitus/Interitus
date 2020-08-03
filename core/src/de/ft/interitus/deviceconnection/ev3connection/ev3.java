@@ -1,12 +1,17 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.deviceconnection.ev3connection;
 
+import de.ft.interitus.utils.ArrayList;
 import org.usb4java.*;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.IntBuffer;
 import java.nio.charset.StandardCharsets;
-import de.ft.interitus.utils.ArrayList;
 import java.util.List;
 
 /***

@@ -1,15 +1,17 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus;
 
 import com.badlogic.gdx.math.Vector2;
 import de.ft.interitus.UI.UIElements.TabBar.Tab;
 import de.ft.interitus.UI.window.Window;
-import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.projecttypes.ProjectVar;
-
 import de.ft.interitus.utils.ArrayList;
 
 public class Var {
-
 
 
     public static double PROGRAMM_VERSION_ID = 01;
@@ -60,7 +62,6 @@ public class Var {
     public static Window splashscreen = null;
 
     public static ArrayList<Tab> ProjektTabs = new ArrayList<>();
-
 
 
 }

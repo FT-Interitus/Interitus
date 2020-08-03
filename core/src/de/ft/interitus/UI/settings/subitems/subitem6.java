@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.UI.settings.subitems;
 
 import com.badlogic.gdx.Input;
@@ -10,7 +15,6 @@ import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.shortcut.ShortCut;
 import de.ft.interitus.UI.shortcut.SpecialKeys;
 import de.ft.interitus.Var;
-
 import de.ft.interitus.utils.ArrayList;
 
 public class subitem6 {

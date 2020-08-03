@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.utils;
 
 import de.ft.interitus.DisplayErrors;
@@ -7,7 +12,6 @@ import java.io.IOException;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import de.ft.interitus.utils.ArrayList;
 
 public class NetworkScan {
     public static ArrayList<InetAddress> device = new ArrayList<>();

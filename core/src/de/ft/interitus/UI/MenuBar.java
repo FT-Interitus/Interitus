@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.UI;
 
 import com.badlogic.gdx.Gdx;
@@ -11,14 +16,12 @@ import com.kotcrab.vis.ui.widget.MenuItem;
 import com.kotcrab.vis.ui.widget.PopupMenu;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.UI.newproject.NewProjectWindow;
-import de.ft.interitus.UI.setup.SetupWindow;
 import de.ft.interitus.Var;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.datamanager.programmdata.Updater;
+import de.ft.interitus.datamanager.userdata.UserInteractDataManagerDialog;
 import de.ft.interitus.datamanager.userdata.load.DataLoader;
 import de.ft.interitus.datamanager.userdata.save.DataSaver;
-import de.ft.interitus.datamanager.userdata.UserInteractDataManagerDialog;
-
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.UI.UIOpenSettingsEvent;
 import de.ft.interitus.network.bettertogether.Manager;
@@ -38,7 +41,7 @@ public class MenuBar {
     public static MenuItem menuItem_einstellungen;
     public static MenuItem menuItem_beenden;
 
-//Better together
+    //Better together
     public static MenuItem menuItem_openserver;
     public static MenuItem menuItem_connecttoserver;
 
@@ -153,7 +156,7 @@ public class MenuBar {
                     if (ProjectManager.getActProjectVar().path != "") {
                         FileHandle handle = Gdx.files.absolute(ProjectManager.getActProjectVar().path);
                         DataSaver.save(handle);
-                       // DataManager.saved();
+                        // DataManager.saved();
                     } else {
                         if (!UserInteractDataManagerDialog.issaveopen()) {
                             UserInteractDataManagerDialog.saveas();
@@ -254,24 +257,23 @@ public class MenuBar {
         menuItem_keeplog = new MenuItem("Log behalten", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                Var.keeplog=true;
+                Var.keeplog = true;
                 menuItem_keeplog.setText("Wird behalten");
                 menuItem_keeplog.setDisabled(true);
 
             }
         });
 
-           menuItem_openserver = new MenuItem("Server starten", new ChangeListener() {
-               @Override
-               public void changed(ChangeEvent event, Actor actor) {
-                   Manager.startserver();
-               }
-           });
+        menuItem_openserver = new MenuItem("Server starten", new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                Manager.startserver();
+            }
+        });
         menuItem_connecttoserver = new MenuItem("Mit Server verbinden", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 Manager.startclient();
-
 
 
             }
@@ -337,7 +339,7 @@ public class MenuBar {
 
         UI.menuBar.addMenu(fileMenu);
         UI.menuBar.addMenu(editMenu);
-       // UI.menuBar.addMenu(ConnectionMenue);
+        // UI.menuBar.addMenu(ConnectionMenue);
         UI.menuBar.addMenu(windowMenu);
         UI.menuBar.addMenu(helpMenu);
 
@@ -373,7 +375,7 @@ public class MenuBar {
                                     public void result(Integer result) {
                                         if (result == nothing) {
 
-                                         //   DataManager.saved();
+                                            //   DataManager.saved();
 
                                             FileHandle handle = Gdx.files.absolute(Data.path.get(finalI));
                                             DataLoader.load(handle, Data.filename.get(finalI), Data.path.get(finalI));
@@ -384,7 +386,7 @@ public class MenuBar {
                                             if (ProjectManager.getActProjectVar().path != "") {
                                                 FileHandle handle = Gdx.files.external(ProjectManager.getActProjectVar().path);
                                                 DataSaver.save(handle);
-                                         //       DataManager.saved();
+                                                //       DataManager.saved();
                                             } else {
                                                 UserInteractDataManagerDialog.saveas();
                                             }
@@ -401,7 +403,7 @@ public class MenuBar {
                     } else {
 
                         //ClearActOpenProgramm.clear();
-                       // DataManager.saved();
+                        // DataManager.saved();
 
 
                         FileHandle handle = Gdx.files.absolute(Data.path.get(finalI));

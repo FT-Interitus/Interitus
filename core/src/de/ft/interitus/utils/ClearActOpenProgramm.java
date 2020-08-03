@@ -1,13 +1,15 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.utils;
 
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Programm;
 import de.ft.interitus.Var;
-
 import de.ft.interitus.projecttypes.ProjectManager;
-
-import de.ft.interitus.utils.ArrayList;
 
 public class ClearActOpenProgramm {
 
@@ -15,9 +17,9 @@ public class ClearActOpenProgramm {
     public static ArrayList<Block> blockstoclear = new ArrayList<>();
     static Thread clear;
 
-    public static void clear() {
+    public static void clear(int index) {
         Var.isclearing = true;
-        blockstoclear = (ArrayList<Block>) ProjectManager.getActProjectVar().blocks.clone();
+        blockstoclear = (ArrayList<Block>) ProjectManager.getProjectVar(index).blocks.clone();
 
 
         clear = new Thread() {
@@ -26,7 +28,7 @@ public class ClearActOpenProgramm {
 
                 try {
 
-                    blockstoclear.removeAll(ProjectManager.getActProjectVar().visibleblocks);
+                    blockstoclear.removeAll(ProjectManager.getProjectVar(index).visibleblocks);
 
 
                     try {
@@ -53,14 +55,14 @@ public class ClearActOpenProgramm {
 
 
         try {
-            while (ProjectManager.getActProjectVar().visibleblocks.size() != 0) {
-                ProjectManager.getActProjectVar().visibleblocks.get(0).delete(true);
-                ProjectManager.getActProjectVar().visibleblocks.remove(0);
+            while (ProjectManager.getProjectVar(index).visibleblocks.size() != 0) {
+                ProjectManager.getProjectVar(index).visibleblocks.get(0).delete(true);
+                ProjectManager.getProjectVar(index).visibleblocks.remove(0);
 
 
             }
 
-                Programm.logger.config("Clearing Finished");
+            Programm.logger.config("Clearing Finished");
 
         } catch (Exception e) {
             DisplayErrors.error = e;
@@ -68,32 +70,32 @@ public class ClearActOpenProgramm {
             System.exit(-121);
         }
 
-        ProjectManager.getActProjectVar().visibleblocks.clear();
+        ProjectManager.getProjectVar(index).visibleblocks.clear();
 
-        ProjectManager.getActProjectVar().blocks.clear();
+        ProjectManager.getProjectVar(index).blocks.clear();
 
-        ProjectManager.getActProjectVar().biggestblock = null;
-        ProjectManager.getActProjectVar().markedblock = null;
-        ProjectManager.getActProjectVar().ismoving = false;
-        ProjectManager.getActProjectVar().showduplicat.clear();
-
-
-        ProjectManager.getActProjectVar().uberlapptmitmarkedblock.clear();
-        ProjectManager.getActProjectVar().blockmitdergrostenuberlappungmitmarkiertemblock = null;
-
-       // DataManager.saved();
-        ProjectManager.getActProjectVar().filename = "New File";
-        ProjectManager.getActProjectVar().path = "";
+        ProjectManager.getProjectVar(index).biggestblock = null;
+        ProjectManager.getProjectVar(index).markedblock = null;
+        ProjectManager.getProjectVar(index).ismoving = false;
+        ProjectManager.getProjectVar(index).showduplicat.clear();
 
 
-        ProjectManager.getActProjectVar().wireNodes.clear();
-        ProjectManager.getActProjectVar().showleftdocker = false;
-        ProjectManager.getActProjectVar().connetor_offerd_hoverd_block = null;
-        ProjectManager.getActProjectVar().wires.clear();
-        ProjectManager.getActProjectVar().movingwires = null;
-        ProjectManager.getActProjectVar().visiblewires.clear();
-        ProjectManager.getActProjectVar().visibleWireNodes.clear();
-        ProjectManager.getActProjectVar().wire_beginn = null;
+        ProjectManager.getProjectVar(index).uberlapptmitmarkedblock.clear();
+        ProjectManager.getProjectVar(index).blockmitdergrostenuberlappungmitmarkiertemblock = null;
+
+        // DataManager.saved();
+        ProjectManager.getProjectVar(index).filename = "New File";
+        ProjectManager.getProjectVar(index).path = "";
+
+
+        ProjectManager.getProjectVar(index).wireNodes.clear();
+        ProjectManager.getProjectVar(index).showleftdocker = false;
+        ProjectManager.getProjectVar(index).connetor_offerd_hoverd_block = null;
+        ProjectManager.getProjectVar(index).wires.clear();
+        ProjectManager.getProjectVar(index).movingwires = null;
+        ProjectManager.getProjectVar(index).visiblewires.clear();
+        ProjectManager.getProjectVar(index).visibleWireNodes.clear();
+        ProjectManager.getProjectVar(index).wire_beginn = null;
 
 
         //clear.start();

@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.events.global;
 
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
@@ -51,9 +56,9 @@ public class GlobalEventManager implements GlobalEventListener {
 
         }
 
-        if (!handeled)  {
+        if (!handeled) {
             Programm.logger.severe("Datei konnte nicht verarbeitet werden");
-            Dialogs.showOKDialog(UI.stage,"Fehler","Datei konnte nicht verarbeitet werden");
+            Dialogs.showOKDialog(UI.stage, "Fehler", "Datei konnte nicht verarbeitet werden");
         }
 
         return false;

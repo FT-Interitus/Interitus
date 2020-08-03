@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.network.bettertogether;
 
 import com.badlogic.gdx.math.Vector2;
@@ -8,17 +13,18 @@ import de.ft.interitus.UI.UI;
 import de.ft.interitus.Var;
 import de.ft.interitus.datamanager.BlockCalculator;
 import de.ft.interitus.projecttypes.ProjectManager;
+import de.ft.interitus.utils.ArrayList;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import de.ft.interitus.utils.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class Server {
-    private static Vector2 tempVector = new Vector2();
+    private static final Vector2 tempVector = new Vector2();
     private static Socket skt;
-    private static  OutputStreamWriter outputStreamWriter;
+    private static OutputStreamWriter outputStreamWriter;
+
     public static void start(int port) throws IOException {
 
         try {
@@ -27,27 +33,23 @@ public class Server {
             while (true) {
                 skt = myServerSocket.accept();
 
-             startresiver();
-              startsender();
+                startresiver();
+                startsender();
 
 
-              //V(VersionTag)|U(Usernname)|
-
-
+                //V(VersionTag)|U(Usernname)|
 
 
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        catch(IOException e)
-            {
-                e.printStackTrace();
-            }
 
     }
 
     private static void sendstring(String str) {
         try {
-            outputStreamWriter.write(str+"\n");
+            outputStreamWriter.write(str + "\n");
             outputStreamWriter.flush();
 
         } catch (IOException e) {
@@ -68,7 +70,7 @@ public class Server {
         Thread resivier = new Thread() {
             @Override
             public void run() {
-                while(skt.isConnected()) {
+                while (skt.isConnected()) {
                     Reader reader = null;
                     try {
                         reader = new InputStreamReader(skt.getInputStream());
@@ -92,14 +94,13 @@ public class Server {
 
     private static void inputhandler(String readLine) {
 
-        if(readLine==null) {
+        if (readLine == null) {
             return;
         }
 
-        if(readLine.startsWith("!R!")) {
-            if(register(readLine)==0) {
+        if (readLine.startsWith("!R!")) {
+            if (register(readLine) == 0) {
                 sendstring("ok");
-
 
 
                 ArrayList<SaveBlock> blocks = BlockCalculator.save();
@@ -113,8 +114,7 @@ public class Server {
                 }
 
 
-
-            }else{
+            } else {
                 sendstring("error");
 
                 try {
@@ -123,34 +123,30 @@ public class Server {
                     e.printStackTrace();
                 }
             }
-        }else if(readLine.startsWith("!M!")){
+        } else if (readLine.startsWith("!M!")) {
 
-            SharedVar.otherMousepos = tempVector.set(Integer.parseInt(readLine.split("t")[0].replace("!M!","")),Integer.parseInt(readLine.split("t")[1].replace("t","")));
+            SharedVar.otherMousepos = tempVector.set(Integer.parseInt(readLine.split("t")[0].replace("!M!", "")), Integer.parseInt(readLine.split("t")[1].replace("t", "")));
 
 
-        }else if(readLine.startsWith("!BM!")) {
-            ProjectManager.getActProjectVar().blocks.get(Integer.parseInt(readLine.split("t")[0].replace("!BM!",""))).setX(Integer.parseInt(readLine.split("t")[1].replace("t","")));
-            ProjectManager.getActProjectVar().blocks.get(Integer.parseInt(readLine.split("t")[0].replace("!BM!",""))).setY(Integer.parseInt(readLine.split("t")[2].replace("t","")));
-        }else if(readLine.startsWith("!BNL!")) {
-            if(Integer.parseInt(readLine.split("t")[1].replace("t",""))!=-1) {
-                ProjectManager.getActProjectVar().blocks.get(Integer.parseInt(readLine.split("t")[0].replace("!BNL!",""))).setLeft(ProjectManager.getActProjectVar().blocks.get(Integer.parseInt(readLine.split("t")[1].replace("t",""))));
+        } else if (readLine.startsWith("!BM!")) {
+            ProjectManager.getActProjectVar().blocks.get(Integer.parseInt(readLine.split("t")[0].replace("!BM!", ""))).setX(Integer.parseInt(readLine.split("t")[1].replace("t", "")));
+            ProjectManager.getActProjectVar().blocks.get(Integer.parseInt(readLine.split("t")[0].replace("!BM!", ""))).setY(Integer.parseInt(readLine.split("t")[2].replace("t", "")));
+        } else if (readLine.startsWith("!BNL!")) {
+            if (Integer.parseInt(readLine.split("t")[1].replace("t", "")) != -1) {
+                ProjectManager.getActProjectVar().blocks.get(Integer.parseInt(readLine.split("t")[0].replace("!BNL!", ""))).setLeft(ProjectManager.getActProjectVar().blocks.get(Integer.parseInt(readLine.split("t")[1].replace("t", ""))));
 
-            }else {
+            } else {
                 ProjectManager.getActProjectVar().blocks.get(Integer.parseInt(readLine.split("t")[0].replace("!BNL!", ""))).setLeft(null);
             }
-        }else if(readLine.startsWith("!BNR!")) {
-            if(Integer.parseInt(readLine.split("t")[1].replace("t",""))!=-1) {
-                ProjectManager.getActProjectVar().blocks.get(Integer.parseInt(readLine.split("t")[0].replace("!BNR!",""))).setRight(ProjectManager.getActProjectVar().blocks.get(Integer.parseInt(readLine.split("t")[1].replace("t",""))));
+        } else if (readLine.startsWith("!BNR!")) {
+            if (Integer.parseInt(readLine.split("t")[1].replace("t", "")) != -1) {
+                ProjectManager.getActProjectVar().blocks.get(Integer.parseInt(readLine.split("t")[0].replace("!BNR!", ""))).setRight(ProjectManager.getActProjectVar().blocks.get(Integer.parseInt(readLine.split("t")[1].replace("t", ""))));
 
-            }else {
+            } else {
                 ProjectManager.getActProjectVar().blocks.get(Integer.parseInt(readLine.split("t")[0].replace("!BNR!", ""))).setRight(null);
 
             }
         }
-
-
-
-
 
 
     }
@@ -160,9 +156,9 @@ public class Server {
         int responsecode = 0;
 
 
-         if(!Var.PROGRAMM_VERSION.contains(register.split("\\|")[0].replace("\\","").replace("V","").replace("!R!",""))) {
-             responsecode=1; //Der Client hat eine andere Version als der Server!
-         }
+        if (!Var.PROGRAMM_VERSION.contains(register.split("\\|")[0].replace("\\", "").replace("V", "").replace("!R!", ""))) {
+            responsecode = 1; //Der Client hat eine andere Version als der Server!
+        }
 
         String[] möglichkeiten = {"Zulassen", "Ablehnen"};
 
@@ -172,7 +168,7 @@ public class Server {
 
         final int[] newresone = {0};
         //confirmdialog may return result of any type, here we are just using ints
-        Dialogs.showConfirmDialog(UI.stage, "Verbindungsanfrage", "\nDer Benutzer "+register.split("\\|")[1].replace("\\","").replace("U","").replace("\\|","")+" möchte mit an deinem Projekt Arbeiten.\nMöchtest du die Anfrage zulassen?"+"+\n",
+        Dialogs.showConfirmDialog(UI.stage, "Verbindungsanfrage", "\nDer Benutzer " + register.split("\\|")[1].replace("\\", "").replace("U", "").replace("\\|", "") + " möchte mit an deinem Projekt Arbeiten.\nMöchtest du die Anfrage zulassen?" + "+\n",
                 möglichkeiten, new Integer[]{zulassen, ablehenn},
                 new ConfirmDialogListener<Integer>() {
                     @Override
@@ -192,7 +188,7 @@ public class Server {
                 });
 
 
-        while(newresone[0]==0) {
+        while (newresone[0] == 0) {
             try {
                 TimeUnit.SECONDS.sleep(1);
             } catch (InterruptedException e) {
@@ -200,7 +196,7 @@ public class Server {
             }
         }
 
-        if(newresone[0]==2) {
+        if (newresone[0] == 2) {
             responsecode = 2;
         }
 

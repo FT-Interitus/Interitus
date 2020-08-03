@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.datamanager.userdata.load;
 
 import com.badlogic.gdx.files.FileHandle;
@@ -12,16 +17,16 @@ import de.ft.interitus.Var;
 import de.ft.interitus.datamanager.BlockCalculator;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.datamanager.userdata.Zip;
+import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.ProjectTypes;
 import de.ft.interitus.projecttypes.VCS;
-import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
+import de.ft.interitus.utils.ArrayList;
 import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
-import de.ft.interitus.utils.ArrayList;
 
 public class DataLoader {
     public static void load(final FileHandle handle, final String name, final String path) {
@@ -59,7 +64,6 @@ public class DataLoader {
                         Var.openprojects.add(temptype.init());
 
 
-
                         Var.openprojects.get(Var.openprojects.size() - 1).zoom = settings.getFloat("zoom"); //Befor change to not ignore this change
                         Var.openprojects.get(Var.openprojects.size() - 1).cam_pos.set(settings.getFloat("pos_x"), settings.getFloat("pos_y"));
 
@@ -70,9 +74,7 @@ public class DataLoader {
                         ProjectManager.getActProjectVar().path = path;
 
 
-
                         BlockTappedBar.init();
-
 
 
                     }
@@ -98,7 +100,7 @@ public class DataLoader {
                     FileInputStream runconfig_fis = new FileInputStream(runconfig.file());
                     ObjectInputStream runconfig_ois = new ObjectInputStream(runconfig_fis);
 
-                  ProjectManager.getActProjectVar().deviceConfigurations = ((ArrayList<DeviceConfiguration>) runconfig_ois.readObject());
+                    ProjectManager.getActProjectVar().deviceConfigurations = ((ArrayList<DeviceConfiguration>) runconfig_ois.readObject());
 
 
                 } catch (Exception e) {

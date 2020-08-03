@@ -1,6 +1,12 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.deviceconnection.ev3connection;
 
 import de.ft.interitus.utils.ArrayList;
+
 import java.util.concurrent.TimeUnit;
 
 public class USBConnection {

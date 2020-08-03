@@ -1,16 +1,21 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf;
 
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.projecttypes.ProjectTypes;
-import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
 import de.ft.interitus.projecttypes.BlockTypes.BlockTopParameter;
+import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
+import de.ft.interitus.projecttypes.ProjectTypes;
+import de.ft.interitus.utils.ArrayList;
 
 import java.awt.*;
-import de.ft.interitus.utils.ArrayList;
 
 public class Wait extends PlatformSpecificBlock implements ArduinoBlock {
 
@@ -18,14 +23,11 @@ public class Wait extends PlatformSpecificBlock implements ArduinoBlock {
     Parameter waitdauer;
 
 
-
-
-
     public Wait(ProjectTypes arduino) {
         super(arduino);
 
 
-        waitdauer=new Parameter(0, AssetLoader.img_WaitBlock_warteZeit_Parameter, "Warte-Zeit", "Die Zeit die abgewartet werden soll","ms");
+        waitdauer = new Parameter(0, AssetLoader.img_WaitBlock_warteZeit_Parameter, "Warte-Zeit", "Die Zeit die abgewartet werden soll", "ms");
 
 
         parameters.add(waitdauer);
@@ -89,7 +91,6 @@ public class Wait extends PlatformSpecificBlock implements ArduinoBlock {
     }
 
 
-
     @Override
     public int getWidth() {
         return 80;
@@ -112,6 +113,6 @@ public class Wait extends PlatformSpecificBlock implements ArduinoBlock {
 
     @Override
     public String getCode() {
-        return "delay("+this.parameters.get(0).getParameter()+");";
+        return "delay(" + this.parameters.get(0).getParameter() + ");";
     }
 }

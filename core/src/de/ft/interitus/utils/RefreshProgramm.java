@@ -1,28 +1,25 @@
 /*
  * Copyright (c) 2020.
- * Author Tim & Felix
+ * Copyright by Tim and Felix
  */
 
 package de.ft.interitus.utils;
 
 import de.ft.interitus.Block.SaveBlock;
+import de.ft.interitus.Var;
 import de.ft.interitus.datamanager.BlockCalculator;
 
-import de.ft.interitus.utils.ArrayList;
-
 public class RefreshProgramm {
-    public static void refresh()  {
+    public static void refresh() {
 
 
         ArrayList<SaveBlock> saveBlocks = BlockCalculator.save();
 
 
-
-        ClearActOpenProgramm.clear();
+        ClearActOpenProgramm.clear(Var.openprojectindex);
 
 
         BlockCalculator.extract(saveBlocks);
-
 
 
     }

@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.utils;
 
 import com.badlogic.gdx.Gdx;
@@ -14,7 +19,7 @@ public class PositionSaver {
     public static void save() {
         if (Gdx.input.isButtonJustPressed(0)) {
             Var.mousepressedold.set(ProgrammingSpace.viewport.unproject(pos.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, ProgrammingSpace.viewport.unproject(pos2.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y);
-Var.mousepressedoldwihoutunproject.set(Gdx.input.getX(),Gdx.input.getY());
+            Var.mousepressedoldwihoutunproject.set(Gdx.input.getX(), Gdx.input.getY());
         }
     }
 }

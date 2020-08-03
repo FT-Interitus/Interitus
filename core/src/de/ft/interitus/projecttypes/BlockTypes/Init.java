@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.projecttypes.BlockTypes;
 
 import de.ft.interitus.Programm;
@@ -5,11 +10,10 @@ import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.block.BlockEventAdapter;
 import de.ft.interitus.events.block.BlockKillMovingWiresEvent;
 import de.ft.interitus.plugin.PluginGateway;
-import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.InitArduino;
-
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Ev3.InitEv3;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.RaspberryPi.InitRaspberryPI;
+import de.ft.interitus.projecttypes.ProjectManager;
 
 public class Init {
 
@@ -20,13 +24,12 @@ public class Init {
         ProjectTypesVar.projectTypes.add(InitEv3.init());
 
 
-
         ProjectTypesVar.projectTypes.addAll(PluginGateway.pluginprojekttypes);
 
         EventVar.blockEventManager.addListener(new BlockEventAdapter() {
             @Override
             public void killmovingwires(BlockKillMovingWiresEvent e) {
-                if(ProjectManager.getActProjectVar().movingwires!=null) {
+                if (ProjectManager.getActProjectVar().movingwires != null) {
                     ProjectManager.getActProjectVar().wire_beginn.getBlockupdate().isconnectorclicked = false;
                     ProjectManager.getActProjectVar().showleftdocker = false;
 

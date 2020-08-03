@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.UI.tappedbar;
 
 import com.badlogic.gdx.Gdx;
@@ -12,15 +17,13 @@ import de.ft.interitus.projecttypes.ProjectManager;
 
 public class BlockTappedBar {
     public static TappedBar tb = new TappedBar(100, 100);
-
+    public static boolean curserveränderungsblockade = false; //If a Block is over the Block Space
     static TapContent ActionBlocks = new TapContent(AssetLoader.img_mappe1);
     static TapContent Programm_Sequence = new TapContent(AssetLoader.img_mappe2);
     static TapContent Sensors = new TapContent(AssetLoader.img_mappe3);
     static TapContent Data_Operation = new TapContent(AssetLoader.img_mappe4);
     static TapContent Specials = new TapContent(AssetLoader.img_mappe5);
     static TapContent OwnBlocks = new TapContent(AssetLoader.img_mappe6);
-
-    public static boolean curserveränderungsblockade = false; //If a Block is over the Block Space
     private static int curserstate = 0;
     private static boolean verticalrezising = false;
     private static boolean horizontalrezising = false;
@@ -38,7 +41,7 @@ public class BlockTappedBar {
 
         for (int i = 0; i < ProjectManager.getActProjectVar().projectType.getProjectblocks().size(); i++) {
             try {
-                if(ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i).getBlockCategoration()!=null) {
+                if (ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i).getBlockCategoration() != null) {
                     switch (ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i).getBlockCategoration()) {
                         case ActionBlocks:
                             ActionBlocks.addItem(new TapBarBlockItem(ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i), ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i).getSmallImage()));
@@ -73,7 +76,6 @@ public class BlockTappedBar {
     }
 
 
-
     public static void userresize() {
         if (!curserveränderungsblockade) {
             if (Gdx.input.getX() > UIVar.BlockBarW + UIVar.abstandvonRand && Gdx.input.getX() < UIVar.BlockBarW + UIVar.abstandvonRand * 2 && Gdx.graphics.getHeight() - Gdx.input.getY() > UIVar.abstandvonRand && Gdx.graphics.getHeight() - Gdx.input.getY() < UIVar.abstandvonRand + UIVar.BlockBarH) {
@@ -88,7 +90,7 @@ public class BlockTappedBar {
                     curserstate = 2;
                 }
             } else if (curserstate != 1) {
-                if(!ProjectManager.getActProjectVar().removeblock) {
+                if (!ProjectManager.getActProjectVar().removeblock) {
                     Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Arrow);
                 }
                 curserstate = 1;

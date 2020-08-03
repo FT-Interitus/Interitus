@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus;
 
 import com.badlogic.gdx.Gdx;
@@ -43,7 +48,6 @@ public class ProgrammingSpace extends ScreenAdapter {
     public static Switch s;
 
 
-
     public static long renderstarttime = 0;
     public static long rendertimediff = 0;
     public static long rendersleeptime = 0;
@@ -58,14 +62,10 @@ public class ProgrammingSpace extends ScreenAdapter {
     public ProgrammingSpace() {
 
 
-
         //TODO Debug hier wird immer ein Ev3 Project erstellt
 
 
-
-
         pressedKeys = new PressedKeys();
-
 
 
         ia = new IntegerAuswahl(400, 400, 50, 25);
@@ -78,7 +78,7 @@ public class ProgrammingSpace extends ScreenAdapter {
 
         batch = new SpriteBatch();
 
-        cam.position.set(Gdx.graphics.getWidth() / 2+50, Gdx.graphics.getHeight() / 2, 0);
+        cam.position.set(Gdx.graphics.getWidth() / 2 + 50, Gdx.graphics.getHeight() / 2, 0);
         UI.UIcam.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
 
 
@@ -102,11 +102,6 @@ public class ProgrammingSpace extends ScreenAdapter {
         s.setInside(AssetLoader.switch_inside);
 
 
-
-
-
-
-
         ThreadManager.init();
 
 
@@ -115,11 +110,7 @@ public class ProgrammingSpace extends ScreenAdapter {
         //   PortUpdate.UpdateConnectionWindowPortsList();
 
 
-
-
         System.gc(); //Clean RAM after Loading
-
-
 
 
     }
@@ -131,19 +122,17 @@ public class ProgrammingSpace extends ScreenAdapter {
 
         //DEBUG todo remove
 
-        if(Gdx.input.isKeyJustPressed(Input.Keys.D)&&Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)&&Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.D) && Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
             SetupWindow sw = new SetupWindow();
             sw.show();
         }
 
-        this.delta=delta;
-
-
+        ProgrammingSpace.delta = delta;
 
 
         renderstarttime = System.currentTimeMillis();
 
-        if (Var.openprojects.size()!=0 &&ProjectManager.getActProjectVar().projectType == null) {
+        if (Var.openprojects.size() != 0 && ProjectManager.getActProjectVar().projectType == null) {
             Programm.INSTANCE.setScreen(new Welcome());
         }
 
@@ -196,7 +185,7 @@ public class ProgrammingSpace extends ScreenAdapter {
                         if (ProjectManager.getActProjectVar().visibleblocks.get(i).isMarked()) {
 
 
-                            if (BlockShortcuts.shortCut_deleteBlock.isPressed()&&ProjectManager.getActProjectVar().visibleblocks.get(i).getBlocktype().canbedeleted()) {
+                            if (BlockShortcuts.shortCut_deleteBlock.isPressed() && ProjectManager.getActProjectVar().visibleblocks.get(i).getBlocktype().canbedeleted()) {
                                 ProjectManager.getActProjectVar().visibleblocks.get(i).delete(false);
                             }
 
@@ -229,7 +218,6 @@ public class ProgrammingSpace extends ScreenAdapter {
                     try {
                         batch.begin();
                         Temp2.draw(batch, shapeRenderer, font);
-
 
 
                         batch.end();
@@ -291,8 +279,6 @@ public class ProgrammingSpace extends ScreenAdapter {
         }
 
 
-
-
         //  testanim.startAnimation();
 //batch.draw(testanim.getAnimation(),50,50);
         // pm.setBounds(700,200);
@@ -306,8 +292,6 @@ public class ProgrammingSpace extends ScreenAdapter {
         }
 
         loader(); //Load Images in OpenGL context
-
-
 
 
         de.ft.interitus.UI.Viewport.limitfps();
@@ -328,7 +312,6 @@ public class ProgrammingSpace extends ScreenAdapter {
         }
         viewport.update(width, height);
         UI.UIviewport.update(width, height);
-
 
 
     }

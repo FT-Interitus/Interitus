@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.deviceconnection.arduino;
 
 
@@ -5,12 +10,12 @@ import com.fazecast.jSerialComm.SerialPort;
 import com.fazecast.jSerialComm.SerialPortDataListener;
 import com.fazecast.jSerialComm.SerialPortEvent;
 import de.ft.interitus.UI.setup.steps.ArduinoSteps.Step3;
+import de.ft.interitus.utils.ArrayList;
 import jssc.SerialPortList;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import de.ft.interitus.utils.ArrayList;
 import java.util.Scanner;
 
 

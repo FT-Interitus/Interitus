@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.UI.ManualConfig;
 
 
@@ -9,9 +14,10 @@ import java.util.ArrayList;
 
 public class DeviceConfiguration implements Serializable {
 
+    public static final String DEFAULT_NAME = "New Config";
     private String name;
     private ArrayList<DeviceParameter> parameters = new ArrayList<>();
-    public static final String DEFAULT_NAME = "New Config";
+    private transient int DeviceConfigListIndex = -1;
 
     public DeviceConfiguration(String name, ArrayList<DeviceParameter> parameters) {
         this.name = name;
@@ -23,7 +29,7 @@ public class DeviceConfiguration implements Serializable {
     }
 
     public void setName(String name) {
-        if(name.length()==0) {
+        if (name.length() == 0) {
             name = DEFAULT_NAME;
         }
         this.name = name;
@@ -48,17 +54,58 @@ public class DeviceConfiguration implements Serializable {
 
     /**
      * Update the name in the Configuration List
+     *
      * @return true if the operation was successful
      */
     public boolean updateEntry() {
-        int ID =  ProjectManager.getActProjectVar().deviceConfigurations.indexOf(this);
+        if(DeviceConfigListIndex!=-1) {
+            UI.runselection.getElements().get(DeviceConfigListIndex).setText(this.name);
 
-       if(ID!=-1) {
+        }
+        int ID = ProjectManager.getActProjectVar().deviceConfigurations.indexOf(this);
+
+        if (ID != -1) {
 
 
-           return  UI.MANUALCONFIG.updateNodeText(ID,this.name);
-       }else{
-           return false;
-       }
+            return UI.MANUALCONFIG.updateNodeText(ID, this.name);
+        } else {
+            return false;
+        }
+
+
+
+    }
+
+    /**
+     * Update the name in the Configuration List and the identifier
+     *
+     * @return true if the operation was successful
+     */
+    public boolean updateEntry(Object identifier) {
+        if(DeviceConfigListIndex!=-1) {
+            UI.runselection.getElements().get(DeviceConfigListIndex).setText(this.name);
+            UI.runselection.getElements().get(DeviceConfigListIndex).setIdentifier(identifier);
+
+        }
+        int ID = ProjectManager.getActProjectVar().deviceConfigurations.indexOf(this);
+
+        if (ID != -1) {
+
+
+            return UI.MANUALCONFIG.updateNodeText(ID, this.name);
+        } else {
+            return false;
+        }
+
+
+    }
+
+
+    public int getDeviceConfigListIndex() {
+        return DeviceConfigListIndex;
+    }
+
+    public void setDeviceConfigListIndex(int deviceConfigListIndex) {
+        DeviceConfigListIndex = deviceConfigListIndex;
     }
 }

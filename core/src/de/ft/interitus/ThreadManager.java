@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus;
 
 import com.badlogic.gdx.math.Frustum;
@@ -67,7 +72,7 @@ public class ThreadManager {
                                             ProjectManager.getActProjectVar().threads.set(i, ((BlockUpdate) ProjectManager.getActProjectVar().threads.get(i)).block.allowedRestart());
 
 
-                                                Programm.logger.config("Started " + block.getIndex());
+                                            Programm.logger.config("Started " + block.getIndex());
 
                                             ((BlockUpdate) ProjectManager.getActProjectVar().threads.get(i)).isrunning = true;
                                         }

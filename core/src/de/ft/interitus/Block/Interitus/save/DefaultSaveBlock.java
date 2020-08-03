@@ -1,7 +1,11 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.Block.Interitus.save;
 
 import de.ft.interitus.Block.SaveBlock;
-
 import de.ft.interitus.utils.ArrayList;
 
 public class DefaultSaveBlock extends SaveBlock {

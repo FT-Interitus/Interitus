@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.UI.settings.subitems;
 
 import com.badlogic.gdx.Gdx;
@@ -10,8 +15,6 @@ import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisSelectBox;
 import com.kotcrab.vis.ui.widget.VisTable;
 import de.ft.interitus.Settings;
-
-import de.ft.interitus.utils.ArrayList;
 
 public class subitem3 {
     public static void add(VisTable builder) {
@@ -37,9 +40,9 @@ public class subitem3 {
             stringArray.add("5");
         }
 
-        String entrys[] = new String[stringArray.size];
+        String[] entrys = new String[stringArray.size];
 
-        for(int i=0;i<stringArray.size;i++) {
+        for (int i = 0; i < stringArray.size; i++) {
             entrys[i] = ((String) stringArray.get(i));
         }
 

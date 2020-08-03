@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.plugin;
 
 import de.ft.interitus.DisplayErrors;
@@ -57,9 +62,8 @@ public class PluginManagerHandler {
     private static void startPluginLifeCycle() {
 
 
-        for (int i=0;i<loadedplugins.size();i++) {
+        for (int i = 0; i < loadedplugins.size(); i++) {
             try {
-
 
 
                 if (loadedplugins.get(i).getName().length() <= 3 || loadedplugins.get(i).getName().startsWith(" ") || loadedplugins.get(i).getName().endsWith(" ") || loadedplugins.get(i).getName().length() > 50) {
@@ -94,7 +98,7 @@ public class PluginManagerHandler {
 
 
                 }
-            }catch (Throwable e) {
+            } catch (Throwable e) {
                 e.printStackTrace();
                 loadedplugins.remove(loadedplugins.get(i));
             }
@@ -126,7 +130,7 @@ public class PluginManagerHandler {
 
                     //Disable Plugin if it is too slow
                     if (after - before > 80) {
-                        Programm.logger.warning((after-before)+"");
+                        Programm.logger.warning((after - before) + "");
                         Programm.logger.warning("Das Plugin " + loadedplugins.get(i).getName() + " ist zu langsam und wurde deshalb deaktiviert");
                         loadedplugins.get(i).stop();
                         PluginGateway.removepluginregisters(loadedplugins.get(i));

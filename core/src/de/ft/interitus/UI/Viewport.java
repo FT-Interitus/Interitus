@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.UI;
 
 import com.badlogic.gdx.Gdx;
@@ -36,7 +41,7 @@ public class Viewport {
             @Override
             public boolean scrolled(int amount) {
 
-                if(!  UIVar.isdialogeopend) {
+                if (!UIVar.isdialogeopend) {
 
                     if (input.isKeyPressed(Input.Keys.CONTROL_LEFT) || input.isKeyPressed(Input.Keys.CONTROL_RIGHT)) {
                         if (amount == -1) {
@@ -64,7 +69,7 @@ public class Viewport {
         InputManager.addProcessor(new GestureDetector(new GestureDetector.GestureAdapter() {
             @Override
             public boolean pan(float x, float y, float deltaX, float deltaY) {
-                if(!  UIVar.isdialogeopend) {
+                if (!UIVar.isdialogeopend) {
 
                     if (input.isButtonPressed(Input.Buttons.MIDDLE)) {
                         ProgrammingSpace.cam.position.x -= deltaX;
@@ -89,12 +94,10 @@ public class Viewport {
         });
 
 
-
-
     }
 
     public static void update(float delta) {
-        if(!  UIVar.isdialogeopend&&!UIVar.moveprogrammlock) {
+        if (!UIVar.isdialogeopend && !UIVar.moveprogrammlock) {
 
             if (input.isKeyPressed(Input.Keys.LEFT)) {
                 if (!run_left) {

@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.UI.shortcut.shortcuts;
 
 import com.badlogic.gdx.Gdx;
@@ -14,14 +19,12 @@ import de.ft.interitus.UI.shortcut.ShortCut;
 import de.ft.interitus.UI.shortcut.ShortCutChecker;
 import de.ft.interitus.UI.shortcut.SpecialKeys;
 import de.ft.interitus.Var;
-import de.ft.interitus.datamanager.userdata.save.DataSaver;
 import de.ft.interitus.datamanager.userdata.UserInteractDataManagerDialog;
-
+import de.ft.interitus.datamanager.userdata.save.DataSaver;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.UI.UIOpenSettingsEvent;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.VCS;
-
 import de.ft.interitus.utils.ArrayList;
 
 public class GlobalShortcuts implements ShortCutChecker {
@@ -99,7 +102,7 @@ public class GlobalShortcuts implements ShortCutChecker {
                                             if (ProjectManager.getActProjectVar().path != "") {
                                                 FileHandle handle = Gdx.files.external(ProjectManager.getActProjectVar().path);
                                                 DataSaver.save(handle);
-                                          //      DataManager.saved();
+                                                //      DataManager.saved();
                                             } else {
                                                 UserInteractDataManagerDialog.saveas();
                                             }
@@ -129,7 +132,7 @@ public class GlobalShortcuts implements ShortCutChecker {
                 if (ProjectManager.getActProjectVar().path != "") {
                     FileHandle handle = Gdx.files.absolute(ProjectManager.getActProjectVar().path);
                     DataSaver.save(handle);
-               //     DataManager.saved();
+                    //     DataManager.saved();
                 } else {
                     if (!UserInteractDataManagerDialog.issaveopen()) {
                         UserInteractDataManagerDialog.saveas();

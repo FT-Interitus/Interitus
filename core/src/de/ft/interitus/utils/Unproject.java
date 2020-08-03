@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.utils;
 
 import com.badlogic.gdx.Gdx;
@@ -16,8 +21,8 @@ public class Unproject {
         return temp1.set(ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y);
     }
 
-    public static Vector2 projected()  {
-return temp5.set(Gdx.input.getX(),Gdx.input.getY());
+    public static Vector2 projected() {
+        return temp5.set(Gdx.input.getX(), Gdx.input.getY());
     }
 
 }

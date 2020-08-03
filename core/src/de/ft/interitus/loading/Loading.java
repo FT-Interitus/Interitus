@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.loading;
 
 import com.badlogic.gdx.Gdx;
@@ -41,7 +46,6 @@ public class Loading extends ScreenAdapter {
                     this.dispose();
                     EventVar.globalEventManager.loadingdone(new GlobalLoadingDoneEvent(this));
                     UI.initnachassetsloading();
-
 
 
                     Var.splashscreen.destroy();

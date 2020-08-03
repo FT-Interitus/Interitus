@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.UI.editor;
 
 import com.badlogic.gdx.ApplicationListener;
@@ -9,7 +14,7 @@ import de.ft.interitus.UI.window.Window;
 public class Editor {
     public static void open() {
 
-      Window window =  CreateWindow.addWindow("Editor", new ApplicationListener() {
+        Window window = CreateWindow.addWindow("Editor", new ApplicationListener() {
             @Override
             public void create() {
 
@@ -45,8 +50,7 @@ public class Editor {
             }
         });
 
-      window.create();
-
+        window.create();
 
 
     }

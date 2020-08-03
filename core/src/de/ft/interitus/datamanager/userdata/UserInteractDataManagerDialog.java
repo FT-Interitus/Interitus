@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.datamanager.userdata;
 
 import com.badlogic.gdx.Gdx;
@@ -9,7 +14,6 @@ import de.ft.interitus.Var;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.datamanager.userdata.load.DataLoader;
 import de.ft.interitus.datamanager.userdata.save.DataSaver;
-
 import de.ft.interitus.projecttypes.ProjectManager;
 
 import javax.swing.*;
@@ -72,7 +76,7 @@ public class UserInteractDataManagerDialog {
 
                         UI.tabbar.getTabbs().get(Var.openprojectindex).getTabButton().setText(fileToSave.getName());
 
-                      //  DataManager.saved();
+                        //  DataManager.saved();
 
 
                     }
@@ -107,7 +111,7 @@ public class UserInteractDataManagerDialog {
 
                     DataLoader.load(handle, selectedFile.getName(), selectedFile.getAbsolutePath());
 
-                  //  DataManager.saved();
+                    //  DataManager.saved();
 
 
                     if (Data.filename.size() > 9) {

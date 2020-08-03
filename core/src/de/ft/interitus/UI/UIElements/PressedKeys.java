@@ -1,10 +1,14 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.UI.UIElements;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import de.ft.interitus.UI.UIElements.check.InputManager;
-
 import de.ft.interitus.utils.ArrayList;
 
 public class PressedKeys {

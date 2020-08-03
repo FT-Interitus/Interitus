@@ -1,12 +1,18 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.projecttypes.VCSManager;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import de.ft.interitus.Block.SaveBlock;
-import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.datamanager.BlockCalculator;
+import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.datamanager.userdata.Zip;
 import de.ft.interitus.projecttypes.ProjectManager;
+import de.ft.interitus.utils.ArrayList;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -15,7 +21,6 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import de.ft.interitus.utils.ArrayList;
 
 public class ITEV {
     public static void saverevision(String changes, String author) {
@@ -26,8 +31,6 @@ public class ITEV {
 
 
                 ArrayList<SaveBlock> saveBlocks = BlockCalculator.save();
-
-
 
 
                 String generateprojektname = "project" + System.currentTimeMillis();

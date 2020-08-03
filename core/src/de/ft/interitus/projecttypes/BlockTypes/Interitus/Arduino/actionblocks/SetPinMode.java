@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2020.
- * Author Tim & Felix
+ * Copyright by Tim and Felix
  */
 
 package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.actionblocks;
@@ -8,14 +8,14 @@ package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.actionblocks;
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.projecttypes.ProjectTypes;
-import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
 import de.ft.interitus.projecttypes.BlockTypes.BlockTopParameter;
+import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
+import de.ft.interitus.projecttypes.ProjectTypes;
+import de.ft.interitus.utils.ArrayList;
 
 import java.awt.*;
-import de.ft.interitus.utils.ArrayList;
 
 public class SetPinMode extends PlatformSpecificBlock implements ArduinoBlock {
 
@@ -24,27 +24,23 @@ public class SetPinMode extends PlatformSpecificBlock implements ArduinoBlock {
     Parameter mode;
 
 
-
-
-
     public SetPinMode(ProjectTypes type) {
         super(type);
 
 
-        pin = new Parameter("", AssetLoader.Parameter_Pin,"Pin","",null);
-        mode = new Parameter("",AssetLoader.Parameter_IO,"Mode(I/O)","",null);
+        pin = new Parameter("", AssetLoader.Parameter_Pin, "Pin", "", null);
+        mode = new Parameter("", AssetLoader.Parameter_IO, "Mode(I/O)", "", null);
 
 
         parameters.add(pin);
         parameters.add(mode);
 
 
-
-
     }
+
     @Override
     public String getCode() {
-        return "pinMode("+this.parameters.get(0).getParameter()+","+this.parameters.get(1).getParameter()+");";
+        return "pinMode(" + this.parameters.get(0).getParameter() + "," + this.parameters.get(1).getParameter() + ");";
     }
 
     @Override
@@ -103,13 +99,10 @@ public class SetPinMode extends PlatformSpecificBlock implements ArduinoBlock {
     }
 
 
-
-
     @Override
     public int getWidth() {
         return 150;
     }
-
 
 
     @Override

@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.UI.settings.subitems;
 
 import com.badlogic.gdx.graphics.Pixmap;
@@ -16,10 +21,10 @@ import de.ft.interitus.plugin.store.PluginPage;
 import de.ft.interitus.plugin.store.StorePluginEntry;
 import de.ft.interitus.plugin.store.StorePluginsVar;
 import de.ft.interitus.plugin.store.search.findStorePluginEntry;
+import de.ft.interitus.utils.ArrayList;
 import de.ft.interitus.utils.DownloadFile;
 
 import java.io.IOException;
-import de.ft.interitus.utils.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -77,7 +82,6 @@ public class subitem17 {
 
                     @Override
                     public void clicked(InputEvent event, float x, float y) {
-
 
 
                     }

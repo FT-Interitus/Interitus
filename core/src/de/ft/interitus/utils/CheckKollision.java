@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.utils;
 
 import com.badlogic.gdx.Gdx;
@@ -73,9 +78,9 @@ public class CheckKollision {
 
     public static boolean checkblockwithduplicate(Block normal, Block duplicate, int rl) {
         if (rl == 0) { //0=Right
-            return object(normal.getX(), normal.getY(), normal.getW(), normal.getH(), duplicate.getX_dup_rechts(), duplicate.getY(), normal.getW()/1.5f, duplicate.getH()); //TODO Unexpected Kollision Reaction
+            return object(normal.getX(), normal.getY(), normal.getW(), normal.getH(), duplicate.getX_dup_rechts(), duplicate.getY(), normal.getW() / 1.5f, duplicate.getH()); //TODO Unexpected Kollision Reaction
         } else {
-            return object(normal.getX(), normal.getY(), normal.getW(), normal.getH(), duplicate.getX()-normal.getW()/1.5f, duplicate.getY(), normal.getW()/1.5f, duplicate.getH());
+            return object(normal.getX(), normal.getY(), normal.getW(), normal.getH(), duplicate.getX() - normal.getW() / 1.5f, duplicate.getY(), normal.getW() / 1.5f, duplicate.getH());
         }
     }
 

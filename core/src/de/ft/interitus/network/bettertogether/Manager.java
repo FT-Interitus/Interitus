@@ -1,17 +1,19 @@
-package de.ft.interitus.network.bettertogether;
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
 
-import java.io.IOException;
+package de.ft.interitus.network.bettertogether;
 
 public class Manager {
 
 
     public static void startserver() {
-       Thread serverthread = new Thread() {
+        Thread serverthread = new Thread() {
             @Override
             public void run() {
                 try {
                     Server.start(9990);
-
 
 
                 } catch (Exception e) {
@@ -25,7 +27,7 @@ public class Manager {
     }
 
     public static void startclient() {
-        Thread thread = new Thread()  {
+        Thread thread = new Thread() {
             @Override
             public void run() {
                 Client.connect("localhost", 9990);

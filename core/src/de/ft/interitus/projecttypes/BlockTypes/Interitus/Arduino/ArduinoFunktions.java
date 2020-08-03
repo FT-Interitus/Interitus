@@ -8,6 +8,7 @@ package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.Array;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisSelectBox;
@@ -21,9 +22,11 @@ import de.ft.interitus.UI.UIElements.dropdownmenue.DropDownElement;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.compiler.Interitus.Arduino.ArduinoCompiler;
 import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.ProjectFunktions;
+import de.ft.interitus.projecttypes.ProjectManager;
+import de.ft.interitus.utils.ArrayList;
 import org.json.JSONArray;
+
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -33,9 +36,10 @@ public class ArduinoFunktions implements ProjectFunktions {
     private final VisTextField configurationname = new VisTextField();
     private final VisSelectBox<RunConfigSelectItem> selectboard = new VisSelectBox<>();
     private final VisSelectBox<RunConfigSelectItem> selectSerialPort = new VisSelectBox<>();
-    private String savedidentifier = ""; //To know which is the Selected Board
+    private String savedidentifier =""; //To know which is the Selected Board
     private boolean openedprogress = false;
     private DeviceConfiguration activeConfiguration;
+   private final ArrayList<String> parameterArrayList = new ArrayList<>();
 
     public ArduinoFunktions() {
 
@@ -51,7 +55,10 @@ public class ArduinoFunktions implements ProjectFunktions {
                     } else {
                         configurationname.setColor(1, 1, 1, 1);
                     }
-                    activeConfiguration.updateEntry();
+                    parameterArrayList.clear();
+                    parameterArrayList.add( activeConfiguration.getParameters().get(0).getParameter().toString());
+                    parameterArrayList.add(activeConfiguration.getParameters().get(1).getParameter().toString());
+                    activeConfiguration.updateEntry(parameterArrayList.clone());
                 }
             }
         });
@@ -62,21 +69,22 @@ public class ArduinoFunktions implements ProjectFunktions {
             public void changed(ChangeEvent event, Actor actor) {
 
 
-                if(!openedprogress) {
+                if (!openedprogress) {
 
-                if (activeConfiguration != null) {
-                    if (activeConfiguration.getParameters().size() > 0) {
+                    if (activeConfiguration != null) {
+                        if (activeConfiguration.getParameters().size() > 0) {
 
-                        activeConfiguration.getParameters().get(0).setParameter(selectboard.getSelected().getIdentifier());
-                    } else {
-                        activeConfiguration.getParameters().add(new DeviceParameter(selectboard.getSelected().getIdentifier()));
+                            activeConfiguration.getParameters().get(0).setParameter(selectboard.getSelected().getIdentifier());
+                        } else {
+                            activeConfiguration.getParameters().add(new DeviceParameter(selectboard.getSelected().getIdentifier()));
 
+                        }
+
+                        parameterArrayList.clear();
+                        parameterArrayList.add( activeConfiguration.getParameters().get(0).getParameter().toString());
+                        parameterArrayList.add(activeConfiguration.getParameters().get(1).getParameter().toString());
+                        activeConfiguration.updateEntry(parameterArrayList.clone());
                     }
-
-
-                }
-
-
 
 
                 }
@@ -89,7 +97,7 @@ public class ArduinoFunktions implements ProjectFunktions {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
-                if(!openedprogress) {
+                if (!openedprogress) {
 
 
                     if (activeConfiguration != null) {
@@ -99,6 +107,11 @@ public class ArduinoFunktions implements ProjectFunktions {
                         } else {
                             activeConfiguration.getParameters().add(new DeviceParameter(selectSerialPort.getSelected().getIdentifier()));
                         }
+
+                        parameterArrayList.clear();
+                        parameterArrayList.add( activeConfiguration.getParameters().get(0).getParameter().toString());
+                        parameterArrayList.add(activeConfiguration.getParameters().get(1).getParameter().toString());
+                        activeConfiguration.updateEntry(parameterArrayList.clone());
                     }
                 }
 
@@ -136,14 +149,17 @@ public class ArduinoFunktions implements ProjectFunktions {
             }
         }
 
+        counter+=ProjectManager.getActProjectVar().deviceConfigurations.size();
+
 
         if (counter != UI.runselection.getElements().size()) {
             if (UI.runselection.getSelectedElement() != null) {
-                savedidentifier = ((String) UI.runselection.getSelectedElement().getIdentifier());
+                savedidentifier = ((ArrayList<String>) UI.runselection.getSelectedElement().getIdentifier()).get(1);
             }
 
             UI.runselection.clear();
 
+            //Add Auto Selected Boards
             for (int i = 0; i < array.length(); i++) {
                 if (array.getJSONObject(i).has("boards")) {
 
@@ -154,15 +170,35 @@ public class ArduinoFunktions implements ProjectFunktions {
                         default -> AssetLoader.connector_offerd; //TODO image questionmark
                     };
 
-
-                    UI.runselection.addelement(new DropDownElement(image, array.getJSONObject(i).getJSONArray("boards").getJSONObject(0).getString("name"), array.getJSONObject(i).getString("address")));
+                    parameterArrayList.clear();
+                    parameterArrayList.add( array.getJSONObject(i).getJSONArray("boards").getJSONObject(0).getString("FQBN"));
+                    parameterArrayList.add( array.getJSONObject(i).getString("address"));
+                    UI.runselection.addelement(new DropDownElement(image, array.getJSONObject(i).getJSONArray("boards").getJSONObject(0).getString("name"),parameterArrayList.clone()));
                     if (array.getJSONObject(i).getString("address").contains(savedidentifier)) {
-                        UI.runselection.setSelectedElement(UI.runselection.getElements().get(UI.runselection.getElements().size() - 1));
+                        UI.runselection.setSelectedElement((DropDownElement) UI.runselection.getElements().get(UI.runselection.getElements().size() - 1));
                     }
+
                 }
             }
+
             if (UI.runselection.getSelectedElement() == null && UI.runselection.getElements().size() > 0) {
-                UI.runselection.setSelectedElement(UI.runselection.getElements().get(0));
+                UI.runselection.setSelectedElement((DropDownElement) UI.runselection.getElements().get(0));
+            }
+
+            if(ProjectManager.getActProjectVar().deviceConfigurations.size()>0) {
+               // UI.runselection.addelement(new DropDownSeperator());
+
+                //ADD Manual User Configs
+                for(int i=0;i<ProjectManager.getActProjectVar().deviceConfigurations.size();i++) {
+
+                    parameterArrayList.clear();
+                    parameterArrayList.add( ProjectManager.getActProjectVar().deviceConfigurations.get(i).getParameters().get(0).getParameter().toString());
+                    parameterArrayList.add( ProjectManager.getActProjectVar().deviceConfigurations.get(i).getParameters().get(1).getParameter().toString());
+
+                    UI.runselection.addelement(new DropDownElement(AssetLoader.arduinounoimage,ProjectManager.getActProjectVar().deviceConfigurations.get(i).getName(),parameterArrayList.clone()));
+                    ProjectManager.getActProjectVar().deviceConfigurations.get(i).setDeviceConfigListIndex(UI.runselection.getElements().size()-1);
+
+                }
             }
 
             if (UI.runselection.getSelectedElement() == null) {
@@ -173,12 +209,6 @@ public class ArduinoFunktions implements ProjectFunktions {
 
         array = null;
 
-        try {
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
     }
 
@@ -192,14 +222,12 @@ public class ArduinoFunktions implements ProjectFunktions {
         openedprogress = true;
         activeConfiguration = configuration;
 
-        if(activeConfiguration.getParameters().size()<1) {
+        if (activeConfiguration.getParameters().size() < 1) {
             activeConfiguration.getParameters().add(new DeviceParameter(""));
             activeConfiguration.getParameters().add(new DeviceParameter(""));
-        }else if(activeConfiguration.getParameters().size()<2){
+        } else if (activeConfiguration.getParameters().size() < 2) {
             activeConfiguration.getParameters().add(new DeviceParameter(""));
         }
-
-
 
 
         configurationname.setText(configuration.getName());
@@ -239,11 +267,6 @@ public class ArduinoFunktions implements ProjectFunktions {
     }
 
 
-
-
-
-
-
     private void getInstalledBoards() {
         JSONArray deviceArray = ((ArduinoCompiler) ProjectManager.getActProjectVar().projectType.getCompiler()).getInstalledBoards();
 
@@ -254,8 +277,7 @@ public class ArduinoFunktions implements ProjectFunktions {
         for (int i = 0; i < deviceArray.length(); i++) {
 
 
-
-                devices[i] = new RunConfigSelectItem(deviceArray.getJSONObject(i).getString("name"), deviceArray.getJSONObject(i).getString("FQBN"));
+            devices[i] = new RunConfigSelectItem(deviceArray.getJSONObject(i).getString("name"), deviceArray.getJSONObject(i).getString("FQBN"));
 
 
         }
@@ -263,15 +285,15 @@ public class ArduinoFunktions implements ProjectFunktions {
         Arrays.sort(devices, Comparator.comparing(RunConfigSelectItem::getContent));
 
 
-        RunConfigSelectItem[] devices2 = new RunConfigSelectItem[devices.length+1];
+        RunConfigSelectItem[] devices2 = new RunConfigSelectItem[devices.length + 1];
 
-        for(int i=0;i<devices2.length;i++) {
+        for (int i = 0; i < devices2.length; i++) {
 
-            if(i==devices.length) {
+            if (i == devices.length) {
 
-                devices2[i] = new RunConfigSelectItem("Arduino Nano Old Bootloader","arduino:avr:nano:cpu=atmega328old");
+                devices2[i] = new RunConfigSelectItem("Arduino Nano Old Bootloader", "arduino:avr:nano:cpu=atmega328old");
 
-            }else{
+            } else {
                 devices2[i] = devices[i];
             }
 
@@ -305,10 +327,10 @@ public class ArduinoFunktions implements ProjectFunktions {
 
         //Get Serial Ports
 
-         deviceArray = ((ArduinoCompiler) ProjectManager.getActProjectVar().projectType.getCompiler()).getBoards();
+        deviceArray = ((ArduinoCompiler) ProjectManager.getActProjectVar().projectType.getCompiler()).getBoards();
 
 
-       devices = new RunConfigSelectItem[deviceArray.length()];
+        devices = new RunConfigSelectItem[deviceArray.length()];
 
         for (int i = 0; i < deviceArray.length(); i++) {
             devices[i] = new RunConfigSelectItem(deviceArray.getJSONObject(i).getString("address"), deviceArray.getJSONObject(i).getString("address"));
@@ -340,8 +362,8 @@ public class ArduinoFunktions implements ProjectFunktions {
         deviceArray = null;
         devices = null;
 
-selectSerialPort.setDisabled(false);
-selectboard.setDisabled(false);
+        selectSerialPort.setDisabled(false);
+        selectboard.setDisabled(false);
 
         openedprogress = false;
     }

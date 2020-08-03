@@ -1,18 +1,21 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.UI.UIElements.UIElements;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import de.ft.interitus.ProgrammingSpace;
-import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.utils.ShapeRenderer;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.check.Check;
 import de.ft.interitus.UI.UIVar;
+import de.ft.interitus.utils.ShapeRenderer;
 import de.ft.interitus.utils.animation.Animation;
 
-public class Button implements UIElement{
+public class Button implements UIElement {
     public static boolean disablepresscolorchange = false;
     //private final SpriteBatch batch = new SpriteBatch();
 
@@ -20,9 +23,8 @@ public class Button implements UIElement{
     private final Check check = new Check();
     public float hovertransparancy = 0.8f;
     public boolean widthoverText = false;
-    private boolean isworking = false;
     public int widthoverTextlinksrandabstand = 5;
-
+    private boolean isworking = false;
     private boolean ignore_uilock = false;
     private int x;
     private int y;
@@ -37,7 +39,6 @@ public class Button implements UIElement{
     private boolean disable = false;
     private boolean flipX = false;
     private boolean flipY = false;
-
 
 
     public Button(int x, int y, int w, int h) {
@@ -78,7 +79,7 @@ public class Button implements UIElement{
     }
 
     public boolean isjustPressednormal() {
-        if(!UIVar.uilocked||this.isIgnore_uilock()) {
+        if (!UIVar.uilocked || this.isIgnore_uilock()) {
             boolean pressed = false;
             if (!disable && !UIVar.isdialogeopend) {
 
@@ -89,21 +90,21 @@ public class Button implements UIElement{
             }
 
             return pressed;
-        }else{
+        } else {
             return false;
         }
     }
 
 
     public boolean isPresseded() {
-        if(!UIVar.uilocked||this.isIgnore_uilock()) {
+        if (!UIVar.uilocked || this.isIgnore_uilock()) {
             if (!disable) {
 
                 return check.isPressed(x, y, w, h);
             } else {
                 return false;
             }
-        }else{
+        } else {
             return false;
         }
     }
@@ -111,7 +112,7 @@ public class Button implements UIElement{
 
     public boolean isMouseover() {
 
-        if(!UIVar.uilocked||this.isIgnore_uilock()) {
+        if (!UIVar.uilocked || this.isIgnore_uilock()) {
 
             if (UIVar.isdialogeopend) {
                 return false;
@@ -123,7 +124,7 @@ public class Button implements UIElement{
                     return false;
                 }
             }
-        }else{
+        } else {
             return false;
         }
     }
@@ -170,15 +171,14 @@ public class Button implements UIElement{
                 }
 
 
-
                 UI.UIbatch.end();
             } else {
                 UI.UIbatch.begin();
 
-                if(!isworking) {
+                if (!isworking) {
                     if (isDisable()) {
                         UI.UIbatch.setColor(1, 1, 1, 0.3f);
-                    }else{
+                    } else {
                         UI.UIbatch.setColor(1, 1, 1, 1);
                     }
 
@@ -191,9 +191,9 @@ public class Button implements UIElement{
                     if (isMouseover() && Gdx.input.isButtonPressed(0)) {
                         UI.UIbatch.draw(image_pressed, this.x, this.y, this.w, this.h, 0, 0, image.getWidth(), image.getHeight(), this.flipX, this.flipY);
                     }
-                }else {
+                } else {
                     UI.UIbatch.setColor(1, 1, 1, 1);
-                    UI.UIbatch.draw(this.working_animation.getAnimation(),x,y,w,h);
+                    UI.UIbatch.draw(this.working_animation.getAnimation(), x, y, w, h);
                 }
                 UI.UIbatch.end();
             }
@@ -296,30 +296,28 @@ public class Button implements UIElement{
         this.flipY = flipY;
     }
 
-
-    public void setIsworking(boolean isworking) {
-        this.isworking = isworking;
-    }
-
     public boolean isIsworking() {
         return isworking;
     }
 
-
-    public void setWorking_animation(Animation working_animation) {
-        this.working_animation = working_animation;
+    public void setIsworking(boolean isworking) {
+        this.isworking = isworking;
     }
 
     public Animation getWorking_animation() {
         return working_animation;
     }
 
-    public void setIgnore_uilock(boolean ignore_uilock) {
-        this.ignore_uilock = ignore_uilock;
+    public void setWorking_animation(Animation working_animation) {
+        this.working_animation = working_animation;
     }
 
     public boolean isIgnore_uilock() {
         return ignore_uilock;
+    }
+
+    public void setIgnore_uilock(boolean ignore_uilock) {
+        this.ignore_uilock = ignore_uilock;
     }
 }
 
