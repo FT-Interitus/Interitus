@@ -61,5 +61,5 @@ public class Var {
     public static Window splashscreen = null;
 
 
-    public static boolean switchprojectwithoutgui = false;
+
 }

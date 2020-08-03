@@ -8,6 +8,7 @@ package de.ft.interitus.events.global;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import de.ft.interitus.Programm;
 import de.ft.interitus.UI.UI;
+import de.ft.interitus.UI.UIElements.TabBar.Tab;
 
 import java.util.Vector;
 
@@ -82,6 +83,13 @@ public class GlobalEventManager implements GlobalEventListener {
         for (int i = 0; i < listener.size(); i++)
             ((GlobalEventListener) listener.elementAt(i)).
                     focuslost(e);
+    }
+
+    @Override
+    public void tabclicked(GlobalTabClickEvent e, Tab tab) {
+        for (int i = 0; i < listener.size(); i++)
+            ((GlobalEventListener) listener.elementAt(i)).
+                    tabclicked(e,tab);
     }
 
 

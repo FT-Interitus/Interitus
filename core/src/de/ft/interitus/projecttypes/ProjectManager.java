@@ -8,8 +8,13 @@ package de.ft.interitus.projecttypes;
 import de.ft.interitus.Programm;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.UI.UI;
+import de.ft.interitus.UI.UIElements.TabBar.Tab;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.Var;
+import de.ft.interitus.events.EventVar;
+import de.ft.interitus.events.global.GlobalEventAdapter;
+import de.ft.interitus.events.global.GlobalTabClickEvent;
+import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.utils.ClearActOpenProgramm;
 
 import java.util.Timer;
@@ -19,6 +24,19 @@ import java.util.TimerTask;
 public class ProjectManager {
     static Timer time = new Timer();
     static Timer lock = new Timer();
+
+    public static void init() {
+
+        EventVar.globalEventManager.addListener(new GlobalEventAdapter() {
+            @Override
+            public void tabclicked(GlobalTabClickEvent e, Tab tab) {
+
+               change(tab.getIndex());
+
+            }
+        });
+
+    }
 
     public static void change(int index) {
 
@@ -55,7 +73,7 @@ public class ProjectManager {
                 ProjectManager.getActProjectVar().projectType.update();
 
             }
-        }, 0, 6000);
+        }, 2000, 6000);
 
 
 
@@ -74,6 +92,21 @@ public class ProjectManager {
         }
     }
 
+    public static void addProject(ProjectVar projectVar) {
+
+        Var.openprojects.add(projectVar);
+
+        Tab tab = new Tab();
+        tab.getTabButton().setImage(AssetLoader.img_Tab);
+        tab.getTabButton().setW(300);
+        tab.getTabButton().widthoverText = true;
+        tab.getTabButton().setText(Var.openprojects.getLastObject().getFilename());
+        tab.setIndex(Var.openprojects.size()-1);
+        UI.tabbar.addTab(tab);
+
+
+    }
+
     public static ProjectVar getProjectVar(int index) {
         if(Var.openprojects.size() ==0 ) {
             return null;
@@ -89,9 +122,9 @@ public class ProjectManager {
     public static void CloseProject(int index) {
 
 
-
         ClearActOpenProgramm.clear(index);
         Var.openprojects.remove(index);
+        UI.tabbar.getTabbs().remove(index);
 
         if(Var.openprojectindex==index) {
             Var.openprojectindex--;

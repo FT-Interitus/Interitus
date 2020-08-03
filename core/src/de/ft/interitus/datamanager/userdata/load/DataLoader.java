@@ -61,18 +61,18 @@ public class DataLoader {
                         return;
                     } else {
                         //ThreadManager.stopall();
-                        Var.openprojects.add(temptype.init());
 
+                        ProjectManager.addProject(temptype.init());
 
                         Var.openprojects.get(Var.openprojects.size() - 1).zoom = settings.getFloat("zoom"); //Befor change to not ignore this change
                         Var.openprojects.get(Var.openprojects.size() - 1).cam_pos.set(settings.getFloat("pos_x"), settings.getFloat("pos_y"));
 
 
-                        Var.switchprojectwithoutgui = true;
+
                         ProjectManager.change(Var.openprojects.size() - 1);
 
 
-                        ProjectManager.getActProjectVar().filename = name;
+                        ProjectManager.getActProjectVar().setFilename(name);
                         ProjectManager.getActProjectVar().path = path;
 
 

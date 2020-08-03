@@ -44,7 +44,7 @@ public class ProgrammingSpace extends ScreenAdapter {
     public static Component saver;
 
     public static BitmapFont font;
-    public static Switch s;
+
 
 
     public static long renderstarttime = 0;
@@ -68,8 +68,6 @@ public class ProgrammingSpace extends ScreenAdapter {
         pressedKeys = new PressedKeys();
 
 
-
-        s = new Switch(500, 500);
         font = new BitmapFont();
         shapeRenderer = new ShapeRenderer();
         cam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -82,7 +80,7 @@ public class ProgrammingSpace extends ScreenAdapter {
         UI.UIcam.position.set(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f, 0);
 
 
-        Var.openprojects.add(ProjectTypesVar.projectTypes.get(0).init());
+        ProjectManager.addProject(ProjectTypesVar.projectTypes.get(0).init());
         ProjectManager.change(0);
 
         UI.updatedragui(shapeRenderer, true, batch);
@@ -95,11 +93,9 @@ public class ProgrammingSpace extends ScreenAdapter {
         de.ft.interitus.UI.Viewport.init();
 
         Gdx.graphics.setTitle("New File");
-        ProjectManager.getActProjectVar().filename = "New File";
+        ProjectManager.getActProjectVar().setFilename("New File");
 
-        s.setBackground(AssetLoader.switch_background);
-        s.setBackgroundgreen(AssetLoader.switch_background_green);
-        s.setInside(AssetLoader.switch_inside);
+
 
 
         ThreadManager.init();
@@ -239,14 +235,7 @@ public class ProgrammingSpace extends ScreenAdapter {
         }
 
 
-        if (Settings.theme.isdark()) {
-            s.setBackground(AssetLoader.switch_background);
-            s.setBackgroundgreen(AssetLoader.switch_background_green);
-        } else {
-            s.setBackground(AssetLoader.switch_background_white);
-            s.setBackgroundgreen(AssetLoader.switch_background_green_white);
-        }
-        s.setInside(AssetLoader.switch_inside);
+
 
         for (int i = 0; i < ProjectManager.getActProjectVar().visiblewires.size(); i++) {
             if (!Var.isloading) {

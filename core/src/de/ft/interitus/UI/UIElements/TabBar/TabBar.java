@@ -5,16 +5,19 @@
 
 package de.ft.interitus.UI.UIElements.TabBar;
 
+import de.ft.interitus.events.EventVar;
+import de.ft.interitus.events.global.GlobalFileDropedEvent;
+import de.ft.interitus.events.global.GlobalTabClickEvent;
 import de.ft.interitus.utils.ArrayList;
 
 
 public class TabBar {
-    int x = 0;
-    int y = 0;
-    int w = 50;
-    int h = 25;
-    ArrayList<Tab> tabbs = new ArrayList<>();
-    Tab selectedTab = null;
+   private int x = 0;
+    private int y = 0;
+    private int w = 50;
+    private int h = 25;
+    private final ArrayList<Tab> tabbs = new ArrayList<>();
+
 
     public TabBar(int x, int y, int w, int h) {
         this.x = x;
@@ -56,7 +59,7 @@ public class TabBar {
             tabbs.get(i).getTabButton().draw();
             aktualxpluspos = aktualxpluspos + tabbs.get(i).getTabButton().getW();
             if (tabbs.get(i).getTabButton().isjustPressednormal()) {
-                selectedTab = tabbs.get(i);
+                EventVar.globalEventManager.tabclicked(new GlobalTabClickEvent(this),tabbs.get(i));
             }
         }
 
@@ -66,12 +69,8 @@ public class TabBar {
         return tabbs;
     }
 
-    public Tab getSelectedTab() {
-        return selectedTab;
-    }
 
 
-    public void setSelectedTab(int index) {
-        this.selectedTab = tabbs.get(index);
-    }
+
+
 }

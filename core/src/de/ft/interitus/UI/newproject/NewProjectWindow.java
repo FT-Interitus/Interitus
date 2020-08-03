@@ -162,10 +162,10 @@ public class NewProjectWindow {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
                     //ThreadManager.stopall();
-                    Var.openprojects.add(ProjectTypesVar.projectTypes.get(items.indexOf(selectProjectType.getSelected())).init());
-                    Var.switchprojectwithoutgui = true;
+                    ProjectManager.addProject(ProjectTypesVar.projectTypes.get(items.indexOf(selectProjectType.getSelected())).init());
+
                     ProjectManager.change(Var.openprojects.size() - 1);
-                    ProjectManager.getActProjectVar().filename = nameinput.getText();
+                    ProjectManager.getActProjectVar().setFilename(nameinput.getText());
 
                     MenuBar.menuItem_speichern.setText("Speichern");
 

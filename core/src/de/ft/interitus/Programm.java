@@ -25,6 +25,7 @@ import de.ft.interitus.loading.SplashScreen;
 import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.plugin.store.ReadStorePlugins;
 import de.ft.interitus.projecttypes.BlockTypes.Init;
+import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.FolderUtils;
 import de.ft.interitus.utils.NetworkScan;
 import de.ft.interitus.utils.UserNameGetter;
@@ -92,6 +93,7 @@ public class Programm extends Game {
         Init.initBlocks();
 
         UI.init();
+        ProjectManager.init();
 
         Programm.logger.config("UI element loaded");
         if (!Var.savemode) {

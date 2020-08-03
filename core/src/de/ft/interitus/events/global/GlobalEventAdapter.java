@@ -5,6 +5,8 @@
 
 package de.ft.interitus.events.global;
 
+import de.ft.interitus.UI.UIElements.TabBar.Tab;
+
 /**
  * Override only the methods you are interested in
  */
@@ -38,4 +40,11 @@ public class GlobalEventAdapter implements GlobalEventListener {
     public void focuslost(GlobalFocusLostEvent e) {
 
     }
+
+    @Override
+    public void tabclicked(GlobalTabClickEvent e, Tab tab) {
+
+    }
+
+
 }

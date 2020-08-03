@@ -50,12 +50,12 @@ public class UserInteractDataManagerDialog {
                         if (fileToSave.getAbsolutePath().contains(".itp")) {
                             ProjectManager.getActProjectVar().path = fileToSave.getAbsolutePath();
                             DataSaver.save(Gdx.files.absolute(fileToSave.getAbsolutePath()));
-                            ProjectManager.getActProjectVar().filename = fileToSave.getName();
+                            ProjectManager.getActProjectVar().setFilename(fileToSave.getName());
 
                         } else {
                             ProjectManager.getActProjectVar().path = fileToSave.getAbsolutePath() + ".itp";
                             DataSaver.save(Gdx.files.absolute(fileToSave.getAbsolutePath() + ".itp"));
-                            ProjectManager.getActProjectVar().filename = fileToSave.getName() + "";
+                            ProjectManager.getActProjectVar().setFilename(fileToSave.getName() + "");
                         }
                         System.out.println(ProjectManager.getActProjectVar().path);
 

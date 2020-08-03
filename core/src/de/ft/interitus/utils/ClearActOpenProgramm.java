@@ -84,7 +84,7 @@ public class ClearActOpenProgramm {
         ProjectManager.getProjectVar(index).blockmitdergrostenuberlappungmitmarkiertemblock = null;
 
         // DataManager.saved();
-        ProjectManager.getProjectVar(index).filename = "New File";
+        ProjectManager.getProjectVar(index).setFilename("New File");
         ProjectManager.getProjectVar(index).path = "";
 
 

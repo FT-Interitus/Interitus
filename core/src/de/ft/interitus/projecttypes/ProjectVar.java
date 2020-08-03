@@ -11,6 +11,8 @@ import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.Wire;
 import de.ft.interitus.Block.WireNode;
 import de.ft.interitus.UI.ManualConfig.DeviceConfiguration;
+import de.ft.interitus.UI.UI;
+import de.ft.interitus.Var;
 import de.ft.interitus.utils.ArrayList;
 
 public abstract class ProjectVar {
@@ -45,7 +47,7 @@ public abstract class ProjectVar {
     public int vcs = VCS.NONE;
     public ProjectTypes projectType = null;
     public boolean changes = false; //Wurde etwas geändert seit dem letzten speichern
-    public String filename = ""; //Der Name der aktuell geöffneten Datei
+    private String filename = ""; //Der Name der aktuell geöffneten Datei
     public volatile String path = ""; // Wo ist die aktuell geöffnete Datei gespeichert
     public ArrayList<Thread> threads = new ArrayList<>();
     public ArrayList<Object> requestobj = new ArrayList<>();
@@ -59,5 +61,16 @@ public abstract class ProjectVar {
         currentstarttime = System.currentTimeMillis();
         cam_pos.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
 
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
+
+        UI.tabbar.getTabbs().get(Var.openprojects.indexOf(this)).getTabButton().setText(filename);
+
+    }
+
+    public String getFilename() {
+        return filename;
     }
 }

@@ -404,35 +404,8 @@ public class UI {
 
     public static void update() {
 
-        if (Var.openprojects.size() != tabbar.getTabbs().size()) { //TODO nicht die ganze Bar neu erstellen
-            tabbar.setTabs();
-
-            for (int i = 0; i < Var.openprojects.size(); i++) {
-                Tab temptab = new Tab();
-                temptab.getTabButton().setImage(AssetLoader.img_Tab);
-                temptab.getTabButton().setW(300);
-                temptab.getTabButton().widthoverText = true;
-                temptab.getTabButton().setText(Var.openprojects.get(i).filename);
-                temptab.setIndex(i);
-                tabbar.addTab(temptab);
-
-            }
-
-        }
 
 
-        if (tabbar.getSelectedTab() != null) {
-            if (tabbar.getSelectedTab().getIndex() != -1) {
-                if (Var.openprojectindex != tabbar.getSelectedTab().getIndex()) {
-                    if(!Var.switchprojectwithoutgui) {
-                        ProjectManager.change(tabbar.getSelectedTab().getIndex());
-                    }else{
-                        tabbar.setSelectedTab(Var.openprojectindex);
-                        Var.switchprojectwithoutgui = false;
-                    }
-                }
-            }
-        }
         tabbar.setBounds(UIVar.abstandvonRand, UIVar.programmflaeche_h + UIVar.programmflaeche_y, 300, 20);
         tabbar.draw();
 
