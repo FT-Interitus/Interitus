@@ -1,9 +1,14 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino;
 
 import de.ft.interitus.Block.Interitus.*;
 import de.ft.interitus.Block.Interitus.save.DefaultSaveBlockGenerator;
 import de.ft.interitus.ProgrammingSpace;
-import de.ft.interitus.compiler.Arduino.ArduinoCompiler;
+import de.ft.interitus.compiler.Interitus.Arduino.ArduinoCompiler;
 import de.ft.interitus.projecttypes.ProjectTypes;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.actionblocks.SetPinMode;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.actionblocks.digitalWrite;

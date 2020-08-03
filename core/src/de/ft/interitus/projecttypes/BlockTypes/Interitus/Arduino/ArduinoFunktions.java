@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino;
 
 import com.badlogic.gdx.graphics.Texture;
@@ -8,14 +13,13 @@ import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisSelectBox;
 import com.kotcrab.vis.ui.widget.VisTable;
 import com.kotcrab.vis.ui.widget.VisTextField;
-import de.ft.interitus.Programm;
 import de.ft.interitus.UI.ManualConfig.DeviceConfiguration;
 import de.ft.interitus.UI.ManualConfig.DeviceParameter;
 import de.ft.interitus.UI.ManualConfig.ManualConfigUI;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.dropdownmenue.DropDownElement;
 import de.ft.interitus.UI.UIVar;
-import de.ft.interitus.compiler.Arduino.ArduinoCompiler;
+import de.ft.interitus.compiler.Interitus.Arduino.ArduinoCompiler;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.ProjectFunktions;

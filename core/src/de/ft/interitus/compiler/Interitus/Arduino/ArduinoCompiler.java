@@ -1,4 +1,9 @@
-package de.ft.interitus.compiler.Arduino;
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
+package de.ft.interitus.compiler.Interitus.Arduino;
 
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Programm;
