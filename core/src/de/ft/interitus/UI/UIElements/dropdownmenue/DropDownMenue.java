@@ -19,19 +19,19 @@ import de.ft.interitus.utils.ShapeRenderer;
 import java.util.ArrayList;
 
 public class DropDownMenue implements UIElement {
-    ArrayList<DropDownElementInterface> elements = new ArrayList<>();
-    int x;
-    int y;
-    int w = 100;
-    int h = 20;
-    int radius = 5;
-    boolean opened = false;
-    Color bordercolor;
-    Color fillColor;
-    DropDownElementInterface selectedElement = null;
-    GlyphLayout glyphLayout = new GlyphLayout();
-    Button aufklappbutton;
-    String defaultText;
+     private static final  ArrayList<DropDownElementInterface> elements = new ArrayList<>();
+    private int x;
+    private int y;
+    private int w = 100;
+    private int h = 20;
+    private static final int RADIUS = 5;
+    private boolean opened = false;
+    private final Color bordercolor;
+    private final Color fillColor;
+    private DropDownElementInterface selectedElement = null;
+    private final GlyphLayout glyphLayout = new GlyphLayout();
+    private final Button popupbutton = new Button();
+    private String defaultText;
     private int longestText = 0;
 
 
@@ -40,8 +40,7 @@ public class DropDownMenue implements UIElement {
         this.y = y;
         this.bordercolor = bordercolor;
         this.fillColor = fillColor;
-        aufklappbutton = new Button();
-        aufklappbutton.setVisible(false);
+        popupbutton.setVisible(false);
         this.defaultText = defaultText;
     }
 
@@ -97,9 +96,9 @@ public class DropDownMenue implements UIElement {
     public void draw() {
         ProgrammingSpace.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         ProgrammingSpace.shapeRenderer.setColor(bordercolor);
-        ProgrammingSpace.shapeRenderer.roundendrect(x, y, w, h, radius);
+        ProgrammingSpace.shapeRenderer.roundendrect(x, y, w, h, RADIUS);
         ProgrammingSpace.shapeRenderer.setColor(fillColor);
-        ProgrammingSpace.shapeRenderer.roundendrect(x + 1, y + 1, w - 2, h - 2, radius);
+        ProgrammingSpace.shapeRenderer.roundendrect(x + 1, y + 1, w - 2, h - 2, RADIUS);
         ProgrammingSpace.shapeRenderer.end();
         UI.UIbatch.begin();
         UI.UIbatch.setColor(1, 1, 1, 1);
@@ -117,8 +116,8 @@ public class DropDownMenue implements UIElement {
         }
         UI.UIbatch.end();
 
-        aufklappbutton.setBounds(this.x, this.y, this.w, this.h);
-        if (aufklappbutton.isjustPressednormal()) {
+        popupbutton.setBounds(this.x, this.y, this.w, this.h);
+        if (popupbutton.isjustPressednormal()) {
             opened = !opened;
         }
 
@@ -151,7 +150,7 @@ public class DropDownMenue implements UIElement {
         }
 
 
-        if (Gdx.input.isButtonPressed(0) && !aufklappbutton.isPresseded()) {
+        if (Gdx.input.isButtonPressed(0) && !popupbutton.isPresseded()) {
             opened = false;
         }
 

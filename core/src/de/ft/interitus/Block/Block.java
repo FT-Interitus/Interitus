@@ -10,9 +10,11 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.kotcrab.vis.ui.widget.PopupMenu;
 import de.ft.interitus.Block.Generators.BlockUpdateGenerator;
 import de.ft.interitus.Block.Generators.BlocktoSaveGenerator;
 import de.ft.interitus.DisplayErrors;
+import de.ft.interitus.Programm;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.ThreadManager;
 import de.ft.interitus.UI.popup.PopupMenue;
@@ -27,6 +29,7 @@ import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.UI.UIElements.check.CheckKollision;
 import de.ft.interitus.utils.ShapeRenderer;
+import de.ft.interitus.utils.Unproject;
 
 import java.util.Objects;
 
@@ -65,6 +68,7 @@ public abstract class Block implements VisibleObjects {
     private Wire wire_left = null; //linke verbundene Wire
     private Wire wire_right = null; //rechte verbunde Wire
     private PlatformSpecificBlock blocktype;
+    private PopupMenue popupMenue = new PopupMenue(15,"test","test2");
 
 
     public Block(final int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock, BlockUpdateGenerator update, BlocktoSaveGenerator blocktoSaveGenerator) { //Initzialisieren des Blocks
@@ -96,7 +100,14 @@ public abstract class Block implements VisibleObjects {
 
             @Override
             public PopupMenue openrequest(RightClickOpenRequestEvent e, float Pos_X, float Pos_Y) {
-                return null;
+
+
+                if(CheckKollision.object(getX(),getY(),getW(),getW(),Unproject.unproject(Pos_X,Pos_Y).x,Unproject.unproject(Pos_X,Pos_Y).y,1,1)) {
+
+                    return popupMenue;
+                }else{
+                    return null;
+                }
             }
         };
         EventVar.rightClickEventManager.addListener(rightClickEventListener);

@@ -21,6 +21,7 @@ import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.PressedKeys;
 import de.ft.interitus.UI.UIElements.Switch;
 import de.ft.interitus.UI.UIVar;
+import de.ft.interitus.UI.popup.PopupHandler;
 import de.ft.interitus.UI.settings.subitems.subitem17;
 import de.ft.interitus.UI.setup.SetupWindow;
 import de.ft.interitus.UI.shortcut.shortcuts.BlockShortcuts;
@@ -86,7 +87,7 @@ public class ProgrammingSpace extends ScreenAdapter {
         UI.updatedragui(shapeRenderer, true, batch);
         ProjectManager.getActProjectVar().projectType.initProject();
 
-       //TODO init RightCLICK
+
         BlockTappedBar.init();
 
 
@@ -272,7 +273,7 @@ public class ProgrammingSpace extends ScreenAdapter {
 //batch.draw(testanim.getAnimation(),50,50);
         // pm.setBounds(700,200);
 
-      //TODO Draw RightClick
+        PopupHandler.drawPopUp();
 
 
 

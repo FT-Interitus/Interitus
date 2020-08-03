@@ -15,9 +15,10 @@ import de.ft.interitus.utils.ArrayList;
 
 public class PopupMenue {
     private final int buttonheight = 20;
-    private final SpriteBatch batch = new SpriteBatch();
+
     private final ArrayList<Button> buttons = new ArrayList<>(); //TODO Buttons kontrollieren die Maus kollision nur auf dem Text
     private final Texture popupButtonimage = new Texture("popupbuttonimage.png");
+    private int priority;
 
     int ispressed;
     private int x;
@@ -26,7 +27,7 @@ public class PopupMenue {
     private int ausgleichY = 0;
     private boolean show = false;
 
-    public PopupMenue(String... it) {
+    public PopupMenue(int priority,String... it) {
         buttons.clear();
         for (int i = 0; i < it.length; i++) {
             Button b = new Button();
@@ -34,43 +35,31 @@ public class PopupMenue {
 
             buttons.add(b);
         }
+        this.priority = priority;
     }
 
-    public PopupMenue(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
+
 
     public void setBounds(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
-    public void rechtsKlickControlle() {
+    private void rechtsKlickControlle() {
 
-        if (Gdx.input.isButtonJustPressed(1) && (!CheckMouse.isMouseover(this.x + ausgleichX, this.y + ausgleichY, 200, buttonheight * buttons.size()) || !show)) {
-            this.x = Gdx.input.getX();
-            this.y = Gdx.graphics.getHeight() - Gdx.input.getY();
-            show = true;
 
-        }
 
         if (Gdx.input.isButtonJustPressed(0) && !CheckMouse.isMouseover(this.x + ausgleichX, this.y + ausgleichY, 200, buttonheight * buttons.size())) {
             show = false;
         }
     }
 
-    public boolean isShow() {
-        return show;
-    }
 
-    public void setShow(boolean show) {
-        this.show = show;
-    }
 
     public void draw() {
         if (show) {
-            batch.begin();
+            rechtsKlickControlle();
+
             if (y + buttonheight * buttons.size() < Gdx.graphics.getHeight() && x + 200 < Gdx.graphics.getWidth()) {
                 ausgleichX = 0;
                 ausgleichY = 0;
@@ -98,7 +87,7 @@ public class PopupMenue {
             }
 
 
-            batch.end();
+
         }
 
         ispressed = getPressed();
@@ -136,5 +125,21 @@ public class PopupMenue {
             }
         }
         return p;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
+
+    public boolean isShow() {
+        return show;
+    }
+
+    public void setShow(boolean show) {
+        this.show = show;
     }
 }

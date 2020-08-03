@@ -11,12 +11,8 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 public class RightClickEventManager {
-
     protected Vector listener = new Vector();
-
-
-
-
+    private final ArrayList<PopupMenue> requests = new ArrayList<>();
 
     public void removeListener(RightClickEventListener l) {
         listener.remove(l);
@@ -29,12 +25,12 @@ public class RightClickEventManager {
     }
 
 
-
     public ArrayList<PopupMenue> openrequest(RightClickOpenRequestEvent e, float Pos_X, float Pos_Y) {
 
-ArrayList<PopupMenue> requests = new ArrayList<>();
+        requests.clear();
+
         for (int i = 0; i < listener.size(); i++)
-           requests.add(((RightClickEventListener) listener.elementAt(i)).openrequest(e,Pos_X,Pos_Y));
+            requests.add(((RightClickEventListener) listener.elementAt(i)).openrequest(e, Pos_X, Pos_Y));
 
         return requests;
     }
