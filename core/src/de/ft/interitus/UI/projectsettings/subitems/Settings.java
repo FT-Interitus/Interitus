@@ -54,6 +54,7 @@ public class Settings {
 
         //TODO not included yet
         git.setDisabled(true);
+        itev.setDisabled(true);
 
         none.addListener(new ChangeListener() {
             @Override

@@ -69,14 +69,7 @@ public class Programm extends Game {
 
         ThemeManager.register(); //Load all Themes
 
-        Thread loadplugins = new Thread() {
-            @Override
-            public void run() {
-
-                DisplayErrors.error = PluginManagerHandler.init();
-
-            }
-        };
+        Thread loadplugins = new Thread(() -> DisplayErrors.error = PluginManagerHandler.init());
 
         VisUI.load(VisUI.SkinScale.X1);
         Programm.logger.config("Loaded Vis-UI");
@@ -105,12 +98,7 @@ public class Programm extends Game {
             CheckShortcuts.loadArrayList();//bevor CheckShortcuts.loatArraylist muss die ui schon die menuebar eleente erstellt haben!!!!!!!!!
         }
 
-        Thread seachnetwork = new Thread() {
-            @Override
-            public void run() {
-                NetworkScan.get();
-            }
-        }; //TODO doenst work on Mac
+        Thread seachnetwork = new Thread(NetworkScan::get); //TODO doenst work on Mac
         Programm.logger.config("Triggerd Network Scan");
         seachnetwork.start();
         if (!Var.savemode) {

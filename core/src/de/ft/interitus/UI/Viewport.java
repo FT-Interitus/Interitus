@@ -11,7 +11,6 @@ import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.input.GestureDetector;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.Settings;
-import de.ft.interitus.UI.UIElements.check.InputManager;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.block.BlockKillMovingWiresEvent;
 import de.ft.interitus.events.global.GlobalEventAdapter;

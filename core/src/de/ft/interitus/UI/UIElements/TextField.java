@@ -12,8 +12,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import de.ft.interitus.UI.UI;
-import de.ft.interitus.UI.UIElements.check.Check;
-import de.ft.interitus.UI.UIElements.check.InputManager;
+import de.ft.interitus.UI.UIElements.check.CheckMouse;
+import de.ft.interitus.UI.InputManager;
 
 public class TextField {
 
@@ -26,7 +26,7 @@ public class TextField {
     BitmapFont font = new BitmapFont();
     Texture background;
     Texture Backgroundactive;
-    Check check = new Check();
+
     Texture curser;
     private boolean active = false;
     private String input = "default";
@@ -76,10 +76,10 @@ public class TextField {
 
 
     private void active() {
-        if (check.isjustPressed(x, y, w, h)) {
+        if (CheckMouse.isjustPressed(x, y, w, h)) {
             active = !active;
         }
-        if (!check.isMouseover(x, y, w, h) && Gdx.input.isButtonPressed(0)) {
+        if (!CheckMouse.isMouseover(x, y, w, h) && Gdx.input.isButtonPressed(0)) {
             active = false;
         }
     }

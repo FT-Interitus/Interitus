@@ -5,13 +5,12 @@
 
 package de.ft.interitus.events.rightclick;
 
+import de.ft.interitus.UI.popup.PopupMenue;
+
 import java.util.EventListener;
 
 public interface RightClickEventListener extends EventListener {
 
-    void openrightclickwindow(RightClickOpenEvent e);
+    PopupMenue openrequest(RightClickOpenRequestEvent e,float Pos_X,float Pos_Y);
 
-    void closerightclickwindow(RightClickCloseEvent e);
-
-    void buttonclickedinwindow(RightClickButtonSelectEvent e);
 }

@@ -27,23 +27,25 @@ import de.ft.interitus.utils.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * @deprecated
+ */
 public class NewProjectWindow {
     public static SetupBuilder setupBuilder;
     public static VisTable content;
 
-    public static VisTextButton Button_next = new VisTextButton("Erstellen");
-    //public static VisTextButton Button_previouse = new VisTextButton("Previouse");
-    public static VisTextButton Button_cancle = new VisTextButton("Cancel");
-    public static VisLabel errorLabel = new VisLabel("");
+    public final static VisTextButton Button_next = new VisTextButton("Erstellen");
+    public final static VisTextButton Button_cancle = new VisTextButton("Cancel");
+    public final static VisLabel errorLabel = new VisLabel("");
 
-    public static VisTextField nameinput = new VisTextField();
-    public static VisTextField pfadinput = new VisTextField();
-    public static CharSequence text = "Name: ";
-    public static VisLabel namelable = new VisLabel(text);
-    public static CharSequence pfadtext = "Pfad: ";
-    public static VisLabel pfadlable = new VisLabel(pfadtext);
-    public static CharSequence auftragtext = "Bitte gebe hier einen Name für das neue Projekt ein.";
-    public static VisLabel auftrag = new VisLabel(auftragtext);
+    public final static VisTextField nameinput = new VisTextField();
+    public final static VisTextField pfadinput = new VisTextField();
+    public final static CharSequence text = "Name: ";
+    public final static VisLabel namelable = new VisLabel(text);
+    public final static CharSequence pfadtext = "Pfad: ";
+    public final static VisLabel pfadlable = new VisLabel(pfadtext);
+    public final static CharSequence auftragtext = "Bitte gebe hier einen Name für das neue Projekt ein.";
+    public final static VisLabel auftrag = new VisLabel(auftragtext);
     public static VisSelectBox<String> selectProjectType;
 
     final Padding padding = new Padding(2, 3);
@@ -161,6 +163,7 @@ public class NewProjectWindow {
                 public void changed(ChangeEvent event, Actor actor) {
                     //ThreadManager.stopall();
                     Var.openprojects.add(ProjectTypesVar.projectTypes.get(items.indexOf(selectProjectType.getSelected())).init());
+                    Var.switchprojectwithoutgui = true;
                     ProjectManager.change(Var.openprojects.size() - 1);
                     ProjectManager.getActProjectVar().filename = nameinput.getText();
 

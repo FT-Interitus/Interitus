@@ -9,9 +9,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import de.ft.interitus.UI.UIElements.UIElements.Button;
-import de.ft.interitus.UI.UIElements.check.Check;
+import de.ft.interitus.UI.UIElements.check.CheckMouse;
 import de.ft.interitus.events.EventVar;
-import de.ft.interitus.events.rightclick.RightClickButtonSelectEvent;
 import de.ft.interitus.utils.ArrayList;
 
 public class PopupMenue {
@@ -19,7 +18,7 @@ public class PopupMenue {
     private final SpriteBatch batch = new SpriteBatch();
     private final ArrayList<Button> buttons = new ArrayList<>(); //TODO Buttons kontrollieren die Maus kollision nur auf dem Text
     private final Texture popupButtonimage = new Texture("popupbuttonimage.png");
-    private final Check check = new Check();
+
     int ispressed;
     private int x;
     private int y;
@@ -49,14 +48,14 @@ public class PopupMenue {
 
     public void rechtsKlickControlle() {
 
-        if (Gdx.input.isButtonJustPressed(1) && (!check.isMouseover(this.x + ausgleichX, this.y + ausgleichY, 200, buttonheight * buttons.size()) || !show)) {
+        if (Gdx.input.isButtonJustPressed(1) && (!CheckMouse.isMouseover(this.x + ausgleichX, this.y + ausgleichY, 200, buttonheight * buttons.size()) || !show)) {
             this.x = Gdx.input.getX();
             this.y = Gdx.graphics.getHeight() - Gdx.input.getY();
             show = true;
 
         }
 
-        if (Gdx.input.isButtonJustPressed(0) && !check.isMouseover(this.x + ausgleichX, this.y + ausgleichY, 200, buttonheight * buttons.size())) {
+        if (Gdx.input.isButtonJustPressed(0) && !CheckMouse.isMouseover(this.x + ausgleichX, this.y + ausgleichY, 200, buttonheight * buttons.size())) {
             show = false;
         }
     }
@@ -104,7 +103,7 @@ public class PopupMenue {
 
         ispressed = getPressed();
         if (ispressed != -1) {
-            EventVar.rightClickEventManager.buttonclickedinwindow(new RightClickButtonSelectEvent(this, buttons.get(ispressed)));
+           // EventVar.rightClickEventManager.buttonclickedinwindow(new RightClickButtonSelectEvent(this, buttons.get(ispressed)));
             ispressed = -1;
             this.show = false;
 

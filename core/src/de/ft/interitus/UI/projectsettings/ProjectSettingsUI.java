@@ -31,8 +31,8 @@ public class ProjectSettingsUI extends VisWindow {
     public static RowLayout rowLayout;
     public static TestBuilder testBuilder;
     public static int SelectedItem = 0;
-    final VisTable container = new VisTable();
-    final Padding padding = new Padding(2, 3);
+    private final VisTable container = new VisTable();
+    private final Padding padding = new Padding(2, 3);
     ChangeListener listener = null;
     private VisTree tree;
 

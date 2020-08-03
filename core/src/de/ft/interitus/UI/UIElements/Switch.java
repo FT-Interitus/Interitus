@@ -8,7 +8,7 @@ package de.ft.interitus.UI.UIElements;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import de.ft.interitus.UI.UIElements.check.Check;
+import de.ft.interitus.UI.UIElements.check.CheckMouse;
 
 import java.util.Random;
 
@@ -19,7 +19,7 @@ public class Switch {
     private final int multiplikatorecht = 3;
     private final float[] farbehebel = {1, 1, 1, 1};
     private final Vector2 mousesave = new Vector2();
-    private final Check check = new Check();
+
     Texture background;
     SpriteBatch b = new SpriteBatch();
     Random random = new Random();
@@ -71,7 +71,7 @@ public class Switch {
     public boolean isMouseover() {
         if (!disable) {
 
-            return check.isMouseover(x, y, w, h);
+            return CheckMouse.isMouseover(x, y, w, h);
         } else {
             return false;
         }
@@ -81,7 +81,7 @@ public class Switch {
         boolean pressed = false;
         if (!disable) {
 
-            pressed = check.isjustPressed(x, y, w, h);
+            pressed = CheckMouse.isjustPressed(x, y, w, h);
 
         } else {
             return false;

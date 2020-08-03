@@ -18,7 +18,6 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.UI;
-import de.ft.interitus.UI.UIElements.IntegerAuswahl;
 import de.ft.interitus.UI.UIElements.PressedKeys;
 import de.ft.interitus.UI.UIElements.Switch;
 import de.ft.interitus.UI.UIVar;
@@ -56,7 +55,8 @@ public class ProgrammingSpace extends ScreenAdapter {
     public static PressedKeys pressedKeys;
     public static float delta;
     public static Plugin nativ = new Native();
-    IntegerAuswahl ia;
+
+
 
 
     public ProgrammingSpace() {
@@ -68,7 +68,7 @@ public class ProgrammingSpace extends ScreenAdapter {
         pressedKeys = new PressedKeys();
 
 
-        ia = new IntegerAuswahl(400, 400, 50, 25);
+
         s = new Switch(500, 500);
         font = new BitmapFont();
         shapeRenderer = new ShapeRenderer();
@@ -78,8 +78,8 @@ public class ProgrammingSpace extends ScreenAdapter {
 
         batch = new SpriteBatch();
 
-        cam.position.set(Gdx.graphics.getWidth() / 2 + 50, Gdx.graphics.getHeight() / 2, 0);
-        UI.UIcam.position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0);
+        cam.position.set(Gdx.graphics.getWidth() / 2f + 50, Gdx.graphics.getHeight() / 2f, 0);
+        UI.UIcam.position.set(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f, 0);
 
 
         Var.openprojects.add(ProjectTypesVar.projectTypes.get(0).init());
@@ -88,7 +88,7 @@ public class ProgrammingSpace extends ScreenAdapter {
         UI.updatedragui(shapeRenderer, true, batch);
         ProjectManager.getActProjectVar().projectType.initProject();
 
-        RechtsKlick.Init();
+       //TODO init RightCLICK
         BlockTappedBar.init();
 
 
@@ -136,7 +136,7 @@ public class ProgrammingSpace extends ScreenAdapter {
             Programm.INSTANCE.setScreen(new Welcome());
         }
 
-        RechtsKlick.Rechtsklickupdate();
+        //RechtsKlick.Rechtsklickupdate();
 
         try {
 
@@ -283,7 +283,7 @@ public class ProgrammingSpace extends ScreenAdapter {
 //batch.draw(testanim.getAnimation(),50,50);
         // pm.setBounds(700,200);
 
-        RechtsKlick.popupmanager.draw(); //Show Popups
+      //TODO Draw RightClick
 
 
 

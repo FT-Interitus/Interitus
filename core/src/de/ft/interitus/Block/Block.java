@@ -14,20 +14,18 @@ import de.ft.interitus.Block.Generators.BlockUpdateGenerator;
 import de.ft.interitus.Block.Generators.BlocktoSaveGenerator;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.ProgrammingSpace;
-import de.ft.interitus.RechtsKlick;
 import de.ft.interitus.ThreadManager;
+import de.ft.interitus.UI.popup.PopupMenue;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.block.BlockCreateEvent;
 import de.ft.interitus.events.block.BlockDeleteEvent;
 import de.ft.interitus.events.block.BlockNeighborSetEvent;
-import de.ft.interitus.events.rightclick.RightClickButtonSelectEvent;
-import de.ft.interitus.events.rightclick.RightClickCloseEvent;
 import de.ft.interitus.events.rightclick.RightClickEventListener;
-import de.ft.interitus.events.rightclick.RightClickOpenEvent;
+import de.ft.interitus.events.rightclick.RightClickOpenRequestEvent;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.ProjectManager;
-import de.ft.interitus.utils.CheckKollision;
+import de.ft.interitus.UI.UIElements.check.CheckKollision;
 import de.ft.interitus.utils.ShapeRenderer;
 
 import java.util.Objects;
@@ -95,23 +93,10 @@ public abstract class Block implements VisibleObjects {
         final Block instance = this;
 
         rightClickEventListener = new RightClickEventListener() {
-            @Override
-            public void openrightclickwindow(RightClickOpenEvent e) {
-
-            }
 
             @Override
-            public void closerightclickwindow(RightClickCloseEvent e) {
-
-            }
-
-            @Override
-            public void buttonclickedinwindow(RightClickButtonSelectEvent e) {
-
-                if (e.getButton().getText().contains("Löschen") && blockupdate.toggle) {
-                    if (RechtsKlick.mouseoverblockindex == Objects.requireNonNull(ProjectManager.getActProjectVar()).blocks.indexOf(instance) && getBlocktype().canbedeleted())
-                        instance.delete(false);
-                }
+            public PopupMenue openrequest(RightClickOpenRequestEvent e, float Pos_X, float Pos_Y) {
+                return null;
             }
         };
         EventVar.rightClickEventManager.addListener(rightClickEventListener);

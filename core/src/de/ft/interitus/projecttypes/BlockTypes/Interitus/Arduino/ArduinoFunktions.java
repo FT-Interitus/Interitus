@@ -8,7 +8,6 @@ package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.utils.Array;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisSelectBox;
@@ -242,7 +241,7 @@ public class ArduinoFunktions implements ProjectFunktions {
         builder.add(configurationname).expandX().padTop(-(builder.getHeight() / 15 * 14)).padLeft(-70).row(); //TODO height dose'nt work
 
         builder.add(selectboard).expandX().padLeft(-100).row();
-        builder.add(selectSerialPort).expandX().padLeft(-100).row();
+        builder.add(selectSerialPort).expandX().padLeft(-100).padBottom(-50).padTop(50).row();
 
 
         configuration.updateEntry();
@@ -251,7 +250,7 @@ public class ArduinoFunktions implements ProjectFunktions {
         Thread thread = new Thread() {
             @Override
             public void run() {
-                getInstalledBoards();
+                getSerialConnections();
             }
 
 
@@ -267,7 +266,7 @@ public class ArduinoFunktions implements ProjectFunktions {
     }
 
 
-    private void getInstalledBoards() {
+    private void getSerialConnections() {
         JSONArray deviceArray = ((ArduinoCompiler) ProjectManager.getActProjectVar().projectType.getCompiler()).getInstalledBoards();
 
 

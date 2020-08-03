@@ -69,4 +69,9 @@ public class TabBar {
     public Tab getSelectedTab() {
         return selectedTab;
     }
+
+
+    public void setSelectedTab(int index) {
+        this.selectedTab = tabbs.get(index);
+    }
 }

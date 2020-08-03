@@ -6,7 +6,6 @@
 package de.ft.interitus;
 
 import com.badlogic.gdx.math.Vector2;
-import de.ft.interitus.UI.UIElements.TabBar.Tab;
 import de.ft.interitus.UI.window.Window;
 import de.ft.interitus.projecttypes.ProjectVar;
 import de.ft.interitus.utils.ArrayList;
@@ -14,7 +13,7 @@ import de.ft.interitus.utils.ArrayList;
 public class Var {
 
 
-    public static double PROGRAMM_VERSION_ID = 01;
+    public static final double PROGRAMM_VERSION_ID = 1;
 
 
     /**
@@ -23,15 +22,15 @@ public class Var {
      * an der zweiten Zahl bei neuen Featurs,..
      * an der Erste Zahl bei größern Update Packeten
      */
-    public static String PROGRAMM_VERSION = "0.0.1";
+    public static final String PROGRAMM_VERSION = "0.0.1";
 
-    public static double API_VERSION = 1.0;
+    public static final double API_VERSION = 1.0;
     public static boolean isloading = false;
     public static boolean isclearing = false;
     public static boolean nointernetconnection = false;
 
 
-    public static ArrayList<String> programmarguments = new ArrayList<>();
+    public static final ArrayList<String> programmarguments = new ArrayList<>();
 
 
     public static boolean debug = false;
@@ -53,15 +52,14 @@ public class Var {
     public static boolean keeplog = false;
 
 
-    public static Vector2 mousepressedold = new Vector2(1, 1); //Wo war die Maus als das letzte mal eine Taste gedrückt wurde
+    public static final Vector2 mousepressedold = new Vector2(1, 1); //Wo war die Maus als das letzte mal eine Taste gedrückt wurde
 
-    public static Vector2 mousepressedoldwihoutunproject = new Vector2(1, 1); //Wo war die Maus als das letzte mal eine Taste gedrückt wurde
+    public static final Vector2 mousepressedoldwihoutunproject = new Vector2(1, 1); //Wo war die Maus als das letzte mal eine Taste gedrückt wurde
 
 
     public static ArrayList<Window> extendsWindows = new ArrayList<>();
     public static Window splashscreen = null;
 
-    public static ArrayList<Tab> ProjektTabs = new ArrayList<>();
 
-
+    public static boolean switchprojectwithoutgui = false;
 }

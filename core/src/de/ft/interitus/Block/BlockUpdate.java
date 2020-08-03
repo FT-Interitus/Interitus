@@ -14,13 +14,14 @@ import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Programm;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.UI.UI;
+import de.ft.interitus.UI.UIElements.check.CheckMouse;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.Var;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.block.BlockKillMovingWiresEvent;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.ProjectManager;
-import de.ft.interitus.utils.CheckKollision;
+import de.ft.interitus.UI.UIElements.check.CheckKollision;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -96,7 +97,7 @@ public abstract class BlockUpdate extends Thread {
                             time.purge();
                         }
 
-                        toggle = de.ft.interitus.utils.CheckKollision.checkmousewithblock(block); //Wird der Block von der Mouse gehovert?
+                        toggle = CheckKollision.checkmousewithblock(block); //Wird der Block von der Mouse gehovert?
 
                         //TODO
                         //TODO      Kommentierung fortsetzen (Abgebrochen da hier noch sehr viele Änderungen passieren werden)
@@ -207,7 +208,7 @@ public abstract class BlockUpdate extends Thread {
                             IsMousealreadypressed = false;
                         }
 
-                        if (de.ft.interitus.utils.CheckKollision.checkmousewithblock(block, Var.mousepressedold) && Gdx.input.isButtonPressed(0) && ProjectManager.getActProjectVar().ismoving == false && !block.isMarked() && !ProjectManager.getActProjectVar().marked && ProjectManager.getActProjectVar().markedblock == null) {
+                        if (CheckKollision.checkmousewithblock(block, Var.mousepressedold) && Gdx.input.isButtonPressed(0) && ProjectManager.getActProjectVar().ismoving == false && !block.isMarked() && !ProjectManager.getActProjectVar().marked && ProjectManager.getActProjectVar().markedblock == null) {
 
                             if (!CheckKollision.checkmousewithobject((int) block.getwireconnector_right().x, (int) block.getwireconnector_right().y, 20, 20, (int) Var.mousepressedold.x, (int) Var.mousepressedold.y)) {
 
@@ -249,7 +250,7 @@ public abstract class BlockUpdate extends Thread {
                         if (block.isMoving() && Gdx.input.isButtonPressed(0)) {
 
 
-                            tempdelete = UI.check.isMouseover(UIVar.BlockBarX, UIVar.BlockBarY, UIVar.BlockBarW, UIVar.BlockBarH) && block.getBlocktype().canbedeleted();
+                            tempdelete = CheckMouse.isMouseover(UIVar.BlockBarX, UIVar.BlockBarY, UIVar.BlockBarW, UIVar.BlockBarH) && block.getBlocktype().canbedeleted();
 
 
                             if (tempdelete != willbedelete) {
@@ -487,7 +488,7 @@ public abstract class BlockUpdate extends Thread {
                         }
 
 
-                        if (!CheckKollision.checkmousewithblock(block) && Gdx.input.isButtonPressed(0) && !block.isMoving() && block.isMarked() && (!UI.check.isMouseover(UIVar.blockeinstellungen_x, UIVar.blockeinstellungen_y, UIVar.blockeinstellungen_w, UIVar.blockeinstellungen_h) && !UI.check.wasMousePressed(UIVar.blockeinstellungen_x, UIVar.blockeinstellungen_y, UIVar.blockeinstellungen_w, UIVar.blockeinstellungen_h) || !UIVar.isBlockSettingsopen)) {
+                        if (!CheckKollision.checkmousewithblock(block) && Gdx.input.isButtonPressed(0) && !block.isMoving() && block.isMarked() && (!CheckMouse.isMouseover(UIVar.blockeinstellungen_x, UIVar.blockeinstellungen_y, UIVar.blockeinstellungen_w, UIVar.blockeinstellungen_h) && !CheckMouse.wasMousePressed(UIVar.blockeinstellungen_x, UIVar.blockeinstellungen_y, UIVar.blockeinstellungen_w, UIVar.blockeinstellungen_h) || !UIVar.isBlockSettingsopen)) {
                             block.setMarked(false);
                             ProjectManager.getActProjectVar().marked = false;
                             ProjectManager.getActProjectVar().markedblock = null;

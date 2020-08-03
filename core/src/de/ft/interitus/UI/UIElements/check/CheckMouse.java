@@ -9,11 +9,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import de.ft.interitus.Var;
 
-public class Check {
-    private final Vector2 mousesave = new Vector2();
-    private boolean touched;
+public class CheckMouse {
+    private static final Vector2 mousesave = new Vector2();
+    private static boolean touched;
 
-    public boolean isjustPressed(int x, int y, int w, int h) {
+    public static boolean isjustPressed(int x, int y, int w, int h) {
         boolean pressed = false;
 
         if (Gdx.input.isButtonPressed(0)) {
@@ -42,21 +42,21 @@ public class Check {
 
     }
 
-    public boolean isJustPressedNormal(int x, int y, int w, int h) {
+    public static boolean isJustPressedNormal(int x, int y, int w, int h) {
         return Gdx.input.getX() > x && Gdx.input.getX() < x + w && Gdx.input.getY() > Gdx.graphics.getHeight() - y - h && Gdx.input.getY() < Gdx.graphics.getHeight() - y && Gdx.input.isButtonJustPressed(0);
 
     }
 
-    public boolean isMouseover(int x, int y, int w, int h) {
+    public static boolean isMouseover(int x, int y, int w, int h) {
         return Gdx.input.getX() > x && Gdx.input.getX() < x + w && Gdx.input.getY() > Gdx.graphics.getHeight() - y - h && Gdx.input.getY() < Gdx.graphics.getHeight() - y;
     }
 
 
-    public boolean isPressed(int x, int y, int w, int h) {
+    public static boolean isPressed(int x, int y, int w, int h) {
         return Gdx.input.getX() > x && Gdx.input.getX() < x + w && Gdx.input.getY() > Gdx.graphics.getHeight() - y - h && Gdx.input.getY() < Gdx.graphics.getHeight() - y && Gdx.input.isButtonPressed(0);
     }
 
-    public boolean wasMousePressed(int x, int y, int w, int h) {
+    public static boolean wasMousePressed(int x, int y, int w, int h) {
         return Var.mousepressedoldwihoutunproject.x > x && Var.mousepressedoldwihoutunproject.x < x + w && Var.mousepressedoldwihoutunproject.y > Gdx.graphics.getHeight() - y - h && Var.mousepressedoldwihoutunproject.y < Gdx.graphics.getHeight() - y && Gdx.input.isButtonPressed(0);
     }
 

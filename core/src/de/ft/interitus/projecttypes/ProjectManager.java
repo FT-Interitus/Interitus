@@ -7,6 +7,7 @@ package de.ft.interitus.projecttypes;
 
 import de.ft.interitus.Programm;
 import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.Var;
 import de.ft.interitus.utils.ClearActOpenProgramm;
@@ -29,6 +30,7 @@ public class ProjectManager {
         Var.openprojectindex = index;
         getActProjectVar().currentstarttime = System.currentTimeMillis();
 
+        time.cancel();
         time.purge();
         time = new Timer();
 
@@ -39,17 +41,21 @@ public class ProjectManager {
                     @Override
                     public void run() {
                         UIVar.isdialogeopend = false;
+                        UI.runselection.clear();
                     }
                 },
                 2000
         );
+
+
+
         time.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 ProjectManager.getActProjectVar().projectType.update();
 
             }
-        }, 0, 1000);
+        }, 0, 6000);
 
 
 
@@ -62,7 +68,7 @@ public class ProjectManager {
      */
     public static ProjectVar getActProjectVar() {
         if (Var.openprojects.size() == 0) {
-            return null;
+            throw new IllegalCallerException();
         } else {
             return Var.openprojects.get(Var.openprojectindex);
         }
@@ -92,6 +98,8 @@ public class ProjectManager {
         }
 
     }
+
+
 
 
 

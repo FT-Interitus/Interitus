@@ -36,17 +36,19 @@ public class PluginClassLoader {
 //Laden der MANIFEST.MF
         Manifest manifest = null;
         try {
+            assert file != null;
             manifest = file.getManifest();
         } catch (IOException e) {
             PluginManagerHandler.error = e;
 
-        } catch (NullPointerException e) {
+        } catch (NullPointerException ignored) {
 
         }
 
 
 // auslesen der Attribute aus der Manifest
 
+        assert manifest != null;
         Attributes attrib = manifest.getMainAttributes();
 
 // holen der Mainclass aus den Attributen

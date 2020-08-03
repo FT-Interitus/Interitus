@@ -10,20 +10,18 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.UI.UI;
-import de.ft.interitus.UI.UIElements.check.Check;
+import de.ft.interitus.UI.UIElements.check.CheckMouse;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.utils.ShapeRenderer;
 import de.ft.interitus.utils.animation.Animation;
 
 public class Button implements UIElement {
     public static boolean disablepresscolorchange = false;
-    //private final SpriteBatch batch = new SpriteBatch();
-
     private final GlyphLayout glyphLayout = new GlyphLayout();
-    private final Check check = new Check();
+
     public float hovertransparancy = 0.8f;
     public boolean widthoverText = false;
-    public int widthoverTextlinksrandabstand = 5;
+    public final int widthoverTextlinksrandabstand = 5;
     private boolean isworking = false;
     private boolean ignore_uilock = false;
     private int x;
@@ -66,15 +64,18 @@ public class Button implements UIElement {
 
     public boolean isjustPressed() {
         boolean pressed = false;
+
         if (!disable && !UIVar.isdialogeopend) {
 
-            pressed = check.isjustPressed(x, y, w, h);
+            pressed = CheckMouse.isjustPressed(x, y, w, h);
+            return pressed;
 
         } else {
+
             return false;
+
         }
 
-        return pressed;
 
     }
 
@@ -83,13 +84,13 @@ public class Button implements UIElement {
             boolean pressed = false;
             if (!disable && !UIVar.isdialogeopend) {
 
-                pressed = check.isJustPressedNormal(x, y, w, h);
-
+                pressed = CheckMouse.isJustPressedNormal(x, y, w, h);
+                return pressed;
             } else {
                 return false;
             }
 
-            return pressed;
+
         } else {
             return false;
         }
@@ -100,7 +101,7 @@ public class Button implements UIElement {
         if (!UIVar.uilocked || this.isIgnore_uilock()) {
             if (!disable) {
 
-                return check.isPressed(x, y, w, h);
+                return CheckMouse.isPressed(x, y, w, h);
             } else {
                 return false;
             }
@@ -119,7 +120,7 @@ public class Button implements UIElement {
             } else {
                 if (!disable) {
 
-                    return check.isMouseover(x, y, w, h);
+                    return CheckMouse.isMouseover(x, y, w, h);
                 } else {
                     return false;
                 }
@@ -129,7 +130,7 @@ public class Button implements UIElement {
         }
     }
 
-    public void draw() {
+    public void draw() { //TODO Konstellationen deutlicher machen
         if (text != null) {
             glyphLayout.setText(ProgrammingSpace.font, this.text);
             if (widthoverText) {

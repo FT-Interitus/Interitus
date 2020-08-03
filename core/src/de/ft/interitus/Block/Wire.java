@@ -10,18 +10,15 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.DisplayErrors;
-import de.ft.interitus.Programm;
 import de.ft.interitus.ProgrammingSpace;
-import de.ft.interitus.RechtsKlick;
+import de.ft.interitus.UI.popup.PopupMenue;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.block.BlockKillMovingWiresEvent;
-import de.ft.interitus.events.rightclick.RightClickButtonSelectEvent;
-import de.ft.interitus.events.rightclick.RightClickCloseEvent;
 import de.ft.interitus.events.rightclick.RightClickEventListener;
-import de.ft.interitus.events.rightclick.RightClickOpenEvent;
+import de.ft.interitus.events.rightclick.RightClickOpenRequestEvent;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.ProjectManager;
-import de.ft.interitus.utils.CheckKollision;
+import de.ft.interitus.UI.UIElements.check.CheckKollision;
 
 public abstract class Wire {
     final Wire INSTANCE = this;
@@ -32,31 +29,10 @@ public abstract class Wire {
     private VisibleObjects left_connection;
     private VisibleObjects right_connection;
     RightClickEventListener rightClickEventListener = new RightClickEventListener() {
-        @Override
-        public void openrightclickwindow(RightClickOpenEvent e) {
-
-        }
 
         @Override
-        public void closerightclickwindow(RightClickCloseEvent e) {
-
-        }
-
-        @Override
-        public void buttonclickedinwindow(RightClickButtonSelectEvent e) {
-            if (e.getButton().getText().contains("Löschen")) {
-                if (ProjectManager.getActProjectVar().mousehoveredwire == INSTANCE) {
-                    try {
-                        INSTANCE.left_connection.getblock().setRight(null);
-                        INSTANCE.right_connection.getblock().setLeft(null);
-                        INSTANCE.left_connection.setWire_right(null);
-                        INSTANCE.right_connection.setWire_left(null);
-                        INSTANCE.left_connection = null;
-                        EventVar.rightClickEventManager.removeListener(INSTANCE.rightClickEventListener);
-                    } catch (Exception ignored) {
-                    }
-                }
-            }
+        public PopupMenue openrequest(RightClickOpenRequestEvent e, float Pos_X, float Pos_Y) {
+            return null;
         }
     };
     private boolean space_between_blocks = false;
@@ -287,10 +263,7 @@ public abstract class Wire {
 
                     }
 
-                    if (!RechtsKlick.popupmanager.isPopupopen() && ProjectManager.getActProjectVar().mousehoveredwire == this && !CheckKollision.objectwithrotation(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight(), sprite.getRotation(), ProgrammingSpace.viewport.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, ProgrammingSpace.viewport.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1, 0)) {
-                        Programm.logger.fine("Popup disable"); //TODO here is an error
-                        ProjectManager.getActProjectVar().mousehoveredwire = null;
-                    }
+
 
 
                     if (temp) {

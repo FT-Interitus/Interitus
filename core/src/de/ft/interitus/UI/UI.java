@@ -28,8 +28,6 @@ import de.ft.interitus.UI.UIElements.TabBar.Tab;
 import de.ft.interitus.UI.UIElements.TabBar.TabBar;
 import de.ft.interitus.UI.UIElements.UIElementBar;
 import de.ft.interitus.UI.UIElements.UIElements.Button;
-import de.ft.interitus.UI.UIElements.check.Check;
-import de.ft.interitus.UI.UIElements.check.InputManager;
 import de.ft.interitus.UI.UIElements.dropdownmenue.DropDownMenue;
 import de.ft.interitus.UI.editor.Editor;
 import de.ft.interitus.UI.projectsettings.ProjectSettingsUI;
@@ -74,7 +72,7 @@ public class UI {
     public static TabBar tabbar;
     public final static GlyphLayout glyphLayout = new GlyphLayout();
     public final static BitmapFont font = new BitmapFont();
-    public final static Check check = new Check();
+
     public static MenuBar menuBar;
     public static DropDownMenue runselection;
     protected static MenuItem recent;
@@ -82,14 +80,15 @@ public class UI {
     protected static MenuItem redo;
     protected static MenuItem copy;
     protected static MenuItem paste;
-    static ArrayList<VisTextField> textFielder = new ArrayList<>();
+    static final ArrayList<VisTextField> textFielder = new ArrayList<>();
     static boolean isuilock = false;
     private static boolean issettingsuiopend = false;
     private static boolean issetupuiopend = false;
     private static Block markedblock;
     private static int wishaniposition = -170 - UIVar.abstandvonRand;
     private static Thread compile_thread;
-    boolean actiondone = false;
+    //private static final Animation animation = new Animation();
+
 
     public static void updatedragui(ShapeRenderer renderer, boolean flaeche, SpriteBatch batch) {
         if (!UIVar.uilocked) {
@@ -416,6 +415,7 @@ public class UI {
                 temptab.getTabButton().setText(Var.openprojects.get(i).filename);
                 temptab.setIndex(i);
                 tabbar.addTab(temptab);
+
             }
 
         }
@@ -424,7 +424,12 @@ public class UI {
         if (tabbar.getSelectedTab() != null) {
             if (tabbar.getSelectedTab().getIndex() != -1) {
                 if (Var.openprojectindex != tabbar.getSelectedTab().getIndex()) {
-                    ProjectManager.change(tabbar.getSelectedTab().getIndex());
+                    if(!Var.switchprojectwithoutgui) {
+                        ProjectManager.change(tabbar.getSelectedTab().getIndex());
+                    }else{
+                        tabbar.setSelectedTab(Var.openprojectindex);
+                        Var.switchprojectwithoutgui = false;
+                    }
                 }
             }
         }

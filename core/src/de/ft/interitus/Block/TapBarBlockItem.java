@@ -10,7 +10,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.UI.UI;
-import de.ft.interitus.UI.UIElements.check.Check;
+import de.ft.interitus.UI.UIElements.check.CheckMouse;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.tappedbar.TapItem;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
@@ -20,7 +20,6 @@ import de.ft.interitus.projecttypes.ProjectManager;
 public class TapBarBlockItem implements TapItem {
     private final Texture img;
     private final PlatformSpecificBlock psb;
-    private final Check check = new Check();
     private int x;
     private int y;
     private int w = 50;
@@ -35,7 +34,7 @@ public class TapBarBlockItem implements TapItem {
     public void draw() {
 
         if (!UIVar.isdialogeopend) {
-            if (check.isJustPressedNormal(x, y, w, h)) {
+            if (CheckMouse.isJustPressedNormal(x, y, w, h)) {
 
                 Block tempblock = ProjectManager.getActProjectVar().projectType.getBlockGenerator().generateBlock(ProjectManager.getActProjectVar().blocks.size(), (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y, psb.getWidth(), UIVar.BlockHeight, psb, ProjectManager.getActProjectVar().projectType.getBlockUpdateGenerator(), ProjectManager.getActProjectVar().projectType.getBlocktoSaveGenerator());
 
