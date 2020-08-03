@@ -26,6 +26,8 @@ import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.utils.CheckKollision;
 
+import java.util.Objects;
+
 /***
  *
  * @author Felix & Tim
@@ -59,10 +61,10 @@ public abstract class Block implements VisibleObjects {
     private Block right = null; //Der linke verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
     private Wire wire_left = null; //linke verbundene Wire
     private Wire wire_right = null; //rechte verbunde Wire
-    private PlatformSpecificBlock blocktype = null;
+    private PlatformSpecificBlock blocktype;
 
 
-    private GlyphLayout glyphLayout = new GlyphLayout();
+    private final GlyphLayout glyphLayout = new GlyphLayout();
 
 
     public Block(final int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock, BlockUpdateGenerator update, BlocktoSaveGenerator blocktoSaveGenerator) { //Initzialisieren des Blocks
@@ -74,7 +76,7 @@ public abstract class Block implements VisibleObjects {
         this.h = h;
         this.x_dup_rechts = this.x + this.w; //Duplicats positionen werden berechnet
 
-        wireconnector_right.set(x + w, y + h / 3);
+        wireconnector_right.set(x + w, y + h / 3f);
         this.index = index;
         this.blockUpdateGenerator = update;
         this.blockupdate = update.generate(this); //BlockUpdate Klasse wird initzilisieren
@@ -82,7 +84,7 @@ public abstract class Block implements VisibleObjects {
 
         if (this.isVisible()) { //Wenn der Block sichtbar ist...  //Das passiert deshalb weil nicht für nicht sichbare Blöcke ein Thread laufen muss
             blockupdate.start(); //...wird der updater gestartet
-            ProjectManager.getActProjectVar().visibleblocks.add(this); //und wird zum Array der sichtbaren Blöcke hinzugefüt
+            Objects.requireNonNull(ProjectManager.getActProjectVar()).visibleblocks.add(this); //und wird zum Array der sichtbaren Blöcke hinzugefüt
         } else {
             blockupdate.isrunning = false; //...wenn nicht dann nicht
         }
@@ -105,7 +107,7 @@ public abstract class Block implements VisibleObjects {
             public void buttonclickedinwindow(RightClickButtonSelectEvent e) {
 
                 if (e.getButton().getText().contains("Löschen") && blockupdate.toggle) {
-                    if (RechtsKlick.mouseoverblockindex == ProjectManager.getActProjectVar().blocks.indexOf(instance)&&getBlocktype().canbedeleted())
+                    if (RechtsKlick.mouseoverblockindex == Objects.requireNonNull(ProjectManager.getActProjectVar()).blocks.indexOf(instance)&&getBlocktype().canbedeleted())
                         instance.delete(false);
                 }
             }
@@ -461,7 +463,7 @@ public abstract class Block implements VisibleObjects {
      * Getter and Setter for the Index of the Block
      * Must be the same as in the ProjectManager.getactProjectVar().blocks array
      *
-     * @return
+     * @return the index from this Block
      */
     public int getIndex() { //Der Index wird ausgegeben
         return index;

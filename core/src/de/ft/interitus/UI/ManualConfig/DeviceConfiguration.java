@@ -45,6 +45,11 @@ public class DeviceConfiguration implements Serializable {
         this.parameters = parameters;
     }
 
+
+    /**
+     * Update the name in the Configuration List
+     * @return true if the operation was successful
+     */
     public boolean updateEntry() {
         int ID =  ProjectManager.getActProjectVar().deviceConfigurations.indexOf(this);
 

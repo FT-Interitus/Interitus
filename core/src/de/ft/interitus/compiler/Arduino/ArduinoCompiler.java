@@ -31,7 +31,7 @@ public class ArduinoCompiler implements Compiler {
 
         UI.button_start.setDisable(true);
         UI.button_debugstart.setDisable(true);
-        JSONArray array = getBoards();
+        JSONArray array = this.getBoards();
         if(array==null) {
             return false;        }
 
@@ -279,7 +279,7 @@ return outputfromcli;
 
     }
 
-    public static JSONArray getBoards( ) {
+    public JSONArray getBoards( ) {
 
         String get_device = "";
 
@@ -306,6 +306,40 @@ return outputfromcli;
         runcommand(update_index, false);
 try {
     return new JSONArray(runcommand(get_device, false));
+}catch (JSONException e){
+    return null;
+}
+    }
+
+
+
+    public  JSONArray getInstalledBoards( ) {
+
+        String get_device = "";
+
+        String update_index ="";
+        String install_avr="";
+
+        if (isWindows()) {
+            get_device = "libs\\arduino\\cli\\Windows\\arduino-cli.exe board listall --format json";
+            install_avr ="libs\\arduino\\cli\\Windows\\arduino-cli.exe core install arduino:avr@1.6.21";
+            update_index ="libs\\arduino\\cli\\Windows\\arduino-cli.exe core update-index";
+        } else if (isMac()) {
+
+        } else if (isUnix()) {
+
+            get_device = "./libs/arduino/cli/linux/arduino-cli board listall --format json";
+            install_avr ="./libs/arduino/cli/linux/arduino-cli core install arduino:avr@1.6.21";
+            update_index ="./libs/arduino/cli/linux/arduino-cli core update-index";
+
+        } else {
+            Programm.logger.severe("You OS is not supported");
+        }
+
+        runcommand(install_avr, false);
+        runcommand(update_index, false);
+try {
+    return new JSONObject(runcommand(get_device, false)).getJSONArray("boards");
 }catch (JSONException e){
     return null;
 }
