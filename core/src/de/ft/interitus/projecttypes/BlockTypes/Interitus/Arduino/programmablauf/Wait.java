@@ -7,6 +7,7 @@ package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf
 
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
+import de.ft.interitus.Block.ParameterType;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
 import de.ft.interitus.projecttypes.BlockTypes.BlockTopParameter;
@@ -27,7 +28,7 @@ public class Wait extends PlatformSpecificBlock implements ArduinoBlock {
         super(arduino);
 
 
-        waitdauer = new Parameter(0, AssetLoader.img_WaitBlock_warteZeit_Parameter, "Warte-Zeit", "Die Zeit die abgewartet werden soll", "ms","int",false);
+        waitdauer = new Parameter(0, AssetLoader.img_WaitBlock_warteZeit_Parameter, "Warte-Zeit", "Die Zeit die abgewartet werden soll", "ms",new ParameterType("int",false,false));
 
 
         parameters.add(waitdauer);

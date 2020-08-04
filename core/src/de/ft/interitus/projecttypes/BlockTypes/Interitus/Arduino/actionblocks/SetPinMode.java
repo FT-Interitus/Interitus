@@ -7,6 +7,7 @@ package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.actionblocks;
 
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
+import de.ft.interitus.Block.ParameterType;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
 import de.ft.interitus.projecttypes.BlockTypes.BlockTopParameter;
@@ -28,8 +29,8 @@ public class SetPinMode extends PlatformSpecificBlock implements ArduinoBlock {
         super(type);
 
 
-        pin = new Parameter("", AssetLoader.Parameter_Pin, "Pin", "", null,"int",false);
-        mode = new Parameter("", AssetLoader.Parameter_IO, "Mode(I/O)", "", null,"definition",false);
+        pin = new Parameter("", AssetLoader.Parameter_Pin, "Pin", "", null,new ParameterType("int",false,false));
+        mode = new Parameter("", AssetLoader.Parameter_IO, "Mode(I/O)", "", null,new ParameterType("definition",false,true));
 
 
         parameters.add(pin);

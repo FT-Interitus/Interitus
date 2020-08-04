@@ -13,7 +13,7 @@ import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Programm;
 import de.ft.interitus.ProgrammingSpace;
-import de.ft.interitus.UI.UI;
+import de.ft.interitus.UI.UIElements.check.CheckKollision;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.Var;
@@ -21,7 +21,6 @@ import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.block.BlockKillMovingWiresEvent;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.ProjectManager;
-import de.ft.interitus.UI.UIElements.check.CheckKollision;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -66,22 +65,25 @@ public abstract class BlockUpdate extends Thread {
             public void run() {
 
 
+                try {
 
+                    if (ProjectManager.getActProjectVar().movingwires != null && ProjectManager.getActProjectVar().movingwires.getLeft_connection() == block && block.getRight() != null) {
+                        EventVar.blockEventManager.killmovingwires(new BlockKillMovingWiresEvent(this));
+                    }
+                    if (block.isMarked()) {
+                        if (block != ProjectManager.getActProjectVar().markedblock) {
+                            block.setMarked(false);
+                        }
 
-                if(ProjectManager.getActProjectVar().movingwires!=null&&ProjectManager.getActProjectVar().movingwires.getLeft_connection()==block&&block.getRight()!=null) {
-                    EventVar.blockEventManager.killmovingwires(new BlockKillMovingWiresEvent(this));
-                }
-                if (block.isMarked()) {
-                    if (block != ProjectManager.getActProjectVar().markedblock) {
-                        block.setMarked(false);
                     }
 
-                }
+                    if (ProjectManager.getActProjectVar().blocks.indexOf(block) == -1) {
+                        isrunning = false;
+                        currentThread().interrupt();
+                        this.cancel();
+                    }
+                } catch (Exception e) {
 
-                if (ProjectManager.getActProjectVar().blocks.indexOf(block) == -1) {
-                    isrunning = false;
-                    currentThread().interrupt();
-                    this.cancel();
                 }
 
                 if (!UIVar.isdialogeopend) {

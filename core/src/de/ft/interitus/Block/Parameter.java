@@ -10,23 +10,22 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class Parameter {
 
+    private final String Unit;
     private Object Parameter;
     private Texture ParameterTexture;
     private String ParameterName;
     private String ParameterDescription;
-    private final String Unit;
     private Block block;
-    private boolean isoutput = false;
-    private String variableType;
+    private ParameterType parameterType;
 
-    public Parameter(Object parameter, Texture ParameterTexture, String ParameterName, String ParameterDescription, String Unit,String variableType,boolean isoutput) {
+    public Parameter(Object parameter, Texture ParameterTexture, String ParameterName, String ParameterDescription, String Unit, ParameterType parameterType) {
         this.ParameterTexture = ParameterTexture;
         this.Parameter = parameter;
         this.ParameterName = ParameterName;
         this.ParameterDescription = ParameterDescription;
         this.Unit = Unit;
-        this.isoutput = isoutput;
-        this.variableType = variableType;
+
+        this.parameterType = parameterType;
 
 
     }
@@ -75,19 +74,11 @@ public class Parameter {
         this.block = block;
     }
 
-    public String getVariableType() {
-        return variableType;
+    public ParameterType getParameterType() {
+        return parameterType;
     }
 
-    public void setIsoutput(boolean isoutput) {
-        this.isoutput = isoutput;
-    }
-
-    public void setVariableType(String variableType) {
-        this.variableType = variableType;
-    }
-
-    public boolean isIsoutput() {
-        return isoutput;
+    public void setParameterType(ParameterType parameterType) {
+        this.parameterType = parameterType;
     }
 }
