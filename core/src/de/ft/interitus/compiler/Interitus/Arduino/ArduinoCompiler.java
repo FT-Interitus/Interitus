@@ -172,8 +172,22 @@ public class ArduinoCompiler implements Compiler {
     @Override
     public String getCompilerVersion() {
 
+        String commandgetVersion = "";
+        if (isWindows()) {
+            commandgetVersion = "libs\\arduino\\cli\\Windows\\arduino-cli.exe  version --format json";
 
-        return ""; //TODO get version from arduino cli
+
+        } else if (isMac()) {
+
+        } else if (isUnix()) {
+
+            commandgetVersion = "./libs/arduino/cli/linux/arduino-cli version --format json ";
+        } else {
+            Programm.logger.severe("You OS is not supported");
+        }
+
+
+        return new JSONObject( runcommand(commandgetVersion,false)).getString("VersionString");
     }
 
     private boolean compileandrun(JSONObject device) {

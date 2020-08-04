@@ -7,27 +7,27 @@ package de.ft.interitus.UI.popup;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import de.ft.interitus.UI.UIElements.UIElements.Button;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
-import de.ft.interitus.events.EventVar;
 import de.ft.interitus.utils.ArrayList;
 
 public class PopupMenue {
+    private static final int DISTANCE = 10;
+    private static final int WIDTH = 200;
     private final int buttonheight = 20;
-
     private final ArrayList<Button> buttons = new ArrayList<>(); //TODO Buttons kontrollieren die Maus kollision nur auf dem Text
     private final Texture popupButtonimage = new Texture("popupbuttonimage.png");
-    private int priority;
-
     int ispressed;
+    private int priority;
     private int x;
+    private boolean mouseunderpopup = false;
+    private boolean mouserightpopup = false;
     private int y;
-    private int ausgleichX = 0;
-    private int ausgleichY = 0;
     private boolean show = false;
+    private int ausgleichX;
+    private int ausgleichY;
 
-    public PopupMenue(int priority,String... it) {
+    public PopupMenue(int priority, String... it) {
         buttons.clear();
         for (int i = 0; i < it.length; i++) {
             Button b = new Button();
@@ -39,7 +39,6 @@ public class PopupMenue {
     }
 
 
-
     public void setBounds(int x, int y) {
         this.x = x;
         this.y = y;
@@ -48,51 +47,56 @@ public class PopupMenue {
     private void rechtsKlickControlle() {
 
 
-
-        if (Gdx.input.isButtonJustPressed(0) && !CheckMouse.isMouseover(this.x + ausgleichX, this.y + ausgleichY, 200, buttonheight * buttons.size())) {
+        if (Gdx.input.isButtonJustPressed(0) && !CheckMouse.isMouseover(this.x + ausgleichX, this.y + ausgleichY, WIDTH, buttonheight * buttons.size())) {
             show = false;
         }
     }
-
 
 
     public void draw() {
         if (show) {
             rechtsKlickControlle();
 
-            if (y + buttonheight * buttons.size() < Gdx.graphics.getHeight() && x + 200 < Gdx.graphics.getWidth()) {
-                ausgleichX = 0;
-                ausgleichY = 0;
+            this.ausgleichX = 0;
+            this.ausgleichY =0;
+            mouseunderpopup = false;
+            mouserightpopup = false;
 
-            } else {
-                if (x + 200 > Gdx.graphics.getWidth()) {
-                    if (y + buttonheight * buttons.size() > Gdx.graphics.getHeight()) {
-                        ausgleichX = -((x + 200) - Gdx.graphics.getWidth());
-                        ausgleichY = -buttonheight * buttons.size();
 
-                    } else {
-                        ausgleichX = -((x + 200) - Gdx.graphics.getWidth());
-                        ausgleichY = 0;
-                    }
-                } else {
-                    ausgleichX = 0;
-                    ausgleichY = -buttonheight * buttons.size();
-                }
+            if (this.y - (buttons.size() * buttonheight) - DISTANCE < 0) {
+                mouseunderpopup = true;
+
             }
 
-            for (int i = 0; i < buttons.size(); i++) {
-                buttons.get(i).setBounds(this.x + ausgleichX, this.y + (buttonheight * i) + ausgleichY, 200, buttonheight);
+
+            if((this.x +WIDTH)+DISTANCE>Gdx.graphics.getWidth()) {
+
+                mouserightpopup = true;
+            }
+
+
+            if(mouserightpopup) {
+
+                this.ausgleichX= (-WIDTH);
+            }
+
+            if(mouseunderpopup) {
+
+                this.ausgleichY = buttons.size()*buttonheight;
+            }
+
+            for (int i = buttons.size() - 1; i >= 0; i--) {
+                buttons.get(i).setBounds(this.x + ausgleichX, this.y - (buttonheight * buttons.size())+(buttonheight*i) + ausgleichY, WIDTH, buttonheight);
                 buttons.get(i).setImage(popupButtonimage);
                 buttons.get(i).draw();
             }
-
 
 
         }
 
         ispressed = getPressed();
         if (ispressed != -1) {
-           // EventVar.rightClickEventManager.buttonclickedinwindow(new RightClickButtonSelectEvent(this, buttons.get(ispressed)));
+            // EventVar.rightClickEventManager.buttonclickedinwindow(new RightClickButtonSelectEvent(this, buttons.get(ispressed)));
             ispressed = -1;
             this.show = false;
 
@@ -142,4 +146,6 @@ public class PopupMenue {
     public void setShow(boolean show) {
         this.show = show;
     }
+
+
 }

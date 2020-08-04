@@ -46,7 +46,7 @@ public class PopupHandler {
 
                     if(highestPriority!=null){
                         highestPriority.setShow(true);
-                        highestPriority.setBounds(Gdx.input.getX(),Gdx.input.getY()); //TODO Bounds stimmen nicht
+                        highestPriority.setBounds(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY());
                     }
 
             }
