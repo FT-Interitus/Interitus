@@ -22,4 +22,6 @@ public interface RightClickEventListener extends EventListener {
      */
     PopupMenue openrequest(RightClickOpenRequestEvent e,float Pos_X,float Pos_Y);
 
+    void performAction(RightClickPerformActionEvent e,PopupMenue popupMenue,int Buttonindex);
+
 }

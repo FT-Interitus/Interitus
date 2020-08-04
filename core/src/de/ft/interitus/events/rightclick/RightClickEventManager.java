@@ -10,7 +10,7 @@ import de.ft.interitus.UI.popup.PopupMenue;
 import java.util.ArrayList;
 import java.util.Vector;
 
-public class RightClickEventManager {
+public class RightClickEventManager  {
     protected Vector listener = new Vector();
     private final ArrayList<PopupMenue> requests = new ArrayList<>();
 
@@ -33,5 +33,12 @@ public class RightClickEventManager {
             requests.add(((RightClickEventListener) listener.elementAt(i)).openrequest(e, Pos_X, Pos_Y));
 
         return requests;
+    }
+
+    
+    public void performAction(RightClickPerformActionEvent e, PopupMenue popupMenue, int Buttonindex) {
+
+        for (int i = 0; i < listener.size(); i++)
+           ((RightClickEventListener) listener.elementAt(i)).performAction(e, popupMenue, Buttonindex);
     }
 }

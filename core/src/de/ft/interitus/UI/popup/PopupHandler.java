@@ -11,6 +11,7 @@ import de.ft.interitus.Programm;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.rightclick.RightClickOpenRequestEvent;
+import de.ft.interitus.events.rightclick.RightClickPerformActionEvent;
 
 import java.util.ArrayList;
 
@@ -54,8 +55,17 @@ public class PopupHandler {
             if(highestPriority!=null&&highestPriority.isShow()) {
                 highestPriority.draw();
 
+
             }else{
+
+
+
                 if(highestPriority!=null) {
+                    if(highestPriority.ispressed!=-1) {
+
+                        EventVar.rightClickEventManager.performAction(new RightClickPerformActionEvent(Programm.INSTANCE),highestPriority,highestPriority.ispressed);
+                    highestPriority.ispressed = -1;
+                    }
 
                     highestPriority = null;
                 }

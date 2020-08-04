@@ -47,7 +47,7 @@ public class PopupMenue {
     private void rechtsKlickControlle() {
 
 
-        if (Gdx.input.isButtonJustPressed(0) && !CheckMouse.isMouseover(this.x + ausgleichX, this.y + ausgleichY, WIDTH, buttonheight * buttons.size())) {
+        if (Gdx.input.isButtonJustPressed(0) && !CheckMouse.isMouseover(this.x + ausgleichX, this.y - (buttonheight * buttons.size()), WIDTH, buttonheight * buttons.size())) {
             show = false;
         }
     }
@@ -97,7 +97,7 @@ public class PopupMenue {
         ispressed = getPressed();
         if (ispressed != -1) {
             // EventVar.rightClickEventManager.buttonclickedinwindow(new RightClickButtonSelectEvent(this, buttons.get(ispressed)));
-            ispressed = -1;
+
             this.show = false;
 
         }

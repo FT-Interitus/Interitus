@@ -16,6 +16,7 @@ import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.block.BlockKillMovingWiresEvent;
 import de.ft.interitus.events.rightclick.RightClickEventListener;
 import de.ft.interitus.events.rightclick.RightClickOpenRequestEvent;
+import de.ft.interitus.events.rightclick.RightClickPerformActionEvent;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.UI.UIElements.check.CheckKollision;
@@ -33,6 +34,11 @@ public abstract class Wire {
         @Override
         public PopupMenue openrequest(RightClickOpenRequestEvent e, float Pos_X, float Pos_Y) {
             return null;
+        }
+
+        @Override
+        public void performAction(RightClickPerformActionEvent e, PopupMenue popupMenue, int Buttonindex) {
+
         }
     };
     private boolean space_between_blocks = false;

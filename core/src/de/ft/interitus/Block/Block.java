@@ -24,6 +24,7 @@ import de.ft.interitus.events.block.BlockDeleteEvent;
 import de.ft.interitus.events.block.BlockNeighborSetEvent;
 import de.ft.interitus.events.rightclick.RightClickEventListener;
 import de.ft.interitus.events.rightclick.RightClickOpenRequestEvent;
+import de.ft.interitus.events.rightclick.RightClickPerformActionEvent;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.ProjectManager;
@@ -108,6 +109,13 @@ public abstract class Block implements VisibleObjects {
                 }else{
                     return null;
                 }
+            }
+
+            @Override
+            public void performAction(RightClickPerformActionEvent e, PopupMenue popupMenue, int Buttonindex) {
+
+
+
             }
         };
         EventVar.rightClickEventManager.addListener(rightClickEventListener);
