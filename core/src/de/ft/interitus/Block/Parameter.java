@@ -16,13 +16,17 @@ public class Parameter {
     private String ParameterDescription;
     private final String Unit;
     private Block block;
+    private boolean isoutput = false;
+    private String variableType;
 
-    public Parameter(Object parameter, Texture ParameterTexture, String ParameterName, String ParameterDescription, String Unit) {
+    public Parameter(Object parameter, Texture ParameterTexture, String ParameterName, String ParameterDescription, String Unit,String variableType,boolean isoutput) {
         this.ParameterTexture = ParameterTexture;
         this.Parameter = parameter;
         this.ParameterName = ParameterName;
         this.ParameterDescription = ParameterDescription;
         this.Unit = Unit;
+        this.isoutput = isoutput;
+        this.variableType = variableType;
 
 
     }
@@ -69,5 +73,21 @@ public class Parameter {
 
     public void setBlock(Block block) {
         this.block = block;
+    }
+
+    public String getVariableType() {
+        return variableType;
+    }
+
+    public void setIsoutput(boolean isoutput) {
+        this.isoutput = isoutput;
+    }
+
+    public void setVariableType(String variableType) {
+        this.variableType = variableType;
+    }
+
+    public boolean isIsoutput() {
+        return isoutput;
     }
 }

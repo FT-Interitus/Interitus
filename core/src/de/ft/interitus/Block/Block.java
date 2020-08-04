@@ -69,7 +69,6 @@ public abstract class Block implements VisibleObjects {
     private Wire wire_left = null; //linke verbundene Wire
     private Wire wire_right = null; //rechte verbunde Wire
     private PlatformSpecificBlock blocktype;
-    private PopupMenue popupMenue = new PopupMenue(15,"test","test2");
 
 
     public Block(final int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock, BlockUpdateGenerator update, BlocktoSaveGenerator blocktoSaveGenerator) { //Initzialisieren des Blocks
@@ -105,7 +104,7 @@ public abstract class Block implements VisibleObjects {
 
                 if(CheckKollision.object(getX(),getY(),getW(),getW(),Unproject.unproject(Pos_X,Pos_Y).x,Unproject.unproject(Pos_X,Pos_Y).y,1,1)) {
 
-                    return popupMenue;
+                    return null;
                 }else{
                     return null;
                 }
