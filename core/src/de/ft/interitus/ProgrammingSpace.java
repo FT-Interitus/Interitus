@@ -59,7 +59,7 @@ public class ProgrammingSpace extends ScreenAdapter {
     public static float delta;
     public static Plugin nativ = new Native();
 
-    public static Notification notification = new Notification(AssetLoader.close_notification,"test","test").setCloseable(false);
+    public static Notification notification;
 
 
 
@@ -99,7 +99,7 @@ public class ProgrammingSpace extends ScreenAdapter {
         Gdx.graphics.setTitle("New File");
         ProjectManager.getActProjectVar().setFilename("New File");
 
-
+  notification = new Notification(AssetLoader.connector_offerd,"test","test").setCloseable(false);
 
 
         ThreadManager.init();

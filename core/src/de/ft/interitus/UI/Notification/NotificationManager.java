@@ -90,6 +90,9 @@ public class NotificationManager {
             ProgrammingSpace.shapeRenderer.end();
 
 
+            UI.UIbatch.begin();
+            UI.UIbatch.draw(notifications.get(i).getIcon(),Gdx.graphics.getWidth() - DISTANCE_RIGHT+IMAGE_MARGIN_RIGHT/2,UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i))+HEIGHT-IMAGE_MARGIN_TOP,10,10);
+            UI.UIbatch.end();
             if(notifications.get(i).isCloseable()) {
                 notifications.get(i).getCloseButton().setTransparency(notifications.get(i).getFadeout());
                 notifications.get(i).getCloseButton().setBounds(Gdx.graphics.getWidth() - IMAGE_MARGIN_RIGHT - MARGIN_RIGHT, UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i))+HEIGHT-IMAGE_MARGIN_TOP,10,10);
