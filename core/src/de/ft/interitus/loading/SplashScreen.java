@@ -12,6 +12,7 @@ import de.ft.interitus.Programm;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.window.CreateWindow;
 import de.ft.interitus.UI.window.Window;
+import org.lwjgl.glfw.GLFWVidMode;
 
 public class SplashScreen {
     public static Window create() {
@@ -53,7 +54,6 @@ public class SplashScreen {
 
         window.getConfig().setWindowPosition(-1, -1);
         window.getConfig().setDecorated(false);
-
 
         window.create();
         return window;

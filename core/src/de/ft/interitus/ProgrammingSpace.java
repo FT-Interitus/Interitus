@@ -17,6 +17,8 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.UI.CheckShortcuts;
+import de.ft.interitus.UI.Notification.Notification;
+import de.ft.interitus.UI.Notification.NotificationManager;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.PressedKeys;
 import de.ft.interitus.UI.UIElements.Switch;
@@ -160,6 +162,8 @@ public class ProgrammingSpace extends ScreenAdapter {
                 Block Temp = null;
                 Block Temp2 = null;
                 for (int i = 0; i < ProjectManager.getActProjectVar().visibleblocks.size(); i = i + 1) {
+                    Block block = ProjectManager.getActProjectVar().visibleblocks.get(i);
+
                     try {
                         batch.begin();
                     } catch (IllegalStateException e) {
@@ -168,22 +172,22 @@ public class ProgrammingSpace extends ScreenAdapter {
                     }
 
                     try {
-                        if (ProjectManager.getActProjectVar().visibleblocks.get(i).isMarked()) {
-                            if (ProjectManager.getActProjectVar().visibleblocks.get(i).isMoving()) {
-                                Temp2 = ProjectManager.getActProjectVar().visibleblocks.get(i);
+                        if (block.isMarked()) {
+                            if (block.isMoving()) {
+                                Temp2 = block;
                             } else {
-                                Temp = ProjectManager.getActProjectVar().visibleblocks.get(i);
+                                Temp = block;
                             }
                         } else {
-                            ProjectManager.getActProjectVar().visibleblocks.get(i).draw(batch, shapeRenderer, font);
+                            block.draw(batch, shapeRenderer, font);
                         }
 
                         batch.end();
-                        if (ProjectManager.getActProjectVar().visibleblocks.get(i).isMarked()) {
+                        if (block.isMarked()) {
 
 
-                            if (BlockShortcuts.shortCut_deleteBlock.isPressed() && ProjectManager.getActProjectVar().visibleblocks.get(i).getBlocktype().canbedeleted()) {
-                                ProjectManager.getActProjectVar().visibleblocks.get(i).delete(false);
+                            if (BlockShortcuts.shortCut_deleteBlock.isPressed() && block.getBlocktype().canbedeleted()) {
+                                block.delete(false);
                             }
 
 
@@ -275,6 +279,10 @@ public class ProgrammingSpace extends ScreenAdapter {
 //batch.draw(testanim.getAnimation(),50,50);
         // pm.setBounds(700,200);
 
+        NotificationManager.draw();
+        if(Gdx.input.isKeyJustPressed(Input.Keys.C)) {
+            NotificationManager.sendNotification(new Notification(AssetLoader.aktion_anzeige,"test","test"));
+        }
         PopupHandler.drawPopUp();
 
 
@@ -299,6 +307,7 @@ public class ProgrammingSpace extends ScreenAdapter {
     public void resize(int width, int height) {
         super.resize(width, height);
 
+        NotificationManager.resize();
 
         try {
             UI.updateView(width, height);
