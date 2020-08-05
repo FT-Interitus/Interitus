@@ -37,6 +37,7 @@ public class Button implements UIElement {
     private boolean disable = false;
     private boolean flipX = false;
     private boolean flipY = false;
+    private float transparency = 1.0f;
 
 
     public Button(int x, int y, int w, int h) {
@@ -150,10 +151,10 @@ public class Button implements UIElement {
                 if (isMouseover()) {
                     UI.UIbatch.setColor(1, 1, 1, hovertransparancy);
                 } else {
-                    UI.UIbatch.setColor(1, 1, 1, 1);
+                    UI.UIbatch.setColor(1, 1, 1, transparency);
                 }
                 if (isMouseover() && Gdx.input.isButtonPressed(0) && !disablepresscolorchange) {
-                    UI.UIbatch.setColor(1, 0.5f, 0.5f, 1);
+                    UI.UIbatch.setColor(1, 0.5f, 0.5f, transparency);
                 }
                 if (isDisable()) {
                     UI.UIbatch.setColor(1, 1, 1, 0.2f);
@@ -163,7 +164,7 @@ public class Button implements UIElement {
                 UI.UIbatch.end();
             } else if (image_pressed == null) {
                 UI.UIbatch.begin();
-                UI.UIbatch.setColor(1, 1, 1, 1);
+                UI.UIbatch.setColor(1, 1, 1, transparency);
 
                 if (isMouseover()) {
                     UI.UIbatch.draw(image_mouseover, this.x, this.y, this.w, this.h, 0, 0, image.getWidth(), image.getHeight(), this.flipX, this.flipY);
@@ -180,7 +181,7 @@ public class Button implements UIElement {
                     if (isDisable()) {
                         UI.UIbatch.setColor(1, 1, 1, 0.3f);
                     } else {
-                        UI.UIbatch.setColor(1, 1, 1, 1);
+                        UI.UIbatch.setColor(1, 1, 1, transparency);
                     }
 
 
@@ -193,14 +194,14 @@ public class Button implements UIElement {
                         UI.UIbatch.draw(image_pressed, this.x, this.y, this.w, this.h, 0, 0, image.getWidth(), image.getHeight(), this.flipX, this.flipY);
                     }
                 } else {
-                    UI.UIbatch.setColor(1, 1, 1, 1);
+                    UI.UIbatch.setColor(1, 1, 1, transparency);
                     UI.UIbatch.draw(this.working_animation.getAnimation(), x, y, w, h);
                 }
                 UI.UIbatch.end();
             }
             if (text != null) {
                 UI.UIbatch.begin();
-                UI.UIbatch.setColor(1, 1, 1, 1);
+                UI.UIbatch.setColor(1, 1, 1, transparency);
                 ProgrammingSpace.font.draw(UI.UIbatch, glyphLayout, x + widthoverTextlinksrandabstand, y + glyphLayout.height + h / 2 - glyphLayout.height / 2);
 
 
@@ -319,6 +320,14 @@ public class Button implements UIElement {
 
     public void setIgnore_uilock(boolean ignore_uilock) {
         this.ignore_uilock = ignore_uilock;
+    }
+
+    public void setTransparency(float transparency) {
+        this.transparency = transparency;
+    }
+
+    public float getTransparency() {
+        return transparency;
     }
 }
 

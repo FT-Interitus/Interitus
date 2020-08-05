@@ -59,6 +59,7 @@ public class ProgrammingSpace extends ScreenAdapter {
     public static float delta;
     public static Plugin nativ = new Native();
 
+    public static Notification notification = new Notification(AssetLoader.close_notification,"test","test").setCloseable(false);
 
 
 
@@ -279,10 +280,22 @@ public class ProgrammingSpace extends ScreenAdapter {
 //batch.draw(testanim.getAnimation(),50,50);
         // pm.setBounds(700,200);
 
+
+
         NotificationManager.draw();
         if(Gdx.input.isKeyJustPressed(Input.Keys.C)) {
-            NotificationManager.sendNotification(new Notification(AssetLoader.aktion_anzeige,"test","test"));
+            NotificationManager.sendNotification(notification);
         }
+         if(Gdx.input.isKeyPressed(Input.Keys.E)) {
+             try {
+                 notification.setProgressbarvalue(Notification.getProgressbarvalue() + 1);
+             }catch (Exception e) {
+                 notification.setProgressbarvalue(-1);
+             }
+        }
+
+
+
         PopupHandler.drawPopUp();
 
 

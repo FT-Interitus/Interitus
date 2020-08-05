@@ -166,6 +166,9 @@ public class AssetLoader {
 
     public static Texture aufklapppfeil;
 
+    //UI
+    public static Texture close_notification;
+
 
     public static AssetManager manager = new AssetManager();
 
@@ -312,6 +315,8 @@ public class AssetLoader {
             manager.load(workingdirectory + "node.png", Texture.class);
             group = "Plugin";
             manager.load(workingdirectory + "pluginwaiting.png", Texture.class);
+            group = "UI";
+            manager.load(workingdirectory+"UI/close_notification.png",Texture.class);
 
 
 
@@ -464,7 +469,8 @@ public class AssetLoader {
             wire_node = manager.get(workingdirectory + "node.png", Texture.class);
             //Plugin
             pluginwait = manager.get(workingdirectory + "pluginwaiting.png", Texture.class);
-
+            //UI
+           close_notification =  manager.get(workingdirectory+"UI/close_notification.png",Texture.class);
         } catch (Exception e) {
             e.printStackTrace();
             DisplayErrors.error = e;
