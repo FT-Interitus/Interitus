@@ -205,6 +205,16 @@ public class ProgrammingSpace extends ScreenAdapter {
                     }
                 }
 
+
+                for (int i = 0; i < ProjectManager.getActProjectVar().visiblewires.size(); i++) {
+                    if (!Var.isloading) {
+                        ProjectManager.getActProjectVar().visiblewires.get(i).draw();
+                    }
+                }
+                for (int i = 0; i < ProjectManager.getActProjectVar().visibleWireNodes.size(); i++) {
+                    ProjectManager.getActProjectVar().visibleWireNodes.get(i).draw();
+                }
+
                 UI.updatedragui(shapeRenderer, false, batch);
                 BlockTappedBar.tb.setX(UIVar.BlockBarX + UIVar.BlockBarW / 2);
                 BlockTappedBar.tb.setY(UIVar.BlockBarY + UIVar.BlockBarH / 2 - (BlockTappedBar.tb.getHeight() + UIVar.abstandvonRand * 2) / 2);
@@ -238,14 +248,6 @@ public class ProgrammingSpace extends ScreenAdapter {
 
 
 
-        for (int i = 0; i < ProjectManager.getActProjectVar().visiblewires.size(); i++) {
-            if (!Var.isloading) {
-                ProjectManager.getActProjectVar().visiblewires.get(i).draw();
-            }
-        }
-        for (int i = 0; i < ProjectManager.getActProjectVar().visibleWireNodes.size(); i++) {
-            ProjectManager.getActProjectVar().visibleWireNodes.get(i).draw();
-        }
 
 
         //s.setSize(1);

@@ -23,7 +23,6 @@ public class AssetLoader {
 
 
     public static ArrayList<Texture> storeimages = new ArrayList<>();
-    public static ArrayList<ArrayList<Object>> pluginimages = new ArrayList<>();
 
     public static Pixmap backcursor;
 
@@ -39,8 +38,7 @@ public class AssetLoader {
     public static Texture img_block;
     public static Texture img_block_right;
     public static Texture img_block_left;
-    public static Texture img_block_mouseover;
-    public static Texture img_marked;
+
     public static Texture connector;
     public static Texture connector_offerd;
 
@@ -54,11 +52,7 @@ public class AssetLoader {
     public static Texture switch_inside_white;
     public static Texture switch_background_green_white;
 
-    //Setup Help
-    public static Texture help_arduino_boards;
-    public static Texture help_raspberrypi_boards;
-    public static Texture help_ev3;
-    public static Texture help_platforms;
+
 
     //Wire
     public static Texture wire;
@@ -71,7 +65,6 @@ public class AssetLoader {
 
     //////////////////-Tap Block Bar-////////////////////////////
     //////////////////-Aktionsblöck-////////////////////////////
-    public static Texture aktion_mittlerermotor;
     public static Texture aktion_großermotor;
     public static Texture aktion_standartsteuerung;
     public static Texture aktion_hebelsteuerung;
@@ -263,8 +256,6 @@ public class AssetLoader {
             manager.load(workingdirectory + "Block/Blockrechts.png", Texture.class);
             manager.load(workingdirectory + "Block/Blocklinks.png", Texture.class);
             manager.load(workingdirectory + "Block/Blockmitte.png", Texture.class);
-            manager.load(workingdirectory + "block_mouseover.png", Texture.class);
-            manager.load(workingdirectory + "block_marked.png", Texture.class);
             manager.load(workingdirectory + "connector.png", Texture.class);
             manager.load(workingdirectory + "connector_offerd.png", Texture.class);
             manager.load(workingdirectory + "Block/Parameter/WaitBlock/WaitParameter.png", Texture.class);
@@ -312,12 +303,7 @@ public class AssetLoader {
             manager.load(workingdirectory + "switchbackground_white.png", Texture.class);
             manager.load(workingdirectory + "switchinside.png", Texture.class);
             manager.load(workingdirectory + "switchbackground_whitegreen.png", Texture.class);
-            group = "Setup";
-            //Setup Help
-            manager.load(workingdirectory + "ArduinoHilfe.png", Texture.class);
-            manager.load(workingdirectory + "RaspberryPiHilfe.png", Texture.class);
-            manager.load(workingdirectory + "EV3Hilfe.png", Texture.class);
-            manager.load(workingdirectory + "PlatformHilfe.png", Texture.class);
+
             group = "Wire";
             //Wire
             manager.load(workingdirectory + "wire.png", Texture.class);
@@ -326,8 +312,7 @@ public class AssetLoader {
             manager.load(workingdirectory + "node.png", Texture.class);
             group = "Plugin";
             manager.load(workingdirectory + "pluginwaiting.png", Texture.class);
-            group = "Blöcke";
-            manager.load(workingdirectory + "TabBarBlockBilder/antikaeferblock.png", Texture.class);
+
 
 
             Thread loadimagesfromweb = new Thread() {
@@ -428,8 +413,6 @@ public class AssetLoader {
             img_block_right = manager.get(workingdirectory + "Block/Blockrechts.png", Texture.class);
             img_block_left = manager.get(workingdirectory + "Block/Blocklinks.png", Texture.class);
             img_block = manager.get(workingdirectory + "Block/Blockmitte.png", Texture.class);
-            img_block_mouseover = manager.get(workingdirectory + "block_mouseover.png", Texture.class);
-            img_marked = manager.get(workingdirectory + "block_marked.png", Texture.class);
             connector = manager.get(workingdirectory + "connector.png", Texture.class);
             connector_offerd = manager.get(workingdirectory + "connector_offerd.png", Texture.class);
 
@@ -474,19 +457,13 @@ public class AssetLoader {
             switch_background_white = manager.get(workingdirectory + "switchbackground_white.png", Texture.class);
             switch_inside_white = manager.get(workingdirectory + "switchinside.png", Texture.class);
             switch_background_green_white = manager.get(workingdirectory + "switchbackground_whitegreen.png", Texture.class);
-            //Setup help
-            help_arduino_boards = manager.get(workingdirectory + "ArduinoHilfe.png", Texture.class);
-            help_raspberrypi_boards = manager.get(workingdirectory + "RaspberryPiHilfe.png", Texture.class);
-            help_ev3 = manager.get(workingdirectory + "EV3Hilfe.png", Texture.class);
-            help_platforms = manager.get(workingdirectory + "PlatformHilfe.png", Texture.class);
+
             //wire
             wire = manager.get(workingdirectory + "wire.png", Texture.class);
             //Wire Node
             wire_node = manager.get(workingdirectory + "node.png", Texture.class);
             //Plugin
             pluginwait = manager.get(workingdirectory + "pluginwaiting.png", Texture.class);
-
-            aktion_mittlerermotor = manager.get(workingdirectory + "TabBarBlockBilder/antikaeferblock.png");
 
         } catch (Exception e) {
             e.printStackTrace();

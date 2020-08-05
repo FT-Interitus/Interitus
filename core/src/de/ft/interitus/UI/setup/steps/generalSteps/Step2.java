@@ -20,7 +20,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Step2 {
-    public static VisImage helpimage = new VisImage(AssetLoader.help_platforms);
     public static VisSelectBox<String> selectPlatform;
     public static VisSelectBox<String> selectBoardArt;
     public static CharSequence auftragtext = "Hier wählst du bitte deine Plattform aus.";
@@ -32,7 +31,6 @@ public class Step2 {
 
     private static void update1() {
         if (selectPlatform.getSelected().equals("Bitte auswählen")) {
-            helpimage.setDrawable(AssetLoader.help_platforms);
             SetupWindow.Button_next.setDisabled(true);
             SetupWindow.errorLabel.setColor(1, 0, 0, 1);
             SetupWindow.errorLabel.setText("Bitte wähle eine Platform aus");
@@ -46,7 +44,6 @@ public class Step2 {
         } else {
             selectPlatform.setColor(0, 1, 0, 1);
             if (selectPlatform.getSelected().equals("Arduino")) {
-                helpimage.setDrawable(AssetLoader.help_arduino_boards);
                 selectBoardArt.setItems("Bitte auswählen", "Arduino UNO", "Arduino MEGA");
                 selectBoardArt.setVisible(true);
                 SetupWindow.errorLabel.setColor(1, 0, 0, 1);
@@ -59,7 +56,6 @@ public class Step2 {
 
             }
             if (selectPlatform.getSelected().equals("EV3")) {
-                helpimage.setDrawable(AssetLoader.help_ev3);
                 selectBoardArt.setItems("Bitte auswählen", "Normal", "EV3-DEV");
                 selectBoardArt.setVisible(true);
                 SetupWindow.errorLabel.setColor(1, 0, 0, 1);
@@ -71,7 +67,6 @@ public class Step2 {
 
             }
             if (selectPlatform.getSelected().equals("Raspberry Pi")) {
-                helpimage.setDrawable(AssetLoader.help_raspberrypi_boards);
                 selectBoardArt.setItems("Bitte auswählen", "Raspberry Pi 4b", "Raspberry pi 3b/3b+", "Raspberry Pi Zero W");
                 selectBoardArt.setVisible(true);
                 SetupWindow.errorLabel.setColor(1, 0, 0, 1);
@@ -184,7 +179,6 @@ public class Step2 {
         builder.add(selectPlatform).row();
         builder.row();
         builder.add(selectBoardArt).padBottom(-50).row();
-        builder.add(helpimage).padBottom(-400).height(300 * 0.8f).width(500 * 0.8f);
         selectBoardArt.setVisible(false);
 
         SetupWindow.Button_next.setDisabled(true);
