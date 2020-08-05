@@ -14,17 +14,16 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.Widget;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.kotcrab.vis.ui.widget.*;
 import com.kotcrab.vis.ui.widget.MenuBar;
-import com.kotcrab.vis.ui.widget.MenuItem;
-import com.kotcrab.vis.ui.widget.VisTextField;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.ManualConfig.ManualConfigUI;
-import de.ft.interitus.UI.UIElements.TabBar.Tab;
 import de.ft.interitus.UI.UIElements.TabBar.TabBar;
 import de.ft.interitus.UI.UIElements.UIElementBar;
 import de.ft.interitus.UI.UIElements.UIElements.Button;
@@ -34,7 +33,6 @@ import de.ft.interitus.UI.projectsettings.ProjectSettingsUI;
 import de.ft.interitus.UI.settings.SettingsUI;
 import de.ft.interitus.UI.setup.SetupWindow;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
-import de.ft.interitus.Var;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.datamanager.programmdata.experience.ExperienceManager;
 import de.ft.interitus.events.EventVar;
@@ -48,6 +46,7 @@ import de.ft.interitus.utils.ShapeRenderer;
 import de.ft.interitus.utils.animation.Animation;
 
 import java.io.File;
+import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -80,7 +79,7 @@ public class UI {
     protected static MenuItem redo;
     protected static MenuItem copy;
     protected static MenuItem paste;
-    static final ArrayList<VisTextField> textFielder = new ArrayList<>();
+    static final ArrayList<Widget> textFielder = new ArrayList<>();
     static boolean isuilock = false;
     private static boolean issettingsuiopend = false;
     private static boolean issetupuiopend = false;
@@ -126,7 +125,11 @@ public class UI {
         if (markedblock != ProjectManager.getActProjectVar().markedblock) {
             UIVar.isBlockSettingsopen = false;
             for (int i = 0; i < textFielder.size(); i++) {
-                textFielder.get(i).removeListener(textFielder.get(i).getListeners().get(0));
+                try {
+                    textFielder.get(i).removeListener(textFielder.get(i).getListeners().get(0));
+                }catch (IndexOutOfBoundsException ignore) {
+
+                }
                 textFielder.get(i).remove();
             }
             textFielder.clear();
@@ -136,7 +139,7 @@ public class UI {
  * If you move the Cursor in a TextField the program should not move itself
  */
         var lock = false;
-        for (VisTextField visTextField : textFielder) {
+        for (Widget visTextField : textFielder) {
             if (visTextField.hasKeyboardFocus()) {
                 lock = true;
             }
@@ -167,13 +170,48 @@ public class UI {
             for (int i = 0; i < markedblock.getBlocktype().getBlockParameter().size(); i++) {
                 try {
                     if (!UIVar.isBlockSettingsopen) {
-                        textFielder.add(new VisTextField(markedblock.getBlocktype().getBlockParameter().get(i).getParameter().toString()));
-                        textFielder.get(textFielder.size() - 1).addListener(new ChangeListener() {
-                            @Override
-                            public void changed(ChangeEvent event, Actor actor) {
-                                ProjectManager.getActProjectVar().markedblock.getBlocktype().getBlockParameter().get(textFielder.indexOf(actor)).setParameter(((VisTextField) actor).getText());
+
+                        if(markedblock.getBlocktype().getBlockParameter().get(i).getParameterType().isOutput())  {
+
+
+                            continue;
+                        }
+                        if(markedblock.getBlocktype().getBlockParameter().get(i).getParameterType().isDropdown()) {
+                            VisSelectBox<String> selectBox = new VisSelectBox<>();
+                            selectBox.setItems(markedblock.getBlocktype().getBlockParameter().get(i).getParameterType().getSelectables());
+
+                            if(Arrays.asList(markedblock.getBlocktype().getBlockParameter().get(i).getParameterType().getSelectables()).contains(((String) markedblock.getBlocktype().getBlockParameter().get(i).getParameter()))) {
+
+                                selectBox.setSelected(((String) markedblock.getBlocktype().getBlockParameter().get(i).getParameter()));
+
+                            }else {
+                                selectBox.setSelected(selectBox.getItems().get(0));
                             }
-                        });
+
+
+                            selectBox.addListener(new ChangeListener() {
+                                @Override
+                                public void changed(ChangeEvent event, Actor actor) {
+
+                                    ProjectManager.getActProjectVar().markedblock.getBlocktype().getBlockParameter().get(textFielder.indexOf(actor)).setParameter(((VisSelectBox<String>) actor).getSelected());
+
+                                }
+                            });
+
+                            textFielder.add(selectBox);
+
+                        }else {
+
+
+                            textFielder.add(new VisTextField(markedblock.getBlocktype().getBlockParameter().get(i).getParameter().toString()));
+                            textFielder.get(textFielder.size() - 1).addListener(new ChangeListener() {
+                                @Override
+                                public void changed(ChangeEvent event, Actor actor) {
+                                    ProjectManager.getActProjectVar().markedblock.getBlocktype().getBlockParameter().get(textFielder.indexOf(actor)).setParameter(((VisTextField) actor).getText());
+                                }
+                            });
+
+                        }
 
                         UI.stage.addActor(textFielder.get(i));
                     }

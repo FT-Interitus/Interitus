@@ -8,13 +8,13 @@ package de.ft.interitus.Block;
 public class ParameterType {
 
     String typ;
-    boolean isinput;
+    boolean output;
     boolean dropdown;
     String[] selectables;
 
-    public ParameterType(String typ, boolean isinput, boolean dropdown) {
+    public ParameterType(String typ, boolean output, boolean dropdown) {
         this.typ = typ;
-        this.isinput = isinput;
+        this.output = output;
         this.dropdown = dropdown;
     }
 
@@ -26,12 +26,12 @@ public class ParameterType {
         this.typ = typ;
     }
 
-    public boolean isIsinput() {
-        return isinput;
+    public boolean isOutput() {
+        return output;
     }
 
-    public void setIsinput(boolean isinput) {
-        this.isinput = isinput;
+    public void setOutput(boolean output) {
+        this.output = output;
     }
 
     public boolean isDropdown() {
@@ -46,7 +46,8 @@ public class ParameterType {
         return selectables;
     }
 
-    public void setSelectables(String[] selectables) {
+    public ParameterType setSelectables(String[] selectables) {
         this.selectables = selectables;
+        return this;
     }
 }

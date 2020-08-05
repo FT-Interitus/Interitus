@@ -90,6 +90,16 @@ public abstract class BlockUpdate extends Thread {
 
                     try {
 
+                        if(block.getBlocktype()!=null&&block.getBlocktype().getBlockParameter()!=null) {
+                            for (int i = 0; i < block.getBlocktype().getBlockParameter().size(); i++) {
+                                if (block.getBlocktype().getBlockParameter().get(i).getParameterType().isOutput() && !block.getBlocktype().getBlockParameter().get(i).isIsconnected() && block.getBlocktype().getBlockParameter().get(i).getOutputdataWire() == null) {
+                                    block.getBlocktype().getBlockParameter().get(i).setOutputdataWire(new DataWire(block.getBlocktype().getBlockParameter().get(i), null));
+                                    ProjectManager.getActProjectVar().moveingdatawire = block.getBlocktype().getBlockParameter().get(i).getOutputdataWire();
+                                }
+                            }
+                        }
+
+
 
                         if (block == null) { //Wenn kein Block mehr verbunden ist wird der timer beendet und damit auch der thread
                             time.cancel();

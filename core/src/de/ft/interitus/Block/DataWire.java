@@ -6,6 +6,8 @@
 package de.ft.interitus.Block;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import de.ft.interitus.Programm;
+import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.ShapeRenderer;
 
 public class DataWire {
@@ -21,9 +23,20 @@ public class DataWire {
     public DataWire(Parameter param_input, Parameter param_output) {
         this.param_input = param_input;
         this.param_output = param_output;
+        Programm.logger.config("New Output");
     }
 
-    public void draw(SpriteBatch batch, ShapeRenderer shapeRenderer) {
+    public void draw() {
+
+        if(ProjectManager.getActProjectVar().moveingdatawire==this) {
+
+        }
+
+        if(param_output==null)  {
+
+        }else{
+
+        }
 
     }
 

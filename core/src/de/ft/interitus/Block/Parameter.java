@@ -17,6 +17,8 @@ public class Parameter {
     private String ParameterDescription;
     private Block block;
     private ParameterType parameterType;
+    private boolean isconnected = false; //FOR Outputs
+    private DataWire outputdataWire = null;
 
     public Parameter(Object parameter, Texture ParameterTexture, String ParameterName, String ParameterDescription, String Unit, ParameterType parameterType) {
         this.ParameterTexture = ParameterTexture;
@@ -80,5 +82,22 @@ public class Parameter {
 
     public void setParameterType(ParameterType parameterType) {
         this.parameterType = parameterType;
+    }
+
+    public boolean isIsconnected() {
+        return isconnected;
+    }
+
+    public void setIsconnected(boolean isconnected) {
+        this.isconnected = isconnected;
+    }
+
+
+    public DataWire getOutputdataWire() {
+        return outputdataWire;
+    }
+
+    public void setOutputdataWire(DataWire outputdataWire) {
+        this.outputdataWire = outputdataWire;
     }
 }

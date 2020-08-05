@@ -30,7 +30,10 @@ public class SetPinMode extends PlatformSpecificBlock implements ArduinoBlock {
 
 
         pin = new Parameter("", AssetLoader.Parameter_Pin, "Pin", "", null,new ParameterType("int",false,false));
-        mode = new Parameter("", AssetLoader.Parameter_IO, "Mode(I/O)", "", null,new ParameterType("definition",false,true));
+        String[] selecteables = new String[2];
+        selecteables[0] = "INPUT";
+        selecteables[1] = "OUTPUT";
+        mode = new Parameter(selecteables[1], AssetLoader.Parameter_IO, "Mode(I/O)", "", null,new ParameterType("definition",false,true).setSelectables(selecteables));
 
 
         parameters.add(pin);
