@@ -89,6 +89,7 @@ public class AssetLoader {
 
 
     public static BitmapFont welcomefont;//font
+    public static BitmapFont defaultfont;//font
 
     /////////////////////-ButtonBar-//////////////////////////
     public static Texture img_startbutton;
@@ -196,6 +197,13 @@ public class AssetLoader {
                 FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
                 parameter.size = 50;
                 welcomefont = generator.generateFont(parameter); // font size 12 pixels
+
+                FreeTypeFontGenerator generator1 = new FreeTypeFontGenerator(Gdx.files.internal("defaultfont.ttf"));
+                FreeTypeFontGenerator.FreeTypeFontParameter parameter1 = new FreeTypeFontGenerator.FreeTypeFontParameter();
+                parameter1.size = 15;
+
+                defaultfont = generator1.generateFont(parameter1);
+
                 generator.dispose(); // don't forget to dispose to avoid memory leaks!
             } catch (Exception e) {
                 System.out.println("Fehler beim Laden der Schrift");

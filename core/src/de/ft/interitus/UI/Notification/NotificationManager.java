@@ -6,6 +6,8 @@
 package de.ft.interitus.UI.Notification;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.UI;
@@ -25,16 +27,26 @@ public class NotificationManager {
     private static final int MARGIN_RIGHT = 20;
     private static final int IMAGE_MARGIN_RIGHT = 17;
     private static final int IMAGE_MARGIN_TOP = 17;
-    private static final int PROGRESSBAR_MARGIN_BOTTOM = 15;
+    private static final int PROGRESSBAR_MARGIN_BOTTOM = 10;
+    private static final GlyphLayout glyphLayout = new GlyphLayout();
 
     private static int MAX_NOTIFICATIONS = 10;
 
+    /***
+     * Send a Notification to the user
+     * It can fail if there are more Notification than Space on the Screen
+     * Nevertheless it can be displayed if the Notification isn't closeable
+     *
+     * @param notification that one which should be send to the user
+     * @return true if the sending was successful
+     */
 
     public static boolean sendNotification(Notification notification) {
 
-        if (notifications.size() < MAX_NOTIFICATIONS) {
+        if ((notifications.size() < MAX_NOTIFICATIONS||!notification.isCloseable())&&!notification.isDisplayed()) {
 
             notifications.add(notification);
+            notification.setDisplayed(true);
             notification.setStarttime(System.currentTimeMillis());
 
             if(notification.isCloseable()) {
@@ -49,6 +61,16 @@ public class NotificationManager {
 
     }
 
+
+    /***
+     * Draw should be called in the Main Renderer with no active Batch or ShapeRenderer
+     * At first it will be checked how much notifications can fit on the screen
+     * Than Notifications which doesn't fit will be deleted without fading if they are closeable
+     * The Notification will be Rendered by default only the Title, the Icon, the Message, the CloseButton and the Background
+     * If the ProgressBar Value isn't -1 it will also be rendered
+     * Than Notifications which are expired will be faded out
+     * That happens after the Render loop to prevent flickering
+     */
 
     public static void draw() {
 
@@ -91,7 +113,16 @@ public class NotificationManager {
 
 
             UI.UIbatch.begin();
+            UI.UIbatch.setColor(1,1,1,notifications.get(i).getFadeout());
             UI.UIbatch.draw(notifications.get(i).getIcon(),Gdx.graphics.getWidth() - DISTANCE_RIGHT+IMAGE_MARGIN_RIGHT/2,UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i))+HEIGHT-IMAGE_MARGIN_TOP,10,10);
+           glyphLayout.setText(  AssetLoader.defaultfont,notifications.get(i).getTitle());
+
+            AssetLoader.defaultfont.setColor(0.9f,0.9f,0.9f,notifications.get(i).getFadeout());
+          AssetLoader.defaultfont.draw(UI.UIbatch,notifications.get(i).getTitle(),Gdx.graphics.getWidth() - DISTANCE_RIGHT+IMAGE_MARGIN_RIGHT/2+20,UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i))+HEIGHT-(float)glyphLayout.height/1.2f);
+            AssetLoader.defaultfont.setColor(0.6f,0.6f,0.6f,notifications.get(i).getFadeout());
+
+            glyphLayout.setText(AssetLoader.defaultfont,notifications.get(i).getMessage());
+           AssetLoader.defaultfont.draw(UI.UIbatch,notifications.get(i).getMessage(),Gdx.graphics.getWidth() - DISTANCE_RIGHT+IMAGE_MARGIN_RIGHT/2+23,UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i))+HEIGHT-HEIGHT/3.2f);
             UI.UIbatch.end();
             if(notifications.get(i).isCloseable()) {
                 notifications.get(i).getCloseButton().setTransparency(notifications.get(i).getFadeout());

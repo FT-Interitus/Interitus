@@ -22,6 +22,7 @@ public class Notification {
     private final String title;
     private static final Button closeButton = new Button();
     private static int progressbarvalue = -1;
+    private boolean displayed = false;
 
 
 
@@ -86,6 +87,14 @@ public class Notification {
         return this;
     }
 
+    /**
+     * Get the current ProgressBar Value if ProgressBar is hidden -1 will be returned
+     * @return
+     */
+    public static int getProgressbarvalue() {
+        return progressbarvalue;
+    }
+
 
 
     protected Texture getIcon() {
@@ -143,7 +152,14 @@ public class Notification {
         return stayalive;
     }
 
-    public static int getProgressbarvalue() {
-        return progressbarvalue;
+
+
+
+    protected boolean isDisplayed() {
+        return displayed;
+    }
+
+    protected void setDisplayed(boolean displayed) {
+        this.displayed = displayed;
     }
 }

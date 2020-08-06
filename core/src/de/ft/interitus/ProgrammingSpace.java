@@ -21,7 +21,6 @@ import de.ft.interitus.UI.Notification.Notification;
 import de.ft.interitus.UI.Notification.NotificationManager;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.PressedKeys;
-import de.ft.interitus.UI.UIElements.Switch;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.popup.PopupHandler;
 import de.ft.interitus.UI.settings.subitems.subitem17;
@@ -49,7 +48,6 @@ public class ProgrammingSpace extends ScreenAdapter {
     public static BitmapFont font;
 
 
-
     public static long renderstarttime = 0;
     public static long rendertimediff = 0;
     public static long rendersleeptime = 0;
@@ -60,7 +58,6 @@ public class ProgrammingSpace extends ScreenAdapter {
     public static Plugin nativ = new Native();
 
     public static Notification notification;
-
 
 
     public ProgrammingSpace() {
@@ -99,7 +96,7 @@ public class ProgrammingSpace extends ScreenAdapter {
         Gdx.graphics.setTitle("New File");
         ProjectManager.getActProjectVar().setFilename("New File");
 
-  notification = new Notification(AssetLoader.connector_offerd,"test","test").setCloseable(false);
+        notification = new Notification(AssetLoader.connector_offerd, "Wichtige Information", "Achtung ein Hinweis:\nEs steht kein Update bereit!");
 
 
         ThreadManager.init();
@@ -108,7 +105,6 @@ public class ProgrammingSpace extends ScreenAdapter {
         //  SerialConnection.searchArduino();
 
         //   PortUpdate.UpdateConnectionWindowPortsList();
-
 
         System.gc(); //Clean RAM after Loading
 
@@ -251,10 +247,6 @@ public class ProgrammingSpace extends ScreenAdapter {
         }
 
 
-
-
-
-
         //s.setSize(1);
         //s.setSize(1f);
         //s.setWackelstärke(1);
@@ -281,24 +273,20 @@ public class ProgrammingSpace extends ScreenAdapter {
         // pm.setBounds(700,200);
 
 
-
         NotificationManager.draw();
-        if(Gdx.input.isKeyJustPressed(Input.Keys.C)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
             NotificationManager.sendNotification(notification);
         }
-         if(Gdx.input.isKeyPressed(Input.Keys.E)) {
-             try {
-                 notification.setProgressbarvalue(Notification.getProgressbarvalue() + 1);
-             }catch (Exception e) {
-                 notification.setProgressbarvalue(-1);
-             }
+        if (Gdx.input.isKeyPressed(Input.Keys.E)) {
+            try {
+                notification.setProgressbarvalue(Notification.getProgressbarvalue() + 1);
+            } catch (Exception e) {
+                notification.setProgressbarvalue(-1);
+            }
         }
-
 
 
         PopupHandler.drawPopUp();
-
-
 
 
         try {
