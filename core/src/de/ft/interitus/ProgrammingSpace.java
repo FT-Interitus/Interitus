@@ -57,7 +57,7 @@ public class ProgrammingSpace extends ScreenAdapter {
     public static float delta;
     public static Plugin nativ = new Native();
 
-    public static Notification notification;
+
 
 
     public ProgrammingSpace() {
@@ -96,7 +96,6 @@ public class ProgrammingSpace extends ScreenAdapter {
         Gdx.graphics.setTitle("New File");
         ProjectManager.getActProjectVar().setFilename("New File");
 
-        notification = new Notification(AssetLoader.connector_offerd, "Wichtige Information", "Achtung ein Hinweis:\nEs steht kein Update bereit!");
 
 
         ThreadManager.init();
@@ -274,16 +273,7 @@ public class ProgrammingSpace extends ScreenAdapter {
 
 
         NotificationManager.draw();
-        if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
-            NotificationManager.sendNotification(notification);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.E)) {
-            try {
-                notification.setProgressbarvalue(notification.getProgressbarvalue() + 1);
-            } catch (Exception e) {
-                notification.setProgressbarvalue(-1);
-            }
-        }
+
 
 
         PopupHandler.drawPopUp();

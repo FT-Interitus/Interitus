@@ -161,7 +161,7 @@ public class ArduinoCompiler implements Compiler {
         UI.button_debugstart.setDisable(true);
 
 
-        notification =  new Notification(AssetLoader.connector_offerd,"Umwandlung...","\nProjekt wird in Code umgewandelt").setCloseable(false).setAlivetime(6000);
+        notification =  new Notification(AssetLoader.connector_offerd,"Umwandlung...","\nProjekt wird in Code umgewandelt").setCloseable(false).setAlivetime(9000);
         notification.setProgressbarvalue(0);
         NotificationManager.sendNotification(notification);
 
@@ -321,6 +321,8 @@ public class ArduinoCompiler implements Compiler {
                     notification.setMessage("Trenne den Arduino\nund verbinde ihn neu!");
                     notification.setStayalive(true);
                     notification.setCloseable(true);
+                    UI.button_start.setDisable(false);
+                    UI.button_debugstart.setDisable(false);
                     return false;
                 } catch (InterruptedException e) {
                     // handle the interrupts
