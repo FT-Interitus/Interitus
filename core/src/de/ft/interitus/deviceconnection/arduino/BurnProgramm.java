@@ -169,7 +169,7 @@ public class BurnProgramm {
 
     public static void postproduktion(String output, String port) {
 
-        if (output.contains("AVR device initialized")) {
+        if (output.contains("written")) {
             ausgabe = ("Brennen hat funktioniert, nun kannst du dein Gerät konfigurieren");
 
 

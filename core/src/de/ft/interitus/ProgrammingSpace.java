@@ -279,7 +279,7 @@ public class ProgrammingSpace extends ScreenAdapter {
         }
         if (Gdx.input.isKeyPressed(Input.Keys.E)) {
             try {
-                notification.setProgressbarvalue(Notification.getProgressbarvalue() + 1);
+                notification.setProgressbarvalue(notification.getProgressbarvalue() + 1);
             } catch (Exception e) {
                 notification.setProgressbarvalue(-1);
             }

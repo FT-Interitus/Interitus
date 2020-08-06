@@ -49,11 +49,11 @@ public class NotificationManager {
             notification.setDisplayed(true);
             notification.setStarttime(System.currentTimeMillis());
 
-            if(notification.isCloseable()) {
+
                 notification.getCloseButton().setImage(AssetLoader.close_notification);
 
 
-            }
+
             return true;
         }else{
             return false;
@@ -127,6 +127,7 @@ public class NotificationManager {
             if(notifications.get(i).isCloseable()) {
                 notifications.get(i).getCloseButton().setTransparency(notifications.get(i).getFadeout());
                 notifications.get(i).getCloseButton().setBounds(Gdx.graphics.getWidth() - IMAGE_MARGIN_RIGHT - MARGIN_RIGHT, UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i))+HEIGHT-IMAGE_MARGIN_TOP,10,10);
+
                 notifications.get(i).getCloseButton().draw();
                 if( notifications.get(i).getCloseButton().isjustPressednormal()) {
                     notifications.get(i).setFadingout(true);
@@ -144,7 +145,7 @@ public class NotificationManager {
                 ProgrammingSpace.shapeRenderer.roundendrect(Gdx.graphics.getWidth() - DISTANCE_RIGHT+IMAGE_MARGIN_RIGHT, UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i))+PROGRESSBAR_MARGIN_BOTTOM, DISTANCE_RIGHT - MARGIN_RIGHT-IMAGE_MARGIN_RIGHT*2, 3, 2);
 
                 ProgrammingSpace.shapeRenderer.setColor(Settings.theme.ClearColor().r+0.3f,Settings.theme.ClearColor().g+0.3f,Settings.theme.ClearColor().b+0.3f,notifications.get(i).getFadeout());
-                ProgrammingSpace.shapeRenderer.roundendrect(Gdx.graphics.getWidth() - DISTANCE_RIGHT+IMAGE_MARGIN_RIGHT, UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i))+PROGRESSBAR_MARGIN_BOTTOM, ((int) ((float) (DISTANCE_RIGHT - MARGIN_RIGHT - IMAGE_MARGIN_RIGHT * 2) / 100f * notifications.get(i).getProgressbarvalue())), 3, 2);
+                ProgrammingSpace.shapeRenderer.roundendrect(Gdx.graphics.getWidth() - DISTANCE_RIGHT+IMAGE_MARGIN_RIGHT, UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i))+PROGRESSBAR_MARGIN_BOTTOM, ((int) ((float) (DISTANCE_RIGHT - MARGIN_RIGHT - IMAGE_MARGIN_RIGHT * 2) / 100f * notifications.get(i).getProgressbarvalueis())), 3, 2);
 
                 ProgrammingSpace.shapeRenderer.end();
 
@@ -156,6 +157,14 @@ public class NotificationManager {
         }
 
         for (int i = 0; i < notifications.size(); i++) {
+
+            if(notifications.get(i).getProgressbarvalueis()>notifications.get(i).getProgressbarvalue()) {
+                notifications.get(i).setProgressbarvalueis(notifications.get(i).getProgressbarvalueis()-1);
+            }
+            if(notifications.get(i).getProgressbarvalueis()<notifications.get(i).getProgressbarvalue()) {
+                notifications.get(i).setProgressbarvalueis(notifications.get(i).getProgressbarvalueis()+1);
+            }
+
 
             if (System.currentTimeMillis() - notifications.get(i).getStarttime() > notifications.get(i).getAlivetime() && !notifications.get(i).isStayalive()&&!notifications.get(i).isFadingout()&&notifications.get(i).isCloseable()) {
                 notifications.get(i).setFadingout(true);
@@ -170,8 +179,10 @@ public class NotificationManager {
 
 
                 }
-            }
 
+
+
+            }
 
 
 

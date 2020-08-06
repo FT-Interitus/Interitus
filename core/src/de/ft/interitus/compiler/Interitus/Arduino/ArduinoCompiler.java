@@ -7,9 +7,12 @@ package de.ft.interitus.compiler.Interitus.Arduino;
 
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Programm;
+import de.ft.interitus.UI.Notification.Notification;
+import de.ft.interitus.UI.Notification.NotificationManager;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.compiler.Compiler;
 import de.ft.interitus.datamanager.programmdata.Data;
+import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.ArrayList;
@@ -17,13 +20,20 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import javax.management.remote.NotificationResult;
 import java.io.*;
 import java.lang.reflect.Array;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class ArduinoCompiler implements Compiler {
     //TODO APPLE SUPPORT
     private static final String OS = System.getProperty("os.name").toLowerCase();
     private static final ArrayList<String> errorstring = new ArrayList<>();
+    private static Notification notification;
+    private static boolean uploaderror = false;
+    private static Process pr;
 
     private static String compilesketch() {
         String Programm = "";
@@ -83,10 +93,11 @@ public class ArduinoCompiler implements Compiler {
     private static String runcommand(String command, boolean geterror) {
 
         Runtime rt = Runtime.getRuntime();
-        Process pr = null;
+        pr = null;
         try {
 
             pr = rt.exec(command);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -152,6 +163,9 @@ public class ArduinoCompiler implements Compiler {
         UI.button_debugstart.setDisable(true);
 
 
+        notification =  new Notification(AssetLoader.connector_offerd,"Umwandlung...","\nProjekt wird in Code umgewandelt").setCloseable(false).setAlivetime(6000);
+        notification.setProgressbarvalue(0);
+        NotificationManager.sendNotification(notification);
 
 
         JSONObject board = new JSONObject();
@@ -159,6 +173,7 @@ public class ArduinoCompiler implements Compiler {
         board.put("boards",new JSONArray().put(new JSONObject().put("FQBN", ((ArrayList<String>) UI.runselection.getSelectedElement().getIdentifier()).get(0))));
 
 
+        notification.setProgressbarvalue(20);
 
 
         compileandrun(board);
@@ -207,7 +222,7 @@ public class ArduinoCompiler implements Compiler {
 
         try (PrintWriter out = new PrintWriter(System.getProperty("user.home") + "/" + Data.foldername + "/temp/" + folder + "/" + filename)) {
             out.println(compile());
-
+            notification.setProgressbarvalue(40);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -245,41 +260,82 @@ public class ArduinoCompiler implements Compiler {
         //Error Highlighting
         ProjectManager.getActProjectVar().Blockwitherrors.clear();
         errorstring.clear();
+        notification.setTitle("Compilieren...");
+        notification.setMessage("\nProjekt wird compiliert");
+
         runcommand(compile_to_hex, true);
 
-        try {
+
+
+        notification.setProgressbarvalue(60);
+
+
             if (errorstring.size() > 0) { //Geht Errors in an Array
-                for (int i = 0; i < errorstring.size(); i++) {
 
-                    if (errorstring.get(i).contains("^")) {
+                notification.setMessage("\nFehler beim Compilieren");
+                notification.setProgressbarvalue(-1);
+                notification.setCloseable(true);
+                notification.setStayalive(true);
+                try {
 
-                        try {
-                            if (!ProjectManager.getActProjectVar().Blockwitherrors.contains(Integer.parseInt(errorstring.get(i - 1).split("//")[1].replace(" ", "")))) {
-                                ProjectManager.getActProjectVar().Blockwitherrors.add(Integer.parseInt(errorstring.get(i - 1).split("//")[1].replace(" ", ""))); //Get Block Index
+                    for (int i = 0; i < errorstring.size(); i++) {
+
+                        if (errorstring.get(i).contains("^")) {
+
+                            try {
+                                if (!ProjectManager.getActProjectVar().Blockwitherrors.contains(Integer.parseInt(errorstring.get(i - 1).split("//")[1].replace(" ", "")))) {
+                                    ProjectManager.getActProjectVar().Blockwitherrors.add(Integer.parseInt(errorstring.get(i - 1).split("//")[1].replace(" ", ""))); //Get Block Index
+                                }
+
+                                Programm.logger.severe("Fehler-Block: " + errorstring.get(i - 1).split("//")[1]);
+                            } catch (Exception e) {
+
                             }
 
-                            Programm.logger.severe("Fehler-Block: " + errorstring.get(i - 1).split("//")[1]);
-                        } catch (Exception e) {
 
                         }
-
-
                     }
+                }catch (Exception e) {
+                    e.printStackTrace();
                 }
+                new File(System.getProperty("user.home") + "/" + Data.foldername + "/temp/" + folder + "/" + filename).delete();
+                UI.button_start.setDisable(false);
+                UI.button_debugstart.setDisable(false);
+                return false;
+            }else{
+                notification.setTitle("Wird hochgeladen");
+                notification.setMessage("\nDas Projekt wird hochgeladen");
+                notification.setProgressbarvalue(80);
+
+                runcommand(upload, true);
+
+                notification.setMessage(getAverdudeError());
+                if(uploaderror) {
+                    notification.setTitle("Fehler beim Hochladen");
+                }else {
+                    notification.setTitle("Hochladen abgeschlossen");
+                }
+
+
+                new File(System.getProperty("user.home") + "/" + Data.foldername + "/temp/" + folder + "/" + filename).delete();
+                notification.setProgressbarvalue(100);
+                notification.setStayalive(false);
+                notification.setCloseable(true);
+                UI.button_start.setDisable(false);
+                UI.button_debugstart.setDisable(false);
+                return true;
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
 
-        runcommand(upload, false);
 
-        new File(System.getProperty("user.home") + "/" + Data.foldername + "/temp/" + folder + "/" + filename).delete();
 
-        UI.button_start.setDisable(false);
-        UI.button_debugstart.setDisable(false);
 
-        return true;
+
+
+
+
+
+
     }
 
     public JSONArray getBoards() {
@@ -345,6 +401,54 @@ public class ArduinoCompiler implements Compiler {
         } catch (JSONException e) {
             return null;
         }
+    }
+
+    private String getAverdudeError() {
+        String ausgabe;
+        String response ="";
+        for(int i=0;i<errorstring.size();i++) {
+            response+="\n"+errorstring.get(i);
+
+        }
+
+        if (response.contains("written")) {
+            ausgabe = ("\nProjekt wird bereinigt");
+            uploaderror = false;
+
+
+        } else {
+            ausgabe = ("Ein unbekanter\nFehler ist aufgetreten");
+            uploaderror = true;
+        }
+
+        if (response.contains("can't open device")) {
+            ausgabe = ("Trenne den Arduino\nund verbinde ihn neu!");
+            uploaderror = true;
+        }
+
+        if (response.contains("Expected signature")) {
+            ausgabe = ("Falscher Board Typ ausgewählt!");
+            uploaderror = true;
+        }
+
+        if (response.contains("not found")) {
+            ausgabe = ("Falscher Board Typ ausgewählt!");
+            uploaderror = true;
+        }
+
+        if (response.contains("programmer is not responding")) {
+            ausgabe = ("Falscher Board Typ oder\nfalschen Port ausgewählt!");
+            uploaderror = true;
+        }
+
+        if (response.contains("Permission denied")) {
+
+            ausgabe = ("Keine Berechtigung auf diesem Port!");
+            uploaderror = true;
+
+        }
+
+        return ausgabe;
     }
 
 
