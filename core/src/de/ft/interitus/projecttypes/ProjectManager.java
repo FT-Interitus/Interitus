@@ -55,13 +55,14 @@ public class ProjectManager {
 
         time.cancel();
         time.purge();
-        time = new Timer();
+
 
         UIVar.isdialogeopend = true;
 
        final Notification waitforprojectnotification = new Notification(AssetLoader.informatiom,"Bitte Warten...","Das Projekt wird aktiviert").setCloseable(false).setProgressbarvalue(0);
         NotificationManager.sendNotification(waitforprojectnotification);
 
+        UI.runselection.clear();
 
         Timer Timer = new Timer();
         Timer.scheduleAtFixedRate(new TimerTask() {
@@ -88,14 +89,14 @@ public class ProjectManager {
             }
         },0,15);
 
-
+        time = new Timer();
         time.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 ProjectManager.getActProjectVar().projectType.update();
 
             }
-        }, 2000, 6000);
+        }, 1500, 6000);
 
 
 

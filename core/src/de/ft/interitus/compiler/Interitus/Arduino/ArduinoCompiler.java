@@ -20,9 +20,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import javax.management.remote.NotificationResult;
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.concurrent.*;
 
 public class ArduinoCompiler implements Compiler {
@@ -160,16 +158,22 @@ public class ArduinoCompiler implements Compiler {
         UI.button_start.setDisable(true);
         UI.button_debugstart.setDisable(true);
 
+        if (notification != null) {
+            notification.close();
+        }
 
-        notification =  new Notification(AssetLoader.arduinomegaimage,"Umwandlung...","\nProjekt wird in Code umgewandelt").setCloseable(false).setAlivetime(9000);
+        notification = new Notification(AssetLoader.arduinomegaimage, "Umwandlung...", "\nProjekt wird in Code umgewandelt").setCloseable(false).setAlivetime(9000);
         notification.setProgressbarvalue(0);
         NotificationManager.sendNotification(notification);
 
-
-        JSONObject board = new JSONObject();
-        board.put("address", ((ArrayList<String>) UI.runselection.getSelectedElement().getIdentifier()).get(1));
-        board.put("boards",new JSONArray().put(new JSONObject().put("FQBN", ((ArrayList<String>) UI.runselection.getSelectedElement().getIdentifier()).get(0))));
-
+        JSONObject board;
+        try {
+            board = new JSONObject();
+            board.put("address", ((ArrayList<String>) UI.runselection.getSelectedElement().getIdentifier()).get(1));
+            board.put("boards", new JSONArray().put(new JSONObject().put("FQBN", ((ArrayList<String>) UI.runselection.getSelectedElement().getIdentifier()).get(0))));
+        } catch (Exception e) {
+            return false;
+        }
 
         notification.setProgressbarvalue(20);
 
@@ -178,8 +182,6 @@ public class ArduinoCompiler implements Compiler {
 
         return true;
     }
-
-
 
 
     @Override
@@ -200,7 +202,12 @@ public class ArduinoCompiler implements Compiler {
         }
 
 
-        return new JSONObject( runcommand(commandgetVersion,false)).getString("VersionString");
+        return new JSONObject(runcommand(commandgetVersion, false)).getString("VersionString");
+    }
+
+    @Override
+    public void interupt() {
+
     }
 
     private boolean compileandrun(JSONObject device) {
@@ -264,101 +271,91 @@ public class ArduinoCompiler implements Compiler {
         runcommand(compile_to_hex, true);
 
 
-
         notification.setProgressbarvalue(60);
 
 
-            if (errorstring.size() > 0) { //Geht Errors in an Array
+        if (errorstring.size() > 0) { //Geht Errors in an Array
 
-                notification.setMessage("\nFehler beim Compilieren");
-                notification.setProgressbarvalue(-1);
-                notification.setCloseable(true);
-                notification.setStayalive(true);
-                try {
+            notification.setMessage("\nFehler beim Compilieren");
+            notification.setProgressbarvalue(-1);
+            notification.setCloseable(true);
+            notification.setStayalive(true);
+            try {
 
-                    for (int i = 0; i < errorstring.size(); i++) {
+                for (int i = 0; i < errorstring.size(); i++) {
 
-                        if (errorstring.get(i).contains("^")) {
+                    if (errorstring.get(i).contains("^")) {
 
-                            try {
-                                if (!ProjectManager.getActProjectVar().Blockwitherrors.contains(Integer.parseInt(errorstring.get(i - 1).split("//")[1].replace(" ", "")))) {
-                                    ProjectManager.getActProjectVar().Blockwitherrors.add(Integer.parseInt(errorstring.get(i - 1).split("//")[1].replace(" ", ""))); //Get Block Index
-                                }
-
-                                Programm.logger.severe("Fehler-Block: " + errorstring.get(i - 1).split("//")[1]);
-                            } catch (Exception e) {
-
+                        try {
+                            if (!ProjectManager.getActProjectVar().Blockwitherrors.contains(Integer.parseInt(errorstring.get(i - 1).split("//")[1].replace(" ", "")))) {
+                                ProjectManager.getActProjectVar().Blockwitherrors.add(Integer.parseInt(errorstring.get(i - 1).split("//")[1].replace(" ", ""))); //Get Block Index
                             }
 
+                            Programm.logger.severe("Fehler-Block: " + errorstring.get(i - 1).split("//")[1]);
+                        } catch (Exception e) {
 
                         }
+
+
                     }
-                }catch (Exception e) {
-                    e.printStackTrace();
                 }
-                new File(System.getProperty("user.home") + "/" + Data.foldername + "/temp/" + folder + "/" + filename).delete();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            new File(System.getProperty("user.home") + "/" + Data.foldername + "/temp/" + folder + "/" + filename).delete();
+            UI.button_start.setDisable(false);
+            UI.button_debugstart.setDisable(false);
+            return false;
+        } else {
+            notification.setTitle("Wird hochgeladen");
+            notification.setMessage("\nDas Projekt wird hochgeladen");
+            notification.setProgressbarvalue(80);
+
+            ExecutorService executor = Executors.newCachedThreadPool();
+            String finalUpload = upload;
+            Callable<Object> task = new Callable<Object>() {
+                public Object call() {
+                    return runcommand(finalUpload, true);
+                }
+            };
+            Future<Object> future = executor.submit(task);
+            try {
+                Object result = future.get(10, TimeUnit.SECONDS);
+            } catch (TimeoutException ex) {
+
+                notification.setTitle("Fehler beim Hochladen");
+                notification.setMessage("Trenne den Arduino\nund verbinde ihn neu!");
+                notification.setStayalive(true);
+                notification.setCloseable(true);
+                notification.setProgressbarvalue(-1);
                 UI.button_start.setDisable(false);
                 UI.button_debugstart.setDisable(false);
                 return false;
-            }else{
-                notification.setTitle("Wird hochgeladen");
-                notification.setMessage("\nDas Projekt wird hochgeladen");
-                notification.setProgressbarvalue(80);
-
-                ExecutorService executor = Executors.newCachedThreadPool();
-                String finalUpload = upload;
-                Callable<Object> task = new Callable<Object>() {
-                    public Object call() {
-                        return  runcommand(finalUpload, true);
-                    }
-                };
-                Future<Object> future = executor.submit(task);
-                try {
-                    Object result = future.get(10, TimeUnit.SECONDS);
-                } catch (TimeoutException ex) {
-
-                    notification.setTitle("Fehler beim Hochladen");
-                    notification.setMessage("Trenne den Arduino\nund verbinde ihn neu!");
-                    notification.setStayalive(true);
-                    notification.setCloseable(true);
-                    UI.button_start.setDisable(false);
-                    UI.button_debugstart.setDisable(false);
-                    return false;
-                } catch (InterruptedException e) {
-                    // handle the interrupts
-                } catch (ExecutionException e) {
-                    // handle other exceptions
-                } finally {
-                    future.cancel(true); // may or may not desire this
-                }
-
-
-
-                notification.setMessage(getAverdudeError());
-                if(uploaderror) {
-                    notification.setTitle("Fehler beim Hochladen");
-                }else {
-                    notification.setTitle("Hochladen abgeschlossen");
-                }
-
-
-                new File(System.getProperty("user.home") + "/" + Data.foldername + "/temp/" + folder + "/" + filename).delete();
-                notification.setProgressbarvalue(100);
-                notification.setStayalive(false);
-                notification.setCloseable(true);
-                UI.button_start.setDisable(false);
-                UI.button_debugstart.setDisable(false);
-                return true;
+            } catch (InterruptedException e) {
+                // handle the interrupts
+            } catch (ExecutionException e) {
+                // handle other exceptions
+            } finally {
+                future.cancel(true); // may or may not desire this
             }
 
 
+            notification.setMessage(getAverdudeError());
+            if (uploaderror) {
+                notification.setTitle("Fehler beim Hochladen");
+            } else {
+                notification.setTitle("Hochladen abgeschlossen");
+            }
 
 
-
-
-
-
-
+            new File(System.getProperty("user.home") + "/" + Data.foldername + "/temp/" + folder + "/" + filename).delete();
+            notification.setProgressbarvalue(100);
+            notification.setStayalive(false);
+            notification.setCloseable(true);
+            UI.button_start.setDisable(false);
+            UI.button_debugstart.setDisable(false);
+            return true;
+        }
 
 
     }
@@ -430,9 +427,9 @@ public class ArduinoCompiler implements Compiler {
 
     private String getAverdudeError() {
         String ausgabe;
-        String response ="";
-        for(int i=0;i<errorstring.size();i++) {
-            response+="\n"+errorstring.get(i);
+        String response = "";
+        for (int i = 0; i < errorstring.size(); i++) {
+            response += "\n" + errorstring.get(i);
 
         }
 

@@ -11,4 +11,6 @@ public interface Compiler {
     boolean compileandrun();
 
     String getCompilerVersion();
+
+    void interupt();
 }

@@ -486,7 +486,7 @@ public class UI {
         }
 
 
-        if (UI.button_start.isjustPressednormal()) {
+        if (UI.button_start.isjustPressednormal()&&runselection.getSelectedElement()!=null) {
             //  UI.button_start.setDisable(true);
 
             compile_thread = new Thread() {
@@ -508,9 +508,15 @@ public class UI {
             Editor.open();
         }
 
+        if(UI.button_stop.isjustPressednormal()) {
+            ProjectManager.getActProjectVar().projectType.getCompiler().interupt();
+        }
+
         if (UI.button_addrunconfig.isjustPressednormal()) {
             MANUALCONFIG.show();
         }
+
+
 
 
     }
