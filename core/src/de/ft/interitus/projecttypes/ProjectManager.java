@@ -7,6 +7,8 @@ package de.ft.interitus.projecttypes;
 
 import de.ft.interitus.Programm;
 import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.UI.Notification.Notification;
+import de.ft.interitus.UI.Notification.NotificationManager;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.TabBar.Tab;
 import de.ft.interitus.UI.UIVar;
@@ -31,7 +33,10 @@ public class ProjectManager {
             @Override
             public void tabclicked(GlobalTabClickEvent e, Tab tab) {
 
-               change(tab.getIndex());
+                if(tab.getIndex()!=Var.openprojectindex) {
+                    change(tab.getIndex());
+
+                }
 
             }
         });
@@ -54,17 +59,34 @@ public class ProjectManager {
 
         UIVar.isdialogeopend = true;
 
-        new java.util.Timer().schedule(
-                new java.util.TimerTask() {
-                    @Override
-                    public void run() {
-                        UIVar.isdialogeopend = false;
-                        UI.runselection.clear();
-                    }
-                },
-                2000
-        );
+       final Notification waitforprojectnotification = new Notification(AssetLoader.informatiom,"Bitte Warten...","Das Projekt wird aktiviert").setCloseable(false).setProgressbarvalue(0);
+        NotificationManager.sendNotification(waitforprojectnotification);
 
+
+        Timer Timer = new Timer();
+        Timer.scheduleAtFixedRate(new TimerTask() {
+            int counter = 0;
+
+
+            @Override
+            public void run() {
+
+
+                waitforprojectnotification.setProgressbarvalue(counter);
+
+
+               if(counter==100) {
+
+                   waitforprojectnotification.close();
+                   UIVar.isdialogeopend = false;
+                   UI.runselection.clear();
+                   this.cancel();
+               }
+
+                counter++;
+
+            }
+        },0,15);
 
 
         time.scheduleAtFixedRate(new TimerTask() {
