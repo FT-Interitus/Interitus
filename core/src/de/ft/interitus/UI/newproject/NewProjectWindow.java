@@ -134,8 +134,8 @@ public class NewProjectWindow {
             content.add(namelable).expandX().padLeft(-400).padBottom(-50);
             content.add(nameinput).expandX().width(400).padLeft(-500).padBottom(-50).row();
 
-            content.add(pfadlable).expandX().padLeft(-400).padBottom(-150);
-            content.add(pfadinput).expandX().width(400).padLeft(-500).padBottom(-150).row();
+           // content.add(pfadlable).expandX().padLeft(-400).padBottom(-150);
+           // content.add(pfadinput).expandX().width(400).padLeft(-500).padBottom(-150).row();
             content.add(selectProjectType).expandX().padBottom(-250).row();
 
 

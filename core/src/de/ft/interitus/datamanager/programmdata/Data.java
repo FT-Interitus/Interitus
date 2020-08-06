@@ -478,8 +478,8 @@ public class Data {
 
         try {
             FolderUtils.deleteFileOrFolder(Path.of(System.getProperty("user.home") + "/" + foldername + "/temp/"));
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            //i.e. File already deleted, no permission...
         }
 
     }

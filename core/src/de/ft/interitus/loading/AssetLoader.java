@@ -169,7 +169,7 @@ public class AssetLoader {
 
     //UI
     public static Texture close_notification;
-    public static Texture informatiom;
+    public static Texture information;
 
 
     public static AssetManager manager = new AssetManager();
@@ -481,7 +481,7 @@ public class AssetLoader {
             pluginwait = manager.get(workingdirectory + "pluginwaiting.png", Texture.class);
             //UI
            close_notification =  manager.get(workingdirectory+"UI/close_notification.png",Texture.class);
-           informatiom =  manager.get(workingdirectory+"UI/information.png",Texture.class);
+           information =  manager.get(workingdirectory+"UI/information.png",Texture.class);
         } catch (Exception e) {
             e.printStackTrace();
             DisplayErrors.error = e;

@@ -59,7 +59,7 @@ public class ProjectManager {
 
         UIVar.isdialogeopend = true;
 
-       final Notification waitforprojectnotification = new Notification(AssetLoader.informatiom,"Bitte Warten...","Das Projekt wird aktiviert").setCloseable(false).setProgressbarvalue(0);
+       final Notification waitforprojectnotification = new Notification(AssetLoader.information,"Bitte Warten...","Das Projekt wird aktiviert").setCloseable(false).setProgressbarvalue(0);
         NotificationManager.sendNotification(waitforprojectnotification);
 
         UI.runselection.clear();

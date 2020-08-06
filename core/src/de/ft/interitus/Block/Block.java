@@ -132,6 +132,7 @@ public abstract class Block implements VisibleObjects {
         return ProgrammingSpace.cam.frustum.boundsInFrustum(this.getX(), this.getY(), 0, this.getW(), this.getH(), 0); //Ist der Block im Camera bereich?
 
 
+
     }
 
     /***

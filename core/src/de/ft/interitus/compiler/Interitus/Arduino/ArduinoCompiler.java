@@ -444,7 +444,7 @@ public class ArduinoCompiler implements Compiler {
         }
 
         if (response.contains("can't open device")) {
-            ausgabe = ("Trenne den Arduino\nund verbinde ihn neu!");
+            ausgabe = ("Es wurde der falsche\nPort ausgewählt!");
             uploaderror = true;
         }
 

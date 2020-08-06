@@ -7,6 +7,7 @@ package de.ft.interitus.UI.Notification;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.Settings;
@@ -103,8 +104,8 @@ public class NotificationManager {
 
         for (int i = notifications.size() - 1; i >= 0; i--) {
 
-            Gdx.gl.glEnable(GL11.GL_BLEND);
-            Gdx.gl.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+            Gdx.gl.glEnable(GL20.GL_BLEND);
+            Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
             ProgrammingSpace.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
             ProgrammingSpace.shapeRenderer.setColor(Settings.theme.ClearColor().r,Settings.theme.ClearColor().g,Settings.theme.ClearColor().b,notifications.get(i).getFadeout());
 
@@ -152,7 +153,7 @@ public class NotificationManager {
             }
 
 
-            Gdx.gl.glDisable(GL11.GL_BLEND);
+            Gdx.gl.glDisable(GL20.GL_BLEND);
 
         }
 
