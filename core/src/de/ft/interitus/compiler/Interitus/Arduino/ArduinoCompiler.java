@@ -23,9 +23,7 @@ import org.json.JSONObject;
 import javax.management.remote.NotificationResult;
 import java.io.*;
 import java.lang.reflect.Array;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 public class ArduinoCompiler implements Compiler {
     //TODO APPLE SUPPORT
@@ -307,7 +305,32 @@ public class ArduinoCompiler implements Compiler {
                 notification.setMessage("\nDas Projekt wird hochgeladen");
                 notification.setProgressbarvalue(80);
 
-                runcommand(upload, true);
+                ExecutorService executor = Executors.newCachedThreadPool();
+                String finalUpload = upload;
+                Callable<Object> task = new Callable<Object>() {
+                    public Object call() {
+                        return  runcommand(finalUpload, true);
+                    }
+                };
+                Future<Object> future = executor.submit(task);
+                try {
+                    Object result = future.get(10, TimeUnit.SECONDS);
+                } catch (TimeoutException ex) {
+
+                    notification.setTitle("Fehler beim Hochladen");
+                    notification.setMessage("Trenne den Arduino\nund verbinde ihn neu!");
+                    notification.setStayalive(true);
+                    notification.setCloseable(true);
+                    return false;
+                } catch (InterruptedException e) {
+                    // handle the interrupts
+                } catch (ExecutionException e) {
+                    // handle other exceptions
+                } finally {
+                    future.cancel(true); // may or may not desire this
+                }
+
+
 
                 notification.setMessage(getAverdudeError());
                 if(uploaderror) {
