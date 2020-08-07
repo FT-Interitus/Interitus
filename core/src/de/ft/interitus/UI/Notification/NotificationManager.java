@@ -32,6 +32,7 @@ public class NotificationManager {
     public static final int MOVE_IN_SPEED  = 15;
     private static final GlyphLayout glyphLayout = new GlyphLayout();
 
+
     private static int MAX_NOTIFICATIONS = 10;
 
     /***
@@ -44,6 +45,8 @@ public class NotificationManager {
      */
 
     public static boolean sendNotification(Notification notification) {
+
+
 
         if ((notifications.size() < MAX_NOTIFICATIONS||!notification.isCloseable())&&!notification.isDisplayed()) {
 

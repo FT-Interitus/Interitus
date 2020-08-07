@@ -11,6 +11,7 @@ import de.ft.interitus.UI.UIElements.UIElements.Button;
 
 public class Notification {
 
+
     private  Texture icon;
     private  String message;
     private boolean stayalive = false;
@@ -105,16 +106,19 @@ public class Notification {
     }
 
 
-    public void setIcon(Texture icon) {
+    public Notification setIcon(Texture icon) {
         this.icon = icon;
+        return this;
     }
 
-    public void setMessage(String message) {
+    public Notification setMessage(String message) {
         this.message = message;
+        return this;
     }
 
-    public void setTitle(String title) {
+    public Notification setTitle(String title) {
         this.title = title;
+        return this;
     }
 
 
@@ -231,6 +235,8 @@ public class Notification {
     protected void setInrollin(boolean inrollin) {
         this.inrollin = inrollin;
     }
+
+
 }
 
 
