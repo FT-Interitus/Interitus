@@ -24,10 +24,10 @@ public class Step5 {
             public void run() {
                 SetupWindow.errorLabel.setColor(1, 0, 0, 1);
                 SetupWindow.errorLabel.setText("Vorgang gestartet...");
-                SSHConnection.update(SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().ip, SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().username, SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().password);
+              //  SSHConnection.update(SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().ip, SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().username, SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().password);
 
                 installationprogress.setText("System-Update abgeschlossen\n\nPython installieren...\n\n \n\n \n\n ");
-                SSHConnection.installpython(SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().ip, SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().username, SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().password);
+            //    SSHConnection.installpython(SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().ip, SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().username, SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().password);
                 installationprogress.setText("System-Update abgeschlossen\n\nPython installieren abgeschlossen\n\n Weitere Aktion...\n\n \n\n ");
 
                 try {

@@ -43,12 +43,10 @@ public class Step3 {
                 isBurning = true;
                 try {
 
-                    if (SetupWindow.tempverbindungsspeicher.getDevice() == Devices.ARDUINO_MEGA) {
-                        BurnProgramm.burn(Devices.ARDUINO_MEGA, getrennt[0], "sketch_mega.hex");
+                    if(true ) {                          BurnProgramm.burn(Devices.ARDUINO_MEGA, getrennt[0], "sketch_mega.hex");
                     }
 
-                    if (SetupWindow.tempverbindungsspeicher.getDevice() == Devices.ARDUINO_UNO) {
-                        BurnProgramm.burn(Devices.ARDUINO_UNO, getrennt[0], "sketch_uno.hex");
+                    if(true ) {                          BurnProgramm.burn(Devices.ARDUINO_UNO, getrennt[0], "sketch_uno.hex");
                     }
 
                 } catch (Exception e) {

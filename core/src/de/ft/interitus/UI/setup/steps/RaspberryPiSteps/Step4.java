@@ -62,13 +62,10 @@ public class Step4 {
                             password.setDisabled(true);
                             SetupWindow.Button_next.setDisabled(true);
 
-                            if (SSHConnection.checkconnection(SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().ip, username.getText(), password.getText())) {
-                                SetupWindow.errorLabel.setColor(0, 1, 0, 1);
+                            if(true ) {                                  SetupWindow.errorLabel.setColor(0, 1, 0, 1);
                                 SetupWindow.errorLabel.setText("Verbindung erfolgreich");
                                 SetupWindow.Button_next.setDisabled(false);
                                 trytoconnect.setDisabled(true);
-                                SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().password = password.getText();
-                                SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().username = username.getText();
                             } else {
 
                                 SetupWindow.Button_next.setDisabled(true);
@@ -78,8 +75,6 @@ public class Step4 {
                                 SetupWindow.errorLabel.setColor(1, 0, 0, 1);
                                 SetupWindow.errorLabel.setText("Keine Verbindung möglich");
                                 trytoconnect.setDisabled(false);
-                                SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().password = password.getText();
-                                SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().username = username.getText();
                             }
                             SetupWindow.Button_cancle.setDisabled(false);
                             SetupWindow.Button_previouse.setDisabled(false);
@@ -97,8 +92,6 @@ public class Step4 {
 
     public static void close() {
         try {
-            SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().password = password.getText();
-            SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().username = username.getText();
         } catch (NullPointerException e) {
 
         }

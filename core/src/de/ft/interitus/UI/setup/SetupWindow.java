@@ -23,13 +23,13 @@ import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.setup.steps.ArduinoSteps.Step3;
 import de.ft.interitus.UI.setup.steps.generalSteps.Step1;
 import de.ft.interitus.UI.setup.steps.generalSteps.Step2;
-import de.ft.interitus.datamanager.programmdata.VerbindungsSpeicher;
+
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class SetupWindow {
-    public static VerbindungsSpeicher tempverbindungsspeicher = new VerbindungsSpeicher();
+
     public static int currentStep = 1;
     public static SetupBuilder setupBuilder;
     public static VisTextButton Button_next = new VisTextButton("Next");
@@ -63,7 +63,7 @@ public class SetupWindow {
 
 
     public void show() {
-        tempverbindungsspeicher = new VerbindungsSpeicher();
+
         if (setupBuilder == null) {
             content = new VisTable();
             setupBuilder = new SetupBuilder("Verbindungs Setup", new StandardTableBuilder(padding));
@@ -149,7 +149,7 @@ public class SetupWindow {
 
                     }
                     if (currentStep > 2) {
-                        if (tempverbindungsspeicher.getDevice() == Devices.ARDUINO_MEGA || tempverbindungsspeicher.getDevice() == Devices.ARDUINO_UNO) {
+                        if (true) {
                             switch (currentStep) {
                                 case 3:
                                     Step3.close();
@@ -162,7 +162,7 @@ public class SetupWindow {
                     }
 
                     if (currentStep > 2) {
-                        if (tempverbindungsspeicher.getDevice() == Devices.RASPBERRY3Bplus || tempverbindungsspeicher.getDevice() == Devices.RASPBERRYPI4 || tempverbindungsspeicher.getDevice() == Devices.RASPBERRYPIZEROW) {
+                        if (true) {
                             switch (currentStep) {
                                 case 3:
                                     de.ft.interitus.UI.setup.steps.RaspberryPiSteps.Step3.close();
@@ -192,7 +192,7 @@ public class SetupWindow {
 
 
                     if (currentStep > 2) {
-                        if (tempverbindungsspeicher.getDevice() == Devices.ARDUINO_MEGA || tempverbindungsspeicher.getDevice() == Devices.ARDUINO_UNO) {
+                        if (true) {
                             switch (currentStep) {
                                 case 3:
                                     Step3.step3(content);
@@ -201,7 +201,7 @@ public class SetupWindow {
                             }
                         }
 
-                        if (tempverbindungsspeicher.getDevice() == Devices.RASPBERRY3Bplus || tempverbindungsspeicher.getDevice() == Devices.RASPBERRYPI4 || tempverbindungsspeicher.getDevice() == Devices.RASPBERRYPIZEROW) {
+                        if (true) {
 
 
                             switch (currentStep) {
@@ -222,8 +222,7 @@ public class SetupWindow {
 
 
                     if (currentStep > 1) {
-                        if (tempverbindungsspeicher.getDevice() == Devices.RASPBERRY3Bplus || tempverbindungsspeicher.getDevice() == Devices.RASPBERRYPI4 || tempverbindungsspeicher.getDevice() == Devices.RASPBERRYPIZEROW) {
-
+if(true) {
 
                         } else if (currentStep != 5) {
                             Button_previouse.setDisabled(false);
@@ -250,8 +249,7 @@ public class SetupWindow {
                     }
 
                     if (currentStep > 2) {
-                        if (tempverbindungsspeicher.getDevice() == Devices.ARDUINO_MEGA || tempverbindungsspeicher.getDevice() == Devices.ARDUINO_UNO) {
-                            switch (currentStep) {
+if(true) {                            switch (currentStep) {
                                 case 3:
                                     Step3.close();
                                     break;
@@ -259,8 +257,7 @@ public class SetupWindow {
                             }
                         }
 
-                        if (tempverbindungsspeicher.getDevice() == Devices.RASPBERRY3Bplus || tempverbindungsspeicher.getDevice() == Devices.RASPBERRYPI4 || tempverbindungsspeicher.getDevice() == Devices.RASPBERRYPIZEROW) {
-                            switch (currentStep) {
+if(true ) {                            switch (currentStep) {
                                 case 3:
                                     de.ft.interitus.UI.setup.steps.RaspberryPiSteps.Step3.close();
                                     break;
@@ -290,16 +287,14 @@ public class SetupWindow {
                     }
 
                     if (currentStep > 2) {
-                        if (tempverbindungsspeicher.getDevice() == Devices.ARDUINO_MEGA || tempverbindungsspeicher.getDevice() == Devices.ARDUINO_UNO) {
-                            switch (currentStep) {
+                        if(true ) {                              switch (currentStep) {
                                 case 3:
                                     Step3.step3(content);
                                     break;
 
                             }
                         }
-                        if (tempverbindungsspeicher.getDevice() == Devices.RASPBERRY3Bplus || tempverbindungsspeicher.getDevice() == Devices.RASPBERRYPI4 || tempverbindungsspeicher.getDevice() == Devices.RASPBERRYPIZEROW) {
-
+                        if(true ) {
                             switch (currentStep) {
                                 case 3:
                                     de.ft.interitus.UI.setup.steps.RaspberryPiSteps.Step3.step3(content);
@@ -338,7 +333,7 @@ public class SetupWindow {
                     de.ft.interitus.UI.setup.steps.RaspberryPiSteps.Step5.close();
 
                     currentStep = 1;
-                    tempverbindungsspeicher = null;
+
                     setupBuilder.close();
                 }
             });

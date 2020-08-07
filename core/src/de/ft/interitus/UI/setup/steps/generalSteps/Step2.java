@@ -38,7 +38,6 @@ public class Step2 {
             selectPlatform.setColor(1, 0, 0, 1);
             selectBoardArt.setSelected("Bitte auswählen");
             shownext = 0;
-            SetupWindow.tempverbindungsspeicher.setDevice(Devices.UNDEFINIERT);
 
 
         } else {
@@ -95,18 +94,15 @@ public class Step2 {
                     SetupWindow.errorLabel.setColor(0, 1, 0, 1);
                     SetupWindow.errorLabel.setText("Alle Voraussetzungen erfüllt");
                     SetupWindow.Button_next.setDisabled(false);
-                    SetupWindow.tempverbindungsspeicher.setDevice(Devices.ARDUINO_UNO);
                 } else if (selectBoardArt.getSelected().equals("Arduino MEGA")) {
                     selectBoardArt.setColor(0, 1, 0, 1);
                     SetupWindow.errorLabel.setColor(0, 1, 0, 1);
                     SetupWindow.errorLabel.setText("Alle Voraussetzungen erfüllt");
                     SetupWindow.Button_next.setDisabled(false);
-                    SetupWindow.tempverbindungsspeicher.setDevice(Devices.ARDUINO_MEGA);
                 } else {
                     SetupWindow.errorLabel.setColor(1, 0, 0, 1);
                     SetupWindow.errorLabel.setText("Bitte wähle ein Arduino Board aus");
                     SetupWindow.Button_next.setDisabled(true);
-                    SetupWindow.tempverbindungsspeicher.setDevice(Devices.UNDEFINIERT);
                 }
                 break;
 
@@ -117,13 +113,11 @@ public class Step2 {
                     SetupWindow.errorLabel.setColor(0, 1, 0, 1);
                     SetupWindow.errorLabel.setText("Alle Voraussetzungen erfüllt");
                     SetupWindow.Button_next.setDisabled(false);
-                    SetupWindow.tempverbindungsspeicher.setDevice(Devices.EV3);
                 } else if (selectBoardArt.getSelected().equals("EV3-DEV")) {
                     selectBoardArt.setColor(0, 1, 0, 1);
                     SetupWindow.errorLabel.setColor(0, 1, 0, 1);
                     SetupWindow.errorLabel.setText("Alle Voraussetzungen erfüllt");
                     SetupWindow.Button_next.setDisabled(false);
-                    SetupWindow.tempverbindungsspeicher.setDevice(Devices.EV3_DEV);
                 } else {
                     SetupWindow.errorLabel.setColor(1, 0, 0, 1);
                     SetupWindow.errorLabel.setText("Bitte wähle ein EV3 aus");
@@ -137,24 +131,20 @@ public class Step2 {
                     SetupWindow.errorLabel.setColor(0, 1, 0, 1);
                     SetupWindow.errorLabel.setText("Alle Voraussetzungen erfüllt");
                     SetupWindow.Button_next.setDisabled(false);
-                    SetupWindow.tempverbindungsspeicher.setDevice(Devices.RASPBERRYPI4);
                 } else if (selectBoardArt.getSelected().equals("Raspberry pi 3b/3b+")) {
                     selectBoardArt.setColor(0, 1, 0, 1);
                     SetupWindow.errorLabel.setColor(0, 1, 0, 1);
                     SetupWindow.errorLabel.setText("Alle Voraussetzungen erfüllt");
                     SetupWindow.Button_next.setDisabled(false);
-                    SetupWindow.tempverbindungsspeicher.setDevice(Devices.RASPBERRY3Bplus);
                 } else if (selectBoardArt.getSelected().equals("Raspberry Pi Zero W")) {
                     selectBoardArt.setColor(0, 1, 0, 1);
                     SetupWindow.errorLabel.setColor(0, 1, 0, 1);
                     SetupWindow.errorLabel.setText("Alle Voraussetzungen erfüllt");
                     SetupWindow.Button_next.setDisabled(false);
-                    SetupWindow.tempverbindungsspeicher.setDevice(Devices.RASPBERRYPIZEROW);
                 } else {
                     SetupWindow.errorLabel.setColor(1, 0, 0, 1);
                     SetupWindow.errorLabel.setText("Bitte wähle einen Raspberry Pi aus");
                     SetupWindow.Button_next.setDisabled(true);
-                    SetupWindow.tempverbindungsspeicher.setDevice(Devices.UNDEFINIERT);
                 }
                 break;
         }
@@ -188,45 +178,38 @@ public class Step2 {
         selectBoardArt.setColor(1, 0, 0, 1);
 
 
-        if (SetupWindow.tempverbindungsspeicher.getDevice() == Devices.ARDUINO_UNO) {
-            selectPlatform.setSelected("Arduino");
+        if(true ) {              selectPlatform.setSelected("Arduino");
             update1();
             selectBoardArt.setSelected("Arduino UNO");
             update2();
 
         }
-        if (SetupWindow.tempverbindungsspeicher.getDevice() == Devices.ARDUINO_MEGA) {
-            selectPlatform.setSelected("Arduino");
+        if(true ) {              selectPlatform.setSelected("Arduino");
             update1();
             selectBoardArt.setSelected("Arduino MEGA");
             update2();
         }
-        if (SetupWindow.tempverbindungsspeicher.getDevice() == Devices.RASPBERRYPI4) {
-            selectPlatform.setSelected("Raspberry Pi");
+        if(true ) {              selectPlatform.setSelected("Raspberry Pi");
             update1();
             selectBoardArt.setSelected("Raspberry Pi 4b");
             update2();
         }
-        if (SetupWindow.tempverbindungsspeicher.getDevice() == Devices.RASPBERRY3Bplus) {
-            selectPlatform.setSelected("Raspberry Pi");
+        if(true ) {              selectPlatform.setSelected("Raspberry Pi");
             update1();
             selectBoardArt.setSelected("Raspberry pi 3b/3b+");
             update2();
         }
-        if (SetupWindow.tempverbindungsspeicher.getDevice() == Devices.RASPBERRYPIZEROW) {
-            selectPlatform.setSelected("Raspberry Pi");
+        if(true ) {              selectPlatform.setSelected("Raspberry Pi");
             update1();
             selectBoardArt.setSelected("Raspberry Pi Zero W");
             update2();
         }
-        if (SetupWindow.tempverbindungsspeicher.getDevice() == Devices.EV3) {
-            selectPlatform.setSelected("EV3");
+        if(true ) {              selectPlatform.setSelected("EV3");
             update1();
             selectBoardArt.setSelected("Normal");
             update2();
         }
-        if (SetupWindow.tempverbindungsspeicher.getDevice() == Devices.EV3_DEV) {
-            selectPlatform.setSelected("EV3");
+        if(true ) {              selectPlatform.setSelected("EV3");
             update1();
             selectBoardArt.setSelected("EV3-DEV");
             update2();

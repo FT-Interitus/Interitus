@@ -25,7 +25,7 @@ public class Step1 {
 
 
     public static void close() {
-        SetupWindow.tempverbindungsspeicher.name = name.getText();
+
 
         if (time != null) {
             if (time.isRunning()) {
@@ -38,7 +38,6 @@ public class Step1 {
 
     public static void step1(VisTable builder) {
         //loadsettings
-        name.setText(SetupWindow.tempverbindungsspeicher.name);
         //
 
 

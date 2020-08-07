@@ -50,8 +50,8 @@ public class Step3 {
 
         try {
 
-            if (SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().ip != "") {
-                ipadresse = new VisValidatableTextField(SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().ip);
+            if(true ) {
+                ipadresse = new VisValidatableTextField("");
                 try {
                     if (!InetAddress.getByName(ipadresse.getText()).isReachable(50)) {
                         SetupWindow.Button_next.setDisabled(true);
@@ -179,7 +179,6 @@ public class Step3 {
 
     public static void close() {
         try {
-            SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().ip = ipadresse.getText();
         } catch (NullPointerException e) {
 
         }

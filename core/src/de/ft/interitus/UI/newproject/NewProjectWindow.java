@@ -27,9 +27,7 @@ import de.ft.interitus.utils.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/**
- * @deprecated
- */
+
 public class NewProjectWindow {
     public static SetupBuilder setupBuilder;
     public static VisTable content;
