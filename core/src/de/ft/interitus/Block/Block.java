@@ -9,6 +9,8 @@ package de.ft.interitus.Block;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Frustum;
+import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
 import com.kotcrab.vis.ui.widget.PopupMenu;
 import de.ft.interitus.Block.Generators.BlockUpdateGenerator;
@@ -17,6 +19,7 @@ import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Programm;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.ThreadManager;
+import de.ft.interitus.UI.Viewport;
 import de.ft.interitus.UI.popup.PopupMenue;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.block.BlockCreateEvent;
@@ -129,7 +132,9 @@ public abstract class Block implements VisibleObjects {
 
     @Override
     public boolean isVisible() {
-        return ProgrammingSpace.cam.frustum.boundsInFrustum(this.getX(), this.getY(), 0, this.getW(), this.getH(), 0); //Ist der Block im Camera bereich?
+
+
+        return Viewport.extendedfrustum.boundsInFrustum(this.getX(), this.getY(), 0, this.getW(), this.getH(), 0); //Ist der Block im Camera bereich?
 
 
 

@@ -8,7 +8,13 @@ package de.ft.interitus.UI;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeType;
 import com.badlogic.gdx.input.GestureDetector;
+import com.badlogic.gdx.math.Frustum;
+import com.badlogic.gdx.math.Matrix3;
+import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.Settings;
 import de.ft.interitus.events.EventVar;
@@ -30,6 +36,14 @@ public class Viewport {
     private static double time_pressed_right = 0;
     private static double time_pressed_up = 0;
     private static double time_pressed_down = 0;
+    private static Matrix4 projection = new Matrix4();
+    public static final float ADDITIONAL_FRUSTRUM_SIZE = 0.7f;
+    private static Matrix4 view = new Matrix4();
+    private static Vector3 tmp = new Vector3();
+    private static Matrix4 combined = new Matrix4();
+    private static Matrix4 invProjectionView = new Matrix4();
+    public static Frustum extendedfrustum = new Frustum();
+
 
     public static void init() {
         Gdx.graphics.setVSync(Settings.Vsync);
@@ -173,6 +187,24 @@ public class Viewport {
             ProjectManager.getActProjectVar().cam_pos.set(ProgrammingSpace.cam.position.x, ProgrammingSpace.cam.position.y);
 
         }
+
+
+
+        projection.setToOrtho((ProgrammingSpace.cam.zoom+ADDITIONAL_FRUSTRUM_SIZE) * -ProgrammingSpace.cam.viewportWidth / 2, (ProgrammingSpace.cam.zoom+ADDITIONAL_FRUSTRUM_SIZE) * (ProgrammingSpace.cam.viewportWidth / 2), (ProgrammingSpace.cam.zoom+ADDITIONAL_FRUSTRUM_SIZE) * -(ProgrammingSpace.cam.viewportHeight / 2), (ProgrammingSpace.cam.zoom+ADDITIONAL_FRUSTRUM_SIZE)
+                * ProgrammingSpace.cam.viewportHeight / 2, ProgrammingSpace.cam.near, ProgrammingSpace.cam.far);
+
+        view.setToLookAt(ProgrammingSpace.cam.position, tmp.set(ProgrammingSpace.cam.position).add(ProgrammingSpace.cam.direction), ProgrammingSpace.cam.up);
+        combined.set(projection);
+        Matrix4.mul(combined.val, view.val);
+
+
+            invProjectionView.set(combined);
+            Matrix4.inv(invProjectionView.val);
+            extendedfrustum.update(invProjectionView);
+
+
+
+
 
     }
 

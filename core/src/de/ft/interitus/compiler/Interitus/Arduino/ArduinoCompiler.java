@@ -162,7 +162,7 @@ public class ArduinoCompiler implements Compiler {
             notification.close();
         }
 
-        notification = new Notification(AssetLoader.arduinomegaimage, "Umwandlung...", "\nProjekt wird in Code umgewandelt").setCloseable(false).setAlivetime(9000);
+        notification = new Notification(AssetLoader.arduinomegaimage, "Umwandlung...", "\nProjekt wird in Code umgewandelt").setCloseable(false).setAlivetime(9000).rollin(false);
         notification.setProgressbarvalue(0);
         NotificationManager.sendNotification(notification);
 

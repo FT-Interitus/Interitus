@@ -24,6 +24,8 @@ public class Notification {
     private  int progressbarvalue = -1;
     private  int progressbarvalueis = -1;
     private boolean displayed = false;
+    private int rollin = 0;
+    private boolean inrollin = true;
 
     /***
      * Creates a new Notification which can send to the NotificationManager
@@ -44,7 +46,7 @@ public class Notification {
      * If the value is -1 (default) the ProgressBar will be hidden
      * Note that the Notification will automatically expire if StayAlive is false (default)
      * @param progressbarvalue
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException with the Values are less than -1 and more than 100
      */
     public Notification setProgressbarvalue(int progressbarvalue) {
         if(progressbarvalue>100||progressbarvalue<-1) {
@@ -128,6 +130,16 @@ public class Notification {
 
     }
 
+    /**
+     * If true the Notification Swipes in
+     * @param animate
+     */
+
+    public Notification rollin(boolean animate) {
+        setInrollin(animate);
+        setRollin(0);
+        return this;
+    }
 
     protected Texture getIcon() {
         return icon;
@@ -202,6 +214,22 @@ public class Notification {
 
     protected  void setProgressbarvalueis(int progressbarvalueis) {
         this.progressbarvalueis = progressbarvalueis;
+    }
+
+    protected int getRollin() {
+        return rollin;
+    }
+
+    protected void setRollin(int rollin) {
+        this.rollin = rollin;
+    }
+
+    protected boolean isInrollin() {
+        return inrollin;
+    }
+
+    protected void setInrollin(boolean inrollin) {
+        this.inrollin = inrollin;
     }
 }
 

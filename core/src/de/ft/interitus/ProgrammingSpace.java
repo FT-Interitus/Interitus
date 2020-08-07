@@ -274,7 +274,9 @@ public class ProgrammingSpace extends ScreenAdapter {
 
         NotificationManager.draw();
 
-
+if(Gdx.input.isKeyJustPressed(Input.Keys.C)) {
+    NotificationManager.sendNotification(new Notification(AssetLoader.information,"Wichtige Information","\nEs steht kein Update bereit"));
+}
 
         PopupHandler.drawPopUp();
 
@@ -298,7 +300,7 @@ public class ProgrammingSpace extends ScreenAdapter {
     public void resize(int width, int height) {
         super.resize(width, height);
 
-        NotificationManager.resize();
+
 
         try {
             UI.updateView(width, height);

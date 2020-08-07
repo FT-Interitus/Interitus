@@ -18,7 +18,7 @@ import java.util.TimerTask;
 public class ThreadManager {
 
 
-    static Frustum camfr;
+
 
     public static Thread add(Thread thread, Object obj) {
         Thread createThread = new Thread();
@@ -46,7 +46,7 @@ public class ThreadManager {
                     if (!UIVar.isdialogeopend) {
                         ProjectVar projectVar =ProjectManager.getActProjectVar();
                         try {
-                            camfr = ProgrammingSpace.cam.frustum;
+
 
 
                             for (int i = 0; i < projectVar.blocks.size(); i++) {
@@ -54,7 +54,7 @@ public class ThreadManager {
 //                            System.out.println(camfr.boundsInFrustum(BlockVar.blocks.get(10).getX(), BlockVar.blocks.get(10).getY(), 0, BlockVar.blocks.get(10).getW(), BlockVar.blocks.get(10).getH(),0));
                                 try {
                                     Block block = ((BlockUpdate) projectVar.threads.get(i)).block;
-                                    if (!(camfr.boundsInFrustum(block.getX(), block.getY(), 0, block.getW(), block.getH(), 0)) && !block.isMarked() && ((BlockUpdate) projectVar.threads.get(i)).isrunning) {
+                                    if (!block.isVisible() && !block.isMarked() && ((BlockUpdate) projectVar.threads.get(i)).isrunning) {
 
                                         if (((BlockUpdate) projectVar.threads.get(i)).isrunning) {
                                             try {
@@ -67,7 +67,7 @@ public class ThreadManager {
                                         projectVar.visibleblocks.remove(block);
                                     }
 
-                                    if (camfr.boundsInFrustum(block.getX(), block.getY(), 0, block.getW(), block.getH(), 0) && !((BlockUpdate) projectVar.threads.get(i)).isrunning) {
+                                    if (block.isVisible() && !((BlockUpdate) projectVar.threads.get(i)).isrunning) {
                                         projectVar.visibleblocks.add(block);
                                         projectVar.threads.set(i, ((BlockUpdate) projectVar.threads.get(i)).block.allowedRestart());
 

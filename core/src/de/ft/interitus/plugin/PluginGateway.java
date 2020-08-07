@@ -35,6 +35,7 @@ public class PluginGateway {
     public static ArrayList<ShortCutChecker> pluginshortCutsChecker = new ArrayList<>();
     public static ArrayList<ShortCut> pluginshortCuts = new ArrayList<>();
 
+    @SuppressWarnings("unused")
     public static boolean addsettings(VisTable settingsclass, Plugin requestedplugin) {
         if (PluginManagerHandler.loadedplugins.contains(requestedplugin)) {
             pluginsettings.add(settingsclass);
@@ -45,6 +46,7 @@ public class PluginGateway {
         }
     }
 
+    @SuppressWarnings("unused")
     public static boolean addMenuEntry(Menu menuentry, Plugin requestedplugin) {
         if (PluginManagerHandler.loadedplugins.contains(requestedplugin)) {
             pluginMenubar.add(menuentry);
@@ -54,7 +56,7 @@ public class PluginGateway {
             return false;
         }
     }
-
+    @SuppressWarnings("unused")
     public static boolean addProjectType(ProjectTypes PT, Plugin requestedplugin) {
         if (PluginManagerHandler.loadedplugins.contains(requestedplugin)) {
             pluginprojekttypes.add(PT);
@@ -64,7 +66,7 @@ public class PluginGateway {
             return false;
         }
     }
-
+    @SuppressWarnings("unused")
     public static boolean addShortcut(Plugin requestedplugin, ShortCut shortCut) {
         if (PluginManagerHandler.loadedplugins.contains(requestedplugin)) {
             pluginshortCuts.add(shortCut);
@@ -74,7 +76,7 @@ public class PluginGateway {
             return false;
         }
     }
-
+    @SuppressWarnings("unused")
     public static boolean addShortcutChecker(ShortCutChecker shortCutChecker, Plugin requestedplugin) {
         if (PluginManagerHandler.loadedplugins.contains(requestedplugin)) {
             pluginshortCutsChecker.add(shortCutChecker);
@@ -84,7 +86,7 @@ public class PluginGateway {
             return false;
         }
     }
-
+    @SuppressWarnings("unused")
     public static boolean registerTheme(Theme theme, Plugin requestedplugin) {
         if (PluginManagerHandler.loadedplugins.contains(requestedplugin)) {
             RegisteredThemes.themes.add(theme);
