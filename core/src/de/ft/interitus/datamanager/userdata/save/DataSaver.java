@@ -7,6 +7,7 @@ package de.ft.interitus.datamanager.userdata.save;
 
 import com.badlogic.gdx.files.FileHandle;
 import de.ft.interitus.Block.SaveBlock;
+import de.ft.interitus.Var;
 import de.ft.interitus.datamanager.BlockCalculator;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.datamanager.userdata.Zip;
@@ -62,6 +63,9 @@ public class DataSaver {
                 settings.put("pos_x", ProjectManager.getActProjectVar().cam_pos.x);
                 settings.put("pos_y", ProjectManager.getActProjectVar().cam_pos.y);
                 settings.put("time", ProjectManager.getActProjectVar().programmingtime + (System.currentTimeMillis() - ProjectManager.getActProjectVar().currentstarttime));
+                settings.put("it_version", Var.PROGRAMM_VERSION_ID); //Saves Interitus Version in Project File
+                settings.put("pl_name",ProjectManager.getActProjectVar().projectType.getPluginRegister().getName());
+                settings.put("pl_version",ProjectManager.getActProjectVar().projectType.getPluginRegister().getVersion());
                 try {
                     Files.write(Paths.get(Data.tempfolder + "/" + generateprojektsettingsname), settings.toString().getBytes());
                 } catch (IOException e) {

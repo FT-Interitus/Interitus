@@ -7,6 +7,7 @@ package de.ft.interitus.UI.popup;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import de.ft.interitus.Programm;
 import de.ft.interitus.UI.UIElements.UIElements.Button;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
 import de.ft.interitus.utils.ArrayList;
@@ -96,7 +97,6 @@ public class PopupMenue {
 
         ispressed = getPressed();
         if (ispressed != -1) {
-            // EventVar.rightClickEventManager.buttonclickedinwindow(new RightClickButtonSelectEvent(this, buttons.get(ispressed)));
 
             this.show = false;
 
@@ -124,7 +124,7 @@ public class PopupMenue {
     private int getPressed() {
         int p = -1;
         for (int i = 0; i < buttons.size(); i++) {
-            if (buttons.get(i).isjustPressed()) {
+            if (buttons.get(i).isjustPressednormal()) {
                 p = i;
             }
         }

@@ -97,7 +97,7 @@ public abstract class Block implements VisibleObjects {
         }
         ThreadManager.add(blockupdate, this); //Blockupdate wird zum Array der laufenden Threads hinzugefügt
 
-        final Block instance = this;
+
 
         rightClickEventListener = new RightClickEventListener() {
 

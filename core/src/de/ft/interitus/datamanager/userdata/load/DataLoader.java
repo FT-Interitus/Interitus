@@ -11,12 +11,15 @@ import de.ft.interitus.Block.SaveBlock;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.UI.ManualConfig.DeviceConfiguration;
 import de.ft.interitus.UI.MenuBar;
+import de.ft.interitus.UI.Notification.Notification;
+import de.ft.interitus.UI.Notification.NotificationManager;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.Var;
 import de.ft.interitus.datamanager.BlockCalculator;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.datamanager.userdata.Zip;
+import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.ProjectTypes;
@@ -29,6 +32,7 @@ import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 
 public class DataLoader {
+    private static boolean wascreated = false;
     public static void load(final FileHandle handle, final String name, final String path) {
 
 
@@ -55,15 +59,23 @@ public class DataLoader {
 
                     if (temptype == null) {
 
-                        Dialogs.showErrorDialog(UI.stage, "Das Plugin das mit diesem Projekt verbunden ist, ist nicht installiert."); //TODO more Informations (link to plugin)
-
+                        Dialogs.showErrorDialog(UI.stage, "Das Plugin mit dem Namen \""+settings.getString("pl_name")+"\", das mit diesem Projekt verbunden ist, ist nicht installiert."); //TODO more Informations (link to plugin)
+                        Var.isloading = false;
                         this.interrupt();
                         return;
                     } else {
                         //ThreadManager.stopall();
 
-                        ProjectManager.addProject(temptype.init());
+                        if(settings.getDouble("it_version")!=Var.PROGRAMM_VERSION_ID) {
+                            NotificationManager.sendNotification(new Notification(AssetLoader.information,"Warnung","Das Project stammt aus\neiner anderen Interitus Version"));
+                        }
 
+                        if(settings.getDouble("pl_version")!=temptype.getPluginRegister().getVersion()) {
+                            NotificationManager.sendNotification(new Notification(AssetLoader.information,"Warnung","Das Project stammt aus\neiner anderen Projekt-Type Version"));
+                        }
+
+                        ProjectManager.addProject(temptype.init());
+                        wascreated = true;
                         Var.openprojects.get(Var.openprojects.size() - 1).zoom = settings.getFloat("zoom"); //Befor change to not ignore this change
                         Var.openprojects.get(Var.openprojects.size() - 1).cam_pos.set(settings.getFloat("pos_x"), settings.getFloat("pos_y"));
 
@@ -79,7 +91,7 @@ public class DataLoader {
                         BlockTappedBar.init();
 
 
-                    }
+
 
                     ProjectManager.getActProjectVar().vcs = settings.getInt("vcs");
                     ProjectManager.getActProjectVar().programmingtime = settings.getLong("time");
@@ -104,11 +116,13 @@ public class DataLoader {
 
                     ProjectManager.getActProjectVar().deviceConfigurations = ((ArrayList<DeviceConfiguration>) runconfig_ois.readObject());
 
-
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Var.openprojects.remove(Var.openprojects.size() - 1);
-                    DisplayErrors.customErrorstring = "Fehler beim Laden des Projekts";
+                    if(wascreated) {
+                        Var.openprojects.remove(Var.openprojects.size() - 1);
+                    }
+                    DisplayErrors.customErrorstring = "Fehler beim Laden des Projekts\nDie Project Datei ist beschädigt!";
                     DisplayErrors.error = e;
 
                 }

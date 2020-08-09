@@ -24,7 +24,7 @@ public class Var {
      */
     public static final String PROGRAMM_VERSION = "0.0.1";
 
-  //  public static final double API_VERSION = 1.0; TODO create API
+
     public static boolean isloading = false;
     public static boolean isclearing = false;
     public static boolean nointernetconnection = false;

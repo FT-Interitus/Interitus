@@ -5,6 +5,8 @@
 
 package de.ft.interitus.plugin;
 
+import de.ft.interitus.Var;
+
 public class Native implements Plugin {
     @Override
     public boolean register() {
@@ -28,7 +30,7 @@ public class Native implements Plugin {
 
     @Override
     public double getVersion() {
-        return 1.0;
+        return Var.PROGRAMM_VERSION_ID;
     }
 
     @Override

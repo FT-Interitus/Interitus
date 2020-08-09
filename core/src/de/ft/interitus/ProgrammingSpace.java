@@ -65,7 +65,7 @@ public class ProgrammingSpace extends ScreenAdapter {
     public ProgrammingSpace() {
 
 
-        //TODO Debug hier wird immer ein Ev3 Project erstellt
+        //TODO Debug hier wird immer ein Arduino Project erstellt
 
 
         pressedKeys = new PressedKeys();
