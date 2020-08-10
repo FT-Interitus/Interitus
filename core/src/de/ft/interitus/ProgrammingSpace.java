@@ -279,7 +279,7 @@ public class ProgrammingSpace extends ScreenAdapter {
         NotificationManager.draw();
 
 if(Gdx.input.isKeyJustPressed(Input.Keys.C)) {
-    NotificationManager.sendNotification(new Notification(AssetLoader.information,"Wichtige Information","\nEs steht kein Update bereit"));
+    NotificationManager.sendNotification(new Notification(AssetLoader.information,"Wichtige Information","\nEs steht kein Update bereit!"));
 }
 
         PopupHandler.drawPopUp();

@@ -39,8 +39,9 @@ public class ArduinoFunktions implements ProjectFunktions {
     private boolean openedprogress = false;
     private DeviceConfiguration activeConfiguration;
    private final ArrayList<String> parameterArrayList = new ArrayList<>();
-
+private boolean firstrun = true;
     public ArduinoFunktions() {
+
 
         configurationname.setMaxLength(ManualConfigUI.MAX_NAME_LENGTH);
 
@@ -132,6 +133,7 @@ public class ArduinoFunktions implements ProjectFunktions {
     @Override
     public void update() {
 
+   UI.runselection.setDefaultText("Bitte Gerät verbinden");
 
         JSONArray array = ((ArduinoCompiler) ProjectManager.getActProjectVar().projectType.getCompiler()).getBoards();
         if (array == null) {

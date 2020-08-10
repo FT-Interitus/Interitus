@@ -47,6 +47,7 @@ public class ProjectManager {
 
         getActProjectVar().programmingtime = (System.currentTimeMillis() - getActProjectVar().currentstarttime) + getActProjectVar().programmingtime;
 
+        UI.runselection.setDefaultText("");
 
         ProgrammingSpace.cam.position.set(Var.openprojects.get(index).cam_pos.x, Var.openprojects.get(index).cam_pos.y, 0);
         ProgrammingSpace.cam.zoom = Var.openprojects.get(index).zoom;
