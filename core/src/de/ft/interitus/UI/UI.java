@@ -422,7 +422,7 @@ public class UI {
         button_addrunconfig.setW(20);
 
 
-        runselection = new DropDownMenue(100, 100, new Color(94f / 255f, 96f / 255f, 96f / 255f, 1), Settings.theme.ClearColor(), "");
+        runselection = new DropDownMenue(100, 100, new Color(94f / 255f, 96f / 255f, 96f / 255f, 1), "");
 
 
         buttonbar = new UIElementBar(0, 0, 20);

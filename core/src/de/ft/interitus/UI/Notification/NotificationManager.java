@@ -89,7 +89,7 @@ public class NotificationManager {
 
 
 
-        //Delete Notification if it doesnt fit on the screen
+        //Delete Notification if it doesnt fit on the screen but only if it is closeable
         if(notifications.size()>MAX_NOTIFICATIONS) {
           int  addcounter =0;
             for(int i=0;i<notifications.size()-MAX_NOTIFICATIONS;i++) {
@@ -112,7 +112,7 @@ public class NotificationManager {
         for (int i = notifications.size() - 1; i >= 0; i--) {
 
             Gdx.gl.glEnable(GL20.GL_BLEND);
-            Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
+            Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA); //Enalble Alpha Rendering
             ProgrammingSpace.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
             ProgrammingSpace.shapeRenderer.setColor(Settings.theme.ClearColor().r,Settings.theme.ClearColor().g,Settings.theme.ClearColor().b,notifications.get(i).getFadeout());
 

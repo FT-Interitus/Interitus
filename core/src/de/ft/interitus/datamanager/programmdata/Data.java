@@ -226,11 +226,11 @@ public class Data {
                             }
                         }
                     } catch (JSONException e) {
-                        Settings.theme = RegisteredThemes.themes.get(0); //Load White Mode if Theme Attribut is unavailable
+                        Settings.theme = RegisteredThemes.themes.get(0); //Load Dark Mode if Theme Attribut is unavailable
                     }
 
                     if (Settings.theme == null) {
-                        Settings.theme = RegisteredThemes.themes.get(0); //Load White Mode if Theme is unavailable
+                        Settings.theme = RegisteredThemes.themes.get(0); //Load Dark Mode if Theme is unavailable
                     }
 
                     Settings.updateurl = obj.getString("updateurl");

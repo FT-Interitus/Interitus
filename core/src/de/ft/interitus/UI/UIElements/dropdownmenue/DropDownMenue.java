@@ -27,7 +27,7 @@ public class DropDownMenue implements UIElement {
     private static final int RADIUS = 5;
     private boolean opened = false;
     private final Color bordercolor;
-    private final Color fillColor;
+
     private DropDownElementInterface selectedElement = null;
     private final GlyphLayout glyphLayout = new GlyphLayout();
     private final Button popupbutton = new Button();
@@ -35,11 +35,11 @@ public class DropDownMenue implements UIElement {
     private int longestText = 0;
 
 
-    public DropDownMenue(int x, int y, Color bordercolor, Color fillColor, String defaultText) {
+    public DropDownMenue(int x, int y, Color bordercolor, String defaultText) {
         this.x = x;
         this.y = y;
         this.bordercolor = bordercolor;
-        this.fillColor = fillColor;
+
         popupbutton.setVisible(false);
         this.defaultText = defaultText;
     }
@@ -97,7 +97,7 @@ public class DropDownMenue implements UIElement {
         ProgrammingSpace.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         ProgrammingSpace.shapeRenderer.setColor(bordercolor);
         ProgrammingSpace.shapeRenderer.roundendrect(x, y, w, h, RADIUS);
-        ProgrammingSpace.shapeRenderer.setColor(fillColor);
+        ProgrammingSpace.shapeRenderer.setColor(Settings.theme.ClearColor());
         ProgrammingSpace.shapeRenderer.roundendrect(x + 1, y + 1, w - 2, h - 2, RADIUS);
         ProgrammingSpace.shapeRenderer.end();
         UI.UIbatch.begin();
