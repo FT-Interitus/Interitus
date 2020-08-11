@@ -9,6 +9,7 @@ import de.ft.interitus.Block.SaveBlock;
 import de.ft.interitus.ThreadManager;
 import de.ft.interitus.UI.Notification.Notification;
 import de.ft.interitus.UI.Notification.NotificationManager;
+import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.Var;
 import de.ft.interitus.datamanager.BlockCalculator;
 import de.ft.interitus.loading.AssetLoader;
@@ -18,8 +19,9 @@ import java.util.concurrent.TimeUnit;
 
 public class RefreshProgramm {
     public static void refresh() {
+        UIVar.isdialogeopend = true;
 
-
+ThreadManager.stopall();
 
 
         ArrayList<SaveBlock> saveBlocks = BlockCalculator.save();
@@ -44,12 +46,13 @@ public class RefreshProgramm {
             }
             progress++;
         }
-        notification.close();
+
 
 
 
         BlockCalculator.extract(saveBlocks);
-
+        notification.close();
+        UIVar.isdialogeopend = false;
 
     }
 }
