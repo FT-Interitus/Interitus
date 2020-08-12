@@ -14,6 +14,7 @@ import de.ft.interitus.UI.UIElements.TabBar.Tab;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.Var;
 import de.ft.interitus.Welcome;
+import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.global.GlobalCloseEvent;
 import de.ft.interitus.events.global.GlobalEventAdapter;
@@ -134,6 +135,7 @@ public class ProjectManager {
      */
     public static ProjectVar getActProjectVar() {
         if (Var.openprojects.size() == 0) {
+            Data.close();
             System.exit(0);
             return null;
         } else {
@@ -181,6 +183,7 @@ public class ProjectManager {
         }
 
         if(Var.openprojectindex-1==-1) {
+           Data.close();
             System.exit(0);
             return;
         }
