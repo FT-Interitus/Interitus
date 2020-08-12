@@ -13,7 +13,9 @@ import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.TabBar.Tab;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.Var;
+import de.ft.interitus.Welcome;
 import de.ft.interitus.events.EventVar;
+import de.ft.interitus.events.global.GlobalCloseEvent;
 import de.ft.interitus.events.global.GlobalEventAdapter;
 import de.ft.interitus.events.global.GlobalTabClickEvent;
 import de.ft.interitus.loading.AssetLoader;
@@ -38,6 +40,28 @@ public class ProjectManager {
 
                 }
 
+            }
+
+            @Override
+            public boolean closeprogramm(GlobalCloseEvent e) {
+                boolean canbeclosed = true;
+
+                for(int i=0;i<Var.openprojects.size();i++) {
+
+
+                    if(Var.openprojects.get(i).changes) {
+                        canbeclosed = false;
+
+                        NotificationManager.sendNotification(new Notification(AssetLoader.information,"Schliesen abgebrochen","In deinem Projekt "+Var.openprojects.get(i).getFilename()+" wurden\nungspeicherte Änderungen erkannt!"));
+
+                    }else{
+                        CloseProject(Var.openprojects.indexOf(Var.openprojects.get(i)));
+                        i--;
+                    }
+
+                }
+
+                return canbeclosed;
             }
         });
 
@@ -110,10 +134,12 @@ public class ProjectManager {
      */
     public static ProjectVar getActProjectVar() {
         if (Var.openprojects.size() == 0) {
-            throw new IllegalCallerException();
+            System.exit(0);
+            return null;
         } else {
             return Var.openprojects.get(Var.openprojectindex);
         }
+
     }
 
     public static void addProject(ProjectVar projectVar) {
@@ -121,8 +147,10 @@ public class ProjectManager {
         Var.openprojects.add(projectVar);
 
         Tab tab = new Tab();
-        tab.getTabButton().setImage(AssetLoader.img_Tab);
+       // tab.getTabButton().setImage(AssetLoader.img_Tab);
+        tab.getCloseButton().setImage(AssetLoader.close_notification);
         tab.getTabButton().setW(300);
+        tab.getCloseButton().setW(25);
         tab.getTabButton().widthoverText = true;
         tab.getTabButton().setText(Var.openprojects.getLastObject().getFilename());
         tab.setIndex(Var.openprojects.size()-1);
@@ -147,12 +175,18 @@ public class ProjectManager {
 
 
         ClearActOpenProgramm.clear(index);
-        Var.openprojects.remove(index);
         UI.tabbar.getTabbs().remove(index);
-
-        if(Var.openprojectindex==index) {
-            Var.openprojectindex--;
+        for(Tab tab:UI.tabbar.getTabbs()) {
+            tab.setIndex(tab.getIndex()-1);
         }
+
+        if(Var.openprojectindex-1==-1) {
+            System.exit(0);
+            return;
+        }
+        change(   Var.openprojectindex-1);
+        Var.openprojects.remove(index);
+
 
     }
 

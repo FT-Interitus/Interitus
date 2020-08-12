@@ -18,7 +18,7 @@ import de.ft.interitus.utils.ArrayList;
 
 public abstract class ProjectVar {
 
-    public static ArrayList<Integer> Blockwitherrors = new ArrayList<>();
+    public  ArrayList<Integer> Blockwitherrors = new ArrayList<>();
     //Anmerkung ganz wichtig hier alle beim clearen auf null setzen damit alle referenzierungen auf einen Block gelöscht werden damit der Speicherplatz freigegeben werden kann
     public boolean wirezulassung = true;  //Wires können blockiert werden
     public ArrayList<Block> blocks = new ArrayList<Block>(); //Liste aller erstellen Blöcke

@@ -287,6 +287,9 @@ public abstract class Block implements VisibleObjects {
      * @param moving set if the Block is moved by the user
      */
     public void setMoving(boolean moving) {
+        if(moving) {
+            ProjectManager.getActProjectVar().changes = true;
+        }
         this.moving = moving; //Gibt an das der Block gerade in Bewegung ist
     }
 

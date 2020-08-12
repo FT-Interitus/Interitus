@@ -89,6 +89,9 @@ public class DataSaver {
                 tempblockfile.delete();
 
 
+                ProjectManager.getActProjectVar().changes = false;
+
+
             }
 
 

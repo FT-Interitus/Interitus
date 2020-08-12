@@ -71,6 +71,7 @@ public abstract class Wire {
 
             if (movebymouse) {
 
+                ProjectManager.getActProjectVar().changes = true;
 
                 if (Gdx.input.isButtonJustPressed(0)) {
                     int counter = 0;

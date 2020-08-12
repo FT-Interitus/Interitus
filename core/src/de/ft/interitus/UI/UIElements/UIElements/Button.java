@@ -139,13 +139,15 @@ public class Button implements UIElement {
             }
         }
 
-
         if (isVisible()) {
             if (image == null) {
 
-                ProgrammingSpace.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-                ProgrammingSpace.shapeRenderer.roundendrect(this.x, this.y, this.w, this.h, 5);
-                ProgrammingSpace.shapeRenderer.end();
+                if(text==null) {
+
+                    ProgrammingSpace.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+                    ProgrammingSpace.shapeRenderer.roundendrect(this.x, this.y, this.w, this.h, 5);
+                    ProgrammingSpace.shapeRenderer.end();
+                }
             } else if (image_mouseover == null) {
                 UI.UIbatch.begin();
                 if (isMouseover()) {
@@ -208,6 +210,7 @@ public class Button implements UIElement {
                 UI.UIbatch.end();
             }
         }
+
     }
 
     public int getX() {
