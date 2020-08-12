@@ -47,16 +47,7 @@ public class CheckShortcuts {
             shortCutsChecker.get(i).check();
         }
 
-        if (!blockshortcuts) {
 
-            //TODO Changeable in the Settings   <- Deswegen habe ich erstmal nur Datei gemacht
-            if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT) || Gdx.input.isKeyPressed(Input.Keys.CONTROL_RIGHT)) {
-
-
-            }
-
-
-        }
 
 
     }

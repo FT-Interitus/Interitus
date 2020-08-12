@@ -13,14 +13,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-/***
- *
- * @author Felix & Tim
- *
- * TODO eventuell noch als debug den Log von avrdude ausprobieren
- *
- * TODO ausführlich auf MacOS testen
- *
+/**
+ * @deprecated
  */
 
 public class BurnProgramm {
@@ -31,7 +25,7 @@ public class BurnProgramm {
     public static void burn(int arduino, String port, String file) {
 
         String methode = null;
-        if (arduino == Devices.ARDUINO_UNO) { //TODO add platforms
+        if (arduino == Devices.ARDUINO_UNO) {
             platform = "atmega328p";
             methode = "arduino";
         }
@@ -85,7 +79,7 @@ public class BurnProgramm {
 
         port = "/dev/" + port;
         try {
-            Process pr = rt.exec("./libs/arduino/avrdude -Clibs/arduino/avrdude.conf -v -p" + platform + " -c " + methode + " -P" + port + " -b115200 -D -Uflash:w:libs/arduino/" + file + ":i"); //TODO Progress
+            Process pr = rt.exec("./libs/arduino/avrdude -Clibs/arduino/avrdude.conf -v -p" + platform + " -c " + methode + " -P" + port + " -b115200 -D -Uflash:w:libs/arduino/" + file + ":i");
 
 
             BufferedReader input = new BufferedReader(new InputStreamReader(pr.getErrorStream()));
@@ -117,7 +111,7 @@ public class BurnProgramm {
 
         port = "" + port;
         try {
-            Process pr = rt.exec("libs\\arduino\\avrdude.exe -C libs\\arduino\\avrdude.conf -v -p " + platform + " -c" + methode + " -P" + port + " -b115200 -D -Uflash:w:libs\\arduino\\" + file + ":i"); //TODO Progress
+            Process pr = rt.exec("libs\\arduino\\avrdude.exe -C libs\\arduino\\avrdude.conf -v -p " + platform + " -c" + methode + " -P" + port + " -b115200 -D -Uflash:w:libs\\arduino\\" + file + ":i");
 
 
             BufferedReader input = new BufferedReader(new InputStreamReader(pr.getErrorStream()));
@@ -144,7 +138,7 @@ public class BurnProgramm {
 
         port = "/dev/" + port;
         try {
-            Process pr = rt.exec("libs/arduino/avrdudeapple -C libs/arduino/avrdude.conf -v -p " + platform + " -c" + methode + " -P" + port + " -b115200 -D -Uflash:w:libs/arduino/" + file + ":i"); //TODO Progress
+            Process pr = rt.exec("libs/arduino/avrdudeapple -C libs/arduino/avrdude.conf -v -p " + platform + " -c" + methode + " -P" + port + " -b115200 -D -Uflash:w:libs/arduino/" + file + ":i");
 
 
             BufferedReader input = new BufferedReader(new InputStreamReader(pr.getErrorStream()));

@@ -24,6 +24,8 @@ import de.ft.interitus.Block.Block;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.ManualConfig.ManualConfigUI;
+import de.ft.interitus.UI.Notification.Notification;
+import de.ft.interitus.UI.Notification.NotificationManager;
 import de.ft.interitus.UI.UIElements.TabBar.TabBar;
 import de.ft.interitus.UI.UIElements.UIElementBar;
 import de.ft.interitus.UI.UIElements.UIElements.Button;
@@ -304,7 +306,7 @@ public class UI {
 
 
                             for (int i = 0; i < Data.path.size(); i++) {
-                                if (!(new File(Data.path.get(i)).exists())) { //TODO new vermeiden
+                                if (!(new File(Data.path.get(i)).exists())) {
                                     Data.path.remove(i);
                                     Data.filename.remove(i);
                                 }
@@ -493,7 +495,9 @@ public class UI {
                 @Override
                 public void run() {
 
-                    ProjectManager.getActProjectVar().projectType.getCompiler().compileandrun(); //TODO if false there was an error
+                   if(! ProjectManager.getActProjectVar().projectType.getCompiler().compileandrun()) {
+                       NotificationManager.sendNotification(new Notification(AssetLoader.information,"Ein Fehler ist aufgetreten","Während des Compilierens ist\nein Fehler aufgetreten!"));
+                   }
                 }
             };
 

@@ -16,7 +16,7 @@ public class PopupMenue {
     private static final int DISTANCE = 10;
     private static final int WIDTH = 200;
     private final int buttonheight = 20;
-    private final ArrayList<Button> buttons = new ArrayList<>(); //TODO Buttons kontrollieren die Maus kollision nur auf dem Text
+    private final ArrayList<Button> buttons = new ArrayList<>(); //TODO Buttons kontrollieren die Maus kollision nur auf dem Text???
     private final Texture popupButtonimage = new Texture("popupbuttonimage.png");
     int ispressed;
     private int priority;

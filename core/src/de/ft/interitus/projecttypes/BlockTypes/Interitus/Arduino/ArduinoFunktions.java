@@ -168,7 +168,7 @@ private boolean firstrun = true;
                         case "arduino:avr:uno" -> AssetLoader.arduinounoimage;
                         case "arduino:avr:mega" -> AssetLoader.arduinomegaimage;
                         case "arduino:avr:nano" -> AssetLoader.arduinonanoimage;
-                        default -> AssetLoader.connector_offerd; //TODO image questionmark
+                        default -> AssetLoader.arduinounoimage;
                     };
 
                     parameterArrayList.clear();
@@ -240,7 +240,7 @@ private boolean firstrun = true;
         }
 
         builder.add(new VisLabel("Name: ")).expandX().padTop(-(builder.getHeight() / 15 * 14));
-        builder.add(configurationname).expandX().padTop(-(builder.getHeight() / 15 * 14)).padLeft(-70).row(); //TODO height dose'nt work
+        builder.add(configurationname).expandX().padTop(-(builder.getHeight() / 15 * 14)).padLeft(-70).row();
 
         builder.add(selectboard).expandX().padLeft(-100).row();
         builder.add(selectSerialPort).expandX().padLeft(-100).padBottom(-50).padTop(50).row();

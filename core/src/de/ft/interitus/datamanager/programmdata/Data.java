@@ -57,10 +57,8 @@ public class Data {
         tempfolder = new File(System.getProperty("user.home") + "/" + foldername + "/temp"); //Order der Programmdaten
         File recent = new File(System.getProperty("user.home") + "/" + foldername + "/recent.json"); //JSON file in dem die zuletzt geöffneten Projekte gespeichert werden
         File settings = new File(System.getProperty("user.home") + "/" + foldername + "/settings.json"); // JSON file in dem alle Einstellungen gespeichert werden
-        File knowndevices = new File(System.getProperty("user.home") + "/" + foldername + "/devices.json"); //JSON file in dem alle konfigurierten Geräte gespeichert werden
         File userexperience = new File(System.getProperty("user.home") + "/" + foldername + "/experience.json"); //JSON file in dem User Analytics gespeichert werden
         File tastenkombinationen = new File(System.getProperty("user.home") + "/" + foldername + "/tastenkombinationen.json"); //JSON file in dem tastenkombinationen gespeichert werden
-        //File defaulttastenkombinationen = new File(System.getProperty("user.home") + "/"+foldername+"/defaulttastenkombinationen.json"); //JSON file in dem defaulttastenkombinationen gespeichert werden (von user nicht veränderbar)
 
 
         Path path = folder.toPath();
@@ -96,13 +94,7 @@ public class Data {
                 DisplayErrors.error = e;
             }
 
-            try {
-                knowndevices.createNewFile();//Die datei für die bekannten Geräte wird erstellt
 
-            } catch (IOException e) {
-                e.printStackTrace();
-                DisplayErrors.error = e;
-            }
 
             try {
                 userexperience.createNewFile();//Die datei für die bekannten Geräte wird erstellt
@@ -233,7 +225,7 @@ public class Data {
                         Settings.theme = RegisteredThemes.themes.get(0); //Load Dark Mode if Theme is unavailable
                     }
 
-                    Settings.updateurl = obj.getString("updateurl");
+
                     Settings.defaultpfad = obj.getString("defaultpath");
                     Settings.Vsync = obj.getBoolean("vsync");
                     Settings.limitfps = obj.getInt("limitfps");
@@ -251,38 +243,7 @@ public class Data {
             }
 
 
-            if (!knowndevices.exists()) { //siehe recent
-                try {
-                    Programm.logger.config("knowndevices not found");
-                    knowndevices.createNewFile();
-                    Gdx.files.absolute(knowndevices.getAbsolutePath()).writeString("{}", false); //siehe recent
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } else {
 
-                try {
-                    FileHandle se = Gdx.files.absolute(System.getProperty("user.home") + "/" + foldername + "/devices.json");
-                    if (se.readString() == "") {
-                        se.writeString("{}", false);
-                        return;
-                    }
-                    JSONObject obj = new JSONObject(se.readString());
-
-                    //Die Geräte werden geladen und für jedes eine Verbindungsspeicher Instanze erstellt
-
-                    //////////// *.* = obj.getInt();/////////////
-
-                    //TODO device laden mit attributen
-
-                } catch (JSONException e) {
-
-                } catch (Exception e) {
-
-                }
-
-
-            }
 
 
             if (!userexperience.exists()) { //siehe recent
@@ -310,9 +271,9 @@ public class Data {
                     ExperienceVar.settingstimeinhoures = obj.getDouble("settingstime");
                     ExperienceVar.setuptimeinhoures = obj.getDouble("setuptime");
                     ExperienceVar.starttimes = obj.getInt("starttimes");
-                    //////////// *.* = obj.getInt();/////////////
 
-                    //TODO device laden mit attributen
+
+
 
                 } catch (JSONException e) {
 
@@ -428,7 +389,6 @@ public class Data {
         FileHandle settings = Gdx.files.absolute(System.getProperty("user.home") + "/" + foldername + "/settings.json"); //Lade Datei
         JSONObject settings_obj = new JSONObject(settings); //Einstellungen werden je nach Daten Typ abgespeichert
         settings_obj.put("theme", Settings.theme.getName());
-        settings_obj.put("updateurl", Settings.updateurl);
         settings_obj.put("defaultpath", Settings.defaultpfad);
         settings_obj.put("vsync", Settings.Vsync);
         settings_obj.put("limitfps", Settings.limitfps);
@@ -438,17 +398,9 @@ public class Data {
         //hier weitere Einstellugen speichern
         settings.writeString(settings_obj.toString(), false); //Datei wird geschrieben
 
-        ////////////////////////////////////////////////////////////////////
 
-        FileHandle knowndevices = Gdx.files.absolute(System.getProperty("user.home") + "/" + foldername + "/devices.json");//Lade Datei
-        JSONObject knowndevices_obj = new JSONObject(settings);
 
-        ///  knowndevices_obj.put("",Variable);///
 
-        //Jede VerbindungsSpeicher Instance wird ausgelsen und abgespeichert
-
-        //TODO attribute laden
-        knowndevices.writeString(knowndevices_obj.toString(), false); //Datei wird geschrieben
 
         ///////////////////////////////////////////////////////////////
         FileHandle userexperience = Gdx.files.absolute(System.getProperty("user.home") + "/" + foldername + "/experience.json"); //Lade Datei

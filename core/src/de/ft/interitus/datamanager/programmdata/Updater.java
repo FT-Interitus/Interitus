@@ -20,13 +20,13 @@ public class Updater {
 
     public static void check(final boolean showincaseoffalse) {
 
-        //Noch nicht commited da hier noch viele änderungen passieren
+
 
         Thread checkupdate;
         checkupdate = new Thread() {
 
 
-            //TODO Hier caching problem
+
             @Override
             public void run() {
                 try {
@@ -35,7 +35,7 @@ public class Updater {
                     InputStreamReader isr = null;
                     URL url = null;
 
-                    String urlString = Settings.updateurl;
+                    String urlString = ""; //TODO Update String
 
                     try {
                         url = new URL(urlString);

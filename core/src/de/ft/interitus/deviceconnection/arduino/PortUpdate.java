@@ -9,12 +9,15 @@ import de.ft.interitus.UI.setup.steps.ArduinoSteps.Step3;
 
 import java.util.Timer;
 import java.util.TimerTask;
-
+/***
+ * @deprecated
+ */
 public class PortUpdate {
 
 
     public static Thread thread;
     private static boolean found;
+
 
     public static void UpdateConnectionWindowPortsList() {
 

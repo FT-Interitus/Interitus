@@ -100,9 +100,9 @@ public class Programm extends Game {
             CheckShortcuts.loadArrayList();//bevor CheckShortcuts.loatArraylist muss die ui schon die menuebar eleente erstellt haben!!!!!!!!!
         }
 
-        Thread seachnetwork = new Thread(NetworkScan::get); //TODO doenst work on Mac
-        Programm.logger.config("Triggerd Network Scan");
-        seachnetwork.start();
+
+
+
         if (!Var.savemode) {
             Data.init();
         } else {

@@ -15,13 +15,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /***
- *          !Vermutung!
  *
- * Bei Lego gibt es Definition von String, Int,...
- *
- * Bei String ist es 0x84 am Anfang
- * Bei Int ist es 0x81 am Anfang
- *
+ * todo if this code is finish it has to be moved to Ev3-Funktions
  *
  */
 

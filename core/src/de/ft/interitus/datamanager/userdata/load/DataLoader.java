@@ -59,7 +59,7 @@ public class DataLoader {
 
                     if (temptype == null) {
 
-                        Dialogs.showErrorDialog(UI.stage, "Das Plugin mit dem Namen \""+settings.getString("pl_name")+"\", das mit diesem Projekt verbunden ist, ist nicht installiert."); //TODO more Informations (link to plugin)
+                        Dialogs.showErrorDialog(UI.stage, "Das Plugin mit dem Namen \""+settings.getString("pl_name")+"\", das mit diesem Projekt verbunden ist, ist nicht installiert.");
                         Var.isloading = false;
                         this.interrupt();
                         return;

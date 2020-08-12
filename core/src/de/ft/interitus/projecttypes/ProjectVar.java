@@ -30,7 +30,7 @@ public abstract class ProjectVar {
     public ArrayList<WireNode> visibleWireNodes = new ArrayList<>(); //Liste aller sichtbaren Nodes
     public Vector2 cam_pos = new Vector2();
     public float zoom = 1;
-    //TODO Für multi select hier eventuel ArrayList
+    //TODO Für multi select hier eventuell ArrayList
     public Block markedblock = null; // Welcher Block ist makiert ?
     public Vector2 unterschiedsave = new Vector2(); //Unterschied zwischen Blöckem die scih überllappen
     public boolean ismoving = false; //Wird ein Block bewegt

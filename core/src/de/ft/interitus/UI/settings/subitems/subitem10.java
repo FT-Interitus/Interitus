@@ -20,11 +20,12 @@ public class subitem10 {
     static VisTextButton export = new VisTextButton("Daten exportieren");
 
     public static void add(VisTable builder) {
-        builder.add(new VisLabel("Daten, die sich im Laufe der Zeit generieren.\nDarunter zählen zuletzt geöffnete Projekte, vorgenommene Einstellungen\nund konfigurierte Geräte sowie Aktivitäts-Daten.\nDiese belegen zurzeit " + Data.getprogrammfoldersize() + " Bytes an Festplattenspeicher.")).padLeft(25).padTop(-450);
+        builder.add(new VisLabel("Daten, die sich im Laufe der Zeit generieren.\nDarunter zählen zuletzt geöffnete Projekte, vorgenommene Einstellungen\nund Plugins sowie Aktivitäts-Daten.\nDiese belegen zurzeit " + Data.getprogrammfoldersize() + " Bytes an Festplattenspeicher.")).padLeft(25).padTop(-450);
 
 
         builder.row();
-        export.setDisabled(true);
+        export.setDisabled(true); //TODO include
+        delete.setDisabled(true);
 
         builder.add(export).padLeft(-250);
         builder.add(delete).padLeft(-250);

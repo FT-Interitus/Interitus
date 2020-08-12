@@ -50,6 +50,6 @@ public class subitem7 {
             }
         });
 
-        //TODO hier toggle für tipps
+
     }
 }

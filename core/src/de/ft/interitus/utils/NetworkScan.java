@@ -13,6 +13,9 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+/**
+ *@deprecated todo Platform Specific Code!!!!
+ */
 public class NetworkScan {
     public static ArrayList<InetAddress> device = new ArrayList<>();
 
@@ -23,7 +26,7 @@ public class NetworkScan {
         try {
 
             try (final DatagramSocket socket = new DatagramSocket()) {
-                socket.connect(InetAddress.getByName("8.8.8.8"), 10002); //TODO port kann belegt sein
+                socket.connect(InetAddress.getByName("8.8.8.8"), 10002);
                 String ip = socket.getLocalAddress().getHostAddress();
 
 
@@ -39,7 +42,7 @@ public class NetworkScan {
                 } catch (UnknownHostException e) {
                 }
                 for (int i = 0; i < 255; i++) {
-                    InetAddress testdevice = InetAddress.getByName("192.168." + ip + "." + i); //TODO doesn't work on MAC OS
+                    InetAddress testdevice = InetAddress.getByName("192.168." + ip + "." + i);
 
                     if (testdevice.isReachable(60)) {
                         device.add(testdevice);
@@ -63,7 +66,5 @@ public class NetworkScan {
         }
     }
 
-    public static void scan() {
 
-    }
 }

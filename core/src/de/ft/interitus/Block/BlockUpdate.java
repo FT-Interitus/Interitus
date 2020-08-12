@@ -111,12 +111,12 @@ public abstract class BlockUpdate extends Thread {
 
                         toggle = CheckKollision.checkmousewithblock(block); //Wird der Block von der Mouse gehovert?
 
-                        //TODO
-                        //TODO      Kommentierung fortsetzen (Abgebrochen da hier noch sehr viele Änderungen passieren werden)
-                        //TODO
+
+                        //TODO      Kommentierung fortsetzen
 
 
-                        if (block.getBlocktype().canhasleftconnector() && !isIsconnectorclicked() && ProjectManager.getActProjectVar().showleftdocker && CheckKollision.object(block.getX_entrance(), block.getY_entrance(), block.getW_entrance(), block.getH_entrance(), (int) ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1) && Gdx.input.isButtonJustPressed(0) && block.getLeft() == null) { //TODO Durch das Just pressed kann es sein das es manchmal verpasst wird dieses Event auszuführen
+
+                        if (block.getBlocktype().canhasleftconnector() && !isIsconnectorclicked() && ProjectManager.getActProjectVar().showleftdocker && CheckKollision.object(block.getX_entrance(), block.getY_entrance(), block.getW_entrance(), block.getH_entrance(), (int) ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1) && Gdx.input.isButtonJustPressed(0) && block.getLeft() == null) {
                             ProjectManager.getActProjectVar().showleftdocker = false;
                             ProjectManager.getActProjectVar().movingwires.setMovebymouse(false);
                             ProjectManager.getActProjectVar().movingwires.setRight_connection(block);
@@ -401,7 +401,7 @@ public abstract class BlockUpdate extends Thread {
                                 try {
                                     if (ProjectManager.getActProjectVar().uberlapptmitmarkedblock.get(i).getBlockMarkedblockuberlappungsflache() > biggestvalue2) {
 
-                                        biggestvalue2 = ProjectManager.getActProjectVar().uberlapptmitmarkedblock.get(i).getBlockMarkedblockuberlappungsflache(); //TODO h
+                                        biggestvalue2 = ProjectManager.getActProjectVar().uberlapptmitmarkedblock.get(i).getBlockMarkedblockuberlappungsflache();
                                         biggestindex2 = i;
 
                                     }
@@ -472,7 +472,7 @@ public abstract class BlockUpdate extends Thread {
 
                         }
 
-                        if (block.seted == false && ProjectManager.getActProjectVar().biggestblock == block && !Gdx.input.isButtonPressed(0)) { //TODO flackern wegmachen!
+                        if (block.seted == false && ProjectManager.getActProjectVar().biggestblock == block && !Gdx.input.isButtonPressed(0)) {
 
                             block.seted = true;
                             geschoben = false;

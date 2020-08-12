@@ -95,50 +95,7 @@ public class MenuBar {
 
                 if (!UserInteractDataManagerDialog.isopenopen()) {
                     if (!Var.isclearing) {
-                        if (ProjectManager.getActProjectVar().changes) {
-                            String[] möglichkeiten = {"Verwerfen", "Speichern", "Abbrechen"};
-
-
-                            final int nothing = 1;
-                            final int everything = 2;
-                            final int something = 3;
-
-                            //confirmdialog may return result of any type, here we are just using ints
-                            Dialogs.showConfirmDialog(UI.stage, "Ungespeicherte Änderungen", "\nWenn du eine neue Datei öffnest werden womögich Änderungen verworfen.\n",
-                                    möglichkeiten, new Integer[]{nothing, everything, something},
-                                    new ConfirmDialogListener<Integer>() {
-                                        @Override
-                                        public void result(Integer result) {
-                                            if (result == nothing) {
-
-                                                UserInteractDataManagerDialog.open();
-                                            }
-
-                                            if (result == everything) {
-                                                if (ProjectManager.getActProjectVar().vcs == VCS.NONE) {
-                                                    if (ProjectManager.getActProjectVar().path != "") {
-                                                        FileHandle handle = Gdx.files.external(ProjectManager.getActProjectVar().path);
-                                                        DataSaver.save(handle);
-                                                        //DataManager.saved();
-                                                    } else {
-                                                        UserInteractDataManagerDialog.saveas();
-                                                    }
-                                                } else if (ProjectManager.getActProjectVar().vcs == VCS.ITEV) {
-
-                                                }
-                                            }
-
-                                            if (result == something) {
-
-
-                                            }
-                                        }
-                                    });
-
-
-                        } else {
-                            UserInteractDataManagerDialog.open();
-                        }
+                        UserInteractDataManagerDialog.open();
                     } else {
                         Dialogs.showOKDialog(UI.stage, "Bitte Warten", "Das Programm ist gerade mit deinem zuletzt Geöffnetem Programm beschäftigt. Bitte warte noch bis es fertig ist");
                     }
@@ -326,7 +283,7 @@ public class MenuBar {
         }).setShortcut("Strg+V"));
 
 
-        helpMenu.addItem(menuItem_update);
+      //  helpMenu.addItem(menuItem_update); todo if update is supported
         helpMenu.addItem(menuItem_showruntimeinfo);
         helpMenu.addItem(menuItem_clearram);
         helpMenu.addItem(menuItem_updateproject);
@@ -361,54 +318,8 @@ public class MenuBar {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
 
-                    if (ProjectManager.getActProjectVar().changes) {
-
-                        String[] möglichkeiten = {"Verwerfen", "Speichern", "Abbrechen"};
-                        final int nothing = 1;
-                        final int everything = 2;
-                        final int something = 3;
-
-                        Dialogs.showConfirmDialog(UI.stage, "Ungespeicherte Änderungen", "\nWenn du eine neue Datei öffnest werden womögich Änderungen verworfen.\n",
-                                möglichkeiten, new Integer[]{nothing, everything, something},
-                                new ConfirmDialogListener<Integer>() {
-                                    @Override
-                                    public void result(Integer result) {
-                                        if (result == nothing) {
-
-                                            //   DataManager.saved();
-
-                                            FileHandle handle = Gdx.files.absolute(Data.path.get(finalI));
-                                            DataLoader.load(handle, Data.filename.get(finalI), Data.path.get(finalI));
-
-                                        }
-
-                                        if (result == everything) {
-                                            if (ProjectManager.getActProjectVar().path != "") {
-                                                FileHandle handle = Gdx.files.external(ProjectManager.getActProjectVar().path);
-                                                DataSaver.save(handle);
-                                                //       DataManager.saved();
-                                            } else {
-                                                UserInteractDataManagerDialog.saveas();
-                                            }
-                                        }
-
-                                        if (result == something) {
-
-
-                                        }
-                                    }
-                                });
-
-
-                    } else {
-
-                        //ClearActOpenProgramm.clear();
-                        // DataManager.saved();
-
-
-                        FileHandle handle = Gdx.files.absolute(Data.path.get(finalI));
-                        DataLoader.load(handle, Data.filename.get(finalI), Data.path.get(finalI));
-                    }
+                    FileHandle handle = Gdx.files.absolute(Data.path.get(finalI));
+                    DataLoader.load(handle, Data.filename.get(finalI), Data.path.get(finalI));
 
 
                 }

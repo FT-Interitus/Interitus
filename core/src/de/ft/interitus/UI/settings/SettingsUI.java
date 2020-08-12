@@ -34,7 +34,7 @@ import java.util.TimerTask;
 
 public class SettingsUI extends VisWindow {
 
-    public static VisTextField updateurlfield;
+
     public static RowLayout rowLayout;
 
     public static TestBuilder testBuilder;
@@ -133,17 +133,8 @@ public class SettingsUI extends VisWindow {
             // setScale(200,200);
 
 
-            updateurlfield = new VisTextField(Settings.updateurl);
-            updateurlfield.setDisabled(true);
 
 
-            updateurlfield.addListener(new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor) {
-
-                    Settings.updateurl = updateurlfield.getText();
-                }
-            });
 
 
             ActorLayout layout = new ActorLayout() {
@@ -164,57 +155,8 @@ public class SettingsUI extends VisWindow {
 
             builder.setTablePadding(new Padding(20, 30, 20, 30));
 
-            final VisCheckBox enabledangeroussettings;
-            enabledangeroussettings = new VisCheckBox("Freischalten");
-            enabledangeroussettings.setChecked(false);
-            enabledangeroussettings.addListener(new ChangeListener() {
-                @Override
-                public void changed(ChangeEvent event, Actor actor) {
-
-                    if (!enabledangeroussettings.isChecked()) {
-
-                        updateurlfield.setDisabled(true);
-                    } else {
-
-                        if (accepteddangerous) {
-                            enabledangeroussettings.setChecked(true);
-                            updateurlfield.setDisabled(false);
-                        } else {
-                            String[] möglichkeiten = {"Trotzdem fortfahren", "Abbrechen"};
 
 
-                            final int nothing = 1;
-                            final int everything = 2;
-
-
-                            //confirmdialog may return result of any type, here we are just using ints
-                            Dialogs.showConfirmDialog(UI.stage, "Kritische Einstellungen", "\nWenn du die Update-URL falsch änderst, kann es passieren, das das Programm sich nicht mehr updatet.\n Änderen musst du in der Regel nur etwas, falls du die Anweisung per Mail bekommen hast.\n",
-                                    möglichkeiten, new Integer[]{nothing, everything},
-                                    new ConfirmDialogListener<Integer>() {
-                                        @Override
-                                        public void result(Integer result) {
-                                            if (result == nothing) {
-
-
-                                                accepteddangerous = true;
-                                                updateurlfield.setDisabled(false);
-
-                                            }
-
-                                            if (result == everything) {
-
-                                                enabledangeroussettings.setChecked(false);
-
-                                            }
-
-
-                                        }
-                                    });
-                        }
-                    }
-
-                }
-            });
 
             final VisTree tree = new VisTree();
             TestNode item1 = new TestNode(new VisLabel(" Aussehen "), 0);

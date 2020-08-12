@@ -47,9 +47,9 @@ public class SSHConnection {
 
     }
 
-    public static boolean checkconnection(String ipaddress, String username, String password) {
+    public static boolean checkconnection(String ipaddress, String username, String password,int port) {
         try {
-            testconnectionsession = testconnection.getSession(username, ipaddress, 22); //TODO port auswählbar
+            testconnectionsession = testconnection.getSession(username, ipaddress, port);
             testconnectionsession.setConfig("StrictHostKeyChecking", "no");
             testconnectionsession.setPassword(password);
             testconnectionsession.connect(1000);
@@ -61,9 +61,11 @@ public class SSHConnection {
         }
     }
 
-    public static boolean update(String ipaddress, String username, String password) { //TODO Retrun int from Exit state
+    public static int update(String ipaddress, String username, String password,int port) {
+        int exitstate = -1;
         try {
-            updatesession = testconnection.getSession(username, ipaddress, 22); //TODO port auswählbar
+
+            updatesession = testconnection.getSession(username, ipaddress, port);
             updatesession.setConfig("StrictHostKeyChecking", "no");
             updatesession.setPassword(password);
             updatesession.connect(2000);
@@ -86,6 +88,7 @@ public class SSHConnection {
                 if (channel.isClosed()) {
                     if (in.available() > 0) continue;
                     Programm.logger.config("exit-status: " + channel.getExitStatus());
+                    exitstate = channel.getExitStatus();
                     break;
                 }
                 try {
@@ -97,17 +100,17 @@ public class SSHConnection {
             testconnectionsession.disconnect();
 
 
-            return true;
+            return exitstate;
         } catch (Exception e) {
             DisplayErrors.error = e;
             e.printStackTrace();
-            return false;
+            return exitstate;
         }
     }
 
-    public static boolean installpython(String ipaddress, String username, String password) {
+    public static boolean installpython(String ipaddress, String username, String password,int port) {
         try {
-            updatesession = testconnection.getSession(username, ipaddress, 22); //TODO port auswählbar
+            updatesession = testconnection.getSession(username, ipaddress, port);
             updatesession.setConfig("StrictHostKeyChecking", "no");
             updatesession.setPassword(password);
             updatesession.connect(2000);

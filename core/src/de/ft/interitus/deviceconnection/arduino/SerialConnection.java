@@ -18,6 +18,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 
+/**
+ * @deprecated probably required when using a serial monitor
+ */
 
 public class SerialConnection {
     public static boolean isRunning = false;
@@ -218,10 +221,10 @@ public class SerialConnection {
             while (System.currentTimeMillis() < save) {
 
                 //if (empfangen(checkport).contains("defaultID")) {  //fehler
-                ///////////////////////////////////////////TODO hier muss dem arduino noch eine neue ID zugewiesen werden
+                ///////////////////////////////////////////
                 //    found = true;
                 // }
-                /////////////////////////////////////////////TODO hier muss noch überprüft werden ob der Arduino schon bekannt ist (schon eine richtige ID hat)
+                /////////////////////////////////////////////
 
 
             }

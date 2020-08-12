@@ -385,7 +385,7 @@ public class subitem17 {
 
 
             builder.add(scrollPane).spaceTop(8).growX().fillX().width(525).height(500).padTop(-60).padBottom(-60).row();
-            //  scrollPane.setScrollPercentY(0.5f); //TODO hier geht etwas nicht
+
         } else {
             builder.add(new VisLabel("Das Plugin Sub-System läuft nicht!")).expandX().fillY();
         }

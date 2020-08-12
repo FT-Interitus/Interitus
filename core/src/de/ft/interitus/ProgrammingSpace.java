@@ -65,7 +65,7 @@ public class ProgrammingSpace extends ScreenAdapter {
     public ProgrammingSpace() {
 
 
-        //TODO Debug hier wird immer ein Arduino Project erstellt
+
 
 
         pressedKeys = new PressedKeys();
@@ -82,7 +82,7 @@ public class ProgrammingSpace extends ScreenAdapter {
         cam.position.set(Gdx.graphics.getWidth() / 2f + 50, Gdx.graphics.getHeight() / 2f, 0);
         UI.UIcam.position.set(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f, 0);
 
-
+//TODO Debug hier wird immer ein Arduino Project erstellt
         ProjectManager.addProject(ProjectTypesVar.projectTypes.get(0).init());
         ProjectManager.change(0);
 
