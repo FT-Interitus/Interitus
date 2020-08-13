@@ -53,6 +53,8 @@ public class Programm extends Game {
     public void create() {
 
 
+
+
         LoggerInit.init();
 
         DebugPrinter.detect();

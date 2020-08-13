@@ -6,89 +6,166 @@
 package de.ft.interitus.datamanager.programmdata;
 
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
-import de.ft.interitus.Settings;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.Var;
+import de.ft.interitus.utils.DownloadFile;
+import de.ft.interitus.utils.OSChecker;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
-import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
+import java.io.InputStream;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 public class Updater {
 
-    public static void check(final boolean showincaseoffalse) {
+    public static void check(boolean userrequest) {
 
+        try {
+            String releases = "";
 
+            try {
+                releases = DownloadFile.downloadFile("https://api.github.com/repos/ft-interitus/interitus/releases"); //TODO replace with Interitus
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-        Thread checkupdate;
-        checkupdate = new Thread() {
+            JSONArray jsonArray = new JSONArray(releases);
+            JSONObject jsonObject = null;
+            if (Var.betaupdates) {
 
+                jsonObject = jsonArray.getJSONObject(0);
 
+            } else {
+                int counter = 0;
 
-            @Override
-            public void run() {
-                try {
-
-                    BufferedReader br = null;
-                    InputStreamReader isr = null;
-                    URL url = null;
-
-                    String urlString = ""; //TODO Update String
-
+                while (true) {
                     try {
-                        url = new URL(urlString);
-                    } catch (MalformedURLException e) {
-                        if (showincaseoffalse) {
-
-                            Dialogs.showErrorDialog(UI.stage, "Der Update-Server reagiert leider nicht oder du hast einfach keine Internetverbindung");
-                        }
+                        jsonArray.getJSONObject(counter);
+                    } catch (Exception e) {
+                        break;
                     }
 
+                    counter++;
+                }
 
+
+                for (int i = 0; i < counter + 1; i++) {
+
+                    if (!jsonArray.getJSONObject(i).getBoolean("prerelease")) {
+
+                        jsonObject = jsonArray.getJSONObject(i);
+                        break;
+                    }
+                }
+
+            }
+
+            if (!jsonObject.getString("tag_name").contentEquals(Var.PROGRAMM_VERSION)) {
+
+                if (!new File(System.getProperty("user.dir") + "").canWrite()) {
+                    if (userrequest) {
+                        Dialogs.showOKDialog(UI.stage, "Update fehlgeschlagen", "\nStarte Interitus mit erweiterten bzw administrativen Rechten!\nUnd versuche es erneut...\n");
+                    }
+                } else {
+                    InputStream in = null;
                     try {
+                        in = new URL("https://github.com/FT-Interitus/interitus/releases/download/" + jsonObject.getString("tag_name") + "/interitus.jar").openStream();
+                        Files.copy(in, Paths.get(System.getProperty("user.dir") + "/interitus.update"), StandardCopyOption.REPLACE_EXISTING);
 
-                        isr = new InputStreamReader(url.openStream());
+                        String java = "";
+                        if (OSChecker.isWindows()) {
+
+                            java = System.getProperty("java.home") + "/bin/java.exe";
+
+                        } else if (OSChecker.isUnix()) {
+                            java = System.getProperty("java.home") + "/bin/java";
+
+                        } else if (OSChecker.isMac()) {
+
+                            java = System.getProperty("java.home") + "/bin/java";
+
+                        }
+
+
+                        try {
+                            Process proc = Runtime.getRuntime().exec(java + " -jar updater.jar -u -r");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        System.exit(0);
 
 
                     } catch (IOException e) {
-                        if (showincaseoffalse) {
-                            Dialogs.showErrorDialog(UI.stage, "Der Update-Server reagiert leider nicht oder du hast einfach keine Internetverbindung");
-                        }
+                        Dialogs.showOKDialog(UI.stage, "Update fehlgeschlagen", "\nEin unbekannter Fehler ist aufgetreten!\nVersuche es erneut...\n");
                     }
 
-                    br = new BufferedReader(isr);
+                }
 
 
-                    try {
-                        double version_get = Double.parseDouble(br.readLine());
-                        System.out.println(version_get);
-                        if (version_get == Var.PROGRAMM_VERSION_ID) {
-                            if (showincaseoffalse) {
-                                Dialogs.showOKDialog(UI.stage, "Kein Update", "Du bist auf dem neusten Stand");
-                            }
+            } else {
+                if (userrequest) {
+                    Dialogs.showOKDialog(UI.stage, "Update", "\nZurzeit kein Update verfügbar!\n");
 
-                        } else if (version_get < Var.PROGRAMM_VERSION_ID) {
-                            if (showincaseoffalse) {
-                                Dialogs.showErrorDialog(UI.stage, "Bitte Kontaktiere die Herausgeber dieser Software! Hier liegt ein Fehler vor der alle Nutzer betrifft!");
-                            }
-                        } else if (version_get > Var.PROGRAMM_VERSION_ID) {
-                            Dialogs.showOKDialog(UI.stage, "Update", "Hier liegt ein Update vor!"); //TODO hier update vorgang einleiten
-                        }
-                    } catch (IOException e) {
-                        if (showincaseoffalse) {
-                            Dialogs.showErrorDialog(UI.stage, "Der Update-Server reagiert leider nicht oder du hast einfach keine Internetverbindung");
-                        }
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace(); //for debug to find errors
                 }
             }
-        };
 
-        checkupdate.start();
+        } catch (Exception e) {
 
 
+        }
+    }
+
+    public static boolean isupdateavailable() {
+        try {
+            String releases = "";
+
+            try {
+                releases = DownloadFile.downloadFile("https://api.github.com/repos/ft-interitus/interitus/releases");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            JSONArray jsonArray = new JSONArray(releases);
+            JSONObject jsonObject = null;
+            if (Var.betaupdates) {
+
+                jsonObject = jsonArray.getJSONObject(0);
+
+            } else {
+                int counter = 0;
+
+                while (true) {
+                    try {
+                        jsonArray.getJSONObject(counter);
+                    } catch (Exception e) {
+                        break;
+                    }
+
+                    counter++;
+                }
+
+
+                for (int i = 0; i < counter + 1; i++) {
+
+                    if (!jsonArray.getJSONObject(i).getBoolean("prerelease")) {
+
+                        jsonObject = jsonArray.getJSONObject(i);
+                        break;
+                    }
+                }
+
+            }
+
+
+            return !jsonObject.getString("tag_name").contentEquals(Var.PROGRAMM_VERSION);
+
+        }catch (Exception e) {
+            return false;
+        }
     }
 }

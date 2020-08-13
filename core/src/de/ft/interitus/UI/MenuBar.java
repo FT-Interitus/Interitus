@@ -171,7 +171,7 @@ public class MenuBar {
                 final int no = 2;
 
 
-                Dialogs.showConfirmDialog(UI.stage, "Auf Updates prüfen", "\nSicher das du nach Updates prüfen willst?\n",
+                Dialogs.showConfirmDialog(UI.stage, "Auf Updates prüfen", "\nSicher das du nach Updates prüfen willst?\nAlle Änderungen in geöffneten Programmen werden dabei verworfen!\n",
                         möglichkeiten, new Integer[]{yes, no},
                         new ConfirmDialogListener<Integer>() {
                             @Override
@@ -283,7 +283,7 @@ public class MenuBar {
         }).setShortcut("Strg+V"));
 
 
-      //  helpMenu.addItem(menuItem_update); todo if update is supported
+       helpMenu.addItem(menuItem_update);
         helpMenu.addItem(menuItem_showruntimeinfo);
         helpMenu.addItem(menuItem_clearram);
         helpMenu.addItem(menuItem_updateproject);

@@ -36,6 +36,8 @@ public class DesktopLauncher {
 
 	public static void main (String[] arg) throws FileNotFoundException {
 
+
+
 		Var.programmarguments.addAll(Arrays.asList(arg));
 
 		CheckArguments.check();
@@ -49,7 +51,7 @@ public class DesktopLauncher {
 
 			config.setWindowedMode(Var.w,Var.h);
 
-			config.setWindowIcon(Files.FileType.Internal, "Icon/iteritus.png");
+			config.setWindowIcon(Files.FileType.Internal, "Icon/interitus.png");
 			config.setBackBufferConfig(8,8,8,8,16,0,4);
 			config.setWindowSizeLimits(1000,500,-1,-1);
 			config.disableAudio(true);

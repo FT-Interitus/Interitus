@@ -13,7 +13,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.ft.interitus.Block.Block;
@@ -28,16 +27,17 @@ import de.ft.interitus.UI.settings.subitems.subitem17;
 import de.ft.interitus.UI.setup.SetupWindow;
 import de.ft.interitus.UI.shortcut.shortcuts.BlockShortcuts;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
+import de.ft.interitus.datamanager.programmdata.Updater;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.plugin.Native;
 import de.ft.interitus.plugin.Plugin;
-import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.Wait;
 import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.PositionSaver;
 import de.ft.interitus.utils.ShapeRenderer;
 
 import java.awt.*;
+import java.io.File;
 
 
 public class ProgrammingSpace extends ScreenAdapter {
@@ -60,12 +60,7 @@ public class ProgrammingSpace extends ScreenAdapter {
     public static Plugin nativ = new Native();
 
 
-
-
     public ProgrammingSpace() {
-
-
-
 
 
         pressedKeys = new PressedKeys();
@@ -99,16 +94,20 @@ public class ProgrammingSpace extends ScreenAdapter {
         ProjectManager.getActProjectVar().setFilename("New File");
 
 
-
         ThreadManager.init();
 
 
-        //  SerialConnection.searchArduino();
-
-        //   PortUpdate.UpdateConnectionWindowPortsList();
 
         System.gc(); //Clean RAM after Loading
 
+
+        if (Updater.isupdateavailable()) {
+            if (!new File(System.getProperty("user.dir") + "").canWrite()) {
+                NotificationManager.sendNotification(new Notification(AssetLoader.information, "Update verfügbar", "Ein Update ist verfügbar!\nBitte starte Interitus mit Admin-Rechten!"));
+            }else{
+                Updater.check(false);
+            }
+        }
 
 
 
@@ -278,9 +277,9 @@ public class ProgrammingSpace extends ScreenAdapter {
 
         NotificationManager.draw();
 
-if(Gdx.input.isKeyJustPressed(Input.Keys.C)) {
-    NotificationManager.sendNotification(new Notification(AssetLoader.information,"Wichtige Information","\nEs steht kein Update bereit!"));
-}
+        if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
+            NotificationManager.sendNotification(new Notification(AssetLoader.information, "Wichtige Information", "\nEs steht kein Update bereit!"));
+        }
 
         PopupHandler.drawPopUp();
 
@@ -303,7 +302,6 @@ if(Gdx.input.isKeyJustPressed(Input.Keys.C)) {
     @Override
     public void resize(int width, int height) {
         super.resize(width, height);
-
 
 
         try {

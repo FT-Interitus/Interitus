@@ -48,6 +48,10 @@ public class CheckArguments {
         if(Var.programmarguments.indexOf("-ni")!=-1) {
             Var.nointernetconnection = true;
         }
+        if(Var.programmarguments.indexOf("-up")!=-1) {
+            Var.showreleasenotes = true;
+        }
+
 
     }
 }

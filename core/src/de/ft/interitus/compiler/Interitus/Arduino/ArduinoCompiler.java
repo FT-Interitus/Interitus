@@ -16,6 +16,7 @@ import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.ArrayList;
+import de.ft.interitus.utils.OSChecker;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,7 +26,7 @@ import java.util.concurrent.*;
 
 public class ArduinoCompiler implements Compiler {
     //TODO APPLE SUPPORT
-    private static final String OS = System.getProperty("os.name").toLowerCase();
+
     private static final ArrayList<String> errorstring = new ArrayList<>();
     private static Notification notification;
     private static boolean uploaderror = false;
@@ -67,24 +68,7 @@ public class ArduinoCompiler implements Compiler {
         return Programm;
     }
 
-    //OS tesster
-    private static boolean isWindows() {
 
-        return (OS.indexOf("win") >= 0);
-
-    }
-
-    private static boolean isMac() {
-
-        return (OS.indexOf("mac") >= 0);
-
-    }
-
-    private static boolean isUnix() {
-
-        return (OS.indexOf("nix") >= 0 || OS.indexOf("nux") >= 0 || OS.indexOf("aix") > 0);
-
-    }
 
     private static String runcommand(String command, boolean geterror) {
 
@@ -188,13 +172,13 @@ public class ArduinoCompiler implements Compiler {
     public String getCompilerVersion() {
 
         String commandgetVersion = "";
-        if (isWindows()) {
+        if (OSChecker.isWindows()) {
             commandgetVersion = "libs\\arduino\\cli\\Windows\\arduino-cli.exe  version --format json";
 
 
-        } else if (isMac()) {
+        } else if (OSChecker.isMac()) {
 
-        } else if (isUnix()) {
+        } else if (OSChecker.isUnix()) {
 
             commandgetVersion = "./libs/arduino/cli/linux/arduino-cli version --format json ";
         } else {
@@ -245,14 +229,14 @@ public class ArduinoCompiler implements Compiler {
         String compile_to_hex = "";
         String upload = "";
 
-        if (isWindows()) {
+        if (OSChecker.isWindows()) {
             compile_to_hex = "libs\\arduino\\cli\\Windows\\arduino-cli.exe compile -b " + device.getJSONArray("boards").getJSONObject(0).getString("FQBN") + " " + (System.getProperty("user.home") + "/" + Data.foldername + "/temp/" + folder + "/" + filename).replace("/", "\\");
 
             upload = "libs\\arduino\\cli\\Windows\\arduino-cli.exe upload -b " + device.getJSONArray("boards").getJSONObject(0).getString("FQBN") + " " + (System.getProperty("user.home") + "/" + Data.foldername + "/temp/" + folder + "/").replace("/", "\\") + " -p " + device.getString("address") + " -v";
 
-        } else if (isMac()) {
+        } else if (OSChecker.isMac()) {
 
-        } else if (isUnix()) {
+        } else if (OSChecker.isUnix()) {
 
             compile_to_hex = "./libs/arduino/cli/linux/arduino-cli compile -b " + device.getJSONArray("boards").getJSONObject(0).getString("FQBN") + " " + System.getProperty("user.home") + "/" + Data.foldername + "/temp/" + folder + "/" + filename + " ";
 
@@ -367,13 +351,13 @@ public class ArduinoCompiler implements Compiler {
         String update_index = "";
         String install_avr = "";
 
-        if (isWindows()) {
+        if (OSChecker.isWindows()) {
             get_device = "libs\\arduino\\cli\\Windows\\arduino-cli.exe board list --format json";
             install_avr = "libs\\arduino\\cli\\Windows\\arduino-cli.exe core install arduino:avr@1.6.21";
             update_index = "libs\\arduino\\cli\\Windows\\arduino-cli.exe core update-index";
-        } else if (isMac()) {
+        } else if (OSChecker.isMac()) {
 
-        } else if (isUnix()) {
+        } else if (OSChecker.isUnix()) {
 
             get_device = "./libs/arduino/cli/linux/arduino-cli board list --format json";
             install_avr = "./libs/arduino/cli/linux/arduino-cli core install arduino:avr@1.6.21";
@@ -400,13 +384,13 @@ public class ArduinoCompiler implements Compiler {
         String update_index = "";
         String install_avr = "";
 
-        if (isWindows()) {
+        if (OSChecker.isWindows()) {
             get_device = "libs\\arduino\\cli\\Windows\\arduino-cli.exe board listall --format json";
             install_avr = "libs\\arduino\\cli\\Windows\\arduino-cli.exe core install arduino:avr@1.6.21";
             update_index = "libs\\arduino\\cli\\Windows\\arduino-cli.exe core update-index";
-        } else if (isMac()) {
+        } else if (OSChecker.isMac()) {
 
-        } else if (isUnix()) {
+        } else if (OSChecker.isUnix()) {
 
             get_device = "./libs/arduino/cli/linux/arduino-cli board listall --format json";
             install_avr = "./libs/arduino/cli/linux/arduino-cli core install arduino:avr@1.6.21";

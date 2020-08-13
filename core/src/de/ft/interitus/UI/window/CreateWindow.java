@@ -15,7 +15,7 @@ public class CreateWindow {
     public static Window addWindow(String title, ApplicationListener listener) {
         Lwjgl3WindowConfiguration config = new Lwjgl3WindowConfiguration();
         config.useVsync(Settings.Vsync);
-        config.setWindowIcon(Files.FileType.Internal, "Icon/iteritus.png");
+        config.setWindowIcon(Files.FileType.Internal, "Icon/interitus.png");
         config.setTitle(title);
 
         Window createWindow = new Window(listener, config);
