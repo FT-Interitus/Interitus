@@ -4,8 +4,21 @@
 
 [![Interitus](https://github.com/FT-Interitus/Interitus/blob/master/img/Screenshot_20200610_202036.png?raw=true)]()
 
+
+**Install**
+
+- Linux:
+  One Line Installer: 
+  curl -sSl https://raw.githubusercontent.com/FT-Interitus/Installation/master/linux/install | sudo bash
+
+OR:
+
+Go to Releases and Download the Programm files
+
+
 > It should support Ev3, Arduino and Raspberry Pi (or other platforms via plugin), but not limit the user,
 to make the leap into a "real" programming language.
+
 
 **Featurs**
 
