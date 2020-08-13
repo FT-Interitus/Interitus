@@ -1,6 +1,6 @@
 <a href="#"><img src="https://avatars0.githubusercontent.com/u/63862361?s=400&u=a579cadd40dddd17795b000fc583f046d6c0e40b&v=4" title="Interitus" alt="Interitus"></a>
 
-> Is or should be a graphical drag'n'drop programming interface for future developers
+> Is a graphical drag'n'drop programming interface for future developers
 
 [![Interitus](https://github.com/FT-Interitus/Interitus/blob/master/img/Screenshot_20200610_202036.png?raw=true)]()
 
@@ -9,11 +9,11 @@
 
 - Linux:
   One Line Installer: 
-  curl -sSl https://raw.githubusercontent.com/FT-Interitus/Installation/master/linux/install | sudo bash
+ #### `curl -sSl https://raw.githubusercontent.com/FT-Interitus/Installation/master/linux/install | sudo bash`
 
 OR:
 
-Go to Releases and Download the Programm files
+#### Go to Releases and Download the Programm files
 
 
 > It should support Ev3, Arduino and Raspberry Pi (or other platforms via plugin), but not limit the user,
