@@ -231,6 +231,7 @@ public class Data {
                     Settings.limitfps = obj.getInt("limitfps");
                     Settings.hints = obj.getBoolean("hints");
                     Settings.personalhits = obj.getBoolean("personalhints");
+                    Settings.betaupdates = obj.getBoolean("betaupdates");
                     // weitere einstellugen Laden
 
                 } catch (JSONException e) {
@@ -394,6 +395,7 @@ public class Data {
         settings_obj.put("limitfps", Settings.limitfps);
         settings_obj.put("hints", Settings.hints);
         settings_obj.put("personalhints", Settings.personalhits);
+        settings_obj.put("betaupdates",Settings.betaupdates);
 
         //hier weitere Einstellugen speichern
         settings.writeString(settings_obj.toString(), false); //Datei wird geschrieben

@@ -6,6 +6,7 @@
 package de.ft.interitus.datamanager.programmdata;
 
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
+import de.ft.interitus.Settings;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.Var;
 import de.ft.interitus.utils.DownloadFile;
@@ -36,7 +37,7 @@ public class Updater {
 
             JSONArray jsonArray = new JSONArray(releases);
             JSONObject jsonObject = null;
-            if (Var.betaupdates) {
+            if (Settings.betaupdates) {
 
                 jsonObject = jsonArray.getJSONObject(0);
 
@@ -132,7 +133,7 @@ public class Updater {
 
             JSONArray jsonArray = new JSONArray(releases);
             JSONObject jsonObject = null;
-            if (Var.betaupdates) {
+            if (Settings.betaupdates) {
 
                 jsonObject = jsonArray.getJSONObject(0);
 

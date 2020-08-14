@@ -62,7 +62,5 @@ public class Var {
     public static ArrayList<Window> extendsWindows = new ArrayList<>();
     public static Window splashscreen = null;
 
-    public static boolean betaupdates = true;
-
     public static boolean updatepermissionlock = false;
 }
