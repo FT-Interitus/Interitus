@@ -5,6 +5,7 @@
 
 package de.ft.interitus;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.events.EventVar;
@@ -14,25 +15,31 @@ public class DisplayErrors {
     public static Throwable error;
     public static String customErrorstring = "Ein Fehler ist aufgetreten!";
     public static String errorStringwithoutException = "";
+    private static Throwable lastError = null;
 
     public static void checkerror() {
-        if (error != null) {
+
+
+        if (error != null && (lastError == null || !lastError.getMessage().contentEquals(error.getMessage()))) {
 
 
             Dialogs.showErrorDialog(UI.stage, customErrorstring, error);
 
             EventVar.globalEventManager.erroroccurred(new GlobalErrorOccurredEvent(Programm.INSTANCE, error));
-
+            lastError = error;
             error = null;
             customErrorstring = "Ein Fehler ist aufgetreten!";
 
 
         }
-        if (errorStringwithoutException != "") {
-            Dialogs.showErrorDialog(UI.stage, errorStringwithoutException);
-            errorStringwithoutException = "";
-        }
-    }
 
+        if(errorStringwithoutException !="")
+
+    {
+        Dialogs.showErrorDialog(UI.stage, errorStringwithoutException);
+        errorStringwithoutException = "";
+
+    }
+}
 
 }

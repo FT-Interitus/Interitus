@@ -6,6 +6,7 @@
 package de.ft.interitus;
 
 import com.badlogic.gdx.math.Frustum;
+import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.BlockUpdate;
 import de.ft.interitus.UI.UIVar;
