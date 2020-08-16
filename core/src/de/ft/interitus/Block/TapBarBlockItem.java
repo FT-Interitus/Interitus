@@ -27,6 +27,7 @@ public class TapBarBlockItem implements TapItem {
     private int w = 50;
     private int h = 60;
     private boolean doonce=false;
+    private long zeitstempel;
 
     public TapBarBlockItem(PlatformSpecificBlock psb, Texture img) {
         this.img = img;
@@ -68,14 +69,14 @@ public class TapBarBlockItem implements TapItem {
             doonce=true;
             UI.blockbarquickinfo.fadeOut();
         }
-        *//*
+        */
         if (CheckMouse.isMouseover(this.x, this.y, this.w, this.h)) {
             if (doonce) {
                 zeitstempel = System.currentTimeMillis() + 2000;
                 doonce = false;
             }
             if (zeitstempel < System.currentTimeMillis()) {
-                UI.blockbarquickinfo.setText("Block Quick\nInfo");
+                UI.blockbarquickinfo.setText(this.psb.getName());
                 UI.blockbarquickinfo.setX(Gdx.input.getX());
                 UI.blockbarquickinfo.setY(Gdx.graphics.getHeight()-Gdx.input.getY());
                 UI.blockbarquickinfo.fadeIn();
@@ -87,12 +88,15 @@ public class TapBarBlockItem implements TapItem {
 
             }
 
-        }*/
-        UI.blockbarquickinfo.setText("Block Quick\nInfo");
+        }
+        /*
+        UI.blockbarquickinfo.setText(psb.getName());
         UI.blockbarquickinfo.setSelfCheckRectangle(new Rectangle(this.x,this.y,this.w,this.h));
         UI.blockbarquickinfo.setDoonce(doonce);
+        UI.blockbarquickinfo.setZeitstempel(zeitstempel);
         UI.blockbarquickinfo.RectangleSelfCheck();
         doonce=UI.blockbarquickinfo.isDoonce();
+        zeitstempel=UI.blockbarquickinfo.getZeitstempel();*/
     }
 
     @Override
