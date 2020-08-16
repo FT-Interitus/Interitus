@@ -26,7 +26,6 @@ public class TapBarBlockItem implements TapItem {
     private int y;
     private int w = 50;
     private int h = 60;
-    private long zeitstempel;
     private boolean doonce=false;
 
     public TapBarBlockItem(PlatformSpecificBlock psb, Texture img) {
