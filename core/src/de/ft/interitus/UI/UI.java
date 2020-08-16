@@ -26,6 +26,7 @@ import de.ft.interitus.Settings;
 import de.ft.interitus.UI.ManualConfig.ManualConfigUI;
 import de.ft.interitus.UI.Notification.Notification;
 import de.ft.interitus.UI.Notification.NotificationManager;
+import de.ft.interitus.UI.UIElements.QuickInfo;
 import de.ft.interitus.UI.UIElements.TabBar.TabBar;
 import de.ft.interitus.UI.UIElements.UIElementBar;
 import de.ft.interitus.UI.UIElements.UIElements.Button;
@@ -55,6 +56,7 @@ import java.util.TimerTask;
 import static de.ft.interitus.UI.MenuBar.createSubMenu;
 
 public class UI {
+    public static QuickInfo blockbarquickinfo=new QuickInfo(0,0,"");
     public static final ManualConfigUI MANUALCONFIG = new ManualConfigUI();
     static final Table root = new Table();
     public static Stage stage;
@@ -251,7 +253,6 @@ public class UI {
             }
         }
         runselection.draw();
-
 
     }
 
@@ -521,6 +522,7 @@ public class UI {
         }
 
 
+        blockbarquickinfo.update();
 
 
     }

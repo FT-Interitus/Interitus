@@ -60,7 +60,6 @@ public class ProgrammingSpace extends ScreenAdapter {
     public static float delta;
     public static Plugin nativ = new Native();
 
-    public static QuickInfo quickInfo = new QuickInfo(100,500,"Das ist eine\nQuickInfo");
 
 
     public ProgrammingSpace() {
@@ -275,7 +274,6 @@ public class ProgrammingSpace extends ScreenAdapter {
         //  testanim.startAnimation();
 //batch.draw(testanim.getAnimation(),50,50);
         // pm.setBounds(700,200);
-        quickInfo.update();
 
 
         NotificationManager.draw();

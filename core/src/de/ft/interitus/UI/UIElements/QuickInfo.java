@@ -20,12 +20,12 @@ public class QuickInfo {
     private BitmapFont font;
     private GlyphLayout glyphLayout;
     private boolean shown=false;
-    private Color backgroundColor=new Color(1.0f  ,1.0f ,1.0f ,1.0f );
+    private Color backgroundColor=new Color(0.5f  ,0.5f ,0.5f ,1.0f );
     private Color textColor=new Color(0.0f,0.0f,0.0f,1.0f);
     private int abstandvonrand=5;
     private int eckenradius=5;
 
-    private float animationsAlphaPosition=1;
+    private float animationsAlphaPosition=0;
     private float alphaMax=1;
     private float alphaMin=0;
 
@@ -48,11 +48,11 @@ public class QuickInfo {
      */
     public void update(){
         if(shown){
-            if(animationsAlphaPosition<alphaMax-fadeInSpeed){
+            if(animationsAlphaPosition<=alphaMax-fadeInSpeed){
                 animationsAlphaPosition+=fadeInSpeed;
             }
         }else if(!shown){
-            if(animationsAlphaPosition>alphaMin+fadeOutSpeed){
+            if(animationsAlphaPosition>=alphaMin+fadeOutSpeed){
                 animationsAlphaPosition-=fadeOutSpeed;
             }
         }
