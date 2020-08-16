@@ -35,6 +35,10 @@ public class subitem12 {
                     Settings.betaupdates = true;
                 }
 
+                if(!betatoggle.isChecked()&&!stabletoggle.isChecked()) {
+                    betatoggle.setChecked(true);
+                }
+
 
             }
         });
@@ -47,6 +51,10 @@ public class subitem12 {
                 if(stabletoggle.isChecked()) {
                     betatoggle.setChecked(false);
                     Settings.betaupdates = false;
+                }
+
+                if(!stabletoggle.isChecked()&&!betatoggle.isChecked()) {
+                    stabletoggle.setChecked(true);
                 }
 
             }
