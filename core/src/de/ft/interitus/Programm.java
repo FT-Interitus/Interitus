@@ -23,6 +23,7 @@ import de.ft.interitus.events.UI.UILoadEvent;
 import de.ft.interitus.loading.Loading;
 import de.ft.interitus.loading.SplashScreen;
 import de.ft.interitus.plugin.PluginManagerHandler;
+import de.ft.interitus.plugin.PluginSandboxSecurityPolicy;
 import de.ft.interitus.plugin.store.ReadStorePlugins;
 import de.ft.interitus.projecttypes.BlockTypes.Init;
 import de.ft.interitus.projecttypes.ProjectManager;
@@ -32,6 +33,7 @@ import de.ft.interitus.utils.UserNameGetter;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.security.Policy;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Logger;
@@ -52,7 +54,8 @@ public class Programm extends Game {
     @Override
     public void create() {
 
-
+        Policy.setPolicy(new PluginSandboxSecurityPolicy());
+        System.setSecurityManager(new SecurityManager());
 
 
         LoggerInit.init();
