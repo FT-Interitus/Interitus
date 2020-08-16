@@ -29,8 +29,8 @@ public class QuickInfo {
     private float alphaMax=1;
     private float alphaMin=0;
 
-    private float fadeInSpeed=0.01f;
-    private float fadeOutSpeed=0.01f;
+    private float fadeInSpeed=100;
+    private float fadeOutSpeed=50;
 
 
 
@@ -48,12 +48,12 @@ public class QuickInfo {
      */
     public void update(){
         if(shown){
-            if(animationsAlphaPosition<=alphaMax-fadeInSpeed){
-                animationsAlphaPosition+=fadeInSpeed;
+            if(animationsAlphaPosition<=alphaMax-alphaMax/fadeInSpeed){
+                animationsAlphaPosition+=alphaMax/fadeInSpeed;
             }
         }else if(!shown){
-            if(animationsAlphaPosition>=alphaMin+fadeOutSpeed){
-                animationsAlphaPosition-=fadeOutSpeed;
+            if(animationsAlphaPosition>=alphaMin+alphaMax/fadeInSpeed){
+                animationsAlphaPosition-=alphaMax/fadeOutSpeed;
             }
         }
         this.glyphLayout.setText(this.font,this.text);
