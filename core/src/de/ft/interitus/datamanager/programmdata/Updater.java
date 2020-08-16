@@ -30,7 +30,11 @@ import java.nio.file.StandardCopyOption;
 
 public class Updater {
 
-    public static void check(boolean userrequest) {
+    public static void check() {
+        check(true);
+    }
+
+    private static void check(boolean userrequest) {
 
         try {
             String releases = "";
