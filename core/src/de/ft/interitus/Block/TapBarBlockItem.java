@@ -16,6 +16,7 @@ import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.tappedbar.TapItem;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.ProjectManager;
+import org.w3c.dom.css.Rect;
 
 
 public class TapBarBlockItem implements TapItem {
@@ -88,6 +89,7 @@ public class TapBarBlockItem implements TapItem {
             }
 
         }
+
     }
 
     @Override

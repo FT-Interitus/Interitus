@@ -6,7 +6,10 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Rectangle;
 import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.UI.UI;
+import de.ft.interitus.UI.UIElements.check.CheckMouse;
 
 public class QuickInfo {
     private String text;
@@ -28,6 +31,11 @@ public class QuickInfo {
     private float fadeInSpeed=100;
     private float fadeOutSpeed=50;
 
+    private boolean doonce=false;
+    private long zeitstempel;
+    private Rectangle selfCheckRectangle= new Rectangle();
+    private boolean selfCheck=false;
+
 
 
 
@@ -39,10 +47,34 @@ public class QuickInfo {
         font = new BitmapFont();
     }
 
+    public void RectangleSelfCheck(){
+        if (CheckMouse.isMouseover(selfCheckRectangle)) {
+
+            if (doonce) {
+                zeitstempel = System.currentTimeMillis() + 2000;
+                doonce = false;
+            }
+            if (zeitstempel < System.currentTimeMillis()) {
+                setX(Gdx.input.getX());
+                setY(Gdx.graphics.getHeight()-Gdx.input.getY());
+                fadeIn();
+            }
+        } else {
+            if (!doonce) {
+                doonce = true;
+                fadeOut();
+
+            }
+
+        }
+    }
+
     /**
      * draws and updates the QuickInfo
      */
     public void update(){
+        if(selfCheck)RectangleSelfCheck();
+
         if(attachedToMouse){
             this.x=Gdx.input.getX();
             this.y=Gdx.graphics.getHeight()-Gdx.input.getY();
@@ -215,6 +247,22 @@ public class QuickInfo {
 
     public void setAttachedToMouse(boolean attachedToMouse) {
         this.attachedToMouse = attachedToMouse;
+    }
+
+    public Rectangle getSelfCheckRectangle() {
+        return selfCheckRectangle;
+    }
+
+    public boolean isSelfCheck() {
+        return selfCheck;
+    }
+
+    public void setSelfCheckRectangle(Rectangle selfCheckRectangle) {
+        this.selfCheckRectangle = selfCheckRectangle;
+    }
+
+    public void setSelfCheck(boolean selfCheck) {
+        this.selfCheck = selfCheck;
     }
 }
 

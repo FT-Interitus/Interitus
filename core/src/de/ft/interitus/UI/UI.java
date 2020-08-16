@@ -442,6 +442,7 @@ public class UI {
 
         blockbarquickinfo=new QuickInfo(0,0,"");
         blockbarquickinfo.setAttachedToMouse(true);
+        blockbarquickinfo.setSelfCheck(false);
     }
 
     public static void update() {
