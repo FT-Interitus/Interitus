@@ -6,14 +6,20 @@
 package de.ft.interitus.datamanager.programmdata;
 
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
+import de.ft.interitus.Programm;
 import de.ft.interitus.Settings;
+import de.ft.interitus.UI.Notification.Notification;
+import de.ft.interitus.UI.Notification.NotificationManager;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.Var;
+import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.utils.DownloadFile;
 import de.ft.interitus.utils.OSChecker;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -102,7 +108,7 @@ public class Updater {
 
 
                     } catch (IOException e) {
-                        Dialogs.showOKDialog(UI.stage, "Update fehlgeschlagen", "\nEin unbekannter Fehler ist aufgetreten!\nVersuche es erneut...\n");
+                        Dialogs.showOKDialog(UI.stage, "Update fehlgeschlagen", "\nEin unbekannter Fehler ist aufgetreten!\nVersuche es erneut mit Admin-Rechten\n");
                     }
 
                 }
@@ -167,6 +173,26 @@ public class Updater {
 
         }catch (Exception e) {
             return false;
+        }
+    }
+
+    public static void initprogress() {
+
+        /**
+         * If Interitus is in an Update Loop you can enable Caps-Lock and the Update will be canceled
+         */
+        if (!Toolkit.getDefaultToolkit().getLockingKeyState(KeyEvent.VK_CAPS_LOCK)) {
+            if (Updater.isupdateavailable()) {
+                if (!new File(System.getProperty("user.dir") + "").canWrite()) {
+                    NotificationManager.sendNotification(new Notification(AssetLoader.information, "Update verfügbar", "Ein Update ist verfügbar!\nBitte starte Interitus mit Admin-Rechten!"));
+                } else {
+                    Updater.check(false);
+                }
+            }
+
+
+        }else{
+            Programm.logger.warning("Update Canceled");
         }
     }
 }
