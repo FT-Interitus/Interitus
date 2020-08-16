@@ -264,6 +264,22 @@ public class QuickInfo {
     public void setSelfCheck(boolean selfCheck) {
         this.selfCheck = selfCheck;
     }
+
+    public boolean isDoonce() {
+        return doonce;
+    }
+
+    public long getZeitstempel() {
+        return zeitstempel;
+    }
+
+    public void setDoonce(boolean doonce) {
+        this.doonce = doonce;
+    }
+
+    public void setZeitstempel(long zeitstempel) {
+        this.zeitstempel = zeitstempel;
+    }
 }
 
 

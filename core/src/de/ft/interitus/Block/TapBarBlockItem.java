@@ -69,7 +69,7 @@ public class TapBarBlockItem implements TapItem {
             doonce=true;
             UI.blockbarquickinfo.fadeOut();
         }
-        */
+        *//*
         if (CheckMouse.isMouseover(this.x, this.y, this.w, this.h)) {
             if (doonce) {
                 zeitstempel = System.currentTimeMillis() + 2000;
@@ -88,8 +88,12 @@ public class TapBarBlockItem implements TapItem {
 
             }
 
-        }
-
+        }*/
+        UI.blockbarquickinfo.setText("Block Quick\nInfo");
+        UI.blockbarquickinfo.setSelfCheckRectangle(new Rectangle(this.x,this.y,this.w,this.h));
+        UI.blockbarquickinfo.setDoonce(doonce);
+        UI.blockbarquickinfo.RectangleSelfCheck();
+        doonce=UI.blockbarquickinfo.isDoonce();
     }
 
     @Override
