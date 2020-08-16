@@ -6,7 +6,7 @@
 package de.ft.interitus.utils;
 
 public class ShapeRenderer extends com.badlogic.gdx.graphics.glutils.ShapeRenderer {
-    public void roundendrect(int x, int y, int w, int h, int r) {
+    public void roundendrect(float x, float y, float w, float h, float r) {
         w = w - r * 2;
         h = h - r * 2;
         circle(x + r, y + r, r);

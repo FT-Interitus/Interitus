@@ -21,6 +21,7 @@ import de.ft.interitus.UI.Notification.Notification;
 import de.ft.interitus.UI.Notification.NotificationManager;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.PressedKeys;
+import de.ft.interitus.UI.UIElements.QuickInfo;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.popup.PopupHandler;
 import de.ft.interitus.UI.settings.subitems.subitem17;
@@ -58,6 +59,8 @@ public class ProgrammingSpace extends ScreenAdapter {
     public static PressedKeys pressedKeys;
     public static float delta;
     public static Plugin nativ = new Native();
+
+    public static QuickInfo quickInfo = new QuickInfo(100,500,"Das ist eine\nQuickInfo");
 
 
     public ProgrammingSpace() {
@@ -116,7 +119,6 @@ public class ProgrammingSpace extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
-
 
         //DEBUG todo remove
 
@@ -273,6 +275,7 @@ public class ProgrammingSpace extends ScreenAdapter {
         //  testanim.startAnimation();
 //batch.draw(testanim.getAnimation(),50,50);
         // pm.setBounds(700,200);
+        quickInfo.update();
 
 
         NotificationManager.draw();
