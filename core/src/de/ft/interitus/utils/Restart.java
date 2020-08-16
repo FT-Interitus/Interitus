@@ -8,8 +8,10 @@ package de.ft.interitus.utils;
 import com.kotcrab.vis.ui.util.dialog.ConfirmDialogListener;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import de.ft.interitus.UI.UI;
+import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.datamanager.programmdata.Updater;
 
+import javax.sql.DataSource;
 import java.io.IOException;
 
 public class Restart {
@@ -48,6 +50,7 @@ public class Restart {
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
+                            Data.close();
                             System.exit(0);
                         }
 
