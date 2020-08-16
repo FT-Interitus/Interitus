@@ -3,15 +3,10 @@ package de.ft.interitus.UI.UIElements;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Rectangle;
-import de.ft.interitus.Programm;
 import de.ft.interitus.ProgrammingSpace;
-import org.lwjgl.system.CallbackI;
 
 public class QuickInfo {
     private String text;
@@ -24,6 +19,7 @@ public class QuickInfo {
     private Color textColor=new Color(0.0f,0.0f,0.0f,1.0f);
     private int abstandvonrand=5;
     private int eckenradius=5;
+    private boolean attachedToMouse=false;
 
     private float animationsAlphaPosition=0;
     private float alphaMax=1;
@@ -47,6 +43,11 @@ public class QuickInfo {
      * draws and updates the QuickInfo
      */
     public void update(){
+        if(attachedToMouse){
+            this.x=Gdx.input.getX();
+            this.y=Gdx.graphics.getHeight()-Gdx.input.getY();
+        }
+
         if(shown){
             if(animationsAlphaPosition<=alphaMax-alphaMax/fadeInSpeed){
                 animationsAlphaPosition+=alphaMax/fadeInSpeed;
@@ -206,6 +207,14 @@ public class QuickInfo {
 
     public void setFadeOutSpeed(float fadeOutSpeed) {
         this.fadeOutSpeed = fadeOutSpeed;
+    }
+
+    public boolean isAttachedToMouse() {
+        return attachedToMouse;
+    }
+
+    public void setAttachedToMouse(boolean attachedToMouse) {
+        this.attachedToMouse = attachedToMouse;
     }
 }
 

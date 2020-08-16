@@ -56,7 +56,7 @@ import java.util.TimerTask;
 import static de.ft.interitus.UI.MenuBar.createSubMenu;
 
 public class UI {
-    public static QuickInfo blockbarquickinfo=new QuickInfo(0,0,"");
+    public static QuickInfo blockbarquickinfo;
     public static final ManualConfigUI MANUALCONFIG = new ManualConfigUI();
     static final Table root = new Table();
     public static Stage stage;
@@ -440,7 +440,8 @@ public class UI {
 
         tabbar = new TabBar();
 
-
+        blockbarquickinfo=new QuickInfo(0,0,"");
+        blockbarquickinfo.setAttachedToMouse(true);
     }
 
     public static void update() {
