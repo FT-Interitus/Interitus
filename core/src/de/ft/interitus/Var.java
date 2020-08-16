@@ -14,6 +14,7 @@ public class Var {
 
 
     public static final double PROGRAMM_VERSION_ID = 1;
+    public static final int PLUGIN_SUBSYSTEM_VERSION = 1;
 
 
     /**

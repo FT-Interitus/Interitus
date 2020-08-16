@@ -29,11 +29,11 @@ public class PluginGateway {
     private static final ArrayList<Plugin> pluginshortCutsCheckerplugins = new ArrayList<>();
     private static final ArrayList<Plugin> pluginshortCutsplugins = new ArrayList<>();
     private static final ArrayList<Plugin> themesplugins = new ArrayList<>();
-    public static ArrayList<ProjectTypes> pluginprojekttypes = new ArrayList<>();
-    public static List<VisTable> pluginsettings = new ArrayList<>();
-    public static List<Menu> pluginMenubar = new ArrayList<>();
-    public static ArrayList<ShortCutChecker> pluginshortCutsChecker = new ArrayList<>();
-    public static ArrayList<ShortCut> pluginshortCuts = new ArrayList<>();
+     public static final ArrayList<ProjectTypes> pluginprojekttypes = new ArrayList<>();
+    public static final List<VisTable> pluginsettings = new ArrayList<>();
+    public static final List<Menu> pluginMenubar = new ArrayList<>();
+    public static final ArrayList<ShortCutChecker> pluginshortCutsChecker = new ArrayList<>();
+    public static final ArrayList<ShortCut> pluginshortCuts = new ArrayList<>();
 
     @SuppressWarnings("unused")
     public static boolean addsettings(VisTable settingsclass, Plugin requestedplugin) {
