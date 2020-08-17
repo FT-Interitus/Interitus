@@ -16,11 +16,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.ft.interitus.Block.Block;
+import de.ft.interitus.Block.BlockDrawer;
 import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.Notification.Notification;
 import de.ft.interitus.UI.Notification.NotificationManager;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.PressedKeys;
+import de.ft.interitus.UI.UIElements.UIElementBar;
+import de.ft.interitus.UI.UIElements.UIElements.Button;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.popup.PopupHandler;
 import de.ft.interitus.UI.settings.subitems.subitem17;
@@ -35,6 +38,7 @@ import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.PositionSaver;
 import de.ft.interitus.utils.ShapeRenderer;
+
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -56,6 +60,7 @@ public class ProgrammingSpace extends ScreenAdapter {
     public static long rendersleeptime = 0;
 
     public static ShapeRenderer shapeRenderer;
+    public static ShapeRenderer BlockshapeRenderer;
     public static PressedKeys pressedKeys;
     public static float delta;
     public static Plugin nativ = new Native();
@@ -69,6 +74,7 @@ public class ProgrammingSpace extends ScreenAdapter {
 
         font = new BitmapFont();
         shapeRenderer = new ShapeRenderer();
+        BlockshapeRenderer = new ShapeRenderer();
         cam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         viewport = new ScreenViewport(cam);
@@ -145,6 +151,7 @@ public class ProgrammingSpace extends ScreenAdapter {
             batch.setProjectionMatrix(cam.combined);
             UI.UIbatch.setProjectionMatrix(UI.UIcam.combined);
             shapeRenderer.setProjectionMatrix(UI.UIcam.combined);
+            BlockshapeRenderer.setProjectionMatrix(cam.combined);
 
 
             UI.updatedragui(shapeRenderer, true, batch);

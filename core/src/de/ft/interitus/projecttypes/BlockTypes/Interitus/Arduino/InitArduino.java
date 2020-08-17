@@ -34,6 +34,7 @@ public class InitArduino {
         blocks.add(new WhileLoopEnd(arduino));
         blocks.add(new SetPinMode(arduino));
         blocks.add(new digitalWrite(arduino));
+        blocks.add(new TestOutput(arduino));
 
 
         return arduino;

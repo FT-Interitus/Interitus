@@ -1,9 +1,4 @@
-/*
- * Copyright (c) 2020.
- * Copyright by Tim and Felix
- */
-
-package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.actionblocks;
+package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino;
 
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
@@ -11,41 +6,28 @@ import de.ft.interitus.Block.ParameterType;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
 import de.ft.interitus.projecttypes.BlockTypes.BlockTopParameter;
-import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.ProjectTypes;
 import de.ft.interitus.utils.ArrayList;
 
 import java.awt.*;
 
-public class SetPinMode extends PlatformSpecificBlock implements ArduinoBlock {
-
+public class TestOutput extends PlatformSpecificBlock implements ArduinoBlock{
     ArrayList<Parameter> parameters = new ArrayList<>();
-    Parameter pin;
-    Parameter mode;
+    Parameter waitdauer;
 
 
-    public SetPinMode(ProjectTypes type) {
-        super(type);
+    public TestOutput(ProjectTypes arduino) {
+        super(arduino);
 
 
-        pin = new Parameter("", AssetLoader.Parameter_Pin, "Pin", "", null,new ParameterType("int",false,false), true);
-        String[] selecteables = new String[2];
-        selecteables[0] = "INPUT";
-        selecteables[1] = "OUTPUT";
-        mode = new Parameter(selecteables[1], AssetLoader.Parameter_IO, "Mode(I/O)", "", null,new ParameterType("definition",false,true).setSelectables(selecteables), true);
+        waitdauer = new Parameter(0, AssetLoader.img_WaitBlock_warteZeit_Parameter, "Warte-Zeit", "Die Zeit die abgewartet werden soll", "ms",new ParameterType("int",true,false), true);
 
 
-        parameters.add(pin);
-        parameters.add(mode);
-
+        parameters.add(waitdauer);
 
     }
 
-    @Override
-    public String getCode() {
-        return "pinMode(" + this.parameters.get(0).getParameter() + "," + this.parameters.get(1).getParameter() + ");";
-    }
 
     @Override
     public ArrayList<Parameter> getBlockParameter() {
@@ -54,12 +36,12 @@ public class SetPinMode extends PlatformSpecificBlock implements ArduinoBlock {
 
     @Override
     public String getName() {
-        return "SetPinMode";
+        return "Test";
     }
 
     @Override
     public String getdescription() {
-        return "";
+        return null;
     }
 
     @Override
@@ -74,40 +56,39 @@ public class SetPinMode extends PlatformSpecificBlock implements ArduinoBlock {
 
     @Override
     public BlockCategories getBlockCategoration() {
-        return BlockCategories.ActionBlocks;
+        return BlockCategories.Programm_Sequence;
     }
 
     @Override
     public Texture getSmallImage() {
-        return AssetLoader.PinModeBlock_smallimage;
+        return AssetLoader.WaitBlock_smallimage;
     }
 
     @Override
     public Texture getImageRight() {
-        return AssetLoader.PinModeBlock_right;
+        return AssetLoader.WaitBlock_right;
     }
 
     @Override
     public Texture getImageLeft() {
-        return AssetLoader.PinModeBlock_left;
+        return AssetLoader.WaitBlock_left;
     }
 
     @Override
     public Texture getImageCenter() {
-        return AssetLoader.PinModeBlock_middle;
+        return AssetLoader.WaitBlock_middle;
     }
 
     @Override
     public Texture getDescriptionImage() {
-        return AssetLoader.PinModeBlock_description_image;
+        return AssetLoader.WaitBlock_description_image;
     }
 
 
     @Override
     public int getWidth() {
-        return 150;
+        return 80;
     }
-
 
     @Override
     public boolean canbedeleted() {
@@ -122,5 +103,16 @@ public class SetPinMode extends PlatformSpecificBlock implements ArduinoBlock {
     @Override
     public boolean canhasleftconnector() {
         return true;
+    }
+
+    @Override
+    public String getCode() {
+
+        if( parameters.get(0).getDatawire()!=null){
+            return parameters.get(0).getDatawire().varName+ " = 1+1;";
+
+        }else {
+            return "1+1";
+        }
     }
 }

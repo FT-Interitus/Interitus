@@ -10,6 +10,8 @@ public class UIVar {
     public static final int untenkante = 125;
     public static final int BlockHeight = 70;
     public static int abstandvonRand = 5;
+    public static final int parameter_height = 30;
+    public static final int parameter_width = 30;
     public static int untenhohe = 125;
     public static int unteneinteilung = 300;
     public static int radius = 3;

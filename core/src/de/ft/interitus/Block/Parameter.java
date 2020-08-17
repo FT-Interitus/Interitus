@@ -17,10 +17,12 @@ public class Parameter {
     private String ParameterDescription;
     private Block block;
     private ParameterType parameterType;
-    private boolean isconnected = false; //FOR Outputs
-    private DataWire outputdataWire = null;
+    private DataWire Datawire = null;
+    private int x =0;
+    private int y=0;
+    private boolean varname = false;
 
-    public Parameter(Object parameter, Texture ParameterTexture, String ParameterName, String ParameterDescription, String Unit, ParameterType parameterType) {
+    public Parameter(Object parameter, Texture ParameterTexture, String ParameterName, String ParameterDescription, String Unit, ParameterType parameterType, boolean varname) {
         this.ParameterTexture = ParameterTexture;
         this.Parameter = parameter;
         this.ParameterName = ParameterName;
@@ -28,12 +30,20 @@ public class Parameter {
         this.Unit = Unit;
 
         this.parameterType = parameterType;
+        this.varname = varname;
 
 
     }
 
     public Object getParameter() {
-        return Parameter;
+        if(!varname) {
+            return Parameter;
+        }
+        if(getDatawire()!=null) {
+            return getDatawire().varName;
+        }else {
+            return Parameter;
+        }
     }
 
     public void setParameter(Object parameter) {
@@ -84,20 +94,29 @@ public class Parameter {
         this.parameterType = parameterType;
     }
 
-    public boolean isIsconnected() {
-        return isconnected;
+
+
+    public DataWire getDatawire() {
+        return Datawire;
     }
 
-    public void setIsconnected(boolean isconnected) {
-        this.isconnected = isconnected;
+    public void setDatawire(DataWire datawire) {
+        Datawire = datawire;
     }
 
-
-    public DataWire getOutputdataWire() {
-        return outputdataWire;
+    public void setY(int y) {
+        this.y = y;
     }
 
-    public void setOutputdataWire(DataWire outputdataWire) {
-        this.outputdataWire = outputdataWire;
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getX() {
+        return x;
     }
 }

@@ -63,7 +63,6 @@ public class TapBarBlockItem implements TapItem {
         if(UI.blockbarquickinfo.getContentOverKey(psb.getName())!=null) {
             UI.blockbarquickinfo.getContentOverKey(psb.getName()).setDisabled(false);
             UI.blockbarquickinfo.getContentOverKey(psb.getName()).setMouseoverRect(this.x, this.y, this.w, this.h);
-            System.out.println(UI.blockbarquickinfo.getContentOverKey(psb.getName()).getKey());
 
         }
 

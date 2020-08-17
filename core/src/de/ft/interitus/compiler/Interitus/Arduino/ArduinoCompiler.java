@@ -6,6 +6,8 @@
 package de.ft.interitus.compiler.Interitus.Arduino;
 
 import de.ft.interitus.Block.Block;
+import de.ft.interitus.Block.DataWire;
+import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.Programm;
 import de.ft.interitus.UI.Notification.Notification;
 import de.ft.interitus.UI.Notification.NotificationManager;
@@ -22,6 +24,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
+import java.util.Map;
 import java.util.concurrent.*;
 
 public class ArduinoCompiler implements Compiler {
@@ -31,20 +34,55 @@ public class ArduinoCompiler implements Compiler {
     private static Notification notification;
     private static boolean uploaderror = false;
     private static Process pr;
+    private static String prefix = "param_";
 
     private static String compilesketch() {
         String Programm = "";
+        int i=0;
+        for(Block block:ProjectManager.getActProjectVar().blocks) {
+            if(block.getBlocktype().getBlockParameter()==null) {
+                continue;
+            }
+            for(Parameter parameter:block.getBlocktype().getBlockParameter()) {
+
+
+                if(parameter.getParameterType().isOutput()==false) {
+                    continue;
+                }
+                if(parameter.getDatawire()==null) {
+                    continue;
+                }
+
+                if(parameter.getDatawire().getParam_input()!=parameter) {
+                    continue;
+                }
+
+                parameter.getDatawire().varName = prefix+i;
+                Programm+=parameter.getParameterType().getTyp()+" "+parameter.getDatawire().varName+";\n";
+                  i++;
+            }
+
+
+
+        }
+
         Block a = ProjectManager.getActProjectVar().blocks.get(0);
 
-        Programm = ((ArduinoBlock) a.getBlocktype()).getCode() + "\n";
+        Programm += ((ArduinoBlock) a.getBlocktype()).getCode() + "\n";
         while (a.getRight() != null) {
 
             //block.getRight().setX(block.getRight().getX() + block.getW());
             a = a.getRight();
 
-            Programm = Programm + ((ArduinoBlock) a.getBlocktype()).getCode() + "//" + a.getIndex() + " \n";
+
+
+                Programm = Programm +  ((ArduinoBlock) a.getBlocktype()).getCode() + "//" + a.getIndex() + " \n";
+
 
         }
+
+
+
         Programm = Programm + "}\n";
 
         /////////////Loop Teil
@@ -57,7 +95,9 @@ public class ArduinoCompiler implements Compiler {
             //block.getRight().setX(block.getRight().getX() + block.getW());
             a = a.getRight();
 
-            Programm = Programm + ((ArduinoBlock) a.getBlocktype()).getCode() + "//" + a.getIndex() + " \n";
+
+            Programm = Programm +  ((ArduinoBlock) a.getBlocktype()).getCode() + "//" + a.getIndex() + " \n";
+
 
         }
         Programm = Programm + "}\n";

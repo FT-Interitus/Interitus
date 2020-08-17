@@ -19,6 +19,8 @@ import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Programm;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.ThreadManager;
+import de.ft.interitus.UI.UI;
+import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.Viewport;
 import de.ft.interitus.UI.popup.PopupMenue;
 import de.ft.interitus.events.EventVar;
@@ -615,7 +617,7 @@ public abstract class Block implements VisibleObjects {
      */
 
     public void draw(SpriteBatch batch, ShapeRenderer shape, BitmapFont font) {
-
+batch.begin();
 
         try {
             if (ProjectManager.getActProjectVar().Blockwitherrors.contains(this.getIndex())) {
@@ -710,11 +712,14 @@ public abstract class Block implements VisibleObjects {
                 for (int i = 0; i < this.getBlocktype().getBlockParameter().size(); i++) {
                     batch.draw(this.getBlocktype().getBlockParameter().get(i).getParameterTexture(), aktualX + 5, this.getY() + 30, 20, 20);
                     if (this.getBlocktype().getBlockParameter().get(i).getParameterType().isOutput()) {
-                        batch.draw(AssetLoader.Plug_ZahlParameter, (int) aktualX, this.getY() - 5, 30, 30, 0, 0, AssetLoader.Plug_ZahlParameter.getWidth(), AssetLoader.Plug_ZahlParameter.getHeight(), false, true);
-
+                        batch.draw(AssetLoader.Plug_ZahlParameter, (int) aktualX, this.getY() - 5, UIVar.parameter_width,  UIVar.parameter_height, 0, 0, AssetLoader.Plug_ZahlParameter.getWidth(), AssetLoader.Plug_ZahlParameter.getHeight(), false, true);
+                        this.getBlocktype().getBlockParameter().get(i).setX((int) aktualX);
+                        this.getBlocktype().getBlockParameter().get(i).setY(this.getY() - 5);
 
                     } else {
-                        batch.draw(AssetLoader.Plug_ZahlParameter, aktualX, this.getY(), 30, 30);
+                        batch.draw(AssetLoader.Plug_ZahlParameter, aktualX, this.getY(), UIVar.parameter_width, UIVar.parameter_height);
+                        this.getBlocktype().getBlockParameter().get(i).setX((int) aktualX);
+                        this.getBlocktype().getBlockParameter().get(i).setY(this.getY());
                         font.getData().setScale(0.9f);
                         glyphLayout.setText(font, "" + this.getBlocktype().getBlockParameter().get(i).getParameter());
                         font.draw(batch, glyphLayout, aktualX + 15 - glyphLayout.width / 2, y + glyphLayout.height * 1.5f);
@@ -722,7 +727,18 @@ public abstract class Block implements VisibleObjects {
                     aktualX += 30;
                 }
             }
+batch.end();
+            if(this.getBlocktype()!=null&&this.getBlocktype().getBlockParameter()!=null) {
+                for (Parameter parameter : this.getBlocktype().getBlockParameter()) {
+                    if (parameter.getDatawire() != null && parameter.getDatawire().getParam_input() == parameter) {
+                        parameter.getDatawire().draw();
+                    }
+                }
+            }
+
         }catch (Exception e) {
+
+            e.printStackTrace();
             //If the Block was deleted while drawing
 
             if(batch.isDrawing()) {

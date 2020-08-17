@@ -21,6 +21,7 @@ import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.block.BlockKillMovingWiresEvent;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.ProjectManager;
+import de.ft.interitus.utils.Unproject;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -90,14 +91,7 @@ public abstract class BlockUpdate extends Thread {
 
                     try {
 
-                        if(block.getBlocktype()!=null&&block.getBlocktype().getBlockParameter()!=null) {
-                            for (int i = 0; i < block.getBlocktype().getBlockParameter().size(); i++) {
-                                if (block.getBlocktype().getBlockParameter().get(i).getParameterType().isOutput() && !block.getBlocktype().getBlockParameter().get(i).isIsconnected() && block.getBlocktype().getBlockParameter().get(i).getOutputdataWire() == null) {
-                                    block.getBlocktype().getBlockParameter().get(i).setOutputdataWire(new DataWire(block.getBlocktype().getBlockParameter().get(i), null));
-                                    ProjectManager.getActProjectVar().moveingdatawire = block.getBlocktype().getBlockParameter().get(i).getOutputdataWire();
-                                }
-                            }
-                        }
+
 
 
 
@@ -256,6 +250,24 @@ public abstract class BlockUpdate extends Thread {
                                 }
                             }
 
+                        }
+/////////////////////////////Datawire erzeigen
+                        if(block.getBlocktype()!=null&&block.getBlocktype().getBlockParameter()!=null) {
+                            for (int i = 0; i < block.getBlocktype().getBlockParameter().size(); i++) {
+                                if (block.getBlocktype().getBlockParameter().get(i).getParameterType().isOutput()  && block.getBlocktype().getBlockParameter().get(i).getDatawire() == null) {
+
+
+                                    if(CheckKollision.checkmousewithobject(block.getBlocktype().getBlockParameter().get(i).getX(),block.getBlocktype().getBlockParameter().get(i).getY(),UIVar.parameter_width,UIVar.parameter_height, Unproject.unproject())&&Gdx.input.isButtonJustPressed(0)){
+                                        block.getBlocktype().getBlockParameter().get(i).setDatawire(new DataWire(block.getBlocktype().getBlockParameter().get(i)));
+                                        block.setMoving(false);
+
+                                    }
+
+
+
+                                    ProjectManager.getActProjectVar().moveingdatawire = block.getBlocktype().getBlockParameter().get(i).getDatawire();
+                                }
+                            }
                         }
 
 

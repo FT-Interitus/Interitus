@@ -29,11 +29,11 @@ public class digitalWrite extends PlatformSpecificBlock implements ArduinoBlock 
         super(type);
 
 
-        pin = new Parameter("", AssetLoader.Parameter_Pin, "Pin", "", null,new ParameterType("int",false,false));
+        pin = new Parameter("", AssetLoader.Parameter_Pin, "Pin", "", null,new ParameterType("int",false,false), true);
         String[] selectables = new String[2];
         selectables[0] = "HIGH";
         selectables[1] = "LOW";
-        mode = new Parameter(selectables[1], AssetLoader.Parameter_High_Low, "Mode", "", null,new ParameterType("state",false,true).setSelectables(selectables));
+        mode = new Parameter(selectables[1], AssetLoader.Parameter_High_Low, "Mode", "", null,new ParameterType("state",false,true).setSelectables(selectables), true);
 
 
         parameters.add(pin);
