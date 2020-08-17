@@ -16,6 +16,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.ft.interitus.Block.Block;
+import de.ft.interitus.Block.BlockDrawer;
 import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.Notification.Notification;
 import de.ft.interitus.UI.Notification.NotificationManager;
@@ -127,11 +128,8 @@ public class ProgrammingSpace extends ScreenAdapter {
             Programm.INSTANCE.setScreen(new Welcome());
         }
 
-        //RechtsKlick.Rechtsklickupdate();
-
         try {
 
-            //logger.finest("Blöcke "+BlockVar.blocks.size()+" Sichtbare "+ BlockVar.visibleblocks.size());
 
             PositionSaver.save();
 
@@ -150,87 +148,7 @@ public class ProgrammingSpace extends ScreenAdapter {
             UI.updatedragui(shapeRenderer, true, batch);
 
 
-            if (!Var.isloading) {
-                Block Temp = null;
-                Block Temp2 = null;
-                for (int i = 0; i < ProjectManager.getActProjectVar().visibleblocks.size(); i = i + 1) {
-                    Block block = ProjectManager.getActProjectVar().visibleblocks.get(i);
-
-                    try {
-                        batch.begin();
-                    } catch (IllegalStateException e) {
-                        batch.end();
-                        batch.begin();
-                    }
-
-                    try {
-                        if (block.isMarked()) {
-                            if (block.isMoving()) {
-                                Temp2 = block;
-                            } else {
-                                Temp = block;
-                            }
-                        } else {
-                            block.draw(batch, shapeRenderer, font);
-                        }
-
-                        batch.end();
-                        if (block.isMarked()) {
-
-
-                            if (BlockShortcuts.shortCut_deleteBlock.isPressed() && block.getBlocktype().canbedeleted()) {
-                                block.delete(false);
-                            }
-
-
-                        }
-
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (Temp != null) {
-
-                    try {
-                        batch.begin();
-                        Temp.draw(batch, shapeRenderer, font);
-                        batch.end();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-
-
-                for (int i = 0; i < ProjectManager.getActProjectVar().visiblewires.size(); i++) {
-                    if (!Var.isloading) {
-                        ProjectManager.getActProjectVar().visiblewires.get(i).draw();
-                    }
-                }
-                for (int i = 0; i < ProjectManager.getActProjectVar().visibleWireNodes.size(); i++) {
-                    ProjectManager.getActProjectVar().visibleWireNodes.get(i).draw();
-                }
-
-                UI.updatedragui(shapeRenderer, false, batch);
-                BlockTappedBar.tb.setX(UIVar.BlockBarX + UIVar.BlockBarW / 2);
-                BlockTappedBar.tb.setY(UIVar.BlockBarY + UIVar.BlockBarH / 2 - (BlockTappedBar.tb.getHeight() + UIVar.abstandvonRand * 2) / 2);
-                BlockTappedBar.tb.draw();
-
-                if (Temp2 != null) {
-
-                    try {
-                        batch.begin();
-                        Temp2.draw(batch, shapeRenderer, font);
-
-
-                        batch.end();
-                    } catch (Exception ignored) {
-
-                    }
-                }
-
-
-            }
+            BlockDrawer.Draw();
 
 
             de.ft.interitus.UI.Viewport.update(delta);
