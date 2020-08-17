@@ -9,19 +9,18 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.UI.Animation;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.utils.ShapeRenderer;
-import de.ft.interitus.UI.Animation;
 
 public class Button implements UIElement {
     public static boolean disablepresscolorchange = false;
+    public final int widthoverTextlinksrandabstand = 5;
     private final GlyphLayout glyphLayout = new GlyphLayout();
-
     public float hovertransparancy = 0.8f;
     public boolean widthoverText = false;
-    public final int widthoverTextlinksrandabstand = 5;
     private boolean isworking = false;
     private boolean ignore_uilock = false;
     private int x;
@@ -142,7 +141,7 @@ public class Button implements UIElement {
         if (isVisible()) {
             if (image == null) {
 
-                if(text==null) {
+                if (text == null) {
 
                     ProgrammingSpace.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
                     ProgrammingSpace.shapeRenderer.roundendrect(this.x, this.y, this.w, this.h, 5);
@@ -204,6 +203,7 @@ public class Button implements UIElement {
             if (text != null) {
                 UI.UIbatch.begin();
                 UI.UIbatch.setColor(1, 1, 1, transparency);
+                ProgrammingSpace.font.setColor(1,1,1,transparency);
                 ProgrammingSpace.font.draw(UI.UIbatch, glyphLayout, x + widthoverTextlinksrandabstand, y + glyphLayout.height + h / 2 - glyphLayout.height / 2);
 
 
@@ -211,6 +211,11 @@ public class Button implements UIElement {
             }
         }
 
+    }
+
+    @Override
+    public void setAlpha(float alpha) {
+        this.transparency = alpha;
     }
 
     public int getX() {
@@ -241,16 +246,18 @@ public class Button implements UIElement {
         return w;
     }
 
-    public void setW(int w) {
+    public Button setW(int w) {
         this.w = w;
+        return this;
     }
 
     public String getText() {
         return text;
     }
 
-    public void setText(String text) {
+    public Button setText(String text) {
         this.text = text;
+        return this;
     }
 
     public Texture getImage() {
@@ -325,12 +332,12 @@ public class Button implements UIElement {
         this.ignore_uilock = ignore_uilock;
     }
 
-    public void setTransparency(float transparency) {
-        this.transparency = transparency;
-    }
-
     public float getTransparency() {
         return transparency;
+    }
+
+    public void setTransparency(float transparency) {
+        this.transparency = transparency;
     }
 }
 

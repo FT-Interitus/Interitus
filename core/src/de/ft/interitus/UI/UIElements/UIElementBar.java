@@ -41,20 +41,27 @@ public class UIElementBar {
 
     }
 
-    public void addButton(UIElement button) {
+    public UIElementBar addButton(UIElement button) {
         buttons.add(button);
+        return this;
     }
 
     public ArrayList<UIElement> getButtons() {
         return buttons;
     }
 
+
     public void draw() {
+        this.draw(1);
+    }
+
+    public void draw(float alpha) {
 
         int aktualXPosition = this.x;
         for (UIElement button : this.buttons) {
             aktualXPosition -= button.getW();
             aktualXPosition -= button_distance;
+            button.setAlpha(alpha);
             button.setBounds(aktualXPosition, this.y, button.getW(), button_h);
             button.draw();
 

@@ -57,6 +57,7 @@ public class DesktopLauncher {
 			config.disableAudio(true);
 
 
+
 			config.setWindowListener(new Lwjgl3WindowAdapter() {
 				@Override
 				public void created(Lwjgl3Window window) {
@@ -70,6 +71,8 @@ public class DesktopLauncher {
 
 				@Override
 				public void maximized(boolean isMaximized) {
+
+
 
 				}
 

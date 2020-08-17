@@ -22,6 +22,8 @@ import de.ft.interitus.UI.Notification.Notification;
 import de.ft.interitus.UI.Notification.NotificationManager;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.PressedKeys;
+import de.ft.interitus.UI.UIElements.UIElementBar;
+import de.ft.interitus.UI.UIElements.UIElements.Button;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.popup.PopupHandler;
 import de.ft.interitus.UI.settings.subitems.subitem17;
@@ -185,7 +187,9 @@ public class ProgrammingSpace extends ScreenAdapter {
         NotificationManager.draw();
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
-            NotificationManager.sendNotification(new Notification(AssetLoader.information, "Wichtige Information", "\nEs steht kein Update bereit!"));
+          Notification notification =  new Notification(AssetLoader.information, "Wichtige Information", "\nEs steht kein Update bereit!");
+          notification.setButtonBar(new UIElementBar().addButton(new Button().setText("Test")));
+            NotificationManager.sendNotification(notification);
         }
 
         PopupHandler.drawPopUp();
