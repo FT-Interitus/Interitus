@@ -28,8 +28,8 @@ public class QuickInfo {
     private float alphaMax=1;
     private float alphaMin=0;
 
-    private float fadeInSpeed=100;
-    private float fadeOutSpeed=50;
+    private float fadeInSpeed=50;
+    private float fadeOutSpeed=25;
 
     private boolean doonce=false;
     private long zeitstempel;
