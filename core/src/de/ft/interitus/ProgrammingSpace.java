@@ -21,7 +21,6 @@ import de.ft.interitus.UI.Notification.Notification;
 import de.ft.interitus.UI.Notification.NotificationManager;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.PressedKeys;
-import de.ft.interitus.UI.UIElements.QuickInfo;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.popup.PopupHandler;
 import de.ft.interitus.UI.settings.subitems.subitem17;
@@ -38,6 +37,7 @@ import de.ft.interitus.utils.PositionSaver;
 import de.ft.interitus.utils.ShapeRenderer;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.io.File;
 
 
@@ -59,7 +59,6 @@ public class ProgrammingSpace extends ScreenAdapter {
     public static PressedKeys pressedKeys;
     public static float delta;
     public static Plugin nativ = new Native();
-
 
 
     public ProgrammingSpace() {
@@ -99,17 +98,10 @@ public class ProgrammingSpace extends ScreenAdapter {
         ThreadManager.init();
 
 
-
         System.gc(); //Clean RAM after Loading
 
+     Updater.initprogress();
 
-        if (Updater.isupdateavailable()) {
-            if (!new File(System.getProperty("user.dir") + "").canWrite()) {
-                NotificationManager.sendNotification(new Notification(AssetLoader.information, "Update verfügbar", "Ein Update ist verfügbar!\nBitte starte Interitus mit Admin-Rechten!"));
-            }else{
-                Updater.check(false);
-            }
-        }
 
 
 

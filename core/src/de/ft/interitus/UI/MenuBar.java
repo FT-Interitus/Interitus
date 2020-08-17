@@ -178,7 +178,7 @@ public class MenuBar {
                             public void result(Integer result) {
 
                                 if (result == yes) {
-                                    Updater.check(true);
+                                    Updater.check();
                                 }
 
                             }

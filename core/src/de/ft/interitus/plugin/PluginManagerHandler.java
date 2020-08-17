@@ -37,7 +37,7 @@ public class PluginManagerHandler {
 
 
                 try {
-                    PluginClassLoader.loadPlugin(f); //jedes gefundene Plugin bekommt den Befehel zu laden
+                    PluginLoader.loadPlugin(f); //jedes gefundene Plugin bekommt den Befehel zu laden
                     Plugincounter++;
                 } catch (Exception e) {
                     Programm.logger.severe("Plugin lade Fehler");

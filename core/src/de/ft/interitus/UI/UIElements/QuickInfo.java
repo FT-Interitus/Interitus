@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.UI.UIElements;
 
 import com.badlogic.gdx.Gdx;
@@ -8,7 +13,6 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import de.ft.interitus.ProgrammingSpace;
-import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
 
 public class QuickInfo {
