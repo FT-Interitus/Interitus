@@ -94,8 +94,26 @@ public class DataWire {
 
         ProgrammingSpace.BlockshapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         ProgrammingSpace.BlockshapeRenderer.setColor(0.234f, 0.247f,0.254f,1);
-        ProgrammingSpace.BlockshapeRenderer.rectLine(input_x,input_y,output_x,output_y,3);
-        ProgrammingSpace.BlockshapeRenderer.rectLine(input_x,input_y,output_x,output_y,3);
+        int parameter_middle_x=input_x+UIVar.parameter_width/2;
+        int parameter_middle_output_x;
+        if(param_output==null){
+            parameter_middle_output_x = output_x;
+
+        }else {
+            parameter_middle_output_x = output_x + UIVar.parameter_width / 2;
+        }
+
+        if(input_y<output_y) {
+            ProgrammingSpace.BlockshapeRenderer.rectLine(parameter_middle_x, input_y, parameter_middle_x, input_y - UIVar.first_curve_margin, UIVar.thickness);
+            ProgrammingSpace.BlockshapeRenderer.rectLine(parameter_middle_output_x, output_y, parameter_middle_output_x, output_y - UIVar.first_curve_margin, UIVar.thickness);
+            ProgrammingSpace.BlockshapeRenderer.rectLine(parameter_middle_x, input_y - UIVar.first_curve_margin, parameter_middle_output_x, input_y - UIVar.first_curve_margin, UIVar.thickness);
+            ProgrammingSpace.BlockshapeRenderer.rectLine(parameter_middle_output_x, input_y - UIVar.first_curve_margin, parameter_middle_output_x, output_y - UIVar.first_curve_margin, UIVar.thickness);
+        }else{
+            ProgrammingSpace.BlockshapeRenderer.rectLine(parameter_middle_x, input_y, parameter_middle_x, output_y-UIVar.first_curve_margin, UIVar.thickness);
+            ProgrammingSpace.BlockshapeRenderer.rectLine(parameter_middle_output_x, output_y, parameter_middle_output_x, output_y - UIVar.first_curve_margin, UIVar.thickness);
+            ProgrammingSpace.BlockshapeRenderer.rectLine(parameter_middle_x, output_y - UIVar.first_curve_margin, parameter_middle_output_x, output_y - UIVar.first_curve_margin, UIVar.thickness);
+            ProgrammingSpace.BlockshapeRenderer.rectLine(parameter_middle_output_x, output_y - UIVar.first_curve_margin, parameter_middle_output_x, output_y, UIVar.thickness);
+        }
         ProgrammingSpace.BlockshapeRenderer.end();
 
     }

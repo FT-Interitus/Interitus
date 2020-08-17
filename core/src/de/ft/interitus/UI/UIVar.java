@@ -37,4 +37,8 @@ public class UIVar {
     public static boolean isdialogeopend = false;
     public static boolean uilocked = false;
     public static boolean moveprogrammlock = false; //To not move the Programm when you Move the Cursor in a Textfield
+
+    //////DataWires///
+    public static final int first_curve_margin=30;
+    public static final int thickness=3;
 }

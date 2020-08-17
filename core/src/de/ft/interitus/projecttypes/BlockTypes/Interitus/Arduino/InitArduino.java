@@ -11,6 +11,7 @@ import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.compiler.Interitus.Arduino.ArduinoCompiler;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.actionblocks.SetPinMode;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.actionblocks.digitalWrite;
+import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.operationblocks.AdditionsBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.Wait;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.WhileLoopEnd;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.WhileLoopStart;
@@ -35,6 +36,7 @@ public class InitArduino {
         blocks.add(new SetPinMode(arduino));
         blocks.add(new digitalWrite(arduino));
         blocks.add(new TestOutput(arduino));
+        blocks.add(new AdditionsBlock(arduino));
 
 
         return arduino;

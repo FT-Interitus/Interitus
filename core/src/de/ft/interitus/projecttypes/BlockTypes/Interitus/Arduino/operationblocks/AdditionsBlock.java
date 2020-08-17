@@ -1,9 +1,4 @@
-/*
- * Copyright (c) 2020.
- * Copyright by Tim and Felix
- */
-
-package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf;
+package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.operationblocks;
 
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
@@ -18,23 +13,36 @@ import de.ft.interitus.utils.ArrayList;
 
 import java.awt.*;
 
-public class Wait extends PlatformSpecificBlock implements ArduinoBlock {
+public class AdditionsBlock extends PlatformSpecificBlock implements ArduinoBlock {
 
     ArrayList<Parameter> parameters = new ArrayList<>();
-    Parameter waitdauer;
+    Parameter Summand_1;
+    Parameter Summand_2;
+    Parameter Ergebnis;
 
 
-    public Wait(ProjectTypes arduino) {
-        super(arduino);
+    public AdditionsBlock(ProjectTypes type) {
+        super(type);
 
+        Summand_1=new Parameter("",AssetLoader.Parameter_IO,"1. Summand", "erster Summand", "", new ParameterType("float", false, false), true);
+        Summand_2=new Parameter("",AssetLoader.Plug_ZahlParameter,"2. Summand", "zweiter Summand", "", new ParameterType("float", false, false), true);
+        Ergebnis=new Parameter("",AssetLoader.Plug_ZahlParameter,"Ergebnis", "Das was bei einer Addition meistens raus kommt", "", new ParameterType("float", true, false), true);
+        parameters.add(Summand_1);
+        parameters.add(Summand_2);
+        parameters.add(Ergebnis);
 
-        waitdauer = new Parameter(0, AssetLoader.img_WaitBlock_warteZeit_Parameter, "Warte-Zeit", "Die Zeit die abgewartet werden soll", "ms",new ParameterType("float",false,false), true);
-
-
-        parameters.add(waitdauer);
 
     }
 
+    @Override
+    public String getCode() {
+        if( parameters.get(2).getDatawire()!=null){
+            return parameters.get(2).getDatawire().varName+ " = "+parameters.get(0).getParameter()+" + "+parameters.get(1).getParameter()+";";
+
+        }else {
+            return parameters.get(0).getParameter()+" + "+parameters.get(1).getParameter()+";";
+        }
+    }
 
     @Override
     public ArrayList<Parameter> getBlockParameter() {
@@ -43,12 +51,12 @@ public class Wait extends PlatformSpecificBlock implements ArduinoBlock {
 
     @Override
     public String getName() {
-        return "Wait";
+        return "Addition";
     }
 
     @Override
     public String getdescription() {
-        return null;
+        return "Zwei zahlen plus rechnen";
     }
 
     @Override
@@ -63,39 +71,40 @@ public class Wait extends PlatformSpecificBlock implements ArduinoBlock {
 
     @Override
     public BlockCategories getBlockCategoration() {
-        return BlockCategories.Programm_Sequence;
+        return BlockCategories.Data_Operation;
     }
 
     @Override
     public Texture getSmallImage() {
-        return AssetLoader.WaitBlock_smallimage;
+        return AssetLoader.DigitalWrite_smallimage;
     }
 
     @Override
     public Texture getImageRight() {
-        return AssetLoader.WaitBlock_right;
+        return AssetLoader.DigitalWrite_right;
     }
 
     @Override
     public Texture getImageLeft() {
-        return AssetLoader.WaitBlock_left;
+        return AssetLoader.DigitalWrite_left;
     }
 
     @Override
     public Texture getImageCenter() {
-        return AssetLoader.WaitBlock_middle;
+        return AssetLoader.DigitalWrite_middle;
     }
 
     @Override
     public Texture getDescriptionImage() {
-        return AssetLoader.WaitBlock_description_image;
+        return AssetLoader.DigitalWrite_description_image;
     }
 
 
     @Override
     public int getWidth() {
-        return 80;
+        return 200;
     }
+
 
     @Override
     public boolean canbedeleted() {
@@ -110,10 +119,5 @@ public class Wait extends PlatformSpecificBlock implements ArduinoBlock {
     @Override
     public boolean canhasleftconnector() {
         return true;
-    }
-
-    @Override
-    public String getCode() {
-        return "delay(" + this.parameters.get(0).getParameter() + ");";
     }
 }
