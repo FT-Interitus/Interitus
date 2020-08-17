@@ -47,7 +47,6 @@ import de.ft.interitus.network.bettertogether.SharedVar;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.ArrayList;
 import de.ft.interitus.utils.ShapeRenderer;
-import de.ft.interitus.utils.animation.Animation;
 
 import java.io.File;
 import java.util.Arrays;

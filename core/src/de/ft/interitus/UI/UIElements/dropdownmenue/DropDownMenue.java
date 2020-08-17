@@ -19,18 +19,17 @@ import de.ft.interitus.utils.ShapeRenderer;
 import java.util.ArrayList;
 
 public class DropDownMenue implements UIElement {
-     private static final  ArrayList<DropDownElementInterface> elements = new ArrayList<>();
+    private static final ArrayList<DropDownElementInterface> elements = new ArrayList<>();
+    private static final int RADIUS = 5;
+    private final Color bordercolor;
+    private final GlyphLayout glyphLayout = new GlyphLayout();
+    private final Button popupbutton = new Button();
     private int x;
     private int y;
     private int w = 100;
     private int h = 20;
-    private static final int RADIUS = 5;
     private boolean opened = false;
-    private final Color bordercolor;
-
     private DropDownElementInterface selectedElement = null;
-    private final GlyphLayout glyphLayout = new GlyphLayout();
-    private final Button popupbutton = new Button();
     private String defaultText;
     private int longestText = 0;
 
@@ -154,6 +153,11 @@ public class DropDownMenue implements UIElement {
             opened = false;
         }
 
+    }
+
+    @Override
+    public void setAlpha(float alpha) {
+    //TODO @Felix
     }
 
     public ArrayList<DropDownElementInterface> getElements() {

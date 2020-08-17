@@ -18,4 +18,6 @@ public interface UIElement {
 
     void draw();
 
+    void setAlpha(float alpha);
+
 }

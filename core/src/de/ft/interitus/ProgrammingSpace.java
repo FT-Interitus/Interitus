@@ -13,7 +13,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.ft.interitus.Block.Block;
@@ -22,8 +21,6 @@ import de.ft.interitus.UI.Notification.Notification;
 import de.ft.interitus.UI.Notification.NotificationManager;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.PressedKeys;
-import de.ft.interitus.UI.UIElements.UIElements.quickinfo.QuickInfo;
-import de.ft.interitus.UI.UIElements.UIElements.quickinfo.QuickInfoContent;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.popup.PopupHandler;
 import de.ft.interitus.UI.settings.subitems.subitem17;
@@ -64,11 +61,7 @@ public class ProgrammingSpace extends ScreenAdapter {
     public static Plugin nativ = new Native();
 
 
-
     public ProgrammingSpace() {
-
-
-
 
 
         pressedKeys = new PressedKeys();
@@ -157,87 +150,7 @@ public class ProgrammingSpace extends ScreenAdapter {
             UI.updatedragui(shapeRenderer, true, batch);
 
 
-            if (!Var.isloading) {
-                Block Temp = null;
-                Block Temp2 = null;
-                for (int i = 0; i < ProjectManager.getActProjectVar().visibleblocks.size(); i = i + 1) {
-                    Block block = ProjectManager.getActProjectVar().visibleblocks.get(i);
-
-                    try {
-                        batch.begin();
-                    } catch (IllegalStateException e) {
-                        batch.end();
-                        batch.begin();
-                    }
-
-                    try {
-                        if (block.isMarked()) {
-                            if (block.isMoving()) {
-                                Temp2 = block;
-                            } else {
-                                Temp = block;
-                            }
-                        } else {
-                            block.draw(batch, shapeRenderer, font);
-                        }
-
-                        batch.end();
-                        if (block.isMarked()) {
-
-
-                            if (BlockShortcuts.shortCut_deleteBlock.isPressed() && block.getBlocktype().canbedeleted()) {
-                                block.delete(false);
-                            }
-
-
-                        }
-
-
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-                if (Temp != null) {
-
-                    try {
-                        batch.begin();
-                        Temp.draw(batch, shapeRenderer, font);
-                        batch.end();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-
-
-                for (int i = 0; i < ProjectManager.getActProjectVar().visiblewires.size(); i++) {
-                    if (!Var.isloading) {
-                        ProjectManager.getActProjectVar().visiblewires.get(i).draw();
-                    }
-                }
-                for (int i = 0; i < ProjectManager.getActProjectVar().visibleWireNodes.size(); i++) {
-                    ProjectManager.getActProjectVar().visibleWireNodes.get(i).draw();
-                }
-
-                UI.updatedragui(shapeRenderer, false, batch);
-                BlockTappedBar.tb.setX(UIVar.BlockBarX + UIVar.BlockBarW / 2);
-                BlockTappedBar.tb.setY(UIVar.BlockBarY + UIVar.BlockBarH / 2 - (BlockTappedBar.tb.getHeight() + UIVar.abstandvonRand * 2) / 2);
-                BlockTappedBar.tb.draw();
-
-                if (Temp2 != null) {
-
-                    try {
-                        batch.begin();
-                        Temp2.draw(batch, shapeRenderer, font);
-
-
-                        batch.end();
-                    } catch (Exception ignored) {
-
-                    }
-                }
-
-
-            }
+            BlockDrawer.Draw();
 
 
             de.ft.interitus.UI.Viewport.update(delta);
@@ -270,15 +183,13 @@ public class ProgrammingSpace extends ScreenAdapter {
         }
 
 
-        //  testanim.startAnimation();
-//batch.draw(testanim.getAnimation(),50,50);
-        // pm.setBounds(700,200);
-
 
         NotificationManager.draw();
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
-            NotificationManager.sendNotification(new Notification(AssetLoader.information, "Wichtige Information", "\nEs steht kein Update bereit!"));
+          Notification notification =  new Notification(AssetLoader.information, "Wichtige Information", "\nEs steht kein Update bereit!");
+          notification.setButtonBar(new UIElementBar().addButton(new Button().setText("Test")));
+            NotificationManager.sendNotification(notification);
         }
 
         PopupHandler.drawPopUp();
@@ -294,7 +205,6 @@ public class ProgrammingSpace extends ScreenAdapter {
 
 
         de.ft.interitus.UI.Viewport.limitfps();
-
 
 
     }

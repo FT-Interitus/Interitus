@@ -40,7 +40,7 @@ public class Updater {
             String releases = "";
 
             try {
-                releases = DownloadFile.downloadFile("https://api.github.com/repos/ft-interitus/interitus/releases"); //TODO replace with Interitus
+                releases = DownloadFile.downloadFile("https://api.github.com/repos/ft-interitus/interitus/releases");
             } catch (IOException e) {
                 e.printStackTrace();
             }

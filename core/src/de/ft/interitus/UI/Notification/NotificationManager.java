@@ -157,6 +157,17 @@ public class NotificationManager {
 
                 ProgrammingSpace.shapeRenderer.end();
 
+            }else{
+
+               if(notifications.get(i).getButtonbar()!=null) {
+
+                   notifications.get(i).getButtonbar().setX(Gdx.graphics.getWidth() - IMAGE_MARGIN_RIGHT - MARGIN_RIGHT+notifications.get(i).getRollin());
+                   notifications.get(i).getButtonbar().setY(UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i))+PROGRESSBAR_MARGIN_BOTTOM);
+                   notifications.get(i).getButtonbar().setButton_h(10);
+                   notifications.get(i).getButtonbar().draw(notifications.get(i).getFadeout());
+
+               }
+
             }
 
 

@@ -6,6 +6,8 @@
 package de.ft.interitus.UI.Notification;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.kotcrab.vis.ui.widget.ButtonBar;
+import de.ft.interitus.UI.UIElements.UIElementBar;
 import de.ft.interitus.UI.UIElements.UIElements.Button;
 
 
@@ -27,6 +29,7 @@ public class Notification {
     private boolean displayed = false;
     private int rollin = 0;
     private boolean inrollin = true;
+    private UIElementBar buttonbar = null;
 
     /***
      * Creates a new Notification which can send to the NotificationManager
@@ -103,6 +106,20 @@ public class Notification {
      */
     public int getProgressbarvalue() {
         return progressbarvalue;
+    }
+
+    /**
+     * Set Buttons which will be displayed under the text
+     * Note that this will be ignored if ProgressBar Value is not -1
+     * @param buttonBar
+     * @return
+     */
+    public Notification setButtonBar(UIElementBar buttonBar) {
+
+        this.buttonbar = buttonBar;
+
+        return this;
+
     }
 
 
@@ -236,7 +253,9 @@ public class Notification {
         this.inrollin = inrollin;
     }
 
-
+    protected UIElementBar getButtonbar() {
+        return buttonbar;
+    }
 }
 
 

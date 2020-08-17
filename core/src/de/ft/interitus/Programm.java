@@ -130,9 +130,10 @@ public class Programm extends Game {
         saveprogrammdatatimer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                Data.close();
+                Data.close(false);
             }
         }, 1000 * 60 * 15, 1000 * 60 * 15);
+
 
 
         setScreen(new Loading());
@@ -144,7 +145,7 @@ public class Programm extends Game {
 
         ThreadManager.stopall();
 
-        Data.close();
+        Data.close(true);
 
         if (Var.savemode) {
             try {

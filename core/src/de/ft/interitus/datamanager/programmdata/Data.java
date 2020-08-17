@@ -351,7 +351,7 @@ public class Data {
     }
 
 
-    public static void close() {
+    public static void close(boolean closeprogramm) {
         //////Tastenkombinationen////////////////////////////////////
         FileHandle tastenkombinationen = Gdx.files.absolute(System.getProperty("user.home") + "/" + foldername + "/tastenkombinationen.json"); //Lade datei
         JSONObject tastenkombinationen_obj = new JSONObject(tastenkombinationen);
@@ -431,7 +431,9 @@ public class Data {
 
 
         try {
-            FolderUtils.deleteFileOrFolder(Path.of(System.getProperty("user.home") + "/" + foldername + "/temp/"));
+            if(closeprogramm) {
+                FolderUtils.deleteFileOrFolder(Path.of(System.getProperty("user.home") + "/" + foldername + "/temp/"));
+            }
         } catch (Exception e) {
             //i.e. File already deleted, no permission...
         }
