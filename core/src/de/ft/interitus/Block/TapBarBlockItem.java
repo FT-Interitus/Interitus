@@ -60,16 +60,7 @@ public class TapBarBlockItem implements TapItem {
         UI.UIbatch.end();
 
         //QuickInfo
-        /*
-        if(CheckMouse.isMouseover(this.x,this.y,this.w,this.h)){
-            UI.blockbarquickinfo.setText("abcde");
-            UI.blockbarquickinfo.fadeIn();
-            doonce=false;
-        }else if(!doonce){
-            doonce=true;
-            UI.blockbarquickinfo.fadeOut();
-        }
-        */
+
         if (CheckMouse.isMouseover(this.x, this.y, this.w, this.h)) {
             if (doonce) {
                 zeitstempel = System.currentTimeMillis() + 2000;
