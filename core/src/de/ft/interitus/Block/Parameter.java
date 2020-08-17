@@ -119,4 +119,15 @@ public class Parameter {
     public int getX() {
         return x;
     }
+
+
+
+    @Override
+    public String toString() {
+        if(super.toString()==null) {
+            return "param";
+        }else {
+            return super.toString();
+        }
+    }
 }

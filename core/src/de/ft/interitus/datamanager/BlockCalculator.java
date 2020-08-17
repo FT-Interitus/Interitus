@@ -5,6 +5,7 @@
 
 package de.ft.interitus.datamanager;
 
+import de.ft.interitus.Block.DataWire;
 import de.ft.interitus.Block.SaveBlock;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.projecttypes.ProjectManager;
@@ -78,9 +79,18 @@ public class BlockCalculator {
             if (ProjectManager.getActProjectVar().blocks.get(i).getBlocktype().getBlockParameter() != null) {
                 for (int j = 0; j < saveBlocks.get(i).getParameters().size(); j++) {
                     ProjectManager.getActProjectVar().blocks.get(i).getBlocktype().getBlockParameter().get(j).setParameter(saveBlocks.get(i).getParameters().get(j));
+                    if(saveBlocks.get(i).getWireconnectionsleft().get(j)!=-1) {
+                        ProjectManager.getActProjectVar().blocks.get(i).getBlocktype().getBlockParameter().get(j).setDatawire(new DataWire(  ProjectManager.getActProjectVar().blocks.get(i).getBlocktype().getBlockParameter().get(j),ProjectManager.getActProjectVar().blocks.get(saveBlocks.get(i).getWireconnectionsleft().get(j)).getBlocktype().getBlockParameter().get(saveBlocks.get(i).getWireconnectionsleft_index().get(j))));
+                    }
+
                 }
 
+
+
             }
+
+
+
         }
     }
 }

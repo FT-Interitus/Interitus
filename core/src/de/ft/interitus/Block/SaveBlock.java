@@ -9,6 +9,7 @@ package de.ft.interitus.Block;
 import de.ft.interitus.utils.ArrayList;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 
 public abstract class SaveBlock implements Serializable {
 
@@ -23,9 +24,11 @@ public abstract class SaveBlock implements Serializable {
     private int index_rechts = -1;
     private boolean isspacebetweenrightblock = false;
     private int platformspecificblockid = 0;
+    private ArrayList<Integer> wireconnectionsleft = new ArrayList<>();
+    private ArrayList<Integer> wireconnectionsleft_index = new ArrayList<>();
 
 
-    public SaveBlock(int x, int y, int index, int index_links, int index_rechts, boolean isspacebetweenrightblock, ArrayList<ArrayList<Integer>> nodes, int platformspecificblockid, ArrayList<String> parameters) {
+    public SaveBlock(int x, int y, int index, int index_links, int index_rechts, boolean isspacebetweenrightblock, ArrayList<ArrayList<Integer>> nodes, int platformspecificblockid, ArrayList<String> parameters, ArrayList<Integer> wireconnectionsleft,ArrayList<Integer> wireconnectionsleft_index) {
         this.x = x;
         this.y = y;
         this.index = index;
@@ -35,6 +38,8 @@ public abstract class SaveBlock implements Serializable {
         this.nodes = nodes;
         this.platformspecificblockid = platformspecificblockid;
         this.parameters = parameters;
+        this.wireconnectionsleft = wireconnectionsleft;
+        this.wireconnectionsleft_index = wireconnectionsleft_index;
 
 
     }
@@ -73,5 +78,13 @@ public abstract class SaveBlock implements Serializable {
 
     public ArrayList<String> getParameters() {
         return parameters;
+    }
+
+    public ArrayList<Integer> getWireconnectionsleft() {
+        return wireconnectionsleft;
+    }
+
+    public ArrayList<Integer> getWireconnectionsleft_index() {
+        return wireconnectionsleft_index;
     }
 }

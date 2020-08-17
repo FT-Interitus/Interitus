@@ -40,6 +40,14 @@ public class DataWire {
         Programm.logger.config("New Output");
     }
 
+    public DataWire(Parameter param_input,Parameter param_output) {
+        this.param_output = param_output;
+        this.param_input = param_input;
+
+        param_output.setDatawire(this);
+        param_input.setDatawire(this);
+    }
+
     public void draw() {
 
        input_x = param_input.getX();
