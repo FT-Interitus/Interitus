@@ -135,7 +135,7 @@ public class ProjectManager {
      */
     public static ProjectVar getActProjectVar() {
         if (Var.openprojects.size() == 0) {
-            Data.close();
+            Data.close(true);
             System.exit(0);
             return null;
         } else {
@@ -183,7 +183,7 @@ public class ProjectManager {
         }
 
         if(Var.openprojectindex-1==-1) {
-           Data.close();
+           Data.close(true);
             System.exit(0);
             return;
         }

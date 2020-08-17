@@ -144,7 +144,7 @@ public class MenuBar {
         menuItem_beenden = new MenuItem("Beenden", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                Data.close();
+                Data.close(true);
                 System.exit(0);
             }
         }).setShortcut("Alt+F4");

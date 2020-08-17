@@ -50,7 +50,7 @@ public class Restart {
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
-                            Data.close();
+                            Data.close(true);
                             System.exit(0);
                         }
 
