@@ -181,10 +181,6 @@ public class ProgrammingSpace extends ScreenAdapter {
         }
 
 
-        //  testanim.startAnimation();
-//batch.draw(testanim.getAnimation(),50,50);
-        // pm.setBounds(700,200);
-
 
         NotificationManager.draw();
 

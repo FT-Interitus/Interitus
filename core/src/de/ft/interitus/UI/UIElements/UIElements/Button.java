@@ -13,7 +13,7 @@ import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.utils.ShapeRenderer;
-import de.ft.interitus.utils.animation.Animation;
+import de.ft.interitus.UI.Animation;
 
 public class Button implements UIElement {
     public static boolean disablepresscolorchange = false;
