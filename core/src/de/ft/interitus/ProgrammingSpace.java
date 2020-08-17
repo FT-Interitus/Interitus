@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.ft.interitus.Block.Block;
@@ -21,6 +22,8 @@ import de.ft.interitus.UI.Notification.Notification;
 import de.ft.interitus.UI.Notification.NotificationManager;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.PressedKeys;
+import de.ft.interitus.UI.UIElements.UIElements.quickinfo.QuickInfo;
+import de.ft.interitus.UI.UIElements.UIElements.quickinfo.QuickInfoContent;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.popup.PopupHandler;
 import de.ft.interitus.UI.settings.subitems.subitem17;
@@ -61,7 +64,11 @@ public class ProgrammingSpace extends ScreenAdapter {
     public static Plugin nativ = new Native();
 
 
+
     public ProgrammingSpace() {
+
+
+
 
 
         pressedKeys = new PressedKeys();
@@ -287,6 +294,7 @@ public class ProgrammingSpace extends ScreenAdapter {
 
 
         de.ft.interitus.UI.Viewport.limitfps();
+
 
 
     }

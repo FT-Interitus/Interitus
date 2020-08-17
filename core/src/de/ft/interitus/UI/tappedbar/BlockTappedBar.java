@@ -10,6 +10,8 @@ import com.badlogic.gdx.graphics.Cursor;
 import de.ft.interitus.Block.TapBarBlockItem;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Programm;
+import de.ft.interitus.UI.UI;
+import de.ft.interitus.UI.UIElements.UIElements.quickinfo.QuickInfoContent;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.ProjectManager;
@@ -38,7 +40,8 @@ public class BlockTappedBar {
         Specials.clear();
         OwnBlocks.clear();
 
-
+        UI.blockbarquickinfo.disableall();
+        UI.blockbarquickinfo.getSelfCheckList().clear();
         for (int i = 0; i < ProjectManager.getActProjectVar().projectType.getProjectblocks().size(); i++) {
             try {
                 if (ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i).getBlockCategoration() != null) {
@@ -63,6 +66,7 @@ public class BlockTappedBar {
                             break;
 
                     }
+                    UI.blockbarquickinfo.addSelfCheckField(new QuickInfoContent(0,0,500,500,ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i).getName(),ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i).getName()));
                 }
             } catch (Exception e) {
                 e.printStackTrace();

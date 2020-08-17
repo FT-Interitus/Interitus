@@ -28,7 +28,7 @@ import java.util.TimerTask;
 
 public class ProjectManager {
     static Timer time = new Timer();
-    static Timer lock = new Timer();
+
 
     public static void init() {
 

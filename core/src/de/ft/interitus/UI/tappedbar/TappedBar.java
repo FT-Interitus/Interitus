@@ -7,6 +7,7 @@ package de.ft.interitus.UI.tappedbar;
 
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import de.ft.interitus.UI.ChangeListener;
 import de.ft.interitus.utils.ArrayList;
 
 public class TappedBar {
@@ -20,6 +21,7 @@ public class TappedBar {
     BitmapFont font = new BitmapFont();
     ArrayList<TapContent> taps = new ArrayList<>();
     TapContent selectetContent = null;
+    private ChangeListener listener = null;
 
     public TappedBar(int x, int y) {
         this.x = x;
@@ -51,6 +53,7 @@ public class TappedBar {
 
             if (tb.getTab_button().isjustPressednormal()) {
                 selectetContent = tb;
+                listener.change();
             }
 
 
@@ -140,5 +143,9 @@ public class TappedBar {
 
     public void setButtonabstand(int buttonabstand) {
         this.buttonabstand = buttonabstand;
+    }
+
+    public void setListener(ChangeListener listener) {
+        this.listener = listener;
     }
 }

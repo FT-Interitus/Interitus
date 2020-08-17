@@ -3,7 +3,7 @@
  * Copyright by Tim and Felix
  */
 
-package de.ft.interitus.UI.UIElements;
+package de.ft.interitus.UI.UIElements.UIElements.quickinfo;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -11,9 +11,13 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
+
+import java.util.ArrayList;
 
 public class QuickInfo {
     private String text;
@@ -29,16 +33,18 @@ public class QuickInfo {
     private boolean attachedToMouse=false;
 
     private float animationsAlphaPosition=0;
-    private float alphaMax=1;
-    private float alphaMin=0;
+    private static final float alphaMax=1;
+    private static final float alphaMin=0;
 
-    private float fadeInSpeed=50;
-    private float fadeOutSpeed=25;
+    private float fadeInSpeed=10;
+    private float fadeOutSpeed=15;
 
     private boolean doonce=false;
     private long zeitstempel;
     private Rectangle selfCheckRectangle= new Rectangle();
     private boolean selfCheck=false;
+
+    private ArrayList<QuickInfoContent>selfCheckList=new ArrayList<>();
 
 
 
@@ -51,7 +57,38 @@ public class QuickInfo {
         font = new BitmapFont();
     }
 
+
+    public QuickInfoContent getContentOverKey(String Key){
+        QuickInfoContent qic=null;
+        for(int i=0;i<selfCheckList.size();i++){
+            if(selfCheckList.get(i).getKey()==Key){
+                qic=selfCheckList.get(i);
+
+            }
+        }
+        return qic;
+    }
+
+    public void disableall(){
+        for(int i=0;i<selfCheckList.size();i++){
+            selfCheckList.get(i).setDisabled(true);
+        }
+    }
+
     public void RectangleSelfCheck(){
+        for(int i=0;i<this.selfCheckList.size();i++){
+            if(this.selfCheckList.get(i).isDisabled()) {
+                continue;
+            }
+            if(this.selfCheckList.get(i).check()){
+                this.text=this.selfCheckList.get(i).getText();
+                fadeIn();
+                break;
+            }else{
+                fadeOut();
+            }
+        }
+/*
         if (CheckMouse.isMouseover(selfCheckRectangle)) {
 
             if (doonce) {
@@ -70,7 +107,7 @@ public class QuickInfo {
 
             }
 
-        }
+        }*/
     }
 
     /**
@@ -89,10 +126,15 @@ public class QuickInfo {
                 animationsAlphaPosition+=alphaMax/fadeInSpeed;
             }
         }else if(!shown){
-            if(animationsAlphaPosition>=alphaMin+alphaMax/fadeInSpeed){
+            if(animationsAlphaPosition>=alphaMin){
                 animationsAlphaPosition-=alphaMax/fadeOutSpeed;
             }
         }
+
+        if(animationsAlphaPosition<0) {
+            animationsAlphaPosition=0;
+        }
+
         this.glyphLayout.setText(this.font,this.text);
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA); //Enalble Alpha Rendering
@@ -102,11 +144,11 @@ public class QuickInfo {
         ProgrammingSpace.shapeRenderer.roundendrect(this.x,this.y,glyphLayout.width+abstandvonrand*2,glyphLayout.height+abstandvonrand*2,eckenradius);
         ProgrammingSpace.shapeRenderer.end();
 
-        ProgrammingSpace.batch.begin();
+        UI.UIbatch.begin();
         textColor.a=animationsAlphaPosition;
         font.setColor(textColor);
-        font.draw(ProgrammingSpace.batch,glyphLayout,this.x+abstandvonrand,this.y+glyphLayout.height+abstandvonrand);
-        ProgrammingSpace.batch.end();
+        font.draw(UI.UIbatch,glyphLayout,this.x+abstandvonrand,this.y+glyphLayout.height+abstandvonrand);
+        UI.UIbatch.end();
     }
 
     /**
@@ -127,6 +169,18 @@ public class QuickInfo {
             shown=false;
             //...
         }
+    }
+
+    public void addSelfCheckField(QuickInfoContent QIC){
+        this.selfCheckList.add(QIC);
+    }
+
+    public void setSelfCheckList(ArrayList<QuickInfoContent> selfCheckList) {
+        this.selfCheckList = selfCheckList;
+    }
+
+    public ArrayList<QuickInfoContent> getSelfCheckList() {
+        return selfCheckList;
     }
 
     public String getText() {
@@ -229,13 +283,7 @@ public class QuickInfo {
         return fadeOutSpeed;
     }
 
-    public void setAlphaMax(float alphaMax) {
-        this.alphaMax = alphaMax;
-    }
 
-    public void setAlphaMin(float alphaMin) {
-        this.alphaMin = alphaMin;
-    }
 
     public void setFadeInSpeed(float fadeInSpeed) {
         this.fadeInSpeed = fadeInSpeed;
@@ -249,8 +297,9 @@ public class QuickInfo {
         return attachedToMouse;
     }
 
-    public void setAttachedToMouse(boolean attachedToMouse) {
+    public QuickInfo setAttachedToMouse(boolean attachedToMouse) {
         this.attachedToMouse = attachedToMouse;
+        return this;
     }
 
     public Rectangle getSelfCheckRectangle() {
@@ -265,8 +314,9 @@ public class QuickInfo {
         this.selfCheckRectangle = selfCheckRectangle;
     }
 
-    public void setSelfCheck(boolean selfCheck) {
+    public QuickInfo setSelfCheck(boolean selfCheck) {
         this.selfCheck = selfCheck;
+        return this;
     }
 
     public boolean isDoonce() {
@@ -284,6 +334,7 @@ public class QuickInfo {
     public void setZeitstempel(long zeitstempel) {
         this.zeitstempel = zeitstempel;
     }
+
 }
 
 

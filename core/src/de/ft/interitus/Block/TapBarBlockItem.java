@@ -60,34 +60,13 @@ public class TapBarBlockItem implements TapItem {
         UI.UIbatch.end();
 
         //QuickInfo
-
-        if (CheckMouse.isMouseover(this.x, this.y, this.w, this.h)) {
-            if (doonce) {
-                zeitstempel = System.currentTimeMillis() + 2000;
-                doonce = false;
-            }
-            if (zeitstempel < System.currentTimeMillis()) {
-                UI.blockbarquickinfo.setText(this.psb.getName());
-                UI.blockbarquickinfo.setX(Gdx.input.getX());
-                UI.blockbarquickinfo.setY(Gdx.graphics.getHeight()-Gdx.input.getY());
-                UI.blockbarquickinfo.fadeIn();
-            }
-        } else {
-            if (!doonce) {
-                doonce = true;
-                UI.blockbarquickinfo.fadeOut();
-
-            }
+        if(UI.blockbarquickinfo.getContentOverKey(psb.getName())!=null) {
+            UI.blockbarquickinfo.getContentOverKey(psb.getName()).setDisabled(false);
+            UI.blockbarquickinfo.getContentOverKey(psb.getName()).setMouseoverRect(this.x, this.y, this.w, this.h);
+            System.out.println(UI.blockbarquickinfo.getContentOverKey(psb.getName()).getKey());
 
         }
-        /*
-        UI.blockbarquickinfo.setText(psb.getName());
-        UI.blockbarquickinfo.setSelfCheckRectangle(new Rectangle(this.x,this.y,this.w,this.h));
-        UI.blockbarquickinfo.setDoonce(doonce);
-        UI.blockbarquickinfo.setZeitstempel(zeitstempel);
-        UI.blockbarquickinfo.RectangleSelfCheck();
-        doonce=UI.blockbarquickinfo.isDoonce();
-        zeitstempel=UI.blockbarquickinfo.getZeitstempel();*/
+
     }
 
     @Override

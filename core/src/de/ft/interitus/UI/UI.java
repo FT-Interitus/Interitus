@@ -22,11 +22,12 @@ import com.kotcrab.vis.ui.widget.*;
 import com.kotcrab.vis.ui.widget.MenuBar;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.DisplayErrors;
+import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.ManualConfig.ManualConfigUI;
 import de.ft.interitus.UI.Notification.Notification;
 import de.ft.interitus.UI.Notification.NotificationManager;
-import de.ft.interitus.UI.UIElements.QuickInfo;
+import de.ft.interitus.UI.UIElements.UIElements.quickinfo.QuickInfo;
 import de.ft.interitus.UI.UIElements.TabBar.TabBar;
 import de.ft.interitus.UI.UIElements.UIElementBar;
 import de.ft.interitus.UI.UIElements.UIElements.Button;
@@ -440,9 +441,14 @@ public class UI {
 
         tabbar = new TabBar();
 
-        blockbarquickinfo=new QuickInfo(0,0,"");
-        blockbarquickinfo.setAttachedToMouse(true);
-        blockbarquickinfo.setSelfCheck(false);
+        blockbarquickinfo=new QuickInfo(0,0,"").setAttachedToMouse(true).setSelfCheck(true);
+        BlockTappedBar.tb.setListener(new de.ft.interitus.UI.ChangeListener() {
+            @Override
+            public void change() {
+                blockbarquickinfo.disableall();
+            }
+        });
+
     }
 
     public static void update() {
