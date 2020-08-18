@@ -84,9 +84,10 @@ public class DataWire {
         if((UIVar.DataWire[1][0]<=UIVar.DataWire[2][0] && (moving[0] || CheckMouse.isMouseover(UIVar.DataWire[1][0],UIVar.DataWire[1][1]-UIVar.DataWireMouseKollisionsFeld,UIVar.DataWire[2][0]-UIVar.DataWire[1][0],UIVar.DataWireMouseKollisionsFeld*2))) || (UIVar.DataWire[1][0]>UIVar.DataWire[2][0] && (moving[0] || CheckMouse.isMouseover(UIVar.DataWire[2][0],UIVar.DataWire[1][1]-UIVar.DataWireMouseKollisionsFeld,UIVar.DataWire[1][0]-UIVar.DataWire[2][0],UIVar.DataWireMouseKollisionsFeld*2)))){
             Gdx.graphics.setSystemCursor(SystemCursor.VerticalResize);
             setCorsoronlyonce=true;
-
-            moving[0]=true;
-            if(Gdx.input.isButtonPressed(0)){
+            if(Gdx.input.isButtonJustPressed(0)) {
+                moving[0] = true;
+            }
+            if(Gdx.input.isButtonPressed(0) && moving[0]){
                 if(UIVar.doonce) {
                     UIVar.merkpos.set(Gdx.input.getX(), Gdx.input.getY(), verschiebung_4_VertikaleInput);
                     UIVar.doonce=false;
@@ -99,8 +100,10 @@ public class DataWire {
         }else if((UIVar.DataWire[2][1]>UIVar.DataWire[3][1]  && (moving[1] || CheckMouse.isMouseover(UIVar.DataWire[2][0]-UIVar.DataWireMouseKollisionsFeld,UIVar.DataWire[3][1],UIVar.DataWireMouseKollisionsFeld*2, UIVar.DataWire[2][1]-UIVar.DataWire[3][1]))) || (UIVar.DataWire[2][1]<=UIVar.DataWire[3][1]  && (moving[1] || CheckMouse.isMouseover(UIVar.DataWire[2][0]-UIVar.DataWireMouseKollisionsFeld,UIVar.DataWire[2][1],UIVar.DataWireMouseKollisionsFeld*2, UIVar.DataWire[3][1]-UIVar.DataWire[2][1])))){
             Gdx.graphics.setSystemCursor(SystemCursor.HorizontalResize);
             setCorsoronlyonce=true;
-            moving[1]=true;
-            if(Gdx.input.isButtonPressed(0)){
+            if(Gdx.input.isButtonJustPressed(0)) {
+                moving[1] = true;
+            }
+            if(Gdx.input.isButtonPressed(0)  && moving[1]){
                 if(UIVar.doonce) {
                     UIVar.merkpos.set(Gdx.input.getX(), Gdx.input.getY(), verschiebung_2_HorizontaleInput);
                     UIVar.doonce=false;
@@ -114,8 +117,10 @@ public class DataWire {
             Gdx.graphics.setSystemCursor(SystemCursor.VerticalResize);
             setCorsoronlyonce=true;
 
-            moving[2]=true;
-            if(Gdx.input.isButtonPressed(0)){
+            if(Gdx.input.isButtonJustPressed(0)) {
+                moving[2] = true;
+            }
+            if(Gdx.input.isButtonPressed(0)  && moving[2]){
                 if(UIVar.doonce) {
                     UIVar.merkpos.set(Gdx.input.getX(), Gdx.input.getY(), verschiebung_1_Horizontale);
                     UIVar.doonce=false;
@@ -129,8 +134,10 @@ public class DataWire {
             Gdx.graphics.setSystemCursor(SystemCursor.HorizontalResize);
             setCorsoronlyonce=true;
 
-            moving[3]=true;
-            if(Gdx.input.isButtonPressed(0)){
+            if(Gdx.input.isButtonJustPressed(0)) {
+                moving[3] = true;
+            }
+            if(Gdx.input.isButtonPressed(0)  && moving[3]){
                 if(UIVar.doonce) {
                     UIVar.merkpos.set(Gdx.input.getX(), Gdx.input.getY(), verschiebung_3_HorizontaleOutput);
                     UIVar.doonce=false;
@@ -144,8 +151,10 @@ public class DataWire {
             Gdx.graphics.setSystemCursor(SystemCursor.VerticalResize);
             setCorsoronlyonce=true;
 
-            moving[4]=true;
-            if(Gdx.input.isButtonPressed(0)){
+            if(Gdx.input.isButtonJustPressed(0)) {
+                moving[4] = true;
+            }
+            if(Gdx.input.isButtonPressed(0)  && moving[4]){
                 if(UIVar.doonce) {
                     UIVar.merkpos.set(Gdx.input.getX(), Gdx.input.getY(), verschiebung_5_VertikaleInput);
                     UIVar.doonce=false;
