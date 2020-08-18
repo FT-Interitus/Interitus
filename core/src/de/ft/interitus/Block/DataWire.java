@@ -96,29 +96,45 @@ public class DataWire {
         ProgrammingSpace.BlockshapeRenderer.setColor(0.234f, 0.247f,0.254f,1);
         int parameter_middle_x=input_x+UIVar.parameter_width/2;
         int parameter_middle_output_x;
+
+        int switchposition=10;
         if(param_output==null){
             parameter_middle_output_x = output_x;
-
         }else {
             parameter_middle_output_x = output_x + UIVar.parameter_width / 2;
         }
-
-        if(input_y<output_y) {
+        if(output_y-UIVar.first_curve_margin-80>UIVar.DataWire_horizontal_Y+switchposition || UIVar.DataWire_OutputHorizontale_Y==0) {
             UIVar.DataWire_horizontal_Y=input_y - UIVar.first_curve_margin-100;
             UIVar.DataWire_InputVertikale_X=parameter_middle_x-50;
             UIVar.DataWire_OutputVertikale_X=parameter_middle_output_x+50;
-            ProgrammingSpace.BlockshapeRenderer.rectLine(parameter_middle_x, input_y, parameter_middle_x, input_y-UIVar.first_curve_margin,UIVar.thickness);//Verlängerung an input
-            ProgrammingSpace.BlockshapeRenderer.rectLine(parameter_middle_x, input_y-UIVar.first_curve_margin, UIVar.DataWire_InputVertikale_X,input_y-UIVar.first_curve_margin,UIVar.thickness);//input horizontal verlängerung
-            ProgrammingSpace.BlockshapeRenderer.rectLine(UIVar.DataWire_InputVertikale_X, input_y-UIVar.first_curve_margin, UIVar.DataWire_InputVertikale_X, UIVar.DataWire_horizontal_Y, UIVar.thickness);//vertikale an input
-            ProgrammingSpace.BlockshapeRenderer.rectLine(parameter_middle_output_x, output_y, parameter_middle_output_x, output_y - UIVar.first_curve_margin, UIVar.thickness);//Verlängerung an output
+            UIVar.DataWire_InputHorizontale_Y=input_y-UIVar.first_curve_margin-20;
+            UIVar.test=output_y;
+            UIVar.DataWire_OutputHorizontale_Y=UIVar.test-UIVar.first_curve_margin-80;
+
+            ProgrammingSpace.BlockshapeRenderer.rectLine(parameter_middle_x, input_y, parameter_middle_x, UIVar.DataWire_InputHorizontale_Y,UIVar.thickness);//Verlängerung an input
+            ProgrammingSpace.BlockshapeRenderer.rectLine(parameter_middle_x, UIVar.DataWire_InputHorizontale_Y, UIVar.DataWire_InputVertikale_X,UIVar.DataWire_InputHorizontale_Y,UIVar.thickness);//input horizontal verlängerung
+            ProgrammingSpace.BlockshapeRenderer.rectLine(UIVar.DataWire_InputVertikale_X, UIVar.DataWire_InputHorizontale_Y, UIVar.DataWire_InputVertikale_X, UIVar.DataWire_horizontal_Y, UIVar.thickness);//vertikale an input
             ProgrammingSpace.BlockshapeRenderer.rectLine(UIVar.DataWire_InputVertikale_X, UIVar.DataWire_horizontal_Y, UIVar.DataWire_OutputVertikale_X, UIVar.DataWire_horizontal_Y, UIVar.thickness);//Horizontale
-            ProgrammingSpace.BlockshapeRenderer.rectLine(UIVar.DataWire_OutputVertikale_X,output_y-UIVar.first_curve_margin, parameter_middle_output_x, output_y-UIVar.first_curve_margin, UIVar.thickness);//output horizontal verlängerung
-            ProgrammingSpace.BlockshapeRenderer.rectLine(UIVar.DataWire_OutputVertikale_X, UIVar.DataWire_horizontal_Y, UIVar.DataWire_OutputVertikale_X, output_y - UIVar.first_curve_margin, UIVar.thickness);//Vertikale an output
-        }else{
-            ProgrammingSpace.BlockshapeRenderer.rectLine(parameter_middle_x, input_y, parameter_middle_x, output_y-UIVar.first_curve_margin, UIVar.thickness);
-            ProgrammingSpace.BlockshapeRenderer.rectLine(parameter_middle_output_x, output_y, parameter_middle_output_x, output_y - UIVar.first_curve_margin, UIVar.thickness);
-            ProgrammingSpace.BlockshapeRenderer.rectLine(parameter_middle_x, output_y - UIVar.first_curve_margin, parameter_middle_output_x, output_y - UIVar.first_curve_margin, UIVar.thickness);
-            ProgrammingSpace.BlockshapeRenderer.rectLine(parameter_middle_output_x, output_y - UIVar.first_curve_margin, parameter_middle_output_x, output_y, UIVar.thickness);
+            ProgrammingSpace.BlockshapeRenderer.rectLine(UIVar.DataWire_OutputVertikale_X, UIVar.DataWire_horizontal_Y, UIVar.DataWire_OutputVertikale_X, UIVar.DataWire_OutputHorizontale_Y, UIVar.thickness);//Vertikale an output
+            ProgrammingSpace.BlockshapeRenderer.rectLine(UIVar.DataWire_OutputVertikale_X,UIVar.DataWire_OutputHorizontale_Y, parameter_middle_output_x, UIVar.DataWire_OutputHorizontale_Y, UIVar.thickness);//output horizontal verlängerung
+            ProgrammingSpace.BlockshapeRenderer.rectLine(parameter_middle_output_x, UIVar.test, parameter_middle_output_x, UIVar.DataWire_OutputHorizontale_Y, UIVar.thickness);//Verlängerung an output
+        }else {/*
+            UIVar.DataWire_horizontal_Y=output_y - UIVar.first_curve_margin-100+switchposition;
+            UIVar.DataWire_InputVertikale_X=parameter_middle_x-50;
+            UIVar.DataWire_OutputVertikale_X=parameter_middle_output_x+50;
+            UIVar.DataWire_InputHorizontale_Y=input_y-UIVar.first_curve_margin-20;
+            UIVar.test=output_y;
+
+            UIVar.DataWire_OutputHorizontale_Y=UIVar.test-UIVar.first_curve_margin-80;
+
+            ProgrammingSpace.BlockshapeRenderer.rectLine(parameter_middle_x, input_y, parameter_middle_x, UIVar.DataWire_InputHorizontale_Y,UIVar.thickness);//Verlängerung an input
+            ProgrammingSpace.BlockshapeRenderer.rectLine(parameter_middle_x, UIVar.DataWire_InputHorizontale_Y, UIVar.DataWire_InputVertikale_X,UIVar.DataWire_InputHorizontale_Y,UIVar.thickness);//input horizontal verlängerung
+            ProgrammingSpace.BlockshapeRenderer.rectLine(UIVar.DataWire_InputVertikale_X, UIVar.DataWire_InputHorizontale_Y, UIVar.DataWire_InputVertikale_X, UIVar.DataWire_horizontal_Y, UIVar.thickness);//vertikale an input
+            ProgrammingSpace.BlockshapeRenderer.rectLine(UIVar.DataWire_InputVertikale_X, UIVar.DataWire_horizontal_Y, UIVar.DataWire_OutputVertikale_X, UIVar.DataWire_horizontal_Y, UIVar.thickness);//Horizontale
+            ProgrammingSpace.BlockshapeRenderer.rectLine(UIVar.DataWire_OutputVertikale_X, UIVar.DataWire_horizontal_Y, UIVar.DataWire_OutputVertikale_X, UIVar.DataWire_OutputHorizontale_Y, UIVar.thickness);//Vertikale an output
+            ProgrammingSpace.BlockshapeRenderer.rectLine(UIVar.DataWire_OutputVertikale_X,UIVar.DataWire_OutputHorizontale_Y, parameter_middle_output_x, UIVar.DataWire_OutputHorizontale_Y, UIVar.thickness);//output horizontal verlängerung
+            ProgrammingSpace.BlockshapeRenderer.rectLine(parameter_middle_output_x, UIVar.test, parameter_middle_output_x, UIVar.DataWire_OutputHorizontale_Y, UIVar.thickness);//Verlängerung an output
+        */
         }
         ProgrammingSpace.BlockshapeRenderer.end();
 
