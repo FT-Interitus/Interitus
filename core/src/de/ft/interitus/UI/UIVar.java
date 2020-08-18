@@ -5,6 +5,9 @@
 
 package de.ft.interitus.UI;
 
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
+
 public class UIVar {
     public static final int rechtseinraste = 300;
     public static final int untenkante = 125;
@@ -48,4 +51,7 @@ public class UIVar {
     public static int DataWire_OutputHorizontale_Y=0;
     public static int[][] DataWire = new int[8][2];
     public static final int DataWireMouseKollisionsFeld=3;
+    public static Vector3 merkpos=new Vector3();
+    public static boolean[] moving=new boolean[10];
+    public static boolean doonce=true;
 }
