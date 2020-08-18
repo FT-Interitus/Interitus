@@ -46,4 +46,5 @@ public class UIVar {
     public static int DataWire_OutputVertikale_X=0;
     public static int DataWire_InputHorizontale_Y=0;
     public static int DataWire_OutputHorizontale_Y=0;
+    public static int[][] DataWire = new int[9][2];
 }
