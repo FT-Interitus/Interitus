@@ -497,6 +497,16 @@ public abstract class Block implements VisibleObjects {
     public void delete(boolean complete) { //Der Block soll gelöscht werden (complete beduetet das alle Blöcke gelöscht werden sollen)
 
 
+        for(Parameter parameter:blocktype.getBlockParameter())   {
+            if(parameter.getDatawire()==null) {
+                continue;
+            }
+
+                parameter.getDatawire().delete();
+
+        }
+
+
         if (ProjectManager.getActProjectVar().Blockwitherrors.contains(this.getIndex())) {
             ProjectManager.getActProjectVar().Blockwitherrors.remove((Object) this.getIndex());
         }

@@ -134,4 +134,21 @@ public class DataWire {
         this.param_output = param_output;
     }
 
+    public void delete() {
+
+        try {
+            param_input.setDatawire(null);
+        }catch (NullPointerException e){
+
+        }
+
+        try {
+            param_output.setDatawire(null);
+        }catch (NullPointerException e) {
+
+        }
+        param_output =null;
+        param_input = null;
+
+    }
 }
