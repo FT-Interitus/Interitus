@@ -41,4 +41,9 @@ public class UIVar {
     //////DataWires///
     public static final int first_curve_margin=30;
     public static final int thickness=3;
+    public static int DataWire_horizontal_Y=0;
+    public static int DataWire_InputVertikale_X=0;
+    public static int DataWire_OutputVertikale_X=0;
+    public static int DataWire_InputHorizontale_Y=0;
+    public static int DataWire_OutputHorizontale_Y=0;
 }
