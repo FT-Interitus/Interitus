@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.operationblocks;
 
 import com.badlogic.gdx.graphics.Texture;
@@ -37,7 +42,7 @@ public class AdditionsBlock extends PlatformSpecificBlock implements ArduinoBloc
     @Override
     public String getCode() {
         if( parameters.get(2).getDatawire()!=null){
-            return parameters.get(2).getDatawire().varName+ " = "+parameters.get(0).getParameter()+" + "+parameters.get(1).getParameter()+";";
+            return parameters.get(2).getVarName()+ " = "+parameters.get(0).getParameter()+" + "+parameters.get(1).getParameter()+";";
 
         }else {
             return parameters.get(0).getParameter()+" + "+parameters.get(1).getParameter()+";";

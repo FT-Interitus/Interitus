@@ -79,8 +79,15 @@ public class BlockCalculator {
             if (ProjectManager.getActProjectVar().blocks.get(i).getBlocktype().getBlockParameter() != null) {
                 for (int j = 0; j < saveBlocks.get(i).getParameters().size(); j++) {
                     ProjectManager.getActProjectVar().blocks.get(i).getBlocktype().getBlockParameter().get(j).setParameter(saveBlocks.get(i).getParameters().get(j));
-                    if(saveBlocks.get(i).getWireconnectionsleft().get(j)!=-1) {
-                        ProjectManager.getActProjectVar().blocks.get(i).getBlocktype().getBlockParameter().get(j).setDatawire(new DataWire(  ProjectManager.getActProjectVar().blocks.get(i).getBlocktype().getBlockParameter().get(j),ProjectManager.getActProjectVar().blocks.get(saveBlocks.get(i).getWireconnectionsleft().get(j)).getBlocktype().getBlockParameter().get(saveBlocks.get(i).getWireconnectionsleft_index().get(j))));
+
+                    for(int k=0;k<saveBlocks.get(i).getDatawires().get(j).size();k++) {
+                        if(saveBlocks.get(i).getDatawires().get(j).get(k)==-1) {
+                            continue;
+                        }
+                        if(saveBlocks.get(i).getDatawiresindex().get(j).get(k)==-1) {
+                            continue;
+                        }
+                        new DataWire(ProjectManager.getActProjectVar().blocks.get(i).getBlocktype().getBlockParameter().get(j),ProjectManager.getActProjectVar().blocks.get(saveBlocks.get(i).getDatawires().get(j).get(k)).getBlocktype().getBlockParameter().get(saveBlocks.get(i).getDatawiresindex().get(j).get(k)));
                     }
 
                 }

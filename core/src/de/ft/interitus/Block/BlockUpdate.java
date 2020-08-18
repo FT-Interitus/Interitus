@@ -254,18 +254,18 @@ public abstract class BlockUpdate extends Thread {
 /////////////////////////////Datawire erzeigen
                         if(block.getBlocktype()!=null&&block.getBlocktype().getBlockParameter()!=null) {
                             for (int i = 0; i < block.getBlocktype().getBlockParameter().size(); i++) {
-                                if (block.getBlocktype().getBlockParameter().get(i).getParameterType().isOutput()  && block.getBlocktype().getBlockParameter().get(i).getDatawire() == null) {
+                                if (block.getBlocktype().getBlockParameter().get(i).getParameterType().isOutput() ) {
 
 
                                     if(CheckKollision.checkmousewithobject(block.getBlocktype().getBlockParameter().get(i).getX(),block.getBlocktype().getBlockParameter().get(i).getY(),UIVar.parameter_width,UIVar.parameter_height, Unproject.unproject())&&Gdx.input.isButtonJustPressed(0)){
-                                        block.getBlocktype().getBlockParameter().get(i).setDatawire(new DataWire(block.getBlocktype().getBlockParameter().get(i)));
+                                        block.getBlocktype().getBlockParameter().get(i).getDatawire().add(new DataWire(block.getBlocktype().getBlockParameter().get(i)));
                                         block.setMoving(false);
+                                        ProjectManager.getActProjectVar().moveingdatawire = block.getBlocktype().getBlockParameter().get(i).getDatawire().getLastObject();
 
                                     }
 
 
 
-                                    ProjectManager.getActProjectVar().moveingdatawire = block.getBlocktype().getBlockParameter().get(i).getDatawire();
                                 }
                             }
                         }

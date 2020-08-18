@@ -180,7 +180,10 @@ public class UI {
 
                             continue;
                         }
-                        if(markedblock.getBlocktype().getBlockParameter().get(i).getParameterType().isDropdown()) {
+
+
+
+                        if(markedblock.getBlocktype().getBlockParameter().get(i).getParameterType().isDropdown()&& !(markedblock.getBlocktype().getBlockParameter().get(i).getDatawire().size() >0)) {
                             VisSelectBox<String> selectBox = new VisSelectBox<>();
                             selectBox.setItems(markedblock.getBlocktype().getBlockParameter().get(i).getParameterType().getSelectables());
 
@@ -206,8 +209,14 @@ public class UI {
 
                         }else {
 
+                           if( markedblock.getBlocktype().getBlockParameter().get(i).getDatawire().size()>0) {
+                               textFielder.add(new VisTextField("Per Leitung Übertragen")); //TODO design
+                               ((VisTextField) textFielder.getLastObject()).setDisabled(true);
 
-                            textFielder.add(new VisTextField(markedblock.getBlocktype().getBlockParameter().get(i).getParameter().toString()));
+                           }else{
+                               textFielder.add(new VisTextField(markedblock.getBlocktype().getBlockParameter().get(i).getParameter().toString()));
+
+                           }
                             textFielder.get(textFielder.size() - 1).addListener(new ChangeListener() {
                                 @Override
                                 public void changed(ChangeEvent event, Actor actor) {

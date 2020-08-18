@@ -8,8 +8,10 @@ package de.ft.interitus.Block;
 
 import com.badlogic.gdx.graphics.Texture;
 
-public class Parameter {
+import de.ft.interitus.utils.ArrayList;
 
+public class Parameter {
+    private String varName;
     private final String Unit;
     private Object Parameter;
     private Texture ParameterTexture;
@@ -17,10 +19,10 @@ public class Parameter {
     private String ParameterDescription;
     private Block block;
     private ParameterType parameterType;
-    private DataWire Datawire = null;
+    private ArrayList<DataWire> Datawire = new ArrayList<>();
     private int x =0;
     private int y=0;
-    private boolean varname = false;
+    private final boolean varname;
 
     public Parameter(Object parameter, Texture ParameterTexture, String ParameterName, String ParameterDescription, String Unit, ParameterType parameterType, boolean varname) {
         this.ParameterTexture = ParameterTexture;
@@ -39,8 +41,8 @@ public class Parameter {
         if(!varname) {
             return Parameter;
         }
-        if(getDatawire()!=null) {
-            return getDatawire().varName;
+        if(getDatawire().size()>0) {
+            return Datawire.get(0).getParam_input().getVarName();
         }else {
             return Parameter;
         }
@@ -96,11 +98,11 @@ public class Parameter {
 
 
 
-    public DataWire getDatawire() {
+    public ArrayList<DataWire> getDatawire() {
         return Datawire;
     }
 
-    public void setDatawire(DataWire datawire) {
+    protected void setDatawire(ArrayList<DataWire> datawire) {
         Datawire = datawire;
     }
 
@@ -129,5 +131,13 @@ public class Parameter {
         }else {
             return super.toString();
         }
+    }
+
+    public String getVarName() {
+        return varName;
+    }
+
+    public void setVarName(String varName) {
+        this.varName = varName;
     }
 }

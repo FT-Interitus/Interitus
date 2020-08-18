@@ -53,12 +53,12 @@ public class ArduinoCompiler implements Compiler {
                     continue;
                 }
 
-                if(parameter.getDatawire().getParam_input()!=parameter) {
-                    continue;
-                }
+               if(parameter.getDatawire().size()<1) {
+                   continue;
+               }
 
-                parameter.getDatawire().varName = prefix+i;
-                Programm+=parameter.getParameterType().getTyp()+" "+parameter.getDatawire().varName+";\n";
+                parameter.setVarName(prefix+i);
+                Programm+=parameter.getParameterType().getTyp()+" "+parameter.getVarName()+";\n";
                   i++;
             }
 

@@ -24,11 +24,12 @@ public abstract class SaveBlock implements Serializable {
     private int index_rechts = -1;
     private boolean isspacebetweenrightblock = false;
     private int platformspecificblockid = 0;
-    private ArrayList<Integer> wireconnectionsleft = new ArrayList<>();
-    private ArrayList<Integer> wireconnectionsleft_index = new ArrayList<>();
+    private ArrayList<ArrayList<Integer>> datawires;
+    private ArrayList<ArrayList<Integer>> datawiresindex;
 
 
-    public SaveBlock(int x, int y, int index, int index_links, int index_rechts, boolean isspacebetweenrightblock, ArrayList<ArrayList<Integer>> nodes, int platformspecificblockid, ArrayList<String> parameters, ArrayList<Integer> wireconnectionsleft,ArrayList<Integer> wireconnectionsleft_index) {
+
+    public SaveBlock(int x, int y, int index, int index_links, int index_rechts, boolean isspacebetweenrightblock, ArrayList<ArrayList<Integer>> nodes, int platformspecificblockid, ArrayList<String> parameters, ArrayList<ArrayList<Integer>> datawires,ArrayList<ArrayList<Integer>> datawireindex) {
         this.x = x;
         this.y = y;
         this.index = index;
@@ -38,8 +39,8 @@ public abstract class SaveBlock implements Serializable {
         this.nodes = nodes;
         this.platformspecificblockid = platformspecificblockid;
         this.parameters = parameters;
-        this.wireconnectionsleft = wireconnectionsleft;
-        this.wireconnectionsleft_index = wireconnectionsleft_index;
+        this.datawires = datawires;
+        this.datawiresindex = datawireindex;
 
 
     }
@@ -80,11 +81,11 @@ public abstract class SaveBlock implements Serializable {
         return parameters;
     }
 
-    public ArrayList<Integer> getWireconnectionsleft() {
-        return wireconnectionsleft;
+    public ArrayList<ArrayList<Integer>> getDatawires() {
+        return datawires;
     }
 
-    public ArrayList<Integer> getWireconnectionsleft_index() {
-        return wireconnectionsleft_index;
+    public ArrayList<ArrayList<Integer>> getDatawiresindex() {
+        return datawiresindex;
     }
 }

@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino;
 
 import com.badlogic.gdx.graphics.Texture;
@@ -109,7 +114,7 @@ public class TestOutput extends PlatformSpecificBlock implements ArduinoBlock{
     public String getCode() {
 
         if( parameters.get(0).getDatawire()!=null){
-            return parameters.get(0).getDatawire().varName+ " = 1+1;";
+            return parameters.get(0).getVarName()+ " = 1+1;";
 
         }else {
             return "1+1";

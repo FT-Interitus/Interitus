@@ -37,6 +37,7 @@ import de.ft.interitus.UI.UIElements.check.CheckKollision;
 import de.ft.interitus.utils.ShapeRenderer;
 import de.ft.interitus.utils.Unproject;
 
+import java.util.ConcurrentModificationException;
 import java.util.Objects;
 
 /***
@@ -496,13 +497,20 @@ public abstract class Block implements VisibleObjects {
 
     public void delete(boolean complete) { //Der Block soll gelöscht werden (complete beduetet das alle Blöcke gelöscht werden sollen)
 
+        try {
+            if (blocktype.getBlockParameter() != null) {
+                for (Parameter parameter : blocktype.getBlockParameter()) {
+                    if (parameter.getDatawire() == null) {
+                        continue;
+                    }
 
-        for(Parameter parameter:blocktype.getBlockParameter())   {
-            if(parameter.getDatawire()==null) {
-                continue;
+                    for (DataWire wire : parameter.getDatawire()) {
+                        wire.delete();
+                    }
+
+                }
             }
-
-                parameter.getDatawire().delete();
+        }catch (ConcurrentModificationException e) {
 
         }
 
@@ -738,13 +746,23 @@ batch.begin();
                 }
             }
 batch.end();
-            if(this.getBlocktype()!=null&&this.getBlocktype().getBlockParameter()!=null) {
-                for (Parameter parameter : this.getBlocktype().getBlockParameter()) {
-                    if (parameter.getDatawire() != null && parameter.getDatawire().getParam_input() == parameter) {
-                        parameter.getDatawire().draw();
+
+            try {
+                if (this.getBlocktype() != null && this.getBlocktype().getBlockParameter() != null) {
+                    for (Parameter parameter : this.getBlocktype().getBlockParameter()) {
+                        if (parameter.getDatawire() != null) {
+                            for (DataWire dataWire : parameter.getDatawire()) {
+                                if (dataWire.getParam_input() == parameter) {
+                                    dataWire.draw();
+                                }
+                            }
+                        }
                     }
                 }
+            }catch (ConcurrentModificationException e) {
+
             }
+
 
         }catch (Exception e) {
 

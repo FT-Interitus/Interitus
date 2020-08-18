@@ -6,6 +6,7 @@
 package de.ft.interitus.Block;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.graphics.Cursor.SystemCursor;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -19,7 +20,7 @@ import de.ft.interitus.utils.Unproject;
 
 public class DataWire {
 
-    public String varName;
+
     int input_x = 0;
     int input_y = 0;
     int output_x = 0;
@@ -57,8 +58,8 @@ public class DataWire {
         this.param_output = param_output;
         this.param_input = param_input;
 
-        param_output.setDatawire(this);
-        param_input.setDatawire(this);
+        param_output.getDatawire().add(this);
+        param_input.getDatawire().add(this);
     }
 
     /**
@@ -110,6 +111,7 @@ public class DataWire {
        input_y = param_input.getY();
 
         if(ProjectManager.getActProjectVar().moveingdatawire==this) {
+
             output_x = ((int) Unproject.unproject().x);
             output_y = ((int) Unproject.unproject().y);
 
@@ -120,12 +122,13 @@ public class DataWire {
                    continue;
                }
                for(Parameter parameter:block.getBlocktype().getBlockParameter()) {
-                   if(parameter!=this.getParam_input()&&!parameter.getParameterType().isOutput()&&parameter.getDatawire()==null&&parameter.getParameterType().typ==this.getParam_input().getParameterType().typ) {
+                   if(parameter!=this.getParam_input()&&!parameter.getParameterType().isOutput()&&parameter.getDatawire().size()!=1&&parameter.getParameterType().typ==this.getParam_input().getParameterType().typ&&parameter.getBlock()!=this.getParam_input().getBlock()) {
 
 
                        if(CheckKollision.checkmousewithobject(parameter.getX(),parameter.getY(), UIVar.parameter_width,UIVar.parameter_height,Unproject.unproject())&&Gdx.input.isButtonPressed(0)) {
                            param_output=parameter;
-                           parameter.setDatawire(this);
+                           parameter.getDatawire().clear();
+                           parameter.getDatawire().add(this);
                        }
 
                    }
@@ -203,6 +206,12 @@ public class DataWire {
 
         ProgrammingSpace.BlockshapeRenderer.end();
         userLayoutMovment();
+
+        if(ProjectManager.getActProjectVar().moveingdatawire==this) {
+            if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+                this.delete();
+            }
+        }
     }
 
     public Parameter getParam_input() {
@@ -224,13 +233,13 @@ public class DataWire {
     public void delete() {
 
         try {
-            param_input.setDatawire(null);
+            param_input.getDatawire().remove(this);
         }catch (NullPointerException e){
 
         }
 
         try {
-            param_output.setDatawire(null);
+            param_output.getDatawire().clear();
         }catch (NullPointerException e) {
 
         }
