@@ -6,16 +6,12 @@
 package de.ft.interitus.Block;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import de.ft.interitus.Programm;
 import de.ft.interitus.ProgrammingSpace;
-import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.check.CheckKollision;
-import de.ft.interitus.UI.UIElements.check.CheckMouse;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.projecttypes.ProjectManager;
-import de.ft.interitus.projecttypes.ProjectTypes;
 import de.ft.interitus.utils.Unproject;
 
 public class DataWire {
@@ -27,6 +23,13 @@ public class DataWire {
     int output_y = 0;
     private Parameter param_input;
     private Parameter param_output;
+
+    /////Layout
+    private int verschiebung_1_Horizontale =-100;
+    private int verschiebung_2_HorizontaleInput=40;
+    private int verschiebung_3_HorizontaleOutput =-40;
+    private int verschiebung_4_VertikaleInput =-20;
+    private int verschiebung_5_VertikaleInput =-10;
 
 
 
@@ -46,6 +49,14 @@ public class DataWire {
 
         param_output.setDatawire(this);
         param_input.setDatawire(this);
+    }
+
+    public void setLayout(int verschiebung_1_Horizontale, int verschiebung_2_HorizontaleInput, int verschiebung_3_HorizontaleOutput, int verschiebung_4_VertikaleInput, int verschiebung_5_VertikaleInput){
+        this.verschiebung_1_Horizontale=verschiebung_1_Horizontale;
+        this.verschiebung_2_HorizontaleInput=verschiebung_2_HorizontaleInput;
+        this.verschiebung_3_HorizontaleOutput=verschiebung_3_HorizontaleOutput;
+        this.verschiebung_4_VertikaleInput=verschiebung_4_VertikaleInput;
+        this.verschiebung_5_VertikaleInput=verschiebung_5_VertikaleInput;
     }
 
     public void draw() {
@@ -97,19 +108,19 @@ public class DataWire {
         int parameter_middle_x=input_x+UIVar.parameter_width/2;
         int parameter_middle_output_x;
 
-        int switchposition=10;
+
+
         if(param_output==null){
             parameter_middle_output_x = output_x;
         }else {
             parameter_middle_output_x = output_x + UIVar.parameter_width / 2;
         }
-        if(output_y-UIVar.first_curve_margin-80>UIVar.DataWire_horizontal_Y+switchposition || UIVar.DataWire_OutputHorizontale_Y==0) {
-            UIVar.DataWire_horizontal_Y=input_y - UIVar.first_curve_margin-100;
-            UIVar.DataWire_InputVertikale_X=parameter_middle_x-50;
-            UIVar.DataWire_OutputVertikale_X=parameter_middle_output_x+50;
-            UIVar.DataWire_InputHorizontale_Y=input_y-UIVar.first_curve_margin-20;
-            UIVar.test=output_y;
-            UIVar.DataWire_OutputHorizontale_Y=UIVar.test-UIVar.first_curve_margin-80;
+        if(output_y > input_y || UIVar.DataWire_OutputHorizontale_Y==0) {
+            UIVar.DataWire_horizontal_Y=input_y - UIVar.first_curve_margin+ verschiebung_1_Horizontale;
+            UIVar.DataWire_InputVertikale_X=parameter_middle_x+verschiebung_2_HorizontaleInput;
+            UIVar.DataWire_OutputVertikale_X=parameter_middle_output_x+ verschiebung_3_HorizontaleOutput;
+            UIVar.DataWire_InputHorizontale_Y=input_y-UIVar.first_curve_margin+ verschiebung_4_VertikaleInput;
+            UIVar.DataWire_OutputHorizontale_Y=output_y-UIVar.first_curve_margin+ verschiebung_5_VertikaleInput;
 
             ProgrammingSpace.BlockshapeRenderer.rectLine(parameter_middle_x, input_y, parameter_middle_x, UIVar.DataWire_InputHorizontale_Y,UIVar.thickness);//Verlängerung an input
             ProgrammingSpace.BlockshapeRenderer.rectLine(parameter_middle_x, UIVar.DataWire_InputHorizontale_Y, UIVar.DataWire_InputVertikale_X,UIVar.DataWire_InputHorizontale_Y,UIVar.thickness);//input horizontal verlängerung
@@ -117,15 +128,14 @@ public class DataWire {
             ProgrammingSpace.BlockshapeRenderer.rectLine(UIVar.DataWire_InputVertikale_X, UIVar.DataWire_horizontal_Y, UIVar.DataWire_OutputVertikale_X, UIVar.DataWire_horizontal_Y, UIVar.thickness);//Horizontale
             ProgrammingSpace.BlockshapeRenderer.rectLine(UIVar.DataWire_OutputVertikale_X, UIVar.DataWire_horizontal_Y, UIVar.DataWire_OutputVertikale_X, UIVar.DataWire_OutputHorizontale_Y, UIVar.thickness);//Vertikale an output
             ProgrammingSpace.BlockshapeRenderer.rectLine(UIVar.DataWire_OutputVertikale_X,UIVar.DataWire_OutputHorizontale_Y, parameter_middle_output_x, UIVar.DataWire_OutputHorizontale_Y, UIVar.thickness);//output horizontal verlängerung
-            ProgrammingSpace.BlockshapeRenderer.rectLine(parameter_middle_output_x, UIVar.test, parameter_middle_output_x, UIVar.DataWire_OutputHorizontale_Y, UIVar.thickness);//Verlängerung an output
-        }else {/*
-            UIVar.DataWire_horizontal_Y=output_y - UIVar.first_curve_margin-100+switchposition;
-            UIVar.DataWire_InputVertikale_X=parameter_middle_x-50;
-            UIVar.DataWire_OutputVertikale_X=parameter_middle_output_x+50;
-            UIVar.DataWire_InputHorizontale_Y=input_y-UIVar.first_curve_margin-20;
-            UIVar.test=output_y;
+            ProgrammingSpace.BlockshapeRenderer.rectLine(parameter_middle_output_x, output_y, parameter_middle_output_x, UIVar.DataWire_OutputHorizontale_Y, UIVar.thickness);//Verlängerung an output
+        }else {
 
-            UIVar.DataWire_OutputHorizontale_Y=UIVar.test-UIVar.first_curve_margin-80;
+            UIVar.DataWire_horizontal_Y=output_y - UIVar.first_curve_margin+ verschiebung_1_Horizontale;
+            UIVar.DataWire_InputVertikale_X=parameter_middle_x+verschiebung_2_HorizontaleInput;
+            UIVar.DataWire_OutputVertikale_X=parameter_middle_output_x+ verschiebung_3_HorizontaleOutput;
+            UIVar.DataWire_InputHorizontale_Y=input_y-UIVar.first_curve_margin+ verschiebung_4_VertikaleInput;
+            UIVar.DataWire_OutputHorizontale_Y=output_y-UIVar.first_curve_margin+ verschiebung_5_VertikaleInput;
 
             ProgrammingSpace.BlockshapeRenderer.rectLine(parameter_middle_x, input_y, parameter_middle_x, UIVar.DataWire_InputHorizontale_Y,UIVar.thickness);//Verlängerung an input
             ProgrammingSpace.BlockshapeRenderer.rectLine(parameter_middle_x, UIVar.DataWire_InputHorizontale_Y, UIVar.DataWire_InputVertikale_X,UIVar.DataWire_InputHorizontale_Y,UIVar.thickness);//input horizontal verlängerung
@@ -133,8 +143,8 @@ public class DataWire {
             ProgrammingSpace.BlockshapeRenderer.rectLine(UIVar.DataWire_InputVertikale_X, UIVar.DataWire_horizontal_Y, UIVar.DataWire_OutputVertikale_X, UIVar.DataWire_horizontal_Y, UIVar.thickness);//Horizontale
             ProgrammingSpace.BlockshapeRenderer.rectLine(UIVar.DataWire_OutputVertikale_X, UIVar.DataWire_horizontal_Y, UIVar.DataWire_OutputVertikale_X, UIVar.DataWire_OutputHorizontale_Y, UIVar.thickness);//Vertikale an output
             ProgrammingSpace.BlockshapeRenderer.rectLine(UIVar.DataWire_OutputVertikale_X,UIVar.DataWire_OutputHorizontale_Y, parameter_middle_output_x, UIVar.DataWire_OutputHorizontale_Y, UIVar.thickness);//output horizontal verlängerung
-            ProgrammingSpace.BlockshapeRenderer.rectLine(parameter_middle_output_x, UIVar.test, parameter_middle_output_x, UIVar.DataWire_OutputHorizontale_Y, UIVar.thickness);//Verlängerung an output
-        */
+            ProgrammingSpace.BlockshapeRenderer.rectLine(parameter_middle_output_x, output_y, parameter_middle_output_x, UIVar.DataWire_OutputHorizontale_Y, UIVar.thickness);//Verlängerung an output
+
         }
         ProgrammingSpace.BlockshapeRenderer.end();
 
@@ -172,5 +182,45 @@ public class DataWire {
         param_output =null;
         param_input = null;
 
+    }
+
+    public int getVerschiebung_1_Horizontale() {
+        return verschiebung_1_Horizontale;
+    }
+
+    public int getVerschiebung_2_HorizontaleInput() {
+        return verschiebung_2_HorizontaleInput;
+    }
+
+    public int getVerschiebung_3_HorizontaleOutput() {
+        return verschiebung_3_HorizontaleOutput;
+    }
+
+    public int getVerschiebung_4_VertikaleInput() {
+        return verschiebung_4_VertikaleInput;
+    }
+
+    public int getVerschiebung_5_VertikaleInput() {
+        return verschiebung_5_VertikaleInput;
+    }
+
+    public void setVerschiebung_1_Horizontale(int verschiebung_1_Horizontale) {
+        this.verschiebung_1_Horizontale = verschiebung_1_Horizontale;
+    }
+
+    public void setVerschiebung_2_HorizontaleInput(int verschiebung_2_HorizontaleInput) {
+        this.verschiebung_2_HorizontaleInput = verschiebung_2_HorizontaleInput;
+    }
+
+    public void setVerschiebung_3_HorizontaleOutput(int verschiebung_3_HorizontaleOutput) {
+        this.verschiebung_3_HorizontaleOutput = verschiebung_3_HorizontaleOutput;
+    }
+
+    public void setVerschiebung_4_VertikaleInput(int verschiebung_4_VertikaleInput) {
+        this.verschiebung_4_VertikaleInput = verschiebung_4_VertikaleInput;
+    }
+
+    public void setVerschiebung_5_VertikaleInput(int verschiebung_5_VertikaleInput) {
+        this.verschiebung_5_VertikaleInput = verschiebung_5_VertikaleInput;
     }
 }
