@@ -52,6 +52,5 @@ public class UIVar {
     public static int[][] DataWire = new int[8][2];
     public static final int DataWireMouseKollisionsFeld=3;
     public static Vector3 merkpos=new Vector3();
-    public static boolean[] moving=new boolean[10];
     public static boolean doonce=true;
 }
