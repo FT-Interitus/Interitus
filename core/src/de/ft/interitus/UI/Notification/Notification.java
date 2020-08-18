@@ -146,7 +146,7 @@ public class Notification {
      */
 
     public void close() {
-
+        setCloseable(true);
         setFadingout(true);
 
     }

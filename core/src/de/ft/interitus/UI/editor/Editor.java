@@ -5,15 +5,22 @@
 
 package de.ft.interitus.UI.editor;
 
-import com.badlogic.gdx.ApplicationListener;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIVar;
-import de.ft.interitus.UI.window.CreateWindow;
-import de.ft.interitus.UI.window.Window;
+
+import javax.swing.*;
+
 
 public class Editor {
     public static void open() {
 
+        JFrame jFrame = new JFrame();
+        jFrame.setSize(1000, 600);
+        jFrame.setLocationRelativeTo(null);
+        jFrame.setVisible(true);
+
+
+/*
         Window window = CreateWindow.addWindow("Editor", new ApplicationListener() {
             @Override
             public void create() {
@@ -52,6 +59,8 @@ public class Editor {
 
         window.create();
 
+
+ */
 
     }
 
