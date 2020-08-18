@@ -525,7 +525,7 @@ public class UI {
 
         if (UI.button_editor.isjustPressednormal()) {
 
-            UI.button_editor.setIsworking(true); // TODO: 02.08.20 Build Project
+           // UI.button_editor.setIsworking(true); // TODO: 02.08.20 Build Project
             Editor.open();
         }
 
