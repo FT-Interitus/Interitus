@@ -6,10 +6,13 @@
 package de.ft.interitus.Block;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Cursor;
+import com.badlogic.gdx.graphics.Cursor.SystemCursor;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import de.ft.interitus.Programm;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.UI.UIElements.check.CheckKollision;
+import de.ft.interitus.UI.UIElements.check.CheckMouse;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.Unproject;
@@ -23,6 +26,7 @@ public class DataWire {
     int output_y = 0;
     private Parameter param_input;
     private Parameter param_output;
+    private boolean setCorsoronlyonce=false;
 
     /////Layout
     private int verschiebung_1_Horizontale =-100;
@@ -73,7 +77,28 @@ public class DataWire {
     }
 
     private void userLayoutMovment(){
+        if(CheckMouse.isMouseover(UIVar.DataWire[1][0],UIVar.DataWire[1][1]-UIVar.DataWireMouseKollisionsFeld,UIVar.DataWire[2][0]-UIVar.DataWire[1][0],UIVar.DataWireMouseKollisionsFeld*2)){
+            Gdx.graphics.setSystemCursor(SystemCursor.VerticalResize);
+            setCorsoronlyonce=true;
+        }else if(CheckMouse.isMouseover(UIVar.DataWire[2][0]-UIVar.DataWireMouseKollisionsFeld,UIVar.DataWire[3][1],UIVar.DataWireMouseKollisionsFeld*2, UIVar.DataWire[2][1]-UIVar.DataWire[3][1])){
+            Gdx.graphics.setSystemCursor(SystemCursor.HorizontalResize);
+            setCorsoronlyonce=true;
+        }else if(CheckMouse.isMouseover(UIVar.DataWire[3][0], UIVar.DataWire[3][1]-UIVar.DataWireMouseKollisionsFeld,UIVar.DataWire[4][0]-UIVar.DataWire[3][0],UIVar.DataWireMouseKollisionsFeld*2)){
+            Gdx.graphics.setSystemCursor(SystemCursor.VerticalResize);
+            setCorsoronlyonce=true;
+        }else if(CheckMouse.isMouseover(UIVar.DataWire[4][0]-UIVar.DataWireMouseKollisionsFeld, UIVar.DataWire[4][1], UIVar.DataWireMouseKollisionsFeld*2,UIVar.DataWire[5][1]-UIVar.DataWire[4][1])){
+            Gdx.graphics.setSystemCursor(SystemCursor.HorizontalResize);
+            setCorsoronlyonce=true;
+        }else if(CheckMouse.isMouseover(UIVar.DataWire[5][0], UIVar.DataWire[5][1]-UIVar.DataWireMouseKollisionsFeld, UIVar.DataWire[6][0]-UIVar.DataWire[5][0], UIVar.DataWireMouseKollisionsFeld*2)){
+            Gdx.graphics.setSystemCursor(SystemCursor.VerticalResize);
+            setCorsoronlyonce=true;
+        }else{
+            if(setCorsoronlyonce) {
+                Gdx.graphics.setSystemCursor(SystemCursor.Arrow);
+                setCorsoronlyonce=false;
+            }
 
+        }
     }
 
     /**
@@ -125,10 +150,9 @@ public class DataWire {
 
         ProgrammingSpace.BlockshapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         ProgrammingSpace.BlockshapeRenderer.setColor(0.234f, 0.247f,0.254f,1);
+
         int parameter_middle_x=input_x+UIVar.parameter_width/2;
         int parameter_middle_output_x;
-
-
 
         if(param_output==null){
             parameter_middle_output_x = output_x;
@@ -177,11 +201,8 @@ public class DataWire {
         ProgrammingSpace.BlockshapeRenderer.rectLine(UIVar.DataWire[5][0], UIVar.DataWire[5][1], UIVar.DataWire[6][0], UIVar.DataWire[6][1], UIVar.thickness);//output horizontal verlängerung
         ProgrammingSpace.BlockshapeRenderer.rectLine(UIVar.DataWire[6][0], UIVar.DataWire[6][1], UIVar.DataWire[7][0], UIVar.DataWire[7][1], UIVar.thickness);//Verlängerung an output
 
-
-
-
         ProgrammingSpace.BlockshapeRenderer.end();
-
+        userLayoutMovment();
     }
 
     public Parameter getParam_input() {
