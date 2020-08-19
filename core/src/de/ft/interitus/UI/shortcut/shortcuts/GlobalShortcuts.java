@@ -26,6 +26,11 @@ import de.ft.interitus.events.UI.UIOpenSettingsEvent;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.VCS;
 import de.ft.interitus.utils.ArrayList;
+import de.ft.interitus.utils.ClipBoard;
+
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 
 public class GlobalShortcuts implements ShortCutChecker {
     public static ShortCut shortCut_newprojektwindow = new ShortCut("Neues Projekt", MenuBar.menuItem_neues_projekt, SpecialKeys.dualStrg, Input.Keys.N);
@@ -62,6 +67,10 @@ public class GlobalShortcuts implements ShortCutChecker {
 
     @Override
     public void check() {
+
+        if(shortCut_Copy.isPressed()){
+            ClipBoard.CopyBlocktoClipboard(ProjectManager.getActProjectVar().markedblock.getBlocktype());
+        }
 
         if (shortCut_einstellungen.isPressed() && !SettingsUI.isopend()) {
             EventVar.uiEventManager.UIOpenSettingsEvent(new UIOpenSettingsEvent(this));
