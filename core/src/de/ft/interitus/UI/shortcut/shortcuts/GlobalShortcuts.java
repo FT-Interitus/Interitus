@@ -35,6 +35,9 @@ public class GlobalShortcuts implements ShortCutChecker {
     public static ShortCut shortCut_vollbild = new ShortCut("Vollbild", MenuBar.menuItem_vollbild, Input.Keys.F11);
     public static ShortCut shortCut_einstellungen = new ShortCut("Einstellungen öffnen", MenuBar.menuItem_einstellungen, SpecialKeys.dualStrg, Input.Keys.ALT_LEFT, Input.Keys.S);
 
+    public static ShortCut shortCut_Copy = new ShortCut("Copy", UI.copy, SpecialKeys.dualStrg, Input.Keys.C);
+    public static ShortCut shortCut_Paste = new ShortCut("Paste", UI.paste, SpecialKeys.dualStrg, Input.Keys.V);
+
 
     public GlobalShortcuts() {
 
@@ -49,6 +52,9 @@ public class GlobalShortcuts implements ShortCutChecker {
         returnarraylist.add(shortCut_speichern_unter);
         returnarraylist.add(shortCut_vollbild);
         returnarraylist.add(shortCut_einstellungen);
+
+        returnarraylist.add(shortCut_Copy);
+        returnarraylist.add(shortCut_Paste);
 
         return returnarraylist;
 

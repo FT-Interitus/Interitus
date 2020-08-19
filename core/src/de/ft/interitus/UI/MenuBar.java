@@ -53,6 +53,7 @@ public class MenuBar {
     public static MenuItem menuItem_clearram;
     public static MenuItem menuItem_updateproject;
     public static MenuItem menuItem_keeplog;
+
     public static Menu fileMenu;
 
     protected static void createMenus() {
@@ -268,6 +269,7 @@ public class MenuBar {
         editMenu.addSeparator();
         editMenu.addItem(menuItem_blockloeschen);
         editMenu.addSeparator();
+
         editMenu.addItem(UI.copy = new MenuItem("Kopieren", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
