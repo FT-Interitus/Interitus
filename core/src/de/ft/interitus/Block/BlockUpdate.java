@@ -257,7 +257,7 @@ public abstract class BlockUpdate extends Thread {
                                 if (block.getBlocktype().getBlockParameter().get(i).getParameterType().isOutput() ) {
 
 
-                                    if(CheckKollision.checkmousewithobject(block.getBlocktype().getBlockParameter().get(i).getX(),block.getBlocktype().getBlockParameter().get(i).getY(),UIVar.parameter_width,UIVar.parameter_height, Unproject.unproject())&&Gdx.input.isButtonJustPressed(0)){
+                                    if(CheckKollision.checkmousewithobject(block.getBlocktype().getBlockParameter().get(i).getX(),block.getBlocktype().getBlockParameter().get(i).getY(),UIVar.parameter_width,UIVar.parameter_height, Unproject.unproject())&&Gdx.input.isButtonJustPressed(0)&&ProjectManager.getActProjectVar().moveingdatawire==null){
                                         block.getBlocktype().getBlockParameter().get(i).getDatawire().add(new DataWire(block.getBlocktype().getBlockParameter().get(i)));
                                         block.setMoving(false);
                                         ProjectManager.getActProjectVar().moveingdatawire = block.getBlocktype().getBlockParameter().get(i).getDatawire().getLastObject();
