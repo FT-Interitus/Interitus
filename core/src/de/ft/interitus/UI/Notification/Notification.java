@@ -109,6 +109,9 @@ public class Notification {
     }
 
     /**
+     *   DOESN'T WORK
+     *
+     *
      * Set Buttons which will be displayed under the text
      * Note that this will be ignored if ProgressBar Value is not -1
      * @param buttonBar

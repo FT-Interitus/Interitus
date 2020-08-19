@@ -12,6 +12,7 @@ import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
 import de.ft.interitus.projecttypes.BlockTypes.BlockTopParameter;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
+import de.ft.interitus.projecttypes.ParameterVariableType;
 import de.ft.interitus.projecttypes.ProjectTypes;
 import de.ft.interitus.utils.ArrayList;
 
@@ -26,7 +27,7 @@ public class TestOutput extends PlatformSpecificBlock implements ArduinoBlock{
         super(arduino);
 
 
-        waitdauer = new Parameter(0, AssetLoader.img_WaitBlock_warteZeit_Parameter, "Warte-Zeit", "Die Zeit die abgewartet werden soll", "ms",new ParameterType("int",true,false), true);
+        waitdauer = new Parameter(0, AssetLoader.img_WaitBlock_warteZeit_Parameter, "Warte-Zeit", "Die Zeit die abgewartet werden soll", "ms",new ParameterType(new ParameterVariableType("int","float"),true,false), true);
 
 
         parameters.add(waitdauer);
@@ -113,11 +114,11 @@ public class TestOutput extends PlatformSpecificBlock implements ArduinoBlock{
     @Override
     public String getCode() {
 
-        if( parameters.get(0).getDatawire()!=null){
+        if( parameters.get(0).getDatawire().size()>0){
             return parameters.get(0).getVarName()+ " = 1+1;";
 
         }else {
-            return "1+1";
+            return "1+1;";
         }
     }
 }

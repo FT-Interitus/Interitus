@@ -34,7 +34,7 @@ public class NewProjectWindow {
 
     public final static VisTextButton Button_next = new VisTextButton("Erstellen");
     public final static VisTextButton Button_cancle = new VisTextButton("Cancel");
-    public final static VisLabel errorLabel = new VisLabel("");
+    public final static VisLabel errorLabel = new VisLabel("Bitte gib einen gültigen Namen an");
 
     public final static VisTextField nameinput = new VisTextField();
     public final static VisTextField pfadinput = new VisTextField();
@@ -121,7 +121,6 @@ public class NewProjectWindow {
             VisTable buttonTable = new VisTable(true);
             buttonTable.add(errorLabel).fillX().width(60).pad(350, 0, 0, 350);
             buttonTable.add(Button_cancle).fillX().width(60).pad(350, 0, 0, 0);
-            //buttonTable.add(Button_previouse).fillX().width(80).pad(350,0,0,0);
             buttonTable.add(Button_next).fillX().width(70).pad(350, 0, 0, 0);
 
             builder.append(buttonTable);
@@ -154,7 +153,7 @@ public class NewProjectWindow {
                     setupBuilder.close();
                 }
             });
-
+            Button_next.setDisabled(true);
 
             Button_next.addListener(new ChangeListener() {
                 @Override
@@ -177,6 +176,22 @@ public class NewProjectWindow {
 
 
                     setupBuilder.close();
+                }
+            });
+
+
+            nameinput.addListener(new ChangeListener() {
+                @Override
+                public void changed(ChangeEvent changeEvent, Actor actor) {
+                    if( nameinput.getText().length()>3&&!nameinput.getText().startsWith(" ")&&!nameinput.getText().endsWith(" ")) {
+                    Button_next.setDisabled(false);
+                    errorLabel.setText("");
+                    }else{
+                        Button_next.setDisabled(true);
+                        errorLabel.setText("Bitte gib einen gültigen Namen an");
+                    }
+
+
                 }
             });
 

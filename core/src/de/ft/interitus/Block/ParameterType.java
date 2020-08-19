@@ -5,24 +5,26 @@
 
 package de.ft.interitus.Block;
 
+import de.ft.interitus.projecttypes.ParameterVariableType;
+
 public class ParameterType {
 
-    String typ;
+    ParameterVariableType typ;
     boolean output;
     boolean dropdown;
     String[] selectables;
 
-    public ParameterType(String typ, boolean output, boolean dropdown) {
+    public ParameterType(ParameterVariableType typ, boolean output, boolean dropdown) {
         this.typ = typ;
         this.output = output;
         this.dropdown = dropdown;
     }
 
-    public String getTyp() {
+    public ParameterVariableType getTyp() {
         return typ;
     }
 
-    public void setTyp(String typ) {
+    public void setTyp(ParameterVariableType typ) {
         this.typ = typ;
     }
 

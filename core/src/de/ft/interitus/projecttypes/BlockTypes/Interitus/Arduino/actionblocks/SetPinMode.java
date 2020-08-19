@@ -13,6 +13,7 @@ import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
 import de.ft.interitus.projecttypes.BlockTypes.BlockTopParameter;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
+import de.ft.interitus.projecttypes.ParameterVariableType;
 import de.ft.interitus.projecttypes.ProjectTypes;
 import de.ft.interitus.utils.ArrayList;
 
@@ -29,11 +30,11 @@ public class SetPinMode extends PlatformSpecificBlock implements ArduinoBlock {
         super(type);
 
 
-        pin = new Parameter("", AssetLoader.Parameter_Pin, "Pin", "", null,new ParameterType("int",false,false), true);
+        pin = new Parameter("", AssetLoader.Parameter_Pin, "Pin", "", null,new ParameterType(new ParameterVariableType("int","float"),false,false), true);
         String[] selecteables = new String[2];
         selecteables[0] = "INPUT";
         selecteables[1] = "OUTPUT";
-        mode = new Parameter(selecteables[1], AssetLoader.Parameter_IO, "Mode(I/O)", "", null,new ParameterType("definition",false,true).setSelectables(selecteables), true);
+        mode = new Parameter(selecteables[1], AssetLoader.Parameter_IO, "Mode(I/O)", "", null,new ParameterType(new ParameterVariableType("int","float"),false,true).setSelectables(selecteables), true);
 
 
         parameters.add(pin);

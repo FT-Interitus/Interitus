@@ -28,7 +28,6 @@ import de.ft.interitus.network.bettertogether.Manager;
 import de.ft.interitus.plugin.PluginGateway;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.VCS;
-import de.ft.interitus.utils.RefreshProgramm;
 
 
 public class MenuBar {
@@ -51,7 +50,7 @@ public class MenuBar {
     public static MenuItem menuItem_ueber;
     public static MenuItem menuItem_showruntimeinfo;
     public static MenuItem menuItem_clearram;
-    public static MenuItem menuItem_updateproject;
+
     public static MenuItem menuItem_keeplog;
 
     public static Menu fileMenu;
@@ -206,12 +205,7 @@ public class MenuBar {
                 System.gc();
             }
         });
-        menuItem_updateproject = new MenuItem("Update Projekt", new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                RefreshProgramm.refresh();
-            }
-        });
+
         menuItem_keeplog = new MenuItem("Log behalten", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -288,7 +282,7 @@ public class MenuBar {
        helpMenu.addItem(menuItem_update);
         helpMenu.addItem(menuItem_showruntimeinfo);
         helpMenu.addItem(menuItem_clearram);
-        helpMenu.addItem(menuItem_updateproject);
+
         helpMenu.addItem(menuItem_keeplog);
 
         helpMenu.addSeparator();

@@ -193,10 +193,11 @@ public class DataWire {
                    continue;
                }
                for(Parameter parameter:block.getBlocktype().getBlockParameter()) {
-                   if(parameter!=this.getParam_input()&&!parameter.getParameterType().isOutput()&&parameter.getDatawire().size()!=1&&parameter.getParameterType().typ==this.getParam_input().getParameterType().typ&&parameter.getBlock()!=this.getParam_input().getBlock()) {
+                   if(parameter!=this.getParam_input()&&!parameter.getParameterType().isOutput()&&parameter.getDatawire().size()!=1&&parameter.getParameterType().typ.iscompatible(this.getParam_input().getParameterType().typ)&&parameter.getBlock()!=this.getParam_input().getBlock()) {
 
 
                        if(CheckKollision.checkmousewithobject(parameter.getX(),parameter.getY(), UIVar.parameter_width,UIVar.parameter_height,Unproject.unproject())&&Gdx.input.isButtonPressed(0)) {
+                           ProjectManager.getActProjectVar().moveingdatawire=null;
                            param_output=parameter;
                            parameter.getDatawire().clear();
                            parameter.getDatawire().add(this);
@@ -316,6 +317,10 @@ public class DataWire {
         }
         param_output =null;
         param_input = null;
+
+        if(ProjectManager.getActProjectVar().moveingdatawire==this) {
+            ProjectManager.getActProjectVar().moveingdatawire=null;
+        }
 
     }
 

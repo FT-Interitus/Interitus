@@ -29,7 +29,14 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class SetupWindow {
-
+    /***
+     * @deprecated
+     *
+     * Code to display
+     *   SetupWindow sw = new SetupWindow();
+     *             sw.show();
+     *
+     */
     public static int currentStep = 1;
     public static SetupBuilder setupBuilder;
     public static VisTextButton Button_next = new VisTextButton("Next");
