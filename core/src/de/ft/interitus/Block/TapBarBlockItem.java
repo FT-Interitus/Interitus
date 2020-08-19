@@ -7,7 +7,6 @@ package de.ft.interitus.Block;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.UI.UI;
@@ -16,7 +15,6 @@ import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.tappedbar.TapItem;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.ProjectManager;
-import org.w3c.dom.css.Rect;
 
 
 public class TapBarBlockItem implements TapItem {
@@ -38,7 +36,7 @@ public class TapBarBlockItem implements TapItem {
     public void draw() {
 
         if (!UIVar.isdialogeopend) {
-            if (CheckMouse.isJustPressedNormal(x, y, w, h)) {
+            if (CheckMouse.isJustPressedNormal(x, y, w, h, false)) {
 
                 Block tempblock = ProjectManager.getActProjectVar().projectType.getBlockGenerator().generateBlock(ProjectManager.getActProjectVar().blocks.size(), (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y, psb.getWidth(), UIVar.BlockHeight, psb, ProjectManager.getActProjectVar().projectType.getBlockUpdateGenerator(), ProjectManager.getActProjectVar().projectType.getBlocktoSaveGenerator());
 

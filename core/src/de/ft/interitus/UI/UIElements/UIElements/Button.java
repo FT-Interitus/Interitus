@@ -67,7 +67,7 @@ public class Button implements UIElement {
 
         if (!disable && !UIVar.isdialogeopend) {
 
-            pressed = CheckMouse.isjustPressed(x, y, w, h);
+            pressed = CheckMouse.isjustPressed(x, y, w, h, false);
             return pressed;
 
         } else {
@@ -84,7 +84,7 @@ public class Button implements UIElement {
             boolean pressed = false;
             if (!disable && !UIVar.isdialogeopend) {
 
-                pressed = CheckMouse.isJustPressedNormal(x, y, w, h);
+                pressed = CheckMouse.isJustPressedNormal(x, y, w, h, false);
                 return pressed;
             } else {
                 return false;
@@ -101,7 +101,7 @@ public class Button implements UIElement {
         if (!UIVar.uilocked || this.isIgnore_uilock()) {
             if (!disable) {
 
-                return CheckMouse.isPressed(x, y, w, h);
+                return CheckMouse.isPressed(x, y, w, h, false);
             } else {
                 return false;
             }
@@ -120,7 +120,7 @@ public class Button implements UIElement {
             } else {
                 if (!disable) {
 
-                    return CheckMouse.isMouseover(x, y, w, h);
+                    return CheckMouse.isMouseover(x, y, w, h, false);
                 } else {
                     return false;
                 }

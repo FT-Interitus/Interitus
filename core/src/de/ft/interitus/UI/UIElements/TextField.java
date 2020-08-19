@@ -76,10 +76,10 @@ public class TextField {
 
 
     private void active() {
-        if (CheckMouse.isjustPressed(x, y, w, h)) {
+        if (CheckMouse.isjustPressed(x, y, w, h, false)) {
             active = !active;
         }
-        if (!CheckMouse.isMouseover(x, y, w, h) && Gdx.input.isButtonPressed(0)) {
+        if (!CheckMouse.isMouseover(x, y, w, h, false) && Gdx.input.isButtonPressed(0)) {
             active = false;
         }
     }

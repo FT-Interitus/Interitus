@@ -7,6 +7,7 @@ package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmaufbau
 
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
+import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.BlockTypes.BlockModi;
 import de.ft.interitus.projecttypes.BlockTypes.BlockTopParameter;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
@@ -30,12 +31,12 @@ public class SetupModi implements BlockModi, ArduinoBlock {
 
     @Override
     public String getname() {
-        return null;
+        return "SetupModi";
     }
 
     @Override
     public Texture getModiImage() {
-        return null;
+        return AssetLoader.connector_offerd;
     }
 
     @Override

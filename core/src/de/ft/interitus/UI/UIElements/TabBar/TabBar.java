@@ -15,7 +15,6 @@ import de.ft.interitus.Var;
 import de.ft.interitus.datamanager.userdata.UserInteractDataManagerDialog;
 import de.ft.interitus.datamanager.userdata.save.DataSaver;
 import de.ft.interitus.events.EventVar;
-import de.ft.interitus.events.global.GlobalFileDropedEvent;
 import de.ft.interitus.events.global.GlobalTabClickEvent;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.ProjectManager;
@@ -74,7 +73,7 @@ public class TabBar {
             tabbs.get(i).getCloseButton().setH(10);
             tabbs.get(i).getCloseButton().setW(10);
             UI.UIbatch.begin();
-            if(CheckMouse.isMouseover(this.x+aktualxpluspos,this.y,tabbs.get(i).getTabButton().getW(),this.h)) {
+            if(CheckMouse.isMouseover(this.x+aktualxpluspos,this.y,tabbs.get(i).getTabButton().getW(),this.h, false)) {
                 UI.UIbatch.setColor(1,1,1,0.7f);
             }else{
                 UI.UIbatch.setColor(1,1,1,1);

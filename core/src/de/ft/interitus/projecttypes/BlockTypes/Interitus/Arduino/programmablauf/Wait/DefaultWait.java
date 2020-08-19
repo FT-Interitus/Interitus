@@ -40,12 +40,12 @@ public class DefaultWait implements BlockModi, ArduinoBlock {
 
     @Override
     public String getname() {
-        return null;
+        return "DefaultWait";
     }
 
     @Override
     public Texture getModiImage() {
-        return null;
+        return AssetLoader.connector_offerd;
     }
 
     @Override

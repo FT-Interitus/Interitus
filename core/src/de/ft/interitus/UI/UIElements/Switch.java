@@ -71,7 +71,7 @@ public class Switch {
     public boolean isMouseover() {
         if (!disable) {
 
-            return CheckMouse.isMouseover(x, y, w, h);
+            return CheckMouse.isMouseover(x, y, w, h, false);
         } else {
             return false;
         }
@@ -81,7 +81,7 @@ public class Switch {
         boolean pressed = false;
         if (!disable) {
 
-            pressed = CheckMouse.isjustPressed(x, y, w, h);
+            pressed = CheckMouse.isjustPressed(x, y, w, h, false);
 
         } else {
             return false;

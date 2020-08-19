@@ -6,13 +6,11 @@
 package de.ft.interitus.UI.Notification;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.UI;
-import de.ft.interitus.UI.UIElements.check.CheckKollision;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.loading.AssetLoader;
@@ -118,7 +116,7 @@ public class NotificationManager {
             ProgrammingSpace.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
             ProgrammingSpace.shapeRenderer.setColor(Settings.theme.ClearColor().r,Settings.theme.ClearColor().g,Settings.theme.ClearColor().b,notifications.get(i).getFadeout());
 
-            if(CheckMouse.isMouseover(Gdx.graphics.getWidth() - DISTANCE_RIGHT+notifications.get(i).getRollin(), UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i)), DISTANCE_RIGHT - MARGIN_RIGHT, HEIGHT)) {
+            if(CheckMouse.isMouseover(Gdx.graphics.getWidth() - DISTANCE_RIGHT+notifications.get(i).getRollin(), UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i)), DISTANCE_RIGHT - MARGIN_RIGHT, HEIGHT, false)) {
 
 
                 for(int j=notifications.size()-1;j>=i;j--)  {

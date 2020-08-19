@@ -7,7 +7,6 @@ package de.ft.interitus.UI.popup;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import de.ft.interitus.Programm;
 import de.ft.interitus.UI.UIElements.UIElements.Button;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
 import de.ft.interitus.utils.ArrayList;
@@ -48,7 +47,7 @@ public class PopupMenue {
     private void rechtsKlickControlle() {
 
 
-        if (Gdx.input.isButtonJustPressed(0) && !CheckMouse.isMouseover(this.x + ausgleichX, this.y - (buttonheight * buttons.size()), WIDTH, buttonheight * buttons.size())) {
+        if (Gdx.input.isButtonJustPressed(0) && !CheckMouse.isMouseover(this.x + ausgleichX, this.y - (buttonheight * buttons.size()), WIDTH, buttonheight * buttons.size(), false)) {
             show = false;
         }
     }

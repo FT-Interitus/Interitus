@@ -6,6 +6,7 @@
 package de.ft.interitus.projecttypes.BlockTypes;
 
 import com.badlogic.gdx.graphics.Texture;
+import de.ft.interitus.Block.DataWire;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.projecttypes.ProjectTypes;
 import de.ft.interitus.utils.ArrayList;
@@ -89,5 +90,33 @@ public abstract class PlatformSpecificBlock {
 
     public final int getWidth() {
         return blockModis.get(actBlockModiIndex).getWidth();
+    }
+
+    public final void change(int index) {
+        if(index==actBlockModiIndex) {
+            return;
+        }
+
+        if(this.getBlockParameter()!=null) {
+            for (Parameter parameter : this.getBlockParameter()) {
+
+
+                if (parameter.getDatawire() == null) {
+                    continue;
+                }
+                for (DataWire dataWire : parameter.getDatawire()) {
+
+                    dataWire.delete();
+
+                }
+
+
+            }
+        }
+
+        actBlockModiIndex = index;
+
+
+
     }
 }

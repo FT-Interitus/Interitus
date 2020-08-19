@@ -1,6 +1,10 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.UI.UIElements.UIElements.quickinfo;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
 
@@ -35,7 +39,7 @@ public class QuickInfoContent {
 
     protected boolean check(){
         boolean blub=false;
-        if (CheckMouse.isMouseover(mouseoverRect)) {
+        if (CheckMouse.isMouseover(mouseoverRect, false)) {
 
             if (doonce) {
                 zeitstempel = System.currentTimeMillis() + 2000;

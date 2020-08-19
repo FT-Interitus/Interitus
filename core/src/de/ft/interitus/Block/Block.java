@@ -15,6 +15,8 @@ import de.ft.interitus.Block.Generators.BlockUpdateGenerator;
 import de.ft.interitus.Block.Generators.BlocktoSaveGenerator;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.ThreadManager;
+import de.ft.interitus.UI.UIElements.BlockDropDownMenue.BlockDropDownItem;
+import de.ft.interitus.UI.UIElements.BlockDropDownMenue.BlockDropDownMenue;
 import de.ft.interitus.UI.UIElements.dropdownmenue.DropDownMenue;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.Viewport;
@@ -71,7 +73,7 @@ public abstract class Block implements VisibleObjects {
     private Wire wire_left = null; //linke verbundene Wire
     private Wire wire_right = null; //rechte verbunde Wire
     private PlatformSpecificBlock blocktype;
-    private DropDownMenue BlockModeMenue = new DropDownMenue(0,0,new Color(0.77f, 0.77f, 0.77f, 1) ,"");
+    private BlockDropDownMenue BlockModiSelection = new BlockDropDownMenue(0,0,0,0, this);
 
 
     public Block(final int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock, BlockUpdateGenerator update, BlocktoSaveGenerator blocktoSaveGenerator) { //Initzialisieren des Blocks
@@ -121,6 +123,9 @@ public abstract class Block implements VisibleObjects {
             }
         };
         EventVar.rightClickEventManager.addListener(rightClickEventListener);
+
+
+
 
     }
 
@@ -744,8 +749,13 @@ batch.begin();
                 }
             }
 batch.end();
-            BlockModeMenue.setBounds(this.x,this.y,100,20);
-            BlockModeMenue.draw();
+
+
+            BlockModiSelection.setBounds(this.x+4,this.y+2,30,20);
+            BlockModiSelection.draw();
+
+
+
             try {
                 if (this.getBlocktype() != null && this.getBlocktype().getBlockParameter() != null) {
                     for (Parameter parameter : this.getBlocktype().getBlockParameter()) {

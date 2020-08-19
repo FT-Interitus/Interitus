@@ -47,12 +47,12 @@ public class AdditionalModi implements BlockModi, ArduinoBlock {
 
     @Override
     public String getname() {
-        return null;
+        return "addidionalModi";
     }
 
     @Override
     public Texture getModiImage() {
-        return null;
+        return AssetLoader.connector_offerd;
     }
 
     @Override
