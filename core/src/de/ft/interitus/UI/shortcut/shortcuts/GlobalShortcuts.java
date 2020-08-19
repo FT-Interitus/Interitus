@@ -26,6 +26,11 @@ import de.ft.interitus.events.UI.UIOpenSettingsEvent;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.VCS;
 import de.ft.interitus.utils.ArrayList;
+import de.ft.interitus.utils.ClipBoard;
+
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 
 public class GlobalShortcuts implements ShortCutChecker {
     public static ShortCut shortCut_newprojektwindow = new ShortCut("Neues Projekt", MenuBar.menuItem_neues_projekt, SpecialKeys.dualStrg, Input.Keys.N);
@@ -34,6 +39,9 @@ public class GlobalShortcuts implements ShortCutChecker {
     public static ShortCut shortCut_speichern_unter = new ShortCut("Speichern unter", MenuBar.menuItem_speichernunter, SpecialKeys.dualStrg, SpecialKeys.dualShift, Input.Keys.S);
     public static ShortCut shortCut_vollbild = new ShortCut("Vollbild", MenuBar.menuItem_vollbild, Input.Keys.F11);
     public static ShortCut shortCut_einstellungen = new ShortCut("Einstellungen öffnen", MenuBar.menuItem_einstellungen, SpecialKeys.dualStrg, Input.Keys.ALT_LEFT, Input.Keys.S);
+
+    public static ShortCut shortCut_Copy = new ShortCut("Copy", UI.copy, SpecialKeys.dualStrg, Input.Keys.C);
+    public static ShortCut shortCut_Paste = new ShortCut("Paste", UI.paste, SpecialKeys.dualStrg, Input.Keys.V);
 
 
     public GlobalShortcuts() {
@@ -50,12 +58,19 @@ public class GlobalShortcuts implements ShortCutChecker {
         returnarraylist.add(shortCut_vollbild);
         returnarraylist.add(shortCut_einstellungen);
 
+        returnarraylist.add(shortCut_Copy);
+        returnarraylist.add(shortCut_Paste);
+
         return returnarraylist;
 
     }
 
     @Override
     public void check() {
+
+        if(shortCut_Copy.isPressed()){
+            ClipBoard.CopyBlocktoClipboard(ProjectManager.getActProjectVar().markedblock.getBlocktype());
+        }
 
         if (shortCut_einstellungen.isPressed() && !SettingsUI.isopend()) {
             EventVar.uiEventManager.UIOpenSettingsEvent(new UIOpenSettingsEvent(this));

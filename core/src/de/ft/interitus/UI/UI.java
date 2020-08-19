@@ -78,11 +78,11 @@ public class UI {
 
     public static MenuBar menuBar;
     public static DropDownMenue runselection;
-    protected static MenuItem recent;
-    protected static MenuItem revert;
-    protected static MenuItem redo;
-    protected static MenuItem copy;
-    protected static MenuItem paste;
+    public static MenuItem recent;
+    public static MenuItem revert;
+    public static MenuItem redo;
+    public static MenuItem copy;
+    public static MenuItem paste;
     static final ArrayList<Widget> textFielder = new ArrayList<>();
     static boolean isuilock = false;
     private static boolean issettingsuiopend = false;
