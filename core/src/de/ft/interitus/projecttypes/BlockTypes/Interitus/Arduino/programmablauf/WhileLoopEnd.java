@@ -25,10 +25,6 @@ public class WhileLoopEnd extends PlatformSpecificBlock implements ArduinoBlock 
 
     }
 
-    @Override
-    public ArrayList<Parameter> getBlockParameter() {
-        return null;
-    }
 
     @Override
     public String getName() {
@@ -40,10 +36,7 @@ public class WhileLoopEnd extends PlatformSpecificBlock implements ArduinoBlock 
         return "";
     }
 
-    @Override
-    public ArrayList<BlockTopParameter> getblocktopparamter() {
-        return null;
-    }
+
 
     @Override
     public Color blockcolor() {
@@ -81,10 +74,6 @@ public class WhileLoopEnd extends PlatformSpecificBlock implements ArduinoBlock 
     }
 
 
-    @Override
-    public int getWidth() {
-        return 150;
-    }
 
     @Override
     public boolean canbedeleted() {

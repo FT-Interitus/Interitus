@@ -25,10 +25,7 @@ public class WhileLoopStart extends PlatformSpecificBlock implements ArduinoBloc
 
     }
 
-    @Override
-    public ArrayList<Parameter> getBlockParameter() {
-        return null;
-    }
+
 
     @Override
     public String getName() {
@@ -40,10 +37,7 @@ public class WhileLoopStart extends PlatformSpecificBlock implements ArduinoBloc
         return "Das ist ein Block um eine while schleife zu starten mehr dazu findest du auf der GitHub Seite von Interitus.";
     }
 
-    @Override
-    public ArrayList<BlockTopParameter> getblocktopparamter() {
-        return null;
-    }
+
 
     @Override
     public Color blockcolor() {
@@ -61,10 +55,7 @@ public class WhileLoopStart extends PlatformSpecificBlock implements ArduinoBloc
     }
 
 
-    @Override
-    public int getWidth() {
-        return 150;
-    }
+
 
     @Override
     public boolean canbedeleted() {

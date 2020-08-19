@@ -21,10 +21,7 @@ public class Wait extends PlatformSpecificBlock implements Ev3Block {
         super(projectTypes);
     }
 
-    @Override
-    public ArrayList<Parameter> getBlockParameter() {
-        return null;
-    }
+
 
     @Override
     public String getName() {
@@ -36,10 +33,6 @@ public class Wait extends PlatformSpecificBlock implements Ev3Block {
         return "Mit diesem Block lässt du dein Programm einen bestimmte Zeit warten, das hängt je nach Einstellung ab.";
     }
 
-    @Override
-    public ArrayList<BlockTopParameter> getblocktopparamter() {
-        return null;
-    }
 
     @Override
     public Color blockcolor() {
@@ -77,10 +70,6 @@ public class Wait extends PlatformSpecificBlock implements Ev3Block {
     }
 
 
-    @Override
-    public int getWidth() {
-        return 150;
-    }
 
     @Override
     public boolean canbedeleted() {

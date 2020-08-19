@@ -35,10 +35,7 @@ public class TestOutput extends PlatformSpecificBlock implements ArduinoBlock{
     }
 
 
-    @Override
-    public ArrayList<Parameter> getBlockParameter() {
-        return parameters;
-    }
+
 
     @Override
     public String getName() {
@@ -50,10 +47,7 @@ public class TestOutput extends PlatformSpecificBlock implements ArduinoBlock{
         return null;
     }
 
-    @Override
-    public ArrayList<BlockTopParameter> getblocktopparamter() {
-        return null;
-    }
+
 
     @Override
     public Color blockcolor() {
@@ -91,10 +85,7 @@ public class TestOutput extends PlatformSpecificBlock implements ArduinoBlock{
     }
 
 
-    @Override
-    public int getWidth() {
-        return 80;
-    }
+
 
     @Override
     public boolean canbedeleted() {

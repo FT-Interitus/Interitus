@@ -6,6 +6,7 @@
 package de.ft.interitus.Block;
 
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -14,6 +15,7 @@ import de.ft.interitus.Block.Generators.BlockUpdateGenerator;
 import de.ft.interitus.Block.Generators.BlocktoSaveGenerator;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.ThreadManager;
+import de.ft.interitus.UI.UIElements.dropdownmenue.DropDownMenue;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.Viewport;
 import de.ft.interitus.UI.popup.PopupMenue;
@@ -69,6 +71,7 @@ public abstract class Block implements VisibleObjects {
     private Wire wire_left = null; //linke verbundene Wire
     private Wire wire_right = null; //rechte verbunde Wire
     private PlatformSpecificBlock blocktype;
+    private DropDownMenue BlockModeMenue = new DropDownMenue(0,0,new Color(0.77f, 0.77f, 0.77f, 1) ,"");
 
 
     public Block(final int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock, BlockUpdateGenerator update, BlocktoSaveGenerator blocktoSaveGenerator) { //Initzialisieren des Blocks
@@ -720,6 +723,7 @@ batch.begin();
 
                 aktualX += 5;
                 batch.draw(this.getBlocktype().getDescriptionImage(), aktualX, this.getY() + this.getH() - 30 - 15, 30, 30);
+
                 aktualX += 35;
                 for (int i = 0; i < this.getBlocktype().getBlockParameter().size(); i++) {
                     batch.draw(this.getBlocktype().getBlockParameter().get(i).getParameterTexture(), aktualX + 5, this.getY() + 30, 20, 20);
@@ -740,7 +744,8 @@ batch.begin();
                 }
             }
 batch.end();
-
+            BlockModeMenue.setBounds(this.x,this.y,100,20);
+            BlockModeMenue.draw();
             try {
                 if (this.getBlocktype() != null && this.getBlocktype().getBlockParameter() != null) {
                     for (Parameter parameter : this.getBlocktype().getBlockParameter()) {

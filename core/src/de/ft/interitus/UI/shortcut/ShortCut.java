@@ -12,11 +12,14 @@ import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.Var;
 import de.ft.interitus.utils.ArrayList;
 
+import javax.swing.plaf.FileChooserUI;
+
 public class ShortCut {
-    String name = null;
-    boolean disable = false;
-    MenuItem menuItem;
-    ArrayList<Integer> combination = new ArrayList<>();
+    private String name = null;
+    private boolean disable = false;
+    private MenuItem menuItem;
+    private ArrayList<Integer> combination = new ArrayList<>();
+    private boolean releasecheckervar=false;
 
     public ShortCut(String name, int... combination) {
         this.name = name;
@@ -132,7 +135,18 @@ public class ShortCut {
         }
 
     }
-
+    public boolean isReleased(){
+        boolean isrealeased=false;
+        if(isPressed()){
+            releasecheckervar=true;
+        }else{
+            if(releasecheckervar==true){
+                isrealeased=true;
+                releasecheckervar=false;
+            }
+        }
+        return isrealeased;
+    }
     public boolean isPressed() {
         boolean pressed = true;
 

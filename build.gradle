@@ -4,7 +4,7 @@
  */
 
 buildscript {
-    
+
 
     repositories {
         mavenLocal()
@@ -15,10 +15,11 @@ buildscript {
         google()
     }
     dependencies {
-        
+
 
     }
 }
+
 
 allprojects {
 
@@ -54,9 +55,10 @@ project(":desktop") {
         api "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"
         api "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
 
-        
+
     }
 }
+
 
 project(":core") {
     apply plugin: "java-library"

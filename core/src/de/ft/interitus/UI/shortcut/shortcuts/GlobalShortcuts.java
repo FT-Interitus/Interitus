@@ -78,7 +78,7 @@ public class GlobalShortcuts implements ShortCutChecker {
             EventVar.uiEventManager.UIOpenSettingsEvent(new UIOpenSettingsEvent(this));
         }
 
-        if (shortCut_vollbild.isPressed()) {
+        if (shortCut_vollbild.isReleased()) {
             if (MenuBar.fullscreen == false) {
                 Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
                 MenuBar.fullscreen = true;

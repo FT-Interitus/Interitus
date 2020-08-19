@@ -3,13 +3,14 @@
  * Copyright by Tim and Felix
  */
 
-package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf;
+package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.Wait;
 
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.Block.ParameterType;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
+import de.ft.interitus.projecttypes.BlockTypes.BlockModi;
 import de.ft.interitus.projecttypes.BlockTypes.BlockTopParameter;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.InitArduino;
@@ -20,28 +21,20 @@ import de.ft.interitus.utils.ArrayList;
 
 import java.awt.*;
 
-public class Wait extends PlatformSpecificBlock implements ArduinoBlock {
+public class Wait extends PlatformSpecificBlock {
 
-    ArrayList<Parameter> parameters = new ArrayList<>();
-    Parameter waitdauer;
 
 
     public Wait(ProjectTypes arduino) {
         super(arduino);
 
-
-        waitdauer = new Parameter(0, AssetLoader.img_WaitBlock_warteZeit_Parameter, "Warte-Zeit", "Die Zeit die abgewartet werden soll", "ms",new ParameterType(InitArduino.floatvar,false,false), true);
-
-
-        parameters.add(waitdauer);
+        blockModis.add(new DefaultWait());
+      blockModis.add(new Test());
+       actBlockModiIndex = 0;
 
     }
 
 
-    @Override
-    public ArrayList<Parameter> getBlockParameter() {
-        return parameters;
-    }
 
     @Override
     public String getName() {
@@ -53,10 +46,7 @@ public class Wait extends PlatformSpecificBlock implements ArduinoBlock {
         return null;
     }
 
-    @Override
-    public ArrayList<BlockTopParameter> getblocktopparamter() {
-        return null;
-    }
+
 
     @Override
     public Color blockcolor() {
@@ -94,10 +84,7 @@ public class Wait extends PlatformSpecificBlock implements ArduinoBlock {
     }
 
 
-    @Override
-    public int getWidth() {
-        return 80;
-    }
+
 
     @Override
     public boolean canbedeleted() {
@@ -114,8 +101,4 @@ public class Wait extends PlatformSpecificBlock implements ArduinoBlock {
         return true;
     }
 
-    @Override
-    public String getCode() {
-        return "delay(" + this.parameters.get(0).getParameter() + ");";
-    }
 }

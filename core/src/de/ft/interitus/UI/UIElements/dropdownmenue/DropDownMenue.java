@@ -19,8 +19,8 @@ import de.ft.interitus.utils.ShapeRenderer;
 import java.util.ArrayList;
 
 public class DropDownMenue implements UIElement {
-    private static final ArrayList<DropDownElementInterface> elements = new ArrayList<>();
-    private static final int RADIUS = 5;
+    private final ArrayList<DropDownElementInterface> elements = new ArrayList<>();
+    private final int RADIUS = 5;
     private final Color bordercolor;
     private final GlyphLayout glyphLayout = new GlyphLayout();
     private final Button popupbutton = new Button();

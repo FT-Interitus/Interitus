@@ -3,7 +3,7 @@
  * Copyright by Tim and Felix
  */
 
-package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmaufbau;
+package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmaufbau.LoopBlock;
 
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
@@ -17,17 +17,17 @@ import de.ft.interitus.utils.ArrayList;
 
 import java.awt.*;
 
-public class LoopBlock extends PlatformSpecificBlock implements ArduinoBlock {
+public class LoopBlock extends PlatformSpecificBlock  {
 
 
     public LoopBlock(ProjectTypes projectTypes) {
         super(projectTypes);
+
+        super.blockModis.add(new LoopModi());
+        super.actBlockModiIndex = 0;
     }
 
-    @Override
-    public ArrayList<Parameter> getBlockParameter() {
-        return null;
-    }
+
 
 
     public String getName() {
@@ -39,10 +39,7 @@ public class LoopBlock extends PlatformSpecificBlock implements ArduinoBlock {
         return "Alles was an diesen Block angehängt wird immer wiederholt";
     }
 
-    @Override
-    public ArrayList<BlockTopParameter> getblocktopparamter() {
-        return null;
-    }
+
 
     @Override
     public Color blockcolor() {
@@ -80,10 +77,7 @@ public class LoopBlock extends PlatformSpecificBlock implements ArduinoBlock {
     }
 
 
-    @Override
-    public int getWidth() {
-        return 74;
-    }
+
 
     @Override
     public boolean canbedeleted() {
@@ -101,8 +95,4 @@ public class LoopBlock extends PlatformSpecificBlock implements ArduinoBlock {
     }
 
 
-    @Override
-    public String getCode() {
-        return "void loop(){";
-    }
 }

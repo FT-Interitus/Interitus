@@ -13,6 +13,8 @@ import de.ft.interitus.utils.ArrayList;
 import java.awt.*;
 
 public abstract class PlatformSpecificBlock {
+ public   final ArrayList<BlockModi> blockModis = new ArrayList<>();
+    public  int actBlockModiIndex = -1;
 
     private ProjectTypes projectTypes = null;
 
@@ -22,7 +24,7 @@ public abstract class PlatformSpecificBlock {
 
     }
 
-    public abstract ArrayList<Parameter> getBlockParameter();
+
 
 
     public abstract String getName();
@@ -31,7 +33,7 @@ public abstract class PlatformSpecificBlock {
     public abstract String getdescription();
 
 
-    public abstract ArrayList<BlockTopParameter> getblocktopparamter();
+
 
 
     public abstract Color blockcolor();
@@ -66,11 +68,26 @@ public abstract class PlatformSpecificBlock {
         return projectTypes;
     }
 
-    public abstract int getWidth();
 
     public abstract boolean canbedeleted();
 
     public abstract boolean canhasrightconnector();
 
     public abstract boolean canhasleftconnector();
+
+    public final ArrayList<BlockModi> getBlockModis() {
+        return blockModis;
+    }
+
+    public final int getActBlockModiIndex() {
+        return actBlockModiIndex;
+    }
+
+    public final ArrayList<Parameter> getBlockParameter() {
+        return blockModis.get(actBlockModiIndex).getBlockParameter();
+    }
+
+    public final int getWidth() {
+        return blockModis.get(actBlockModiIndex).getWidth();
+    }
 }

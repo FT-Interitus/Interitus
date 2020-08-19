@@ -3,7 +3,7 @@
  * Copyright by Tim and Felix
  */
 
-package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmaufbau;
+package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmaufbau.SetupBlock;
 
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
@@ -17,18 +17,17 @@ import de.ft.interitus.utils.ArrayList;
 
 import java.awt.*;
 
-public class SetupBlock extends PlatformSpecificBlock implements ArduinoBlock {
+public class SetupBlock extends PlatformSpecificBlock {
 
     public SetupBlock(ProjectTypes arduino) {
         super(arduino);
+        super.blockModis.add(new SetupModi());
+        super.actBlockModiIndex=0;
 
 
     }
 
-    @Override
-    public ArrayList<Parameter> getBlockParameter() {
-        return null;
-    }
+
 
     @Override
     public String getName() {
@@ -40,10 +39,7 @@ public class SetupBlock extends PlatformSpecificBlock implements ArduinoBlock {
         return "Alles was an diesen Block angehängt wird einmal bei Programmstart ausgeführt";
     }
 
-    @Override
-    public ArrayList<BlockTopParameter> getblocktopparamter() {
-        return null;
-    }
+
 
     @Override
     public Color blockcolor() {
@@ -81,10 +77,7 @@ public class SetupBlock extends PlatformSpecificBlock implements ArduinoBlock {
     }
 
 
-    @Override
-    public int getWidth() {
-        return 74;
-    }
+
 
 
     @Override
@@ -103,8 +96,4 @@ public class SetupBlock extends PlatformSpecificBlock implements ArduinoBlock {
     }
 
 
-    @Override
-    public String getCode() {
-        return "void setup(){";
-    }
 }

@@ -14,12 +14,12 @@ import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.Addons.Interitus.Arduino.NeoPixel;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.actionblocks.SetPinMode;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.actionblocks.digitalWrite;
-import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.operationblocks.AdditionsBlock;
-import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.Wait;
+import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.operationblocks.Math.MathBlock;
+import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.Wait.Wait;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.WhileLoopEnd;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.WhileLoopStart;
-import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmaufbau.LoopBlock;
-import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmaufbau.SetupBlock;
+import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmaufbau.LoopBlock.LoopBlock;
+import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmaufbau.SetupBlock.SetupBlock;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
 import de.ft.interitus.projecttypes.ParameterVariableType;
@@ -51,7 +51,7 @@ public class InitArduino {
         blocks.add(new SetPinMode(arduino));
         blocks.add(new digitalWrite(arduino));
         blocks.add(new TestOutput(arduino));
-        blocks.add(new AdditionsBlock(arduino));
+        blocks.add(new MathBlock(arduino));
 
         ProjectTypesVar.addons.add(new NeoPixel());
 

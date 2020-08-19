@@ -6,9 +6,7 @@
 package de.ft.interitus.projecttypes.Addons.Interitus.Arduino;
 
 import de.ft.interitus.projecttypes.Addons.Addon;
-import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.Wait;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
-import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
 import de.ft.interitus.projecttypes.Tool;
 
 import java.util.ArrayList;

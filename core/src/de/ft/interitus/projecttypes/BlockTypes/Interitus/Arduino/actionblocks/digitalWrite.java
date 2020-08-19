@@ -49,10 +49,7 @@ public class digitalWrite extends PlatformSpecificBlock implements ArduinoBlock 
         return "digitalWrite(" + this.parameters.get(0).getParameter() + "," + this.parameters.get(1).getParameter() + ");";
     }
 
-    @Override
-    public ArrayList<Parameter> getBlockParameter() {
-        return parameters;
-    }
+
 
     @Override
     public String getName() {
@@ -64,10 +61,6 @@ public class digitalWrite extends PlatformSpecificBlock implements ArduinoBlock 
         return "";
     }
 
-    @Override
-    public ArrayList<BlockTopParameter> getblocktopparamter() {
-        return null;
-    }
 
     @Override
     public Color blockcolor() {
@@ -105,10 +98,7 @@ public class digitalWrite extends PlatformSpecificBlock implements ArduinoBlock 
     }
 
 
-    @Override
-    public int getWidth() {
-        return 150;
-    }
+
 
 
     @Override
