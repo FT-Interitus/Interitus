@@ -27,7 +27,7 @@ public class TestOutput extends PlatformSpecificBlock implements ArduinoBlock{
         super(arduino);
 
 
-        waitdauer = new Parameter("", AssetLoader.img_WaitBlock_warteZeit_Parameter, "Warte-Zeit", "Die Zeit die abgewartet werden soll", "ms",new ParameterType(InitArduino.stringvar,true,false), true);
+        waitdauer = new Parameter("", AssetLoader.img_WaitBlock_warteZeit_Parameter, "Warte-Zeit", "Die Zeit die abgewartet werden soll", "ms",new ParameterType(InitArduino.floatvar,true,false), true);
 
 
         parameters.add(waitdauer);

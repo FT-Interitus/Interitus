@@ -9,17 +9,11 @@ package de.ft.interitus.Block;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Frustum;
-import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
-import com.kotcrab.vis.ui.widget.PopupMenu;
 import de.ft.interitus.Block.Generators.BlockUpdateGenerator;
 import de.ft.interitus.Block.Generators.BlocktoSaveGenerator;
 import de.ft.interitus.DisplayErrors;
-import de.ft.interitus.Programm;
-import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.ThreadManager;
-import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.Viewport;
 import de.ft.interitus.UI.popup.PopupMenue;
@@ -730,7 +724,7 @@ batch.begin();
                 for (int i = 0; i < this.getBlocktype().getBlockParameter().size(); i++) {
                     batch.draw(this.getBlocktype().getBlockParameter().get(i).getParameterTexture(), aktualX + 5, this.getY() + 30, 20, 20);
                     if (this.getBlocktype().getBlockParameter().get(i).getParameterType().isOutput()) {
-                        batch.draw(this.getBlocktype().getBlockParameter().get(i).getParameterType().getTyp().getTextureconnector(), (int) aktualX, this.getY() - 5, UIVar.parameter_width,  UIVar.parameter_height, 0, 0, AssetLoader.Plug_ZahlParameter.getWidth(), AssetLoader.Plug_ZahlParameter.getHeight(), false, true);
+                        batch.draw(this.getBlocktype().getBlockParameter().get(i).getParameterType().getTyp().getTextureconnector(), (int) aktualX, this.getY() - 5, UIVar.parameter_width,  UIVar.parameter_height, 0, 0, AssetLoader.Plug_IntParameter.getWidth(), AssetLoader.Plug_IntParameter.getHeight(), false, true);
                         this.getBlocktype().getBlockParameter().get(i).setX((int) aktualX);
                         this.getBlocktype().getBlockParameter().get(i).setY(this.getY() - 5);
 

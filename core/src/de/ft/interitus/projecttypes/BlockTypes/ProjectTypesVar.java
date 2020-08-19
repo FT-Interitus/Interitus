@@ -5,6 +5,7 @@
 
 package de.ft.interitus.projecttypes.BlockTypes;
 
+import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.ProjectTypes;
 import de.ft.interitus.utils.ArrayList;
 
@@ -15,10 +16,9 @@ public class ProjectTypesVar {
      * 0 -> Arduino
      * 1 -> Raspberry Pi
      * 2 -> Ev3
-     * 3 -> Arduino Neopixel
-     * 4 -> Arduino RoboArm
-     * ... -> Plugins
+     * 3... -> Plugins
      */
     public static ArrayList<ProjectTypes> projectTypes = new ArrayList<>();
+    public static ArrayList<Addon> addons = new ArrayList<>();
 
 }

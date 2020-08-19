@@ -10,6 +10,7 @@ import com.badlogic.gdx.backends.lwjgl3.*;
 import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import de.ft.interitus.Programm;
 import de.ft.interitus.UI.UI;
+import de.ft.interitus.UI.editor.Editor;
 import de.ft.interitus.Var;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.global.GlobalCloseEvent;
@@ -106,6 +107,7 @@ public class DesktopLauncher {
 			});
 
 			new Lwjgl3Application(new Programm(), config);
+
 
 		}else{
 

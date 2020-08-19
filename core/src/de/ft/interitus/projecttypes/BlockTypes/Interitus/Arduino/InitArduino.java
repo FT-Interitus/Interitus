@@ -11,6 +11,7 @@ import de.ft.interitus.Block.Interitus.save.DefaultSaveBlockGenerator;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.compiler.Interitus.Arduino.ArduinoCompiler;
 import de.ft.interitus.loading.AssetLoader;
+import de.ft.interitus.projecttypes.Addons.Interitus.Arduino.NeoPixel;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.actionblocks.SetPinMode;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.actionblocks.digitalWrite;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.operationblocks.AdditionsBlock;
@@ -20,6 +21,7 @@ import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmaufbau.LoopBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmaufbau.SetupBlock;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
+import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
 import de.ft.interitus.projecttypes.ParameterVariableType;
 import de.ft.interitus.projecttypes.ProjectTypes;
 import de.ft.interitus.utils.ArrayList;
@@ -31,12 +33,16 @@ public class InitArduino {
 
     public static ParameterVariableType floatvar;
     public static ParameterVariableType stringvar;
+    public static ParameterVariableType booleanvar;
 
 
     public static ProjectTypes init() {
 
-        floatvar = new ParameterVariableType("float", AssetLoader.Plug_ZahlParameter,new Color(23f/255f,141f/255f,209f/255f,1f),"int");
-        stringvar = new ParameterVariableType("String", AssetLoader.Plug_ZahlParameter,new Color(156f/255f,19f/255f,19f/255f,1f),"char[]");
+
+
+        floatvar = new ParameterVariableType("float", AssetLoader.Plug_IntParameter,new Color(23f/255f,141f/255f,209f/255f,1f),"int");
+        stringvar = new ParameterVariableType("String", AssetLoader.Plug_StringParameter,new Color(156f/255f,19f/255f,19f/255f,1f),"char[]");
+        booleanvar = new ParameterVariableType("boolean", AssetLoader.Plug_BooleanParameter,new Color(245f/255f,169f/255f,56f/255f,1f));
         blocks.add(new SetupBlock(arduino));
         blocks.add(new LoopBlock(arduino));
         blocks.add(new Wait(arduino));
@@ -47,6 +53,7 @@ public class InitArduino {
         blocks.add(new TestOutput(arduino));
         blocks.add(new AdditionsBlock(arduino));
 
+        ProjectTypesVar.addons.add(new NeoPixel());
 
         return arduino;
     }

@@ -163,7 +163,9 @@ public class AssetLoader {
     public static Texture marked_rechts;
     public static Texture marked_mitte;
 
-    public static Texture Plug_ZahlParameter;
+    public static Texture Plug_IntParameter;
+    public static Texture Plug_StringParameter;
+    public static Texture Plug_BooleanParameter;
 
     public static Texture aufklapppfeil;
 
@@ -176,6 +178,7 @@ public class AssetLoader {
 
     public static ArrayList<Pixmap> pixmap = new ArrayList<>();
     public static boolean finishpluginimageloading = false;
+
 
     public static void loadmore(String file, Class type) {
         manager.load(workingdirectory + file, type);
@@ -212,6 +215,8 @@ public class AssetLoader {
 
             group = "Plugs";
             manager.load(workingdirectory + "Block/ParameterStecker/ZahlParameterStecker.png", Texture.class);
+            manager.load(workingdirectory + "Block/ParameterStecker/TextParameterStecker.png", Texture.class);
+            manager.load(workingdirectory + "Block/ParameterStecker/BooleanParameterStecker.png", Texture.class);
 
 
             group = "TabBar";
@@ -378,7 +383,9 @@ public class AssetLoader {
 
             img_WaitBlock_warteZeit_Parameter = manager.get(workingdirectory + "Block/Parameter/WaitBlock/WaitParameter.png", Texture.class);
 
-            Plug_ZahlParameter = manager.get(workingdirectory + "Block/ParameterStecker/ZahlParameterStecker.png", Texture.class);
+            Plug_IntParameter = manager.get(workingdirectory + "Block/ParameterStecker/ZahlParameterStecker.png", Texture.class);
+            Plug_StringParameter = manager.get(workingdirectory + "Block/ParameterStecker/TextParameterStecker.png", Texture.class);
+            Plug_BooleanParameter = manager.get(workingdirectory + "Block/ParameterStecker/BooleanParameterStecker.png", Texture.class);
 
 
             arduinomegaimage = manager.get(workingdirectory + "arduinomegaminiimage.png", Texture.class);

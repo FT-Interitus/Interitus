@@ -10,10 +10,12 @@ import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.block.BlockEventAdapter;
 import de.ft.interitus.events.block.BlockKillMovingWiresEvent;
 import de.ft.interitus.plugin.PluginGateway;
+import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.InitArduino;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Ev3.InitEv3;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.RaspberryPi.InitRaspberryPI;
 import de.ft.interitus.projecttypes.ProjectManager;
+import de.ft.interitus.projecttypes.ProjectTypes;
 
 public class Init {
 
@@ -25,6 +27,24 @@ public class Init {
 
 
         ProjectTypesVar.projectTypes.addAll(PluginGateway.pluginprojekttypes);
+
+
+        for(Addon addon:ProjectTypesVar.addons) {
+            for(ProjectTypes projectTypes :ProjectTypesVar.projectTypes) {
+                if(projectTypes.getName().contentEquals(addon.getProjectTypebyName())) {
+                        addon.setProjectTypeindex(ProjectTypesVar.projectTypes.indexOf(projectTypes));
+                        if(addon.getaddBlocks()!=null) {
+                            projectTypes.getProjectblocks().addAll(addon.getaddBlocks());
+                        }
+                }
+            }
+
+
+
+        }
+
+
+        //TODO add Addons
 
         EventVar.blockEventManager.addListener(new BlockEventAdapter() {
             @Override

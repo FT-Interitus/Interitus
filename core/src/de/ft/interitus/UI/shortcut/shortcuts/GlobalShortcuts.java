@@ -69,7 +69,9 @@ public class GlobalShortcuts implements ShortCutChecker {
     public void check() {
 
         if(shortCut_Copy.isPressed()){
-            ClipBoard.CopyBlocktoClipboard(ProjectManager.getActProjectVar().markedblock.getBlocktype());
+
+                ClipBoard.CopyBlocktoClipboard(ProjectManager.getActProjectVar().markedblock.getBlocktype());
+
         }
 
         if (shortCut_einstellungen.isPressed() && !SettingsUI.isopend()) {
