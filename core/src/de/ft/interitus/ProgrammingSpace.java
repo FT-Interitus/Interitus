@@ -117,12 +117,9 @@ public class ProgrammingSpace extends ScreenAdapter {
     @Override
     public void render(float delta) {
 
-        //DEBUG todo remove
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.D) && Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
-            SetupWindow sw = new SetupWindow();
-            sw.show();
-        }
+
+
 
         ProgrammingSpace.delta = delta;
 
