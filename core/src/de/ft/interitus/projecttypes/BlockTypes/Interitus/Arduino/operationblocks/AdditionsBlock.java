@@ -12,6 +12,7 @@ import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
 import de.ft.interitus.projecttypes.BlockTypes.BlockTopParameter;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
+import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.InitArduino;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.ParameterVariableType;
 import de.ft.interitus.projecttypes.ProjectTypes;
@@ -30,9 +31,9 @@ public class AdditionsBlock extends PlatformSpecificBlock implements ArduinoBloc
     public AdditionsBlock(ProjectTypes type) {
         super(type);
 
-        Summand_1=new Parameter("",AssetLoader.Parameter_IO,"1. Summand", "erster Summand", "", new ParameterType(new ParameterVariableType("float","int"), false, false), true);
-        Summand_2=new Parameter("",AssetLoader.Plug_ZahlParameter,"2. Summand", "zweiter Summand", "", new ParameterType(new ParameterVariableType("float","int"), false, false), true);
-        Ergebnis=new Parameter("",AssetLoader.Plug_ZahlParameter,"Ergebnis", "Das was bei einer Addition meistens raus kommt", "", new ParameterType(new ParameterVariableType("float","int"), true, false), true);
+        Summand_1=new Parameter("",AssetLoader.Parameter_IO,"1. Summand", "erster Summand", "", new ParameterType(InitArduino.floatvar, false, false), true);
+        Summand_2=new Parameter("",AssetLoader.Plug_ZahlParameter,"2. Summand", "zweiter Summand", "", new ParameterType(InitArduino.floatvar, false, false), true);
+        Ergebnis=new Parameter("",AssetLoader.Plug_ZahlParameter,"Ergebnis", "Das was bei einer Addition meistens raus kommt", "", new ParameterType(InitArduino.floatvar, true, false), true);
         parameters.add(Summand_1);
         parameters.add(Summand_2);
         parameters.add(Ergebnis);

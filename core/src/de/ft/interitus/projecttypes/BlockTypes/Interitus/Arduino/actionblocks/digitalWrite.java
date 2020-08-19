@@ -12,6 +12,7 @@ import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
 import de.ft.interitus.projecttypes.BlockTypes.BlockTopParameter;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
+import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.InitArduino;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.ParameterVariableType;
 import de.ft.interitus.projecttypes.ProjectTypes;
@@ -30,11 +31,11 @@ public class digitalWrite extends PlatformSpecificBlock implements ArduinoBlock 
         super(type);
 
 
-        pin = new Parameter("", AssetLoader.Parameter_Pin, "Pin", "", null,new ParameterType(new ParameterVariableType("int","float"),false,false), true);
+        pin = new Parameter("", AssetLoader.Parameter_Pin, "Pin", "", null,new ParameterType(InitArduino.floatvar,false,false), true);
         String[] selectables = new String[2];
         selectables[0] = "HIGH";
         selectables[1] = "LOW";
-        mode = new Parameter(selectables[1], AssetLoader.Parameter_High_Low, "Mode", "", null,new ParameterType(new ParameterVariableType("int","float"),false,true).setSelectables(selectables), true);
+        mode = new Parameter(selectables[1], AssetLoader.Parameter_High_Low, "Mode", "", null,new ParameterType(InitArduino.floatvar,false,true).setSelectables(selectables), true);
 
 
         parameters.add(pin);

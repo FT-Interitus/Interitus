@@ -224,7 +224,7 @@ public class DataWire {
 
 
         ProgrammingSpace.BlockshapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        ProgrammingSpace.BlockshapeRenderer.setColor(0.234f, 0.247f,0.254f,1);
+        ProgrammingSpace.BlockshapeRenderer.setColor(this.getParam_input().getParameterType().getTyp().getWirecolor());
 
         int parameter_middle_x=input_x+UIVar.parameter_width/2;
         int parameter_middle_output_x;

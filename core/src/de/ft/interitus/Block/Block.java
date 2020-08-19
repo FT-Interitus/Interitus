@@ -730,12 +730,12 @@ batch.begin();
                 for (int i = 0; i < this.getBlocktype().getBlockParameter().size(); i++) {
                     batch.draw(this.getBlocktype().getBlockParameter().get(i).getParameterTexture(), aktualX + 5, this.getY() + 30, 20, 20);
                     if (this.getBlocktype().getBlockParameter().get(i).getParameterType().isOutput()) {
-                        batch.draw(AssetLoader.Plug_ZahlParameter, (int) aktualX, this.getY() - 5, UIVar.parameter_width,  UIVar.parameter_height, 0, 0, AssetLoader.Plug_ZahlParameter.getWidth(), AssetLoader.Plug_ZahlParameter.getHeight(), false, true);
+                        batch.draw(this.getBlocktype().getBlockParameter().get(i).getParameterType().getTyp().getTextureconnector(), (int) aktualX, this.getY() - 5, UIVar.parameter_width,  UIVar.parameter_height, 0, 0, AssetLoader.Plug_ZahlParameter.getWidth(), AssetLoader.Plug_ZahlParameter.getHeight(), false, true);
                         this.getBlocktype().getBlockParameter().get(i).setX((int) aktualX);
                         this.getBlocktype().getBlockParameter().get(i).setY(this.getY() - 5);
 
                     } else {
-                        batch.draw(AssetLoader.Plug_ZahlParameter, aktualX, this.getY(), UIVar.parameter_width, UIVar.parameter_height);
+                        batch.draw(this.getBlocktype().getBlockParameter().get(i).getParameterType().getTyp().getTextureconnector(), aktualX, this.getY(), UIVar.parameter_width, UIVar.parameter_height);
                         this.getBlocktype().getBlockParameter().get(i).setX((int) aktualX);
                         this.getBlocktype().getBlockParameter().get(i).setY(this.getY());
                         font.getData().setScale(0.9f);

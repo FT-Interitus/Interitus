@@ -95,7 +95,6 @@ public class Programm extends Game {
         EventVar.uiEventManager.UILoadEvent(new UILoadEvent(this));
 
 
-        Init.initBlocks();
 
         UI.init();
         ProjectManager.init();

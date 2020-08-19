@@ -5,14 +5,22 @@
 
 package de.ft.interitus.projecttypes;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+
 import java.util.Arrays;
 
 public class ParameterVariableType {
-    private String type;
-    private String[] compatibleTypes;
-    public ParameterVariableType(String type, String... compatibleTo) {
+    private final String type;
+    private final String[] compatibleTypes;
+    private final Texture textureconnector;
+    private final Color wirecolor;
+
+    public ParameterVariableType(String type,Texture textureconnector,Color wirecolor, String... compatibleTo) {
         this.compatibleTypes = compatibleTo;
         this.type = type;
+        this.textureconnector = textureconnector;
+        this.wirecolor = wirecolor;
     }
 
 
@@ -22,6 +30,14 @@ public class ParameterVariableType {
 
     public String[] getCompatibleTypes() {
         return compatibleTypes;
+    }
+
+    public Color getWirecolor() {
+        return wirecolor;
+    }
+
+    public Texture getTextureconnector() {
+        return textureconnector;
     }
 
     public boolean iscompatible(ParameterVariableType type) {

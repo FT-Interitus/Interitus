@@ -18,6 +18,7 @@ import de.ft.interitus.Welcome;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.global.GlobalLoadingDoneEvent;
 import de.ft.interitus.events.global.GlobalLoadingStartEvent;
+import de.ft.interitus.projecttypes.BlockTypes.Init;
 
 public class Loading extends ScreenAdapter {
     public Loading loading = this;
@@ -46,6 +47,7 @@ public class Loading extends ScreenAdapter {
                     this.dispose();
                     EventVar.globalEventManager.loadingdone(new GlobalLoadingDoneEvent(this));
                     UI.initnachassetsloading();
+                    Init.initBlocks();
 
 
                     Var.splashscreen.destroy();
