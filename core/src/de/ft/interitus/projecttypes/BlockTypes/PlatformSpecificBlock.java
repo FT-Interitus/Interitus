@@ -92,7 +92,7 @@ public abstract class PlatformSpecificBlock {
         return blockModis.get(actBlockModiIndex).getWidth();
     }
 
-    public final void change(int index) {
+    public final void changeBlockModus(int index) {
         if(index==actBlockModiIndex) {
             return;
         }

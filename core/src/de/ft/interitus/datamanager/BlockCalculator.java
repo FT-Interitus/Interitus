@@ -96,6 +96,8 @@ public class BlockCalculator {
 
             }
 
+            ProjectManager.getActProjectVar().blocks.get(i).getBlocktype().changeBlockModus(saveBlocks.get(i).getBlockmodus());
+
 
 
         }

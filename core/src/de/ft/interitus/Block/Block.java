@@ -752,7 +752,9 @@ batch.end();
 
 
             BlockModiSelection.setBounds(this.x+4,this.y+2,30,20);
-            BlockModiSelection.draw();
+            if(this.getBlocktype().getBlockModis().size()>1) {
+                BlockModiSelection.draw();
+            }
 
 
 

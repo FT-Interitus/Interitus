@@ -6,16 +6,15 @@
 package de.ft.interitus.UI.UIElements.BlockDropDownMenue;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import de.ft.interitus.Block.Block;
-import de.ft.interitus.Programm;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.UIElements.UIElement;
-import de.ft.interitus.UI.UIElements.check.CheckMouse;
+import de.ft.interitus.UI.UIElements.check.CheckKollision;
 import de.ft.interitus.projecttypes.BlockTypes.BlockModi;
+import de.ft.interitus.utils.Unproject;
 
 public class BlockDropDownMenue implements UIElement {
     private int x=0;
@@ -27,7 +26,7 @@ public class BlockDropDownMenue implements UIElement {
  private Block block=null;
     private boolean dropped=false;
 
-    private BitmapFont font = new BitmapFont();
+
     private GlyphLayout glyphLayout = new GlyphLayout();
     private int longestText;
 
@@ -87,39 +86,39 @@ public class BlockDropDownMenue implements UIElement {
         ProgrammingSpace.batch.draw(block.getBlocktype().getBlockModis().get(block.getBlocktype().actBlockModiIndex).getModiImage(),this.x,this.y,this.w,this.h);
         ProgrammingSpace.batch.end();
 
-        if(CheckMouse.isJustPressedNormal(this.x,this.y,this.w,this.h, false)){
-            dropped=true;
+        if(CheckKollision.checkmousewithobject(this.x,this.y,this.w,this.h, Unproject.unproject().x,Unproject.unproject().y)&&Gdx.input.isButtonJustPressed(0)){
+            dropped=!dropped;
         }
         if(dropped) {
             int aktualy = +10;
-            ProgrammingSpace.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-            ProgrammingSpace.shapeRenderer.setColor(0.3f,0.3f,0.3f,1);
-            ProgrammingSpace.shapeRenderer.roundendrect(this.x-margin,this.y-21*block.getBlocktype().getBlockModis().size()-10-margin,this.longestText+this.w+5+margin*2, 21*block.getBlocktype().getBlockModis().size()+margin*2, 2);
-            ProgrammingSpace.shapeRenderer.end();
+            ProgrammingSpace.BlockshapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+            ProgrammingSpace.BlockshapeRenderer.setColor(0.3f,0.3f,0.3f,1);
+            ProgrammingSpace.BlockshapeRenderer.roundendrect(this.x-margin,this.y-21*block.getBlocktype().getBlockModis().size()-10-margin,this.longestText+this.w+5+margin*2, 21*block.getBlocktype().getBlockModis().size()+margin*2, 2);
+            ProgrammingSpace.BlockshapeRenderer.end();
         for (int i = 0; i < block.getBlocktype().getBlockModis().size(); i++) {
                 aktualy += 21;
 
-            if(CheckMouse.isMouseover(this.x, this.y- aktualy, this.longestText+this.w+5+margin*2,this.h,false)){
-                ProgrammingSpace.shapeRenderer.setColor(0f/255f, 101f/255f, 168f/255f,1);
+            if(CheckKollision.checkmousewithobject(this.x, this.y- aktualy, this.longestText+this.w+5+margin*2,this.h, Unproject.unproject().x,Unproject.unproject().y)){
+                ProgrammingSpace.BlockshapeRenderer.setColor(0f/255f, 101f/255f, 168f/255f,1);
 
                 if(Gdx.input.isButtonPressed(0)){
-                    ProgrammingSpace.shapeRenderer.setColor(0f/255f, 101f/255f, 100f/255f,1);
-                    block.getBlocktype().change(i);
+                    ProgrammingSpace.BlockshapeRenderer.setColor(0f/255f, 101f/255f, 100f/255f,1);
+                    block.getBlocktype().changeBlockModus(i);
 
                 }
-                ProgrammingSpace.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-                ProgrammingSpace.shapeRenderer.rect(this.x, this.y- aktualy, this.longestText+this.w+5+margin*2,this.h);
-                ProgrammingSpace.shapeRenderer.end();
+                ProgrammingSpace.BlockshapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+                ProgrammingSpace.BlockshapeRenderer.rect(this.x, this.y- aktualy, this.longestText+this.w+5+margin*2,this.h);
+                ProgrammingSpace.BlockshapeRenderer.end();
             }
 
 
-                UI.UIbatch.begin();
-                UI.UIbatch.draw(block.getBlocktype().getBlockModis().get(i).getModiImage(), this.x, this.y- aktualy, this.w,this.h);
-                UI.UIbatch.end();
+                ProgrammingSpace.batch.begin();
+            ProgrammingSpace.batch.draw(block.getBlocktype().getBlockModis().get(i).getModiImage(), this.x, this.y- aktualy, this.w,this.h);
+            ProgrammingSpace.batch.end();
 
                 ProgrammingSpace.batch.begin();
-                glyphLayout.setText(font, block.getBlocktype().getBlockModis().get(i).getname());
-                font.draw(ProgrammingSpace.batch, glyphLayout, this.x+this.w+5,this.y-aktualy+glyphLayout.height  + this.h/2- glyphLayout.height/2);
+                glyphLayout.setText(ProgrammingSpace.font, block.getBlocktype().getBlockModis().get(i).getname());
+                ProgrammingSpace.font.draw(ProgrammingSpace.batch, glyphLayout, this.x+this.w+5,this.y-aktualy+glyphLayout.height  + this.h/2- glyphLayout.height/2);
                 ProgrammingSpace.batch.end();
 
 
@@ -132,7 +131,7 @@ public class BlockDropDownMenue implements UIElement {
 
 
 
-if(Gdx.input.isButtonPressed(0) && !CheckMouse.isMouseover(this.x,this.y,this.w,this.h,false)){
+if(Gdx.input.isButtonPressed(0) && !CheckKollision.checkmousewithobject(this.x,this.y,this.w,this.h, Unproject.unproject().x,Unproject.unproject().y)){
     dropped=false;
 }
 
