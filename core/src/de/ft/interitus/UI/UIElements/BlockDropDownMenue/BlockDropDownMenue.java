@@ -5,10 +5,12 @@
 
 package de.ft.interitus.UI.UIElements.BlockDropDownMenue;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import de.ft.interitus.Block.Block;
+import de.ft.interitus.Programm;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.UIElements.UIElement;
@@ -86,15 +88,30 @@ public class BlockDropDownMenue implements UIElement {
         ProgrammingSpace.batch.end();
 
         if(CheckMouse.isJustPressedNormal(this.x,this.y,this.w,this.h, false)){
-            dropped=!dropped;
+            dropped=true;
         }
         if(dropped) {
             int aktualy = +10;
             ProgrammingSpace.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+            ProgrammingSpace.shapeRenderer.setColor(0.3f,0.3f,0.3f,1);
             ProgrammingSpace.shapeRenderer.roundendrect(this.x-margin,this.y-21*block.getBlocktype().getBlockModis().size()-10-margin,this.longestText+this.w+5+margin*2, 21*block.getBlocktype().getBlockModis().size()+margin*2, 2);
             ProgrammingSpace.shapeRenderer.end();
         for (int i = 0; i < block.getBlocktype().getBlockModis().size(); i++) {
                 aktualy += 21;
+
+            if(CheckMouse.isMouseover(this.x, this.y- aktualy, this.longestText+this.w+5+margin*2,this.h,false)){
+                ProgrammingSpace.shapeRenderer.setColor(0f/255f, 101f/255f, 168f/255f,1);
+
+                if(Gdx.input.isButtonPressed(0)){
+                    ProgrammingSpace.shapeRenderer.setColor(0f/255f, 101f/255f, 100f/255f,1);
+                    block.getBlocktype().change(i);
+
+                }
+                ProgrammingSpace.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+                ProgrammingSpace.shapeRenderer.rect(this.x, this.y- aktualy, this.longestText+this.w+5+margin*2,this.h);
+                ProgrammingSpace.shapeRenderer.end();
+            }
+
 
                 UI.UIbatch.begin();
                 UI.UIbatch.draw(block.getBlocktype().getBlockModis().get(i).getModiImage(), this.x, this.y- aktualy, this.w,this.h);
@@ -105,6 +122,9 @@ public class BlockDropDownMenue implements UIElement {
                 font.draw(ProgrammingSpace.batch, glyphLayout, this.x+this.w+5,this.y-aktualy+glyphLayout.height  + this.h/2- glyphLayout.height/2);
                 ProgrammingSpace.batch.end();
 
+
+
+
             }
 
         }
@@ -112,7 +132,9 @@ public class BlockDropDownMenue implements UIElement {
 
 
 
-
+if(Gdx.input.isButtonPressed(0) && !CheckMouse.isMouseover(this.x,this.y,this.w,this.h,false)){
+    dropped=false;
+}
 
         }
 
