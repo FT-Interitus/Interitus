@@ -3,7 +3,7 @@
  * Copyright by Tim and Felix
  */
 
-package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.actionblocks;
+package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.actionblocks.setpinmode;
 
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
@@ -20,40 +20,28 @@ import de.ft.interitus.utils.ArrayList;
 
 import java.awt.*;
 
-public class digitalWrite extends PlatformSpecificBlock implements ArduinoBlock {
-
-    ArrayList<Parameter> parameters = new ArrayList<>();
-    Parameter pin;
-    Parameter mode;
+public class SetPinMode extends PlatformSpecificBlock  {
 
 
-    public digitalWrite(ProjectTypes type) {
+
+
+    public SetPinMode(ProjectTypes type) {
         super(type);
+        blockModis.add(new DefaultSetPinMode());
+        actBlockModiIndex=0;
 
 
-        pin = new Parameter("", AssetLoader.Parameter_Pin, "Pin", "", null,new ParameterType(InitArduino.floatvar,false,false), true);
-        String[] selectables = new String[2];
-        selectables[0] = "HIGH";
-        selectables[1] = "LOW";
-        mode = new Parameter(selectables[1], AssetLoader.Parameter_High_Low, "Mode", "", null,new ParameterType(InitArduino.floatvar,false,true).setSelectables(selectables), true);
-
-
-        parameters.add(pin);
-        parameters.add(mode);
 
 
     }
 
-    @Override
-    public String getCode() {
-        return "digitalWrite(" + this.parameters.get(0).getParameter() + "," + this.parameters.get(1).getParameter() + ");";
-    }
+
 
 
 
     @Override
     public String getName() {
-        return "digitalWrite";
+        return "SetPinMode";
     }
 
     @Override
@@ -74,27 +62,27 @@ public class digitalWrite extends PlatformSpecificBlock implements ArduinoBlock 
 
     @Override
     public Texture getSmallImage() {
-        return AssetLoader.DigitalWrite_smallimage;
+        return AssetLoader.PinModeBlock_smallimage;
     }
 
     @Override
     public Texture getImageRight() {
-        return AssetLoader.DigitalWrite_right;
+        return AssetLoader.PinModeBlock_right;
     }
 
     @Override
     public Texture getImageLeft() {
-        return AssetLoader.DigitalWrite_left;
+        return AssetLoader.PinModeBlock_left;
     }
 
     @Override
     public Texture getImageCenter() {
-        return AssetLoader.DigitalWrite_middle;
+        return AssetLoader.PinModeBlock_middle;
     }
 
     @Override
     public Texture getDescriptionImage() {
-        return AssetLoader.DigitalWrite_description_image;
+        return AssetLoader.PinModeBlock_description_image;
     }
 
 
