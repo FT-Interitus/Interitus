@@ -27,6 +27,7 @@ public class MathBlock extends PlatformSpecificBlock {
     public MathBlock(ProjectTypes type) {
         super(type);
         super.blockModis.add(new AdditionalModi());
+        super.blockModis.add(new DifferenzModi());
         super.actBlockModiIndex = 0;
 
 
