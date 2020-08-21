@@ -23,7 +23,7 @@ Soon
 > It supports Ev3, Arduino and Raspberry Pi (or other platforms via plugin), but not limit the user,
 to make the leap into a "real" programming language.
 
-See <a href="https://ft-interitus.github.io/Interitus">Docs</a>
+See <a href="https://ft-interitus.github.io">Docs</a>
 
 
 **Featurs**
