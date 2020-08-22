@@ -34,6 +34,7 @@ See <a href="https://ft-interitus.github.io">Docs</a>
 - Smartphone Addon
 - Fast
 - Themes
+- Auto Update
 - etc.
 
 
