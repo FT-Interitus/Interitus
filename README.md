@@ -116,4 +116,4 @@ See <a href="https://ft-interitus.github.io">Docs</a>
 
 ---
 
-> Tanks for your support
+> Thanks for your support
