@@ -10,7 +10,9 @@ to make the leap into a "real" programming language.
 **Install**
 <br/>
 - Linux:
+<br/>
   One Line Installer: 
+  
  #### `curl -sSl https://raw.githubusercontent.com/FT-Interitus/Installation/master/linux/install | sudo bash`
 <br/>
 
@@ -19,9 +21,13 @@ to make the leap into a "real" programming language.
   Download installer <a href="#">here</a>
 
 <br/>
-OR
 
-#### Go to Releases and Download the Programm files and run it with jdk 14
+- Other:
+
+ <br/>
+ 
+ 
+   Go to Releases and Download the Programm files and run it with jdk 14
 
 <br/>
 
@@ -42,7 +48,6 @@ See <a href="https://ft-interitus.github.io">Docs</a> for more Informations.
  - Write an <a href="https://github.com/ft-interitus/interitus/issus">Issues</a>
 
 > Plugins
- 
 - if you are interested in writing Plugins see <a href="https://github.com/FT-Interitus/Interitus-Plugins">Plugins</a>
 
 ---
