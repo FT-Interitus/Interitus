@@ -10,10 +10,9 @@ to make the leap into a "real" programming language.
 **Install**
 <br/>
 - Linux:
-<br/>
+  <br/>
   One Line Installer: 
-  
- #### `curl -sSl https://raw.githubusercontent.com/FT-Interitus/Installation/master/linux/install | sudo bash`
+  #### `curl -sSl https://raw.githubusercontent.com/FT-Interitus/Installation/master/linux/install | sudo bash`
 <br/>
 
 - Windows:
@@ -23,11 +22,8 @@ to make the leap into a "real" programming language.
 <br/>
 
 - Other:
-
- <br/>
- 
- 
-   Go to Releases and Download the Programm files and run it with jdk 14
+  <br/>
+  Go to Releases and Download the Programm files and run it with jdk 14
 
 <br/>
 
@@ -40,7 +36,6 @@ See <a href="https://ft-interitus.github.io">Docs</a> for more Informations.
 - Plugin Support
 - Internal Easy Version Control System
 - Project Addons
-
 
 - Try it is very easy to use
 
