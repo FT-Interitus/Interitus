@@ -11,12 +11,13 @@
   One Line Installer: 
  #### `curl -sSl https://raw.githubusercontent.com/FT-Interitus/Installation/master/linux/install | sudo bash`
 
-OR:
+- Windows:
+  Download installer here
 
 
-Soon
+OR
 
-#### Go to Releases and Download the Programm files
+#### Go to Releases and Download the Programm files and run it with jdk 14
 
 <br/>
 
