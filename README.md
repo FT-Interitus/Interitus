@@ -4,6 +4,10 @@
 <br/><br/>It supports Ev3, Arduino and Raspberry Pi (or other platforms via plugin), but not limit the user,
 to make the leap into a "real" programming language.
 
+<br/>
+
+[![CodeFactor](https://www.codefactor.io/repository/github/ft-interitus/interitus/badge)](https://www.codefactor.io/repository/github/ft-interitus/interitus)
+
 [![Interitus](https://github.com/FT-Interitus/Interitus/blob/master/img/Screenshot_20200610_202036.png?raw=true)]()
 
 
