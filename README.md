@@ -13,6 +13,7 @@ to make the leap into a "real" programming language.
   One Line Installer: 
  #### `curl -sSl https://raw.githubusercontent.com/FT-Interitus/Installation/master/linux/install | sudo bash`
 <br/>
+
 - Windows:
   Download installer here
 
