@@ -28,8 +28,9 @@ to make the leap into a "real" programming language.
 <br/>
 
 
-See <a href="https://ft-interitus.github.io">Docs</a> for more Informations.
+#### See <a href="https://ft-interitus.github.io">Docs</a> for more Informations.
 
+<br/>
 
 > Featurs
 
@@ -39,14 +40,19 @@ See <a href="https://ft-interitus.github.io">Docs</a> for more Informations.
 
 - Try it is very easy to use
 
+<br/>
+
 > Bugs, New Featurs or Ideas?
  - Write an <a href="https://github.com/ft-interitus/interitus/issus">Issues</a>
+
+<br/>
 
 > Plugins
 - if you are interested in writing Plugins see <a href="https://github.com/FT-Interitus/Interitus-Plugins">Plugins</a>
 
----
+<br/>
 
+---
 
 
 ## Contributing
@@ -75,6 +81,8 @@ See <a href="https://ft-interitus.github.io">Docs</a> for more Informations.
 ### Step 3
 
 - 🔃 Create a new pull request using <a href="https://github.com/ft-interitus/interitus/compare/" target="_blank">`https://github.com/ft-interitus/interitus/compare/`</a>.
+
+<br/>
 
 ---
 
