@@ -8,7 +8,7 @@ to make the leap into a "real" programming language.
 
 [![CodeFactor](https://www.codefactor.io/repository/github/ft-interitus/interitus/badge)](https://www.codefactor.io/repository/github/ft-interitus/interitus)
 [![TODOs](https://www.badgen.net/https/api.tickgit.com/badgen/github.com/ft-interitus/interitus)](https://www.tickgit.com/browse?repo=github.com/ft-interitus/interitus)
-[![Build Status](https://travis-ci.org/Ft-Interitus/interitus.png?branch=master)](https://travis-ci.org/ft-interitus/interitus)
+[![Build Status](https://travis-ci.com/FT-Interitus/Interitus.svg?branch=master)](https://travis-ci.com/FT-Interitus/Interitus)
 [![Interitus](https://github.com/FT-Interitus/Interitus/blob/master/img/Screenshot_20200610_202036.png?raw=true)]()
 
 
