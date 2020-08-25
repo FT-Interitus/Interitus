@@ -7,7 +7,7 @@ to make the leap into a "real" programming language.
 <br/>
 
 [![CodeFactor](https://www.codefactor.io/repository/github/ft-interitus/interitus/badge)](https://www.codefactor.io/repository/github/ft-interitus/interitus)
-
+[![TODOs](https://badgen.net/https/api.tickgit.com/badgen/github.com/ft-interitus/interitus)](https://www.tickgit.com/browse?repo=github.com/ft-interitus/interitus)
 [![Interitus](https://github.com/FT-Interitus/Interitus/blob/master/img/Screenshot_20200610_202036.png?raw=true)]()
 
 
