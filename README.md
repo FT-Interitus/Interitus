@@ -37,6 +37,21 @@ to make the leap into a "real" programming language.
 
 <br/>
 
+#### Supported and Updated Versions
+
+If your Interitus Version isn't supported your project could be incompatible to newer Interitus Versions
+      
+| Version | Supported          |
+| ------- | ------------------ |
+| > 0.0.1   | :x: |
+| 0.0.1   | :white_check_mark:                |
+
+
+      
+     
+<br/>
+
+
 > Featurs
 
 - Plugin Support
