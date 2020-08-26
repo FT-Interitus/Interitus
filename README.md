@@ -25,7 +25,7 @@ to make the leap into a "real" programming language.
 
 - Windows:
   <br/>
-  Download installer <a href="#">here</a>
+  Download installer soon <a href="#">here</a>
 
 <br/>
 
