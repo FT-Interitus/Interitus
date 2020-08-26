@@ -30,7 +30,7 @@ Post Error if available
 
 **Desktop (please complete the following information):**
  - OS: [e.g. Windows]
- - Version [e.g. 22]
+ - Version of the Programm (Can be found at Menu->About) [e.g. 1.0]
 
 **Additional context**
 Add any other context about the problem here.
