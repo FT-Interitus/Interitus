@@ -11,6 +11,7 @@ to make the leap into a "real" programming language.
 [![Build Status](https://travis-ci.com/FT-Interitus/Interitus.svg?branch=master)](https://travis-ci.com/FT-Interitus/Interitus)
 ![GitHub contributors](https://img.shields.io/github/contributors/ft-interitus/interitus)
 ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/ft-interitus/interitus?include_prereleases)
+![GitHub](https://img.shields.io/github/license/ft-interitus/interitus)
 [![Interitus](https://github.com/FT-Interitus/Interitus/blob/master/img/Screenshot_20200610_202036.png?raw=true)]()
 
 
