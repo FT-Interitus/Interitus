@@ -22,9 +22,9 @@ public class AdditionalModi implements BlockModi, ArduinoBlock {
     Parameter Ergebnis;
 
     public AdditionalModi(){
-        Summand_1=new Parameter("", AssetLoader.Parameter_IO,"1. Summand", "erster Summand", "", new ParameterType(InitArduino.floatvar, false, false), true);
-        Summand_2=new Parameter("",AssetLoader.Plug_IntParameter,"2. Summand", "zweiter Summand", "", new ParameterType(InitArduino.floatvar, false, false), true);
-        Ergebnis=new Parameter("",AssetLoader.Plug_IntParameter,"Ergebnis", "Das was bei einer Addition meistens raus kommt", "", new ParameterType(InitArduino.floatvar, true, false), true);
+        Summand_1=new Parameter("", AssetLoader.Parameter_erstens,"1. Summand", "erster Summand", "", new ParameterType(InitArduino.floatvar, false, false), true);
+        Summand_2=new Parameter("",AssetLoader.Parameter_zweitens,"2. Summand", "zweiter Summand", "", new ParameterType(InitArduino.floatvar, false, false), true);
+        Ergebnis=new Parameter("",AssetLoader.Parameter_istgleich,"Ergebnis", "Das Ergebnis der Summe (Wert der Summe)", "", new ParameterType(InitArduino.floatvar, true, false), true);
         parameters.add(Summand_1);
         parameters.add(Summand_2);
         parameters.add(Ergebnis);
@@ -52,7 +52,7 @@ public class AdditionalModi implements BlockModi, ArduinoBlock {
 
     @Override
     public Texture getModiImage() {
-        return AssetLoader.connector_offerd;
+        return AssetLoader.Parameter_Plus;
     }
 
     @Override

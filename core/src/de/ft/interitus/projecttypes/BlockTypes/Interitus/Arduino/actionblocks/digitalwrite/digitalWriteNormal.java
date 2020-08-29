@@ -21,7 +21,7 @@ public class digitalWriteNormal implements BlockModi, ArduinoBlock {
         String[] selectables = new String[2];
         selectables[0] = "HIGH";
         selectables[1] = "LOW";
-        mode = new Parameter(selectables[1], AssetLoader.Parameter_High_Low, "Mode", "", null,new ParameterType(InitArduino.floatvar,false,true).setSelectables(selectables), true);
+        mode = new Parameter(selectables[1], AssetLoader.Parameter_High_Low, "Mode", "", null,new ParameterType(InitArduino.booleanvar,false,true).setSelectables(selectables), true);
 
 
         parameters.add(pin);

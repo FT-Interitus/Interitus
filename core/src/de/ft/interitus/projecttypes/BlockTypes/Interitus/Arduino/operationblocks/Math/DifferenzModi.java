@@ -22,9 +22,9 @@ public class DifferenzModi implements BlockModi, ArduinoBlock {
     Parameter Ergebnis;
 
     public DifferenzModi(){
-        Summand_1=new Parameter("", AssetLoader.Parameter_IO,"Minuend", "Minuend", "", new ParameterType(InitArduino.floatvar, false, false), true);
-        Summand_2=new Parameter("",AssetLoader.Plug_IntParameter,"Subtrahend", "Subtrahend", "", new ParameterType(InitArduino.floatvar, false, false), true);
-        Ergebnis=new Parameter("",AssetLoader.Plug_IntParameter,"Ergebnis", "Das was bei einer Differenz meistens raus kommt", "", new ParameterType(InitArduino.floatvar, true, false), true);
+        Summand_1=new Parameter("", AssetLoader.Parameter_erstens,"Minuend", "Minuend", "", new ParameterType(InitArduino.floatvar, false, false), true);
+        Summand_2=new Parameter("",AssetLoader.Parameter_zweitens,"Subtraend", "Subtraend", "", new ParameterType(InitArduino.floatvar, false, false), true);
+        Ergebnis=new Parameter("",AssetLoader.Parameter_istgleich,"Ergebnis", "Unterschied von zwei zahlen", "", new ParameterType(InitArduino.floatvar, true, false), true);
         parameters.add(Summand_1);
         parameters.add(Summand_2);
         parameters.add(Ergebnis);
@@ -47,12 +47,12 @@ public class DifferenzModi implements BlockModi, ArduinoBlock {
 
     @Override
     public String getname() {
-        return "Minus Block";
+        return "Differenz Block";
     }
 
     @Override
     public Texture getModiImage() {
-        return AssetLoader.connector_offerd;
+        return AssetLoader.Parameter_Minus;
     }
 
     @Override

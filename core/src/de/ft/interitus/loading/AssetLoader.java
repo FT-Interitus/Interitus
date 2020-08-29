@@ -119,7 +119,6 @@ public class AssetLoader {
     public static Texture waitforfinishbuild;
 
     ///////////////////////////-BlockParameter Bilder-/////////////////////////////
-    public static Texture img_WaitBlock_warteZeit_Parameter;
 
     //////////////////////////-TabBar-//////////////////////////////
     public static Texture img_Tab;
@@ -151,9 +150,21 @@ public class AssetLoader {
     public static Texture DigitalWrite_smallimage;
     public static Texture DigitalWrite_description_image;
 
+
+
+    ////ParameterBilder :
     public static Texture Parameter_High_Low;
     public static Texture Parameter_Pin;
     public static Texture Parameter_IO;
+    public static Texture img_WaitBlock_warteZeit_Parameter;
+    public static Texture Parameter_erstens;
+    public static Texture Parameter_zweitens;
+    public static Texture Parameter_drittens;
+    public static Texture Parameter_viertens;
+    public static Texture Parameter_istgleich;
+    public static Texture Parameter_Minus;
+    public static Texture Parameter_Plus;
+
 
     public static Texture mouseover_links;
     public static Texture mouse_over_rechts;
@@ -193,6 +204,24 @@ public class AssetLoader {
 
 
         try {
+            group = "ParameterBilder";
+            manager.load(workingdirectory + "Block/Parameter/WaitParameter.png", Texture.class);
+            manager.load(workingdirectory + "Block/Parameter/Parameter_Pin.png", Texture.class);
+            manager.load(workingdirectory + "Block/Parameter/Parameter_IO.png", Texture.class);
+            manager.load(workingdirectory + "Block/Parameter/parameter_high_low.png", Texture.class);
+            manager.load(workingdirectory + "Block/Parameter/istgleich.png", Texture.class);
+            manager.load(workingdirectory + "Block/Parameter/erstens.png", Texture.class);
+            manager.load(workingdirectory + "Block/Parameter/zweitens.png", Texture.class);
+            manager.load(workingdirectory + "Block/Parameter/drittens.png", Texture.class);
+            manager.load(workingdirectory + "Block/Parameter/viertens.png", Texture.class);
+            manager.load(workingdirectory + "Block/Parameter/Minus.png", Texture.class);
+            manager.load(workingdirectory + "Block/Parameter/Plus.png", Texture.class);
+
+
+
+
+
+
 
             group = "Schriftarten";
             try {
@@ -220,7 +249,6 @@ public class AssetLoader {
 
 
             group = "TabBar";
-            manager.load(workingdirectory + "Block/Parameter/WaitBlock/WaitParameter.png", Texture.class);
 
             backcursor = new Pixmap(Gdx.files.internal("backcursor.png"));
 
@@ -275,7 +303,6 @@ public class AssetLoader {
             manager.load(workingdirectory + "Block/Blockmitte.png", Texture.class);
             manager.load(workingdirectory + "connector.png", Texture.class);
             manager.load(workingdirectory + "connector_offerd.png", Texture.class);
-            manager.load(workingdirectory + "Block/Parameter/WaitBlock/WaitParameter.png", Texture.class);
             //////////////////////////////////////////////////////////////////////////////////////////////////////////
             manager.load(workingdirectory + "Block/Block_Wait/links.png", Texture.class);
             manager.load(workingdirectory + "Block/Block_Wait/rechts.png", Texture.class);
@@ -289,12 +316,9 @@ public class AssetLoader {
             manager.load(workingdirectory + "Block/Block_PinMode/links.png", Texture.class);
             manager.load(workingdirectory + "Block/Block_PinMode/rechts.png", Texture.class);
             manager.load(workingdirectory + "Block/Block_PinMode/mitte.png", Texture.class);
-            manager.load(workingdirectory + "Block/Block_PinMode/Parameter_Pin.png", Texture.class);
-            manager.load(workingdirectory + "Block/Block_PinMode/Parameter_IO.png", Texture.class);
             manager.load(workingdirectory + "Block/Block_DigitalWrite/links.png", Texture.class);
             manager.load(workingdirectory + "Block/Block_DigitalWrite/rechts.png", Texture.class);
             manager.load(workingdirectory + "Block/Block_DigitalWrite/mitte.png", Texture.class);
-            manager.load(workingdirectory + "Block/Block_DigitalWrite/parameter_high_low.png", Texture.class);
             manager.load(workingdirectory + "Block/mouseover_links.png", Texture.class);
             manager.load(workingdirectory + "Block/mouseover_rechts.png", Texture.class);
             manager.load(workingdirectory + "Block/mouseover_mitte.png", Texture.class);
@@ -380,8 +404,22 @@ public class AssetLoader {
         try {
             group = "";
 
+            //ParameterBilder
+            group = "ParameterBilder";
+            img_WaitBlock_warteZeit_Parameter = manager.get(workingdirectory + "Block/Parameter/WaitParameter.png", Texture.class);
+            Parameter_High_Low = manager.get(workingdirectory + "Block/Parameter/parameter_high_low.png", Texture.class);
+            Parameter_Pin = manager.get(workingdirectory + "Block/Parameter/Parameter_Pin.png", Texture.class);
+            Parameter_IO = manager.get(workingdirectory + "Block/Parameter/Parameter_IO.png", Texture.class);
+            Parameter_istgleich = manager.get(workingdirectory + "Block/Parameter/istgleich.png", Texture.class);
+            Parameter_erstens = manager.get(workingdirectory + "Block/Parameter/erstens.png", Texture.class);
+            Parameter_zweitens = manager.get(workingdirectory + "Block/Parameter/zweitens.png", Texture.class);
+            Parameter_drittens = manager.get(workingdirectory + "Block/Parameter/drittens.png", Texture.class);
+            Parameter_viertens = manager.get(workingdirectory + "Block/Parameter/viertens.png", Texture.class);
+            Parameter_Minus = manager.get(workingdirectory + "Block/Parameter/Minus.png", Texture.class);
+            Parameter_Plus = manager.get(workingdirectory + "Block/Parameter/Plus.png", Texture.class);
 
-            img_WaitBlock_warteZeit_Parameter = manager.get(workingdirectory + "Block/Parameter/WaitBlock/WaitParameter.png", Texture.class);
+
+
 
             Plug_IntParameter = manager.get(workingdirectory + "Block/ParameterStecker/ZahlParameterStecker.png", Texture.class);
             Plug_StringParameter = manager.get(workingdirectory + "Block/ParameterStecker/TextParameterStecker.png", Texture.class);
@@ -450,12 +488,9 @@ public class AssetLoader {
             PinModeBlock_left = manager.get(workingdirectory + "Block/Block_PinMode/links.png", Texture.class);
             PinModeBlock_right = manager.get(workingdirectory + "Block/Block_PinMode/rechts.png", Texture.class);
             PinModeBlock_middle = manager.get(workingdirectory + "Block/Block_PinMode/mitte.png", Texture.class);
-            Parameter_Pin = manager.get(workingdirectory + "Block/Block_PinMode/Parameter_Pin.png", Texture.class);
-            Parameter_IO = manager.get(workingdirectory + "Block/Block_PinMode/Parameter_IO.png", Texture.class);
             DigitalWrite_left = manager.get(workingdirectory + "Block/Block_DigitalWrite/links.png", Texture.class);
             DigitalWrite_right = manager.get(workingdirectory + "Block/Block_DigitalWrite/rechts.png", Texture.class);
             DigitalWrite_middle = manager.get(workingdirectory + "Block/Block_DigitalWrite/mitte.png", Texture.class);
-            Parameter_High_Low = manager.get(workingdirectory + "Block/Block_DigitalWrite/parameter_high_low.png", Texture.class);
             mouse_over_rechts = manager.get(workingdirectory + "Block/mouseover_rechts.png", Texture.class);
             mouseover_links = manager.get(workingdirectory + "Block/mouseover_links.png", Texture.class);
             mouse_over_mitte = manager.get(workingdirectory + "Block/mouseover_mitte.png", Texture.class);

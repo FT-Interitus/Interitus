@@ -14,6 +14,7 @@ import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.Addons.Interitus.Arduino.NeoPixel;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.actionblocks.setpinmode.SetPinMode;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.actionblocks.digitalwrite.digitalWrite;
+import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.inputblocs.DigitalRead;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.operationblocks.Math.MathBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.Wait.Wait;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.WhileLoopEnd;
@@ -50,7 +51,7 @@ public class InitArduino {
         //blocks.add(new WhileLoopEnd(arduino));
         blocks.add(new SetPinMode(arduino));
         blocks.add(new digitalWrite(arduino));
-        //blocks.add(new TestOutput(arduino));
+        blocks.add(new DigitalRead(arduino));
         blocks.add(new MathBlock(arduino));
 
         ProjectTypesVar.addons.add(new NeoPixel());
