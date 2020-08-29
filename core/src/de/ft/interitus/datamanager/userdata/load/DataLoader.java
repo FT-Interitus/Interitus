@@ -67,16 +67,20 @@ public class DataLoader {
                         return;
                     } else {
                         boolean found = false;
+                        String tempaddonname = "";
+                        String temppluginname ="";
                         for(Object addonname:  settings.getJSONArray("addons").toList()) {
                             found = false;
                             for(Addon addon:ProjectTypesVar.addons) {
-                                if(addonname==addon.getName()) {
+                                tempaddonname = ((JSONObject) addonname).getString("addon_name");
+                                temppluginname = ((JSONObject) addonname).getString("pl_name");
+                                if(((JSONObject) addonname).getString("addon_name").contentEquals(addon.getName())) {
                                     found = true;
                                     break;
                                 }
                             }
                             if(!found) {
-                                Dialogs.showErrorDialog(UI.stage,"Ein verbundenes Addon konnte nicht gefunden werden!"); //TODO informations about the Plugin
+                                Dialogs.showErrorDialog(UI.stage,"Das verbundenes Addon "+tempaddonname+" vom Plugin "+temppluginname+" konnte nicht gefunden werden!"); //TODO informations about the Plugin
                                 Var.isloading = false;
                                 this.interrupt();
                                 return;

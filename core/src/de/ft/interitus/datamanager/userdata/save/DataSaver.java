@@ -66,9 +66,12 @@ public class DataSaver {
                 settings.put("it_version", Var.PROGRAMM_VERSION_ID); //Saves Interitus Version in Project File
                 settings.put("pl_name",ProjectManager.getActProjectVar().projectType.getPluginRegister().getName());
                 settings.put("pl_version",ProjectManager.getActProjectVar().projectType.getPluginRegister().getVersion());
-                ArrayList<String> addons = new ArrayList<>();
+                ArrayList<JSONObject> addons = new ArrayList<>();
                 for(int i=0;i<ProjectManager.getActProjectVar().enabledAddons.size();i++) {
-                    addons.add(ProjectManager.getActProjectVar().enabledAddons.get(i).getName());
+                    JSONObject tempjson = new JSONObject();
+                    tempjson.put("pl_name",ProjectManager.getActProjectVar().enabledAddons.get(i).getPlugin().getName());
+                    tempjson.put("addon_name",ProjectManager.getActProjectVar().enabledAddons.get(i).getPlugin().getName());
+
                 }
                 settings.put("addons",addons);
                 try {
