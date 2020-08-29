@@ -13,6 +13,7 @@ import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.UI.MenuBar;
 import de.ft.interitus.UI.UI;
+import de.ft.interitus.UI.newproject.ImportProject;
 import de.ft.interitus.UI.newproject.NewProjectWindow;
 import de.ft.interitus.UI.settings.SettingsUI;
 import de.ft.interitus.UI.shortcut.ShortCut;
@@ -33,7 +34,8 @@ import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 
 public class GlobalShortcuts implements ShortCutChecker {
-    public static ShortCut shortCut_newprojektwindow = new ShortCut("Neues Projekt", MenuBar.menuItem_neues_projekt, SpecialKeys.dualStrg, Input.Keys.N);
+    public static ShortCut shortCut_newprojektwindow = new ShortCut("Neues Projekt", MenuBar.menuItem_newproject, SpecialKeys.dualStrg, Input.Keys.N);
+    public static ShortCut shortCut_importprojektwindow = new ShortCut("Import Projekt", MenuBar.menuItem_import, SpecialKeys.dualStrg, Input.Keys.I);
     public static ShortCut shortCut_oefnen = new ShortCut("Projekt Öffnen", MenuBar.menuItem_oeffnen, SpecialKeys.dualStrg, Input.Keys.O);
     public static ShortCut shortCut_speichern = new ShortCut("Speichern", MenuBar.menuItem_speichern, SpecialKeys.dualStrg, Input.Keys.S);
     public static ShortCut shortCut_speichern_unter = new ShortCut("Speichern unter", MenuBar.menuItem_speichernunter, SpecialKeys.dualStrg, SpecialKeys.dualShift, Input.Keys.S);
@@ -52,6 +54,7 @@ public class GlobalShortcuts implements ShortCutChecker {
 
         ArrayList<ShortCut> returnarraylist = new ArrayList<>();
         returnarraylist.add(shortCut_newprojektwindow);
+        returnarraylist.add(shortCut_importprojektwindow);
         returnarraylist.add(shortCut_oefnen);
         returnarraylist.add(shortCut_speichern);
         returnarraylist.add(shortCut_speichern_unter);
@@ -67,6 +70,10 @@ public class GlobalShortcuts implements ShortCutChecker {
 
     @Override
     public void check() {
+
+        if(shortCut_importprojektwindow.isPressed()) {
+            new ImportProject().show();
+        }
 
         if(shortCut_Copy.isPressed()){
 

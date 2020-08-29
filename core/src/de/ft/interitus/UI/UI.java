@@ -22,7 +22,6 @@ import com.kotcrab.vis.ui.widget.*;
 import com.kotcrab.vis.ui.widget.MenuBar;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.DisplayErrors;
-import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.ManualConfig.ManualConfigUI;
 import de.ft.interitus.UI.Notification.Notification;
@@ -53,7 +52,7 @@ import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import static de.ft.interitus.UI.MenuBar.createSubMenu;
+import static de.ft.interitus.UI.MenuBar.createProjectsSubMenu;
 
 public class UI {
     public static QuickInfo blockbarquickinfo;
@@ -495,7 +494,7 @@ public class UI {
         root.setPosition(UIcam.position.x - ((float) Gdx.graphics.getWidth()) / 2, UIcam.position.y - ((float) Gdx.graphics.getHeight()) / 2);
         stage.draw();
 
-        recent.setSubMenu(createSubMenu(Data.filename.size(), GetStringArray(Data.filename)));
+        recent.setSubMenu(createProjectsSubMenu(Data.filename.size(), GetStringArray(Data.filename)));
 
 
         if (button_projectstructus.isjustPressednormal()) {

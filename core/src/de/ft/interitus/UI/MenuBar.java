@@ -15,7 +15,9 @@ import com.kotcrab.vis.ui.widget.Menu;
 import com.kotcrab.vis.ui.widget.MenuItem;
 import com.kotcrab.vis.ui.widget.PopupMenu;
 import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.UI.newproject.ImportProject;
 import de.ft.interitus.UI.newproject.NewProjectWindow;
+import de.ft.interitus.UI.popup.PopupMenue;
 import de.ft.interitus.Var;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.datamanager.programmdata.Updater;
@@ -33,7 +35,9 @@ import de.ft.interitus.projecttypes.VCS;
 public class MenuBar {
     public static boolean fullscreen = false;
     public static MenuItem menuItem_vollbild;
-    public static MenuItem menuItem_neues_projekt;
+    public static MenuItem menuItem_newproject;
+    public static MenuItem menuItem_import;
+    public static MenuItem menuItem_new;
     public static MenuItem menuItem_oeffnen;
     public static MenuItem menuItem_speichern;
     public static MenuItem menuItem_speichernunter;
@@ -79,13 +83,24 @@ public class MenuBar {
         }).setShortcut("F11");
 
 
-        menuItem_neues_projekt = new MenuItem("Neues Projekt", new ChangeListener() {
+        menuItem_newproject = new MenuItem("Neues Projekt", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 NewProjectWindow NPW = new NewProjectWindow();
                 NPW.show();
             }
         }).setShortcut("Strg+N");
+        menuItem_import = new MenuItem("Import Projekt", new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+               new ImportProject().show();
+            }
+        }).setShortcut("Strg+I");
+        menuItem_new = new MenuItem("Neu");
+        PopupMenu newsubmenu = new PopupMenu();
+        newsubmenu.addItem(menuItem_newproject);
+        newsubmenu.addItem(menuItem_import);
+        menuItem_new.setSubMenu(newsubmenu);
 
         UI.recent = new MenuItem("Letzte Öffnen");
 
@@ -237,7 +252,7 @@ public class MenuBar {
         //recent.setSubMenu(createSubMenu());
 
         windowMenu.addItem(menuItem_vollbild);
-        fileMenu.addItem(menuItem_neues_projekt);
+        fileMenu.addItem(menuItem_new);
         fileMenu.addItem(UI.recent);
         fileMenu.addItem(menuItem_oeffnen);
         fileMenu.addItem(menuItem_speichern);
@@ -303,7 +318,7 @@ public class MenuBar {
     }
 
 
-    protected static PopupMenu createSubMenu(int count, final String[] projects) {
+    protected static PopupMenu createProjectsSubMenu(int count, final String[] projects) {
         PopupMenu menu = new PopupMenu();
 
         for (int i = count; i > 0; i--) {

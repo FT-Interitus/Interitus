@@ -351,6 +351,7 @@ public class Data {
 
 
     public static void close(boolean closeprogramm) {
+        Programm.logger.config("Saved Programm Settings");
         //////Tastenkombinationen////////////////////////////////////
         FileHandle tastenkombinationen = Gdx.files.absolute(System.getProperty("user.home") + "/" + foldername + "/tastenkombinationen.json"); //Lade datei
         JSONObject tastenkombinationen_obj = new JSONObject(tastenkombinationen);

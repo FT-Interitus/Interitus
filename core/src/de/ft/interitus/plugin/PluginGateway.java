@@ -13,6 +13,10 @@ import de.ft.interitus.UI.Theme.Theme;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.shortcut.ShortCut;
 import de.ft.interitus.UI.shortcut.ShortCutChecker;
+import de.ft.interitus.projecttypes.Addons.Addon;
+import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
+import de.ft.interitus.projecttypes.Importer.Import;
+import de.ft.interitus.projecttypes.Importer.Importer;
 import de.ft.interitus.projecttypes.ProjectTypes;
 import de.ft.interitus.utils.ArrayList;
 
@@ -96,6 +100,29 @@ public class PluginGateway {
             return false;
         }
     }
+
+    @SuppressWarnings("unused")
+    public static boolean registerAddon(Addon addon, Plugin requestedplugin) {
+        if (PluginManagerHandler.loadedplugins.contains(requestedplugin)) {
+            ProjectTypesVar.addons.add(addon);
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @SuppressWarnings("unused")
+    public static boolean registerImporter(Import importer, Plugin requestedplugin) {
+        if (PluginManagerHandler.loadedplugins.contains(requestedplugin)) {
+            Importer.importer.add(importer);
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
 
     static void removepluginregisters(Plugin plugin) {

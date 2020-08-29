@@ -5,6 +5,8 @@
 
 package de.ft.interitus.projecttypes.Addons.Interitus.Arduino;
 
+import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.plugin.Plugin;
 import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.Tool;
@@ -14,7 +16,6 @@ import java.util.ArrayList;
 public class NeoPixel extends Addon {
     @Override
     public String getProjectTypebyName() {
-        System.out.println("Hier");
         return "Arduino-Projekt";
     }
 
@@ -31,5 +32,10 @@ public class NeoPixel extends Addon {
     @Override
     public String getName() {
         return "NeoPixel";
+    }
+
+    @Override
+    public Plugin getPlugin() {
+        return ProgrammingSpace.nativ;
     }
 }
