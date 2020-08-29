@@ -216,6 +216,9 @@ public class NotificationManager {
 
             if(notifications.get(i).isFadingout()) {
                 if(notifications.get(i).getFadeout()<0){
+                    if(notifications.get(i).getCloseListener()!=null) {
+                        notifications.get(i).getCloseListener().change();
+                    }
                     notifications.remove(notifications.get(i));
                 }else{
 

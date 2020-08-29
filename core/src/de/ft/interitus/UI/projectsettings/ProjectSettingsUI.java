@@ -20,6 +20,7 @@ import com.kotcrab.vis.ui.building.utilities.layouts.ActorLayout;
 import com.kotcrab.vis.ui.widget.*;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIVar;
+import de.ft.interitus.UI.projectsettings.subitems.AddonSettings;
 import de.ft.interitus.UI.projectsettings.subitems.Informations;
 import de.ft.interitus.UI.projectsettings.subitems.Settings;
 import de.ft.interitus.Var;
@@ -116,6 +117,7 @@ public class ProjectSettingsUI extends VisWindow {
 
             TestNode item1 = new TestNode(new VisLabel(" Informationen "), 0);
             TestNode item2 = new TestNode(new VisLabel(" Einstellungen "), 1);
+            TestNode item3 = new TestNode(new VisLabel(" Addons "), 2);
 
             //ADD Advanced Settings to ITM if Device is connect
 
@@ -126,6 +128,7 @@ public class ProjectSettingsUI extends VisWindow {
 
             tree.add(item1);
             tree.add(item2);
+            tree.add(item3);
 
 
             tree.addListener(new ChangeListener() {
@@ -143,15 +146,9 @@ public class ProjectSettingsUI extends VisWindow {
                     }
 
                     switch (SelectedItem) {
-
-
-                        case 0:
-                            Informations.add(container);
-                            break;
-
-                        case 1:
-                            Settings.add(container);
-                            break;
+                        case 0 -> Informations.add(container);
+                        case 1 -> Settings.add(container);
+                        case 2 -> AddonSettings.add(container);
                     }
 
                 }

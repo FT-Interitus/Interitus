@@ -11,19 +11,12 @@ import de.ft.interitus.projecttypes.Tool;
 
 import java.util.ArrayList;
 
-public abstract class Addon {
-    public  int ProjectTypeindex = -1;
-   public   abstract String getProjectTypebyName();
-    public  abstract ArrayList<PlatformSpecificBlock> getaddBlocks();
-    public abstract ArrayList<Tool> getTools(); //TODO Add
-    public abstract String getName();
-    public abstract Plugin getPlugin();
+public interface Addon {
 
-    public final  void setProjectTypeindex(int projectTypeindex) {
-        ProjectTypeindex = projectTypeindex;
-    }
+   public    String getProjectTypebyName();
+    public   ArrayList<PlatformSpecificBlock> getaddBlocks();
+    public  ArrayList<Tool> getTools(); //TODO Add
+    public  String getName();
+    public  Plugin getPlugin();
 
-    public final  int getProjectTypeindex() {
-        return ProjectTypeindex;
-    }
 }

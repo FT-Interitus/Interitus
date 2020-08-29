@@ -13,7 +13,7 @@ import de.ft.interitus.projecttypes.Tool;
 
 import java.util.ArrayList;
 
-public class NeoPixel extends Addon {
+public class NeoPixel implements Addon {
     @Override
     public String getProjectTypebyName() {
         return "Arduino-Projekt";

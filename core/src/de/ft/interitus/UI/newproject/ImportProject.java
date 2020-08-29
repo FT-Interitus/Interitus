@@ -189,6 +189,9 @@ public class ImportProject {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
 
+                    if(items.indexOf(selectimporter.getSelected())==-1) {
+                        return;
+                    }
                     Importer.importer.get(items.indexOf(selectimporter.getSelected())).importproject(selectedfile);
 
                     UIVar.isdialogeopend = false;

@@ -54,7 +54,7 @@ public class InitArduino {
         blocks.add(new DigitalRead(arduino));
         blocks.add(new MathBlock(arduino));
 
-        ProjectTypesVar.addons.add(new NeoPixel());
+
 
         return arduino;
     }

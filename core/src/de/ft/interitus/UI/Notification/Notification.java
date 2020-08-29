@@ -7,6 +7,7 @@ package de.ft.interitus.UI.Notification;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.kotcrab.vis.ui.widget.ButtonBar;
+import de.ft.interitus.UI.ChangeListener;
 import de.ft.interitus.UI.UIElements.UIElementBar;
 import de.ft.interitus.UI.UIElements.UIElements.Button;
 
@@ -30,6 +31,7 @@ public class Notification {
     private int rollin = 0;
     private boolean inrollin = true;
     private UIElementBar buttonbar = null;
+    private ChangeListener closeListener;
 
     /***
      * Creates a new Notification which can send to the NotificationManager
@@ -75,8 +77,13 @@ public class Notification {
         return this;
     }
 
-
-
+    /***
+     * Set CloseListener
+     * @param closeListener
+     */
+    public void setCloseListener(ChangeListener closeListener) {
+        this.closeListener = closeListener;
+    }
 
     /**
      * If false the Notification can't be closed by the user and after expiring.
@@ -258,6 +265,10 @@ public class Notification {
 
     protected UIElementBar getButtonbar() {
         return buttonbar;
+    }
+
+    protected ChangeListener getCloseListener() {
+        return closeListener;
     }
 }
 

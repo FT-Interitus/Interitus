@@ -63,6 +63,12 @@ public class PluginGateway {
     @SuppressWarnings("unused")
     public static boolean addProjectType(ProjectTypes PT, Plugin requestedplugin) {
         if (PluginManagerHandler.loadedplugins.contains(requestedplugin)) {
+            //Do not allow two ProjectTypes with the same Name
+            for(ProjectTypes projectTypes:ProjectTypesVar.projectTypes) {
+                if(PT.getName().contentEquals(projectTypes.getName())) {
+                    return false;
+                }
+            }
             pluginprojekttypes.add(PT);
             pluginprojekttypesplugins.add(requestedplugin);
             return true;

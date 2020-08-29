@@ -14,6 +14,7 @@ import de.ft.interitus.Block.WireNode;
 import de.ft.interitus.UI.ManualConfig.DeviceConfiguration;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.Var;
+import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.utils.ArrayList;
 
 import java.util.HashMap;
@@ -54,6 +55,7 @@ public abstract class ProjectVar {
     public ArrayList<Thread> threads = new ArrayList<>();
     public ArrayList<Object> requestobj = new ArrayList<>();
     public DataWire moveingdatawire = null;
+    public ArrayList<Addon> enabledAddons = new ArrayList<>();
 
 
     public ArrayList<DeviceConfiguration> deviceConfigurations = new ArrayList<>();
