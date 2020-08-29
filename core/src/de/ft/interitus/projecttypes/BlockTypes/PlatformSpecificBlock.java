@@ -104,9 +104,10 @@ public abstract class PlatformSpecificBlock {
                 if (parameter.getDatawire() == null) {
                     continue;
                 }
-                for (DataWire dataWire : parameter.getDatawire()) {
 
-                    dataWire.delete();
+                while(parameter.getDatawire().size()>0) {
+
+                    parameter.getDatawire().get(0).delete();
 
                 }
 

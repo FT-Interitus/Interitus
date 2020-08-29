@@ -6,6 +6,7 @@
 package de.ft.interitus.projecttypes;
 
 import com.kotcrab.vis.ui.widget.VisTable;
+import de.ft.interitus.Block.Block;
 import de.ft.interitus.UI.ManualConfig.DeviceConfiguration;
 
 public interface ProjectFunktions {
@@ -19,5 +20,8 @@ public interface ProjectFunktions {
      * will be called by chancing the current run config to an other on
      */
     void changedrunconfig();
+
+
+    boolean isblockconnected(Block block);
 
 }

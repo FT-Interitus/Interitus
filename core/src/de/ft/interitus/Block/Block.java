@@ -14,6 +14,7 @@ import com.badlogic.gdx.math.Vector2;
 import de.ft.interitus.Block.Generators.BlockUpdateGenerator;
 import de.ft.interitus.Block.Generators.BlocktoSaveGenerator;
 import de.ft.interitus.DisplayErrors;
+import de.ft.interitus.Settings;
 import de.ft.interitus.ThreadManager;
 import de.ft.interitus.UI.UIElements.BlockDropDownMenue.BlockDropDownItem;
 import de.ft.interitus.UI.UIElements.BlockDropDownMenue.BlockDropDownMenue;
@@ -499,22 +500,20 @@ public abstract class Block implements VisibleObjects {
 
     public void delete(boolean complete) { //Der Block soll gelöscht werden (complete beduetet das alle Blöcke gelöscht werden sollen)
 
-        try {
+
             if (blocktype.getBlockParameter() != null) {
                 for (Parameter parameter : blocktype.getBlockParameter()) {
                     if (parameter.getDatawire() == null) {
                         continue;
                     }
 
-                    for (DataWire wire : parameter.getDatawire()) {
-                        wire.delete();
+                    while (parameter.getDatawire().size()>0) {
+                        parameter.getDatawire().get(0).delete();
                     }
 
                 }
             }
-        }catch (ConcurrentModificationException e) {
 
-        }
 
 
         if (ProjectManager.getActProjectVar().Blockwitherrors.contains(this.getIndex())) {
@@ -645,6 +644,11 @@ batch.begin();
             } else {
                 batch.setColor(1, 1, 1, 1);
             }
+            if(!Settings.disableblockgrayout) {
+                if (!ProjectManager.getActProjectVar().projectType.getProjectFunktions().isblockconnected(this)) {
+                    batch.setColor(batch.getColor().r, batch.getColor().g, batch.getColor().b, 0.4f);
+                }
+            }
 
 
             if (!this.blockupdate.toggle) {
@@ -668,19 +672,7 @@ batch.begin();
                 batch.draw(AssetLoader.marked_links, this.getX(), this.getY(), 6, this.getH());
                 batch.draw(AssetLoader.marked_rechts, this.getX() + this.getW() - 6, this.getY(), 6, this.getH());
             }
-            if (ProjectManager.getActProjectVar().biggestblock == this) {
-                if (this.isShowdupulicate_rechts() && this.getBlocktype().canhasrightconnector()) {
-                    batch.setColor(1, 1, 1, 0.5f);
-                    batch.draw(AssetLoader.img_block, this.x_dup_rechts, this.y, ProjectManager.getActProjectVar().markedblock.getW(), this.getH()); //Wenn der Block die größte überlappung hat wird er als show duplicat angezigt
-                    batch.setColor(1, 1, 1, 1);
-                }
 
-                if (this.isShowdupulicate_links() && this.getBlocktype().canhasleftconnector()) {
-                    batch.setColor(1, 1, 1, 0.5f);
-                    batch.draw(AssetLoader.img_block, this.x - ProjectManager.getActProjectVar().markedblock.getW(), this.y, ProjectManager.getActProjectVar().markedblock.getW(), this.getH()); //das gleiche für links
-                    batch.setColor(1, 1, 1, 1);
-                }
-            }
 /*
         if (this.getLeft() != null) { //Verbindungs marke ob der Nachbar verbunden ist
             batch.end();
@@ -748,6 +740,22 @@ batch.begin();
                     aktualX += 30;
                 }
             }
+
+
+            if (ProjectManager.getActProjectVar().biggestblock == this) {
+                if (this.isShowdupulicate_rechts() && this.getBlocktype().canhasrightconnector()) {
+                    batch.setColor(1, 1, 1, 0.5f);
+                    batch.draw(AssetLoader.img_block, this.x_dup_rechts, this.y, ProjectManager.getActProjectVar().markedblock.getW(), this.getH()); //Wenn der Block die größte überlappung hat wird er als show duplicat angezigt
+                    batch.setColor(1, 1, 1, 1);
+                }
+
+                if (this.isShowdupulicate_links() && this.getBlocktype().canhasleftconnector()) {
+                    batch.setColor(1, 1, 1, 0.5f);
+                    batch.draw(AssetLoader.img_block, this.x - ProjectManager.getActProjectVar().markedblock.getW(), this.y, ProjectManager.getActProjectVar().markedblock.getW(), this.getH()); //das gleiche für links
+                    batch.setColor(1, 1, 1, 1);
+                }
+            }
+
 batch.end();
 
 
@@ -770,8 +778,7 @@ batch.end();
                         }
                     }
                 }
-            }catch (ConcurrentModificationException e) {
-
+            }catch (ConcurrentModificationException ignored) {
             }
 
 

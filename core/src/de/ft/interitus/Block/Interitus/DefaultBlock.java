@@ -8,6 +8,8 @@ package de.ft.interitus.Block.Interitus;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.Generators.BlockUpdateGenerator;
 import de.ft.interitus.Block.Generators.BlocktoSaveGenerator;
+import de.ft.interitus.Block.Parameter;
+import de.ft.interitus.projecttypes.BlockTypes.BlockModi;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 
 public class DefaultBlock extends Block {
@@ -17,10 +19,21 @@ public class DefaultBlock extends Block {
         super(index, x, y, w, h, platformSpecificBlock, update, blocktoSaveGenerator);
 
 
-        if (platformSpecificBlock.getBlockParameter() != null) {
-            for (int i = 0; i < platformSpecificBlock.getBlockParameter().size(); i++) {
-                platformSpecificBlock.getBlockParameter().get(i).setBlock(this);
+
+            for(BlockModi blockModi:platformSpecificBlock.getBlockModis()) {
+
+                if(blockModi.getBlockParameter()==null) {
+                    continue;
+                }
+                for (Parameter parameter:blockModi.getBlockParameter()) {
+                    parameter.setBlock(this);
+                }
+
+
             }
-        }
+
+
+
+
     }
 }

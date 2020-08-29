@@ -48,7 +48,7 @@ public class subitem6 {
 
     }
 
-    public static class ShortCutEinstellung {
+    private static class ShortCutEinstellung {
         VisLabel name;
         VisTextField tastenkombeauswahl;
         VisRadioButton disablebutton;

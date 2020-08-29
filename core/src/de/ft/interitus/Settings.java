@@ -15,4 +15,5 @@ public class Settings {
     public static boolean personalhits = true;
     public static boolean hints = true;
     public static boolean betaupdates = false;
+    public static boolean disableblockgrayout = false;
 }

@@ -57,7 +57,7 @@ public class AdditionalModi implements BlockModi, ArduinoBlock {
 
     @Override
     public String getCode() {
-        if( parameters.get(2).getDatawire()!=null){
+        if( parameters.get(2).getDatawire().size()>0){
             return parameters.get(2).getVarName()+ " = "+parameters.get(0).getParameter()+" + "+parameters.get(1).getParameter()+";";
 
         }else {

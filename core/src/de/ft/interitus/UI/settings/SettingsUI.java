@@ -39,7 +39,6 @@ public class SettingsUI extends VisWindow {
 
     public static TestBuilder testBuilder;
     public static int SelectedItem = -1;
-    private static boolean accepteddangerous = false;
     final VisTable container = new VisTable();
     final Padding padding = new Padding(2, 3);
     ChangeListener listener = null;
@@ -176,7 +175,7 @@ public class SettingsUI extends VisWindow {
             item2.add(new TestNode(new VisLabel(" item 2.3"), 7));
 
             item3.add(new TestNode(new VisLabel(" Daten"), 9));
-            item3.add(new TestNode(new VisLabel(" item"), 10));
+            item3.add(new TestNode(new VisLabel(" Performance"), 10));
             item3.add(new TestNode(new VisLabel(" Erweitert"), 11));
 
             item4.add(new TestNode(new VisLabel(" Interitus Mobil"), 13));
