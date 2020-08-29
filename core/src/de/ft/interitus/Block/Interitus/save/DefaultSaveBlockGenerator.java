@@ -10,6 +10,7 @@ import de.ft.interitus.Block.DataWire;
 import de.ft.interitus.Block.Generators.BlocktoSaveGenerator;
 import de.ft.interitus.Block.SaveBlock;
 import de.ft.interitus.Block.Wire;
+import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.ArrayList;
 
 public class DefaultSaveBlockGenerator implements BlocktoSaveGenerator {
@@ -100,6 +101,10 @@ public class DefaultSaveBlockGenerator implements BlocktoSaveGenerator {
                     }
 
                     for(DataWire dataWire:block.getBlocktype().getBlockParameter().get(i).getDatawire()) {
+                        if(dataWire== ProjectManager.getActProjectVar().moveingdatawire) {
+                            //Ignore moving DataWires while saving
+                            continue;
+                        }
                         datawires.get(i).add(dataWire.getParam_output().getBlock().getIndex());
                         datawiresindex.get(i).add(dataWire.getParam_output().getBlock().getBlocktype().getBlockParameter().indexOf(dataWire.getParam_output()));
 

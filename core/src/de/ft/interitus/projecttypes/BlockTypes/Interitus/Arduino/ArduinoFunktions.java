@@ -13,6 +13,7 @@ import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisSelectBox;
 import com.kotcrab.vis.ui.widget.VisTable;
 import com.kotcrab.vis.ui.widget.VisTextField;
+import de.ft.interitus.Block.Block;
 import de.ft.interitus.UI.ManualConfig.DeviceConfiguration;
 import de.ft.interitus.UI.ManualConfig.DeviceParameter;
 import de.ft.interitus.UI.ManualConfig.ManualConfigUI;
@@ -265,6 +266,37 @@ private boolean firstrun = true;
         openedprogress = false;
         activeConfiguration = null;
 
+    }
+
+    @Override
+    public boolean isblockconnected(Block block) {
+        if(block.getIndex()==0||block.getIndex()==1) {
+            return true;
+        }
+
+        Block tempblock = block;
+        boolean returnvalue = false;
+
+        while (tempblock.getLeft() != null) {
+
+            if(tempblock.getLeft()==null) {
+
+                break;
+
+            }
+            tempblock = tempblock.getLeft();
+        }
+
+
+        if(tempblock.getIndex()==0) {
+            returnvalue=true;
+        }
+
+        if(tempblock.getIndex()==1) {
+            returnvalue = true;
+        }
+
+        return returnvalue;
     }
 
 

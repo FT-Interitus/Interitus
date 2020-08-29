@@ -232,9 +232,8 @@ public class Data {
                     Settings.hints = obj.getBoolean("hints");
                     Settings.personalhits = obj.getBoolean("personalhints");
                     Settings.betaupdates = obj.getBoolean("betaupdates");
+                    Settings.disableblockgrayout = obj.getBoolean("disableblockgrayout");
                     // weitere einstellugen Laden
-
-                } catch (JSONException e) {
 
                 } catch (Exception e) {
 
@@ -396,6 +395,7 @@ public class Data {
         settings_obj.put("hints", Settings.hints);
         settings_obj.put("personalhints", Settings.personalhits);
         settings_obj.put("betaupdates",Settings.betaupdates);
+        settings_obj.put("disableblockgrayout",Settings.disableblockgrayout);
 
         //hier weitere Einstellugen speichern
         settings.writeString(settings_obj.toString(), false); //Datei wird geschrieben
