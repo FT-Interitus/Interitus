@@ -1,8 +1,8 @@
 ---
 name: Bug report
-about: Report a Bug to tell us what we can improve!
-title: "[Bug]"
-labels: ''
+about: Create a report to help us improve
+title: ''
+labels: bug
 assignees: ''
 
 ---
@@ -23,10 +23,14 @@ A clear and concise description of what you expected to happen.
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
 
+
+**Stacktrace**
+Post Error if available
+
+
 **Desktop (please complete the following information):**
  - OS: [e.g. Windows]
- - Version of the Programm (Can be found at Menu->About) [e.g. 22]
-
+ - Version of the Programm (Can be found at Menu->About) [e.g. 1.0]
 
 **Additional context**
 Add any other context about the problem here.
