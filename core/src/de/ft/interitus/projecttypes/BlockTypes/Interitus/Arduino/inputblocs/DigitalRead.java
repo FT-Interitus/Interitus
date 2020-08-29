@@ -1,9 +1,4 @@
-/*
- * Copyright (c) 2020.
- * Copyright by Tim and Felix
- */
-
-package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.Wait;
+package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.inputblocs;
 
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
@@ -21,15 +16,15 @@ import de.ft.interitus.utils.ArrayList;
 
 import java.awt.*;
 
-public class Wait extends PlatformSpecificBlock {
+public class DigitalRead extends PlatformSpecificBlock {
 
 
 
-    public Wait(ProjectTypes arduino) {
+    public DigitalRead(ProjectTypes arduino) {
         super(arduino);
 
-        blockModis.add(new DefaultWait());
-       actBlockModiIndex = 0;
+        blockModis.add(new DigitalReadDefault());
+        actBlockModiIndex = 0;
 
     }
 
@@ -37,12 +32,12 @@ public class Wait extends PlatformSpecificBlock {
 
     @Override
     public String getName() {
-        return "Wait";
+        return "DigitalRead";
     }
 
     @Override
     public String getdescription() {
-        return null;
+        return "Dieser Block list einen Pin digital aus";
     }
 
 
@@ -54,7 +49,7 @@ public class Wait extends PlatformSpecificBlock {
 
     @Override
     public BlockCategories getBlockCategoration() {
-        return BlockCategories.Programm_Sequence;
+        return BlockCategories.Sensors;
     }
 
     @Override
