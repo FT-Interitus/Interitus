@@ -20,6 +20,7 @@ import de.ft.interitus.datamanager.BlockCalculator;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.datamanager.userdata.Zip;
 import de.ft.interitus.loading.AssetLoader;
+import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.ProjectTypes;
@@ -30,6 +31,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
+import java.util.List;
 
 public class DataLoader {
     private static boolean wascreated = false;
@@ -64,6 +66,25 @@ public class DataLoader {
                         this.interrupt();
                         return;
                     } else {
+                        boolean found = false;
+                        for(Object addonname:  settings.getJSONArray("addons").toList()) {
+                            found = false;
+                            for(Addon addon:ProjectTypesVar.addons) {
+                                if(addonname==addon.getName()) {
+                                    found = true;
+                                    break;
+                                }
+                            }
+                            if(!found) {
+                                Dialogs.showErrorDialog(UI.stage,"Ein verbundenes Addon konnte nicht gefunden werden!"); //TODO informations about the Plugin
+                                Var.isloading = false;
+                                this.interrupt();
+                                return;
+                            }
+
+                        }
+
+
                         //ThreadManager.stopall();
 
                         if(settings.getDouble("it_version")!=Var.PROGRAMM_VERSION_ID) {
