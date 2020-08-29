@@ -34,6 +34,7 @@ import de.ft.interitus.datamanager.programmdata.Updater;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.plugin.Native;
 import de.ft.interitus.plugin.Plugin;
+import de.ft.interitus.plugin.PluginGateway;
 import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.PositionSaver;
@@ -122,7 +123,6 @@ public class ProgrammingSpace extends ScreenAdapter {
 
 
 
-
         ProgrammingSpace.delta = delta;
 
 
@@ -201,6 +201,8 @@ public class ProgrammingSpace extends ScreenAdapter {
         PopupHandler.drawPopUp();
 
 
+
+
         try {
             DisplayErrors.checkerror(); //Check if there are undisplayed Errors
         } catch (IllegalStateException e) {
@@ -257,6 +259,10 @@ public class ProgrammingSpace extends ScreenAdapter {
 
             for (int i = 0; i < AssetLoader.pixmap.size(); i++) {
                 AssetLoader.storeimages.add(new Texture(AssetLoader.pixmap.get(i)));
+            }
+
+            for (int i = 0; i < PluginGateway.pluginpixmaps.size(); i++) {
+                PluginGateway.pluginTextures.add(new Texture(PluginGateway.pluginpixmaps.get(i)));
             }
 
             AssetLoader.finishpluginimageloading = false; //

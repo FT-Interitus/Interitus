@@ -7,10 +7,11 @@ apply plugin: "java"
 
 sourceCompatibility = 1.14
 sourceSets.main.java.srcDirs = [ "src/" ]
-sourceSets.main.resources.srcDirs = ["../core/assets"]
+sourceSets.main.resources.srcDirs = ["../core/assets","src/"]
 
 project.ext.mainClassName = "de.ft.interitus.desktop.DesktopLauncher"
 project.ext.assetsDir = new File("../core/assets")
+
 
 task run(dependsOn: classes, type: JavaExec) {
     main = project.mainClassName

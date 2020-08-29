@@ -14,7 +14,7 @@ public class PluginSandboxSecurityPolicy extends Policy {
     @Override
     public PermissionCollection getPermissions(ProtectionDomain domain) {
         if(isPlugin(domain)) {
-            return pluginPermissions();
+            return applicationPermissions();
         }else{
             return applicationPermissions();
         }

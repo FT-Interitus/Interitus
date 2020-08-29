@@ -6,18 +6,21 @@
 package de.ft.interitus.loading;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import de.ft.interitus.DisplayErrors;
+import de.ft.interitus.Programm;
 import de.ft.interitus.Var;
 import de.ft.interitus.plugin.store.StorePluginsVar;
 import de.ft.interitus.utils.ArrayList;
 import de.ft.interitus.utils.DownloadFile;
 
 import java.io.IOException;
+import java.util.Objects;
 
 public class AssetLoader {
 
@@ -216,6 +219,10 @@ public class AssetLoader {
             manager.load(workingdirectory + "Block/Parameter/viertens.png", Texture.class);
             manager.load(workingdirectory + "Block/Parameter/Minus.png", Texture.class);
             manager.load(workingdirectory + "Block/Parameter/Plus.png", Texture.class);
+           // manager.load(new AssetDescriptor(Objects.requireNonNull(Programm.INSTANCE.getClass().getClassLoader().getResource("../statistics/test.png")).getFile(),Texture.class));
+
+
+            //Programm.INSTANCE.getClass().getResource()
 
 
 

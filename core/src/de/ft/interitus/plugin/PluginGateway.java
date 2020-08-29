@@ -5,6 +5,8 @@
 
 package de.ft.interitus.plugin;
 
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.kotcrab.vis.ui.widget.Menu;
 import com.kotcrab.vis.ui.widget.VisTable;
 import de.ft.interitus.Settings;
@@ -20,6 +22,7 @@ import de.ft.interitus.projecttypes.Importer.Importer;
 import de.ft.interitus.projecttypes.ProjectTypes;
 import de.ft.interitus.utils.ArrayList;
 
+import java.io.IOException;
 import java.util.List;
 
 
@@ -38,6 +41,8 @@ public class PluginGateway {
     public static final List<Menu> pluginMenubar = new ArrayList<>();
     public static final ArrayList<ShortCutChecker> pluginshortCutsChecker = new ArrayList<>();
     public static final ArrayList<ShortCut> pluginshortCuts = new ArrayList<>();
+    public static final ArrayList<Pixmap> pluginpixmaps = new ArrayList<>();
+    public static final ArrayList<Texture> pluginTextures = new ArrayList<>();
 
     @SuppressWarnings("unused")
     public static boolean addsettings(VisTable settingsclass, Plugin requestedplugin) {
@@ -126,6 +131,26 @@ public class PluginGateway {
             return true;
         } else {
             return false;
+        }
+    }
+
+    @SuppressWarnings("unused")
+    public static int loadTexture(String internalPath, Plugin requestedplugin) {
+        if (PluginManagerHandler.loadedplugins.contains(requestedplugin)) {
+
+
+            try {
+                byte[] imagesbytes = requestedplugin.getClass().getResourceAsStream(internalPath).readAllBytes();
+                pluginpixmaps.add(new Pixmap(imagesbytes,0,imagesbytes.length));
+                return pluginpixmaps.size()-1;
+
+            } catch (IOException e) {
+              return -1;
+            }
+
+
+        } else {
+            return -1;
         }
     }
 
