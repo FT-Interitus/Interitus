@@ -11,6 +11,7 @@ import de.ft.interitus.Var;
 import de.ft.interitus.datamanager.BlockCalculator;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.datamanager.userdata.Zip;
+import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.ArrayList;
 import org.json.JSONObject;
@@ -64,13 +65,13 @@ public class DataSaver {
                 settings.put("pos_y", ProjectManager.getActProjectVar().cam_pos.y);
                 settings.put("time", ProjectManager.getActProjectVar().programmingtime + (System.currentTimeMillis() - ProjectManager.getActProjectVar().currentstarttime));
                 settings.put("it_version", Var.PROGRAMM_VERSION_ID); //Saves Interitus Version in Project File
-                settings.put("pl_name",ProjectManager.getActProjectVar().projectType.getPluginRegister().getName());
-                settings.put("pl_version",ProjectManager.getActProjectVar().projectType.getPluginRegister().getVersion());
+                settings.put("pl_name", PluginManagerHandler.getPluginArgs(ProjectManager.getActProjectVar().projectType.getPluginRegister(),"name"));
+                settings.put("pl_version", ((double) PluginManagerHandler.getPluginArgs(ProjectManager.getActProjectVar().projectType.getPluginRegister(), "version")));
                 ArrayList<JSONObject> addons = new ArrayList<>();
                 for(int i=0;i<ProjectManager.getActProjectVar().enabledAddons.size();i++) {
                     JSONObject tempjson = new JSONObject();
-                    tempjson.put("pl_name",ProjectManager.getActProjectVar().enabledAddons.get(i).getPlugin().getName());
-                    tempjson.put("addon_name",ProjectManager.getActProjectVar().enabledAddons.get(i).getPlugin().getName());
+                    tempjson.put("pl_name",PluginManagerHandler.getPluginArgs(ProjectManager.getActProjectVar().enabledAddons.get(i).getPlugin(),"name").toString());
+                    tempjson.put("addon_name",ProjectManager.getActProjectVar().enabledAddons.get(i).getName());
 
                 }
                 settings.put("addons",addons);

@@ -20,6 +20,7 @@ import de.ft.interitus.datamanager.BlockCalculator;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.datamanager.userdata.Zip;
 import de.ft.interitus.loading.AssetLoader;
+import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
 import de.ft.interitus.projecttypes.ProjectManager;
@@ -95,7 +96,7 @@ public class DataLoader {
                             NotificationManager.sendNotification(new Notification(AssetLoader.information,"Warnung","Das Project stammt aus\neiner anderen Interitus Version"));
                         }
 
-                        if(settings.getDouble("pl_version")!=temptype.getPluginRegister().getVersion()) {
+                        if(settings.getDouble("pl_version")!= ((double) PluginManagerHandler.getPluginArgs(temptype.getPluginRegister(), "version"))) {
                             NotificationManager.sendNotification(new Notification(AssetLoader.information,"Warnung","Das Project stammt aus\neiner anderen Projekt-Type Version"));
                         }
 

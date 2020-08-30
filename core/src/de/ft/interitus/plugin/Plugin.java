@@ -11,20 +11,10 @@ public interface Plugin {
 
     boolean init(PluginAssetManager assetManager);
 
-    boolean stop();
 
     boolean run();
 
 
-    String getName();
-
-    double getVersion();
-
-    String getDescription();
-
-    String getLongDescription();
-
-    String getAuthor();
 
 
 }

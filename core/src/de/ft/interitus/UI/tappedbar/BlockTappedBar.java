@@ -14,6 +14,7 @@ import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.UIElements.quickinfo.QuickInfoContent;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.loading.AssetLoader;
+import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.projecttypes.ProjectManager;
 
 
@@ -62,7 +63,7 @@ public class BlockTappedBar {
                             Specials.addItem(new TapBarBlockItem(ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i), ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i).getSmallImage()));
                             break;
                         case OwnBlocks:
-                            Programm.logger.severe("Unallowed Block was registered from Plugin " + ProjectManager.getActProjectVar().projectType.getPluginRegister().getName());
+                            Programm.logger.severe("Unallowed Block was registered from Plugin " + PluginManagerHandler.getPluginArgs(ProjectManager.getActProjectVar().projectType.getPluginRegister(),"name"));
                             break;
 
                     }

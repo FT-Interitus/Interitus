@@ -22,10 +22,14 @@ import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
 import de.ft.interitus.projecttypes.Importer.Import;
 import de.ft.interitus.projecttypes.Importer.Importer;
+import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.ProjectTypes;
 import de.ft.interitus.utils.ArrayList;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URL;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -148,7 +152,10 @@ public class ProgramRegistry {
 
 
             try {
-                byte[] imagesbytes = requestedplugin.getClass().getResourceAsStream(internalPath).readAllBytes();
+
+                byte[] imagesbytes = requestedplugin.getClass().getResourceAsStream("/"+internalPath).readAllBytes();
+
+
                 pluginpixmaps.add(new Pixmap(imagesbytes, 0, imagesbytes.length));
                 return pluginpixmaps.size() - 1;
 
@@ -280,7 +287,7 @@ public class ProgramRegistry {
 
     public static void addSettings(SettingsUI.TestNode node) {
         for (int i = 0; i < ProgramRegistry.pluginsettings.size(); i++) {
-            node.add(new SettingsUI.TestNode(new VisLabel(" " + PluginManagerHandler.loadedplugins.get(i).getName() + " "), 17 + i));
+            node.add(new SettingsUI.TestNode(new VisLabel(" " +  PluginManagerHandler.getPluginArgs(PluginManagerHandler.loadedplugins.get(i),"name")+ " "), 17 + i));
         }
     }
 

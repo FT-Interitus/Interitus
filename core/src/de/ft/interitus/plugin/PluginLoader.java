@@ -67,9 +67,20 @@ public class PluginLoader {
         try {
             cl = new PluginClassLoader(new File(filetest.getAbsolutePath()).toURI().toURL()).loadClass(main);
 
+           try {
 
+               if(!PluginManagerHandler.pluginvalidator(new String(cl.getResourceAsStream("plugin.json").readAllBytes()))) {
+                   Programm.logger.warning("Plugin loading error");
+                   return;
+               }
 
-            Pixmap pixmap = new Pixmap(cl.getResourceAsStream("test.png").readAllBytes(),0,cl.getResourceAsStream("test.png").readAllBytes().length);
+           }catch (Throwable e) {
+               e.printStackTrace();
+
+               Programm.logger.warning("Plugin doesn't provide plugin.json");
+
+               return;
+           }
 
         } catch (ClassNotFoundException e) {
             PluginManagerHandler.error = e;

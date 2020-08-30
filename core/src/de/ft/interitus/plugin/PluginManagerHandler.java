@@ -9,8 +9,10 @@ import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Programm;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.utils.ArrayList;
+import org.json.JSONObject;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -59,7 +61,7 @@ public class PluginManagerHandler {
 
     public static void init() {
 
-        for(Plugin plugin:loadedplugins) {
+        for (Plugin plugin : loadedplugins) {
             plugin.init(assetManager);
         }
 
@@ -69,9 +71,6 @@ public class PluginManagerHandler {
     }
 
     private static void startPluginLifeCycle() {
-
-
-
 
 
         Timer time = new Timer();
@@ -86,7 +85,7 @@ public class PluginManagerHandler {
                     try {
                         loadedplugins.get(i).run();
                     } catch (Throwable e) {
-                        DisplayErrors.customErrorstring = "Im Plugin " + loadedplugins.get(i).getName() + " ist ein Fehler aufgetreten und es wurde deaktiviert";
+                        DisplayErrors.customErrorstring = "Im Plugin " + getPluginArgs(loadedplugins.get(i),"name") + " ist ein Fehler aufgetreten und es wurde deaktiviert";
                         DisplayErrors.error = e;
 
                         //ProgramRegistry.removepluginregisters(loadedplugins.get(i));
@@ -99,8 +98,8 @@ public class PluginManagerHandler {
                     //Disable Plugin if it is too slow
                     if (after - before > 80) {
                         Programm.logger.warning((after - before) + "");
-                        Programm.logger.warning("Das Plugin " + loadedplugins.get(i).getName() + " ist zu langsam und wurde deshalb deaktiviert");
-                        loadedplugins.get(i).stop();
+                        Programm.logger.warning("Das Plugin " + getPluginArgs(loadedplugins.get(i),"name") + " ist zu langsam und wurde deshalb deaktiviert");
+
                         //ProgramRegistry.removepluginregisters(loadedplugins.get(i));
                         loadedplugins.remove(loadedplugins.get(i));
 
@@ -117,41 +116,16 @@ public class PluginManagerHandler {
 
     private static void registerPlugins() {
         for (int i = 0; i < loadedplugins.size(); i++) {
+
+
             try {
 
 
-                if (loadedplugins.get(i).getName().length() <= 3 || loadedplugins.get(i).getName().startsWith(" ") || loadedplugins.get(i).getName().endsWith(" ") || loadedplugins.get(i).getName().length() > 50) {
-                    loadedplugins.remove(loadedplugins.get(i));
-
-                }
-
-                if (loadedplugins.get(i).getVersion() <= 0.0) {
-                    loadedplugins.remove(loadedplugins.get(i));
-                }
-
-                if (loadedplugins.get(i).getAuthor().length() <= 3 || loadedplugins.get(i).getAuthor().startsWith(" ") || loadedplugins.get(i).getAuthor().endsWith(" ")) {
-                    loadedplugins.remove(loadedplugins.get(i));
-                }
-
-                if (loadedplugins.get(i).getDescription().contentEquals("")) {
-                    loadedplugins.remove(loadedplugins.get(i));
-                }
-            } catch (Throwable e) {
-                e.printStackTrace();
-                loadedplugins.remove(loadedplugins.get(i));
-            }
-            try {
-
-                if (!loadedplugins.contains(loadedplugins.get(i))) {
-                    Programm.logger.warning("Das Plugin " + loadedplugins.get(i).getName() + " konnte nicht geladen werden.");
-                    i--;
-                } else {
-                    int finalI = i;
-                    Thread thread = new Thread(() -> loadedplugins.get(finalI).register(registry));
-                    thread.start();
+                int finalI = i;
+                Thread thread = new Thread(() -> loadedplugins.get(finalI).register(registry));
+                thread.start();
 
 
-                }
             } catch (Throwable e) {
                 e.printStackTrace();
                 loadedplugins.remove(loadedplugins.get(i));
@@ -160,5 +134,40 @@ public class PluginManagerHandler {
         }
     }
 
+    protected static boolean pluginvalidator(String json) {
+        JSONObject jsonObject = new JSONObject(json);
+        try {
+            if (jsonObject.getString("name").length() <= 3 || jsonObject.getString("name").startsWith(" ") || jsonObject.getString("name").endsWith(" ") || jsonObject.getString("name").length() > 50) {
+                return false;
+
+            }
+
+            if (jsonObject.getDouble("version") <= 0.0) {
+                return false;
+            }
+
+            if (jsonObject.getString("author").length() <= 3 || jsonObject.getString("author").startsWith(" ") || jsonObject.getString("author").endsWith(" ")) {
+                return false;
+            }
+
+            if (jsonObject.getString("description").contentEquals("")) {
+                return false;
+            }
+        } catch (Throwable e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        return true;
+
+    }
+
+    public static Object getPluginArgs(Plugin plugin,String attribute)  {
+        try {
+           return new JSONObject(new String(plugin.getClass().getResourceAsStream("plugin.json").readAllBytes())).get(attribute);
+        }catch (IOException e) {
+            return null;
+        }
+    }
 
 }

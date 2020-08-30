@@ -64,7 +64,7 @@ public class PluginPage {
 
         boolean isinstalled = false;
         for (int i = 0; i < PluginManagerHandler.loadedplugins.size(); i++) {
-            if (PluginManagerHandler.loadedplugins.get(i).getName().toLowerCase().contains(Storeentry.getName().toLowerCase())) {
+            if (PluginManagerHandler.getPluginArgs(PluginManagerHandler.loadedplugins.get(i),"name").toString().toLowerCase().contains(Storeentry.getName().toLowerCase())) {
                 isinstalled = true;
 
 

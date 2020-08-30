@@ -9,6 +9,10 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class PluginAssetManager {
     public Texture collectTextureAsset(int id) {
-      return ProgramRegistry.pluginTextures.get(id);
+        try {
+            return ProgramRegistry.pluginTextures.get(id);
+        }catch (IndexOutOfBoundsException e) {
+            return null;
+        }
     }
 }
