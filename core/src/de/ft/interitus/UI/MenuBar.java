@@ -17,7 +17,6 @@ import com.kotcrab.vis.ui.widget.PopupMenu;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.UI.newproject.ImportProject;
 import de.ft.interitus.UI.newproject.NewProjectWindow;
-import de.ft.interitus.UI.popup.PopupMenue;
 import de.ft.interitus.Var;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.datamanager.programmdata.Updater;
@@ -27,7 +26,7 @@ import de.ft.interitus.datamanager.userdata.save.DataSaver;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.UI.UIOpenSettingsEvent;
 import de.ft.interitus.network.bettertogether.Manager;
-import de.ft.interitus.plugin.PluginGateway;
+import de.ft.interitus.plugin.ProgramRegistry;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.VCS;
 
@@ -311,9 +310,7 @@ public class MenuBar {
         UI.menuBar.addMenu(windowMenu);
         UI.menuBar.addMenu(helpMenu);
 
-        for (int i = 0; i < PluginGateway.pluginMenubar.size(); i++) { //Alle Plugins MenuBar werden der MenuBar
-            UI.menuBar.addMenu(PluginGateway.pluginMenubar.get(i));
-        }
+        ProgramRegistry.addMenuBarItems();
 
     }
 

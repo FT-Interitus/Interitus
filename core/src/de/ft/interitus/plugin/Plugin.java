@@ -6,11 +6,15 @@
 package de.ft.interitus.plugin;
 
 public interface Plugin {
-    boolean register();
+    boolean register(ProgramRegistry registry);
+
+
+    boolean init(PluginAssetManager assetManager);
 
     boolean stop();
 
     boolean run();
+
 
     String getName();
 

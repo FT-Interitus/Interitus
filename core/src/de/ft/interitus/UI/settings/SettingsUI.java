@@ -17,15 +17,12 @@ import com.kotcrab.vis.ui.building.TableBuilder;
 import com.kotcrab.vis.ui.building.utilities.CellWidget;
 import com.kotcrab.vis.ui.building.utilities.Padding;
 import com.kotcrab.vis.ui.building.utilities.layouts.ActorLayout;
-import com.kotcrab.vis.ui.util.dialog.ConfirmDialogListener;
-import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import com.kotcrab.vis.ui.widget.*;
-import de.ft.interitus.Settings;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.settings.subitems.*;
 import de.ft.interitus.Var;
-import de.ft.interitus.plugin.PluginGateway;
+import de.ft.interitus.plugin.ProgramRegistry;
 import de.ft.interitus.plugin.PluginManagerHandler;
 
 import java.util.Timer;
@@ -103,7 +100,7 @@ public class SettingsUI extends VisWindow {
 
     }
 
-    static class TestNode extends Tree.Node {
+    public static class TestNode extends Tree.Node {
         public VisLabel label;
         public int Mode;
 
@@ -183,9 +180,7 @@ public class SettingsUI extends VisWindow {
             item4.add(new TestNode(new VisLabel(" Erweitert"), 15));
             //ADD Advanced Settings to ITM if Device is connect
 
-            for (int i = 0; i < PluginGateway.pluginsettings.size(); i++) {
-                item5.add(new TestNode(new VisLabel(" " + PluginManagerHandler.loadedplugins.get(i).getName() + " "), 17 + i));
-            }
+           ProgramRegistry.addSettings(item5);
 
             item1.setExpanded(true);
             item2.setExpanded(true);
@@ -277,7 +272,7 @@ public class SettingsUI extends VisWindow {
                         default:
 
                             if (SelectedItem > 16) {
-                                container.add(PluginGateway.pluginsettings.get(SelectedItem - 17));
+                               ProgramRegistry.getSettingsContainer(container,SelectedItem - 17);
                             }
 
 

@@ -8,11 +8,14 @@ package de.ft.interitus.plugin;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.kotcrab.vis.ui.widget.Menu;
+import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisTable;
 import de.ft.interitus.Settings;
+import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.Theme.RegisteredThemes;
 import de.ft.interitus.UI.Theme.Theme;
 import de.ft.interitus.UI.UI;
+import de.ft.interitus.UI.settings.SettingsUI;
 import de.ft.interitus.UI.shortcut.ShortCut;
 import de.ft.interitus.UI.shortcut.ShortCutChecker;
 import de.ft.interitus.projecttypes.Addons.Addon;
@@ -29,23 +32,24 @@ import java.util.List;
 /**
  * Plugin bridge into the Programm
  */
-public class PluginGateway {
+public class ProgramRegistry {
+    private static final ArrayList<ProjectTypes> pluginprojekttypes = new ArrayList<>();
+    private static final List<VisTable> pluginsettings = new ArrayList<>();
+    private static final List<Menu> pluginMenubar = new ArrayList<>();
+    private static final ArrayList<ShortCutChecker> pluginshortCutsChecker = new ArrayList<>();
+    private static final ArrayList<ShortCut> pluginshortCuts = new ArrayList<>();
+    protected static final ArrayList<Pixmap> pluginpixmaps = new ArrayList<>();
+    protected static final ArrayList<Texture> pluginTextures = new ArrayList<>();
+    protected static final ArrayList<PluginRenderer> pluginRenderer = new ArrayList<>();
     private static final ArrayList<Plugin> pluginprojekttypesplugins = new ArrayList<>();
     private static final ArrayList<Plugin> pluginsettingsplugins = new ArrayList<>();
     private static final ArrayList<Plugin> pluginMenubarplugins = new ArrayList<>();
     private static final ArrayList<Plugin> pluginshortCutsCheckerplugins = new ArrayList<>();
     private static final ArrayList<Plugin> pluginshortCutsplugins = new ArrayList<>();
     private static final ArrayList<Plugin> themesplugins = new ArrayList<>();
-     public static final ArrayList<ProjectTypes> pluginprojekttypes = new ArrayList<>();
-    public static final List<VisTable> pluginsettings = new ArrayList<>();
-    public static final List<Menu> pluginMenubar = new ArrayList<>();
-    public static final ArrayList<ShortCutChecker> pluginshortCutsChecker = new ArrayList<>();
-    public static final ArrayList<ShortCut> pluginshortCuts = new ArrayList<>();
-    public static final ArrayList<Pixmap> pluginpixmaps = new ArrayList<>();
-    public static final ArrayList<Texture> pluginTextures = new ArrayList<>();
 
     @SuppressWarnings("unused")
-    public static boolean addsettings(VisTable settingsclass, Plugin requestedplugin) {
+    public  boolean addsettings(VisTable settingsclass, Plugin requestedplugin) {
         if (PluginManagerHandler.loadedplugins.contains(requestedplugin)) {
             pluginsettings.add(settingsclass);
             pluginsettingsplugins.add(requestedplugin);
@@ -56,7 +60,7 @@ public class PluginGateway {
     }
 
     @SuppressWarnings("unused")
-    public static boolean addMenuEntry(Menu menuentry, Plugin requestedplugin) {
+    public  boolean addMenuEntry(Menu menuentry, Plugin requestedplugin) {
         if (PluginManagerHandler.loadedplugins.contains(requestedplugin)) {
             pluginMenubar.add(menuentry);
             pluginMenubarplugins.add(requestedplugin);
@@ -65,12 +69,13 @@ public class PluginGateway {
             return false;
         }
     }
+
     @SuppressWarnings("unused")
-    public static boolean addProjectType(ProjectTypes PT, Plugin requestedplugin) {
+    public  boolean addProjectType(ProjectTypes PT, Plugin requestedplugin) {
         if (PluginManagerHandler.loadedplugins.contains(requestedplugin)) {
             //Do not allow two ProjectTypes with the same Name
-            for(ProjectTypes projectTypes:ProjectTypesVar.projectTypes) {
-                if(PT.getName().contentEquals(projectTypes.getName())) {
+            for (ProjectTypes projectTypes : ProjectTypesVar.projectTypes) {
+                if (PT.getName().contentEquals(projectTypes.getName())) {
                     return false;
                 }
             }
@@ -81,8 +86,9 @@ public class PluginGateway {
             return false;
         }
     }
+
     @SuppressWarnings("unused")
-    public static boolean addShortcut(Plugin requestedplugin, ShortCut shortCut) {
+    public  boolean addShortcut(Plugin requestedplugin, ShortCut shortCut) {
         if (PluginManagerHandler.loadedplugins.contains(requestedplugin)) {
             pluginshortCuts.add(shortCut);
             pluginshortCutsplugins.add(requestedplugin);
@@ -91,8 +97,9 @@ public class PluginGateway {
             return false;
         }
     }
+
     @SuppressWarnings("unused")
-    public static boolean addShortcutChecker(ShortCutChecker shortCutChecker, Plugin requestedplugin) {
+    public  boolean addShortcutChecker(ShortCutChecker shortCutChecker, Plugin requestedplugin) {
         if (PluginManagerHandler.loadedplugins.contains(requestedplugin)) {
             pluginshortCutsChecker.add(shortCutChecker);
             pluginshortCutsCheckerplugins.add(requestedplugin);
@@ -101,8 +108,9 @@ public class PluginGateway {
             return false;
         }
     }
+
     @SuppressWarnings("unused")
-    public static boolean registerTheme(Theme theme, Plugin requestedplugin) {
+    public  boolean registerTheme(Theme theme, Plugin requestedplugin) {
         if (PluginManagerHandler.loadedplugins.contains(requestedplugin)) {
             RegisteredThemes.themes.add(theme);
             themesplugins.add(requestedplugin);
@@ -113,7 +121,7 @@ public class PluginGateway {
     }
 
     @SuppressWarnings("unused")
-    public static boolean registerAddon(Addon addon, Plugin requestedplugin) {
+    public  boolean registerAddon(Addon addon, Plugin requestedplugin) {
         if (PluginManagerHandler.loadedplugins.contains(requestedplugin)) {
             ProjectTypesVar.addons.add(addon);
 
@@ -124,7 +132,7 @@ public class PluginGateway {
     }
 
     @SuppressWarnings("unused")
-    public static boolean registerImporter(Import importer, Plugin requestedplugin) {
+    public  boolean registerImporter(Import importer, Plugin requestedplugin) {
         if (PluginManagerHandler.loadedplugins.contains(requestedplugin)) {
             Importer.importer.add(importer);
 
@@ -135,17 +143,17 @@ public class PluginGateway {
     }
 
     @SuppressWarnings("unused")
-    public static int loadTexture(String internalPath, Plugin requestedplugin) {
+    public  int loadAsset(String internalPath, Plugin requestedplugin) {
         if (PluginManagerHandler.loadedplugins.contains(requestedplugin)) {
 
 
             try {
                 byte[] imagesbytes = requestedplugin.getClass().getResourceAsStream(internalPath).readAllBytes();
-                pluginpixmaps.add(new Pixmap(imagesbytes,0,imagesbytes.length));
-                return pluginpixmaps.size()-1;
+                pluginpixmaps.add(new Pixmap(imagesbytes, 0, imagesbytes.length));
+                return pluginpixmaps.size() - 1;
 
             } catch (IOException e) {
-              return -1;
+                return -1;
             }
 
 
@@ -154,7 +162,24 @@ public class PluginGateway {
         }
     }
 
+    @SuppressWarnings("unused")
+    public  boolean addPluginRender(Plugin requestedplugin, PluginRenderer renderer) {
+        if (PluginManagerHandler.loadedplugins.contains(requestedplugin)) {
 
+            pluginRenderer.add(renderer);
+
+
+            return true;
+
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * @deprecated it isn't posible to unload a Plugin
+     * @param plugin
+     */
 
     static void removepluginregisters(Plugin plugin) {
 
@@ -235,6 +260,32 @@ public class PluginGateway {
             e.printStackTrace();
         }
 
+
+    }
+    public static void addProjectTypes() {
+
+        ProjectTypesVar.projectTypes.addAll(ProgramRegistry.pluginprojekttypes);
+    }
+
+    public static void addShortCuts() {
+        CheckShortcuts.shortCuts.addAll(ProgramRegistry.pluginshortCuts);
+        CheckShortcuts.shortCutsChecker.addAll(ProgramRegistry.pluginshortCutsChecker);
+    }
+
+    public static void addMenuBarItems() {
+        for (int i = 0; i < ProgramRegistry.pluginMenubar.size(); i++) { //Alle Plugins MenuBar werden der MenuBar
+            UI.menuBar.addMenu(ProgramRegistry.pluginMenubar.get(i));
+        }
+    }
+
+    public static void addSettings(SettingsUI.TestNode node) {
+        for (int i = 0; i < ProgramRegistry.pluginsettings.size(); i++) {
+            node.add(new SettingsUI.TestNode(new VisLabel(" " + PluginManagerHandler.loadedplugins.get(i).getName() + " "), 17 + i));
+        }
+    }
+
+    public static void getSettingsContainer(VisTable container,int id) {
+        container.add(ProgramRegistry.pluginsettings.get(id));
 
     }
 

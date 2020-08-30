@@ -9,14 +9,12 @@ import de.ft.interitus.Programm;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.block.BlockEventAdapter;
 import de.ft.interitus.events.block.BlockKillMovingWiresEvent;
-import de.ft.interitus.plugin.PluginGateway;
-import de.ft.interitus.projecttypes.Addons.Addon;
+import de.ft.interitus.plugin.ProgramRegistry;
 import de.ft.interitus.projecttypes.Addons.Interitus.Arduino.InitNativAddons;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.InitArduino;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Ev3.InitEv3;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.RaspberryPi.InitRaspberryPI;
 import de.ft.interitus.projecttypes.ProjectManager;
-import de.ft.interitus.projecttypes.ProjectTypes;
 
 public class Init {
 
@@ -26,8 +24,7 @@ public class Init {
         ProjectTypesVar.projectTypes.add(InitRaspberryPI.init());
         ProjectTypesVar.projectTypes.add(InitEv3.init());
 
-
-        ProjectTypesVar.projectTypes.addAll(PluginGateway.pluginprojekttypes);
+        ProgramRegistry.addProjectTypes();
 
 
         InitNativAddons.init();

@@ -25,10 +25,8 @@ import de.ft.interitus.loading.SplashScreen;
 import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.plugin.PluginSandboxSecurityPolicy;
 import de.ft.interitus.plugin.store.ReadStorePlugins;
-import de.ft.interitus.projecttypes.BlockTypes.Init;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.FolderUtils;
-import de.ft.interitus.utils.NetworkScan;
 import de.ft.interitus.utils.UserNameGetter;
 
 import java.io.IOException;
@@ -75,7 +73,7 @@ public class Programm extends Game {
 
         ThemeManager.register(); //Load all Themes
 
-        Thread loadplugins = new Thread(() -> DisplayErrors.error = PluginManagerHandler.init());
+        Thread loadplugins = new Thread(() -> DisplayErrors.error = PluginManagerHandler.register());
 
         VisUI.load(VisUI.SkinScale.X1);
         Programm.logger.config("Loaded Vis-UI");

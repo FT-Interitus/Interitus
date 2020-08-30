@@ -15,7 +15,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.BlockDrawer;
 import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.Notification.Notification;
@@ -24,17 +23,12 @@ import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.PressedKeys;
 import de.ft.interitus.UI.UIElements.UIElementBar;
 import de.ft.interitus.UI.UIElements.UIElements.Button;
-import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.popup.PopupHandler;
 import de.ft.interitus.UI.settings.subitems.subitem17;
-import de.ft.interitus.UI.setup.SetupWindow;
-import de.ft.interitus.UI.shortcut.shortcuts.BlockShortcuts;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.datamanager.programmdata.Updater;
 import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.plugin.Native;
-import de.ft.interitus.plugin.Plugin;
-import de.ft.interitus.plugin.PluginGateway;
+import de.ft.interitus.plugin.*;
 import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.PositionSaver;
@@ -42,8 +36,6 @@ import de.ft.interitus.utils.ShapeRenderer;
 
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.io.File;
 
 
 public class ProgrammingSpace extends ScreenAdapter {
@@ -64,6 +56,7 @@ public class ProgrammingSpace extends ScreenAdapter {
     public static ShapeRenderer BlockshapeRenderer;
     public static PressedKeys pressedKeys;
     public static float delta;
+    public boolean loadimagesfromplugin = true;
     public static Plugin nativ = new Native();
 
 
@@ -189,6 +182,10 @@ public class ProgrammingSpace extends ScreenAdapter {
         }
 
 
+        if(!loadimagesfromplugin) {
+            PluginDrawer.draw();
+        }
+
 
         NotificationManager.draw();
 
@@ -254,18 +251,15 @@ public class ProgrammingSpace extends ScreenAdapter {
         CheckShortcuts.check();
 
 
-        //Import all Donwloaded images
-        if (AssetLoader.finishpluginimageloading) { //Import all
+        //Import all Plugin Images
+        if (loadimagesfromplugin) { //Import all
 
-            for (int i = 0; i < AssetLoader.pixmap.size(); i++) {
-                AssetLoader.storeimages.add(new Texture(AssetLoader.pixmap.get(i)));
-            }
+            PluginDrawer.loadimages();
 
-            for (int i = 0; i < PluginGateway.pluginpixmaps.size(); i++) {
-                PluginGateway.pluginTextures.add(new Texture(PluginGateway.pluginpixmaps.get(i)));
-            }
+            loadimagesfromplugin = false; //
 
-            AssetLoader.finishpluginimageloading = false; //
+            PluginManagerHandler.init();
+
         }
     }
 
