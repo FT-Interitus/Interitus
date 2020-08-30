@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.Block.ParameterType;
 import de.ft.interitus.loading.AssetLoader;
+import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
 import de.ft.interitus.projecttypes.BlockTypes.BlockTopParameter;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
@@ -25,8 +26,8 @@ public class SetPinMode extends PlatformSpecificBlock  {
 
 
 
-    public SetPinMode(ProjectTypes type) {
-        super(type);
+    public SetPinMode(ProjectTypes type, Addon addon) {
+        super(type,addon);
         blockModis.add(new DefaultSetPinMode());
         actBlockModiIndex=0;
 

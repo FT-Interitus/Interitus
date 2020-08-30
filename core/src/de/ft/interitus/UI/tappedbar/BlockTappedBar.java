@@ -15,6 +15,8 @@ import de.ft.interitus.UI.UIElements.UIElements.quickinfo.QuickInfoContent;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.plugin.PluginManagerHandler;
+import de.ft.interitus.projecttypes.Addons.Addon;
+import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.ProjectManager;
 
 
@@ -75,6 +77,47 @@ public class BlockTappedBar {
                 DisplayErrors.error = e;
             }
         }
+
+
+
+
+        for (Addon addon:ProjectManager.getActProjectVar().enabledAddons) {
+            for (PlatformSpecificBlock psb : addon.getaddBlocks()) {
+                try {
+                    if (psb.getBlockCategoration() != null) {
+                        switch (psb.getBlockCategoration()) {
+                            case ActionBlocks:
+                                ActionBlocks.addItem(new TapBarBlockItem(psb, psb.getSmallImage()));
+                                break;
+                            case Programm_Sequence:
+                                Programm_Sequence.addItem(new TapBarBlockItem(psb, psb.getSmallImage()));
+                                break;
+                            case Sensors:
+                                Sensors.addItem(new TapBarBlockItem(psb, psb.getSmallImage()));
+                                break;
+                            case Data_Operation:
+                                Data_Operation.addItem(new TapBarBlockItem(psb, psb.getSmallImage()));
+                                break;
+                            case Specials:
+                                Specials.addItem(new TapBarBlockItem(psb, psb.getSmallImage()));
+                                break;
+                            case OwnBlocks:
+                                Programm.logger.severe("Unallowed Block was registered from Plugin " + PluginManagerHandler.getPluginArgs(ProjectManager.getActProjectVar().projectType.getPluginRegister(), "name"));
+                                break;
+
+                        }
+                        UI.blockbarquickinfo.addSelfCheckField(new QuickInfoContent(0, 0, 500, 500, psb.getName(), psb.getName()));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    DisplayErrors.customErrorstring = "Fehler beim Laden der Blöcke!";
+                    DisplayErrors.error = e;
+                }
+            }
+        }
+
+
+
 
 
         tb.setContent(ActionBlocks, Programm_Sequence, Sensors, Data_Operation, Specials, OwnBlocks);

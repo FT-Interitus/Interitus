@@ -8,6 +8,7 @@ package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmaufbau
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.loading.AssetLoader;
+import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
 import de.ft.interitus.projecttypes.BlockTypes.BlockTopParameter;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
@@ -19,8 +20,8 @@ import java.awt.*;
 
 public class SetupBlock extends PlatformSpecificBlock {
 
-    public SetupBlock(ProjectTypes arduino) {
-        super(arduino);
+    public SetupBlock(ProjectTypes arduino, Addon addon) {
+        super(arduino,  addon);
         super.blockModis.add(new SetupModi());
         super.actBlockModiIndex=0;
 

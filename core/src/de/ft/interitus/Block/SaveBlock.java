@@ -24,13 +24,14 @@ public abstract class SaveBlock implements Serializable {
     private int index_rechts = -1;
     private boolean isspacebetweenrightblock = false;
     private int platformspecificblockid = 0;
-    private ArrayList<ArrayList<Integer>> datawires;
-    private ArrayList<ArrayList<Integer>> datawiresindex;
-    private int blockmodus;
+    private final ArrayList<ArrayList<Integer>> datawires;
+    private final ArrayList<ArrayList<Integer>> datawiresindex;
+    private final int blockmodus;
+    private final String addon;
 
 
 
-    public SaveBlock(int x, int y, int index, int index_links, int index_rechts, boolean isspacebetweenrightblock, ArrayList<ArrayList<Integer>> nodes, int platformspecificblockid, ArrayList<String> parameters, ArrayList<ArrayList<Integer>> datawires,ArrayList<ArrayList<Integer>> datawireindex,int BlockModus) {
+    public SaveBlock(int x, int y, int index, int index_links, int index_rechts, boolean isspacebetweenrightblock, ArrayList<ArrayList<Integer>> nodes, int platformspecificblockid, ArrayList<String> parameters, ArrayList<ArrayList<Integer>> datawires,ArrayList<ArrayList<Integer>> datawireindex,int BlockModus,String addon) {
         this.x = x;
         this.y = y;
         this.index = index;
@@ -43,6 +44,7 @@ public abstract class SaveBlock implements Serializable {
         this.datawires = datawires;
         this.datawiresindex = datawireindex;
         this.blockmodus = BlockModus;
+        this.addon = addon;
 
 
     }
@@ -93,5 +95,9 @@ public abstract class SaveBlock implements Serializable {
 
     public int getBlockmodus() {
         return blockmodus;
+    }
+
+    public String getAddon() {
+        return addon;
     }
 }

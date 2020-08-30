@@ -29,7 +29,7 @@ import de.ft.interitus.utils.ArrayList;
 
 public class InitArduino {
     static ArrayList<PlatformSpecificBlock> blocks = new ArrayList<>();
-    static ProjectTypes arduino = new ProjectTypes(ProgrammingSpace.nativ, "Arduino-Projekt", blocks, new DefaultBlockGenerator(), new DefaultBlockUpdateGenerator(), new DefaultWireGenerator(), new DefaultWireNodeGenerator(), new DefaultSaveBlockGenerator(), new DefaultBlockVarGenerator(), new ArduinoFunktions(), new ArduinoCompiler());
+   public static ProjectTypes arduino = new ProjectTypes(ProgrammingSpace.nativ, "Arduino-Projekt", blocks, new DefaultBlockGenerator(), new DefaultBlockUpdateGenerator(), new DefaultWireGenerator(), new DefaultWireNodeGenerator(), new DefaultSaveBlockGenerator(), new DefaultBlockVarGenerator(), new ArduinoFunktions(), new ArduinoCompiler());
 
 
     public static ParameterVariableType floatvar;
@@ -44,15 +44,15 @@ public class InitArduino {
         floatvar = new ParameterVariableType("float", AssetLoader.Plug_IntParameter,new Color(23f/255f,141f/255f,209f/255f,1f),"int");
         stringvar = new ParameterVariableType("String", AssetLoader.Plug_StringParameter,new Color(156f/255f,19f/255f,19f/255f,1f),"char[]");
         booleanvar = new ParameterVariableType("boolean", AssetLoader.Plug_BooleanParameter,new Color(245f/255f,169f/255f,56f/255f,1f));
-        blocks.add(new SetupBlock(arduino));
-        blocks.add(new LoopBlock(arduino));
-        blocks.add(new Wait(arduino));
+        blocks.add(new SetupBlock(arduino,null));
+        blocks.add(new LoopBlock(arduino,null));
+        blocks.add(new Wait(arduino,null));
         //blocks.add(new WhileLoopStart(arduino));
         //blocks.add(new WhileLoopEnd(arduino));
-        blocks.add(new SetPinMode(arduino));
-        blocks.add(new digitalWrite(arduino));
-        blocks.add(new DigitalRead(arduino));
-        blocks.add(new MathBlock(arduino));
+        blocks.add(new SetPinMode(arduino,null));
+        blocks.add(new digitalWrite(arduino,null));
+        blocks.add(new DigitalRead(arduino,null));
+        blocks.add(new MathBlock(arduino,null));
 
 
 

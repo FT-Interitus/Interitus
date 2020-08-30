@@ -8,6 +8,7 @@ package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmaufbau
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.loading.AssetLoader;
+import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
 import de.ft.interitus.projecttypes.BlockTypes.BlockTopParameter;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
@@ -20,8 +21,8 @@ import java.awt.*;
 public class LoopBlock extends PlatformSpecificBlock  {
 
 
-    public LoopBlock(ProjectTypes projectTypes) {
-        super(projectTypes);
+    public LoopBlock(ProjectTypes projectTypes, Addon addon) {
+        super(projectTypes,addon);
 
         super.blockModis.add(new LoopModi());
         super.actBlockModiIndex = 0;

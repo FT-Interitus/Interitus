@@ -1,9 +1,15 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.inputblocs;
 
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.Block.ParameterType;
 import de.ft.interitus.loading.AssetLoader;
+import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
 import de.ft.interitus.projecttypes.BlockTypes.BlockModi;
 import de.ft.interitus.projecttypes.BlockTypes.BlockTopParameter;
@@ -20,8 +26,8 @@ public class DigitalRead extends PlatformSpecificBlock {
 
 
 
-    public DigitalRead(ProjectTypes arduino) {
-        super(arduino);
+    public DigitalRead(ProjectTypes arduino, Addon addon) {
+        super(arduino,addon);
 
         blockModis.add(new DigitalReadDefault());
         actBlockModiIndex = 0;

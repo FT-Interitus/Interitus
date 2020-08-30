@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.Block.ParameterType;
 import de.ft.interitus.loading.AssetLoader;
+import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
 import de.ft.interitus.projecttypes.BlockTypes.BlockTopParameter;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
@@ -24,8 +25,8 @@ public class MathBlock extends PlatformSpecificBlock {
 
 
 
-    public MathBlock(ProjectTypes type) {
-        super(type);
+    public MathBlock(ProjectTypes type, Addon addon) {
+        super(type,addon);
         super.blockModis.add(new AdditionalModi());
         super.blockModis.add(new DifferenzModi());
         super.actBlockModiIndex = 0;

@@ -6,6 +6,7 @@
 package de.ft.interitus.datamanager.userdata.load;
 
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.g2d.CpuSpriteBatch;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import de.ft.interitus.Block.SaveBlock;
 import de.ft.interitus.DisplayErrors;
@@ -36,8 +37,9 @@ import java.util.List;
 
 public class DataLoader {
     private static boolean wascreated = false;
-    public static void load(final FileHandle handle, final String name, final String path) {
+    private static final ArrayList<Addon> enabledAddons = new ArrayList<>();
 
+    public static void load(final FileHandle handle, final String name, final String path) {
 
         Thread laden = new Thread() {
             public void run() {
@@ -67,15 +69,17 @@ public class DataLoader {
                         this.interrupt();
                         return;
                     } else {
+                        enabledAddons.clear();
                         boolean found = false;
                         String tempaddonname = "";
                         String temppluginname ="";
-                        for(Object addonname:  settings.getJSONArray("addons").toList()) {
+                        for(Object addonname:  settings.getJSONArray("addons")) {
                             found = false;
                             for(Addon addon:ProjectTypesVar.addons) {
                                 tempaddonname = ((JSONObject) addonname).getString("addon_name");
                                 temppluginname = ((JSONObject) addonname).getString("pl_name");
                                 if(((JSONObject) addonname).getString("addon_name").contentEquals(addon.getName())) {
+                                    enabledAddons.add(addon);
                                     found = true;
                                     break;
                                 }
@@ -113,6 +117,8 @@ public class DataLoader {
                         ProjectManager.getActProjectVar().setFilename(name);
                         ProjectManager.getActProjectVar().path = path;
 
+
+                        ProjectManager.getActProjectVar().enabledAddons.addAll(enabledAddons);
 
                         BlockTappedBar.init();
 

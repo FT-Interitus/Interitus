@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.Block.ParameterType;
 import de.ft.interitus.loading.AssetLoader;
+import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
 import de.ft.interitus.projecttypes.BlockTypes.BlockTopParameter;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
@@ -23,8 +24,8 @@ public class TestOutput extends PlatformSpecificBlock implements ArduinoBlock{
     Parameter waitdauer;
 
 
-    public TestOutput(ProjectTypes arduino) {
-        super(arduino);
+    public TestOutput(ProjectTypes arduino, Addon addon) {
+        super(arduino,addon);
 
 
         waitdauer = new Parameter("", AssetLoader.img_WaitBlock_warteZeit_Parameter, "Warte-Zeit", "Die Zeit die abgewartet werden soll", "ms",new ParameterType(InitArduino.floatvar,true,false), true);

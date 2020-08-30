@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.Block.ParameterType;
 import de.ft.interitus.loading.AssetLoader;
+import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
 import de.ft.interitus.projecttypes.BlockTypes.BlockModi;
 import de.ft.interitus.projecttypes.BlockTypes.BlockTopParameter;
@@ -25,8 +26,8 @@ public class Wait extends PlatformSpecificBlock {
 
 
 
-    public Wait(ProjectTypes arduino) {
-        super(arduino);
+    public Wait(ProjectTypes arduino, Addon addon) {
+        super(arduino,addon);
 
         blockModis.add(new DefaultWait());
        actBlockModiIndex = 0;

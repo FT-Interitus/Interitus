@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.Block.ParameterType;
 import de.ft.interitus.loading.AssetLoader;
+import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
 import de.ft.interitus.projecttypes.BlockTypes.BlockTopParameter;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
@@ -27,8 +28,8 @@ public class digitalWrite extends PlatformSpecificBlock {
     Parameter mode;
 
 
-    public digitalWrite(ProjectTypes type) {
-        super(type);
+    public digitalWrite(ProjectTypes type, Addon addon) {
+        super(type,addon);
 
         blockModis.add(new digitalWriteNormal());
         actBlockModiIndex=0;

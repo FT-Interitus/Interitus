@@ -73,6 +73,7 @@ public class DataSaver {
                     tempjson.put("pl_name",PluginManagerHandler.getPluginArgs(ProjectManager.getActProjectVar().enabledAddons.get(i).getPlugin(),"name").toString());
                     tempjson.put("addon_name",ProjectManager.getActProjectVar().enabledAddons.get(i).getName());
 
+                    addons.add(tempjson);
                 }
                 settings.put("addons",addons);
                 try {
