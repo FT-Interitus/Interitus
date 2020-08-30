@@ -4,6 +4,7 @@
  */
 
 buildscript {
+    ext.kotlin_version = '1.4.0'
 
 
     repositories {
@@ -15,10 +16,12 @@ buildscript {
         google()
     }
     dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
 
     }
 }
+apply plugin: 'kotlin'
 
 
 allprojects {
@@ -76,5 +79,21 @@ project(":core") {
         api "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         api "com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion"
 
+    }
+}
+repositories {
+    mavenCentral()
+}
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+}
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 }
