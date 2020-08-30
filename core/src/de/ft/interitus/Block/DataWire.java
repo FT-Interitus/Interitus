@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Cursor.SystemCursor;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.Programm;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.UI.UIElements.check.CheckKollision;
@@ -16,6 +17,7 @@ import de.ft.interitus.UI.UIElements.check.CheckMouse;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.Unproject;
+
 
 public class DataWire {
 
@@ -27,6 +29,8 @@ public class DataWire {
     private Parameter param_input;
     private Parameter param_output;
     private boolean setCorsoronlyonce=false;
+    private final Vector3 tempvector = new Vector3();
+    private final Vector3 tempvector1 = new Vector3();
 
     private boolean[] moving=new boolean[10];
 
@@ -279,6 +283,23 @@ public class DataWire {
         userLayoutMovment();
 
         if(ProjectManager.getActProjectVar().moveingdatawire==this) {
+
+            if(Gdx.input.isButtonJustPressed(0)) {
+                int counter = 0;
+                for (int i = 0; i < ProjectManager.getActProjectVar().visibleblocks.size(); i++) {
+
+
+                    if (CheckKollision.object(ProjectManager.getActProjectVar().visibleblocks.get(i).getX(), ProjectManager.getActProjectVar().visibleblocks.get(i).getY(), ProjectManager.getActProjectVar().visibleblocks.get(i).getW(), ProjectManager.getActProjectVar().visibleblocks.get(i).getH(), (int) ProgrammingSpace.viewport.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1)) {
+                        counter++;
+                    }
+
+
+                }
+
+                if(counter==0) {
+                    this.delete();
+                }
+            }
             if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
                 this.delete();
             }

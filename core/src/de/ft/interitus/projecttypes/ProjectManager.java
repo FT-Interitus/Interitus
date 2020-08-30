@@ -99,10 +99,12 @@ public class ProjectManager {
             public void run() {
 
 
-                waitforprojectnotification.setProgressbarvalue(counter);
+                if(counter<=100) {
+                    waitforprojectnotification.setProgressbarvalue(counter);
+                }
 
 
-               if(counter==100) {
+               if(counter==110) {
 
                    waitforprojectnotification.close();
                    UIVar.isdialogeopend = false;
