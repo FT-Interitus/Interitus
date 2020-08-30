@@ -735,7 +735,9 @@ batch.begin();
                         this.getBlocktype().getBlockParameter().get(i).setY(this.getY());
                         font.getData().setScale(0.9f);
                         glyphLayout.setText(font, "" + this.getBlocktype().getBlockParameter().get(i).getParameter());
-                        font.draw(batch, glyphLayout, aktualX + 15 - glyphLayout.width / 2, y + glyphLayout.height * 1.5f);
+                        if(this.getBlocktype().getBlockParameter().get(i).getDatawire().size()<1) {
+                            font.draw(batch, glyphLayout, aktualX + 15 - glyphLayout.width / 2, y + glyphLayout.height * 1.5f);
+                        }
                     }
                     aktualX += 30;
                 }

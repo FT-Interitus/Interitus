@@ -75,31 +75,36 @@ public class BlockCalculator {
                 }
             }
 
+
+            ProjectManager.getActProjectVar().blocks.get(i).getBlocktype().changeBlockModus(saveBlocks.get(i).getBlockmodus());
+        }
+        for (int i = 0; i < saveBlocks.size(); i++) {
             //Load Parameters
             if (ProjectManager.getActProjectVar().blocks.get(i).getBlocktype().getBlockParameter() != null) {
                 for (int j = 0; j < saveBlocks.get(i).getParameters().size(); j++) {
                     ProjectManager.getActProjectVar().blocks.get(i).getBlocktype().getBlockParameter().get(j).setParameter(saveBlocks.get(i).getParameters().get(j));
 
-                    for(int k=0;k<saveBlocks.get(i).getDatawires().get(j).size();k++) {
-                        if(saveBlocks.get(i).getDatawires().get(j).get(k)==-1) {
+                    for (int k = 0; k < saveBlocks.get(i).getDatawires().get(j).size(); k++) {
+                        if (saveBlocks.get(i).getDatawires().get(j).get(k) == -1) {
                             continue;
                         }
-                        if(saveBlocks.get(i).getDatawiresindex().get(j).get(k)==-1) {
+                        if (saveBlocks.get(i).getDatawiresindex().get(j).get(k) == -1) {
                             continue;
                         }
-                        new DataWire(ProjectManager.getActProjectVar().blocks.get(i).getBlocktype().getBlockParameter().get(j),ProjectManager.getActProjectVar().blocks.get(saveBlocks.get(i).getDatawires().get(j).get(k)).getBlocktype().getBlockParameter().get(saveBlocks.get(i).getDatawiresindex().get(j).get(k)));
+                        new DataWire(ProjectManager.getActProjectVar().blocks.get(i).getBlocktype().getBlockParameter().get(j), ProjectManager.getActProjectVar().blocks.get(saveBlocks.get(i).getDatawires().get(j).get(k)).getBlocktype().getBlockParameter().get(saveBlocks.get(i).getDatawiresindex().get(j).get(k)));
                     }
 
                 }
 
 
-
             }
 
-            ProjectManager.getActProjectVar().blocks.get(i).getBlocktype().changeBlockModus(saveBlocks.get(i).getBlockmodus());
-
-
-
         }
+
+
+
+
+
+
     }
 }

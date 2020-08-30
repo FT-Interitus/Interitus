@@ -83,10 +83,17 @@ public class Updater {
                         Dialogs.showOKDialog(UI.stage, "Update fehlgeschlagen", "\nStarte Interitus mit erweiterten bzw administrativen Rechten!\nUnd versuche es erneut...\n");
                     }
                 } else {
-                    InputStream in = null;
+                    InputStream Interitus = null;
+                    InputStream updater = null;
+                    InputStream libs = null;
+
                     try {
-                        in = new URL("https://github.com/FT-Interitus/interitus/releases/download/" + jsonObject.getString("tag_name") + "/interitus.jar").openStream();
-                        Files.copy(in, Paths.get(System.getProperty("user.dir") + "/interitus.update"), StandardCopyOption.REPLACE_EXISTING);
+                        Interitus = new URL("https://github.com/FT-Interitus/interitus/releases/download/" + jsonObject.getString("tag_name") + "/interitus.jar").openStream();
+                        updater = new URL("https://github.com/FT-Interitus/interitus/releases/download/" + jsonObject.getString("tag_name") + "/updater.jar").openStream();
+                        libs = new URL("https://github.com/FT-Interitus/interitus/releases/download/" + jsonObject.getString("tag_name") + "/libs.zip").openStream();
+                        Files.copy(Interitus, Paths.get(System.getProperty("user.dir") + "/interitus.update"), StandardCopyOption.REPLACE_EXISTING);
+                        Files.copy(updater, Paths.get(System.getProperty("user.dir") + "/updater.jar"), StandardCopyOption.REPLACE_EXISTING);
+                        Files.copy(libs, Paths.get(System.getProperty("user.dir") + "/libs.zip"), StandardCopyOption.REPLACE_EXISTING);
 
                         String java = "";
                         if (OSChecker.isWindows()) {

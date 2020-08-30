@@ -7,6 +7,7 @@ package de.ft.interitus.plugin;
 
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Programm;
+import de.ft.interitus.Var;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.utils.ArrayList;
 import org.json.JSONObject;
@@ -163,6 +164,16 @@ public class PluginManagerHandler {
     }
 
     public static Object getPluginArgs(Plugin plugin,String attribute)  {
+
+
+        if(plugin.getClass().getSimpleName().contentEquals("Native")) {
+            if(attribute.contentEquals("name")) {
+                return "Native";
+            }else if(attribute.contentEquals("version")) {
+                return Var.PROGRAMM_VERSION_ID;
+            }
+        }
+
         try {
            return new JSONObject(new String(plugin.getClass().getResourceAsStream("plugin.json").readAllBytes())).get(attribute);
         }catch (IOException e) {
