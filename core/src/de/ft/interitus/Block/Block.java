@@ -30,6 +30,7 @@ import de.ft.interitus.events.rightclick.RightClickEventListener;
 import de.ft.interitus.events.rightclick.RightClickOpenRequestEvent;
 import de.ft.interitus.events.rightclick.RightClickPerformActionEvent;
 import de.ft.interitus.loading.AssetLoader;
+import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.UI.UIElements.check.CheckKollision;
@@ -649,29 +650,49 @@ batch.begin();
                     batch.setColor(batch.getColor().r, batch.getColor().g, batch.getColor().b, 0.4f);
                 }
             }
+            batch.draw(AssetLoader.block_middle, this.getX() + 6, this.getY(), this.getW() - 12, this.getH()); // Block ohne das er makiert ist
+            batch.draw(AssetLoader.block_left, this.getX(), this.getY(), 6, this.getH());
+            batch.draw(AssetLoader.block_right, this.getX() + this.getW() - 6, this.getY(), 6, this.getH());
 
 
-            if (!this.blockupdate.toggle) {
-                batch.draw(getBlocktype().getImageCenter(), this.getX() + 6, this.getY(), this.getW() - 12, this.getH()); // Block ohne das er makiert ist
-                batch.draw(getBlocktype().getImageLeft(), this.getX(), this.getY(), 6, this.getH());
-                batch.draw(getBlocktype().getImageRight(), this.getX() + this.getW() - 6, this.getY(), 6, this.getH());
-            } else {
-                batch.draw(getBlocktype().getImageCenter(), this.getX() + 6, this.getY(), this.getW() - 12, this.getH()); // Block ohne das er makiert ist
-                batch.draw(getBlocktype().getImageLeft(), this.getX(), this.getY(), 6, this.getH());
-                batch.draw(getBlocktype().getImageRight(), this.getX() + this.getW() - 6, this.getY(), 6, this.getH());
+            if(blocktype.getBlockCategoration()== BlockCategories.ActionBlocks) {
+                batch.draw(AssetLoader.green_bar_middle, this.getX() + 6, this.getY()-1+this.getH()-13, this.getW() - 12, 13); // Block ohne das er makiert ist
+                batch.draw(AssetLoader.green_bar_left, this.getX()+1, this.getY()-1+this.getH()-13, 6,13);
+                batch.draw(AssetLoader.green_bar_right, this.getX() + this.getW() - 7, this.getY()-1+this.getH()-13, 6, 13);
+
+
+            }
+
+
+            if (this.blockupdate.toggle) {
+
                 batch.draw(AssetLoader.mouse_over_mitte, this.getX() + 6, this.getY(), this.getW() - 12, this.getH()); // Block ohne das er makiert ist
                 batch.draw(AssetLoader.mouseover_links, this.getX(), this.getY(), 6, this.getH());
                 batch.draw(AssetLoader.mouse_over_rechts, this.getX() + this.getW() - 6, this.getY(), 6, this.getH());
             }
 
             if (this.isMarked()) {
-                batch.draw(getBlocktype().getImageCenter(), this.getX() + 6, this.getY(), this.getW() - 12, this.getH()); // Block ohne das er makiert ist
-                batch.draw(getBlocktype().getImageLeft(), this.getX(), this.getY(), 6, this.getH());
-                batch.draw(getBlocktype().getImageRight(), this.getX() + this.getW() - 6, this.getY(), 6, this.getH());
+
                 batch.draw(AssetLoader.marked_mitte, this.getX() + 6, this.getY(), this.getW() - 12, this.getH()); // Block ohne das er makiert ist
                 batch.draw(AssetLoader.marked_links, this.getX(), this.getY(), 6, this.getH());
                 batch.draw(AssetLoader.marked_rechts, this.getX() + this.getW() - 6, this.getY(), 6, this.getH());
             }
+
+            if (ProjectManager.getActProjectVar().biggestblock == this) {
+                if (this.isShowdupulicate_rechts() && this.getBlocktype().canhasrightconnector()) {
+                    batch.setColor(1, 1, 1, 0.5f);
+                    batch.draw(AssetLoader.block_middle, this.x_dup_rechts, this.y, ProjectManager.getActProjectVar().markedblock.getW(), this.getH()); //Wenn der Block die größte überlappung hat wird er als show duplicat angezigt
+                    batch.setColor(1, 1, 1, 1);
+                }
+
+                if (this.isShowdupulicate_links() && this.getBlocktype().canhasleftconnector()) {
+                    batch.setColor(1, 1, 1, 0.5f);
+                    batch.draw(AssetLoader.block_middle, this.x - ProjectManager.getActProjectVar().markedblock.getW(), this.y, ProjectManager.getActProjectVar().markedblock.getW(), this.getH()); //das gleiche für links
+                    batch.setColor(1, 1, 1, 1);
+                }
+            }
+
+
 
 /*
         if (this.getLeft() != null) { //Verbindungs marke ob der Nachbar verbunden ist
@@ -744,19 +765,6 @@ batch.begin();
             }
 
 
-            if (ProjectManager.getActProjectVar().biggestblock == this) {
-                if (this.isShowdupulicate_rechts() && this.getBlocktype().canhasrightconnector()) {
-                    batch.setColor(1, 1, 1, 0.5f);
-                    batch.draw(AssetLoader.img_block, this.x_dup_rechts, this.y, ProjectManager.getActProjectVar().markedblock.getW(), this.getH()); //Wenn der Block die größte überlappung hat wird er als show duplicat angezigt
-                    batch.setColor(1, 1, 1, 1);
-                }
-
-                if (this.isShowdupulicate_links() && this.getBlocktype().canhasleftconnector()) {
-                    batch.setColor(1, 1, 1, 0.5f);
-                    batch.draw(AssetLoader.img_block, this.x - ProjectManager.getActProjectVar().markedblock.getW(), this.y, ProjectManager.getActProjectVar().markedblock.getW(), this.getH()); //das gleiche für links
-                    batch.setColor(1, 1, 1, 1);
-                }
-            }
 
 batch.end();
 

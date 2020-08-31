@@ -54,23 +54,10 @@ public class SetupBlock extends PlatformSpecificBlock {
 
     @Override
     public Texture getSmallImage() {
-        return AssetLoader.img_block;
+        return null;
     }
 
-    @Override
-    public Texture getImageRight() {
-        return AssetLoader.SetupBlock_right;
-    }
 
-    @Override
-    public Texture getImageLeft() {
-        return AssetLoader.SetupBlock_left;
-    }
-
-    @Override
-    public Texture getImageCenter() {
-        return AssetLoader.SetupBlock_middle;
-    }
 
     @Override
     public Texture getDescriptionImage() {

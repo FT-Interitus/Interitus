@@ -1,39 +1,27 @@
-/*
- * Copyright (c) 2020.
- * Copyright by Tim and Felix
- */
-
-package de.ft.interitus.projecttypes.BlockTypes.Interitus.Ev3;
+package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.If;
 
 import com.badlogic.gdx.graphics.Texture;
-import de.ft.interitus.Block.Parameter;
-import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
-import de.ft.interitus.projecttypes.BlockTypes.BlockTopParameter;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.ProjectTypes;
-import de.ft.interitus.utils.ArrayList;
 
 import java.awt.*;
 
-public class Wait extends PlatformSpecificBlock implements Ev3Block {
-    public Wait(ProjectTypes projectTypes, Addon addon) {
-        super(projectTypes,addon);
+public class If extends PlatformSpecificBlock {
+    public If(ProjectTypes projectTypes, Addon addon) {
+        super(projectTypes, addon);
     }
-
-
 
     @Override
     public String getName() {
-        return "Warten";
+        return "If";
     }
 
     @Override
     public String getdescription() {
-        return "Mit diesem Block lässt du dein Programm einen bestimmte Zeit warten, das hängt je nach Einstellung ab.";
+        return "Dieser Block vergleicht mehrere Daten";
     }
-
 
     @Override
     public Color blockcolor() {
@@ -47,9 +35,8 @@ public class Wait extends PlatformSpecificBlock implements Ev3Block {
 
     @Override
     public Texture getSmallImage() {
-        return AssetLoader.img_mappe1;
+        return null;
     }
-
 
 
     @Override
@@ -57,25 +44,18 @@ public class Wait extends PlatformSpecificBlock implements Ev3Block {
         return null;
     }
 
-
-
     @Override
     public boolean canbedeleted() {
-        return true;
+        return false;
     }
 
     @Override
     public boolean canhasrightconnector() {
-        return true;
+        return false;
     }
 
     @Override
     public boolean canhasleftconnector() {
-        return true;
-    }
-
-    @Override
-    public String getCode() {
-        return null;
+        return false;
     }
 }

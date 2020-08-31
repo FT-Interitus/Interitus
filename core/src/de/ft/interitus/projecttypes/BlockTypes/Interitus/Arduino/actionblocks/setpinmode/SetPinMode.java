@@ -66,20 +66,7 @@ public class SetPinMode extends PlatformSpecificBlock  {
         return AssetLoader.PinModeBlock_smallimage;
     }
 
-    @Override
-    public Texture getImageRight() {
-        return AssetLoader.PinModeBlock_right;
-    }
 
-    @Override
-    public Texture getImageLeft() {
-        return AssetLoader.PinModeBlock_left;
-    }
-
-    @Override
-    public Texture getImageCenter() {
-        return AssetLoader.PinModeBlock_middle;
-    }
 
     @Override
     public Texture getDescriptionImage() {

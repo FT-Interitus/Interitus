@@ -67,20 +67,6 @@ public class digitalWrite extends PlatformSpecificBlock {
         return AssetLoader.DigitalWrite_smallimage;
     }
 
-    @Override
-    public Texture getImageRight() {
-        return AssetLoader.DigitalWrite_right;
-    }
-
-    @Override
-    public Texture getImageLeft() {
-        return AssetLoader.DigitalWrite_left;
-    }
-
-    @Override
-    public Texture getImageCenter() {
-        return AssetLoader.DigitalWrite_middle;
-    }
 
     @Override
     public Texture getDescriptionImage() {

@@ -65,20 +65,7 @@ public class TestOutput extends PlatformSpecificBlock implements ArduinoBlock{
         return AssetLoader.WaitBlock_smallimage;
     }
 
-    @Override
-    public Texture getImageRight() {
-        return AssetLoader.WaitBlock_right;
-    }
 
-    @Override
-    public Texture getImageLeft() {
-        return AssetLoader.WaitBlock_left;
-    }
-
-    @Override
-    public Texture getImageCenter() {
-        return AssetLoader.WaitBlock_middle;
-    }
 
     @Override
     public Texture getDescriptionImage() {

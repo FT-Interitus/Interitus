@@ -32,15 +32,20 @@ public class AssetLoader {
     public static String group = "";
     public static String workingdirectory = "";
 
-    //Arduino Block Images
+    public static Texture block_left;
+    public static Texture block_middle;
+    public static Texture block_right;
+
+    public static Texture green_bar_left;
+    public static Texture green_bar_middle;
+    public static Texture green_bar_right;
+
+
+    //Arduino Device Images
     public static Texture arduinonanoimage;
     public static Texture arduinounoimage;
     public static Texture arduinomegaimage;
 
-    //Block Textures
-    public static Texture img_block;
-    public static Texture img_block_right;
-    public static Texture img_block_left;
 
     public static Texture connector;
     public static Texture connector_offerd;
@@ -66,21 +71,7 @@ public class AssetLoader {
     public static Texture pluginwait;
 
 
-    //////////////////-Tap Block Bar-////////////////////////////
-    //////////////////-Aktionsblöck-////////////////////////////
-    public static Texture aktion_großermotor;
-    public static Texture aktion_standartsteuerung;
-    public static Texture aktion_hebelsteuerung;
-    public static Texture aktion_anzeige;
-    public static Texture aktion_klang;
-    public static Texture aktion_steinstatusleuchte;
-    //////////////////-Programm ablauf-////////////////////////////
-    public static Texture programmablauf_start;
-    public static Texture Programmablauf_wait;
-    public static Texture programmablauf_schleufe;
-    public static Texture programmablauf_schalter;
-    public static Texture programmablauf_interrupt;
-    //////////////////-Sensorblöcke-////////////////////////////
+
 
 
     public static Texture img_mappe1;
@@ -126,30 +117,13 @@ public class AssetLoader {
     //////////////////////////-TabBar-//////////////////////////////
     public static Texture img_Tab;
 
-    /////////WaitBlock////////////
-    public static Texture WaitBlock_left;
-    public static Texture WaitBlock_right;
-    public static Texture WaitBlock_middle;
+
     public static Texture WaitBlock_smallimage;
     public static Texture WaitBlock_description_image;
-    /////////SetupBlock////////////
-    public static Texture SetupBlock_left;
-    public static Texture SetupBlock_right;
-    public static Texture SetupBlock_middle;
-    /////////LoopBlock////////////
-    public static Texture LoopBlock_left;
-    public static Texture LoopBlock_right;
-    public static Texture LoopBlock_middle;
-    /////////PinModeBlock////////////
-    public static Texture PinModeBlock_left;
-    public static Texture PinModeBlock_right;
-    public static Texture PinModeBlock_middle;
+
     public static Texture PinModeBlock_smallimage;
     public static Texture PinModeBlock_description_image;
-    /////////DigitalWriteBlock////////////
-    public static Texture DigitalWrite_left;
-    public static Texture DigitalWrite_right;
-    public static Texture DigitalWrite_middle;
+
     public static Texture DigitalWrite_smallimage;
     public static Texture DigitalWrite_description_image;
 
@@ -190,12 +164,7 @@ public class AssetLoader {
 
     public static AssetManager manager = new AssetManager();
 
-    public static ArrayList<Pixmap> pixmap = new ArrayList<>();
 
-
-    public static void loadmore(String file, Class type) {
-        manager.load(workingdirectory + file, type);
-    }
 
     public static Object save(String file, Class Type) {
         return manager.get(workingdirectory + file, Type);
@@ -303,28 +272,25 @@ public class AssetLoader {
 
 
             group = "Blöcke";
-            //Block Textures
-            manager.load(workingdirectory + "Block/Blockrechts.png", Texture.class);
-            manager.load(workingdirectory + "Block/Blocklinks.png", Texture.class);
-            manager.load(workingdirectory + "Block/Blockmitte.png", Texture.class);
+
+            manager.load(workingdirectory + "Block/mouseover_links.png", Texture.class);
+            manager.load(workingdirectory + "Block/mouseover_links.png", Texture.class);
+            manager.load(workingdirectory + "Block/mouseover_links.png", Texture.class);
+
+            manager.load(workingdirectory + "Block/block_right.png", Texture.class);
+            manager.load(workingdirectory + "Block/block_middle.png", Texture.class);
+            manager.load(workingdirectory + "Block/block_left.png", Texture.class);
+
+            manager.load(workingdirectory + "Block/color_bar/green_left.png", Texture.class);
+            manager.load(workingdirectory + "Block/color_bar/green_middle.png", Texture.class);
+            manager.load(workingdirectory + "Block/color_bar/green_right.png", Texture.class);
+
+
+
             manager.load(workingdirectory + "connector.png", Texture.class);
             manager.load(workingdirectory + "connector_offerd.png", Texture.class);
             //////////////////////////////////////////////////////////////////////////////////////////////////////////
-            manager.load(workingdirectory + "Block/Block_Wait/links.png", Texture.class);
-            manager.load(workingdirectory + "Block/Block_Wait/rechts.png", Texture.class);
-            manager.load(workingdirectory + "Block/Block_Wait/mitte.png", Texture.class);
-            manager.load(workingdirectory + "Block/Block_Setup/links.png", Texture.class);
-            manager.load(workingdirectory + "Block/Block_Setup/rechts.png", Texture.class);
-            manager.load(workingdirectory + "Block/Block_Setup/mitte.png", Texture.class);
-            manager.load(workingdirectory + "Block/Block_Loop/links.png", Texture.class);
-            manager.load(workingdirectory + "Block/Block_Loop/rechts.png", Texture.class);
-            manager.load(workingdirectory + "Block/Block_Loop/mitte.png", Texture.class);
-            manager.load(workingdirectory + "Block/Block_PinMode/links.png", Texture.class);
-            manager.load(workingdirectory + "Block/Block_PinMode/rechts.png", Texture.class);
-            manager.load(workingdirectory + "Block/Block_PinMode/mitte.png", Texture.class);
-            manager.load(workingdirectory + "Block/Block_DigitalWrite/links.png", Texture.class);
-            manager.load(workingdirectory + "Block/Block_DigitalWrite/rechts.png", Texture.class);
-            manager.load(workingdirectory + "Block/Block_DigitalWrite/mitte.png", Texture.class);
+
             manager.load(workingdirectory + "Block/mouseover_links.png", Texture.class);
             manager.load(workingdirectory + "Block/mouseover_rechts.png", Texture.class);
             manager.load(workingdirectory + "Block/mouseover_mitte.png", Texture.class);
@@ -445,28 +411,18 @@ public class AssetLoader {
             img_mappe6 = manager.get(workingdirectory + "Bar/Mappe6.png", Texture.class);
 
 
-            //Block
-            img_block_right = manager.get(workingdirectory + "Block/Blockrechts.png", Texture.class);
-            img_block_left = manager.get(workingdirectory + "Block/Blocklinks.png", Texture.class);
-            img_block = manager.get(workingdirectory + "Block/Blockmitte.png", Texture.class);
+
             connector = manager.get(workingdirectory + "connector.png", Texture.class);
             connector_offerd = manager.get(workingdirectory + "connector_offerd.png", Texture.class);
 
-            WaitBlock_left = manager.get(workingdirectory + "Block/Block_Wait/links.png", Texture.class);
-            WaitBlock_right = manager.get(workingdirectory + "Block/Block_Wait/rechts.png", Texture.class);
-            WaitBlock_middle = manager.get(workingdirectory + "Block/Block_Wait/mitte.png", Texture.class);
-            SetupBlock_left = manager.get(workingdirectory + "Block/Block_Setup/links.png", Texture.class);
-            SetupBlock_right = manager.get(workingdirectory + "Block/Block_Setup/rechts.png", Texture.class);
-            SetupBlock_middle = manager.get(workingdirectory + "Block/Block_Setup/mitte.png", Texture.class);
-            LoopBlock_left = manager.get(workingdirectory + "Block/Block_Loop/links.png", Texture.class);
-            LoopBlock_right = manager.get(workingdirectory + "Block/Block_Loop/rechts.png", Texture.class);
-            LoopBlock_middle = manager.get(workingdirectory + "Block/Block_Loop/mitte.png", Texture.class);
-            PinModeBlock_left = manager.get(workingdirectory + "Block/Block_PinMode/links.png", Texture.class);
-            PinModeBlock_right = manager.get(workingdirectory + "Block/Block_PinMode/rechts.png", Texture.class);
-            PinModeBlock_middle = manager.get(workingdirectory + "Block/Block_PinMode/mitte.png", Texture.class);
-            DigitalWrite_left = manager.get(workingdirectory + "Block/Block_DigitalWrite/links.png", Texture.class);
-            DigitalWrite_right = manager.get(workingdirectory + "Block/Block_DigitalWrite/rechts.png", Texture.class);
-            DigitalWrite_middle = manager.get(workingdirectory + "Block/Block_DigitalWrite/mitte.png", Texture.class);
+          block_right =  manager.get(workingdirectory + "Block/block_right.png", Texture.class);
+           block_middle = manager.get(workingdirectory + "Block/block_middle.png", Texture.class);
+          block_left = manager.get(workingdirectory + "Block/block_left.png", Texture.class);
+
+          green_bar_left =  manager.get(workingdirectory + "Block/color_bar/green_left.png", Texture.class);
+            green_bar_middle =  manager.get(workingdirectory + "Block/color_bar/green_middle.png", Texture.class);
+            green_bar_right =  manager.get(workingdirectory + "Block/color_bar/green_right.png", Texture.class);
+
             mouse_over_rechts = manager.get(workingdirectory + "Block/mouseover_rechts.png", Texture.class);
             mouseover_links = manager.get(workingdirectory + "Block/mouseover_links.png", Texture.class);
             mouse_over_mitte = manager.get(workingdirectory + "Block/mouseover_mitte.png", Texture.class);

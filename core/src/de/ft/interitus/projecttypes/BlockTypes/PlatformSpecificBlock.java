@@ -39,11 +39,6 @@ public abstract class PlatformSpecificBlock {
 
     public abstract Texture getSmallImage();
 
-    public abstract Texture getImageRight();
-
-    public abstract Texture getImageLeft();
-
-    public abstract Texture getImageCenter();
 
     public abstract Texture getDescriptionImage();
 

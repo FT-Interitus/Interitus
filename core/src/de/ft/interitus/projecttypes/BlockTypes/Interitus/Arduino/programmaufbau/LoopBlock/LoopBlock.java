@@ -54,23 +54,10 @@ public class LoopBlock extends PlatformSpecificBlock  {
 
     @Override
     public Texture getSmallImage() {
-        return AssetLoader.img_block;
+        return null;
     }
 
-    @Override
-    public Texture getImageRight() {
-        return AssetLoader.LoopBlock_right;
-    }
 
-    @Override
-    public Texture getImageLeft() {
-        return AssetLoader.LoopBlock_left;
-    }
-
-    @Override
-    public Texture getImageCenter() {
-        return AssetLoader.LoopBlock_middle;
-    }
 
     @Override
     public Texture getDescriptionImage() {

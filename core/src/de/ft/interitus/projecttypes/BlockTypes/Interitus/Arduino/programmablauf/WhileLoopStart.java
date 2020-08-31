@@ -52,7 +52,7 @@ public class WhileLoopStart extends PlatformSpecificBlock implements ArduinoBloc
 
     @Override
     public Texture getSmallImage() {
-        return AssetLoader.img_block;
+        return null;
     }
 
 
@@ -73,20 +73,6 @@ public class WhileLoopStart extends PlatformSpecificBlock implements ArduinoBloc
         return true;
     }
 
-    @Override
-    public Texture getImageRight() {
-        return AssetLoader.WaitBlock_right;
-    }
-
-    @Override
-    public Texture getImageLeft() {
-        return AssetLoader.WaitBlock_left;
-    }
-
-    @Override
-    public Texture getImageCenter() {
-        return AssetLoader.WaitBlock_middle;
-    }
 
     @Override
     public Texture getDescriptionImage() {
