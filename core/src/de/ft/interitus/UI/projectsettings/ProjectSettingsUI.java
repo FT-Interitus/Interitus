@@ -24,6 +24,8 @@ import de.ft.interitus.UI.projectsettings.subitems.AddonSettings;
 import de.ft.interitus.UI.projectsettings.subitems.Informations;
 import de.ft.interitus.UI.projectsettings.subitems.Settings;
 import de.ft.interitus.Var;
+import de.ft.interitus.projecttypes.Addons.Addon;
+import de.ft.interitus.projecttypes.ProjectManager;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -119,6 +121,8 @@ public class ProjectSettingsUI extends VisWindow {
             TestNode item2 = new TestNode(new VisLabel(" Einstellungen "), 1);
             TestNode item3 = new TestNode(new VisLabel(" Addons "), 2);
 
+
+
             //ADD Advanced Settings to ITM if Device is connect
 
 
@@ -129,6 +133,13 @@ public class ProjectSettingsUI extends VisWindow {
             tree.add(item1);
             tree.add(item2);
             tree.add(item3);
+
+
+            int counter = 0;
+            for(Addon addon: ProjectManager.getActProjectVar().enabledAddons) {
+                counter++;
+                tree.add(new TestNode(new VisLabel(" " + addon.getName() + " "),counter+2));
+            }
 
 
             tree.addListener(new ChangeListener() {
@@ -149,6 +160,7 @@ public class ProjectSettingsUI extends VisWindow {
                         case 0 -> Informations.add(container);
                         case 1 -> Settings.add(container);
                         case 2 -> AddonSettings.add(container);
+                        default -> ProjectManager.getActProjectVar().enabledAddons.get(SelectedItem-3).getAddonSettings(container);
                     }
 
                 }

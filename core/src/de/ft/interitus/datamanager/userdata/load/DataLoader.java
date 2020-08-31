@@ -80,6 +80,14 @@ public class DataLoader {
                                 temppluginname = ((JSONObject) addonname).getString("pl_name");
                                 if(((JSONObject) addonname).getString("addon_name").contentEquals(addon.getName())) {
                                     enabledAddons.add(addon);
+                                    FileHandle addonconfig = new FileHandle(Data.tempfolder.getAbsolutePath() + "/" + ""+addon.getName()+".ita");
+
+                                    FileInputStream addonconfig_fis = new FileInputStream(addonconfig.file());
+                                    ObjectInputStream addonconfig_ois = new ObjectInputStream(addonconfig_fis);
+
+
+
+                                    addon.setAddonSettings( addonconfig_ois.readObject());
                                     found = true;
                                     break;
                                 }

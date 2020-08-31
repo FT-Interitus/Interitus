@@ -12,6 +12,7 @@ import de.ft.interitus.datamanager.BlockCalculator;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.datamanager.userdata.Zip;
 import de.ft.interitus.plugin.PluginManagerHandler;
+import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.ArrayList;
 import org.json.JSONObject;
@@ -56,6 +57,15 @@ public class DataSaver {
                     e.printStackTrace();
                 }
 
+                for(Addon addon:ProjectManager.getActProjectVar().enabledAddons) {
+                    try (FileOutputStream fos = new FileOutputStream(Data.tempfolder + "/" + addon.getName());
+                         ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+                        oos.writeObject(addon.getAddonSettings());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
 
                 JSONObject settings = new JSONObject();
                 settings.put("vcs", ProjectManager.getActProjectVar().vcs);
@@ -89,7 +99,20 @@ public class DataSaver {
                     names.add("Program.itid");
                     names.add("Settings.itps");
                     names.add("RunConfig.itrc");
-                    Zip.zipFiles(names, handle.file().getAbsolutePath(), Data.tempfolder + "/" + generateprojektname, Data.tempfolder + "/" + generateprojektsettingsname, Data.tempfolder + "/" + generaterunconfigurationen);
+                   for(Addon addon:ProjectManager.getActProjectVar().enabledAddons) {
+                       names.add(addon.getName()+".ita");
+                   }
+
+                   String[] addonnames = new String[ProjectManager.getActProjectVar().enabledAddons.size()+3];
+                   addonnames[0] = Data.tempfolder + "/" + generateprojektname;
+                   addonnames[1] =  Data.tempfolder + "/" + generateprojektsettingsname;
+                   addonnames[2] =  Data.tempfolder + "/" + generaterunconfigurationen;
+
+                   for(int i=0;i<ProjectManager.getActProjectVar().enabledAddons.size();i++) {
+                       addonnames[i+3] = Data.tempfolder + "/" + ProjectManager.getActProjectVar().enabledAddons.get(i).getName();
+                   }
+
+                    Zip.zipFiles(names, handle.file().getAbsolutePath(), addonnames );
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
