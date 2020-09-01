@@ -37,7 +37,7 @@ public class BlockDrawer {
                             Temp = block;
                         }
                     } else {
-                        block.draw(ProgrammingSpace.batch, ProgrammingSpace.shapeRenderer, ProgrammingSpace.font);
+                        block.draw(ProgrammingSpace.batch, ProgrammingSpace.BlockshapeRenderer, ProgrammingSpace.font);
                     }
 
                     if (block.isMarked()) {
@@ -58,7 +58,7 @@ public class BlockDrawer {
             if (Temp != null) {
 
                 try {
-                    Temp.draw(ProgrammingSpace.batch, ProgrammingSpace.shapeRenderer, ProgrammingSpace.font);
+                    Temp.draw(ProgrammingSpace.batch, ProgrammingSpace.BlockshapeRenderer, ProgrammingSpace.font);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -82,7 +82,7 @@ public class BlockDrawer {
             if (Temp2 != null) {
 
                 try {
-                    Temp2.draw(ProgrammingSpace.batch, ProgrammingSpace.shapeRenderer, ProgrammingSpace.font);
+                    Temp2.draw(ProgrammingSpace.batch, ProgrammingSpace.BlockshapeRenderer, ProgrammingSpace.font);
 
 
                 } catch (Exception ignored) {

@@ -179,6 +179,7 @@ public abstract class BlockUpdate extends Thread {
                             if (!(ProjectManager.getActProjectVar().markedblock == block)) {
                                 if (!isconnectorclicked && ProjectManager.getActProjectVar().wirezulassung) {
 
+                                    //Create new wire
 
                                     tempwire = ProjectManager.getActProjectVar().projectType.getWireGenerator().generate(block);
 
@@ -532,6 +533,7 @@ public abstract class BlockUpdate extends Thread {
 
                                     } else {
 
+                                        //Set Block only if you doesn't move it
 
                                         if (block.getRight() != ProjectManager.getActProjectVar().markedblock && ProjectManager.getActProjectVar().markedblock.getLeft() != block && block.getRight() == null && ProjectManager.getActProjectVar().biggestblock == block) {
 
