@@ -43,7 +43,7 @@ public class DesktopLauncher {
 
 		CheckArguments.check();
 
-		if(Var.programmarguments.indexOf("-nogui")==-1) {
+		if(!Var.programmarguments.contains("-nogui")) {
 
 
 
@@ -56,12 +56,14 @@ public class DesktopLauncher {
 			config.setBackBufferConfig(8,8,8,8,16,0,4);
 			config.setWindowSizeLimits(1000,500,-1,-1);
 			config.disableAudio(true);
-
+			config.setInitialVisible(false);
 
 
 			config.setWindowListener(new Lwjgl3WindowAdapter() {
 				@Override
 				public void created(Lwjgl3Window window) {
+
+					Var.window = window;
 
 				}
 
@@ -107,6 +109,7 @@ public class DesktopLauncher {
 			});
 
 			new Lwjgl3Application(new Programm(), config);
+
 
 
 		}else{

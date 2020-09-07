@@ -19,6 +19,7 @@ import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.global.GlobalLoadingDoneEvent;
 import de.ft.interitus.events.global.GlobalLoadingStartEvent;
 import de.ft.interitus.projecttypes.BlockTypes.Init;
+import org.lwjgl.glfw.GLFW;
 
 public class Loading extends ScreenAdapter {
     public Loading loading = this;
@@ -51,9 +52,17 @@ public class Loading extends ScreenAdapter {
 
 
                     Var.splashscreen.destroy();
+                    //GLFW.glfwMaximizeWindow(Var.window.getWindowHandle());
 
+                    //GLFW.glfwHideWindow(Var.window.getWindowHandle());
+
+
+                    Var.window.setVisible(true);
+                    GLFW.glfwFocusWindow(Var.window.getWindowHandle());
                     Programm.INSTANCE.setScreen(new Welcome());
-                    ((Lwjgl3Graphics) Gdx.graphics).getWindow().restoreWindow();
+                  //  ((Lwjgl3Graphics) Gdx.graphics).getWindow().restoreWindow();
+
+                    //GLFW.glfwMaximizeWindow(Var.window.getWindowHandle());
                     this.dispose();
 
                 }

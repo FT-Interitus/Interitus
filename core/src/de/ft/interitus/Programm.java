@@ -28,6 +28,7 @@ import de.ft.interitus.plugin.store.ReadStorePlugins;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.FolderUtils;
 import de.ft.interitus.utils.UserNameGetter;
+import org.lwjgl.glfw.GLFW;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -64,8 +65,15 @@ public class Programm extends Game {
         if (Var.savemode) {
             logger.warning("Programm is running in savemode");
         }
-        ((Lwjgl3Graphics) Gdx.graphics).getWindow().iconifyWindow();
+       // ((Lwjgl3Graphics) Gdx.graphics).getWindow().iconifyWindow();
         Var.splashscreen = SplashScreen.create();
+        if(Var.window==null) {
+            System.out.println("null");
+        }
+        Var.window.setVisible(false);
+        //GLFW.glfwHideWindow(Var.window.getWindowHandle());
+
+
 
 
         Var.username = UserNameGetter.get();
