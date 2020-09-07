@@ -16,6 +16,8 @@ public interface ProjectFunktions {
 
     void runconfigsettings(VisTable builder, DeviceConfiguration configuration);
 
+    void projectsettings(VisTable builder,Object settings);
+
     /**
      * will be called by chancing the current run config to an other on
      */

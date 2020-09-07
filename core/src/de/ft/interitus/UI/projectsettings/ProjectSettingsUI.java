@@ -22,7 +22,7 @@ import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.projectsettings.subitems.AddonSettings;
 import de.ft.interitus.UI.projectsettings.subitems.Informations;
-import de.ft.interitus.UI.projectsettings.subitems.Settings;
+import de.ft.interitus.UI.projectsettings.subitems.VersionControll;
 import de.ft.interitus.Var;
 import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.ProjectManager;
@@ -118,8 +118,9 @@ public class ProjectSettingsUI extends VisWindow {
             tree = new VisTree();
 
             TestNode item1 = new TestNode(new VisLabel(" Informationen "), 0);
-            TestNode item2 = new TestNode(new VisLabel(" Einstellungen "), 1);
-            TestNode item3 = new TestNode(new VisLabel(" Addons "), 2);
+            TestNode item2 = new TestNode(new VisLabel(" Einstellungen "),1);
+            TestNode item3 = new TestNode(new VisLabel(" VCS "), 2);
+            TestNode item4 = new TestNode(new VisLabel(" Addons "), 3);
 
 
 
@@ -128,17 +129,19 @@ public class ProjectSettingsUI extends VisWindow {
 
             item1.setExpanded(true);
             item2.setExpanded(true);
+            item3.setExpanded(true);
 
 
             tree.add(item1);
             tree.add(item2);
             tree.add(item3);
+            tree.add(item4);
 
 
             int counter = 0;
             for(Addon addon: ProjectManager.getActProjectVar().enabledAddons) {
                 counter++;
-                tree.add(new TestNode(new VisLabel(" " + addon.getName() + " "),counter+2));
+                tree.add(new TestNode(new VisLabel(" " + addon.getName() + " "),counter+3));
             }
 
 
@@ -158,9 +161,10 @@ public class ProjectSettingsUI extends VisWindow {
 
                     switch (SelectedItem) {
                         case 0 -> Informations.add(container);
-                        case 1 -> Settings.add(container);
-                        case 2 -> AddonSettings.add(container);
-                        default -> ProjectManager.getActProjectVar().enabledAddons.get(SelectedItem-3).getAddonSettings(container);
+                        case 2 -> VersionControll.add(container);
+                        case 1 -> ProjectManager.getActProjectVar().projectType.getProjectFunktions().projectsettings(container,ProjectManager.getActProjectVar().projectSettings);
+                        case 3 -> AddonSettings.add(container);
+                        default -> ProjectManager.getActProjectVar().enabledAddons.get(SelectedItem-4).getAddonSettings(container);
                     }
 
                 }

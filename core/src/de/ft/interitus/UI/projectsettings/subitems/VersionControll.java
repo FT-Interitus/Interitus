@@ -19,7 +19,7 @@ import de.ft.interitus.UI.UI;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.VCS;
 
-public class Settings {
+public class VersionControll {
     private static VisRadioButton none;
     private static VisRadioButton itev;
     private static VisRadioButton git;

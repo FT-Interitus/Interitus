@@ -38,8 +38,9 @@ public class DataSaver {
 
 
                 String generateprojektname = "project" + System.currentTimeMillis();
-                String generateprojektsettingsname = "projectsettings" + System.currentTimeMillis();
+                String generateprojektsettingsname = "projectstates" + System.currentTimeMillis();
                 String generaterunconfigurationen = "runconfig" + System.currentTimeMillis();
+                String generateprojectsettings = "projectsettings" + System.currentTimeMillis();
 
 
                 try (FileOutputStream fos = new FileOutputStream(Data.tempfolder + "/" + generateprojektname);
@@ -56,6 +57,14 @@ public class DataSaver {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
+                try (FileOutputStream fos = new FileOutputStream(Data.tempfolder + "/" + generateprojectsettings);
+                     ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+                    oos.writeObject(ProjectManager.getActProjectVar().projectSettings);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
 
                 for(Addon addon:ProjectManager.getActProjectVar().enabledAddons) {
                     try (FileOutputStream fos = new FileOutputStream(Data.tempfolder + "/" + addon.getName());
@@ -99,17 +108,19 @@ public class DataSaver {
                     names.add("Program.itid");
                     names.add("Settings.itps");
                     names.add("RunConfig.itrc");
+                    names.add("ProjectSettings.itps");
                    for(Addon addon:ProjectManager.getActProjectVar().enabledAddons) {
                        names.add(addon.getName()+".ita");
                    }
 
-                   String[] addonnames = new String[ProjectManager.getActProjectVar().enabledAddons.size()+3];
+                   String[] addonnames = new String[ProjectManager.getActProjectVar().enabledAddons.size()+4];
                    addonnames[0] = Data.tempfolder + "/" + generateprojektname;
                    addonnames[1] =  Data.tempfolder + "/" + generateprojektsettingsname;
                    addonnames[2] =  Data.tempfolder + "/" + generaterunconfigurationen;
+                   addonnames[3] =  Data.tempfolder + "/" + generateprojectsettings;
 
                    for(int i=0;i<ProjectManager.getActProjectVar().enabledAddons.size();i++) {
-                       addonnames[i+3] = Data.tempfolder + "/" + ProjectManager.getActProjectVar().enabledAddons.get(i).getName();
+                       addonnames[i+4] = Data.tempfolder + "/" + ProjectManager.getActProjectVar().enabledAddons.get(i).getName();
                    }
 
                     Zip.zipFiles(names, handle.file().getAbsolutePath(), addonnames );

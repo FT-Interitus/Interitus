@@ -27,6 +27,12 @@ public class EV3Funktions implements ProjectFunktions {
     }
 
     @Override
+    public void projectsettings(VisTable builder, Object settings) {
+
+    }
+
+
+    @Override
     public void changedrunconfig() {
 
     }

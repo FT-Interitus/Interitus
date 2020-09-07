@@ -57,6 +57,7 @@ public class DesktopLauncher {
 			config.setWindowSizeLimits(1000,500,-1,-1);
 			config.disableAudio(true);
 			config.setInitialVisible(false);
+			config.setTransparentFramebuffer(true);
 
 
 			config.setWindowListener(new Lwjgl3WindowAdapter() {

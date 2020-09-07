@@ -262,6 +262,13 @@ private boolean firstrun = true;
     }
 
     @Override
+    public void projectsettings(VisTable builder, Object settings) {
+
+    }
+
+
+
+    @Override
     public void changedrunconfig() {
         openedprogress = false;
         activeConfiguration = null;
