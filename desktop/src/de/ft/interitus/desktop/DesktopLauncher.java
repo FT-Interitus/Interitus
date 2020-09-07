@@ -17,7 +17,11 @@ import de.ft.interitus.events.global.GlobalCloseEvent;
 import de.ft.interitus.events.global.GlobalFileDropedEvent;
 import de.ft.interitus.events.global.GlobalFocusLostEvent;
 
+import java.awt.*;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Arrays;
 
 public class DesktopLauncher {
@@ -110,7 +114,6 @@ public class DesktopLauncher {
 			});
 
 			new Lwjgl3Application(new Programm(), config);
-
 
 
 		}else{

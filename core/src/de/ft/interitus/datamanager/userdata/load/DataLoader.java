@@ -93,7 +93,7 @@ public class DataLoader {
                                 }
                             }
                             if (!found) {
-                                Dialogs.showErrorDialog(UI.stage, "Das verbundenes Addon " + tempaddonname + " vom Plugin " + temppluginname + " konnte nicht gefunden werden!"); //TODO informations about the Plugin
+                                Dialogs.showErrorDialog(UI.stage, "Das verbundenes Addon " + tempaddonname + " vom Plugin " + temppluginname + " konnte nicht gefunden werden!");
                                 Var.isloading = false;
                                 this.interrupt();
                                 return;

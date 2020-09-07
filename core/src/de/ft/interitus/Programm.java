@@ -24,15 +24,18 @@ import de.ft.interitus.loading.Loading;
 import de.ft.interitus.loading.SplashScreen;
 import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.plugin.PluginSandboxSecurityPolicy;
-import de.ft.interitus.plugin.store.ReadStorePlugins;
+
+import de.ft.interitus.plugin.store.PluginInstallerServer;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.FolderUtils;
 import de.ft.interitus.utils.UserNameGetter;
 import org.lwjgl.glfw.GLFW;
+import org.springframework.boot.SpringApplication;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.security.Policy;
+import java.util.Collections;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Logger;
@@ -90,7 +93,16 @@ public class Programm extends Game {
         try {
             if (!Var.disablePluginSubSystem && !Var.nointernetconnection) {
                 loadplugins.start(); //Plugins laden
-                ReadStorePlugins.read(); //Ersten 10 Plugins im Store laden
+                Thread springthread = new Thread() {
+                    @Override
+                    public void run() {
+                        SpringApplication.run(PluginInstallerServer.class);
+                        SpringApplication app = new SpringApplication(PluginInstallerServer.class);
+                        app.setDefaultProperties(Collections.singletonMap("server.port","8459"));
+
+                    }
+                };
+                springthread.start();
 
             }
         } catch (Exception e) {

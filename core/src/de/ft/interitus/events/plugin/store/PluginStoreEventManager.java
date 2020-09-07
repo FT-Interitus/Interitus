@@ -21,10 +21,5 @@ public class PluginStoreEventManager implements PluginStoreEventListener {
             listener.addElement(a);
     }
 
-    @Override
-    public void plugininstalled(PluginInstalledNewEvent e) {
-        for (int i = 0; i < listener.size(); i++)
-            ((PluginStoreEventListener) listener.elementAt(i)).
-                    plugininstalled(e);
-    }
+
 }

@@ -24,7 +24,6 @@ import de.ft.interitus.UI.UIElements.PressedKeys;
 import de.ft.interitus.UI.UIElements.UIElementBar;
 import de.ft.interitus.UI.UIElements.UIElements.Button;
 import de.ft.interitus.UI.popup.PopupHandler;
-import de.ft.interitus.UI.settings.subitems.subitem17;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.datamanager.programmdata.Updater;
 import de.ft.interitus.loading.AssetLoader;
@@ -36,6 +35,9 @@ import de.ft.interitus.utils.ShapeRenderer;
 
 
 import java.awt.*;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 
 public class ProgrammingSpace extends ScreenAdapter {
@@ -100,7 +102,7 @@ public class ProgrammingSpace extends ScreenAdapter {
 
         System.gc(); //Clean RAM after Loading
 
-     Updater.initprogress();
+    // Updater.initprogress();
 
 
 
@@ -240,11 +242,7 @@ public class ProgrammingSpace extends ScreenAdapter {
     }
 
     public void loader() {
-        if (subitem17.saveme != null) {
-            AssetLoader.storeimages.add(new Texture(subitem17.saveme));
-            subitem17.saveme = null;
 
-        }
 
 
         //Um alle shortcuts für das Programm zu überprüfen

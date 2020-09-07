@@ -53,7 +53,7 @@ public class subitem10 {
 
                                 if (result == everything) {
 
-                                    Data.delete();
+
 
 
                                 }

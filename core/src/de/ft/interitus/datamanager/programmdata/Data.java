@@ -456,10 +456,7 @@ public class Data {
     }
 
 
-    public static void delete() { //TODO Experimentell
-        folder.delete(); //Der Ordner wird gelöscht
 
-    }
 
     public static void init(String s) {
         foldername = s;

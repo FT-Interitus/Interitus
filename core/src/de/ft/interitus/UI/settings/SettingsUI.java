@@ -23,8 +23,11 @@ import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.settings.subitems.*;
 import de.ft.interitus.Var;
 import de.ft.interitus.plugin.ProgramRegistry;
-import de.ft.interitus.plugin.PluginManagerHandler;
 
+import java.awt.*;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -129,10 +132,6 @@ public class SettingsUI extends VisWindow {
             // setScale(200,200);
 
 
-
-
-
-
             ActorLayout layout = new ActorLayout() {
                 @Override
                 public Actor convertToActor(Actor... widgets) {
@@ -150,8 +149,6 @@ public class SettingsUI extends VisWindow {
 
 
             builder.setTablePadding(new Padding(20, 30, 20, 30));
-
-
 
 
             final VisTree tree = new VisTree();
@@ -180,7 +177,7 @@ public class SettingsUI extends VisWindow {
             item4.add(new TestNode(new VisLabel(" Erweitert"), 15));
             //ADD Advanced Settings to ITM if Device is connect
 
-           ProgramRegistry.addSettings(item5);
+            ProgramRegistry.addSettings(item5);
 
             item1.setExpanded(true);
             item2.setExpanded(true);
@@ -267,12 +264,14 @@ public class SettingsUI extends VisWindow {
                             subitem16.add(container);
                             break;
                         case 16:
-                            subitem17.add(container, 0);
+
+
+
                             break;
                         default:
 
                             if (SelectedItem > 16) {
-                               ProgramRegistry.getSettingsContainer(container,SelectedItem - 17);
+                                ProgramRegistry.getSettingsContainer(container, SelectedItem - 17);
                             }
 
 

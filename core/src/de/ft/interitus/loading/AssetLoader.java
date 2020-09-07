@@ -15,7 +15,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Programm;
 import de.ft.interitus.Var;
-import de.ft.interitus.plugin.store.StorePluginsVar;
+
 import de.ft.interitus.utils.ArrayList;
 import de.ft.interitus.utils.DownloadFile;
 
