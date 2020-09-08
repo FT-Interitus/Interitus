@@ -42,7 +42,7 @@ public class DifferenzModi implements BlockModi, ArduinoBlock {
 
     @Override
     public int getWidth() {
-        return 200;
+        return 150;
     }
 
     @Override

@@ -3,11 +3,7 @@
  * Copyright by Tim and Felix
  */
 
-package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.inputblocs;/*
- * Copyright (c) 2020.
- * Copyright by Tim and Felix
- */
-
+package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.If;
 
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
@@ -19,19 +15,14 @@ import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.InitArduino;
 import de.ft.interitus.utils.ArrayList;
 
-public class DigitalReadDefault implements BlockModi, ArduinoBlock {
+public class IfDefaultBlockModi implements BlockModi, ArduinoBlock {
     ArrayList<Parameter> parameters = new ArrayList<>();
-    Parameter Pin;
-    Parameter Output;
+    public IfDefaultBlockModi() {
 
-
-    public DigitalReadDefault(){
-        Pin=new Parameter("", AssetLoader.Parameter_erstens,"Pin", "Auszulesender Pin", "", new ParameterType(InitArduino.floatvar, false, false), true);
-        Output=new Parameter("",AssetLoader.Parameter_istgleich,"Output", "Output", "", new ParameterType(InitArduino.booleanvar, true, false), true);
-        parameters.add(Pin);
-        parameters.add(Output);
+        parameters.add(new Parameter("",AssetLoader.Parameter_erstens,"Bedingung","","boolean",new ParameterType(InitArduino.booleanvar,false,true).setSelectables(new String[]{"true","false"}),true));
 
     }
+
     @Override
     public ArrayList<Parameter> getBlockParameter() {
         return parameters;
@@ -44,26 +35,21 @@ public class DigitalReadDefault implements BlockModi, ArduinoBlock {
 
     @Override
     public int getWidth() {
-        return 120;
+        return 100;
     }
 
     @Override
     public String getname() {
-        return "DigitalRead";
+        return "If";
     }
 
     @Override
     public Texture getModiImage() {
-        return AssetLoader.Parameter_Minus;
+        return AssetLoader.WaitBlock_description_image;
     }
 
     @Override
     public String getCode() {
-        if( parameters.get(1).getDatawire().size()>0){
-            return parameters.get(1).getVarName()+ " = "+"digitalRead(" + parameters.get(0).getParameter() + ");";
-
-        }else {
-            return "digitalRead(" + parameters.get(0).getParameter() + ");";
-        }
+        return "if("+parameters.get(0).getParameter()+") {";
     }
 }

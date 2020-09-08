@@ -16,6 +16,7 @@ import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.actionblocks.se
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.actionblocks.digitalwrite.digitalWrite;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.inputblocs.DigitalRead;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.operationblocks.Math.MathBlock;
+import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.If.If;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.Wait.Wait;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.WhileLoopEnd;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.WhileLoopStart;
@@ -53,6 +54,7 @@ public class InitArduino {
         blocks.add(new digitalWrite(arduino,null));
         blocks.add(new DigitalRead(arduino,null));
         blocks.add(new MathBlock(arduino,null));
+        blocks.add(new If(arduino,null));
 
 
 

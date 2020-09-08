@@ -42,12 +42,12 @@ public class AdditionalModi implements BlockModi, ArduinoBlock {
 
     @Override
     public int getWidth() {
-        return 200;
+        return 150;
     }
 
     @Override
     public String getname() {
-        return "addidionalModi";
+        return "Additions Block";
     }
 
     @Override

@@ -46,7 +46,7 @@ public class ArduinoCompiler implements Compiler {
             for(Parameter parameter:block.getBlocktype().getBlockParameter()) {
 
 
-                if(parameter.getParameterType().isOutput()==false) {
+                if(!parameter.getParameterType().isOutput()) {
                     continue;
                 }
                 if(parameter.getDatawire()==null) {
