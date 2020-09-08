@@ -97,9 +97,9 @@ public class Programm extends Game {
                     @Override
                     public void run() {
 
-                        SpringApplication app = new SpringApplication(PluginInstallerServer.class);
-                        app.setDefaultProperties(Collections.singletonMap("server.port","8459"));
-                        app.run();
+                       // SpringApplication app = new SpringApplication(PluginInstallerServer.class);
+                        //app.setDefaultProperties(Collections.singletonMap("server.port","8459"));
+                      //  app.run();
 
                     }
                 };

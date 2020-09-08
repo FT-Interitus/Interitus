@@ -40,6 +40,26 @@ public class AssetLoader {
     public static Texture green_bar_middle;
     public static Texture green_bar_right;
 
+    public static Texture orange_bar_left;
+    public static Texture orange_bar_middle;
+    public static Texture orange_bar_right;
+
+    public static Texture yellow_bar_left;
+    public static Texture yellow_bar_middle;
+    public static Texture yellow_bar_right;
+
+    public static Texture red_bar_left;
+    public static Texture red_bar_middle;
+    public static Texture red_bar_right;
+
+    public static Texture blue_bar_left;
+    public static Texture blue_bar_middle;
+    public static Texture blue_bar_right;
+
+    public static Texture turquoise_bar_left;
+    public static Texture turquoise_bar_middle;
+    public static Texture turquoise_bar_right;
+
 
     //Arduino Device Images
     public static Texture arduinonanoimage;
@@ -285,6 +305,26 @@ public class AssetLoader {
             manager.load(workingdirectory + "Block/color_bar/green_middle.png", Texture.class);
             manager.load(workingdirectory + "Block/color_bar/green_right.png", Texture.class);
 
+            manager.load(workingdirectory + "Block/color_bar/orange_left.png", Texture.class);
+            manager.load(workingdirectory + "Block/color_bar/orange_middle.png", Texture.class);
+            manager.load(workingdirectory + "Block/color_bar/orange_right.png", Texture.class);
+
+            manager.load(workingdirectory + "Block/color_bar/yellow_left.png", Texture.class);
+            manager.load(workingdirectory + "Block/color_bar/yellow_middle.png", Texture.class);
+            manager.load(workingdirectory + "Block/color_bar/yellow_right.png", Texture.class);
+
+            manager.load(workingdirectory + "Block/color_bar/red_left.png", Texture.class);
+            manager.load(workingdirectory + "Block/color_bar/red_middle.png", Texture.class);
+            manager.load(workingdirectory + "Block/color_bar/red_right.png", Texture.class);
+
+            manager.load(workingdirectory + "Block/color_bar/blue_left.png", Texture.class);
+            manager.load(workingdirectory + "Block/color_bar/blue_middle.png", Texture.class);
+            manager.load(workingdirectory + "Block/color_bar/blue_right.png", Texture.class);
+
+            manager.load(workingdirectory + "Block/color_bar/turquoise_left.png", Texture.class);
+            manager.load(workingdirectory + "Block/color_bar/turquoise_middle.png", Texture.class);
+            manager.load(workingdirectory + "Block/color_bar/turquoise_right.png", Texture.class);
+
 
 
             manager.load(workingdirectory + "connector.png", Texture.class);
@@ -423,18 +463,44 @@ public class AssetLoader {
             green_bar_middle =  manager.get(workingdirectory + "Block/color_bar/green_middle.png", Texture.class);
             green_bar_right =  manager.get(workingdirectory + "Block/color_bar/green_right.png", Texture.class);
 
+            orange_bar_left = manager.get(workingdirectory + "Block/color_bar/orange_left.png", Texture.class);
+            orange_bar_middle = manager.get(workingdirectory + "Block/color_bar/orange_middle.png", Texture.class);
+            orange_bar_right = manager.get(workingdirectory + "Block/color_bar/orange_right.png", Texture.class);
+
+            yellow_bar_left = manager.get(workingdirectory + "Block/color_bar/yellow_left.png", Texture.class);
+            yellow_bar_middle = manager.get(workingdirectory + "Block/color_bar/yellow_middle.png", Texture.class);
+            yellow_bar_right = manager.get(workingdirectory + "Block/color_bar/yellow_right.png", Texture.class);
+
+            red_bar_left = manager.get(workingdirectory + "Block/color_bar/red_left.png", Texture.class);
+            red_bar_middle = manager.get(workingdirectory + "Block/color_bar/red_middle.png", Texture.class);
+            red_bar_right = manager.get(workingdirectory + "Block/color_bar/red_right.png", Texture.class);
+
+            blue_bar_left = manager.get(workingdirectory + "Block/color_bar/blue_left.png", Texture.class);
+            blue_bar_middle = manager.get(workingdirectory + "Block/color_bar/blue_middle.png", Texture.class);
+            blue_bar_right = manager.get(workingdirectory + "Block/color_bar/blue_right.png", Texture.class);
+
+            turquoise_bar_left = manager.get(workingdirectory + "Block/color_bar/turquoise_left.png", Texture.class);
+            turquoise_bar_middle = manager.get(workingdirectory + "Block/color_bar/turquoise_middle.png", Texture.class);
+            turquoise_bar_right = manager.get(workingdirectory + "Block/color_bar/turquoise_right.png", Texture.class);
+
+
+
             mouse_over_rechts = manager.get(workingdirectory + "Block/mouseover_rechts.png", Texture.class);
             mouseover_links = manager.get(workingdirectory + "Block/mouseover_links.png", Texture.class);
             mouse_over_mitte = manager.get(workingdirectory + "Block/mouseover_mitte.png", Texture.class);
+
             marked_rechts = manager.get(workingdirectory + "Block/market_rechts.png", Texture.class);
             marked_links = manager.get(workingdirectory + "Block/market_links.png", Texture.class);
             marked_mitte = manager.get(workingdirectory + "Block/market_mitte.png", Texture.class);
+
             PinModeBlock_smallimage = manager.get(workingdirectory + "Block/Block_PinMode/smallblock.png", Texture.class);
             DigitalWrite_smallimage = manager.get(workingdirectory + "Block/Block_DigitalWrite/smallblock.png", Texture.class);
             WaitBlock_smallimage = manager.get(workingdirectory + "Block/Block_Wait/smallblock.png", Texture.class);
+
             WaitBlock_description_image = manager.get(workingdirectory + "Block/Block_Wait/beschreibungsbild.png", Texture.class);
             PinModeBlock_description_image = manager.get(workingdirectory + "Block/Block_PinMode/beschreibungsbild.png", Texture.class);
             DigitalWrite_description_image = manager.get(workingdirectory + "Block/Block_DigitalWrite/beschreibungsbild.png", Texture.class);
+
             aufklapppfeil = manager.get(workingdirectory + "aufklapppfeil.png", Texture.class);
 
 

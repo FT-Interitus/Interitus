@@ -6,7 +6,6 @@
 package de.ft.interitus.Block;
 
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -16,9 +15,8 @@ import de.ft.interitus.Block.Generators.BlocktoSaveGenerator;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Settings;
 import de.ft.interitus.ThreadManager;
-import de.ft.interitus.UI.UIElements.BlockDropDownMenue.BlockDropDownItem;
 import de.ft.interitus.UI.UIElements.BlockDropDownMenue.BlockDropDownMenue;
-import de.ft.interitus.UI.UIElements.dropdownmenue.DropDownMenue;
+import de.ft.interitus.UI.UIElements.check.CheckKollision;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.Viewport;
 import de.ft.interitus.UI.popup.PopupMenue;
@@ -30,10 +28,8 @@ import de.ft.interitus.events.rightclick.RightClickEventListener;
 import de.ft.interitus.events.rightclick.RightClickOpenRequestEvent;
 import de.ft.interitus.events.rightclick.RightClickPerformActionEvent;
 import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.ProjectManager;
-import de.ft.interitus.UI.UIElements.check.CheckKollision;
 import de.ft.interitus.utils.ShapeRenderer;
 import de.ft.interitus.utils.Unproject;
 
@@ -42,7 +38,7 @@ import java.util.Objects;
 
 /***
  *
- * @author Felix & Tim
+ *
  *
  *Hier werden die Blöcke erstellt die für die Programmmierung zuständig sind.
  * Nähere Informationen stehen in den Kommentaren oder im Github Wiki.
@@ -75,7 +71,7 @@ public abstract class Block implements VisibleObjects {
     private Wire wire_left = null; //linke verbundene Wire
     private Wire wire_right = null; //rechte verbunde Wire
     private PlatformSpecificBlock blocktype;
-    private BlockDropDownMenue BlockModiSelection = new BlockDropDownMenue(0,0,0,0, this);
+    private final BlockDropDownMenue BlockModiSelection = new BlockDropDownMenue(0, 0, 0, 0, this);
 
 
     public Block(final int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock, BlockUpdateGenerator update, BlocktoSaveGenerator blocktoSaveGenerator) { //Initzialisieren des Blocks
@@ -102,17 +98,16 @@ public abstract class Block implements VisibleObjects {
         ThreadManager.add(blockupdate, this); //Blockupdate wird zum Array der laufenden Threads hinzugefügt
 
 
-
         rightClickEventListener = new RightClickEventListener() {
 
             @Override
             public PopupMenue openrequest(RightClickOpenRequestEvent e, float Pos_X, float Pos_Y) {
 
 
-                if(CheckKollision.object(getX(),getY(),getW(),getW(),Unproject.unproject(Pos_X,Pos_Y).x,Unproject.unproject(Pos_X,Pos_Y).y,1,1)) {
+                if (CheckKollision.object(getX(), getY(), getW(), getW(), Unproject.unproject(Pos_X, Pos_Y).x, Unproject.unproject(Pos_X, Pos_Y).y, 1, 1)) {
 
                     return null;
-                }else{
+                } else {
                     return null;
                 }
             }
@@ -121,12 +116,9 @@ public abstract class Block implements VisibleObjects {
             public void performAction(RightClickPerformActionEvent e, PopupMenue popupMenue, int Buttonindex) {
 
 
-
             }
         };
         EventVar.rightClickEventManager.addListener(rightClickEventListener);
-
-
 
 
     }
@@ -142,7 +134,6 @@ public abstract class Block implements VisibleObjects {
 
 
         return Viewport.extendedfrustum.boundsInFrustum(this.getX(), this.getY(), 0, this.getW(), this.getH(), 0); //Ist der Block im Camera bereich?
-
 
 
     }
@@ -294,7 +285,7 @@ public abstract class Block implements VisibleObjects {
      * @param moving set if the Block is moved by the user
      */
     public void setMoving(boolean moving) {
-        if(moving) {
+        if (moving) {
             ProjectManager.getActProjectVar().changes = true;
         }
         this.moving = moving; //Gibt an das der Block gerade in Bewegung ist
@@ -502,19 +493,18 @@ public abstract class Block implements VisibleObjects {
     public void delete(boolean complete) { //Der Block soll gelöscht werden (complete beduetet das alle Blöcke gelöscht werden sollen)
 
 
-            if (blocktype.getBlockParameter() != null) {
-                for (Parameter parameter : blocktype.getBlockParameter()) {
-                    if (parameter.getDatawire() == null) {
-                        continue;
-                    }
-
-                    while (parameter.getDatawire().size()>0) {
-                        parameter.getDatawire().get(0).delete();
-                    }
-
+        if (blocktype.getBlockParameter() != null) {
+            for (Parameter parameter : blocktype.getBlockParameter()) {
+                if (parameter.getDatawire() == null) {
+                    continue;
                 }
-            }
 
+                while (parameter.getDatawire().size() > 0) {
+                    parameter.getDatawire().get(0).delete();
+                }
+
+            }
+        }
 
 
         if (ProjectManager.getActProjectVar().Blockwitherrors.contains(this.getIndex())) {
@@ -637,7 +627,7 @@ public abstract class Block implements VisibleObjects {
      */
 
     public void draw(SpriteBatch batch, ShapeRenderer shape, BitmapFont font) {
-batch.begin();
+        batch.begin();
 
         try {
             if (ProjectManager.getActProjectVar().Blockwitherrors.contains(this.getIndex())) {
@@ -645,7 +635,7 @@ batch.begin();
             } else {
                 batch.setColor(1, 1, 1, 1);
             }
-            if(!Settings.disableblockgrayout) {
+            if (!Settings.disableblockgrayout) {
                 if (!ProjectManager.getActProjectVar().projectType.getProjectFunktions().isblockconnected(this)) {
                     batch.setColor(batch.getColor().r, batch.getColor().g, batch.getColor().b, 0.4f);
                 }
@@ -655,11 +645,64 @@ batch.begin();
             batch.draw(AssetLoader.block_right, this.getX() + this.getW() - 6, this.getY(), 6, this.getH());
 
 
-            if(blocktype.getBlockCategoration()== BlockCategories.ActionBlocks) {
-                batch.draw(AssetLoader.green_bar_middle, this.getX() + 6, this.getY()-1+this.getH()-13, this.getW() - 12, 13); // Block ohne das er makiert ist
-                batch.draw(AssetLoader.green_bar_left, this.getX()+1, this.getY()-1+this.getH()-13, 6,13);
-                batch.draw(AssetLoader.green_bar_right, this.getX() + this.getW() - 7, this.getY()-1+this.getH()-13, 6, 13);
+            if (blocktype.getBlockCategoration() != null) {
+                switch (blocktype.getBlockCategoration()) {
 
+                    case ActionBlocks -> {
+
+                        batch.draw(AssetLoader.green_bar_middle, this.getX() + 6, this.getY() - 1 + this.getH() - 13, this.getW() - 12, 13); // Block ohne das er makiert ist
+                        batch.draw(AssetLoader.green_bar_left, this.getX() + 1, this.getY() - 1 + this.getH() - 13, 6, 13);
+                        batch.draw(AssetLoader.green_bar_right, this.getX() + this.getW() - 7, this.getY() - 1 + this.getH() - 13, 6, 13);
+
+
+                    }
+
+
+                    case Programm_Sequence -> {
+                        batch.draw(AssetLoader.orange_bar_middle, this.getX() + 6, this.getY() - 1 + this.getH() - 13, this.getW() - 12, 13); // Block ohne das er makiert ist
+                        batch.draw(AssetLoader.orange_bar_left, this.getX() + 1, this.getY() - 1 + this.getH() - 13, 6, 13);
+                        batch.draw(AssetLoader.orange_bar_right, this.getX() + this.getW() - 7, this.getY() - 1 + this.getH() - 13, 6, 13);
+
+                    }
+
+                    case Sensors -> {
+                        batch.draw(AssetLoader.yellow_bar_middle, this.getX() + 6, this.getY() - 1 + this.getH() - 13, this.getW() - 12, 13); // Block ohne das er makiert ist
+                        batch.draw(AssetLoader.yellow_bar_left, this.getX() + 1, this.getY() - 1 + this.getH() - 13, 6, 13);
+                        batch.draw(AssetLoader.yellow_bar_right, this.getX() + this.getW() - 7, this.getY() - 1 + this.getH() - 13, 6, 13);
+
+                    }
+
+                    case Data_Operation -> {
+                        batch.draw(AssetLoader.red_bar_middle, this.getX() + 6, this.getY() - 1 + this.getH() - 13, this.getW() - 12, 13); // Block ohne das er makiert ist
+                        batch.draw(AssetLoader.red_bar_left, this.getX() + 1, this.getY() - 1 + this.getH() - 13, 6, 13);
+                        batch.draw(AssetLoader.red_bar_right, this.getX() + this.getW() - 7, this.getY() - 1 + this.getH() - 13, 6, 13);
+
+
+                    }
+
+
+                    case Specials -> {
+                        batch.draw(AssetLoader.blue_bar_middle, this.getX() + 6, this.getY() - 1 + this.getH() - 13, this.getW() - 12, 13); // Block ohne das er makiert ist
+                        batch.draw(AssetLoader.blue_bar_left, this.getX() + 1, this.getY() - 1 + this.getH() - 13, 6, 13);
+                        batch.draw(AssetLoader.blue_bar_right, this.getX() + this.getW() - 7, this.getY() - 1 + this.getH() - 13, 6, 13);
+
+                    }
+
+                    case OwnBlocks -> {
+                        batch.draw(AssetLoader.turquoise_bar_middle, this.getX() + 6, this.getY() - 1 + this.getH() - 13, this.getW() - 12, 13); // Block ohne das er makiert ist
+                        batch.draw(AssetLoader.turquoise_bar_left, this.getX() + 1, this.getY() - 1 + this.getH() - 13, 6, 13);
+                        batch.draw(AssetLoader.turquoise_bar_right, this.getX() + this.getW() - 7, this.getY() - 1 + this.getH() - 13, 6, 13);
+
+
+                    }
+
+
+                }
+
+            }else{
+                batch.draw(AssetLoader.orange_bar_middle, this.getX() + 6, this.getY()-1+this.getH()-13, this.getW() - 12, 13); // Block ohne das er makiert ist
+                batch.draw(AssetLoader.orange_bar_left, this.getX()+1, this.getY()-1+this.getH()-13, 6,13);
+                batch.draw(AssetLoader.orange_bar_right, this.getX() + this.getW() - 7, this.getY()-1+this.getH()-13, 6, 13);
 
             }
 
@@ -746,7 +789,7 @@ batch.begin();
                 for (int i = 0; i < this.getBlocktype().getBlockParameter().size(); i++) {
                     batch.draw(this.getBlocktype().getBlockParameter().get(i).getParameterTexture(), aktualX + 5, this.getY() + 30, 20, 20);
                     if (this.getBlocktype().getBlockParameter().get(i).getParameterType().isOutput()) {
-                        batch.draw(this.getBlocktype().getBlockParameter().get(i).getParameterType().getTyp().getTextureconnector(), (int) aktualX, this.getY() - 5, UIVar.parameter_width,  UIVar.parameter_height, 0, 0, AssetLoader.Plug_IntParameter.getWidth(), AssetLoader.Plug_IntParameter.getHeight(), false, true);
+                        batch.draw(this.getBlocktype().getBlockParameter().get(i).getParameterType().getTyp().getTextureconnector(), (int) aktualX, this.getY() - 5, UIVar.parameter_width, UIVar.parameter_height, 0, 0, AssetLoader.Plug_IntParameter.getWidth(), AssetLoader.Plug_IntParameter.getHeight(), false, true);
                         this.getBlocktype().getBlockParameter().get(i).setX((int) aktualX);
                         this.getBlocktype().getBlockParameter().get(i).setY(this.getY() - 5);
 
@@ -756,7 +799,7 @@ batch.begin();
                         this.getBlocktype().getBlockParameter().get(i).setY(this.getY());
                         font.getData().setScale(0.9f);
                         glyphLayout.setText(font, "" + this.getBlocktype().getBlockParameter().get(i).getParameter());
-                        if(this.getBlocktype().getBlockParameter().get(i).getDatawire().size()<1) {
+                        if (this.getBlocktype().getBlockParameter().get(i).getDatawire().size() < 1) {
                             font.draw(batch, glyphLayout, aktualX + 15 - glyphLayout.width / 2, y + glyphLayout.height * 1.5f);
                         }
                     }
@@ -765,15 +808,13 @@ batch.begin();
             }
 
 
+            batch.end();
 
-batch.end();
 
-
-            BlockModiSelection.setBounds(this.x+4,this.y+2,30,20);
-            if(this.getBlocktype().getBlockModis().size()>1) {
+            BlockModiSelection.setBounds(this.x + 4, this.y + 2, 30, 20);
+            if (this.getBlocktype().getBlockModis().size() > 1) {
                 BlockModiSelection.draw();
             }
-
 
 
             try {
@@ -788,16 +829,16 @@ batch.end();
                         }
                     }
                 }
-            }catch (ConcurrentModificationException ignored) {
+            } catch (ConcurrentModificationException ignored) {
             }
 
 
-        }catch (Exception e) {
+        } catch (Exception e) {
 
             e.printStackTrace();
             //If the Block was deleted while drawing
 
-            if(batch.isDrawing()) {
+            if (batch.isDrawing()) {
                 batch.end();
             }
         }
