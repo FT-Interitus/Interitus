@@ -30,6 +30,7 @@ public class Notification {
     private boolean displayed = false;
     private int rollin = 0;
     private boolean inrollin = true;
+    private boolean closedbyuser = false;
     private UIElementBar buttonbar = null;
     private ChangeListener closeListener;
 
@@ -269,6 +270,15 @@ public class Notification {
 
     protected ChangeListener getCloseListener() {
         return closeListener;
+    }
+
+
+    protected boolean isClosedbyuser() {
+        return closedbyuser;
+    }
+
+    protected void setClosedbyuser(boolean closedbyuser) {
+        this.closedbyuser = closedbyuser;
     }
 }
 

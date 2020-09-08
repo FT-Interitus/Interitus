@@ -116,7 +116,7 @@ public class NotificationManager {
             ProgrammingSpace.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
             ProgrammingSpace.shapeRenderer.setColor(Settings.theme.ClearColor().r,Settings.theme.ClearColor().g,Settings.theme.ClearColor().b,notifications.get(i).getFadeout());
 
-            if(CheckMouse.isMouseover(Gdx.graphics.getWidth() - DISTANCE_RIGHT+notifications.get(i).getRollin(), UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i)), DISTANCE_RIGHT - MARGIN_RIGHT, HEIGHT, false)) {
+            if(CheckMouse.isMouseover(Gdx.graphics.getWidth() - DISTANCE_RIGHT+notifications.get(i).getRollin(), UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i)), DISTANCE_RIGHT - MARGIN_RIGHT, HEIGHT, false)&&!notifications.get(i).isClosedbyuser()) {
 
 
                 for(int j=notifications.size()-1;j>=i;j--)  {
@@ -155,6 +155,7 @@ public class NotificationManager {
                 notifications.get(i).getCloseButton().draw();
                 if( notifications.get(i).getCloseButton().isjustPressednormal()) {
                     notifications.get(i).setFadingout(true);
+                    notifications.get(i).setClosedbyuser(true);
                     notifications.get(i).setFadeout(0.5f);
                 }
 
