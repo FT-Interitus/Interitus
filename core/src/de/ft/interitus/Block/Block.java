@@ -33,6 +33,7 @@ import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.ShapeRenderer;
 import de.ft.interitus.utils.Unproject;
 
+import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.Objects;
 
@@ -812,7 +813,7 @@ public abstract class Block implements VisibleObjects {
 
             BlockModiSelection.setBounds(this.x + 4, this.y + 2, 30, 20);
             if (this.getBlocktype().getBlockModis().size() > 1) {
-                BlockModiSelection.draw();
+                BlockModiSelection.draw(this);
             }
 
 
@@ -937,4 +938,22 @@ public abstract class Block implements VisibleObjects {
     }
 
 
+    public void changesize(int widthdiff) {
+
+        ArrayList<Block> blocks = new ArrayList<>();
+
+        Block nextblock = this.getRight();
+        while(nextblock!=null) {
+
+            if(blocks.contains(blocks)) {
+                break;
+            }
+            blocks.add(nextblock);
+
+            nextblock.setX(nextblock.getX()+widthdiff);
+            nextblock = nextblock.getRight();
+
+        }
+
+    }
 }

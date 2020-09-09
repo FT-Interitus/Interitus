@@ -6,6 +6,7 @@
 package de.ft.interitus.projecttypes.BlockTypes;
 
 import com.badlogic.gdx.graphics.Texture;
+import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.ProjectTypes;
@@ -18,6 +19,7 @@ public abstract class PlatformSpecificBlock {
     private final Addon adddon;
     public int actBlockModiIndex = -1;
     private ProjectTypes projectTypes = null;
+
 
     public PlatformSpecificBlock(ProjectTypes projectTypes, Addon addon) {
 
@@ -116,7 +118,7 @@ public abstract class PlatformSpecificBlock {
         return blockModis.get(actBlockModiIndex).getWidth();
     }
 
-    public final void changeBlockModus(int index) {
+    public final void changeBlockModus(int index, Block block) {
         if (index == actBlockModiIndex) {
             return;
         }
@@ -141,8 +143,12 @@ public abstract class PlatformSpecificBlock {
 
 
 
+        int widthdiff = this.getWidth();
         actBlockModiIndex = index;
 
+        widthdiff = this.getWidth()-widthdiff;
+
+        block.changesize(widthdiff);
 
     }
 

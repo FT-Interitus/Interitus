@@ -16,7 +16,7 @@ import de.ft.interitus.UI.UIElements.check.CheckKollision;
 import de.ft.interitus.projecttypes.BlockTypes.BlockModi;
 import de.ft.interitus.utils.Unproject;
 
-public class BlockDropDownMenue implements UIElement {
+public class BlockDropDownMenue {
     private int x=0;
     private int y=0;
     private int w=0;
@@ -40,27 +40,27 @@ public class BlockDropDownMenue implements UIElement {
 
 
 
-    @Override
+
     public int getX() {
         return this.x;
     }
 
-    @Override
+
     public int getY() {
         return this.y;
     }
 
-    @Override
+
     public int getW() {
         return this.w;
     }
 
-    @Override
+
     public int getH() {
         return this.h;
     }
 
-    @Override
+
     public void setBounds(int x, int y, int w, int h) {
         this.x=x;
         this.y=y;
@@ -79,8 +79,8 @@ public class BlockDropDownMenue implements UIElement {
         }
     }
 
-    @Override
-    public void draw() {
+
+    public void draw(Block block) {
         longestText();
         ProgrammingSpace.batch.begin();
         ProgrammingSpace.batch.draw(block.getBlocktype().getBlockModis().get(block.getBlocktype().actBlockModiIndex).getModiImage(),this.x,this.y,this.w,this.h);
@@ -103,7 +103,7 @@ public class BlockDropDownMenue implements UIElement {
 
                 if(Gdx.input.isButtonPressed(0)){
                     ProgrammingSpace.BlockshapeRenderer.setColor(0f/255f, 101f/255f, 100f/255f,1);
-                    block.getBlocktype().changeBlockModus(i);
+                    block.getBlocktype().changeBlockModus(i,block);
 
                 }
                 ProgrammingSpace.BlockshapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
@@ -137,9 +137,7 @@ if(Gdx.input.isButtonPressed(0) && !CheckKollision.checkmousewithobject(this.x,t
 
         }
 
-    @Override
-    public void setAlpha(float alpha) {
 
-    }
+
 
 }
