@@ -58,10 +58,6 @@ public class Wait extends PlatformSpecificBlock {
         return BlockCategories.Programm_Sequence;
     }
 
-    @Override
-    public Texture getSmallImage() {
-        return AssetLoader.WaitBlock_smallimage;
-    }
 
 
     @Override

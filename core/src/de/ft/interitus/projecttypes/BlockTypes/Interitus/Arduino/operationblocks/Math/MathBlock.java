@@ -59,10 +59,7 @@ public class MathBlock extends PlatformSpecificBlock {
         return BlockCategories.Data_Operation;
     }
 
-    @Override
-    public Texture getSmallImage() {
-        return AssetLoader.DigitalWrite_smallimage;
-    }
+
 
 
     @Override

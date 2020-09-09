@@ -58,10 +58,6 @@ public class DigitalRead extends PlatformSpecificBlock {
         return BlockCategories.Sensors;
     }
 
-    @Override
-    public Texture getSmallImage() {
-        return AssetLoader.WaitBlock_smallimage;
-    }
 
 
 

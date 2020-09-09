@@ -50,10 +50,7 @@ public class WhileLoopStart extends PlatformSpecificBlock implements ArduinoBloc
         return BlockCategories.Programm_Sequence;
     }
 
-    @Override
-    public Texture getSmallImage() {
-        return null;
-    }
+
 
 
 

@@ -32,12 +32,7 @@ public class SetPinMode extends PlatformSpecificBlock  {
         actBlockModiIndex=0;
 
 
-
-
     }
-
-
-
 
 
     @Override
@@ -59,11 +54,6 @@ public class SetPinMode extends PlatformSpecificBlock  {
     @Override
     public BlockCategories getBlockCategoration() {
         return BlockCategories.ActionBlocks;
-    }
-
-    @Override
-    public Texture getSmallImage() {
-        return AssetLoader.PinModeBlock_smallimage;
     }
 
 

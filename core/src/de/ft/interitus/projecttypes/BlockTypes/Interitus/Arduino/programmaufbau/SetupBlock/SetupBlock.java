@@ -52,10 +52,7 @@ public class SetupBlock extends PlatformSpecificBlock {
         return null;
     }
 
-    @Override
-    public Texture getSmallImage() {
-        return null;
-    }
+
 
 
 

@@ -6,26 +6,17 @@
 package de.ft.interitus.loading;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import de.ft.interitus.DisplayErrors;
-import de.ft.interitus.Programm;
-import de.ft.interitus.Var;
-
 import de.ft.interitus.utils.ArrayList;
-import de.ft.interitus.utils.DownloadFile;
 
-import java.io.IOException;
-import java.util.Objects;
 
 public class AssetLoader {
 
-
-    public static ArrayList<Texture> storeimages = new ArrayList<>();
 
     public static Pixmap backcursor;
 
@@ -138,13 +129,13 @@ public class AssetLoader {
     public static Texture img_Tab;
 
 
-    public static Texture WaitBlock_smallimage;
+
     public static Texture WaitBlock_description_image;
 
-    public static Texture PinModeBlock_smallimage;
+
     public static Texture PinModeBlock_description_image;
 
-    public static Texture DigitalWrite_smallimage;
+
     public static Texture DigitalWrite_description_image;
 
 
@@ -293,13 +284,13 @@ public class AssetLoader {
 
             group = "Blöcke";
 
-            manager.load(workingdirectory + "Block/mouseover_links.png", Texture.class);
-            manager.load(workingdirectory + "Block/mouseover_links.png", Texture.class);
-            manager.load(workingdirectory + "Block/mouseover_links.png", Texture.class);
+            manager.load(workingdirectory + "Block/blockmask/mouseover_links.png", Texture.class);
+            manager.load(workingdirectory + "Block/blockmask/mouseover_links.png", Texture.class);
+            manager.load(workingdirectory + "Block/blockmask/mouseover_links.png", Texture.class);
 
-            manager.load(workingdirectory + "Block/block_right.png", Texture.class);
-            manager.load(workingdirectory + "Block/block_middle.png", Texture.class);
-            manager.load(workingdirectory + "Block/block_left.png", Texture.class);
+            manager.load(workingdirectory + "Block/blockmask/block_right.png", Texture.class);
+            manager.load(workingdirectory + "Block/blockmask/block_middle.png", Texture.class);
+            manager.load(workingdirectory + "Block/blockmask/block_left.png", Texture.class);
 
             manager.load(workingdirectory + "Block/color_bar/green_left.png", Texture.class);
             manager.load(workingdirectory + "Block/color_bar/green_middle.png", Texture.class);
@@ -331,18 +322,17 @@ public class AssetLoader {
             manager.load(workingdirectory + "connector_offerd.png", Texture.class);
             //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            manager.load(workingdirectory + "Block/mouseover_links.png", Texture.class);
-            manager.load(workingdirectory + "Block/mouseover_rechts.png", Texture.class);
-            manager.load(workingdirectory + "Block/mouseover_mitte.png", Texture.class);
-            manager.load(workingdirectory + "Block/market_links.png", Texture.class);
-            manager.load(workingdirectory + "Block/market_rechts.png", Texture.class);
-            manager.load(workingdirectory + "Block/market_mitte.png", Texture.class);
-            manager.load(workingdirectory + "Block/Block_PinMode/smallblock.png", Texture.class);
-            manager.load(workingdirectory + "Block/Block_DigitalWrite/smallblock.png", Texture.class);
-            manager.load(workingdirectory + "Block/Block_Wait/smallblock.png", Texture.class);
+            manager.load(workingdirectory + "Block/blockmask/mouseover_links.png", Texture.class);
+            manager.load(workingdirectory + "Block/blockmask/mouseover_rechts.png", Texture.class);
+            manager.load(workingdirectory + "Block/blockmask/mouseover_mitte.png", Texture.class);
+            manager.load(workingdirectory + "Block/blockmask/market_links.png", Texture.class);
+            manager.load(workingdirectory + "Block/blockmask/market_rechts.png", Texture.class);
+            manager.load(workingdirectory + "Block/blockmask/market_mitte.png", Texture.class);
+
             manager.load(workingdirectory + "Block/Block_Wait/beschreibungsbild.png", Texture.class);
             manager.load(workingdirectory + "Block/Block_PinMode/beschreibungsbild.png", Texture.class);
             manager.load(workingdirectory + "Block/Block_DigitalWrite/beschreibungsbild.png", Texture.class);
+
             manager.load(workingdirectory + "aufklapppfeil.png", Texture.class);
 
 
@@ -455,9 +445,9 @@ public class AssetLoader {
             connector = manager.get(workingdirectory + "connector.png", Texture.class);
             connector_offerd = manager.get(workingdirectory + "connector_offerd.png", Texture.class);
 
-          block_right =  manager.get(workingdirectory + "Block/block_right.png", Texture.class);
-           block_middle = manager.get(workingdirectory + "Block/block_middle.png", Texture.class);
-          block_left = manager.get(workingdirectory + "Block/block_left.png", Texture.class);
+          block_right =  manager.get(workingdirectory + "Block/blockmask/block_right.png", Texture.class);
+           block_middle = manager.get(workingdirectory + "Block/blockmask/block_middle.png", Texture.class);
+          block_left = manager.get(workingdirectory + "Block/blockmask/block_left.png", Texture.class);
 
           green_bar_left =  manager.get(workingdirectory + "Block/color_bar/green_left.png", Texture.class);
             green_bar_middle =  manager.get(workingdirectory + "Block/color_bar/green_middle.png", Texture.class);
@@ -485,17 +475,13 @@ public class AssetLoader {
 
 
 
-            mouse_over_rechts = manager.get(workingdirectory + "Block/mouseover_rechts.png", Texture.class);
-            mouseover_links = manager.get(workingdirectory + "Block/mouseover_links.png", Texture.class);
-            mouse_over_mitte = manager.get(workingdirectory + "Block/mouseover_mitte.png", Texture.class);
+            mouse_over_rechts = manager.get(workingdirectory + "Block/blockmask/mouseover_rechts.png", Texture.class);
+            mouseover_links = manager.get(workingdirectory + "Block/blockmask/mouseover_links.png", Texture.class);
+            mouse_over_mitte = manager.get(workingdirectory + "Block/blockmask/mouseover_mitte.png", Texture.class);
 
-            marked_rechts = manager.get(workingdirectory + "Block/market_rechts.png", Texture.class);
-            marked_links = manager.get(workingdirectory + "Block/market_links.png", Texture.class);
-            marked_mitte = manager.get(workingdirectory + "Block/market_mitte.png", Texture.class);
-
-            PinModeBlock_smallimage = manager.get(workingdirectory + "Block/Block_PinMode/smallblock.png", Texture.class);
-            DigitalWrite_smallimage = manager.get(workingdirectory + "Block/Block_DigitalWrite/smallblock.png", Texture.class);
-            WaitBlock_smallimage = manager.get(workingdirectory + "Block/Block_Wait/smallblock.png", Texture.class);
+            marked_rechts = manager.get(workingdirectory + "Block/blockmask/market_rechts.png", Texture.class);
+            marked_links = manager.get(workingdirectory + "Block/blockmask/market_links.png", Texture.class);
+            marked_mitte = manager.get(workingdirectory + "Block/blockmask/market_mitte.png", Texture.class);
 
             WaitBlock_description_image = manager.get(workingdirectory + "Block/Block_Wait/beschreibungsbild.png", Texture.class);
             PinModeBlock_description_image = manager.get(workingdirectory + "Block/Block_PinMode/beschreibungsbild.png", Texture.class);
@@ -530,8 +516,5 @@ public class AssetLoader {
 
     }
 
-    public static void unload() {
 
-
-    }
 }

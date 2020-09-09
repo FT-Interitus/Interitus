@@ -52,10 +52,7 @@ public class WhileLoopEnd extends PlatformSpecificBlock implements ArduinoBlock 
         return BlockCategories.Programm_Sequence;
     }
 
-    @Override
-    public Texture getSmallImage() {
-        return null;
-    }
+
 
 
 

@@ -50,19 +50,19 @@ public class BlockTappedBar {
                 if (ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i).getBlockCategoration() != null) {
                     switch (ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i).getBlockCategoration()) {
                         case ActionBlocks:
-                            ActionBlocks.addItem(new TapBarBlockItem(ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i), ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i).getSmallImage()));
+                            ActionBlocks.addItem(new TapBarBlockItem(ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i)));
                             break;
                         case Programm_Sequence:
-                            Programm_Sequence.addItem(new TapBarBlockItem(ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i), ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i).getSmallImage()));
+                            Programm_Sequence.addItem(new TapBarBlockItem(ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i)));
                             break;
                         case Sensors:
-                            Sensors.addItem(new TapBarBlockItem(ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i), ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i).getSmallImage()));
+                            Sensors.addItem(new TapBarBlockItem(ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i)));
                             break;
                         case Data_Operation:
-                            Data_Operation.addItem(new TapBarBlockItem(ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i), ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i).getSmallImage()));
+                            Data_Operation.addItem(new TapBarBlockItem(ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i)));
                             break;
                         case Specials:
-                            Specials.addItem(new TapBarBlockItem(ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i), ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i).getSmallImage()));
+                            Specials.addItem(new TapBarBlockItem(ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i)));
                             break;
                         case OwnBlocks:
                             Programm.logger.severe("Unallowed Block was registered from Plugin " + PluginManagerHandler.getPluginArgs(ProjectManager.getActProjectVar().projectType.getPluginRegister(),"name"));
@@ -87,19 +87,19 @@ public class BlockTappedBar {
                     if (psb.getBlockCategoration() != null) {
                         switch (psb.getBlockCategoration()) {
                             case ActionBlocks:
-                                ActionBlocks.addItem(new TapBarBlockItem(psb, psb.getSmallImage()));
+                                ActionBlocks.addItem(new TapBarBlockItem(psb));
                                 break;
                             case Programm_Sequence:
-                                Programm_Sequence.addItem(new TapBarBlockItem(psb, psb.getSmallImage()));
+                                Programm_Sequence.addItem(new TapBarBlockItem(psb));
                                 break;
                             case Sensors:
-                                Sensors.addItem(new TapBarBlockItem(psb, psb.getSmallImage()));
+                                Sensors.addItem(new TapBarBlockItem(psb));
                                 break;
                             case Data_Operation:
-                                Data_Operation.addItem(new TapBarBlockItem(psb, psb.getSmallImage()));
+                                Data_Operation.addItem(new TapBarBlockItem(psb));
                                 break;
                             case Specials:
-                                Specials.addItem(new TapBarBlockItem(psb, psb.getSmallImage()));
+                                Specials.addItem(new TapBarBlockItem(psb));
                                 break;
                             case OwnBlocks:
                                 Programm.logger.severe("Unallowed Block was registered from Plugin " + PluginManagerHandler.getPluginArgs(ProjectManager.getActProjectVar().projectType.getPluginRegister(), "name"));

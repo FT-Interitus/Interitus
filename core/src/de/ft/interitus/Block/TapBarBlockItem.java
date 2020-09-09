@@ -19,7 +19,7 @@ import de.ft.interitus.projecttypes.ProjectManager;
 
 
 public class TapBarBlockItem implements TapItem {
-    private final Texture img;
+
     private final PlatformSpecificBlock psb;
     private int x;
     private int y;
@@ -28,8 +28,8 @@ public class TapBarBlockItem implements TapItem {
     private boolean doonce=false;
     private long zeitstempel;
 
-    public TapBarBlockItem(PlatformSpecificBlock psb, Texture img) {
-        this.img = img;
+    public TapBarBlockItem(PlatformSpecificBlock psb) {
+
         this.psb = psb;
     }
 
@@ -125,7 +125,7 @@ public class TapBarBlockItem implements TapItem {
         UI.UIbatch.draw(psb.getDescriptionImage(),this.getX()+10,this.getY()+9,30,30);
 
 
-       // UI.UIbatch.draw(img, this.x, this.y, this.w, this.h);
+
         UI.UIbatch.end();
 
         //QuickInfo

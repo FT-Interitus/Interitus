@@ -45,10 +45,7 @@ public class If extends PlatformSpecificBlock {
         return BlockCategories.Programm_Sequence;
     }
 
-    @Override
-    public Texture getSmallImage() {
-        return AssetLoader.DigitalWrite_smallimage;
-    }
+
 
 
     @Override

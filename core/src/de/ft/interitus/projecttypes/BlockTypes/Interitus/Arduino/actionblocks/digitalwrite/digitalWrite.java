@@ -62,10 +62,7 @@ public class digitalWrite extends PlatformSpecificBlock {
         return BlockCategories.ActionBlocks;
     }
 
-    @Override
-    public Texture getSmallImage() {
-        return AssetLoader.DigitalWrite_smallimage;
-    }
+
 
 
     @Override

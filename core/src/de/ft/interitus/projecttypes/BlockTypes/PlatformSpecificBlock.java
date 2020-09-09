@@ -37,7 +37,6 @@ public abstract class PlatformSpecificBlock {
 
     public abstract BlockCategories getBlockCategoration();
 
-    public abstract Texture getSmallImage();
 
 
     public abstract Texture getDescriptionImage();

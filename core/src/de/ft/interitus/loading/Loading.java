@@ -42,7 +42,12 @@ public class Loading extends ScreenAdapter {
         try {
 
             if (AssetLoader.manager.update()) {
-                AssetLoader.save();
+                try {
+                    AssetLoader.save();
+                }catch (Exception e) {
+
+                    Programm.logger.severe("Error while saving Assets");
+                }
                 if (Programm.inLoading == true) {
                     Programm.inLoading = false;
                     this.dispose();
@@ -67,7 +72,7 @@ public class Loading extends ScreenAdapter {
 
                 }
             }
-        } catch (GdxRuntimeException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

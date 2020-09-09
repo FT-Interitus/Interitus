@@ -45,10 +45,7 @@ public class Wait extends PlatformSpecificBlock implements Ev3Block {
         return BlockCategories.Programm_Sequence;
     }
 
-    @Override
-    public Texture getSmallImage() {
-        return AssetLoader.img_mappe1;
-    }
+
 
 
 
