@@ -6,15 +6,11 @@
 package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf;
 
 import com.badlogic.gdx.graphics.Texture;
-import de.ft.interitus.Block.Parameter;
-import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
-import de.ft.interitus.projecttypes.BlockTypes.BlockTopParameter;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.ProjectTypes;
-import de.ft.interitus.utils.ArrayList;
 
 import java.awt.*;
 

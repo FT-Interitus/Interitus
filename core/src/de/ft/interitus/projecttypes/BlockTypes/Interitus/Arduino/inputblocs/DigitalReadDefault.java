@@ -14,7 +14,7 @@ import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.Block.ParameterType;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.BlockTypes.BlockModi;
-import de.ft.interitus.projecttypes.BlockTypes.BlockTopParameter;
+import de.ft.interitus.projecttypes.BlockTypes.BlockSettings;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.InitArduino;
 import de.ft.interitus.utils.ArrayList;
@@ -38,7 +38,7 @@ public class DigitalReadDefault implements BlockModi, ArduinoBlock {
     }
 
     @Override
-    public ArrayList<BlockTopParameter> getblocktopparamter() {
+    public ArrayList<BlockSettings> getblocksettings() {
         return null;
     }
 
