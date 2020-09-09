@@ -156,6 +156,8 @@ public class AssetLoader {
     public static Texture Parameter_isequal;
     public static Texture Parameter_minus;
     public static Texture Parameter_plus;
+    public static Texture Parameter_Mal;
+    public static Texture Parameter_Geteilt;
     public static Texture Parameter_if;
 
 
@@ -205,7 +207,10 @@ public class AssetLoader {
             manager.load(workingdirectory + "Block/Parameter/Minus.png", Texture.class);
             manager.load(workingdirectory + "Block/Parameter/Plus.png", Texture.class);
             manager.load(workingdirectory + "Block/Parameter/if.png", Texture.class);
-           // manager.load(new AssetDescriptor(Objects.requireNonNull(Programm.INSTANCE.getClass().getClassLoader().getResource("../statistics/test.png")).getFile(),Texture.class));
+            manager.load(workingdirectory + "Block/Parameter/MalKreuz.png", Texture.class);
+            manager.load(workingdirectory + "Block/Parameter/Geteilt.png", Texture.class);
+
+            // manager.load(new AssetDescriptor(Objects.requireNonNull(Programm.INSTANCE.getClass().getClassLoader().getResource("../statistics/test.png")).getFile(),Texture.class));
 
 
             //Programm.INSTANCE.getClass().getResource()
@@ -401,6 +406,9 @@ public class AssetLoader {
             Parameter_minus = manager.get(workingdirectory + "Block/Parameter/Minus.png", Texture.class);
             Parameter_plus = manager.get(workingdirectory + "Block/Parameter/Plus.png", Texture.class);
             Parameter_if = manager.get(workingdirectory + "Block/Parameter/if.png", Texture.class);
+            Parameter_Mal = manager.get(workingdirectory + "Block/Parameter/MalKreuz.png", Texture.class);
+            Parameter_Geteilt = manager.get(workingdirectory + "Block/Parameter/Geteilt.png", Texture.class);
+
 
 
 
