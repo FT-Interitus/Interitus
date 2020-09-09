@@ -937,18 +937,30 @@ public abstract class Block implements VisibleObjects {
         return blocktoSaveGenerator;
     }
 
-
+    /**
+     * When the Size of the Block will be changed
+     * @param widthdiff
+     */
     public void changesize(int widthdiff) {
 
         ArrayList<Block> blocks = new ArrayList<>();
 
         Block nextblock = this.getRight();
+
+        if(this.getWire_right()!=null&&this.getWire_right().isSpace_between_blocks()) {
+            return;
+        }
         while(nextblock!=null) {
 
             if(blocks.contains(blocks)) {
+                blocks.clear();
                 break;
             }
             blocks.add(nextblock);
+            if(nextblock!=null&&nextblock.getWire_right()!=null&&nextblock.getWire_right().isSpace_between_blocks()) {
+                blocks.clear();
+                break;
+            }
 
             nextblock.setX(nextblock.getX()+widthdiff);
             nextblock = nextblock.getRight();
