@@ -38,7 +38,7 @@ public class DigitalReadDefault implements BlockModi, ArduinoBlock {
     }
 
     @Override
-    public ArrayList<BlockSettings> getblocksettings() {
+    public BlockSettings getblocksettings() {
         return null;
     }
 
