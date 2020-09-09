@@ -11,9 +11,13 @@ import de.ft.interitus.utils.ArrayList;
 
 public interface BlockModi {
 
-      ArrayList<Parameter> getBlockParameter();
-   ArrayList<BlockSettings> getblocksettings();
-     int getWidth();
-     String getname();
-     Texture getModiImage();
+    ArrayList<Parameter> getBlockParameter();
+
+    BlockSettings getblocksettings();
+
+    int getWidth();
+
+    String getname();
+
+    Texture getModiImage();
 }

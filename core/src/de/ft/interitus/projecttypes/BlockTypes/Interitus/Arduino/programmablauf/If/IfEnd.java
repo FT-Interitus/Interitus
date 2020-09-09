@@ -21,7 +21,7 @@ public class IfEnd implements BlockModi, ArduinoBlock {
     }
 
     @Override
-    public ArrayList<BlockSettings> getblocksettings() {
+    public BlockSettings getblocksettings() {
         return null;
     }
 
