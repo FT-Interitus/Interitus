@@ -47,7 +47,7 @@ public class AdditionalModi implements BlockModi, ArduinoBlock {
 
     @Override
     public String getname() {
-        return "Additions Block";
+        return "Addition";
     }
 
     @Override

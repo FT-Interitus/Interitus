@@ -15,18 +15,17 @@ import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.InitArduino;
 import de.ft.interitus.utils.ArrayList;
 
-public class DifferenzModi implements BlockModi, ArduinoBlock {
+public class AbsolutModi implements BlockModi, ArduinoBlock {
     ArrayList<Parameter> parameters = new ArrayList<>();
-    Parameter Summand_1;
-    Parameter Summand_2;
+    Parameter value;
+
     Parameter Ergebnis;
 
-    public DifferenzModi(){
-        Summand_1=new Parameter("", AssetLoader.Parameter_first,"Minuend", "Minuend", "", new ParameterType(InitArduino.floatvar, false, false), true);
-        Summand_2=new Parameter("",AssetLoader.Parameter_second,"Subtraend", "Subtraend", "", new ParameterType(InitArduino.floatvar, false, false), true);
-        Ergebnis=new Parameter("",AssetLoader.Parameter_isequal,"Ergebnis", "Unterschied von zwei zahlen", "", new ParameterType(InitArduino.floatvar, true, false), true);
-        parameters.add(Summand_1);
-        parameters.add(Summand_2);
+    public AbsolutModi(){
+        value =new Parameter("", AssetLoader.Parameter_first,"Wert", "", "", new ParameterType(InitArduino.floatvar, false, false), true);
+        Ergebnis=new Parameter("",AssetLoader.Parameter_isequal,"Ergebnis", "Das Ergebnis der Multiplikation (Produkt)", "", new ParameterType(InitArduino.floatvar, true, false), true);
+        parameters.add(value);
+
         parameters.add(Ergebnis);
 
     }
@@ -42,26 +41,26 @@ public class DifferenzModi implements BlockModi, ArduinoBlock {
 
     @Override
     public int getWidth() {
-        return 150;
+        return 125;
     }
 
     @Override
     public String getname() {
-        return "Subtraktion";
+        return "Absoluter Wert";
     }
 
     @Override
     public Texture getModiImage() {
-        return AssetLoader.Parameter_minus;
-    }
+        return AssetLoader.Parameter_Mal;
+    } //TODO correct Image
 
     @Override
     public String getCode() {
-        if( parameters.get(2).getDatawire().size()>0){
-            return parameters.get(2).getVarName()+ " = "+parameters.get(0).getParameter()+" - "+parameters.get(1).getParameter()+";";
+        if( parameters.get(1).getDatawire().size()>0){
+            return parameters.get(1).getVarName()+ " = "+"abs("+parameters.get(0).getParameter()+")"+";";
 
         }else {
-            return parameters.get(0).getParameter()+" - "+parameters.get(1).getParameter()+";";
+            return "abs("+parameters.get(0).getParameter()+")"+";";
         }
     }
 }

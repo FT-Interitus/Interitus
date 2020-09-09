@@ -47,7 +47,7 @@ public class DivisionModi implements BlockModi, ArduinoBlock {
 
     @Override
     public String getname() {
-        return "Divisions Block";
+        return "Division";
     }
 
     @Override

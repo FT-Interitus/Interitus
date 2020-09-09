@@ -57,12 +57,12 @@ public abstract class Block implements VisibleObjects {
     private boolean marked = false; //Ob der Block gerade makiert ist
     private int x; //Die x Koordinate des Blocks
     private int y; //Die Y Koordinate des Blocks
-    private int w; //Die Weite des Blocks
+
     private int h; //Die Höhe des Blocks
     private int index; //Der Index des Blocks (Der Gleiche wie im Array BlckVar.blocks)o
     private boolean showdupulicate_rechts; //Ob das Duplicat rechts angezeigt werden soll d.h. ob der Block der gerade bewegt wird hier hin springen wird
     private boolean showdupulicate_links; //Ob das Duplicat links ...
-    private int x_dup_rechts; // Die X Position des Duplicates
+
     //Die Y Position des Duplicates  //Die Weite und Höhe ergeben sich aus der Block weite und Höhe
     private boolean moving = false; //Ob der Block gerade durch den Nutzer bewegt wird
     private BlockUpdate blockupdate; // Die Block update methode hier werden user actionen engegengenommen und verarbeitet
@@ -79,9 +79,9 @@ public abstract class Block implements VisibleObjects {
         EventVar.blockEventManager.createBlock(new BlockCreateEvent(this, this));
         this.x = x;
         this.y = y;
-        this.w = w;
+
         this.h = h;
-        this.x_dup_rechts = this.x + this.w; //Duplicats positionen werden berechnet
+
 
         wireconnector_right.set(x + w, y + h / 3f);
         this.index = index;
@@ -266,7 +266,7 @@ public abstract class Block implements VisibleObjects {
      */
 
     public int getX_dup_rechts() {
-        return x_dup_rechts; //Gibt die X Position des rechten duplicates zurück
+        return this.x + blocktype.getWidth(); //Gibt die X Position des rechten duplicates zurück
     }
 
 
@@ -434,8 +434,6 @@ public abstract class Block implements VisibleObjects {
 
     public void setX(int x) {
         this.x = x; //Die X Position wird geupdated
-        this.x_dup_rechts = this.x + this.w; //Im gleichen Zug werden auch die beiden Duplikate auf ihre neue Poisition gesetzt
-
     }
 
     public int getY() {
@@ -454,21 +452,18 @@ public abstract class Block implements VisibleObjects {
     }
 
     public int getW() {
-        return w; //Die Weite wird ausgegeben
+        return blocktype.getWidth(); //Die Weite wird ausgegeben
     }
 
     public void setPosition(int x, int y) { //X und Y werden aufeinmal gesetzt
         this.x = x;
         this.y = y;
-        this.x_dup_rechts = this.x + this.w;
+
 
     }
 
 
-    public void setWH(int w, int h) { //Höhe und Weite werden auf einmal gesetzt
-        this.w = w;
-        this.h = h;
-    }
+
 
     /**
      * Getter and Setter for the Index of the Block
@@ -633,7 +628,7 @@ public abstract class Block implements VisibleObjects {
         if (ProjectManager.getActProjectVar().biggestblock == this) {
             if (this.isShowdupulicate_rechts() && this.getBlocktype().canhasrightconnector()) {
                 batch.setColor(1, 1, 1, 0.5f);
-                batch.draw(AssetLoader.block_middle, this.x_dup_rechts, this.y, ProjectManager.getActProjectVar().markedblock.getW(), this.getH()); //Wenn der Block die größte überlappung hat wird er als show duplicat angezigt
+                batch.draw(AssetLoader.block_middle, this.getX_dup_rechts(), this.y, ProjectManager.getActProjectVar().markedblock.getW(), this.getH()); //Wenn der Block die größte überlappung hat wird er als show duplicat angezigt
                 batch.setColor(1, 1, 1, 1);
             }
 
@@ -854,7 +849,7 @@ public abstract class Block implements VisibleObjects {
      */
 
     public Vector2 getwireconnector_right() {
-        wireconnector_right.set(x + w - 7, y + h / 3 + 12);
+        wireconnector_right.set(x + blocktype.getWidth() - 7, y + h / 3 + 12);
         return wireconnector_right;
     }
 

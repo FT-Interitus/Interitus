@@ -47,7 +47,7 @@ public class MultiplicationModi implements BlockModi, ArduinoBlock {
 
     @Override
     public String getname() {
-        return "Multiplikations Block";
+        return "Multiplikation";
     }
 
     @Override
