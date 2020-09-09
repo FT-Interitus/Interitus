@@ -163,16 +163,12 @@ public class ProgrammingSpace extends ScreenAdapter {
         }
 
 
-        //s.setSize(1);
-        //s.setSize(1f);
-        //s.setWackelstärke(1);
-        // s.draw();
-        //ia.setButtonposition(1);
-        //ia.draw(shapeRenderer, batch);
-        //textfieldtest.setTextAnordnung(1);
-        //textfieldtest.draw();
-        //tb.setX(UIVar.);
+        if(!loadimagesfromplugin) {
+            PluginDrawer.draw();
+        }
 
+
+        NotificationManager.draw();
         try {
             UI.update();
 
@@ -184,12 +180,7 @@ public class ProgrammingSpace extends ScreenAdapter {
         }
 
 
-        if(!loadimagesfromplugin) {
-            PluginDrawer.draw();
-        }
 
-
-        NotificationManager.draw();
 
         if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
           Notification notification =  new Notification(AssetLoader.information, "Wichtige Information", "\nEs steht kein Update bereit!");

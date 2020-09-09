@@ -13,6 +13,7 @@ import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.tappedbar.TapItem;
+import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.ProjectManager;
 
@@ -54,7 +55,77 @@ public class TapBarBlockItem implements TapItem {
         }
 
         UI.UIbatch.begin();
-        UI.UIbatch.draw(img, this.x, this.y, this.w, this.h);
+
+
+        UI.UIbatch.draw(AssetLoader.block_middle,this.x+6,this.y,this.w-(6*2),this.h);
+        UI.UIbatch.draw(AssetLoader.block_left,this.x,this.y,6,this.h);
+        UI.UIbatch.draw(AssetLoader.block_right,this.x+6+this.getW()-(6*2),this.y,6,this.h);
+
+        if (psb.getBlockCategoration() != null) {
+            switch (psb.getBlockCategoration()) {
+
+                case ActionBlocks -> {
+
+                    UI.UIbatch.draw(AssetLoader.green_bar_middle, this.getX() + 6, this.getY() - 1 + this.getH() - 13, this.getW() - 12, 13); // Block ohne das er makiert ist
+                    UI.UIbatch.draw(AssetLoader.green_bar_left, this.getX() + 1, this.getY() - 1 + this.getH() - 13, 6, 13);
+                    UI.UIbatch.draw(AssetLoader.green_bar_right, this.getX() + this.getW() - 7, this.getY() - 1 + this.getH() - 13, 6, 13);
+
+
+                }
+
+
+                case Programm_Sequence -> {
+                    UI.UIbatch.draw(AssetLoader.orange_bar_middle, this.getX() + 6, this.getY() - 1 + this.getH() - 13, this.getW() - 12, 13); // Block ohne das er makiert ist
+                    UI.UIbatch.draw(AssetLoader.orange_bar_left, this.getX() + 1, this.getY() - 1 + this.getH() - 13, 6, 13);
+                    UI.UIbatch.draw(AssetLoader.orange_bar_right, this.getX() + this.getW() - 7, this.getY() - 1 + this.getH() - 13, 6, 13);
+
+                }
+
+                case Sensors -> {
+                    UI.UIbatch.draw(AssetLoader.yellow_bar_middle, this.getX() + 6, this.getY() - 1 + this.getH() - 13, this.getW() - 12, 13); // Block ohne das er makiert ist
+                    UI.UIbatch.draw(AssetLoader.yellow_bar_left, this.getX() + 1, this.getY() - 1 + this.getH() - 13, 6, 13);
+                    UI.UIbatch.draw(AssetLoader.yellow_bar_right, this.getX() + this.getW() - 7, this.getY() - 1 + this.getH() - 13, 6, 13);
+
+                }
+
+                case Data_Operation -> {
+                    UI.UIbatch.draw(AssetLoader.red_bar_middle, this.getX() + 6, this.getY() - 1 + this.getH() - 13, this.getW() - 12, 13); // Block ohne das er makiert ist
+                    UI.UIbatch.draw(AssetLoader.red_bar_left, this.getX() + 1, this.getY() - 1 + this.getH() - 13, 6, 13);
+                    UI.UIbatch.draw(AssetLoader.red_bar_right, this.getX() + this.getW() - 7, this.getY() - 1 + this.getH() - 13, 6, 13);
+
+
+                }
+
+
+                case Specials -> {
+                    UI.UIbatch.draw(AssetLoader.blue_bar_middle, this.getX() + 6, this.getY() - 1 + this.getH() - 13, this.getW() - 12, 13); // Block ohne das er makiert ist
+                    UI.UIbatch.draw(AssetLoader.blue_bar_left, this.getX() + 1, this.getY() - 1 + this.getH() - 13, 6, 13);
+                    UI.UIbatch.draw(AssetLoader.blue_bar_right, this.getX() + this.getW() - 7, this.getY() - 1 + this.getH() - 13, 6, 13);
+
+                }
+
+                case OwnBlocks -> {
+                    UI.UIbatch.draw(AssetLoader.turquoise_bar_middle, this.getX() + 6, this.getY() - 1 + this.getH() - 13, this.getW() - 12, 13); // Block ohne das er makiert ist
+                    UI.UIbatch.draw(AssetLoader.turquoise_bar_left, this.getX() + 1, this.getY() - 1 + this.getH() - 13, 6, 13);
+                    UI.UIbatch.draw(AssetLoader.turquoise_bar_right, this.getX() + this.getW() - 7, this.getY() - 1 + this.getH() - 13, 6, 13);
+
+
+                }
+
+
+            }
+
+        }else{
+            UI.UIbatch.draw(AssetLoader.orange_bar_middle, this.getX() + 6, this.getY()-1+this.getH()-13, this.getW() - 12, 13); // Block ohne das er makiert ist
+            UI.UIbatch.draw(AssetLoader.orange_bar_left, this.getX()+1, this.getY()-1+this.getH()-13, 6,13);
+            UI.UIbatch.draw(AssetLoader.orange_bar_right, this.getX() + this.getW() - 7, this.getY()-1+this.getH()-13, 6, 13);
+
+        }
+
+        UI.UIbatch.draw(psb.getDescriptionImage(),this.getX()+10,this.getY()+9,30,30);
+
+
+       // UI.UIbatch.draw(img, this.x, this.y, this.w, this.h);
         UI.UIbatch.end();
 
         //QuickInfo

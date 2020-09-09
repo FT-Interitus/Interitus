@@ -283,8 +283,15 @@ private boolean firstrun = true;
 
         Block tempblock = block;
         boolean returnvalue = false;
+        ArrayList<Block> checkedBlocks = new ArrayList<>();
 
         while (tempblock.getLeft() != null) {
+            if(checkedBlocks.contains(tempblock)) {
+                checkedBlocks.clear();
+                return false;
+
+            }
+            checkedBlocks.add(tempblock);
 
             if(tempblock.getLeft()==null) {
 

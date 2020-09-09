@@ -629,12 +629,31 @@ public abstract class Block implements VisibleObjects {
     public void draw(SpriteBatch batch, ShapeRenderer shape, BitmapFont font) {
         batch.begin();
 
+
+        if (ProjectManager.getActProjectVar().biggestblock == this) {
+            if (this.isShowdupulicate_rechts() && this.getBlocktype().canhasrightconnector()) {
+                batch.setColor(1, 1, 1, 0.5f);
+                batch.draw(AssetLoader.block_middle, this.x_dup_rechts, this.y, ProjectManager.getActProjectVar().markedblock.getW(), this.getH()); //Wenn der Block die größte überlappung hat wird er als show duplicat angezigt
+                batch.setColor(1, 1, 1, 1);
+            }
+
+            if (this.isShowdupulicate_links() && this.getBlocktype().canhasleftconnector()) {
+                batch.setColor(1, 1, 1, 0.5f);
+                batch.draw(AssetLoader.block_middle, this.x - ProjectManager.getActProjectVar().markedblock.getW(), this.y, ProjectManager.getActProjectVar().markedblock.getW(), this.getH()); //das gleiche für links
+                batch.setColor(1, 1, 1, 1);
+            }
+        }
+
+
         try {
             if (ProjectManager.getActProjectVar().Blockwitherrors.contains(this.getIndex())) {
                 batch.setColor(1, 0.8f, 0.8f, 1);
             } else {
                 batch.setColor(1, 1, 1, 1);
             }
+
+
+
             if (!Settings.disableblockgrayout) {
                 if (!ProjectManager.getActProjectVar().projectType.getProjectFunktions().isblockconnected(this)) {
                     batch.setColor(batch.getColor().r, batch.getColor().g, batch.getColor().b, 0.4f);
@@ -721,19 +740,6 @@ public abstract class Block implements VisibleObjects {
                 batch.draw(AssetLoader.marked_rechts, this.getX() + this.getW() - 6, this.getY(), 6, this.getH());
             }
 
-            if (ProjectManager.getActProjectVar().biggestblock == this) {
-                if (this.isShowdupulicate_rechts() && this.getBlocktype().canhasrightconnector()) {
-                    batch.setColor(1, 1, 1, 0.5f);
-                    batch.draw(AssetLoader.block_middle, this.x_dup_rechts, this.y, ProjectManager.getActProjectVar().markedblock.getW(), this.getH()); //Wenn der Block die größte überlappung hat wird er als show duplicat angezigt
-                    batch.setColor(1, 1, 1, 1);
-                }
-
-                if (this.isShowdupulicate_links() && this.getBlocktype().canhasleftconnector()) {
-                    batch.setColor(1, 1, 1, 0.5f);
-                    batch.draw(AssetLoader.block_middle, this.x - ProjectManager.getActProjectVar().markedblock.getW(), this.y, ProjectManager.getActProjectVar().markedblock.getW(), this.getH()); //das gleiche für links
-                    batch.setColor(1, 1, 1, 1);
-                }
-            }
 
 
 
@@ -757,13 +763,8 @@ public abstract class Block implements VisibleObjects {
         }
 
  */
-            if (this == ProjectManager.getActProjectVar().biggestblock) { //DEBUG Wer ist der größte Block?
-                batch.end();
-                shape.begin(ShapeRenderer.ShapeType.Filled);
-                shape.rect(x, y, 20, 20);
-                shape.end();
-                batch.begin();
-            }
+
+
 
             if (!this.blockupdate.isIsconnectorclicked() && ProjectManager.getActProjectVar().showleftdocker && this.getLeft() == null && this.getBlocktype().canhasleftconnector()) {
                 batch.draw(AssetLoader.connector_offerd, getWireconnector_left().x, getWireconnector_left().y, 20, 20);
@@ -772,7 +773,6 @@ public abstract class Block implements VisibleObjects {
             if (this.getRight() == null && this.getBlocktype().canhasrightconnector()) {
                 batch.draw(AssetLoader.connector, getwireconnector_right().x, getwireconnector_right().y, 20, 20);
             }
-
             //font.draw(batch, "index:  " + this.getIndex() + " Block: " + this.getBlocktype().getName(), this.getX() + 5, this.getY() + 30); //DEBUG Block Index auf dem Block anzeigen
             //font.draw(batch,this.getBlocktype().getName(), this.getX() + 5, this.getY() + this.getH() - 10); //DEBUG Block Index auf dem Block anzeigen
 
