@@ -12,7 +12,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import de.ft.interitus.DisplayErrors;
-import de.ft.interitus.utils.ArrayList;
 
 
 public class AssetLoader {
@@ -138,20 +137,27 @@ public class AssetLoader {
 
     public static Texture DigitalWrite_description_image;
 
+    public static Texture if_description;
+    public static Texture loop_description;
+    public static Texture setup_description;
+    public static Texture math_description;
+
 
 
     ////ParameterBilder :
     public static Texture Parameter_High_Low;
     public static Texture Parameter_Pin;
     public static Texture Parameter_IO;
-    public static Texture img_WaitBlock_warteZeit_Parameter;
-    public static Texture Parameter_erstens;
-    public static Texture Parameter_zweitens;
-    public static Texture Parameter_drittens;
-    public static Texture Parameter_viertens;
-    public static Texture Parameter_istgleich;
-    public static Texture Parameter_Minus;
-    public static Texture Parameter_Plus;
+    public static Texture Parameter_wait;
+    public static Texture Parameter_first;
+    public static Texture Parameter_second;
+    public static Texture Parameter_third;
+    public static Texture Parameter_fourth;
+    public static Texture Parameter_isequal;
+    public static Texture Parameter_minus;
+    public static Texture Parameter_plus;
+    public static Texture Parameter_if;
+
 
 
     public static Texture mouseover_links;
@@ -198,6 +204,7 @@ public class AssetLoader {
             manager.load(workingdirectory + "Block/Parameter/viertens.png", Texture.class);
             manager.load(workingdirectory + "Block/Parameter/Minus.png", Texture.class);
             manager.load(workingdirectory + "Block/Parameter/Plus.png", Texture.class);
+            manager.load(workingdirectory + "Block/Parameter/if.png", Texture.class);
            // manager.load(new AssetDescriptor(Objects.requireNonNull(Programm.INSTANCE.getClass().getClassLoader().getResource("../statistics/test.png")).getFile(),Texture.class));
 
 
@@ -332,6 +339,10 @@ public class AssetLoader {
             manager.load(workingdirectory + "Block/Block_Wait/beschreibungsbild.png", Texture.class);
             manager.load(workingdirectory + "Block/Block_PinMode/beschreibungsbild.png", Texture.class);
             manager.load(workingdirectory + "Block/Block_DigitalWrite/beschreibungsbild.png", Texture.class);
+            manager.load(workingdirectory + "Block/description_image/if_description.png", Texture.class);
+            manager.load(workingdirectory + "Block/description_image/loop_description.png", Texture.class);
+            manager.load(workingdirectory + "Block/description_image/setup_description.png", Texture.class);
+            manager.load(workingdirectory + "Block/description_image/math_description.png", Texture.class);
 
             manager.load(workingdirectory + "aufklapppfeil.png", Texture.class);
 
@@ -378,17 +389,18 @@ public class AssetLoader {
 
             //ParameterBilder
             group = "ParameterBilder";
-            img_WaitBlock_warteZeit_Parameter = manager.get(workingdirectory + "Block/Parameter/WaitParameter.png", Texture.class);
+            Parameter_wait = manager.get(workingdirectory + "Block/Parameter/WaitParameter.png", Texture.class);
             Parameter_High_Low = manager.get(workingdirectory + "Block/Parameter/parameter_high_low.png", Texture.class);
             Parameter_Pin = manager.get(workingdirectory + "Block/Parameter/Parameter_Pin.png", Texture.class);
             Parameter_IO = manager.get(workingdirectory + "Block/Parameter/Parameter_IO.png", Texture.class);
-            Parameter_istgleich = manager.get(workingdirectory + "Block/Parameter/istgleich.png", Texture.class);
-            Parameter_erstens = manager.get(workingdirectory + "Block/Parameter/erstens.png", Texture.class);
-            Parameter_zweitens = manager.get(workingdirectory + "Block/Parameter/zweitens.png", Texture.class);
-            Parameter_drittens = manager.get(workingdirectory + "Block/Parameter/drittens.png", Texture.class);
-            Parameter_viertens = manager.get(workingdirectory + "Block/Parameter/viertens.png", Texture.class);
-            Parameter_Minus = manager.get(workingdirectory + "Block/Parameter/Minus.png", Texture.class);
-            Parameter_Plus = manager.get(workingdirectory + "Block/Parameter/Plus.png", Texture.class);
+            Parameter_isequal = manager.get(workingdirectory + "Block/Parameter/istgleich.png", Texture.class);
+            Parameter_first = manager.get(workingdirectory + "Block/Parameter/erstens.png", Texture.class);
+            Parameter_second = manager.get(workingdirectory + "Block/Parameter/zweitens.png", Texture.class);
+            Parameter_third = manager.get(workingdirectory + "Block/Parameter/drittens.png", Texture.class);
+            Parameter_fourth = manager.get(workingdirectory + "Block/Parameter/viertens.png", Texture.class);
+            Parameter_minus = manager.get(workingdirectory + "Block/Parameter/Minus.png", Texture.class);
+            Parameter_plus = manager.get(workingdirectory + "Block/Parameter/Plus.png", Texture.class);
+            Parameter_if = manager.get(workingdirectory + "Block/Parameter/if.png", Texture.class);
 
 
 
@@ -486,6 +498,12 @@ public class AssetLoader {
             WaitBlock_description_image = manager.get(workingdirectory + "Block/Block_Wait/beschreibungsbild.png", Texture.class);
             PinModeBlock_description_image = manager.get(workingdirectory + "Block/Block_PinMode/beschreibungsbild.png", Texture.class);
             DigitalWrite_description_image = manager.get(workingdirectory + "Block/Block_DigitalWrite/beschreibungsbild.png", Texture.class);
+
+            if_description = manager.get(workingdirectory + "Block/description_image/if_description.png", Texture.class);
+            loop_description = manager.get(workingdirectory + "Block/description_image/loop_description.png", Texture.class);
+            setup_description = manager.get(workingdirectory + "Block/description_image/setup_description.png", Texture.class);
+            math_description = manager.get(workingdirectory + "Block/description_image/math_description.png", Texture.class);
+
 
             aufklapppfeil = manager.get(workingdirectory + "aufklapppfeil.png", Texture.class);
 

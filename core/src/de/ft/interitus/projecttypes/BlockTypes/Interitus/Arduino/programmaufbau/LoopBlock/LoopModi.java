@@ -31,12 +31,12 @@ public class LoopModi  implements BlockModi, ArduinoBlock {
 
     @Override
     public String getname() {
-        return "LoopModi";
+        return "Loop";
     }
 
     @Override
     public Texture getModiImage() {
-        return AssetLoader.connector_offerd;
+        return null;
     }
 
     @Override

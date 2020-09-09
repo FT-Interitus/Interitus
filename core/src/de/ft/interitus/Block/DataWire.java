@@ -75,13 +75,6 @@ public class DataWire {
      * @param verschiebung_4_VertikaleInput
      * @param verschiebung_5_VertikaleInput
      */
-    public void setLayout(int verschiebung_1_Horizontale, int verschiebung_2_HorizontaleInput, int verschiebung_3_HorizontaleOutput, int verschiebung_4_VertikaleInput, int verschiebung_5_VertikaleInput){
-        this.verschiebung_1_Horizontale=verschiebung_1_Horizontale;
-        this.verschiebung_2_HorizontaleInput=verschiebung_2_HorizontaleInput;
-        this.verschiebung_3_HorizontaleOutput=verschiebung_3_HorizontaleOutput;
-        this.verschiebung_4_VertikaleInput=verschiebung_4_VertikaleInput;
-        this.verschiebung_5_VertikaleInput=verschiebung_5_VertikaleInput;
-    }
 
     private void userLayoutMovment(){
         if((UIVar.DataWire[1][0]<=UIVar.DataWire[2][0] && (moving[0] || CheckMouse.isMouseover(UIVar.DataWire[1][0],UIVar.DataWire[1][1]-UIVar.DataWireMouseKollisionsFeld,UIVar.DataWire[2][0]-UIVar.DataWire[1][0],UIVar.DataWireMouseKollisionsFeld*2, false))) || (UIVar.DataWire[1][0]>UIVar.DataWire[2][0] && (moving[0] || CheckMouse.isMouseover(UIVar.DataWire[2][0],UIVar.DataWire[1][1]-UIVar.DataWireMouseKollisionsFeld,UIVar.DataWire[1][0]-UIVar.DataWire[2][0],UIVar.DataWireMouseKollisionsFeld*2, false)))){

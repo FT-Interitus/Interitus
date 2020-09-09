@@ -58,7 +58,7 @@ public class LoopBlock extends PlatformSpecificBlock  {
 
     @Override
     public Texture getDescriptionImage() {
-        return null;
+        return AssetLoader.loop_description;
     }
 
 

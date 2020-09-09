@@ -64,7 +64,7 @@ public class MathBlock extends PlatformSpecificBlock {
 
     @Override
     public Texture getDescriptionImage() {
-        return AssetLoader.DigitalWrite_description_image;
+        return AssetLoader.math_description;
     }
 
 

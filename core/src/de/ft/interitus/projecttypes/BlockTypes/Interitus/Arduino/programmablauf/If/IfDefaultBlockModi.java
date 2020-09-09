@@ -19,7 +19,7 @@ public class IfDefaultBlockModi implements BlockModi, ArduinoBlock {
     ArrayList<Parameter> parameters = new ArrayList<>();
     public IfDefaultBlockModi() {
 
-        parameters.add(new Parameter("",AssetLoader.Parameter_erstens,"Bedingung","","boolean",new ParameterType(InitArduino.booleanvar,false,true).setSelectables(new String[]{"true","false"}),true));
+        parameters.add(new Parameter("",AssetLoader.Parameter_first,"Bedingung","","boolean",new ParameterType(InitArduino.booleanvar,false,true).setSelectables(new String[]{"true","false"}),true));
 
     }
 
@@ -45,7 +45,7 @@ public class IfDefaultBlockModi implements BlockModi, ArduinoBlock {
 
     @Override
     public Texture getModiImage() {
-        return AssetLoader.WaitBlock_description_image;
+        return AssetLoader.Parameter_if;
     }
 
     @Override

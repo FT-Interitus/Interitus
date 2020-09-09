@@ -26,8 +26,8 @@ public class DigitalReadDefault implements BlockModi, ArduinoBlock {
 
 
     public DigitalReadDefault(){
-        Pin=new Parameter("", AssetLoader.Parameter_erstens,"Pin", "Auszulesender Pin", "", new ParameterType(InitArduino.floatvar, false, false), true);
-        Output=new Parameter("",AssetLoader.Parameter_istgleich,"Output", "Output", "", new ParameterType(InitArduino.booleanvar, true, false), true);
+        Pin=new Parameter("", AssetLoader.Parameter_first,"Pin", "Auszulesender Pin", "", new ParameterType(InitArduino.floatvar, false, false), true);
+        Output=new Parameter("",AssetLoader.Parameter_isequal,"Output", "Output", "", new ParameterType(InitArduino.booleanvar, true, false), true);
         parameters.add(Pin);
         parameters.add(Output);
 
@@ -54,7 +54,7 @@ public class DigitalReadDefault implements BlockModi, ArduinoBlock {
 
     @Override
     public Texture getModiImage() {
-        return AssetLoader.Parameter_Minus;
+        return AssetLoader.Parameter_minus;
     }
 
     @Override

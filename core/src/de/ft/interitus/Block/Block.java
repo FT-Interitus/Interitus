@@ -783,7 +783,7 @@ public abstract class Block implements VisibleObjects {
                 float aktualX = this.getX();
 
                 aktualX += 5;
-                batch.draw(this.getBlocktype().getDescriptionImage(), aktualX, this.getY() + this.getH() - 30 - 15, 30, 30);
+                batch.draw(this.getBlocktype().getDescriptionImage(), aktualX, this.getY() + this.getH() - 30 - 17, 30, 30);
 
                 aktualX += 35;
                 for (int i = 0; i < this.getBlocktype().getBlockParameter().size(); i++) {
@@ -805,6 +805,10 @@ public abstract class Block implements VisibleObjects {
                     }
                     aktualX += 30;
                 }
+            }else if(this.getBlocktype().getDescriptionImage()!=null) {
+
+                batch.draw(this.getBlocktype().getDescriptionImage(), this.getX()+((this.getW()-50f)/2f), this.getY() + this.getH()  - 17-50, 50, 50);
+
             }
 
 

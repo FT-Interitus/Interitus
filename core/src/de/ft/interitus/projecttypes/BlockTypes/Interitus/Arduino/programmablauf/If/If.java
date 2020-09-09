@@ -50,7 +50,7 @@ public class If extends PlatformSpecificBlock {
 
     @Override
     public Texture getDescriptionImage() {
-        return AssetLoader.WaitBlock_description_image;
+        return AssetLoader.if_description;
     }
 
     @Override
