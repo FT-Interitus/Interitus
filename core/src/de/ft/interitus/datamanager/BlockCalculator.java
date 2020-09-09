@@ -108,6 +108,11 @@ public class BlockCalculator {
             ProjectManager.getActProjectVar().blocks.get(i).getBlocktype().changeBlockModus(saveBlocks.get(i).getBlockmodus());
         }
         for (int i = 0; i < saveBlocks.size(); i++) {
+
+            //Load BlockSettings
+
+            ProjectManager.getActProjectVar().blocks.get(i).getBlocktype().blockModis.get(ProjectManager.getActProjectVar().blocks.get(i).getBlocktype().actBlockModiIndex).getblocksettings().setSettings(saveBlocks.get(i).getBlocksettings());
+
             //Load Parameters
             if (ProjectManager.getActProjectVar().blocks.get(i).getBlocktype().getBlockParameter() != null) {
                 for (int j = 0; j < saveBlocks.get(i).getParameters().size(); j++) {
