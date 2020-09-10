@@ -46,6 +46,7 @@ import de.ft.interitus.network.bettertogether.SharedVar;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.ArrayList;
 import de.ft.interitus.utils.ShapeRenderer;
+import org.assertj.core.data.Index;
 
 import java.io.File;
 import java.util.Arrays;
@@ -89,6 +90,7 @@ public class UI {
     private static Block markedblock;
     private static int wishaniposition = -170 - UIVar.abstandvonRand;
     private static Thread compile_thread;
+    static VisTextField settingstextfield;
     //private static final Animation animation = new Animation();
 
 
@@ -170,17 +172,35 @@ public class UI {
             UIbatch.begin();
 
             int nachuntenrutscher=0;
-            if(markedblock.getBlocktype().blockModis.get(markedblock.getBlocktype().actBlockModiIndex).getblocksettings()!=null || true){
-                if(!UIVar.isBlockSettingsopen) {
-                    VisTextField textfield = new VisTextField("a+b+c+d");
+            try {
+                if (markedblock.getBlocktype().blockModis.get(markedblock.getBlocktype().actBlockModiIndex).getblocksettings() != null) {
 
-                    textfield.setWidth(UIVar.blockeinstellungen_w - 40);
-                    textfield.setPosition(UIVar.blockeinstellungen_x + 5, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 -textfield.getHeight());
-                    textFielder.add(textfield);
-                    UI.stage.addActor(textfield);
+                    if (!UIVar.isBlockSettingsopen) {
+                        settingstextfield = new VisTextField(markedblock.getBlocktype().blockModis.get(markedblock.getBlocktype().actBlockModiIndex).getblocksettings().getSettings());
+
+                        settingstextfield.setWidth(UIVar.blockeinstellungen_w - 40);
+
+                        settingstextfield.addListener(new ChangeListener() {
+                            @Override
+                            public void changed(ChangeEvent event, Actor actor) {
+
+                                markedblock.getBlocktype().blockModis.get(markedblock.getBlocktype().actBlockModiIndex).getblocksettings().setSettings(settingstextfield.getText());
+
+                            }
+                        });
+
+                        UI.stage.addActor(settingstextfield);
+                    }
+                    nachuntenrutscher = 100;
+                    if (settingstextfield != null) {
+                        settingstextfield.setPosition(UIVar.blockeinstellungen_x + 5, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - settingstextfield.getHeight());
+                    }
+
                 }
-                nachuntenrutscher=100;
 
+
+            }catch (Exception e) {
+                e.printStackTrace();
             }
 
 
@@ -240,18 +260,18 @@ public class UI {
 
                         }
 
-                        UI.stage.addActor(textFielder.get(i+1));
+                        UI.stage.addActor(textFielder.get(i));
                     }
 
-                    textFielder.get(i+1).setWidth(UIVar.blockeinstellungen_w - 40);
-                    textFielder.get(i+1).setPosition(UIVar.blockeinstellungen_x + 5, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - UIVar.abstandText - glyphLayout.height - (i * (glyphLayout.height + UIVar.abstandzwischenparametern + UIVar.abstandText + textFielder.get(i+1).getHeight()) + 3) - textFielder.get(i+1).getHeight()-nachuntenrutscher);
+                    textFielder.get(i).setWidth(UIVar.blockeinstellungen_w - 40);
+                    textFielder.get(i).setPosition(UIVar.blockeinstellungen_x + 5, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - UIVar.abstandText - glyphLayout.height - (i * (glyphLayout.height + UIVar.abstandzwischenparametern + UIVar.abstandText + textFielder.get(i).getHeight()) + 3) - textFielder.get(i).getHeight()-nachuntenrutscher);
                     glyphLayout.setText(font, markedblock.getBlocktype().getBlockParameter().get(i).getParameterName());
 
-                    font.draw(UIbatch, glyphLayout, UIVar.blockeinstellungen_x + 5, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - (i * (glyphLayout.height + textFielder.get(i+1).getHeight() + UIVar.abstandzwischenparametern + UIVar.abstandText) + 3)-nachuntenrutscher);
+                    font.draw(UIbatch, glyphLayout, UIVar.blockeinstellungen_x + 5, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - (i * (glyphLayout.height + textFielder.get(i).getHeight() + UIVar.abstandzwischenparametern + UIVar.abstandText) + 3)-nachuntenrutscher);
 
                     if (markedblock.getBlocktype().getBlockParameter().get(i).getUnit() != null) {
                         glyphLayout.setText(font, markedblock.getBlocktype().getBlockParameter().get(i).getUnit());
-                        font.draw(UIbatch, glyphLayout, UIVar.blockeinstellungen_x + 5 + UIVar.blockeinstellungen_w - 30, (UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - UIVar.abstandText - glyphLayout.height - (i * (glyphLayout.height + UIVar.abstandzwischenparametern + UIVar.abstandText + textFielder.get(i+1).getHeight()) + 3) - textFielder.get(i+1).getHeight() / 3f)  -nachuntenrutscher);
+                        font.draw(UIbatch, glyphLayout, UIVar.blockeinstellungen_x + 5 + UIVar.blockeinstellungen_w - 30, (UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - UIVar.abstandText - glyphLayout.height - (i * (glyphLayout.height + UIVar.abstandzwischenparametern + UIVar.abstandText + textFielder.get(i).getHeight()) + 3) - textFielder.get(i).getHeight() / 3f)  -nachuntenrutscher);
 
                     }
                 } catch (Exception e) {
@@ -267,6 +287,17 @@ public class UI {
         } else {
             markedblock = ProjectManager.getActProjectVar().markedblock;
             wishaniposition = -UIVar.blockeinstellungen_w - UIVar.abstandvonRand;
+
+                if(settingstextfield!=null) {
+                    try {
+                        settingstextfield.removeListener(settingstextfield.getListeners().get(0));
+                        settingstextfield.remove();
+                    }catch (Exception ignored) {
+
+
+                    }
+                }
+
             if (textFielder.size() > 0) {
                 UIVar.isBlockSettingsopen = false;
                 for (int i = 0; i < textFielder.size(); i++) {

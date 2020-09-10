@@ -58,7 +58,6 @@ public abstract class Block implements VisibleObjects {
     private boolean marked = false; //Ob der Block gerade makiert ist
     private int x; //Die x Koordinate des Blocks
     private int y; //Die Y Koordinate des Blocks
-
     private int h; //Die Höhe des Blocks
     private int index; //Der Index des Blocks (Der Gleiche wie im Array BlckVar.blocks)o
     private boolean showdupulicate_rechts; //Ob das Duplicat rechts angezeigt werden soll d.h. ob der Block der gerade bewegt wird hier hin springen wird
@@ -961,6 +960,7 @@ public abstract class Block implements VisibleObjects {
                 blocks.clear();
                 break;
             }
+
 
             nextblock.setX(nextblock.getX()+widthdiff);
             nextblock = nextblock.getRight();
