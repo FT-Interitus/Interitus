@@ -169,6 +169,21 @@ public class UI {
             renderer.end();
             UIbatch.begin();
 
+            int nachuntenrutscher=0;
+            if(markedblock.getBlocktype().blockModis.get(markedblock.getBlocktype().actBlockModiIndex).getblocksettings()!=null || true){
+                if(!UIVar.isBlockSettingsopen) {
+                    VisTextField textfield = new VisTextField("a+b+c+d");
+
+                    textfield.setWidth(UIVar.blockeinstellungen_w - 40);
+                    textfield.setPosition(UIVar.blockeinstellungen_x + 5, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 -textfield.getHeight());
+                    textFielder.add(textfield);
+                    UI.stage.addActor(textfield);
+                }
+                nachuntenrutscher=100;
+
+            }
+
+
 
             for (int i = 0; i < markedblock.getBlocktype().getBlockParameter().size(); i++) {
                 try {
@@ -225,18 +240,18 @@ public class UI {
 
                         }
 
-                        UI.stage.addActor(textFielder.get(i));
+                        UI.stage.addActor(textFielder.get(i+1));
                     }
 
-                    textFielder.get(i).setWidth(UIVar.blockeinstellungen_w - 40);
-                    textFielder.get(i).setPosition(UIVar.blockeinstellungen_x + 5, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - UIVar.abstandText - glyphLayout.height - (i * (glyphLayout.height + UIVar.abstandzwischenparametern + UIVar.abstandText + textFielder.get(i).getHeight()) + 3) - textFielder.get(i).getHeight());
+                    textFielder.get(i+1).setWidth(UIVar.blockeinstellungen_w - 40);
+                    textFielder.get(i+1).setPosition(UIVar.blockeinstellungen_x + 5, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - UIVar.abstandText - glyphLayout.height - (i * (glyphLayout.height + UIVar.abstandzwischenparametern + UIVar.abstandText + textFielder.get(i+1).getHeight()) + 3) - textFielder.get(i+1).getHeight()-nachuntenrutscher);
                     glyphLayout.setText(font, markedblock.getBlocktype().getBlockParameter().get(i).getParameterName());
 
-                    font.draw(UIbatch, glyphLayout, UIVar.blockeinstellungen_x + 5, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - (i * (glyphLayout.height + textFielder.get(i).getHeight() + UIVar.abstandzwischenparametern + UIVar.abstandText) + 3));
+                    font.draw(UIbatch, glyphLayout, UIVar.blockeinstellungen_x + 5, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - (i * (glyphLayout.height + textFielder.get(i+1).getHeight() + UIVar.abstandzwischenparametern + UIVar.abstandText) + 3)-nachuntenrutscher);
 
                     if (markedblock.getBlocktype().getBlockParameter().get(i).getUnit() != null) {
                         glyphLayout.setText(font, markedblock.getBlocktype().getBlockParameter().get(i).getUnit());
-                        font.draw(UIbatch, glyphLayout, UIVar.blockeinstellungen_x + 5 + UIVar.blockeinstellungen_w - 30, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - UIVar.abstandText - glyphLayout.height - (i * (glyphLayout.height + UIVar.abstandzwischenparametern + UIVar.abstandText + textFielder.get(i).getHeight()) + 3) - textFielder.get(i).getHeight() / 3f);
+                        font.draw(UIbatch, glyphLayout, UIVar.blockeinstellungen_x + 5 + UIVar.blockeinstellungen_w - 30, (UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - UIVar.abstandText - glyphLayout.height - (i * (glyphLayout.height + UIVar.abstandzwischenparametern + UIVar.abstandText + textFielder.get(i+1).getHeight()) + 3) - textFielder.get(i+1).getHeight() / 3f)  -nachuntenrutscher);
 
                     }
                 } catch (Exception e) {
@@ -245,6 +260,7 @@ public class UI {
                     }
                 }
             }
+
             UIVar.isBlockSettingsopen = true;
             UIbatch.end();
 
@@ -254,7 +270,11 @@ public class UI {
             if (textFielder.size() > 0) {
                 UIVar.isBlockSettingsopen = false;
                 for (int i = 0; i < textFielder.size(); i++) {
-                    textFielder.get(i).removeListener(textFielder.get(i).getListeners().get(0));
+                    try {
+                        textFielder.get(i).removeListener(textFielder.get(i).getListeners().get(0));
+                    }catch (Exception e) {
+
+                    }
                     textFielder.get(i).remove();
                 }
                 textFielder.clear();
