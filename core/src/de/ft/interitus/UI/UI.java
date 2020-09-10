@@ -149,6 +149,13 @@ public class UI {
                 lock = true;
             }
         }
+        if(settingstextfield!=null) {
+            if(settingstextfield.hasKeyboardFocus()) {
+                lock = true;
+            }
+
+        }
+
         UIVar.moveprogrammlock = lock;
 
 
