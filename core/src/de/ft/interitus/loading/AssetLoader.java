@@ -13,6 +13,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import de.ft.interitus.DisplayErrors;
 
+import java.lang.reflect.ParameterizedType;
+
 
 public class AssetLoader {
 
@@ -159,6 +161,8 @@ public class AssetLoader {
     public static Texture Parameter_Mal;
     public static Texture Parameter_Geteilt;
     public static Texture Parameter_if;
+    public static Texture Parameter_abs;
+    public static Texture Parameter_fkt;
 
 
 
@@ -209,6 +213,8 @@ public class AssetLoader {
             manager.load(workingdirectory + "Block/Parameter/if.png", Texture.class);
             manager.load(workingdirectory + "Block/Parameter/MalKreuz.png", Texture.class);
             manager.load(workingdirectory + "Block/Parameter/Geteilt.png", Texture.class);
+            manager.load(workingdirectory + "Block/Parameter/absolutevalue.png", Texture.class);
+            manager.load(workingdirectory + "Block/Parameter/advancedFunktion.png", Texture.class);
 
             // manager.load(new AssetDescriptor(Objects.requireNonNull(Programm.INSTANCE.getClass().getClassLoader().getResource("../statistics/test.png")).getFile(),Texture.class));
 
@@ -408,7 +414,8 @@ public class AssetLoader {
             Parameter_if = manager.get(workingdirectory + "Block/Parameter/if.png", Texture.class);
             Parameter_Mal = manager.get(workingdirectory + "Block/Parameter/MalKreuz.png", Texture.class);
             Parameter_Geteilt = manager.get(workingdirectory + "Block/Parameter/Geteilt.png", Texture.class);
-
+            Parameter_abs = manager.get(workingdirectory + "Block/Parameter/absolutevalue.png", Texture.class);
+           Parameter_fkt = manager.get(workingdirectory + "Block/Parameter/advancedFunktion.png", Texture.class);
 
 
 

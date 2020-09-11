@@ -26,7 +26,10 @@ public class MathBlock extends PlatformSpecificBlock {
         super.blockModis.add(new MultiplicationModi());
         super.blockModis.add(new DivisionModi());
         super.blockModis.add(new AbsolutModi());
+        super.blockModis.add(new SquareRootModi());
+        super.blockModis.add(new PowerModi());
         super.blockModis.add(new ExpandedMath());
+
         super.actBlockModiIndex = 0;
 
 

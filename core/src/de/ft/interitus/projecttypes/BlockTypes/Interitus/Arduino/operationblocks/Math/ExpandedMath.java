@@ -61,7 +61,7 @@ public class ExpandedMath implements BlockModi, ArduinoBlock {
 
     @Override
     public Texture getModiImage() {
-        return AssetLoader.Parameter_Geteilt;
+        return AssetLoader.Parameter_fkt;
     }
 
     @Override

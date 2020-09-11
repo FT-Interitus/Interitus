@@ -15,16 +15,16 @@ import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.InitArduino;
 import de.ft.interitus.utils.ArrayList;
 
-public class AbsolutModi implements BlockModi, ArduinoBlock {
+public class SquareRootModi implements BlockModi, ArduinoBlock {
     ArrayList<Parameter> parameters = new ArrayList<>();
-    Parameter value;
+    Parameter Summand_1;
 
     Parameter Ergebnis;
 
-    public AbsolutModi(){
-        value =new Parameter("", AssetLoader.Parameter_first,"Wert", "", "", new ParameterType(InitArduino.floatvar, false, false), true);
-        Ergebnis=new Parameter("",AssetLoader.Parameter_isequal,"Ergebnis", "Das Ergebnis der Multiplikation (Produkt)", "", new ParameterType(InitArduino.floatvar, true, false), true);
-        parameters.add(value);
+    public SquareRootModi(){
+        Summand_1=new Parameter("", AssetLoader.Parameter_first,"Wurzel", "Wurzel", "", new ParameterType(InitArduino.floatvar, false, false), true);
+        Ergebnis=new Parameter("",AssetLoader.Parameter_isequal,"Ergebnis", "Unterschied von zwei zahlen", "", new ParameterType(InitArduino.floatvar, true, false), true);
+        parameters.add(Summand_1);
 
         parameters.add(Ergebnis);
 
@@ -46,21 +46,21 @@ public class AbsolutModi implements BlockModi, ArduinoBlock {
 
     @Override
     public String getname() {
-        return "Absoluter Wert";
+        return "Wurzel ziehen";
     }
 
     @Override
     public Texture getModiImage() {
-        return AssetLoader.Parameter_abs;
+        return AssetLoader.Parameter_minus;
     }
 
     @Override
     public String getCode() {
         if( parameters.get(1).getDatawire().size()>0){
-            return parameters.get(1).getVarName()+ " = "+"abs("+parameters.get(0).getParameter()+")"+";";
+            return parameters.get(1).getVarName()+ " = "+"sqrt("+parameters.get(0).getParameter()+");";
 
         }else {
-            return "abs("+parameters.get(0).getParameter()+")"+";";
+            return "sqrt("+parameters.get(0).getParameter()+");";
         }
     }
 }

@@ -15,17 +15,18 @@ import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.InitArduino;
 import de.ft.interitus.utils.ArrayList;
 
-public class AbsolutModi implements BlockModi, ArduinoBlock {
+public class PowerModi implements BlockModi, ArduinoBlock {
     ArrayList<Parameter> parameters = new ArrayList<>();
-    Parameter value;
-
+    Parameter Basis;
+    Parameter Exponent;
     Parameter Ergebnis;
 
-    public AbsolutModi(){
-        value =new Parameter("", AssetLoader.Parameter_first,"Wert", "", "", new ParameterType(InitArduino.floatvar, false, false), true);
-        Ergebnis=new Parameter("",AssetLoader.Parameter_isequal,"Ergebnis", "Das Ergebnis der Multiplikation (Produkt)", "", new ParameterType(InitArduino.floatvar, true, false), true);
-        parameters.add(value);
-
+    public PowerModi(){
+        Basis =new Parameter("", AssetLoader.Parameter_first,"Basis", "", "", new ParameterType(InitArduino.floatvar, false, false), true);
+        Exponent =new Parameter("",AssetLoader.Parameter_second,"Exponent", "", "", new ParameterType(InitArduino.floatvar, false, false), true);
+        Ergebnis=new Parameter("",AssetLoader.Parameter_isequal,"Ergebnis", "", "", new ParameterType(InitArduino.floatvar, true, false), true);
+        parameters.add(Basis);
+        parameters.add(Exponent);
         parameters.add(Ergebnis);
 
     }
@@ -41,26 +42,26 @@ public class AbsolutModi implements BlockModi, ArduinoBlock {
 
     @Override
     public int getWidth() {
-        return 125;
+        return 150;
     }
 
     @Override
     public String getname() {
-        return "Absoluter Wert";
+        return "Potenz";
     }
 
     @Override
     public Texture getModiImage() {
-        return AssetLoader.Parameter_abs;
+        return AssetLoader.Parameter_Geteilt;
     }
 
     @Override
     public String getCode() {
-        if( parameters.get(1).getDatawire().size()>0){
-            return parameters.get(1).getVarName()+ " = "+"abs("+parameters.get(0).getParameter()+")"+";";
+        if( parameters.get(2).getDatawire().size()>0){
+            return parameters.get(2).getVarName()+ " = "+"pow("+parameters.get(0).getParameter()+","+parameters.get(1).getParameter()+");";
 
         }else {
-            return "abs("+parameters.get(0).getParameter()+")"+";";
+            return "pow("+parameters.get(0).getParameter()+","+parameters.get(1).getParameter()+");";
         }
     }
 }
