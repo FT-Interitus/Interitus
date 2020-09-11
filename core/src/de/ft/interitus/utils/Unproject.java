@@ -19,6 +19,7 @@ public class Unproject {
 
     public static Vector2 unproject() {
         return temp1.set(ProgrammingSpace.cam.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, ProgrammingSpace.cam.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y);
+
     }
     public static Vector2 unproject(float X,float Y) {
         return temp1.set(ProgrammingSpace.viewport.unproject(temp1.set(X,Y)));

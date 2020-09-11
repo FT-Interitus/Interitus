@@ -68,16 +68,10 @@ public class DataWire {
         param_input.getDatawire().add(this);
     }
 
-    /**
-     * @param verschiebung_1_Horizontale
-     * @param verschiebung_2_HorizontaleInput
-     * @param verschiebung_3_HorizontaleOutput
-     * @param verschiebung_4_VertikaleInput
-     * @param verschiebung_5_VertikaleInput
-     */
+
 
     private void userLayoutMovment(){
-        if((UIVar.DataWire[1][0]<=UIVar.DataWire[2][0] && (moving[0] || CheckMouse.isMouseover(UIVar.DataWire[1][0],UIVar.DataWire[1][1]-UIVar.DataWireMouseKollisionsFeld,UIVar.DataWire[2][0]-UIVar.DataWire[1][0],UIVar.DataWireMouseKollisionsFeld*2, false))) || (UIVar.DataWire[1][0]>UIVar.DataWire[2][0] && (moving[0] || CheckMouse.isMouseover(UIVar.DataWire[2][0],UIVar.DataWire[1][1]-UIVar.DataWireMouseKollisionsFeld,UIVar.DataWire[1][0]-UIVar.DataWire[2][0],UIVar.DataWireMouseKollisionsFeld*2, false)))){
+        if((UIVar.DataWire[1][0]<=UIVar.DataWire[2][0] && (moving[0] || CheckMouse.isMouseover(UIVar.DataWire[1][0],UIVar.DataWire[1][1]-UIVar.DataWireMouseKollisionsFeld,UIVar.DataWire[2][0]-UIVar.DataWire[1][0],UIVar.DataWireMouseKollisionsFeld*2, true))) || (UIVar.DataWire[1][0]>UIVar.DataWire[2][0] && (moving[0] || CheckMouse.isMouseover(UIVar.DataWire[2][0],UIVar.DataWire[1][1]-UIVar.DataWireMouseKollisionsFeld,UIVar.DataWire[1][0]-UIVar.DataWire[2][0],UIVar.DataWireMouseKollisionsFeld*2, true)))){
             Gdx.graphics.setSystemCursor(SystemCursor.VerticalResize);
             setCorsoronlyonce=true;
             if(Gdx.input.isButtonJustPressed(0)) {
@@ -93,7 +87,7 @@ public class DataWire {
                 UIVar.doonce=true;
                 moving[0]=false;
             }
-        }else if((UIVar.DataWire[2][1]>UIVar.DataWire[3][1]  && (moving[1] || CheckMouse.isMouseover(UIVar.DataWire[2][0]-UIVar.DataWireMouseKollisionsFeld,UIVar.DataWire[3][1],UIVar.DataWireMouseKollisionsFeld*2, UIVar.DataWire[2][1]-UIVar.DataWire[3][1], false))) || (UIVar.DataWire[2][1]<=UIVar.DataWire[3][1]  && (moving[1] || CheckMouse.isMouseover(UIVar.DataWire[2][0]-UIVar.DataWireMouseKollisionsFeld,UIVar.DataWire[2][1],UIVar.DataWireMouseKollisionsFeld*2, UIVar.DataWire[3][1]-UIVar.DataWire[2][1], false)))){
+        }else if((UIVar.DataWire[2][1]>UIVar.DataWire[3][1]  && (moving[1] || CheckMouse.isMouseover(UIVar.DataWire[2][0]-UIVar.DataWireMouseKollisionsFeld,UIVar.DataWire[3][1],UIVar.DataWireMouseKollisionsFeld*2, UIVar.DataWire[2][1]-UIVar.DataWire[3][1], true))) || (UIVar.DataWire[2][1]<=UIVar.DataWire[3][1]  && (moving[1] || CheckMouse.isMouseover(UIVar.DataWire[2][0]-UIVar.DataWireMouseKollisionsFeld,UIVar.DataWire[2][1],UIVar.DataWireMouseKollisionsFeld*2, UIVar.DataWire[3][1]-UIVar.DataWire[2][1], true)))){
             Gdx.graphics.setSystemCursor(SystemCursor.HorizontalResize);
             setCorsoronlyonce=true;
             if(Gdx.input.isButtonJustPressed(0)) {
@@ -109,7 +103,7 @@ public class DataWire {
                 UIVar.doonce=true;
                 moving[1]=false;
             }
-        }else if((UIVar.DataWire[3][0]<=UIVar.DataWire[4][0] && (moving[2] || CheckMouse.isMouseover(UIVar.DataWire[3][0], UIVar.DataWire[3][1]-UIVar.DataWireMouseKollisionsFeld,UIVar.DataWire[4][0]-UIVar.DataWire[3][0],UIVar.DataWireMouseKollisionsFeld*2, false)))   ||  (UIVar.DataWire[3][0]>UIVar.DataWire[4][0] && (moving[2] || CheckMouse.isMouseover(UIVar.DataWire[4][0], UIVar.DataWire[3][1]-UIVar.DataWireMouseKollisionsFeld,UIVar.DataWire[3][0]-UIVar.DataWire[4][0],UIVar.DataWireMouseKollisionsFeld*2, false)))){
+        }else if((UIVar.DataWire[3][0]<=UIVar.DataWire[4][0] && (moving[2] || CheckMouse.isMouseover(UIVar.DataWire[3][0], UIVar.DataWire[3][1]-UIVar.DataWireMouseKollisionsFeld,UIVar.DataWire[4][0]-UIVar.DataWire[3][0],UIVar.DataWireMouseKollisionsFeld*2, true)))   ||  (UIVar.DataWire[3][0]>UIVar.DataWire[4][0] && (moving[2] || CheckMouse.isMouseover(UIVar.DataWire[4][0], UIVar.DataWire[3][1]-UIVar.DataWireMouseKollisionsFeld,UIVar.DataWire[3][0]-UIVar.DataWire[4][0],UIVar.DataWireMouseKollisionsFeld*2, true)))){
             Gdx.graphics.setSystemCursor(SystemCursor.VerticalResize);
             setCorsoronlyonce=true;
 
@@ -126,7 +120,7 @@ public class DataWire {
                 UIVar.doonce=true;
                 moving[2]=false;
             }
-        }else if((UIVar.DataWire[4][1]<=UIVar.DataWire[5][1] && (moving[3] || CheckMouse.isMouseover(UIVar.DataWire[4][0]-UIVar.DataWireMouseKollisionsFeld, UIVar.DataWire[4][1], UIVar.DataWireMouseKollisionsFeld*2,UIVar.DataWire[5][1]-UIVar.DataWire[4][1], false))) || (UIVar.DataWire[4][1]>UIVar.DataWire[5][1] && (moving[3] || CheckMouse.isMouseover(UIVar.DataWire[4][0]-UIVar.DataWireMouseKollisionsFeld, UIVar.DataWire[5][1], UIVar.DataWireMouseKollisionsFeld*2,UIVar.DataWire[4][1]-UIVar.DataWire[5][1], false)))){
+        }else if((UIVar.DataWire[4][1]<=UIVar.DataWire[5][1] && (moving[3] || CheckMouse.isMouseover(UIVar.DataWire[4][0]-UIVar.DataWireMouseKollisionsFeld, UIVar.DataWire[4][1], UIVar.DataWireMouseKollisionsFeld*2,UIVar.DataWire[5][1]-UIVar.DataWire[4][1], true))) || (UIVar.DataWire[4][1]>UIVar.DataWire[5][1] && (moving[3] || CheckMouse.isMouseover(UIVar.DataWire[4][0]-UIVar.DataWireMouseKollisionsFeld, UIVar.DataWire[5][1], UIVar.DataWireMouseKollisionsFeld*2,UIVar.DataWire[4][1]-UIVar.DataWire[5][1], true)))){
             Gdx.graphics.setSystemCursor(SystemCursor.HorizontalResize);
             setCorsoronlyonce=true;
 
@@ -143,7 +137,7 @@ public class DataWire {
                 UIVar.doonce=true;
                 moving[3]=false;
             }
-        }else if((UIVar.DataWire[5][0]<=UIVar.DataWire[6][0] && (moving[4] || CheckMouse.isMouseover(UIVar.DataWire[5][0], UIVar.DataWire[5][1]-UIVar.DataWireMouseKollisionsFeld, UIVar.DataWire[6][0]-UIVar.DataWire[5][0], UIVar.DataWireMouseKollisionsFeld*2, false)))  ||  (UIVar.DataWire[5][0]>UIVar.DataWire[6][0] && (moving[4] || CheckMouse.isMouseover(UIVar.DataWire[6][0], UIVar.DataWire[5][1]-UIVar.DataWireMouseKollisionsFeld, UIVar.DataWire[5][0]-UIVar.DataWire[6][0], UIVar.DataWireMouseKollisionsFeld*2, false)))){
+        }else if((UIVar.DataWire[5][0]<=UIVar.DataWire[6][0] && (moving[4] || CheckMouse.isMouseover(UIVar.DataWire[5][0], UIVar.DataWire[5][1]-UIVar.DataWireMouseKollisionsFeld, UIVar.DataWire[6][0]-UIVar.DataWire[5][0], UIVar.DataWireMouseKollisionsFeld*2, true)))  ||  (UIVar.DataWire[5][0]>UIVar.DataWire[6][0] && (moving[4] || CheckMouse.isMouseover(UIVar.DataWire[6][0], UIVar.DataWire[5][1]-UIVar.DataWireMouseKollisionsFeld, UIVar.DataWire[5][0]-UIVar.DataWire[6][0], UIVar.DataWireMouseKollisionsFeld*2, true)))){
             Gdx.graphics.setSystemCursor(SystemCursor.VerticalResize);
             setCorsoronlyonce=true;
 
@@ -192,7 +186,7 @@ public class DataWire {
                    if(parameter!=this.getParam_input()&&!parameter.getParameterType().isOutput()&&parameter.getDatawire().size()!=1&&parameter.getParameterType().typ.iscompatible(this.getParam_input().getParameterType().typ)&&parameter.getBlock()!=this.getParam_input().getBlock()) {
 
 
-                       if(CheckKollision.checkmousewithobject(parameter.getX(),parameter.getY(), UIVar.parameter_width,UIVar.parameter_height,Unproject.unproject())&&Gdx.input.isButtonPressed(0)) {
+                       if(CheckKollision.checkpointwithobject(parameter.getX(),parameter.getY(), UIVar.parameter_width,UIVar.parameter_height,Unproject.unproject())&&Gdx.input.isButtonPressed(0)) {
                            ProjectManager.getActProjectVar().moveingdatawire=null;
                            param_output=parameter;
                            parameter.getDatawire().clear();

@@ -163,7 +163,7 @@ public abstract class BlockUpdate extends Thread {
                         }
 
                         if (!isconnectorclicked && ProjectManager.getActProjectVar().showleftdocker) { //Wenn der eigene Wire connector nicht ausgelöst ist aber ein anderer
-                            if (CheckKollision.checkmousewithobject((int) block.getWireconnector_left().x, (int) block.getWireconnector_left().y, 20, 20, (int) ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y)) { //Wenn die Maus über meinen connection offerer fährt...
+                            if (CheckKollision.checkpointwithobject((int) block.getWireconnector_left().x, (int) block.getWireconnector_left().y, 20, 20, (int) ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y)) { //Wenn die Maus über meinen connection offerer fährt...
                                 if (ProjectManager.getActProjectVar().connetor_offerd_hoverd_block != block) { //Und der zugehörige Block noch nicht in der Variable steht
                                     ProjectManager.getActProjectVar().connetor_offerd_hoverd_block = block; //Schreibt sich der Block in die Variable welcher Block beim loslassen als wire nachbar verbunden werden würde
                                 }
@@ -175,7 +175,7 @@ public abstract class BlockUpdate extends Thread {
                         }
 
 
-                        if (CheckKollision.checkmousewithobject((int) block.getwireconnector_right().x, (int) block.getwireconnector_right().y, 20, 20, (int) Var.mousepressedold.x, (int) Var.mousepressedold.y) && Gdx.input.isButtonPressed(0) && ProjectManager.getActProjectVar().movingwires == null && !IsMousealreadypressed && block.getWire_right() == null) {
+                        if (CheckKollision.checkpointwithobject((int) block.getwireconnector_right().x, (int) block.getwireconnector_right().y, 20, 20, (int) Var.mousepressedold.x, (int) Var.mousepressedold.y) && Gdx.input.isButtonPressed(0) && ProjectManager.getActProjectVar().movingwires == null && !IsMousealreadypressed && block.getWire_right() == null) {
                             if (!(ProjectManager.getActProjectVar().markedblock == block)) {
                                 if (!isconnectorclicked && ProjectManager.getActProjectVar().wirezulassung) {
 
@@ -217,7 +217,7 @@ public abstract class BlockUpdate extends Thread {
 
                         if (CheckKollision.checkmousewithblock(block, Var.mousepressedold) && Gdx.input.isButtonPressed(0) && ProjectManager.getActProjectVar().ismoving == false && !block.isMarked() && !ProjectManager.getActProjectVar().marked && ProjectManager.getActProjectVar().markedblock == null) {
 
-                            if (!CheckKollision.checkmousewithobject((int) block.getwireconnector_right().x, (int) block.getwireconnector_right().y, 20, 20, (int) Var.mousepressedold.x, (int) Var.mousepressedold.y)) {
+                            if (!CheckKollision.checkpointwithobject((int) block.getwireconnector_right().x, (int) block.getwireconnector_right().y, 20, 20, (int) Var.mousepressedold.x, (int) Var.mousepressedold.y)) {
 
 
                                 // MainGame.logger.debug("Marked Block" + block.getIndex());
@@ -233,7 +233,7 @@ public abstract class BlockUpdate extends Thread {
                         if (ProjectManager.getActProjectVar().ismoving == false && !block.isMoving() && block.isMarked() && Gdx.input.isButtonPressed(0) && CheckKollision.checkmousewithblock(block)) {
 
 
-                            if (!CheckKollision.checkmousewithobject((int) block.getwireconnector_right().x, (int) block.getwireconnector_right().y, 20, 20, (int) Var.mousepressedold.x, (int) Var.mousepressedold.y)) {
+                            if (!CheckKollision.checkpointwithobject((int) block.getwireconnector_right().x, (int) block.getwireconnector_right().y, 20, 20, (int) Var.mousepressedold.x, (int) Var.mousepressedold.y)) {
 
 
                                 int feld = 2;
@@ -258,7 +258,7 @@ public abstract class BlockUpdate extends Thread {
                                 if (block.getBlocktype().getBlockParameter().get(i).getParameterType().isOutput() ) {
 
 
-                                    if(CheckKollision.checkmousewithobject(block.getBlocktype().getBlockParameter().get(i).getX(),block.getBlocktype().getBlockParameter().get(i).getY(),UIVar.parameter_width,UIVar.parameter_height, Unproject.unproject())&&Gdx.input.isButtonJustPressed(0)&&ProjectManager.getActProjectVar().moveingdatawire==null){
+                                    if(CheckKollision.checkpointwithobject(block.getBlocktype().getBlockParameter().get(i).getX(),block.getBlocktype().getBlockParameter().get(i).getY(),UIVar.parameter_width,UIVar.parameter_height, Unproject.unproject())&&Gdx.input.isButtonJustPressed(0)&&ProjectManager.getActProjectVar().moveingdatawire==null){
                                         block.getBlocktype().getBlockParameter().get(i).getDatawire().add(new DataWire(block.getBlocktype().getBlockParameter().get(i)));
                                         block.setMoving(false);
                                         ProjectManager.getActProjectVar().moveingdatawire = block.getBlocktype().getBlockParameter().get(i).getDatawire().getLastObject();

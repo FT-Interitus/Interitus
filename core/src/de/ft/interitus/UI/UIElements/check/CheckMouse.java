@@ -71,7 +71,7 @@ public class CheckMouse {
       if(!unproject) {
           return Gdx.input.getX() > x && Gdx.input.getX() < x + w && Gdx.input.getY() > Gdx.graphics.getHeight() - y - h && Gdx.input.getY() < Gdx.graphics.getHeight() - y && Gdx.input.isButtonJustPressed(0);
       }else{
-          return Unproject.unproject().x> x && Unproject.unproject().x < x + w && Unproject.unproject().y > Gdx.graphics.getHeight() - y - h && Unproject.unproject().y < Gdx.graphics.getHeight() - y && Gdx.input.isButtonJustPressed(0);
+          return CheckKollision.checkpointwithobject(x,y,w,h,Unproject.unproject().x,Unproject.unproject().y) && Gdx.input.isButtonJustPressed(0);
       }
     }
 
@@ -79,7 +79,7 @@ public class CheckMouse {
         if(!unproject) {
             return Gdx.input.getX() > x && Gdx.input.getX() < x + w && Gdx.input.getY() > Gdx.graphics.getHeight() - y - h && Gdx.input.getY() < Gdx.graphics.getHeight() - y;
         }else{
-                return Unproject.unproject().x > x && Unproject.unproject().x < x + w && Unproject.unproject().y > Gdx.graphics.getHeight() - y - h && Unproject.unproject().y < Gdx.graphics.getHeight() - y;
+                return CheckKollision.checkpointwithobject(x,y,w,h,Unproject.unproject().x,Unproject.unproject().y);
 
             }
         }
@@ -97,7 +97,7 @@ public class CheckMouse {
         if(!unproject) {
             return Gdx.input.getX() > x && Gdx.input.getX() < x + w && Gdx.input.getY() > Gdx.graphics.getHeight() - y - h && Gdx.input.getY() < Gdx.graphics.getHeight() - y && Gdx.input.isButtonPressed(0);
         }else{
-            return  Unproject.unproject().x  > x &&  Unproject.unproject().x  < x + w &&  Unproject.unproject().y > Gdx.graphics.getHeight() - y - h &&  Unproject.unproject().y < Gdx.graphics.getHeight() - y && Gdx.input.isButtonPressed(0);
+            return  CheckKollision.checkpointwithobject(x,y,w,h,Unproject.unproject().x,Unproject.unproject().y) && Gdx.input.isButtonPressed(0);
 
         }
     }

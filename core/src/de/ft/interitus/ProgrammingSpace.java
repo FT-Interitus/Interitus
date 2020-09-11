@@ -15,6 +15,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import de.ft.interitus.Block.BlockDrawer;
 import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.Notification.Notification;
@@ -63,6 +64,8 @@ public class ProgrammingSpace extends ScreenAdapter {
 
 
     public ProgrammingSpace() {
+
+
 
 
         pressedKeys = new PressedKeys();
@@ -141,7 +144,6 @@ public class ProgrammingSpace extends ScreenAdapter {
 
            Gdx.gl.glClearColor(Settings.theme.ClearColor().r, Settings.theme.ClearColor().g, Settings.theme.ClearColor().b, Settings.theme.ClearColor().a);
            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-            //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT | (Gdx.graphics.getBufferFormat().coverageSampling?GL20.GL_COVERAGE_BUFFER_BIT_NV:0));
             batch.setProjectionMatrix(cam.combined);
             UI.UIbatch.setProjectionMatrix(UI.UIcam.combined);
             shapeRenderer.setProjectionMatrix(UI.UIcam.combined);
