@@ -27,21 +27,21 @@ public class BlockCalculator {
 
     public static void extract(ArrayList<SaveBlock> saveBlocks) {
         for (int i = 0; i < saveBlocks.size(); i++) {
-            if(saveBlocks.get(i).getAddon().contentEquals("")) {
+            if (saveBlocks.get(i).getAddon().contentEquals("")) {
                 ProjectManager.getActProjectVar().blocks.add(ProjectManager.getActProjectVar().projectType.getBlockGenerator().generateBlock(i, saveBlocks.get(i).getX(), saveBlocks.get(i).getY(), ProjectManager.getActProjectVar().projectType.getProjectblocks().get(saveBlocks.get(i).getPlatformspecificblockid()).getWidth(), UIVar.BlockHeight, ProjectManager.getActProjectVar().projectType.getProjectblocks().get(saveBlocks.get(i).getPlatformspecificblockid()), ProjectManager.getActProjectVar().projectType.getBlockUpdateGenerator(), ProjectManager.getActProjectVar().projectType.getBlocktoSaveGenerator()));
-            }else{
+            } else {
 
                 Addon tempaddon = null;
-                for(Addon addon:ProjectManager.getActProjectVar().enabledAddons) {
-                    if(addon.getName().contentEquals(saveBlocks.get(i).getAddon())) {
+                for (Addon addon : ProjectManager.getActProjectVar().enabledAddons) {
+                    if (addon.getName().contentEquals(saveBlocks.get(i).getAddon())) {
                         tempaddon = addon;
                     }
                 }
 
 
-                if(tempaddon==null) {
+                if (tempaddon == null) {
 
-                    Dialogs.showErrorDialog(UI.stage,"Addon Fehler");
+                    Dialogs.showErrorDialog(UI.stage, "Addon Fehler");
                     ProjectManager.CloseProject(Var.openprojectindex);
 
 
@@ -52,8 +52,7 @@ public class BlockCalculator {
             }
 
 
-
-            }
+        }
 
         for (int i = 0; i < saveBlocks.size(); i++) {
 
@@ -105,14 +104,16 @@ public class BlockCalculator {
             }
 
 
-            ProjectManager.getActProjectVar().blocks.get(i).getBlocktype().changeBlockModus(saveBlocks.get(i).getBlockmodus(),ProjectManager.getActProjectVar().blocks.get(i));
+            ProjectManager.getActProjectVar().blocks.get(i).getBlocktype().changeBlockModus(saveBlocks.get(i).getBlockmodus(), ProjectManager.getActProjectVar().blocks.get(i));
         }
         for (int i = 0; i < saveBlocks.size(); i++) {
 
             //Load BlockSettings
+            try {
+                ProjectManager.getActProjectVar().blocks.get(i).getBlocktype().blockModis.get(ProjectManager.getActProjectVar().blocks.get(i).getBlocktype().actBlockModiIndex).getblocksettings().setSettings(saveBlocks.get(i).getBlocksettings());
+            } catch (NullPointerException e) {
 
-            ProjectManager.getActProjectVar().blocks.get(i).getBlocktype().blockModis.get(ProjectManager.getActProjectVar().blocks.get(i).getBlocktype().actBlockModiIndex).getblocksettings().setSettings(saveBlocks.get(i).getBlocksettings());
-
+            }
             //Load Parameters
             if (ProjectManager.getActProjectVar().blocks.get(i).getBlocktype().getBlockParameter() != null) {
                 for (int j = 0; j < saveBlocks.get(i).getParameters().size(); j++) {
@@ -134,10 +135,6 @@ public class BlockCalculator {
             }
 
         }
-
-
-
-
 
 
     }

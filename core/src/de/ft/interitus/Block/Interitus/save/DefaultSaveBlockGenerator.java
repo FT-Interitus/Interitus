@@ -69,8 +69,11 @@ public class DefaultSaveBlockGenerator implements BlocktoSaveGenerator {
         datawires.clear();
         datawiresindex.clear();
         parameters.clear();
-        blocksettings = block.getBlocktype().blockModis.get(block.getBlocktype().actBlockModiIndex).getblocksettings().getSettings();
-
+        if(block.getBlocktype().blockModis.get(block.getBlocktype().actBlockModiIndex).getblocksettings()!=null) {
+            blocksettings = block.getBlocktype().blockModis.get(block.getBlocktype().actBlockModiIndex).getblocksettings().getSettings();
+        }else{
+            blocksettings = null;
+        }
 
         if (block.getBlocktype().getBlockParameter() != null) {
             for (int i = 0; i < block.getBlocktype().getBlockParameter().size(); i++) {
