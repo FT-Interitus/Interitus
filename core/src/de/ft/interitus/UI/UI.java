@@ -46,7 +46,6 @@ import de.ft.interitus.network.bettertogether.SharedVar;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.ArrayList;
 import de.ft.interitus.utils.ShapeRenderer;
-import org.assertj.core.data.Index;
 
 import java.io.File;
 import java.util.Arrays;
@@ -73,6 +72,8 @@ public class UI {
     public static Button button_editor;
     public static Button button_addrunconfig;
     public static TabBar tabbar;
+    public static VisLabel blocknamelabel;
+    public static VisLabel blocksettingslabel;
     public final static GlyphLayout glyphLayout = new GlyphLayout();
     public final static BitmapFont font = new BitmapFont();
 
@@ -178,7 +179,29 @@ public class UI {
             renderer.end();
             UIbatch.begin();
 
-            int nachuntenrutscher=0;
+
+
+            if(!UIVar.isBlockSettingsopen) {
+                blocknamelabel = new VisLabel(markedblock.getBlocktype().getBlockModis().get(markedblock.getBlocktype().actBlockModiIndex).getname());
+                UI.stage.addActor(blocknamelabel);
+            }
+
+            if(!UIVar.isBlockSettingsopen&&markedblock.getBlocktype().blockModis.get(markedblock.getBlocktype().actBlockModiIndex).getblocksettings() != null) {
+                blocksettingslabel = new VisLabel("Einstellungen");
+                UI.stage.addActor(blocksettingslabel);
+
+            }
+            if(blocksettingslabel!=null) {
+                blocksettingslabel.setPosition(UIVar.blockeinstellungen_x + 5, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 57);
+
+            }
+
+            if(blocknamelabel !=null) {
+                glyphLayout.setText(AssetLoader.defaultfont, blocknamelabel.getText());
+                blocknamelabel.setPosition(UIVar.blockeinstellungen_x +UIVar.blockeinstellungen_w/2- blocknamelabel.getWidth()/2,UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h-25);
+            }
+
+            int nachuntenrutscher=10;
             try {
                 if (markedblock.getBlocktype().blockModis.get(markedblock.getBlocktype().actBlockModiIndex).getblocksettings() != null) {
 
@@ -198,9 +221,9 @@ public class UI {
 
                         UI.stage.addActor(settingstextfield);
                     }
-                    nachuntenrutscher = 100;
+                    nachuntenrutscher = 75+10;
                     if (settingstextfield != null) {
-                        settingstextfield.setPosition(UIVar.blockeinstellungen_x + 5, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - settingstextfield.getHeight());
+                        settingstextfield.setPosition(UIVar.blockeinstellungen_x + 5, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 59 - settingstextfield.getHeight());
                     }
 
                 }
@@ -209,6 +232,7 @@ public class UI {
             }catch (Exception e) {
                 e.printStackTrace();
             }
+
 
 
 
@@ -304,6 +328,14 @@ public class UI {
 
                     }
                 }
+
+                if(blocknamelabel !=null) {
+                    blocknamelabel.remove();
+                }
+
+            if(blocksettingslabel !=null) {
+                blocksettingslabel.remove();
+            }
 
             if (textFielder.size() > 0) {
                 UIVar.isBlockSettingsopen = false;

@@ -14,14 +14,15 @@ import de.ft.interitus.projecttypes.ProjectTypes;
 
 import java.awt.*;
 
-public class DigitalRead extends PlatformSpecificBlock {
+public class ReadPin extends PlatformSpecificBlock {
 
 
 
-    public DigitalRead(ProjectTypes arduino, Addon addon) {
+    public ReadPin(ProjectTypes arduino, Addon addon) {
         super(arduino,addon);
 
         blockModis.add(new DigitalReadDefault());
+        blockModis.add(new AnalogRead());
         actBlockModiIndex = 0;
 
     }
@@ -30,7 +31,7 @@ public class DigitalRead extends PlatformSpecificBlock {
 
     @Override
     public String getName() {
-        return "DigitalRead";
+        return "Read Pin";
     }
 
     @Override
