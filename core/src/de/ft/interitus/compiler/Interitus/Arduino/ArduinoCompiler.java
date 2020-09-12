@@ -35,9 +35,16 @@ public class ArduinoCompiler implements Compiler {
     private static boolean uploaderror = false;
     private static Process pr;
     private static String prefix = "param_";
+    public static ArrayList<String> includes = new ArrayList<>();
 
     private static String compilesketch() {
         String Programm = "";
+        for(String include:includes) {
+
+            Programm+=include;
+
+        }
+
         int i=0;
         for(Block block:ProjectManager.getActProjectVar().blocks) {
             if(block.getBlocktype().getBlockParameter()==null) {
