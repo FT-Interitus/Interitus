@@ -160,6 +160,7 @@ public class AssetLoader {
     public static Texture Parameter_plus;
     public static Texture Parameter_Mal;
     public static Texture Parameter_Geteilt;
+    public static Texture Parameter_squareroot;
     public static Texture Parameter_if;
     public static Texture Parameter_abs;
     public static Texture Parameter_fkt;
@@ -213,6 +214,7 @@ public class AssetLoader {
             manager.load(workingdirectory + "Block/Parameter/drittens.png", Texture.class);
             manager.load(workingdirectory + "Block/Parameter/viertens.png", Texture.class);
             manager.load(workingdirectory + "Block/Parameter/Minus.png", Texture.class);
+            manager.load(workingdirectory + "Block/Parameter/squareroot.png", Texture.class);
             manager.load(workingdirectory + "Block/Parameter/Plus.png", Texture.class);
             manager.load(workingdirectory + "Block/Parameter/if.png", Texture.class);
             manager.load(workingdirectory + "Block/Parameter/MalKreuz.png", Texture.class);
@@ -418,6 +420,7 @@ public class AssetLoader {
             Parameter_third = manager.get(workingdirectory + "Block/Parameter/drittens.png", Texture.class);
             Parameter_fourth = manager.get(workingdirectory + "Block/Parameter/viertens.png", Texture.class);
             Parameter_minus = manager.get(workingdirectory + "Block/Parameter/Minus.png", Texture.class);
+            Parameter_squareroot = manager.get(workingdirectory + "Block/Parameter/squareroot.png", Texture.class);
             Parameter_plus = manager.get(workingdirectory + "Block/Parameter/Plus.png", Texture.class);
             Parameter_if = manager.get(workingdirectory + "Block/Parameter/if.png", Texture.class);
             Parameter_Mal = manager.get(workingdirectory + "Block/Parameter/MalKreuz.png", Texture.class);
