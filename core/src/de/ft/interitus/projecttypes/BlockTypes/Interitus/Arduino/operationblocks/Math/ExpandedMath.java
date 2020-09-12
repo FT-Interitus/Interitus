@@ -25,10 +25,10 @@ public class ExpandedMath implements BlockModi, ArduinoBlock {
     BlockSettings blockSettings = new BlockSettings();
 
     public ExpandedMath() {
-        a = new Parameter("", AssetLoader.Parameter_first, "A", "Erster Parameter", "", new ParameterType(InitArduino.floatvar, false, false), true);
-        b = new Parameter("", AssetLoader.Parameter_second, "B", "Zweiter Parameter", "", new ParameterType(InitArduino.floatvar, false, false), true);
-        c = new Parameter("", AssetLoader.Parameter_third, "C", "Dritter Parameter", "", new ParameterType(InitArduino.floatvar, false, false), true);
-        d = new Parameter("", AssetLoader.Parameter_fourth, "D", "Vierter Parameter", "", new ParameterType(InitArduino.floatvar, false, false), true);
+        a = new Parameter("", AssetLoader.Parameter_a, "A", "Erster Parameter", "", new ParameterType(InitArduino.floatvar, false, false), true);
+        b = new Parameter("", AssetLoader.Parameter_b, "B", "Zweiter Parameter", "", new ParameterType(InitArduino.floatvar, false, false), true);
+        c = new Parameter("", AssetLoader.Parameter_c, "C", "Dritter Parameter", "", new ParameterType(InitArduino.floatvar, false, false), true);
+        d = new Parameter("", AssetLoader.Parameter_d, "D", "Vierter Parameter", "", new ParameterType(InitArduino.floatvar, false, false), true);
         Ergebnis = new Parameter("", AssetLoader.Parameter_isequal, "Ergebnis", "Das Ergebnis", "", new ParameterType(InitArduino.floatvar, true, false), true);
         parameters.add(a);
         parameters.add(b);

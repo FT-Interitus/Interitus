@@ -43,6 +43,10 @@ public class ArduinoCompiler implements Compiler {
             if(block.getBlocktype().getBlockParameter()==null) {
                 continue;
             }
+
+            if(!ProjectManager.getActProjectVar().projectType.getProjectFunktions().isblockconnected(block)) {
+                continue;
+            }
             for(Parameter parameter:block.getBlocktype().getBlockParameter()) {
 
 

@@ -163,6 +163,10 @@ public class AssetLoader {
     public static Texture Parameter_if;
     public static Texture Parameter_abs;
     public static Texture Parameter_fkt;
+    public static Texture Parameter_a;
+    public static Texture Parameter_b;
+    public static Texture Parameter_c;
+    public static Texture Parameter_d;
 
 
 
@@ -214,6 +218,10 @@ public class AssetLoader {
             manager.load(workingdirectory + "Block/Parameter/MalKreuz.png", Texture.class);
             manager.load(workingdirectory + "Block/Parameter/Geteilt.png", Texture.class);
             manager.load(workingdirectory + "Block/Parameter/absolutevalue.png", Texture.class);
+            manager.load(workingdirectory + "Block/Parameter/a.png", Texture.class);
+            manager.load(workingdirectory + "Block/Parameter/b.png", Texture.class);
+            manager.load(workingdirectory + "Block/Parameter/c.png", Texture.class);
+            manager.load(workingdirectory + "Block/Parameter/d.png", Texture.class);
             manager.load(workingdirectory + "Block/Parameter/advancedFunktion.png", Texture.class);
 
             // manager.load(new AssetDescriptor(Objects.requireNonNull(Programm.INSTANCE.getClass().getClassLoader().getResource("../statistics/test.png")).getFile(),Texture.class));
@@ -416,7 +424,10 @@ public class AssetLoader {
             Parameter_Geteilt = manager.get(workingdirectory + "Block/Parameter/Geteilt.png", Texture.class);
             Parameter_abs = manager.get(workingdirectory + "Block/Parameter/absolutevalue.png", Texture.class);
            Parameter_fkt = manager.get(workingdirectory + "Block/Parameter/advancedFunktion.png", Texture.class);
-
+            Parameter_a= manager.get(workingdirectory + "Block/Parameter/a.png", Texture.class);
+            Parameter_b= manager.get(workingdirectory + "Block/Parameter/b.png", Texture.class);
+            Parameter_c= manager.get(workingdirectory + "Block/Parameter/c.png", Texture.class);
+            Parameter_d= manager.get(workingdirectory + "Block/Parameter/d.png", Texture.class);
 
 
 

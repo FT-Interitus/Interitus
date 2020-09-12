@@ -632,7 +632,7 @@ public abstract class Block implements VisibleObjects {
                 batch.setColor(1, 1, 1, 1);
             }
 
-            if (this.isShowdupulicate_links() && this.getBlocktype().canhasleftconnector()) {
+            if (this.isShowdupulicate_links() && this.getBlocktype().canhasleftconnector()&&ProjectManager.getActProjectVar().markedblock!=null) {
                 batch.setColor(1, 1, 1, 0.5f);
                 batch.draw(AssetLoader.block_middle, this.x - ProjectManager.getActProjectVar().markedblock.getW(), this.y, ProjectManager.getActProjectVar().markedblock.getW(), this.getH()); //das gleiche für links
                 batch.setColor(1, 1, 1, 1);
