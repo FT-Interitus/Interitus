@@ -126,10 +126,13 @@ public class Parameter {
 
     @Override
     public String toString() {
-        if(super.toString()==null) {
-            return "param";
+        if(!varname) {
+            return Parameter.toString();
+        }
+        if(getDatawire().size()>0) {
+            return Datawire.get(0).getParam_input().getVarName();
         }else {
-            return super.toString();
+            return Parameter.toString();
         }
     }
 
@@ -140,4 +143,6 @@ public class Parameter {
     public void setVarName(String varName) {
         this.varName = varName;
     }
+
+
 }
