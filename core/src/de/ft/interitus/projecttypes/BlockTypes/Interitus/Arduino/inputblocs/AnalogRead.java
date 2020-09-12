@@ -66,4 +66,9 @@ public class AnalogRead implements BlockModi, ArduinoBlock {
             return "analogRead(" + parameters.get(0).getParameter() + ");";
         }
     }
+
+    @Override
+    public String getHeaderCode() {
+        return null;
+    }
 }

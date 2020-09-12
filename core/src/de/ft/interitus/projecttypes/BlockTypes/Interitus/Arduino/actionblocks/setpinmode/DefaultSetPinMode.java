@@ -61,4 +61,9 @@ public class DefaultSetPinMode implements BlockModi, ArduinoBlock {
     public String getCode() {
         return  "pinMode(" + this.parameters.get(0).getParameter() + "," + this.parameters.get(1).getParameter() + ");";
     }
+
+    @Override
+    public String getHeaderCode() {
+        return null;
+    }
 }

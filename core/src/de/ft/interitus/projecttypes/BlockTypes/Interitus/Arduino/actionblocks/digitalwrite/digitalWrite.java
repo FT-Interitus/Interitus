@@ -47,13 +47,10 @@ public class digitalWrite extends PlatformSpecificBlock {
     }
 
 
-    @Override
-    public Color blockcolor() {
-        return null;
-    }
+
 
     @Override
-    public BlockCategories getBlockCategoration() {
+    public BlockCategories getBlockCategorie() {
         return BlockCategories.ActionBlocks;
     }
 

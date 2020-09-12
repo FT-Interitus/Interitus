@@ -43,4 +43,10 @@ public class IfElse implements BlockModi, ArduinoBlock {
     public String getCode() {
         return "} else {";
     }
+
+    @Override
+    public String getHeaderCode() {
+        return null;
+    }
+
 }

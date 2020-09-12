@@ -659,8 +659,8 @@ public abstract class Block implements VisibleObjects {
             batch.draw(AssetLoader.block_right, this.getX() + this.getW() - 6, this.getY(), 6, this.getH());
 
 
-            if (blocktype.getBlockCategoration() != null) {
-                switch (blocktype.getBlockCategoration()) {
+            if (blocktype.getBlockCategorie() != null) {
+                switch (blocktype.getBlockCategorie()) {
 
                     case ActionBlocks -> {
 
@@ -782,7 +782,7 @@ public abstract class Block implements VisibleObjects {
 
                 aktualX += 35;
                 for (int i = 0; i < this.getBlocktype().getBlockParameter().size(); i++) {
-                    batch.draw(this.getBlocktype().getBlockParameter().get(i).getParameterTexture(), aktualX + 5, this.getY() + 30, 20, 20);
+                    batch.draw(this.getBlocktype().getBlockParameter().get(i).getParameterTexture(), aktualX + 5, this.getY() + 33, 20, 20);
                     if (this.getBlocktype().getBlockParameter().get(i).getParameterType().isOutput()) {
                         batch.draw(this.getBlocktype().getBlockParameter().get(i).getParameterType().getTyp().getTextureconnector(), (int) aktualX, this.getY() - 7, UIVar.parameter_width, UIVar.parameter_height, 0, 0, AssetLoader.Plug_IntParameter.getWidth(), AssetLoader.Plug_IntParameter.getHeight(), false, true);
                         this.getBlocktype().getBlockParameter().get(i).setX((int) aktualX);

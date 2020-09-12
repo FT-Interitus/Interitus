@@ -63,4 +63,9 @@ public class digitalWriteNormal implements BlockModi, ArduinoBlock {
     public String getCode() {
         return "digitalWrite(" + this.parameters.get(0).getParameter() + "," + this.parameters.get(1).getParameter() + ");";
     }
+
+    @Override
+    public String getHeaderCode() {
+        return null;
+    }
 }

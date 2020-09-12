@@ -3,7 +3,7 @@
  * Copyright by Tim and Felix
  */
 
-package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.Wait;
+package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.operationblocks.variable;
 
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
@@ -12,46 +12,63 @@ import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.BlockTypes.BlockModi;
 import de.ft.interitus.projecttypes.BlockTypes.BlockSettings;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
+import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoFunktions;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.InitArduino;
+import de.ft.interitus.projecttypes.ParameterVariableType;
+import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.ArrayList;
 
-public class DefaultWait implements BlockModi, ArduinoBlock {
-    final ArrayList<Parameter> parameter = new ArrayList<>();
-    public DefaultWait() {
+public class WriteValue implements BlockModi, ArduinoBlock {
 
-        parameter.add(new Parameter(0, AssetLoader.Parameter_wait, "Warte-Zeit", "Die Zeit die abgewartet werden soll", "ms",new ParameterType(InitArduino.floatvar,false,false), true));
+
+    ArrayList<Parameter> parameterArrayList = new ArrayList<>();
+    BlockSettings blockSettings = new BlockSettings();
+
+    Parameter value;
+
+
+    public WriteValue() {
+
+        value = new Parameter("", AssetLoader.Parameter_first,"Wert","","", new ParameterType(InitArduino.floatvar,false,false),true);
+
+        parameterArrayList.add(value);
+
+        blockSettings.setSettings("");
 
     }
+
     @Override
     public ArrayList<Parameter> getBlockParameter() {
-
-        return parameter;
+        return parameterArrayList;
     }
 
     @Override
     public BlockSettings getblocksettings() {
-        return null;
+
+
+        return blockSettings;
     }
 
     @Override
     public int getWidth() {
-        return 80;
+        return 75;
     }
 
     @Override
     public String getname() {
-        return "DefaultWait";
+        return "Variable Schreiben";
     }
 
     @Override
     public Texture getModiImage() {
-        return AssetLoader.connector_offerd;
+        return AssetLoader.Parameter_a;
     }
 
     @Override
     public String getCode() {
-         return "delay(" + parameter.get(0).getParameter() + ");";
+        return blockSettings.getSettings() + " = "+ value.getParameter()+";";
     }
+
 
     @Override
     public String getHeaderCode() {

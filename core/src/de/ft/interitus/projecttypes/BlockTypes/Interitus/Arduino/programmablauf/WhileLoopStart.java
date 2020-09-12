@@ -36,13 +36,9 @@ public class WhileLoopStart extends PlatformSpecificBlock implements ArduinoBloc
 
 
 
-    @Override
-    public Color blockcolor() {
-        return null;
-    }
 
     @Override
-    public BlockCategories getBlockCategoration() {
+    public BlockCategories getBlockCategorie() {
         return BlockCategories.Programm_Sequence;
     }
 
@@ -75,6 +71,11 @@ public class WhileLoopStart extends PlatformSpecificBlock implements ArduinoBloc
     @Override
     public String getCode() {
         return "while(true){";
+    }
+
+    @Override
+    public String getHeaderCode() {
+        return null;
     }
 
 

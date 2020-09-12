@@ -27,17 +27,14 @@ public class Wait extends PlatformSpecificBlock implements Ev3Block {
 
     @Override
     public String getdescription() {
-        return "Mit diesem Block lässt du dein Programm einen bestimmte Zeit warten, das hängt je nach Einstellung ab.";
+        return "Mit diesem Block lässt du dein Programm einen bestimmte Zeit warten.";
     }
 
 
-    @Override
-    public Color blockcolor() {
-        return null;
-    }
+
 
     @Override
-    public BlockCategories getBlockCategoration() {
+    public BlockCategories getBlockCategorie() {
         return BlockCategories.Programm_Sequence;
     }
 

@@ -38,13 +38,9 @@ public class LoopBlock extends PlatformSpecificBlock  {
 
 
 
-    @Override
-    public Color blockcolor() {
-        return null;
-    }
 
     @Override
-    public BlockCategories getBlockCategoration() {
+    public BlockCategories getBlockCategorie() {
         return null;
     }
 

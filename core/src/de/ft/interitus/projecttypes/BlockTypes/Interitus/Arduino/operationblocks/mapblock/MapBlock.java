@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.operationblocks.mapblock;
 
 import com.badlogic.gdx.graphics.Texture;
@@ -24,16 +29,13 @@ public class MapBlock extends PlatformSpecificBlock {
 
     @Override
     public String getdescription() {
-        return "Dieser Block macht map und muh";
+        return "Dieser Block Mappt";
     }
 
-    @Override
-    public Color blockcolor() {
-        return null;
-    }
+
 
     @Override
-    public BlockCategories getBlockCategoration() {
+    public BlockCategories getBlockCategorie() {
         return BlockCategories.Data_Operation;
     }
 

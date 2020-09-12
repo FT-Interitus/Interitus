@@ -62,4 +62,9 @@ public class ParameterVariableType {
         return false;
 
     }
+
+    @Override
+    public String toString() {
+        return type;
+    }
 }

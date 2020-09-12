@@ -7,12 +7,12 @@ package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
-import com.kotcrab.vis.ui.widget.VisLabel;
-import com.kotcrab.vis.ui.widget.VisSelectBox;
-import com.kotcrab.vis.ui.widget.VisTable;
-import com.kotcrab.vis.ui.widget.VisTextField;
+import com.kotcrab.vis.ui.widget.*;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.UI.ManualConfig.DeviceConfiguration;
 import de.ft.interitus.UI.ManualConfig.DeviceParameter;
@@ -22,10 +22,12 @@ import de.ft.interitus.UI.UIElements.dropdownmenue.DropDownElement;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.compiler.Interitus.Arduino.ArduinoCompiler;
 import de.ft.interitus.loading.AssetLoader;
+import de.ft.interitus.projecttypes.ParameterVariableType;
 import de.ft.interitus.projecttypes.ProjectFunktions;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.ArrayList;
 import org.json.JSONArray;
+import org.lwjgl.system.CallbackI;
 
 
 import java.util.Arrays;
@@ -41,6 +43,9 @@ public class ArduinoFunktions implements ProjectFunktions {
     private DeviceConfiguration activeConfiguration;
    private final ArrayList<String> parameterArrayList = new ArrayList<>();
 private boolean firstrun = true;
+
+private  VisTextField varname;
+private VisSelectBox<ParameterVariableType> stringVisSelectBox;
     public ArduinoFunktions() {
 
 
@@ -263,6 +268,10 @@ private boolean firstrun = true;
 
     @Override
     public void projectsettings(VisTable builder, Object settings) {
+
+
+
+
 
     }
 

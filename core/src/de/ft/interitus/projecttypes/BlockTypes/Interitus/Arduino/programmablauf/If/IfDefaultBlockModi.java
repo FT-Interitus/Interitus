@@ -52,4 +52,9 @@ public class IfDefaultBlockModi implements BlockModi, ArduinoBlock {
     public String getCode() {
         return "if("+parameters.get(0).getParameter()+") {";
     }
+
+    @Override
+    public String getHeaderCode() {
+        return null;
+    }
 }

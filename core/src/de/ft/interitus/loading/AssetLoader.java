@@ -168,6 +168,9 @@ public class AssetLoader {
     public static Texture Parameter_b;
     public static Texture Parameter_c;
     public static Texture Parameter_d;
+    public static Texture Parameter_randomdice;
+    public static Texture Parameter_lowerlimit;
+    public static Texture Parameter_upperlimit;
 
 
 
@@ -225,6 +228,9 @@ public class AssetLoader {
             manager.load(workingdirectory + "Block/Parameter/c.png", Texture.class);
             manager.load(workingdirectory + "Block/Parameter/d.png", Texture.class);
             manager.load(workingdirectory + "Block/Parameter/advancedFunktion.png", Texture.class);
+            manager.load(workingdirectory + "Block/Parameter/randomdice.png", Texture.class);
+            manager.load(workingdirectory + "Block/Parameter/lowerlimit.png", Texture.class);
+            manager.load(workingdirectory + "Block/Parameter/upperlimit.png", Texture.class);
 
             // manager.load(new AssetDescriptor(Objects.requireNonNull(Programm.INSTANCE.getClass().getClassLoader().getResource("../statistics/test.png")).getFile(),Texture.class));
 
@@ -431,7 +437,9 @@ public class AssetLoader {
             Parameter_b= manager.get(workingdirectory + "Block/Parameter/b.png", Texture.class);
             Parameter_c= manager.get(workingdirectory + "Block/Parameter/c.png", Texture.class);
             Parameter_d= manager.get(workingdirectory + "Block/Parameter/d.png", Texture.class);
-
+            Parameter_randomdice= manager.get(workingdirectory + "Block/Parameter/randomdice.png", Texture.class);
+           Parameter_lowerlimit = manager.get(workingdirectory + "Block/Parameter/lowerlimit.png", Texture.class);
+            Parameter_upperlimit = manager.get(workingdirectory + "Block/Parameter/upperlimit.png", Texture.class);
 
 
             Plug_IntParameter = manager.get(workingdirectory + "Block/ParameterStecker/ZahlParameterStecker.png", Texture.class);

@@ -64,4 +64,9 @@ public class MultiplicationModi implements BlockModi, ArduinoBlock {
             return parameters.get(0).getParameter()+" * "+parameters.get(1).getParameter()+";";
         }
     }
+
+    @Override
+    public String getHeaderCode() {
+        return null;
+    }
 }

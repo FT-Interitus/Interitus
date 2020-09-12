@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.operationblocks.mapblock;
 
 import com.badlogic.gdx.graphics.Texture;
@@ -75,5 +80,11 @@ public class MapModiDefault implements BlockModi, ArduinoBlock {
         }
 
 
+    }
+
+
+    @Override
+    public String getHeaderCode() {
+        return null;
     }
 }

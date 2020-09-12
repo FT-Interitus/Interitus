@@ -42,4 +42,8 @@ public class LoopModi  implements BlockModi, ArduinoBlock {
     public String getCode() {
          return "void loop(){";
     }
+    @Override
+    public String getHeaderCode() {
+        return null;
+    }
 }

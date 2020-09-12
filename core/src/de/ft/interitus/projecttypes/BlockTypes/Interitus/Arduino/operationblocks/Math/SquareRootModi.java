@@ -63,4 +63,8 @@ public class SquareRootModi implements BlockModi, ArduinoBlock {
             return "sqrt("+parameters.get(0).getParameter()+");";
         }
     }
+    @Override
+    public String getHeaderCode() {
+        return null;
+    }
 }

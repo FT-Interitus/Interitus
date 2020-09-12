@@ -45,4 +45,9 @@ public class IfEnd implements BlockModi, ArduinoBlock {
         return "}";
     }
 
+    @Override
+    public String getHeaderCode() {
+        return null;
+    }
+
 }

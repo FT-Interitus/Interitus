@@ -17,6 +17,9 @@ import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.inputblocs.Read
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.operationblocks.Math.MathBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.operationblocks.logicOperation.LogicOperation;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.operationblocks.mapblock.MapBlock;
+import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.operationblocks.random.RandomBlock;
+import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.operationblocks.variable.VariableBlock;
+import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.operationblocks.variable.WriteValue;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.If.If;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.Wait.Wait;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmaufbau.LoopBlock.LoopBlock;
@@ -29,6 +32,8 @@ import de.ft.interitus.utils.ArrayList;
 public class InitArduino {
     static ArrayList<PlatformSpecificBlock> blocks = new ArrayList<>();
    public static ProjectTypes arduino = new ProjectTypes(ProgrammingSpace.nativ, "Arduino-Projekt", blocks, new DefaultBlockGenerator(), new DefaultBlockUpdateGenerator(), new DefaultWireGenerator(), new DefaultWireNodeGenerator(), new DefaultSaveBlockGenerator(), new DefaultBlockVarGenerator(), new ArduinoFunktions(), new ArduinoCompiler());
+
+
 
 
     public static ParameterVariableType floatvar;
@@ -55,6 +60,8 @@ public class InitArduino {
         blocks.add(new If(arduino,null));
         blocks.add(new MapBlock(arduino , null));
         blocks.add(new LogicOperation(arduino, null));
+      //  blocks.add(new VariableBlock(arduino, null));
+        blocks.add(new RandomBlock(arduino, null));
 
 
 

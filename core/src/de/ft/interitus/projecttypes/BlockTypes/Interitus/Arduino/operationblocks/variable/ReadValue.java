@@ -7,50 +7,62 @@ package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.operationblock
 
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
+import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.BlockTypes.BlockModi;
 import de.ft.interitus.projecttypes.BlockTypes.BlockSettings;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.utils.ArrayList;
 
-public class CreateVariable implements BlockModi, ArduinoBlock {
+public class ReadValue implements BlockModi, ArduinoBlock {
 
 
     ArrayList<Parameter> parameterArrayList = new ArrayList<>();
+    BlockSettings blockSettings = new BlockSettings();
+
+    Parameter initialValue;
 
 
-    public CreateVariable() {
+    public ReadValue() {
 
+        //initialValue = new Parameter("", AssetLoader.Parameter_first,"Wert",);
 
+blockSettings.setSettings("float");
 
     }
 
     @Override
     public ArrayList<Parameter> getBlockParameter() {
-        return null;
+        return parameterArrayList;
     }
 
     @Override
     public BlockSettings getblocksettings() {
-        return null;
+        return blockSettings;
     }
 
     @Override
     public int getWidth() {
-        return 0;
+        return 75;
     }
 
     @Override
     public String getname() {
-        return null;
+        return "Read Value";
     }
 
     @Override
     public Texture getModiImage() {
-        return null;
+        return AssetLoader.PinModeBlock_description_image;
     }
 
     @Override
     public String getCode() {
+        return null;
+    }
+
+
+    @Override
+    public String getHeaderCode() {
         return null;
     }
 }

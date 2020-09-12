@@ -35,13 +35,10 @@ public class If extends PlatformSpecificBlock {
         return "Dieser Block vergleicht mehrere Daten";
     }
 
-    @Override
-    public Color blockcolor() {
-        return null;
-    }
+
 
     @Override
-    public BlockCategories getBlockCategoration() {
+    public BlockCategories getBlockCategorie() {
         return BlockCategories.Programm_Sequence;
     }
 

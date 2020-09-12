@@ -64,4 +64,9 @@ public class PowerModi implements BlockModi, ArduinoBlock {
             return "pow("+parameters.get(0).getParameter()+","+parameters.get(1).getParameter()+");";
         }
     }
+
+    @Override
+    public String getHeaderCode() {
+        return null;
+    }
 }

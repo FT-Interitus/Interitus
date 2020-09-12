@@ -15,6 +15,7 @@ import de.ft.interitus.UI.UI;
 import de.ft.interitus.compiler.Compiler;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.loading.AssetLoader;
+import de.ft.interitus.projecttypes.BlockTypes.BlockModi;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.ArrayList;
@@ -35,20 +36,33 @@ public class ArduinoCompiler implements Compiler {
     private static boolean uploaderror = false;
     private static Process pr;
     private static String prefix = "param_";
-    public static ArrayList<String> includes = new ArrayList<>();
+    public static ArrayList<String> installlibery = new ArrayList<>();
 
     private static String compilesketch() {
-        String Programm = "";
-        for(String include:includes) {
+        StringBuilder Programm = new StringBuilder();
+        for(String include:installlibery) {
 
-
-            installlibary("\""+include.replace("_"," ")+"\"");
-
-            Programm+="#include<"+include+".h>";
+            installlibary("\""+include+"\"");
 
         }
 
+
+        installlibery.clear();
+
         int i=0;
+
+        for(Block block:ProjectManager.getActProjectVar().blocks) {
+            if(!ProjectManager.getActProjectVar().projectType.getProjectFunktions().isblockconnected(block)) {
+                continue;
+            }
+
+            if(((ArduinoBlock) block.getBlocktype().blockModis.get(block.getBlocktype().actBlockModiIndex)).getHeaderCode()!=null) {
+
+                Programm.append(((ArduinoBlock) block.getBlocktype().blockModis.get(block.getBlocktype().actBlockModiIndex)).getHeaderCode());
+
+            }
+        }
+
         for(Block block:ProjectManager.getActProjectVar().blocks) {
             if(block.getBlocktype().getBlockParameter()==null) {
                 continue;
@@ -57,6 +71,10 @@ public class ArduinoCompiler implements Compiler {
             if(!ProjectManager.getActProjectVar().projectType.getProjectFunktions().isblockconnected(block)) {
                 continue;
             }
+
+
+
+
             for(Parameter parameter:block.getBlocktype().getBlockParameter()) {
 
 
@@ -72,7 +90,7 @@ public class ArduinoCompiler implements Compiler {
                }
 
                 parameter.setVarName(prefix+i);
-                Programm+=parameter.getParameterType().getTyp().getType()+" "+parameter.getVarName()+";\n";
+                Programm.append(parameter.getParameterType().getTyp().getType()).append(" ").append(parameter.getVarName()).append(";\n");
                   i++;
             }
 
@@ -82,7 +100,7 @@ public class ArduinoCompiler implements Compiler {
 
         Block a = ProjectManager.getActProjectVar().blocks.get(0);
 
-        Programm += ((ArduinoBlock) a.getBlocktype().getBlockModis().get(a.getBlocktype().getActBlockModiIndex())).getCode() + "\n";
+        Programm.append(((ArduinoBlock) a.getBlocktype().getBlockModis().get(a.getBlocktype().getActBlockModiIndex())).getCode()).append("\n");
         while (a.getRight() != null) {
 
             //block.getRight().setX(block.getRight().getX() + block.getW());
@@ -90,36 +108,36 @@ public class ArduinoCompiler implements Compiler {
 
 
 
-                Programm = Programm +  ((ArduinoBlock) a.getBlocktype().getBlockModis().get(a.getBlocktype().getActBlockModiIndex())).getCode() + "//" + a.getIndex() + " \n";
+                Programm.append(((ArduinoBlock) a.getBlocktype().getBlockModis().get(a.getBlocktype().getActBlockModiIndex())).getCode()).append("//").append(a.getIndex()).append(" \n");
 
 
         }
 
 
 
-        Programm = Programm + "}\n";
+        Programm.append("}\n");
 
         /////////////Loop Teil
 
         a = ProjectManager.getActProjectVar().blocks.get(1);
 
-        Programm += ((ArduinoBlock) a.getBlocktype().getBlockModis().get(a.getBlocktype().getActBlockModiIndex())).getCode() + "\n";
+        Programm.append(((ArduinoBlock) a.getBlocktype().getBlockModis().get(a.getBlocktype().getActBlockModiIndex())).getCode()).append("\n");
         while (a.getRight() != null) {
 
             //block.getRight().setX(block.getRight().getX() + block.getW());
             a = a.getRight();
 
 
-            Programm = Programm +  ((ArduinoBlock) a.getBlocktype().getBlockModis().get(a.getBlocktype().getActBlockModiIndex())).getCode() + "//" + a.getIndex() + " \n";
+            Programm.append(((ArduinoBlock) a.getBlocktype().getBlockModis().get(a.getBlocktype().getActBlockModiIndex())).getCode()).append("//").append(a.getIndex()).append(" \n");
 
 
         }
-        Programm = Programm + "}\n";
+        Programm.append("}\n");
 
 
         System.out.println(Programm);
 
-        return Programm;
+        return Programm.toString();
     }
 
 

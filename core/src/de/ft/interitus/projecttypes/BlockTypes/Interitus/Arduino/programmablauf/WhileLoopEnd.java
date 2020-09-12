@@ -37,13 +37,10 @@ public class WhileLoopEnd extends PlatformSpecificBlock implements ArduinoBlock 
 
 
 
-    @Override
-    public Color blockcolor() {
-        return null;
-    }
+
 
     @Override
-    public BlockCategories getBlockCategoration() {
+    public BlockCategories getBlockCategorie() {
         return BlockCategories.Programm_Sequence;
     }
 
@@ -77,6 +74,11 @@ public class WhileLoopEnd extends PlatformSpecificBlock implements ArduinoBlock 
     @Override
     public String getCode() {
         return "}";
+    }
+
+    @Override
+    public String getHeaderCode() {
+        return null;
     }
 
 }

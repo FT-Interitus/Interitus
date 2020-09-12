@@ -66,4 +66,9 @@ public class DigitalReadDefault implements BlockModi, ArduinoBlock {
             return "digitalRead(" + parameters.get(0).getParameter() + ");";
         }
     }
+
+    @Override
+    public String getHeaderCode() {
+        return null;
+    }
 }

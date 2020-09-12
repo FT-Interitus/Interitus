@@ -12,14 +12,15 @@ import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.ProjectTypes;
 
-import java.awt.*;
+
 
 public class VariableBlock extends PlatformSpecificBlock {
     public VariableBlock(ProjectTypes projectTypes, Addon addon) {
         super(projectTypes, addon);
 
         super.actBlockModiIndex = 0;
-        super.blockModis.add(new CreateVariable());
+        super.blockModis.add(new WriteValue());
+        super.blockModis.add(new ReadValue());
 
 
     }
@@ -34,13 +35,9 @@ public class VariableBlock extends PlatformSpecificBlock {
         return "";
     }
 
-    @Override
-    public Color blockcolor() {
-        return null;
-    }
 
     @Override
-    public BlockCategories getBlockCategoration() {
+    public BlockCategories getBlockCategorie() {
         return BlockCategories.Data_Operation;
     }
 

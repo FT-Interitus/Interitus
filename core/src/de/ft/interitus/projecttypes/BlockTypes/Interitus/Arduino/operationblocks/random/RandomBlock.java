@@ -3,7 +3,7 @@
  * Copyright by Tim and Felix
  */
 
-package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.operationblocks.Math;
+package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.operationblocks.random;
 
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.loading.AssetLoader;
@@ -12,61 +12,32 @@ import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.ProjectTypes;
 
-import java.awt.*;
-
-public class MathBlock extends PlatformSpecificBlock {
-
-
-
-
-    public MathBlock(ProjectTypes type, Addon addon) {
-        super(type,addon);
-        super.blockModis.add(new AdditionalModi());
-        super.blockModis.add(new DifferenzModi());
-        super.blockModis.add(new MultiplicationModi());
-        super.blockModis.add(new DivisionModi());
-        super.blockModis.add(new AbsolutModi());
-        super.blockModis.add(new SquareRootModi());
-        super.blockModis.add(new PowerModi());
-        super.blockModis.add(new ExpandedMath());
-
+public class RandomBlock extends PlatformSpecificBlock {
+    public RandomBlock(ProjectTypes projectTypes, Addon addon) {
+        super(projectTypes, addon);
         super.actBlockModiIndex = 0;
-
-
-
+        super.blockModis.add(new RandomNumeric());
     }
-
-
 
     @Override
     public String getName() {
-        return "Math";
+        return "Zufalls Block";
     }
 
     @Override
     public String getdescription() {
-        return "Zwei zahlen plus rechnen";
+        return "Gibt einen Zufall zurück";
     }
-
-
-
-
 
     @Override
     public BlockCategories getBlockCategorie() {
         return BlockCategories.Data_Operation;
     }
 
-
-
-
     @Override
     public Texture getDescriptionImage() {
         return AssetLoader.math_description;
     }
-
-
-
 
     @Override
     public boolean canbedeleted() {

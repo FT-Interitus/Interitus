@@ -63,4 +63,9 @@ public class AbsolutModi implements BlockModi, ArduinoBlock {
             return "abs("+parameters.get(0).getParameter()+")"+";";
         }
     }
+    @Override
+    public String getHeaderCode() {
+        return null;
+    }
+
 }

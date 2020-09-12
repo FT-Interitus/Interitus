@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.operationblocks.logicOperation;
 
 import com.badlogic.gdx.graphics.Texture;
@@ -26,13 +31,9 @@ public class LogicOperation extends PlatformSpecificBlock {
         return "Dieser Block vergleicht Intager";
     }
 
-    @Override
-    public Color blockcolor() {
-        return null;
-    }
 
     @Override
-    public BlockCategories getBlockCategoration() {
+    public BlockCategories getBlockCategorie() {
         return BlockCategories.Data_Operation;
     }
 

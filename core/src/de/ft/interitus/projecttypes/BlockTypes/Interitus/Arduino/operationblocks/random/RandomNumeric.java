@@ -3,7 +3,7 @@
  * Copyright by Tim and Felix
  */
 
-package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.operationblocks.Math;
+package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.operationblocks.random;
 
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
@@ -15,19 +15,22 @@ import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.InitArduino;
 import de.ft.interitus.utils.ArrayList;
 
-public class DifferenzModi implements BlockModi, ArduinoBlock {
-    ArrayList<Parameter> parameters = new ArrayList<>();
-    Parameter Summand_1;
-    Parameter Summand_2;
-    Parameter Ergebnis;
+import java.sql.PreparedStatement;
 
-    public DifferenzModi(){
-        Summand_1=new Parameter("", AssetLoader.Parameter_first,"Minuend", "Minuend", "", new ParameterType(InitArduino.floatvar, false, false), true);
-        Summand_2=new Parameter("",AssetLoader.Parameter_second,"Subtraend", "Subtraend", "", new ParameterType(InitArduino.floatvar, false, false), true);
-        Ergebnis=new Parameter("",AssetLoader.Parameter_isequal,"Ergebnis", "Unterschied von zwei zahlen", "", new ParameterType(InitArduino.floatvar, true, false), true);
-        parameters.add(Summand_1);
-        parameters.add(Summand_2);
-        parameters.add(Ergebnis);
+public class RandomNumeric implements BlockModi, ArduinoBlock {
+    ArrayList<Parameter> parameters = new ArrayList<>();
+    Parameter min;
+    Parameter max;
+    Parameter output;
+    public RandomNumeric() {
+        min = new Parameter("", AssetLoader.Parameter_lowerlimit,"Minimum","","",new ParameterType(InitArduino.floatvar,false,false),true);
+        max = new Parameter("", AssetLoader.Parameter_upperlimit,"Minimum","","",new ParameterType(InitArduino.floatvar,false,false),true);
+        output = new Parameter("", AssetLoader.Parameter_randomdice,"Output","","",new ParameterType(InitArduino.floatvar,true,false),true);
+
+
+parameters.add(min);
+parameters.add(max);
+parameters.add(output);
 
     }
     @Override
@@ -47,21 +50,21 @@ public class DifferenzModi implements BlockModi, ArduinoBlock {
 
     @Override
     public String getname() {
-        return "Subtraktion";
+        return "Zahlen-Zufall";
     }
 
     @Override
     public Texture getModiImage() {
-        return AssetLoader.Parameter_minus;
+        return AssetLoader.Parameter_randomdice;
     }
 
     @Override
     public String getCode() {
         if( parameters.get(2).getDatawire().size()>0){
-            return parameters.get(2).getVarName()+ " = "+parameters.get(0).getParameter()+" - "+parameters.get(1).getParameter()+";";
+            return parameters.get(2).getVarName()+ " = "+"random("+parameters.get(0).getParameter()+","+parameters.get(1).getParameter()+");";
 
         }else {
-            return parameters.get(0).getParameter()+" - "+parameters.get(1).getParameter()+";";
+            return "random("+parameters.get(0).getParameter()+","+parameters.get(1).getParameter()+");";
         }
     }
 
@@ -69,5 +72,4 @@ public class DifferenzModi implements BlockModi, ArduinoBlock {
     public String getHeaderCode() {
         return null;
     }
-
 }

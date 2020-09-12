@@ -35,9 +35,8 @@ public abstract class PlatformSpecificBlock {
     public abstract String getdescription();
 
 
-    public abstract Color blockcolor();
 
-    public abstract BlockCategories getBlockCategoration();
+    public abstract BlockCategories getBlockCategorie();
 
 
 

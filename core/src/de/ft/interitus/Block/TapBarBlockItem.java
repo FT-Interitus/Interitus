@@ -6,7 +6,6 @@
 package de.ft.interitus.Block;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.UI.UI;
@@ -61,8 +60,8 @@ public class TapBarBlockItem implements TapItem {
         UI.UIbatch.draw(AssetLoader.block_left,this.x,this.y,6,this.h);
         UI.UIbatch.draw(AssetLoader.block_right,this.x+6+this.getW()-(6*2),this.y,6,this.h);
 
-        if (psb.getBlockCategoration() != null) {
-            switch (psb.getBlockCategoration()) {
+        if (psb.getBlockCategorie() != null) {
+            switch (psb.getBlockCategorie()) {
 
                 case ActionBlocks -> {
 

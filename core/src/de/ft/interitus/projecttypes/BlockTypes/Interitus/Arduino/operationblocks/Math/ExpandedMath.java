@@ -142,5 +142,10 @@ public class ExpandedMath implements BlockModi, ArduinoBlock {
         return stringBuffer.toString();
     }
 
+    @Override
+    public String getHeaderCode() {
+        return null;
+    }
+
 
 }
