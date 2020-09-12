@@ -41,7 +41,10 @@ public class ArduinoCompiler implements Compiler {
         String Programm = "";
         for(String include:includes) {
 
-            Programm+=include;
+
+            installlibary(include);
+
+            Programm+="#include<"+include+".h>";
 
         }
 
@@ -391,6 +394,33 @@ public class ArduinoCompiler implements Compiler {
             UI.button_debugstart.setDisable(false);
             return true;
         }
+
+
+    }
+
+    private static void installlibary(String library) {
+
+        String installlibrary = "";
+
+
+
+        if (OSChecker.isWindows()) {
+            installlibrary = "libs\\arduino\\cli\\Windows\\arduino-cli.exe lib install "+library;
+
+        } else if (OSChecker.isMac()) {
+
+        } else if (OSChecker.isUnix()) {
+
+            installlibrary = "./libs/arduino/cli/linux/arduino-cli lib install "+library;
+
+
+        } else {
+            Programm.logger.severe("You OS is not supported");
+        }
+
+
+
+           runcommand(installlibrary, true);
 
 
     }
