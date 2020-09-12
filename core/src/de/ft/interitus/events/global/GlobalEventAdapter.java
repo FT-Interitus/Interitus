@@ -6,6 +6,7 @@
 package de.ft.interitus.events.global;
 
 import de.ft.interitus.UI.UIElements.TabBar.Tab;
+import de.ft.interitus.compiler.Compiler;
 
 /**
  * Override only the methods you are interested in
@@ -43,6 +44,11 @@ public class GlobalEventAdapter implements GlobalEventListener {
 
     @Override
     public void tabclicked(GlobalTabClickEvent e, Tab tab) {
+
+    }
+
+    @Override
+    public void compilingstarted(GlobalCompilingStartEvent e, Compiler compiler) {
 
     }
 

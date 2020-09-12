@@ -35,9 +35,19 @@ public class ArduinoCompiler implements Compiler {
     private static boolean uploaderror = false;
     private static Process pr;
     private static String prefix = "param_";
+    public static ArrayList<String> includes = new ArrayList<>();
 
     private static String compilesketch() {
         String Programm = "";
+        for(String include:includes) {
+
+
+            installlibary("\""+include.replace("_"," ")+"\"");
+
+            Programm+="#include<"+include+".h>";
+
+        }
+
         int i=0;
         for(Block block:ProjectManager.getActProjectVar().blocks) {
             if(block.getBlocktype().getBlockParameter()==null) {
@@ -384,6 +394,33 @@ public class ArduinoCompiler implements Compiler {
             UI.button_debugstart.setDisable(false);
             return true;
         }
+
+
+    }
+
+    private static void installlibary(String library) {
+
+        String installlibrary = "";
+
+
+
+        if (OSChecker.isWindows()) {
+            installlibrary = "libs\\arduino\\cli\\Windows\\arduino-cli.exe lib install "+library;
+
+        } else if (OSChecker.isMac()) {
+
+        } else if (OSChecker.isUnix()) {
+
+            installlibrary = "./libs/arduino/cli/linux/arduino-cli lib install "+library;
+
+
+        } else {
+            Programm.logger.severe("You OS is not supported");
+        }
+
+
+
+           runcommand(installlibrary, true);
 
 
     }

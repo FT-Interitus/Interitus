@@ -41,6 +41,7 @@ import de.ft.interitus.datamanager.programmdata.experience.ExperienceManager;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.UI.UIOpenSettingsEvent;
 import de.ft.interitus.events.UI.UiEventAdapter;
+import de.ft.interitus.events.global.GlobalCompilingStartEvent;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.network.bettertogether.SharedVar;
 import de.ft.interitus.projecttypes.ProjectManager;
@@ -600,6 +601,8 @@ public class UI {
             compile_thread = new Thread() {
                 @Override
                 public void run() {
+
+                    EventVar.globalEventManager.compilingstarted(new GlobalCompilingStartEvent(this),ProjectManager.getActProjectVar().projectType.getCompiler());
 
                    if(! ProjectManager.getActProjectVar().projectType.getCompiler().compileandrun()) {
                        NotificationManager.sendNotification(new Notification(AssetLoader.information,"Ein Fehler ist aufgetreten","Während des Compilierens ist\nein Fehler aufgetreten!"));
