@@ -6,6 +6,7 @@
 package de.ft.interitus.events.global;
 
 import de.ft.interitus.UI.UIElements.TabBar.Tab;
+import de.ft.interitus.compiler.Compiler;
 
 public interface GlobalEventListener {
     void loadingdone(GlobalLoadingDoneEvent e);
@@ -21,4 +22,6 @@ public interface GlobalEventListener {
     void focuslost(GlobalFocusLostEvent e);
 
     void tabclicked(GlobalTabClickEvent e, Tab tab);
+
+    void compilingstarted(GlobalCompilingStartEvent e, Compiler compiler);
 }

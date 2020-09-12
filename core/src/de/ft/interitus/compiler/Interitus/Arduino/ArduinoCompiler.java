@@ -42,7 +42,7 @@ public class ArduinoCompiler implements Compiler {
         for(String include:includes) {
 
 
-            installlibary("\""+include+"\"");
+            installlibary("\""+include.replace("_"," ")+"\"");
 
             Programm+="#include<"+include+".h>";
 

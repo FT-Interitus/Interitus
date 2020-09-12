@@ -9,6 +9,7 @@ import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import de.ft.interitus.Programm;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.TabBar.Tab;
+import de.ft.interitus.compiler.Compiler;
 
 import java.util.Vector;
 
@@ -91,6 +92,13 @@ public class GlobalEventManager implements GlobalEventListener {
         for (int i = 0; i < listener.size(); i++)
             ((GlobalEventListener) listener.elementAt(i)).
                     tabclicked(e,tab);
+    }
+
+    @Override
+    public void compilingstarted(GlobalCompilingStartEvent e, Compiler compiler) {
+        for (int i = 0; i < listener.size(); i++)
+            ((GlobalEventListener) listener.elementAt(i)).
+                    compilingstarted(e,compiler);
     }
 
 
