@@ -9,7 +9,7 @@ package de.ft.interitus.deviceconnection.arduino;
 import com.fazecast.jSerialComm.SerialPort;
 import com.fazecast.jSerialComm.SerialPortDataListener;
 import com.fazecast.jSerialComm.SerialPortEvent;
-import de.ft.interitus.UI.setup.steps.ArduinoSteps.Step3;
+import de.ft.interitus.UI_old.setup.steps.ArduinoSteps.Step3;
 import de.ft.interitus.utils.ArrayList;
 import jssc.SerialPortList;
 

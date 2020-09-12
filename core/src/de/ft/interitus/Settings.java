@@ -5,7 +5,7 @@
 
 package de.ft.interitus;
 
-import de.ft.interitus.UI.Theme.Theme;
+import de.ft.interitus.UI_old.Theme.Theme;
 
 public class Settings {
     public static Theme theme = null;

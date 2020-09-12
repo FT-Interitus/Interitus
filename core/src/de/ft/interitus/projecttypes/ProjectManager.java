@@ -7,13 +7,12 @@ package de.ft.interitus.projecttypes;
 
 import de.ft.interitus.Programm;
 import de.ft.interitus.ProgrammingSpace;
-import de.ft.interitus.UI.Notification.Notification;
-import de.ft.interitus.UI.Notification.NotificationManager;
-import de.ft.interitus.UI.UI;
-import de.ft.interitus.UI.UIElements.TabBar.Tab;
-import de.ft.interitus.UI.UIVar;
+import de.ft.interitus.UI_old.Notification.Notification;
+import de.ft.interitus.UI_old.Notification.NotificationManager;
+import de.ft.interitus.UI_old.UI;
+import de.ft.interitus.UI_old.UIElements.TabBar.Tab;
+import de.ft.interitus.UI_old.UIVar;
 import de.ft.interitus.Var;
-import de.ft.interitus.Welcome;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.global.GlobalCloseEvent;

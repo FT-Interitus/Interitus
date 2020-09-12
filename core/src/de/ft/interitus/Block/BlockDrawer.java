@@ -6,10 +6,7 @@
 package de.ft.interitus.Block;
 
 import de.ft.interitus.ProgrammingSpace;
-import de.ft.interitus.UI.UI;
-import de.ft.interitus.UI.UIVar;
-import de.ft.interitus.UI.shortcut.shortcuts.BlockShortcuts;
-import de.ft.interitus.UI.tappedbar.BlockTappedBar;
+import de.ft.interitus.UI_old.shortcut.shortcuts.BlockShortcuts;
 import de.ft.interitus.Var;
 import de.ft.interitus.projecttypes.ProjectManager;
 
@@ -74,10 +71,10 @@ public class BlockDrawer {
                 ProjectManager.getActProjectVar().visibleWireNodes.get(i).draw();
             }
 
-            UI.updatedragui(ProgrammingSpace.shapeRenderer, false, ProgrammingSpace.batch);
-            BlockTappedBar.tb.setX(UIVar.BlockBarX + UIVar.BlockBarW / 2);
-            BlockTappedBar.tb.setY(UIVar.BlockBarY + UIVar.BlockBarH / 2 - (BlockTappedBar.tb.getHeight() + UIVar.abstandvonRand * 2) / 2);
-            BlockTappedBar.tb.draw();
+           // UI.updatedragui(ProgrammingSpace.shapeRenderer, false, ProgrammingSpace.batch);
+          //  BlockTappedBar.tb.setX(UIVar.BlockBarX + UIVar.BlockBarW / 2);
+           // BlockTappedBar.tb.setY(UIVar.BlockBarY + UIVar.BlockBarH / 2 - (BlockTappedBar.tb.getHeight() + UIVar.abstandvonRand * 2) / 2);
+          //  BlockTappedBar.tb.draw();
 
             if (Temp2 != null) {
 

@@ -11,25 +11,21 @@ import com.kotcrab.vis.ui.widget.Menu;
 import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisTable;
 import de.ft.interitus.Settings;
-import de.ft.interitus.UI.CheckShortcuts;
-import de.ft.interitus.UI.Theme.RegisteredThemes;
-import de.ft.interitus.UI.Theme.Theme;
-import de.ft.interitus.UI.UI;
-import de.ft.interitus.UI.settings.SettingsUI;
-import de.ft.interitus.UI.shortcut.ShortCut;
-import de.ft.interitus.UI.shortcut.ShortCutChecker;
+import de.ft.interitus.UI_old.CheckShortcuts;
+import de.ft.interitus.UI_old.Theme.RegisteredThemes;
+import de.ft.interitus.UI_old.Theme.Theme;
+import de.ft.interitus.UI_old.UI;
+import de.ft.interitus.UI_old.settings.SettingsUI;
+import de.ft.interitus.UI_old.shortcut.ShortCut;
+import de.ft.interitus.UI_old.shortcut.ShortCutChecker;
 import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
 import de.ft.interitus.projecttypes.Importer.Import;
 import de.ft.interitus.projecttypes.Importer.Importer;
-import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.ProjectTypes;
 import de.ft.interitus.utils.ArrayList;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.URL;
-import java.util.Collections;
 import java.util.List;
 
 

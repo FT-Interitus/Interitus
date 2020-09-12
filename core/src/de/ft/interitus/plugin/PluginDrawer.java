@@ -7,7 +7,7 @@ package de.ft.interitus.plugin;
 
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.ProgrammingSpace;
-import de.ft.interitus.UI.UI;
+import de.ft.interitus.UI_old.UI;
 
 public class PluginDrawer {
     public static void draw() {

@@ -5,26 +5,15 @@
 
 package de.ft.interitus.plugin;
 
-import com.badlogic.gdx.Files;
-import com.badlogic.gdx.backends.lwjgl3.Lwjgl3FileHandle;
-import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Files;
-import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Programm;
-import de.ft.interitus.UI.UIElements.TextField;
 
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.util.Arrays;
 import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
-import java.util.logging.FileHandler;
 
 public class PluginLoader {
 

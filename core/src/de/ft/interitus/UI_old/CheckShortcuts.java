@@ -1,0 +1,52 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
+package de.ft.interitus.UI_old;
+
+import de.ft.interitus.Programm;
+import de.ft.interitus.UI_old.shortcut.ShortCut;
+import de.ft.interitus.UI_old.shortcut.ShortCutChecker;
+import de.ft.interitus.UI_old.shortcut.shortcuts.BlockShortcuts;
+import de.ft.interitus.UI_old.shortcut.shortcuts.GlobalShortcuts;
+import de.ft.interitus.plugin.ProgramRegistry;
+import de.ft.interitus.utils.ArrayList;
+
+public class CheckShortcuts {
+    public static boolean blockshortcuts = false;
+
+
+    public static ArrayList<ShortCut> shortCuts = new ArrayList<>();
+    public static ArrayList<ShortCutChecker> shortCutsChecker = new ArrayList<>();
+
+    public static void loadArrayList() {
+
+        //Add global Shortcuts
+        //GlobalShortcuts.generateshortcuts();
+        shortCuts.addAll(GlobalShortcuts.retunrarray());
+        shortCutsChecker.add(new GlobalShortcuts());
+        //Add Block shortcuts
+        shortCuts.addAll(BlockShortcuts.retunrarray());
+        shortCutsChecker.add(new BlockShortcuts());
+
+        // ...
+
+        //plugins
+        ProgramRegistry.addShortCuts();
+
+        Programm.logger.config("Shortcuts loaded");
+    }
+
+    public static void check() {
+
+
+        for (int i = 0; i < shortCutsChecker.size(); i++) {
+            shortCutsChecker.get(i).check();
+        }
+
+
+
+
+    }
+}

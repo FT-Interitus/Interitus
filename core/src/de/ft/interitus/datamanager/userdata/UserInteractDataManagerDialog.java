@@ -9,7 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.ProgrammingSpace;
-import de.ft.interitus.UI.UI;
+import de.ft.interitus.UI_old.UI;
 import de.ft.interitus.Var;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.datamanager.userdata.load.DataLoader;

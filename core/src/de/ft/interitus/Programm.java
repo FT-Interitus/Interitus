@@ -7,14 +7,13 @@ package de.ft.interitus;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Graphics;
 import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import de.ft.interitus.Logging.DebugPrinter;
 import de.ft.interitus.Logging.LoggerInit;
-import de.ft.interitus.UI.CheckShortcuts;
-import de.ft.interitus.UI.Theme.ThemeManager;
-import de.ft.interitus.UI.UI;
+import de.ft.interitus.UI_old.CheckShortcuts;
+import de.ft.interitus.UI_old.Theme.ThemeManager;
+import de.ft.interitus.UI_old.UI;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.datamanager.programmdata.experience.ExperienceManager;
 import de.ft.interitus.datamanager.userdata.UserDataInit;
@@ -25,17 +24,13 @@ import de.ft.interitus.loading.SplashScreen;
 import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.plugin.PluginSandboxSecurityPolicy;
 
-import de.ft.interitus.plugin.store.PluginInstallerServer;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.FolderUtils;
 import de.ft.interitus.utils.UserNameGetter;
-import org.lwjgl.glfw.GLFW;
-import org.springframework.boot.SpringApplication;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.security.Policy;
-import java.util.Collections;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Logger;

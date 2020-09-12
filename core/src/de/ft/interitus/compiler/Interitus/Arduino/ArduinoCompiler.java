@@ -6,12 +6,11 @@
 package de.ft.interitus.compiler.Interitus.Arduino;
 
 import de.ft.interitus.Block.Block;
-import de.ft.interitus.Block.DataWire;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.Programm;
-import de.ft.interitus.UI.Notification.Notification;
-import de.ft.interitus.UI.Notification.NotificationManager;
-import de.ft.interitus.UI.UI;
+import de.ft.interitus.UI_old.Notification.Notification;
+import de.ft.interitus.UI_old.Notification.NotificationManager;
+import de.ft.interitus.UI_old.UI;
 import de.ft.interitus.compiler.Compiler;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.loading.AssetLoader;
@@ -24,7 +23,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
-import java.util.Map;
 import java.util.concurrent.*;
 
 public class ArduinoCompiler implements Compiler {

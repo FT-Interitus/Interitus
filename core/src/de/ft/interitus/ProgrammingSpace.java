@@ -6,28 +6,21 @@
 package de.ft.interitus;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import de.ft.interitus.Block.BlockDrawer;
-import de.ft.interitus.UI.CheckShortcuts;
-import de.ft.interitus.UI.Notification.Notification;
-import de.ft.interitus.UI.Notification.NotificationManager;
-import de.ft.interitus.UI.UI;
-import de.ft.interitus.UI.UIElements.PressedKeys;
-import de.ft.interitus.UI.UIElements.UIElementBar;
-import de.ft.interitus.UI.UIElements.UIElements.Button;
-import de.ft.interitus.UI.popup.PopupHandler;
-import de.ft.interitus.UI.tappedbar.BlockTappedBar;
-import de.ft.interitus.datamanager.programmdata.Updater;
-import de.ft.interitus.loading.AssetLoader;
+import de.ft.interitus.UI.Label;
+import de.ft.interitus.UI.Stage;
+import de.ft.interitus.UI_old.CheckShortcuts;
+import de.ft.interitus.UI_old.Notification.NotificationManager;
+import de.ft.interitus.UI_old.UI;
+import de.ft.interitus.UI_old.UIElements.PressedKeys;
+import de.ft.interitus.UI_old.tappedbar.BlockTappedBar;
 import de.ft.interitus.plugin.*;
 import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
 import de.ft.interitus.projecttypes.ProjectManager;
@@ -36,9 +29,6 @@ import de.ft.interitus.utils.ShapeRenderer;
 
 
 import java.awt.*;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 
 
 public class ProgrammingSpace extends ScreenAdapter {
@@ -61,9 +51,18 @@ public class ProgrammingSpace extends ScreenAdapter {
     public static float delta;
     public boolean loadimagesfromplugin = true;
     public static Plugin nativ = new Native();
+    public static Stage stage;
+    public static Label label = new Label("test");
 
 
     public ProgrammingSpace() {
+
+
+
+
+
+
+
 
 
 
@@ -94,7 +93,7 @@ public class ProgrammingSpace extends ScreenAdapter {
         BlockTappedBar.init();
 
 
-        de.ft.interitus.UI.Viewport.init();
+        de.ft.interitus.UI_old.Viewport.init();
 
         Gdx.graphics.setTitle("New File");
         ProjectManager.getActProjectVar().setFilename("New File");
@@ -102,6 +101,9 @@ public class ProgrammingSpace extends ScreenAdapter {
 
         ThreadManager.init();
 
+
+        stage = new Stage(UI.UIbatch,shapeRenderer);
+        stage.add(label);
 
         System.gc(); //Clean RAM after Loading
 
@@ -117,6 +119,8 @@ public class ProgrammingSpace extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
+
+
 
 
 
@@ -150,13 +154,13 @@ public class ProgrammingSpace extends ScreenAdapter {
             BlockshapeRenderer.setProjectionMatrix(cam.combined);
 
 
-            UI.updatedragui(shapeRenderer, true, batch);
+           // UI.updatedragui(shapeRenderer, true, batch);
 
-
+            stage.draw();
             BlockDrawer.Draw();
 
 
-            de.ft.interitus.UI.Viewport.update(delta);
+            de.ft.interitus.UI_old.Viewport.update(delta);
 
 
         } catch (Exception e) {
@@ -172,7 +176,7 @@ public class ProgrammingSpace extends ScreenAdapter {
 
         NotificationManager.draw();
         try {
-            UI.update();
+            //UI.update();
 
         } catch (Exception e) {
             //Falls die UI nicht richtig initialisiert werden konnte
@@ -184,19 +188,13 @@ public class ProgrammingSpace extends ScreenAdapter {
 
 
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
-          Notification notification =  new Notification(AssetLoader.information, "Wichtige Information", "\nEs steht kein Update bereit!");
-          notification.setButtonBar(new UIElementBar().addButton(new Button().setText("Test")));
-            NotificationManager.sendNotification(notification);
-        }
-
-        PopupHandler.drawPopUp();
+      //  PopupHandler.drawPopUp();
 
 
 
 
         try {
-            DisplayErrors.checkerror(); //Check if there are undisplayed Errors
+            //DisplayErrors.checkerror(); //Check if there are undisplayed Errors
         } catch (IllegalStateException e) {
             //Bei eienem VisUI absturz
         }
@@ -204,7 +202,7 @@ public class ProgrammingSpace extends ScreenAdapter {
         loader(); //Load Images in OpenGL context
 
 
-        de.ft.interitus.UI.Viewport.limitfps();
+        de.ft.interitus.UI_old.Viewport.limitfps();
 
 
     }

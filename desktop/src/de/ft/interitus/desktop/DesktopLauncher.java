@@ -7,21 +7,14 @@ package de.ft.interitus.desktop;
 
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.backends.lwjgl3.*;
-import com.badlogic.gdx.scenes.scene2d.utils.DragAndDrop;
 import de.ft.interitus.Programm;
-import de.ft.interitus.UI.UI;
-import de.ft.interitus.UI.editor.Editor;
 import de.ft.interitus.Var;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.global.GlobalCloseEvent;
 import de.ft.interitus.events.global.GlobalFileDropedEvent;
 import de.ft.interitus.events.global.GlobalFocusLostEvent;
 
-import java.awt.*;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Arrays;
 
 public class DesktopLauncher {

@@ -5,7 +5,7 @@
 
 package de.ft.interitus.events.rightclick;
 
-import de.ft.interitus.UI.popup.PopupMenue;
+import de.ft.interitus.UI_old.popup.PopupMenue;
 
 import java.util.ArrayList;
 import java.util.Vector;

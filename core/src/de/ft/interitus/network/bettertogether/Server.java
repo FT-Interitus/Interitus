@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.kotcrab.vis.ui.util.dialog.ConfirmDialogListener;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import de.ft.interitus.Block.SaveBlock;
-import de.ft.interitus.UI.UI;
+import de.ft.interitus.UI_old.UI;
 import de.ft.interitus.Var;
 import de.ft.interitus.datamanager.BlockCalculator;
 import de.ft.interitus.projecttypes.ProjectManager;

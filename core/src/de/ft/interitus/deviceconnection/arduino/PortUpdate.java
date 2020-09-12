@@ -5,7 +5,7 @@
 
 package de.ft.interitus.deviceconnection.arduino;
 
-import de.ft.interitus.UI.setup.steps.ArduinoSteps.Step3;
+import de.ft.interitus.UI_old.setup.steps.ArduinoSteps.Step3;
 
 import java.util.Timer;
 import java.util.TimerTask;

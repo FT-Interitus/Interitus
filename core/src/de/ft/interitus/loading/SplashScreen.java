@@ -10,9 +10,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import de.ft.interitus.Programm;
 import de.ft.interitus.Settings;
-import de.ft.interitus.UI.window.CreateWindow;
-import de.ft.interitus.UI.window.Window;
-import org.lwjgl.glfw.GLFWVidMode;
+import de.ft.interitus.UI_old.window.CreateWindow;
+import de.ft.interitus.UI_old.window.Window;
 
 public class SplashScreen {
     public static Window create() {

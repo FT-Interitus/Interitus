@@ -7,12 +7,10 @@ package de.ft.interitus.loading;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Graphics;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.utils.GdxRuntimeException;
 import de.ft.interitus.Programm;
 import de.ft.interitus.Settings;
-import de.ft.interitus.UI.UI;
+import de.ft.interitus.UI_old.UI;
 import de.ft.interitus.Var;
 import de.ft.interitus.Welcome;
 import de.ft.interitus.events.EventVar;

@@ -10,10 +10,10 @@ import com.badlogic.gdx.math.Frustum;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.ProgrammingSpace;
-import de.ft.interitus.UI.UIVar;
+import de.ft.interitus.UI_old.UIVar;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.ProjectManager;
-import de.ft.interitus.UI.UIElements.check.CheckKollision;
+import de.ft.interitus.UI_old.UIElements.check.CheckKollision;
 
 public abstract class WireNode implements VisibleObjects {
     public final static int public_w = 10;

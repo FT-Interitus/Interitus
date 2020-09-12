@@ -6,13 +6,12 @@
 package de.ft.interitus.Block;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.ProgrammingSpace;
-import de.ft.interitus.UI.UI;
-import de.ft.interitus.UI.UIElements.check.CheckMouse;
-import de.ft.interitus.UI.UIVar;
-import de.ft.interitus.UI.tappedbar.TapItem;
+import de.ft.interitus.UI_old.UI;
+import de.ft.interitus.UI_old.UIElements.check.CheckMouse;
+import de.ft.interitus.UI_old.UIVar;
+import de.ft.interitus.UI_old.tappedbar.TapItem;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.ProjectManager;

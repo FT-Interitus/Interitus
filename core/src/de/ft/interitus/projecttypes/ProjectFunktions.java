@@ -7,7 +7,7 @@ package de.ft.interitus.projecttypes;
 
 import com.kotcrab.vis.ui.widget.VisTable;
 import de.ft.interitus.Block.Block;
-import de.ft.interitus.UI.ManualConfig.DeviceConfiguration;
+import de.ft.interitus.UI_old.ManualConfig.DeviceConfiguration;
 
 public interface ProjectFunktions {
     void create();

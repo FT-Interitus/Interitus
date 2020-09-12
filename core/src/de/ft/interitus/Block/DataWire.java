@@ -12,9 +12,9 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.Programm;
 import de.ft.interitus.ProgrammingSpace;
-import de.ft.interitus.UI.UIElements.check.CheckKollision;
-import de.ft.interitus.UI.UIElements.check.CheckMouse;
-import de.ft.interitus.UI.UIVar;
+import de.ft.interitus.UI_old.UIElements.check.CheckKollision;
+import de.ft.interitus.UI_old.UIElements.check.CheckMouse;
+import de.ft.interitus.UI_old.UIVar;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.Unproject;
 

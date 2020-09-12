@@ -11,7 +11,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.ProgrammingSpace;
-import de.ft.interitus.UI.popup.PopupMenue;
+import de.ft.interitus.UI_old.popup.PopupMenue;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.block.BlockKillMovingWiresEvent;
 import de.ft.interitus.events.rightclick.RightClickEventListener;
@@ -19,7 +19,7 @@ import de.ft.interitus.events.rightclick.RightClickOpenRequestEvent;
 import de.ft.interitus.events.rightclick.RightClickPerformActionEvent;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.ProjectManager;
-import de.ft.interitus.UI.UIElements.check.CheckKollision;
+import de.ft.interitus.UI_old.UIElements.check.CheckKollision;
 
 public abstract class Wire {
     final Wire INSTANCE = this;
