@@ -12,8 +12,6 @@ import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.ProjectTypes;
 import de.ft.interitus.utils.ArrayList;
 
-import java.awt.*;
-
 public abstract class PlatformSpecificBlock {
     public final ArrayList<BlockModi> blockModis = new ArrayList<>();
     private final Addon adddon;
@@ -117,7 +115,7 @@ public abstract class PlatformSpecificBlock {
         return blockModis.get(actBlockModiIndex).getWidth();
     }
 
-    public final void changeBlockModus(int index, Block block) {
+    public final void changeBlockModus(int index, Block block, boolean loading) {
         if (index == actBlockModiIndex) {
             return;
         }
@@ -145,9 +143,13 @@ public abstract class PlatformSpecificBlock {
         int widthdiff = this.getWidth();
         actBlockModiIndex = index;
 
+
+
         widthdiff = this.getWidth()-widthdiff;
 
-        block.changesize(widthdiff);
+        if(!loading) {
+            block.changesize(widthdiff);
+        }
 
     }
 

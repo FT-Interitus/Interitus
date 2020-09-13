@@ -62,7 +62,7 @@ blockSettings.setSettings("float");
 
 
     @Override
-    public String getHeaderCode() {
+    public String getHeaderCode(boolean inserted) {
         return null;
     }
 }

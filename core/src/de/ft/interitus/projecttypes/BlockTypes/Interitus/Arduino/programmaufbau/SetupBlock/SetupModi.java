@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2020. 
  * Copyright by Tim and Felix
  */
 
@@ -11,8 +11,6 @@ import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.BlockTypes.BlockModi;
 import de.ft.interitus.projecttypes.BlockTypes.BlockSettings;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
-import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoFunktions;
-import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.ArrayList;
 
 public class SetupModi implements BlockModi, ArduinoBlock {
@@ -46,7 +44,7 @@ public class SetupModi implements BlockModi, ArduinoBlock {
         return "void setup(){";
     }
     @Override
-    public String getHeaderCode() {
+    public String getHeaderCode(boolean inserted) {
 
 
 

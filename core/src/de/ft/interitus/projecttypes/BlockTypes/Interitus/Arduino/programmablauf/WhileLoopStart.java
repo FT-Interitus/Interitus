@@ -12,8 +12,6 @@ import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.ProjectTypes;
 
-import java.awt.*;
-
 public class WhileLoopStart extends PlatformSpecificBlock implements ArduinoBlock {
 
     public WhileLoopStart(ProjectTypes arduino, Addon addon) {
@@ -74,7 +72,7 @@ public class WhileLoopStart extends PlatformSpecificBlock implements ArduinoBloc
     }
 
     @Override
-    public String getHeaderCode() {
+    public String getHeaderCode(boolean inserted) {
         return null;
     }
 

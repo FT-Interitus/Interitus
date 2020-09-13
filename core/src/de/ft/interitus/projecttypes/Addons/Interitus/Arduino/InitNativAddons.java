@@ -9,7 +9,7 @@ import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
 
 public class InitNativAddons {
     public static void init() {
-        ProjectTypesVar.addons.add(new NeoPixel());
+        //ProjectTypesVar.addons.add(new NeoPixel());
 
     }
 }

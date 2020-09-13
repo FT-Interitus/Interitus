@@ -20,6 +20,7 @@ import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.operationblocks
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.operationblocks.random.RandomBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.operationblocks.variable.VariableBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.operationblocks.variable.WriteValue;
+import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.For.For;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.If.If;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.Wait.Wait;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmaufbau.LoopBlock.LoopBlock;
@@ -60,8 +61,10 @@ public class InitArduino {
         blocks.add(new If(arduino,null));
         blocks.add(new MapBlock(arduino , null));
         blocks.add(new LogicOperation(arduino, null));
-        blocks.add(new VariableBlock(arduino, null));
         blocks.add(new RandomBlock(arduino, null));
+        blocks.add(new For(arduino, null));
+
+
 
 
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2020. 
  * Copyright by Tim and Felix
  */
 
@@ -70,7 +70,7 @@ public class LogicOperationIntagerOperation implements BlockModi, ArduinoBlock {
 
 
     @Override
-    public String getHeaderCode() {
+    public String getHeaderCode(boolean inserted) {
         return null;
     }
 

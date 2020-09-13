@@ -12,6 +12,7 @@ import de.ft.interitus.UI.Notification.NotificationManager;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.TabBar.Tab;
 import de.ft.interitus.UI.UIVar;
+import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.Var;
 import de.ft.interitus.Welcome;
 import de.ft.interitus.datamanager.programmdata.Data;
@@ -82,6 +83,8 @@ public class ProjectManager {
         time.cancel();
         time.purge();
 
+
+        BlockTappedBar.init();
 
         UIVar.isdialogeopend = true;
 

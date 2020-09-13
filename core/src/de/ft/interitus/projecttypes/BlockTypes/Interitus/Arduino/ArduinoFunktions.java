@@ -133,12 +133,6 @@ private VisSelectBox<ParameterVariableType> stringVisSelectBox;
         ProjectManager.getActProjectVar().blocks.add(ProjectManager.getActProjectVar().projectType.getBlockGenerator().generateBlock(0, UIVar.abstandvonRand + 20, UIVar.programmflaeche_h + UIVar.untenhohe - 70 - UIVar.buttonbarzeile_h - 250, ProjectManager.getActProjectVar().projectType.getProjectblocks().get(1).getWidth(), UIVar.BlockHeight, ProjectManager.getActProjectVar().projectType.getProjectblocks().get(1), ProjectManager.getActProjectVar().projectType.getBlockUpdateGenerator(), ProjectManager.getActProjectVar().projectType.getBlocktoSaveGenerator()));
 
 
-        ProjectManager.getActProjectVar().projectVariables.add(new ArduinoVariable("hi",InitArduino.booleanvar));
-        ProjectManager.getActProjectVar().projectVariables.add(new ArduinoVariable("h2",InitArduino.booleanvar));
-        ProjectManager.getActProjectVar().projectVariables.add(new ArduinoVariable("h3",InitArduino.booleanvar));
-        ProjectManager.getActProjectVar().projectVariables.add(new ArduinoVariable("h4",InitArduino.booleanvar));
-        ProjectManager.getActProjectVar().projectVariables.add(new ArduinoVariable("h5",InitArduino.booleanvar));
-        ProjectManager.getActProjectVar().projectVariables.add(new ArduinoVariable("h6",InitArduino.booleanvar));
 
     }
 

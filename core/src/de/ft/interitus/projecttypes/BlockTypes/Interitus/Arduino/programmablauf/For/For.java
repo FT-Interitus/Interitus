@@ -3,37 +3,37 @@
  * Copyright by Tim and Felix
  */
 
-package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf;
+package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.For;
 
 import com.badlogic.gdx.graphics.Texture;
+import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
-import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
-import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.inputblocs.DigitalReadDefault;
+import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.If.IfDefaultBlockModi;
+import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.If.IfElse;
+import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.If.IfEnd;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.ProjectTypes;
 
-public class WhileLoopEnd extends PlatformSpecificBlock implements ArduinoBlock {
+public class For extends PlatformSpecificBlock {
 
-    public WhileLoopEnd(ProjectTypes arduino, Addon addon) {
-        super(arduino,addon);
-        blockModis.add(new DigitalReadDefault());
-        actBlockModiIndex = 0;
+    public For(ProjectTypes projectTypes, Addon addon) {
+        super(projectTypes, addon);
+        super.blockModis.add(new ForDefaultBlockModi());
+
+        super.actBlockModiIndex = 0;
 
     }
 
-
     @Override
     public String getName() {
-        return "WhileLoopEnde";
+        return "For";
     }
 
     @Override
     public String getdescription() {
         return "";
     }
-
-
 
 
 
@@ -45,13 +45,10 @@ public class WhileLoopEnd extends PlatformSpecificBlock implements ArduinoBlock 
 
 
 
-
     @Override
     public Texture getDescriptionImage() {
-        return null;
+        return AssetLoader.if_description;
     }
-
-
 
     @Override
     public boolean canbedeleted() {
@@ -67,16 +64,4 @@ public class WhileLoopEnd extends PlatformSpecificBlock implements ArduinoBlock 
     public boolean canhasleftconnector() {
         return true;
     }
-
-
-    @Override
-    public String getCode() {
-        return "}";
-    }
-
-    @Override
-    public String getHeaderCode(boolean inserted) {
-        return null;
-    }
-
 }

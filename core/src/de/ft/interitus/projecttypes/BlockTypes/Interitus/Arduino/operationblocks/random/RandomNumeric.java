@@ -15,8 +15,6 @@ import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.InitArduino;
 import de.ft.interitus.utils.ArrayList;
 
-import java.sql.PreparedStatement;
-
 public class RandomNumeric implements BlockModi, ArduinoBlock {
     ArrayList<Parameter> parameters = new ArrayList<>();
     Parameter min;
@@ -24,7 +22,7 @@ public class RandomNumeric implements BlockModi, ArduinoBlock {
     Parameter output;
     public RandomNumeric() {
         min = new Parameter("", AssetLoader.Parameter_lowerlimit,"Minimum","","",new ParameterType(InitArduino.floatvar,false,false),true);
-        max = new Parameter("", AssetLoader.Parameter_upperlimit,"Minimum","","",new ParameterType(InitArduino.floatvar,false,false),true);
+        max = new Parameter("", AssetLoader.Parameter_upperlimit,"Maximum","","",new ParameterType(InitArduino.floatvar,false,false),true);
         output = new Parameter("", AssetLoader.Parameter_randomdice,"Output","","",new ParameterType(InitArduino.floatvar,true,false),true);
 
 
@@ -69,7 +67,7 @@ parameters.add(output);
     }
 
     @Override
-    public String getHeaderCode() {
+    public String getHeaderCode(boolean inserted) {
         return null;
     }
 }

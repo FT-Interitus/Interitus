@@ -3,7 +3,7 @@
  * Copyright by Tim and Felix
  */
 
-package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.If;
+package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.For;
 
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
@@ -14,12 +14,14 @@ import de.ft.interitus.projecttypes.BlockTypes.BlockSettings;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.InitArduino;
 import de.ft.interitus.utils.ArrayList;
+import org.apache.commons.lang3.RandomStringUtils;
 
-public class IfDefaultBlockModi implements BlockModi, ArduinoBlock {
+public class ForDefaultBlockModi implements BlockModi, ArduinoBlock {
     ArrayList<Parameter> parameters = new ArrayList<>();
-    public IfDefaultBlockModi() {
+    public ForDefaultBlockModi() {
 
-        parameters.add(new Parameter("",AssetLoader.Parameter_first,"Bedingung","","boolean",new ParameterType(InitArduino.booleanvar,false,true).setSelectables(new String[]{"true","false"}),true));
+        parameters.add(new Parameter("",AssetLoader.Parameter_first,"Counter","","int",new ParameterType(InitArduino.floatvar,false,false),true));
+        parameters.add(new Parameter("",AssetLoader.Parameter_isequal,"Output","","int",new ParameterType(InitArduino.floatvar,true,false),true));
 
     }
 
@@ -40,7 +42,7 @@ public class IfDefaultBlockModi implements BlockModi, ArduinoBlock {
 
     @Override
     public String getname() {
-        return "If";
+        return "For";
     }
 
     @Override
@@ -50,7 +52,18 @@ public class IfDefaultBlockModi implements BlockModi, ArduinoBlock {
 
     @Override
     public String getCode() {
-        return "if("+parameters.get(0).getParameter()+") {";
+        String generatedString = RandomStringUtils.randomAlphabetic(4);
+        if( parameters.get(1).getDatawire().size()>0) {
+            return "for(int " + generatedString + "=0;" + generatedString + "<" + parameters.get(0).getParameter() + ";" + generatedString + "++) {\n"+
+                    parameters.get(1).getVarName() +" = "+ generatedString+";"
+
+                    ;
+
+
+        }else{
+            return "for(int " + generatedString + "=0;" + generatedString + "<" + parameters.get(0).getParameter() + ";" + generatedString + "++) {";
+
+        }
     }
 
     @Override

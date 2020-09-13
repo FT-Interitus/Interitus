@@ -45,7 +45,7 @@ public class IfElse implements BlockModi, ArduinoBlock {
     }
 
     @Override
-    public String getHeaderCode() {
+    public String getHeaderCode(boolean inserted) {
         return null;
     }
 

@@ -84,7 +84,7 @@ public class MapModiDefault implements BlockModi, ArduinoBlock {
 
 
     @Override
-    public String getHeaderCode() {
-        return null;
+    public String getHeaderCode(boolean inserted) {
+        return "test";
     }
 }

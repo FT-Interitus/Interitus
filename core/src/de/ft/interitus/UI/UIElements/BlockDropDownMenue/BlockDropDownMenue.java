@@ -102,7 +102,7 @@ public class BlockDropDownMenue {
 
                 if(Gdx.input.isButtonPressed(0)){
                     ProgrammingSpace.BlockshapeRenderer.setColor(0f/255f, 101f/255f, 100f/255f,1);
-                    block.getBlocktype().changeBlockModus(i,block);
+                    block.getBlocktype().changeBlockModus(i,block, false);
 
                 }
                 ProgrammingSpace.BlockshapeRenderer.begin(ShapeRenderer.ShapeType.Filled);

@@ -51,6 +51,7 @@ public class PluginManagerHandler {
                     e.printStackTrace();
                 } catch (UnsupportedClassVersionError a) {
                     Programm.logger.severe("Das Plugin " + f.getName() + " wurde in der falschen Version geschrieben");
+                    a.printStackTrace();
 
                 }
 

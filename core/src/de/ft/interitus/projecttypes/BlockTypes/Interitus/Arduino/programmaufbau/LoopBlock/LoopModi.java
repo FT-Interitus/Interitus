@@ -43,7 +43,7 @@ public class LoopModi  implements BlockModi, ArduinoBlock {
          return "void loop(){";
     }
     @Override
-    public String getHeaderCode() {
+    public String getHeaderCode(boolean inserted) {
         return null;
     }
 }

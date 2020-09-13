@@ -55,9 +55,12 @@ public class ArduinoCompiler implements Compiler {
                 continue;
             }
 
-            if (((ArduinoBlock) block.getBlocktype().blockModis.get(block.getBlocktype().actBlockModiIndex)).getHeaderCode() != null) {
+            if (((ArduinoBlock) block.getBlocktype().blockModis.get(block.getBlocktype().actBlockModiIndex)).getHeaderCode(false) != null) {
 
-                Programm.append(((ArduinoBlock) block.getBlocktype().blockModis.get(block.getBlocktype().actBlockModiIndex)).getHeaderCode());
+                Programm.append(((ArduinoBlock) block.getBlocktype().blockModis.get(block.getBlocktype().actBlockModiIndex)).getHeaderCode(true));
+                Programm.append("\n");
+
+
 
             }
         }
@@ -138,7 +141,7 @@ public class ArduinoCompiler implements Compiler {
         Programm.append("}\n");
 
 
-        System.out.println(Programm);
+        de.ft.interitus.Programm.logger.warning("\n"+Programm.toString());
 
         return Programm.toString();
     }

@@ -27,7 +27,7 @@ public class IfEnd implements BlockModi, ArduinoBlock {
 
     @Override
     public int getWidth() {
-        return 35;
+        return 50;
     }
 
     @Override
@@ -46,7 +46,7 @@ public class IfEnd implements BlockModi, ArduinoBlock {
     }
 
     @Override
-    public String getHeaderCode() {
+    public String getHeaderCode(boolean inserted) {
         return null;
     }
 
