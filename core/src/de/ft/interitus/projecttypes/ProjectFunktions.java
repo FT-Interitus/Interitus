@@ -9,6 +9,8 @@ import com.kotcrab.vis.ui.widget.VisTable;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.UI.ManualConfig.DeviceConfiguration;
 
+import java.util.ArrayList;
+
 public interface ProjectFunktions {
     void create();
 
@@ -25,5 +27,11 @@ public interface ProjectFunktions {
 
 
     boolean isblockconnected(Block block);
+
+    boolean isVariableAvailable(String name);
+
+
+
+
 
 }

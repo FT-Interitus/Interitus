@@ -57,6 +57,7 @@ public abstract class ProjectVar {
     public DataWire moveingdatawire = null;
     public ArrayList<Addon> enabledAddons = new ArrayList<>();
     public Object projectSettings = null;
+    public ArrayList<ProjectVariable> projectVariables = new ArrayList<>();
 
 
     public ArrayList<DeviceConfiguration> deviceConfigurations = new ArrayList<>();

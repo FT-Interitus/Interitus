@@ -6,7 +6,6 @@
 package de.ft.interitus.compiler.Interitus.Arduino;
 
 import de.ft.interitus.Block.Block;
-import de.ft.interitus.Block.DataWire;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.Programm;
 import de.ft.interitus.UI.Notification.Notification;
@@ -15,9 +14,10 @@ import de.ft.interitus.UI.UI;
 import de.ft.interitus.compiler.Compiler;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.projecttypes.BlockTypes.BlockModi;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
+import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoVariable;
 import de.ft.interitus.projecttypes.ProjectManager;
+import de.ft.interitus.projecttypes.ProjectVariable;
 import de.ft.interitus.utils.ArrayList;
 import de.ft.interitus.utils.OSChecker;
 import org.json.JSONArray;
@@ -25,75 +25,80 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
-import java.util.Map;
 import java.util.concurrent.*;
 
 public class ArduinoCompiler implements Compiler {
     //TODO APPLE SUPPORT
 
     private static final ArrayList<String> errorstring = new ArrayList<>();
+    public static ArrayList<String> installlibery = new ArrayList<>();
     private static Notification notification;
     private static boolean uploaderror = false;
     private static Process pr;
-    private static String prefix = "param_";
-    public static ArrayList<String> installlibery = new ArrayList<>();
+    private static final String prefix = "param_";
 
     private static String compilesketch() {
         StringBuilder Programm = new StringBuilder();
-        for(String include:installlibery) {
+        for (String include : installlibery) {
 
-            installlibary("\""+include+"\"");
+            installlibary("\"" + include + "\"");
 
         }
 
-
         installlibery.clear();
 
-        int i=0;
+        int i = 0;
 
-        for(Block block:ProjectManager.getActProjectVar().blocks) {
-            if(!ProjectManager.getActProjectVar().projectType.getProjectFunktions().isblockconnected(block)) {
+
+        for (Block block : ProjectManager.getActProjectVar().blocks) {
+            if (!ProjectManager.getActProjectVar().projectType.getProjectFunktions().isblockconnected(block)) {
                 continue;
             }
 
-            if(((ArduinoBlock) block.getBlocktype().blockModis.get(block.getBlocktype().actBlockModiIndex)).getHeaderCode()!=null) {
+            if (((ArduinoBlock) block.getBlocktype().blockModis.get(block.getBlocktype().actBlockModiIndex)).getHeaderCode() != null) {
 
                 Programm.append(((ArduinoBlock) block.getBlocktype().blockModis.get(block.getBlocktype().actBlockModiIndex)).getHeaderCode());
 
             }
         }
 
-        for(Block block:ProjectManager.getActProjectVar().blocks) {
-            if(block.getBlocktype().getBlockParameter()==null) {
+        for (ProjectVariable variable : ProjectManager.getActProjectVar().projectVariables) {
+
+            Programm.append(((ArduinoVariable) variable).getCode());
+            Programm.append("\n");
+
+
+        }
+
+
+        for (Block block : ProjectManager.getActProjectVar().blocks) {
+            if (block.getBlocktype().getBlockParameter() == null) {
                 continue;
             }
 
-            if(!ProjectManager.getActProjectVar().projectType.getProjectFunktions().isblockconnected(block)) {
+            if (!ProjectManager.getActProjectVar().projectType.getProjectFunktions().isblockconnected(block)) {
                 continue;
             }
 
 
+            for (Parameter parameter : block.getBlocktype().getBlockParameter()) {
 
 
-            for(Parameter parameter:block.getBlocktype().getBlockParameter()) {
-
-
-                if(!parameter.getParameterType().isOutput()) {
+                if (!parameter.getParameterType().isOutput()) {
                     continue;
                 }
-                if(parameter.getDatawire()==null) {
+                if (parameter.getDatawire() == null) {
                     continue;
                 }
 
-               if(parameter.getDatawire().size()<1) {
-                   continue;
-               }
+                if (parameter.getDatawire().size() < 1) {
+                    continue;
+                }
 
-                parameter.setVarName(prefix+i);
+                parameter.setVarName(prefix + i);
                 Programm.append(parameter.getParameterType().getTyp().getType()).append(" ").append(parameter.getVarName()).append(";\n");
-                  i++;
+                i++;
             }
-
 
 
         }
@@ -107,12 +112,10 @@ public class ArduinoCompiler implements Compiler {
             a = a.getRight();
 
 
-
-                Programm.append(((ArduinoBlock) a.getBlocktype().getBlockModis().get(a.getBlocktype().getActBlockModiIndex())).getCode()).append("//").append(a.getIndex()).append(" \n");
+            Programm.append(((ArduinoBlock) a.getBlocktype().getBlockModis().get(a.getBlocktype().getActBlockModiIndex())).getCode()).append("//").append(a.getIndex()).append(" \n");
 
 
         }
-
 
 
         Programm.append("}\n");
@@ -139,7 +142,6 @@ public class ArduinoCompiler implements Compiler {
 
         return Programm.toString();
     }
-
 
 
     private static String runcommand(String command, boolean geterror) {
@@ -201,6 +203,31 @@ public class ArduinoCompiler implements Compiler {
 
     }
 
+    private static void installlibary(String library) {
+
+        String installlibrary = "";
+
+
+        if (OSChecker.isWindows()) {
+            installlibrary = "libs\\arduino\\cli\\Windows\\arduino-cli.exe lib install " + library;
+
+        } else if (OSChecker.isMac()) {
+
+        } else if (OSChecker.isUnix()) {
+
+            installlibrary = "./libs/arduino/cli/linux/arduino-cli lib install " + library;
+
+
+        } else {
+            Programm.logger.severe("You OS is not supported");
+        }
+
+
+        runcommand(installlibrary, true);
+
+
+    }
+
     @Override
     public String compile() {
 
@@ -238,7 +265,6 @@ public class ArduinoCompiler implements Compiler {
 
         return true;
     }
-
 
     @Override
     public String getCompilerVersion() {
@@ -412,33 +438,6 @@ public class ArduinoCompiler implements Compiler {
             UI.button_debugstart.setDisable(false);
             return true;
         }
-
-
-    }
-
-    private static void installlibary(String library) {
-
-        String installlibrary = "";
-
-
-
-        if (OSChecker.isWindows()) {
-            installlibrary = "libs\\arduino\\cli\\Windows\\arduino-cli.exe lib install "+library;
-
-        } else if (OSChecker.isMac()) {
-
-        } else if (OSChecker.isUnix()) {
-
-            installlibrary = "./libs/arduino/cli/linux/arduino-cli lib install "+library;
-
-
-        } else {
-            Programm.logger.severe("You OS is not supported");
-        }
-
-
-
-           runcommand(installlibrary, true);
 
 
     }
