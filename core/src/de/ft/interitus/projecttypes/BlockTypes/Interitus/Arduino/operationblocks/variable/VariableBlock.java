@@ -32,7 +32,7 @@ public class VariableBlock extends PlatformSpecificBlock {
 
     @Override
     public String getdescription() {
-        return "";
+        return "Das ist ein Variablen Block";
     }
 
 

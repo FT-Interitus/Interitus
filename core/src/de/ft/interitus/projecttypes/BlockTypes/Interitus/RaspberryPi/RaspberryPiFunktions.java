@@ -43,5 +43,10 @@ public class RaspberryPiFunktions implements ProjectFunktions {
         return false;
     }
 
+    @Override
+    public boolean isVariableAvailable(String name) {
+        return false;
+    }
+
 
 }

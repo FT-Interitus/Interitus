@@ -60,7 +60,7 @@ public class InitArduino {
         blocks.add(new If(arduino,null));
         blocks.add(new MapBlock(arduino , null));
         blocks.add(new LogicOperation(arduino, null));
-      //  blocks.add(new VariableBlock(arduino, null));
+        blocks.add(new VariableBlock(arduino, null));
         blocks.add(new RandomBlock(arduino, null));
 
 

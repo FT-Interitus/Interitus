@@ -42,5 +42,10 @@ public class EV3Funktions implements ProjectFunktions {
         return false;
     }
 
+    @Override
+    public boolean isVariableAvailable(String name) {
+        return false;
+    }
+
 
 }
