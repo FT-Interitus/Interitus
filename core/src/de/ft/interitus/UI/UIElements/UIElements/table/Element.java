@@ -7,4 +7,7 @@ public class Element {
     public Element(){
 
     }
+    public Element(UIElement uiElement){
+        this.uiElement=uiElement;
+    }
 }

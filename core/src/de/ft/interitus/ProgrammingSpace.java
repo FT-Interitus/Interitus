@@ -24,6 +24,9 @@ import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.PressedKeys;
 import de.ft.interitus.UI.UIElements.UIElementBar;
 import de.ft.interitus.UI.UIElements.UIElements.Button;
+import de.ft.interitus.UI.UIElements.UIElements.table.Column;
+import de.ft.interitus.UI.UIElements.UIElements.table.Row;
+import de.ft.interitus.UI.UIElements.UIElements.table.Table;
 import de.ft.interitus.UI.popup.PopupHandler;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.datamanager.programmdata.Updater;
@@ -61,9 +64,15 @@ public class ProgrammingSpace extends ScreenAdapter {
     public static float delta;
     public boolean loadimagesfromplugin = true;
     public static Plugin nativ = new Native();
+    public static Table testtable=new Table(100,200,1,1);
 
 
     public ProgrammingSpace() {
+        testtable.addColumn(new Column(100));
+        testtable.addColumn(new Column(50));
+        testtable.addColumn(new Column(100));
+        testtable.addRow(new Row(100));
+        testtable.getColumn(0).setWeight(10);
 
 
 
@@ -206,7 +215,7 @@ public class ProgrammingSpace extends ScreenAdapter {
 
         de.ft.interitus.UI.Viewport.limitfps();
 
-
+testtable.draw();
     }
 
 
