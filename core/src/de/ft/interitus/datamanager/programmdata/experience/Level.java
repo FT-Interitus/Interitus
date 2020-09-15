@@ -28,7 +28,7 @@ public class Level {
 
 
         //Level 3 to 4
-        if (ExperienceVar.userlevel == 3 && ExperienceVar.programmtimeinhoures > 1.0f) {
+        if (ExperienceVar.userlevel == 3 && ExperienceVar.programmtimeinhoures > 10.0f) {
             ExperienceVar.userlevel = 4;
         }
 /*

@@ -7,9 +7,7 @@ package de.ft.interitus.loading;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Graphics;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.utils.GdxRuntimeException;
 import de.ft.interitus.Programm;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.UI;
@@ -29,6 +27,7 @@ public class Loading extends ScreenAdapter {
         EventVar.globalEventManager.loadingstart(new GlobalLoadingStartEvent(this));
 
 
+
         AssetLoader.load();
 
     }
@@ -44,7 +43,7 @@ public class Loading extends ScreenAdapter {
             if (AssetLoader.manager.update()) {
                 try {
                     AssetLoader.save();
-                }catch (Exception e) {
+                } catch (Exception e) {
 
                     Programm.logger.severe("Error while saving Assets");
                 }
@@ -65,7 +64,7 @@ public class Loading extends ScreenAdapter {
                     Var.window.setVisible(true);
                     GLFW.glfwFocusWindow(Var.window.getWindowHandle());
                     Programm.INSTANCE.setScreen(new Welcome());
-                  //  ((Lwjgl3Graphics) Gdx.graphics).getWindow().restoreWindow();
+                    //  ((Lwjgl3Graphics) Gdx.graphics).getWindow().restoreWindow();
 
                     //GLFW.glfwMaximizeWindow(Var.window.getWindowHandle());
                     this.dispose();

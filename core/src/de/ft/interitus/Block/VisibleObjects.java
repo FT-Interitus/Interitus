@@ -5,7 +5,7 @@
 
 package de.ft.interitus.Block;
 
-public interface
+ public interface
 VisibleObjects {
 
 

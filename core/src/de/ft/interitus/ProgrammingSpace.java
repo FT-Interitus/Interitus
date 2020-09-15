@@ -161,7 +161,7 @@ public class ProgrammingSpace extends ScreenAdapter {
 
             UI.updatedragui(shapeRenderer, true, batch);
 
-
+            testtable.draw();
             BlockDrawer.Draw();
 
 
@@ -215,7 +215,7 @@ public class ProgrammingSpace extends ScreenAdapter {
 
         de.ft.interitus.UI.Viewport.limitfps();
 
-testtable.draw();
+
     }
 
 

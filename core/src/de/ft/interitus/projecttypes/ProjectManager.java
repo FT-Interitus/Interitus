@@ -16,6 +16,8 @@ import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.Var;
 import de.ft.interitus.Welcome;
 import de.ft.interitus.datamanager.programmdata.Data;
+import de.ft.interitus.datamanager.programmdata.experience.ExperienceManager;
+import de.ft.interitus.datamanager.programmdata.experience.ExperienceVar;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.global.GlobalCloseEvent;
 import de.ft.interitus.events.global.GlobalEventAdapter;
@@ -153,6 +155,7 @@ public class ProjectManager {
 
         Var.openprojects.add(projectVar);
 
+        ExperienceVar.newprojects++;
         Tab tab = new Tab();
        // tab.getTabButton().setImage(AssetLoader.img_Tab);
         tab.getCloseButton().setImage(AssetLoader.close_notification);
