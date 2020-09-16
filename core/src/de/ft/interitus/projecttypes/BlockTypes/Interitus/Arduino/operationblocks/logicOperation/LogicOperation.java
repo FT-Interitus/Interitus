@@ -39,7 +39,7 @@ public class LogicOperation extends PlatformSpecificBlock {
 
     @Override
     public Texture getDescriptionImage() {
-        return AssetLoader.arduinomegaimage;
+        return AssetLoader.vergleich_description;
     }
 
     @Override

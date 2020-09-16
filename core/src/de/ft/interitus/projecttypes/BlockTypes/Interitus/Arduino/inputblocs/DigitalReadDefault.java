@@ -54,7 +54,7 @@ public class DigitalReadDefault implements BlockModi, ArduinoBlock {
 
     @Override
     public Texture getModiImage() {
-        return AssetLoader.Parameter_minus;
+        return AssetLoader.Parameter_digital;
     }
 
     @Override

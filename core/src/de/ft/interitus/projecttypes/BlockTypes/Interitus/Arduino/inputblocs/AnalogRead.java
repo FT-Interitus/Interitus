@@ -54,7 +54,7 @@ public class AnalogRead implements BlockModi, ArduinoBlock {
 
     @Override
     public Texture getModiImage() {
-        return AssetLoader.Parameter_plus;
+        return AssetLoader.Parameter_analog;
     }
 
     @Override

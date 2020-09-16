@@ -36,7 +36,7 @@ public class RandomBlock extends PlatformSpecificBlock {
 
     @Override
     public Texture getDescriptionImage() {
-        return AssetLoader.math_description;
+        return AssetLoader.zufall_description;
     }
 
     @Override
