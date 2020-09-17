@@ -33,6 +33,7 @@ import de.ft.interitus.datamanager.programmdata.Updater;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.plugin.*;
 import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
+import de.ft.interitus.projecttypes.ProgrammArea.ProgrammAreaManager;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.PositionSaver;
 import de.ft.interitus.utils.ShapeRenderer;
@@ -128,7 +129,7 @@ public class ProgrammingSpace extends ScreenAdapter {
     public void render(float delta) {
 
 
-
+        //ProgrammAreaManager.update();
 
         ProgrammingSpace.delta = delta;
 

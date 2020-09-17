@@ -143,6 +143,11 @@ public class AssetLoader {
     public static Texture loop_description;
     public static Texture setup_description;
     public static Texture math_description;
+    public static Texture input_description;
+    public static Texture output_description;
+    public static Texture zufall_description;
+    public static Texture vergleich_description;
+    public static Texture bereich_description;
 
 
 
@@ -171,6 +176,8 @@ public class AssetLoader {
     public static Texture Parameter_randomdice;
     public static Texture Parameter_lowerlimit;
     public static Texture Parameter_upperlimit;
+    public static Texture Parameter_digital;
+    public static Texture Parameter_analog;
 
 
 
@@ -231,6 +238,10 @@ public class AssetLoader {
             manager.load(workingdirectory + "Block/Parameter/randomdice.png", Texture.class);
             manager.load(workingdirectory + "Block/Parameter/lowerlimit.png", Texture.class);
             manager.load(workingdirectory + "Block/Parameter/upperlimit.png", Texture.class);
+            manager.load(workingdirectory + "Block/Parameter/digital.png", Texture.class);
+            manager.load(workingdirectory + "Block/Parameter/analog.png", Texture.class);
+
+
 
             // manager.load(new AssetDescriptor(Objects.requireNonNull(Programm.INSTANCE.getClass().getClassLoader().getResource("../statistics/test.png")).getFile(),Texture.class));
 
@@ -370,6 +381,14 @@ public class AssetLoader {
             manager.load(workingdirectory + "Block/description_image/loop_description.png", Texture.class);
             manager.load(workingdirectory + "Block/description_image/setup_description.png", Texture.class);
             manager.load(workingdirectory + "Block/description_image/math_description.png", Texture.class);
+            manager.load(workingdirectory + "Block/description_image/input_description.png", Texture.class);
+            manager.load(workingdirectory + "Block/description_image/output_description.png", Texture.class);
+            manager.load(workingdirectory + "Block/description_image/zufall_description.png", Texture.class);
+            manager.load(workingdirectory + "Block/description_image/vergleich_description.png", Texture.class);
+            manager.load(workingdirectory + "Block/description_image/bereich_description.png", Texture.class);
+
+
+
 
             manager.load(workingdirectory + "aufklapppfeil.png", Texture.class);
 
@@ -440,6 +459,10 @@ public class AssetLoader {
             Parameter_randomdice= manager.get(workingdirectory + "Block/Parameter/randomdice.png", Texture.class);
            Parameter_lowerlimit = manager.get(workingdirectory + "Block/Parameter/lowerlimit.png", Texture.class);
             Parameter_upperlimit = manager.get(workingdirectory + "Block/Parameter/upperlimit.png", Texture.class);
+            Parameter_digital = manager.get(workingdirectory + "Block/Parameter/digital.png", Texture.class);
+            Parameter_analog = manager.get(workingdirectory + "Block/Parameter/analog.png", Texture.class);
+
+
 
 
             Plug_IntParameter = manager.get(workingdirectory + "Block/ParameterStecker/ZahlParameterStecker.png", Texture.class);
@@ -540,6 +563,15 @@ public class AssetLoader {
             loop_description = manager.get(workingdirectory + "Block/description_image/loop_description.png", Texture.class);
             setup_description = manager.get(workingdirectory + "Block/description_image/setup_description.png", Texture.class);
             math_description = manager.get(workingdirectory + "Block/description_image/math_description.png", Texture.class);
+            input_description = manager.get(workingdirectory + "Block/description_image/input_description.png", Texture.class);
+            output_description = manager.get(workingdirectory + "Block/description_image/output_description.png", Texture.class);
+            zufall_description = manager.get(workingdirectory + "Block/description_image/zufall_description.png", Texture.class);
+            vergleich_description = manager.get(workingdirectory + "Block/description_image/vergleich_description.png", Texture.class);
+            bereich_description = manager.get(workingdirectory + "Block/description_image/bereich_description.png", Texture.class);
+
+
+
+
 
 
             aufklapppfeil = manager.get(workingdirectory + "aufklapppfeil.png", Texture.class);

@@ -52,7 +52,7 @@ public class ReadPin extends PlatformSpecificBlock {
 
     @Override
     public Texture getDescriptionImage() {
-        return AssetLoader.WaitBlock_description_image;
+        return AssetLoader.input_description;
     }
 
 

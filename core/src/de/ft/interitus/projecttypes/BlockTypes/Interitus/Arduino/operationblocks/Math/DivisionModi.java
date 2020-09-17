@@ -15,7 +15,7 @@ import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.InitArduino;
 import de.ft.interitus.utils.ArrayList;
 
-public class DivisionModi implements BlockModi, ArduinoBlock {
+public class DivisionModi extends BlockModi implements ArduinoBlock {
     ArrayList<Parameter> parameters = new ArrayList<>();
     Parameter Divident;
     Parameter Divisor;

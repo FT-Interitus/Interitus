@@ -19,7 +19,7 @@ import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.InitArduino;
 import de.ft.interitus.utils.ArrayList;
 
-public class AnalogRead implements BlockModi, ArduinoBlock {
+public class AnalogRead extends BlockModi implements ArduinoBlock {
     ArrayList<Parameter> parameters = new ArrayList<>();
     Parameter Pin;
     Parameter Output;
@@ -54,7 +54,7 @@ public class AnalogRead implements BlockModi, ArduinoBlock {
 
     @Override
     public Texture getModiImage() {
-        return AssetLoader.Parameter_plus;
+        return AssetLoader.Parameter_analog;
     }
 
     @Override

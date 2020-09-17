@@ -7,17 +7,22 @@ package de.ft.interitus.projecttypes.BlockTypes;
 
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
+import de.ft.interitus.projecttypes.ProgrammArea.ProgrammArea;
 import de.ft.interitus.utils.ArrayList;
 
-public interface BlockModi {
+public abstract class BlockModi {
 
-    ArrayList<Parameter> getBlockParameter();
+    public abstract ArrayList<Parameter> getBlockParameter();
 
-    BlockSettings getblocksettings();
+    public abstract BlockSettings getblocksettings();
 
-    int getWidth();
+    public abstract int getWidth();
 
-    String getname();
+    public abstract String getname();
 
-    Texture getModiImage();
+    public abstract Texture getModiImage();
+
+    public ProgrammArea getProgrammArea(){
+        return ProgrammArea.PROGRAMM_BLOCK;
+    }
 }

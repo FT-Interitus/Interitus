@@ -120,9 +120,11 @@ public class TapBarBlockItem implements TapItem {
             UI.UIbatch.draw(AssetLoader.orange_bar_right, this.getX() + this.getW() - 7, this.getY()-1+this.getH()-13, 6, 13);
 
         }
+try {
+    UI.UIbatch.draw(psb.getDescriptionImage(), this.getX() + 10, this.getY() + 9, 30, 30);
+}catch(NullPointerException e){
 
-        UI.UIbatch.draw(psb.getDescriptionImage(),this.getX()+10,this.getY()+9,30,30);
-
+}
 
 
         UI.UIbatch.end();
