@@ -13,7 +13,7 @@ import de.ft.interitus.projecttypes.BlockTypes.BlockSettings;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.utils.ArrayList;
 
-public class ReadValue implements BlockModi, ArduinoBlock {
+public class ReadValue extends BlockModi implements ArduinoBlock {
 
 
     ArrayList<Parameter> parameterArrayList = new ArrayList<>();

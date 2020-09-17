@@ -26,7 +26,6 @@ public abstract class PlatformSpecificBlock {
 
     }
 
-
     public abstract String getName();
 
 

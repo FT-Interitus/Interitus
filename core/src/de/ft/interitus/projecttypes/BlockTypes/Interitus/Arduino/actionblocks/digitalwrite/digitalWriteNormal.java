@@ -15,7 +15,7 @@ import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.InitArduino;
 import de.ft.interitus.utils.ArrayList;
 
-public class digitalWriteNormal implements BlockModi, ArduinoBlock {
+public class digitalWriteNormal extends BlockModi implements ArduinoBlock {
 
     ArrayList<Parameter> parameters = new ArrayList<>();
     Parameter pin;

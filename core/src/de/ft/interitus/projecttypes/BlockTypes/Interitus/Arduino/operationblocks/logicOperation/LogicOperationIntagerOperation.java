@@ -15,7 +15,7 @@ import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.InitArduino;
 import de.ft.interitus.utils.ArrayList;
 
-public class LogicOperationIntagerOperation implements BlockModi, ArduinoBlock {
+public class LogicOperationIntagerOperation extends BlockModi implements ArduinoBlock {
     Parameter value1;
     Parameter operation;
     Parameter value2;

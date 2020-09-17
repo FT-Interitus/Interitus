@@ -12,7 +12,7 @@ import de.ft.interitus.projecttypes.BlockTypes.BlockSettings;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.utils.ArrayList;
 
-public class LoopModi  implements BlockModi, ArduinoBlock {
+public class LoopModi extends BlockModi implements ArduinoBlock {
     @Override
     public ArrayList<Parameter> getBlockParameter() {
         return null;

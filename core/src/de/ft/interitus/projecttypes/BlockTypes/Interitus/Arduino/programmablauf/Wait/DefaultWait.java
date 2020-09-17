@@ -15,7 +15,7 @@ import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.InitArduino;
 import de.ft.interitus.utils.ArrayList;
 
-public class DefaultWait implements BlockModi, ArduinoBlock {
+public class DefaultWait extends BlockModi implements ArduinoBlock {
     final ArrayList<Parameter> parameter = new ArrayList<>();
     public DefaultWait() {
 

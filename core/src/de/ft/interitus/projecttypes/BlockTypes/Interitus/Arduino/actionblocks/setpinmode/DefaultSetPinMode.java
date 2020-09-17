@@ -15,7 +15,7 @@ import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.InitArduino;
 import de.ft.interitus.utils.ArrayList;
 
-public class DefaultSetPinMode implements BlockModi, ArduinoBlock {
+public class DefaultSetPinMode extends BlockModi implements ArduinoBlock {
     ArrayList<Parameter>parameters=new ArrayList<>();
     Parameter pin;
     Parameter mode;

@@ -15,7 +15,7 @@ import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.InitArduino;
 import de.ft.interitus.utils.ArrayList;
 
-public class WriteValue implements BlockModi, ArduinoBlock {
+public class WriteValue extends BlockModi implements ArduinoBlock {
 
 
     ArrayList<Parameter> parameterArrayList = new ArrayList<>();

@@ -12,14 +12,14 @@ import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.ProjectTypes;
 
-import java.awt.*;
-
 public class MapBlock extends PlatformSpecificBlock {
     public MapBlock(ProjectTypes projectTypes, Addon addon) {
         super(projectTypes, addon);
         super.blockModis.add(new MapModiDefault());
         super.actBlockModiIndex=0;
 ;    }
+
+
 
     @Override
     public String getName() {

@@ -7,13 +7,14 @@ package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf
 
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
+import de.ft.interitus.projecttypes.ProgrammArea.ProgrammArea;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.BlockTypes.BlockModi;
 import de.ft.interitus.projecttypes.BlockTypes.BlockSettings;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.utils.ArrayList;
 
-public class IfEnd implements BlockModi, ArduinoBlock {
+public class IfEnd extends BlockModi implements ArduinoBlock {
 
     @Override
     public ArrayList<Parameter> getBlockParameter() {
@@ -50,4 +51,8 @@ public class IfEnd implements BlockModi, ArduinoBlock {
         return null;
     }
 
+    @Override
+    public ProgrammArea getProgrammArea() {
+        return ProgrammArea.PROGRAMM_AREA_END;
+    }
 }
