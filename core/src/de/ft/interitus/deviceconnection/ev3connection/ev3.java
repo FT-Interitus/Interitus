@@ -6,7 +6,8 @@
 package de.ft.interitus.deviceconnection.ev3connection;
 
 import de.ft.interitus.utils.ArrayList;
-import org.usb4java.*;
+import org.hid4java.HidDevice;
+
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -93,7 +94,7 @@ public class ev3 {
     static final byte EP_IN = (byte) 0x81;
     static final byte EP_OUT = (byte) 0x01;
     static final byte DIRECT_COMMAND_REPLY = (byte) 0x00;
-    static DeviceHandle handle;
+   // static DeviceHandle handle;
 
     public static byte[] LCS(String string) {
 
@@ -224,6 +225,10 @@ public class ev3 {
     }
 
     private static void connectUsb() {
+
+        HidDevice legodevice;
+
+       /*
         int result = LibUsb.init(null);
         Device device = null;
         DeviceList list = new DeviceList();
@@ -267,6 +272,8 @@ public class ev3 {
         if (result != LibUsb.SUCCESS) {
             throw new LibUsbException("Unable to claim interface", result);
         }
+
+        */
     }
 
     private static ByteBuffer sendSystemCmd(ArrayList<Byte> operations) { //TODO inarbeit
@@ -276,6 +283,8 @@ public class ev3 {
         buffer.putShort((short) 0xA0);                            // counter
         buffer.put(DIRECT_COMMAND_REPLY);                       // legth of creare
 
+
+/*
 
         for (int i = 0; i < operations.size(); i++) {         // operations
             buffer.put(operations.get(i));
@@ -299,10 +308,14 @@ public class ev3 {
 
         printHex("Recv", buffer);
         return buffer;
+
+ */
+        return null;
     }
 
     private static ByteBuffer sendDirectCmd(ArrayList<Byte> operations,
                                             int local_mem, int global_mem) {
+        /*
         ByteBuffer buffer = ByteBuffer.allocateDirect(operations.size() + 7);
         buffer.order(ByteOrder.LITTLE_ENDIAN);
         buffer.putShort((short) (operations.size() + 5));   // length
@@ -331,6 +344,9 @@ public class ev3 {
         buffer.position(global_mem + 5);
         printHex("Recv", buffer);
         return buffer;
+
+         */
+        return null;
     }
 
     private static void printHex(String desc, ByteBuffer buffer) {
@@ -348,8 +364,11 @@ public class ev3 {
     }
 
     public static void closeev3session() {
+        /*
         LibUsb.releaseInterface(handle, 0);
         LibUsb.close(handle);
+
+         */
     }
 
 

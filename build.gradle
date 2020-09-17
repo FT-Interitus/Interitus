@@ -72,11 +72,12 @@ project(":core") {
         api group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.3.3.RELEASE'
         compile group: 'org.springframework', name: 'spring-web', version: '5.2.8.RELEASE'
         compile group: 'org.springframework', name: 'spring-context', version: '5.2.8.RELEASE'
-        api group: 'org.usb4java', name: 'usb4java', version: '1.2.0'
         api 'com.jcraft:jsch:0.1.54'
         api 'com.fazecast:jSerialComm:[2.0.0,3.0.0)'
         api "com.kotcrab.vis:vis-ui:$visuiVersion"
         api 'org.json:json:20171018'
+        compile group: 'org.hid4java', name: 'hid4java', version: '0.7.0'
+        compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.11'
         api group: 'org.scream3r', name: 'jssc', version: '2.8.0'
         api "com.badlogicgames.gdx:gdx:$gdxVersion"
         api "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
@@ -90,6 +91,7 @@ repositories {
 }
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+
 }
 compileKotlin {
     kotlinOptions {

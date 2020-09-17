@@ -5,8 +5,16 @@
 
 package de.ft.interitus.deviceconnection.ev3connection;
 
+import de.ft.interitus.Programm;
 import de.ft.interitus.utils.ArrayList;
+import org.assertj.core.internal.bytebuddy.description.modifier.SyntheticState;
+import org.hid4java.HidDevice;
+import org.hid4java.HidManager;
+import org.hid4java.HidServices;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.concurrent.TimeUnit;
 
 public class USBConnection {
@@ -14,9 +22,48 @@ public class USBConnection {
 
     public static void main(String[] args) {
 
+        HidServices hidServices = HidManager.getHidServices();
+        HidDevice legodevice = null;
+
+        while(legodevice==null) {
+            hidServices = HidManager.getHidServices();
+            legodevice =  hidServices.getHidDevice(ev3.ID_VENDOR_LEGO,ev3.ID_PRODUCT_EV3,null);
+            legodevice.open();
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            if(legodevice==null)
+                System.out.println("Not found");
+
+
+
+        }
+
+        System.out.println("Found Device!");
+
+
+        byte[] message = new byte[2];
+        message[0] = (byte) 1;
+        message[1] = (byte) 160;
+
+       System.out.println( legodevice.open());
+       int val = legodevice.write(message,message.length,(byte)0);
+       if(val!=-1) {
+           System.out.println("Success!");
+
+       }
+       hidServices.shutdown();
+
+        System.exit(0);
+
         ev3.openev3sesseion();
 
+
+
         ArrayList<Byte> command = new ArrayList<>();
+
 /*
         for(int i=0;i<128;i++) {
             command.clear();
