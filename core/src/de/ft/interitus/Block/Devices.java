@@ -4,7 +4,9 @@
  */
 
 package de.ft.interitus.Block;
-
+/**
+ * @deprecated
+ */
 public class Devices {
 
     public static int ARDUINO_UNO = 0; // Arduino UNO definition auf 0 um die Lesbvarkeit des Codes zu verbessern
