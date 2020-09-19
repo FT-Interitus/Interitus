@@ -15,11 +15,11 @@ import org.hid4java.HidDevice;
 public class USBDevice implements Device {
     private final ArrayList<Character> chararray = new ArrayList<>();
 
-     private final HidDevice device;
-     private final ConnectionHandle connectionHandle;
-     private final String path;
+    private final HidDevice device;
+    private final ConnectionHandle connectionHandle;
+    private final String path;
 
-    public USBDevice(HidDevice device,ConnectionHandle connectionHandle,String path) {
+    public USBDevice(HidDevice device, ConnectionHandle connectionHandle, String path) {
         this.device = device;
         this.connectionHandle = connectionHandle;
         this.path = path;
@@ -43,37 +43,37 @@ public class USBDevice implements Device {
 
     @Override
     public String getName() {
-try {
+        try {
 
-    Byte[] data = connectionHandle.sendData(ev3.makeDirectCmd(Operations.getBrickname(), 4, 20), this);
-    chararray.clear();
-    for(int i=5;i<(int)data[0];i++) {
+            Byte[] data = connectionHandle.sendData(ev3.makeDirectCmd(Operations.getBrickname(), 4, 20), this);
+            chararray.clear();
+            for (int i = 5; i < (int) data[0]; i++) {
 
-        if(data[i].byteValue()==(byte)0x00) {
-            break;
+                if (data[i].byteValue() == (byte) 0x00) {
+                    break;
+                }
+
+                chararray.add(((char) data[i].byteValue()));
+
+
+            }
+            ev3.printHex("recv", data);
+
+            char[] array = new char[chararray.size()];
+
+            for (int i = 0; i < array.length; i++) {
+
+
+                array[i] = chararray.get(i);
+
+            }
+
+            return new String(array);
+
+
+        } catch (Exception ignored) {
+            ignored.printStackTrace();
         }
-
-        chararray.add(((char) data[i].byteValue()));
-
-
-    }
-    ev3.printHex("recv",data);
-
-    char[] array = new char[chararray.size()];
-
-    for(int i=0;i<array.length;i++) {
-
-
-        array[i] = chararray.get(i);
-
-    }
-
-   return new String(array);
-
-
-}catch (Exception ignored){
-    ignored.printStackTrace();
-}
 
         return "-1";
     }
