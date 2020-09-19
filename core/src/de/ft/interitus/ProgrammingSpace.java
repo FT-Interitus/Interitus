@@ -128,9 +128,9 @@ public class ProgrammingSpace extends ScreenAdapter {
     @Override
     public void render(float delta) {
 
-
-        //ProgrammAreaManager.update();
-
+if(ProjectManager.getActProjectVar().markedblock!=null) {
+    ProgrammAreaManager.getProgrammArea(ProjectManager.getActProjectVar().markedblock.getIndex());
+}
         ProgrammingSpace.delta = delta;
 
 
