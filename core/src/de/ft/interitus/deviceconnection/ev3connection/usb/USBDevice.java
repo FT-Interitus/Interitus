@@ -13,6 +13,7 @@ import de.ft.interitus.utils.ArrayList;
 import org.hid4java.HidDevice;
 
 public class USBDevice implements Device {
+    private final ArrayList<Character> chararray = new ArrayList<>();
 
      private final HidDevice device;
      private final ConnectionHandle connectionHandle;
@@ -44,13 +45,36 @@ public class USBDevice implements Device {
     public String getName() {
 try {
 
-    Byte[] data = connectionHandle.sendData(ev3.makeDirectCmd(Operations.getBrickname(), 1, 1), this);
+    Byte[] data = connectionHandle.sendData(ev3.makeDirectCmd(Operations.getBrickname(), 4, 20), this);
+    chararray.clear();
+    for(int i=5;i<(int)data[0];i++) {
 
-    ev3.printHex("recv", data);
+        if(data[i].byteValue()==(byte)0x00) {
+            break;
+        }
+
+        chararray.add(((char) data[i].byteValue()));
+
+
+    }
+    ev3.printHex("recv",data);
+
+    char[] array = new char[chararray.size()];
+
+    for(int i=0;i<array.length;i++) {
+
+
+        array[i] = chararray.get(i);
+
+    }
+
+   return new String(array);
+
+
 }catch (Exception ignored){
     ignored.printStackTrace();
 }
 
-        return null;
+        return "-1";
     }
 }

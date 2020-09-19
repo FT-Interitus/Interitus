@@ -535,11 +535,19 @@ public class Operations {
 
         operations.add(ev3.opCom_Get);
         operations.add(ev3.GET_BRICKNAME);
-        Byte[] temp = ev3.LCX(1);
+
+        Byte[] temp = ev3.LCX(18);
 
         for (int i = 0; i < temp.length; i++) {
            operations.add(temp[i]);
+       }
+
+        Byte[] temp2 = ev3.GVX(0);
+        for(int i=0;i<temp2.length;i++) {
+            operations.add(temp2[i]);
+
         }
+
 
         return operations;
 

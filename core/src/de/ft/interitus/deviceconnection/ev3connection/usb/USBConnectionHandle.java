@@ -56,7 +56,6 @@ private static ArrayList<HidDevice> removeinglist = new ArrayList<>();
     public void update() {
 
 
-        //TODO add New Devices to ArrayList!!! 19.09.2020
 
 
         for(HidDevice hiddevice:hidServices.getAttachedHidDevices()) {
