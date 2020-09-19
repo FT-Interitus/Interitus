@@ -94,7 +94,7 @@ public class ProgrammingSpace extends ScreenAdapter {
         UI.UIcam.position.set(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f, 0);
 
 //TODO Debug hier wird immer ein Arduino Project erstellt
-        ProjectManager.addProject(ProjectTypesVar.projectTypes.get(2).init());
+        ProjectManager.addProject(ProjectTypesVar.projectTypes.get(0).init());
         ProjectManager.change(0);
 
         UI.updatedragui(shapeRenderer, true, batch);
