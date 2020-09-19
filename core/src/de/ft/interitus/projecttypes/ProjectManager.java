@@ -14,9 +14,7 @@ import de.ft.interitus.UI.UIElements.TabBar.Tab;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.Var;
-import de.ft.interitus.Welcome;
 import de.ft.interitus.datamanager.programmdata.Data;
-import de.ft.interitus.datamanager.programmdata.experience.ExperienceManager;
 import de.ft.interitus.datamanager.programmdata.experience.ExperienceVar;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.global.GlobalCloseEvent;
@@ -39,7 +37,7 @@ public class ProjectManager {
             @Override
             public void tabclicked(GlobalTabClickEvent e, Tab tab) {
 
-                if(tab.getIndex()!=Var.openprojectindex) {
+                if (tab.getIndex() != Var.openprojectindex) {
                     change(tab.getIndex());
 
                 }
@@ -50,15 +48,15 @@ public class ProjectManager {
             public boolean closeprogramm(GlobalCloseEvent e) {
                 boolean canbeclosed = true;
 
-                for(int i=0;i<Var.openprojects.size();i++) {
+                for (int i = 0; i < Var.openprojects.size(); i++) {
 
 
-                    if(Var.openprojects.get(i).changes) {
+                    if (Var.openprojects.get(i).changes) {
                         canbeclosed = false;
 
-                        NotificationManager.sendNotification(new Notification(AssetLoader.information,"Schliesen abgebrochen","In deinem Projekt "+Var.openprojects.get(i).getFilename()+" wurden\nungspeicherte Änderungen erkannt!"));
+                        NotificationManager.sendNotification(new Notification(AssetLoader.information, "Schliesen abgebrochen", "In deinem Projekt " + Var.openprojects.get(i).getFilename() + " wurden\nungspeicherte Änderungen erkannt!"));
 
-                    }else{
+                    } else {
                         CloseProject(Var.openprojects.indexOf(Var.openprojects.get(i)));
                         i--;
                     }
@@ -72,7 +70,6 @@ public class ProjectManager {
     }
 
     public static void change(int index) {
-
         getActProjectVar().programmingtime = (System.currentTimeMillis() - getActProjectVar().currentstarttime) + getActProjectVar().programmingtime;
 
         UI.runselection.setDefaultText("");
@@ -90,7 +87,7 @@ public class ProjectManager {
 
         UIVar.isdialogeopend = true;
 
-       final Notification waitforprojectnotification = new Notification(AssetLoader.information,"Bitte Warten...","Das Projekt wird aktiviert").setCloseable(false).setProgressbarvalue(0).rollin(false);
+        final Notification waitforprojectnotification = new Notification(AssetLoader.information, "Bitte Warten...", "Das Projekt wird aktiviert").setCloseable(false).setProgressbarvalue(0).rollin(false);
         NotificationManager.sendNotification(waitforprojectnotification);
 
         UI.runselection.clear();
@@ -104,23 +101,24 @@ public class ProjectManager {
             public void run() {
 
 
-                if(counter<=100) {
+                if (counter <= 100) {
                     waitforprojectnotification.setProgressbarvalue(counter);
                 }
 
 
-               if(counter==110) {
+                if (counter == 110) {
 
-                   waitforprojectnotification.close();
-                   UIVar.isdialogeopend = false;
-                   UI.runselection.clear();
-                   this.cancel();
-               }
+                    waitforprojectnotification.close();
+                    UIVar.isdialogeopend = false;
+                    UI.runselection.clear();
+                    System.out.println("clear");
+                    this.cancel();
+                }
 
                 counter++;
 
             }
-        },0,15);
+        }, 0, 15);
 
         time = new Timer();
         time.scheduleAtFixedRate(new TimerTask() {
@@ -129,10 +127,10 @@ public class ProjectManager {
                 ProjectManager.getActProjectVar().projectType.update();
 
             }
-        }, 1500, 6000);
+        }, 1700, 1000);
 
 
-
+       ProjectManager.getActProjectVar().projectType.getProjectFunktions().switchedto();
         Programm.logger.config("changed tab");
     }
 
@@ -157,24 +155,24 @@ public class ProjectManager {
 
         ExperienceVar.newprojects++;
         Tab tab = new Tab();
-       // tab.getTabButton().setImage(AssetLoader.img_Tab);
+        // tab.getTabButton().setImage(AssetLoader.img_Tab);
         tab.getCloseButton().setImage(AssetLoader.close_notification);
         tab.getTabButton().setW(300);
         tab.getCloseButton().setW(25);
         tab.getTabButton().widthoverText = true;
         tab.getTabButton().setText(Var.openprojects.getLastObject().getFilename());
-        tab.setIndex(Var.openprojects.size()-1);
+        tab.setIndex(Var.openprojects.size() - 1);
         UI.tabbar.addTab(tab);
 
 
     }
 
     public static ProjectVar getProjectVar(int index) {
-        if(Var.openprojects.size() ==0 ) {
+        if (Var.openprojects.size() == 0) {
             return null;
         }
 
-        if(index>=Var.openprojects.size()) {
+        if (index >= Var.openprojects.size()) {
             return null;
         }
 
@@ -186,23 +184,20 @@ public class ProjectManager {
 
         ClearActOpenProgramm.clear(index);
         UI.tabbar.getTabbs().remove(index);
-        for(Tab tab:UI.tabbar.getTabbs()) {
-            tab.setIndex(tab.getIndex()-1);
+        for (Tab tab : UI.tabbar.getTabbs()) {
+            tab.setIndex(tab.getIndex() - 1);
         }
 
-        if(Var.openprojectindex-1==-1) {
-           Data.close(true);
+        if (Var.openprojectindex - 1 == -1) {
+            Data.close(true);
             System.exit(0);
             return;
         }
-        change(   Var.openprojectindex-1);
+        change(Var.openprojectindex - 1);
         Var.openprojects.remove(index);
 
 
     }
-
-
-
 
 
 }

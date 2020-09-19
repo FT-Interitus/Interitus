@@ -16,6 +16,8 @@ public interface ProjectFunktions {
 
     void update();
 
+    void switchedto();
+
     void runconfigsettings(VisTable builder, DeviceConfiguration configuration);
 
     void projectsettings(VisTable builder,Object settings);

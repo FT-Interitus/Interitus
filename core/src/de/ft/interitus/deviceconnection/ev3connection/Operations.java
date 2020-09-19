@@ -7,12 +7,14 @@ package de.ft.interitus.deviceconnection.ev3connection;
 
 import de.ft.interitus.utils.ArrayList;
 
+import java.util.Arrays;
+
 public class Operations {
 
     public static ArrayList<Byte> stopProgramm(int Slot) {
         ArrayList<Byte> b = new ArrayList<>();
         b.add(ev3.opProgram_Stop);
-        byte[] temp1 = ev3.LCX(Slot);
+        Byte[] temp1 = ev3.LCX(Slot);
 
         for (int i = 0; i < temp1.length; i++) {
             b.add(temp1[i]);
@@ -26,23 +28,23 @@ public class Operations {
 
         b.add(ev3.opProgram_Start);
 
-        byte[] temp1 = ev3.LCX(Slot);
+        Byte[] temp1 = ev3.LCX(Slot);
 
         for (int i = 0; i < temp1.length; i++) {
             b.add(temp1[i]);
         }
 
-        byte[] temp2 = ev3.LVX(size);
+        Byte[] temp2 = ev3.LVX(size);
         for (int i = 0; i < temp2.length; i++) {
             b.add(temp2[i]);
         }
 
-        byte[] temp3 = ev3.LVX(ProgrammReferenzNumber);
+        Byte[] temp3 = ev3.LVX(ProgrammReferenzNumber);
         for (int i = 0; i < temp3.length; i++) {
             b.add(temp3[i]);
         }
 
-        byte[] temp4 = null;
+        Byte[] temp4 = null;
         if (debug) {
             temp4 = ev3.LCX(1);
         } else {
@@ -64,23 +66,23 @@ public class Operations {
         b.add(ev3.opFile);
         b.add(ev3.LOAD_IMAGE);
 
-        byte[] temp1 = ev3.LCX(Slot);
+        Byte[] temp1 = ev3.LCX(Slot);
 
         for (int i = 0; i < temp1.length; i++) {
             b.add(temp1[i]);
         }
 
-        byte[] temp2 = ev3.LCS(path);
+        Byte[] temp2 = ev3.LCS(path);
         for (int i = 0; i < temp2.length; i++) {
             b.add(temp2[i]);
         }
 
-        byte[] temp3 = ev3.LVX(size);
+        Byte[] temp3 = ev3.LVX(size);
         for (int i = 0; i < temp3.length; i++) {
             b.add(temp3[i]);
         }
 
-        byte[] temp4 = ev3.LVX(ProgrammReferenzNumber);
+        Byte[] temp4 = ev3.LVX(ProgrammReferenzNumber);
         for (int i = 0; i < temp4.length; i++) {
             b.add(temp4[i]);
         }
@@ -94,13 +96,13 @@ public class Operations {
         ArrayList<Byte> b = new ArrayList<>();
         b.add(ev3.opTimer_Wait);
 
-        byte[] temp1 = ev3.LCX(TimetoWait);
+        Byte[] temp1 = ev3.LCX(TimetoWait);
 
         for (int i = 0; i < temp1.length; i++) {
             b.add(temp1[i]);
         }
 
-        byte[] temp2 = ev3.LVX(TimerReferezNumber);
+        Byte[] temp2 = ev3.LVX(TimerReferezNumber);
 
         for (int i = 0; i < temp2.length; i++) {
             b.add(temp2[i]);
@@ -115,7 +117,7 @@ public class Operations {
         b.add(ev3.opTimer_Ready);
 
 
-        byte[] temp2 = ev3.LVX(TimerReferezNumber);
+        Byte[] temp2 = ev3.LVX(TimerReferezNumber);
 
         for (int i = 0; i < temp2.length; i++) {
             b.add(temp2[i]);
@@ -129,7 +131,7 @@ public class Operations {
         ArrayList<Byte> b = new ArrayList<>();
         b.add(ev3.opUI_Write);
         b.add(ev3.SCREEN_BLOCK);
-        byte[] temp;
+        Byte[] temp;
         if (block) {
             temp = ev3.LCX(1);
 
@@ -147,7 +149,7 @@ public class Operations {
         ArrayList<Byte> b = new ArrayList<>();
         b.add(ev3.opUI_Button);
         b.add(ev3.SET_BACK_BLOCK);
-        byte[] temp;
+        Byte[] temp;
         if (disable) {
             temp = ev3.LCX(1);
 
@@ -161,13 +163,54 @@ public class Operations {
         return b;
     }
 
-    public static ArrayList<Byte> releaseKey(byte Key) {
+
+//TODO doens't work
+    public static ArrayList<Byte> showTextBox(int x,int y,int w,int h,String string,Byte delimiter) {
         ArrayList<Byte> b = new ArrayList<>();
-        b.add(ev3.opUI_Write); //TODO
+        b.add(ev3.opUI_draw);
+        b.add(ev3.TEXTBOX);
+        b.addAll(Arrays.asList(ev3.LCX(x)));
+        b.addAll(Arrays.asList(ev3.LCX(y)));
+        b.addAll(Arrays.asList(ev3.LCX(x+w)));
+        b.addAll(Arrays.asList(ev3.LCX(y+h)));
+        b.addAll(Arrays.asList(ev3.LCS(string+new String(new byte[]{0x00}))));
+        b.addAll(Arrays.asList(ev3.LCX(string.length()+1)));
+        b.add(delimiter);
+
+
+
+        return b;
+    }
+
+
+
+
+
+
+    public static ArrayList<Byte> releaseKey(Byte Key) {
+        ArrayList<Byte> b = new ArrayList<>();
+        b.add(ev3.opUI_Button);
         b.add(ev3.RELEASE);
         b.add(Key);
         return b;
     }
+
+    public static ArrayList<Byte> waitforbuttonpress() {
+        ArrayList<Byte> b = new ArrayList<>();
+        b.add(ev3.opUI_Button);
+        b.add(ev3.WAIT_FOR_PRESS);
+
+        return b;
+    }
+
+    public static ArrayList<Byte> pressKey(Byte Key) {
+        ArrayList<Byte> b = new ArrayList<>();
+        b.add(ev3.opUI_Button);
+        b.add(ev3.PRESS);
+        b.add(Key);
+        return b;
+    }
+
 
     public static ArrayList<Byte> getblockbackbutton() {
         ArrayList<Byte> b = new ArrayList<>();
@@ -188,7 +231,7 @@ public class Operations {
 
         b.add(ev3.opUI_draw);
         b.add(ev3.LINE);
-        byte[] temp;
+        Byte[] temp;
 
         if (white) {
             temp = ev3.LCX(0);
@@ -201,25 +244,25 @@ public class Operations {
             b.add(temp[i]);
         }
 
-        byte[] temp2 = ev3.LCX(xstart);
+        Byte[] temp2 = ev3.LCX(xstart);
 
         for (int i = 0; i < temp2.length; i++) {
             b.add(temp2[i]);
         }
 
-        byte[] temp3 = ev3.LCX(ystart);
+        Byte[] temp3 = ev3.LCX(ystart);
 
         for (int i = 0; i < temp3.length; i++) {
             b.add(temp3[i]);
         }
 
-        byte[] temp4 = ev3.LCX(xend);
+        Byte[] temp4 = ev3.LCX(xend);
 
         for (int i = 0; i < temp4.length; i++) {
             b.add(temp4[i]);
         }
 
-        byte[] temp5 = ev3.LCX(yend);
+        Byte[] temp5 = ev3.LCX(yend);
 
         for (int i = 0; i < temp5.length; i++) {
             b.add(temp5[i]);
@@ -247,7 +290,7 @@ public class Operations {
 
         b.add(ev3.opUI_draw);
         b.add(ev3.FILLWINDOW);
-        byte[] temp;
+        Byte[] temp;
 
         if (white) {
             temp = ev3.LCX(0);
@@ -260,13 +303,13 @@ public class Operations {
             b.add(temp[i]);
         }
 
-        byte[] temp2 = ev3.LCX(ystart);
+        Byte[] temp2 = ev3.LCX(ystart);
 
         for (int i = 0; i < temp2.length; i++) {
             b.add(temp2[i]);
         }
 
-        byte[] temp3 = ev3.LCX(ysize);
+        Byte[] temp3 = ev3.LCX(ysize);
 
         for (int i = 0; i < temp3.length; i++) {
             b.add(temp3[i]);
@@ -292,7 +335,7 @@ public class Operations {
         ArrayList<Byte> b = new ArrayList<>();
         b.add(ev3.opUI_draw);
         b.add(ev3.TOPLINE);
-        byte[] temp;
+        Byte[] temp;
         if (enable) {
             temp = ev3.LCX(1);
 
@@ -312,7 +355,7 @@ public class Operations {
 
         b.add(ev3.BMPFile);
 
-        byte[] temp;
+        Byte[] temp;
 
 
         if (white) { //Setzen der Farbe
@@ -327,7 +370,7 @@ public class Operations {
         }
 
         /////////////////////////X/////////
-        byte[] temp2;
+        Byte[] temp2;
         temp2 = ev3.LCX(X);
 
 
@@ -337,7 +380,7 @@ public class Operations {
 
 /////////////////////////Y/////////
 
-        byte[] temp3;
+        Byte[] temp3;
         temp3 = ev3.LCX(Y);
 
 
@@ -346,7 +389,7 @@ public class Operations {
         }
 
 
-        byte[] temp4;
+        Byte[] temp4;
         temp4 = ev3.LCS(name);
 
         for (int i = 0; i < temp4.length; i++) {
@@ -416,14 +459,14 @@ public class Operations {
         } else {
             b.add(ev3.REPEAT);
         }
-        byte[] temp2 = ev3.LCX(Volume);
+        Byte[] temp2 = ev3.LCX(Volume);
 
         for (int i = 0; i < temp2.length; i++) {
             b.add(temp2[i]);
         }
 
 
-        byte[] temp = ev3.LCS(soundfile);
+        Byte[] temp = ev3.LCS(soundfile);
         for (int i = 0; i < temp.length; i++) {
             b.add(temp[i]);
         }
@@ -448,17 +491,17 @@ public class Operations {
         ArrayList<Byte> b = new ArrayList<>();
         b.add(ev3.opSound);
         b.add(ev3.TONE);
-        byte[] temp = ev3.LCX(Volume);
+        Byte[] temp = ev3.LCX(Volume);
         for (int i = 0; i < temp.length; i++) {
             b.add(temp[i]);
         }
 
-        byte[] temp2 = ev3.LCX(Frequency);
+        Byte[] temp2 = ev3.LCX(Frequency);
         for (int i = 0; i < temp2.length; i++) {
             b.add(temp2[i]);
         }
 
-        byte[] temp3 = ev3.LCX(duration); //IN MS
+        Byte[] temp3 = ev3.LCX(duration); //IN MS
         for (int i = 0; i < temp3.length; i++) {
             b.add(temp3[i]);
         }
@@ -474,10 +517,28 @@ public class Operations {
 
         operations.add(ev3.opCom_Set);
         operations.add(ev3.SET_BRICKNAME);
-        byte[] temp = ev3.LCS(name);
+        Byte[] temp = ev3.LCS(name);
 
         for (int i = 0; i < temp.length; i++) {
             operations.add(temp[i]);
+        }
+
+        return operations;
+
+
+    }
+
+ public static ArrayList<Byte> getBrickname() {
+
+        ArrayList<Byte> operations = new ArrayList<>();
+
+
+        operations.add(ev3.opCom_Get);
+        operations.add(ev3.GET_BRICKNAME);
+        Byte[] temp = ev3.LCX(1);
+
+        for (int i = 0; i < temp.length; i++) {
+           operations.add(temp[i]);
         }
 
         return operations;

@@ -6,12 +6,10 @@
 package de.ft.interitus.deviceconnection.ev3connection;
 
 import de.ft.interitus.utils.ArrayList;
-import org.hid4java.HidDevice;
 
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.nio.IntBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
@@ -25,7 +23,10 @@ import java.util.List;
 public class ev3 {
 
 
+
     static final byte opCom_Set = (byte) 0xD4;
+    static final byte opCom_Get = (byte) 0xD3;
+
 
     static final byte opSound = (byte) 0x94;
     static final byte opSound_Ready = (byte) 0x96;
@@ -44,6 +45,7 @@ public class ev3 {
 
 
     static final byte SET_BRICKNAME = (byte) 0x08;
+    static final byte GET_BRICKNAME = (byte) 0x0D;
 
     static final byte TONE = (byte) 0x01;
     static final byte PLAY = (byte) 0x02;
@@ -62,6 +64,8 @@ public class ev3 {
     static final byte ORANGE_FLASH_TWO_TIMES = (byte) 0x09;
 
     static final byte SET_BACK_BLOCK = (byte) 0x0A;
+    static final byte TEXTBOX = (byte) 0x20;
+    static final byte TERMINAL = (byte) 0x1F;
     static final byte GET_BACK_BLOCK = (byte) 0x0B;
     static final byte SCREEN_BLOCK = (byte) 0x10;
 
@@ -76,6 +80,7 @@ public class ev3 {
 
     static final byte PRESS = (byte) 0x05;
     static final byte RELEASE = (byte) 0x06;
+    static final byte WAIT_FOR_PRESS = (byte) 0x03;
 
     static final byte NO_BUTTON = (byte) 0x00;
     static final byte UP_BUTTON = (byte) 0x01;
@@ -89,17 +94,19 @@ public class ev3 {
      * EV3 Connection
      */
 
-    static final short ID_VENDOR_LEGO = (short) 0x0694;
-    static final short ID_PRODUCT_EV3 = (short) 0x0005;
-    static final byte EP_IN = (byte) 0x81;
-    static final byte EP_OUT = (byte) 0x01;
+   public static final short ID_VENDOR_LEGO = (short) 0x0694;
+    public static final short ID_PRODUCT_EV3 = (short) 0x0005;
+
+
     static final byte DIRECT_COMMAND_REPLY = (byte) 0x00;
+
+    static final byte SYSTEM_COMMAND_REPLY = (byte) 0x01;
+    static final byte SYSTEM_COMMAND_NO_REPLY = (byte) 0x81;
    // static DeviceHandle handle;
 
-    public static byte[] LCS(String string) {
+    public static Byte[] LCS(String string) {
 
-        byte[] b = string.getBytes(StandardCharsets.UTF_8);
-        byte[] a = new byte[string.getBytes(StandardCharsets.UTF_8).length + 2];
+        Byte[] a = new Byte[string.getBytes(StandardCharsets.UTF_8).length + 2];
 
         a[0] = (byte) 0x84;
         for (int i = 0; i < string.getBytes(StandardCharsets.UTF_8).length; i++) {
@@ -112,7 +119,7 @@ public class ev3 {
 
     }
 
-    public static byte[] LCX(int value) {
+    public static Byte[] LCX(int value) {
 
 
         byte count1 = (byte) 0x01;
@@ -121,12 +128,12 @@ public class ev3 {
         byte count4 = (byte) 0x83;
         byte count5 = (byte) 0x84;
 
-        byte[] returnarray = null;
+        Byte[] returnarray = null;
         Integer integer = value;
 
         if (value >= -32 && value <= 31) {
 
-            returnarray = new byte[1];
+            returnarray = new Byte[1];
 
             returnarray[0] = integer.byteValue();
             return returnarray;
@@ -134,7 +141,7 @@ public class ev3 {
 
 
             if (value >= -127 && value <= 127) {
-                returnarray = new byte[2];
+                returnarray = new Byte[2];
                 returnarray[0] = count2;
                 returnarray[1] = integer.byteValue();
                 return returnarray;
@@ -142,12 +149,12 @@ public class ev3 {
             } else {
 
                 if (value >= -32767 && value <= 32767) {
-                    returnarray = new byte[3];
+                    returnarray = new Byte[3];
                     returnarray[0] = (byte) 0x82;
                     returnarray[1] = (byte) value;
                     returnarray[2] = (byte) (value >> 8);
                 } else {
-                    returnarray = new byte[5];
+                    returnarray = new Byte[5];
                     returnarray[0] = (byte) 0x83;
                     returnarray[1] = (byte) value;
                     returnarray[2] = (byte) (value >> 8);
@@ -165,7 +172,7 @@ public class ev3 {
 
     }
 
-    public static byte[] LVX(int value) {
+    public static Byte[] LVX(int value) {
         List<Byte> ops = new ArrayList<>();
         if (value < 0) {
             throw new IllegalArgumentException("Parameter must be positive " + value);
@@ -185,7 +192,7 @@ public class ev3 {
             ops.add((byte) (value >> 16));
             ops.add((byte) (value >> 24));
         }
-        byte[] returnarray = new byte[ops.size()];
+        Byte[] returnarray = new Byte[ops.size()];
         for (int i = 0; i < ops.size(); i++) {
             returnarray[i] = ops.get(i);
         }
@@ -195,7 +202,7 @@ public class ev3 {
     }
 
     // Global Variable 1,2,4 bytes follow
-    public static byte[] GVX(int value) {
+    public static Byte[] GVX(int value) {
         List<Byte> ops = new ArrayList<>();
         if (value < 0) {
             throw new IllegalArgumentException("Parameter must be positive " + value);
@@ -215,7 +222,7 @@ public class ev3 {
             ops.add((byte) (value >> 16));
             ops.add((byte) (value >> 24));
         }
-        byte[] returnarray = new byte[ops.size()];
+        Byte[] returnarray = new Byte[ops.size()];
         for (int i = 0; i < ops.size(); i++) {
             returnarray[i] = ops.get(i);
         }
@@ -224,98 +231,42 @@ public class ev3 {
 
     }
 
-    private static void connectUsb() {
-
-        HidDevice legodevice;
-
-       /*
-        int result = LibUsb.init(null);
-        Device device = null;
-        DeviceList list = new DeviceList();
-        result = LibUsb.getDeviceList(null, list);
 
 
-        if (result < 0) {
-            throw new RuntimeException("Unable to get device list. Result=" + result);
-        }
-        boolean found = false;
-        for (Device dev : list) {
-            DeviceDescriptor descriptor = new DeviceDescriptor();
-            result = LibUsb.getDeviceDescriptor(dev, descriptor);
-            if (result != LibUsb.SUCCESS) {
-                throw new LibUsbException("Unable to read device descriptor", result);
-            }
-            if (descriptor.idVendor() == ID_VENDOR_LEGO
-                    || descriptor.idProduct() == ID_PRODUCT_EV3) {
-                device = dev;
-                found = true;
-                break;
-            }
-        }
-        LibUsb.freeDeviceList(list, false);
-        if (!found) throw new RuntimeException("Lego EV3 device not found.");
-
-        handle = new DeviceHandle();
-        result = LibUsb.open(device, handle);
-        if (result != LibUsb.SUCCESS) {
-            System.out.println(device.getPointer());
-            throw new LibUsbException("Unable to open USB device", result);
-        }
-        boolean detach = LibUsb.kernelDriverActive(handle, 0) != 0;
-
-        if (detach) result = LibUsb.detachKernelDriver(handle, 0);
-        if (result != LibUsb.SUCCESS) {
-            throw new LibUsbException("Unable to detach kernel driver", result);
-        }
-
-        result = LibUsb.claimInterface(handle, 0);
-        if (result != LibUsb.SUCCESS) {
-            throw new LibUsbException("Unable to claim interface", result);
-        }
-
-        */
-    }
-
-    private static ByteBuffer sendSystemCmd(ArrayList<Byte> operations) { //TODO inarbeit
-        ByteBuffer buffer = ByteBuffer.allocateDirect(operations.size() + 7);
+    public static byte[] makeSystemCommand(byte[] Command) {
+        ByteBuffer buffer = ByteBuffer.allocateDirect(6);
         buffer.order(ByteOrder.LITTLE_ENDIAN);
-        buffer.putShort((short) 0x01);   // length
-        buffer.putShort((short) 0xA0);                            // counter
-        buffer.put(DIRECT_COMMAND_REPLY);                       // legth of creare
+        buffer.putShort((short) ((short) 4+Command.length-1));   // length
+        buffer.putShort((short) 42);                            // counter
+        buffer.put(SYSTEM_COMMAND_REPLY);                       // legth of creare
+        buffer.put(Command[0]);                       // legth of creare
 
 
-/*
 
-        for (int i = 0; i < operations.size(); i++) {         // operations
-            buffer.put(operations.get(i));
+        for(int i=1;i<Command.length;i++) {
+            buffer.put(Command[i]);
         }
 
+        printHex("send",buffer);
 
-        IntBuffer transferred = IntBuffer.allocate(1);
-        int result = LibUsb.bulkTransfer(handle, EP_OUT, buffer, transferred, 100);
-        if (result != LibUsb.SUCCESS) {
-            throw new LibUsbException("Unable to write data", transferred.get(0));
-        }
-        printHex("Sent", buffer);
 
-        buffer = ByteBuffer.allocateDirect(1024);
-        transferred = IntBuffer.allocate(1);
-        result = LibUsb.bulkTransfer(handle, EP_IN, buffer, transferred, 100);
+        byte[] bytes = new byte[buffer.remaining()];
+        buffer.get(bytes, 0, bytes.length);
+        buffer.clear();
+        bytes = new byte[buffer.capacity()];
+        buffer.get(bytes, 0, bytes.length);
 
-        if (result != LibUsb.SUCCESS) {
-            System.out.println("Restart EV3!");
-        }
 
-        printHex("Recv", buffer);
-        return buffer;
 
- */
-        return null;
+       
+
+
+        return bytes;
     }
 
-    private static ByteBuffer sendDirectCmd(ArrayList<Byte> operations,
+    public static byte[] makeDirectCmd(ArrayList<Byte> operations,
                                             int local_mem, int global_mem) {
-        /*
+
         ByteBuffer buffer = ByteBuffer.allocateDirect(operations.size() + 7);
         buffer.order(ByteOrder.LITTLE_ENDIAN);
         buffer.putShort((short) (operations.size() + 5));   // length
@@ -327,29 +278,23 @@ public class ev3 {
             buffer.put(operations.get(i));
         }
 
+        printHex("send",buffer);
 
-        IntBuffer transferred = IntBuffer.allocate(1);
-        int result = LibUsb.bulkTransfer(handle, EP_OUT, buffer, transferred, 100);
-        if (result != LibUsb.SUCCESS) {
-            throw new LibUsbException("Unable to write data", transferred.get(0));
-        }
-        printHex("Sent", buffer);
 
-        buffer = ByteBuffer.allocateDirect(1024);
-        transferred = IntBuffer.allocate(1);
-        result = LibUsb.bulkTransfer(handle, EP_IN, buffer, transferred, 100);
-        if (result != LibUsb.SUCCESS) {
-            throw new LibUsbException("Unable to read data", result);
-        }
-        buffer.position(global_mem + 5);
-        printHex("Recv", buffer);
-        return buffer;
+        byte[] bytes = new byte[buffer.remaining()];
+        buffer.get(bytes, 0, bytes.length);
+        buffer.clear();
+        bytes = new byte[buffer.capacity()];
+        buffer.get(bytes, 0, bytes.length);
 
-         */
-        return null;
+
+        return bytes;
+
+
+
     }
 
-    private static void printHex(String desc, ByteBuffer buffer) {
+    public static void printHex(String desc, ByteBuffer buffer) {
         System.out.print(desc + " 0x|");
         for (int i = 0; i < buffer.position() - 1; i++) {
             System.out.printf("%02X:", buffer.get(i));
@@ -358,27 +303,20 @@ public class ev3 {
         System.out.println();
     }
 
-
-    public static void openev3sesseion() {
-        connectUsb();
-    }
-
-    public static void closeev3session() {
-        /*
-        LibUsb.releaseInterface(handle, 0);
-        LibUsb.close(handle);
-
-         */
+    public static void printHex(String desc, Byte[] buffer) {
+        System.out.print(desc + " 0x|");
+        for (int i = 0; i < buffer.length - 1; i++) {
+            System.out.printf("%02X:", buffer[i]);
+        }
+       // System.out.printf("%02X|", buffer.get(buffer.position() - 1));
+        System.out.println();
     }
 
 
-    public static void sendcommand(ArrayList<Byte> command, int local_mem, int global_mem) {
-        ByteBuffer reply = sendDirectCmd(command, local_mem, global_mem);
-    }
 
-    public static void sendsystemcommand(ArrayList<Byte> command) {
-        ByteBuffer reply = sendSystemCmd(command);
-    }
+
+
+
 
 
 }

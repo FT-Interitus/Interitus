@@ -40,7 +40,7 @@ public class ArduinoFunktions implements ProjectFunktions {
     private boolean openedprogress = false;
     private DeviceConfiguration activeConfiguration;
    private final ArrayList<String> parameterArrayList = new ArrayList<>();
-private boolean firstrun = true;
+private int counter = 0;
 
 private  VisTextField varname;
 private VisSelectBox<ParameterVariableType> stringVisSelectBox;
@@ -139,83 +139,91 @@ private VisSelectBox<ParameterVariableType> stringVisSelectBox;
     @Override
     public void update() {
 
-   UI.runselection.setDefaultText("Bitte Gerät verbinden");
+        counter++;
+        if(counter==6) {
+            counter = 0;
+            UI.runselection.setDefaultText("Bitte Gerät verbinden");
 
-        JSONArray array = ((ArduinoCompiler) ProjectManager.getActProjectVar().projectType.getCompiler()).getBoards();
-        if (array == null) {
-            Dialogs.showErrorDialog(UI.stage, "Fehler beim Laden der Arduino Boards");
-            return;
-        }
-        //Counts the connected Boards
-        int counter = 0;
-        for (int i = 0; i < array.length(); i++) {
-            if (array.getJSONObject(i).has("boards")) {
-                counter++;
-
-
+            JSONArray array = ((ArduinoCompiler) ProjectManager.getActProjectVar().projectType.getCompiler()).getBoards();
+            if (array == null) {
+                Dialogs.showErrorDialog(UI.stage, "Fehler beim Laden der Arduino Boards");
+                return;
             }
-        }
-
-        counter+=ProjectManager.getActProjectVar().deviceConfigurations.size();
-
-
-        if (counter != UI.runselection.getElements().size()) {
-            if (UI.runselection.getSelectedElement() != null) {
-                savedidentifier = ((ArrayList<String>) UI.runselection.getSelectedElement().getIdentifier()).get(1);
-            }
-
-            UI.runselection.clear();
-
-            //Add Auto Selected Boards
+            //Counts the connected Boards
+            int counter = 0;
             for (int i = 0; i < array.length(); i++) {
                 if (array.getJSONObject(i).has("boards")) {
+                    counter++;
 
-                    Texture image = switch (array.getJSONObject(i).getJSONArray("boards").getJSONObject(0).getString("FQBN")) {
-                        case "arduino:avr:uno" -> AssetLoader.arduinounoimage;
-                        case "arduino:avr:mega" -> AssetLoader.arduinomegaimage;
-                        case "arduino:avr:nano" -> AssetLoader.arduinonanoimage;
-                        default -> AssetLoader.arduinounoimage;
-                    };
 
-                    parameterArrayList.clear();
-                    parameterArrayList.add( array.getJSONObject(i).getJSONArray("boards").getJSONObject(0).getString("FQBN"));
-                    parameterArrayList.add( array.getJSONObject(i).getString("address"));
-                    UI.runselection.addelement(new DropDownElement(image, array.getJSONObject(i).getJSONArray("boards").getJSONObject(0).getString("name"),parameterArrayList.clone()));
-                    if (array.getJSONObject(i).getString("address").contains(savedidentifier)) {
-                        UI.runselection.setSelectedElement((DropDownElement) UI.runselection.getElements().get(UI.runselection.getElements().size() - 1));
+                }
+            }
+
+            counter += ProjectManager.getActProjectVar().deviceConfigurations.size();
+
+
+            if (counter != UI.runselection.getElements().size()) {
+                if (UI.runselection.getSelectedElement() != null) {
+                    savedidentifier = ((ArrayList<String>) UI.runselection.getSelectedElement().getIdentifier()).get(1);
+                }
+
+                UI.runselection.clear();
+
+                //Add Auto Selected Boards
+                for (int i = 0; i < array.length(); i++) {
+                    if (array.getJSONObject(i).has("boards")) {
+
+                        Texture image = switch (array.getJSONObject(i).getJSONArray("boards").getJSONObject(0).getString("FQBN")) {
+                            case "arduino:avr:uno" -> AssetLoader.arduinounoimage;
+                            case "arduino:avr:mega" -> AssetLoader.arduinomegaimage;
+                            case "arduino:avr:nano" -> AssetLoader.arduinonanoimage;
+                            default -> AssetLoader.arduinounoimage;
+                        };
+
+                        parameterArrayList.clear();
+                        parameterArrayList.add(array.getJSONObject(i).getJSONArray("boards").getJSONObject(0).getString("FQBN"));
+                        parameterArrayList.add(array.getJSONObject(i).getString("address"));
+                        UI.runselection.addelement(new DropDownElement(image, array.getJSONObject(i).getJSONArray("boards").getJSONObject(0).getString("name"), parameterArrayList.clone()));
+                        if (array.getJSONObject(i).getString("address").contains(savedidentifier)) {
+                            UI.runselection.setSelectedElement((DropDownElement) UI.runselection.getElements().get(UI.runselection.getElements().size() - 1));
+                        }
+
                     }
-
                 }
-            }
 
-            if (UI.runselection.getSelectedElement() == null && UI.runselection.getElements().size() > 0) {
-                UI.runselection.setSelectedElement((DropDownElement) UI.runselection.getElements().get(0));
-            }
-
-            if(ProjectManager.getActProjectVar().deviceConfigurations.size()>0) {
-               // UI.runselection.addelement(new DropDownSeperator());
-
-                //ADD Manual User Configs
-                for(int i=0;i<ProjectManager.getActProjectVar().deviceConfigurations.size();i++) {
-
-                    parameterArrayList.clear();
-                    parameterArrayList.add( ProjectManager.getActProjectVar().deviceConfigurations.get(i).getParameters().get(0).getParameter().toString());
-                    parameterArrayList.add( ProjectManager.getActProjectVar().deviceConfigurations.get(i).getParameters().get(1).getParameter().toString());
-
-                    UI.runselection.addelement(new DropDownElement(AssetLoader.arduinounoimage,ProjectManager.getActProjectVar().deviceConfigurations.get(i).getName(),parameterArrayList.clone()));
-                    ProjectManager.getActProjectVar().deviceConfigurations.get(i).setDeviceConfigListIndex(UI.runselection.getElements().size()-1);
-
+                if (UI.runselection.getSelectedElement() == null && UI.runselection.getElements().size() > 0) {
+                    UI.runselection.setSelectedElement((DropDownElement) UI.runselection.getElements().get(0));
                 }
+
+                if (ProjectManager.getActProjectVar().deviceConfigurations.size() > 0) {
+                    // UI.runselection.addelement(new DropDownSeperator());
+
+                    //ADD Manual User Configs
+                    for (int i = 0; i < ProjectManager.getActProjectVar().deviceConfigurations.size(); i++) {
+
+                        parameterArrayList.clear();
+                        parameterArrayList.add(ProjectManager.getActProjectVar().deviceConfigurations.get(i).getParameters().get(0).getParameter().toString());
+                        parameterArrayList.add(ProjectManager.getActProjectVar().deviceConfigurations.get(i).getParameters().get(1).getParameter().toString());
+
+                        UI.runselection.addelement(new DropDownElement(AssetLoader.arduinounoimage, ProjectManager.getActProjectVar().deviceConfigurations.get(i).getName(), parameterArrayList.clone()));
+                        ProjectManager.getActProjectVar().deviceConfigurations.get(i).setDeviceConfigListIndex(UI.runselection.getElements().size() - 1);
+
+                    }
+                }
+
+                if (UI.runselection.getSelectedElement() == null) {
+                    UI.runselection.setDefaultText("Bitte Gerät verbinden");
+                }
+
             }
 
-            if (UI.runselection.getSelectedElement() == null) {
-                UI.runselection.setDefaultText("Bitte Gerät verbinden");
-            }
+            array = null;
 
         }
+    }
 
-        array = null;
-
+    @Override
+    public void switchedto() {
 
     }
 
