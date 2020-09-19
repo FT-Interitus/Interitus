@@ -528,5 +528,23 @@ public class Operations {
 
     }
 
+ public static ArrayList<Byte> getBrickname() {
+
+        ArrayList<Byte> operations = new ArrayList<>();
+
+
+        operations.add(ev3.opCom_Get);
+        operations.add(ev3.GET_BRICKNAME);
+        Byte[] temp = ev3.LCX(1);
+
+        for (int i = 0; i < temp.length; i++) {
+           operations.add(temp[i]);
+        }
+
+        return operations;
+
+
+    }
+
 
 }

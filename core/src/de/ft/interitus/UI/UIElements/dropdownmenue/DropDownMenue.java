@@ -88,7 +88,7 @@ public class DropDownMenue implements UIElement {
         return selectedElement;
     }
 
-    public void setSelectedElement(DropDownElement selectedElement) {
+    public void setSelectedElement(DropDownElementInterface selectedElement) {
         this.selectedElement = selectedElement;
     }
 
@@ -168,6 +168,9 @@ public class DropDownMenue implements UIElement {
         selectedElement = null;
         elements.clear();
     }
+
+
+
 
     public String getDefaultText() {
         return defaultText;

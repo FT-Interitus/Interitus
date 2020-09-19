@@ -22,6 +22,11 @@ public class RaspberryPiFunktions implements ProjectFunktions {
     }
 
     @Override
+    public void switchedto() {
+
+    }
+
+    @Override
     public void runconfigsettings(VisTable builder, DeviceConfiguration configuration) {
 
     }

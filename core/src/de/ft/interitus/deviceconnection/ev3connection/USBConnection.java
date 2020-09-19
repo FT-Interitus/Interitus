@@ -71,7 +71,7 @@ USBConnectionHandle usbConnectionHandle = new USBConnectionHandle();
 
       // command.addAll(Operations.fillwindow(true,0,40));
       // command.addAll(Operations.updateev3screen());
-        command.addAll(Operations.ev3statusline(true));
+        command.addAll(Operations.ev3statusline(false));
         command.addAll(Operations.updateev3screen());
       //  command.addAll(Operations.playSound("./ui/DownloadSucces",100,false));
 

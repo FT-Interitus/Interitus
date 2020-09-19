@@ -25,6 +25,8 @@ public class ev3 {
 
 
     static final byte opCom_Set = (byte) 0xD4;
+    static final byte opCom_Get = (byte) 0xD3;
+
 
     static final byte opSound = (byte) 0x94;
     static final byte opSound_Ready = (byte) 0x96;
@@ -43,6 +45,7 @@ public class ev3 {
 
 
     static final byte SET_BRICKNAME = (byte) 0x08;
+    static final byte GET_BRICKNAME = (byte) 0x0D;
 
     static final byte TONE = (byte) 0x01;
     static final byte PLAY = (byte) 0x02;
@@ -91,8 +94,8 @@ public class ev3 {
      * EV3 Connection
      */
 
-    static final short ID_VENDOR_LEGO = (short) 0x0694;
-    static final short ID_PRODUCT_EV3 = (short) 0x0005;
+   public static final short ID_VENDOR_LEGO = (short) 0x0694;
+    public static final short ID_PRODUCT_EV3 = (short) 0x0005;
 
 
     static final byte DIRECT_COMMAND_REPLY = (byte) 0x00;
@@ -199,7 +202,7 @@ public class ev3 {
     }
 
     // Global Variable 1,2,4 bytes follow
-    public static byte[] GVX(int value) {
+    public static Byte[] GVX(int value) {
         List<Byte> ops = new ArrayList<>();
         if (value < 0) {
             throw new IllegalArgumentException("Parameter must be positive " + value);
@@ -219,7 +222,7 @@ public class ev3 {
             ops.add((byte) (value >> 16));
             ops.add((byte) (value >> 24));
         }
-        byte[] returnarray = new byte[ops.size()];
+        Byte[] returnarray = new Byte[ops.size()];
         for (int i = 0; i < ops.size(); i++) {
             returnarray[i] = ops.get(i);
         }

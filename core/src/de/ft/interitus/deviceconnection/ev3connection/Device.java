@@ -9,6 +9,7 @@ public interface Device {
 
     ConnectionHandle getConnectionHandle();
     String path();
+    String getName();
 
 
 
