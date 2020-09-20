@@ -66,18 +66,21 @@ USBConnectionHandle usbConnectionHandle = new USBConnectionHandle();
        // command.addAll(Operations.setbrickname("Hallo"));
         USBDevice device = new USBDevice(USBConnectionHandle.hidServices.getHidDevice(ev3.ID_VENDOR_LEGO, ev3.ID_PRODUCT_EV3, null),usbConnectionHandle,"");
 
-        System.out.println(device.getDevice().getPath());
+        Utils.downloadFile("test12345","test1234334353",device);
+
+      //  System.out.println(device.getDevice().getPath());
 
 
       // command.addAll(Operations.fillwindow(true,0,40));
       // command.addAll(Operations.updateev3screen());
-        command.addAll(Operations.ev3statusline(false));
-        command.addAll(Operations.updateev3screen());
+     //   command.addAll(Operations.showTextBox(10,10,100,100,"Hallo",(byte)0x02));
+
+      //  command.addAll(Operations.updateev3screen());
       //  command.addAll(Operations.playSound("./ui/DownloadSucces",100,false));
 
-        Byte[] returnbytes = usbConnectionHandle.sendData(ev3.makeDirectCmd(command,4,0),device);
+     //   Byte[] returnbytes = usbConnectionHandle.sendData(ev3.makeDirectCmd(command,4,0),device);
 
-ev3.printHex("recv",returnbytes);
+//ev3.printHex("recv",returnbytes);
 
 
         //  command.addAll(Operations.loadProgrammFiles(4,"../prjs/newUI/test.rbf",0,4));

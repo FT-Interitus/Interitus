@@ -234,7 +234,7 @@ public class ev3 {
 
 
     public static byte[] makeSystemCommand(byte[] Command) {
-        ByteBuffer buffer = ByteBuffer.allocateDirect(6);
+        ByteBuffer buffer = ByteBuffer.allocateDirect(6+Command.length);
         buffer.order(ByteOrder.LITTLE_ENDIAN);
         buffer.putShort((short) ((short) 4+Command.length-1));   // length
         buffer.putShort((short) 42);                            // counter
