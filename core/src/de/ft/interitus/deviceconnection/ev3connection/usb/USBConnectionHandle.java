@@ -18,9 +18,8 @@ import org.hid4java.HidServices;
 import java.util.ArrayList;
 
 public class USBConnectionHandle implements ConnectionHandle {
-   public static HidServices hidServices = HidManager.getHidServices();
-private static ArrayList<HidDevice> devices = new ArrayList<>();
-private static ArrayList<HidDevice> removeinglist = new ArrayList<>();
+public static HidServices hidServices = HidManager.getHidServices();
+
     @Override
     public Byte[] sendData(byte[] sendingbytes, Device device) {
         HidDevice legodevice;
@@ -37,7 +36,7 @@ private static ArrayList<HidDevice> removeinglist = new ArrayList<>();
         if (val != -1) {
             try {
 
-                readed = legodevice.read();
+                readed = legodevice.read(1032,1000);
 
             }catch (Exception e) {
 

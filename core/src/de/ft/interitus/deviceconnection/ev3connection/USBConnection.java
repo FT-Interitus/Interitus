@@ -9,6 +9,8 @@ import de.ft.interitus.deviceconnection.ev3connection.usb.USBConnectionHandle;
 import de.ft.interitus.deviceconnection.ev3connection.usb.USBDevice;
 import de.ft.interitus.utils.ArrayList;
 
+import java.util.UUID;
+
 /**
  * Only for testing purpose
  */
@@ -21,7 +23,7 @@ public class USBConnection {
 
 
 
-USBConnectionHandle usbConnectionHandle = new USBConnectionHandle();
+        USBConnectionHandle usbConnectionHandle = new USBConnectionHandle();
 
 
 
@@ -34,7 +36,7 @@ USBConnectionHandle usbConnectionHandle = new USBConnectionHandle();
 
             command.addAll(Operations.ev3statusline(false));
             command.addAll(Operations.fillwindow(false, 1, 1));
-            command.addAll(Operations.fillwindow(true, 128, 2));
+
 
             System.out.println(i);
 
@@ -48,7 +50,7 @@ USBConnectionHandle usbConnectionHandle = new USBConnectionHandle();
 
  */
 
-
+       // command.addAll(Operations.fillwindow(true, 0, 10));
        // command.clear();
         // command.addAll(Operations.playTone(100, 600, 100));
 
@@ -59,14 +61,18 @@ USBConnectionHandle usbConnectionHandle = new USBConnectionHandle();
         // command.addAll(Operations.updateev3screen());
         //   while(true) {
 
-        //command.addAll(Operations.setbrickname("Tim"));
+        //command.addAll(Operations.setbrickname("Felix"));
         //command.addAll(Operations.setbrickname("Tim"));
 //command.addAll(Operations.setbrickname("Hallo"));
 
        // command.addAll(Operations.setbrickname("Hallo"));
         USBDevice device = new USBDevice(USBConnectionHandle.hidServices.getHidDevice(ev3.ID_VENDOR_LEGO, ev3.ID_PRODUCT_EV3, null),usbConnectionHandle,"");
 
-        Utils.downloadFile("test12345","test1234334353",device);
+String a1000 = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+a1000 += "\nHallo das ist ein Test";
+
+       // Utils.downloadFile("../apps/data.txt", a1000,device);
+       System.out.println("data: "+Utils.uploadFile("../apps/data.txt",device));
 
       //  System.out.println(device.getDevice().getPath());
 
@@ -76,9 +82,10 @@ USBConnectionHandle usbConnectionHandle = new USBConnectionHandle();
      //   command.addAll(Operations.showTextBox(10,10,100,100,"Hallo",(byte)0x02));
 
       //  command.addAll(Operations.updateev3screen());
-      //  command.addAll(Operations.playSound("./ui/DownloadSucces",100,false));
+       // command.addAll(Operations.playSound("./ui/DownloadSucces",100,false));
 
-     //   Byte[] returnbytes = usbConnectionHandle.sendData(ev3.makeDirectCmd(command,4,0),device);
+       // Byte[] returnbytes = usbConnectionHandle.sendData(ev3.makeDirectCmd(command,4,0),device);
+        //Byte[] returnbytes = usbConnectionHandle.sendData(ev3.makeSystemCommand(SystemOperations.firmwareUpdate()),device);
 
 //ev3.printHex("recv",returnbytes);
 
