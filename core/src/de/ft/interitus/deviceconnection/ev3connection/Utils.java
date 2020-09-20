@@ -116,8 +116,8 @@ public class Utils {
 
                 ev3.printHex("recv",additionalcontent);
 
-
-                for(int i=0;i<Math.min(maxbytetoread,size-counter);i++) {
+                int tempcounter = counter;
+                for(int i=0;i<Math.min(maxbytetoread,size-tempcounter);i++) {
 
 
                    content+= ((char) additionalcontent[i + 8].byteValue());
