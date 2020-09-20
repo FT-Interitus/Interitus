@@ -81,10 +81,15 @@ public class Utils {
 
         byte filehandle = payload[11];
         ev3.printHex("recv",payload);
-        size=size|(payload[7]);
-        size=size|(payload[8]<<8);
-        size=size|(payload[9]<<16);
-        size=size|(payload[10]<<24);
+        //size=size|(payload[7]);
+        //size=size|(payload[8]<<8);
+        //size=size|(payload[9]<<16);
+        //size=size|(payload[10]<<24);
+         size =
+                ((payload[7] & 0xFF) <<  0) |
+                        ((payload[8] & 0xFF) <<  8) |
+                        ((payload[9] & 0xFF) << 16) |
+                        ((payload[10] & 0xFF) << 24);
         int counter=0;
         System.out.println("filesize: "+size);
         if(maxbytetoread>=size){
