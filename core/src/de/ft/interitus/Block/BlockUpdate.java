@@ -35,8 +35,6 @@ public abstract class BlockUpdate extends Thread {
     public boolean geschoben = false;
     public Wire tempwire;
     boolean toggle; // Ist der Block von der mouse gehovert?
-    Vector2 temp1; //Temp vectoren für berechnungs zwischen schritte
-    Vector2 temp2;//Temp vectoren für berechnungs zwischen schritte
     Vector3 temp3;//Temp vectoren für berechnungs zwischen schritte
     Vector3 temp4;//Temp vectoren für berechnungs zwischen schritte
     private boolean willbedelete = false;
@@ -48,8 +46,6 @@ public abstract class BlockUpdate extends Thread {
     public BlockUpdate(Block block) {
         this.block = block; //Der Block wird zugewiesen
 
-        temp1 = new Vector2(0, 0);//Temp Vectoren init
-        temp2 = new Vector2(0, 0);//Temp Vectoren init
         temp3 = new Vector3(0, 0, 0);//Temp Vectoren init
         temp4 = new Vector3(0, 0, 0);//Temp Vectoren init
     }
@@ -533,7 +529,7 @@ public abstract class BlockUpdate extends Thread {
 
                                     } else {
 
-                                        //Set Block only if you doesn't move it
+                                        //Set Block only if you don't move it
 
                                         if (block.getRight() != ProjectManager.getActProjectVar().markedblock && ProjectManager.getActProjectVar().markedblock.getLeft() != block && block.getRight() == null && ProjectManager.getActProjectVar().biggestblock == block) {
 
