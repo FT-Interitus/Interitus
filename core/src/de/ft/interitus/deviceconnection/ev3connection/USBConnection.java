@@ -73,6 +73,7 @@ a1000 += "\nHallo das ist ein Test";
 
         //Utils.Close_all_FileHandle(10, device);
         Utils.downloadFile("../apps/data123.txt", a1000,device);
+        //Utils.Delete_File("../apps/data123.txt", device);
         //Utils.Close_FileHandle((byte)0x01,device);
        //System.out.println("data: "+Utils.uploadFile("../apps/data123.txt",device));
 

@@ -123,6 +123,16 @@ public class SystemOperations {
         return bytes;
     }
 
+    public static byte[] Delete_File(byte[] path){
+        byte[] bytes = new byte[1+path.length];
+        bytes[0]=DELETE_FILE;
+        for(int i=0;i<path.length;i++){
+            bytes[1+i]=path[i];
+        }
+
+        return bytes;
+    }
+
 
 
 

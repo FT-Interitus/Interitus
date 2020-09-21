@@ -142,5 +142,9 @@ public class Utils {
             ev3.printHex("recv",payload);
         }
     }
+    public static void Delete_File(String path, Device device){
+        Byte[] payload =  device.getConnectionHandle().sendData(ev3.makeSystemCommand(SystemOperations.Delete_File(path.getBytes())),device);
+        ev3.printHex("recv",payload);
+    }
 
 }
