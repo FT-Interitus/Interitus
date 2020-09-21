@@ -133,6 +133,12 @@ public class SystemOperations {
         return bytes;
     }
 
+    public static byte[] List_Open_Handles(){
+        byte[] bytes = new byte[1];
+        bytes[0]=LIST_OPEN_HANDLES;
+        return bytes;
+    }
+
 
 
 
