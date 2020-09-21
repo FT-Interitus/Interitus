@@ -140,10 +140,19 @@ public class SystemOperations {
     }
 
 
+    public static byte[] Create_Dir(byte[] path) {
+
+        byte[] bytes = new byte[2+path.length];
+        bytes[0] = CREATE_DIR;
+        for(int i=0;i<path.length;i++) {
+
+            bytes[i+1] = path[i];
+
+        }
+        bytes[bytes.length-1] = (byte)0x00;
 
 
+        return bytes;
 
-
-
-
+    }
 }

@@ -5,12 +5,16 @@
 
 package de.ft.interitus.deviceconnection.ev3connection;
 
+import de.ft.interitus.deviceconnection.ev3connection.Exception.Ev3ErrorAnalyser;
+import de.ft.interitus.deviceconnection.ev3connection.Exception.Ev3NoPermissionException;
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 
 public class Utils {
     static Byte[] returnvalue;
    static byte[] sendArray;
-    public static void downloadFile(String name,String content,Device device) {
+    public static void downloadFile(String name,String content,Device device) throws Exception {
 
         returnvalue = null;
         sendArray = null;
@@ -35,48 +39,49 @@ public class Utils {
         if(filehandle[6]==(byte)0x00) {
 
 
-            while(counter<contentbytes.length)  {
+            while(counter<contentbytes.length) {
 
-                sendArray = new byte[Math.min(chucksize,contentbytes.length-counter)];
-                for(int i=0;i<sendArray.length;i++) {
+                sendArray = new byte[Math.min(chucksize, contentbytes.length - counter)];
+                for (int i = 0; i < sendArray.length; i++) {
 
                     sendArray[i] = contentbytes[counter++];
 
                 }
 
 
-                returnvalue = device.getConnectionHandle().sendData(ev3.makeSystemCommand(SystemOperations.continueDownload(filehandle[7],sendArray)),device);
+                returnvalue = device.getConnectionHandle().sendData(ev3.makeSystemCommand(SystemOperations.continueDownload(filehandle[7], sendArray)), device);
 
                 System.out.println(filehandle[7]);
-                ev3.printHex("recv",returnvalue);
+                ev3.printHex("recv", returnvalue);
 
-                if(returnvalue[6]!=(byte)0x00) {
-                    throw new RuntimeException("Error while Uploading File");
+                if (returnvalue[6] != (byte) 0x00) {
+                    Ev3ErrorAnalyser.analyze(returnvalue[6]);
 
 
                 }
-
 
             }
 
 
 
 
-        }else{
-            throw new RuntimeException("Error while getting FileHandle");
+        }else {
+            Ev3ErrorAnalyser.analyze(filehandle[6]);
         }
 
         System.out.println("Filehandle: "+filehandle[7]);
-        Close_FileHandle(filehandle[7],device);
+        close_FileHandle(filehandle[7],device);
     }
 
-    public static String uploadFile(String path, Device device){
+    public static String uploadFile(String path, Device device) throws Exception {
         String file="";
         final int  maxbytetoread=1000;
         long size=0;
         //Byte[] bytes=new Byte[1000];
 
         Byte[] payload =  device.getConnectionHandle().sendData(ev3.makeSystemCommand(SystemOperations.Begin_Upload(maxbytetoread, path.getBytes())),device);
+
+        Ev3ErrorAnalyser.analyze(payload[6]);
 
         byte filehandle = payload[11];
         ev3.printHex("recv",payload);
@@ -114,6 +119,8 @@ public class Utils {
 
                 Byte[] additionalcontent =  device.getConnectionHandle().sendData(ev3.makeSystemCommand(SystemOperations.Continue_Upload(filehandle,maxbytetoread )),device);
 
+                Ev3ErrorAnalyser.analyze(additionalcontent[6]);
+
                 ev3.printHex("recv",additionalcontent);
 
                 int tempcounter = counter;
@@ -131,20 +138,40 @@ public class Utils {
 
 
     }
-    public static void Close_FileHandle(byte handle, Device device){
+    public static void close_FileHandle(byte handle, Device device) throws Exception {
         Byte[] payload =  device.getConnectionHandle().sendData(ev3.makeSystemCommand(SystemOperations.Close_FileHandle(handle)),device);
         ev3.printHex("recv",payload);
+        Ev3ErrorAnalyser.analyze(payload[6]);
 
     }
-    public static void Close_all_FileHandle(int filehandleanzahl, Device device){
+    public static void close_all_FileHandle(int filehandleanzahl, Device device) throws Exception {
         for(byte i=0;i<filehandleanzahl;i++){
             Byte[] payload =  device.getConnectionHandle().sendData(ev3.makeSystemCommand(SystemOperations.Close_FileHandle(i)),device);
             ev3.printHex("recv",payload);
+            Ev3ErrorAnalyser.analyze(payload[6]);
         }
     }
-    public static void Delete_File(String path, Device device){
+    public static void Delete_File(String path, Device device) throws Exception {
         Byte[] payload =  device.getConnectionHandle().sendData(ev3.makeSystemCommand(SystemOperations.Delete_File(path.getBytes())),device);
         ev3.printHex("recv",payload);
+        Ev3ErrorAnalyser.analyze(payload[6]);
+
+    }
+
+    /**
+     * Create a Dir relative to lms2012
+     * @param path path to the new dir
+     * @param device device to be send to
+     */
+    public static void create_Dir(String path, Device device) throws Exception {
+        if(!path.startsWith("/")) {
+            path = "/home/root/lms2012/" + path;
+        }
+        Byte[] payload =  device.getConnectionHandle().sendData(ev3.makeSystemCommand(SystemOperations.Create_Dir(path.getBytes())),device);
+        ev3.printHex("recv",payload);
+
+        Ev3ErrorAnalyser.analyze(payload[6]);
+
     }
 
 }
