@@ -32,7 +32,6 @@ public class Utils {
       Byte[] filehandle =  device.getConnectionHandle().sendData(ev3.makeSystemCommand(bytes),device);
         ev3.printHex("recv",filehandle);
         System.out.println("SIZE: "+contentbytes.length);
-
         if(filehandle[6]==(byte)0x00) {
 
 
@@ -67,8 +66,8 @@ public class Utils {
             throw new RuntimeException("Error while getting FileHandle");
         }
 
-
-
+        System.out.println("Filehandle: "+filehandle[7]);
+        Close_FileHandle(filehandle[7],device);
     }
 
     public static String uploadFile(String path, Device device){
@@ -90,6 +89,7 @@ public class Utils {
                         ((payload[8] & 0xFF) <<  8) |
                         ((payload[9] & 0xFF) << 16) |
                         ((payload[10] & 0xFF) << 24);
+
         int counter=0;
         System.out.println("filesize: "+size);
         if(maxbytetoread>=size){
@@ -130,6 +130,17 @@ public class Utils {
         }
 
 
+    }
+    public static void Close_FileHandle(byte handle, Device device){
+        Byte[] payload =  device.getConnectionHandle().sendData(ev3.makeSystemCommand(SystemOperations.Close_FileHandle(handle)),device);
+        ev3.printHex("recv",payload);
+
+    }
+    public static void Close_all_FileHandle(int filehandleanzahl, Device device){
+        for(byte i=0;i<filehandleanzahl;i++){
+            Byte[] payload =  device.getConnectionHandle().sendData(ev3.makeSystemCommand(SystemOperations.Close_FileHandle(i)),device);
+            ev3.printHex("recv",payload);
+        }
     }
 
 }

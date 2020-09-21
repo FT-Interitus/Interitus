@@ -114,6 +114,16 @@ public class SystemOperations {
         return bytes;
     }
 
+    public static byte[] Close_FileHandle(byte handle){
+        byte[] bytes = new byte[3];
+        bytes[0]=CLOSE_FILEHANDLE;
+        bytes[1]=handle;
+        bytes[2]=0x00;
+
+        return bytes;
+    }
+
+
 
 
 
