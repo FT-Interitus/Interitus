@@ -22,7 +22,7 @@ import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.Var;
 import de.ft.interitus.projecttypes.ProjectManager;
 
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;

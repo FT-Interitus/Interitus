@@ -17,7 +17,7 @@ import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.utils.ShapeRenderer;
 import org.lwjgl.opengl.GL11;
 
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public class NotificationManager {
 

@@ -10,7 +10,7 @@ import de.ft.interitus.UI.UI;
 import de.ft.interitus.projecttypes.ProjectManager;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public class DeviceConfiguration implements Serializable {
 

@@ -17,7 +17,7 @@ import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.Tool;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public class NeoPixel implements Addon {
     ArrayList<PlatformSpecificBlock> platformSpecificBlocks = new ArrayList<>();

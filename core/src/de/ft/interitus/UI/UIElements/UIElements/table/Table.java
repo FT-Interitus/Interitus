@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.UI.UIElements.UIElements.table;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -5,7 +10,7 @@ import de.ft.interitus.Programm;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.UI.UIElements.UIElements.UIElement;
 
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public class Table implements UIElement {
     private int x;

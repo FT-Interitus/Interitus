@@ -8,7 +8,7 @@ package de.ft.interitus.deviceconnection.ev3connection;
 import de.ft.interitus.deviceconnection.ev3connection.Exception.Ev3EndOfFileException;
 import de.ft.interitus.deviceconnection.ev3connection.Exception.Ev3ErrorAnalyser;
 
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public class Ev3SystemUtils {
     static Byte[] returnvalue;

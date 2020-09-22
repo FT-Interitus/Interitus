@@ -9,7 +9,7 @@ import com.kotcrab.vis.ui.widget.VisTable;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.UI.ManualConfig.DeviceConfiguration;
 
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public interface ProjectFunktions {
     void create();

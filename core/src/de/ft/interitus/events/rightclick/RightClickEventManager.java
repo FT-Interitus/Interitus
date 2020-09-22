@@ -7,7 +7,7 @@ package de.ft.interitus.events.rightclick;
 
 import de.ft.interitus.UI.popup.PopupMenue;
 
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 import java.util.Vector;
 
 public class RightClickEventManager  {

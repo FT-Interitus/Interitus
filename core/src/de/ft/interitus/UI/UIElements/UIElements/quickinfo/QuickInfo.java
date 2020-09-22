@@ -17,7 +17,7 @@ import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
 
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public class QuickInfo {
     private String text;
