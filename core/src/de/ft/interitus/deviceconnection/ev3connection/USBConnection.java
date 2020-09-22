@@ -72,7 +72,7 @@ public class USBConnection {
         //Utils.Close_all_FileHandle(10, device);
         //Utils.downloadFile("../apps/data123.txt", a1000,device);
         try {
-            Ev3SystemUtils.ListFilesinPath("/home/root/lms2012/prjs/",device);
+           // Ev3SystemUtils.ListFilesinPath("/home/root/lms2012/prjs/",device);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -82,18 +82,18 @@ public class USBConnection {
 
       //  System.out.println(device.getDevice().getPath());
 
-
       // command.addAll(Operations.fillwindow(true,0,40));
       // command.addAll(Operations.updateev3screen());
-     //   command.addAll(Operations.showTextBox(10,10,100,100,"Hallo",(byte)0x02));
+        //command.addAll(Operations.showTextBox(10,10,100,100,"Hallo",(byte)0x00));
+command.addAll(Operations.led(2,true,true));
 
       //  command.addAll(Operations.updateev3screen());
        // command.addAll(Operations.playSound("./ui/DownloadSucces",100,false));
 
-       // Byte[] returnbytes = usbConnectionHandle.sendData(ev3.makeDirectCmd(command,4,0),device);
+        Byte[] returnbytes = usbConnectionHandle.sendData(ev3.makeDirectCmd(command,16,16),device);
         //Byte[] returnbytes = usbConnectionHandle.sendData(ev3.makeSystemCommand(SystemOperations.firmwareUpdate()),device);
 
-//ev3.printHex("recv",returnbytes);
+ev3.printHex("recv",returnbytes);
 
 
         //  command.addAll(Operations.loadProgrammFiles(4,"../prjs/newUI/test.rbf",0,4));
