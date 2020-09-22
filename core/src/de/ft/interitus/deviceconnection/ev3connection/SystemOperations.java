@@ -155,4 +155,42 @@ public class SystemOperations {
         return bytes;
 
     }
+
+
+    public static byte[] List_Files(byte[] path,int maxSize) {
+
+        byte[] bytes = new byte[1+2+path.length];
+
+        bytes[0] = LIST_FILES;
+        bytes[1] = (byte)maxSize;
+        bytes[2] = (byte)(maxSize>>8);
+
+        for(int i=0;i<path.length;i++) {
+
+            bytes[i+3]=path[i];
+
+        }
+
+        return bytes;
+
+
+
+    }
+
+
+    public static byte[] continueListFile(byte handle, int maxbytetoread) {
+
+
+        byte[] bytes = new byte[1+2+1];
+
+        bytes[0] = CONTINUE_LIST_FILES;
+        bytes[1] = handle;
+        bytes[2] = (byte)maxbytetoread;
+        bytes[3] = (byte)(maxbytetoread>>8);
+
+
+        return bytes;
+
+    }
+
 }

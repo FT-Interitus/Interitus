@@ -6,12 +6,10 @@
 package de.ft.interitus.deviceconnection.ev3connection;
 
 import de.ft.interitus.deviceconnection.ev3connection.Exception.Ev3ErrorAnalyser;
-import de.ft.interitus.deviceconnection.ev3connection.Exception.Ev3NoPermissionException;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-public class Utils {
+public class Ev3SystemUtils {
     static Byte[] returnvalue;
    static byte[] sendArray;
     public static void downloadFile(String name,String content,Device device) throws Exception {
@@ -173,5 +171,72 @@ public class Utils {
         Ev3ErrorAnalyser.analyze(payload[6]);
 
     }
+
+    public static byte[] ListFilesinPath(String path, Device device) throws Exception {
+        if(!path.startsWith("/")) {
+            path = "/home/root/lms2012/" + path;
+        }
+        final int  maxbytetoread=1000;
+
+        Byte[] payload = device.getConnectionHandle().sendData(ev3.makeSystemCommand(SystemOperations.List_Files(path.getBytes(),maxbytetoread)),device);
+
+        ev3.printHex("recv",payload);
+
+        Ev3ErrorAnalyser.analyze(payload[6]);
+
+        long sizeofcontent =
+                ((payload[7] & 0xFF) <<  0) |
+                        ((payload[8] & 0xFF) <<  8) |
+                        ((payload[9] & 0xFF) << 16) |
+                        ((payload[10] & 0xFF) << 24);
+        byte filehandle = payload[11];
+
+
+        byte[] listfiles = new byte[(int)sizeofcontent];
+
+        for(int i=0;i<Math.min(sizeofcontent,maxbytetoread);i++) {
+
+            listfiles[i] = payload[i+12];
+
+        }
+
+
+
+        if(!(Math.min(sizeofcontent,maxbytetoread)>=sizeofcontent)) {
+            int counter = maxbytetoread;
+            while(sizeofcontent>counter) {
+
+
+                Byte[] getmorefiles = device.getConnectionHandle().sendData(ev3.makeSystemCommand(SystemOperations.continueListFile(filehandle, (int) Math.min(sizeofcontent-counter,maxbytetoread))),device);
+                ev3.printHex("recv",getmorefiles);
+
+
+                Ev3ErrorAnalyser.analyze(getmorefiles[6]);
+
+                int temppointer = counter;
+                for(int i=0;i<Math.min(sizeofcontent-temppointer,maxbytetoread);i++) {
+                    counter++;
+                    listfiles[counter+i] = getmorefiles[8+i];
+
+
+
+                }
+
+
+            }
+
+
+        }
+
+
+        return listfiles;
+
+
+    }
+
+
+
+
+
 
 }
