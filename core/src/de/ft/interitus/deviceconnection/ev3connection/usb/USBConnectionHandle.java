@@ -15,7 +15,7 @@ import org.hid4java.HidDevice;
 import org.hid4java.HidManager;
 import org.hid4java.HidServices;
 
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public class USBConnectionHandle implements ConnectionHandle {
 public static HidServices hidServices = HidManager.getHidServices();
@@ -31,12 +31,24 @@ public static HidServices hidServices = HidManager.getHidServices();
 
 
 
+        Byte[] size = null;
         Byte[] readed = null;
         int val = legodevice.write(sendingbytes, sendingbytes.length, (byte) 0);
         if (val != -1) {
             try {
 
-                readed = legodevice.read(1032,1000);
+                size = legodevice.read(2,1000);
+
+                int sizeofcontent =
+                        ((size[0] & (byte)0xFF) <<  0) |
+                                ((size[1] & (byte)0xFF) <<  8);
+
+                readed = legodevice.read(sizeofcontent,1000);
+
+                System.out.println(readed.length);
+
+
+
 
             }catch (Exception e) {
 

@@ -16,7 +16,7 @@ import de.ft.interitus.UI.UIElements.UIElements.UIElement;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.utils.ShapeRenderer;
 
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public class DropDownMenue implements UIElement {
     private final ArrayList<DropDownElementInterface> elements = new ArrayList<>();

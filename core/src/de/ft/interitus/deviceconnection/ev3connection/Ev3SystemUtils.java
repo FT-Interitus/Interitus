@@ -5,13 +5,12 @@
 
 package de.ft.interitus.deviceconnection.ev3connection;
 
+import de.ft.interitus.deviceconnection.ev3connection.Exception.Ev3EndOfFileException;
 import de.ft.interitus.deviceconnection.ev3connection.Exception.Ev3ErrorAnalyser;
-import de.ft.interitus.deviceconnection.ev3connection.Exception.Ev3NoPermissionException;
-import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
-public class Utils {
+public class Ev3SystemUtils {
     static Byte[] returnvalue;
    static byte[] sendArray;
     public static void downloadFile(String name,String content,Device device) throws Exception {
@@ -173,5 +172,150 @@ public class Utils {
         Ev3ErrorAnalyser.analyze(payload[6]);
 
     }
+
+    public static ArrayList<ArrayList<Byte>> ListFilesinPath(String path, Device device) throws Exception {
+        if(!path.startsWith("/")) {
+            path = "/home/root/lms2012/" + path;
+        }
+        final int  maxbytetoread=1000;
+
+        Byte[] payload = device.getConnectionHandle().sendData(ev3.makeSystemCommand(SystemOperations.List_Files(path.getBytes(),maxbytetoread)),device);
+
+
+        try {
+            Ev3ErrorAnalyser.analyze(payload[6]);
+        }catch (Ev3EndOfFileException ignored) {
+
+        }
+
+        long sizeofcontent =
+                ((payload[7] & 0xFF) <<  0) |
+                        ((payload[8] & 0xFF) <<  8) |
+                        ((payload[9] & 0xFF) << 16) |
+                        ((payload[10] & 0xFF) << 24);
+        byte filehandle = payload[11];
+
+
+        byte[] listfiles = new byte[(int)sizeofcontent];
+
+        for(int i=0;i<Math.min(sizeofcontent,maxbytetoread);i++) {
+
+            listfiles[i] = payload[i+12];
+
+        }
+
+
+
+        if(Math.min(sizeofcontent,maxbytetoread)<sizeofcontent) {
+            int counter = maxbytetoread;
+            while(sizeofcontent>counter) {
+
+
+                Byte[] getmorefiles = device.getConnectionHandle().sendData(ev3.makeSystemCommand(SystemOperations.continueListFile(filehandle, (int) Math.min(sizeofcontent-counter,maxbytetoread))),device);
+
+
+
+                Ev3ErrorAnalyser.analyze(getmorefiles[6]);
+
+                int temppointer = counter;
+                for(int i=0;i<Math.min(sizeofcontent-temppointer,maxbytetoread);i++) {
+                    counter++;
+                    listfiles[counter+i] = getmorefiles[8+i];
+
+
+
+                }
+
+
+            }
+
+
+        }
+
+
+
+        ev3.printHex("recv",listfiles);
+
+
+
+        ArrayList<ArrayList<Byte>> bytesarray = new ArrayList<>();
+
+        for(int i=0;i<listfiles.length;i++) {
+
+            if(listfiles[i]==(byte)0x0A) {
+
+                bytesarray.add(new ArrayList<>());
+
+            }
+        }
+
+        int jumper =0;
+        for(int i=0;i<listfiles.length;i++) {
+            if(listfiles[i]==(byte)0x0A) {
+                jumper++;
+                continue;
+            }
+
+
+            bytesarray.get(jumper).add(listfiles[i]);
+
+        }
+
+
+
+
+        return bytesarray;
+
+
+    }
+
+
+    public static ArrayList<String> listedfilestoStrings(ArrayList<ArrayList<Byte>> bytes) {
+
+        ArrayList<String> strings = new ArrayList<>();
+
+        String tempstring="";
+
+        for(ArrayList<Byte> files:bytes)  {
+
+            tempstring="";
+
+            if(!files.contains(" ".getBytes()[0])) {
+
+                for(Byte byte1:files) {
+                    tempstring+=(char)byte1.byteValue();
+
+                }
+            }else{
+                int first = 0;
+                for(Byte byte1:files) {
+                    if(first!=2) {
+                        if((char)byte1.byteValue()==' ') {
+                            first++;
+                        }
+                    }else {
+                        tempstring += (char) byte1.byteValue();
+                    }
+                }
+
+            }
+
+
+
+            strings.add(tempstring);
+
+
+        }
+
+        return strings;
+
+
+    }
+
+
+
+
+
+
 
 }

@@ -309,7 +309,15 @@ public class ev3 {
 
     public static void printHex(String desc, Byte[] buffer) {
         System.out.print(desc + " 0x|");
-        for (int i = 0; i < buffer.length - 1; i++) {
+        for (int i = 0; i < buffer.length; i++) {
+            System.out.printf("%02X:", buffer[i]);
+        }
+       // System.out.printf("%02X|", buffer.get(buffer.position() - 1));
+        System.out.println();
+    }
+    public static void printHex(String desc, byte[] buffer) {
+        System.out.print(desc + " 0x|");
+        for (int i = 0; i < buffer.length; i++) {
             System.out.printf("%02X:", buffer[i]);
         }
        // System.out.printf("%02X|", buffer.get(buffer.position() - 1));

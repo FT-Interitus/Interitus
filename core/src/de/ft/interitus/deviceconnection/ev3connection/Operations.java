@@ -176,6 +176,7 @@ public class Operations {
         b.addAll(Arrays.asList(ev3.LCS(string+new String(new byte[]{0x00}))));
         b.addAll(Arrays.asList(ev3.LCX(string.length()+1)));
         b.add(delimiter);
+       b.addAll(Arrays.asList(ev3.LVX(0)));
 
 
 

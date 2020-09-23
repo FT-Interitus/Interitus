@@ -5,11 +5,15 @@
 
 package de.ft.interitus.deviceconnection.ev3connection;
 
+import de.ft.interitus.deviceconnection.ev3connection.Exception.Ev3ErrorAnalyser;
 import de.ft.interitus.deviceconnection.ev3connection.usb.USBConnectionHandle;
 import de.ft.interitus.deviceconnection.ev3connection.usb.USBDevice;
-import de.ft.interitus.utils.ArrayList;
+import org.hid4java.HidDevice;
+import org.hid4java.jna.HidApi;
 
-import java.util.UUID;
+import de.ft.interitus.utils.ArrayList;
+import java.util.concurrent.TimeUnit;
+
 
 /**
  * Only for testing purpose
@@ -28,6 +32,7 @@ public class USBConnection {
 
 
         ArrayList<Byte> command = new ArrayList<>();
+
 
 /*
         for(int i=0;i<128;i++) {
@@ -71,29 +76,101 @@ public class USBConnection {
 //String a1000 = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
 //a1000 += "\nHallo das ist ein Test";
 
+
+
         //Utils.Close_all_FileHandle(10, device);
         //Utils.downloadFile("../apps/data123.txt", a1000,device);
+<<<<<<< HEAD
         /*try {
             Utils.create_Dir("/home/root/lms2012/prjs/test123/",device);
         } catch (Exception e) {
             e.printStackTrace();
         }*/
+=======
+        try {
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+          // ArrayList<ArrayList<Byte>> bytes = Ev3SystemUtils.ListFilesinPath("/home/root/lms2012/prjs/",device);
+          // for(String string: Ev3SystemUtils.listedfilestoStrings(bytes)) {
+
+              // System.out.println(string);
+
+          // }
+
+/*
+            HidDevice device1 = null;
+            for(HidDevice device:USBConnectionHandle.hidServices.getAttachedHidDevices()) {
+                if(device.getProduct() == null) {
+                    continue;
+                }
+               if(device.getProduct().contentEquals("EV3 Firmware Update")) {
+
+                device1 = device;
+
+               }
+            }
+
+            device1.open();
+
+          for(int i=0;i<5;i++) {
+
+              Byte[] test =device1.read();
+
+              byte[] message = new byte[10];
+
+              message[0] = (byte) 0x01;
+              message[1] = (byte) 0x02;
+              message[2] = (byte) 0x03;
+              message[3] = (byte) 0x04;
+              message[4] = (byte) 0x05;
+              message[5] = (byte) 0x06;
+              message[6] = (byte) 0x07;
+              message[7] = (byte) 0x08;
+              message[8] = (byte) 0x09;
+              message[9] = (byte) 0x0A;
+              device1.write(message,message.length,(byte)0x00);
+              System.out.println("ausgabe");
+            ev3.printHex("recv",test);
+
+              TimeUnit.SECONDS.sleep(1);
+           }
+
+            device1.close();
+
+ */
+
+           // ev3.printHex("recv",device.getConnectionHandle().sendData(ev3.makeSystemCommand(SystemOperations.firmwareUpdate()),device));
+
+
+
+
+>>>>>>> 75d2759406a729798e4cfa6382a03376ba57b73c
         //Utils.Delete_File("../apps/data123.txt", device);
         //Utils.Close_FileHandle((byte)0x01,device);
        //System.out.println("data: "+Utils.uploadFile("../apps/data123.txt",device));
 
       //  System.out.println(device.getDevice().getPath());
 
-
       // command.addAll(Operations.fillwindow(true,0,40));
       // command.addAll(Operations.updateev3screen());
-     //   command.addAll(Operations.showTextBox(10,10,100,100,"Hallo",(byte)0x02));
+        //command.addAll(Operations.showTextBox(10,10,100,100,"Hallo",(byte)0x00));
+//command.addAll(Operations.led(2,true,true));
 
+<<<<<<< HEAD
       //  command.addAll(Operations.updateev3screen());
         //command.addAll(Operations.playSound("./ui/DownloadSucces",100,false));
         command.addAll(Operations.questionBox((byte)0x01,50,50,(byte)0x01,(byte)0x02,"0x00",(byte)0x00));
 
         Byte[] returnbytes = usbConnectionHandle.sendData(ev3.makeDirectCmd(command,4,0),device);
+=======
+        command.addAll(Operations.updateev3screen());
+       // command.addAll(Operations.playSound("./ui/DownloadSucces",100,false));
+
+        Byte[] returnbytes = usbConnectionHandle.sendData(ev3.makeDirectCmd(command,16,16),device);
+>>>>>>> 75d2759406a729798e4cfa6382a03376ba57b73c
         //Byte[] returnbytes = usbConnectionHandle.sendData(ev3.makeSystemCommand(SystemOperations.firmwareUpdate()),device);
 
         ev3.printHex("recv",returnbytes);

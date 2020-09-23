@@ -13,7 +13,7 @@ import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.rightclick.RightClickOpenRequestEvent;
 import de.ft.interitus.events.rightclick.RightClickPerformActionEvent;
 
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public class PopupHandler {
 

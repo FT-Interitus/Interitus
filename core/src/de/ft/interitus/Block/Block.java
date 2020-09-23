@@ -33,7 +33,7 @@ import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.ShapeRenderer;
 import de.ft.interitus.utils.Unproject;
 
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.Objects;
 

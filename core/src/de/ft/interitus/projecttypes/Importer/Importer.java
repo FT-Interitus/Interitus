@@ -5,7 +5,7 @@
 
 package de.ft.interitus.projecttypes.Importer;
 
-import java.util.ArrayList;
+import de.ft.interitus.utils.ArrayList;
 
 public class Importer {
     public static ArrayList<Import> importer = new ArrayList<>();
