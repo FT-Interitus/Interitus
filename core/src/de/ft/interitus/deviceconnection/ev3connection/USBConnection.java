@@ -12,6 +12,8 @@ import org.hid4java.HidDevice;
 import org.hid4java.jna.HidApi;
 
 import de.ft.interitus.utils.ArrayList;
+
+import java.io.ByteArrayOutputStream;
 import java.util.concurrent.TimeUnit;
 
 
@@ -57,7 +59,7 @@ public class USBConnection {
 
        // command.addAll(Operations.fillwindow(true, 0, 10));
        // command.clear();
-        // command.addAll(Operations.playTone(100, 600, 100));
+        //command.addAll(Operations.playTone(100, 600, 100));
 
 //command.addAll(Operations.blockbackbutton(true));
         //command.addAll(Operations.updateev3screen());
@@ -80,16 +82,18 @@ public class USBConnection {
 
         //Utils.Close_all_FileHandle(10, device);
         //Utils.downloadFile("../apps/data123.txt", a1000,device);
-<<<<<<< HEAD
+
         /*try {
             Utils.create_Dir("/home/root/lms2012/prjs/test123/",device);
         } catch (Exception e) {
             e.printStackTrace();
         }*/
-=======
+
         try {
 
-
+            command.addAll(Operations.playSound("./ui/DownloadSucces",100,false));
+           Byte[] bytes = device.getConnectionHandle().sendData(ev3.makeDirectCmd(command,10,10),device);
+            ev3.printHex("recv",bytes);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -147,8 +151,7 @@ public class USBConnection {
 
 
 
->>>>>>> 75d2759406a729798e4cfa6382a03376ba57b73c
-        //Utils.Delete_File("../apps/data123.txt", device);
+       //Utils.Delete_File("../apps/data123.txt", device);
         //Utils.Close_FileHandle((byte)0x01,device);
        //System.out.println("data: "+Utils.uploadFile("../apps/data123.txt",device));
 
@@ -159,21 +162,20 @@ public class USBConnection {
         //command.addAll(Operations.showTextBox(10,10,100,100,"Hallo",(byte)0x00));
 //command.addAll(Operations.led(2,true,true));
 
-<<<<<<< HEAD
       //  command.addAll(Operations.updateev3screen());
-        //command.addAll(Operations.playSound("./ui/DownloadSucces",100,false));
-        command.addAll(Operations.questionBox((byte)0x01,50,50,(byte)0x01,(byte)0x02,"0x00",(byte)0x00));
 
-        Byte[] returnbytes = usbConnectionHandle.sendData(ev3.makeDirectCmd(command,4,0),device);
-=======
-        command.addAll(Operations.updateev3screen());
+        //command.addAll(Operations.questionBox((byte)0x01,50,50,(byte)0x01,(byte)0x02,"0x00",(byte)0x00));
+
+       // Byte[] returnbytes = usbConnectionHandle.sendData(ev3.makeDirectCmd(command,4,0),device);
+
+       // command.addAll(Operations.updateev3screen());
        // command.addAll(Operations.playSound("./ui/DownloadSucces",100,false));
 
-        Byte[] returnbytes = usbConnectionHandle.sendData(ev3.makeDirectCmd(command,16,16),device);
->>>>>>> 75d2759406a729798e4cfa6382a03376ba57b73c
+    //    Byte[] returnbytes = usbConnectionHandle.sendData(ev3.makeDirectCmd(command,16,16),device);
+
         //Byte[] returnbytes = usbConnectionHandle.sendData(ev3.makeSystemCommand(SystemOperations.firmwareUpdate()),device);
 
-        ev3.printHex("recv",returnbytes);
+        //ev3.printHex("recv",returnbytes);
 
 
         //  command.addAll(Operations.loadProgrammFiles(4,"../prjs/newUI/test.rbf",0,4));
