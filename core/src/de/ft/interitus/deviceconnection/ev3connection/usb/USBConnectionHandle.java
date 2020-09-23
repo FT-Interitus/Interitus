@@ -37,8 +37,8 @@ public static HidServices hidServices = HidManager.getHidServices();
         if (val != -1) {
             try {
 
-                size = legodevice.read(4,3000);
-//TODO experimentell
+                size = legodevice.read(1048,3000);
+            //TODO experimentell
 
                 int sizeofcontent =
                         ((size[0] & (byte)0xFF) <<  0) |
@@ -61,7 +61,7 @@ public static HidServices hidServices = HidManager.getHidServices();
         }
 
 
-        return readed;
+        return size;
     }
 
     @Override
