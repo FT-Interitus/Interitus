@@ -181,6 +181,27 @@ public class Operations {
 
         return b;
     }
+    public static ArrayList<Byte> questionBox(byte Color, int x, int y, byte ICON1, byte ICON2, String question, byte state){
+        ArrayList<Byte> b = new ArrayList<>();
+
+        b.add(ev3.opUI_draw);
+        b.add(ev3.QUESTION);
+        b.addAll(Arrays.asList(ev3.LCX(x)));
+        b.addAll(Arrays.asList(ev3.LCX(y)));
+        b.addAll(Arrays.asList(ev3.LCX((byte)0x01)));
+        b.addAll(Arrays.asList(ev3.LCX((byte)0x02)));
+        b.addAll(Arrays.asList(ev3.LCS("a")));
+        b.addAll(Arrays.asList(ev3.LCX((byte)0x00)));
+
+
+
+        return b;
+    }
+    public static ArrayList<Byte> GET_BATT_in_prozent(){
+        ArrayList<Byte> b = new ArrayList<>();
+
+        return b;
+    }
 
 
 

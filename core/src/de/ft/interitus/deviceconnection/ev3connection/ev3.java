@@ -90,6 +90,10 @@ public class ev3 {
     static final byte LEFT_BUTTON = (byte) 0x05;
     static final byte BACK_BUTTON = (byte) 0x06;
     static final byte ANY_BUTTON = (byte) 0x07;
+
+
+    static final byte QUESTION = (byte) 0x0C;
+    static final byte GET_LBATT = (byte)0x12;
     /**
      * EV3 Connection
      */
