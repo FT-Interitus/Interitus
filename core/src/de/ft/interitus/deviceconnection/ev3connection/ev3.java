@@ -100,6 +100,7 @@ public class ev3 {
 
    public static final short ID_VENDOR_LEGO = (short) 0x0694;
     public static final short ID_PRODUCT_EV3 = (short) 0x0005;
+    public static final short ID_PRODUCT_EV3_UPDATE = (short) 0x0006;
 
 
     static final byte DIRECT_COMMAND_REPLY = (byte) 0x00;
