@@ -14,6 +14,7 @@ import org.hid4java.jna.HidApi;
 import de.ft.interitus.utils.ArrayList;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 
@@ -73,7 +74,7 @@ public class USBConnection {
 //command.addAll(Operations.setbrickname("Hallo"));
 
        // command.addAll(Operations.setbrickname("Hallo"));
-        USBDevice device = new USBDevice(USBConnectionHandle.hidServices.getHidDevice(ev3.ID_VENDOR_LEGO, ev3.ID_PRODUCT_EV3, null),usbConnectionHandle,"");
+       // USBDevice device = new USBDevice(USBConnectionHandle.hidServices.getHidDevice(ev3.ID_VENDOR_LEGO, ev3.ID_PRODUCT_EV3, null),usbConnectionHandle,"");
 
 //String a1000 = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
 //a1000 += "\nHallo das ist ein Test";
@@ -81,8 +82,13 @@ public class USBConnection {
 
 
         //Utils.Close_all_FileHandle(10, device);
-        //Utils.downloadFile("../apps/data123.txt", a1000,device);
-
+        try {
+           // Ev3SystemUtils.downloadFile("../apps/data123.txt", a1000, device);
+            FirmwareUpdater.update(new File("/home/tim/test.bin"));
+           // FirmwareUpdater.update(null);
+        }catch (Exception e) {
+        e.printStackTrace();
+        }
         /*try {
             Utils.create_Dir("/home/root/lms2012/prjs/test123/",device);
         } catch (Exception e) {
@@ -197,7 +203,7 @@ public class USBConnection {
         // }
 
         // command.addAll(Operations.setbrickname("MyEv3"));
-        device.getDevice().close();
+      // device.getDevice().close();
         USBConnectionHandle.hidServices.shutdown();
 
 
