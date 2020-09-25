@@ -90,8 +90,11 @@ public class USBConnection {
         }*/
 
         try {
-
+            System.out.println("test:   "+Integer.toBinaryString(ev3.LC2((byte)0x01,(byte)12)));
             command.addAll(Operations.playSound("./ui/DownloadSucces",100,false));
+            //command.addAll(Operations.showTextBox(0,0,100,100,"o",(byte)0x00));
+            command.addAll(Operations.drawline(false, 100,0,100,100));
+            command.addAll(Operations.updateev3screen());
            Byte[] bytes = device.getConnectionHandle().sendData(ev3.makeDirectCmd(command,10,10),device);
             ev3.printHex("recv",bytes);
         } catch (Exception e) {

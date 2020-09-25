@@ -169,14 +169,18 @@ public class Operations {
         ArrayList<Byte> b = new ArrayList<>();
         b.add(ev3.opUI_draw);
         b.add(ev3.TEXTBOX);
+
+
+
+
         b.addAll(Arrays.asList(ev3.LCX(x)));
         b.addAll(Arrays.asList(ev3.LCX(y)));
-        b.addAll(Arrays.asList(ev3.LCX(x+w)));
-        b.addAll(Arrays.asList(ev3.LCX(y+h)));
-        b.addAll(Arrays.asList(ev3.LCS(string+new String(new byte[]{0x00}))));
-        b.addAll(Arrays.asList(ev3.LCX(string.length()+1)));
-        b.add(delimiter);
-       b.addAll(Arrays.asList(ev3.LVX(0)));
+        b.addAll(Arrays.asList(ev3.LCX(w)));
+        b.addAll(Arrays.asList(ev3.LCX(h)));
+       // b.addAll(Arrays.asList(ev3.LCS(string)));
+        //b.addAll(Arrays.asList(ev3.LCX(string.length())));
+        //b.addAll(Arrays.asList(ev3.LC0((byte)0x00,delimiter)));
+       //b.addAll(Arrays.asList(ev3.LVX(0)));
 
 
 
@@ -256,17 +260,17 @@ public class Operations {
         Byte[] temp;
 
         if (white) {
-            temp = ev3.LCX(0);
+            temp = ev3.aLC0((byte)0x00,(byte)0x00);
         } else {
 
-            temp = ev3.LCX(1);
+            temp = ev3.aLC0((byte)0x00,(byte)0x01);
         }
 
         for (int i = 0; i < temp.length; i++) {
             b.add(temp[i]);
         }
 
-        Byte[] temp2 = ev3.LCX(xstart);
+        Byte[] temp2 = ev3.arrayLC2((byte)0x00, xstart);
 
         for (int i = 0; i < temp2.length; i++) {
             b.add(temp2[i]);

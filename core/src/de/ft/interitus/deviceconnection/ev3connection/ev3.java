@@ -6,6 +6,7 @@
 package de.ft.interitus.deviceconnection.ev3connection;
 
 import de.ft.interitus.utils.ArrayList;
+import org.lwjgl.system.CallbackI;
 
 
 import java.nio.ByteBuffer;
@@ -122,6 +123,77 @@ public class ev3 {
         return a;
 
     }
+/*
+    Now we write the 5 constants as binary masks, where S stands for the sign (0 is positive, 1 is negative), V stands for one bit of the value.
+
+            LC0: 0b 00SV VVVV, 5-bit integer value, range: -32 - 31, length: 1 byte, identified by 2 leading bits 00.
+            LC1: 0b 1000 0001 SVVV VVVV, 8-bit integer value, range: -127 - 127, length: 2 byte, identified by leading byte 0x|81|. Value 0x|80| is NaN.
+            LC2: 0b 1000 0010 VVVV VVVV SVVV VVVV, 16-bit integer value, range: -32,767 – 32,767, length: 3 byte, identified by leading byte 0x|82|. Value 0x|80:00| is NaN.
+            LC4: 0b 1000 0011 VVVV VVVV VVVV VVVV VVVV VVVV SVVV VVVV, 32-bit integer value, range: -2,147,483,647 – 2,147,483,647, length: 5 byte, identified by leading 0x|83|. Value 0x|80:00:00:00| is NaN.
+            LCS: 0b 1000 0100 VVVV VVVV ... 0000 0000, zero-terminated string, length: variable, identified by leading 0x|84|.
+*/
+
+    /**
+     *
+     * @param vorzeichen 0-positiv 1-negative
+     * @param fivebitValue a five bit value
+     * @return Returns the five bit value in ev3 LC0 bytemask
+     */
+    public static byte LC0(byte vorzeichen, byte fivebitValue){
+        //bytemask: 00SV VVVV
+        byte output=0x00;
+        output=(byte)(output|((vorzeichen&0b00000001)<<5));
+
+        output=(byte)(output|(fivebitValue));
+
+        return output;
+    }
+    public static Byte[] aLC0(byte vorzeichen, byte fivebitValue){
+        //bytemask: 00SV VVVV
+        Byte[] returnarray = new Byte[1];
+        byte output=0x00;
+        output=(byte)(output|((vorzeichen&0b00000001)<<5));
+
+        output=(byte)(output|(fivebitValue));
+        returnarray[0]=output;
+        return returnarray;
+    }
+    /**
+     *
+     * @param vorzeichen 0-positiv 1-negative
+     * @param sevenbitValue a seven bit value (or eight bit integer dann parametervorzeichen egal)
+     * @return Returns the seven bit value in ev3 LC1 bytemask
+     */
+    public static int LC1(byte vorzeichen, byte sevenbitValue){
+        //bytemask: 1000 0001 SVVV VVVV
+        int output=0x8100;
+        output=(int)(output|((vorzeichen&0b00000001)<<7));
+        output=(int)(output|(sevenbitValue));
+        return output;
+    }
+
+    public static int LC2(byte vorzeichen, int fifteenbitValue){
+        //bytemask: 1000 0010 VVVV VVVV SVVV VVVV
+        int output=0x820000;
+        output=(output|((vorzeichen&0b00000001)<<7));
+        output=output|(0x7F&((byte)(fifteenbitValue)));
+        output=output|((fifteenbitValue&0b1111111110000000)<<1);
+        return output;
+    }
+    public static Byte[] arrayLC2(byte vorzeichen, int fifteenbitValue){
+        Byte[] returnarray=new Byte[3];
+        //bytemask: 1000 0010 VVVV VVVV SVVV VVVV
+        int output=0x820000;
+        output=(output|((vorzeichen&0b00000001)<<7));
+        output=output|(0x7F&((byte)(fifteenbitValue)));
+        output=output|((fifteenbitValue&0b1111111110000000)<<1);
+        returnarray[0]=(byte)output;
+        returnarray[1]=(byte)(output>>8);
+        returnarray[2]=(byte)(output>>16);
+        return returnarray;
+    }
+
+
 
     public static Byte[] LCX(int value) {
 
