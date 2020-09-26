@@ -49,11 +49,10 @@ public class DesktopLauncher {
 
 		if(!Var.programmarguments.contains("-nogui")) {
 
+			System.setProperty("org.lwjgl.opengl.Display.allowSoftwareOpenGL","true");
 
 
 			Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
-
-
 			config.setWindowedMode(Var.w,Var.h);
 
 			config.setWindowIcon(Files.FileType.Internal, "Icon/interitus.png");
