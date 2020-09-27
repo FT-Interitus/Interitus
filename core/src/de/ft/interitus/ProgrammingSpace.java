@@ -18,6 +18,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import de.ft.interitus.Block.BlockDrawer;
 import de.ft.interitus.UI.CheckShortcuts;
+import de.ft.interitus.UI.Grid;
 import de.ft.interitus.UI.Notification.Notification;
 import de.ft.interitus.UI.Notification.NotificationManager;
 import de.ft.interitus.UI.UI;
@@ -163,6 +164,8 @@ if(ProjectManager.getActProjectVar().markedblock!=null) {
             UI.updatedragui(shapeRenderer, true, batch);
 
             testtable.draw();
+            Grid.draw();
+
             BlockDrawer.Draw();
 
 
@@ -241,6 +244,7 @@ if(ProjectManager.getActProjectVar().markedblock!=null) {
 
 
         batch.dispose();
+
 
     }
 

@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.projecttypes.ProgrammArea;
 
 import de.ft.interitus.Block.Block;
@@ -42,7 +47,7 @@ public class ProgrammAreaManager {
         }
 
 
-System.out.println(PA);
+
         return PA;
     }
 }
