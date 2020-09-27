@@ -421,15 +421,18 @@ public class Data {
         userexperience.writeString(userexperience_obj.toString(), false); //Datei wird geschrieben
 
 ///////////////////////////////////////////////////////////////////////
-        new File(System.getProperty("user.home") + "/" + foldername + "/it.lock").delete();
-        if (!Var.keeplog) {
-            LoggerInit.fh.close();
-            new File(Var.logname).delete();
-        } else {
-            LoggerInit.fh.close();
-            new File(Var.logname).renameTo(new File(System.getProperty("user.home") + "/KeepLog_" + Var.lognamefile));
-        }
 
+        if(closeprogramm) {
+            new File(System.getProperty("user.home") + "/" + foldername + "/it.lock").delete();
+            if (!Var.keeplog) {
+                LoggerInit.fh.close();
+                new File(Var.logname).delete();
+            } else {
+                LoggerInit.fh.close();
+                new File(Var.logname).renameTo(new File(System.getProperty("user.home") + "/KeepLog_" + Var.lognamefile));
+            }
+
+        }
 
         try {
             if(closeprogramm) {
