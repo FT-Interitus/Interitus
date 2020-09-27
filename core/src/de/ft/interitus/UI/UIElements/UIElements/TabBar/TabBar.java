@@ -3,13 +3,16 @@
  * Copyright by Tim and Felix
  */
 
-package de.ft.interitus.UI.UIElements.TabBar;
+package de.ft.interitus.UI.UIElements.UIElements.TabBar;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.kotcrab.vis.ui.util.dialog.ConfirmDialogListener;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
+import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.UI.UI;
+import de.ft.interitus.UI.UIElements.UIElements.UIElement;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
 import de.ft.interitus.Var;
 import de.ft.interitus.datamanager.userdata.UserInteractDataManagerDialog;
@@ -21,8 +24,10 @@ import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.VCS;
 import de.ft.interitus.utils.ArrayList;
 
+import java.awt.*;
 
-public class TabBar {
+
+public class TabBar implements UIElement {
    private int x = 0;
     private int y = 0;
     private int w = 50;
@@ -41,6 +46,26 @@ public class TabBar {
 
     }
 
+
+    @Override
+    public int getX() {
+        return x;
+    }
+
+    @Override
+    public int getY() {
+        return y;
+    }
+
+    @Override
+    public int getW() {
+        return 0;
+    }
+
+    @Override
+    public int getH() {
+        return h;
+    }
 
     public void setBounds(int x, int y, int w, int h) {
         this.x = x;
@@ -69,20 +94,20 @@ public class TabBar {
             tabbs.get(i).getTabButton().setY(this.y);
             tabbs.get(i).getTabButton().setH(this.h);
             tabbs.get(i).getCloseButton().setX((int) (this.x+aktualxpluspos+tabbs.get(i).getTabButton().getW()+1f));
-            tabbs.get(i).getCloseButton().setY((int) (this.y+5f));
-            tabbs.get(i).getCloseButton().setH(10);
-            tabbs.get(i).getCloseButton().setW(10);
-            UI.UIbatch.begin();
+            tabbs.get(i).getCloseButton().setY((int) (this.y));
+            tabbs.get(i).getCloseButton().setH(h);
+            tabbs.get(i).getCloseButton().setW(h);
+            ProgrammingSpace.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
             if(CheckMouse.isMouseover(this.x+aktualxpluspos,this.y,tabbs.get(i).getTabButton().getW(),this.h, false)) {
-                UI.UIbatch.setColor(1,1,1,0.7f);
+                ProgrammingSpace.shapeRenderer.setColor(tabbs.get(i).getMouseovertabcolor());
             }else{
-                UI.UIbatch.setColor(1,1,1,1);
+                ProgrammingSpace.shapeRenderer.setColor(tabbs.get(i).getTabcolor());
 
             }
-            UI.UIbatch.draw(AssetLoader.img_Tab,this.x+aktualxpluspos,this.y,tabbs.get(i).getTabButton().getW()+tabbs.get(i).getCloseButton().getW()+7,this.h);
+            ProgrammingSpace.shapeRenderer.rect(this.x+aktualxpluspos,this.y,tabbs.get(i).getTabButton().getW()+tabbs.get(i).getCloseButton().getW()+7,this.h);
 
-            UI.UIbatch.setColor(1,1,1,1);
-            UI.UIbatch.end();
+            ProgrammingSpace.shapeRenderer.setColor(1,1,1,1);
+            ProgrammingSpace.shapeRenderer.end();
             tabbs.get(i).getTabButton().draw();
             tabbs.get(i).getCloseButton().draw();
             aktualxpluspos = aktualxpluspos + tabbs.get(i).getTabButton().getW()+tabbs.get(i).getCloseButton().getW();
@@ -147,6 +172,11 @@ public class TabBar {
 
             }
         }
+
+    }
+
+    @Override
+    public void setAlpha(float alpha) {
 
     }
 

@@ -11,17 +11,26 @@ import de.ft.interitus.ProgrammingSpace;
 
 public class Grid {
 
-    public static int margin = 20;
+    public static float margin = 20;
     private static int radius = 2;
     public static int origin_radius = 2;
 private static int move_x =0;
 private static int move_y =0;
+
+private static float min=0.39999992f;
+private static float max=2.0000002f;
+private static float neuzoom=0;
+private static float ma=0;
     public static void draw() {
 
 
 
         ProgrammingSpace.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-
+        margin=20;
+        ma=max-min;
+        neuzoom=(ProgrammingSpace.cam.zoom-min)/ma;
+        System.out.println("margin: ");
+        margin=margin*(1-neuzoom);
 
         if(ProgrammingSpace.cam.position.x/(float)margin%2!=0) {
 
@@ -44,6 +53,7 @@ private static int move_y =0;
        // move_x = (int) (move_x*ProgrammingSpace.cam.zoom);
         //radius = origin_radius;
      //   radius = (int) (radius*ProgrammingSpace.cam.zoom);
+
 
 
 

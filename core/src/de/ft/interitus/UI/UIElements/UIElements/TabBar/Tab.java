@@ -3,15 +3,19 @@
  * Copyright by Tim and Felix
  */
 
-package de.ft.interitus.UI.UIElements.TabBar;
+package de.ft.interitus.UI.UIElements.UIElements.TabBar;
 
+import com.badlogic.gdx.graphics.Color;
 import de.ft.interitus.UI.UIElements.UIElements.Button;
+
 
 public class Tab {
     private Button TabButton;
 
     private int index = -1;
     private Button CloseButton;
+    private Color tabcolor=new Color(163f/255f, 163f/255f, 163f/255f,1);
+    private Color mouseovertabcolor=new Color(140f/255, 140f/255f, 140f/255f,1f);
 
     public Tab() {
         TabButton = new Button();
@@ -43,4 +47,21 @@ public class Tab {
     public void setIndex(int index) {
         this.index = index;
     }
+
+    public void setTabcolor(Color tabcolor) {
+        this.tabcolor = tabcolor;
+    }
+
+    public Color getTabcolor() {
+        return tabcolor;
+    }
+
+    public void setMouseovertabcolor(Color mouseovertabcolor) {
+        this.mouseovertabcolor = mouseovertabcolor;
+    }
+
+    public Color getMouseovertabcolor() {
+        return mouseovertabcolor;
+    }
+
 }

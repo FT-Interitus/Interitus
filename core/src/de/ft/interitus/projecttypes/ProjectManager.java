@@ -10,7 +10,7 @@ import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.UI.Notification.Notification;
 import de.ft.interitus.UI.Notification.NotificationManager;
 import de.ft.interitus.UI.UI;
-import de.ft.interitus.UI.UIElements.TabBar.Tab;
+import de.ft.interitus.UI.UIElements.UIElements.TabBar.Tab;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.Var;
@@ -157,6 +157,7 @@ public class ProjectManager {
         Tab tab = new Tab();
         // tab.getTabButton().setImage(AssetLoader.img_Tab);
         tab.getCloseButton().setImage(AssetLoader.close_notification);
+        tab.getCloseButton().setImage_mouseover(AssetLoader.close_notification_mouseover);
         tab.getTabButton().setW(300);
         tab.getCloseButton().setW(25);
         tab.getTabButton().widthoverText = true;

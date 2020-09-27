@@ -5,7 +5,7 @@
 
 package de.ft.interitus.events.global;
 
-import de.ft.interitus.UI.UIElements.TabBar.Tab;
+import de.ft.interitus.UI.UIElements.UIElements.TabBar.Tab;
 import de.ft.interitus.compiler.Compiler;
 
 /**
