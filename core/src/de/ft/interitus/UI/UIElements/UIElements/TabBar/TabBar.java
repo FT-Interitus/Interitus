@@ -188,6 +188,11 @@ public class TabBar implements UIElement {
 
     }
 
+
+    public void setSelectedTabindex(int selectedTabindex) {
+        this.selectedTabindex = selectedTabindex;
+    }
+
     public ArrayList<Tab> getTabbs() {
         return tabbs;
     }

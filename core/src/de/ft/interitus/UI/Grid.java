@@ -26,11 +26,11 @@ private static float ma=0;
 
 
         ProgrammingSpace.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        margin=20;
-        ma=max-min;
-        neuzoom=(ProgrammingSpace.cam.zoom-min)/ma;
-        System.out.println("margin: ");
-        margin=margin*(1-neuzoom);
+     //   margin=20;
+     //   ma=max-min;
+    //    neuzoom=(ProgrammingSpace.cam.zoom-min)/ma;
+    //    System.out.println("margin: ");
+    //    margin=margin*(1-neuzoom);
 
         if(ProgrammingSpace.cam.position.x/(float)margin%2!=0) {
 

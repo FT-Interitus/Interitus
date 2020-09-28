@@ -131,6 +131,7 @@ public class ProjectManager {
 
 
        ProjectManager.getActProjectVar().projectType.getProjectFunktions().switchedto();
+       UI.tabbar.setSelectedTabindex(index);
         Programm.logger.config("changed tab");
     }
 
