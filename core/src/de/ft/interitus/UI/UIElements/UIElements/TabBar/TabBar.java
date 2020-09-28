@@ -32,6 +32,7 @@ public class TabBar implements UIElement {
     private int y = 0;
     private int w = 50;
     private int h = 25;
+    private int selectedTabindex=0;
     private final ArrayList<Tab> tabbs = new ArrayList<>();
 
 
@@ -104,19 +105,26 @@ public class TabBar implements UIElement {
                 ProgrammingSpace.shapeRenderer.setColor(tabbs.get(i).getTabcolor());
 
             }
+            if(i==selectedTabindex){
+                ProgrammingSpace.shapeRenderer.setColor(tabbs.get(i).getSelected());
+            }
             ProgrammingSpace.shapeRenderer.rect(this.x+aktualxpluspos,this.y,tabbs.get(i).getTabButton().getW()+tabbs.get(i).getCloseButton().getW()+7,this.h);
+            if(i==selectedTabindex) {
+                ProgrammingSpace.shapeRenderer.setColor(0.5f, 0, 0, 1);
+                ProgrammingSpace.shapeRenderer.rect(this.x + aktualxpluspos, this.y, tabbs.get(i).getTabButton().getW() + tabbs.get(i).getCloseButton().getW() + 7, 3);
+            }
 
-            ProgrammingSpace.shapeRenderer.setColor(1,1,1,1);
+                ProgrammingSpace.shapeRenderer.setColor(1,1,1,1);
             ProgrammingSpace.shapeRenderer.end();
             tabbs.get(i).getTabButton().draw();
             tabbs.get(i).getCloseButton().draw();
             aktualxpluspos = aktualxpluspos + tabbs.get(i).getTabButton().getW()+tabbs.get(i).getCloseButton().getW()+7;
             if (tabbs.get(i).getTabButton().isjustPressednormal()) {
+                selectedTabindex=i;
                 EventVar.globalEventManager.tabclicked(new GlobalTabClickEvent(this),tabbs.get(i));
             }
 
             if(tabbs.get(i).getCloseButton().isjustPressednormal()) {
-
                 if(Var.openprojects.get(i).changes) {
 
                     String[] möglichkeiten = {"Verwerfen", "Speichern", "Abbrechen"};

@@ -14,8 +14,9 @@ public class Tab {
 
     private int index = -1;
     private Button CloseButton;
-    private Color tabcolor=new Color(163f/255f, 163f/255f, 163f/255f,1);
+    private Color tabcolor=new Color(100f/255, 100f/255f, 100f/255f,1f);
     private Color mouseovertabcolor=new Color(140f/255, 140f/255f, 140f/255f,1f);
+    private Color selected=new Color(163f/255f, 163f/255f, 163f/255f,1);
 
     public Tab() {
         TabButton = new Button();
@@ -64,4 +65,11 @@ public class Tab {
         return mouseovertabcolor;
     }
 
+    public Color getSelected() {
+        return selected;
+    }
+
+    public void setSelected(Color selected) {
+        this.selected = selected;
+    }
 }
