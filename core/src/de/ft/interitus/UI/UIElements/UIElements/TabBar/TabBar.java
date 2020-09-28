@@ -94,9 +94,9 @@ public class TabBar implements UIElement {
             tabbs.get(i).getTabButton().setY(this.y);
             tabbs.get(i).getTabButton().setH(this.h);
             tabbs.get(i).getCloseButton().setX((int) (this.x+aktualxpluspos+tabbs.get(i).getTabButton().getW()+1f));
-            tabbs.get(i).getCloseButton().setY((int) (this.y));
-            tabbs.get(i).getCloseButton().setH(h);
-            tabbs.get(i).getCloseButton().setW(h);
+            tabbs.get(i).getCloseButton().setY((int) (this.y+5f));
+            tabbs.get(i).getCloseButton().setH(10);
+            tabbs.get(i).getCloseButton().setW(10);
             ProgrammingSpace.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
             if(CheckMouse.isMouseover(this.x+aktualxpluspos,this.y,tabbs.get(i).getTabButton().getW(),this.h, false)) {
                 ProgrammingSpace.shapeRenderer.setColor(tabbs.get(i).getMouseovertabcolor());
