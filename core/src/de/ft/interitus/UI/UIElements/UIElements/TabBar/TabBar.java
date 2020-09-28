@@ -110,7 +110,7 @@ public class TabBar implements UIElement {
             ProgrammingSpace.shapeRenderer.end();
             tabbs.get(i).getTabButton().draw();
             tabbs.get(i).getCloseButton().draw();
-            aktualxpluspos = aktualxpluspos + tabbs.get(i).getTabButton().getW()+tabbs.get(i).getCloseButton().getW();
+            aktualxpluspos = aktualxpluspos + tabbs.get(i).getTabButton().getW()+tabbs.get(i).getCloseButton().getW()+7;
             if (tabbs.get(i).getTabButton().isjustPressednormal()) {
                 EventVar.globalEventManager.tabclicked(new GlobalTabClickEvent(this),tabbs.get(i));
             }
