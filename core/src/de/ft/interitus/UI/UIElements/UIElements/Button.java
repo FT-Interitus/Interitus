@@ -37,6 +37,8 @@ public class Button implements UIElement {
     private boolean flipX = false;
     private boolean flipY = false;
     private float transparency = 1.0f;
+    private int text_pos_change_x = 0;
+    private int text_pos_change_y = 0;
 
 
     public Button(int x, int y, int w, int h) {
@@ -204,7 +206,7 @@ public class Button implements UIElement {
                 UI.UIbatch.begin();
                 UI.UIbatch.setColor(1, 1, 1, transparency);
                 ProgrammingSpace.font.setColor(1,1,1,transparency);
-                ProgrammingSpace.font.draw(UI.UIbatch, glyphLayout, x + widthoverTextlinksrandabstand, y + glyphLayout.height + h / 2 - glyphLayout.height / 2);
+                ProgrammingSpace.font.draw(UI.UIbatch, glyphLayout, x + widthoverTextlinksrandabstand+text_pos_change_x, y + glyphLayout.height + h / 2 - glyphLayout.height / 2+text_pos_change_y);
 
 
                 UI.UIbatch.end();
@@ -338,6 +340,22 @@ public class Button implements UIElement {
 
     public void setTransparency(float transparency) {
         this.transparency = transparency;
+    }
+
+    public int getText_pos_change_x() {
+        return text_pos_change_x;
+    }
+
+    public int getText_pos_change_y() {
+        return text_pos_change_y;
+    }
+
+    public void setText_pos_change_x(int text_pos_change_x) {
+        this.text_pos_change_x = text_pos_change_x;
+    }
+
+    public void setText_pos_change_y(int text_pos_change_y) {
+        this.text_pos_change_y = text_pos_change_y;
     }
 }
 

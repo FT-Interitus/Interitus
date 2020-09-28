@@ -10,24 +10,19 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import de.ft.interitus.Block.BlockDrawer;
 import de.ft.interitus.UI.CheckShortcuts;
-import de.ft.interitus.UI.Grid;
+import de.ft.interitus.UI.ProgramGrid;
 import de.ft.interitus.UI.Notification.Notification;
 import de.ft.interitus.UI.Notification.NotificationManager;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.PressedKeys;
 import de.ft.interitus.UI.UIElements.UIElementBar;
 import de.ft.interitus.UI.UIElements.UIElements.Button;
-import de.ft.interitus.UI.UIElements.UIElements.table.Column;
-import de.ft.interitus.UI.UIElements.UIElements.table.Row;
-import de.ft.interitus.UI.UIElements.UIElements.table.Table;
 import de.ft.interitus.UI.popup.PopupHandler;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.datamanager.programmdata.Updater;
@@ -41,9 +36,6 @@ import de.ft.interitus.utils.ShapeRenderer;
 
 
 import java.awt.*;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 
 
 public class ProgrammingSpace extends ScreenAdapter {
@@ -66,15 +58,10 @@ public class ProgrammingSpace extends ScreenAdapter {
     public static float delta;
     public boolean loadimagesfromplugin = true;
     public static Plugin nativ = new Native();
-    public static Table testtable=new Table(100,200,1,1);
 
 
     public ProgrammingSpace() {
-        testtable.addColumn(new Column(100));
-        testtable.addColumn(new Column(50));
-        testtable.addColumn(new Column(100));
-        testtable.addRow(new Row(100));
-        testtable.getColumn(0).setWeight(10);
+
 
 
 
@@ -163,8 +150,7 @@ if(ProjectManager.getActProjectVar().markedblock!=null) {
 
             UI.updatedragui(shapeRenderer, true, batch);
 
-            testtable.draw();
-            Grid.draw();
+            ProgramGrid.draw();
 
             BlockDrawer.Draw();
 

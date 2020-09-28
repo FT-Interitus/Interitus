@@ -163,6 +163,7 @@ public class ProjectManager {
         tab.getCloseButton().setW(25);
         tab.getTabButton().widthoverText = true;
         tab.getTabButton().setText(Var.openprojects.getLastObject().getFilename());
+        tab.getTabButton().setText_pos_change_y(1);
         tab.setIndex(Var.openprojects.size() - 1);
         UI.tabbar.addTab(tab);
 

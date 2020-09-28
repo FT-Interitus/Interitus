@@ -110,7 +110,7 @@ public class TabBar implements UIElement {
             }
             ProgrammingSpace.shapeRenderer.rect(this.x+aktualxpluspos,this.y,tabbs.get(i).getTabButton().getW()+tabbs.get(i).getCloseButton().getW()+7,this.h);
             if(i==selectedTabindex) {
-                ProgrammingSpace.shapeRenderer.setColor(0.5f, 0, 0, 1);
+                ProgrammingSpace.shapeRenderer.setColor(86f/255f, 138f/255f, 242f/255f, 1);
                 ProgrammingSpace.shapeRenderer.rect(this.x + aktualxpluspos, this.y, tabbs.get(i).getTabButton().getW() + tabbs.get(i).getCloseButton().getW() + 7, 3);
             }
 
