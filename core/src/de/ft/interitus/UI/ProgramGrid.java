@@ -13,7 +13,9 @@ public class ProgramGrid {
     public static int radius = 2;
     public static float linewidth = 0.75f;
     public static float margin = 20;
-    public static boolean points = true;
+    public static boolean points = false;
+    public static boolean enable = true;
+    public static boolean block_snapping = true;
 
     public static int origin_radius = 2;
     private static int move_x = 0;
@@ -26,7 +28,9 @@ public class ProgramGrid {
     public static void draw() {
 
 
-
+        if(!enable) {
+            return;
+        }
 
         ProgrammingSpace.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         //   margin=20;

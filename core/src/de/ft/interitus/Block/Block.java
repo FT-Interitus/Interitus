@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import de.ft.interitus.Block.BlockUpdate.BlockUpdate;
 import de.ft.interitus.Block.Generators.BlockUpdateGenerator;
 import de.ft.interitus.Block.Generators.BlocktoSaveGenerator;
 import de.ft.interitus.DisplayErrors;
