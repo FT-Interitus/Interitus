@@ -3,16 +3,20 @@
  * Copyright by Tim and Felix
  */
 
-package de.ft.interitus.Block;
+package de.ft.interitus.Block.BlockUpdate;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import de.ft.interitus.Block.Block;
+import de.ft.interitus.Block.DataWire;
+import de.ft.interitus.Block.Wire;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Programm;
 import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.UI.ProgramGrid;
 import de.ft.interitus.UI.UIElements.check.CheckKollision;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
 import de.ft.interitus.UI.UIVar;
@@ -20,6 +24,7 @@ import de.ft.interitus.Var;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.block.BlockKillMovingWiresEvent;
 import de.ft.interitus.loading.AssetLoader;
+import de.ft.interitus.projecttypes.ProgrammArea.ProgrammArea;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.Unproject;
 
@@ -34,7 +39,7 @@ public abstract class BlockUpdate extends Thread {
     public boolean isconnectorclicked = false;//Ist der connector des zuständigen Blocks ausgelöst
     public boolean geschoben = false;
     public Wire tempwire;
-    boolean toggle; // Ist der Block von der mouse gehovert?
+   public boolean toggle; // Ist der Block von der mouse gehovert?
     Vector3 temp3;//Temp vectoren für berechnungs zwischen schritte
     Vector3 temp4;//Temp vectoren für berechnungs zwischen schritte
     private boolean willbedelete = false;
@@ -62,26 +67,7 @@ public abstract class BlockUpdate extends Thread {
             public void run() {
 
 
-                try {
-
-                    if (ProjectManager.getActProjectVar().movingwires != null && ProjectManager.getActProjectVar().movingwires.getLeft_connection() == block && block.getRight() != null) {
-                        EventVar.blockEventManager.killmovingwires(new BlockKillMovingWiresEvent(this));
-                    }
-                    if (block.isMarked()) {
-                        if (block != ProjectManager.getActProjectVar().markedblock) {
-                            block.setMarked(false);
-                        }
-
-                    }
-
-                    if (ProjectManager.getActProjectVar().blocks.indexOf(block) == -1) {
-                        isrunning = false;
-                        currentThread().interrupt();
-                        this.cancel();
-                    }
-                } catch (Exception e) {
-
-                }
+                control_block_errors(); //Check if BlockUpdate is running correctly
 
                 if (!UIVar.isdialogeopend) {
 
@@ -102,153 +88,17 @@ public abstract class BlockUpdate extends Thread {
                         toggle = CheckKollision.checkmousewithblock(block); //Wird der Block von der Mouse gehovert?
 
 
-                        //TODO      Kommentierung fortsetzen
 
 
+                        wire_managment();
 
-                        if (block.getBlocktype().canhasleftconnector() && !isIsconnectorclicked() && ProjectManager.getActProjectVar().showleftdocker && CheckKollision.object(block.getX_entrance(), block.getY_entrance(), block.getW_entrance(), block.getH_entrance(), (int) ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1) && Gdx.input.isButtonJustPressed(0) && block.getLeft() == null) {
-                            ProjectManager.getActProjectVar().showleftdocker = false;
-                            ProjectManager.getActProjectVar().movingwires.setMovebymouse(false);
-                            ProjectManager.getActProjectVar().movingwires.setRight_connection(block);
-                            ProjectManager.getActProjectVar().movingwires.setSpace_between_blocks(true);
-                            block.setWire_left(ProjectManager.getActProjectVar().movingwires);
-                            try {
-                                ProjectManager.getActProjectVar().wire_beginn.setRight(block);
-                            } catch (NullPointerException e) {
-
-                                //Falls die eine Node dazwischen ist und der Nachbar über die Node gesetzt werden muss
-
-                                Programm.logger.severe("Konnte Nachbar nicht setzten");
-
-
-                            }
-
-                            ProjectManager.getActProjectVar().movingwires.getRight_connection().getLeft().getBlockupdate().isconnectorclicked = false;
-                            ProjectManager.getActProjectVar().movingwires = null;
-
-
-                        }
-
-
-                        if ((isconnectorclicked && Gdx.input.isKeyPressed(Input.Keys.ESCAPE))) { //Um vorzeitige wire wieder aufzulösen und ggf zu richtigen umzuwandeln
-
-                            isconnectorclicked = false;
-                            ProjectManager.getActProjectVar().showleftdocker = false;
-
-                            try {
-                                tempwire.getLeft_connection().setWire_right(null);
-                                ProjectManager.getActProjectVar().visiblewires.remove(tempwire);
-                                ProjectManager.getActProjectVar().wires.remove(tempwire);
-
-                                try {
-
-                                    tempwire.getRight_connectionObject().getwirenode().setWire_left(null);
-                                    tempwire.setRight_connection(null);
-
-                                } catch (NullPointerException e) {
-                                    //Falls hier keine Wire ist
-                                }
-                                tempwire = null;
-                            } catch (Exception e) {
-
-                            }
-
-                            ProjectManager.getActProjectVar().movingwires = null;
-
-
-                        }
-
-                        if (!isconnectorclicked && ProjectManager.getActProjectVar().showleftdocker) { //Wenn der eigene Wire connector nicht ausgelöst ist aber ein anderer
-                            if (CheckKollision.checkpointwithobject((int) block.getWireconnector_left().x, (int) block.getWireconnector_left().y, 20, 20, (int) ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y)) { //Wenn die Maus über meinen connection offerer fährt...
-                                if (ProjectManager.getActProjectVar().connetor_offerd_hoverd_block != block) { //Und der zugehörige Block noch nicht in der Variable steht
-                                    ProjectManager.getActProjectVar().connetor_offerd_hoverd_block = block; //Schreibt sich der Block in die Variable welcher Block beim loslassen als wire nachbar verbunden werden würde
-                                }
-                            } else {
-                                if (ProjectManager.getActProjectVar().connetor_offerd_hoverd_block == block) { //Wenn die Maus nicht mehr über dem Wire connection offerer ist
-                                    ProjectManager.getActProjectVar().connetor_offerd_hoverd_block = null; //Wird der Block wieder aus der Variable entfernt
-                                }
-                            }
-                        }
-
-
-                        if (CheckKollision.checkpointwithobject((int) block.getwireconnector_right().x, (int) block.getwireconnector_right().y, 20, 20, (int) Var.mousepressedold.x, (int) Var.mousepressedold.y) && Gdx.input.isButtonPressed(0) && ProjectManager.getActProjectVar().movingwires == null && !IsMousealreadypressed && block.getWire_right() == null) {
-                            if (!(ProjectManager.getActProjectVar().markedblock == block)) {
-                                if (!isconnectorclicked && ProjectManager.getActProjectVar().wirezulassung) {
-
-                                    //Create new wire
-
-                                    tempwire = ProjectManager.getActProjectVar().projectType.getWireGenerator().generate(block);
-
-                                    tempwire.setMovebymouse(true);
-
-                                    tempwire.setSpace_between_blocks(true);
-
-                                    block.setWire_right(tempwire);
-                                    ProjectManager.getActProjectVar().wires.add(tempwire);
-                                    ProjectManager.getActProjectVar().movingwires = tempwire;
-                                    ProjectManager.getActProjectVar().wire_beginn = block;
-
-
-                                    ProjectManager.getActProjectVar().showleftdocker = true;
-
-                                    isconnectorclicked = true;
-                                    if (block.isMarked()) {
-
-
-                                        block.setMoving(false);
-                                        ProjectManager.getActProjectVar().ismoving = false;
-                                        ProjectManager.getActProjectVar().marked = false;
-                                    }
-
-                                    IsMousealreadypressed = true;
-
-                                }
-                            }
-
-                        }
 
                         if (IsMousealreadypressed && !Gdx.input.isButtonPressed(0)) {
                             IsMousealreadypressed = false;
                         }
 
-                        if (CheckKollision.checkmousewithblock(block, Var.mousepressedold) && Gdx.input.isButtonPressed(0) && ProjectManager.getActProjectVar().ismoving == false && !block.isMarked() && !ProjectManager.getActProjectVar().marked && ProjectManager.getActProjectVar().markedblock == null) {
 
-                            if (!CheckKollision.checkpointwithobject((int) block.getwireconnector_right().x, (int) block.getwireconnector_right().y, 20, 20, (int) Var.mousepressedold.x, (int) Var.mousepressedold.y)) {
-
-
-                                // MainGame.logger.debug("Marked Block" + block.getIndex());
-                                ProjectManager.getActProjectVar().marked = true;
-                                block.setMarked(true);
-                                ProjectManager.getActProjectVar().markedblock = block;
-                                ProjectManager.getActProjectVar().unterschiedsave.set(ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x - block.getX(), ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y - block.getY());
-
-                            }
-                        }
-
-
-                        if (ProjectManager.getActProjectVar().ismoving == false && !block.isMoving() && block.isMarked() && Gdx.input.isButtonPressed(0) && CheckKollision.checkmousewithblock(block)) {
-
-
-                            if (!CheckKollision.checkpointwithobject((int) block.getwireconnector_right().x, (int) block.getwireconnector_right().y, 20, 20, (int) Var.mousepressedold.x, (int) Var.mousepressedold.y)) {
-
-
-                                int feld = 2;
-                                if (Math.abs(Var.mousepressedold.x - ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x) > feld || Math.abs(Var.mousepressedold.y - ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y) > feld) {
-                                    if (block.isMoving() == false && ProjectManager.getActProjectVar().ismoving == false) {
-                                        ProjectManager.getActProjectVar().unterschiedsave.set(ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x - block.getX(), ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y - block.getY());
-
-
-                                        block.setMoving(true);
-                                        ProjectManager.getActProjectVar().ismoving = true;
-
-                                    }
-
-
-                                }
-                            }
-
-                        }
-/////////////////////////////Datawire erzeigen
+                        /////////////////////////////Datawire erzeigen
                         if(block.getBlocktype()!=null&&block.getBlocktype().getBlockParameter()!=null) {
                             for (int i = 0; i < block.getBlocktype().getBlockParameter().size(); i++) {
                                 if (block.getBlocktype().getBlockParameter().get(i).getParameterType().isOutput() ) {
@@ -267,85 +117,7 @@ public abstract class BlockUpdate extends Thread {
                             }
                         }
 
-
-                        if (block.isMoving() && Gdx.input.isButtonPressed(0)) {
-
-
-                            tempdelete = CheckMouse.isMouseover(UIVar.BlockBarX, UIVar.BlockBarY, UIVar.BlockBarW, UIVar.BlockBarH, false) && block.getBlocktype().canbedeleted();
-
-
-                            if (tempdelete != willbedelete) {
-                                changewillbedeleted = true;
-                                willbedelete = tempdelete;
-                            } else {
-                                changewillbedeleted = false;
-                            }
-
-                            if (changewillbedeleted) {
-                                //Wenn der Mauszeiger die Ablagefläche berührt
-
-                                if (willbedelete) {
-                                    Gdx.graphics.setCursor(Gdx.graphics.newCursor(AssetLoader.backcursor, 0, 0));
-                                    ProjectManager.getActProjectVar().removeblock = true;
-                                } else {
-                                    Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Arrow);
-                                    ProjectManager.getActProjectVar().removeblock = false;
-                                }
-
-                            }
-
-                            //Ändere die Aktuelle Blockposition auf die Maus Position
-                            block.setX((int) (ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x - ProjectManager.getActProjectVar().unterschiedsave.x));
-                            block.setY((int) (ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y - ProjectManager.getActProjectVar().unterschiedsave.y));
-
-
-                            if (block.getWire_left() != null) {
-                                if (!block.getWire_left().isSpace_between_blocks()) {
-                                    if (block.getLeft() != null) {
-                                        block.getLeft().setRight(null);
-                                        try {
-                                            block.getWire_left().getLeft_connection().setWire_right(null); //löschen der Wire die zwischen den Blöcken war
-                                        } catch (Exception e) {
-                                            //Falls die Wire schon ein anderer Block gelöscht hat
-                                        }
-                                        ProjectManager.getActProjectVar().wires.remove(block.getWire_left());
-                                        block.setWire_left(null);
-
-
-                                    }
-                                    block.setLeft(null);
-
-                                }
-                            }
-
-                            if (block.getWire_right() != null) {
-                                if (!block.getWire_right().isSpace_between_blocks()) {
-                                    if (block.getRight() != null) {
-                                        block.getRight().setLeft(null);
-
-                                        block.getWire_right().getRight_connection().setWire_left(null);//löschen der Wire die zwischen den Blöcken war
-                                        ProjectManager.getActProjectVar().wires.remove(block.getWire_right());
-                                        block.setWire_right(null);
-
-                                    }
-                                    block.setRight(null);
-                                }
-
-                            }
-
-
-                        } else if (block.isMoving()) {
-
-
-                            ProjectManager.getActProjectVar().ismoving = false;
-                            block.setMoving(false);
-                            if (willbedelete) {
-                                deleteonend = true;
-
-                            }
-
-
-                        }
+                        block_moveingengine();
 
                         if (ProjectManager.getActProjectVar().markedblock == null && block.isMarked()) {
                             block.setMarked(false);
@@ -361,7 +133,7 @@ public abstract class BlockUpdate extends Thread {
                             ProjectManager.getActProjectVar().biggestblock = null;
                         }
 
-                        //    System.out.println(ProjectManager.getactProjectVar().showduplicat.size());
+
                         int biggestvalue = 0;
                         int biggestindex = -1;
                         for (int i = 0; i < ProjectManager.getActProjectVar().showduplicat.size(); i++) {
@@ -404,9 +176,7 @@ public abstract class BlockUpdate extends Thread {
                             int biggestindex2 = -1;
 
                             for (int i = 0; i < ProjectManager.getActProjectVar().uberlapptmitmarkedblock.size(); i++) {
-                                //if(ProjectManager.getactProjectVar().uberlapptmitmarkedblock.get(i).)
 
-                                //System.out.println("flaeche   " + ProjectManager.getactProjectVar().uberlapptmitmarkedblock.get(i).getBlockMarkedblockuberlappungsflache() + "i:   " + i);
                                 try {
                                     if (ProjectManager.getActProjectVar().uberlapptmitmarkedblock.get(i).getBlockMarkedblockuberlappungsflache() > biggestvalue2) {
 
@@ -618,6 +388,275 @@ public abstract class BlockUpdate extends Thread {
         }, 0, 20);
 
     }
+
+
+
+    private void wire_managment() {
+        if (block.getBlocktype().canhasleftconnector() && !isIsconnectorclicked() && ProjectManager.getActProjectVar().showleftdocker && CheckKollision.object(block.getX_entrance(), block.getY_entrance(), block.getW_entrance(), block.getH_entrance(), (int) ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1) && Gdx.input.isButtonJustPressed(0) && block.getLeft() == null) {
+            ProjectManager.getActProjectVar().showleftdocker = false;
+            ProjectManager.getActProjectVar().movingwires.setMovebymouse(false);
+            ProjectManager.getActProjectVar().movingwires.setRight_connection(block);
+            ProjectManager.getActProjectVar().movingwires.setSpace_between_blocks(true);
+            block.setWire_left(ProjectManager.getActProjectVar().movingwires);
+            try {
+                ProjectManager.getActProjectVar().wire_beginn.setRight(block);
+            } catch (NullPointerException e) {
+
+                //Falls die eine Node dazwischen ist und der Nachbar über die Node gesetzt werden muss
+
+                Programm.logger.severe("Konnte Nachbar nicht setzten");
+
+
+            }
+
+            ProjectManager.getActProjectVar().movingwires.getRight_connection().getLeft().getBlockupdate().isconnectorclicked = false;
+            ProjectManager.getActProjectVar().movingwires = null;
+
+
+        }
+
+
+        if ((isconnectorclicked && Gdx.input.isKeyPressed(Input.Keys.ESCAPE))) { //Um vorzeitige wire wieder aufzulösen und ggf zu richtigen umzuwandeln
+
+            isconnectorclicked = false;
+            ProjectManager.getActProjectVar().showleftdocker = false;
+
+            try {
+                tempwire.getLeft_connection().setWire_right(null);
+                ProjectManager.getActProjectVar().visiblewires.remove(tempwire);
+                ProjectManager.getActProjectVar().wires.remove(tempwire);
+
+                try {
+
+                    tempwire.getRight_connectionObject().getwirenode().setWire_left(null);
+                    tempwire.setRight_connection(null);
+
+                } catch (NullPointerException e) {
+                    //Falls hier keine Wire ist
+                }
+                tempwire = null;
+            } catch (Exception e) {
+
+            }
+
+            ProjectManager.getActProjectVar().movingwires = null;
+
+
+        }
+
+        if (!isconnectorclicked && ProjectManager.getActProjectVar().showleftdocker) { //Wenn der eigene Wire connector nicht ausgelöst ist aber ein anderer
+            if (CheckKollision.checkpointwithobject((int) block.getWireconnector_left().x, (int) block.getWireconnector_left().y, 20, 20, (int) ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y)) { //Wenn die Maus über meinen connection offerer fährt...
+                if (ProjectManager.getActProjectVar().connetor_offerd_hoverd_block != block) { //Und der zugehörige Block noch nicht in der Variable steht
+                    ProjectManager.getActProjectVar().connetor_offerd_hoverd_block = block; //Schreibt sich der Block in die Variable welcher Block beim loslassen als wire nachbar verbunden werden würde
+                }
+            } else {
+                if (ProjectManager.getActProjectVar().connetor_offerd_hoverd_block == block) { //Wenn die Maus nicht mehr über dem Wire connection offerer ist
+                    ProjectManager.getActProjectVar().connetor_offerd_hoverd_block = null; //Wird der Block wieder aus der Variable entfernt
+                }
+            }
+        }
+
+
+        if (CheckKollision.checkpointwithobject((int) block.getwireconnector_right().x, (int) block.getwireconnector_right().y, 20, 20, (int) Var.mousepressedold.x, (int) Var.mousepressedold.y) && Gdx.input.isButtonPressed(0) && ProjectManager.getActProjectVar().movingwires == null && !IsMousealreadypressed && block.getWire_right() == null) {
+            if (!(ProjectManager.getActProjectVar().markedblock == block)) {
+                if (!isconnectorclicked && ProjectManager.getActProjectVar().wirezulassung) {
+
+                    //Create new wire
+
+                    tempwire = ProjectManager.getActProjectVar().projectType.getWireGenerator().generate(block);
+
+                    tempwire.setMovebymouse(true);
+
+                    tempwire.setSpace_between_blocks(true);
+
+                    block.setWire_right(tempwire);
+                    ProjectManager.getActProjectVar().wires.add(tempwire);
+                    ProjectManager.getActProjectVar().movingwires = tempwire;
+                    ProjectManager.getActProjectVar().wire_beginn = block;
+
+
+                    ProjectManager.getActProjectVar().showleftdocker = true;
+
+                    isconnectorclicked = true;
+                    if (block.isMarked()) {
+
+
+                        block.setMoving(false);
+                        ProjectManager.getActProjectVar().ismoving = false;
+                        ProjectManager.getActProjectVar().marked = false;
+                    }
+
+                    IsMousealreadypressed = true;
+
+                }
+            }
+
+        }
+    }
+
+
+
+
+
+    private void control_block_errors() {
+        try {
+
+            if (ProjectManager.getActProjectVar().movingwires != null && ProjectManager.getActProjectVar().movingwires.getLeft_connection() == block && block.getRight() != null) {
+                EventVar.blockEventManager.killmovingwires(new BlockKillMovingWiresEvent(this));
+            }
+            if (block.isMarked()) {
+                if (block != ProjectManager.getActProjectVar().markedblock) {
+                    block.setMarked(false);
+                }
+
+            }
+
+            if (ProjectManager.getActProjectVar().blocks.indexOf(block) == -1) {
+                isrunning = false;
+                currentThread().interrupt();
+                this.time.cancel();
+            }
+        } catch (Exception e) {
+
+        }
+    }
+
+
+
+
+
+    private void block_moveingengine() {
+        if (CheckKollision.checkmousewithblock(block, Var.mousepressedold) && Gdx.input.isButtonPressed(0) && ProjectManager.getActProjectVar().ismoving == false && !block.isMarked() && !ProjectManager.getActProjectVar().marked && ProjectManager.getActProjectVar().markedblock == null) {
+
+            if (!CheckKollision.checkpointwithobject((int) block.getwireconnector_right().x, (int) block.getwireconnector_right().y, 20, 20, (int) Var.mousepressedold.x, (int) Var.mousepressedold.y)) {
+
+                ProjectManager.getActProjectVar().marked = true;
+                block.setMarked(true);
+                ProjectManager.getActProjectVar().markedblock = block;
+                ProjectManager.getActProjectVar().unterschiedsave.set(ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x - block.getX(), ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y - block.getY());
+
+            }
+        }
+
+
+        if (ProjectManager.getActProjectVar().ismoving == false && !block.isMoving() && block.isMarked() && Gdx.input.isButtonPressed(0) && CheckKollision.checkmousewithblock(block)) {
+
+
+            if (!CheckKollision.checkpointwithobject((int) block.getwireconnector_right().x, (int) block.getwireconnector_right().y, 20, 20, (int) Var.mousepressedold.x, (int) Var.mousepressedold.y)) {
+
+
+                int feld = 2;
+                if (Math.abs(Var.mousepressedold.x - ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x) > feld || Math.abs(Var.mousepressedold.y - ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y) > feld) {
+                    if (block.isMoving() == false && ProjectManager.getActProjectVar().ismoving == false) {
+                        ProjectManager.getActProjectVar().unterschiedsave.set(ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x - block.getX(), ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y - block.getY());
+
+
+                        block.setMoving(true);
+                        ProjectManager.getActProjectVar().ismoving = true;
+
+                    }
+
+
+                }
+            }
+
+        }
+
+
+
+        if (block.isMoving() && Gdx.input.isButtonPressed(0)) {
+
+
+            tempdelete = CheckMouse.isMouseover(UIVar.BlockBarX, UIVar.BlockBarY, UIVar.BlockBarW, UIVar.BlockBarH, false) && block.getBlocktype().canbedeleted();
+
+
+            if (tempdelete != willbedelete) {
+                changewillbedeleted = true;
+                willbedelete = tempdelete;
+            } else {
+                changewillbedeleted = false;
+            }
+
+            if (changewillbedeleted) {
+                //Wenn der Mauszeiger die Ablagefläche berührt
+
+                if (willbedelete) {
+                    Gdx.graphics.setCursor(Gdx.graphics.newCursor(AssetLoader.backcursor, 0, 0));
+                    ProjectManager.getActProjectVar().removeblock = true;
+                } else {
+                    Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Arrow);
+                    ProjectManager.getActProjectVar().removeblock = false;
+                }
+
+            }
+
+            //Ändere die Aktuelle Blockposition auf die Maus Position
+
+            if(ProgramGrid.enable&&ProgramGrid.block_snapping) {
+
+
+                int newx = (int) ((ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x - ProjectManager.getActProjectVar().unterschiedsave.x)/ProgramGrid.margin);
+                int newy = (int) ((ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y - ProjectManager.getActProjectVar().unterschiedsave.y)/ProgramGrid.margin);
+                block.setX((int) (newx*ProgramGrid.margin));
+                block.setY((int) (newy*ProgramGrid.margin));
+
+
+            } else {
+
+
+                block.setX((int) (ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x - ProjectManager.getActProjectVar().unterschiedsave.x));
+                block.setY((int) (ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y - ProjectManager.getActProjectVar().unterschiedsave.y));
+            }
+
+            if (block.getWire_left() != null) {
+                if (!block.getWire_left().isSpace_between_blocks()) {
+                    if (block.getLeft() != null) {
+                        block.getLeft().setRight(null);
+                        try {
+                            block.getWire_left().getLeft_connection().setWire_right(null); //löschen der Wire die zwischen den Blöcken war
+                        } catch (Exception e) {
+                            //Falls die Wire schon ein anderer Block gelöscht hat
+                        }
+                        ProjectManager.getActProjectVar().wires.remove(block.getWire_left());
+                        block.setWire_left(null);
+
+
+                    }
+                    block.setLeft(null);
+
+                }
+            }
+
+            if (block.getWire_right() != null) {
+                if (!block.getWire_right().isSpace_between_blocks()) {
+                    if (block.getRight() != null) {
+                        block.getRight().setLeft(null);
+
+                        block.getWire_right().getRight_connection().setWire_left(null);//löschen der Wire die zwischen den Blöcken war
+                        ProjectManager.getActProjectVar().wires.remove(block.getWire_right());
+                        block.setWire_right(null);
+
+                    }
+                    block.setRight(null);
+                }
+
+            }
+
+
+        } else if (block.isMoving()) {
+
+
+            ProjectManager.getActProjectVar().ismoving = false;
+            block.setMoving(false);
+            if (willbedelete) {
+                deleteonend = true;
+
+            }
+
+
+        }
+    }
+
 
     public boolean isIsconnectorclicked() {
         return isconnectorclicked;

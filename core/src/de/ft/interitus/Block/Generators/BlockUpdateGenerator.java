@@ -6,7 +6,7 @@
 package de.ft.interitus.Block.Generators;
 
 import de.ft.interitus.Block.Block;
-import de.ft.interitus.Block.BlockUpdate;
+import de.ft.interitus.Block.BlockUpdate.BlockUpdate;
 
 public interface BlockUpdateGenerator {
     BlockUpdate generate(Block block);
