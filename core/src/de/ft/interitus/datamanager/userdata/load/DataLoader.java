@@ -8,7 +8,6 @@ package de.ft.interitus.datamanager.userdata.load;
 import com.badlogic.gdx.files.FileHandle;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import de.ft.interitus.Block.SaveBlock;
-import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Programm;
 import de.ft.interitus.UI.ManualConfig.DeviceConfiguration;
 import de.ft.interitus.UI.MenuBar;
@@ -21,6 +20,7 @@ import de.ft.interitus.datamanager.BlockCalculator;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.datamanager.userdata.Zip;
 import de.ft.interitus.loading.AssetLoader;
+import de.ft.interitus.plugin.Plugin;
 import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
@@ -65,13 +65,15 @@ public class DataLoader {
 
                     if (temptype == null) {
 
+                        //TODO is Plugin or Projekt Name not found?
+
                         Dialogs.showErrorDialog(UI.stage, "Das Plugin mit dem Namen \"" + settings.getString("pl_name") + "\", das mit diesem Projekt verbunden ist, ist nicht installiert.");
                         Var.isloading = false;
                         this.interrupt();
                         return;
                     } else {
                         enabledAddons.clear();
-                        boolean found = false;
+                        boolean found;
                         String tempaddonname = "";
                         String temppluginname = "";
                         for (Object addonname : settings.getJSONArray("addons")) {
@@ -170,8 +172,8 @@ public class DataLoader {
                     if (wascreated) {
                         Var.openprojects.remove(Var.openprojects.size() - 1);
                     }
-                    DisplayErrors.customErrorstring = "Fehler beim Laden des Projekts\nDie Project Datei ist beschädigt!";
-                    DisplayErrors.error = e;
+                    Dialogs.showErrorDialog(UI.stage,"Fehler beim Laden des Projekts\nDie Projekt Datei ist womöglich beschädigt!") ;
+
 
                 }
 

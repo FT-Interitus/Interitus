@@ -19,27 +19,33 @@ public class DisplayErrors {
 
     public static void checkerror() {
 
+        try {
 
-        if (error != null && (lastError == null || !lastError.getMessage().contentEquals(error.getMessage()))) {
+
+            if (error != null && (lastError == null || !lastError.getMessage().contentEquals(error.getMessage()))) {
 
 
-            Dialogs.showErrorDialog(UI.stage, customErrorstring, error);
+                Dialogs.showErrorDialog(UI.stage, customErrorstring, error);
 
-            EventVar.globalEventManager.erroroccurred(new GlobalErrorOccurredEvent(Programm.INSTANCE, error));
-            lastError = error;
+                EventVar.globalEventManager.erroroccurred(new GlobalErrorOccurredEvent(Programm.INSTANCE, error));
+                lastError = error;
+                error = null;
+                customErrorstring = "Ein Fehler ist aufgetreten!";
+
+
+            }
+
+            if (errorStringwithoutException != "") {
+                Dialogs.showErrorDialog(UI.stage, errorStringwithoutException);
+                errorStringwithoutException = "";
+
+            }
+        }catch (Exception e) {
+
             error = null;
-            customErrorstring = "Ein Fehler ist aufgetreten!";
-
-
+            lastError = null;
+            errorStringwithoutException = "";
         }
-
-        if(errorStringwithoutException !="")
-
-    {
-        Dialogs.showErrorDialog(UI.stage, errorStringwithoutException);
-        errorStringwithoutException = "";
-
     }
-}
 
 }

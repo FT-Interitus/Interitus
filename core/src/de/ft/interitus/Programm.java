@@ -30,6 +30,7 @@ import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.FolderUtils;
 import de.ft.interitus.utils.UserNameGetter;
 import org.lwjgl.glfw.GLFW;
+import org.lwjgl.openal.ALC;
 import org.springframework.boot.SpringApplication;
 
 import java.io.IOException;

@@ -198,6 +198,10 @@ if(ProjectManager.getActProjectVar().markedblock!=null) {
             DisplayErrors.checkerror(); //Check if there are undisplayed Errors
         } catch (IllegalStateException e) {
             //Bei eienem VisUI absturz
+        }catch (NullPointerException e) {
+
+            e.printStackTrace();
+
         }
 
         loader(); //Load Images in OpenGL context

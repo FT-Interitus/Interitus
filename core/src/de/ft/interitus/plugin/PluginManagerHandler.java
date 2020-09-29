@@ -21,7 +21,7 @@ import java.util.TimerTask;
 public class PluginManagerHandler {
 
 
-    public static List<Plugin> loadedplugins = new ArrayList<>();
+    protected static List<Plugin> loadedplugins = new ArrayList<>();
     private static final ProgramRegistry registry = new ProgramRegistry();
     private static final PluginAssetManager assetManager = new PluginAssetManager();
 
@@ -36,6 +36,7 @@ public class PluginManagerHandler {
         }
 
         File[] files = new File(System.getProperty("user.home") + "/" + Data.foldername + "/plugins").listFiles(); //Aus dem Ordner Plugins werden alle Files aufgelistet
+        assert files != null;
         Programm.logger.config("Found " + files.length + " Plugins in Plugin Folder");
         for (File f : files) {
             if (f.getName().split("\\.")[1].contains("itpl") && f.getName().split("\\.")[1].endsWith("itpl")) {

@@ -14,11 +14,7 @@ import java.nio.ByteOrder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
-/***
- *
- * todo if this code is finish it has to be moved to Ev3-Funktions
- *
- */
+
 
 
 public class ev3 {

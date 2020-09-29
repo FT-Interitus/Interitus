@@ -121,7 +121,7 @@ public class PluginLoader {
             }
 
         } else {
-            System.out.println("Fehlerhaftes Plugin");
+            Programm.logger.severe("Fehlerhaftes Plugin");
         }
 
 

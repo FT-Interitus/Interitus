@@ -25,7 +25,6 @@ public class ProgramGrid {
         margin =20f;
 
        margin = margin*(0.86f/ProgrammingSpace.cam.zoom);
-       System.out.println(ProgrammingSpace.cam.zoom);
 
         if(!enable) {
             return;
