@@ -123,7 +123,7 @@ public class TabBar implements UIElement {
             aktualxpluspos = aktualxpluspos + tabbs.get(i).getTabButton().getW()+tabbs.get(i).getCloseButton().getW()+7;
             if (tabbs.get(i).getTabButton().isjustPressednormal()) {
                 mousemerkpos.set(Gdx.input.getX(),Gdx.input.getY());
-                selectedTabindex=i;
+
                 EventVar.globalEventManager.tabclicked(new GlobalTabClickEvent(this),tabbs.get(i));
             }
 
