@@ -8,6 +8,7 @@ package de.ft.interitus.UI.UIElements.UIElements.TabBar;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector2;
 import com.kotcrab.vis.ui.util.dialog.ConfirmDialogListener;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import de.ft.interitus.ProgrammingSpace;
@@ -34,6 +35,7 @@ public class TabBar implements UIElement {
     private int h = 25;
     private int selectedTabindex=0;
     private final ArrayList<Tab> tabbs = new ArrayList<>();
+    private Vector2 mousemerkpos=new Vector2();
 
 
     public TabBar(int x, int y, int w, int h) {
@@ -120,6 +122,7 @@ public class TabBar implements UIElement {
             tabbs.get(i).getCloseButton().draw();
             aktualxpluspos = aktualxpluspos + tabbs.get(i).getTabButton().getW()+tabbs.get(i).getCloseButton().getW()+7;
             if (tabbs.get(i).getTabButton().isjustPressednormal()) {
+                mousemerkpos.set(Gdx.input.getX(),Gdx.input.getY());
                 selectedTabindex=i;
                 EventVar.globalEventManager.tabclicked(new GlobalTabClickEvent(this),tabbs.get(i));
             }
