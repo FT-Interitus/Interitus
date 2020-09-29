@@ -592,13 +592,13 @@ public abstract class BlockUpdate extends Thread {
 
             //Ändere die Aktuelle Blockposition auf die Maus Position
 
-            if(ProgramGrid.enable&&ProgramGrid.block_snapping) {
+            if(ProgramGrid.enable&&ProgramGrid.block_snapping&&ProgramGrid.block_active_snapping) {
 
 
-                int newx = (int) ((ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x - ProjectManager.getActProjectVar().unterschiedsave.x)/ProgramGrid.margin);
-                int newy = (int) ((ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y - ProjectManager.getActProjectVar().unterschiedsave.y)/ProgramGrid.margin);
-                block.setX((int) (newx*ProgramGrid.margin));
-                block.setY((int) (newy*ProgramGrid.margin));
+                int newx = (int) (((ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x - ProjectManager.getActProjectVar().unterschiedsave.x)-UIVar.abstandvonRand)/ProgramGrid.margin);
+                int newy = (int) (((ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y - ProjectManager.getActProjectVar().unterschiedsave.y)-UIVar.programmflaeche_y)/ProgramGrid.margin);
+                block.setX((int) (newx*ProgramGrid.margin)+UIVar.abstandvonRand);
+                block.setY((int) (newy*ProgramGrid.margin)+UIVar.programmflaeche_y);
 
 
             } else {
@@ -648,6 +648,16 @@ public abstract class BlockUpdate extends Thread {
 
             ProjectManager.getActProjectVar().ismoving = false;
             block.setMoving(false);
+
+            if(ProgramGrid.block_snapping&&!ProgramGrid.block_active_snapping) {
+
+                int newx = (int) ((block.getX())/ProgramGrid.margin);
+                int newy = (int) ((block.getY())/ProgramGrid.margin);
+                block.setX((int) (newx*ProgramGrid.margin));
+                block.setY((int) (newy*ProgramGrid.margin));
+
+            }
+
             if (willbedelete) {
                 deleteonend = true;
 

@@ -63,7 +63,7 @@ public class Viewport {
                             }
 
                         } else {
-                            if (ProgrammingSpace.cam.zoom < 2.0f) {
+                            if (ProgrammingSpace.cam.zoom <= 2.0f) {
                                 ProgrammingSpace.cam.zoom = ProgrammingSpace.cam.zoom + 0.1f;
                             }
                         }
@@ -85,8 +85,8 @@ public class Viewport {
                 if (!UIVar.isdialogeopend) {
 
                     if (input.isButtonPressed(Input.Buttons.MIDDLE)) {
-                        ProgrammingSpace.cam.position.x -= deltaX;
-                        ProgrammingSpace.cam.position.y += deltaY;
+                        ProgrammingSpace.cam.position.x -= deltaX*ProgrammingSpace.cam.zoom;
+                        ProgrammingSpace.cam.position.y += deltaY*ProgrammingSpace.cam.zoom;
                         ProgrammingSpace.cam.update();
                     }
                 }
