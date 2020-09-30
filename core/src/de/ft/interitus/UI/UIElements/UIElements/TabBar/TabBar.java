@@ -36,6 +36,7 @@ public class TabBar implements UIElement {
     private int selectedTabindex=0;
     private final ArrayList<Tab> tabbs = new ArrayList<>();
     private Vector2 mousemerkpos=new Vector2();
+    private boolean doonce=false;
 
 
     public TabBar(int x, int y, int w, int h) {
@@ -100,8 +101,34 @@ public class TabBar implements UIElement {
             tabbs.get(i).getCloseButton().setY((int) (this.y+5f));
             tabbs.get(i).getCloseButton().setH(10);
             tabbs.get(i).getCloseButton().setW(10);
+
+
+
+
+            if (tabbs.get(i).getTabButton().isjustPressednormal()) {
+                if(doonce=true) {
+                    doonce=false;
+                    System.out.println("doonce");
+                    mousemerkpos.set(Gdx.input.getX() - this.x, Gdx.input.getY());
+                }
+                selectedTabindex=i;
+                EventVar.globalEventManager.tabclicked(new GlobalTabClickEvent(this),tabbs.get(i));
+            }
+            if(!Gdx.input.isButtonPressed(0) && doonce) {
+                doonce = false;
+            }
+
+            if(doonce==false){
+                tabbs.get(i).getTabButton().setX((int)(Gdx.input.getX()+ mousemerkpos.x));
+            }
+
+
+
+
+
+
             ProgrammingSpace.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-            if(CheckMouse.isMouseover(this.x+aktualxpluspos,this.y,tabbs.get(i).getTabButton().getW(),this.h, false)) {
+            if(CheckMouse.isMouseover(tabbs.get(i).getTabButton().getX(),this.y,tabbs.get(i).getTabButton().getW(),this.h, false)) {
                 ProgrammingSpace.shapeRenderer.setColor(tabbs.get(i).getMouseovertabcolor());
             }else{
                 ProgrammingSpace.shapeRenderer.setColor(tabbs.get(i).getTabcolor());
@@ -110,10 +137,10 @@ public class TabBar implements UIElement {
             if(i==selectedTabindex){
                 ProgrammingSpace.shapeRenderer.setColor(tabbs.get(i).getSelected());
             }
-            ProgrammingSpace.shapeRenderer.rect(this.x+aktualxpluspos,this.y,tabbs.get(i).getTabButton().getW()+tabbs.get(i).getCloseButton().getW()+7,this.h);
+            ProgrammingSpace.shapeRenderer.rect(tabbs.get(i).getTabButton().getX(),this.y,tabbs.get(i).getTabButton().getW()+tabbs.get(i).getCloseButton().getW()+7,this.h);
             if(i==selectedTabindex) {
                 ProgrammingSpace.shapeRenderer.setColor(86f/255f, 138f/255f, 242f/255f, 1);
-                ProgrammingSpace.shapeRenderer.rect(this.x + aktualxpluspos, this.y, tabbs.get(i).getTabButton().getW() + tabbs.get(i).getCloseButton().getW() + 7, 3);
+                ProgrammingSpace.shapeRenderer.rect(tabbs.get(i).getTabButton().getX(), this.y, tabbs.get(i).getTabButton().getW() + tabbs.get(i).getCloseButton().getW() + 7, 3);
             }
 
                 ProgrammingSpace.shapeRenderer.setColor(1,1,1,1);
