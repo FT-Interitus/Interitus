@@ -24,7 +24,7 @@ public class Notification {
     private float fadeout = 1.0f;
     private boolean fadingout = false;
     private  String title;
-    private static final Button closeButton = new Button();
+    private final Button closeButton = new Button();
     private  int progressbarvalue = -1;
     private  int progressbarvalueis = -1;
     private boolean displayed = false;
@@ -52,7 +52,7 @@ public class Notification {
      * Set the value of the ProgressBar in the Notification
      * If the value is -1 (default) the ProgressBar will be hidden
      * Note that the Notification will automatically expire if StayAlive is false (default)
-     * @param progressbarvalue
+     * @param progressbarvalue set Value for Progressbar
      * @throws IllegalArgumentException with the Values are less than -1 and more than 100
      */
     public Notification setProgressbarvalue(int progressbarvalue) {
@@ -219,7 +219,7 @@ public class Notification {
         this.fadingout = fadingout;
     }
 
-    protected static Button getCloseButton() {
+    protected Button getCloseButton() {
         return closeButton;
     }
 

@@ -5,6 +5,7 @@
 
 package de.ft.interitus.projecttypes;
 
+import com.badlogic.gdx.files.FileHandle;
 import de.ft.interitus.Programm;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.UI.Notification.Notification;
@@ -16,6 +17,7 @@ import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.Var;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.datamanager.programmdata.experience.ExperienceVar;
+import de.ft.interitus.datamanager.userdata.load.DataLoader;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.global.GlobalCloseEvent;
 import de.ft.interitus.events.global.GlobalEventAdapter;
@@ -23,6 +25,7 @@ import de.ft.interitus.events.global.GlobalTabClickEvent;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.utils.ClearActOpenProgramm;
 
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -183,6 +186,10 @@ public class ProjectManager {
     }
 
     public static void CloseProject(int index) {
+        CloseProject(index,true);
+    }
+
+    public static void CloseProject(int index,boolean allowedtoclose) {
 
 
         ClearActOpenProgramm.clear(index);
@@ -193,7 +200,9 @@ public class ProjectManager {
 
         if (Var.openprojectindex - 1 == -1) {
             Data.close(true);
-            System.exit(0);
+            if(allowedtoclose) {
+                System.exit(0);
+            }
             return;
         }
         change(Var.openprojectindex - 1);
@@ -201,6 +210,35 @@ public class ProjectManager {
 
 
     }
+
+
+/* usage?
+    public static void reloadProject(int index) {
+        if(Objects.requireNonNull(getProjectVar(index)).changes) {
+            return;
+        }
+
+
+
+       String path = getProjectVar(index).path;
+        if(path.contentEquals("")) {
+            return;
+        }
+       String name = getProjectVar(index).path;
+
+
+        NotificationManager.suppress = true;
+        CloseProject(index,false);
+
+        while(Var.isclearing);
+
+        DataLoader.load(new FileHandle(path),name,path);
+        NotificationManager.suppress = false;
+
+
+    }
+
+ */
 
 
 }

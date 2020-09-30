@@ -68,6 +68,7 @@ project(":core") {
 
 
     dependencies {
+
         compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.3.3.RELEASE'
         api group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.3.3.RELEASE'
         compile group: 'org.springframework', name: 'spring-web', version: '5.2.8.RELEASE'

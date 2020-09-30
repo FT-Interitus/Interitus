@@ -16,9 +16,9 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.ft.interitus.Block.BlockDrawer;
 import de.ft.interitus.UI.CheckShortcuts;
-import de.ft.interitus.UI.ProgramGrid;
 import de.ft.interitus.UI.Notification.Notification;
 import de.ft.interitus.UI.Notification.NotificationManager;
+import de.ft.interitus.UI.ProgramGrid;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.PressedKeys;
 import de.ft.interitus.UI.UIElements.UIElementBar;
@@ -27,13 +27,15 @@ import de.ft.interitus.UI.popup.PopupHandler;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.datamanager.programmdata.Updater;
 import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.plugin.*;
+import de.ft.interitus.plugin.Native;
+import de.ft.interitus.plugin.Plugin;
+import de.ft.interitus.plugin.PluginDrawer;
+import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
 import de.ft.interitus.projecttypes.ProgrammArea.ProgrammAreaManager;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.PositionSaver;
 import de.ft.interitus.utils.ShapeRenderer;
-
 
 import java.awt.*;
 
@@ -56,14 +58,11 @@ public class ProgrammingSpace extends ScreenAdapter {
     public static ShapeRenderer BlockshapeRenderer;
     public static PressedKeys pressedKeys;
     public static float delta;
-    public boolean loadimagesfromplugin = true;
     public static Plugin nativ = new Native();
+    public boolean loadimagesfromplugin = true;
 
 
     public ProgrammingSpace() {
-
-
-
 
 
         pressedKeys = new PressedKeys();
@@ -103,22 +102,18 @@ public class ProgrammingSpace extends ScreenAdapter {
 
         System.gc(); //Clean RAM after Loading
 
-    Updater.initprogress();
-
-
+        Updater.initprogress();
 
 
     }
 
 
-
-
     @Override
     public void render(float delta) {
 
-if(ProjectManager.getActProjectVar().markedblock!=null) {
-    ProgrammAreaManager.getProgrammArea(ProjectManager.getActProjectVar().markedblock.getIndex());
-}
+        if (ProjectManager.getActProjectVar().markedblock != null) {
+            ProgrammAreaManager.getProgrammArea(ProjectManager.getActProjectVar().markedblock.getIndex());
+        }
         ProgrammingSpace.delta = delta;
 
 
@@ -140,8 +135,8 @@ if(ProjectManager.getActProjectVar().markedblock!=null) {
             cam.update();
             UI.UIcam.update();
 
-           Gdx.gl.glClearColor(Settings.theme.ClearColor().r, Settings.theme.ClearColor().g, Settings.theme.ClearColor().b, Settings.theme.ClearColor().a);
-           Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+            Gdx.gl.glClearColor(Settings.theme.ClearColor().r, Settings.theme.ClearColor().g, Settings.theme.ClearColor().b, Settings.theme.ClearColor().a);
+            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             batch.setProjectionMatrix(cam.combined);
             UI.UIbatch.setProjectionMatrix(UI.UIcam.combined);
             shapeRenderer.setProjectionMatrix(UI.UIcam.combined);
@@ -164,7 +159,7 @@ if(ProjectManager.getActProjectVar().markedblock!=null) {
         }
 
 
-        if(!loadimagesfromplugin) {
+        if (!loadimagesfromplugin) {
             PluginDrawer.draw();
         }
 
@@ -181,24 +176,20 @@ if(ProjectManager.getActProjectVar().markedblock!=null) {
         }
 
 
-
-
         if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
-          Notification notification =  new Notification(AssetLoader.information, "Wichtige Information", "\nEs steht kein Update bereit!");
-          notification.setButtonBar(new UIElementBar().addButton(new Button().setText("Test")));
+            Notification notification = new Notification(AssetLoader.information, "Wichtige Information", "\nEs steht kein Update bereit!");
+            //notification.setButtonBar(new UIElementBar().addButton(new Button().setText("Test")));
             NotificationManager.sendNotification(notification);
         }
 
         PopupHandler.drawPopUp();
 
 
-
-
         try {
             DisplayErrors.checkerror(); //Check if there are undisplayed Errors
         } catch (IllegalStateException e) {
             //Bei eienem VisUI absturz
-        }catch (NullPointerException e) {
+        } catch (NullPointerException e) {
 
             e.printStackTrace();
 
@@ -239,7 +230,6 @@ if(ProjectManager.getActProjectVar().markedblock!=null) {
     }
 
     public void loader() {
-
 
 
         //Um alle shortcuts für das Programm zu überprüfen
