@@ -6,7 +6,10 @@
 package de.ft.interitus.UI.UIElements.UIElements.TabBar;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.UI.UIElements.UIElements.Button;
+import de.ft.interitus.UI.UIElements.check.CheckMouse;
 
 
 public class Tab {
@@ -17,10 +20,39 @@ public class Tab {
     private Color tabcolor=new Color(100f/255, 100f/255f, 100f/255f,1f);
     private Color mouseovertabcolor=new Color(140f/255, 140f/255f, 140f/255f,1f);
     private Color selected=new Color(163f/255f, 163f/255f, 163f/255f,1);
+    private int CloseButtonDiameter=10;
 
     public Tab() {
         TabButton = new Button();
         CloseButton = new Button();
+    }
+
+    public void draw(boolean selectedTabindex,int y){
+        ProgrammingSpace.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        if(getTabButton().isMouseover()) {
+            ProgrammingSpace.shapeRenderer.setColor(getMouseovertabcolor());
+        }else{
+            ProgrammingSpace.shapeRenderer.setColor(getTabcolor());
+
+        }
+        if(selectedTabindex){
+            ProgrammingSpace.shapeRenderer.setColor(getSelected());
+        }
+        ProgrammingSpace.shapeRenderer.rect(getTabButton().getX(),y,getW(),getTabButton().getH());
+        if(selectedTabindex) {
+            ProgrammingSpace.shapeRenderer.setColor(86f/255f, 138f/255f, 242f/255f, 1);
+            ProgrammingSpace.shapeRenderer.rect(getTabButton().getX(), y, getW(), 3);
+        }
+        ProgrammingSpace.shapeRenderer.end();
+
+
+        getCloseButton().setX((int) (getTabButton().getX()+getTabButton().getW()+1f));
+        getCloseButton().setY((int) (getTabButton().getY()+(getTabButton().getH()/2-CloseButtonDiameter/2)));
+        getCloseButton().setH(CloseButtonDiameter);
+        getCloseButton().setW(CloseButtonDiameter);
+
+        getTabButton().draw();
+        getCloseButton().draw();
     }
 
     public Button getTabButton() {
@@ -71,5 +103,24 @@ public class Tab {
 
     public void setSelected(Color selected) {
         this.selected = selected;
+    }
+
+    public int getW() {
+        return TabButton.getW()+CloseButton.getW()+7;
+    }
+
+    public int getX() {
+        return TabButton.getX();
+    }
+    public void setH(int h){
+        TabButton.setH(h);
+        //CloseButton.setH(h);
+    }
+    public void setX(int x){
+        TabButton.setX(x);
+        CloseButton.setX(TabButton.getW()+ TabButton.getX());
+    }
+    public void setY(int y){
+        TabButton.setY(y);
     }
 }

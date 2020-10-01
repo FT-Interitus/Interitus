@@ -104,20 +104,21 @@ public class TabBar implements UIElement {
         int aktualxpluspos = 0;
         for (int i = 0; i < this.tabbs.size(); i++) {
 
-            tabbs.get(i).getTabButton().setX(this.x + aktualxpluspos);
-            tabbs.get(i).getTabButton().setY(this.y);
+            tabbs.get(i).setX(this.x + aktualxpluspos);
+            tabbs.get(i).setY(this.y);
             tabbs.get(i).getTabButton().setH(this.h);
 
+
             if(doonce==false){
-                System.out.println("moving");
-                tabbs.get(selectedTabindex).getTabButton().setX(tabbs.get(selectedTabindex).getTabButton().getX()+(int)(Gdx.input.getX()- mousemerkpos.x));
+                //System.out.println("moving");
+                tabbs.get(selectedTabindex).setX(tabbs.get(selectedTabindex).getX()+(int)(Gdx.input.getX()- mousemerkpos.x));
+                //int half=(tabbs.get(selectedTabindex).getTabButton().getW()+tabbs.get(selectedTabindex).getCloseButton().getW()+7)/2;
+                //if(tabbs.get(selectedTabindex+1)!=null){
+                //if(tabbs.get(selectedTabindex+1).getTabButton().getX()+tabbs.get(selectedTabindex+1).getTabButton().getW()-half < tabbs.get(selectedTabindex).getTabButton().getX()+half){
+                 //   System.out.println("switch");
+               // }
+               // }
             }
-
-            tabbs.get(i).getCloseButton().setX((int) (tabbs.get(i).getTabButton().getX()+tabbs.get(i).getTabButton().getW()+1f));
-            tabbs.get(i).getCloseButton().setY((int) (this.y+5f));
-            tabbs.get(i).getCloseButton().setH(10);
-            tabbs.get(i).getCloseButton().setW(10);
-
 
 
             if (tabbs.get(i).getTabButton().isjustPressednormal()) {
@@ -127,7 +128,7 @@ public class TabBar implements UIElement {
                 if(doonce=true) {
                     doonce=false;
                     System.out.println("doonce");
-                    mousemerkpos.set(Gdx.input.getX() - this.x, Gdx.input.getY());
+                    mousemerkpos.set(Gdx.input.getX(), Gdx.input.getY());
                 }
             }
             if(!Gdx.input.isButtonPressed(0) && !doonce) {
@@ -135,31 +136,10 @@ public class TabBar implements UIElement {
             }
 
 
+            tabbs.get(i).draw(selectedTabindex==i,this.y);
 
 
 
-
-
-                ProgrammingSpace.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-            if(CheckMouse.isMouseover(tabbs.get(i).getTabButton().getX(),this.y,tabbs.get(i).getTabButton().getW(),this.h, false)) {
-                ProgrammingSpace.shapeRenderer.setColor(tabbs.get(i).getMouseovertabcolor());
-            }else{
-                ProgrammingSpace.shapeRenderer.setColor(tabbs.get(i).getTabcolor());
-
-            }
-            if(i==selectedTabindex){
-                ProgrammingSpace.shapeRenderer.setColor(tabbs.get(i).getSelected());
-            }
-            ProgrammingSpace.shapeRenderer.rect(tabbs.get(i).getTabButton().getX(),this.y,tabbs.get(i).getTabButton().getW()+tabbs.get(i).getCloseButton().getW()+7,this.h);
-            if(i==selectedTabindex) {
-                ProgrammingSpace.shapeRenderer.setColor(86f/255f, 138f/255f, 242f/255f, 1);
-                ProgrammingSpace.shapeRenderer.rect(tabbs.get(i).getTabButton().getX(), this.y, tabbs.get(i).getTabButton().getW() + tabbs.get(i).getCloseButton().getW() + 7, 3);
-            }
-
-                ProgrammingSpace.shapeRenderer.setColor(1,1,1,1);
-            ProgrammingSpace.shapeRenderer.end();
-            tabbs.get(i).getTabButton().draw();
-            tabbs.get(i).getCloseButton().draw();
             aktualxpluspos = aktualxpluspos + tabbs.get(i).getTabButton().getW()+tabbs.get(i).getCloseButton().getW()+7;
             if (tabbs.get(i).getTabButton().isjustPressednormal()) {
                 mousemerkpos.set(Gdx.input.getX(),Gdx.input.getY());
