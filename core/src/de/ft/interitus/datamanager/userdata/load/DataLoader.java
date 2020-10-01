@@ -20,7 +20,6 @@ import de.ft.interitus.datamanager.BlockCalculator;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.datamanager.userdata.Zip;
 import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.plugin.Plugin;
 import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
@@ -30,10 +29,7 @@ import de.ft.interitus.projecttypes.VCS;
 import de.ft.interitus.utils.ArrayList;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
-import java.io.StreamCorruptedException;
+import java.io.*;
 
 public class DataLoader {
     private static final ArrayList<Addon> enabledAddons = new ArrayList<>();
@@ -132,7 +128,7 @@ public class DataLoader {
                             FileInputStream projectsettings_fis = new FileInputStream(projectsettingsfile.file());
                             ObjectInputStream projectsettings_ois = new ObjectInputStream(projectsettings_fis);
                             ProjectManager.getActProjectVar().projectSettings = projectsettings_ois.readObject();
-                        }catch (StreamCorruptedException ignored) {
+                        } catch (StreamCorruptedException ignored) {
                             Programm.logger.warning("ProjectType has no saveable Settings");
 
 
@@ -155,9 +151,15 @@ public class DataLoader {
 
                         FileInputStream fis = new FileInputStream(file.file());
                         ObjectInputStream ois = new ObjectInputStream(fis);
+                        ArrayList<SaveBlock> readedblocks = null;
 
-                        ArrayList<SaveBlock> readedblocks = ((ArrayList<SaveBlock>) ois.readObject());
+                        try {
+                            readedblocks = ((ArrayList<SaveBlock>) ois.readObject());
+                        } catch (InvalidClassException f) {
 
+                                Dialogs.showErrorDialog(UI.stage, "Das Projekt kann in dieser Interitus Version nicht geöffnet werden!");
+
+                        }
                         BlockCalculator.extract(readedblocks);
 
 
@@ -167,13 +169,16 @@ public class DataLoader {
                         ProjectManager.getActProjectVar().deviceConfigurations = ((ArrayList<DeviceConfiguration>) runconfig_ois.readObject());
 
                     }
-                } catch (Exception e) {
+                } catch (Throwable e) {
                     e.printStackTrace();
-                    if (wascreated) {
-                        Var.openprojects.remove(Var.openprojects.size() - 1);
+                    try {
+                        if (wascreated) {
+                            Var.openprojects.remove(Var.openprojects.size() - 1);
+                        }
+                        Dialogs.showErrorDialog(UI.stage, "Fehler beim Laden des Projekts\nDie Projekt Datei ist womöglich beschädigt!");
+                    }catch (Exception f) {
+                        f.printStackTrace();
                     }
-                    Dialogs.showErrorDialog(UI.stage,"Fehler beim Laden des Projekts\nDie Projekt Datei ist womöglich beschädigt!") ;
-
 
                 }
 

@@ -29,9 +29,8 @@ public class NotificationManager {
     private static final int IMAGE_MARGIN_RIGHT = 17;
     private static final int IMAGE_MARGIN_TOP = 17;
     private static final int PROGRESSBAR_MARGIN_BOTTOM = 10;
-    public static final int MOVE_IN_SPEED  = 15;
+    private static final int MOVE_IN_SPEED  = 15;
     private static final GlyphLayout glyphLayout = new GlyphLayout();
-
 
     private static int MAX_NOTIFICATIONS = 10;
 
@@ -91,19 +90,19 @@ public class NotificationManager {
 
         //Delete Notification if it doesnt fit on the screen but only if it is closeable
         if(notifications.size()>MAX_NOTIFICATIONS) {
-          int  addcounter =0;
+          int close_counter =0;
             for(int i=0;i<notifications.size()-MAX_NOTIFICATIONS;i++) {
 
-                if(notifications.size()-1-i-addcounter<0) {
+                if(notifications.size()-1-i-close_counter<0) {
                     break;
                 }
 
-                if(! notifications.get(notifications.size()-1-i-addcounter).isCloseable()) {
-                    addcounter++;
+                if(! notifications.get(notifications.size()-1-i-close_counter).isCloseable()) {
+                    close_counter++;
                     continue;
                 }
-                notifications.get(notifications.size()-1-i-addcounter).setFadingout(true);
-                notifications.get(notifications.size()-1-i-addcounter).setFadeout(-0.1f);
+                notifications.get(notifications.size()-1-i-close_counter).setFadingout(true);
+                notifications.get(notifications.size()-1-i-close_counter).setFadeout(-0.1f);
 
             }
         }
@@ -112,7 +111,7 @@ public class NotificationManager {
         for (int i = notifications.size() - 1; i >= 0; i--) {
 
             Gdx.gl.glEnable(GL20.GL_BLEND);
-            Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA); //Enalble Alpha Rendering
+            Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA); //Enable Alpha Rendering
             ProgrammingSpace.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
             ProgrammingSpace.shapeRenderer.setColor(Settings.theme.ClearColor().r,Settings.theme.ClearColor().g,Settings.theme.ClearColor().b,notifications.get(i).getFadeout());
 
@@ -138,15 +137,15 @@ public class NotificationManager {
 
             UI.UIbatch.begin();
             UI.UIbatch.setColor(1,1,1,notifications.get(i).getFadeout());
-            UI.UIbatch.draw(notifications.get(i).getIcon(),Gdx.graphics.getWidth() - DISTANCE_RIGHT+IMAGE_MARGIN_RIGHT/2+notifications.get(i).getRollin(),UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i))+HEIGHT-IMAGE_MARGIN_TOP,10,10);
+            UI.UIbatch.draw(notifications.get(i).getIcon(),Gdx.graphics.getWidth() - DISTANCE_RIGHT+IMAGE_MARGIN_RIGHT/2f+notifications.get(i).getRollin(),UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i))+HEIGHT-IMAGE_MARGIN_TOP,10,10);
            glyphLayout.setText(  AssetLoader.defaultfont,notifications.get(i).getTitle());
 
             AssetLoader.defaultfont.setColor(0.9f,0.9f,0.9f,notifications.get(i).getFadeout());
-          AssetLoader.defaultfont.draw(UI.UIbatch,notifications.get(i).getTitle(),Gdx.graphics.getWidth() - DISTANCE_RIGHT+IMAGE_MARGIN_RIGHT/2+20+notifications.get(i).getRollin(),UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i))+HEIGHT-(float)glyphLayout.height/1.2f);
+          AssetLoader.defaultfont.draw(UI.UIbatch,notifications.get(i).getTitle(),Gdx.graphics.getWidth() - DISTANCE_RIGHT+IMAGE_MARGIN_RIGHT/2f+20+notifications.get(i).getRollin(),UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i))+HEIGHT- glyphLayout.height /1.2f);
             AssetLoader.defaultfont.setColor(0.6f,0.6f,0.6f,notifications.get(i).getFadeout());
 
             glyphLayout.setText(AssetLoader.defaultfont,notifications.get(i).getMessage());
-           AssetLoader.defaultfont.draw(UI.UIbatch,notifications.get(i).getMessage(),Gdx.graphics.getWidth() - DISTANCE_RIGHT+IMAGE_MARGIN_RIGHT/2+23+notifications.get(i).getRollin(),UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i))+HEIGHT-HEIGHT/3.2f);
+           AssetLoader.defaultfont.draw(UI.UIbatch,notifications.get(i).getMessage(),Gdx.graphics.getWidth() - DISTANCE_RIGHT+IMAGE_MARGIN_RIGHT/2f+23+notifications.get(i).getRollin(),UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i))+HEIGHT-HEIGHT/3.2f);
             UI.UIbatch.end();
             if(notifications.get(i).isCloseable()) {
                 notifications.get(i).getCloseButton().setTransparency(notifications.get(i).getFadeout());

@@ -35,6 +35,7 @@ public class MenuBar {
     public static boolean fullscreen = false;
     public static MenuItem menuItem_vollbild;
     public static MenuItem menuItem_newproject;
+   // public static MenuItem menuItem_reloadproject;
     public static MenuItem menuItem_import;
     public static MenuItem menuItem_new;
     public static MenuItem menuItem_oeffnen;
@@ -89,6 +90,14 @@ public class MenuBar {
                 NPW.show();
             }
         }).setShortcut("Strg+N");
+
+        //menuItem_reloadproject = new MenuItem("Projekt neuladen", new ChangeListener() {
+        //    @Override
+        //    public void changed(ChangeEvent event, Actor actor) {
+        //        ProjectManager.reloadProject(Var.openprojectindex);
+         //   }
+       // });
+
         menuItem_import = new MenuItem("Import Projekt", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -256,6 +265,7 @@ public class MenuBar {
         fileMenu.addItem(menuItem_oeffnen);
         fileMenu.addItem(menuItem_speichern);
         fileMenu.addItem(menuItem_speichernunter);
+        //fileMenu.addItem(menuItem_reloadproject);
         fileMenu.addSeparator();
         fileMenu.addItem(menuItem_einstellungen);
         fileMenu.addItem(menuItem_beenden);
