@@ -9,16 +9,13 @@ import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
-import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.If.IfDefaultBlockModi;
-import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.If.IfElse;
-import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.If.IfEnd;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
-import de.ft.interitus.projecttypes.ProjectTypes;
+import de.ft.interitus.projecttypes.ProjectType;
 
 public class For extends PlatformSpecificBlock {
 
-    public For(ProjectTypes projectTypes, Addon addon) {
-        super(projectTypes, addon);
+    public For(ProjectType projectType, Addon addon) {
+        super(projectType, addon);
         super.blockModis.add(new ForDefaultBlockModi());
 
         super.actBlockModiIndex = 0;

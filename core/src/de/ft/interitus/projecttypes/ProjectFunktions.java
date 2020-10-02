@@ -32,6 +32,8 @@ public interface ProjectFunktions {
 
     boolean isVariableAvailable(String name);
 
+    ArrayList<Tool> getProjectTools();
+
 
 
 

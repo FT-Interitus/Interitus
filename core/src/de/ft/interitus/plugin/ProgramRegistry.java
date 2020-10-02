@@ -22,14 +22,10 @@ import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
 import de.ft.interitus.projecttypes.Importer.Import;
 import de.ft.interitus.projecttypes.Importer.Importer;
-import de.ft.interitus.projecttypes.ProjectManager;
-import de.ft.interitus.projecttypes.ProjectTypes;
+import de.ft.interitus.projecttypes.ProjectType;
 import de.ft.interitus.utils.ArrayList;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.URL;
-import java.util.Collections;
 import java.util.List;
 
 
@@ -37,7 +33,7 @@ import java.util.List;
  * Plugin bridge into the Programm
  */
 public class ProgramRegistry {
-    private static final ArrayList<ProjectTypes> pluginprojekttypes = new ArrayList<>();
+    private static final ArrayList<ProjectType> pluginprojekttypes = new ArrayList<>();
     private static final List<VisTable> pluginsettings = new ArrayList<>();
     private static final List<Menu> pluginMenubar = new ArrayList<>();
     private static final ArrayList<ShortCutChecker> pluginshortCutsChecker = new ArrayList<>();
@@ -75,11 +71,11 @@ public class ProgramRegistry {
     }
 
     @SuppressWarnings("unused")
-    public  boolean addProjectType(ProjectTypes PT, Plugin requestedplugin) {
+    public  boolean addProjectType(ProjectType PT, Plugin requestedplugin) {
         if (PluginManagerHandler.loadedplugins.contains(requestedplugin)) {
             //Do not allow two ProjectTypes with the same Name
-            for (ProjectTypes projectTypes : ProjectTypesVar.projectTypes) {
-                if (PT.getName().contentEquals(projectTypes.getName())) {
+            for (ProjectType projectType : ProjectTypesVar.projectTypes) {
+                if (PT.getName().contentEquals(projectType.getName())) {
                     return false;
                 }
             }

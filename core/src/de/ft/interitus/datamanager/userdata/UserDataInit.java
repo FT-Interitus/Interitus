@@ -12,25 +12,29 @@ import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.global.GlobalEventAdapter;
 import de.ft.interitus.events.global.GlobalFileDropedEvent;
 
+import java.io.File;
+
+
 public class UserDataInit {
 
     public static void init() {
         EventVar.globalEventManager.addListener(new GlobalEventAdapter() {
             @Override
-            public boolean filedroped(GlobalFileDropedEvent e, String[] filepaths) {
+            public boolean filedroped(GlobalFileDropedEvent e, String filepaths) {
 
                 String extension = "";
 
-                int i = filepaths[0].lastIndexOf('.');
-                int p = Math.max(filepaths[0].lastIndexOf('/'), filepaths[0].lastIndexOf('\\'));
+                int i = filepaths.lastIndexOf('.');
+                int p = Math.max(filepaths.lastIndexOf('/'), filepaths.lastIndexOf('\\'));
 
                 if (i > p) {
-                    extension = filepaths[0].substring(i + 1);
+                    extension = filepaths.substring(i + 1);
                 }
+            File file =  new File(filepaths);
 
                 if (extension != "") {
                     if (extension.contains("itp")) {
-                        DataLoader.load(Gdx.files.internal(filepaths[0]), filepaths[0], filepaths[0]); //TODO correct Name
+                        DataLoader.load(Gdx.files.internal(filepaths), file.getName(), filepaths); //TODO correct Name
                         return true;
                     }
                 }

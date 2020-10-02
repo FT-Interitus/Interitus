@@ -28,7 +28,7 @@ public class GlobalEventAdapter implements GlobalEventListener {
     }
 
     @Override
-    public boolean filedroped(GlobalFileDropedEvent e, String[] filepaths) {
+    public boolean filedroped(GlobalFileDropedEvent e, String filepaths) {
         return false;
     }
 

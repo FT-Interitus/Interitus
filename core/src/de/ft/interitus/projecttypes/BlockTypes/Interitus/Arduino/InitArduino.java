@@ -18,8 +18,6 @@ import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.operationblocks
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.operationblocks.logicOperation.LogicOperation;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.operationblocks.mapblock.MapBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.operationblocks.random.RandomBlock;
-import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.operationblocks.variable.VariableBlock;
-import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.operationblocks.variable.WriteValue;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.For.For;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.If.If;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.Wait.Wait;
@@ -27,12 +25,12 @@ import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmaufbau.
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmaufbau.SetupBlock.SetupBlock;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.ParameterVariableType;
-import de.ft.interitus.projecttypes.ProjectTypes;
+import de.ft.interitus.projecttypes.ProjectType;
 import de.ft.interitus.utils.ArrayList;
 
 public class InitArduino {
     static ArrayList<PlatformSpecificBlock> blocks = new ArrayList<>();
-   public static ProjectTypes arduino = new ProjectTypes(ProgrammingSpace.nativ, "Arduino-Projekt", blocks, new DefaultBlockGenerator(), new DefaultBlockUpdateGenerator(), new DefaultWireGenerator(), new DefaultWireNodeGenerator(), new DefaultSaveBlockGenerator(), new DefaultBlockVarGenerator(), new ArduinoFunktions(), new ArduinoCompiler());
+   public static ProjectType arduino = new ProjectType(ProgrammingSpace.nativ, "Arduino-Projekt", blocks, new DefaultBlockGenerator(), new DefaultBlockUpdateGenerator(), new DefaultWireGenerator(), new DefaultWireNodeGenerator(), new DefaultSaveBlockGenerator(), new DefaultBlockVarGenerator(), new ArduinoFunktions(), new ArduinoCompiler());
 
 
 
@@ -42,7 +40,7 @@ public class InitArduino {
     public static ParameterVariableType booleanvar;
 
 
-    public static ProjectTypes init() {
+    public static ProjectType init() {
 
 
 

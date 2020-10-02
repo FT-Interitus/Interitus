@@ -6,7 +6,7 @@
 package de.ft.interitus.projecttypes.Importer;
 
 import de.ft.interitus.plugin.Plugin;
-import de.ft.interitus.projecttypes.ProjectTypes;
+import de.ft.interitus.projecttypes.ProjectType;
 
 import java.io.File;
 
@@ -20,6 +20,6 @@ public interface Import {
     void importproject(File file);
     String getName();
     Plugin getPlugin();
-    ProjectTypes getTargetProjectType();
+    ProjectType getTargetProjectType();
 
 }

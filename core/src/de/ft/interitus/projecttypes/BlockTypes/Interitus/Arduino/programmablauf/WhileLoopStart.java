@@ -10,11 +10,11 @@ import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
-import de.ft.interitus.projecttypes.ProjectTypes;
+import de.ft.interitus.projecttypes.ProjectType;
 
 public class WhileLoopStart extends PlatformSpecificBlock implements ArduinoBlock {
 
-    public WhileLoopStart(ProjectTypes arduino, Addon addon) {
+    public WhileLoopStart(ProjectType arduino, Addon addon) {
         super(arduino,addon);
 
 

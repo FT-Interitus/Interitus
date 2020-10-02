@@ -11,11 +11,11 @@ import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.inputblocs.DigitalReadDefault;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
-import de.ft.interitus.projecttypes.ProjectTypes;
+import de.ft.interitus.projecttypes.ProjectType;
 
 public class WhileLoopEnd extends PlatformSpecificBlock implements ArduinoBlock {
 
-    public WhileLoopEnd(ProjectTypes arduino, Addon addon) {
+    public WhileLoopEnd(ProjectType arduino, Addon addon) {
         super(arduino,addon);
         blockModis.add(new DigitalReadDefault());
         actBlockModiIndex = 0;

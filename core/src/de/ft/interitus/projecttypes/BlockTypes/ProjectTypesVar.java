@@ -6,7 +6,7 @@
 package de.ft.interitus.projecttypes.BlockTypes;
 
 import de.ft.interitus.projecttypes.Addons.Addon;
-import de.ft.interitus.projecttypes.ProjectTypes;
+import de.ft.interitus.projecttypes.ProjectType;
 import de.ft.interitus.utils.ArrayList;
 
 public class ProjectTypesVar {
@@ -18,7 +18,7 @@ public class ProjectTypesVar {
      * 2 -> Ev3
      * 3... -> Plugins
      */
-    public static ArrayList<ProjectTypes> projectTypes = new ArrayList<>();
+    public static ArrayList<ProjectType> projectTypes = new ArrayList<>();
     public static ArrayList<Addon> addons = new ArrayList<>();
 
 }

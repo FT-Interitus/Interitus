@@ -10,11 +10,11 @@ import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
-import de.ft.interitus.projecttypes.ProjectTypes;
+import de.ft.interitus.projecttypes.ProjectType;
 
 public class RandomBlock extends PlatformSpecificBlock {
-    public RandomBlock(ProjectTypes projectTypes, Addon addon) {
-        super(projectTypes, addon);
+    public RandomBlock(ProjectType projectType, Addon addon) {
+        super(projectType, addon);
         super.actBlockModiIndex = 0;
         super.blockModis.add(new RandomNumeric());
     }

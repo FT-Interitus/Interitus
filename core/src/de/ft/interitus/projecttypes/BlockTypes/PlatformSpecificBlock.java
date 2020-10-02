@@ -9,19 +9,19 @@ import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.projecttypes.Addons.Addon;
-import de.ft.interitus.projecttypes.ProjectTypes;
+import de.ft.interitus.projecttypes.ProjectType;
 import de.ft.interitus.utils.ArrayList;
 
 public abstract class PlatformSpecificBlock {
     public final ArrayList<BlockModi> blockModis = new ArrayList<>();
     private final Addon adddon;
     public int actBlockModiIndex = -1;
-    private ProjectTypes projectTypes = null;
+    private ProjectType projectType = null;
 
 
-    public PlatformSpecificBlock(ProjectTypes projectTypes, Addon addon) {
+    public PlatformSpecificBlock(ProjectType projectType, Addon addon) {
 
-        this.projectTypes = projectTypes;
+        this.projectType = projectType;
         this.adddon = addon;
 
     }
@@ -42,9 +42,9 @@ public abstract class PlatformSpecificBlock {
 
     final public int getID() {
         if (adddon == null) {
-            for (int i = 0; i < ProjectTypesVar.projectTypes.get(ProjectTypesVar.projectTypes.indexOf(projectTypes)).getProjectblocks().size(); i++) {
+            for (int i = 0; i < ProjectTypesVar.projectTypes.get(ProjectTypesVar.projectTypes.indexOf(projectType)).getProjectblocks().size(); i++) {
 
-                if (ProjectTypesVar.projectTypes.get(ProjectTypesVar.projectTypes.indexOf(projectTypes)).getProjectblocks().get(i).getClass() == this.getClass()) {
+                if (ProjectTypesVar.projectTypes.get(ProjectTypesVar.projectTypes.indexOf(projectType)).getProjectblocks().get(i).getClass() == this.getClass()) {
 
                     return i;
                 }
@@ -84,8 +84,8 @@ public abstract class PlatformSpecificBlock {
 
     }
 
-    final public ProjectTypes getProjectType() {
-        return projectTypes;
+    final public ProjectType getProjectType() {
+        return projectType;
     }
 
     public final Addon getAdddon() {

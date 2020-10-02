@@ -38,112 +38,122 @@ public class ArduinoCompiler implements Compiler {
     private static final String prefix = "param_";
 
     private static String compilesketch() {
-        StringBuilder Programm = new StringBuilder();
-        for (String include : installlibery) {
+        try {
+            StringBuilder Programm = new StringBuilder();
+            for (String include : installlibery) {
 
-            installlibary("\"" + include + "\"");
+                installlibary("\"" + include + "\"");
 
-        }
-
-        installlibery.clear();
-
-        int i = 0;
-
-
-        for (Block block : ProjectManager.getActProjectVar().blocks) {
-            if (!ProjectManager.getActProjectVar().projectType.getProjectFunktions().isblockconnected(block)) {
-                continue;
             }
 
-            if (((ArduinoBlock) block.getBlocktype().blockModis.get(block.getBlocktype().actBlockModiIndex)).getHeaderCode(false) != null) {
+            installlibery.clear();
 
-                Programm.append(((ArduinoBlock) block.getBlocktype().blockModis.get(block.getBlocktype().actBlockModiIndex)).getHeaderCode(true));
+            int i = 0;
+
+
+            for (Block block : ProjectManager.getActProjectVar().blocks) {
+                if (!ProjectManager.getActProjectVar().projectType.getProjectFunktions().isblockconnected(block)) {
+                    continue;
+                }
+
+                if (((ArduinoBlock) block.getBlocktype().blockModis.get(block.getBlocktype().actBlockModiIndex)).getHeaderCode(false) != null) {
+
+                    Programm.append(((ArduinoBlock) block.getBlocktype().blockModis.get(block.getBlocktype().actBlockModiIndex)).getHeaderCode(true));
+                    Programm.append("\n");
+
+
+                }
+            }
+
+            for (ProjectVariable variable : ProjectManager.getActProjectVar().projectVariables) {
+
+                Programm.append(((ArduinoVariable) variable).getCode());
                 Programm.append("\n");
 
 
-
-            }
-        }
-
-        for (ProjectVariable variable : ProjectManager.getActProjectVar().projectVariables) {
-
-            Programm.append(((ArduinoVariable) variable).getCode());
-            Programm.append("\n");
-
-
-        }
-
-
-        for (Block block : ProjectManager.getActProjectVar().blocks) {
-            if (block.getBlocktype().getBlockParameter() == null) {
-                continue;
-            }
-
-            if (!ProjectManager.getActProjectVar().projectType.getProjectFunktions().isblockconnected(block)) {
-                continue;
             }
 
 
-            for (Parameter parameter : block.getBlocktype().getBlockParameter()) {
-
-
-                if (!parameter.getParameterType().isOutput()) {
-                    continue;
-                }
-                if (parameter.getDatawire() == null) {
+            for (Block block : ProjectManager.getActProjectVar().blocks) {
+                if (block.getBlocktype().getBlockParameter() == null) {
                     continue;
                 }
 
-                if (parameter.getDatawire().size() < 1) {
+                if (!ProjectManager.getActProjectVar().projectType.getProjectFunktions().isblockconnected(block)) {
                     continue;
                 }
 
-                parameter.setVarName(prefix + i);
-                Programm.append(parameter.getParameterType().getTyp().getType()).append(" ").append(parameter.getVarName()).append(";\n");
-                i++;
+
+                for (Parameter parameter : block.getBlocktype().getBlockParameter()) {
+
+
+                    if (!parameter.getParameterType().isOutput()) {
+                        continue;
+                    }
+                    if (parameter.getDatawire() == null) {
+                        continue;
+                    }
+
+                    if (parameter.getDatawire().size() < 1) {
+                        continue;
+                    }
+
+                    parameter.setVarName(prefix + i);
+                    Programm.append(parameter.getParameterType().getTyp().getType()).append(" ").append(parameter.getVarName()).append(";\n");
+                    i++;
+                }
+
+
+            }
+
+            Block a = ProjectManager.getActProjectVar().blocks.get(0);
+
+            Programm.append(((ArduinoBlock) a.getBlocktype().getBlockModis().get(a.getBlocktype().getActBlockModiIndex())).getCode()).append("\n");
+            while (a.getRight() != null) {
+
+                //block.getRight().setX(block.getRight().getX() + block.getW());
+                a = a.getRight();
+
+
+                Programm.append(((ArduinoBlock) a.getBlocktype().getBlockModis().get(a.getBlocktype().getActBlockModiIndex())).getCode()).append("//").append(a.getIndex()).append(" \n");
+
+
             }
 
 
+            Programm.append("}\n");
+
+            /////////////Loop Teil
+
+            a = ProjectManager.getActProjectVar().blocks.get(1);
+
+            Programm.append(((ArduinoBlock) a.getBlocktype().getBlockModis().get(a.getBlocktype().getActBlockModiIndex())).getCode()).append("\n");
+            while (a.getRight() != null) {
+
+                //block.getRight().setX(block.getRight().getX() + block.getW());
+                a = a.getRight();
+
+
+                Programm.append(((ArduinoBlock) a.getBlocktype().getBlockModis().get(a.getBlocktype().getActBlockModiIndex())).getCode()).append("//").append(a.getIndex()).append(" \n");
+
+
+            }
+            Programm.append("}\n");
+
+
+            de.ft.interitus.Programm.logger.warning("\n" + Programm.toString());
+
+            return Programm.toString();
+        }catch (Exception e) {
+            notification.setTitle("Fehler beim  Compilieren");
+            notification.setMessage("Öffne das Projekt neu!");
+            notification.setStayalive(true);
+            notification.setCloseable(true);
+            notification.setProgressbarvalue(-1);
+            UI.button_start.setDisable(false);
+            UI.button_debugstart.setDisable(false);
+            return "";
         }
-
-        Block a = ProjectManager.getActProjectVar().blocks.get(0);
-
-        Programm.append(((ArduinoBlock) a.getBlocktype().getBlockModis().get(a.getBlocktype().getActBlockModiIndex())).getCode()).append("\n");
-        while (a.getRight() != null) {
-
-            //block.getRight().setX(block.getRight().getX() + block.getW());
-            a = a.getRight();
-
-
-            Programm.append(((ArduinoBlock) a.getBlocktype().getBlockModis().get(a.getBlocktype().getActBlockModiIndex())).getCode()).append("//").append(a.getIndex()).append(" \n");
-
-
-        }
-
-
-        Programm.append("}\n");
-
-        /////////////Loop Teil
-
-        a = ProjectManager.getActProjectVar().blocks.get(1);
-
-        Programm.append(((ArduinoBlock) a.getBlocktype().getBlockModis().get(a.getBlocktype().getActBlockModiIndex())).getCode()).append("\n");
-        while (a.getRight() != null) {
-
-            //block.getRight().setX(block.getRight().getX() + block.getW());
-            a = a.getRight();
-
-
-            Programm.append(((ArduinoBlock) a.getBlocktype().getBlockModis().get(a.getBlocktype().getActBlockModiIndex())).getCode()).append("//").append(a.getIndex()).append(" \n");
-
-
-        }
-        Programm.append("}\n");
-
-
-        de.ft.interitus.Programm.logger.warning("\n"+Programm.toString());
-
-        return Programm.toString();
     }
 
 

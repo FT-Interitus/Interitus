@@ -49,7 +49,7 @@ public class GlobalEventManager implements GlobalEventListener {
     }
 
     @Override
-    public boolean filedroped(GlobalFileDropedEvent e, String[] filepaths) {
+    public boolean filedroped(GlobalFileDropedEvent e, String filepaths) {
         boolean handeled = false;
         for (int i = 0; i < listener.size(); i++) {
             if (((GlobalEventListener) listener.elementAt(i)).filedroped(e, filepaths)) {

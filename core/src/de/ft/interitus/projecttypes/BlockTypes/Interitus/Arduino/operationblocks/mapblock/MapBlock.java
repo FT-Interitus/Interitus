@@ -10,11 +10,11 @@ import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
-import de.ft.interitus.projecttypes.ProjectTypes;
+import de.ft.interitus.projecttypes.ProjectType;
 
 public class MapBlock extends PlatformSpecificBlock {
-    public MapBlock(ProjectTypes projectTypes, Addon addon) {
-        super(projectTypes, addon);
+    public MapBlock(ProjectType projectType, Addon addon) {
+        super(projectType, addon);
         super.blockModis.add(new MapModiDefault());
         super.actBlockModiIndex=0;
 ;    }

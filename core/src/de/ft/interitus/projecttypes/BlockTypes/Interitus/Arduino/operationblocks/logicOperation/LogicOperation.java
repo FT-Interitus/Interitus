@@ -10,13 +10,11 @@ import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
-import de.ft.interitus.projecttypes.ProjectTypes;
-
-import java.awt.*;
+import de.ft.interitus.projecttypes.ProjectType;
 
 public class LogicOperation extends PlatformSpecificBlock {
-    public LogicOperation(ProjectTypes projectTypes, Addon addon) {
-        super(projectTypes, addon);
+    public LogicOperation(ProjectType projectType, Addon addon) {
+        super(projectType, addon);
         super.blockModis.add(new LogicOperationIntagerOperation());
         super.actBlockModiIndex=0;
     }

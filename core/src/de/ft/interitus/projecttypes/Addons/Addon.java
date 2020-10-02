@@ -17,7 +17,7 @@ public interface Addon {
 
    public    String getProjectTypebyName();
     public   ArrayList<PlatformSpecificBlock> getaddBlocks();
-    public  ArrayList<Tool> getTools(); //TODO Add
+    public  ArrayList<Tool> getTools();
     public  String getName();
     public  Plugin getPlugin();
     public void getAddonSettings(VisTable table);

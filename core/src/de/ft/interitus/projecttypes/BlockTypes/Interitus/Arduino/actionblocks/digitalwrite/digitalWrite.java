@@ -11,10 +11,8 @@ import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
-import de.ft.interitus.projecttypes.ProjectTypes;
+import de.ft.interitus.projecttypes.ProjectType;
 import de.ft.interitus.utils.ArrayList;
-
-import java.awt.*;
 
 public class digitalWrite extends PlatformSpecificBlock {
 
@@ -23,7 +21,7 @@ public class digitalWrite extends PlatformSpecificBlock {
     Parameter mode;
 
 
-    public digitalWrite(ProjectTypes type, Addon addon) {
+    public digitalWrite(ProjectType type, Addon addon) {
         super(type,addon);
 
         blockModis.add(new digitalWriteNormal());

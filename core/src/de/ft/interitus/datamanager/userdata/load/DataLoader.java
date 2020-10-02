@@ -24,9 +24,10 @@ import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
 import de.ft.interitus.projecttypes.ProjectManager;
-import de.ft.interitus.projecttypes.ProjectTypes;
+import de.ft.interitus.projecttypes.ProjectType;
 import de.ft.interitus.projecttypes.VCS;
 import de.ft.interitus.utils.ArrayList;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
@@ -50,7 +51,7 @@ public class DataLoader {
                     JSONObject settings = new JSONObject(settingsfile.readString());
 
 
-                    ProjectTypes temptype = null;
+                    ProjectType temptype = null;
                     String typetemp = settings.getString("type");
                     for (int i = 0; i < ProjectTypesVar.projectTypes.size(); i++) {
                         if (ProjectTypesVar.projectTypes.get(i).getName().contains(typetemp)) {
@@ -168,6 +169,16 @@ public class DataLoader {
 
                         ProjectManager.getActProjectVar().deviceConfigurations = ((ArrayList<DeviceConfiguration>) runconfig_ois.readObject());
 
+                    }
+                } catch (JSONException g) {
+                    g.printStackTrace();
+                    try {
+                        if (wascreated) {
+                            Var.openprojects.remove(Var.openprojects.size() - 1);
+                        }
+                        Dialogs.showErrorDialog(UI.stage, "Fehler beim Laden des Projekts\nDie Projekt Datei ist womöglich beschädigt!");
+                    }catch (Exception f) {
+                        f.printStackTrace();
                     }
                 } catch (Throwable e) {
                     e.printStackTrace();

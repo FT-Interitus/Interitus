@@ -17,8 +17,6 @@ import de.ft.interitus.Var;
 import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.utils.ArrayList;
 
-import java.util.HashMap;
-
 public abstract class ProjectVar {
 
     public  ArrayList<Integer> Blockwitherrors = new ArrayList<>();
@@ -48,7 +46,7 @@ public abstract class ProjectVar {
     public Block ismarkedbyother = null; // Gibt an welcher Block bei einem anderen Client makiert ist
     public boolean removeblock = false; //Wenn ein Block über die ablage Fläche gehalten wird
     public int vcs = VCS.NONE;
-    public ProjectTypes projectType = null;
+    public ProjectType projectType = null;
     public boolean changes = false; //Wurde etwas geändert seit dem letzten speichern
     private String filename = ""; //Der Name der aktuell geöffneten Datei
     public volatile String path = ""; // Wo ist die aktuell geöffnete Datei gespeichert
@@ -58,6 +56,7 @@ public abstract class ProjectVar {
     public ArrayList<Addon> enabledAddons = new ArrayList<>();
     public Object projectSettings = null;
     public ArrayList<ProjectVariable> projectVariables = new ArrayList<>();
+    public ArrayList<Tool> tools = new ArrayList<>();
 
 
     public ArrayList<DeviceConfiguration> deviceConfigurations = new ArrayList<>();

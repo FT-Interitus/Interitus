@@ -15,7 +15,7 @@ public interface GlobalEventListener {
 
     void erroroccurred(GlobalErrorOccurredEvent e);
 
-    boolean filedroped(GlobalFileDropedEvent e, String[] filepaths);
+    boolean filedroped(GlobalFileDropedEvent e, String filepaths);
 
     boolean closeprogramm(GlobalCloseEvent e);
 

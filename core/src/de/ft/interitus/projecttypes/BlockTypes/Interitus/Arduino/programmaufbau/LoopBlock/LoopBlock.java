@@ -10,15 +10,13 @@ import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
-import de.ft.interitus.projecttypes.ProjectTypes;
-
-import java.awt.*;
+import de.ft.interitus.projecttypes.ProjectType;
 
 public class LoopBlock extends PlatformSpecificBlock  {
 
 
-    public LoopBlock(ProjectTypes projectTypes, Addon addon) {
-        super(projectTypes,addon);
+    public LoopBlock(ProjectType projectType, Addon addon) {
+        super(projectType,addon);
 
         super.blockModis.add(new LoopModi());
         super.actBlockModiIndex = 0;

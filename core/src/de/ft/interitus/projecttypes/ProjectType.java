@@ -12,7 +12,7 @@ import de.ft.interitus.plugin.Plugin;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.utils.ArrayList;
 
-public class ProjectTypes {
+public class ProjectType {
 
     private final de.ft.interitus.plugin.Plugin pluginRegister;
     private final BlockVarGenerator blockVarGenerator;
@@ -26,7 +26,7 @@ public class ProjectTypes {
     private WireNodeGenerator wireNodeGenerator;
     private BlocktoSaveGenerator blocktoSaveGenerator;
 
-    public ProjectTypes(Plugin pluginRegister, String name, ArrayList<PlatformSpecificBlock> blocks, BlockGenerator blockgenerator, BlockUpdateGenerator updategenerator, WireGenerator wireGenerator, WireNodeGenerator wireNodeGenerator, BlocktoSaveGenerator blocktoSaveGenerator, BlockVarGenerator blockVarGenerator, ProjectFunktions projectFunktions, Compiler compiler) {
+    public ProjectType(Plugin pluginRegister, String name, ArrayList<PlatformSpecificBlock> blocks, BlockGenerator blockgenerator, BlockUpdateGenerator updategenerator, WireGenerator wireGenerator, WireNodeGenerator wireNodeGenerator, BlocktoSaveGenerator blocktoSaveGenerator, BlockVarGenerator blockVarGenerator, ProjectFunktions projectFunktions, Compiler compiler) {
         this.projectblocks = blocks;
 
         this.name = name;
@@ -113,6 +113,8 @@ public class ProjectTypes {
 
     public void initProject() {
         projectFunktions.create();
+        Tools.update();
+
     }
 
     public void update() {

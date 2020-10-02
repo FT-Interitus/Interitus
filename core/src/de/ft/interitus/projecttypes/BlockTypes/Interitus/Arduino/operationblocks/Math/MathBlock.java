@@ -10,16 +10,14 @@ import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
-import de.ft.interitus.projecttypes.ProjectTypes;
-
-import java.awt.*;
+import de.ft.interitus.projecttypes.ProjectType;
 
 public class MathBlock extends PlatformSpecificBlock {
 
 
 
 
-    public MathBlock(ProjectTypes type, Addon addon) {
+    public MathBlock(ProjectType type, Addon addon) {
         super(type,addon);
         super.blockModis.add(new AdditionalModi());
         super.blockModis.add(new DifferenzModi());

@@ -10,14 +10,11 @@ import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
-import de.ft.interitus.projecttypes.ProjectTypes;
-
-
-import java.awt.*;
+import de.ft.interitus.projecttypes.ProjectType;
 
 public class SetupBlock extends PlatformSpecificBlock {
 
-    public SetupBlock(ProjectTypes arduino, Addon addon) {
+    public SetupBlock(ProjectType arduino, Addon addon) {
         super(arduino,  addon);
         super.blockModis.add(new SetupModi());
         super.actBlockModiIndex=0;

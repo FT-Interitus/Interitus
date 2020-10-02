@@ -103,7 +103,9 @@ public class DesktopLauncher {
 
 				@Override
 				public void filesDropped(String[] files) {
-					EventVar.globalEventManager.filedroped(new GlobalFileDropedEvent(this),files);
+					for(String file:files) {
+						EventVar.globalEventManager.filedroped(new GlobalFileDropedEvent(this), file);
+					}
 				}
 
 				@Override

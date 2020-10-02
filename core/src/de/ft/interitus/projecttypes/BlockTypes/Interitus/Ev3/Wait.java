@@ -9,13 +9,11 @@ import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
-import de.ft.interitus.projecttypes.ProjectTypes;
-
-import java.awt.*;
+import de.ft.interitus.projecttypes.ProjectType;
 
 public class Wait extends PlatformSpecificBlock implements Ev3Block {
-    public Wait(ProjectTypes projectTypes, Addon addon) {
-        super(projectTypes,addon);
+    public Wait(ProjectType projectType, Addon addon) {
+        super(projectType,addon);
     }
 
 

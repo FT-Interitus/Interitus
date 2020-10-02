@@ -18,6 +18,7 @@ import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
 import de.ft.interitus.projecttypes.ProjectManager;
+import de.ft.interitus.projecttypes.Tools;
 import de.ft.interitus.utils.ArrayList;
 
 
@@ -83,6 +84,7 @@ public class AddonSettings {
 
                 }
                 BlockTappedBar.init();
+                Tools.update();
 
             }
         });
