@@ -349,6 +349,11 @@ private VisSelectBox<ParameterVariableType> stringVisSelectBox;
         return returnvalue;
     }
 
+    @Override
+    public ArrayList<Tool> getProjectTools() {
+        return null;
+    }
+
 
     private void getSerialConnections() {
         JSONArray deviceArray = ((ArduinoCompiler) ProjectManager.getActProjectVar().projectType.getCompiler()).getInstalledBoards();

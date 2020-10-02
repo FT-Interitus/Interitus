@@ -16,6 +16,8 @@ import de.ft.interitus.deviceconnection.ev3connection.usb.USBConnectionHandle;
 import de.ft.interitus.deviceconnection.ev3connection.usb.USBDevice;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.ProjectFunktions;
+import de.ft.interitus.projecttypes.Tool;
+import de.ft.interitus.utils.ArrayList;
 
 public class EV3Funktions implements ProjectFunktions {
     public com.badlogic.gdx.utils.DelayedRemovalArray<Device> ev3devices = new com.badlogic.gdx.utils.DelayedRemovalArray<>();
@@ -126,6 +128,11 @@ public class EV3Funktions implements ProjectFunktions {
     @Override
     public boolean isVariableAvailable(String name) {
         return false;
+    }
+
+    @Override
+    public ArrayList<Tool> getProjectTools() {
+        return null;
     }
 
 

@@ -9,6 +9,8 @@ import com.kotcrab.vis.ui.widget.VisTable;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.UI.ManualConfig.DeviceConfiguration;
 import de.ft.interitus.projecttypes.ProjectFunktions;
+import de.ft.interitus.projecttypes.Tool;
+import de.ft.interitus.utils.ArrayList;
 
 public class RaspberryPiFunktions implements ProjectFunktions {
     @Override
@@ -51,6 +53,11 @@ public class RaspberryPiFunktions implements ProjectFunktions {
     @Override
     public boolean isVariableAvailable(String name) {
         return false;
+    }
+
+    @Override
+    public ArrayList<Tool> getProjectTools() {
+        return null;
     }
 
 
