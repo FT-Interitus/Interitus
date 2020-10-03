@@ -1,7 +1,12 @@
 package de.ft.interitus.projecttypes.tools.arduinotools;
 
+import com.badlogic.gdx.Files;
+import com.bulenkov.darcula.DarculaLaf;
+import de.ft.interitus.loading.AssetLoader;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.concurrent.ExecutionException;
 
 public class SerialMonitorJFrame extends JFrame {
     private JPanel panel1;
@@ -10,7 +15,7 @@ public class SerialMonitorJFrame extends JFrame {
     private JButton sendButton;
 
     public JScrollPane CommunicationAreaGenerate(){
-        CommunicationArea = new JTextArea(30, 80);
+        CommunicationArea = new JTextArea(32, 80);
         CommunicationArea.setEditable(false);
         CommunicationArea.setText("Hier steht irgendwann mal der vom Arduino Empfangene Text");
         JScrollPane detailScrollPane = new JScrollPane(CommunicationArea,
@@ -21,7 +26,20 @@ public class SerialMonitorJFrame extends JFrame {
 
     public SerialMonitorJFrame(String title) throws HeadlessException {
         super(title);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        try {
+            ImageIcon img = new ImageIcon(getClass().getResource("/Icon/interitus.png"));
+            super.setIconImage(img.getImage());
+            //this.getRootPane().setWindowDecorationStyle(JRootPane.FRAME);
+            this.setResizable(false);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        try {
+            UIManager.setLookAndFeel(new DarculaLaf());
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
 
         panel1 = new JPanel(new BorderLayout());
 

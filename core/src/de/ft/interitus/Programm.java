@@ -171,7 +171,7 @@ public class Programm extends Game {
         if (Var.savemode) {
             try {
                 FolderUtils.deleteFileOrFolder(Path.of(System.getProperty("user.home") + "/" + Data.foldername));
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }

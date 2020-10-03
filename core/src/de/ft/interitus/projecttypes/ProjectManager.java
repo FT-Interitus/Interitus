@@ -200,7 +200,11 @@ public class ProjectManager {
         }
 
         if (Var.openprojectindex - 1 == -1) {
-            Data.close(true);
+            try {
+                Data.close(true);
+            }catch (Exception e) {
+
+            }
             if(allowedtoclose) {
                 System.exit(0);
             }

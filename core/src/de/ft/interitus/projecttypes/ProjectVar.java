@@ -73,7 +73,13 @@ public abstract class ProjectVar {
     public void setFilename(String filename) {
         this.filename = filename;
 
-        UI.tabbar.getTabbs().get(Var.openprojects.indexOf(this)).getTabButton().setText(filename);
+
+        //TODO Error if Project was closed
+        try {
+            UI.tabbar.getTabbs().get(Var.openprojects.indexOf(this)).getTabButton().setText(filename);
+        }catch (IndexOutOfBoundsException e) {
+
+        }
 
     }
 

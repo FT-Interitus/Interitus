@@ -34,10 +34,12 @@ import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
 import de.ft.interitus.projecttypes.ProgrammArea.ProgrammAreaManager;
 import de.ft.interitus.projecttypes.ProjectManager;
+import de.ft.interitus.projecttypes.ProjectVar;
 import de.ft.interitus.utils.PositionSaver;
 import de.ft.interitus.utils.ShapeRenderer;
 
 import java.awt.*;
+import java.util.StringTokenizer;
 
 
 public class ProgrammingSpace extends ScreenAdapter {
@@ -80,7 +82,7 @@ public class ProgrammingSpace extends ScreenAdapter {
         cam.position.set(Gdx.graphics.getWidth() / 2f + 50, Gdx.graphics.getHeight() / 2f, 0);
         UI.UIcam.position.set(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f, 0);
 
-//TODO Debug hier wird immer ein Arduino Project erstellt
+//TODO Debug hier wird immer ein Arduino Project erstellt -> Welcome Screen
         ProjectManager.addProject(ProjectTypesVar.projectTypes.get(0).init());
         ProjectManager.change(0);
 
@@ -110,7 +112,7 @@ public class ProgrammingSpace extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
-        if(Gdx.input.isKeyJustPressed(Input.Keys.S)){
+        if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
             ProjectManager.getActProjectVar().tools.get(0).open();
         }
 
@@ -123,8 +125,11 @@ public class ProgrammingSpace extends ScreenAdapter {
         renderstarttime = System.currentTimeMillis();
 
         if (Var.openprojects.size() != 0 && ProjectManager.getActProjectVar().projectType == null) {
+            this.dispose();
             Programm.INSTANCE.setScreen(new Welcome());
         }
+
+
 
         //RechtsKlick.Rechtsklickupdate();
 
@@ -225,6 +230,19 @@ public class ProgrammingSpace extends ScreenAdapter {
 
 
     public void dispose() {
+
+        if (Var.openprojects.size() > 0) {
+
+            for (int i = 0; i < Var.openprojects.size(); i++) {
+                try {
+                    ProjectManager.CloseProject(i, false);
+                } catch (Exception e) {
+
+                }
+            }
+
+
+        }
 
 
         batch.dispose();

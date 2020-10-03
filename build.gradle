@@ -84,6 +84,8 @@ project(":core") {
         api "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         api "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         api "com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion"
+        compile group: 'com.bulenkov', name: 'darcula', version: '2018.2'
+
 
     }
 }
