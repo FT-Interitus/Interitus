@@ -15,13 +15,13 @@ import de.ft.interitus.utils.ArrayList;
 
 public interface Addon {
 
-   public    String getProjectTypebyName();
-    public   ArrayList<PlatformSpecificBlock> getaddBlocks();
-    public  ArrayList<Tool> getTools();
-    public  String getName();
-    public  Plugin getPlugin();
-    public void getAddonSettings(VisTable table);
-    public Serializable getAddonSettings();
+       String getProjectTypebyName();
+       ArrayList<PlatformSpecificBlock> getaddBlocks();
+      ArrayList<Tool> getTools();
+      String getName();
+      Plugin getPlugin();
+     void getAddonSettings(VisTable table);
+     Serializable getAddonSettings();
 
     void setAddonSettings(Object object);
 }
