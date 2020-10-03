@@ -33,6 +33,7 @@ import org.lwjgl.glfw.GLFW;
 import org.lwjgl.openal.ALC;
 import org.springframework.boot.SpringApplication;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.security.Policy;
@@ -56,6 +57,7 @@ public class Programm extends Game {
 
     @Override
     public void create() {
+
 
         Policy.setPolicy(new PluginSandboxSecurityPolicy());
         System.setSecurityManager(new SecurityManager());

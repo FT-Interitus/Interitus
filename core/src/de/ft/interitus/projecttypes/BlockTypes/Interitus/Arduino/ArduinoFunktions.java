@@ -23,6 +23,7 @@ import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.compiler.Interitus.Arduino.ArduinoCompiler;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.*;
+import de.ft.interitus.projecttypes.tools.arduinotools.SerialMonitor;
 import de.ft.interitus.utils.ArrayList;
 import org.json.JSONArray;
 import org.lwjgl.system.CallbackI;
@@ -40,6 +41,7 @@ public class ArduinoFunktions implements ProjectFunktions {
     private boolean openedprogress = false;
     private DeviceConfiguration activeConfiguration;
    private final ArrayList<String> parameterArrayList = new ArrayList<>();
+   private ArrayList<Tool>tools=new ArrayList<>();
 private int counter = 0;
 
 private  VisTextField varname;
@@ -351,7 +353,9 @@ private VisSelectBox<ParameterVariableType> stringVisSelectBox;
 
     @Override
     public ArrayList<Tool> getProjectTools() {
-        return null;
+        tools.clear();
+        tools.add(new SerialMonitor());
+        return tools;
     }
 
 

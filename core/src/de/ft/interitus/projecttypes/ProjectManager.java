@@ -186,7 +186,7 @@ public class ProjectManager {
     }
 
     public static void CloseProject(int index) {
-        UI.tabbar.setSelectedTabindex(0);
+
         CloseProject(index,true);
     }
 
@@ -207,6 +207,8 @@ public class ProjectManager {
             return;
         }
         change(Var.openprojectindex - 1);
+        UI.tabbar.setSelectedTabindex(Var.openprojectindex - 1);
+
         Var.openprojects.remove(index);
 
 

@@ -6,6 +6,7 @@
 package de.ft.interitus.UI;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -38,6 +39,7 @@ import de.ft.interitus.UI.setup.SetupWindow;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.datamanager.programmdata.experience.ExperienceManager;
+import de.ft.interitus.deviceconnection.arduino.SerialCommunication;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.UI.UIOpenSettingsEvent;
 import de.ft.interitus.events.UI.UiEventAdapter;
@@ -97,6 +99,7 @@ public class UI {
 
 
     public static void updatedragui(ShapeRenderer renderer, boolean flaeche, SpriteBatch batch) {
+
         if (!UIVar.uilocked) {
             BlockTappedBar.userresize();
         }

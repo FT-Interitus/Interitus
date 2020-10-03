@@ -110,6 +110,9 @@ public class ProgrammingSpace extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
+        if(Gdx.input.isKeyJustPressed(Input.Keys.S)){
+            ProjectManager.getActProjectVar().tools.get(0).open();
+        }
 
         if (ProjectManager.getActProjectVar().markedblock != null) {
             ProgrammAreaManager.getProgrammArea(ProjectManager.getActProjectVar().markedblock.getIndex());
