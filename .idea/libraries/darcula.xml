@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="darcula">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/core/src/de/ft/interitus/lib/darcula.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

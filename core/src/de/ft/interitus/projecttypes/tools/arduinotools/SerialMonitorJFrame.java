@@ -11,7 +11,7 @@ public class SerialMonitorJFrame extends JFrame {
 
     public JScrollPane CommunicationAreaGenerate(){
         CommunicationArea = new JTextArea(30, 80);
-        CommunicationArea.setEditable(true);
+        CommunicationArea.setEditable(false);
         CommunicationArea.setText("Hier steht irgendwann mal der vom Arduino Empfangene Text");
         JScrollPane detailScrollPane = new JScrollPane(CommunicationArea,
                 JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
