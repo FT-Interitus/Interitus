@@ -1,19 +1,18 @@
 /*
- * Copyright (c) 2020. 
+ * Copyright (c) 2020.
  * Copyright by Tim and Felix
  */
 
-package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmaufbau.SetupBlock;
+package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmaufbau.LoopBlock;
 
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
-import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.projecttypes.BlockTypes.BlockModi;
+import de.ft.interitus.projecttypes.BlockTypes.BlockModus;
 import de.ft.interitus.projecttypes.BlockTypes.BlockSettings;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.utils.ArrayList;
 
-public class SetupModi extends BlockModi implements ArduinoBlock {
+public class LoopModus extends BlockModus implements ArduinoBlock {
     @Override
     public ArrayList<Parameter> getBlockParameter() {
         return null;
@@ -31,24 +30,20 @@ public class SetupModi extends BlockModi implements ArduinoBlock {
 
     @Override
     public String getname() {
-        return "SetupModi";
+        return "Loop";
     }
 
     @Override
     public Texture getModiImage() {
-        return AssetLoader.connector_offerd;
+        return null;
     }
 
     @Override
     public String getCode() {
-        return "void setup(){";
+         return "void loop(){";
     }
     @Override
     public String getHeaderCode(boolean inserted) {
-
-
-
-
         return null;
     }
 }

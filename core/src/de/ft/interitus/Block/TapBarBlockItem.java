@@ -40,7 +40,7 @@ public class TapBarBlockItem implements TapItem {
 
                 Block tempblock = ProjectManager.getActProjectVar().projectType.getBlockGenerator().generateBlock(ProjectManager.getActProjectVar().blocks.size(), (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y, psb.getWidth(), UIVar.BlockHeight, psb, ProjectManager.getActProjectVar().projectType.getBlockUpdateGenerator(), ProjectManager.getActProjectVar().projectType.getBlocktoSaveGenerator());
 
-                ProjectManager.getActProjectVar().markedblock = tempblock;
+                ProjectManager.getActProjectVar().marked_block = tempblock;
                 ProjectManager.getActProjectVar().marked = true;
 
                 ProjectManager.getActProjectVar().blocks.add(tempblock);
@@ -49,7 +49,7 @@ public class TapBarBlockItem implements TapItem {
                 tempblock.setMarked(true);
                 tempblock.setMoving(true);
 
-                ProjectManager.getActProjectVar().unterschiedsave.set(psb.getWidth() / 2, UIVar.BlockHeight / 2);
+                ProjectManager.getActProjectVar().diff_save.set(psb.getWidth() / 2, UIVar.BlockHeight / 2);
             }
         }
 

@@ -21,8 +21,6 @@ import de.ft.interitus.UI.Notification.NotificationManager;
 import de.ft.interitus.UI.ProgramGrid;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.PressedKeys;
-import de.ft.interitus.UI.UIElements.UIElementBar;
-import de.ft.interitus.UI.UIElements.UIElements.Button;
 import de.ft.interitus.UI.popup.PopupHandler;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.datamanager.programmdata.Updater;
@@ -34,12 +32,10 @@ import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
 import de.ft.interitus.projecttypes.ProgrammArea.ProgrammAreaManager;
 import de.ft.interitus.projecttypes.ProjectManager;
-import de.ft.interitus.projecttypes.ProjectVar;
 import de.ft.interitus.utils.PositionSaver;
 import de.ft.interitus.utils.ShapeRenderer;
 
 import java.awt.*;
-import java.util.StringTokenizer;
 
 
 public class ProgrammingSpace extends ScreenAdapter {
@@ -116,8 +112,8 @@ public class ProgrammingSpace extends ScreenAdapter {
             ProjectManager.getActProjectVar().tools.get(0).open();
         }
 
-        if (ProjectManager.getActProjectVar().markedblock != null) {
-            ProgrammAreaManager.getProgrammArea(ProjectManager.getActProjectVar().markedblock.getIndex());
+        if (ProjectManager.getActProjectVar().marked_block != null) {
+            ProgrammAreaManager.getProgrammArea(ProjectManager.getActProjectVar().marked_block.getIndex());
         }
         ProgrammingSpace.delta = delta;
 
@@ -236,7 +232,7 @@ public class ProgrammingSpace extends ScreenAdapter {
             for (int i = 0; i < Var.openprojects.size(); i++) {
                 try {
                     ProjectManager.CloseProject(i, false);
-                } catch (Exception e) {
+                } catch (Exception ignored) {
 
                 }
             }

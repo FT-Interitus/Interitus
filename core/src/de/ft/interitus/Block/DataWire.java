@@ -273,10 +273,10 @@ public class DataWire {
 
             if(Gdx.input.isButtonJustPressed(0)) {
                 int counter = 0;
-                for (int i = 0; i < ProjectManager.getActProjectVar().visibleblocks.size(); i++) {
+                for (int i = 0; i < ProjectManager.getActProjectVar().visible_blocks.size(); i++) {
 
 
-                    if (CheckKollision.object(ProjectManager.getActProjectVar().visibleblocks.get(i).getX(), ProjectManager.getActProjectVar().visibleblocks.get(i).getY(), ProjectManager.getActProjectVar().visibleblocks.get(i).getW(), ProjectManager.getActProjectVar().visibleblocks.get(i).getH(), (int) ProgrammingSpace.viewport.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1)) {
+                    if (CheckKollision.object(ProjectManager.getActProjectVar().visible_blocks.get(i).getX(), ProjectManager.getActProjectVar().visible_blocks.get(i).getY(), ProjectManager.getActProjectVar().visible_blocks.get(i).getW(), ProjectManager.getActProjectVar().visible_blocks.get(i).getH(), (int) ProgrammingSpace.viewport.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1)) {
                         counter++;
                     }
 

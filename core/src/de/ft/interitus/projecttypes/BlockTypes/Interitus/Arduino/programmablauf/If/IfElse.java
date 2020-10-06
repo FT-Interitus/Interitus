@@ -9,12 +9,12 @@ import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.projecttypes.ProgrammArea.ProgrammArea;
 import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.projecttypes.BlockTypes.BlockModi;
+import de.ft.interitus.projecttypes.BlockTypes.BlockModus;
 import de.ft.interitus.projecttypes.BlockTypes.BlockSettings;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.utils.ArrayList;
 
-public class IfElse extends BlockModi implements ArduinoBlock {
+public class IfElse extends BlockModus implements ArduinoBlock {
     @Override
     public ArrayList<Parameter> getBlockParameter() {
         return null;

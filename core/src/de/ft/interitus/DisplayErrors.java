@@ -5,7 +5,6 @@
 
 package de.ft.interitus;
 
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.events.EventVar;

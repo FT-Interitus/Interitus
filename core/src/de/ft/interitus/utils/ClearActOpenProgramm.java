@@ -28,7 +28,7 @@ public class ClearActOpenProgramm {
 
                 try {
 
-                    blockstoclear.removeAll(ProjectManager.getProjectVar(index).visibleblocks);
+                    blockstoclear.removeAll(ProjectManager.getProjectVar(index).visible_blocks);
 
 
                     try {
@@ -55,9 +55,9 @@ public class ClearActOpenProgramm {
 
 
         try {
-            while (ProjectManager.getProjectVar(index).visibleblocks.size() != 0) {
-                ProjectManager.getProjectVar(index).visibleblocks.get(0).delete(true);
-                ProjectManager.getProjectVar(index).visibleblocks.remove(0);
+            while (ProjectManager.getProjectVar(index).visible_blocks.size() != 0) {
+                ProjectManager.getProjectVar(index).visible_blocks.get(0).delete(true);
+                ProjectManager.getProjectVar(index).visible_blocks.remove(0);
 
 
             }
@@ -70,18 +70,18 @@ public class ClearActOpenProgramm {
             System.exit(-121);
         }
 
-        ProjectManager.getProjectVar(index).visibleblocks.clear();
+        ProjectManager.getProjectVar(index).visible_blocks.clear();
 
         ProjectManager.getProjectVar(index).blocks.clear();
 
         ProjectManager.getProjectVar(index).biggestblock = null;
-        ProjectManager.getProjectVar(index).markedblock = null;
+        ProjectManager.getProjectVar(index).marked_block = null;
         ProjectManager.getProjectVar(index).ismoving = false;
         ProjectManager.getProjectVar(index).showduplicat.clear();
 
 
-        ProjectManager.getProjectVar(index).uberlapptmitmarkedblock.clear();
-        ProjectManager.getProjectVar(index).blockmitdergrostenuberlappungmitmarkiertemblock = null;
+        ProjectManager.getProjectVar(index).marked_block_overlapping.clear();
+        ProjectManager.getProjectVar(index).jumping_block = null;
 
         // DataManager.saved();
         ProjectManager.getProjectVar(index).setFilename("New File");
@@ -92,8 +92,8 @@ public class ClearActOpenProgramm {
         ProjectManager.getProjectVar(index).showleftdocker = false;
         ProjectManager.getProjectVar(index).connetor_offerd_hoverd_block = null;
         ProjectManager.getProjectVar(index).wires.clear();
-        ProjectManager.getProjectVar(index).movingwires = null;
-        ProjectManager.getProjectVar(index).visiblewires.clear();
+        ProjectManager.getProjectVar(index).moving_wires = null;
+        ProjectManager.getProjectVar(index).visible_wires.clear();
         ProjectManager.getProjectVar(index).visibleWireNodes.clear();
         ProjectManager.getProjectVar(index).wire_beginn = null;
 

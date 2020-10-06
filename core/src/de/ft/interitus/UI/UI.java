@@ -6,7 +6,6 @@
 package de.ft.interitus.UI;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -39,7 +38,6 @@ import de.ft.interitus.UI.setup.SetupWindow;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.datamanager.programmdata.experience.ExperienceManager;
-import de.ft.interitus.deviceconnection.arduino.SerialCommunication;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.UI.UIOpenSettingsEvent;
 import de.ft.interitus.events.UI.UiEventAdapter;
@@ -132,7 +130,7 @@ public class UI {
         renderer.end();
 
 
-        if (markedblock != ProjectManager.getActProjectVar().markedblock) {
+        if (markedblock != ProjectManager.getActProjectVar().marked_block) {
             UIVar.isBlockSettingsopen = false;
             for (int i = 0; i < textFielder.size(); i++) {
                 try {
@@ -164,7 +162,7 @@ public class UI {
         UIVar.moveprogrammlock = lock;
 
 
-        if (markedblock != null && markedblock.getBlocktype().getBlockParameter() != null && markedblock == ProjectManager.getActProjectVar().markedblock) {
+        if (markedblock != null && markedblock.getBlocktype().getBlockParameter() != null && markedblock == ProjectManager.getActProjectVar().marked_block) {
 
 
             UIVar.blockeinstellungen_w = 170;
@@ -269,7 +267,7 @@ public class UI {
                                 @Override
                                 public void changed(ChangeEvent event, Actor actor) {
 
-                                    ProjectManager.getActProjectVar().markedblock.getBlocktype().getBlockParameter().get(textFielder.indexOf(actor)).setParameter(((VisSelectBox<String>) actor).getSelected());
+                                    ProjectManager.getActProjectVar().marked_block.getBlocktype().getBlockParameter().get(textFielder.indexOf(actor)).setParameter(((VisSelectBox<String>) actor).getSelected());
 
                                 }
                             });
@@ -289,7 +287,7 @@ public class UI {
                             textFielder.get(textFielder.size() - 1).addListener(new ChangeListener() {
                                 @Override
                                 public void changed(ChangeEvent event, Actor actor) {
-                                    ProjectManager.getActProjectVar().markedblock.getBlocktype().getBlockParameter().get(textFielder.indexOf(actor)).setParameter(((VisTextField) actor).getText());
+                                    ProjectManager.getActProjectVar().marked_block.getBlocktype().getBlockParameter().get(textFielder.indexOf(actor)).setParameter(((VisTextField) actor).getText());
                                 }
                             });
 
@@ -320,7 +318,7 @@ public class UI {
             UIbatch.end();
 
         } else {
-            markedblock = ProjectManager.getActProjectVar().markedblock;
+            markedblock = ProjectManager.getActProjectVar().marked_block;
             wishaniposition = -UIVar.blockeinstellungen_w - UIVar.abstandvonRand;
 
                 if(settingstextfield!=null) {

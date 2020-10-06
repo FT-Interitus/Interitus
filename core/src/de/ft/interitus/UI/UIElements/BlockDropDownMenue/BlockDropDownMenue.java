@@ -12,7 +12,7 @@ import de.ft.interitus.Block.Block;
 import de.ft.interitus.ProgrammingSpace;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.check.CheckKollision;
-import de.ft.interitus.projecttypes.BlockTypes.BlockModi;
+import de.ft.interitus.projecttypes.BlockTypes.BlockModus;
 import de.ft.interitus.utils.Unproject;
 
 public class BlockDropDownMenue {
@@ -70,7 +70,7 @@ public class BlockDropDownMenue {
 
     private void longestText() {
 
-        for (BlockModi modi : block.getBlocktype().getBlockModis()) {
+        for (BlockModus modi : block.getBlocktype().getBlockModis()) {
             glyphLayout.setText(UI.font, modi.getname());
             if (glyphLayout.width > this.longestText) {
                 this.longestText = (int) glyphLayout.width;

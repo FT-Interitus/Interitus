@@ -8,12 +8,12 @@ package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.operationblock
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.projecttypes.BlockTypes.BlockModi;
+import de.ft.interitus.projecttypes.BlockTypes.BlockModus;
 import de.ft.interitus.projecttypes.BlockTypes.BlockSettings;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.utils.ArrayList;
 
-public class ReadValue extends BlockModi implements ArduinoBlock {
+public class ReadValue extends BlockModus implements ArduinoBlock {
 
 
     ArrayList<Parameter> parameterArrayList = new ArrayList<>();

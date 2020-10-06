@@ -358,7 +358,7 @@ public class ArduinoCompiler implements Compiler {
 
 
         //Error Highlighting
-        ProjectManager.getActProjectVar().Blockwitherrors.clear();
+        ProjectManager.getActProjectVar().Blockswitherrors.clear();
         errorstring.clear();
         notification.setTitle("Compilieren...");
         notification.setMessage("\nProjekt wird compiliert");
@@ -382,8 +382,8 @@ public class ArduinoCompiler implements Compiler {
                     if (errorstring.get(i).contains("^")) {
 
                         try {
-                            if (!ProjectManager.getActProjectVar().Blockwitherrors.contains(Integer.parseInt(errorstring.get(i - 1).split("//")[1].replace(" ", "")))) {
-                                ProjectManager.getActProjectVar().Blockwitherrors.add(Integer.parseInt(errorstring.get(i - 1).split("//")[1].replace(" ", ""))); //Get Block Index
+                            if (!ProjectManager.getActProjectVar().Blockswitherrors.contains(Integer.parseInt(errorstring.get(i - 1).split("//")[1].replace(" ", "")))) {
+                                ProjectManager.getActProjectVar().Blockswitherrors.add(Integer.parseInt(errorstring.get(i - 1).split("//")[1].replace(" ", ""))); //Get Block Index
                             }
 
                             Programm.logger.severe("Fehler-Block: " + errorstring.get(i - 1).split("//")[1]);

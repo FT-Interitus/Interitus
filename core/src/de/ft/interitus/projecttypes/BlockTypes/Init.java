@@ -32,13 +32,13 @@ public class Init {
         EventVar.blockEventManager.addListener(new BlockEventAdapter() {
             @Override
             public void killmovingwires(BlockKillMovingWiresEvent e) {
-                if (ProjectManager.getActProjectVar().movingwires != null) {
+                if (ProjectManager.getActProjectVar().moving_wires != null) {
                     ProjectManager.getActProjectVar().wire_beginn.getBlockupdate().isconnectorclicked = false;
                     ProjectManager.getActProjectVar().showleftdocker = false;
 
                     try {
                         ProjectManager.getActProjectVar().wire_beginn.getBlockupdate().tempwire.getLeft_connection().setWire_right(null);
-                        ProjectManager.getActProjectVar().visiblewires.remove(ProjectManager.getActProjectVar().wire_beginn.getBlockupdate().tempwire);
+                        ProjectManager.getActProjectVar().visible_wires.remove(ProjectManager.getActProjectVar().wire_beginn.getBlockupdate().tempwire);
                         ProjectManager.getActProjectVar().wires.remove(ProjectManager.getActProjectVar().wire_beginn.getBlockupdate().tempwire);
 
                         try {
@@ -54,7 +54,7 @@ public class Init {
 
                     }
 
-                    ProjectManager.getActProjectVar().movingwires = null;
+                    ProjectManager.getActProjectVar().moving_wires = null;
                 }
             }
         });

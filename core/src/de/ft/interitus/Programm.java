@@ -7,7 +7,6 @@ package de.ft.interitus;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Graphics;
 import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import de.ft.interitus.Logging.DebugPrinter;
@@ -24,20 +23,12 @@ import de.ft.interitus.loading.Loading;
 import de.ft.interitus.loading.SplashScreen;
 import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.plugin.PluginSandboxSecurityPolicy;
-
-import de.ft.interitus.plugin.store.PluginInstallerServer;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.FolderUtils;
 import de.ft.interitus.utils.UserNameGetter;
-import org.lwjgl.glfw.GLFW;
-import org.lwjgl.openal.ALC;
-import org.springframework.boot.SpringApplication;
 
-import javax.swing.*;
-import java.io.IOException;
 import java.nio.file.Path;
 import java.security.Policy;
-import java.util.Collections;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Logger;
@@ -96,16 +87,13 @@ public class Programm extends Game {
         try {
             if (!Var.disablePluginSubSystem && !Var.nointernetconnection) {
                 loadplugins.start(); //Plugins laden
-                Thread springthread = new Thread() {
-                    @Override
-                    public void run() {
+                Thread springthread = new Thread(() -> {
 
-                       // SpringApplication app = new SpringApplication(PluginInstallerServer.class);
-                        //app.setDefaultProperties(Collections.singletonMap("server.port","8459"));
-                      //  app.run();
+                   // SpringApplication app = new SpringApplication(PluginInstallerServer.class);
+                    //app.setDefaultProperties(Collections.singletonMap("server.port","8459"));
+                  //  app.run();
 
-                    }
-                };
+                });
                 springthread.start();
 
             }

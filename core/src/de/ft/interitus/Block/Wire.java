@@ -75,9 +75,9 @@ public abstract class Wire {
 
                 if (Gdx.input.isButtonJustPressed(0)) {
                     int counter = 0;
-                    for (int i = 0; i < ProjectManager.getActProjectVar().visibleblocks.size(); i++) {
+                    for (int i = 0; i < ProjectManager.getActProjectVar().visible_blocks.size(); i++) {
 
-                        if (CheckKollision.object(ProjectManager.getActProjectVar().visibleblocks.get(i).getX(), ProjectManager.getActProjectVar().visibleblocks.get(i).getY(), ProjectManager.getActProjectVar().visibleblocks.get(i).getW(), ProjectManager.getActProjectVar().visibleblocks.get(i).getH(), (int) ProgrammingSpace.viewport.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1)) {
+                        if (CheckKollision.object(ProjectManager.getActProjectVar().visible_blocks.get(i).getX(), ProjectManager.getActProjectVar().visible_blocks.get(i).getY(), ProjectManager.getActProjectVar().visible_blocks.get(i).getW(), ProjectManager.getActProjectVar().visible_blocks.get(i).getH(), (int) ProgrammingSpace.viewport.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1)) {
                             counter++;
                         }
 
@@ -101,8 +101,8 @@ public abstract class Wire {
 
                 if (left_connection == null) { //Selbst zerstören wenn ein Block gelöscht wird mit der die Wire verbunden war
                     ProjectManager.getActProjectVar().wires.remove(this);
-                    ProjectManager.getActProjectVar().visiblewires.remove(this);
-                    ProjectManager.getActProjectVar().movingwires = null;
+                    ProjectManager.getActProjectVar().visible_wires.remove(this);
+                    ProjectManager.getActProjectVar().moving_wires = null;
                     ProjectManager.getActProjectVar().showleftdocker = false;
 
 
@@ -125,10 +125,10 @@ public abstract class Wire {
                 }
 
 
-                if (Gdx.input.isKeyJustPressed(Input.Keys.N) && canplaceanewwirenode && ProjectManager.getActProjectVar().movingwires != null) {
+                if (Gdx.input.isKeyJustPressed(Input.Keys.N) && canplaceanewwirenode && ProjectManager.getActProjectVar().moving_wires != null) {
 
 
-                    WireNode tempwirenode = ProjectManager.getActProjectVar().projectType.getWireNodeGenerator().generate(ProjectManager.getActProjectVar().movingwires, (int) ProgrammingSpace.viewport.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, WireNode.public_w, WireNode.public_h);
+                    WireNode tempwirenode = ProjectManager.getActProjectVar().projectType.getWireNodeGenerator().generate(ProjectManager.getActProjectVar().moving_wires, (int) ProgrammingSpace.viewport.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, WireNode.public_w, WireNode.public_h);
 
                     ProjectManager.getActProjectVar().wireNodes.add(tempwirenode);
                     ProjectManager.getActProjectVar().visibleWireNodes.add(tempwirenode);
@@ -136,23 +136,23 @@ public abstract class Wire {
                     this.right_connection = tempwirenode;
 
                     try {
-                        ProjectManager.getActProjectVar().movingwires.movebymouse = false;
-                        ProjectManager.getActProjectVar().movingwires.space_between_blocks = true;
-                        ProjectManager.getActProjectVar().movingwires.right_connection = tempwirenode;
+                        ProjectManager.getActProjectVar().moving_wires.movebymouse = false;
+                        ProjectManager.getActProjectVar().moving_wires.space_between_blocks = true;
+                        ProjectManager.getActProjectVar().moving_wires.right_connection = tempwirenode;
                     } catch (NullPointerException e) {
                         DisplayErrors.customErrorstring = "Keine WireNodes in der Luft plazieren!";
                         DisplayErrors.error = e;
                     }
 
-                    ProjectManager.getActProjectVar().movingwires = null;
+                    ProjectManager.getActProjectVar().moving_wires = null;
 
 
                     tempwirenode.setWire_right(ProjectManager.getActProjectVar().projectType.getWireGenerator().generate(tempwirenode));
                     //tempwirenode.getWire_right().space_between_blocks = false;
                     tempwirenode.getWire_right().movebymouse = true;
                     tempwirenode.getWire_right().space_between_blocks = true;
-                    ProjectManager.getActProjectVar().movingwires = tempwirenode.getWire_right();
-                    ProjectManager.getActProjectVar().visiblewires.add(tempwirenode.getWire_right());
+                    ProjectManager.getActProjectVar().moving_wires = tempwirenode.getWire_right();
+                    ProjectManager.getActProjectVar().visible_wires.add(tempwirenode.getWire_right());
                     //ProjectManager.getactProjectVar().wires.add(tempwirenode.getWire_right());
 
 
@@ -215,7 +215,7 @@ public abstract class Wire {
 
                 if (left_connection == null || right_connection == null) { //Selbst zerstören wenn ein Block gelöscht wird mit der die Wire verbunden war
                     ProjectManager.getActProjectVar().wires.remove(this);
-                    ProjectManager.getActProjectVar().visiblewires.remove(this);
+                    ProjectManager.getActProjectVar().visible_wires.remove(this);
 
 
                     if (right_connection != null) {

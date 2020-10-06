@@ -5,7 +5,6 @@
 
 package de.ft.interitus;
 
-import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Cursor;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Window;
 import com.badlogic.gdx.math.Vector2;
 import de.ft.interitus.UI.window.Window;

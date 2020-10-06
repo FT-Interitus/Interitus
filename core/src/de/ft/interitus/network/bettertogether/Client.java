@@ -87,8 +87,8 @@ public class Client {
                     blockmovingtimer.scheduleAtFixedRate(new TimerTask() {
                         @Override
                         public void run() {
-                            if (ProjectManager.getActProjectVar().markedblock != null) {
-                                sendinglist.add("!BM!" + ProjectManager.getActProjectVar().markedblock.getIndex() + "t" + ProjectManager.getActProjectVar().markedblock.getX() + "t" + ProjectManager.getActProjectVar().markedblock.getY() + "\n");
+                            if (ProjectManager.getActProjectVar().marked_block != null) {
+                                sendinglist.add("!BM!" + ProjectManager.getActProjectVar().marked_block.getIndex() + "t" + ProjectManager.getActProjectVar().marked_block.getX() + "t" + ProjectManager.getActProjectVar().marked_block.getY() + "\n");
 
                             }
 

@@ -9,7 +9,7 @@ import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.Generators.BlockUpdateGenerator;
 import de.ft.interitus.Block.Generators.BlocktoSaveGenerator;
 import de.ft.interitus.Block.Parameter;
-import de.ft.interitus.projecttypes.BlockTypes.BlockModi;
+import de.ft.interitus.projecttypes.BlockTypes.BlockModus;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 
 public class DefaultBlock extends Block {
@@ -20,12 +20,12 @@ public class DefaultBlock extends Block {
 
 
 
-            for(BlockModi blockModi:platformSpecificBlock.getBlockModis()) {
+            for(BlockModus blockModus :platformSpecificBlock.getBlockModis()) {
 
-                if(blockModi.getBlockParameter()==null) {
+                if(blockModus.getBlockParameter()==null) {
                     continue;
                 }
-                for (Parameter parameter:blockModi.getBlockParameter()) {
+                for (Parameter parameter: blockModus.getBlockParameter()) {
                     parameter.setBlock(this);
                 }
 

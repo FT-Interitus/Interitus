@@ -13,7 +13,7 @@ import de.ft.interitus.projecttypes.ProjectType;
 import de.ft.interitus.utils.ArrayList;
 
 public abstract class PlatformSpecificBlock {
-    public final ArrayList<BlockModi> blockModis = new ArrayList<>();
+    public final ArrayList<BlockModus> blockModis = new ArrayList<>();
     private final Addon adddon;
     public int actBlockModiIndex = -1;
     private ProjectType projectType = null;
@@ -98,7 +98,7 @@ public abstract class PlatformSpecificBlock {
 
     public abstract boolean canhasleftconnector();
 
-    public final ArrayList<BlockModi> getBlockModis() {
+    public final ArrayList<BlockModus> getBlockModis() {
         return blockModis;
     }
 

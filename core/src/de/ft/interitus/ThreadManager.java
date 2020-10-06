@@ -63,11 +63,11 @@ public class ThreadManager {
                                         }
                                         projectVar.threads.get(i).interrupt();
                                         ((BlockUpdate) projectVar.threads.get(i)).isrunning = false;
-                                        projectVar.visibleblocks.remove(block);
+                                        projectVar.visible_blocks.remove(block);
                                     }
 
                                     if (block.isVisible() && !((BlockUpdate) projectVar.threads.get(i)).isrunning) {
-                                        projectVar.visibleblocks.add(block);
+                                        projectVar.visible_blocks.add(block);
                                         projectVar.threads.set(i, ((BlockUpdate) projectVar.threads.get(i)).block.allowedRestart());
 
 
@@ -86,11 +86,11 @@ public class ThreadManager {
 
                             for (int i = 0; i < projectVar.wires.size(); i++) {
                                 if (projectVar.wires.get(i).isvisible()) {
-                                    if (!projectVar.visiblewires.contains(projectVar.wires.get(i))) {
-                                        projectVar.visiblewires.add(projectVar.wires.get(i));
+                                    if (!projectVar.visible_wires.contains(projectVar.wires.get(i))) {
+                                        projectVar.visible_wires.add(projectVar.wires.get(i));
                                     }
                                 } else {
-                                    projectVar.visiblewires.remove(projectVar.wires.get(i));
+                                    projectVar.visible_wires.remove(projectVar.wires.get(i));
                                 }
                             }
 
@@ -112,7 +112,7 @@ public class ThreadManager {
 
                         //Enable or disable Wire System
 
-                        projectVar.wirezulassung = !projectVar.ismoving;
+                        projectVar.wires_allowed = !projectVar.ismoving;
                     }
 
                 }

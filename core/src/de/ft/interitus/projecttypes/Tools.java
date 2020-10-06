@@ -14,8 +14,10 @@ public class Tools {
             ProjectManager.getActProjectVar().tools.addAll(ProjectManager.getActProjectVar().projectType.getProjectFunktions().getProjectTools());
         }
         for(Addon addon:ProjectManager.getActProjectVar().enabledAddons) {
+            if(addon.getTools()!=null) {
 
-           ProjectManager.getActProjectVar().tools.addAll( addon.getTools());
+                ProjectManager.getActProjectVar().tools.addAll(addon.getTools());
+            }
         }
 
 

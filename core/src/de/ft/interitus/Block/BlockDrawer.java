@@ -18,8 +18,8 @@ public class BlockDrawer {
         if (!Var.isloading) {
             Block Temp = null;
             Block Temp2 = null;
-            for (int i = 0; i < ProjectManager.getActProjectVar().visibleblocks.size(); i = i + 1) {
-                Block block = ProjectManager.getActProjectVar().visibleblocks.get(i);
+            for (int i = 0; i < ProjectManager.getActProjectVar().visible_blocks.size(); i = i + 1) {
+                Block block = ProjectManager.getActProjectVar().visible_blocks.get(i);
 
                 try {
                     ProgrammingSpace.batch.begin();
@@ -65,9 +65,9 @@ public class BlockDrawer {
             }
 
 
-            for (int i = 0; i < ProjectManager.getActProjectVar().visiblewires.size(); i++) {
+            for (int i = 0; i < ProjectManager.getActProjectVar().visible_wires.size(); i++) {
                 if (!Var.isloading) {
-                    ProjectManager.getActProjectVar().visiblewires.get(i).draw();
+                    ProjectManager.getActProjectVar().visible_wires.get(i).draw();
                 }
             }
             for (int i = 0; i < ProjectManager.getActProjectVar().visibleWireNodes.size(); i++) {

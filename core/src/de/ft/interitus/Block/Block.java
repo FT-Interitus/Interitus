@@ -92,7 +92,7 @@ public abstract class Block implements VisibleObjects {
 
         if (this.isVisible()) { //Wenn der Block sichtbar ist...  //Das passiert deshalb weil nicht für nicht sichbare Blöcke ein Thread laufen muss
             blockupdate.start(); //...wird der updater gestartet
-            Objects.requireNonNull(ProjectManager.getActProjectVar()).visibleblocks.add(this); //und wird zum Array der sichtbaren Blöcke hinzugefüt
+            Objects.requireNonNull(ProjectManager.getActProjectVar()).visible_blocks.add(this); //und wird zum Array der sichtbaren Blöcke hinzugefüt
         } else {
             blockupdate.isrunning = false; //...wenn nicht dann nicht
         }
@@ -503,13 +503,13 @@ public abstract class Block implements VisibleObjects {
         }
 
 
-        if (ProjectManager.getActProjectVar().Blockwitherrors.contains(this.getIndex())) {
-            ProjectManager.getActProjectVar().Blockwitherrors.remove((Object) this.getIndex());
+        if (ProjectManager.getActProjectVar().Blockswitherrors.contains(this.getIndex())) {
+            ProjectManager.getActProjectVar().Blockswitherrors.remove((Object) this.getIndex());
         }
 
         EventVar.rightClickEventManager.removeListener(this.rightClickEventListener);
         EventVar.blockEventManager.deleteBlock(new BlockDeleteEvent(this, this)); //Fire Delete Event
-        ProjectManager.getActProjectVar().markedblock = null; //Der Makierte Block wird auf null gesetzt da nur ein makierter block gelöscht werden kann //Anmerkung falls das ganze Programm gelöscht wird spielt das sowieso keine Rolle
+        ProjectManager.getActProjectVar().marked_block = null; //Der Makierte Block wird auf null gesetzt da nur ein makierter block gelöscht werden kann //Anmerkung falls das ganze Programm gelöscht wird spielt das sowieso keine Rolle
         ProjectManager.getActProjectVar().marked = false; //Ob ein Block makiert ist wird auf false gesetzt da nur ein makierter Block gelöscht werden kann
         ProjectManager.getActProjectVar().ismoving = false; // Ob ein Block bewegt wird, wird auf false gesetzt da wenn ein Block bewegt und gelöscht wird kann es nur der bewegte Block sein
 
@@ -570,7 +570,7 @@ public abstract class Block implements VisibleObjects {
 
         if (!complete) { //das trifft nur nicht zu wenn das ganze programm gecleart wird
             ProjectManager.getActProjectVar().blocks.remove(this); //Der block wird aus dem Blocks Array entfernt
-            ProjectManager.getActProjectVar().visibleblocks.remove(this); //Der block wird aus dem Visible Blocks Array entfernt
+            ProjectManager.getActProjectVar().visible_blocks.remove(this); //Der block wird aus dem Visible Blocks Array entfernt
 
             try {
                 ProjectManager.getActProjectVar().blocks.remove(this); //Der Block entfernet sich selbst aus dem Blocks Array
@@ -581,10 +581,10 @@ public abstract class Block implements VisibleObjects {
             Thread calcnew = new Thread() { //Da dies relativ lange dauert dauert in einem eigenen Thread
                 @Override
                 public void run() {
-                    for (int i = 0; i < ProjectManager.getActProjectVar().visibleblocks.size(); i++) { //Durch alle Indexe des Block Arrays wird durchgegangen alle die einen größeren Index haben //Durch die Temp variable kann der alte Index des Blocks hier wieder verwendet werden
+                    for (int i = 0; i < ProjectManager.getActProjectVar().visible_blocks.size(); i++) { //Durch alle Indexe des Block Arrays wird durchgegangen alle die einen größeren Index haben //Durch die Temp variable kann der alte Index des Blocks hier wieder verwendet werden
                         try {
-                            if (ProjectManager.getActProjectVar().visibleblocks.get(i) != getblock()) {
-                                ProjectManager.getActProjectVar().visibleblocks.get(i).findnewindex(); //Alle anderen Blöcke werden um einen Index verschoben
+                            if (ProjectManager.getActProjectVar().visible_blocks.get(i) != getblock()) {
+                                ProjectManager.getActProjectVar().visible_blocks.get(i).findnewindex(); //Alle anderen Blöcke werden um einen Index verschoben
                             }
                         } catch (Exception e) { //Wenn man bei Milliarden von Blöcken der erste und der zweite gelöscht werden gibt es hier fehler
                             DisplayErrors.error = e;
@@ -629,20 +629,20 @@ public abstract class Block implements VisibleObjects {
         if (ProjectManager.getActProjectVar().biggestblock == this) {
             if (this.isShowdupulicate_rechts() && this.getBlocktype().canhasrightconnector()) {
                 batch.setColor(1, 1, 1, 0.5f);
-                batch.draw(AssetLoader.block_middle, this.getX_dup_rechts(), this.y, ProjectManager.getActProjectVar().markedblock.getW(), this.getH()); //Wenn der Block die größte überlappung hat wird er als show duplicat angezigt
+                batch.draw(AssetLoader.block_middle, this.getX_dup_rechts(), this.y, ProjectManager.getActProjectVar().marked_block.getW(), this.getH()); //Wenn der Block die größte überlappung hat wird er als show duplicat angezigt
                 batch.setColor(1, 1, 1, 1);
             }
 
-            if (this.isShowdupulicate_links() && this.getBlocktype().canhasleftconnector()&&ProjectManager.getActProjectVar().markedblock!=null) {
+            if (this.isShowdupulicate_links() && this.getBlocktype().canhasleftconnector()&&ProjectManager.getActProjectVar().marked_block !=null) {
                 batch.setColor(1, 1, 1, 0.5f);
-                batch.draw(AssetLoader.block_middle, this.x - ProjectManager.getActProjectVar().markedblock.getW(), this.y, ProjectManager.getActProjectVar().markedblock.getW(), this.getH()); //das gleiche für links
+                batch.draw(AssetLoader.block_middle, this.x - ProjectManager.getActProjectVar().marked_block.getW(), this.y, ProjectManager.getActProjectVar().marked_block.getW(), this.getH()); //das gleiche für links
                 batch.setColor(1, 1, 1, 1);
             }
         }
 
 
         try {
-            if (ProjectManager.getActProjectVar().Blockwitherrors.contains(this.getIndex())) {
+            if (ProjectManager.getActProjectVar().Blockswitherrors.contains(this.getIndex())) {
                 batch.setColor(1, 0.8f, 0.8f, 1);
             } else {
                 batch.setColor(1, 1, 1, 1);
@@ -875,7 +875,7 @@ public abstract class Block implements VisibleObjects {
 
             try {
 
-                flaeche = (CheckKollision.flache(this.getX_dup_rechts(), this.getY(), this.getW(), this.getH(), ProjectManager.getActProjectVar().markedblock.getX(), ProjectManager.getActProjectVar().markedblock.getY())); //Fläsche mit der die Blöcke überlappen um zu brechenen an welchen Block der Block springen wird
+                flaeche = (CheckKollision.flache(this.getX_dup_rechts(), this.getY(), this.getW(), this.getH(), ProjectManager.getActProjectVar().marked_block.getX(), ProjectManager.getActProjectVar().marked_block.getY())); //Fläsche mit der die Blöcke überlappen um zu brechenen an welchen Block der Block springen wird
 
             } catch (NullPointerException ignored) {
 
@@ -888,7 +888,7 @@ public abstract class Block implements VisibleObjects {
         if (this.isShowdupulicate_links()) { //Für links
             try {
 
-                flaeche = (CheckKollision.flache(this.x - ProjectManager.getActProjectVar().markedblock.getW(), this.getY(), this.getW(), this.getH(), ProjectManager.getActProjectVar().markedblock.getX(), ProjectManager.getActProjectVar().markedblock.getY()));//Fläsche mit der die Blöcke überlappen um zu brechenen an welchen Block der Block springen wird
+                flaeche = (CheckKollision.flache(this.x - ProjectManager.getActProjectVar().marked_block.getW(), this.getY(), this.getW(), this.getH(), ProjectManager.getActProjectVar().marked_block.getX(), ProjectManager.getActProjectVar().marked_block.getY()));//Fläsche mit der die Blöcke überlappen um zu brechenen an welchen Block der Block springen wird
 
             } catch (NullPointerException ignored) {
 
@@ -901,7 +901,7 @@ public abstract class Block implements VisibleObjects {
     public int getBlockMarkedblockuberlappungsflache() {
         int flaeche = 0;
         try {
-            flaeche = CheckKollision.flache(this.getX(), this.getY(), this.getW(), this.getH(), ProjectManager.getActProjectVar().markedblock.getX(), ProjectManager.getActProjectVar().markedblock.getY()); //Fläche des Markierten Blocks
+            flaeche = CheckKollision.flache(this.getX(), this.getY(), this.getW(), this.getH(), ProjectManager.getActProjectVar().marked_block.getX(), ProjectManager.getActProjectVar().marked_block.getY()); //Fläche des Markierten Blocks
         } catch (NullPointerException e) {
         }
         return flaeche;

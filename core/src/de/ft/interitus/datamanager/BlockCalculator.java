@@ -98,7 +98,7 @@ public class BlockCalculator {
 
                                 ProjectManager.getActProjectVar().wires.get(ProjectManager.getActProjectVar().wires.size() - 1).setRight_connection(ProjectManager.getActProjectVar().wireNodes.get(ProjectManager.getActProjectVar().wireNodes.size() - 1));
 
-                                ProjectManager.getActProjectVar().visiblewires.add(ProjectManager.getActProjectVar().wires.get(ProjectManager.getActProjectVar().wires.size() - 1));
+                                ProjectManager.getActProjectVar().visible_wires.add(ProjectManager.getActProjectVar().wires.get(ProjectManager.getActProjectVar().wires.size() - 1));
 
 
                             }

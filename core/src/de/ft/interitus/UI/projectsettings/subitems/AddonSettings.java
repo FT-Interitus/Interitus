@@ -56,36 +56,40 @@ public class AddonSettings {
         submit.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                try {
 
-                ProjectManager.getActProjectVar().enabledAddons.clear();
-                for (VisCheckBox checkBox : checkBoxArrayList) {
+                    ProjectManager.getActProjectVar().enabledAddons.clear();
+                    for (VisCheckBox checkBox : checkBoxArrayList) {
 
-                    if (checkBox.isChecked()) {
-                        if (!ProjectManager.getActProjectVar().enabledAddons.contains(ProjectTypesVar.addons.get(checkBoxArrayList.indexOf(checkBox)))) {
-                            ProjectManager.getActProjectVar().enabledAddons.add(ProjectTypesVar.addons.get(checkBoxArrayList.indexOf(checkBox)));
-                        }
-                    } else {
-
-                        ArrayList<Block> deleteblocks = new ArrayList<>();
-                        for (Block block : ProjectManager.getActProjectVar().blocks) {
-                            if (ProjectTypesVar.addons.get(checkBoxArrayList.indexOf(checkBox)) == block.getBlocktype().getAdddon()) {
-                                deleteblocks.add(block);
-
+                        if (checkBox.isChecked()) {
+                            if (!ProjectManager.getActProjectVar().enabledAddons.contains(ProjectTypesVar.addons.get(checkBoxArrayList.indexOf(checkBox)))) {
+                                ProjectManager.getActProjectVar().enabledAddons.add(ProjectTypesVar.addons.get(checkBoxArrayList.indexOf(checkBox)));
                             }
-                        }
+                        } else {
 
-                        while(deleteblocks.size()>0) {
-                            deleteblocks.get(0).delete(false);
-                            deleteblocks.remove(deleteblocks.get(0));
-                        }
+                            ArrayList<Block> deleteblocks = new ArrayList<>();
+                            for (Block block : ProjectManager.getActProjectVar().blocks) {
+                                if (ProjectTypesVar.addons.get(checkBoxArrayList.indexOf(checkBox)) == block.getBlocktype().getAdddon()) {
+                                    deleteblocks.add(block);
 
+                                }
+                            }
+
+                            while (deleteblocks.size() > 0) {
+                                deleteblocks.get(0).delete(false);
+                                deleteblocks.remove(deleteblocks.get(0));
+                            }
+
+
+                        }
 
                     }
+                    BlockTappedBar.init();
+                    Tools.update();
 
+                }catch (Exception e) {
+                    e.printStackTrace();
                 }
-                BlockTappedBar.init();
-                Tools.update();
-
             }
         });
 

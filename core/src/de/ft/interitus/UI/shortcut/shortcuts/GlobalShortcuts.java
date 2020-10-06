@@ -29,10 +29,6 @@ import de.ft.interitus.projecttypes.VCS;
 import de.ft.interitus.utils.ArrayList;
 import de.ft.interitus.utils.ClipBoard;
 
-import java.awt.*;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.StringSelection;
-
 public class GlobalShortcuts implements ShortCutChecker {
     public static ShortCut shortCut_newprojektwindow = new ShortCut("Neues Projekt", MenuBar.menuItem_newproject, SpecialKeys.dualStrg, Input.Keys.N);
     public static ShortCut shortCut_importprojektwindow = new ShortCut("Import Projekt", MenuBar.menuItem_import, SpecialKeys.dualStrg, Input.Keys.I);
@@ -77,7 +73,7 @@ public class GlobalShortcuts implements ShortCutChecker {
 
         if(shortCut_Copy.isPressed()){
 
-                ClipBoard.CopyBlocktoClipboard(ProjectManager.getActProjectVar().markedblock.getBlocktype());
+                ClipBoard.CopyBlocktoClipboard(ProjectManager.getActProjectVar().marked_block.getBlocktype());
 
         }
 
