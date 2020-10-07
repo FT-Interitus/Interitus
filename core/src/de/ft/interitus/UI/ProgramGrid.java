@@ -7,7 +7,7 @@ package de.ft.interitus.UI;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.ProgramingSpace;
 
 public class ProgramGrid {
     public static int radius = 2;
@@ -24,24 +24,24 @@ public class ProgramGrid {
 
         margin =20f;
 
-       margin = margin*(0.86f/ProgrammingSpace.cam.zoom);
+       margin = margin*(0.86f/ ProgramingSpace.cam.zoom);
 
         if(!enable) {
             return;
         }
 
-        ProgrammingSpace.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        ProgramingSpace.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         //   margin=20;
         //   ma=max-min;
         //    x=(ProgrammingSpace.cam.zoom-min)/ma;
-        //    System.out.println("margin: ");
+        //    Program.logger.config("margin: ");
         //    margin=margin*(1-x);
 
         int move_x;
 
-        if ((ProgrammingSpace.cam.position.x*(0.86f/ProgrammingSpace.cam.zoom)) / margin % 2 != 0) {
+        if ((ProgramingSpace.cam.position.x*(0.86f/ ProgramingSpace.cam.zoom)) / margin % 2 != 0) {
 
-            move_x = -(int) ((ProgrammingSpace.cam.position.x*(0.86f/ProgrammingSpace.cam.zoom)) % margin);
+            move_x = -(int) ((ProgramingSpace.cam.position.x*(0.86f/ ProgramingSpace.cam.zoom)) % margin);
 
         } else {
             move_x = 0;
@@ -49,9 +49,9 @@ public class ProgramGrid {
 
         int move_y;
 
-        if ((ProgrammingSpace.cam.position.y*(0.86f/ProgrammingSpace.cam.zoom)) / margin % 2 != 0) {
+        if ((ProgramingSpace.cam.position.y*(0.86f/ ProgramingSpace.cam.zoom)) / margin % 2 != 0) {
 
-            move_y = -(int) ((ProgrammingSpace.cam.position.y*(0.86f/ProgrammingSpace.cam.zoom)) % margin);
+            move_y = -(int) ((ProgramingSpace.cam.position.y*(0.86f/ ProgramingSpace.cam.zoom)) % margin);
 
         } else {
             move_y = 0;
@@ -70,7 +70,7 @@ public class ProgramGrid {
 
                 for (int y = move_y; y < UIVar.programmflaeche_h; ) {
 
-                    ProgrammingSpace.shapeRenderer.circle(x + UIVar.abstandvonRand, y + UIVar.programmflaeche_y, radius);
+                    ProgramingSpace.shapeRenderer.circle(x + UIVar.abstandvonRand, y + UIVar.programmflaeche_y, radius);
 
 
                     y += margin;
@@ -85,7 +85,7 @@ public class ProgramGrid {
             for (int x = move_x; x < Gdx.graphics.getWidth() - (UIVar.abstandvonRand * 2); ) {
 
 
-                    ProgrammingSpace.shapeRenderer.rectLine(x+UIVar.abstandvonRand,UIVar.programmflaeche_y,x+UIVar.abstandvonRand,UIVar.programmflaeche_y+UIVar.programmflaeche_h, line_width);
+                    ProgramingSpace.shapeRenderer.rectLine(x+UIVar.abstandvonRand,UIVar.programmflaeche_y,x+UIVar.abstandvonRand,UIVar.programmflaeche_y+UIVar.programmflaeche_h, line_width);
 
 
 
@@ -96,7 +96,7 @@ public class ProgramGrid {
 
             for (int y = move_y; y < UIVar.programmflaeche_h; ) {
 
-                ProgrammingSpace.shapeRenderer.rectLine((float)UIVar.abstandvonRand,(float)y+UIVar.programmflaeche_y,(float)Gdx.graphics.getWidth()-UIVar.abstandvonRand,(float)y+UIVar.programmflaeche_y, line_width);
+                ProgramingSpace.shapeRenderer.rectLine((float)UIVar.abstandvonRand,(float)y+UIVar.programmflaeche_y,(float)Gdx.graphics.getWidth()-UIVar.abstandvonRand,(float)y+UIVar.programmflaeche_y, line_width);
 
 
 
@@ -107,7 +107,7 @@ public class ProgramGrid {
 
         }
 
-        ProgrammingSpace.shapeRenderer.end();
+        ProgramingSpace.shapeRenderer.end();
 
 
     }

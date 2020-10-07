@@ -8,7 +8,8 @@ package de.ft.interitus.datamanager.userdata.load;
 import com.badlogic.gdx.files.FileHandle;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import de.ft.interitus.Block.SaveBlock;
-import de.ft.interitus.Programm;
+import de.ft.interitus.Block.Saving.SaveBlockV1;
+import de.ft.interitus.Program;
 import de.ft.interitus.UI.ManualConfig.DeviceConfiguration;
 import de.ft.interitus.UI.MenuBar;
 import de.ft.interitus.UI.Notification.Notification;
@@ -130,7 +131,7 @@ public class DataLoader {
                             ObjectInputStream projectsettings_ois = new ObjectInputStream(projectsettings_fis);
                             ProjectManager.getActProjectVar().projectSettings = projectsettings_ois.readObject();
                         } catch (StreamCorruptedException ignored) {
-                            Programm.logger.warning("ProjectType has no saveable Settings");
+                            Program.logger.warning("ProjectType has no saveable Settings");
 
 
                         }
@@ -152,16 +153,18 @@ public class DataLoader {
 
                         FileInputStream fis = new FileInputStream(file.file());
                         ObjectInputStream ois = new ObjectInputStream(fis);
-                        ArrayList<SaveBlock> readedblocks = null;
+                        ArrayList<SaveBlockV1> readedblocks = null;
 
                         try {
-                            readedblocks = ((ArrayList<SaveBlock>) ois.readObject());
+                            readedblocks = ((ArrayList<SaveBlockV1>) ois.readObject());
                         } catch (InvalidClassException f) {
+                            f.printStackTrace();
 
                                 Dialogs.showErrorDialog(UI.stage, "Das Projekt kann in dieser Interitus Version nicht geöffnet werden!");
 
                         }
-                        BlockCalculator.extract(readedblocks);
+                       // BlockCalculator.extract(readedblocks);
+                        BlockCalculator.extractV1(readedblocks);
 
 
                         FileInputStream runconfig_fis = new FileInputStream(runconfig.file());

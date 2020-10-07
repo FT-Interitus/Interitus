@@ -8,14 +8,11 @@ package de.ft.interitus.UI;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeType;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Frustum;
-import com.badlogic.gdx.math.Matrix3;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
-import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.ProgramingSpace;
 import de.ft.interitus.Settings;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.block.BlockKillMovingWiresEvent;
@@ -58,17 +55,17 @@ public class Viewport {
 
                     if (input.isKeyPressed(Input.Keys.CONTROL_LEFT) || input.isKeyPressed(Input.Keys.CONTROL_RIGHT)) {
                         if (amount == -1) {
-                            if (ProgrammingSpace.cam.zoom > 0.4f) {
-                                ProgrammingSpace.cam.zoom = ProgrammingSpace.cam.zoom - 0.1f;
+                            if (ProgramingSpace.cam.zoom > 0.4f) {
+                                ProgramingSpace.cam.zoom = ProgramingSpace.cam.zoom - 0.1f;
                             }
 
                         } else {
-                            if (ProgrammingSpace.cam.zoom <= 2.0f) {
-                                ProgrammingSpace.cam.zoom = ProgrammingSpace.cam.zoom + 0.1f;
+                            if (ProgramingSpace.cam.zoom <= 2.0f) {
+                                ProgramingSpace.cam.zoom = ProgramingSpace.cam.zoom + 0.1f;
                             }
                         }
 
-                        ProjectManager.getActProjectVar().zoom = ProgrammingSpace.cam.zoom;
+                        ProjectManager.getActProjectVar().zoom = ProgramingSpace.cam.zoom;
 
                     }
 
@@ -85,9 +82,9 @@ public class Viewport {
                 if (!UIVar.isdialogeopend) {
 
                     if (input.isButtonPressed(Input.Buttons.MIDDLE)) {
-                        ProgrammingSpace.cam.position.x -= deltaX*ProgrammingSpace.cam.zoom;
-                        ProgrammingSpace.cam.position.y += deltaY*ProgrammingSpace.cam.zoom;
-                        ProgrammingSpace.cam.update();
+                        ProgramingSpace.cam.position.x -= deltaX* ProgramingSpace.cam.zoom;
+                        ProgramingSpace.cam.position.y += deltaY* ProgramingSpace.cam.zoom;
+                        ProgramingSpace.cam.update();
                     }
                 }
 
@@ -116,11 +113,11 @@ public class Viewport {
                 if (!run_left) {
                     time_pressed_left = System.currentTimeMillis();
                     run_left = true;
-                    ProgrammingSpace.cam.position.set(ProgrammingSpace.cam.position.x -= 20, ProgrammingSpace.cam.position.y, 0);
+                    ProgramingSpace.cam.position.set(ProgramingSpace.cam.position.x -= 20, ProgramingSpace.cam.position.y, 0);
                 } else {
                     if (System.currentTimeMillis() - time_pressed_left > firstmovedelay) {
                         time_pressed_left = System.currentTimeMillis() - movedelay;
-                        ProgrammingSpace.cam.position.set(ProgrammingSpace.cam.position.x -= 20, ProgrammingSpace.cam.position.y, 0);
+                        ProgramingSpace.cam.position.set(ProgramingSpace.cam.position.x -= 20, ProgramingSpace.cam.position.y, 0);
                     }
                 }
             } else {
@@ -132,11 +129,11 @@ public class Viewport {
                 if (!run_right) {
                     time_pressed_right = System.currentTimeMillis();
                     run_right = true;
-                    ProgrammingSpace.cam.position.set(ProgrammingSpace.cam.position.x += 20, ProgrammingSpace.cam.position.y, 0);
+                    ProgramingSpace.cam.position.set(ProgramingSpace.cam.position.x += 20, ProgramingSpace.cam.position.y, 0);
                 } else {
                     if (System.currentTimeMillis() - time_pressed_right > firstmovedelay) {
                         time_pressed_right = System.currentTimeMillis() - movedelay;
-                        ProgrammingSpace.cam.position.set(ProgrammingSpace.cam.position.x += 20, ProgrammingSpace.cam.position.y, 0);
+                        ProgramingSpace.cam.position.set(ProgramingSpace.cam.position.x += 20, ProgramingSpace.cam.position.y, 0);
                     }
                 }
             } else {
@@ -148,11 +145,11 @@ public class Viewport {
                 if (!run_up) {
                     time_pressed_up = System.currentTimeMillis();
                     run_up = true;
-                    ProgrammingSpace.cam.position.set(ProgrammingSpace.cam.position.x, ProgrammingSpace.cam.position.y += 20, 0);
+                    ProgramingSpace.cam.position.set(ProgramingSpace.cam.position.x, ProgramingSpace.cam.position.y += 20, 0);
                 } else {
                     if (System.currentTimeMillis() - time_pressed_up > firstmovedelay) {
                         time_pressed_up = System.currentTimeMillis() - movedelay;
-                        ProgrammingSpace.cam.position.set(ProgrammingSpace.cam.position.x, ProgrammingSpace.cam.position.y += 20, 0);
+                        ProgramingSpace.cam.position.set(ProgramingSpace.cam.position.x, ProgramingSpace.cam.position.y += 20, 0);
                     }
                 }
             } else {
@@ -164,11 +161,11 @@ public class Viewport {
                 if (!run_down) {
                     time_pressed_down = System.currentTimeMillis();
                     run_down = true;
-                    ProgrammingSpace.cam.position.set(ProgrammingSpace.cam.position.x, ProgrammingSpace.cam.position.y -= 20, 0);
+                    ProgramingSpace.cam.position.set(ProgramingSpace.cam.position.x, ProgramingSpace.cam.position.y -= 20, 0);
                 } else {
                     if (System.currentTimeMillis() - time_pressed_down > firstmovedelay) {
                         time_pressed_down = System.currentTimeMillis() - movedelay;
-                        ProgrammingSpace.cam.position.set(ProgrammingSpace.cam.position.x, ProgrammingSpace.cam.position.y -= 20, 0);
+                        ProgramingSpace.cam.position.set(ProgramingSpace.cam.position.x, ProgramingSpace.cam.position.y -= 20, 0);
                     }
                 }
             } else {
@@ -177,23 +174,23 @@ public class Viewport {
 
 
             if (input.isKeyJustPressed(Input.Keys.PLUS)) {
-                ProgrammingSpace.cam.zoom = ProgrammingSpace.cam.zoom - 0.2f;
+                ProgramingSpace.cam.zoom = ProgramingSpace.cam.zoom - 0.2f;
             }
             if (input.isKeyJustPressed(Input.Keys.MINUS)) {
-                ProgrammingSpace.cam.zoom = ProgrammingSpace.cam.zoom + 0.2f;
+                ProgramingSpace.cam.zoom = ProgramingSpace.cam.zoom + 0.2f;
             }
 
 
-            ProjectManager.getActProjectVar().cam_pos.set(ProgrammingSpace.cam.position.x, ProgrammingSpace.cam.position.y);
+            ProjectManager.getActProjectVar().cam_pos.set(ProgramingSpace.cam.position.x, ProgramingSpace.cam.position.y);
 
         }
 
 
 
-        projection.setToOrtho((ProgrammingSpace.cam.zoom+ADDITIONAL_FRUSTRUM_SIZE) * -ProgrammingSpace.cam.viewportWidth / 2, (ProgrammingSpace.cam.zoom+ADDITIONAL_FRUSTRUM_SIZE) * (ProgrammingSpace.cam.viewportWidth / 2), (ProgrammingSpace.cam.zoom+ADDITIONAL_FRUSTRUM_SIZE) * -(ProgrammingSpace.cam.viewportHeight / 2), (ProgrammingSpace.cam.zoom+ADDITIONAL_FRUSTRUM_SIZE)
-                * ProgrammingSpace.cam.viewportHeight / 2, ProgrammingSpace.cam.near, ProgrammingSpace.cam.far);
+        projection.setToOrtho((ProgramingSpace.cam.zoom+ADDITIONAL_FRUSTRUM_SIZE) * -ProgramingSpace.cam.viewportWidth / 2, (ProgramingSpace.cam.zoom+ADDITIONAL_FRUSTRUM_SIZE) * (ProgramingSpace.cam.viewportWidth / 2), (ProgramingSpace.cam.zoom+ADDITIONAL_FRUSTRUM_SIZE) * -(ProgramingSpace.cam.viewportHeight / 2), (ProgramingSpace.cam.zoom+ADDITIONAL_FRUSTRUM_SIZE)
+                * ProgramingSpace.cam.viewportHeight / 2, ProgramingSpace.cam.near, ProgramingSpace.cam.far);
 
-        view.setToLookAt(ProgrammingSpace.cam.position, tmp.set(ProgrammingSpace.cam.position).add(ProgrammingSpace.cam.direction), ProgrammingSpace.cam.up);
+        view.setToLookAt(ProgramingSpace.cam.position, tmp.set(ProgramingSpace.cam.position).add(ProgramingSpace.cam.direction), ProgramingSpace.cam.up);
         combined.set(projection);
         Matrix4.mul(combined.val, view.val);
 
@@ -209,15 +206,15 @@ public class Viewport {
     }
 
     public static void limitfps() {
-        ProgrammingSpace.rendertimediff = System.currentTimeMillis() - ProgrammingSpace.renderstarttime;
+        ProgramingSpace.rendertimediff = System.currentTimeMillis() - ProgramingSpace.renderstarttime;
         if (Settings.limitfps != 0) {
-            ProgrammingSpace.rendersleeptime = (int) (1000 / Settings.limitfps - ProgrammingSpace.rendertimediff);
+            ProgramingSpace.rendersleeptime = (int) (1000 / Settings.limitfps - ProgramingSpace.rendertimediff);
         } else {
             Settings.limitfps = 0;
         }
-        if (ProgrammingSpace.rendersleeptime > 0 && !Settings.Vsync) {
+        if (ProgramingSpace.rendersleeptime > 0 && !Settings.Vsync) {
             try {
-                Thread.sleep(ProgrammingSpace.rendersleeptime);
+                Thread.sleep(ProgramingSpace.rendersleeptime);
             } catch (InterruptedException e) {
             }
         }

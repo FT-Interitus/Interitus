@@ -12,6 +12,7 @@ import com.kotcrab.vis.ui.widget.VisSelectBox;
 import com.kotcrab.vis.ui.widget.VisTable;
 import com.kotcrab.vis.ui.widget.VisTextButton;
 import de.ft.interitus.Block.Devices;
+import de.ft.interitus.Program;
 import de.ft.interitus.UI.setup.SetupWindow;
 import de.ft.interitus.deviceconnection.arduino.BurnProgramm;
 import de.ft.interitus.deviceconnection.arduino.SerialConnection;
@@ -69,10 +70,9 @@ public class Step3 {
                 arduinosgefunden.setText("Arduinos: " + SerialConnection.Arduinos.size());
 
                 if (isBurning) {
-                    System.out.println(BurnProgramm.ausgabe);
+                    Program.logger.config(BurnProgramm.ausgabe);
                     brenntext.setText(BurnProgramm.ausgabe);
                     if (BurnProgramm.ausgabe.contains("Brennen hat funktioniert, nun kannst du dein Gerät konfigurieren")) {
-                        System.out.println("jetzt ID machen");
 
 
                     }

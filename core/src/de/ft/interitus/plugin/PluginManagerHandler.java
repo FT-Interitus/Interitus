@@ -6,7 +6,7 @@
 package de.ft.interitus.plugin;
 
 import de.ft.interitus.DisplayErrors;
-import de.ft.interitus.Programm;
+import de.ft.interitus.Program;
 import de.ft.interitus.Var;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.utils.ArrayList;
@@ -37,7 +37,7 @@ public class PluginManagerHandler {
 
         File[] files = new File(System.getProperty("user.home") + "/" + Data.foldername + "/plugins").listFiles(); //Aus dem Ordner Plugins werden alle Files aufgelistet
         assert files != null;
-        Programm.logger.config("Found " + files.length + " Plugins in Plugin Folder");
+        Program.logger.config("Found " + files.length + " Plugins in Plugin Folder");
         for (File f : files) {
             if (f.getName().split("\\.")[1].contains("itpl") && f.getName().split("\\.")[1].endsWith("itpl")) {
 
@@ -46,12 +46,12 @@ public class PluginManagerHandler {
                     PluginLoader.loadPlugin(f); //jedes gefundene Plugin bekommt den Befehel zu laden
                     Plugincounter++;
                 } catch (Exception e) {
-                    Programm.logger.severe("Plugin lade Fehler");
+                    Program.logger.severe("Plugin lade Fehler");
                     DisplayErrors.customErrorstring = "Plugin Lade-Fehler";
                     DisplayErrors.error = e;
                     e.printStackTrace();
                 } catch (UnsupportedClassVersionError a) {
-                    Programm.logger.severe("Das Plugin " + f.getName() + " wurde in der falschen Version geschrieben");
+                    Program.logger.severe("Das Plugin " + f.getName() + " wurde in der falschen Version geschrieben");
                     a.printStackTrace();
 
                 }
@@ -100,8 +100,8 @@ public class PluginManagerHandler {
 
                     //Disable Plugin if it is too slow
                     if (after - before > 80) {
-                        Programm.logger.warning((after - before) + "");
-                        Programm.logger.warning("Das Plugin " + getPluginArgs(loadedplugins.get(i),"name") + " ist zu langsam und wurde deshalb deaktiviert");
+                        Program.logger.warning((after - before) + "");
+                        Program.logger.warning("Das Plugin " + getPluginArgs(loadedplugins.get(i),"name") + " ist zu langsam und wurde deshalb deaktiviert");
 
                         //ProgramRegistry.removepluginregisters(loadedplugins.get(i));
                         loadedplugins.remove(loadedplugins.get(i));

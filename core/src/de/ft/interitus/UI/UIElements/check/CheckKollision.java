@@ -8,7 +8,7 @@ package de.ft.interitus.UI.UIElements.check;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.*;
 import de.ft.interitus.Block.Block;
-import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.ProgramingSpace;
 
 public class CheckKollision {
 
@@ -48,7 +48,7 @@ public class CheckKollision {
     public static boolean checkmousewithblock(Block block) {
 
 
-        return object(block.getX(), block.getY(), block.getW(), block.getH(), (int) ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, MOUSESIZE, MOUSESIZE);
+        return object(block.getX(), block.getY(), block.getW(), block.getH(), (int) ProgramingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgramingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, MOUSESIZE, MOUSESIZE);
 
     }
 
@@ -96,7 +96,7 @@ public class CheckKollision {
             yy = h - (yy - h);
         }
 
-        //System.out.println("y: " + yy + "x: " + xx + "flache: "+ yy*xx);
+        //Program.logger.config("y: " + yy + "x: " + xx + "flache: "+ yy*xx);
         flache = xx * yy;
         return flache;
     }

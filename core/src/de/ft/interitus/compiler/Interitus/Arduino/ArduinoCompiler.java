@@ -7,7 +7,7 @@ package de.ft.interitus.compiler.Interitus.Arduino;
 
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.Parameter;
-import de.ft.interitus.Programm;
+import de.ft.interitus.Program;
 import de.ft.interitus.UI.Notification.Notification;
 import de.ft.interitus.UI.Notification.NotificationManager;
 import de.ft.interitus.UI.UI;
@@ -141,7 +141,7 @@ public class ArduinoCompiler implements Compiler {
             Programm.append("}\n");
 
 
-            de.ft.interitus.Programm.logger.warning("\n" + Programm.toString());
+            Program.logger.warning("\n" + Programm.toString());
 
             return Programm.toString();
         }catch (Exception e) {
@@ -200,7 +200,7 @@ public class ArduinoCompiler implements Compiler {
 
                         break;
                     } else {
-                        Programm.logger.severe(strCurrenterrorLine);
+                        Program.logger.severe(strCurrenterrorLine);
                         errorstring.add(strCurrenterrorLine);
                         errorfromcli += strCurrenterrorLine;
                     }
@@ -232,7 +232,7 @@ public class ArduinoCompiler implements Compiler {
 
 
         } else {
-            Programm.logger.severe("You OS is not supported");
+            Program.logger.severe("You OS is not supported");
         }
 
 
@@ -293,7 +293,7 @@ public class ArduinoCompiler implements Compiler {
 
             commandgetVersion = "./libs/arduino/cli/linux/arduino-cli version --format json ";
         } else {
-            Programm.logger.severe("You OS is not supported");
+            Program.logger.severe("You OS is not supported");
         }
 
 
@@ -353,7 +353,7 @@ public class ArduinoCompiler implements Compiler {
 
             upload = "./libs/arduino/cli/linux/arduino-cli upload -b " + device.getJSONArray("boards").getJSONObject(0).getString("FQBN") + " " + System.getProperty("user.home") + "/" + Data.foldername + "/temp/" + folder + "/" + " -p " + device.getString("address") + " -v";
         } else {
-            Programm.logger.severe("You OS is not supported");
+            Program.logger.severe("You OS is not supported");
         }
 
 
@@ -386,7 +386,7 @@ public class ArduinoCompiler implements Compiler {
                                 ProjectManager.getActProjectVar().Blockswitherrors.add(Integer.parseInt(errorstring.get(i - 1).split("//")[1].replace(" ", ""))); //Get Block Index
                             }
 
-                            Programm.logger.severe("Fehler-Block: " + errorstring.get(i - 1).split("//")[1]);
+                            Program.logger.severe("Fehler-Block: " + errorstring.get(i - 1).split("//")[1]);
                         } catch (Exception e) {
 
                         }
@@ -475,7 +475,7 @@ public class ArduinoCompiler implements Compiler {
             update_index = "./libs/arduino/cli/linux/arduino-cli core update-index";
 
         } else {
-            Programm.logger.severe("You OS is not supported");
+            Program.logger.severe("You OS is not supported");
         }
 
         runcommand(install_avr, false);
@@ -508,7 +508,7 @@ public class ArduinoCompiler implements Compiler {
             update_index = "./libs/arduino/cli/linux/arduino-cli core update-index";
 
         } else {
-            Programm.logger.severe("You OS is not supported");
+            Program.logger.severe("You OS is not supported");
         }
 
         runcommand(install_avr, false);

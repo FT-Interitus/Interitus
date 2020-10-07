@@ -5,12 +5,11 @@
 
 package de.ft.interitus.UI;
 
-import de.ft.interitus.Programm;
+import de.ft.interitus.Program;
 import de.ft.interitus.UI.shortcut.ShortCut;
 import de.ft.interitus.UI.shortcut.ShortCutChecker;
 import de.ft.interitus.UI.shortcut.shortcuts.BlockShortcuts;
 import de.ft.interitus.UI.shortcut.shortcuts.GlobalShortcuts;
-import de.ft.interitus.plugin.ProgramRegistry;
 import de.ft.interitus.utils.ArrayList;
 
 public class CheckShortcuts {
@@ -33,9 +32,9 @@ public class CheckShortcuts {
         // ...
 
         //plugins
-        ProgramRegistry.addShortCuts();
+      //  ProgramRegistry.addShortCuts();
 
-        Programm.logger.config("Shortcuts loaded");
+        Program.logger.config("Shortcuts loaded");
     }
 
     public static void check() {

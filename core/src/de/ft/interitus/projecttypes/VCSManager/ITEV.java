@@ -8,6 +8,7 @@ package de.ft.interitus.projecttypes.VCSManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import de.ft.interitus.Block.SaveBlock;
+import de.ft.interitus.Block.Saving.SaveBlockV1;
 import de.ft.interitus.datamanager.BlockCalculator;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.datamanager.userdata.Zip;
@@ -30,7 +31,7 @@ public class ITEV {
             public void run() {
 
 
-                ArrayList<SaveBlock> saveBlocks = BlockCalculator.save();
+                ArrayList<SaveBlockV1> saveBlocks = BlockCalculator.save();
 
 
                 String generateprojektname = "project" + System.currentTimeMillis();

@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import de.ft.interitus.DisplayErrors;
+import de.ft.interitus.Program;
 
 import java.lang.reflect.ParameterizedType;
 
@@ -271,7 +272,7 @@ public class AssetLoader {
 
                 generator.dispose(); // don't forget to dispose to avoid memory leaks!
             } catch (Exception e) {
-                System.out.println("Fehler beim Laden der Schrift");
+                Program.logger.severe("Error while loading Font");
             }
 
             group = "Plugs";

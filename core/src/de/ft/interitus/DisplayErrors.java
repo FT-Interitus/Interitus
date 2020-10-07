@@ -26,7 +26,7 @@ public class DisplayErrors {
 
                 Dialogs.showErrorDialog(UI.stage, customErrorstring, error);
 
-                EventVar.globalEventManager.erroroccurred(new GlobalErrorOccurredEvent(Programm.INSTANCE, error));
+                EventVar.globalEventManager.erroroccurred(new GlobalErrorOccurredEvent(Program.INSTANCE, error));
                 lastError = error;
                 error = null;
                 customErrorstring = "Ein Fehler ist aufgetreten!";
@@ -34,7 +34,7 @@ public class DisplayErrors {
 
             }
 
-            if (errorStringwithoutException != "") {
+            if (!errorStringwithoutException.equals("")) {
                 Dialogs.showErrorDialog(UI.stage, errorStringwithoutException);
                 errorStringwithoutException = "";
 

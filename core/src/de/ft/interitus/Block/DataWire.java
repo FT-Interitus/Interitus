@@ -10,8 +10,8 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Cursor.SystemCursor;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
-import de.ft.interitus.Programm;
-import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.Program;
+import de.ft.interitus.ProgramingSpace;
 import de.ft.interitus.UI.UIElements.check.CheckKollision;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
 import de.ft.interitus.UI.UIVar;
@@ -53,7 +53,7 @@ public class DataWire {
 
 
         ProjectManager.getActProjectVar().moveingdatawire = this;
-        Programm.logger.config("New Output");
+        Program.logger.config("New Output");
     }
 
     /**
@@ -213,8 +213,8 @@ public class DataWire {
 
 
 
-        ProgrammingSpace.BlockshapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        ProgrammingSpace.BlockshapeRenderer.setColor(this.getParam_input().getParameterType().getTyp().getWirecolor());
+        ProgramingSpace.BlockshapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        ProgramingSpace.BlockshapeRenderer.setColor(this.getParam_input().getParameterType().getTyp().getWirecolor());
 
         int parameter_middle_x=input_x+UIVar.parameter_width/2;
         int parameter_middle_output_x;
@@ -258,15 +258,15 @@ public class DataWire {
         UIVar.DataWire[7][0]=parameter_middle_output_x;
         UIVar.DataWire[7][1]=output_y;
 
-        ProgrammingSpace.BlockshapeRenderer.rectLine(UIVar.DataWire[0][0], UIVar.DataWire[0][1], UIVar.DataWire[1][0], UIVar.DataWire[1][1],UIVar.thickness);//Verlängerung an input
-        ProgrammingSpace.BlockshapeRenderer.rectLine(UIVar.DataWire[1][0], UIVar.DataWire[1][1], UIVar.DataWire[2][0], UIVar.DataWire[2][1],UIVar.thickness);//input horizontal verlängerung
-        ProgrammingSpace.BlockshapeRenderer.rectLine(UIVar.DataWire[2][0], UIVar.DataWire[2][1], UIVar.DataWire[3][0], UIVar.DataWire[3][1], UIVar.thickness);//vertikale an input
-        ProgrammingSpace.BlockshapeRenderer.rectLine(UIVar.DataWire[3][0], UIVar.DataWire[3][1], UIVar.DataWire[4][0], UIVar.DataWire[4][1], UIVar.thickness);//Horizontale
-        ProgrammingSpace.BlockshapeRenderer.rectLine(UIVar.DataWire[4][0], UIVar.DataWire[4][1], UIVar.DataWire[5][0], UIVar.DataWire[5][1], UIVar.thickness);//Vertikale an output
-        ProgrammingSpace.BlockshapeRenderer.rectLine(UIVar.DataWire[5][0], UIVar.DataWire[5][1], UIVar.DataWire[6][0], UIVar.DataWire[6][1], UIVar.thickness);//output horizontal verlängerung
-        ProgrammingSpace.BlockshapeRenderer.rectLine(UIVar.DataWire[6][0], UIVar.DataWire[6][1], UIVar.DataWire[7][0], UIVar.DataWire[7][1], UIVar.thickness);//Verlängerung an output
+        ProgramingSpace.BlockshapeRenderer.rectLine(UIVar.DataWire[0][0], UIVar.DataWire[0][1], UIVar.DataWire[1][0], UIVar.DataWire[1][1],UIVar.thickness);//Verlängerung an input
+        ProgramingSpace.BlockshapeRenderer.rectLine(UIVar.DataWire[1][0], UIVar.DataWire[1][1], UIVar.DataWire[2][0], UIVar.DataWire[2][1],UIVar.thickness);//input horizontal verlängerung
+        ProgramingSpace.BlockshapeRenderer.rectLine(UIVar.DataWire[2][0], UIVar.DataWire[2][1], UIVar.DataWire[3][0], UIVar.DataWire[3][1], UIVar.thickness);//vertikale an input
+        ProgramingSpace.BlockshapeRenderer.rectLine(UIVar.DataWire[3][0], UIVar.DataWire[3][1], UIVar.DataWire[4][0], UIVar.DataWire[4][1], UIVar.thickness);//Horizontale
+        ProgramingSpace.BlockshapeRenderer.rectLine(UIVar.DataWire[4][0], UIVar.DataWire[4][1], UIVar.DataWire[5][0], UIVar.DataWire[5][1], UIVar.thickness);//Vertikale an output
+        ProgramingSpace.BlockshapeRenderer.rectLine(UIVar.DataWire[5][0], UIVar.DataWire[5][1], UIVar.DataWire[6][0], UIVar.DataWire[6][1], UIVar.thickness);//output horizontal verlängerung
+        ProgramingSpace.BlockshapeRenderer.rectLine(UIVar.DataWire[6][0], UIVar.DataWire[6][1], UIVar.DataWire[7][0], UIVar.DataWire[7][1], UIVar.thickness);//Verlängerung an output
 
-        ProgrammingSpace.BlockshapeRenderer.end();
+        ProgramingSpace.BlockshapeRenderer.end();
         userLayoutMovment();
 
         if(ProjectManager.getActProjectVar().moveingdatawire==this) {
@@ -276,7 +276,7 @@ public class DataWire {
                 for (int i = 0; i < ProjectManager.getActProjectVar().visible_blocks.size(); i++) {
 
 
-                    if (CheckKollision.object(ProjectManager.getActProjectVar().visible_blocks.get(i).getX(), ProjectManager.getActProjectVar().visible_blocks.get(i).getY(), ProjectManager.getActProjectVar().visible_blocks.get(i).getW(), ProjectManager.getActProjectVar().visible_blocks.get(i).getH(), (int) ProgrammingSpace.viewport.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1)) {
+                    if (CheckKollision.object(ProjectManager.getActProjectVar().visible_blocks.get(i).getX(), ProjectManager.getActProjectVar().visible_blocks.get(i).getY(), ProjectManager.getActProjectVar().visible_blocks.get(i).getW(), ProjectManager.getActProjectVar().visible_blocks.get(i).getH(), (int) ProgramingSpace.viewport.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgramingSpace.viewport.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1)) {
                         counter++;
                     }
 

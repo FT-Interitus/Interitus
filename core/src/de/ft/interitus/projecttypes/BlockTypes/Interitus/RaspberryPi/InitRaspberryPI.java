@@ -7,7 +7,7 @@ package de.ft.interitus.projecttypes.BlockTypes.Interitus.RaspberryPi;
 
 import de.ft.interitus.Block.Interitus.*;
 import de.ft.interitus.Block.Interitus.save.DefaultSaveBlockGenerator;
-import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.ProgramingSpace;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Ev3.Wait;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.ProjectType;
@@ -20,6 +20,6 @@ public class InitRaspberryPI {
 
         platformSpecificBlocks.add(new Wait(null,null));
 
-        return new ProjectType(ProgrammingSpace.nativ, "RaspberryPi-Projekt", platformSpecificBlocks, new DefaultBlockGenerator(), new DefaultBlockUpdateGenerator(), new DefaultWireGenerator(), new DefaultWireNodeGenerator(), new DefaultSaveBlockGenerator(), new DefaultBlockVarGenerator(), new RaspberryPiFunktions(), null);
+        return new ProjectType(ProgramingSpace.nativ, "RaspberryPi-Projekt", platformSpecificBlocks, new DefaultBlockGenerator(), new DefaultBlockUpdateGenerator(), new DefaultWireGenerator(), new DefaultWireNodeGenerator(), new DefaultSaveBlockGenerator(), new DefaultBlockVarGenerator(), new RaspberryPiFunktions(), null);
     }
 }

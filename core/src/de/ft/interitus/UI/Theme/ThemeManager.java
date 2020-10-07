@@ -5,7 +5,7 @@
 
 package de.ft.interitus.UI.Theme;
 
-import de.ft.interitus.Programm;
+import de.ft.interitus.Program;
 import de.ft.interitus.UI.Theme.interitus.DarkMode;
 import de.ft.interitus.UI.Theme.interitus.BlueDark;
 
@@ -15,7 +15,7 @@ public class ThemeManager {
         //Register default Interitus nativ Themes
         RegisteredThemes.themes.add(new DarkMode());
         RegisteredThemes.themes.add(new BlueDark());
-        Programm.logger.config("Registered " + RegisteredThemes.themes.size() + " native Themes");
+        Program.logger.config("Registered " + RegisteredThemes.themes.size() + " native Themes");
 
 
     }

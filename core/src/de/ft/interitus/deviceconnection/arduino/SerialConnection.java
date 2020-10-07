@@ -9,6 +9,7 @@ package de.ft.interitus.deviceconnection.arduino;
 import com.fazecast.jSerialComm.SerialPort;
 import com.fazecast.jSerialComm.SerialPortDataListener;
 import com.fazecast.jSerialComm.SerialPortEvent;
+import de.ft.interitus.Program;
 import de.ft.interitus.UI.setup.steps.ArduinoSteps.Step3;
 import de.ft.interitus.utils.ArrayList;
 import jssc.SerialPortList;
@@ -79,7 +80,7 @@ public class SerialConnection {
     public static String empfangenScanner(SerialPort sport) {
         Scanner data = new Scanner(sport.getInputStream());
 
-        //System.out.println(data.hasNextLine());
+        //Program.logger.config(data.hasNextLine());
 
 
         if (data.hasNextLine()) {
@@ -89,7 +90,7 @@ public class SerialConnection {
             } catch (Exception e) {
             }
 
-            System.out.println("nubmer    " + number);
+            Program.logger.config("nubmer    " + number);
             return number;
         } else {
             return "";
@@ -139,14 +140,14 @@ public class SerialConnection {
                 try {
 
                     int input = b.read();
-                    System.out.println("asdf  " + (char) input);
+                    Program.logger.config("asdf  " + (char) input);
 
                     /////// Authentifikation.checkvalidaten(input);
 
                     //    Authentifikation.getPart()
 
 
-                    //  System.out.println(input);
+                    //  Program.logger.config(input);
                 } catch (IOException e) {
                 }
             }
@@ -178,7 +179,7 @@ public class SerialConnection {
 
 
                 for (int i = 0; i < split.length; i++) {
-                    System.out.println(split[i]);
+                    Program.logger.config(split[i]);
 
                 }
 
@@ -273,13 +274,13 @@ public class SerialConnection {
                         for (SerialPort port : ports) {   //hier werden alle verfügbaren Ports durchtariert
                             i++;
 
-                            System.out.println("i     " + i);
+                            Program.logger.config("i     " + i);
                             try {
                                 SerialPort checkport = ports[i - 2];
 
                                 if (checkport.openPort()) {        //versuche port zu öffnen
-                                    System.out.println("Successfully opened the port." + checkport.getSystemPortName());     //port geöffnet
-                                    System.out.println("desprictiveportname:   " + checkport.getDescriptivePortName());
+                                    Program.logger.config("Successfully opened the port." + checkport.getSystemPortName());     //port geöffnet
+                                    Program.logger.config("desprictiveportname:   " + checkport.getDescriptivePortName());
                                     output = "versuche " + checkport.getSystemPortName() + " zu autentifizieren";
 
                                     Thread.sleep(arduinoneustartzeit);
@@ -287,7 +288,7 @@ public class SerialConnection {
 
 
                                 } else {
-                                    System.out.println("Unable to open the port.");
+                                    Program.logger.config("Unable to open the port.");
                                     output = "Konnte Port nicht öffnen";                                  //port nicht geöffnet
                                 }
 
@@ -310,7 +311,7 @@ public class SerialConnection {
                     } catch (Exception e) {
                         //    e.printStackTrace(); //for debug to find errors
                         output = "es ist ein Fehler aufgetreten Bitte versuche es erneut\nwenn der Fehler weiterhin auftritt wende dich an den Support";
-                        System.out.println("es ist ein Fehler in SerialConnection aufgetreten | ^^^^ hier oben ist die exeption ^^^^ viel spaß damit ^^^^");
+                        Program.logger.config("es ist ein Fehler in SerialConnection aufgetreten | ^^^^ hier oben ist die exeption ^^^^ viel spaß damit ^^^^");
                     }
 
                     isRunning = false;

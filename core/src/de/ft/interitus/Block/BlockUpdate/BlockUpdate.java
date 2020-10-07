@@ -13,8 +13,8 @@ import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.DataWire;
 import de.ft.interitus.Block.Wire;
 import de.ft.interitus.DisplayErrors;
-import de.ft.interitus.Programm;
-import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.Program;
+import de.ft.interitus.ProgramingSpace;
 import de.ft.interitus.UI.ProgramGrid;
 import de.ft.interitus.UI.UIElements.check.CheckKollision;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
@@ -156,7 +156,7 @@ public abstract class BlockUpdate extends Thread {
 
 
                             if (CheckKollision.object(ProjectManager.getActProjectVar().marked_block.getX(), ProjectManager.getActProjectVar().marked_block.getY(), ProjectManager.getActProjectVar().marked_block.getW(), ProjectManager.getActProjectVar().marked_block.getH(), block.getX(), block.getY(), block.getW(), block.getH()) && CheckKollision.flache(ProjectManager.getActProjectVar().marked_block.getX(), ProjectManager.getActProjectVar().marked_block.getY(), ProjectManager.getActProjectVar().marked_block.getW(), ProjectManager.getActProjectVar().marked_block.getH(), block.getX(), block.getY()) > 7000 && block != ProjectManager.getActProjectVar().marked_block) {
-                                // System.out.println("überschneidung von markedblock und einem block");
+                                // Program.logger.config("überschneidung von markedblock und einem block");
 
                                 if (ProjectManager.getActProjectVar().marked_block_overlapping.indexOf(block) == -1) {
                                     block.moved = false;
@@ -207,7 +207,7 @@ public abstract class BlockUpdate extends Thread {
                                 geschoben = true;
 
                                 Block a = block;
-                                //System.out.println(a);
+                                //Program.logger.config(a);
                                 block.setX(block.getX() + block.getW());
 
                                 block.seted = false;
@@ -289,7 +289,7 @@ public abstract class BlockUpdate extends Thread {
                             try {
                                 if (CheckKollision.checkblockwithduplicate(ProjectManager.getActProjectVar().marked_block, block, 0) && block.getRight() == null && ProjectManager.getActProjectVar().marked_block.getWire_left() == null && ProjectManager.getActProjectVar().marked_block.getBlocktype().canhasleftconnector()) {
                                     if (ProjectManager.getActProjectVar().marked_block.isMoving()) {
-                                        //System.out.println("Kollision!");
+                                        //Program.logger.config("Kollision!");
 
 
                                         block.setShowdupulicate_rechts(true);
@@ -301,7 +301,7 @@ public abstract class BlockUpdate extends Thread {
 
                                         if (block.getRight() != ProjectManager.getActProjectVar().marked_block && ProjectManager.getActProjectVar().marked_block.getLeft() != block && block.getRight() == null && ProjectManager.getActProjectVar().biggestblock == block) {
 
-                                            //System.out.println("test");
+                                            //Program.logger.config("test");
                                             block.setShowdupulicate_rechts(false);
 
 
@@ -390,7 +390,7 @@ public abstract class BlockUpdate extends Thread {
 
 
     private void wire_managment() {
-        if (block.getBlocktype().canhasleftconnector() && !isIsconnectorclicked() && ProjectManager.getActProjectVar().showleftdocker && CheckKollision.object(block.getX_entrance(), block.getY_entrance(), block.getW_entrance(), block.getH_entrance(), (int) ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1) && Gdx.input.isButtonJustPressed(0) && block.getLeft() == null) {
+        if (block.getBlocktype().canhasleftconnector() && !isIsconnectorclicked() && ProjectManager.getActProjectVar().showleftdocker && CheckKollision.object(block.getX_entrance(), block.getY_entrance(), block.getW_entrance(), block.getH_entrance(), (int) ProgramingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgramingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1) && Gdx.input.isButtonJustPressed(0) && block.getLeft() == null) {
             ProjectManager.getActProjectVar().showleftdocker = false;
             ProjectManager.getActProjectVar().moving_wires.setMovebymouse(false);
             ProjectManager.getActProjectVar().moving_wires.setRight_connection(block);
@@ -402,7 +402,7 @@ public abstract class BlockUpdate extends Thread {
 
                 //Falls die eine Node dazwischen ist und der Nachbar über die Node gesetzt werden muss
 
-                Programm.logger.severe("Konnte Nachbar nicht setzten");
+                Program.logger.severe("Konnte Nachbar nicht setzten");
 
 
             }
@@ -443,7 +443,7 @@ public abstract class BlockUpdate extends Thread {
         }
 
         if (!isconnectorclicked && ProjectManager.getActProjectVar().showleftdocker) { //Wenn der eigene Wire connector nicht ausgelöst ist aber ein anderer
-            if (CheckKollision.checkpointwithobject((int) block.getWireconnector_left().x, (int) block.getWireconnector_left().y, 20, 20, (int) ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y)) { //Wenn die Maus über meinen connection offerer fährt...
+            if (CheckKollision.checkpointwithobject((int) block.getWireconnector_left().x, (int) block.getWireconnector_left().y, 20, 20, (int) ProgramingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgramingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y)) { //Wenn die Maus über meinen connection offerer fährt...
                 if (ProjectManager.getActProjectVar().connetor_offerd_hoverd_block != block) { //Und der zugehörige Block noch nicht in der Variable steht
                     ProjectManager.getActProjectVar().connetor_offerd_hoverd_block = block; //Schreibt sich der Block in die Variable welcher Block beim loslassen als wire nachbar verbunden werden würde
                 }
@@ -531,7 +531,7 @@ public abstract class BlockUpdate extends Thread {
                 ProjectManager.getActProjectVar().marked = true;
                 block.setMarked(true);
                 ProjectManager.getActProjectVar().marked_block = block;
-                ProjectManager.getActProjectVar().diff_save.set(ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x - block.getX(), ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y - block.getY());
+                ProjectManager.getActProjectVar().diff_save.set(ProgramingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x - block.getX(), ProgramingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y - block.getY());
 
             }
         }
@@ -544,9 +544,9 @@ public abstract class BlockUpdate extends Thread {
 
 
                 int feld = 2;
-                if (Math.abs(Var.mousepressedold.x - ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x) > feld || Math.abs(Var.mousepressedold.y - ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y) > feld) {
+                if (Math.abs(Var.mousepressedold.x - ProgramingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x) > feld || Math.abs(Var.mousepressedold.y - ProgramingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y) > feld) {
                     if (block.isMoving() == false && ProjectManager.getActProjectVar().ismoving == false) {
-                        ProjectManager.getActProjectVar().diff_save.set(ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x - block.getX(), ProgrammingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y - block.getY());
+                        ProjectManager.getActProjectVar().diff_save.set(ProgramingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x - block.getX(), ProgramingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y - block.getY());
 
 
                         block.setMoving(true);
@@ -593,8 +593,8 @@ public abstract class BlockUpdate extends Thread {
             if(ProgramGrid.enable&&ProgramGrid.block_snapping&&ProgramGrid.block_active_snapping) {
 
 
-                int newx = (int) (((ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x - ProjectManager.getActProjectVar().diff_save.x)-UIVar.abstandvonRand)/ProgramGrid.margin);
-                int newy = (int) (((ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y - ProjectManager.getActProjectVar().diff_save.y)-UIVar.programmflaeche_y)/ProgramGrid.margin);
+                int newx = (int) (((ProgramingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x - ProjectManager.getActProjectVar().diff_save.x)-UIVar.abstandvonRand)/ProgramGrid.margin);
+                int newy = (int) (((ProgramingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y - ProjectManager.getActProjectVar().diff_save.y)-UIVar.programmflaeche_y)/ProgramGrid.margin);
                 block.setX((int) (newx*ProgramGrid.margin)+UIVar.abstandvonRand);
                 block.setY((int) (newy*ProgramGrid.margin)+UIVar.programmflaeche_y);
 
@@ -602,8 +602,8 @@ public abstract class BlockUpdate extends Thread {
             } else {
 
 
-                block.setX((int) (ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x - ProjectManager.getActProjectVar().diff_save.x));
-                block.setY((int) (ProgrammingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y - ProjectManager.getActProjectVar().diff_save.y));
+                block.setX((int) (ProgramingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x - ProjectManager.getActProjectVar().diff_save.x));
+                block.setY((int) (ProgramingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y - ProjectManager.getActProjectVar().diff_save.y));
             }
 
             if (block.getWire_left() != null) {

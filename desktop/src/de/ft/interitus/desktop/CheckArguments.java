@@ -5,7 +5,7 @@
 
 package de.ft.interitus.desktop;
 
-import de.ft.interitus.Programm;
+import de.ft.interitus.Program;
 import de.ft.interitus.Var;
 import de.ft.interitus.datamanager.programmdata.Data;
 
@@ -37,10 +37,10 @@ public class CheckArguments {
 
                     Data.foldername = Var.programmarguments.get(Var.programmarguments.indexOf("-ud") + 1);
                 }else{
-                    Programm.logger.severe("Error in Programm Arguments");
+                    Program.logger.severe("Error in Programm Arguments");
                 }
             }catch (Exception e) {
-                Programm.logger.severe("Error in Programm Arguments");
+                Program.logger.severe("Error in Programm Arguments");
             }
 
         }

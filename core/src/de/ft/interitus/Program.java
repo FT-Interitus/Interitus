@@ -9,6 +9,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
+import de.ft.interitus.Block.ThreadManager;
 import de.ft.interitus.Logging.DebugPrinter;
 import de.ft.interitus.Logging.LoggerInit;
 import de.ft.interitus.UI.CheckShortcuts;
@@ -23,24 +24,32 @@ import de.ft.interitus.loading.Loading;
 import de.ft.interitus.loading.SplashScreen;
 import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.plugin.PluginSandboxSecurityPolicy;
+import de.ft.interitus.plugin.ProgramRegistry;
+import de.ft.interitus.plugin.store.PluginInstallerServer;
+import de.ft.interitus.projecttypes.Importer.Importer;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.FolderUtils;
 import de.ft.interitus.utils.UserNameGetter;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.ConfigurableApplicationContext;
 
 import java.nio.file.Path;
 import java.security.Policy;
+import java.util.Collections;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Logger;
 
-public class Programm extends Game {
+public class Program extends Game {
 
-    public static Programm INSTANCE;
+    public static Program INSTANCE;
     public static boolean inLoading = true;
-    public static Logger logger = Logger.getLogger(Programm.class.getName());
+    public static Logger logger = Logger.getLogger(Program.class.getName());
 
+   public static long time = System.currentTimeMillis();
 
-    public Programm() {
+    public Program() {
 
 
         INSTANCE = this;
@@ -65,7 +74,9 @@ public class Programm extends Game {
        // ((Lwjgl3Graphics) Gdx.graphics).getWindow().iconifyWindow();
         Var.splashscreen = SplashScreen.create();
         if(Var.window==null) {
-            System.out.println("null");
+
+            logger.severe("Window not found... Exiting");
+            System.exit(-1);
         }
         Var.window.setVisible(false);
         //GLFW.glfwHideWindow(Var.window.getWindowHandle());
@@ -81,7 +92,11 @@ public class Programm extends Game {
         Thread loadplugins = new Thread(() -> DisplayErrors.error = PluginManagerHandler.register());
 
         VisUI.load(VisUI.SkinScale.X1);
-        Programm.logger.config("Loaded Vis-UI");
+
+        Importer.init();
+
+
+        Program.logger.config("Loaded Vis-UI");
 
 
         try {
@@ -89,27 +104,38 @@ public class Programm extends Game {
                 loadplugins.start(); //Plugins laden
                 Thread springthread = new Thread(() -> {
 
-                   // SpringApplication app = new SpringApplication(PluginInstallerServer.class);
-                    //app.setDefaultProperties(Collections.singletonMap("server.port","8459"));
-                  //  app.run();
+                   SpringApplication app = new SpringApplication(PluginInstallerServer.class);
+
+                    SpringApplicationBuilder builder = new SpringApplicationBuilder(PluginInstallerServer.class);
+
+                    builder.headless(false);
+                    builder.properties(Collections.singletonMap("server.port","8459"));
+
+                    ConfigurableApplicationContext context = builder.run();
+
 
                 });
                 springthread.start();
 
             }
         } catch (Exception e) {
-            Programm.logger.warning("No Internet Connection!");
+            Program.logger.warning("No Internet Connection!");
             Var.nointernetconnection = true;
         }
 
         EventVar.uiEventManager.UILoadEvent(new UILoadEvent(this));
+
+    /*
+     * Wait until all Plugins are registred
+     */
+
 
 
 
         UI.init();
         ProjectManager.init();
 
-        Programm.logger.config("UI element loaded");
+        Program.logger.config("UI element loaded");
         if (!Var.savemode) {
             CheckShortcuts.loadArrayList();//bevor CheckShortcuts.loatArraylist muss die ui schon die menuebar eleente erstellt haben!!!!!!!!!
         }
@@ -123,17 +149,19 @@ public class Programm extends Game {
             Dialogs.showErrorDialog(UI.stage, "Achtung Interitus läuft im Abgesicherten Modus!\nAlle Einstellungen die die hier vornimmst werden nicht übernommen.\nDieser Modus dient nur dazu, Projekte zu retten und um Plugins zu testen.");
             Data.init(".temp");
         }
-        Programm.logger.finest("");
-        Programm.logger.config("Theme: " + Settings.theme.getName());
-        Programm.logger.config("Limit-FPS: " + Settings.limitfps);
-        Programm.logger.config("Vsync: " + Settings.Vsync);
-        Programm.logger.finest("");
+        Program.logger.finest("");
+        Program.logger.config("Theme: " + Settings.theme.getName());
+        Program.logger.config("Limit-FPS: " + Settings.limitfps);
+        Program.logger.config("Vsync: " + Settings.Vsync);
+        Program.logger.finest("");
         if (!Var.savemode) {
             UserDataInit.init();
         }
-        Programm.logger.config("Setted File drop Listener");
+        Program.logger.config("Setted File drop Listener");
         ExperienceManager.init();
         Gdx.graphics.setVSync(Settings.Vsync);
+
+
 
         Timer saveprogrammdatatimer = new Timer();
         saveprogrammdatatimer.scheduleAtFixedRate(new TimerTask() {
@@ -143,6 +171,20 @@ public class Programm extends Game {
             }
         }, 1000 * 60 * 15, 1000 * 60 * 15);
 
+        Thread pluginloadingthread = new Thread() {
+            @Override
+            public void run() {
+                while(loadplugins.isAlive());
+
+                ProgramRegistry.addProjectTypes();
+                ProgramRegistry.addMenuBarItems();
+                ProgramRegistry.addShortCuts();
+
+                logger.config("Plugin Registering done");
+
+            }
+        };
+        pluginloadingthread.start();
 
 
         setScreen(new Loading());

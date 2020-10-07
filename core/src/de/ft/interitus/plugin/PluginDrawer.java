@@ -6,7 +6,7 @@
 package de.ft.interitus.plugin;
 
 import com.badlogic.gdx.graphics.Texture;
-import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.ProgramingSpace;
 import de.ft.interitus.UI.UI;
 
 public class PluginDrawer {
@@ -14,7 +14,7 @@ public class PluginDrawer {
 
 
         for(PluginRenderer renderer: ProgramRegistry.pluginRenderer) {
-            renderer.render(ProgrammingSpace.batch, UI.UIbatch,ProgrammingSpace.BlockshapeRenderer,ProgrammingSpace.shapeRenderer);
+            renderer.render(ProgramingSpace.batch, UI.UIbatch, ProgramingSpace.BlockshapeRenderer, ProgramingSpace.shapeRenderer);
         }
 
 

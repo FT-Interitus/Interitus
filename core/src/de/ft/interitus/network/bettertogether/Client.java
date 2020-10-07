@@ -7,7 +7,7 @@ package de.ft.interitus.network.bettertogether;
 
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.SaveBlock;
-import de.ft.interitus.Programm;
+import de.ft.interitus.Program;
 import de.ft.interitus.Var;
 import de.ft.interitus.datamanager.BlockCalculator;
 import de.ft.interitus.events.EventVar;
@@ -68,7 +68,7 @@ public class Client {
                 BufferedReader bfreader = new BufferedReader(reader);
 
                 if (bfreader.readLine().contains("ok")) {
-                    Programm.logger.config("Accepted");
+                    Program.logger.config("Accepted");
 
 
                     ObjectInputStream objectInput = new ObjectInputStream(socket.getInputStream());
@@ -78,7 +78,7 @@ public class Client {
                         titleList = (ArrayList<SaveBlock>) object;
                         BlockCalculator.extract(titleList);
                     } catch (ClassNotFoundException e) {
-                        System.out.println("The title list has not come from the server");
+                        Program.logger.config("The title list has not come from the server");
                         e.printStackTrace();
                     }
 
@@ -140,14 +140,14 @@ public class Client {
 
 
                 } else {
-                    Programm.logger.config("Error");
+                    Program.logger.config("Error");
                     socket.close();
                     return;
                 }
 
 
             } catch (IOException e) {
-                System.out.println("The socket for reading the object has problem");
+                Program.logger.config("The socket for reading the object has problem");
                 e.printStackTrace();
             }
         } catch (UnknownHostException e) {

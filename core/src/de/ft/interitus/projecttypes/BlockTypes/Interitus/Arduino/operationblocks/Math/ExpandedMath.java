@@ -8,6 +8,7 @@ package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.operationblock
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.Block.ParameterType;
+import de.ft.interitus.Program;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.BlockTypes.BlockModus;
 import de.ft.interitus.projecttypes.BlockTypes.BlockSettings;
@@ -74,7 +75,7 @@ public class ExpandedMath extends BlockModus implements ArduinoBlock {
         tempstring = replace(tempstring, "c", (String) c.getParameter());
         tempstring = replace(tempstring, "d", (String) d.getParameter());
 
-        System.out.println(tempstring);
+        Program.logger.config(tempstring);
 
         if (parameters.get(4).getDatawire().size() > 0) {
             return parameters.get(4).getVarName() + " = " + "("  +tempstring+ ");";

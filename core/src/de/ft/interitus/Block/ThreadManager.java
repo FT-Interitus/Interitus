@@ -3,10 +3,11 @@
  * Copyright by Tim and Felix
  */
 
-package de.ft.interitus;
+package de.ft.interitus.Block;
 
-import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.BlockUpdate.BlockUpdate;
+import de.ft.interitus.DisplayErrors;
+import de.ft.interitus.Program;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.ProjectVar;
@@ -49,8 +50,8 @@ public class ThreadManager {
 
 
                             for (int i = 0; i < projectVar.blocks.size(); i++) {
-                                //System.out.println("Test"+i);
-//                            System.out.println(camfr.boundsInFrustum(BlockVar.blocks.get(10).getX(), BlockVar.blocks.get(10).getY(), 0, BlockVar.blocks.get(10).getW(), BlockVar.blocks.get(10).getH(),0));
+                                //Program.logger.config("Test"+i);
+//                            Program.logger.config(camfr.boundsInFrustum(BlockVar.blocks.get(10).getX(), BlockVar.blocks.get(10).getY(), 0, BlockVar.blocks.get(10).getW(), BlockVar.blocks.get(10).getH(),0));
                                 try {
                                     Block block = ((BlockUpdate) projectVar.threads.get(i)).block;
                                     if (!block.isVisible() && !block.isMarked() && ((BlockUpdate) projectVar.threads.get(i)).isrunning) {
@@ -71,7 +72,7 @@ public class ThreadManager {
                                         projectVar.threads.set(i, ((BlockUpdate) projectVar.threads.get(i)).block.allowedRestart());
 
 
-                                        Programm.logger.config("Started " + block.getIndex());
+                                        Program.logger.config("Started " + block.getIndex());
 
                                         ((BlockUpdate) projectVar.threads.get(i)).isrunning = true;
                                     }

@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.kotcrab.vis.ui.util.dialog.ConfirmDialogListener;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import de.ft.interitus.Block.SaveBlock;
+import de.ft.interitus.Block.Saving.SaveBlockV1;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.Var;
 import de.ft.interitus.datamanager.BlockCalculator;
@@ -103,7 +104,7 @@ public class Server {
                 sendstring("ok");
 
 
-                ArrayList<SaveBlock> blocks = BlockCalculator.save();
+                ArrayList<SaveBlockV1> blocks = BlockCalculator.save();
 
                 try {
                     ObjectOutputStream objectOutput = new ObjectOutputStream(skt.getOutputStream());

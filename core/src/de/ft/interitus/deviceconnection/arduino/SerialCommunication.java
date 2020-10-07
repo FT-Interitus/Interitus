@@ -1,6 +1,12 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.deviceconnection.arduino;
 
 import com.fazecast.jSerialComm.SerialPort;
+import de.ft.interitus.Program;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.ArrayList;
@@ -24,7 +30,7 @@ public class SerialCommunication {
                 }
             }
             serialPort = SerialPort.getCommPorts()[port];
-            System.out.println(port);
+            Program.logger.config(String.valueOf(port));
             serialPort.openPort();
         }
     }
@@ -33,6 +39,6 @@ public class SerialCommunication {
     }
     public static void methode() {
 
-        System.out.println(((ArrayList<String>) UI.runselection.getSelectedElement().getIdentifier()).get(1));
+        Program.logger.config(((ArrayList<String>) UI.runselection.getSelectedElement().getIdentifier()).get(1));
     }
 }

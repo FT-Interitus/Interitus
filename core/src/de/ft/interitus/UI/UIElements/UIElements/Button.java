@@ -8,7 +8,7 @@ package de.ft.interitus.UI.UIElements.UIElements;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
-import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.ProgramingSpace;
 import de.ft.interitus.UI.Animation;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
@@ -134,7 +134,7 @@ public class Button implements UIElement {
 
     public void draw() { //TODO Konstellationen deutlicher machen
         if (text != null) {
-            glyphLayout.setText(ProgrammingSpace.font, this.text);
+            glyphLayout.setText(ProgramingSpace.font, this.text);
             if (widthoverText) {
                 this.w = (int) glyphLayout.width + 2 * widthoverTextlinksrandabstand;
             }
@@ -145,9 +145,9 @@ public class Button implements UIElement {
 
                 if (text == null) {
 
-                    ProgrammingSpace.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-                    ProgrammingSpace.shapeRenderer.roundendrect(this.x, this.y, this.w, this.h, 5);
-                    ProgrammingSpace.shapeRenderer.end();
+                    ProgramingSpace.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+                    ProgramingSpace.shapeRenderer.roundendrect(this.x, this.y, this.w, this.h, 5);
+                    ProgramingSpace.shapeRenderer.end();
                 }
             } else if (image_mouseover == null) {
                 UI.UIbatch.begin();
@@ -205,8 +205,8 @@ public class Button implements UIElement {
             if (text != null) {
                 UI.UIbatch.begin();
                 UI.UIbatch.setColor(1, 1, 1, transparency);
-                ProgrammingSpace.font.setColor(1,1,1,transparency);
-                ProgrammingSpace.font.draw(UI.UIbatch, glyphLayout, x + widthoverTextlinksrandabstand+text_pos_change_x, y + glyphLayout.height + h / 2 - glyphLayout.height / 2+text_pos_change_y);
+                ProgramingSpace.font.setColor(1,1,1,transparency);
+                ProgramingSpace.font.draw(UI.UIbatch, glyphLayout, x + widthoverTextlinksrandabstand+text_pos_change_x, y + glyphLayout.height + h / 2 - glyphLayout.height / 2+text_pos_change_y);
 
 
                 UI.UIbatch.end();

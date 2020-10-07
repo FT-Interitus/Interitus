@@ -5,7 +5,7 @@
 
 package de.ft.interitus.Block;
 
-import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.ProgramingSpace;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.shortcut.shortcuts.BlockShortcuts;
@@ -22,11 +22,11 @@ public class BlockDrawer {
                 Block block = ProjectManager.getActProjectVar().visible_blocks.get(i);
 
                 try {
-                    ProgrammingSpace.batch.begin();
-                    ProgrammingSpace.batch.end();
+                    ProgramingSpace.batch.begin();
+                    ProgramingSpace.batch.end();
 
                 } catch (IllegalStateException e) {
-                    ProgrammingSpace.batch.end();
+                    ProgramingSpace.batch.end();
                 }
 
                 try {
@@ -37,7 +37,7 @@ public class BlockDrawer {
                             Temp = block;
                         }
                     } else {
-                        block.draw(ProgrammingSpace.batch, ProgrammingSpace.BlockshapeRenderer, ProgrammingSpace.font);
+                        block.draw(ProgramingSpace.batch, ProgramingSpace.BlockshapeRenderer, ProgramingSpace.font);
                     }
 
                     if (block.isMarked()) {
@@ -58,7 +58,7 @@ public class BlockDrawer {
             if (Temp != null) {
 
                 try {
-                    Temp.draw(ProgrammingSpace.batch, ProgrammingSpace.BlockshapeRenderer, ProgrammingSpace.font);
+                    Temp.draw(ProgramingSpace.batch, ProgramingSpace.BlockshapeRenderer, ProgramingSpace.font);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -74,7 +74,7 @@ public class BlockDrawer {
                 ProjectManager.getActProjectVar().visibleWireNodes.get(i).draw();
             }
 
-            UI.updatedragui(ProgrammingSpace.shapeRenderer, false, ProgrammingSpace.batch);
+            UI.updatedragui(ProgramingSpace.shapeRenderer, false, ProgramingSpace.batch);
             BlockTappedBar.tb.setX(UIVar.BlockBarX + UIVar.BlockBarW / 2);
             BlockTappedBar.tb.setY(UIVar.BlockBarY + UIVar.BlockBarH / 2 - (BlockTappedBar.tb.getHeight() + UIVar.abstandvonRand * 2) / 2);
             BlockTappedBar.tb.draw();
@@ -82,7 +82,7 @@ public class BlockDrawer {
             if (Temp2 != null) {
 
                 try {
-                    Temp2.draw(ProgrammingSpace.batch, ProgrammingSpace.BlockshapeRenderer, ProgrammingSpace.font);
+                    Temp2.draw(ProgramingSpace.batch, ProgramingSpace.BlockshapeRenderer, ProgramingSpace.font);
 
 
                 } catch (Exception ignored) {

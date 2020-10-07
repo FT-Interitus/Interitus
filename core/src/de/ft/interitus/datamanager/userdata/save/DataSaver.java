@@ -7,6 +7,7 @@ package de.ft.interitus.datamanager.userdata.save;
 
 import com.badlogic.gdx.files.FileHandle;
 import de.ft.interitus.Block.SaveBlock;
+import de.ft.interitus.Block.Saving.SaveBlockV1;
 import de.ft.interitus.Var;
 import de.ft.interitus.datamanager.BlockCalculator;
 import de.ft.interitus.datamanager.programmdata.Data;
@@ -34,7 +35,7 @@ public class DataSaver {
             public void run() {
 
 
-                ArrayList<SaveBlock> saveBlocks = BlockCalculator.save();
+                ArrayList<SaveBlockV1> saveBlocks = BlockCalculator.save();
 
 
                 String generateprojektname = "project" + System.currentTimeMillis();

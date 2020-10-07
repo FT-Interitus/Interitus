@@ -6,7 +6,7 @@
 package de.ft.interitus.datamanager.programmdata;
 
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
-import de.ft.interitus.Programm;
+import de.ft.interitus.Program;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.Notification.Notification;
 import de.ft.interitus.UI.Notification.NotificationManager;
@@ -203,7 +203,7 @@ public class Updater {
 
 
         }else{
-            Programm.logger.warning("Update Canceled");
+            Program.logger.warning("Update Canceled");
         }
     }
 }

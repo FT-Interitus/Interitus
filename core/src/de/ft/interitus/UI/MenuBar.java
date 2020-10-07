@@ -14,7 +14,7 @@ import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import com.kotcrab.vis.ui.widget.Menu;
 import com.kotcrab.vis.ui.widget.MenuItem;
 import com.kotcrab.vis.ui.widget.PopupMenu;
-import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.ProgramingSpace;
 import de.ft.interitus.UI.newproject.ImportProject;
 import de.ft.interitus.UI.newproject.NewProjectWindow;
 import de.ft.interitus.Var;
@@ -26,7 +26,6 @@ import de.ft.interitus.datamanager.userdata.save.DataSaver;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.UI.UIOpenSettingsEvent;
 import de.ft.interitus.network.bettertogether.Manager;
-import de.ft.interitus.plugin.ProgramRegistry;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.VCS;
 
@@ -74,7 +73,7 @@ public class MenuBar {
                     fullscreen = true;
                 } else {
                     Gdx.graphics.setWindowedMode(Var.w, Var.h);
-                    ProgrammingSpace.batch.getProjectionMatrix().setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                    ProgramingSpace.batch.getProjectionMatrix().setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                     Gdx.gl.glViewport(0, 0, Gdx.graphics.getBackBufferWidth(), Gdx.graphics.getBackBufferHeight());
                     fullscreen = false;
                 }
@@ -320,7 +319,9 @@ public class MenuBar {
         UI.menuBar.addMenu(windowMenu);
         UI.menuBar.addMenu(helpMenu);
 
-        ProgramRegistry.addMenuBarItems();
+
+     //   ProgramRegistry.addMenuBarItems();
+
 
     }
 

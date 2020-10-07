@@ -7,25 +7,20 @@ package de.ft.interitus.UI.UIElements.UIElements.TabBar;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.kotcrab.vis.ui.util.dialog.ConfirmDialogListener;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
-import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.Program;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.UIElements.UIElement;
-import de.ft.interitus.UI.UIElements.check.CheckMouse;
 import de.ft.interitus.Var;
 import de.ft.interitus.datamanager.userdata.UserInteractDataManagerDialog;
 import de.ft.interitus.datamanager.userdata.save.DataSaver;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.global.GlobalTabClickEvent;
-import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.VCS;
 import de.ft.interitus.utils.ArrayList;
-
-import java.awt.*;
 
 
 public class TabBar implements UIElement {
@@ -110,12 +105,12 @@ public class TabBar implements UIElement {
 
 
             if(doonce==false){
-                //System.out.println("moving");
+                //Program.logger.config("moving");
                 tabbs.get(selectedTabindex).setX(tabbs.get(selectedTabindex).getX()+(int)(Gdx.input.getX()- mousemerkpos.x));
                 //int half=(tabbs.get(selectedTabindex).getTabButton().getW()+tabbs.get(selectedTabindex).getCloseButton().getW()+7)/2;
                 //if(tabbs.get(selectedTabindex+1)!=null){
                 //if(tabbs.get(selectedTabindex+1).getTabButton().getX()+tabbs.get(selectedTabindex+1).getTabButton().getW()-half < tabbs.get(selectedTabindex).getTabButton().getX()+half){
-                 //   System.out.println("switch");
+                 //   Program.logger.config("switch");
                // }
                // }
             }
@@ -127,7 +122,7 @@ public class TabBar implements UIElement {
                 selectedTabindex=i;
                 if(doonce=true) {
                     doonce=false;
-                    System.out.println("doonce");
+                    Program.logger.config("doonce");
                     mousemerkpos.set(Gdx.input.getX(), Gdx.input.getY());
                 }
             }

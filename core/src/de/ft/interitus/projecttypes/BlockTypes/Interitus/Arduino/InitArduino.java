@@ -7,8 +7,9 @@ package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino;
 
 import com.badlogic.gdx.graphics.Color;
 import de.ft.interitus.Block.Interitus.*;
+
 import de.ft.interitus.Block.Interitus.save.DefaultSaveBlockGenerator;
-import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.ProgramingSpace;
 import de.ft.interitus.compiler.Interitus.Arduino.ArduinoCompiler;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.actionblocks.setpinmode.SetPinMode;
@@ -30,7 +31,7 @@ import de.ft.interitus.utils.ArrayList;
 
 public class InitArduino {
     static ArrayList<PlatformSpecificBlock> blocks = new ArrayList<>();
-   public static ProjectType arduino = new ProjectType(ProgrammingSpace.nativ, "Arduino-Projekt", blocks, new DefaultBlockGenerator(), new DefaultBlockUpdateGenerator(), new DefaultWireGenerator(), new DefaultWireNodeGenerator(), new DefaultSaveBlockGenerator(), new DefaultBlockVarGenerator(), new ArduinoFunktions(), new ArduinoCompiler());
+   public static ProjectType arduino = new ProjectType(ProgramingSpace.nativ, "Arduino-Projekt", blocks, new DefaultBlockGenerator(), new DefaultBlockUpdateGenerator(), new DefaultWireGenerator(), new DefaultWireNodeGenerator(), new DefaultSaveBlockGenerator(), new DefaultBlockVarGenerator(), new ArduinoFunktions(), new ArduinoCompiler());
 
 
 

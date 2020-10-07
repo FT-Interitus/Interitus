@@ -6,6 +6,7 @@
 package de.ft.interitus.plugin.store;
 
 
+import de.ft.interitus.Program;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,7 +26,7 @@ public class StorePluginInstallManager {
     @RequestMapping(value = "/install")
     public String installer(@RequestParam String url) {
 
-        System.out.println(url);
+        Program.logger.config(url);
             return "";
 
     }

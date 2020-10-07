@@ -177,7 +177,7 @@ public class SettingsUI extends VisWindow {
             item4.add(new TestNode(new VisLabel(" Erweitert"), 15));
             //ADD Advanced Settings to ITM if Device is connect
 
-            ProgramRegistry.addSettings(item5);
+           ProgramRegistry.addSettings(item5);
 
             item1.setExpanded(true);
             item2.setExpanded(true);

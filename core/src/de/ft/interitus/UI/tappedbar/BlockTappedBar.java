@@ -9,7 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Cursor;
 import de.ft.interitus.Block.TapBarBlockItem;
 import de.ft.interitus.DisplayErrors;
-import de.ft.interitus.Programm;
+import de.ft.interitus.Program;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.UIElements.quickinfo.QuickInfoContent;
 import de.ft.interitus.UI.UIVar;
@@ -65,7 +65,7 @@ public class BlockTappedBar {
                             Specials.addItem(new TapBarBlockItem(ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i)));
                             break;
                         case OwnBlocks:
-                            Programm.logger.severe("Unallowed Block was registered from Plugin " + PluginManagerHandler.getPluginArgs(ProjectManager.getActProjectVar().projectType.getPluginRegister(),"name"));
+                            Program.logger.severe("Unallowed Block was registered from Plugin " + PluginManagerHandler.getPluginArgs(ProjectManager.getActProjectVar().projectType.getPluginRegister(),"name"));
                             break;
 
                     }
@@ -102,7 +102,7 @@ public class BlockTappedBar {
                                 Specials.addItem(new TapBarBlockItem(psb));
                                 break;
                             case OwnBlocks:
-                                Programm.logger.severe("Unallowed Block was registered from Plugin " + PluginManagerHandler.getPluginArgs(ProjectManager.getActProjectVar().projectType.getPluginRegister(), "name"));
+                                Program.logger.severe("Unallowed Block was registered from Plugin " + PluginManagerHandler.getPluginArgs(ProjectManager.getActProjectVar().projectType.getPluginRegister(), "name"));
                                 break;
 
                         }

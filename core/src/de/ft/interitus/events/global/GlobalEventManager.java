@@ -6,7 +6,7 @@
 package de.ft.interitus.events.global;
 
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
-import de.ft.interitus.Programm;
+import de.ft.interitus.Program;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.UIElements.TabBar.Tab;
 import de.ft.interitus.compiler.Compiler;
@@ -60,7 +60,7 @@ public class GlobalEventManager implements GlobalEventListener {
         }
 
         if (!handeled) {
-            Programm.logger.severe("Datei konnte nicht verarbeitet werden");
+            Program.logger.severe("Datei konnte nicht verarbeitet werden");
             Dialogs.showOKDialog(UI.stage, "Fehler", "Datei konnte nicht verarbeitet werden");
         }
 

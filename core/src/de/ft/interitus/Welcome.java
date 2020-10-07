@@ -58,7 +58,7 @@ public class Welcome extends ScreenAdapter {
         batch.end();
 
         if (forward) {
-            Programm.INSTANCE.setScreen(new ProgrammingSpace());
+            Program.INSTANCE.setScreen(new ProgramingSpace());
             forward = false;
             super.dispose();
         }

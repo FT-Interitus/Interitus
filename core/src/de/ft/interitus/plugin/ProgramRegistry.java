@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.kotcrab.vis.ui.widget.Menu;
 import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisTable;
+import de.ft.interitus.Program;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.Theme.RegisteredThemes;
@@ -61,9 +62,12 @@ public class ProgramRegistry {
 
     @SuppressWarnings("unused")
     public  boolean addMenuEntry(Menu menuentry, Plugin requestedplugin) {
+        Program.logger.config("successful request: "+PluginManagerHandler.getPluginArgs(requestedplugin,"name"));
         if (PluginManagerHandler.loadedplugins.contains(requestedplugin)) {
             pluginMenubar.add(menuentry);
             pluginMenubarplugins.add(requestedplugin);
+            Program.logger.config("successful added: "+PluginManagerHandler.getPluginArgs(requestedplugin,"name"));
+
             return true;
         } else {
             return false;
@@ -181,7 +185,7 @@ public class ProgramRegistry {
 
     /**
      * @deprecated it isn't posible to unload a Plugin
-     * @param plugin
+     * @param plugin removed Plugin
      */
 
     static void removepluginregisters(Plugin plugin) {
@@ -281,12 +285,18 @@ public class ProgramRegistry {
         }
     }
 
+    /***
+     * Will be loaded in Runtime because the settings window does not appear at program start
+     * @param node
+     */
     public static void addSettings(SettingsUI.TestNode node) {
         for (int i = 0; i < ProgramRegistry.pluginsettings.size(); i++) {
             node.add(new SettingsUI.TestNode(new VisLabel(" " +  PluginManagerHandler.getPluginArgs(PluginManagerHandler.loadedplugins.get(i),"name")+ " "), 17 + i));
         }
     }
-
+    /***
+     * Will be loaded in Runtime because the settings window does not appear at program start
+     */
     public static void getSettingsContainer(VisTable container,int id) {
         container.add(ProgramRegistry.pluginsettings.get(id));
 

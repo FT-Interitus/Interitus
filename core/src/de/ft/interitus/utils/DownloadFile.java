@@ -5,7 +5,7 @@
 
 package de.ft.interitus.utils;
 
-import de.ft.interitus.Programm;
+import de.ft.interitus.Program;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -56,7 +56,7 @@ public class DownloadFile {
 
 
         } else {
-            Programm.logger.warning("No file to download. Server replied HTTP code: " + responseCode);
+            Program.logger.warning("No file to download. Server replied HTTP code: " + responseCode);
             return null;
         }
 
@@ -104,7 +104,7 @@ public class DownloadFile {
 
 
         } else {
-            System.out.println("No file to download. Server replied HTTP code: " + responseCode);
+            Program.logger.config("No file to download. Server replied HTTP code: " + responseCode);
             return null;
         }
 

@@ -5,9 +5,8 @@
 
 package de.ft.interitus.projecttypes;
 
-import com.badlogic.gdx.files.FileHandle;
-import de.ft.interitus.Programm;
-import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.Program;
+import de.ft.interitus.ProgramingSpace;
 import de.ft.interitus.UI.Notification.Notification;
 import de.ft.interitus.UI.Notification.NotificationManager;
 import de.ft.interitus.UI.UI;
@@ -17,7 +16,6 @@ import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.Var;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.datamanager.programmdata.experience.ExperienceVar;
-import de.ft.interitus.datamanager.userdata.load.DataLoader;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.global.GlobalCloseEvent;
 import de.ft.interitus.events.global.GlobalEventAdapter;
@@ -25,7 +23,6 @@ import de.ft.interitus.events.global.GlobalTabClickEvent;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.utils.ClearActOpenProgramm;
 
-import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -77,8 +74,8 @@ public class ProjectManager {
 
         UI.runselection.setDefaultText("");
 
-        ProgrammingSpace.cam.position.set(Var.openprojects.get(index).cam_pos.x, Var.openprojects.get(index).cam_pos.y, 0);
-        ProgrammingSpace.cam.zoom = Var.openprojects.get(index).zoom;
+        ProgramingSpace.cam.position.set(Var.openprojects.get(index).cam_pos.x, Var.openprojects.get(index).cam_pos.y, 0);
+        ProgramingSpace.cam.zoom = Var.openprojects.get(index).zoom;
         Var.openprojectindex = index;
         getActProjectVar().currentstarttime = System.currentTimeMillis();
 
@@ -114,7 +111,7 @@ public class ProjectManager {
                     waitforprojectnotification.close();
                     UIVar.isdialogeopend = false;
                     UI.runselection.clear();
-                    System.out.println("clear");
+                    Program.logger.config("clear");
                     this.cancel();
                 }
 
@@ -135,7 +132,7 @@ public class ProjectManager {
 
        ProjectManager.getActProjectVar().projectType.getProjectFunktions().switchedto();
        UI.tabbar.setSelectedTabindex(index);
-        Programm.logger.config("changed tab");
+        Program.logger.config("changed tab");
     }
 
     /***

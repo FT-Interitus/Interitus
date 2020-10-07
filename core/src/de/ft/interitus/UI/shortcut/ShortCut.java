@@ -8,11 +8,9 @@ package de.ft.interitus.UI.shortcut;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.kotcrab.vis.ui.widget.MenuItem;
-import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.ProgramingSpace;
 import de.ft.interitus.Var;
 import de.ft.interitus.utils.ArrayList;
-
-import javax.swing.plaf.FileChooserUI;
 
 public class ShortCut {
     private String name = null;
@@ -160,7 +158,7 @@ public class ShortCut {
 
                 for (int i = 0; i < combination.size(); i++) {
                     if (combination.get(i) < 600) {
-                        if (ProgrammingSpace.pressedKeys.getPressedkeys().indexOf(combination.get(i)) == -1) {
+                        if (ProgramingSpace.pressedKeys.getPressedkeys().indexOf(combination.get(i)) == -1) {
                             pressed = false;
                         }
                     } else {
@@ -178,7 +176,7 @@ public class ShortCut {
                         }
                     }
                 }
-                if (combination.size() != ProgrammingSpace.pressedKeys.getPressedkeys().size()) {
+                if (combination.size() != ProgramingSpace.pressedKeys.getPressedkeys().size()) {
                     pressed = false;
                 }
 

@@ -5,11 +5,8 @@
 
 package de.ft.interitus.loading;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.GL20;
-import de.ft.interitus.Programm;
-import de.ft.interitus.Settings;
+import de.ft.interitus.Program;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.Var;
 import de.ft.interitus.Welcome;
@@ -35,20 +32,21 @@ public class Loading extends ScreenAdapter {
 
     public void render(float delta) {
 
-        Gdx.gl.glClearColor(Settings.theme.ClearColor().r, Settings.theme.ClearColor().g, Settings.theme.ClearColor().b, Settings.theme.ClearColor().a);
 
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT | (Gdx.graphics.getBufferFormat().coverageSampling ? GL20.GL_COVERAGE_BUFFER_BIT_NV : 0));
         try {
 
             if (AssetLoader.manager.update()) {
+
+
+
                 try {
                     AssetLoader.save();
                 } catch (Exception e) {
 
-                    Programm.logger.severe("Error while saving Assets");
+                    Program.logger.severe("Error while saving Assets");
                 }
-                if (Programm.inLoading == true) {
-                    Programm.inLoading = false;
+                if (Program.inLoading == true) {
+                    Program.inLoading = false;
                     this.dispose();
                     EventVar.globalEventManager.loadingdone(new GlobalLoadingDoneEvent(this));
                     UI.initnachassetsloading();
@@ -56,18 +54,11 @@ public class Loading extends ScreenAdapter {
 
 
                     Var.splashscreen.destroy();
-                    //GLFW.glfwMaximizeWindow(Var.window.getWindowHandle());
-
-                    //GLFW.glfwHideWindow(Var.window.getWindowHandle());
-
 
                     Var.window.setVisible(true);
                     GLFW.glfwFocusWindow(Var.window.getWindowHandle());
-                    Programm.INSTANCE.setScreen(new Welcome());
-                    //  ((Lwjgl3Graphics) Gdx.graphics).getWindow().restoreWindow();
+                    Program.INSTANCE.setScreen(new Welcome());
 
-                    //GLFW.glfwMaximizeWindow(Var.window.getWindowHandle());
-                    this.dispose();
 
                 }
             }
@@ -78,9 +69,7 @@ public class Loading extends ScreenAdapter {
     }
 
 
-    public void dispose() {
 
-    }
 
 
 }

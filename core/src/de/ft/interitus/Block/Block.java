@@ -15,7 +15,6 @@ import de.ft.interitus.Block.Generators.BlockUpdateGenerator;
 import de.ft.interitus.Block.Generators.BlocktoSaveGenerator;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Settings;
-import de.ft.interitus.ThreadManager;
 import de.ft.interitus.UI.UIElements.BlockDropDownMenue.BlockDropDownMenue;
 import de.ft.interitus.UI.UIElements.check.CheckKollision;
 import de.ft.interitus.UI.UIVar;

@@ -7,7 +7,7 @@ package de.ft.interitus.UI.popup;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import de.ft.interitus.Programm;
+import de.ft.interitus.Program;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.rightclick.RightClickOpenRequestEvent;
@@ -27,7 +27,7 @@ public class PopupHandler {
             if (Gdx.input.isButtonJustPressed(Input.Buttons.RIGHT)) {
 
                     highestPriority = null;
-                    ArrayList<PopupMenue> requestedMenues = EventVar.rightClickEventManager.openrequest(new RightClickOpenRequestEvent(Programm.INSTANCE), Gdx.input.getX(), Gdx.input.getY());
+                    ArrayList<PopupMenue> requestedMenues = EventVar.rightClickEventManager.openrequest(new RightClickOpenRequestEvent(Program.INSTANCE), Gdx.input.getX(), Gdx.input.getY());
 
                     for (PopupMenue popupMenu : requestedMenues) {
                         if (popupMenu != null) {
@@ -63,7 +63,7 @@ public class PopupHandler {
                 if(highestPriority!=null) {
                     if(highestPriority.ispressed!=-1) {
 
-                        EventVar.rightClickEventManager.performAction(new RightClickPerformActionEvent(Programm.INSTANCE),highestPriority,highestPriority.ispressed);
+                        EventVar.rightClickEventManager.performAction(new RightClickPerformActionEvent(Program.INSTANCE),highestPriority,highestPriority.ispressed);
                     highestPriority.ispressed = -1;
                     }
 

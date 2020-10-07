@@ -8,7 +8,8 @@ package de.ft.interitus.datamanager.userdata;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import de.ft.interitus.DisplayErrors;
-import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.Program;
+import de.ft.interitus.ProgramingSpace;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.Var;
 import de.ft.interitus.datamanager.programmdata.Data;
@@ -20,7 +21,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
 
-import static de.ft.interitus.ProgrammingSpace.saver;
+import static de.ft.interitus.ProgramingSpace.saver;
 
 public class UserInteractDataManagerDialog {
     static Thread open;
@@ -44,7 +45,7 @@ public class UserInteractDataManagerDialog {
 
                     if (userSelection == JFileChooser.APPROVE_OPTION) {
                         File fileToSave = fileChooser.getSelectedFile();
-                        System.out.println("Save as file: " + fileToSave.getName());
+                        Program.logger.config("Save as file: " + fileToSave.getName());
 
 
                         if (fileToSave.getAbsolutePath().contains(".itp")) {
@@ -57,7 +58,7 @@ public class UserInteractDataManagerDialog {
                             DataSaver.save(Gdx.files.absolute(fileToSave.getAbsolutePath() + ".itp"));
                             ProjectManager.getActProjectVar().setFilename(fileToSave.getName() + "");
                         }
-                        System.out.println(ProjectManager.getActProjectVar().path);
+                        Program.logger.config(ProjectManager.getActProjectVar().path);
 
                         if (Data.filename.size() > 9) {
                             Data.filename.remove(0);
@@ -102,11 +103,11 @@ public class UserInteractDataManagerDialog {
                 JFileChooser fileChooser = new JFileChooser();
 
                 fileChooser.setFileFilter(new FileNameExtensionFilter("Projektdatei (.itp)", "itp"));
-                int result = fileChooser.showOpenDialog(ProgrammingSpace.saver);
+                int result = fileChooser.showOpenDialog(ProgramingSpace.saver);
                 if (result == JFileChooser.APPROVE_OPTION) {
                     File selectedFile = fileChooser.getSelectedFile();
 
-                    System.out.println("Selected file: " + selectedFile.getName());
+                    Program.logger.config("Selected file: " + selectedFile.getName());
                     FileHandle handle = Gdx.files.internal(selectedFile.getAbsolutePath());
 
                     DataLoader.load(handle, selectedFile.getName(), selectedFile.getAbsolutePath());

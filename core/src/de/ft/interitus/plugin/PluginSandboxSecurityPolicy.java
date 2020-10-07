@@ -14,7 +14,7 @@ public class PluginSandboxSecurityPolicy extends Policy {
     @Override
     public PermissionCollection getPermissions(ProtectionDomain domain) {
         if(isPlugin(domain)) {
-            return applicationPermissions(); //TODO change back to Plugin Perms!
+            return applicationPermissions();
         }else{
             return applicationPermissions();
         }
@@ -25,8 +25,7 @@ public class PluginSandboxSecurityPolicy extends Policy {
     }
 
     private PermissionCollection pluginPermissions() {
-        Permissions permissions = new Permissions(); // No permissions
-        return permissions;
+        return new Permissions();
     }
 
     private PermissionCollection applicationPermissions() {

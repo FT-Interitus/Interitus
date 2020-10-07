@@ -6,12 +6,13 @@
 package de.ft.interitus.projecttypes.ProgrammArea;
 
 import de.ft.interitus.Block.Block;
+import de.ft.interitus.Program;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.ArrayList;
 
 public class ProgrammAreaManager {
     public static void update(){
-        System.out.println(ProjectManager.getActProjectVar().blocks.getLastObject().getBlocktype().blockModis.get(ProjectManager.getActProjectVar().blocks.get(0).getBlocktype().actBlockModiIndex).getProgrammArea().toString());
+        Program.logger.config(ProjectManager.getActProjectVar().blocks.getLastObject().getBlocktype().blockModis.get(ProjectManager.getActProjectVar().blocks.get(0).getBlocktype().actBlockModiIndex).getProgrammArea().toString());
     }
     public static ProgrammArea getDirectProgrammAreaOfBlock(int i){
         return ProjectManager.getActProjectVar().blocks.get(i).getBlocktype().blockModis.get(ProjectManager.getActProjectVar().blocks.get(i).getBlocktype().actBlockModiIndex).getProgrammArea();

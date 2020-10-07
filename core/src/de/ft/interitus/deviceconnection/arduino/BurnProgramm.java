@@ -7,7 +7,7 @@ package de.ft.interitus.deviceconnection.arduino;
 
 import de.ft.interitus.Block.Devices;
 import de.ft.interitus.DisplayErrors;
-import de.ft.interitus.Programm;
+import de.ft.interitus.Program;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -44,7 +44,7 @@ public class BurnProgramm {
             burnLinux(platform, port, file, methode);
 
         } else {
-            Programm.logger.severe("You OS is not supported");
+            Program.logger.severe("You OS is not supported");
         }
 
     }

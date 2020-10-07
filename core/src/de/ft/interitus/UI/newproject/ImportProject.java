@@ -14,18 +14,11 @@ import com.kotcrab.vis.ui.building.TableBuilder;
 import com.kotcrab.vis.ui.building.utilities.CellWidget;
 import com.kotcrab.vis.ui.building.utilities.Padding;
 import com.kotcrab.vis.ui.widget.*;
-import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.ProgramingSpace;
 import de.ft.interitus.Settings;
-import de.ft.interitus.UI.MenuBar;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIVar;
-import de.ft.interitus.UI.tappedbar.BlockTappedBar;
-import de.ft.interitus.Var;
-import de.ft.interitus.datamanager.userdata.UserInteractDataManagerDialog;
-import de.ft.interitus.datamanager.userdata.load.DataLoader;
-import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
 import de.ft.interitus.projecttypes.Importer.Importer;
-import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.ArrayList;
 
 import javax.swing.*;
@@ -118,7 +111,7 @@ public class ImportProject {
                 public void changed(ChangeEvent event, Actor actor) {
 
                     JFileChooser fileChooser = new JFileChooser();
-                    int result = fileChooser.showOpenDialog(ProgrammingSpace.saver);
+                    int result = fileChooser.showOpenDialog(ProgramingSpace.saver);
                     if (result == JFileChooser.APPROVE_OPTION) {
                          selectedfile = fileChooser.getSelectedFile();
                         if( nameinput.getText().length()>3&&!nameinput.getText().startsWith(" ")&&!nameinput.getText().endsWith(" ")) {

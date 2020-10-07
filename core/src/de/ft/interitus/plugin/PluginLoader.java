@@ -5,26 +5,15 @@
 
 package de.ft.interitus.plugin;
 
-import com.badlogic.gdx.Files;
-import com.badlogic.gdx.backends.lwjgl3.Lwjgl3FileHandle;
-import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Files;
-import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
-import de.ft.interitus.Programm;
-import de.ft.interitus.UI.UIElements.TextField;
+import de.ft.interitus.Program;
 
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.util.Arrays;
 import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
-import java.util.logging.FileHandler;
 
 public class PluginLoader {
 
@@ -70,14 +59,14 @@ public class PluginLoader {
            try {
 
                if(!PluginManagerHandler.pluginvalidator(new String(cl.getResourceAsStream("plugin.json").readAllBytes()))) {
-                   Programm.logger.warning("Plugin loading error");
+                   Program.logger.warning("Plugin loading error");
                    return;
                }
 
            }catch (Throwable e) {
                e.printStackTrace();
 
-               Programm.logger.warning("Plugin doesn't provide plugin.json");
+               Program.logger.warning("Plugin doesn't provide plugin.json");
 
                return;
            }
@@ -110,7 +99,7 @@ public class PluginLoader {
                     PluginManagerHandler.error = e;
                     return;
                 }
-                Programm.logger.config("Loaded " + filetest.getName());
+                Program.logger.config("Loaded " + filetest.getName());
                 PluginManagerHandler.loadedplugins.add(plugin);
             } catch (InstantiationException e) {
                 PluginManagerHandler.error = e;
@@ -121,7 +110,7 @@ public class PluginLoader {
             }
 
         } else {
-            Programm.logger.severe("Fehlerhaftes Plugin");
+            Program.logger.severe("Fehlerhaftes Plugin");
         }
 
 

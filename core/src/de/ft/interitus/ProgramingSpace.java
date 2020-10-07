@@ -15,6 +15,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.ft.interitus.Block.BlockDrawer;
+import de.ft.interitus.Block.ThreadManager;
 import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.Notification.Notification;
 import de.ft.interitus.UI.Notification.NotificationManager;
@@ -38,7 +39,7 @@ import de.ft.interitus.utils.ShapeRenderer;
 import java.awt.*;
 
 
-public class ProgrammingSpace extends ScreenAdapter {
+public class ProgramingSpace extends ScreenAdapter {
     public static SpriteBatch batch;
 
     public static OrthographicCamera cam;
@@ -60,7 +61,7 @@ public class ProgrammingSpace extends ScreenAdapter {
     public boolean loadimagesfromplugin = true;
 
 
-    public ProgrammingSpace() {
+    public ProgramingSpace() {
 
 
         pressedKeys = new PressedKeys();
@@ -91,7 +92,7 @@ public class ProgrammingSpace extends ScreenAdapter {
 
         de.ft.interitus.UI.Viewport.init();
 
-        Gdx.graphics.setTitle("New File");
+        Gdx.graphics.setTitle("Interitus - Home Version");
         ProjectManager.getActProjectVar().setFilename("New File");
 
 
@@ -101,6 +102,7 @@ public class ProgrammingSpace extends ScreenAdapter {
         System.gc(); //Clean RAM after Loading
 
         Updater.initprogress();
+        Program.logger.config(String.valueOf(System.currentTimeMillis()- Program.time));
 
 
     }
@@ -108,21 +110,19 @@ public class ProgrammingSpace extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
-        if (Gdx.input.isKeyJustPressed(Input.Keys.S)) {
-            ProjectManager.getActProjectVar().tools.get(0).open();
-        }
+
 
         if (ProjectManager.getActProjectVar().marked_block != null) {
             ProgrammAreaManager.getProgrammArea(ProjectManager.getActProjectVar().marked_block.getIndex());
         }
-        ProgrammingSpace.delta = delta;
+        ProgramingSpace.delta = delta;
 
 
         renderstarttime = System.currentTimeMillis();
 
         if (Var.openprojects.size() != 0 && ProjectManager.getActProjectVar().projectType == null) {
             this.dispose();
-            Programm.INSTANCE.setScreen(new Welcome());
+            Program.INSTANCE.setScreen(new Welcome());
         }
 
 

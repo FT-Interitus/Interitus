@@ -9,7 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Frustum;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import de.ft.interitus.ProgrammingSpace;
+import de.ft.interitus.ProgramingSpace;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.ProjectManager;
@@ -49,7 +49,7 @@ public abstract class WireNode implements VisibleObjects {
     public void draw() {
 
 
-        if (CheckKollision.checkpointwithobject(x, y, w, h, (int) ProgrammingSpace.viewport.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgrammingSpace.viewport.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y) && Gdx.input.isButtonJustPressed(0)) {
+        if (CheckKollision.checkpointwithobject(x, y, w, h, (int) ProgramingSpace.viewport.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgramingSpace.viewport.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y) && Gdx.input.isButtonJustPressed(0)) {
 
             if (!gemerkt) {
                 gemerktvector.set(Gdx.input.getX() - x, Gdx.graphics.getHeight() - Gdx.input.getY() - y);
@@ -71,17 +71,17 @@ public abstract class WireNode implements VisibleObjects {
 
 
         boolean temp = false;
-        if (!ProgrammingSpace.batch.isDrawing()) {
-            ProgrammingSpace.batch.begin();
+        if (!ProgramingSpace.batch.isDrawing()) {
+            ProgramingSpace.batch.begin();
             temp = true;
         }
 
 
-        ProgrammingSpace.batch.draw(AssetLoader.wire_node, x, y, w, h);
+        ProgramingSpace.batch.draw(AssetLoader.wire_node, x, y, w, h);
 
 
         if (temp) {
-            ProgrammingSpace.batch.end();
+            ProgramingSpace.batch.end();
         }
 
         if (wire_left == null || wire_right == null) {
@@ -133,7 +133,7 @@ public abstract class WireNode implements VisibleObjects {
 
     @Override
     public boolean isVisible() {
-        frustum = ProgrammingSpace.cam.frustum;
+        frustum = ProgramingSpace.cam.frustum;
         return frustum.boundsInFrustum(x, y, 0, w, h, 0);
 
     }

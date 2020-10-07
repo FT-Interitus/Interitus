@@ -8,11 +8,10 @@ package de.ft.interitus.loading;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import de.ft.interitus.Programm;
+import de.ft.interitus.Program;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.window.CreateWindow;
 import de.ft.interitus.UI.window.Window;
-import org.lwjgl.glfw.GLFWVidMode;
 
 public class SplashScreen {
     public static Window create() {
@@ -21,7 +20,7 @@ public class SplashScreen {
         window = CreateWindow.addWindow("Loading", new ApplicationListener() {
             @Override
             public void create() {
-                Programm.logger.config("Created Splash Screen");
+                Program.logger.config("Created Splash Screen");
             }
 
             @Override

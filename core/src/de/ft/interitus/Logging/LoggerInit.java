@@ -6,7 +6,7 @@
 package de.ft.interitus.Logging;
 
 import de.ft.interitus.DisplayErrors;
-import de.ft.interitus.Programm;
+import de.ft.interitus.Program;
 import de.ft.interitus.Var;
 import de.ft.interitus.datamanager.programmdata.Data;
 
@@ -23,7 +23,7 @@ public class LoggerInit {
 
     public static void init() {
 
-        Programm.logger.setLevel(Level.ALL);
+        Program.logger.setLevel(Level.ALL);
 
         Handler handler = new ConsoleHandler();
         if (!new File(System.getProperty("user.home") + "/" + Data.foldername + "/log").isDirectory()) {
@@ -68,15 +68,15 @@ public class LoggerInit {
             e.printStackTrace();
         }
         handler.setLevel(Level.ALL);
-        Programm.logger.setUseParentHandlers(false);
+        Program.logger.setUseParentHandlers(false);
         handler.setFormatter(new LogColorFormater());
-        Programm.logger.addHandler(handler);
-        Programm.logger.addHandler(fh);
+        Program.logger.addHandler(handler);
+        Program.logger.addHandler(fh);
 
 
-        System.setOut(new PrintStream(new LoggerOutputStream(Programm.logger, Level.INFO)));
-        System.setErr(new PrintStream(new LoggerOutputStream(Programm.logger, Level.SEVERE)));
-        Programm.logger.config("Logger init finished");
+        System.setOut(new PrintStream(new LoggerOutputStream(Program.logger, Level.INFO)));
+        System.setErr(new PrintStream(new LoggerOutputStream(Program.logger, Level.SEVERE)));
+        Program.logger.config("Logger init finished");
 
     }
 

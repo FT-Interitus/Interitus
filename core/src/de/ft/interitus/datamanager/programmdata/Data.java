@@ -9,7 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Logging.LoggerInit;
-import de.ft.interitus.Programm;
+import de.ft.interitus.Program;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.Theme.RegisteredThemes;
@@ -63,7 +63,7 @@ public class Data {
 
         Path path = folder.toPath();
         if (!folder.exists()) {//Wenn der Programm-Ordner noch nicht exsitiert
-            Programm.logger.warning("Create Programm Data Folder");
+            Program.logger.warning("Create Programm Data Folder");
 
             folder.mkdir(); //der Ordner wird erstellt
             tempfolder.mkdir();
@@ -115,14 +115,14 @@ public class Data {
             try {
                 Files.setAttribute(path, "dos:hidden", true); //Auf Windows wird das Verzeichnis unsichtbar gemacht (Auf Linux reicht ja schon der punkt davor)
             } catch (UnsupportedOperationException | IOException e) {
-                Programm.logger.config("Cannot hidden file");
+                Program.logger.config("Cannot hidden file");
             }
         } else {
-            Programm.logger.config("Load Programm Instance: " + folder.getAbsolutePath());
+            Program.logger.config("Load Programm Instance: " + folder.getAbsolutePath());
 
             if (new File(System.getProperty("user.home") + "/" + Data.foldername + "/save.mode").exists()) {
                 if (!Var.savemode) {
-                    Programm.logger.severe("Das Öffnen von Interits aus einer Abgesicherten Modus Instanz ist nicht erlaubt");
+                    Program.logger.severe("Das Öffnen von Interits aus einer Abgesicherten Modus Instanz ist nicht erlaubt");
                     System.exit(-1);
                 } else {
                     try {
@@ -146,7 +146,7 @@ public class Data {
             }
 
             if (!recent.exists()) { //Wenn die Datei der letzten Projekte noch nicht exsisiert
-                Programm.logger.config("Recent not found");
+                Program.logger.config("Recent not found");
 
                 try {
                     recent.createNewFile();
@@ -190,7 +190,7 @@ public class Data {
 
 
             if (!settings.exists()) { //siehe recent
-                Programm.logger.config("Settings not found");
+                Program.logger.config("Settings not found");
                 try {
                     settings.createNewFile();
                     Gdx.files.absolute(settings.getAbsolutePath()).writeString("{}", false); //siehe recent
@@ -250,7 +250,7 @@ public class Data {
 
             if (!userexperience.exists()) { //siehe recent
                 try {
-                    Programm.logger.config("userexperience not found");
+                    Program.logger.config("userexperience not found");
 
                     userexperience.createNewFile();
                     Gdx.files.absolute(userexperience.getAbsolutePath()).writeString("{}", false); //siehe recent
@@ -288,7 +288,7 @@ public class Data {
 
             if (!tastenkombinationen.exists()) { //siehe recent
                 try {
-                    Programm.logger.config("tastenkombinationen not found");
+                    Program.logger.config("tastenkombinationen not found");
                     tastenkombinationen.createNewFile();
                     Gdx.files.absolute(tastenkombinationen.getAbsolutePath()).writeString("{}", false); //siehe recent
                 } catch (IOException e) {
@@ -347,13 +347,13 @@ public class Data {
 
         //////////////////////////////////////////////////////////////////7
 
-        Programm.logger.config("Programm Data Loading fininsh");
+        Program.logger.config("Programm Data Loading fininsh");
 
     }
 
 
     public static void close(boolean closeprogramm) {
-        Programm.logger.config("Saved Programm Settings");
+        Program.logger.config("Saved Programm Settings");
         //////Tastenkombinationen////////////////////////////////////
         FileHandle tastenkombinationen = Gdx.files.absolute(System.getProperty("user.home") + "/" + foldername + "/tastenkombinationen.json"); //Lade datei
         JSONObject tastenkombinationen_obj = new JSONObject(tastenkombinationen);

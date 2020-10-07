@@ -7,8 +7,9 @@ package de.ft.interitus.Block.Generators;
 
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.SaveBlock;
+import de.ft.interitus.Block.Saving.SaveBlockV1;
 
 
 public interface BlocktoSaveGenerator {
-    SaveBlock generate(Block block);
+    SaveBlockV1 generate(Block block);
 }
