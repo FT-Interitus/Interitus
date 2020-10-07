@@ -110,6 +110,7 @@ public class ProjectManager {
 
                     waitforprojectnotification.close();
                     UIVar.isdialogeopend = false;
+                    ProjectManager.getActProjectVar().marked_block = null;
                     UI.runselection.clear();
                     Program.logger.config("clear");
                     this.cancel();
