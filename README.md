@@ -37,7 +37,7 @@ to make the leap into a "real" programming language.
 
 
 
-#### See <a href="https://ft-interitus.github.io">Docs</a> for more Informations.
+#### See <a href="https://interitus.readthedocs.io/de/latest/">Docs</a> for more Informations.
 
 <br/>
 
