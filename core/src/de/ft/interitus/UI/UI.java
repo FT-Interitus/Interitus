@@ -663,4 +663,38 @@ public class UI {
     }
 
 
+    public static void onSwitchToWelcome() {
+        if (settingstextfield != null) {
+            try {
+                settingstextfield.removeListener(settingstextfield.getListeners().get(0));
+                settingstextfield.remove();
+            } catch (Exception ignored) {
+
+
+            }
+        }
+
+        if (blocknamelabel != null) {
+            blocknamelabel.remove();
+        }
+
+        if (blocksettingslabel != null) {
+            blocksettingslabel.remove();
+        }
+
+        if (textFielder.size() > 0) {
+            UIVar.isBlockSettingsopen = false;
+            for (int i = 0; i < textFielder.size(); i++) {
+                try {
+                    textFielder.get(i).removeListener(textFielder.get(i).getListeners().get(0));
+                } catch (Exception e) {
+
+                }
+                textFielder.get(i).remove();
+            }
+            textFielder.clear();
+        }
+    }
+
+
 }

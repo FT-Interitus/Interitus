@@ -5,6 +5,7 @@
 
 package de.ft.interitus.Logging;
 
+import de.ft.interitus.Program;
 import de.ft.interitus.utils.ArrayList;
 
 import java.io.OutputStream;
@@ -26,6 +27,7 @@ public class LoggerOutputStream extends OutputStream {
 
     @Override
     public void write(int b) {
+
         byte[] bytes = new byte[1];
         bytes[0] = (byte) (b & 0xff);
         mem = mem + new String(bytes);
@@ -34,20 +36,33 @@ public class LoggerOutputStream extends OutputStream {
             mem = mem.substring(0, mem.length() - 1);
             flush();
         }
+
+
     }
 
     /**
      * Flushes the output stream.
+     * Disabled Debug flushing because you sould use logger in Program.logger
      */
+
     @Override
     public void flush() {
+
+
+
         if (level == Level.INFO) {
+
+            /*
             logger.log(level, mem + "\n");
             mem = "";
+
+             */
         } else {
             logger.log(level, mem + "");
             mem = "";
         }
+
+
 
     }
 

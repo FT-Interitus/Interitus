@@ -113,8 +113,14 @@ public class ProjectManager {
 
                     waitforprojectnotification.close();
                     UIVar.isdialogeopend = false;
+                    /***
+                     * Remove Marked Block if it doesn't exist in the Block ArrayList
+                     */
                     if(ProjectManager.getActProjectVar()!=null) {
-                        ProjectManager.getActProjectVar().marked_block = null;
+                        if(!ProjectManager.getActProjectVar().blocks.contains(ProjectManager.getActProjectVar().marked_block)) {
+                            ProjectManager.getActProjectVar().marked_block = null;
+
+                        }
                     }
                     UI.runselection.clear();
                     Program.logger.config("clear");

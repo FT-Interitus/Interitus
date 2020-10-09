@@ -7,6 +7,7 @@ package de.ft.interitus.projecttypes;
 
 import de.ft.interitus.Block.Generators.*;
 import de.ft.interitus.DisplayErrors;
+import de.ft.interitus.Var;
 import de.ft.interitus.compiler.Compiler;
 import de.ft.interitus.plugin.Plugin;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
@@ -126,10 +127,13 @@ public class ProjectType {
 
         } catch (Throwable e) {
 
-            DisplayErrors.customErrorstring = "Fehler im ProjectTyp";
-            DisplayErrors.error = e;
+
+            if(Var.inProgram) {
+                DisplayErrors.customErrorstring = "Fehler im ProjectTyp";
+                DisplayErrors.error = e;
 
             e.printStackTrace();
+            }
         }
 
 

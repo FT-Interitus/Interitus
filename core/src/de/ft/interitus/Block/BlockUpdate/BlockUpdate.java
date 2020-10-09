@@ -24,6 +24,7 @@ import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.block.BlockKillMovingWiresEvent;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.ProjectManager;
+import de.ft.interitus.projecttypes.ProjectType;
 import de.ft.interitus.utils.Unproject;
 
 import java.util.Timer;
@@ -119,6 +120,7 @@ public abstract class BlockUpdate extends Thread {
 
                         if (ProjectManager.getActProjectVar().marked_block == null && block.isMarked()) {
                             block.setMarked(false);
+                            ProjectManager.getActProjectVar().marked_block = null;
                         }
 
 
@@ -504,6 +506,7 @@ public abstract class BlockUpdate extends Thread {
             if (block.isMarked()) {
                 if (block != ProjectManager.getActProjectVar().marked_block) {
                     block.setMarked(false);
+
                 }
 
             }

@@ -96,7 +96,6 @@ public class ProgramingSpace extends ScreenAdapter {
         System.gc(); //Clean RAM after Loading
 
         Updater.initprogress();
-        Program.logger.config(String.valueOf(System.currentTimeMillis()- Program.time));
 
     }
 

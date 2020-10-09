@@ -76,6 +76,7 @@ public class LoggerInit {
 
         System.setOut(new PrintStream(new LoggerOutputStream(Program.logger, Level.INFO)));
         System.setErr(new PrintStream(new LoggerOutputStream(Program.logger, Level.SEVERE)));
+
         Program.logger.config("Logger init finished");
 
     }

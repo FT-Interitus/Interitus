@@ -47,7 +47,6 @@ public class Program extends Game {
     public static boolean inLoading = true;
     public static Logger logger = Logger.getLogger(Program.class.getName());
 
-   public static long time = System.currentTimeMillis();
 
     public Program() {
 
@@ -197,7 +196,6 @@ public class Program extends Game {
 
     public void dispose() {
 
-        ThreadManager.stopall();
 
         Data.close(true);
 
@@ -218,9 +216,7 @@ public class Program extends Game {
     }
 
 
-    public void pause() {
 
-    }
 
 
 }
