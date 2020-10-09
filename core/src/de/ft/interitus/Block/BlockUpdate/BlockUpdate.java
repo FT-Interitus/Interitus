@@ -67,7 +67,7 @@ public abstract class BlockUpdate extends Thread {
 
                 control_block_errors(); //Check if BlockUpdate is running correctly
 
-                if (!UIVar.isdialogeopend) {
+                if (!UIVar.isdialogeopend&&ProjectManager.getActProjectVar()!=null) {
 
                     try {
 
@@ -279,13 +279,12 @@ public abstract class BlockUpdate extends Thread {
 
                         if (!CheckKollision.checkmousewithblock(block) && Gdx.input.isButtonPressed(0) && !block.isMoving() && block.isMarked() && (!CheckMouse.isMouseover(UIVar.blockeinstellungen_x, UIVar.blockeinstellungen_y, UIVar.blockeinstellungen_w, UIVar.blockeinstellungen_h, false) && !CheckMouse.wasMousePressed(UIVar.blockeinstellungen_x, UIVar.blockeinstellungen_y, UIVar.blockeinstellungen_w, UIVar.blockeinstellungen_h) || !UIVar.isBlockSettingsopen)) {
                             block.setMarked(false);
-                            ProjectManager.getActProjectVar().marked = false;
                             ProjectManager.getActProjectVar().marked_block = null;
                         }
 
 
                         //Setzt die Nachbaren
-                        if (ProjectManager.getActProjectVar().marked && !block.isMarked()) {
+                        if (ProjectManager.getActProjectVar().marked_block!=null && !block.isMarked()) {
                             try {
                                 if (CheckKollision.checkblockwithduplicate(ProjectManager.getActProjectVar().marked_block, block, 0) && block.getRight() == null && ProjectManager.getActProjectVar().marked_block.getWire_left() == null && ProjectManager.getActProjectVar().marked_block.getBlocktype().canhasleftconnector()) {
                                     if (ProjectManager.getActProjectVar().marked_block.isMoving()) {
@@ -481,7 +480,7 @@ public abstract class BlockUpdate extends Thread {
 
                         block.setMoving(false);
                         ProjectManager.getActProjectVar().ismoving = false;
-                        ProjectManager.getActProjectVar().marked = false;
+                        ProjectManager.getActProjectVar().marked_block = null;
                     }
 
                     IsMousealreadypressed = true;
@@ -524,11 +523,10 @@ public abstract class BlockUpdate extends Thread {
 
 
     private void block_moveingengine() {
-        if (CheckKollision.checkmousewithblock(block, Var.mousepressedold) && Gdx.input.isButtonPressed(0) && ProjectManager.getActProjectVar().ismoving == false && !block.isMarked() && !ProjectManager.getActProjectVar().marked && ProjectManager.getActProjectVar().marked_block == null) {
+        if (CheckKollision.checkmousewithblock(block, Var.mousepressedold) && Gdx.input.isButtonPressed(0) && ProjectManager.getActProjectVar().ismoving == false && !block.isMarked()&& ProjectManager.getActProjectVar().marked_block == null) {
 
             if (!CheckKollision.checkpointwithobject((int) block.getwireconnector_right().x, (int) block.getwireconnector_right().y, 20, 20, (int) Var.mousepressedold.x, (int) Var.mousepressedold.y)) {
 
-                ProjectManager.getActProjectVar().marked = true;
                 block.setMarked(true);
                 ProjectManager.getActProjectVar().marked_block = block;
                 ProjectManager.getActProjectVar().diff_save.set(ProgramingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x - block.getX(), ProgramingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y - block.getY());

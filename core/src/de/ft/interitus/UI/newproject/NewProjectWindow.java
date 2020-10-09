@@ -158,7 +158,6 @@ public class NewProjectWindow {
             Button_next.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
-                    //ThreadManager.stopall();
                     ProjectManager.addProject(ProjectTypesVar.projectTypes.get(items.indexOf(selectProjectType.getSelected())).init());
 
 

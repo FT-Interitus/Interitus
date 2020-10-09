@@ -75,20 +75,19 @@ public class ProgramingSpace extends ScreenAdapter {
         cam.position.set(Gdx.graphics.getWidth() / 2f + 50, Gdx.graphics.getHeight() / 2f, 0);
         UI.UIcam.position.set(Gdx.graphics.getWidth() / 2f + 50, Gdx.graphics.getHeight() / 2f, 0);
 
-        //TODO Debug hier wird immer ein Arduino Project erstellt -> Welcome Screen
         //ProjectManager.addProject(ProjectTypesVar.projectTypes.get(0).init());
         //ProjectManager.change(0);
+
+    }
+
+    public  void init() {
 
         UI.updatedragui(MainRendering.shapeRenderer, true, MainRendering.batch);
         //ProjectManager.getActProjectVar().projectType.initProject();
 
-
-       BlockTappedBar.init();
+        BlockTappedBar.init();
 
         de.ft.interitus.UI.Viewport.init();
-
-        Gdx.graphics.setTitle("Interitus - Home Version");
-        //ProjectManager.getActProjectVar().setFilename("New File");
 
 
         ThreadManager.init();
@@ -98,29 +97,25 @@ public class ProgramingSpace extends ScreenAdapter {
 
         Updater.initprogress();
         Program.logger.config(String.valueOf(System.currentTimeMillis()- Program.time));
+
     }
 
 
     @Override
     public void render(float delta) {
-
+        MainRendering.updateWindow();
         if(Var.openprojects.size()==0) {
             MainRendering.switchto(MainRendering.Windows.welcome);
         }
 
 
-        if (ProjectManager.getActProjectVar().marked_block != null) {
-            ProgrammAreaManager.getProgrammArea(ProjectManager.getActProjectVar().marked_block.getIndex());
-        }
+
         ProgramingSpace.delta = delta;
 
 
         renderstarttime = System.currentTimeMillis();
 
-        if (ProjectManager.getActProjectVar().projectType == null) {
-           this.dispose();
-           MainRendering.switchto(MainRendering.Windows.welcome);
-        }
+
 
 
 
@@ -156,8 +151,10 @@ public class ProgramingSpace extends ScreenAdapter {
 
 
         } catch (Exception e) {
-            DisplayErrors.error = e;
-            e.printStackTrace();
+            if(ProjectManager.getActProjectVar()!=null&&Var.inProgram) {
+                DisplayErrors.error = e;
+                e.printStackTrace();
+            }
         }
 
 
@@ -195,29 +192,8 @@ public class ProgramingSpace extends ScreenAdapter {
     }
 
 
-    public void dispose() {
-
-        /*
-        if (Var.openprojects.size() > 0) {
-
-            for (int i = 0; i < Var.openprojects.size(); i++) {
-                try {
-                    ProjectManager.CloseProject(i);
-                } catch (Exception ignored) {
-
-                }
-            }
 
 
-        }
-
-         */
-
-
-        MainRendering.batch.dispose();
-
-
-    }
 
     public void loader() {
 

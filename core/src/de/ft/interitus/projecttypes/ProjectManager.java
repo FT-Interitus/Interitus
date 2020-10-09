@@ -5,24 +5,24 @@
 
 package de.ft.interitus.projecttypes;
 
-import de.ft.interitus.*;
+import de.ft.interitus.MainRendering;
+import de.ft.interitus.Program;
+import de.ft.interitus.ProgramingSpace;
 import de.ft.interitus.UI.Notification.Notification;
 import de.ft.interitus.UI.Notification.NotificationManager;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.UIElements.TabBar.Tab;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
-import de.ft.interitus.datamanager.programmdata.Data;
+import de.ft.interitus.Var;
 import de.ft.interitus.datamanager.programmdata.experience.ExperienceVar;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.global.GlobalCloseEvent;
 import de.ft.interitus.events.global.GlobalEventAdapter;
 import de.ft.interitus.events.global.GlobalTabClickEvent;
 import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.projecttypes.ProgrammArea.ProgrammArea;
 import de.ft.interitus.utils.ClearActOpenProgramm;
 
-import java.util.Properties;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -72,6 +72,7 @@ public class ProjectManager {
     public static void change(int index) {
 
         MainRendering.switchto(MainRendering.Windows.programingspace);
+        if(getActProjectVar()!=null)
         getActProjectVar().programmingtime = (System.currentTimeMillis() - getActProjectVar().currentstarttime) + getActProjectVar().programmingtime;
 
         UI.runselection.setDefaultText("");
@@ -112,7 +113,9 @@ public class ProjectManager {
 
                     waitforprojectnotification.close();
                     UIVar.isdialogeopend = false;
-                    ProjectManager.getActProjectVar().marked_block = null;
+                    if(ProjectManager.getActProjectVar()!=null) {
+                        ProjectManager.getActProjectVar().marked_block = null;
+                    }
                     UI.runselection.clear();
                     Program.logger.config("clear");
                     this.cancel();
@@ -127,14 +130,17 @@ public class ProjectManager {
         time.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                ProjectManager.getActProjectVar().projectType.update();
+                if (ProjectManager.getActProjectVar() != null) {
+                    ProjectManager.getActProjectVar().projectType.update();
+                }
+
 
             }
         }, 1700, 1000);
 
 
-       ProjectManager.getActProjectVar().projectType.getProjectFunktions().switchedto();
-       UI.tabbar.setSelectedTabindex(index);
+        ProjectManager.getActProjectVar().projectType.getProjectFunktions().switchedto();
+        UI.tabbar.setSelectedTabindex(index);
         Program.logger.config("changed tab");
     }
 
@@ -146,14 +152,15 @@ public class ProjectManager {
         if (Var.openprojects.size() == 0) {
 
 
-            Program.INSTANCE.getScreen().dispose();
             MainRendering.switchto(MainRendering.Windows.welcome);
-
-
 
 
             return null;
         } else {
+            if(Var.openprojectindex<0) { //You are in Homesection
+                return null;
+            }
+
             return Var.openprojects.get(Var.openprojectindex);
         }
 
@@ -161,7 +168,6 @@ public class ProjectManager {
 
     public static void addProject(ProjectVar projectVar) {
 
-      MainRendering.switchto(MainRendering.Windows.welcome);
 
         Var.openprojects.add(projectVar);
 
@@ -178,7 +184,7 @@ public class ProjectManager {
         tab.setIndex(Var.openprojects.size() - 1);
         UI.tabbar.addTab(tab);
 
-
+        MainRendering.switchto(MainRendering.Windows.programingspace);
     }
 
     public static ProjectVar getProjectVar(int index) {
@@ -194,27 +200,31 @@ public class ProjectManager {
     }
 
 
-
     public static void CloseProject(int index) {
 
+        try {
+            ClearActOpenProgramm.clear(index);
+            UI.tabbar.getTabbs().remove(index);
+            for (Tab tab : UI.tabbar.getTabbs()) {
+                tab.setIndex(tab.getIndex() - 1);
+            }
 
-        ClearActOpenProgramm.clear(index);
-        UI.tabbar.getTabbs().remove(index);
-        for (Tab tab : UI.tabbar.getTabbs()) {
-            tab.setIndex(tab.getIndex() - 1);
+
+            if (Var.openprojectindex - 1 == -1) {
+
+
+                MainRendering.switchto(MainRendering.Windows.welcome);
+
+
+            } else {
+                change(Var.openprojectindex - 1);
+                UI.tabbar.setSelectedTabindex(Var.openprojectindex - 1);
+
+            }
+            Var.openprojects.remove(index);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        if (Var.openprojectindex - 1 == -1) {
-
-            Program.INSTANCE.getScreen().dispose();
-           MainRendering.switchto(MainRendering.Windows.welcome);
-
-            return;
-        }
-        change(Var.openprojectindex - 1);
-        UI.tabbar.setSelectedTabindex(Var.openprojectindex - 1);
-
-        Var.openprojects.remove(index);
 
 
     }

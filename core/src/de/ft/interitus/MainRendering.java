@@ -9,12 +9,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import de.ft.interitus.UI.Notification.Notification;
 import de.ft.interitus.UI.Notification.NotificationManager;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.popup.PopupHandler;
-import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.utils.ShapeRenderer;
 
 public class MainRendering {
@@ -23,9 +21,37 @@ public class MainRendering {
     public static BitmapFont font;
     public static SpriteBatch batch;
     private static boolean initalProgramingSpace = true;
+    private static boolean switchtoprogramm = false;
+    private static boolean switchtowelcome = false;
+
+    public static void updateWindow() {
+        if (switchtowelcome) {
+            switchtowelcome = false;
+            Program.INSTANCE.setScreen(Var.welcome);
+        }
+
+        if (switchtoprogramm) {
+            if (initalProgramingSpace) {
+                initalProgramingSpace = false;
+                Var.programingSpace.init();
+
+            }
+
+            switchtoprogramm = false;
+            Program.INSTANCE.setScreen(Var.programingSpace);
+
+        }
+    }
 
     public static void update() {
 
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.H)) {
+            UI.tabbar.setSelectedTabindex(-1);
+            Var.openprojectindex = -1; //-1 is home section
+            switchto(Windows.welcome);
+
+        }
 
         UI.UIcam.update();
         UI.UIbatch.setProjectionMatrix(UI.UIcam.combined);
@@ -37,13 +63,9 @@ public class MainRendering {
     public static void drawer() {
 
 
-        if(!Var.inProgram) {
+        if (!Var.inProgram) {
             UIVar.programmflaeche_y = 0;
-
         }
-
-
-
 
 
         NotificationManager.draw();
@@ -94,36 +116,37 @@ public class MainRendering {
 
     }
 
-   public enum Windows {
-
-        programingspace,welcome
-
-    }
-
     public static void switchto(Windows window) {
 
 
-     if(window==Windows.programingspace) {
-         if(!Var.inProgram) {
-             Var.inProgram =true;
-             if(initalProgramingSpace) {
-                 Var.programingSpace.open();
-                 initalProgramingSpace = false;
-             }
-             Program.INSTANCE.setScreen(Var.programingSpace);
+        if (window == Windows.programingspace) {
+            if (!Var.inProgram) {
+                Var.inProgram = true;
+                if (initalProgramingSpace) {
+                    Var.programingSpace.open();
 
-         }
+                }
+                switchtoprogramm = true;
 
-     }else{
+            }
 
-         if(Var.inProgram) {
-             Var.inProgram =false;
-             Program.INSTANCE.setScreen(Var.welcome);
+        } else {
 
-         }
+            if (Var.inProgram) {
+                Var.inProgram = false;
 
-     }
+                switchtowelcome = true;
 
+            }
+
+        }
+
+
+    }
+
+    public enum Windows {
+
+        programingspace, welcome
 
     }
 }

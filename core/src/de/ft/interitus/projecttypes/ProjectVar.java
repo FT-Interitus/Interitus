@@ -34,7 +34,6 @@ public abstract class ProjectVar {
     public Block marked_block = null; // Welcher Block ist makiert ?
     public Vector2 diff_save = new Vector2(); //Unterschied zwischen Blöckem die scih überllappen
     public boolean ismoving = false; //Wird ein Block bewegt
-    public boolean marked = false; //Ist gerade ein Block makiert?
     public ArrayList<Block> marked_block_overlapping = new ArrayList<>(); //Mit welchen Blöcken überlappt der Aktuell ausgewählte block ?
     public ArrayList<Block> showduplicat = new ArrayList<>(); //Bei welchen Blöcken wir das Duplicat angezeigt?
     public Block biggestblock = null; // Welcher ist der Block der die größten überlappungen mit dem bewegten Block hat
@@ -76,8 +75,8 @@ public abstract class ProjectVar {
         //TODO Error if Project was closed
         try {
             UI.tabbar.getTabbs().get(Var.openprojects.indexOf(this)).getTabButton().setText(filename);
-        }catch (IndexOutOfBoundsException ignored) {
-
+        }catch (IndexOutOfBoundsException e) {
+            e.printStackTrace();
         }
 
     }

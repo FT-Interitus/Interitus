@@ -14,6 +14,7 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.ProgramingSpace;
 import de.ft.interitus.Settings;
+import de.ft.interitus.Var;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.block.BlockKillMovingWiresEvent;
 import de.ft.interitus.events.global.GlobalEventAdapter;
@@ -99,7 +100,9 @@ public class Viewport {
         EventVar.globalEventManager.addListener(new GlobalEventAdapter() {
             @Override
             public void focuslost(GlobalFocusLostEvent e) {
-                EventVar.blockEventManager.killmovingwires(new BlockKillMovingWiresEvent(this));
+                if(ProjectManager.getActProjectVar()!=null&& Var.inProgram) {
+                    EventVar.blockEventManager.killmovingwires(new BlockKillMovingWiresEvent(this));
+                }
             }
         });
 

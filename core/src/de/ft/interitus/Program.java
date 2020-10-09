@@ -57,7 +57,7 @@ public class Program extends Game {
 
     @Override
     public void create() {
-
+        Gdx.graphics.setTitle("Interitus - Home Version");
         Var.programingSpace = new ProgramingSpace();
         Var.welcome = new  Welcome();
 

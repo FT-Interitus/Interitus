@@ -9,6 +9,7 @@ import de.ft.interitus.Block.BlockUpdate.BlockUpdate;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Program;
 import de.ft.interitus.UI.UIVar;
+import de.ft.interitus.Var;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.ProjectVar;
 
@@ -17,7 +18,7 @@ import java.util.TimerTask;
 
 public class ThreadManager {
 
-
+    private static Thread init;
 
 
     public static Thread add(Thread thread, Object obj) {
@@ -37,13 +38,14 @@ public class ThreadManager {
     public synchronized static void init() {
 
 
-        Thread init = new Thread(() -> {
+
+        init = new Thread(() -> {
             Timer timer = new Timer();
             timer.scheduleAtFixedRate(new TimerTask() {
                 @Override
                 public void run() {
 
-                    if (!UIVar.isdialogeopend) {
+                    if (!UIVar.isdialogeopend&& Var.inProgram&&ProjectManager.getActProjectVar()!=null) {
                         ProjectVar projectVar =ProjectManager.getActProjectVar();
                         try {
 
@@ -105,6 +107,7 @@ public class ThreadManager {
                                 }
                             }
 
+                            projectVar.wires_allowed = !projectVar.ismoving;
 
                         } catch (Exception e) {
                             e.printStackTrace(); //for debug to find errors
@@ -113,7 +116,7 @@ public class ThreadManager {
 
                         //Enable or disable Wire System
 
-                        projectVar.wires_allowed = !projectVar.ismoving;
+
                     }
 
                 }

@@ -509,7 +509,6 @@ public abstract class Block implements VisibleObjects {
         EventVar.rightClickEventManager.removeListener(this.rightClickEventListener);
         EventVar.blockEventManager.deleteBlock(new BlockDeleteEvent(this, this)); //Fire Delete Event
         ProjectManager.getActProjectVar().marked_block = null; //Der Makierte Block wird auf null gesetzt da nur ein makierter block gelöscht werden kann //Anmerkung falls das ganze Programm gelöscht wird spielt das sowieso keine Rolle
-        ProjectManager.getActProjectVar().marked = false; //Ob ein Block makiert ist wird auf false gesetzt da nur ein makierter Block gelöscht werden kann
         ProjectManager.getActProjectVar().ismoving = false; // Ob ein Block bewegt wird, wird auf false gesetzt da wenn ein Block bewegt und gelöscht wird kann es nur der bewegte Block sein
 
 

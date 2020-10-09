@@ -47,6 +47,7 @@ public class Welcome extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
+        MainRendering.updateWindow();
 
         if(firstrenderingtime) {
             firstrenderingtime = false;
@@ -79,10 +80,7 @@ public class Welcome extends ScreenAdapter {
     }
 
 
-    @Override
-    public void dispose() {
-        super.dispose();
-    }
+
 
     @Override
     public void resize(int width, int height) {
