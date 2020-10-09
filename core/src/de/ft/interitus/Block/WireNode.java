@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Frustum;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import de.ft.interitus.MainRendering;
 import de.ft.interitus.ProgramingSpace;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.loading.AssetLoader;
@@ -71,17 +72,17 @@ public abstract class WireNode implements VisibleObjects {
 
 
         boolean temp = false;
-        if (!ProgramingSpace.batch.isDrawing()) {
-            ProgramingSpace.batch.begin();
+        if (!MainRendering.batch.isDrawing()) {
+            MainRendering.batch.begin();
             temp = true;
         }
 
 
-        ProgramingSpace.batch.draw(AssetLoader.wire_node, x, y, w, h);
+        MainRendering.batch.draw(AssetLoader.wire_node, x, y, w, h);
 
 
         if (temp) {
-            ProgramingSpace.batch.end();
+            MainRendering.batch.end();
         }
 
         if (wire_left == null || wire_right == null) {

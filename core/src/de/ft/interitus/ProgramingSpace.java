@@ -10,10 +10,10 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.sun.tools.javac.Main;
 import de.ft.interitus.Block.BlockDrawer;
 import de.ft.interitus.Block.ThreadManager;
 import de.ft.interitus.UI.CheckShortcuts;
@@ -34,61 +34,56 @@ import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
 import de.ft.interitus.projecttypes.ProgrammArea.ProgrammAreaManager;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.PositionSaver;
-import de.ft.interitus.utils.ShapeRenderer;
 
 import java.awt.*;
 
 
 public class ProgramingSpace extends ScreenAdapter {
-    public static SpriteBatch batch;
 
     public static OrthographicCamera cam;
     public static Viewport viewport;
     public static Component saver;
 
-    public static BitmapFont font;
+   // public static BitmapFont font;
 
 
     public static long renderstarttime = 0;
     public static long rendertimediff = 0;
     public static long rendersleeptime = 0;
 
-    public static ShapeRenderer shapeRenderer;
-    public static ShapeRenderer BlockshapeRenderer;
+
     public static PressedKeys pressedKeys;
     public static float delta;
     public static Plugin nativ = new Native();
     public boolean loadimagesfromplugin = true;
 
 
-    public ProgramingSpace() {
+
+    public void open() {
 
 
         pressedKeys = new PressedKeys();
 
 
-        font = new BitmapFont();
-        shapeRenderer = new ShapeRenderer();
-        BlockshapeRenderer = new ShapeRenderer();
+
         cam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         viewport = new ScreenViewport(cam);
 
-        batch = new SpriteBatch();
+
 
         cam.position.set(Gdx.graphics.getWidth() / 2f + 50, Gdx.graphics.getHeight() / 2f, 0);
-        UI.UIcam.position.set(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f, 0);
+        UI.UIcam.position.set(Gdx.graphics.getWidth() / 2f + 50, Gdx.graphics.getHeight() / 2f, 0);
 
-//TODO Debug hier wird immer ein Arduino Project erstellt -> Welcome Screen
+        //TODO Debug hier wird immer ein Arduino Project erstellt -> Welcome Screen
         ProjectManager.addProject(ProjectTypesVar.projectTypes.get(0).init());
         ProjectManager.change(0);
 
-        UI.updatedragui(shapeRenderer, true, batch);
+        UI.updatedragui(MainRendering.shapeRenderer, true, MainRendering.batch);
         ProjectManager.getActProjectVar().projectType.initProject();
 
 
         BlockTappedBar.init();
-
 
         de.ft.interitus.UI.Viewport.init();
 
@@ -103,13 +98,15 @@ public class ProgramingSpace extends ScreenAdapter {
 
         Updater.initprogress();
         Program.logger.config(String.valueOf(System.currentTimeMillis()- Program.time));
-
-
     }
 
 
     @Override
     public void render(float delta) {
+
+        if(Var.openprojects.size()==0) {
+        Program.INSTANCE.setScreen(Var.welcome);
+        }
 
 
         if (ProjectManager.getActProjectVar().marked_block != null) {
@@ -120,9 +117,9 @@ public class ProgramingSpace extends ScreenAdapter {
 
         renderstarttime = System.currentTimeMillis();
 
-        if (Var.openprojects.size() != 0 && ProjectManager.getActProjectVar().projectType == null) {
-            this.dispose();
-            Program.INSTANCE.setScreen(new Welcome());
+        if (ProjectManager.getActProjectVar().projectType == null) {
+           this.dispose();
+           Program.INSTANCE.setScreen(Var.welcome);
         }
 
 
@@ -137,17 +134,18 @@ public class ProgramingSpace extends ScreenAdapter {
 
 
             cam.update();
-            UI.UIcam.update();
+
+
 
             Gdx.gl.glClearColor(Settings.theme.ClearColor().r, Settings.theme.ClearColor().g, Settings.theme.ClearColor().b, Settings.theme.ClearColor().a);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-            batch.setProjectionMatrix(cam.combined);
-            UI.UIbatch.setProjectionMatrix(UI.UIcam.combined);
-            shapeRenderer.setProjectionMatrix(UI.UIcam.combined);
-            BlockshapeRenderer.setProjectionMatrix(cam.combined);
+            MainRendering.batch.setProjectionMatrix(cam.combined);
+            MainRendering.BlockshapeRenderer.setProjectionMatrix(cam.combined);
+            MainRendering.update();
 
 
-            UI.updatedragui(shapeRenderer, true, batch);
+
+            UI.updatedragui( MainRendering.shapeRenderer, true, MainRendering.batch);
 
             ProgramGrid.draw();
 
@@ -167,37 +165,9 @@ public class ProgramingSpace extends ScreenAdapter {
             PluginDrawer.draw();
         }
 
-
-        NotificationManager.draw();
-        try {
-            UI.update();
-
-        } catch (Exception e) {
-            //Falls die UI nicht richtig initialisiert werden konnte
-            DisplayErrors.customErrorstring = "Fehler in der UI";
-            DisplayErrors.error = e;
-
-        }
+        MainRendering.drawer();
 
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
-            Notification notification = new Notification(AssetLoader.information, "Wichtige Information", "\nEs steht kein Update bereit!");
-            //notification.setButtonBar(new UIElementBar().addButton(new Button().setText("Test")));
-            NotificationManager.sendNotification(notification);
-        }
-
-        PopupHandler.drawPopUp();
-
-
-        try {
-            DisplayErrors.checkerror(); //Check if there are undisplayed Errors
-        } catch (IllegalStateException e) {
-            //Bei eienem VisUI absturz
-        } catch (NullPointerException e) {
-
-            e.printStackTrace();
-
-        }
 
         loader(); //Load Images in OpenGL context
 
@@ -227,11 +197,12 @@ public class ProgramingSpace extends ScreenAdapter {
 
     public void dispose() {
 
+        /*
         if (Var.openprojects.size() > 0) {
 
             for (int i = 0; i < Var.openprojects.size(); i++) {
                 try {
-                    ProjectManager.CloseProject(i, false);
+                    ProjectManager.CloseProject(i);
                 } catch (Exception ignored) {
 
                 }
@@ -240,8 +211,10 @@ public class ProgramingSpace extends ScreenAdapter {
 
         }
 
+         */
 
-        batch.dispose();
+
+        MainRendering.batch.dispose();
 
 
     }

@@ -57,7 +57,7 @@ public class Loading extends ScreenAdapter {
 
                     Var.window.setVisible(true);
                     GLFW.glfwFocusWindow(Var.window.getWindowHandle());
-                    Program.INSTANCE.setScreen(new Welcome());
+                    Program.INSTANCE.setScreen(Var.welcome);
 
 
                 }

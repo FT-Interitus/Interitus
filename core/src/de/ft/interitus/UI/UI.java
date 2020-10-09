@@ -18,24 +18,26 @@ import com.badlogic.gdx.scenes.scene2d.ui.Widget;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.kotcrab.vis.ui.widget.*;
 import com.kotcrab.vis.ui.widget.MenuBar;
+import com.kotcrab.vis.ui.widget.*;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.ManualConfig.ManualConfigUI;
 import de.ft.interitus.UI.Notification.Notification;
 import de.ft.interitus.UI.Notification.NotificationManager;
-import de.ft.interitus.UI.UIElements.UIElements.quickinfo.QuickInfo;
-import de.ft.interitus.UI.UIElements.UIElements.TabBar.TabBar;
 import de.ft.interitus.UI.UIElements.UIElementBar;
 import de.ft.interitus.UI.UIElements.UIElements.Button;
+import de.ft.interitus.UI.UIElements.UIElements.TabBar.Tab;
+import de.ft.interitus.UI.UIElements.UIElements.TabBar.TabBar;
+import de.ft.interitus.UI.UIElements.UIElements.quickinfo.QuickInfo;
 import de.ft.interitus.UI.UIElements.dropdownmenue.DropDownMenue;
 import de.ft.interitus.UI.editor.Editor;
 import de.ft.interitus.UI.projectsettings.ProjectSettingsUI;
 import de.ft.interitus.UI.settings.SettingsUI;
 import de.ft.interitus.UI.setup.SetupWindow;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
+import de.ft.interitus.Var;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.datamanager.programmdata.experience.ExperienceManager;
 import de.ft.interitus.events.EventVar;
@@ -56,9 +58,12 @@ import java.util.TimerTask;
 import static de.ft.interitus.UI.MenuBar.createProjectsSubMenu;
 
 public class UI {
-    public static QuickInfo blockbarquickinfo;
     public static final ManualConfigUI MANUALCONFIG = new ManualConfigUI();
+    public final static GlyphLayout glyphLayout = new GlyphLayout();
+    public final static BitmapFont font = new BitmapFont();
     static final Table root = new Table();
+    static final ArrayList<Widget> textFielder = new ArrayList<>();
+    public static QuickInfo blockbarquickinfo;
     public static Stage stage;
     public static Viewport UIviewport;
     public static OrthographicCamera UIcam;
@@ -75,9 +80,6 @@ public class UI {
     public static TabBar tabbar;
     public static VisLabel blocknamelabel;
     public static VisLabel blocksettingslabel;
-    public final static GlyphLayout glyphLayout = new GlyphLayout();
-    public final static BitmapFont font = new BitmapFont();
-
     public static MenuBar menuBar;
     public static DropDownMenue runselection;
     public static MenuItem recent;
@@ -85,16 +87,14 @@ public class UI {
     public static MenuItem redo;
     public static MenuItem copy;
     public static MenuItem paste;
-    static final ArrayList<Widget> textFielder = new ArrayList<>();
     static boolean isuilock = false;
+    static VisTextField settingstextfield;
     private static boolean issettingsuiopend = false;
     private static boolean issetupuiopend = false;
     private static Block markedblock;
     private static int wishaniposition = -170 - UIVar.abstandvonRand;
     private static Thread compile_thread;
-    static VisTextField settingstextfield;
     //private static final Animation animation = new Animation();
-
 
     public static void updatedragui(ShapeRenderer renderer, boolean flaeche, SpriteBatch batch) {
 
@@ -135,7 +135,7 @@ public class UI {
             for (int i = 0; i < textFielder.size(); i++) {
                 try {
                     textFielder.get(i).removeListener(textFielder.get(i).getListeners().get(0));
-                }catch (IndexOutOfBoundsException ignore) {
+                } catch (IndexOutOfBoundsException ignore) {
 
                 }
                 textFielder.get(i).remove();
@@ -152,8 +152,8 @@ public class UI {
                 lock = true;
             }
         }
-        if(settingstextfield!=null) {
-            if(settingstextfield.hasKeyboardFocus()) {
+        if (settingstextfield != null) {
+            if (settingstextfield.hasKeyboardFocus()) {
                 lock = true;
             }
 
@@ -182,28 +182,27 @@ public class UI {
             UIbatch.begin();
 
 
-
-            if(!UIVar.isBlockSettingsopen) {
+            if (!UIVar.isBlockSettingsopen) {
                 blocknamelabel = new VisLabel(markedblock.getBlocktype().getBlockModis().get(markedblock.getBlocktype().actBlockModiIndex).getname());
                 UI.stage.addActor(blocknamelabel);
             }
 
-            if(!UIVar.isBlockSettingsopen&&markedblock.getBlocktype().blockModis.get(markedblock.getBlocktype().actBlockModiIndex).getblocksettings() != null) {
+            if (!UIVar.isBlockSettingsopen && markedblock.getBlocktype().blockModis.get(markedblock.getBlocktype().actBlockModiIndex).getblocksettings() != null) {
                 blocksettingslabel = new VisLabel("Einstellungen");
                 UI.stage.addActor(blocksettingslabel);
 
             }
-            if(blocksettingslabel!=null) {
+            if (blocksettingslabel != null) {
                 blocksettingslabel.setPosition(UIVar.blockeinstellungen_x + 5, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 57);
 
             }
 
-            if(blocknamelabel !=null) {
+            if (blocknamelabel != null) {
                 glyphLayout.setText(AssetLoader.defaultfont, blocknamelabel.getText());
-                blocknamelabel.setPosition(UIVar.blockeinstellungen_x +UIVar.blockeinstellungen_w/2- blocknamelabel.getWidth()/2,UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h-25);
+                blocknamelabel.setPosition(UIVar.blockeinstellungen_x + UIVar.blockeinstellungen_w / 2 - blocknamelabel.getWidth() / 2, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 25);
             }
 
-            int nachuntenrutscher=10;
+            int nachuntenrutscher = 10;
             try {
                 if (markedblock.getBlocktype().blockModis.get(markedblock.getBlocktype().actBlockModiIndex).getblocksettings() != null) {
 
@@ -223,7 +222,7 @@ public class UI {
 
                         UI.stage.addActor(settingstextfield);
                     }
-                    nachuntenrutscher = 75+10;
+                    nachuntenrutscher = 75 + 10;
                     if (settingstextfield != null) {
                         settingstextfield.setPosition(UIVar.blockeinstellungen_x + 5, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 59 - settingstextfield.getHeight());
                     }
@@ -231,34 +230,31 @@ public class UI {
                 }
 
 
-            }catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-
-
 
 
             for (int i = 0; i < markedblock.getBlocktype().getBlockParameter().size(); i++) {
                 try {
                     if (!UIVar.isBlockSettingsopen) {
 
-                        if(markedblock.getBlocktype().getBlockParameter().get(i).getParameterType().isOutput())  {
+                        if (markedblock.getBlocktype().getBlockParameter().get(i).getParameterType().isOutput()) {
 
 
                             continue;
                         }
 
 
-
-                        if(markedblock.getBlocktype().getBlockParameter().get(i).getParameterType().isDropdown()&& !(markedblock.getBlocktype().getBlockParameter().get(i).getDatawire().size() >0)) {
+                        if (markedblock.getBlocktype().getBlockParameter().get(i).getParameterType().isDropdown() && !(markedblock.getBlocktype().getBlockParameter().get(i).getDatawire().size() > 0)) {
                             VisSelectBox<String> selectBox = new VisSelectBox<>();
                             selectBox.setItems(markedblock.getBlocktype().getBlockParameter().get(i).getParameterType().getSelectables());
 
-                            if(Arrays.asList(markedblock.getBlocktype().getBlockParameter().get(i).getParameterType().getSelectables()).contains(((String) markedblock.getBlocktype().getBlockParameter().get(i).getParameter()))) {
+                            if (Arrays.asList(markedblock.getBlocktype().getBlockParameter().get(i).getParameterType().getSelectables()).contains(markedblock.getBlocktype().getBlockParameter().get(i).getParameter())) {
 
                                 selectBox.setSelected(((String) markedblock.getBlocktype().getBlockParameter().get(i).getParameter()));
 
-                            }else {
+                            } else {
                                 selectBox.setSelected(selectBox.getItems().get(0));
                             }
 
@@ -274,16 +270,16 @@ public class UI {
 
                             textFielder.add(selectBox);
 
-                        }else {
+                        } else {
 
-                           if( markedblock.getBlocktype().getBlockParameter().get(i).getDatawire().size()>0) {
-                               textFielder.add(new VisTextField("Per Leitung Übertragen")); //TODO design
-                               ((VisTextField) textFielder.getLastObject()).setDisabled(true);
+                            if (markedblock.getBlocktype().getBlockParameter().get(i).getDatawire().size() > 0) {
+                                textFielder.add(new VisTextField("Per Leitung Übertragen")); //TODO design
+                                ((VisTextField) textFielder.getLastObject()).setDisabled(true);
 
-                           }else{
-                               textFielder.add(new VisTextField(markedblock.getBlocktype().getBlockParameter().get(i).getParameter().toString()));
+                            } else {
+                                textFielder.add(new VisTextField(markedblock.getBlocktype().getBlockParameter().get(i).getParameter().toString()));
 
-                           }
+                            }
                             textFielder.get(textFielder.size() - 1).addListener(new ChangeListener() {
                                 @Override
                                 public void changed(ChangeEvent event, Actor actor) {
@@ -297,14 +293,14 @@ public class UI {
                     }
 
                     textFielder.get(i).setWidth(UIVar.blockeinstellungen_w - 40);
-                    textFielder.get(i).setPosition(UIVar.blockeinstellungen_x + 5, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - UIVar.abstandText - glyphLayout.height - (i * (glyphLayout.height + UIVar.abstandzwischenparametern + UIVar.abstandText + textFielder.get(i).getHeight()) + 3) - textFielder.get(i).getHeight()-nachuntenrutscher);
+                    textFielder.get(i).setPosition(UIVar.blockeinstellungen_x + 5, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - UIVar.abstandText - glyphLayout.height - (i * (glyphLayout.height + UIVar.abstandzwischenparametern + UIVar.abstandText + textFielder.get(i).getHeight()) + 3) - textFielder.get(i).getHeight() - nachuntenrutscher);
                     glyphLayout.setText(font, markedblock.getBlocktype().getBlockParameter().get(i).getParameterName());
 
-                    font.draw(UIbatch, glyphLayout, UIVar.blockeinstellungen_x + 5, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - (i * (glyphLayout.height + textFielder.get(i).getHeight() + UIVar.abstandzwischenparametern + UIVar.abstandText) + 3)-nachuntenrutscher);
+                    font.draw(UIbatch, glyphLayout, UIVar.blockeinstellungen_x + 5, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - (i * (glyphLayout.height + textFielder.get(i).getHeight() + UIVar.abstandzwischenparametern + UIVar.abstandText) + 3) - nachuntenrutscher);
 
                     if (markedblock.getBlocktype().getBlockParameter().get(i).getUnit() != null) {
                         glyphLayout.setText(font, markedblock.getBlocktype().getBlockParameter().get(i).getUnit());
-                        font.draw(UIbatch, glyphLayout, UIVar.blockeinstellungen_x + 5 + UIVar.blockeinstellungen_w - 30, (UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - UIVar.abstandText - glyphLayout.height - (i * (glyphLayout.height + UIVar.abstandzwischenparametern + UIVar.abstandText + textFielder.get(i).getHeight()) + 3) - textFielder.get(i).getHeight() / 3f)  -nachuntenrutscher);
+                        font.draw(UIbatch, glyphLayout, UIVar.blockeinstellungen_x + 5 + UIVar.blockeinstellungen_w - 30, (UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - UIVar.abstandText - glyphLayout.height - (i * (glyphLayout.height + UIVar.abstandzwischenparametern + UIVar.abstandText + textFielder.get(i).getHeight()) + 3) - textFielder.get(i).getHeight() / 3f) - nachuntenrutscher);
 
                     }
                 } catch (Exception e) {
@@ -321,21 +317,21 @@ public class UI {
             markedblock = ProjectManager.getActProjectVar().marked_block;
             wishaniposition = -UIVar.blockeinstellungen_w - UIVar.abstandvonRand;
 
-                if(settingstextfield!=null) {
-                    try {
-                        settingstextfield.removeListener(settingstextfield.getListeners().get(0));
-                        settingstextfield.remove();
-                    }catch (Exception ignored) {
+            if (settingstextfield != null) {
+                try {
+                    settingstextfield.removeListener(settingstextfield.getListeners().get(0));
+                    settingstextfield.remove();
+                } catch (Exception ignored) {
 
 
-                    }
                 }
+            }
 
-                if(blocknamelabel !=null) {
-                    blocknamelabel.remove();
-                }
+            if (blocknamelabel != null) {
+                blocknamelabel.remove();
+            }
 
-            if(blocksettingslabel !=null) {
+            if (blocksettingslabel != null) {
                 blocksettingslabel.remove();
             }
 
@@ -344,7 +340,7 @@ public class UI {
                 for (int i = 0; i < textFielder.size(); i++) {
                     try {
                         textFielder.get(i).removeListener(textFielder.get(i).getListeners().get(0));
-                    }catch (Exception e) {
+                    } catch (Exception e) {
 
                     }
                     textFielder.get(i).remove();
@@ -540,7 +536,8 @@ public class UI {
 
         tabbar = new TabBar();
 
-        blockbarquickinfo=new QuickInfo(0,0,"").setAttachedToMouse(true).setSelfCheck(true);
+
+        blockbarquickinfo = new QuickInfo(0, 0, "").setAttachedToMouse(true).setSelfCheck(true);
         BlockTappedBar.tb.setListener(new de.ft.interitus.UI.ChangeListener() {
             @Override
             public void change() {
@@ -553,8 +550,10 @@ public class UI {
     public static void update() {
 
 
+       // System.out.println("Pos:" + (Gdx.graphics.getHeight()-menuBar.getTable().getHeight()-20-(UIVar.abstandvonRand*2)));
 
-        tabbar.setBounds(UIVar.abstandvonRand, UIVar.programmflaeche_h + UIVar.programmflaeche_y, 300, 20);
+       // System.out.println((UIVar.programmflaeche_h + UIVar.programmflaeche_y));
+        tabbar.setBounds(UIVar.abstandvonRand, (int) (Gdx.graphics.getHeight()-menuBar.getTable().getHeight()-20-(UIVar.abstandvonRand*2)), 300, 20);
         tabbar.draw();
 
         if (UIVar.uilocked != isuilock) {
@@ -577,63 +576,67 @@ public class UI {
             stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 60f));
         }
 
-        //root.setPosition(0,0);
-
-        buttonbar.setX(Gdx.graphics.getWidth() - 10);
-        buttonbar.setY(UIVar.programmflaeche_y + UIVar.programmflaeche_h + UIVar.abstandvonRand);
-        buttonbar.draw();
-
         root.setPosition(UIcam.position.x - ((float) Gdx.graphics.getWidth()) / 2, UIcam.position.y - ((float) Gdx.graphics.getHeight()) / 2);
         stage.draw();
 
         recent.setSubMenu(createProjectsSubMenu(Data.filename.size(), GetStringArray(Data.filename)));
 
+        //root.setPosition(0,0);
+        if (Var.inProgram) {
+            buttonbar.setX(Gdx.graphics.getWidth() - 10);
+            buttonbar.setY((int) (Gdx.graphics.getHeight()-menuBar.getTable().getHeight()-20-(UIVar.abstandvonRand*1)));
 
-        if (button_projectstructus.isjustPressednormal()) {
+            buttonbar.draw();
 
-            proset.show();
+
+
+
+
+            if (button_projectstructus.isjustPressednormal()) {
+
+                proset.show();
+
+            }
+
+
+            if (UI.button_start.isjustPressednormal() && runselection.getSelectedElement() != null) {
+                //  UI.button_start.setDisable(true);
+
+                compile_thread = new Thread() {
+                    @Override
+                    public void run() {
+
+                        EventVar.globalEventManager.compilingstarted(new GlobalCompilingStartEvent(this), ProjectManager.getActProjectVar().projectType.getCompiler());
+
+                        if (!ProjectManager.getActProjectVar().projectType.getCompiler().compileandrun()) {
+                            NotificationManager.sendNotification(new Notification(AssetLoader.information, "Ein Fehler ist aufgetreten", "Während des Compilierens ist\nein Fehler aufgetreten!"));
+                        }
+                    }
+                };
+
+                compile_thread.start();
+
+            }
+
+
+            if (UI.button_editor.isjustPressednormal()) {
+
+                // UI.button_editor.setIsworking(true); // TODO: 02.08.20 Build Project
+                Editor.open();
+            }
+
+            if (UI.button_stop.isjustPressednormal()) {
+                ProjectManager.getActProjectVar().projectType.getCompiler().interupt();
+            }
+
+            if (UI.button_addrunconfig.isjustPressednormal()) {
+                MANUALCONFIG.show();
+            }
+
+
+            blockbarquickinfo.update();
 
         }
-
-
-        if (UI.button_start.isjustPressednormal()&&runselection.getSelectedElement()!=null) {
-            //  UI.button_start.setDisable(true);
-
-            compile_thread = new Thread() {
-                @Override
-                public void run() {
-
-                    EventVar.globalEventManager.compilingstarted(new GlobalCompilingStartEvent(this),ProjectManager.getActProjectVar().projectType.getCompiler());
-
-                   if(! ProjectManager.getActProjectVar().projectType.getCompiler().compileandrun()) {
-                       NotificationManager.sendNotification(new Notification(AssetLoader.information,"Ein Fehler ist aufgetreten","Während des Compilierens ist\nein Fehler aufgetreten!"));
-                   }
-                }
-            };
-
-            compile_thread.start();
-
-        }
-
-
-        if (UI.button_editor.isjustPressednormal()) {
-
-           // UI.button_editor.setIsworking(true); // TODO: 02.08.20 Build Project
-            Editor.open();
-        }
-
-        if(UI.button_stop.isjustPressednormal()) {
-            ProjectManager.getActProjectVar().projectType.getCompiler().interupt();
-        }
-
-        if (UI.button_addrunconfig.isjustPressednormal()) {
-            MANUALCONFIG.show();
-        }
-
-
-        blockbarquickinfo.update();
-
-
     }
 
 

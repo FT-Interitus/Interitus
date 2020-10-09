@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import de.ft.interitus.UI.UI;
 import de.ft.interitus.loading.AssetLoader;
 
 import java.util.Timer;
@@ -21,10 +22,13 @@ public class Welcome extends ScreenAdapter {
     public static SpriteBatch batch = new SpriteBatch();
 
     public static boolean forward = false;
+    public static boolean firsttime = true;
+    public static boolean firstrenderingtime = true;
 
-    public Welcome() {
-        Gdx.graphics.setWindowedMode(Var.w, Var.h);
 
+    @Override
+    public void show() {
+/*
         final Timer time = new Timer();
         time.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -34,11 +38,22 @@ public class Welcome extends ScreenAdapter {
                 this.cancel();
 
             }
-        }, 0, 1000);
+        }, 2000, 1000);
+
+ */
+
+
     }
 
     @Override
     public void render(float delta) {
+
+        if(firstrenderingtime) {
+            firstrenderingtime = false;
+            MainRendering.init();
+            Var.programingSpace.open();
+
+        }
 
 
         Gdx.gl.glClearColor(Settings.theme.WelcomeScreenBackgroundColor().r, Settings.theme.WelcomeScreenBackgroundColor().g, Settings.theme.WelcomeScreenBackgroundColor().b, Settings.theme.WelcomeScreenBackgroundColor().a);
@@ -46,8 +61,10 @@ public class Welcome extends ScreenAdapter {
 
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT | (Gdx.graphics.getBufferFormat().coverageSampling ? GL20.GL_COVERAGE_BUFFER_BIT_NV : 0));
 
+       MainRendering.update();
 
-        // Programm.INSTANCE.setScreen(new ProgrammingSpace());
+
+
 
 
         AssetLoader.welcomefont.setColor(Settings.theme.WelcomeScreenFontColor());
@@ -57,10 +74,20 @@ public class Welcome extends ScreenAdapter {
         AssetLoader.welcomefont.draw(batch, "Hallo " + Var.username, 55, Gdx.graphics.getHeight() - 50);
         batch.end();
 
+        MainRendering.drawer();
+
         if (forward) {
-            Program.INSTANCE.setScreen(new ProgramingSpace());
-            forward = false;
+            if(firsttime) {
+                firsttime = false;
+
+
+
+            }
+            Var.inProgram=true;
             super.dispose();
+
+            Program.INSTANCE.setScreen(Var.programingSpace);
+            forward = false;
         }
 
     }
@@ -70,4 +97,21 @@ public class Welcome extends ScreenAdapter {
     public void dispose() {
         super.dispose();
     }
+
+    @Override
+    public void resize(int width, int height) {
+        super.resize(width, height);
+
+
+        try {
+            UI.updateView(width, height);
+        } catch (NullPointerException e) { //Falls die UI nicht initialisiert werden konnte
+
+        }
+
+        UI.UIviewport.update(width, height);
+
+
+    }
+
 }

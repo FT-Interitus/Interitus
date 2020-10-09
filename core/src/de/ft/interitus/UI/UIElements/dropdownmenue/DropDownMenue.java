@@ -8,6 +8,7 @@ package de.ft.interitus.UI.UIElements.dropdownmenue;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import de.ft.interitus.MainRendering;
 import de.ft.interitus.ProgramingSpace;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.UI;
@@ -93,12 +94,12 @@ public class DropDownMenue implements UIElement {
     }
 
     public void draw() {
-        ProgramingSpace.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        ProgramingSpace.shapeRenderer.setColor(bordercolor);
-        ProgramingSpace.shapeRenderer.roundendrect(x, y, w, h, RADIUS);
-        ProgramingSpace.shapeRenderer.setColor(Settings.theme.ClearColor());
-        ProgramingSpace.shapeRenderer.roundendrect(x + 1, y + 1, w - 2, h - 2, RADIUS);
-        ProgramingSpace.shapeRenderer.end();
+        MainRendering.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        MainRendering.shapeRenderer.setColor(bordercolor);
+        MainRendering.shapeRenderer.roundendrect(x, y, w, h, RADIUS);
+        MainRendering.shapeRenderer.setColor(Settings.theme.ClearColor());
+        MainRendering.shapeRenderer.roundendrect(x + 1, y + 1, w - 2, h - 2, RADIUS);
+        MainRendering.shapeRenderer.end();
         UI.UIbatch.begin();
         UI.UIbatch.setColor(1, 1, 1, 1);
 
@@ -123,11 +124,11 @@ public class DropDownMenue implements UIElement {
         if (opened) {
             DropDownElementInterface actualelement;
 
-            ProgramingSpace.shapeRenderer.begin(com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType.Filled);
-            ProgramingSpace.shapeRenderer.setColor(Settings.theme.PopUpColor());
+            MainRendering.shapeRenderer.begin(com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType.Filled);
+            MainRendering.shapeRenderer.setColor(Settings.theme.PopUpColor());
             longestText();
-            ProgramingSpace.shapeRenderer.rect(this.x, this.y - this.h * elements.size(), longestText + 16 + 20 + 10, this.h * elements.size());
-            ProgramingSpace.shapeRenderer.end();
+            MainRendering.shapeRenderer.rect(this.x, this.y - this.h * elements.size(), longestText + 16 + 20 + 10, this.h * elements.size());
+            MainRendering.shapeRenderer.end();
 
             for (int i = 0; i < elements.size(); i++) {
 

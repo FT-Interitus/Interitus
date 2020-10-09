@@ -10,6 +10,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.DisplayErrors;
+import de.ft.interitus.MainRendering;
 import de.ft.interitus.ProgramingSpace;
 import de.ft.interitus.UI.popup.PopupMenue;
 import de.ft.interitus.events.EventVar;
@@ -160,8 +161,8 @@ public abstract class Wire {
 
 
                 boolean temp = false;
-                if (!ProgramingSpace.batch.isDrawing()) {
-                    ProgramingSpace.batch.begin();
+                if (!MainRendering.batch.isDrawing()) {
+                    MainRendering.batch.begin();
                     temp = true;
                 }
 
@@ -198,7 +199,7 @@ public abstract class Wire {
                 // sprite.setRotation();
 
 
-                sprite.draw(ProgramingSpace.batch);
+                sprite.draw(MainRendering.batch);
 
 
                 //ProgrammingSpace.batch.draw(sprite,left_connection.getwireconnector_right().x,left_connection.getwireconnector_right().y,(float) weite,10);
@@ -206,7 +207,7 @@ public abstract class Wire {
 
 
                 if (temp) {
-                    ProgramingSpace.batch.end();
+                    MainRendering.batch.end();
                 }
 
 
@@ -234,8 +235,8 @@ public abstract class Wire {
 
                 try {
                     boolean temp = false;
-                    if (!ProgramingSpace.batch.isDrawing()) {
-                        ProgramingSpace.batch.begin();
+                    if (!MainRendering.batch.isDrawing()) {
+                        MainRendering.batch.begin();
                         temp = true;
                     }
 
@@ -264,7 +265,7 @@ public abstract class Wire {
                     sprite.setOrigin(0, 0);
 
 
-                    sprite.draw(ProgramingSpace.batch);
+                    sprite.draw(MainRendering.batch);
                     if (CheckKollision.objectwithrotation(sprite.getX(), sprite.getY(), sprite.getWidth(), sprite.getHeight(), sprite.getRotation(), ProgramingSpace.viewport.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, ProgramingSpace.viewport.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1, 0) && ProjectManager.getActProjectVar().mousehoveredwire != this) {
                         ProjectManager.getActProjectVar().mousehoveredwire = this;
 
@@ -274,12 +275,12 @@ public abstract class Wire {
 
 
                     if (temp) {
-                        ProgramingSpace.batch.end();
+                        MainRendering.batch.end();
                     }
                 } catch (Exception e) {
                     //Falls der Block der Verbunden ist gerade gelöscht wird
                     try {
-                        ProgramingSpace.batch.end(); //Damit der Render Prozess weiterläuft
+                        MainRendering.batch.end(); //Damit der Render Prozess weiterläuft
                     } catch (IllegalStateException ignored) {
 
                     }

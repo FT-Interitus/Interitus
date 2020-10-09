@@ -9,7 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import de.ft.interitus.Block.Block;
-import de.ft.interitus.ProgramingSpace;
+import de.ft.interitus.MainRendering;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.check.CheckKollision;
 import de.ft.interitus.projecttypes.BlockTypes.BlockModus;
@@ -81,44 +81,44 @@ public class BlockDropDownMenue {
 
     public void draw(Block block) {
         longestText();
-        ProgramingSpace.batch.begin();
-        ProgramingSpace.batch.draw(block.getBlocktype().getBlockModis().get(block.getBlocktype().actBlockModiIndex).getModiImage(),this.x,this.y,this.w,this.h);
-        ProgramingSpace.batch.end();
+        MainRendering.batch.begin();
+        MainRendering.batch.draw(block.getBlocktype().getBlockModis().get(block.getBlocktype().actBlockModiIndex).getModiImage(),this.x,this.y,this.w,this.h);
+        MainRendering.batch.end();
 
         if(CheckKollision.checkpointwithobject(this.x,this.y,this.w,this.h, Unproject.unproject().x,Unproject.unproject().y)&&Gdx.input.isButtonJustPressed(0)){
             dropped=!dropped;
         }
         if(dropped) {
             int aktualy = +10;
-            ProgramingSpace.BlockshapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-            ProgramingSpace.BlockshapeRenderer.setColor(0.3f,0.3f,0.3f,1);
-            ProgramingSpace.BlockshapeRenderer.roundendrect(this.x-margin,this.y-21*block.getBlocktype().getBlockModis().size()-10-margin,this.longestText+this.w+5+margin*2, 21*block.getBlocktype().getBlockModis().size()+margin*2, 2);
-            ProgramingSpace.BlockshapeRenderer.end();
+            MainRendering.BlockshapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+            MainRendering.BlockshapeRenderer.setColor(0.3f,0.3f,0.3f,1);
+            MainRendering.BlockshapeRenderer.roundendrect(this.x-margin,this.y-21*block.getBlocktype().getBlockModis().size()-10-margin,this.longestText+this.w+5+margin*2, 21*block.getBlocktype().getBlockModis().size()+margin*2, 2);
+            MainRendering.BlockshapeRenderer.end();
         for (int i = 0; i < block.getBlocktype().getBlockModis().size(); i++) {
                 aktualy += 21;
 
             if(CheckKollision.checkpointwithobject(this.x, this.y- aktualy, this.longestText+this.w+5+margin*2,this.h, Unproject.unproject().x,Unproject.unproject().y)){
-                ProgramingSpace.BlockshapeRenderer.setColor(0f/255f, 101f/255f, 168f/255f,1);
+                MainRendering.BlockshapeRenderer.setColor(0f/255f, 101f/255f, 168f/255f,1);
 
                 if(Gdx.input.isButtonPressed(0)){
-                    ProgramingSpace.BlockshapeRenderer.setColor(0f/255f, 101f/255f, 100f/255f,1);
+                    MainRendering.BlockshapeRenderer.setColor(0f/255f, 101f/255f, 100f/255f,1);
                     block.getBlocktype().changeBlockModus(i,block, false);
 
                 }
-                ProgramingSpace.BlockshapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-                ProgramingSpace.BlockshapeRenderer.rect(this.x, this.y- aktualy, this.longestText+this.w+5+margin*2,this.h);
-                ProgramingSpace.BlockshapeRenderer.end();
+                MainRendering.BlockshapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+                MainRendering.BlockshapeRenderer.rect(this.x, this.y- aktualy, this.longestText+this.w+5+margin*2,this.h);
+                MainRendering.BlockshapeRenderer.end();
             }
 
 
-                ProgramingSpace.batch.begin();
-            ProgramingSpace.batch.draw(block.getBlocktype().getBlockModis().get(i).getModiImage(), this.x, this.y- aktualy, this.w,this.h);
-            ProgramingSpace.batch.end();
+                MainRendering.batch.begin();
+            MainRendering.batch.draw(block.getBlocktype().getBlockModis().get(i).getModiImage(), this.x, this.y- aktualy, this.w,this.h);
+            MainRendering.batch.end();
 
-                ProgramingSpace.batch.begin();
-                glyphLayout.setText(ProgramingSpace.font, block.getBlocktype().getBlockModis().get(i).getname());
-                ProgramingSpace.font.draw(ProgramingSpace.batch, glyphLayout, this.x+this.w+5,this.y-aktualy+glyphLayout.height  + this.h/2- glyphLayout.height/2);
-                ProgramingSpace.batch.end();
+                MainRendering.batch.begin();
+                glyphLayout.setText(MainRendering.font, block.getBlocktype().getBlockModis().get(i).getname());
+            MainRendering.font.draw(MainRendering.batch, glyphLayout, this.x+this.w+5,this.y-aktualy+glyphLayout.height  + this.h/2- glyphLayout.height/2);
+                MainRendering.batch.end();
 
 
 

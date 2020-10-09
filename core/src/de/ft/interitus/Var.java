@@ -66,4 +66,9 @@ public class Var {
 
     public static boolean updatepermissionlock = false;
     public static Lwjgl3Window window = null;
+    public static ProgramingSpace programingSpace;
+    public static Welcome welcome;
+    public static boolean inProgram = false;
+
+
 }

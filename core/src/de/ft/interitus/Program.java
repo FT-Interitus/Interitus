@@ -58,6 +58,9 @@ public class Program extends Game {
     @Override
     public void create() {
 
+        Var.programingSpace = new ProgramingSpace();
+        Var.welcome = new  Welcome();
+
 
         Policy.setPolicy(new PluginSandboxSecurityPolicy());
         System.setSecurityManager(new SecurityManager());
@@ -66,6 +69,8 @@ public class Program extends Game {
         LoggerInit.init();
 
         DebugPrinter.detect();
+
+
 
 
         if (Var.savemode) {
@@ -103,8 +108,6 @@ public class Program extends Game {
             if (!Var.disablePluginSubSystem && !Var.nointernetconnection) {
                 loadplugins.start(); //Plugins laden
                 Thread springthread = new Thread(() -> {
-
-                   SpringApplication app = new SpringApplication(PluginInstallerServer.class);
 
                     SpringApplicationBuilder builder = new SpringApplicationBuilder(PluginInstallerServer.class);
 

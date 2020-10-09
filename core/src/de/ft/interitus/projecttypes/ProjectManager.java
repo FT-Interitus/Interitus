@@ -14,6 +14,7 @@ import de.ft.interitus.UI.UIElements.UIElements.TabBar.Tab;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.Var;
+import de.ft.interitus.Welcome;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.datamanager.programmdata.experience.ExperienceVar;
 import de.ft.interitus.events.EventVar;
@@ -21,8 +22,10 @@ import de.ft.interitus.events.global.GlobalCloseEvent;
 import de.ft.interitus.events.global.GlobalEventAdapter;
 import de.ft.interitus.events.global.GlobalTabClickEvent;
 import de.ft.interitus.loading.AssetLoader;
+import de.ft.interitus.projecttypes.ProgrammArea.ProgrammArea;
 import de.ft.interitus.utils.ClearActOpenProgramm;
 
+import java.util.Properties;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -142,8 +145,13 @@ public class ProjectManager {
      */
     public static ProjectVar getActProjectVar() {
         if (Var.openprojects.size() == 0) {
-            Data.close(true);
-            System.exit(0);
+
+
+            Program.INSTANCE.getScreen().dispose();
+            Program.INSTANCE.setScreen(Var.welcome);
+
+
+
             return null;
         } else {
             return Var.openprojects.get(Var.openprojectindex);
@@ -183,12 +191,9 @@ public class ProjectManager {
         return Var.openprojects.get(index);
     }
 
+
+
     public static void CloseProject(int index) {
-
-        CloseProject(index,true);
-    }
-
-    public static void CloseProject(int index,boolean allowedtoclose) {
 
 
         ClearActOpenProgramm.clear(index);
@@ -198,14 +203,10 @@ public class ProjectManager {
         }
 
         if (Var.openprojectindex - 1 == -1) {
-            try {
-                Data.close(true);
-            }catch (Exception e) {
 
-            }
-            if(allowedtoclose) {
-                System.exit(0);
-            }
+            Program.INSTANCE.getScreen().dispose();
+            Program.INSTANCE.setScreen(Var.welcome);
+
             return;
         }
         change(Var.openprojectindex - 1);

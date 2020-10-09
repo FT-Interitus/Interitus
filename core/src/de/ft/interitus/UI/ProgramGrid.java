@@ -7,6 +7,7 @@ package de.ft.interitus.UI;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import de.ft.interitus.MainRendering;
 import de.ft.interitus.ProgramingSpace;
 
 public class ProgramGrid {
@@ -30,7 +31,7 @@ public class ProgramGrid {
             return;
         }
 
-        ProgramingSpace.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        MainRendering.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         //   margin=20;
         //   ma=max-min;
         //    x=(ProgrammingSpace.cam.zoom-min)/ma;
@@ -70,7 +71,7 @@ public class ProgramGrid {
 
                 for (int y = move_y; y < UIVar.programmflaeche_h; ) {
 
-                    ProgramingSpace.shapeRenderer.circle(x + UIVar.abstandvonRand, y + UIVar.programmflaeche_y, radius);
+                    MainRendering.shapeRenderer.circle(x + UIVar.abstandvonRand, y + UIVar.programmflaeche_y, radius);
 
 
                     y += margin;
@@ -85,7 +86,7 @@ public class ProgramGrid {
             for (int x = move_x; x < Gdx.graphics.getWidth() - (UIVar.abstandvonRand * 2); ) {
 
 
-                    ProgramingSpace.shapeRenderer.rectLine(x+UIVar.abstandvonRand,UIVar.programmflaeche_y,x+UIVar.abstandvonRand,UIVar.programmflaeche_y+UIVar.programmflaeche_h, line_width);
+                MainRendering.shapeRenderer.rectLine(x+UIVar.abstandvonRand,UIVar.programmflaeche_y,x+UIVar.abstandvonRand,UIVar.programmflaeche_y+UIVar.programmflaeche_h, line_width);
 
 
 
@@ -96,7 +97,7 @@ public class ProgramGrid {
 
             for (int y = move_y; y < UIVar.programmflaeche_h; ) {
 
-                ProgramingSpace.shapeRenderer.rectLine((float)UIVar.abstandvonRand,(float)y+UIVar.programmflaeche_y,(float)Gdx.graphics.getWidth()-UIVar.abstandvonRand,(float)y+UIVar.programmflaeche_y, line_width);
+                MainRendering.shapeRenderer.rectLine((float)UIVar.abstandvonRand,(float)y+UIVar.programmflaeche_y,(float)Gdx.graphics.getWidth()-UIVar.abstandvonRand,(float)y+UIVar.programmflaeche_y, line_width);
 
 
 
@@ -107,7 +108,7 @@ public class ProgramGrid {
 
         }
 
-        ProgramingSpace.shapeRenderer.end();
+        MainRendering.shapeRenderer.end();
 
 
     }

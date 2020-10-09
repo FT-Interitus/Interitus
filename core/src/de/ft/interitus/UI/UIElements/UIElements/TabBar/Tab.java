@@ -7,6 +7,7 @@ package de.ft.interitus.UI.UIElements.UIElements.TabBar;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import de.ft.interitus.MainRendering;
 import de.ft.interitus.ProgramingSpace;
 import de.ft.interitus.UI.UIElements.UIElements.Button;
 
@@ -27,22 +28,22 @@ public class Tab {
     }
 
     public void draw(boolean selectedTabindex,int y){
-        ProgramingSpace.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        MainRendering.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         if(getTabButton().isMouseover()) {
-            ProgramingSpace.shapeRenderer.setColor(getMouseovertabcolor());
+            MainRendering.shapeRenderer.setColor(getMouseovertabcolor());
         }else{
-            ProgramingSpace.shapeRenderer.setColor(getTabcolor());
+            MainRendering.shapeRenderer.setColor(getTabcolor());
 
         }
         if(selectedTabindex){
-            ProgramingSpace.shapeRenderer.setColor(getSelected());
+            MainRendering.shapeRenderer.setColor(getSelected());
         }
-        ProgramingSpace.shapeRenderer.rect(getTabButton().getX(),y,getW(),getTabButton().getH());
+        MainRendering.shapeRenderer.rect(getTabButton().getX(),y,getW(),getTabButton().getH());
         if(selectedTabindex) {
-            ProgramingSpace.shapeRenderer.setColor(86f/255f, 138f/255f, 242f/255f, 1);
-            ProgramingSpace.shapeRenderer.rect(getTabButton().getX(), y, getW(), 3);
+            MainRendering.shapeRenderer.setColor(86f/255f, 138f/255f, 242f/255f, 1);
+            MainRendering.shapeRenderer.rect(getTabButton().getX(), y, getW(), 3);
         }
-        ProgramingSpace.shapeRenderer.end();
+        MainRendering.shapeRenderer.end();
 
 
         getCloseButton().setX((int) (getTabButton().getX()+getTabButton().getW()+1f));

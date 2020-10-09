@@ -8,6 +8,7 @@ package de.ft.interitus.UI.Notification;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import de.ft.interitus.MainRendering;
 import de.ft.interitus.ProgramingSpace;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.UI;
@@ -112,8 +113,8 @@ public class NotificationManager {
 
             Gdx.gl.glEnable(GL20.GL_BLEND);
             Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA); //Enable Alpha Rendering
-            ProgramingSpace.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-            ProgramingSpace.shapeRenderer.setColor(Settings.theme.ClearColor().r,Settings.theme.ClearColor().g,Settings.theme.ClearColor().b,notifications.get(i).getFadeout());
+            MainRendering.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+            MainRendering.shapeRenderer.setColor(Settings.theme.ClearColor().r,Settings.theme.ClearColor().g,Settings.theme.ClearColor().b,notifications.get(i).getFadeout());
 
             if(CheckMouse.isMouseover(Gdx.graphics.getWidth() - DISTANCE_RIGHT+notifications.get(i).getRollin(), UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i)), DISTANCE_RIGHT - MARGIN_RIGHT, HEIGHT, false)&&!notifications.get(i).isClosedbyuser()) {
 
@@ -131,8 +132,8 @@ public class NotificationManager {
             }
 
 
-            ProgramingSpace.shapeRenderer.roundendrect(Gdx.graphics.getWidth() - DISTANCE_RIGHT+notifications.get(i).getRollin(), UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i)), DISTANCE_RIGHT - MARGIN_RIGHT, HEIGHT, 5);
-            ProgramingSpace.shapeRenderer.end();
+            MainRendering.shapeRenderer.roundendrect(Gdx.graphics.getWidth() - DISTANCE_RIGHT+notifications.get(i).getRollin(), UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i)), DISTANCE_RIGHT - MARGIN_RIGHT, HEIGHT, 5);
+            MainRendering.shapeRenderer.end();
 
 
             UI.UIbatch.begin();
@@ -163,15 +164,15 @@ public class NotificationManager {
             if(notifications.get(i).getProgressbarvalue()>-1) {
                 Gdx.gl.glEnable(GL11.GL_BLEND);
                 Gdx.gl.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-                ProgramingSpace.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+                MainRendering.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 
-                ProgramingSpace.shapeRenderer.setColor(Settings.theme.ClearColor().r+0.1f,Settings.theme.ClearColor().g+0.1f,Settings.theme.ClearColor().b+0.1f,notifications.get(i).getFadeout());
-                ProgramingSpace.shapeRenderer.roundendrect(Gdx.graphics.getWidth() - DISTANCE_RIGHT+IMAGE_MARGIN_RIGHT+notifications.get(i).getRollin(), UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i))+PROGRESSBAR_MARGIN_BOTTOM, DISTANCE_RIGHT - MARGIN_RIGHT-IMAGE_MARGIN_RIGHT*2, 3, 2);
+                MainRendering.shapeRenderer.setColor(Settings.theme.ClearColor().r+0.1f,Settings.theme.ClearColor().g+0.1f,Settings.theme.ClearColor().b+0.1f,notifications.get(i).getFadeout());
+                MainRendering.shapeRenderer.roundendrect(Gdx.graphics.getWidth() - DISTANCE_RIGHT+IMAGE_MARGIN_RIGHT+notifications.get(i).getRollin(), UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i))+PROGRESSBAR_MARGIN_BOTTOM, DISTANCE_RIGHT - MARGIN_RIGHT-IMAGE_MARGIN_RIGHT*2, 3, 2);
 
-                ProgramingSpace.shapeRenderer.setColor(Settings.theme.ClearColor().r+0.3f,Settings.theme.ClearColor().g+0.3f,Settings.theme.ClearColor().b+0.3f,notifications.get(i).getFadeout());
-                ProgramingSpace.shapeRenderer.roundendrect(Gdx.graphics.getWidth() - DISTANCE_RIGHT+IMAGE_MARGIN_RIGHT+notifications.get(i).getRollin(), UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i))+PROGRESSBAR_MARGIN_BOTTOM, ((int) ((float) (DISTANCE_RIGHT - MARGIN_RIGHT - IMAGE_MARGIN_RIGHT * 2) / 100f * notifications.get(i).getProgressbarvalueis())), 3, 2);
+                MainRendering.shapeRenderer.setColor(Settings.theme.ClearColor().r+0.3f,Settings.theme.ClearColor().g+0.3f,Settings.theme.ClearColor().b+0.3f,notifications.get(i).getFadeout());
+                MainRendering.shapeRenderer.roundendrect(Gdx.graphics.getWidth() - DISTANCE_RIGHT+IMAGE_MARGIN_RIGHT+notifications.get(i).getRollin(), UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i))+PROGRESSBAR_MARGIN_BOTTOM, ((int) ((float) (DISTANCE_RIGHT - MARGIN_RIGHT - IMAGE_MARGIN_RIGHT * 2) / 100f * notifications.get(i).getProgressbarvalueis())), 3, 2);
 
-                ProgramingSpace.shapeRenderer.end();
+                MainRendering.shapeRenderer.end();
 
             }else{
 
