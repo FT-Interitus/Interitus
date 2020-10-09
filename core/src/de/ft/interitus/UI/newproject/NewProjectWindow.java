@@ -161,6 +161,8 @@ public class NewProjectWindow {
                     //ThreadManager.stopall();
                     ProjectManager.addProject(ProjectTypesVar.projectTypes.get(items.indexOf(selectProjectType.getSelected())).init());
 
+
+
                     ProjectManager.change(Var.openprojects.size() - 1);
                     ProjectManager.getActProjectVar().setFilename(nameinput.getText());
 

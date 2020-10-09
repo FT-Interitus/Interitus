@@ -5,16 +5,13 @@
 
 package de.ft.interitus.projecttypes;
 
-import de.ft.interitus.Program;
-import de.ft.interitus.ProgramingSpace;
+import de.ft.interitus.*;
 import de.ft.interitus.UI.Notification.Notification;
 import de.ft.interitus.UI.Notification.NotificationManager;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.UIElements.TabBar.Tab;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
-import de.ft.interitus.Var;
-import de.ft.interitus.Welcome;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.datamanager.programmdata.experience.ExperienceVar;
 import de.ft.interitus.events.EventVar;
@@ -73,6 +70,8 @@ public class ProjectManager {
     }
 
     public static void change(int index) {
+
+        MainRendering.switchto(MainRendering.Windows.programingspace);
         getActProjectVar().programmingtime = (System.currentTimeMillis() - getActProjectVar().currentstarttime) + getActProjectVar().programmingtime;
 
         UI.runselection.setDefaultText("");
@@ -148,7 +147,8 @@ public class ProjectManager {
 
 
             Program.INSTANCE.getScreen().dispose();
-            Program.INSTANCE.setScreen(Var.welcome);
+            MainRendering.switchto(MainRendering.Windows.welcome);
+
 
 
 
@@ -160,6 +160,8 @@ public class ProjectManager {
     }
 
     public static void addProject(ProjectVar projectVar) {
+
+      MainRendering.switchto(MainRendering.Windows.welcome);
 
         Var.openprojects.add(projectVar);
 
@@ -205,7 +207,7 @@ public class ProjectManager {
         if (Var.openprojectindex - 1 == -1) {
 
             Program.INSTANCE.getScreen().dispose();
-            Program.INSTANCE.setScreen(Var.welcome);
+           MainRendering.switchto(MainRendering.Windows.welcome);
 
             return;
         }

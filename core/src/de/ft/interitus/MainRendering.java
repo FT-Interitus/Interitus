@@ -22,6 +22,7 @@ public class MainRendering {
     public static ShapeRenderer BlockshapeRenderer;
     public static BitmapFont font;
     public static SpriteBatch batch;
+    private static boolean initalProgramingSpace = true;
 
     public static void update() {
 
@@ -42,21 +43,7 @@ public class MainRendering {
         }
 
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
 
-            if (Var.inProgram) {
-                Var.inProgram = false;
-                Program.INSTANCE.setScreen(Var.welcome);
-
-
-            } else {
-                Var.inProgram = true;
-                Program.INSTANCE.setScreen(Var.programingSpace);
-
-            }
-
-
-        }
 
 
         NotificationManager.draw();
@@ -103,6 +90,39 @@ public class MainRendering {
         shapeRenderer = new ShapeRenderer();
         BlockshapeRenderer = new ShapeRenderer();
         UI.UIcam.position.set(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f, 0);
+
+
+    }
+
+   public enum Windows {
+
+        programingspace,welcome
+
+    }
+
+    public static void switchto(Windows window) {
+
+
+     if(window==Windows.programingspace) {
+         if(!Var.inProgram) {
+             Var.inProgram =true;
+             if(initalProgramingSpace) {
+                 Var.programingSpace.open();
+                 initalProgramingSpace = false;
+             }
+             Program.INSTANCE.setScreen(Var.programingSpace);
+
+         }
+
+     }else{
+
+         if(Var.inProgram) {
+             Var.inProgram =false;
+             Program.INSTANCE.setScreen(Var.welcome);
+
+         }
+
+     }
 
 
     }

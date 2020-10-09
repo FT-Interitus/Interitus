@@ -99,7 +99,9 @@ public class UI {
     public static void updatedragui(ShapeRenderer renderer, boolean flaeche, SpriteBatch batch) {
 
         if (!UIVar.uilocked) {
-            BlockTappedBar.userresize();
+
+                BlockTappedBar.userresize();
+
         }
         // Var.w=Gdx.graphics.getWidth();
         //Var.h=Gdx.graphics.getHeight();

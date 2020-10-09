@@ -51,7 +51,6 @@ public class Welcome extends ScreenAdapter {
         if(firstrenderingtime) {
             firstrenderingtime = false;
             MainRendering.init();
-            Var.programingSpace.open();
 
         }
 
@@ -70,25 +69,12 @@ public class Welcome extends ScreenAdapter {
         AssetLoader.welcomefont.setColor(Settings.theme.WelcomeScreenFontColor());
 
 
-        batch.begin();
-        AssetLoader.welcomefont.draw(batch, "Hallo " + Var.username, 55, Gdx.graphics.getHeight() - 50);
-        batch.end();
+        UI.UIbatch.begin();
+        AssetLoader.welcomefont.draw(UI.UIbatch, "Hallo " + Var.username, 30, Gdx.graphics.getHeight() - 80);
+        UI.UIbatch.end();
 
         MainRendering.drawer();
 
-        if (forward) {
-            if(firsttime) {
-                firsttime = false;
-
-
-
-            }
-            Var.inProgram=true;
-            super.dispose();
-
-            Program.INSTANCE.setScreen(Var.programingSpace);
-            forward = false;
-        }
 
     }
 

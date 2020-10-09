@@ -76,19 +76,19 @@ public class ProgramingSpace extends ScreenAdapter {
         UI.UIcam.position.set(Gdx.graphics.getWidth() / 2f + 50, Gdx.graphics.getHeight() / 2f, 0);
 
         //TODO Debug hier wird immer ein Arduino Project erstellt -> Welcome Screen
-        ProjectManager.addProject(ProjectTypesVar.projectTypes.get(0).init());
-        ProjectManager.change(0);
+        //ProjectManager.addProject(ProjectTypesVar.projectTypes.get(0).init());
+        //ProjectManager.change(0);
 
         UI.updatedragui(MainRendering.shapeRenderer, true, MainRendering.batch);
-        ProjectManager.getActProjectVar().projectType.initProject();
+        //ProjectManager.getActProjectVar().projectType.initProject();
 
 
-        BlockTappedBar.init();
+       BlockTappedBar.init();
 
         de.ft.interitus.UI.Viewport.init();
 
         Gdx.graphics.setTitle("Interitus - Home Version");
-        ProjectManager.getActProjectVar().setFilename("New File");
+        //ProjectManager.getActProjectVar().setFilename("New File");
 
 
         ThreadManager.init();
@@ -105,7 +105,7 @@ public class ProgramingSpace extends ScreenAdapter {
     public void render(float delta) {
 
         if(Var.openprojects.size()==0) {
-        Program.INSTANCE.setScreen(Var.welcome);
+            MainRendering.switchto(MainRendering.Windows.welcome);
         }
 
 
@@ -119,7 +119,7 @@ public class ProgramingSpace extends ScreenAdapter {
 
         if (ProjectManager.getActProjectVar().projectType == null) {
            this.dispose();
-           Program.INSTANCE.setScreen(Var.welcome);
+           MainRendering.switchto(MainRendering.Windows.welcome);
         }
 
 
