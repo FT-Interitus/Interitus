@@ -15,7 +15,7 @@ import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.popup.PopupHandler;
 import de.ft.interitus.utils.ShapeRenderer;
 
-public class MainRendering {
+public class WindowManager {
     public static ShapeRenderer shapeRenderer;
     public static ShapeRenderer BlockshapeRenderer;
     public static BitmapFont font;
@@ -56,7 +56,7 @@ public class MainRendering {
 
         UI.UIcam.update();
         UI.UIbatch.setProjectionMatrix(UI.UIcam.combined);
-        MainRendering.shapeRenderer.setProjectionMatrix(UI.UIcam.combined);
+        WindowManager.shapeRenderer.setProjectionMatrix(UI.UIcam.combined);
 
 
     }
@@ -109,7 +109,7 @@ public class MainRendering {
 
     public static void init() {
         font = new BitmapFont();
-        MainRendering.batch = new SpriteBatch();
+        WindowManager.batch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
         BlockshapeRenderer = new ShapeRenderer();
         UI.UIcam.position.set(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f, 0);

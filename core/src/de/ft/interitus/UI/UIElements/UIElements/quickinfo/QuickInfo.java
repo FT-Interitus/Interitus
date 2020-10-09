@@ -12,8 +12,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
-import de.ft.interitus.MainRendering;
-import de.ft.interitus.ProgramingSpace;
+import de.ft.interitus.WindowManager;
 import de.ft.interitus.UI.UI;
 
 import de.ft.interitus.utils.ArrayList;
@@ -137,11 +136,11 @@ public class QuickInfo {
         this.glyphLayout.setText(this.font,this.text);
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA); //Enalble Alpha Rendering
-        MainRendering.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        WindowManager.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         backgroundColor.a=animationsAlphaPosition;
-        MainRendering.shapeRenderer.setColor(backgroundColor);
-        MainRendering.shapeRenderer.roundendrect(this.x,this.y,glyphLayout.width+abstandvonrand*2,glyphLayout.height+abstandvonrand*2,eckenradius);
-        MainRendering.shapeRenderer.end();
+        WindowManager.shapeRenderer.setColor(backgroundColor);
+        WindowManager.shapeRenderer.roundendrect(this.x,this.y,glyphLayout.width+abstandvonrand*2,glyphLayout.height+abstandvonrand*2,eckenradius);
+        WindowManager.shapeRenderer.end();
 
         UI.UIbatch.begin();
         textColor.a=animationsAlphaPosition;

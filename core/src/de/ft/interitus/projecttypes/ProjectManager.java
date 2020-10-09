@@ -5,7 +5,7 @@
 
 package de.ft.interitus.projecttypes;
 
-import de.ft.interitus.MainRendering;
+import de.ft.interitus.WindowManager;
 import de.ft.interitus.Program;
 import de.ft.interitus.ProgramingSpace;
 import de.ft.interitus.UI.Notification.Notification;
@@ -71,7 +71,7 @@ public class ProjectManager {
 
     public static void change(int index) {
 
-        MainRendering.switchto(MainRendering.Windows.programingspace);
+        WindowManager.switchto(WindowManager.Windows.programingspace);
         if(getActProjectVar()!=null)
         getActProjectVar().programmingtime = (System.currentTimeMillis() - getActProjectVar().currentstarttime) + getActProjectVar().programmingtime;
 
@@ -158,7 +158,7 @@ public class ProjectManager {
         if (Var.openprojects.size() == 0) {
 
 
-            MainRendering.switchto(MainRendering.Windows.welcome);
+            WindowManager.switchto(WindowManager.Windows.welcome);
 
 
             return null;
@@ -190,7 +190,7 @@ public class ProjectManager {
         tab.setIndex(Var.openprojects.size() - 1);
         UI.tabbar.addTab(tab);
 
-        MainRendering.switchto(MainRendering.Windows.programingspace);
+        WindowManager.switchto(WindowManager.Windows.programingspace);
     }
 
     public static ProjectVar getProjectVar(int index) {
@@ -219,7 +219,7 @@ public class ProjectManager {
             if (Var.openprojectindex - 1 == -1) {
 
 
-                MainRendering.switchto(MainRendering.Windows.welcome);
+                WindowManager.switchto(WindowManager.Windows.welcome);
 
 
             } else {

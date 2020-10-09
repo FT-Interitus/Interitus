@@ -14,7 +14,7 @@ import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import com.kotcrab.vis.ui.widget.Menu;
 import com.kotcrab.vis.ui.widget.MenuItem;
 import com.kotcrab.vis.ui.widget.PopupMenu;
-import de.ft.interitus.MainRendering;
+import de.ft.interitus.WindowManager;
 import de.ft.interitus.UI.newproject.ImportProject;
 import de.ft.interitus.UI.newproject.NewProjectWindow;
 import de.ft.interitus.Var;
@@ -73,7 +73,7 @@ public class MenuBar {
                     fullscreen = true;
                 } else {
                     Gdx.graphics.setWindowedMode(Var.w, Var.h);
-                    MainRendering.batch.getProjectionMatrix().setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                    WindowManager.batch.getProjectionMatrix().setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                     Gdx.gl.glViewport(0, 0, Gdx.graphics.getBackBufferWidth(), Gdx.graphics.getBackBufferHeight());
                     fullscreen = false;
                 }

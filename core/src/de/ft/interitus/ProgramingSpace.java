@@ -6,32 +6,23 @@
 package de.ft.interitus;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.sun.tools.javac.Main;
 import de.ft.interitus.Block.BlockDrawer;
 import de.ft.interitus.Block.ThreadManager;
 import de.ft.interitus.UI.CheckShortcuts;
-import de.ft.interitus.UI.Notification.Notification;
-import de.ft.interitus.UI.Notification.NotificationManager;
 import de.ft.interitus.UI.ProgramGrid;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.PressedKeys;
-import de.ft.interitus.UI.popup.PopupHandler;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.datamanager.programmdata.Updater;
-import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.plugin.Native;
 import de.ft.interitus.plugin.Plugin;
 import de.ft.interitus.plugin.PluginDrawer;
 import de.ft.interitus.plugin.PluginManagerHandler;
-import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
-import de.ft.interitus.projecttypes.ProgrammArea.ProgrammAreaManager;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.PositionSaver;
 
@@ -82,7 +73,7 @@ public class ProgramingSpace extends ScreenAdapter {
 
     public  void init() {
 
-        UI.updatedragui(MainRendering.shapeRenderer, true, MainRendering.batch);
+        UI.updatedragui(WindowManager.shapeRenderer, true, WindowManager.batch);
         //ProjectManager.getActProjectVar().projectType.initProject();
 
         BlockTappedBar.init();
@@ -102,9 +93,9 @@ public class ProgramingSpace extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
-        MainRendering.updateWindow();
+        WindowManager.updateWindow();
         if(Var.openprojects.size()==0) {
-            MainRendering.switchto(MainRendering.Windows.welcome);
+            WindowManager.switchto(WindowManager.Windows.welcome);
         }
 
 
@@ -133,13 +124,13 @@ public class ProgramingSpace extends ScreenAdapter {
 
             Gdx.gl.glClearColor(Settings.theme.ClearColor().r, Settings.theme.ClearColor().g, Settings.theme.ClearColor().b, Settings.theme.ClearColor().a);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-            MainRendering.batch.setProjectionMatrix(cam.combined);
-            MainRendering.BlockshapeRenderer.setProjectionMatrix(cam.combined);
-            MainRendering.update();
+            WindowManager.batch.setProjectionMatrix(cam.combined);
+            WindowManager.BlockshapeRenderer.setProjectionMatrix(cam.combined);
+            WindowManager.update();
 
 
 
-            UI.updatedragui( MainRendering.shapeRenderer, true, MainRendering.batch);
+            UI.updatedragui( WindowManager.shapeRenderer, true, WindowManager.batch);
 
             ProgramGrid.draw();
 
@@ -161,7 +152,7 @@ public class ProgramingSpace extends ScreenAdapter {
             PluginDrawer.draw();
         }
 
-        MainRendering.drawer();
+        WindowManager.drawer();
 
 
 

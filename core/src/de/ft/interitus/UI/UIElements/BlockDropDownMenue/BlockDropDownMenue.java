@@ -9,7 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import de.ft.interitus.Block.Block;
-import de.ft.interitus.MainRendering;
+import de.ft.interitus.WindowManager;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.check.CheckKollision;
 import de.ft.interitus.projecttypes.BlockTypes.BlockModus;
@@ -81,44 +81,44 @@ public class BlockDropDownMenue {
 
     public void draw(Block block) {
         longestText();
-        MainRendering.batch.begin();
-        MainRendering.batch.draw(block.getBlocktype().getBlockModis().get(block.getBlocktype().actBlockModiIndex).getModiImage(),this.x,this.y,this.w,this.h);
-        MainRendering.batch.end();
+        WindowManager.batch.begin();
+        WindowManager.batch.draw(block.getBlocktype().getBlockModis().get(block.getBlocktype().actBlockModiIndex).getModiImage(),this.x,this.y,this.w,this.h);
+        WindowManager.batch.end();
 
         if(CheckKollision.checkpointwithobject(this.x,this.y,this.w,this.h, Unproject.unproject().x,Unproject.unproject().y)&&Gdx.input.isButtonJustPressed(0)){
             dropped=!dropped;
         }
         if(dropped) {
             int aktualy = +10;
-            MainRendering.BlockshapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-            MainRendering.BlockshapeRenderer.setColor(0.3f,0.3f,0.3f,1);
-            MainRendering.BlockshapeRenderer.roundendrect(this.x-margin,this.y-21*block.getBlocktype().getBlockModis().size()-10-margin,this.longestText+this.w+5+margin*2, 21*block.getBlocktype().getBlockModis().size()+margin*2, 2);
-            MainRendering.BlockshapeRenderer.end();
+            WindowManager.BlockshapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+            WindowManager.BlockshapeRenderer.setColor(0.3f,0.3f,0.3f,1);
+            WindowManager.BlockshapeRenderer.roundendrect(this.x-margin,this.y-21*block.getBlocktype().getBlockModis().size()-10-margin,this.longestText+this.w+5+margin*2, 21*block.getBlocktype().getBlockModis().size()+margin*2, 2);
+            WindowManager.BlockshapeRenderer.end();
         for (int i = 0; i < block.getBlocktype().getBlockModis().size(); i++) {
                 aktualy += 21;
 
             if(CheckKollision.checkpointwithobject(this.x, this.y- aktualy, this.longestText+this.w+5+margin*2,this.h, Unproject.unproject().x,Unproject.unproject().y)){
-                MainRendering.BlockshapeRenderer.setColor(0f/255f, 101f/255f, 168f/255f,1);
+                WindowManager.BlockshapeRenderer.setColor(0f/255f, 101f/255f, 168f/255f,1);
 
                 if(Gdx.input.isButtonPressed(0)){
-                    MainRendering.BlockshapeRenderer.setColor(0f/255f, 101f/255f, 100f/255f,1);
+                    WindowManager.BlockshapeRenderer.setColor(0f/255f, 101f/255f, 100f/255f,1);
                     block.getBlocktype().changeBlockModus(i,block, false);
 
                 }
-                MainRendering.BlockshapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-                MainRendering.BlockshapeRenderer.rect(this.x, this.y- aktualy, this.longestText+this.w+5+margin*2,this.h);
-                MainRendering.BlockshapeRenderer.end();
+                WindowManager.BlockshapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+                WindowManager.BlockshapeRenderer.rect(this.x, this.y- aktualy, this.longestText+this.w+5+margin*2,this.h);
+                WindowManager.BlockshapeRenderer.end();
             }
 
 
-                MainRendering.batch.begin();
-            MainRendering.batch.draw(block.getBlocktype().getBlockModis().get(i).getModiImage(), this.x, this.y- aktualy, this.w,this.h);
-            MainRendering.batch.end();
+                WindowManager.batch.begin();
+            WindowManager.batch.draw(block.getBlocktype().getBlockModis().get(i).getModiImage(), this.x, this.y- aktualy, this.w,this.h);
+            WindowManager.batch.end();
 
-                MainRendering.batch.begin();
-                glyphLayout.setText(MainRendering.font, block.getBlocktype().getBlockModis().get(i).getname());
-            MainRendering.font.draw(MainRendering.batch, glyphLayout, this.x+this.w+5,this.y-aktualy+glyphLayout.height  + this.h/2- glyphLayout.height/2);
-                MainRendering.batch.end();
+                WindowManager.batch.begin();
+                glyphLayout.setText(WindowManager.font, block.getBlocktype().getBlockModis().get(i).getname());
+            WindowManager.font.draw(WindowManager.batch, glyphLayout, this.x+this.w+5,this.y-aktualy+glyphLayout.height  + this.h/2- glyphLayout.height/2);
+                WindowManager.batch.end();
 
 
 

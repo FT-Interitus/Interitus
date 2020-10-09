@@ -12,9 +12,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.loading.AssetLoader;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 
 public class Welcome extends ScreenAdapter {
 
@@ -47,11 +44,11 @@ public class Welcome extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
-        MainRendering.updateWindow();
+        WindowManager.updateWindow();
 
         if(firstrenderingtime) {
             firstrenderingtime = false;
-            MainRendering.init();
+            WindowManager.init();
 
         }
 
@@ -61,7 +58,7 @@ public class Welcome extends ScreenAdapter {
 
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT | (Gdx.graphics.getBufferFormat().coverageSampling ? GL20.GL_COVERAGE_BUFFER_BIT_NV : 0));
 
-       MainRendering.update();
+       WindowManager.update();
 
 
 
@@ -74,7 +71,7 @@ public class Welcome extends ScreenAdapter {
         AssetLoader.welcomefont.draw(UI.UIbatch, "Hallo " + Var.username, 30, Gdx.graphics.getHeight() - 80);
         UI.UIbatch.end();
 
-        MainRendering.drawer();
+        WindowManager.drawer();
 
 
     }

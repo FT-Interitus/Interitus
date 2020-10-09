@@ -42,7 +42,7 @@ public class LoggerOutputStream extends OutputStream {
 
     /**
      * Flushes the output stream.
-     * Disabled Debug flushing because you sould use logger in Program.logger
+     * Disabled Debug flushing because you should use logger in Program.logger
      */
 
     @Override

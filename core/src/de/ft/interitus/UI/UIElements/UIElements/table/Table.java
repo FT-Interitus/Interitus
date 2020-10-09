@@ -6,8 +6,7 @@
 package de.ft.interitus.UI.UIElements.UIElements.table;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import de.ft.interitus.MainRendering;
-import de.ft.interitus.ProgramingSpace;
+import de.ft.interitus.WindowManager;
 import de.ft.interitus.UI.UIElements.UIElements.UIElement;
 
 import de.ft.interitus.utils.ArrayList;
@@ -78,19 +77,19 @@ public class Table implements UIElement {
     public void draw() {
         int a=0;
         for(int c=0;c<columnCount;c++){
-            MainRendering.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-            MainRendering.shapeRenderer.line(this.x+a,this.y,this.x+a,this.y+getRowsHeight());
+            WindowManager.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+            WindowManager.shapeRenderer.line(this.x+a,this.y,this.x+a,this.y+getRowsHeight());
             a+=columns.get(c).getWeight();
-            MainRendering.shapeRenderer.line(this.x+a,this.y,this.x+a,this.y+getRowsHeight());
-            MainRendering.shapeRenderer.end();
+            WindowManager.shapeRenderer.line(this.x+a,this.y,this.x+a,this.y+getRowsHeight());
+            WindowManager.shapeRenderer.end();
         }
         a=0;
         for(int r=0;r<rowCount;r++){
-            MainRendering.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-            MainRendering.shapeRenderer.line(this.x,this.y+a,this.x+getColumnWidth(),this.y+a);
+            WindowManager.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+            WindowManager.shapeRenderer.line(this.x,this.y+a,this.x+getColumnWidth(),this.y+a);
             a+=rows.get(r).getHeight();
-            MainRendering.shapeRenderer.line(this.x,this.y+a,this.x+getColumnWidth(),this.y+a);
-            MainRendering.shapeRenderer.end();
+            WindowManager.shapeRenderer.line(this.x,this.y+a,this.x+getColumnWidth(),this.y+a);
+            WindowManager.shapeRenderer.end();
         }
 
 
