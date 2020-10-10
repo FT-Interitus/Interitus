@@ -224,7 +224,7 @@ public class ProjectManager {
 
             } else {
                 change(Var.openprojectindex - 1);
-                UI.tabbar.setSelectedTabindex(Var.openprojectindex - 1);
+
 
             }
             Var.openprojects.remove(index);
