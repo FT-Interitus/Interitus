@@ -72,7 +72,6 @@ public abstract class ProjectVar {
         this.filename = filename;
 
 
-        //TODO Error if Project was closed
         try {
             UI.tabbar.getTabbs().get(Var.openprojects.indexOf(this)).getTabButton().setText(filename);
         }catch (IndexOutOfBoundsException e) {

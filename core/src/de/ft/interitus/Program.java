@@ -208,7 +208,7 @@ public class Program extends Game {
         }
 
 
-        //ALC.destroy();//Destroy Sound System todo lwjgl3
+        //ALC.destroy();//Destroy Sound System todo lwjgl3 if we want to use sound
 
 
         System.exit(0);
