@@ -6,6 +6,7 @@
 package de.ft.interitus;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -17,6 +18,7 @@ import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.ProgramGrid;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.PressedKeys;
+import de.ft.interitus.UI.codehovering.CodeHovering;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.datamanager.programmdata.Updater;
 import de.ft.interitus.plugin.Native;
@@ -150,6 +152,11 @@ public class ProgramingSpace extends ScreenAdapter {
 
         if (!loadimagesfromplugin) {
             PluginDrawer.draw();
+        }
+
+
+        if(Gdx.input.isKeyPressed(Input.Keys.TAB)) {
+            CodeHovering.draw();
         }
 
         WindowManager.drawer();

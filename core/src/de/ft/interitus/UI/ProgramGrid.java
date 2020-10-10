@@ -7,6 +7,9 @@ package de.ft.interitus.UI;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import de.ft.interitus.Program;
+import de.ft.interitus.Settings;
+import de.ft.interitus.UI.window.Window;
 import de.ft.interitus.WindowManager;
 import de.ft.interitus.ProgramingSpace;
 
@@ -31,7 +34,9 @@ public class ProgramGrid {
             return;
         }
 
+
         WindowManager.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        WindowManager.shapeRenderer.setColor(Settings.theme.ClearColor());
         //   margin=20;
         //   ma=max-min;
         //    x=(ProgrammingSpace.cam.zoom-min)/ma;
