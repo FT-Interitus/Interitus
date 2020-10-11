@@ -26,6 +26,8 @@ public class ProjectType {
     private WireGenerator wireGenerator;
     private WireNodeGenerator wireNodeGenerator;
     private BlocktoSaveGenerator blocktoSaveGenerator;
+    private boolean codeshowable = true;
+
 
     public ProjectType(Plugin pluginRegister, String name, ArrayList<PlatformSpecificBlock> blocks, BlockGenerator blockgenerator, BlockUpdateGenerator updategenerator, WireGenerator wireGenerator, WireNodeGenerator wireNodeGenerator, BlocktoSaveGenerator blocktoSaveGenerator, BlockVarGenerator blockVarGenerator, ProjectFunktions projectFunktions, Compiler compiler) {
         this.projectblocks = blocks;
@@ -141,6 +143,15 @@ public class ProjectType {
 
     public ProjectFunktions getProjectFunktions() {
         return projectFunktions;
+    }
+
+
+    public boolean isCodeshowable() {
+        return codeshowable;
+    }
+
+    public void setCodeshowable(boolean codeshowable) {
+        this.codeshowable = codeshowable;
     }
 
     public Compiler getCompiler() {

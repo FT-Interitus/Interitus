@@ -16,7 +16,7 @@ public class For extends PlatformSpecificBlock {
 
     public For(ProjectType projectType, Addon addon) {
         super(projectType, addon);
-        super.blockModis.add(new ForDefaultBlockModus());
+        super.blockModis.add(new ForDefaultBlockMode());
 
         super.actBlockModiIndex = 0;
 

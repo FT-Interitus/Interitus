@@ -9,13 +9,13 @@ import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.Block.ParameterType;
 import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.projecttypes.BlockTypes.BlockModus;
+import de.ft.interitus.projecttypes.BlockTypes.BlockMode;
 import de.ft.interitus.projecttypes.BlockTypes.BlockSettings;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.InitArduino;
 import de.ft.interitus.utils.ArrayList;
 
-public class MapModusDefault extends BlockModus implements ArduinoBlock {
+public class MapModeDefault extends ArduinoBlock {
     ArrayList<Parameter> parameters = new ArrayList<>();
     Parameter value;
     Parameter bereich1minimum;
@@ -23,7 +23,7 @@ public class MapModusDefault extends BlockModus implements ArduinoBlock {
     Parameter bereich2minimum;
     Parameter bereich2maximum;
     Parameter map;
-    public MapModusDefault(){
+    public MapModeDefault(){
 
 
         bereich1minimum =new Parameter("", AssetLoader.Parameter_first,"Input-Bereich Minimum", "", "", new ParameterType(InitArduino.floatvar, false, false), true);

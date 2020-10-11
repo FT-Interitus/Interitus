@@ -16,7 +16,7 @@ import de.ft.interitus.utils.Unproject;
 
 public class CodeHovering {
 
-    public static void draw() {
+    public static void drawHovering() {
 
 
         WindowManager.BlockshapeRenderer.begin(ShapeRenderer.ShapeType.Filled);

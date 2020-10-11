@@ -10,7 +10,7 @@ import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.projecttypes.ProgrammArea.ProgrammArea;
 import de.ft.interitus.utils.ArrayList;
 
-public abstract class BlockModus {
+public abstract class BlockMode {
 
     public abstract ArrayList<Parameter> getBlockParameter();
 

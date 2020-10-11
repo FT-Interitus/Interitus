@@ -19,13 +19,13 @@ public class MathBlock extends PlatformSpecificBlock {
 
     public MathBlock(ProjectType type, Addon addon) {
         super(type,addon);
-        super.blockModis.add(new AdditionalModus());
-        super.blockModis.add(new DifferenzModus());
-        super.blockModis.add(new MultiplicationModus());
-        super.blockModis.add(new DivisionModus());
-        super.blockModis.add(new AbsolutModus());
-        super.blockModis.add(new SquareRootModus());
-        super.blockModis.add(new PowerModus());
+        super.blockModis.add(new AdditionalMode());
+        super.blockModis.add(new DifferenzMode());
+        super.blockModis.add(new MultiplicationMode());
+        super.blockModis.add(new DivisionMode());
+        super.blockModis.add(new AbsolutMode());
+        super.blockModis.add(new SquareRootMode());
+        super.blockModis.add(new PowerMode());
         super.blockModis.add(new ExpandedMath());
 
         super.actBlockModiIndex = 0;

@@ -10,16 +10,16 @@ import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.Block.ParameterType;
 import de.ft.interitus.projecttypes.ProgrammArea.ProgrammArea;
 import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.projecttypes.BlockTypes.BlockModus;
+import de.ft.interitus.projecttypes.BlockTypes.BlockMode;
 import de.ft.interitus.projecttypes.BlockTypes.BlockSettings;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.InitArduino;
 import de.ft.interitus.utils.ArrayList;
 import org.apache.commons.lang3.RandomStringUtils;
 
-public class ForDefaultBlockModus extends BlockModus implements ArduinoBlock {
+public class ForDefaultBlockMode extends ArduinoBlock {
     ArrayList<Parameter> parameters = new ArrayList<>();
-    public ForDefaultBlockModus() {
+    public ForDefaultBlockMode() {
 
         parameters.add(new Parameter("",AssetLoader.Parameter_first,"Counter","","int",new ParameterType(InitArduino.floatvar,false,false),true));
         parameters.add(new Parameter("",AssetLoader.Parameter_isequal,"Output","","int",new ParameterType(InitArduino.floatvar,true,false),true));

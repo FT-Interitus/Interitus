@@ -9,24 +9,24 @@ import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.Block.ParameterType;
 import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.projecttypes.BlockTypes.BlockModus;
+import de.ft.interitus.projecttypes.BlockTypes.BlockMode;
 import de.ft.interitus.projecttypes.BlockTypes.BlockSettings;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.InitArduino;
 import de.ft.interitus.utils.ArrayList;
 
-public class DifferenzModus extends BlockModus implements ArduinoBlock {
+public class PowerMode extends ArduinoBlock {
     ArrayList<Parameter> parameters = new ArrayList<>();
-    Parameter Summand_1;
-    Parameter Summand_2;
+    Parameter Basis;
+    Parameter Exponent;
     Parameter Ergebnis;
 
-    public DifferenzModus(){
-        Summand_1=new Parameter("", AssetLoader.Parameter_first,"Minuend", "Minuend", "", new ParameterType(InitArduino.floatvar, false, false), true);
-        Summand_2=new Parameter("",AssetLoader.Parameter_second,"Subtraend", "Subtraend", "", new ParameterType(InitArduino.floatvar, false, false), true);
-        Ergebnis=new Parameter("",AssetLoader.Parameter_isequal,"Ergebnis", "Unterschied von zwei zahlen", "", new ParameterType(InitArduino.floatvar, true, false), true);
-        parameters.add(Summand_1);
-        parameters.add(Summand_2);
+    public PowerMode(){
+        Basis =new Parameter("", AssetLoader.Parameter_first,"Basis", "", "", new ParameterType(InitArduino.floatvar, false, false), true);
+        Exponent =new Parameter("",AssetLoader.Parameter_second,"Exponent", "", "", new ParameterType(InitArduino.floatvar, false, false), true);
+        Ergebnis=new Parameter("",AssetLoader.Parameter_isequal,"Ergebnis", "", "", new ParameterType(InitArduino.floatvar, true, false), true);
+        parameters.add(Basis);
+        parameters.add(Exponent);
         parameters.add(Ergebnis);
 
     }
@@ -47,21 +47,21 @@ public class DifferenzModus extends BlockModus implements ArduinoBlock {
 
     @Override
     public String getname() {
-        return "Subtraktion";
+        return "Potenz";
     }
 
     @Override
     public Texture getModiImage() {
-        return AssetLoader.Parameter_minus;
+        return AssetLoader.Parameter_Geteilt;
     }
 
     @Override
     public String getCode() {
         if( parameters.get(2).getDatawire().size()>0){
-            return parameters.get(2).getVarName()+ " = "+parameters.get(0).getParameter()+" - "+parameters.get(1).getParameter()+";";
+            return parameters.get(2).getVarName()+ " = "+"pow("+parameters.get(0).getParameter()+","+parameters.get(1).getParameter()+");";
 
         }else {
-            return parameters.get(0).getParameter()+" - "+parameters.get(1).getParameter()+";";
+            return "pow("+parameters.get(0).getParameter()+","+parameters.get(1).getParameter()+");";
         }
     }
 
@@ -69,5 +69,4 @@ public class DifferenzModus extends BlockModus implements ArduinoBlock {
     public String getHeaderCode(boolean inserted) {
         return null;
     }
-
 }

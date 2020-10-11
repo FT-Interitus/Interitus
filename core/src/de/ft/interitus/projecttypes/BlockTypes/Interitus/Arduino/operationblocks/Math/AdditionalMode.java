@@ -9,19 +9,19 @@ import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.Block.ParameterType;
 import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.projecttypes.BlockTypes.BlockModus;
+import de.ft.interitus.projecttypes.BlockTypes.BlockMode;
 import de.ft.interitus.projecttypes.BlockTypes.BlockSettings;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.InitArduino;
 import de.ft.interitus.utils.ArrayList;
 
-public class AdditionalModus extends BlockModus implements ArduinoBlock {
+public class AdditionalMode extends ArduinoBlock {
     ArrayList<Parameter> parameters = new ArrayList<>();
     Parameter Summand_1;
     Parameter Summand_2;
     Parameter Ergebnis;
 
-    public AdditionalModus(){
+    public AdditionalMode(){
         Summand_1=new Parameter("", AssetLoader.Parameter_first,"1. Summand", "erster Summand", "", new ParameterType(InitArduino.floatvar, false, false), true);
         Summand_2=new Parameter("",AssetLoader.Parameter_second,"2. Summand", "zweiter Summand", "", new ParameterType(InitArduino.floatvar, false, false), true);
         Ergebnis=new Parameter("",AssetLoader.Parameter_isequal,"Ergebnis", "Das Ergebnis der Summe (Wert der Summe)", "", new ParameterType(InitArduino.floatvar, true, false), true);
