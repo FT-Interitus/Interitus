@@ -28,6 +28,8 @@ public class WindowManager {
         if (switchtowelcome) {
             switchtowelcome = false;
             UI.onSwitchToWelcome();
+            UI.tabbar.setSelectedTabindex(-1);
+            Var.openprojectindex = -1; //-1 is home section
             Program.INSTANCE.setScreen(Var.welcome);
         }
 
@@ -47,7 +49,7 @@ public class WindowManager {
     public static void update() {
 
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.CONTROL_LEFT)&&Gdx.input.isKeyJustPressed(Input.Keys.H)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)&&Gdx.input.isKeyPressed(Input.Keys.H)) {
             UI.tabbar.setSelectedTabindex(-1);
             Var.openprojectindex = -1; //-1 is home section
             switchto(Windows.welcome);

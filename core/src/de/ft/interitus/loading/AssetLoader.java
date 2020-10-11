@@ -201,6 +201,8 @@ public class AssetLoader {
     public static Texture close_notification_mouseover;
     public static Texture information;
 
+    public static Texture Tabbarhomeicon;
+
 
     public static AssetManager manager = new AssetManager();
 
@@ -420,7 +422,7 @@ public class AssetLoader {
 
             manager.load(workingdirectory+"UI/information.png",Texture.class);
 
-
+            manager.load(workingdirectory+"Icon/TabBar.png",Texture.class);
 
 
         } catch (Exception e) {
@@ -601,6 +603,8 @@ public class AssetLoader {
             close_notification_mouseover =  manager.get(workingdirectory+"UI/close_notification_mouseover.png",Texture.class);
 
             information =  manager.get(workingdirectory+"UI/information.png",Texture.class);
+
+            Tabbarhomeicon=manager.get(workingdirectory+"Icon/TabBar.png",Texture.class);
         } catch (Exception e) {
             e.printStackTrace();
             DisplayErrors.error = e;

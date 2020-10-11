@@ -13,45 +13,49 @@ import de.ft.interitus.UI.UIElements.UIElements.Button;
 
 public class Tab {
     private Button TabButton;
-
     private int index = -1;
+    private boolean closeable = true;
     private Button CloseButton;
-    private Color tabcolor=new Color(100f/255, 100f/255f, 100f/255f,1f);
-    private Color mouseovertabcolor=new Color(140f/255, 140f/255f, 140f/255f,1f);
-    private Color selected=new Color(163f/255f, 163f/255f, 163f/255f,1);
-    private int CloseButtonDiameter=10;
+    private Color tabcolor = new Color(100f / 255, 100f / 255f, 100f / 255f, 1f);
+    private Color mouseovertabcolor = new Color(140f / 255, 140f / 255f, 140f / 255f, 1f);
+    private Color selected = new Color(163f / 255f, 163f / 255f, 163f / 255f, 1);
+    private int CloseButtonDiameter = 10;
 
     public Tab() {
         TabButton = new Button();
         CloseButton = new Button();
     }
 
-    public void draw(boolean selectedTabindex,int y){
+    public void draw(boolean selectedTabindex, int y) {
         WindowManager.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        if(getTabButton().isMouseover()) {
+        if (getTabButton().isMouseover()) {
             WindowManager.shapeRenderer.setColor(getMouseovertabcolor());
-        }else{
+        } else {
             WindowManager.shapeRenderer.setColor(getTabcolor());
 
         }
-        if(selectedTabindex){
+        if (selectedTabindex) {
             WindowManager.shapeRenderer.setColor(getSelected());
         }
-        WindowManager.shapeRenderer.rect(getTabButton().getX(),y,getW(),getTabButton().getH());
-        if(selectedTabindex) {
-            WindowManager.shapeRenderer.setColor(86f/255f, 138f/255f, 242f/255f, 1);
+        WindowManager.shapeRenderer.rect(getTabButton().getX(), y, getW(), getTabButton().getH());
+        if (selectedTabindex) {
+            WindowManager.shapeRenderer.setColor(86f / 255f, 138f / 255f, 242f / 255f, 1);
             WindowManager.shapeRenderer.rect(getTabButton().getX(), y, getW(), 3);
         }
         WindowManager.shapeRenderer.end();
 
-
-        getCloseButton().setX((int) (getTabButton().getX()+getTabButton().getW()+1f));
-        getCloseButton().setY((int) (getTabButton().getY()+(getTabButton().getH()/2-CloseButtonDiameter/2)));
-        getCloseButton().setH(CloseButtonDiameter);
-        getCloseButton().setW(CloseButtonDiameter);
+        if (isCloseable()) {
+            getCloseButton().setX((int) (getTabButton().getX() + getTabButton().getW() + 1f));
+            getCloseButton().setY((int) (getTabButton().getY() + (getTabButton().getH() / 2 - CloseButtonDiameter / 2)));
+            getCloseButton().setH(CloseButtonDiameter);
+            getCloseButton().setW(CloseButtonDiameter);
+        } else {
+            getCloseButton().setW(0);
+        }
 
         getTabButton().draw();
-        getCloseButton().draw();
+
+        if (isCloseable()) getCloseButton().draw();
     }
 
     public Button getTabButton() {
@@ -69,7 +73,6 @@ public class Tab {
     public void setCloseButton(Button closeButton) {
         CloseButton = closeButton;
     }
-
 
 
     public int getIndex() {
@@ -105,21 +108,34 @@ public class Tab {
     }
 
     public int getW() {
-        return TabButton.getW()+CloseButton.getW()+7;
+        return TabButton.getW() + CloseButton.getW() + 7;
     }
 
     public int getX() {
         return TabButton.getX();
     }
-    public void setH(int h){
+
+    public void setH(int h) {
         TabButton.setH(h);
         //CloseButton.setH(h);
     }
-    public void setX(int x){
+
+    public void setX(int x) {
         TabButton.setX(x);
-        CloseButton.setX(TabButton.getW()+ TabButton.getX());
+        CloseButton.setX(TabButton.getW() + TabButton.getX());
     }
-    public void setY(int y){
+
+    public void setY(int y) {
         TabButton.setY(y);
     }
+
+    public Tab setCloseable(boolean closeable) {
+        this.closeable = closeable;
+        return this;
+    }
+
+    public boolean isCloseable() {
+        return closeable;
+    }
 }
+

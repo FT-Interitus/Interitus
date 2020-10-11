@@ -52,7 +52,7 @@ public class Var {
 
     public static ArrayList<ProjectVar> openprojects = new ArrayList<>();
 
-    public static int openprojectindex = 0;
+    public static int openprojectindex = -1;
     public static boolean keeplog = false;
 
 

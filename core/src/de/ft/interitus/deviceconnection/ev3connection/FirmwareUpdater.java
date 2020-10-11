@@ -26,16 +26,17 @@ public class FirmwareUpdater {
 
         FileInputStream fileInputStream = null;
         try {
-             fileInputStream = new FileInputStream(file);
+            fileInputStream = new FileInputStream(file);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+           e.printStackTrace();
+      }
 
        byte[] data =  fileInputStream.readAllBytes();
 
         reboottofirmwareupdate(device);
 
         HidDevice hidDevice = searchforFWDevice();
+
         System.out.println("Start Erasing");
         eraseDevice(hidDevice);
         System.out.println("End Erasing");
@@ -45,6 +46,8 @@ public class FirmwareUpdater {
         System.out.println("Start Sending Firmware");
         sendFirmware(data,hidDevice);
         System.out.println("End Sending");
+
+
 
         restartToLinux(hidDevice);
 
