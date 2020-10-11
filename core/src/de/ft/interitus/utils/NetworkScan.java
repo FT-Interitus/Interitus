@@ -14,7 +14,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 /**
- *@deprecated todo Platform Specific Code!!!!
+ *@deprecated  Platform Specific Code!!!!
  */
 public class NetworkScan {
     public static ArrayList<InetAddress> device = new ArrayList<>();
