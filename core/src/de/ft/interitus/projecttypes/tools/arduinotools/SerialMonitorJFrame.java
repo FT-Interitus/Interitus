@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.projecttypes.tools.arduinotools;
 
 import com.badlogic.gdx.Files;
@@ -35,11 +40,11 @@ public class SerialMonitorJFrame extends JFrame {
         }catch (Exception e){
             e.printStackTrace();
         }
-        try {
-            UIManager.setLookAndFeel(new DarculaLaf());
-        } catch (UnsupportedLookAndFeelException e) {
-            e.printStackTrace();
-        }
+        //try {
+            //UIManager.setLookAndFeel(new DarculaLaf());
+        //} catch (UnsupportedLookAndFeelException e) {
+         //   e.printStackTrace();
+        //}
 
         panel1 = new JPanel(new BorderLayout());
 

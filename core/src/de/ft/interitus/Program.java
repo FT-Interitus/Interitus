@@ -34,6 +34,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
+import javax.swing.*;
 import java.nio.file.Path;
 import java.security.Policy;
 import java.util.Collections;
@@ -56,6 +57,9 @@ public class Program extends Game {
 
     @Override
     public void create() {
+
+
+
         Gdx.graphics.setTitle("Interitus - Home Version");
         Var.programingSpace = new ProgramingSpace();
         Var.welcome = new  Welcome();

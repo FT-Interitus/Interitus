@@ -141,10 +141,10 @@ public class ProgramingSpace extends ScreenAdapter {
 
 
         } catch (Exception e) {
-            if(ProjectManager.getActProjectVar()!=null&&Var.inProgram) {
-                DisplayErrors.error = e;
-                e.printStackTrace();
-            }
+                if (ProjectManager.getActProjectVar() != null && Var.inProgram) {
+                    DisplayErrors.error = e;
+                    e.printStackTrace();
+                }
         }
 
 
