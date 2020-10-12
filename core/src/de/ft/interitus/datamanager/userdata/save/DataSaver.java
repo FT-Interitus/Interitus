@@ -6,7 +6,7 @@
 package de.ft.interitus.datamanager.userdata.save;
 
 import com.badlogic.gdx.files.FileHandle;
-import de.ft.interitus.Block.SaveBlock;
+import com.google.gson.Gson;
 import de.ft.interitus.Block.Saving.SaveBlockV1;
 import de.ft.interitus.Var;
 import de.ft.interitus.datamanager.BlockCalculator;
@@ -21,7 +21,7 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -42,38 +42,52 @@ public class DataSaver {
                 String generateprojektsettingsname = "projectstates" + System.currentTimeMillis();
                 String generaterunconfigurationen = "runconfig" + System.currentTimeMillis();
                 String generateprojectsettings = "projectsettings" + System.currentTimeMillis();
+                Gson gson = new Gson();
 
 
-                try (FileOutputStream fos = new FileOutputStream(Data.tempfolder + "/" + generateprojektname);
-                     ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-                    oos.writeObject(saveBlocks);
-                } catch (IOException e) {
+                try {
+                    FileOutputStream fos = new FileOutputStream(Data.tempfolder + "/" + generateprojektname);
+                    PrintWriter printWriter = new PrintWriter(fos);
+                    printWriter.print(gson.toJson(saveBlocks));
+                    printWriter.flush();
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
 
-                try (FileOutputStream fos = new FileOutputStream(Data.tempfolder + "/" + generaterunconfigurationen);
-                     ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-                    oos.writeObject(ProjectManager.getActProjectVar().deviceConfigurations);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                try (FileOutputStream fos = new FileOutputStream(Data.tempfolder + "/" + generateprojectsettings);
-                     ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-                    oos.writeObject(ProjectManager.getActProjectVar().projectSettings);
-                } catch (IOException e) {
+                try {
+                    FileOutputStream fos = new FileOutputStream(Data.tempfolder + "/" + generaterunconfigurationen);
+                    PrintWriter printWriter = new PrintWriter(fos);
+                    printWriter.print(gson.toJson(ProjectManager.getActProjectVar().deviceConfigurations));
+                    printWriter.flush();
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 
 
-                for(Addon addon:ProjectManager.getActProjectVar().enabledAddons) {
-                    try (FileOutputStream fos = new FileOutputStream(Data.tempfolder + "/" + addon.getName());
-                         ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-                        oos.writeObject(addon.getAddonSettings());
-                    } catch (IOException e) {
+                try {
+                    FileOutputStream fos = new FileOutputStream(Data.tempfolder + "/" + generateprojectsettings);
+                    PrintWriter printWriter = new PrintWriter(fos);
+                    printWriter.print(gson.toJson(ProjectManager.getActProjectVar().projectSettings));
+                    printWriter.flush();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+
+                for (Addon addon : ProjectManager.getActProjectVar().enabledAddons) {
+
+
+                    try {
+                        FileOutputStream fos = new FileOutputStream(Data.tempfolder + "/" + addon.getName());
+
+                        PrintWriter printWriter = new PrintWriter(fos);
+                        printWriter.print(gson.toJson(addon.getAddonSettings()));
+                        printWriter.flush();
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
+
                 }
 
 
@@ -85,17 +99,17 @@ public class DataSaver {
                 settings.put("pos_y", ProjectManager.getActProjectVar().cam_pos.y);
                 settings.put("time", ProjectManager.getActProjectVar().programmingtime + (System.currentTimeMillis() - ProjectManager.getActProjectVar().currentstarttime));
                 settings.put("it_version", Var.PROGRAMM_VERSION_ID); //Saves Interitus Version in Project File
-                settings.put("pl_name", PluginManagerHandler.getPluginArgs(ProjectManager.getActProjectVar().projectType.getPluginRegister(),"name"));
+                settings.put("pl_name", PluginManagerHandler.getPluginArgs(ProjectManager.getActProjectVar().projectType.getPluginRegister(), "name"));
                 settings.put("pl_version", ((double) PluginManagerHandler.getPluginArgs(ProjectManager.getActProjectVar().projectType.getPluginRegister(), "version")));
                 ArrayList<JSONObject> addons = new ArrayList<>();
-                for(int i=0;i<ProjectManager.getActProjectVar().enabledAddons.size();i++) {
+                for (int i = 0; i < ProjectManager.getActProjectVar().enabledAddons.size(); i++) {
                     JSONObject tempjson = new JSONObject();
-                    tempjson.put("pl_name",PluginManagerHandler.getPluginArgs(ProjectManager.getActProjectVar().enabledAddons.get(i).getPlugin(),"name").toString());
-                    tempjson.put("addon_name",ProjectManager.getActProjectVar().enabledAddons.get(i).getName());
+                    tempjson.put("pl_name", PluginManagerHandler.getPluginArgs(ProjectManager.getActProjectVar().enabledAddons.get(i).getPlugin(), "name").toString());
+                    tempjson.put("addon_name", ProjectManager.getActProjectVar().enabledAddons.get(i).getName());
 
                     addons.add(tempjson);
                 }
-                settings.put("addons",addons);
+                settings.put("addons", addons);
                 try {
                     Files.write(Paths.get(Data.tempfolder + "/" + generateprojektsettingsname), settings.toString().getBytes());
                 } catch (IOException e) {
@@ -110,21 +124,21 @@ public class DataSaver {
                     names.add("Settings.itps");
                     names.add("RunConfig.itrc");
                     names.add("ProjectSettings.itps");
-                   for(Addon addon:ProjectManager.getActProjectVar().enabledAddons) {
-                       names.add(addon.getName()+".ita");
-                   }
+                    for (Addon addon : ProjectManager.getActProjectVar().enabledAddons) {
+                        names.add(addon.getName() + ".ita");
+                    }
 
-                   String[] addonnames = new String[ProjectManager.getActProjectVar().enabledAddons.size()+4];
-                   addonnames[0] = Data.tempfolder + "/" + generateprojektname;
-                   addonnames[1] =  Data.tempfolder + "/" + generateprojektsettingsname;
-                   addonnames[2] =  Data.tempfolder + "/" + generaterunconfigurationen;
-                   addonnames[3] =  Data.tempfolder + "/" + generateprojectsettings;
+                    String[] addonnames = new String[ProjectManager.getActProjectVar().enabledAddons.size() + 4];
+                    addonnames[0] = Data.tempfolder + "/" + generateprojektname;
+                    addonnames[1] = Data.tempfolder + "/" + generateprojektsettingsname;
+                    addonnames[2] = Data.tempfolder + "/" + generaterunconfigurationen;
+                    addonnames[3] = Data.tempfolder + "/" + generateprojectsettings;
 
-                   for(int i=0;i<ProjectManager.getActProjectVar().enabledAddons.size();i++) {
-                       addonnames[i+4] = Data.tempfolder + "/" + ProjectManager.getActProjectVar().enabledAddons.get(i).getName();
-                   }
+                    for (int i = 0; i < ProjectManager.getActProjectVar().enabledAddons.size(); i++) {
+                        addonnames[i + 4] = Data.tempfolder + "/" + ProjectManager.getActProjectVar().enabledAddons.get(i).getName();
+                    }
 
-                    Zip.zipFiles(names, handle.file().getAbsolutePath(), addonnames );
+                    Zip.zipFiles(names, handle.file().getAbsolutePath(), addonnames);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
