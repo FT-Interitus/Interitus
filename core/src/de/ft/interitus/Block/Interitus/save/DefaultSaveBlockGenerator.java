@@ -8,10 +8,9 @@ package de.ft.interitus.Block.Interitus.save;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.DataWire;
 import de.ft.interitus.Block.Generators.BlocktoSaveGenerator;
-import de.ft.interitus.Block.SaveBlock;
 import de.ft.interitus.Block.Saving.SaveBlockV1;
 import de.ft.interitus.Block.Wire;
-import de.ft.interitus.projecttypes.ProjectManager;
+import de.ft.interitus.projecttypes.ProjectVar;
 import de.ft.interitus.utils.ArrayList;
 
 public class DefaultSaveBlockGenerator implements BlocktoSaveGenerator {
@@ -24,7 +23,7 @@ public class DefaultSaveBlockGenerator implements BlocktoSaveGenerator {
    int blockmodus =0;
 
     @Override
-    public SaveBlockV1 generate(Block block) {
+    public SaveBlockV1 generate(Block block, ProjectVar projectVar) {
         nodes = new ArrayList<>();
 
         if (block.getWire_right() != null) {
@@ -110,7 +109,7 @@ public class DefaultSaveBlockGenerator implements BlocktoSaveGenerator {
                     }
                     int counter = 0;
                     for(DataWire dataWire:block.getBlocktype().getBlockParameter().get(i).getDatawire()) {
-                        if(dataWire== ProjectManager.getActProjectVar().moveingdatawire) {
+                        if(dataWire== projectVar.moveingdatawire) {
                             //Ignore moving DataWires while saving
                             continue;
                         }
@@ -141,7 +140,7 @@ public class DefaultSaveBlockGenerator implements BlocktoSaveGenerator {
 
                 for(Block extendedBlock:block.getExtendedBlocks()) {
 
-                    extendedBlocks.add(ProjectManager.getActProjectVar().projectType.getBlocktoSaveGenerator().generate(extendedBlock));
+                    extendedBlocks.add(projectVar.projectType.getBlocktoSaveGenerator().generate(extendedBlock,projectVar));
 
 
                 }

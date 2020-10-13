@@ -104,7 +104,7 @@ public class Server {
                 sendstring("ok");
 
 
-                ArrayList<SaveBlockV1> blocks = BlockCalculator.save();
+                ArrayList<SaveBlockV1> blocks = BlockCalculator.save(ProjectManager.getActProjectVar());
 
                 try {
                     ObjectOutputStream objectOutput = new ObjectOutputStream(skt.getOutputStream());

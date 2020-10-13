@@ -31,7 +31,7 @@ public class ITEV {
             public void run() {
 
 
-                ArrayList<SaveBlockV1> saveBlocks = BlockCalculator.save();
+                ArrayList<SaveBlockV1> saveBlocks = BlockCalculator.save(ProjectManager.getActProjectVar());
 
 
                 String generateprojektname = "project" + System.currentTimeMillis();

@@ -15,6 +15,7 @@ import de.ft.interitus.datamanager.userdata.Zip;
 import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.ProjectManager;
+import de.ft.interitus.projecttypes.ProjectVar;
 import de.ft.interitus.utils.ArrayList;
 import org.json.JSONObject;
 
@@ -27,15 +28,20 @@ import java.nio.file.Paths;
 
 public class DataSaver {
 
-
     static public void save(final FileHandle handle) {
+        save(handle,ProjectManager.getActProjectVar());
+
+    }
+
+
+    static public void save(final FileHandle handle, final ProjectVar projectVar) {
 
 
         Thread speichern = new Thread() {
             public void run() {
 
 
-                ArrayList<SaveBlockV1> saveBlocks = BlockCalculator.save();
+                ArrayList<SaveBlockV1> saveBlocks = BlockCalculator.save(projectVar);
 
 
                 String generateprojektname = "project" + System.currentTimeMillis();
@@ -58,7 +64,7 @@ public class DataSaver {
                 try {
                     FileOutputStream fos = new FileOutputStream(Data.tempfolder + "/" + generaterunconfigurationen);
                     PrintWriter printWriter = new PrintWriter(fos);
-                    printWriter.print(gson.toJson(ProjectManager.getActProjectVar().deviceConfigurations));
+                    printWriter.print(gson.toJson(projectVar.deviceConfigurations));
                     printWriter.flush();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -68,14 +74,14 @@ public class DataSaver {
                 try {
                     FileOutputStream fos = new FileOutputStream(Data.tempfolder + "/" + generateprojectsettings);
                     PrintWriter printWriter = new PrintWriter(fos);
-                    printWriter.print(gson.toJson(ProjectManager.getActProjectVar().projectSettings));
+                    printWriter.print(gson.toJson(projectVar.projectSettings));
                     printWriter.flush();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
 
 
-                for (Addon addon : ProjectManager.getActProjectVar().enabledAddons) {
+                for (Addon addon : projectVar.enabledAddons) {
 
 
                     try {
@@ -92,20 +98,20 @@ public class DataSaver {
 
 
                 JSONObject settings = new JSONObject();
-                settings.put("vcs", ProjectManager.getActProjectVar().vcs);
-                settings.put("type", ProjectManager.getActProjectVar().projectType.getName());
-                settings.put("zoom", ProjectManager.getActProjectVar().zoom);
-                settings.put("pos_x", ProjectManager.getActProjectVar().cam_pos.x);
-                settings.put("pos_y", ProjectManager.getActProjectVar().cam_pos.y);
-                settings.put("time", ProjectManager.getActProjectVar().programmingtime + (System.currentTimeMillis() - ProjectManager.getActProjectVar().currentstarttime));
+                settings.put("vcs", projectVar.vcs);
+                settings.put("type", projectVar.projectType.getName());
+                settings.put("zoom", projectVar.zoom);
+                settings.put("pos_x", projectVar.cam_pos.x);
+                settings.put("pos_y", projectVar.cam_pos.y);
+                settings.put("time", projectVar.programmingtime + (System.currentTimeMillis() - projectVar.currentstarttime));
                 settings.put("it_version", Var.PROGRAMM_VERSION_ID); //Saves Interitus Version in Project File
-                settings.put("pl_name", PluginManagerHandler.getPluginArgs(ProjectManager.getActProjectVar().projectType.getPluginRegister(), "name"));
-                settings.put("pl_version", ((double) PluginManagerHandler.getPluginArgs(ProjectManager.getActProjectVar().projectType.getPluginRegister(), "version")));
+                settings.put("pl_name", PluginManagerHandler.getPluginArgs(projectVar.projectType.getPluginRegister(), "name"));
+                settings.put("pl_version", ((double) PluginManagerHandler.getPluginArgs(projectVar.projectType.getPluginRegister(), "version")));
                 ArrayList<JSONObject> addons = new ArrayList<>();
-                for (int i = 0; i < ProjectManager.getActProjectVar().enabledAddons.size(); i++) {
+                for (int i = 0; i < projectVar.enabledAddons.size(); i++) {
                     JSONObject tempjson = new JSONObject();
-                    tempjson.put("pl_name", PluginManagerHandler.getPluginArgs(ProjectManager.getActProjectVar().enabledAddons.get(i).getPlugin(), "name").toString());
-                    tempjson.put("addon_name", ProjectManager.getActProjectVar().enabledAddons.get(i).getName());
+                    tempjson.put("pl_name", PluginManagerHandler.getPluginArgs(projectVar.enabledAddons.get(i).getPlugin(), "name").toString());
+                    tempjson.put("addon_name", projectVar.enabledAddons.get(i).getName());
 
                     addons.add(tempjson);
                 }
@@ -124,18 +130,18 @@ public class DataSaver {
                     names.add("Settings.itps");
                     names.add("RunConfig.itrc");
                     names.add("ProjectSettings.itps");
-                    for (Addon addon : ProjectManager.getActProjectVar().enabledAddons) {
+                    for (Addon addon : projectVar.enabledAddons) {
                         names.add(addon.getName() + ".ita");
                     }
 
-                    String[] addonnames = new String[ProjectManager.getActProjectVar().enabledAddons.size() + 4];
+                    String[] addonnames = new String[projectVar.enabledAddons.size() + 4];
                     addonnames[0] = Data.tempfolder + "/" + generateprojektname;
                     addonnames[1] = Data.tempfolder + "/" + generateprojektsettingsname;
                     addonnames[2] = Data.tempfolder + "/" + generaterunconfigurationen;
                     addonnames[3] = Data.tempfolder + "/" + generateprojectsettings;
 
-                    for (int i = 0; i < ProjectManager.getActProjectVar().enabledAddons.size(); i++) {
-                        addonnames[i + 4] = Data.tempfolder + "/" + ProjectManager.getActProjectVar().enabledAddons.get(i).getName();
+                    for (int i = 0; i < projectVar.enabledAddons.size(); i++) {
+                        addonnames[i + 4] = Data.tempfolder + "/" + projectVar.enabledAddons.get(i).getName();
                     }
 
                     Zip.zipFiles(names, handle.file().getAbsolutePath(), addonnames);
@@ -148,7 +154,7 @@ public class DataSaver {
                 tempblockfile.delete();
 
 
-                ProjectManager.getActProjectVar().changes = false;
+                projectVar.changes = false;
 
 
             }

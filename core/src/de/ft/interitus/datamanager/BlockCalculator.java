@@ -15,14 +15,15 @@ import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.Var;
 import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.ProjectManager;
+import de.ft.interitus.projecttypes.ProjectVar;
 import de.ft.interitus.utils.ArrayList;
 
 public class BlockCalculator {
-    public static ArrayList<SaveBlockV1> save() {
+    public static ArrayList<SaveBlockV1> save( final ProjectVar projectVar) {
         ArrayList<SaveBlockV1> saveBlocks = new ArrayList<>();
 
-        for (int i = 0; i < ProjectManager.getActProjectVar().blocks.size(); i++) {
-            saveBlocks.add(ProjectManager.getActProjectVar().blocks.get(i).getBlocktoSaveGenerator().generate(ProjectManager.getActProjectVar().blocks.get(i)));
+        for (int i = 0; i < projectVar.blocks.size(); i++) {
+            saveBlocks.add(projectVar.blocks.get(i).getBlocktoSaveGenerator().generate(projectVar.blocks.get(i), ProjectManager.getActProjectVar()));
         }
         return saveBlocks;
     }
