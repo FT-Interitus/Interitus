@@ -15,8 +15,8 @@ import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 public class DefaultBlock extends Block {
 
 
-    public DefaultBlock(int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock, BlockUpdateGenerator update, BlocktoSaveGenerator blocktoSaveGenerator) {
-        super(index, x, y, w, h, platformSpecificBlock, update, blocktoSaveGenerator);
+    public DefaultBlock(int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock, BlockUpdateGenerator update, BlocktoSaveGenerator blocktoSaveGenerator, boolean isSubBlock) {
+        super(index, x, y, w, h, platformSpecificBlock, update, blocktoSaveGenerator, isSubBlock);
 
 
 

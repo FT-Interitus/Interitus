@@ -76,7 +76,7 @@ public abstract class Block implements VisibleObjects {
 
 
 
-    public Block(final int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock, BlockUpdateGenerator update, BlocktoSaveGenerator blocktoSaveGenerator) { //Initzialisieren des Blocks
+    public Block(final int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock, BlockUpdateGenerator update, BlocktoSaveGenerator blocktoSaveGenerator, boolean isSubBlock) { //Initzialisieren des Blocks
         this.blocktype = platformSpecificBlock;
         EventVar.blockEventManager.createBlock(new BlockCreateEvent(this, this));
         this.x = x;
@@ -91,15 +91,17 @@ public abstract class Block implements VisibleObjects {
         this.blockupdate = update.generate(this); //BlockUpdate Klasse wird initzilisieren
         this.blocktoSaveGenerator = blocktoSaveGenerator;
 
-        if (this.isVisible()) { //Wenn der Block sichtbar ist...  //Das passiert deshalb weil nicht für nicht sichbare Blöcke ein Thread laufen muss
-            blockupdate.start(); //...wird der updater gestartet
-            Objects.requireNonNull(ProjectManager.getActProjectVar()).visible_blocks.add(this); //und wird zum Array der sichtbaren Blöcke hinzugefüt
-        } else {
-            blockupdate.isrunning = false; //...wenn nicht dann nicht
+
+        if(!isSubBlock) {
+            if (this.isVisible()) { //Wenn der Block sichtbar ist...  //Das passiert deshalb weil nicht für nicht sichbare Blöcke ein Thread laufen muss
+                blockupdate.start(); //...wird der updater gestartet
+                Objects.requireNonNull(ProjectManager.getActProjectVar()).visible_blocks.add(this); //und wird zum Array der sichtbaren Blöcke hinzugefüt
+            } else {
+                blockupdate.isrunning = false; //...wenn nicht dann nicht
+            }
+            ThreadManager.add(blockupdate, this); //Blockupdate wird zum Array der laufenden Threads hinzugefügt
+
         }
-        ThreadManager.add(blockupdate, this); //Blockupdate wird zum Array der laufenden Threads hinzugefügt
-
-
         rightClickEventListener = new RightClickEventListener() {
 
             @Override

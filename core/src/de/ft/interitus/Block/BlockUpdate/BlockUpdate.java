@@ -5,6 +5,7 @@
 
 package de.ft.interitus.Block.BlockUpdate;
 
+import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Cursor;
@@ -19,11 +20,15 @@ import de.ft.interitus.UI.ProgramGrid;
 import de.ft.interitus.UI.UIElements.check.CheckKollision;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
 import de.ft.interitus.UI.UIVar;
+import de.ft.interitus.UI.window.CreateWindow;
+import de.ft.interitus.UI.window.Window;
 import de.ft.interitus.Var;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.block.BlockKillMovingWiresEvent;
 import de.ft.interitus.loading.AssetLoader;
+import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.For.For;
 import de.ft.interitus.projecttypes.ProjectManager;
+import de.ft.interitus.utils.ArrayList;
 import de.ft.interitus.utils.Unproject;
 
 import java.util.Timer;
@@ -515,11 +520,53 @@ public abstract class BlockUpdate extends Thread {
 
     private void block_moveingengine() {
 
+
+
         if(block.isMarked()) {
 
-            if(Gdx.input.isKeyPressed(Input.Keys.D)&&!openwindow) {
+            if(Gdx.input.isKeyJustPressed(Input.Keys.P)) {
+                block.setExtendedBlocks(new ArrayList<>());
+                block.getExtendedBlocks().add(ProjectManager.getActProjectVar().projectType.getBlockGenerator().generateBlock(0,10,10,10,10,new For(ProjectManager.getActProjectVar().projectType,null),ProjectManager.getActProjectVar().projectType.getBlockUpdateGenerator(),ProjectManager.getActProjectVar().projectType.getBlocktoSaveGenerator(), true));
+            Program.logger.config("Created Subblock");
+            }
 
+
+            if(Gdx.input.isKeyPressed(Input.Keys.D)&&!openwindow) {
+                openwindow = true;
                 if(block.getExtendedBlocks()!=null) {
+
+                 Window window = CreateWindow.addWindow(block.getBlocktype().getName(), new ApplicationListener() {
+                        @Override
+                        public void create() {
+
+                        }
+
+                        @Override
+                        public void resize(int width, int height) {
+
+                        }
+
+                        @Override
+                        public void render() {
+
+                        }
+
+                        @Override
+                        public void pause() {
+
+                        }
+
+                        @Override
+                        public void resume() {
+
+                        }
+
+                        @Override
+                        public void dispose() {
+
+                        }
+                    });
+                 window.create();
 
                     Program.logger.config("Open Window");
 

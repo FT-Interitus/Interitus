@@ -200,7 +200,7 @@ public class ArduinoCompiler implements Compiler {
 
                     break;
                 } else {
-                      Program.logger.config(strCurrentLine);
+                    //  Program.logger.config(strCurrentLine);
                     outputfromcli += strCurrentLine;
                 }
             } catch (IOException e) {

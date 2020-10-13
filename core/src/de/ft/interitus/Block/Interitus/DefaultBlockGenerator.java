@@ -17,10 +17,10 @@ import de.ft.interitus.projecttypes.ProjectType;
 public class DefaultBlockGenerator implements BlockGenerator {
 
     @Override
-    public Block generateBlock(int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock, BlockUpdateGenerator generator, BlocktoSaveGenerator blocktoSaveGenerator) {
+    public Block generateBlock(int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock, BlockUpdateGenerator generator, BlocktoSaveGenerator blocktoSaveGenerator, boolean isSubBlock) {
         try {
 
-            return new DefaultBlock(index, x, y, w, h, platformSpecificBlock.getClass().getDeclaredConstructor(ProjectType.class, Addon.class).newInstance(ProjectManager.getActProjectVar().projectType,platformSpecificBlock.getAdddon()), generator, blocktoSaveGenerator);
+            return new DefaultBlock(index, x, y, w, h, platformSpecificBlock.getClass().getDeclaredConstructor(ProjectType.class, Addon.class).newInstance(ProjectManager.getActProjectVar().projectType,platformSpecificBlock.getAdddon()), generator, blocktoSaveGenerator, isSubBlock);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
