@@ -24,7 +24,6 @@ import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.block.BlockKillMovingWiresEvent;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.ProjectManager;
-import de.ft.interitus.projecttypes.ProjectType;
 import de.ft.interitus.utils.Unproject;
 
 import java.util.Timer;
@@ -38,7 +37,7 @@ public abstract class BlockUpdate extends Thread {
     public boolean isconnectorclicked = false;//Ist der connector des zuständigen Blocks ausgelöst
     public boolean geschoben = false;
     public Wire tempwire;
-   public boolean toggle; // Ist der Block von der mouse gehovert?
+    public boolean toggle; // Ist der Block von der mouse gehovert?
     Vector3 temp3;//Temp vectoren für berechnungs zwischen schritte
     Vector3 temp4;//Temp vectoren für berechnungs zwischen schritte
     private boolean willbedelete = false;
@@ -46,6 +45,8 @@ public abstract class BlockUpdate extends Thread {
     private boolean IsMousealreadypressed = false;
     private boolean changewillbedeleted = false;
     private boolean tempdelete = false;
+
+    private boolean openwindow = false;
 
     public BlockUpdate(Block block) {
         this.block = block; //Der Block wird zugewiesen
@@ -68,12 +69,9 @@ public abstract class BlockUpdate extends Thread {
 
                 control_block_errors(); //Check if BlockUpdate is running correctly
 
-                if (!UIVar.isdialogeopend&&ProjectManager.getActProjectVar()!=null) {
+                if (!UIVar.isdialogeopend && ProjectManager.getActProjectVar() != null) {
 
                     try {
-
-
-
 
 
                         if (block == null) { //Wenn kein Block mehr verbunden ist wird der timer beendet und damit auch der thread
@@ -87,8 +85,6 @@ public abstract class BlockUpdate extends Thread {
                         toggle = CheckKollision.checkmousewithblock(block); //Wird der Block von der Mouse gehovert?
 
 
-
-
                         wire_managment();
 
 
@@ -98,18 +94,17 @@ public abstract class BlockUpdate extends Thread {
 
 
                         /////////////////////////////Datawire erzeigen
-                        if(block.getBlocktype()!=null&&block.getBlocktype().getBlockParameter()!=null) {
+                        if (block.getBlocktype() != null && block.getBlocktype().getBlockParameter() != null) {
                             for (int i = 0; i < block.getBlocktype().getBlockParameter().size(); i++) {
-                                if (block.getBlocktype().getBlockParameter().get(i).getParameterType().isOutput() ) {
+                                if (block.getBlocktype().getBlockParameter().get(i).getParameterType().isOutput()) {
 
 
-                                    if(CheckKollision.checkpointwithobject(block.getBlocktype().getBlockParameter().get(i).getX(),block.getBlocktype().getBlockParameter().get(i).getY(),UIVar.parameter_width,UIVar.parameter_height, Unproject.unproject())&&Gdx.input.isButtonJustPressed(0)&&ProjectManager.getActProjectVar().moveingdatawire==null){
+                                    if (CheckKollision.checkpointwithobject(block.getBlocktype().getBlockParameter().get(i).getX(), block.getBlocktype().getBlockParameter().get(i).getY(), UIVar.parameter_width, UIVar.parameter_height, Unproject.unproject()) && Gdx.input.isButtonJustPressed(0) && ProjectManager.getActProjectVar().moveingdatawire == null) {
                                         block.getBlocktype().getBlockParameter().get(i).getDatawire().add(new DataWire(block.getBlocktype().getBlockParameter().get(i)));
                                         block.setMoving(false);
                                         ProjectManager.getActProjectVar().moveingdatawire = block.getBlocktype().getBlockParameter().get(i).getDatawire().getLastObject();
 
                                     }
-
 
 
                                 }
@@ -286,7 +281,7 @@ public abstract class BlockUpdate extends Thread {
 
 
                         //Setzt die Nachbaren
-                        if (ProjectManager.getActProjectVar().marked_block!=null && !block.isMarked()) {
+                        if (ProjectManager.getActProjectVar().marked_block != null && !block.isMarked()) {
                             try {
                                 if (CheckKollision.checkblockwithduplicate(ProjectManager.getActProjectVar().marked_block, block, 0) && block.getRight() == null && ProjectManager.getActProjectVar().marked_block.getWire_left() == null && ProjectManager.getActProjectVar().marked_block.getBlocktype().canhasleftconnector()) {
                                     if (ProjectManager.getActProjectVar().marked_block.isMoving()) {
@@ -387,7 +382,6 @@ public abstract class BlockUpdate extends Thread {
         }, 0, 20);
 
     }
-
 
 
     private void wire_managment() {
@@ -494,9 +488,6 @@ public abstract class BlockUpdate extends Thread {
     }
 
 
-
-
-
     private void control_block_errors() {
         try {
 
@@ -522,11 +513,29 @@ public abstract class BlockUpdate extends Thread {
     }
 
 
-
-
-
     private void block_moveingengine() {
-        if (CheckKollision.checkmousewithblock(block, Var.mousepressedold) && Gdx.input.isButtonPressed(0) && ProjectManager.getActProjectVar().ismoving == false && !block.isMarked()&& ProjectManager.getActProjectVar().marked_block == null) {
+
+        if(block.isMarked()) {
+
+            if(Gdx.input.isKeyPressed(Input.Keys.D)&&!openwindow) {
+
+                if(block.getExtendedBlocks()!=null) {
+
+                    Program.logger.config("Open Window");
+
+
+                }
+
+            }
+
+        }
+
+
+        if(openwindow&&!Gdx.input.isKeyPressed(Input.Keys.D)) {
+            openwindow =false;
+        }
+
+        if (CheckKollision.checkmousewithblock(block, Var.mousepressedold) && Gdx.input.isButtonPressed(0) && ProjectManager.getActProjectVar().ismoving == false && !block.isMarked() && ProjectManager.getActProjectVar().marked_block == null) {
 
             if (!CheckKollision.checkpointwithobject((int) block.getwireconnector_right().x, (int) block.getwireconnector_right().y, 20, 20, (int) Var.mousepressedold.x, (int) Var.mousepressedold.y)) {
 
@@ -562,7 +571,6 @@ public abstract class BlockUpdate extends Thread {
         }
 
 
-
         if (block.isMoving() && Gdx.input.isButtonPressed(0)) {
 
 
@@ -591,13 +599,13 @@ public abstract class BlockUpdate extends Thread {
 
             //Ändere die Aktuelle Blockposition auf die Maus Position
 
-            if(ProgramGrid.enable&&ProgramGrid.block_snapping&&ProgramGrid.block_active_snapping) {
+            if (ProgramGrid.enable && ProgramGrid.block_snapping && ProgramGrid.block_active_snapping) {
 
 
-                int newx = (int) (((ProgramingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x - ProjectManager.getActProjectVar().diff_save.x)-UIVar.abstandvonRand)/ProgramGrid.margin);
-                int newy = (int) (((ProgramingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y - ProjectManager.getActProjectVar().diff_save.y)-UIVar.programmflaeche_y)/ProgramGrid.margin);
-                block.setX((int) (newx*ProgramGrid.margin)+UIVar.abstandvonRand);
-                block.setY((int) (newy*ProgramGrid.margin)+UIVar.programmflaeche_y);
+                int newx = (int) (((ProgramingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x - ProjectManager.getActProjectVar().diff_save.x) - UIVar.abstandvonRand) / ProgramGrid.margin);
+                int newy = (int) (((ProgramingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y - ProjectManager.getActProjectVar().diff_save.y) - UIVar.programmflaeche_y) / ProgramGrid.margin);
+                block.setX((int) (newx * ProgramGrid.margin) + UIVar.abstandvonRand);
+                block.setY((int) (newy * ProgramGrid.margin) + UIVar.programmflaeche_y);
 
 
             } else {
@@ -648,12 +656,12 @@ public abstract class BlockUpdate extends Thread {
             ProjectManager.getActProjectVar().ismoving = false;
             block.setMoving(false);
 
-            if(ProgramGrid.block_snapping&&!ProgramGrid.block_active_snapping) {
+            if (ProgramGrid.block_snapping && !ProgramGrid.block_active_snapping) {
 
-                int newx = (int) ((block.getX())/ProgramGrid.margin);
-                int newy = (int) ((block.getY())/ProgramGrid.margin);
-                block.setX((int) (newx*ProgramGrid.margin));
-                block.setY((int) (newy*ProgramGrid.margin));
+                int newx = (int) ((block.getX()) / ProgramGrid.margin);
+                int newy = (int) ((block.getY()) / ProgramGrid.margin);
+                block.setX((int) (newx * ProgramGrid.margin));
+                block.setY((int) (newy * ProgramGrid.margin));
 
             }
 

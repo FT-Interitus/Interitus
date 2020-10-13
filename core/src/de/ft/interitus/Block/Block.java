@@ -72,6 +72,8 @@ public abstract class Block implements VisibleObjects {
     private Wire wire_right = null; //rechte verbunde Wire
     private PlatformSpecificBlock blocktype;
     private final BlockDropDownMenue BlockModiSelection = new BlockDropDownMenue(0, 0, 0, 0, this);
+    private ArrayList<Block> extendedBlocks = null;
+
 
 
     public Block(final int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock, BlockUpdateGenerator update, BlocktoSaveGenerator blocktoSaveGenerator) { //Initzialisieren des Blocks
@@ -966,5 +968,14 @@ public abstract class Block implements VisibleObjects {
 
         }
 
+    }
+
+
+    public ArrayList<Block> getExtendedBlocks() {
+        return extendedBlocks;
+    }
+
+    public void setExtendedBlocks(ArrayList<Block> extendedBlocks) {
+        this.extendedBlocks = extendedBlocks;
     }
 }
