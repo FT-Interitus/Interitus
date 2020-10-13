@@ -5,28 +5,25 @@
 
 package de.ft.interitus.Block.BlockUpdate;
 
-import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.math.Vector3;
+import de.ft.interitus.*;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.DataWire;
 import de.ft.interitus.Block.Wire;
-import de.ft.interitus.DisplayErrors;
-import de.ft.interitus.Program;
-import de.ft.interitus.ProgramingSpace;
 import de.ft.interitus.UI.ProgramGrid;
 import de.ft.interitus.UI.UIElements.check.CheckKollision;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.window.CreateWindow;
 import de.ft.interitus.UI.window.Window;
-import de.ft.interitus.Var;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.block.BlockKillMovingWiresEvent;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.For.For;
+import de.ft.interitus.UI.ExtendedBlocksApplicationListener;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.ArrayList;
 import de.ft.interitus.utils.Unproject;
@@ -535,37 +532,7 @@ public abstract class BlockUpdate extends Thread {
                 openwindow = true;
                 if(block.getExtendedBlocks()!=null) {
 
-                 Window window = CreateWindow.addWindow(block.getBlocktype().getName(), new ApplicationListener() {
-                        @Override
-                        public void create() {
-
-                        }
-
-                        @Override
-                        public void resize(int width, int height) {
-
-                        }
-
-                        @Override
-                        public void render() {
-
-                        }
-
-                        @Override
-                        public void pause() {
-
-                        }
-
-                        @Override
-                        public void resume() {
-
-                        }
-
-                        @Override
-                        public void dispose() {
-
-                        }
-                    });
+                 Window window = CreateWindow.addWindow(block.getBlocktype().getName(), new ExtendedBlocksApplicationListener());
                  window.create();
 
                     Program.logger.config("Open Window");

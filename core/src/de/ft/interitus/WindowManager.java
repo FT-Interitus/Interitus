@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import de.ft.interitus.UI.InputManager;
 import de.ft.interitus.UI.Notification.NotificationManager;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIVar;
@@ -23,6 +24,7 @@ public class WindowManager {
     private static boolean initalProgramingSpace = true;
     private static boolean switchtoprogramm = false;
     private static boolean switchtowelcome = false;
+    public static InputManager inputManager;
 
     public static void updateWindow() {
         if (switchtowelcome) {
@@ -115,6 +117,7 @@ public class WindowManager {
         shapeRenderer = new ShapeRenderer();
         BlockshapeRenderer = new ShapeRenderer();
         UI.UIcam.position.set(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f, 0);
+
 
 
     }

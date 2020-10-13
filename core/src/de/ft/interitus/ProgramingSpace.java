@@ -78,7 +78,7 @@ public class ProgramingSpace extends ScreenAdapter {
 
         BlockTappedBar.init();
 
-        de.ft.interitus.UI.Viewport.init();
+        de.ft.interitus.UI.Viewport.init(ProgramingSpace.cam, WindowManager.inputManager);
 
 
         ThreadManager.init();
@@ -132,12 +132,12 @@ public class ProgramingSpace extends ScreenAdapter {
 
             UI.updatedragui( WindowManager.shapeRenderer, true, WindowManager.batch);
 
-            ProgramGrid.draw();
+            ProgramGrid.draw(WindowManager.shapeRenderer, ProgramingSpace.cam);
 
             BlockDrawer.Draw();
 
 
-            de.ft.interitus.UI.Viewport.update(delta);
+            de.ft.interitus.UI.Viewport.update(delta, ProgramingSpace.cam);
 
 
         } catch (Exception e) {

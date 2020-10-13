@@ -18,6 +18,7 @@ public class Var {
     public static final int PLUGIN_SUBSYSTEM_VERSION = 1;
 
 
+
     /**
      * Erklärung
      * Änderung an der letzen Zahl bei kleineren Änderungen (Bugfixes, Typos, ...)

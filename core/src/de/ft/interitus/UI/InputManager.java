@@ -10,21 +10,21 @@ import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;
 
 public class InputManager {
-    public static InputMultiplexer multiplexer = new InputMultiplexer();
+    public  InputMultiplexer multiplexer = new InputMultiplexer();
 
-    public static void updateMultiplexer() {
+    public  void updateMultiplexer() {
         Gdx.input.setInputProcessor(multiplexer);
     }
 
-    public static void addProcessor(InputProcessor p) {
+    public  void addProcessor(InputProcessor p) {
         multiplexer.addProcessor(p);
     }
 
-    public static void remove(InputProcessor p) {
+    public  void remove(InputProcessor p) {
         multiplexer.removeProcessor(p);
     }
 
-    public static boolean contains(InputProcessor p) {
+    public  boolean contains(InputProcessor p) {
         return multiplexer.getProcessors().contains(p, true);
     }
 }

@@ -177,7 +177,7 @@ public class DataLoader {
                                 Dialogs.showErrorDialog(UI.stage, "Das Projekt kann in dieser Interitus Version nicht geöffnet werden!");
 
                         }
-                        BlockCalculator.extractV1(new ArrayList<SaveBlockV1>(readedblocks));
+                      ProjectManager.getActProjectVar().blocks=BlockCalculator.extractV1(new ArrayList<SaveBlockV1>(readedblocks));
 
                         ProjectManager.getActProjectVar().deviceConfigurations =  gson.fromJson(Files.readString(runconfig.file().toPath(),StandardCharsets.UTF_8),new ArrayList<DeviceConfiguration>().getClass());;
 

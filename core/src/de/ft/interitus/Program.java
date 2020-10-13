@@ -13,6 +13,7 @@ import de.ft.interitus.Block.ThreadManager;
 import de.ft.interitus.Logging.DebugPrinter;
 import de.ft.interitus.Logging.LoggerInit;
 import de.ft.interitus.UI.CheckShortcuts;
+import de.ft.interitus.UI.InputManager;
 import de.ft.interitus.UI.Theme.ThemeManager;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.datamanager.programmdata.Data;
@@ -89,8 +90,7 @@ public class Program extends Game {
         Var.window.setVisible(false);
         //GLFW.glfwHideWindow(Var.window.getWindowHandle());
 
-
-
+        WindowManager.inputManager = new InputManager();
 
         Var.username = UserNameGetter.get();
 

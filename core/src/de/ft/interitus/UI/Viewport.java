@@ -8,13 +8,12 @@ package de.ft.interitus.UI;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Frustum;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
-import de.ft.interitus.ProgramingSpace;
-import de.ft.interitus.Settings;
-import de.ft.interitus.Var;
+import de.ft.interitus.*;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.block.BlockKillMovingWiresEvent;
 import de.ft.interitus.events.global.GlobalEventAdapter;
@@ -24,8 +23,10 @@ import de.ft.interitus.projecttypes.ProjectManager;
 import static com.badlogic.gdx.Gdx.input;
 
 public class Viewport {
+    public static final float ADDITIONAL_FRUSTRUM_SIZE = 0.7f;
     public static long movedelay = 580;
     public static long firstmovedelay = 600;
+    public static Frustum extendedfrustum = new Frustum();
     private static boolean run_left = false;
     private static boolean run_right = false;
     private static boolean run_up = false;
@@ -34,19 +35,16 @@ public class Viewport {
     private static double time_pressed_right = 0;
     private static double time_pressed_up = 0;
     private static double time_pressed_down = 0;
-    private static Matrix4 projection = new Matrix4();
-    public static final float ADDITIONAL_FRUSTRUM_SIZE = 0.7f;
-    private static Matrix4 view = new Matrix4();
-    private static Vector3 tmp = new Vector3();
-    private static Matrix4 combined = new Matrix4();
-    private static Matrix4 invProjectionView = new Matrix4();
-    public static Frustum extendedfrustum = new Frustum();
+    private static final Matrix4 projection = new Matrix4();
+    private static final Matrix4 view = new Matrix4();
+    private static final Vector3 tmp = new Vector3();
+    private static final Matrix4 combined = new Matrix4();
+    private static final Matrix4 invProjectionView = new Matrix4();
 
-
-    public static void init() {
+    public static void init(OrthographicCamera cam, InputManager inputManager) {
         Gdx.graphics.setVSync(Settings.Vsync);
 
-        InputManager.addProcessor(new InputAdapter() {
+        inputManager.addProcessor(new InputAdapter() {
 
 
             @Override
@@ -56,17 +54,22 @@ public class Viewport {
 
                     if (input.isKeyPressed(Input.Keys.CONTROL_LEFT) || input.isKeyPressed(Input.Keys.CONTROL_RIGHT)) {
                         if (amount == -1) {
-                            if (ProgramingSpace.cam.zoom > 0.4f) {
-                                ProgramingSpace.cam.zoom = ProgramingSpace.cam.zoom - 0.1f;
+                            if (cam.zoom > 0.4f) {
+                                cam.zoom = cam.zoom - 0.1f;
                             }
 
                         } else {
-                            if (ProgramingSpace.cam.zoom <= 2.0f) {
-                                ProgramingSpace.cam.zoom = ProgramingSpace.cam.zoom + 0.1f;
+                            if (cam.zoom <= 2.0f) {
+                                cam.zoom = cam.zoom + 0.1f;
                             }
                         }
 
-                        ProjectManager.getActProjectVar().zoom = ProgramingSpace.cam.zoom;
+                        if (cam == ProgramingSpace.cam) {
+                            Program.logger.config("is cam");
+                            ProjectManager.getActProjectVar().zoom = cam.zoom;
+                        }else{
+                            Program.logger.config("is not cam");
+                        }
 
                     }
 
@@ -77,15 +80,15 @@ public class Viewport {
             }
         });
 
-        InputManager.addProcessor(new GestureDetector(new GestureDetector.GestureAdapter() {
+        inputManager.addProcessor(new GestureDetector(new GestureDetector.GestureAdapter() {
             @Override
             public boolean pan(float x, float y, float deltaX, float deltaY) {
                 if (!UIVar.isdialogeopend) {
 
                     if (input.isButtonPressed(Input.Buttons.MIDDLE)) {
-                        ProgramingSpace.cam.position.x -= deltaX* ProgramingSpace.cam.zoom;
-                        ProgramingSpace.cam.position.y += deltaY* ProgramingSpace.cam.zoom;
-                        ProgramingSpace.cam.update();
+                        cam.position.x -= deltaX * cam.zoom;
+                        cam.position.y += deltaY * cam.zoom;
+                        cam.update();
                     }
                 }
 
@@ -95,12 +98,12 @@ public class Viewport {
         }));
 
 
-        InputManager.updateMultiplexer();
+        inputManager.updateMultiplexer();
 
         EventVar.globalEventManager.addListener(new GlobalEventAdapter() {
             @Override
             public void focuslost(GlobalFocusLostEvent e) {
-                if(ProjectManager.getActProjectVar()!=null&& Var.inProgram) {
+                if (ProjectManager.getActProjectVar() != null && Var.inProgram) {
                     EventVar.blockEventManager.killmovingwires(new BlockKillMovingWiresEvent(this));
                 }
             }
@@ -109,18 +112,18 @@ public class Viewport {
 
     }
 
-    public static void update(float delta) {
+    public static void update(float delta, OrthographicCamera cam) {
         if (!UIVar.isdialogeopend && !UIVar.moveprogrammlock) {
 
             if (input.isKeyPressed(Input.Keys.LEFT)) {
                 if (!run_left) {
                     time_pressed_left = System.currentTimeMillis();
                     run_left = true;
-                    ProgramingSpace.cam.position.set(ProgramingSpace.cam.position.x -= 20, ProgramingSpace.cam.position.y, 0);
+                    cam.position.set(cam.position.x -= 20, cam.position.y, 0);
                 } else {
                     if (System.currentTimeMillis() - time_pressed_left > firstmovedelay) {
                         time_pressed_left = System.currentTimeMillis() - movedelay;
-                        ProgramingSpace.cam.position.set(ProgramingSpace.cam.position.x -= 20, ProgramingSpace.cam.position.y, 0);
+                        cam.position.set(cam.position.x -= 20, cam.position.y, 0);
                     }
                 }
             } else {
@@ -132,11 +135,11 @@ public class Viewport {
                 if (!run_right) {
                     time_pressed_right = System.currentTimeMillis();
                     run_right = true;
-                    ProgramingSpace.cam.position.set(ProgramingSpace.cam.position.x += 20, ProgramingSpace.cam.position.y, 0);
+                    cam.position.set(cam.position.x += 20, cam.position.y, 0);
                 } else {
                     if (System.currentTimeMillis() - time_pressed_right > firstmovedelay) {
                         time_pressed_right = System.currentTimeMillis() - movedelay;
-                        ProgramingSpace.cam.position.set(ProgramingSpace.cam.position.x += 20, ProgramingSpace.cam.position.y, 0);
+                        cam.position.set(cam.position.x += 20, cam.position.y, 0);
                     }
                 }
             } else {
@@ -148,11 +151,11 @@ public class Viewport {
                 if (!run_up) {
                     time_pressed_up = System.currentTimeMillis();
                     run_up = true;
-                    ProgramingSpace.cam.position.set(ProgramingSpace.cam.position.x, ProgramingSpace.cam.position.y += 20, 0);
+                    cam.position.set(cam.position.x, cam.position.y += 20, 0);
                 } else {
                     if (System.currentTimeMillis() - time_pressed_up > firstmovedelay) {
                         time_pressed_up = System.currentTimeMillis() - movedelay;
-                        ProgramingSpace.cam.position.set(ProgramingSpace.cam.position.x, ProgramingSpace.cam.position.y += 20, 0);
+                        cam.position.set(cam.position.x, cam.position.y += 20, 0);
                     }
                 }
             } else {
@@ -164,11 +167,11 @@ public class Viewport {
                 if (!run_down) {
                     time_pressed_down = System.currentTimeMillis();
                     run_down = true;
-                    ProgramingSpace.cam.position.set(ProgramingSpace.cam.position.x, ProgramingSpace.cam.position.y -= 20, 0);
+                    cam.position.set(cam.position.x, cam.position.y -= 20, 0);
                 } else {
                     if (System.currentTimeMillis() - time_pressed_down > firstmovedelay) {
                         time_pressed_down = System.currentTimeMillis() - movedelay;
-                        ProgramingSpace.cam.position.set(ProgramingSpace.cam.position.x, ProgramingSpace.cam.position.y -= 20, 0);
+                        cam.position.set(cam.position.x, cam.position.y -= 20, 0);
                     }
                 }
             } else {
@@ -177,33 +180,29 @@ public class Viewport {
 
 
             if (input.isKeyJustPressed(Input.Keys.PLUS)) {
-                ProgramingSpace.cam.zoom = ProgramingSpace.cam.zoom - 0.2f;
+                cam.zoom = cam.zoom - 0.2f;
             }
             if (input.isKeyJustPressed(Input.Keys.MINUS)) {
-                ProgramingSpace.cam.zoom = ProgramingSpace.cam.zoom + 0.2f;
+                cam.zoom = cam.zoom + 0.2f;
             }
 
 
-            ProjectManager.getActProjectVar().cam_pos.set(ProgramingSpace.cam.position.x, ProgramingSpace.cam.position.y);
+            ProjectManager.getActProjectVar().cam_pos.set(cam.position.x, cam.position.y);
 
         }
 
 
+        projection.setToOrtho((cam.zoom + ADDITIONAL_FRUSTRUM_SIZE) * -cam.viewportWidth / 2, (cam.zoom + ADDITIONAL_FRUSTRUM_SIZE) * (cam.viewportWidth / 2), (cam.zoom + ADDITIONAL_FRUSTRUM_SIZE) * -(cam.viewportHeight / 2), (cam.zoom + ADDITIONAL_FRUSTRUM_SIZE)
+                * cam.viewportHeight / 2, cam.near, cam.far);
 
-        projection.setToOrtho((ProgramingSpace.cam.zoom+ADDITIONAL_FRUSTRUM_SIZE) * -ProgramingSpace.cam.viewportWidth / 2, (ProgramingSpace.cam.zoom+ADDITIONAL_FRUSTRUM_SIZE) * (ProgramingSpace.cam.viewportWidth / 2), (ProgramingSpace.cam.zoom+ADDITIONAL_FRUSTRUM_SIZE) * -(ProgramingSpace.cam.viewportHeight / 2), (ProgramingSpace.cam.zoom+ADDITIONAL_FRUSTRUM_SIZE)
-                * ProgramingSpace.cam.viewportHeight / 2, ProgramingSpace.cam.near, ProgramingSpace.cam.far);
-
-        view.setToLookAt(ProgramingSpace.cam.position, tmp.set(ProgramingSpace.cam.position).add(ProgramingSpace.cam.direction), ProgramingSpace.cam.up);
+        view.setToLookAt(cam.position, tmp.set(cam.position).add(cam.direction), cam.up);
         combined.set(projection);
         Matrix4.mul(combined.val, view.val);
 
 
-            invProjectionView.set(combined);
-            Matrix4.inv(invProjectionView.val);
-            extendedfrustum.update(invProjectionView);
-
-
-
+        invProjectionView.set(combined);
+        Matrix4.inv(invProjectionView.val);
+        extendedfrustum.update(invProjectionView);
 
 
     }
