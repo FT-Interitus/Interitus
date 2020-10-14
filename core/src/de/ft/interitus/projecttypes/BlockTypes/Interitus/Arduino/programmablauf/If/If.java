@@ -16,7 +16,7 @@ public class If extends PlatformSpecificBlock {
 
     public If(ProjectType projectType, Addon addon) {
         super(projectType, addon);
-        super.blockModis.add(new IfDefaultBlockModus());
+        super.blockModis.add(new IfDefaultBlockMode());
         super.blockModis.add(new IfEnd());
         super.blockModis.add(new IfElse());
         super.actBlockModiIndex = 0;

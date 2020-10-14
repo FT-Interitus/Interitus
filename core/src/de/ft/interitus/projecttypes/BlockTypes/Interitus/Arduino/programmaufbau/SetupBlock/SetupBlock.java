@@ -16,7 +16,7 @@ public class SetupBlock extends PlatformSpecificBlock {
 
     public SetupBlock(ProjectType arduino, Addon addon) {
         super(arduino,  addon);
-        super.blockModis.add(new SetupModus());
+        super.blockModis.add(new SetupMode());
         super.actBlockModiIndex=0;
 
 

@@ -6,9 +6,16 @@
 package de.ft.interitus.UI;
 
 import com.badlogic.gdx.Gdx;
+
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import de.ft.interitus.Program;
+import de.ft.interitus.Settings;
+import de.ft.interitus.UI.window.Window;
+import de.ft.interitus.WindowManager;
+import de.ft.interitus.ProgramingSpace;
+
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import de.ft.interitus.utils.ShapeRenderer;
-
 
 public class ProgramGrid {
     public static int radius = 2;
@@ -31,7 +38,11 @@ public class ProgramGrid {
             return;
         }
 
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+
+
+       shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        shapeRenderer.setColor(Settings.theme.ClearColor());
+
         //   margin=20;
         //   ma=max-min;
         //    x=(ProgrammingSpace.cam.zoom-min)/ma;

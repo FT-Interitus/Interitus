@@ -13,12 +13,12 @@ import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.inputblocs.Digi
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.ProjectType;
 
-public class WhileLoopEnd extends PlatformSpecificBlock implements ArduinoBlock {
+public class WhileLoopEnd extends PlatformSpecificBlock {
 
     public WhileLoopEnd(ProjectType arduino, Addon addon) {
         super(arduino,addon);
-        blockModis.add(new DigitalReadDefault());
-        actBlockModiIndex = 0;
+
+
 
     }
 
@@ -69,14 +69,6 @@ public class WhileLoopEnd extends PlatformSpecificBlock implements ArduinoBlock 
     }
 
 
-    @Override
-    public String getCode() {
-        return "}";
-    }
 
-    @Override
-    public String getHeaderCode(boolean inserted) {
-        return null;
-    }
 
 }

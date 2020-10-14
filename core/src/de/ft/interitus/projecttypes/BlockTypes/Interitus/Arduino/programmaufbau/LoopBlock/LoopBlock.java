@@ -18,7 +18,7 @@ public class LoopBlock extends PlatformSpecificBlock  {
     public LoopBlock(ProjectType projectType, Addon addon) {
         super(projectType,addon);
 
-        super.blockModis.add(new LoopModus());
+        super.blockModis.add(new LoopMode());
         super.actBlockModiIndex = 0;
     }
 

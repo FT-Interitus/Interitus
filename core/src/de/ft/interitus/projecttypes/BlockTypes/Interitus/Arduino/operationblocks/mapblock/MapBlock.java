@@ -15,7 +15,7 @@ import de.ft.interitus.projecttypes.ProjectType;
 public class MapBlock extends PlatformSpecificBlock {
     public MapBlock(ProjectType projectType, Addon addon) {
         super(projectType, addon);
-        super.blockModis.add(new MapModusDefault());
+        super.blockModis.add(new MapModeDefault());
         super.actBlockModiIndex=0;
 ;    }
 

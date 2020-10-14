@@ -9,19 +9,19 @@ import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.Block.ParameterType;
 import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.projecttypes.BlockTypes.BlockModus;
+import de.ft.interitus.projecttypes.BlockTypes.BlockMode;
 import de.ft.interitus.projecttypes.BlockTypes.BlockSettings;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.InitArduino;
 import de.ft.interitus.utils.ArrayList;
 
-public class SquareRootModus extends BlockModus implements ArduinoBlock {
+public class SquareRootMode extends ArduinoBlock {
     ArrayList<Parameter> parameters = new ArrayList<>();
     Parameter Summand_1;
 
     Parameter Ergebnis;
 
-    public SquareRootModus(){
+    public SquareRootMode(){
         Summand_1=new Parameter("", AssetLoader.Parameter_first,"Wurzel", "Wurzel", "", new ParameterType(InitArduino.floatvar, false, false), true);
         Ergebnis=new Parameter("",AssetLoader.Parameter_isequal,"Ergebnis", "Unterschied von zwei zahlen", "", new ParameterType(InitArduino.floatvar, true, false), true);
         parameters.add(Summand_1);
