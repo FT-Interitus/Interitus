@@ -6,7 +6,6 @@
 package de.ft.interitus.projecttypes;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.files.FileHandle;
 import de.ft.interitus.WindowManager;
 import de.ft.interitus.Program;
 import de.ft.interitus.ProgramingSpace;
@@ -70,7 +69,7 @@ public class ProjectManager {
 
 
                     } else {
-                        CloseProject(Var.openprojects.indexOf(Var.openprojects.get(i)));
+                        closeProject(Var.openprojects.indexOf(Var.openprojects.get(i)));
                         i--;
                     }
 
@@ -226,7 +225,7 @@ public class ProjectManager {
     }
 
 
-    public static void CloseProject(int index) {
+    public static void closeProject(int index) {
 
         try {
             ClearActOpenProgramm.clear(index);

@@ -66,8 +66,7 @@ public class ProgramingSpace extends ScreenAdapter {
         cam.position.set(Gdx.graphics.getWidth() / 2f + 50, Gdx.graphics.getHeight() / 2f, 0);
         UI.UIcam.position.set(Gdx.graphics.getWidth() / 2f + 50, Gdx.graphics.getHeight() / 2f, 0);
 
-        //ProjectManager.addProject(ProjectTypesVar.projectTypes.get(0).init());
-        //ProjectManager.change(0);
+
 
     }
 

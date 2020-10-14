@@ -7,11 +7,7 @@ package de.ft.interitus.datamanager.userdata.load;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
-import de.ft.interitus.Block.SaveBlock;
 import de.ft.interitus.Block.Saving.SaveBlockV1;
 import de.ft.interitus.Program;
 import de.ft.interitus.UI.ManualConfig.DeviceConfiguration;
@@ -38,7 +34,6 @@ import org.json.JSONObject;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 
@@ -176,6 +171,7 @@ public class DataLoader {
 
                                 Dialogs.showErrorDialog(UI.stage, "Das Projekt kann in dieser Interitus Version nicht geöffnet werden!");
 
+
                         }
                       ProjectManager.getActProjectVar().blocks=BlockCalculator.extractV1(new ArrayList<SaveBlockV1>(readedblocks));
 
@@ -186,7 +182,9 @@ public class DataLoader {
                     g.printStackTrace();
                     try {
                         if (wascreated) {
-                            Var.openprojects.remove(Var.openprojects.size() - 1);
+
+                            ProjectManager.closeProject(Var.openprojects.size()-1);
+
                         }
                         Dialogs.showErrorDialog(UI.stage, "Fehler beim Laden des Projekts\nDie Projekt Datei ist womöglich beschädigt!");
                     }catch (Exception f) {
@@ -196,7 +194,7 @@ public class DataLoader {
                     e.printStackTrace();
                     try {
                         if (wascreated) {
-                            Var.openprojects.remove(Var.openprojects.size() - 1);
+                            ProjectManager.closeProject(Var.openprojects.size()-1);
                         }
                         Dialogs.showErrorDialog(UI.stage, "Fehler beim Laden des Projekts\nDie Projekt Datei ist womöglich beschädigt!");
                     }catch (Exception f) {

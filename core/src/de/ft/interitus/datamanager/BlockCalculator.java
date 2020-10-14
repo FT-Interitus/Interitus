@@ -50,7 +50,7 @@ public class BlockCalculator {
                         if (tempaddon == null) {
 
                             Dialogs.showErrorDialog(UI.stage, "Addon Fehler");
-                            ProjectManager.CloseProject(Var.openprojectindex);
+                            ProjectManager.closeProject(Var.openprojectindex);
 
 
                         }
@@ -195,7 +195,7 @@ public class BlockCalculator {
                     if (tempaddon == null) {
 
                         Dialogs.showErrorDialog(UI.stage, "Addon Fehler");
-                        ProjectManager.CloseProject(Var.openprojectindex);
+                        ProjectManager.closeProject(Var.openprojectindex);
 
 
                     }

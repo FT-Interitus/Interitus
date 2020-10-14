@@ -20,7 +20,6 @@ import de.ft.interitus.datamanager.userdata.UserInteractDataManagerDialog;
 import de.ft.interitus.datamanager.userdata.save.DataSaver;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.global.GlobalTabClickEvent;
-import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.VCS;
 import de.ft.interitus.utils.ArrayList;
@@ -180,7 +179,7 @@ public class TabBar implements UIElement {
                                 public void result(Integer result) {
                                     if (result == nothing) {
 
-                                        ProjectManager.CloseProject(finalI);
+                                        ProjectManager.closeProject(finalI);
                                     }
 
                                     if (result == everything) {
@@ -206,7 +205,7 @@ public class TabBar implements UIElement {
 
 
                 } else {
-                    ProjectManager.CloseProject(i);
+                    ProjectManager.closeProject(i);
 
                 }
 
