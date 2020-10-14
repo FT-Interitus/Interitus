@@ -15,7 +15,7 @@ import de.ft.interitus.WindowManager;
 import de.ft.interitus.ProgramingSpace;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import de.ft.interitus.utils.ShapeRenderer;
+
 
 public class ProgramGrid {
     public static int radius = 2;
