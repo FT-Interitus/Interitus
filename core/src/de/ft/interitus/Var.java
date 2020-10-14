@@ -18,6 +18,7 @@ public class Var {
     public static final int PLUGIN_SUBSYSTEM_VERSION = 1;
 
 
+
     /**
      * Erklärung
      * Änderung an der letzen Zahl bei kleineren Änderungen (Bugfixes, Typos, ...)
@@ -52,7 +53,7 @@ public class Var {
 
     public static ArrayList<ProjectVar> openprojects = new ArrayList<>();
 
-    public static int openprojectindex = 0;
+    public static int openprojectindex = -1;
     public static boolean keeplog = false;
 
 
@@ -60,6 +61,7 @@ public class Var {
 
     public static final Vector2 mousepressedoldwihoutunproject = new Vector2(1, 1); //Wo war die Maus als das letzte mal eine Taste gedrückt wurde
 
+public static boolean restart_necessary = false;
 
     public static ArrayList<Window> extendsWindows = new ArrayList<>();
     public static Window splashscreen = null;

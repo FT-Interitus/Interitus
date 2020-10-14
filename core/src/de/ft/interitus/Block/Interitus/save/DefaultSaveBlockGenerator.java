@@ -8,10 +8,9 @@ package de.ft.interitus.Block.Interitus.save;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.DataWire;
 import de.ft.interitus.Block.Generators.BlocktoSaveGenerator;
-import de.ft.interitus.Block.SaveBlock;
 import de.ft.interitus.Block.Saving.SaveBlockV1;
 import de.ft.interitus.Block.Wire;
-import de.ft.interitus.projecttypes.ProjectManager;
+import de.ft.interitus.projecttypes.ProjectVar;
 import de.ft.interitus.utils.ArrayList;
 
 public class DefaultSaveBlockGenerator implements BlocktoSaveGenerator {
@@ -24,7 +23,7 @@ public class DefaultSaveBlockGenerator implements BlocktoSaveGenerator {
    int blockmodus =0;
 
     @Override
-    public SaveBlockV1 generate(Block block) {
+    public SaveBlockV1 generate(Block block, ProjectVar projectVar) {
         nodes = new ArrayList<>();
 
         if (block.getWire_right() != null) {
@@ -110,7 +109,7 @@ public class DefaultSaveBlockGenerator implements BlocktoSaveGenerator {
                     }
                     int counter = 0;
                     for(DataWire dataWire:block.getBlocktype().getBlockParameter().get(i).getDatawire()) {
-                        if(dataWire== ProjectManager.getActProjectVar().moveingdatawire) {
+                        if(dataWire== projectVar.moveingdatawire) {
                             //Ignore moving DataWires while saving
                             continue;
                         }
@@ -135,64 +134,144 @@ public class DefaultSaveBlockGenerator implements BlocktoSaveGenerator {
             blockmodus = block.getBlocktype().getActBlockModiIndex();
 
 
-        if (block.getRight() != null) {
-            if (block.getWire_right().isSpace_between_blocks()) {
+            ArrayList<SaveBlockV1> extendedBlocks =null;
+            if(block.getExtendedBlocks()!=null) {
+                extendedBlocks = new ArrayList<>();
+
+                for(Block extendedBlock:block.getExtendedBlocks()) {
+
+                    extendedBlocks.add(projectVar.projectType.getBlocktoSaveGenerator().generate(extendedBlock,projectVar));
 
 
-                if (block.getLeft() == null && block.getRight() != null) {
-                    return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), -1, block.getRight().getIndex(), true, nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(), ((ArrayList<ArrayList<Integer>>) datawires.clone()),((ArrayList<ArrayList<Integer>>) datawiresindex.clone()),blockmodus,block.getBlocktype().addonname(),blocksettings,((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()));
-
-                } else if (block.getLeft() != null && block.getRight() == null) {
-                    return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), block.getLeft().getIndex(), -1, true, nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(),  ((ArrayList<ArrayList<Integer>>) datawires.clone()),((ArrayList<ArrayList<Integer>>) datawiresindex.clone()),blockmodus,block.getBlocktype().addonname(),blocksettings,((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()));
-                } else if (block.getLeft() != null && block.getRight() != null) {
-                    return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), block.getLeft().getIndex(), block.getRight().getIndex(), false, nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(),  ((ArrayList<ArrayList<Integer>>) datawires.clone()),((ArrayList<ArrayList<Integer>>) datawiresindex.clone()),blockmodus,block.getBlocktype().addonname(),blocksettings,((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()));
-
-                } else if (block.getLeft() == null && block.getRight() == null) {
-                    return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), -1, -1, true, nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(),  ((ArrayList<ArrayList<Integer>>) datawires.clone()),((ArrayList<ArrayList<Integer>>) datawiresindex.clone()),blockmodus,block.getBlocktype().addonname(),blocksettings,((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()));
-
-                } else {
-                    return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), -1, -1, true,nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(),  ((ArrayList<ArrayList<Integer>>) datawires.clone()),((ArrayList<ArrayList<Integer>>) datawiresindex.clone()),blockmodus,block.getBlocktype().addonname(),blocksettings,((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()));
                 }
 
 
-            } else {
 
-                if (block.getLeft() == null && block.getRight() != null) {
-                    return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), -1, block.getRight().getIndex(), false, nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(), ((ArrayList<ArrayList<Integer>>) datawires.clone()),((ArrayList<ArrayList<Integer>>) datawiresindex.clone()),blockmodus,block.getBlocktype().addonname(),blocksettings,((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()));
+            }
 
-                } else if (block.getLeft() != null && block.getRight() == null) {
-                    return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), block.getLeft().getIndex(), -1, false,nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(),  ((ArrayList<ArrayList<Integer>>) datawires.clone()),((ArrayList<ArrayList<Integer>>) datawiresindex.clone()),blockmodus,block.getBlocktype().addonname(),blocksettings,((ArrayList<ArrayList<ArrayList<Integer>>>)datawiremoveing.clone()));
-                } else if (block.getLeft() != null && block.getRight() != null) {
-                    return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), block.getLeft().getIndex(), block.getRight().getIndex(), false, nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(),  ((ArrayList<ArrayList<Integer>>) datawires.clone()),((ArrayList<ArrayList<Integer>>) datawiresindex.clone()),blockmodus,block.getBlocktype().addonname(),blocksettings,((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()));
 
-                } else if (block.getLeft() == null && block.getRight() == null) {
-                    return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), -1, -1, false,nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(),  ((ArrayList<ArrayList<Integer>>) datawires.clone()),((ArrayList<ArrayList<Integer>>) datawiresindex.clone()),blockmodus,block.getBlocktype().addonname(),blocksettings,((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()));
+            if(block.getExtendedBlocks()==null) {
+                if (block.getRight() != null) {
+                    if (block.getWire_right().isSpace_between_blocks()) {
+
+
+                        if (block.getLeft() == null && block.getRight() != null) {
+                            return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), -1, block.getRight().getIndex(), true, nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(), ((ArrayList<ArrayList<Integer>>) datawires.clone()), ((ArrayList<ArrayList<Integer>>) datawiresindex.clone()), blockmodus, block.getBlocktype().addonname(), blocksettings, ((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()));
+
+                        } else if (block.getLeft() != null && block.getRight() == null) {
+                            return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), block.getLeft().getIndex(), -1, true, nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(), ((ArrayList<ArrayList<Integer>>) datawires.clone()), ((ArrayList<ArrayList<Integer>>) datawiresindex.clone()), blockmodus, block.getBlocktype().addonname(), blocksettings, ((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()));
+                        } else if (block.getLeft() != null && block.getRight() != null) {
+                            return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), block.getLeft().getIndex(), block.getRight().getIndex(), false, nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(), ((ArrayList<ArrayList<Integer>>) datawires.clone()), ((ArrayList<ArrayList<Integer>>) datawiresindex.clone()), blockmodus, block.getBlocktype().addonname(), blocksettings, ((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()));
+
+                        } else if (block.getLeft() == null && block.getRight() == null) {
+                            return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), -1, -1, true, nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(), ((ArrayList<ArrayList<Integer>>) datawires.clone()), ((ArrayList<ArrayList<Integer>>) datawiresindex.clone()), blockmodus, block.getBlocktype().addonname(), blocksettings, ((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()));
+
+                        } else {
+                            return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), -1, -1, true, nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(), ((ArrayList<ArrayList<Integer>>) datawires.clone()), ((ArrayList<ArrayList<Integer>>) datawiresindex.clone()), blockmodus, block.getBlocktype().addonname(), blocksettings, ((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()));
+                        }
+
+
+                    } else {
+
+                        if (block.getLeft() == null && block.getRight() != null) {
+                            return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), -1, block.getRight().getIndex(), false, nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(), ((ArrayList<ArrayList<Integer>>) datawires.clone()), ((ArrayList<ArrayList<Integer>>) datawiresindex.clone()), blockmodus, block.getBlocktype().addonname(), blocksettings, ((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()));
+
+                        } else if (block.getLeft() != null && block.getRight() == null) {
+                            return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), block.getLeft().getIndex(), -1, false, nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(), ((ArrayList<ArrayList<Integer>>) datawires.clone()), ((ArrayList<ArrayList<Integer>>) datawiresindex.clone()), blockmodus, block.getBlocktype().addonname(), blocksettings, ((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()));
+                        } else if (block.getLeft() != null && block.getRight() != null) {
+                            return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), block.getLeft().getIndex(), block.getRight().getIndex(), false, nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(), ((ArrayList<ArrayList<Integer>>) datawires.clone()), ((ArrayList<ArrayList<Integer>>) datawiresindex.clone()), blockmodus, block.getBlocktype().addonname(), blocksettings, ((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()));
+
+                        } else if (block.getLeft() == null && block.getRight() == null) {
+                            return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), -1, -1, false, nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(), ((ArrayList<ArrayList<Integer>>) datawires.clone()), ((ArrayList<ArrayList<Integer>>) datawiresindex.clone()), blockmodus, block.getBlocktype().addonname(), blocksettings, ((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()));
+
+                        } else {
+                            return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), -1, -1, false, nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(), ((ArrayList<ArrayList<Integer>>) datawires.clone()), ((ArrayList<ArrayList<Integer>>) datawiresindex.clone()), blockmodus, block.getBlocktype().addonname(), blocksettings, ((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()));
+                        }
+
+                    }
 
                 } else {
-                    return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), -1, -1, false,nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(),  ((ArrayList<ArrayList<Integer>>) datawires.clone()),((ArrayList<ArrayList<Integer>>) datawiresindex.clone()),blockmodus,block.getBlocktype().addonname(),blocksettings,((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()));
+
+                    if (block.getLeft() == null && block.getRight() != null) {
+                        return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), -1, block.getRight().getIndex(), false, nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(), ((ArrayList<ArrayList<Integer>>) datawires.clone()), ((ArrayList<ArrayList<Integer>>) datawiresindex.clone()), blockmodus, block.getBlocktype().addonname(), blocksettings, ((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()));
+
+                    } else if (block.getLeft() != null && block.getRight() == null) {
+                        return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), block.getLeft().getIndex(), -1, false, nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(), ((ArrayList<ArrayList<Integer>>) datawires.clone()), ((ArrayList<ArrayList<Integer>>) datawiresindex.clone()), blockmodus, block.getBlocktype().addonname(), blocksettings, ((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()));
+                    } else if (block.getLeft() != null && block.getRight() != null) {
+                        return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), block.getLeft().getIndex(), block.getRight().getIndex(), false, nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(), ((ArrayList<ArrayList<Integer>>) datawires.clone()), ((ArrayList<ArrayList<Integer>>) datawiresindex.clone()), blockmodus, block.getBlocktype().addonname(), blocksettings, ((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()));
+
+                    } else if (block.getLeft() == null && block.getRight() == null) {
+                        return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), -1, -1, false, nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(), ((ArrayList<ArrayList<Integer>>) datawires.clone()), ((ArrayList<ArrayList<Integer>>) datawiresindex.clone()), blockmodus, block.getBlocktype().addonname(), blocksettings, ((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()));
+
+                    } else {
+                        return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), -1, -1, false, nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(), ((ArrayList<ArrayList<Integer>>) datawires.clone()), ((ArrayList<ArrayList<Integer>>) datawiresindex.clone()), blockmodus, block.getBlocktype().addonname(), blocksettings, ((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()));
+                    }
+
+
+                }
+
+            }else{
+                if (block.getRight() != null) {
+                    if (block.getWire_right().isSpace_between_blocks()) {
+
+
+                        if (block.getLeft() == null && block.getRight() != null) {
+                            return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), -1, block.getRight().getIndex(), true, nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(), ((ArrayList<ArrayList<Integer>>) datawires.clone()), ((ArrayList<ArrayList<Integer>>) datawiresindex.clone()), blockmodus, block.getBlocktype().addonname(), blocksettings, ((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()), (ArrayList<SaveBlockV1>) extendedBlocks.clone());
+
+                        } else if (block.getLeft() != null && block.getRight() == null) {
+                            return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), block.getLeft().getIndex(), -1, true, nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(), ((ArrayList<ArrayList<Integer>>) datawires.clone()), ((ArrayList<ArrayList<Integer>>) datawiresindex.clone()), blockmodus, block.getBlocktype().addonname(), blocksettings, ((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()), (ArrayList<SaveBlockV1>) extendedBlocks.clone());
+                        } else if (block.getLeft() != null && block.getRight() != null) {
+                            return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), block.getLeft().getIndex(), block.getRight().getIndex(), false, nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(), ((ArrayList<ArrayList<Integer>>) datawires.clone()), ((ArrayList<ArrayList<Integer>>) datawiresindex.clone()), blockmodus, block.getBlocktype().addonname(), blocksettings, ((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()), (ArrayList<SaveBlockV1>) extendedBlocks.clone());
+
+                        } else if (block.getLeft() == null && block.getRight() == null) {
+                            return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), -1, -1, true, nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(), ((ArrayList<ArrayList<Integer>>) datawires.clone()), ((ArrayList<ArrayList<Integer>>) datawiresindex.clone()), blockmodus, block.getBlocktype().addonname(), blocksettings, ((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()), (ArrayList<SaveBlockV1>) extendedBlocks.clone());
+
+                        } else {
+                            return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), -1, -1, true, nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(), ((ArrayList<ArrayList<Integer>>) datawires.clone()), ((ArrayList<ArrayList<Integer>>) datawiresindex.clone()), blockmodus, block.getBlocktype().addonname(), blocksettings, ((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()), (ArrayList<SaveBlockV1>) extendedBlocks.clone());
+                        }
+
+
+                    } else {
+
+                        if (block.getLeft() == null && block.getRight() != null) {
+                            return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), -1, block.getRight().getIndex(), false, nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(), ((ArrayList<ArrayList<Integer>>) datawires.clone()), ((ArrayList<ArrayList<Integer>>) datawiresindex.clone()), blockmodus, block.getBlocktype().addonname(), blocksettings, ((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()), (ArrayList<SaveBlockV1>) extendedBlocks.clone());
+
+                        } else if (block.getLeft() != null && block.getRight() == null) {
+                            return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), block.getLeft().getIndex(), -1, false, nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(), ((ArrayList<ArrayList<Integer>>) datawires.clone()), ((ArrayList<ArrayList<Integer>>) datawiresindex.clone()), blockmodus, block.getBlocktype().addonname(), blocksettings, ((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()), (ArrayList<SaveBlockV1>) extendedBlocks.clone());
+                        } else if (block.getLeft() != null && block.getRight() != null) {
+                            return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), block.getLeft().getIndex(), block.getRight().getIndex(), false, nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(), ((ArrayList<ArrayList<Integer>>) datawires.clone()), ((ArrayList<ArrayList<Integer>>) datawiresindex.clone()), blockmodus, block.getBlocktype().addonname(), blocksettings, ((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()), (ArrayList<SaveBlockV1>) extendedBlocks.clone());
+
+                        } else if (block.getLeft() == null && block.getRight() == null) {
+                            return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), -1, -1, false, nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(), ((ArrayList<ArrayList<Integer>>) datawires.clone()), ((ArrayList<ArrayList<Integer>>) datawiresindex.clone()), blockmodus, block.getBlocktype().addonname(), blocksettings, ((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()), (ArrayList<SaveBlockV1>) extendedBlocks.clone());
+
+                        } else {
+                            return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), -1, -1, false, nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(), ((ArrayList<ArrayList<Integer>>) datawires.clone()), ((ArrayList<ArrayList<Integer>>) datawiresindex.clone()), blockmodus, block.getBlocktype().addonname(), blocksettings, ((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()), (ArrayList<SaveBlockV1>) extendedBlocks.clone());
+                        }
+
+                    }
+
+                } else {
+
+                    if (block.getLeft() == null && block.getRight() != null) {
+                        return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), -1, block.getRight().getIndex(), false, nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(), ((ArrayList<ArrayList<Integer>>) datawires.clone()), ((ArrayList<ArrayList<Integer>>) datawiresindex.clone()), blockmodus, block.getBlocktype().addonname(), blocksettings, ((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()), (ArrayList<SaveBlockV1>) extendedBlocks.clone());
+
+                    } else if (block.getLeft() != null && block.getRight() == null) {
+                        return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), block.getLeft().getIndex(), -1, false, nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(), ((ArrayList<ArrayList<Integer>>) datawires.clone()), ((ArrayList<ArrayList<Integer>>) datawiresindex.clone()), blockmodus, block.getBlocktype().addonname(), blocksettings, ((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()), (ArrayList<SaveBlockV1>) extendedBlocks.clone());
+                    } else if (block.getLeft() != null && block.getRight() != null) {
+                        return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), block.getLeft().getIndex(), block.getRight().getIndex(), false, nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(), ((ArrayList<ArrayList<Integer>>) datawires.clone()), ((ArrayList<ArrayList<Integer>>) datawiresindex.clone()), blockmodus, block.getBlocktype().addonname(), blocksettings, ((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()), (ArrayList<SaveBlockV1>) extendedBlocks.clone());
+
+                    } else if (block.getLeft() == null && block.getRight() == null) {
+                        return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), -1, -1, false, nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(), ((ArrayList<ArrayList<Integer>>) datawires.clone()), ((ArrayList<ArrayList<Integer>>) datawiresindex.clone()), blockmodus, block.getBlocktype().addonname(), blocksettings, ((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()), (ArrayList<SaveBlockV1>) extendedBlocks.clone());
+
+                    } else {
+                        return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), -1, -1, false, nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(), ((ArrayList<ArrayList<Integer>>) datawires.clone()), ((ArrayList<ArrayList<Integer>>) datawiresindex.clone()), blockmodus, block.getBlocktype().addonname(), blocksettings, ((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()), (ArrayList<SaveBlockV1>) extendedBlocks.clone());
+                    }
+
+
                 }
 
             }
 
-        } else {
-
-            if (block.getLeft() == null && block.getRight() != null) {
-                return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), -1, block.getRight().getIndex(), false, nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(),  ((ArrayList<ArrayList<Integer>>) datawires.clone()),((ArrayList<ArrayList<Integer>>) datawiresindex.clone()),blockmodus,block.getBlocktype().addonname(),blocksettings,((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()));
-
-            } else if (block.getLeft() != null && block.getRight() == null) {
-                return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), block.getLeft().getIndex(), -1, false, nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(),  ((ArrayList<ArrayList<Integer>>) datawires.clone()),((ArrayList<ArrayList<Integer>>) datawiresindex.clone()),blockmodus,block.getBlocktype().addonname(),blocksettings,((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()));
-            } else if (block.getLeft() != null && block.getRight() != null) {
-                return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), block.getLeft().getIndex(), block.getRight().getIndex(), false, nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(),  ((ArrayList<ArrayList<Integer>>) datawires.clone()),((ArrayList<ArrayList<Integer>>) datawiresindex.clone()),blockmodus,block.getBlocktype().addonname(),blocksettings,((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()));
-
-            } else if (block.getLeft() == null && block.getRight() == null) {
-                return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), -1, -1, false,nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(),  ((ArrayList<ArrayList<Integer>>) datawires.clone()),((ArrayList<ArrayList<Integer>>) datawiresindex.clone()),blockmodus,block.getBlocktype().addonname(),blocksettings,((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()));
-
-            } else {
-                return new SaveBlockV1(block.getX(), block.getY(), block.getIndex(), -1, -1, false,nodes, block.getBlocktype().getID(), (ArrayList<String>) parameters.clone(),  ((ArrayList<ArrayList<Integer>>) datawires.clone()),((ArrayList<ArrayList<Integer>>) datawiresindex.clone()),blockmodus,block.getBlocktype().addonname(),blocksettings,((ArrayList<ArrayList<ArrayList<Integer>>>) datawiremoveing.clone()));
-            }
-
-
-        }
 
     }
 }

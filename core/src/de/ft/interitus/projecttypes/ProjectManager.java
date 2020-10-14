@@ -5,6 +5,7 @@
 
 package de.ft.interitus.projecttypes;
 
+import com.badlogic.gdx.Gdx;
 import de.ft.interitus.WindowManager;
 import de.ft.interitus.Program;
 import de.ft.interitus.ProgramingSpace;
@@ -16,6 +17,7 @@ import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.Var;
 import de.ft.interitus.datamanager.programmdata.experience.ExperienceVar;
+import de.ft.interitus.datamanager.userdata.save.DataSaver;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.global.GlobalCloseEvent;
 import de.ft.interitus.events.global.GlobalEventAdapter;
@@ -23,6 +25,7 @@ import de.ft.interitus.events.global.GlobalTabClickEvent;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.utils.ClearActOpenProgramm;
 
+import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -52,12 +55,21 @@ public class ProjectManager {
 
 
                     if (Var.openprojects.get(i).changes) {
-                        canbeclosed = false;
 
-                        NotificationManager.sendNotification(new Notification(AssetLoader.information, "Schliesen abgebrochen", "In deinem Projekt " + Var.openprojects.get(i).getFilename() + " wurden\nungspeicherte Änderungen erkannt!"));
+                        if(Var.openprojects.get(i).path!=""&&new File(Var.openprojects.get(i).path).exists()) {
+
+                            DataSaver.save(Gdx.files.absolute(Var.openprojects.get(i).path),Var.openprojects.get(i));
+
+                        }else {
+
+                            canbeclosed = false;
+                            NotificationManager.sendNotification(new Notification(AssetLoader.information, "Schliesen abgebrochen", "In deinem Projekt " + Var.openprojects.get(i).getFilename() + " wurden\nungspeicherte Änderungen erkannt!"));
+
+                        }
+
 
                     } else {
-                        CloseProject(Var.openprojects.indexOf(Var.openprojects.get(i)));
+                        closeProject(Var.openprojects.indexOf(Var.openprojects.get(i)));
                         i--;
                     }
 
@@ -167,7 +179,14 @@ public class ProjectManager {
                 return null;
             }
 
-            return Var.openprojects.get(Var.openprojectindex);
+            try {
+                return Var.openprojects.get(Var.openprojectindex);
+            }catch (IndexOutOfBoundsException e) {
+                Program.logger.severe("Program-Error: Restart is necessary");
+                Var.restart_necessary = true;
+                return null;
+
+            }
         }
 
     }
@@ -206,7 +225,7 @@ public class ProjectManager {
     }
 
 
-    public static void CloseProject(int index) {
+    public static void closeProject(int index) {
 
         try {
             ClearActOpenProgramm.clear(index);

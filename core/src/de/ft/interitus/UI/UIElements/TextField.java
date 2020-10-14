@@ -14,6 +14,7 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
 import de.ft.interitus.UI.InputManager;
+import de.ft.interitus.WindowManager;
 
 public class TextField {
 
@@ -53,7 +54,7 @@ public class TextField {
         curser = new Texture("curser.png");
 
 
-        InputManager.addProcessor(new InputAdapter() {
+        WindowManager.inputManager.addProcessor(new InputAdapter() {
             @Override
             public boolean keyTyped(char key) {
                 if (active) {
@@ -71,7 +72,7 @@ public class TextField {
                 return false;
             }
         });
-        InputManager.updateMultiplexer();
+        WindowManager.inputManager.updateMultiplexer();
     }
 
 

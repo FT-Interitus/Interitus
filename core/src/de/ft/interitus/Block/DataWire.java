@@ -19,7 +19,7 @@ import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.Unproject;
 
-
+//TODO when moving Wire ProjectVar:changes should be true
 public class DataWire {
 
 
@@ -80,10 +80,10 @@ public class DataWire {
             }
             if(Gdx.input.isButtonPressed(0) && moving[0]){
                 if(UIVar.doonce) {
-                    UIVar.merkpos.set(Gdx.input.getX(), Gdx.input.getY(), verschiebung_4_VertikaleInput);
+                    UIVar.merkpos.set(Gdx.input.getX()*ProgramingSpace.cam.zoom, Gdx.input.getY()*ProgramingSpace.cam.zoom, verschiebung_4_VertikaleInput);
                     UIVar.doonce=false;
                 }
-                verschiebung_4_VertikaleInput=(int)UIVar.merkpos.y-Gdx.input.getY()+(int)UIVar.merkpos.z;
+                verschiebung_4_VertikaleInput= (int) ((int)UIVar.merkpos.y-Gdx.input.getY()*ProgramingSpace.cam.zoom+(int)UIVar.merkpos.z);
             }else if(!Gdx.input.isButtonPressed(0)){
                 UIVar.doonce=true;
                 moving[0]=false;
@@ -96,10 +96,10 @@ public class DataWire {
             }
             if(Gdx.input.isButtonPressed(0)  && moving[1]){
                 if(UIVar.doonce) {
-                    UIVar.merkpos.set(Gdx.input.getX(), Gdx.input.getY(), verschiebung_2_HorizontaleInput);
+                    UIVar.merkpos.set(Gdx.input.getX()*ProgramingSpace.cam.zoom, Gdx.input.getY()*ProgramingSpace.cam.zoom, verschiebung_2_HorizontaleInput);
                     UIVar.doonce=false;
                 }
-                verschiebung_2_HorizontaleInput=Gdx.input.getX()-(int)UIVar.merkpos.x+(int)UIVar.merkpos.z;
+                verschiebung_2_HorizontaleInput= (int) (Gdx.input.getX()*ProgramingSpace.cam.zoom-(int)UIVar.merkpos.x+(int)UIVar.merkpos.z);
             }else if(!Gdx.input.isButtonPressed(0)){
                 UIVar.doonce=true;
                 moving[1]=false;
@@ -113,10 +113,10 @@ public class DataWire {
             }
             if(Gdx.input.isButtonPressed(0)  && moving[2]){
                 if(UIVar.doonce) {
-                    UIVar.merkpos.set(Gdx.input.getX(), Gdx.input.getY(), verschiebung_1_Horizontale);
+                    UIVar.merkpos.set(Gdx.input.getX()*ProgramingSpace.cam.zoom, Gdx.input.getY()*ProgramingSpace.cam.zoom, verschiebung_1_Horizontale);
                     UIVar.doonce=false;
                 }
-                verschiebung_1_Horizontale=(int)UIVar.merkpos.y-Gdx.input.getY()+(int)UIVar.merkpos.z;
+                verschiebung_1_Horizontale= (int) ((int)UIVar.merkpos.y-Gdx.input.getY()*ProgramingSpace.cam.zoom+(int)UIVar.merkpos.z);
             }else if(!Gdx.input.isButtonPressed(0)){
                 UIVar.doonce=true;
                 moving[2]=false;
@@ -130,10 +130,10 @@ public class DataWire {
             }
             if(Gdx.input.isButtonPressed(0)  && moving[3]){
                 if(UIVar.doonce) {
-                    UIVar.merkpos.set(Gdx.input.getX(), Gdx.input.getY(), verschiebung_3_HorizontaleOutput);
+                    UIVar.merkpos.set(Gdx.input.getX()*ProgramingSpace.cam.zoom, Gdx.input.getY()*ProgramingSpace.cam.zoom, verschiebung_3_HorizontaleOutput);
                     UIVar.doonce=false;
                 }
-                verschiebung_3_HorizontaleOutput=Gdx.input.getX()-(int)UIVar.merkpos.x+(int)UIVar.merkpos.z;
+                verschiebung_3_HorizontaleOutput= (int) (Gdx.input.getX()*ProgramingSpace.cam.zoom-(int)UIVar.merkpos.x+(int)UIVar.merkpos.z);
             }else if(!Gdx.input.isButtonPressed(0)){
                 UIVar.doonce=true;
                 moving[3]=false;
@@ -147,10 +147,10 @@ public class DataWire {
             }
             if(Gdx.input.isButtonPressed(0)  && moving[4]){
                 if(UIVar.doonce) {
-                    UIVar.merkpos.set(Gdx.input.getX(), Gdx.input.getY(), verschiebung_5_VertikaleInput);
+                    UIVar.merkpos.set(Gdx.input.getX()*ProgramingSpace.cam.zoom, Gdx.input.getY()*ProgramingSpace.cam.zoom, verschiebung_5_VertikaleInput);
                     UIVar.doonce=false;
                 }
-                verschiebung_5_VertikaleInput=(int)UIVar.merkpos.y-Gdx.input.getY()+(int)UIVar.merkpos.z;
+                verschiebung_5_VertikaleInput= (int) ((int)UIVar.merkpos.y-Gdx.input.getY()*ProgramingSpace.cam.zoom+(int)UIVar.merkpos.z);
             }else if(!Gdx.input.isButtonPressed(0)){
                 UIVar.doonce=true;
                 moving[4]=false;
@@ -277,9 +277,10 @@ public class DataWire {
                 for (int i = 0; i < ProjectManager.getActProjectVar().visible_blocks.size(); i++) {
 
 
-                    if (CheckKollision.object(ProjectManager.getActProjectVar().visible_blocks.get(i).getX(), ProjectManager.getActProjectVar().visible_blocks.get(i).getY(), ProjectManager.getActProjectVar().visible_blocks.get(i).getW(), ProjectManager.getActProjectVar().visible_blocks.get(i).getH(), (int) ProgramingSpace.viewport.unproject(tempvector.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgramingSpace.viewport.unproject(tempvector1.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1)) {
+                    if (CheckKollision.object(ProjectManager.getActProjectVar().visible_blocks.get(i).getX(), ProjectManager.getActProjectVar().visible_blocks.get(i).getY(), ProjectManager.getActProjectVar().visible_blocks.get(i).getW(), ProjectManager.getActProjectVar().visible_blocks.get(i).getH(), (int) ProgramingSpace.viewport.unproject(tempvector.set(Gdx.input.getX()*ProgramingSpace.cam.zoom, Gdx.input.getY()*ProgramingSpace.cam.zoom, 0)).x, (int) ProgramingSpace.viewport.unproject(tempvector1.set(Gdx.input.getX()*ProgramingSpace.cam.zoom, Gdx.input.getY()*ProgramingSpace.cam.zoom*ProgramingSpace.cam.zoom, 0)).y, 1, 1)) {
                         counter++;
                     }
+
 
 
                 }

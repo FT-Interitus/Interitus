@@ -25,6 +25,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.concurrent.*;
 
 public class ArduinoCompiler implements Compiler {
@@ -42,7 +43,7 @@ public class ArduinoCompiler implements Compiler {
             StringBuilder Programm = new StringBuilder();
             for (String include : installlibery) {
 
-                installlibary("\"" + include + "\"");
+                installlibary(  include.replace(" ","҈"));
 
             }
 
@@ -163,7 +164,21 @@ public class ArduinoCompiler implements Compiler {
         pr = null;
         try {
 
-            pr = rt.exec(command);
+
+
+           String[] commandArray = command.split(" ");
+            for(int i=0;i< commandArray.length;i++) {
+
+                commandArray[i] = commandArray[i].replace("҈"," ");
+
+
+
+            }
+
+
+
+            pr = rt.exec(commandArray);
+
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -185,7 +200,7 @@ public class ArduinoCompiler implements Compiler {
 
                     break;
                 } else {
-                    //  Programm.logger.config(strCurrentLine);
+                    //  Program.logger.config(strCurrentLine);
                     outputfromcli += strCurrentLine;
                 }
             } catch (IOException e) {
@@ -234,6 +249,8 @@ public class ArduinoCompiler implements Compiler {
         } else {
             Program.logger.severe("You OS is not supported");
         }
+
+        Program.logger.config(installlibrary);
 
 
         runcommand(installlibrary, true);

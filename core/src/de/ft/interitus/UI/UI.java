@@ -38,6 +38,7 @@ import de.ft.interitus.UI.settings.SettingsUI;
 import de.ft.interitus.UI.setup.SetupWindow;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.Var;
+import de.ft.interitus.WindowManager;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.datamanager.programmdata.experience.ExperienceManager;
 import de.ft.interitus.events.EventVar;
@@ -367,8 +368,8 @@ public class UI {
         root.setFillParent(true);
         stage.addActor(root);
 
-        InputManager.addProcessor(stage);
-        InputManager.updateMultiplexer();
+        WindowManager.inputManager.addProcessor(stage);
+        WindowManager.inputManager.updateMultiplexer();
 
         set = new SettingsUI();
         proset = new ProjectSettingsUI();
@@ -562,12 +563,12 @@ public class UI {
             isuilock = UIVar.uilocked;
 
             if (UIVar.uilocked) {
-                if (InputManager.contains(stage)) {
-                    InputManager.remove(stage);
+                if ( WindowManager.inputManager.contains(stage)) {
+                    WindowManager.inputManager.remove(stage);
                 }
             } else {
-                if (!InputManager.contains(stage)) {
-                    InputManager.addProcessor(stage);
+                if (! WindowManager.inputManager.contains(stage)) {
+                    WindowManager.inputManager.addProcessor(stage);
                 }
             }
 

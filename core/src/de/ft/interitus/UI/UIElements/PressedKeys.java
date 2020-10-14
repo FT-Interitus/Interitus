@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import de.ft.interitus.UI.InputManager;
+import de.ft.interitus.WindowManager;
 import de.ft.interitus.utils.ArrayList;
 
 public class PressedKeys {
@@ -17,7 +18,7 @@ public class PressedKeys {
     public PressedKeys() {
 
 
-        InputManager.addProcessor(new InputAdapter() {
+        WindowManager.inputManager.addProcessor(new InputAdapter() {
             @Override
             public boolean keyDown(int keycode) {
 
@@ -45,7 +46,7 @@ public class PressedKeys {
                 return false;
             }
         });
-        InputManager.updateMultiplexer();
+        WindowManager.inputManager.updateMultiplexer();
 
     }
 

@@ -6,8 +6,8 @@
 package de.ft.interitus.datamanager.userdata.load;
 
 import com.badlogic.gdx.files.FileHandle;
+import com.google.gson.Gson;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
-import de.ft.interitus.Block.SaveBlock;
 import de.ft.interitus.Block.Saving.SaveBlockV1;
 import de.ft.interitus.Program;
 import de.ft.interitus.UI.ManualConfig.DeviceConfiguration;
@@ -32,10 +32,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.util.Arrays;
+import java.util.List;
 
 public class DataLoader {
     private static final ArrayList<Addon> enabledAddons = new ArrayList<>();
     private static boolean wascreated = false;
+   private static Gson gson = new Gson();
 
     public static void load(final FileHandle handle, final String name, final String path) {
 
@@ -80,11 +85,13 @@ public class DataLoader {
                                     enabledAddons.add(addon);
                                     FileHandle addonconfig = new FileHandle(Data.tempfolder.getAbsolutePath() + "/" + "" + addon.getName() + ".ita");
 
-                                    FileInputStream addonconfig_fis = new FileInputStream(addonconfig.file());
-                                    ObjectInputStream addonconfig_ois = new ObjectInputStream(addonconfig_fis);
+                                    try {
+                                        addon.setAddonSettings(gson.fromJson(Files.readString(addonconfig.file().toPath(),StandardCharsets.UTF_8),Object.class));
 
+                                    }catch (Exception e) {
+                                        addon.setAddonSettings(null);
+                                    }
 
-                                    addon.setAddonSettings(addonconfig_ois.readObject());
                                     found = true;
                                     break;
                                 }
@@ -121,13 +128,14 @@ public class DataLoader {
 
                         ProjectManager.getActProjectVar().setFilename(name);
                         ProjectManager.getActProjectVar().path = path;
-
                         try {
 
-                            FileInputStream projectsettings_fis = new FileInputStream(projectsettingsfile.file());
-                            ObjectInputStream projectsettings_ois = new ObjectInputStream(projectsettings_fis);
-                            ProjectManager.getActProjectVar().projectSettings = projectsettings_ois.readObject();
-                        } catch (StreamCorruptedException ignored) {
+                          //  FileInputStream projectsettings_fis = new FileInputStream(projectsettingsfile.file());
+
+
+                                ProjectManager.getActProjectVar().projectSettings = gson.fromJson(Files.readString(projectsettingsfile.file().toPath(),StandardCharsets.UTF_8), Object.class);
+
+                        } catch (Exception ignored) {
                             Program.logger.warning("ProjectType has no saveable Settings");
 
 
@@ -148,33 +156,35 @@ public class DataLoader {
                             MenuBar.menuItem_speichern.setText("Revision speichern");
                         }
 
-                        FileInputStream fis = new FileInputStream(file.file());
-                        ObjectInputStream ois = new ObjectInputStream(fis);
-                        ArrayList<SaveBlockV1> readedblocks = null;
+
+
+
+                        List<SaveBlockV1> readedblocks = null;
+
+
+
 
                         try {
-                            readedblocks = ((ArrayList<SaveBlockV1>) ois.readObject());
-                        } catch (InvalidClassException f) {
+                            readedblocks =  stringToArray( Files.readString(file.file().toPath(),StandardCharsets.UTF_8),SaveBlockV1[].class);
+                        } catch (Exception f) {
                             f.printStackTrace();
 
                                 Dialogs.showErrorDialog(UI.stage, "Das Projekt kann in dieser Interitus Version nicht geöffnet werden!");
 
+
                         }
-                       // BlockCalculator.extract(readedblocks);
-                        BlockCalculator.extractV1(readedblocks);
+                      ProjectManager.getActProjectVar().blocks=BlockCalculator.extractV1(new ArrayList<SaveBlockV1>(readedblocks));
 
-
-                        FileInputStream runconfig_fis = new FileInputStream(runconfig.file());
-                        ObjectInputStream runconfig_ois = new ObjectInputStream(runconfig_fis);
-
-                        ProjectManager.getActProjectVar().deviceConfigurations = ((ArrayList<DeviceConfiguration>) runconfig_ois.readObject());
+                        ProjectManager.getActProjectVar().deviceConfigurations =  gson.fromJson(Files.readString(runconfig.file().toPath(),StandardCharsets.UTF_8),new ArrayList<DeviceConfiguration>().getClass());;
 
                     }
                 } catch (JSONException g) {
                     g.printStackTrace();
                     try {
                         if (wascreated) {
-                            Var.openprojects.remove(Var.openprojects.size() - 1);
+
+                            ProjectManager.closeProject(Var.openprojects.size()-1);
+
                         }
                         Dialogs.showErrorDialog(UI.stage, "Fehler beim Laden des Projekts\nDie Projekt Datei ist womöglich beschädigt!");
                     }catch (Exception f) {
@@ -184,7 +194,7 @@ public class DataLoader {
                     e.printStackTrace();
                     try {
                         if (wascreated) {
-                            Var.openprojects.remove(Var.openprojects.size() - 1);
+                            ProjectManager.closeProject(Var.openprojects.size()-1);
                         }
                         Dialogs.showErrorDialog(UI.stage, "Fehler beim Laden des Projekts\nDie Projekt Datei ist womöglich beschädigt!");
                     }catch (Exception f) {
@@ -192,6 +202,8 @@ public class DataLoader {
                     }
 
                 }
+
+
 
                 File tempblockfile = new File(Data.tempfolder + "/" + "Program.itid");
                 tempblockfile.delete();
@@ -208,4 +220,10 @@ public class DataLoader {
 
 
     }
+
+    private static <T> List<T> stringToArray(String s, Class<T[]> clazz) {
+        T[] arr = new Gson().fromJson(s, clazz);
+        return Arrays.asList(arr); //or return Arrays.asList(new Gson().fromJson(s, clazz)); for a one-liner
+    }
+
 }

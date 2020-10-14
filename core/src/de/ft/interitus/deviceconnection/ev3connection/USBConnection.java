@@ -84,7 +84,8 @@ public class USBConnection {
         //Utils.Close_all_FileHandle(10, device);
         try {
            // Ev3SystemUtils.downloadFile("../apps/data123.txt", a1000, device);
-            FirmwareUpdater.update(new File("/home/tim/test.bin"));
+            //FirmwareUpdater.update(new File("/home/tim/test.bin"));
+            FirmwareUpdater.update(new File("C:\\Users\\Felix\\ev3.bin"),device);
            // FirmwareUpdater.update(null);
         }catch (Exception e) {
         e.printStackTrace();
@@ -96,13 +97,13 @@ public class USBConnection {
         }*/
 
         try {
-            System.out.println("test:   "+Integer.toBinaryString(ev3.LC2((byte)0x01,(byte)12)));
-            command.addAll(Operations.playSound("./ui/DownloadSucces",100,false));
+           // System.out.println("test:   "+Integer.toBinaryString(ev3.LC2((byte)0x01,(byte)12)));
+           // command.addAll(Operations.playSound("./ui/DownloadSucces",100,false));
             //command.addAll(Operations.showTextBox(0,0,100,100,"o",(byte)0x00));
-            command.addAll(Operations.drawline(false, 100,0,100,100));
-            command.addAll(Operations.updateev3screen());
-           Byte[] bytes = device.getConnectionHandle().sendData(ev3.makeDirectCmd(command,10,10),device);
-            ev3.printHex("recv",bytes);
+          //  command.addAll(Operations.drawline(false, 100,0,100,100));
+          //  command.addAll(Operations.updateev3screen());
+           //Byte[] bytes = device.getConnectionHandle().sendData(ev3.makeDirectCmd(command,10,10),device);
+           // ev3.printHex("recv",bytes);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -203,7 +204,7 @@ public class USBConnection {
         // }
 
         // command.addAll(Operations.setbrickname("MyEv3"));
-      // device.getDevice().close();
+       device.getDevice().close();
         USBConnectionHandle.hidServices.shutdown();
 
 

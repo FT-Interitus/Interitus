@@ -68,8 +68,7 @@ public class ProgramingSpace extends ScreenAdapter {
         cam.position.set(Gdx.graphics.getWidth() / 2f + 50, Gdx.graphics.getHeight() / 2f, 0);
         UI.UIcam.position.set(Gdx.graphics.getWidth() / 2f + 50, Gdx.graphics.getHeight() / 2f, 0);
 
-        //ProjectManager.addProject(ProjectTypesVar.projectTypes.get(0).init());
-        //ProjectManager.change(0);
+
 
     }
 
@@ -80,7 +79,7 @@ public class ProgramingSpace extends ScreenAdapter {
 
         BlockTappedBar.init();
 
-        de.ft.interitus.UI.Viewport.init();
+        de.ft.interitus.UI.Viewport.init(ProgramingSpace.cam, WindowManager.inputManager);
 
 
         ThreadManager.init();
@@ -134,19 +133,19 @@ public class ProgramingSpace extends ScreenAdapter {
 
             UI.updatedragui( WindowManager.shapeRenderer, true, WindowManager.batch);
 
-            ProgramGrid.draw();
+            ProgramGrid.draw(WindowManager.shapeRenderer, ProgramingSpace.cam);
 
             BlockDrawer.Draw();
 
 
-            de.ft.interitus.UI.Viewport.update(delta);
+            de.ft.interitus.UI.Viewport.update(delta, ProgramingSpace.cam);
 
 
         } catch (Exception e) {
-            if(ProjectManager.getActProjectVar()!=null&&Var.inProgram) {
-                DisplayErrors.error = e;
-                e.printStackTrace();
-            }
+                if (ProjectManager.getActProjectVar() != null && Var.inProgram) {
+                    DisplayErrors.error = e;
+                    e.printStackTrace();
+                }
         }
 
 

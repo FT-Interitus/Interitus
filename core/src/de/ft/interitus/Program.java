@@ -13,6 +13,7 @@ import de.ft.interitus.Block.ThreadManager;
 import de.ft.interitus.Logging.DebugPrinter;
 import de.ft.interitus.Logging.LoggerInit;
 import de.ft.interitus.UI.CheckShortcuts;
+import de.ft.interitus.UI.InputManager;
 import de.ft.interitus.UI.Theme.ThemeManager;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.datamanager.programmdata.Data;
@@ -34,6 +35,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 
+import javax.swing.*;
 import java.nio.file.Path;
 import java.security.Policy;
 import java.util.Collections;
@@ -56,6 +58,9 @@ public class Program extends Game {
 
     @Override
     public void create() {
+
+
+
         Gdx.graphics.setTitle("Interitus - Home Version");
         Var.programingSpace = new ProgramingSpace();
         Var.welcome = new  Welcome();
@@ -85,8 +90,7 @@ public class Program extends Game {
         Var.window.setVisible(false);
         //GLFW.glfwHideWindow(Var.window.getWindowHandle());
 
-
-
+        WindowManager.inputManager = new InputManager();
 
         Var.username = UserNameGetter.get();
 

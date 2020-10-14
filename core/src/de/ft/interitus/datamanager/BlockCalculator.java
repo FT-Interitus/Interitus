@@ -6,6 +6,7 @@
 package de.ft.interitus.datamanager;
 
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
+import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.DataWire;
 import de.ft.interitus.Block.SaveBlock;
 import de.ft.interitus.Block.Saving.SaveBlockV1;
@@ -18,11 +19,11 @@ import de.ft.interitus.projecttypes.ProjectVar;
 import de.ft.interitus.utils.ArrayList;
 
 public class BlockCalculator {
-    public static ArrayList<SaveBlockV1> save() {
+    public static ArrayList<SaveBlockV1> save( final ProjectVar projectVar) {
         ArrayList<SaveBlockV1> saveBlocks = new ArrayList<>();
 
-        for (int i = 0; i < ProjectManager.getActProjectVar().blocks.size(); i++) {
-            saveBlocks.add(ProjectManager.getActProjectVar().blocks.get(i).getBlocktoSaveGenerator().generate(ProjectManager.getActProjectVar().blocks.get(i)));
+        for (int i = 0; i < projectVar.blocks.size(); i++) {
+            saveBlocks.add(projectVar.blocks.get(i).getBlocktoSaveGenerator().generate(projectVar.blocks.get(i), ProjectManager.getActProjectVar()));
         }
         return saveBlocks;
     }
@@ -35,7 +36,7 @@ public class BlockCalculator {
 
 
                     if (saveBlocks.get(i).getAddon().contentEquals("")) {
-                        ProjectManager.getActProjectVar().blocks.add(ProjectManager.getActProjectVar().projectType.getBlockGenerator().generateBlock(i, saveBlocks.get(i).getX(), saveBlocks.get(i).getY(), ProjectManager.getActProjectVar().projectType.getProjectblocks().get(saveBlocks.get(i).getPlatformspecificblockid()).getWidth(), UIVar.BlockHeight, ProjectManager.getActProjectVar().projectType.getProjectblocks().get(saveBlocks.get(i).getPlatformspecificblockid()), ProjectManager.getActProjectVar().projectType.getBlockUpdateGenerator(), ProjectManager.getActProjectVar().projectType.getBlocktoSaveGenerator()));
+                        ProjectManager.getActProjectVar().blocks.add(ProjectManager.getActProjectVar().projectType.getBlockGenerator().generateBlock(i, saveBlocks.get(i).getX(), saveBlocks.get(i).getY(), ProjectManager.getActProjectVar().projectType.getProjectblocks().get(saveBlocks.get(i).getPlatformspecificblockid()).getWidth(), UIVar.BlockHeight, ProjectManager.getActProjectVar().projectType.getProjectblocks().get(saveBlocks.get(i).getPlatformspecificblockid()), ProjectManager.getActProjectVar().projectType.getBlockUpdateGenerator(), ProjectManager.getActProjectVar().projectType.getBlocktoSaveGenerator(), false));
                     } else {
 
                         Addon tempaddon = null;
@@ -49,12 +50,12 @@ public class BlockCalculator {
                         if (tempaddon == null) {
 
                             Dialogs.showErrorDialog(UI.stage, "Addon Fehler");
-                            ProjectManager.CloseProject(Var.openprojectindex);
+                            ProjectManager.closeProject(Var.openprojectindex);
 
 
                         }
 
-                        ProjectManager.getActProjectVar().blocks.add(ProjectManager.getActProjectVar().projectType.getBlockGenerator().generateBlock(i, saveBlocks.get(i).getX(), saveBlocks.get(i).getY(), tempaddon.getaddBlocks().get(saveBlocks.get(i).getPlatformspecificblockid()).getWidth(), UIVar.BlockHeight, tempaddon.getaddBlocks().get(saveBlocks.get(i).getPlatformspecificblockid()), ProjectManager.getActProjectVar().projectType.getBlockUpdateGenerator(), ProjectManager.getActProjectVar().projectType.getBlocktoSaveGenerator()));
+                        ProjectManager.getActProjectVar().blocks.add(ProjectManager.getActProjectVar().projectType.getBlockGenerator().generateBlock(i, saveBlocks.get(i).getX(), saveBlocks.get(i).getY(), tempaddon.getaddBlocks().get(saveBlocks.get(i).getPlatformspecificblockid()).getWidth(), UIVar.BlockHeight, tempaddon.getaddBlocks().get(saveBlocks.get(i).getPlatformspecificblockid()), ProjectManager.getActProjectVar().projectType.getBlockUpdateGenerator(), ProjectManager.getActProjectVar().projectType.getBlocktoSaveGenerator(), false));
 
                     }
 
@@ -153,6 +154,10 @@ public class BlockCalculator {
                     e.printStackTrace();
                     error = true;
                 }
+
+
+
+
             }
 
 
@@ -167,7 +172,8 @@ public class BlockCalculator {
     }
 
 
-    public static void extractV1(ArrayList<SaveBlockV1> saveBlocks) {
+    public static ArrayList<Block> extractV1(ArrayList<SaveBlockV1> saveBlocks) {
+        ArrayList<Block> extractedBlocks = new ArrayList<>();
         boolean error = false;
         try {
             for (int i = 0; i < saveBlocks.size(); i++) {
@@ -175,7 +181,7 @@ public class BlockCalculator {
 
 
                 if (saveBlocks.get(i).getAddon().contentEquals("")) {
-                    ProjectManager.getActProjectVar().blocks.add(ProjectManager.getActProjectVar().projectType.getBlockGenerator().generateBlock(i, saveBlocks.get(i).getX(), saveBlocks.get(i).getY(), ProjectManager.getActProjectVar().projectType.getProjectblocks().get(saveBlocks.get(i).getPlatformspecificblockid()).getWidth(), UIVar.BlockHeight, ProjectManager.getActProjectVar().projectType.getProjectblocks().get(saveBlocks.get(i).getPlatformspecificblockid()), ProjectManager.getActProjectVar().projectType.getBlockUpdateGenerator(), ProjectManager.getActProjectVar().projectType.getBlocktoSaveGenerator()));
+                    extractedBlocks.add(ProjectManager.getActProjectVar().projectType.getBlockGenerator().generateBlock(i, saveBlocks.get(i).getX(), saveBlocks.get(i).getY(), ProjectManager.getActProjectVar().projectType.getProjectblocks().get(saveBlocks.get(i).getPlatformspecificblockid()).getWidth(), UIVar.BlockHeight, ProjectManager.getActProjectVar().projectType.getProjectblocks().get(saveBlocks.get(i).getPlatformspecificblockid()), ProjectManager.getActProjectVar().projectType.getBlockUpdateGenerator(), ProjectManager.getActProjectVar().projectType.getBlocktoSaveGenerator(), false));
                 } else {
 
                     Addon tempaddon = null;
@@ -189,12 +195,12 @@ public class BlockCalculator {
                     if (tempaddon == null) {
 
                         Dialogs.showErrorDialog(UI.stage, "Addon Fehler");
-                        ProjectManager.CloseProject(Var.openprojectindex);
+                        ProjectManager.closeProject(Var.openprojectindex);
 
 
                     }
 
-                    ProjectManager.getActProjectVar().blocks.add(ProjectManager.getActProjectVar().projectType.getBlockGenerator().generateBlock(i, saveBlocks.get(i).getX(), saveBlocks.get(i).getY(), tempaddon.getaddBlocks().get(saveBlocks.get(i).getPlatformspecificblockid()).getWidth(), UIVar.BlockHeight, tempaddon.getaddBlocks().get(saveBlocks.get(i).getPlatformspecificblockid()), ProjectManager.getActProjectVar().projectType.getBlockUpdateGenerator(), ProjectManager.getActProjectVar().projectType.getBlocktoSaveGenerator()));
+                    extractedBlocks.add(ProjectManager.getActProjectVar().projectType.getBlockGenerator().generateBlock(i, saveBlocks.get(i).getX(), saveBlocks.get(i).getY(), tempaddon.getaddBlocks().get(saveBlocks.get(i).getPlatformspecificblockid()).getWidth(), UIVar.BlockHeight, tempaddon.getaddBlocks().get(saveBlocks.get(i).getPlatformspecificblockid()), ProjectManager.getActProjectVar().projectType.getBlockUpdateGenerator(), ProjectManager.getActProjectVar().projectType.getBlocktoSaveGenerator(), false));
 
                 }
 
@@ -207,10 +213,10 @@ public class BlockCalculator {
 
 
                     if (saveBlocks.get(i).getIndex_rechts() != -1) {
-                        ProjectManager.getActProjectVar().blocks.get(i).setRight(ProjectManager.getActProjectVar().blocks.get(saveBlocks.get(i).getIndex_rechts())); //Set Nachbar rechts
+                        extractedBlocks.get(i).setRight(extractedBlocks.get(saveBlocks.get(i).getIndex_rechts())); //Set Nachbar rechts
                     }
                     if (saveBlocks.get(i).getIndex_links() != -1) {
-                        ProjectManager.getActProjectVar().blocks.get(i).setLeft(ProjectManager.getActProjectVar().blocks.get(saveBlocks.get(i).getIndex_links())); //set Nachbar links
+                        extractedBlocks.get(i).setLeft(extractedBlocks.get(saveBlocks.get(i).getIndex_links())); //set Nachbar links
                     }
 
 
@@ -218,16 +224,16 @@ public class BlockCalculator {
 
                         if (saveBlocks.get(i).getNodes() == null) {
 
-                            ProjectManager.getActProjectVar().wires.add(ProjectManager.getActProjectVar().projectType.getWireGenerator().generate(ProjectManager.getActProjectVar().blocks.get(i), ProjectManager.getActProjectVar().blocks.get(i).getRight())); //Eine Wire mit den entsprechenen Blöcken wird erstellt
-                            ProjectManager.getActProjectVar().blocks.get(i).setWire_right(ProjectManager.getActProjectVar().wires.get(ProjectManager.getActProjectVar().wires.size() - 1)); // Der Rechte Block bekommt die Wire zugeteilt
-                            ProjectManager.getActProjectVar().blocks.get(i).getRight().setWire_left(ProjectManager.getActProjectVar().wires.get(ProjectManager.getActProjectVar().wires.size() - 1));// Der Linke Block bekommt die Wire zugeteilt
+                            ProjectManager.getActProjectVar().wires.add(ProjectManager.getActProjectVar().projectType.getWireGenerator().generate(extractedBlocks.get(i), extractedBlocks.get(i).getRight())); //Eine Wire mit den entsprechenen Blöcken wird erstellt
+                            extractedBlocks.get(i).setWire_right(ProjectManager.getActProjectVar().wires.get(ProjectManager.getActProjectVar().wires.size() - 1)); // Der Rechte Block bekommt die Wire zugeteilt
+                            extractedBlocks.get(i).getRight().setWire_left(ProjectManager.getActProjectVar().wires.get(ProjectManager.getActProjectVar().wires.size() - 1));// Der Linke Block bekommt die Wire zugeteilt
                             ProjectManager.getActProjectVar().wires.get(ProjectManager.getActProjectVar().wires.size() - 1).setSpace_between_blocks(saveBlocks.get(i).isIsspacebetweenrightblock()); //Die Wire wird sichtbar gemacht
 
                         } else {
                             for (int j = 0; j < saveBlocks.get(i).getNodes().size(); j++) {
                                 if (j == 0) {
-                                    ProjectManager.getActProjectVar().wires.add(ProjectManager.getActProjectVar().projectType.getWireGenerator().generate(ProjectManager.getActProjectVar().blocks.get(i)));
-                                    ProjectManager.getActProjectVar().blocks.get(i).setWire_right(ProjectManager.getActProjectVar().wires.get(ProjectManager.getActProjectVar().wires.size() - 1)); // Der linke Block bekommt die Wire zugeteilt
+                                    ProjectManager.getActProjectVar().wires.add(ProjectManager.getActProjectVar().projectType.getWireGenerator().generate(extractedBlocks.get(i)));
+                                    extractedBlocks.get(i).setWire_right(ProjectManager.getActProjectVar().wires.get(ProjectManager.getActProjectVar().wires.size() - 1)); // Der linke Block bekommt die Wire zugeteilt
 
                                 } else {
                                     ProjectManager.getActProjectVar().wires.add(ProjectManager.getActProjectVar().projectType.getWireGenerator().generate(ProjectManager.getActProjectVar().wireNodes.get(ProjectManager.getActProjectVar().wireNodes.size() - 1)));
@@ -244,9 +250,9 @@ public class BlockCalculator {
 
 
                             }
-                            ProjectManager.getActProjectVar().wires.add(ProjectManager.getActProjectVar().projectType.getWireGenerator().generate(ProjectManager.getActProjectVar().wireNodes.get(ProjectManager.getActProjectVar().wireNodes.size() - 1), ProjectManager.getActProjectVar().blocks.get(saveBlocks.get(i).getIndex_rechts())));
+                            ProjectManager.getActProjectVar().wires.add(ProjectManager.getActProjectVar().projectType.getWireGenerator().generate(ProjectManager.getActProjectVar().wireNodes.get(ProjectManager.getActProjectVar().wireNodes.size() - 1), extractedBlocks.get(saveBlocks.get(i).getIndex_rechts())));
                             ProjectManager.getActProjectVar().wireNodes.get(ProjectManager.getActProjectVar().wireNodes.size() - 1).setWire_right(ProjectManager.getActProjectVar().wires.get(ProjectManager.getActProjectVar().wires.size() - 1));
-                            ProjectManager.getActProjectVar().blocks.get(i).getRight().setWire_left(ProjectManager.getActProjectVar().wires.get(ProjectManager.getActProjectVar().wires.size() - 1));// Der rechte Block bekommt die Wire zugeteilt
+                            extractedBlocks.get(i).getRight().setWire_left(ProjectManager.getActProjectVar().wires.get(ProjectManager.getActProjectVar().wires.size() - 1));// Der rechte Block bekommt die Wire zugeteilt
                             ProjectManager.getActProjectVar().wires.get(ProjectManager.getActProjectVar().wires.size() - 1).setSpace_between_blocks(true);
 
 
@@ -254,7 +260,7 @@ public class BlockCalculator {
                     }
 
 
-                    ProjectManager.getActProjectVar().blocks.get(i).getBlocktype().changeBlockModus(saveBlocks.get(i).getBlockmodus(), ProjectManager.getActProjectVar().blocks.get(i), true);
+                    extractedBlocks.get(i).getBlocktype().changeBlockModus(saveBlocks.get(i).getBlockmodus(), extractedBlocks.get(i), true);
                 }catch (Exception e) {
                     e.printStackTrace();
                     error = true;
@@ -265,14 +271,14 @@ public class BlockCalculator {
                 try {
                     //Load BlockSettings
                     try {
-                        ProjectManager.getActProjectVar().blocks.get(i).getBlocktype().blockModis.get(ProjectManager.getActProjectVar().blocks.get(i).getBlocktype().actBlockModiIndex).getblocksettings().setSettings(saveBlocks.get(i).getBlocksettings());
+                        extractedBlocks.get(i).getBlocktype().blockModis.get(extractedBlocks.get(i).getBlocktype().actBlockModiIndex).getblocksettings().setSettings(saveBlocks.get(i).getBlocksettings());
                     } catch (NullPointerException e) {
 
                     }
                     //Load Parameters
-                    if (ProjectManager.getActProjectVar().blocks.get(i).getBlocktype().getBlockParameter() != null) {
+                    if (extractedBlocks.get(i).getBlocktype().getBlockParameter() != null) {
                         for (int j = 0; j < saveBlocks.get(i).getParameters().size(); j++) {
-                            ProjectManager.getActProjectVar().blocks.get(i).getBlocktype().getBlockParameter().get(j).setParameter(saveBlocks.get(i).getParameters().get(j));
+                            extractedBlocks.get(i).getBlocktype().getBlockParameter().get(j).setParameter(saveBlocks.get(i).getParameters().get(j));
 
                             for (int k = 0; k < saveBlocks.get(i).getDatawires().get(j).size(); k++) {
                                 if (saveBlocks.get(i).getDatawires().get(j).get(k) == -1) {
@@ -281,7 +287,7 @@ public class BlockCalculator {
                                 if (saveBlocks.get(i).getDatawiresindex().get(j).get(k) == -1) {
                                     continue;
                                 }
-                                DataWire tempwire = new DataWire(ProjectManager.getActProjectVar().blocks.get(i).getBlocktype().getBlockParameter().get(j), ProjectManager.getActProjectVar().blocks.get(saveBlocks.get(i).getDatawires().get(j).get(k)).getBlocktype().getBlockParameter().get(saveBlocks.get(i).getDatawiresindex().get(j).get(k)));
+                                DataWire tempwire = new DataWire(extractedBlocks.get(i).getBlocktype().getBlockParameter().get(j), extractedBlocks.get(saveBlocks.get(i).getDatawires().get(j).get(k)).getBlocktype().getBlockParameter().get(saveBlocks.get(i).getDatawiresindex().get(j).get(k)));
 
                                 try {
                                     tempwire.setVerschiebung_1_Horizontale(saveBlocks.get(i).getDatawiresmoveing().get(j).get(k).get(0));
@@ -307,6 +313,13 @@ public class BlockCalculator {
                     e.printStackTrace();
                     error = true;
                 }
+
+                if(saveBlocks.get(i).getIncludedBlocks()!=null) {
+
+                  extractedBlocks.get(i).setExtendedBlocks(extractV1(saveBlocks.get(i).getIncludedBlocks()));
+
+                }
+
             }
 
 
@@ -318,5 +331,8 @@ public class BlockCalculator {
         if(error) {
             Dialogs.showErrorDialog(UI.stage,"Fehler beim Laden des Projekts! Alles was wir laden konnten wurde geladen!");
         }
+
+        return extractedBlocks;
+
     }
 }

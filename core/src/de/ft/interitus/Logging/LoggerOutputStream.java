@@ -50,13 +50,14 @@ public class LoggerOutputStream extends OutputStream {
 
 
 
+
         if (level == Level.INFO) {
 
-            /*
-            logger.log(level, mem + "\n");
+
+            //logger.log(level, mem + "\n");
             mem = "";
 
-             */
+
         } else {
             logger.log(level, mem + "");
             mem = "";
