@@ -9,21 +9,25 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Cursor;
 import com.badlogic.gdx.math.Vector3;
-import de.ft.interitus.*;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.DataWire;
+import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.Block.Wire;
+import de.ft.interitus.DisplayErrors;
+import de.ft.interitus.Program;
+import de.ft.interitus.ProgramingSpace;
+import de.ft.interitus.UI.ExtendedBlocksApplicationListener;
 import de.ft.interitus.UI.ProgramGrid;
 import de.ft.interitus.UI.UIElements.check.CheckKollision;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.window.CreateWindow;
 import de.ft.interitus.UI.window.Window;
+import de.ft.interitus.Var;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.block.BlockKillMovingWiresEvent;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.For.For;
-import de.ft.interitus.UI.ExtendedBlocksApplicationListener;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.ArrayList;
 import de.ft.interitus.utils.Unproject;
@@ -95,24 +99,7 @@ public abstract class BlockUpdate extends Thread {
                         }
 
 
-                        /////////////////////////////Datawire erzeigen
-                        if (block.getBlocktype() != null && block.getBlocktype().getBlockParameter() != null) {
-                            for (int i = 0; i < block.getBlocktype().getBlockParameter().size(); i++) {
-                                if (block.getBlocktype().getBlockParameter().get(i).getParameterType().isOutput()) {
-
-
-                                    if (CheckKollision.checkpointwithobject(block.getBlocktype().getBlockParameter().get(i).getX(), block.getBlocktype().getBlockParameter().get(i).getY(), UIVar.parameter_width, UIVar.parameter_height, Unproject.unproject()) && Gdx.input.isButtonJustPressed(0) && ProjectManager.getActProjectVar().moveingdatawire == null) {
-                                        block.getBlocktype().getBlockParameter().get(i).getDatawire().add(new DataWire(block.getBlocktype().getBlockParameter().get(i)));
-                                        block.setMoving(false);
-                                        ProjectManager.getActProjectVar().moveingdatawire = block.getBlocktype().getBlockParameter().get(i).getDatawire().getLastObject();
-
-                                    }
-
-
-                                }
-                            }
-                        }
-
+                        datawire_managment();
                         block_moveingengine();
 
                         if (ProjectManager.getActProjectVar().marked_block == null && block.isMarked()) {
@@ -385,6 +372,28 @@ public abstract class BlockUpdate extends Thread {
 
     }
 
+    private void datawire_managment() {
+        /////////////////////////////Datawire erzeigen
+        if (block.getBlocktype() != null && block.getBlocktype().getBlockParameter() != null) {
+            for (int i = 0; i < block.getBlocktype().getBlockParameter().size(); i++) {
+                if (block.getBlocktype().getBlockParameter().get(i).getParameterType().isOutput()) {
+
+
+                    if (CheckKollision.checkpointwithobject(block.getBlocktype().getBlockParameter().get(i).getX(), block.getBlocktype().getBlockParameter().get(i).getY(), UIVar.parameter_width, UIVar.parameter_height, Unproject.unproject()) && Gdx.input.isButtonJustPressed(0) && ProjectManager.getActProjectVar().moveingdatawire == null) {
+                        block.getBlocktype().getBlockParameter().get(i).getDatawire().add(new DataWire(block.getBlocktype().getBlockParameter().get(i)));
+                        block.setMoving(false);
+                        ProjectManager.getActProjectVar().moveingdatawire = block.getBlocktype().getBlockParameter().get(i).getDatawire().getLastObject();
+
+                    }
+
+
+                }
+            }
+        }
+
+
+    }
+
 
     private void wire_managment() {
         if (block.getBlocktype().canhasleftconnector() && !isIsconnectorclicked() && ProjectManager.getActProjectVar().showleftdocker && CheckKollision.object(block.getX_entrance(), block.getY_entrance(), block.getW_entrance(), block.getH_entrance(), (int) ProgramingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgramingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, 1, 1) && Gdx.input.isButtonJustPressed(0) && block.getLeft() == null) {
@@ -518,22 +527,21 @@ public abstract class BlockUpdate extends Thread {
     private void block_moveingengine() {
 
 
+        if (block.isMarked()) {
 
-        if(block.isMarked()) {
-
-            if(Gdx.input.isKeyJustPressed(Input.Keys.P)) {
+            if (Gdx.input.isKeyJustPressed(Input.Keys.P)) {
                 block.setExtendedBlocks(new ArrayList<>());
-                block.getExtendedBlocks().add(ProjectManager.getActProjectVar().projectType.getBlockGenerator().generateBlock(0,10,10,10,10,new For(ProjectManager.getActProjectVar().projectType,null),ProjectManager.getActProjectVar().projectType.getBlockUpdateGenerator(),ProjectManager.getActProjectVar().projectType.getBlocktoSaveGenerator(), true));
-            Program.logger.config("Created Subblock");
+                block.getExtendedBlocks().add(ProjectManager.getActProjectVar().projectType.getBlockGenerator().generateBlock(0, 10, 10, 10, 10, new For(ProjectManager.getActProjectVar().projectType, null), ProjectManager.getActProjectVar().projectType.getBlockUpdateGenerator(), ProjectManager.getActProjectVar().projectType.getBlocktoSaveGenerator(), true));
+                Program.logger.config("Created Subblock");
             }
 
 
-            if(Gdx.input.isKeyPressed(Input.Keys.D)&&!openwindow) {
+            if (Gdx.input.isKeyPressed(Input.Keys.D) && !openwindow) {
                 openwindow = true;
-                if(block.getExtendedBlocks()!=null) {
+                if (block.getExtendedBlocks() != null) {
 
-                 Window window = CreateWindow.addWindow(block.getBlocktype().getName(), new ExtendedBlocksApplicationListener());
-                 window.create();
+                    Window window = CreateWindow.addWindow(block.getBlocktype().getName(), new ExtendedBlocksApplicationListener());
+                    window.create();
 
                     Program.logger.config("Open Window");
 
@@ -545,8 +553,8 @@ public abstract class BlockUpdate extends Thread {
         }
 
 
-        if(openwindow&&!Gdx.input.isKeyPressed(Input.Keys.D)) {
-            openwindow =false;
+        if (openwindow && !Gdx.input.isKeyPressed(Input.Keys.D)) {
+            openwindow = false;
         }
 
         if (CheckKollision.checkmousewithblock(block, Var.mousepressedold) && Gdx.input.isButtonPressed(0) && ProjectManager.getActProjectVar().ismoving == false && !block.isMarked() && ProjectManager.getActProjectVar().marked_block == null) {

@@ -14,6 +14,7 @@ import de.ft.interitus.Block.BlockUpdate.BlockUpdate;
 import de.ft.interitus.Block.Generators.BlockUpdateGenerator;
 import de.ft.interitus.Block.Generators.BlocktoSaveGenerator;
 import de.ft.interitus.DisplayErrors;
+import de.ft.interitus.Program;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.UIElements.BlockDropDownMenue.BlockDropDownMenue;
 import de.ft.interitus.UI.UIElements.check.CheckKollision;
@@ -625,6 +626,21 @@ public abstract class Block implements VisibleObjects {
      */
 
     public void draw(SpriteBatch batch, ShapeRenderer shape, BitmapFont font) {
+
+        /***
+         * Draw Wire with the Output Block if the Input Block is invisible
+         */
+
+        if (this.getBlocktype().getBlockParameter() != null) {
+            for (Parameter parameter : this.getBlocktype().getBlockParameter()) {
+                for (DataWire dataWire : parameter.getDatawire()) {
+
+                    if (dataWire.getParam_input().getBlock() == this) continue;
+                    if (!dataWire.getParam_input().getBlock().getBlockupdate().isrunning) dataWire.draw();
+                }
+            }
+        }
+
         batch.begin();
 
 
