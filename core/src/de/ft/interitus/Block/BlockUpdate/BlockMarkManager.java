@@ -13,9 +13,13 @@ import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.Var;
 import de.ft.interitus.projecttypes.ProjectManager;
 
+import java.awt.*;
+
 public class BlockMarkManager {
 
     protected static void update() {
+
+
 
         assert ProjectManager.getActProjectVar() !=null;
 
@@ -28,7 +32,8 @@ public class BlockMarkManager {
 
         if(ProjectManager.getActProjectVar().moving_block!=null) return; //Do not allow to select an other Block while anyone is moving
         for(Block block:ProjectManager.getActProjectVar().blocks) {
-            if(CheckCollision.checkmousewithblock(block, Var.mouseDownPos)) block.onClick();
+            if(CheckCollision.checkmousewithblock(block, Var.mouseDownPos))
+                ProjectManager.getActProjectVar().marked_block =block;
         }
 
     }

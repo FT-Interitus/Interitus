@@ -18,6 +18,6 @@ public class InitEv3 {
     public static ProjectType init() {
 
         platformSpecificBlocks.add(new Wait(null,null));
-        return new ProjectType(ProgramingSpace.nativ, "Ev3-Projekt", platformSpecificBlocks, new DefaultBlockGenerator(), new DefaultBlockUpdateGenerator(),  new DefaultSaveBlockGenerator(), new DefaultBlockVarGenerator(), new EV3Funktions(), null);
+        return new ProjectType(ProgramingSpace.nativ, "Ev3-Projekt", platformSpecificBlocks, new DefaultBlockGenerator(),  new DefaultSaveBlockGenerator(), new DefaultBlockVarGenerator(), new EV3Funktions(), null);
     }
 }

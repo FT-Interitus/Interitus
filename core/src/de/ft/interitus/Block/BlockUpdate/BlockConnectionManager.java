@@ -6,13 +6,30 @@
 package de.ft.interitus.Block.BlockUpdate;
 
 import de.ft.interitus.Block.Block;
+import de.ft.interitus.Program;
+import de.ft.interitus.UI.UIElements.check.CheckCollision;
+import de.ft.interitus.projecttypes.ProgrammArea.ProgrammArea;
+import de.ft.interitus.projecttypes.ProjectManager;
 
 public class BlockConnectionManager {
-
 
     public static void startMovingBlock(Block block) {
         disconnectWireLeft(block);
         disconnectWireRight(block);
+
+    }
+
+    public static void placeBlock(Block block) {
+
+        for(Block visibleBlock:ProjectManager.getActProjectVar().visible_blocks) {
+            if(CheckCollision.checkblockwithduplicate(block,visibleBlock,0)) {
+
+                Program.logger.config("Pair found");
+
+                break;
+
+            }
+        }
 
     }
 
@@ -22,6 +39,7 @@ public class BlockConnectionManager {
      * @param block the specific block the changes should be applied to
      */
     private static void disconnectWireLeft(Block block) {
+        if(block.getWire_left()==null) return;
         if(!block.getWire_left().isVisible()) return;
         block.getWire_left().delete();
 
@@ -32,6 +50,7 @@ public class BlockConnectionManager {
      * @param block the specific block the changes should be applied to
      */
     private static void disconnectWireRight(Block block) {
+        if(block.getWire_right()==null) return;
         if(!block.getWire_right().isVisible()) return;
         block.getWire_right().delete();
 

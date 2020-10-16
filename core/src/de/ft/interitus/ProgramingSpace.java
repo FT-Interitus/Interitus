@@ -10,6 +10,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.ft.interitus.Block.Block;
@@ -166,6 +167,10 @@ public class ProgramingSpace extends ScreenAdapter {
         loader(); //Load Images in OpenGL context
 
 
+
+
+
+        //TODO use libgdx internal function
         de.ft.interitus.UI.Viewport.limitfps();
 
 

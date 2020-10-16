@@ -36,8 +36,11 @@ public class BlockMovingManager {
 
             if (projectVar.moving_block == block) {
                 projectVar.moving_block = null;
+
                 if (ProgramGrid.block_snapping && !ProgramGrid.block_active_snapping)
                     blockSnapping(block);
+
+                BlockConnectionManager.placeBlock(block);
             }
 
             return;
@@ -62,6 +65,7 @@ public class BlockMovingManager {
         if (projectVar.moveingdatawire!=null) return false;
 
         projectVar.diff_save = generateDiff(block, Unproject.unproject());
+        BlockConnectionManager.startMovingBlock(block);
 
         return true;
 

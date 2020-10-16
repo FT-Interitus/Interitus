@@ -31,7 +31,7 @@ import de.ft.interitus.utils.ArrayList;
 
 public class InitArduino {
     static ArrayList<PlatformSpecificBlock> blocks = new ArrayList<>();
-   public static ProjectType arduino = new ProjectType(ProgramingSpace.nativ, "Arduino-Projekt", blocks, new DefaultBlockGenerator(), new DefaultBlockUpdateGenerator(), new DefaultSaveBlockGenerator(), new DefaultBlockVarGenerator(), new ArduinoFunktions(), new ArduinoCompiler());
+   public static ProjectType arduino = new ProjectType(ProgramingSpace.nativ, "Arduino-Projekt", blocks, new DefaultBlockGenerator(), new DefaultSaveBlockGenerator(), new DefaultBlockVarGenerator(), new ArduinoFunktions(), new ArduinoCompiler());
 
 
 

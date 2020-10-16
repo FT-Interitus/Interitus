@@ -29,7 +29,6 @@ public class BlockDataWireManager {
                 DataWire instance = new DataWire(parameter);
                 parameter.getDataWires().add(instance);
                 ProjectManager.getActProjectVar().moveingdatawire = instance;
-                ProjectManager.getActProjectVar().moving_block = null; //TODO fix Block
             }
 
 

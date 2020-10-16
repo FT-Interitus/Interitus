@@ -18,83 +18,49 @@ import java.util.TimerTask;
 
 public class ThreadManager {
 
-    private static Thread init;
 
+    public static void stopAll() {
 
-    public static Thread add(Thread thread, Object obj) {
-        Thread createThread = new Thread();
-        ProjectManager.getActProjectVar().threads.add(thread);
-        return createThread;
-    }
+        assert ProjectManager.getActProjectVar()!=null;
+        ProjectManager.getActProjectVar().visible_blocks.clear();
 
-    public static void stopall() {
-        for (int i = 0; i < ProjectManager.getActProjectVar().threads.size(); i++) {
-            ((BlockUpdate) ProjectManager.getActProjectVar().threads.get(i)).time.cancel();
-        }
     }
 
 
     public synchronized static void init() {
 
 
-
-        init = new Thread(() -> {
+        //Program.logger.config("Test"+i);
+        //                            Program.logger.config(camfr.boundsInFrustum(BlockVar.blocks.get(10).getX(), BlockVar.blocks.get(10).getY(), 0, BlockVar.blocks.get(10).getW(), BlockVar.blocks.get(10).getH(),0));
+        Thread init = new Thread(() -> {
             Timer timer = new Timer();
             timer.scheduleAtFixedRate(new TimerTask() {
                 @Override
                 public void run() {
 
-                    if (!UIVar.isdialogeopend&& Var.inProgram&&ProjectManager.getActProjectVar()!=null) {
-                        ProjectVar projectVar =ProjectManager.getActProjectVar();
-                        try {
+                    if (!UIVar.isdialogeopend && Var.inProgram && ProjectManager.getActProjectVar() != null) {
+                        ProjectVar projectVar = ProjectManager.getActProjectVar();
 
-
-
-                            for (int i = 0; i < projectVar.blocks.size(); i++) {
-                                //Program.logger.config("Test"+i);
+                        for (int i = 0; i < projectVar.blocks.size(); i++) {
+                            //Program.logger.config("Test"+i);
 //                            Program.logger.config(camfr.boundsInFrustum(BlockVar.blocks.get(10).getX(), BlockVar.blocks.get(10).getY(), 0, BlockVar.blocks.get(10).getW(), BlockVar.blocks.get(10).getH(),0));
-                                try {
-                                    Block block = ((BlockUpdate) projectVar.threads.get(i)).block;
-                                    if (!block.isVisible() && !block.isMarked() && ((BlockUpdate) projectVar.threads.get(i)).isrunning) {
 
-                                        if (((BlockUpdate) projectVar.threads.get(i)).isrunning) {
-                                            try {
-                                                ((BlockUpdate) projectVar.threads.get(i)).time.cancel();
-                                            } catch (Exception ignored) {
-                                            }
-                                        }
-                                        projectVar.threads.get(i).interrupt();
-                                        ((BlockUpdate) projectVar.threads.get(i)).isrunning = false;
-                                        projectVar.visible_blocks.remove(block);
-                                    }
-
-                                    if (block.isVisible() && !((BlockUpdate) projectVar.threads.get(i)).isrunning) {
-                                        projectVar.visible_blocks.add(block);
-                                        projectVar.threads.set(i, ((BlockUpdate) projectVar.threads.get(i)).block.allowedRestart());
+                            Block block = projectVar.blocks.get(i);
+                            if (!block.isVisible() && !block.isMarked() && projectVar.visible_blocks.contains(block)) {
 
 
-                                        Program.logger.config("Started " + block.getIndex());
-
-                                        ((BlockUpdate) projectVar.threads.get(i)).isrunning = true;
-                                    }
-
-
-                                } catch (Exception e) {
-                                    DisplayErrors.error = e;
-                                    e.printStackTrace();
-                                }
+                                projectVar.visible_blocks.remove(block);
                             }
 
+                            if (block.isVisible() && !projectVar.visible_blocks.contains(block)) {
+                                projectVar.visible_blocks.add(block);
 
-                           // projectVar.wires_allowed = !projectVar.ismoving;
 
-                        } catch (Exception e) {
-                            e.printStackTrace(); //for debug to find errors
+                                Program.logger.config("Visible " + block.getIndex());
+
+                            }
+
                         }
-
-
-                        //Enable or disable Wire System
-
 
                     }
 

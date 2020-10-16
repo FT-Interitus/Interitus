@@ -11,8 +11,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import de.ft.interitus.Block.BlockUpdate.BlockUpdate;
-import de.ft.interitus.Block.Generators.BlockUpdateGenerator;
 import de.ft.interitus.Block.Generators.BlocktoSaveGenerator;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Program;
@@ -22,6 +20,7 @@ import de.ft.interitus.UI.UIElements.check.CheckCollision;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.Viewport;
 import de.ft.interitus.UI.popup.PopupMenue;
+import de.ft.interitus.WindowManager;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.block.BlockCreateEvent;
 import de.ft.interitus.events.block.BlockDeleteEvent;
@@ -53,7 +52,6 @@ public abstract class Block {
     private final Vector2 pos = new Vector2(0, 0); //Block pos
     private final Vector2 wireconnector_left = new Vector2(0, 0); //Die linke wire-Anschluss Position
     private final RightClickEventListener rightClickEventListener;
-    private final BlockUpdateGenerator blockUpdateGenerator;
     private final BlocktoSaveGenerator blocktoSaveGenerator;
     private final GlyphLayout glyphLayout = new GlyphLayout();
     public boolean seted = true; //Ob der Block losgelassen wurde bzw ob der Block eine statische Position hat
@@ -67,7 +65,6 @@ public abstract class Block {
     private Wire wire_right;
 
     //Die Y Position des Duplicates  //Die Weite und Höhe ergeben sich aus der Block weite und Höhe
-    private BlockUpdate blockupdate; // Die Block update methode hier werden user actionen engegengenommen und verarbeitet
     private Block left = null; //Der rechte verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
     private Block right = null; //Der linke verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
 
@@ -78,7 +75,7 @@ public abstract class Block {
     private final Block INSTANCE;
 
 
-    public Block(final int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock, BlockUpdateGenerator update, BlocktoSaveGenerator blocktoSaveGenerator, boolean isSubBlock) { //Initzialisieren des Blocks
+    public Block(final int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock,  BlocktoSaveGenerator blocktoSaveGenerator, boolean isSubBlock) { //Initzialisieren des Blocks
         this.blocktype = platformSpecificBlock;
         EventVar.blockEventManager.createBlock(new BlockCreateEvent(this, this));
         this.pos.x = x;
@@ -89,22 +86,17 @@ public abstract class Block {
 
         wireconnector_right.set(x + w, y + h / 3f);
         this.index = index;
-        this.blockUpdateGenerator = update;
-        this.blockupdate = update.generate(this); //BlockUpdate Klasse wird initzilisieren
+
         this.blocktoSaveGenerator = blocktoSaveGenerator;
         this.INSTANCE = this;
 
 
-        if(!isSubBlock) {
-            if (this.isVisible()) { //Wenn der Block sichtbar ist...  //Das passiert deshalb weil nicht für nicht sichbare Blöcke ein Thread laufen muss
-                blockupdate.start(); //...wird der updater gestartet
+        if(!isSubBlock)
+            if (this.isVisible())  //Wenn der Block sichtbar ist...  //Das passiert deshalb weil nicht für nicht sichbare Blöcke ein Thread laufen muss
                 Objects.requireNonNull(ProjectManager.getActProjectVar()).visible_blocks.add(this); //und wird zum Array der sichtbaren Blöcke hinzugefüt
-            } else {
-                blockupdate.isrunning = false; //...wenn nicht dann nicht
-            }
-            ThreadManager.add(blockupdate, this); //Blockupdate wird zum Array der laufenden Threads hinzugefügt
 
-        }
+
+
         rightClickEventListener = new RightClickEventListener() {
 
             @Override
@@ -147,14 +139,6 @@ public abstract class Block {
 
 
 
-    /***
-     *
-     * @return the running thread of the Block
-     * @see ThreadManager
-     */
-    public BlockUpdate getBlockupdate() {
-        return blockupdate; //Gibt den Blockupdater zurück
-    }
 
     /***
      *
@@ -405,20 +389,6 @@ public abstract class Block {
         left = null; //Die Referenzierung zum linken Nachbar wird gelöscht
         right = null; //Die Referenzierung zum rechten Nachbar wird gelöscht
 
-        if (ProjectManager.getActProjectVar().threads.indexOf(this.blockupdate) != -1) { //Überprüfen ob Thread überhaupt läuft
-            ProjectManager.getActProjectVar().threads.remove(this.blockupdate); //Wenn ja wird er aus dem Array der Threads entfernt
-        }
-
-
-        try {
-
-            blockupdate.time.cancel(); //Der Blockupdate timer wird beendet
-            blockupdate.interrupt(); // Der Thread wird interrupted
-            blockupdate.block = null; //Die referenzierung des Threads BLocks wird getrennt
-        } catch (Exception e) {
-
-
-        }
 
         if (!complete) { //das trifft nur nicht zu wenn das ganze programm gecleart wird
             ProjectManager.getActProjectVar().visible_blocks.remove(this); //Der block wird aus dem Visible Blocks Array entfernt
@@ -470,13 +440,7 @@ public abstract class Block {
 
     }
 
-    /**
-     * @return is the Block hovered
-     */
 
-    public boolean getmousecollision() {
-        return blockupdate.toggle;
-    }
 
     /**
      * Draw the Block and the connectors
@@ -497,10 +461,16 @@ public abstract class Block {
                 for (DataWire dataWire : parameter.getDataWires()) {
 
                     if (dataWire.getParam_input().getBlock() == this) continue;
-                    if (!dataWire.getParam_input().getBlock().getBlockupdate().isrunning) dataWire.draw();
+                    if (!ProjectManager.getActProjectVar().visible_blocks.contains(dataWire.getParam_input().getBlock())) dataWire.draw();
                 }
             }
         }
+
+        WindowManager.BlockshapeRenderer.begin(com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType.Filled);
+        WindowManager.BlockshapeRenderer.setColor(1,0,0,1);
+        WindowManager.BlockshapeRenderer.rect(this.getX_dup_rechts(), this.getY(), this.getW() / 1.5f, this.getH());
+        WindowManager.BlockshapeRenderer.end();
+
 
         batch.begin();
 
@@ -601,7 +571,7 @@ public abstract class Block {
             }
 
 
-            if (this.blockupdate.toggle) {
+            if (CheckCollision.checkmousewithblock(this)) {
 
                 batch.draw(AssetLoader.mouse_over_mitte, this.getX() + 6, this.getY(), this.getW() - 12, this.getH()); // Block ohne das er makiert ist
                 batch.draw(AssetLoader.mouseover_links, this.getX(), this.getY(), 6, this.getH());
@@ -640,10 +610,10 @@ public abstract class Block {
  */
 
 
-
-            if (!this.blockupdate.isIsconnectorclicked() && ProjectManager.getActProjectVar().showleftdocker && this.getLeft() == null && this.getBlocktype().canhasleftconnector()) {
-            batch.draw(AssetLoader.connector_offerd, getWireconnector_left().x, getWireconnector_left().y, 20, 20);
-           }
+//TODO
+            //if (!this.blockupdate.isIsconnectorclicked() && ProjectManager.getActProjectVar().showleftdocker && this.getLeft() == null && this.getBlocktype().canhasleftconnector()) {
+           // batch.draw(AssetLoader.connector_offerd, getWireconnector_left().x, getWireconnector_left().y, 20, 20);
+          // }
 
            if (this.getRight() == null && this.getBlocktype().canhasrightconnector()) {
                 batch.draw(AssetLoader.connector, getwireconnector_right().x, getwireconnector_right().y, 20, 20);
@@ -742,63 +712,6 @@ public abstract class Block {
     }
 
 
-    /**
-     * Returns the size of the biggest Area which overlaps over the blocks
-     *
-     * @return
-     */
-
-    public int getDublicatmarkedblockuberlappungsflache() {
-        int flaeche = 0;
-        if (this.isShowdupulicate_rechts()) { //Für rechts
-
-            try {
-
-                flaeche = (CheckCollision.flache(this.getX_dup_rechts(), this.getY(), this.getW(), this.getH(), ProjectManager.getActProjectVar().marked_block.getX(), ProjectManager.getActProjectVar().marked_block.getY())); //Fläsche mit der die Blöcke überlappen um zu brechenen an welchen Block der Block springen wird
-
-            } catch (NullPointerException ignored) {
-
-            }
-
-
-        }
-
-
-        if (this.isShowdupulicate_links()) { //Für links
-            try {
-
-                flaeche = (CheckCollision.flache(this.getX() - ProjectManager.getActProjectVar().marked_block.getW(), this.getY(), this.getW(), this.getH(), ProjectManager.getActProjectVar().marked_block.getX(), ProjectManager.getActProjectVar().marked_block.getY()));//Fläsche mit der die Blöcke überlappen um zu brechenen an welchen Block der Block springen wird
-
-            } catch (NullPointerException ignored) {
-
-            }
-
-        }
-        return flaeche;
-    }
-
-    public int getBlockMarkedblockuberlappungsflache() {
-        int flaeche = 0;
-        try {
-            flaeche = CheckCollision.flache(this.getX(), this.getY(), this.getW(), this.getH(), ProjectManager.getActProjectVar().marked_block.getX(), ProjectManager.getActProjectVar().marked_block.getY()); //Fläche des Markierten Blocks
-        } catch (NullPointerException e) {
-        }
-        return flaeche;
-    }
-
-    /**
-     * restart the Block Thread if the block is in the cam frustrum again
-     * ATTENTION DO NOT CALL THIS FUNKTION OUTSIDE THREADMANAGER THIS MAY CAUSE PERFORMANCE PROBLEMS AND CAN END IN A CRASH
-     *
-     * @return the block Thread
-     */
-    public final Thread allowedRestart() { //WARNUNG diese Methode darf nur von ThreadMananger aufgerufen werden
-        this.findnewindex();
-        blockupdate = blockUpdateGenerator.generate(this); //Wenn der Block wieder in den Sichtbereich Rückt
-        blockupdate.start(); //             ...wird der update Thread gestarted
-
-        return blockupdate;
-    }
 
     /***
      *
@@ -878,7 +791,7 @@ public abstract class Block {
 
     public void onClick() {
 
-        ProjectManager.getActProjectVar().marked_block =this;
+
 
 
         Program.logger.config("Clicked: "+ blocktype.getName());
