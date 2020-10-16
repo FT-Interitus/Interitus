@@ -71,7 +71,7 @@ public class Welcome extends ScreenAdapter {
         AssetLoader.welcomefont.draw(UI.UIbatch, "Hallo " + Var.username, 30, Gdx.graphics.getHeight() - 80);
         UI.UIbatch.end();
 
-        WindowManager.drawer();
+        WindowManager.drawer(delta);
 
 
     }

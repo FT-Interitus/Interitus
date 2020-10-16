@@ -97,7 +97,7 @@ public class UI {
     private static Thread compile_thread;
     //private static final Animation animation = new Animation();
 
-    public static void updatedragui(ShapeRenderer renderer, boolean flaeche, SpriteBatch batch) {
+    public static void updatedragui(ShapeRenderer renderer, boolean flaeche, SpriteBatch batch,float delta) {
 
         if (!UIVar.uilocked) {
 
@@ -174,7 +174,7 @@ public class UI {
             UIVar.blockeinstellungen_y = UIVar.programmflaeche_y + UIVar.abstandvonRand;
 
             if (wishaniposition < 0) {
-                wishaniposition += (0 - wishaniposition) * 0.1f;
+                wishaniposition += ((0 - wishaniposition) * delta*6);
             }
 
 
@@ -479,7 +479,7 @@ public class UI {
 
     }
 
-    public static void initnachassetsloading() {
+    public static void InitAssets() {
         /////////////////Button Bar zusammensetzung//////////////////////
         button_debugstart = new Button();
         button_debugstart.setImage(AssetLoader.img_debugstart);
@@ -550,7 +550,7 @@ public class UI {
 
     }
 
-    public static void update() {
+    public static void update(float delta) {
 
 
        // System.out.println("Pos:" + (Gdx.graphics.getHeight()-menuBar.getTable().getHeight()-20-(UIVar.abstandvonRand*2)));

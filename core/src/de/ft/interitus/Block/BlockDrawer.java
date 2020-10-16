@@ -14,7 +14,7 @@ import de.ft.interitus.Var;
 import de.ft.interitus.projecttypes.ProjectManager;
 
 public class BlockDrawer {
-    public static void Draw() {
+    public static void Draw(float delta) {
         if (!Var.isloading) {
             Block Temp = null;
             Block Temp2 = null;
@@ -74,7 +74,7 @@ public class BlockDrawer {
                 ProjectManager.getActProjectVar().visibleWireNodes.get(i).draw();
             }
 
-            UI.updatedragui(WindowManager.shapeRenderer, false, WindowManager.batch);
+            UI.updatedragui(WindowManager.shapeRenderer, false, WindowManager.batch,delta);
             BlockTappedBar.tb.setX(UIVar.BlockBarX + UIVar.BlockBarW / 2);
             BlockTappedBar.tb.setY(UIVar.BlockBarY + UIVar.BlockBarH / 2 - (BlockTappedBar.tb.getHeight() + UIVar.abstandvonRand * 2) / 2);
             BlockTappedBar.tb.draw();

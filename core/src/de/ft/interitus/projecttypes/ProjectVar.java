@@ -42,14 +42,12 @@ public abstract class ProjectVar {
     public Block connetor_offerd_hoverd_block = null; //Der Block über den man fährt welcher gehovert wird
     public Block wire_beginn = null;  //um bei verbindungen über eine Node trotzdem noch den Nachbar erfahren zu können
     public Wire mousehoveredwire = null;
-    public boolean removeblock = false; //Wenn ein Block über die ablage Fläche gehalten wird
     public int vcs = VCS.NONE;
     public ProjectType projectType = null;
     public boolean changes = false; //Wurde etwas geändert seit dem letzten speichern
     private String filename = ""; //Der Name der aktuell geöffneten Datei
     public volatile String path = ""; // Wo ist die aktuell geöffnete Datei gespeichert
     public ArrayList<Thread> threads = new ArrayList<>();
-    public ArrayList<Object> requestobj = new ArrayList<>();
     public DataWire moveingdatawire = null;
     public ArrayList<Addon> enabledAddons = new ArrayList<>();
     public Object projectSettings = null;

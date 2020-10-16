@@ -24,7 +24,6 @@ public class ThreadManager {
     public static Thread add(Thread thread, Object obj) {
         Thread createThread = new Thread();
         ProjectManager.getActProjectVar().threads.add(thread);
-        ProjectManager.getActProjectVar().requestobj.add(obj);
         return createThread;
     }
 

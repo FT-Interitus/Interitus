@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.BlockDrawer;
 import de.ft.interitus.Block.ThreadManager;
 import de.ft.interitus.UI.CheckShortcuts;
@@ -37,7 +38,7 @@ public class ProgramingSpace extends ScreenAdapter {
     public static Viewport viewport;
     public static Component saver;
 
-   // public static BitmapFont font;
+    // public static BitmapFont font;
 
 
     public static long renderstarttime = 0;
@@ -46,10 +47,8 @@ public class ProgramingSpace extends ScreenAdapter {
 
 
     public static PressedKeys pressedKeys;
-    public static float delta;
     public static Plugin nativ = new Native();
     public boolean loadimagesfromplugin = true;
-
 
 
     public void open() {
@@ -58,23 +57,20 @@ public class ProgramingSpace extends ScreenAdapter {
         pressedKeys = new PressedKeys();
 
 
-
         cam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         viewport = new ScreenViewport(cam);
-
 
 
         cam.position.set(Gdx.graphics.getWidth() / 2f + 50, Gdx.graphics.getHeight() / 2f, 0);
         UI.UIcam.position.set(Gdx.graphics.getWidth() / 2f + 50, Gdx.graphics.getHeight() / 2f, 0);
 
 
-
     }
 
-    public  void init() {
+    public void init() {
 
-        UI.updatedragui(WindowManager.shapeRenderer, true, WindowManager.batch);
+        UI.updatedragui(WindowManager.shapeRenderer, true, WindowManager.batch,1);
         //ProjectManager.getActProjectVar().projectType.initProject();
 
         BlockTappedBar.init();
@@ -94,20 +90,16 @@ public class ProgramingSpace extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
+
+
         WindowManager.updateWindow();
-        if(Var.openprojects.size()==0) {
+
+        if (Var.openprojects.size() == 0) {
             WindowManager.switchto(WindowManager.Windows.welcome);
         }
 
 
-
-        ProgramingSpace.delta = delta;
-
-
         renderstarttime = System.currentTimeMillis();
-
-
-
 
 
         //RechtsKlick.Rechtsklickupdate();
@@ -122,7 +114,6 @@ public class ProgramingSpace extends ScreenAdapter {
             cam.update();
 
 
-
             Gdx.gl.glClearColor(Settings.theme.ClearColor().r, Settings.theme.ClearColor().g, Settings.theme.ClearColor().b, Settings.theme.ClearColor().a);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
             WindowManager.batch.setProjectionMatrix(cam.combined);
@@ -130,22 +121,24 @@ public class ProgramingSpace extends ScreenAdapter {
             WindowManager.update();
 
 
-
-            UI.updatedragui( WindowManager.shapeRenderer, true, WindowManager.batch);
+            UI.updatedragui(WindowManager.shapeRenderer, true, WindowManager.batch,delta);
 
             ProgramGrid.draw(WindowManager.shapeRenderer, ProgramingSpace.cam);
 
-            BlockDrawer.Draw();
+            for (Block block : ProjectManager.getActProjectVar().blocks) {
+                block.update();
+            }
+            BlockDrawer.Draw(delta);
 
 
             de.ft.interitus.UI.Viewport.update(delta, ProgramingSpace.cam);
 
 
         } catch (Exception e) {
-                if (ProjectManager.getActProjectVar() != null && Var.inProgram) {
-                    DisplayErrors.error = e;
-                    e.printStackTrace();
-                }
+            if (ProjectManager.getActProjectVar() != null && Var.inProgram) {
+                DisplayErrors.error = e;
+                e.printStackTrace();
+            }
         }
 
 
@@ -154,7 +147,7 @@ public class ProgramingSpace extends ScreenAdapter {
         }
 
 
-        if(ProjectManager.getActProjectVar()!=null&&ProjectManager.getActProjectVar().projectType.isCodeshowable()) {
+        if (ProjectManager.getActProjectVar() != null && ProjectManager.getActProjectVar().projectType.isCodeshowable()) {
             if (Gdx.input.isKeyPressed(Input.Keys.TAB)) {
                 CodeHovering.drawHovering();
             }
@@ -162,8 +155,7 @@ public class ProgramingSpace extends ScreenAdapter {
 
         }
 
-        WindowManager.drawer();
-
+        WindowManager.drawer(delta);
 
 
         loader(); //Load Images in OpenGL context
@@ -190,9 +182,6 @@ public class ProgramingSpace extends ScreenAdapter {
 
 
     }
-
-
-
 
 
     public void loader() {

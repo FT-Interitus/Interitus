@@ -9,7 +9,6 @@ import com.badlogic.gdx.ScreenAdapter;
 import de.ft.interitus.Program;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.Var;
-import de.ft.interitus.Welcome;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.global.GlobalLoadingDoneEvent;
 import de.ft.interitus.events.global.GlobalLoadingStartEvent;
@@ -49,7 +48,7 @@ public class Loading extends ScreenAdapter {
                     Program.inLoading = false;
                     this.dispose();
                     EventVar.globalEventManager.loadingdone(new GlobalLoadingDoneEvent(this));
-                    UI.initnachassetsloading();
+                    UI.InitAssets();
                     Init.initBlocks();
 
 

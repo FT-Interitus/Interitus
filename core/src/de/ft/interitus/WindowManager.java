@@ -10,11 +10,15 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import de.ft.interitus.UI.InputManager;
+import de.ft.interitus.UI.Notification.Notification;
 import de.ft.interitus.UI.Notification.NotificationManager;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.popup.PopupHandler;
+import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.utils.ShapeRenderer;
+
+
 
 public class WindowManager {
     public static ShapeRenderer shapeRenderer;
@@ -65,7 +69,7 @@ public class WindowManager {
 
     }
 
-    public static void drawer() {
+    public static void drawer(float delta) {
 
 
         if (!Var.inProgram) {
@@ -76,7 +80,7 @@ public class WindowManager {
         NotificationManager.draw();
         try {
 
-            UI.update();
+            UI.update(delta);
 
         } catch (Exception e) {
             //Falls die UI nicht richtig initialisiert werden konnte
@@ -85,7 +89,7 @@ public class WindowManager {
 
         }
 
-/*
+
         if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
             Notification notification = new Notification(AssetLoader.information, "Wichtige Information", "\nEs steht kein Update bereit!");
             //notification.setButtonBar(new UIElementBar().addButton(new Button().setText("Test")));
@@ -93,7 +97,6 @@ public class WindowManager {
         }
 
 
- */
 
         PopupHandler.drawPopUp();
 

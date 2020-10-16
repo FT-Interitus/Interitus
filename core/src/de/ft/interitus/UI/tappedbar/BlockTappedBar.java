@@ -138,9 +138,8 @@ public class BlockTappedBar {
                     curserstate = 2;
                 }
             } else if (curserstate != 1) {
-                if (!ProjectManager.getActProjectVar().removeblock) {
                     Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Arrow);
-                }
+
                 curserstate = 1;
             }
         }

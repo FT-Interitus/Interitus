@@ -6,6 +6,7 @@
 package de.ft.interitus.Block;
 
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -37,6 +38,7 @@ import de.ft.interitus.utils.Unproject;
 import de.ft.interitus.utils.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.Objects;
+import java.util.logging.Logger;
 
 /***
  *
@@ -74,7 +76,7 @@ public abstract class Block implements VisibleObjects {
     private PlatformSpecificBlock blocktype;
     private final BlockDropDownMenue BlockModiSelection = new BlockDropDownMenue(0, 0, 0, 0, this);
     private ArrayList<Block> extendedBlocks = null;
-
+    private boolean hoverd;
 
 
     public Block(final int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock, BlockUpdateGenerator update, BlocktoSaveGenerator blocktoSaveGenerator, boolean isSubBlock) { //Initzialisieren des Blocks
@@ -506,7 +508,7 @@ public abstract class Block implements VisibleObjects {
             }
         }
 
-
+        assert ProjectManager.getActProjectVar()==null;
         if (ProjectManager.getActProjectVar().Blockswitherrors.contains(this.getIndex())) {
             ProjectManager.getActProjectVar().Blockswitherrors.remove((Object) this.getIndex());
         }
@@ -572,7 +574,6 @@ public abstract class Block implements VisibleObjects {
         }
 
         if (!complete) { //das trifft nur nicht zu wenn das ganze programm gecleart wird
-            ProjectManager.getActProjectVar().blocks.remove(this); //Der block wird aus dem Blocks Array entfernt
             ProjectManager.getActProjectVar().visible_blocks.remove(this); //Der block wird aus dem Visible Blocks Array entfernt
 
             try {
@@ -589,7 +590,7 @@ public abstract class Block implements VisibleObjects {
                             if (ProjectManager.getActProjectVar().visible_blocks.get(i) != getblock()) {
                                 ProjectManager.getActProjectVar().visible_blocks.get(i).findnewindex(); //Alle anderen Blöcke werden um einen Index verschoben
                             }
-                        } catch (Exception e) { //Wenn man bei Milliarden von Blöcken der erste und der zweite gelöscht werden gibt es hier fehler
+                        } catch (Exception e) { //Wenn man bei Hunderten von Blöcken der erste und der zweite gelöscht werden gibt es hier fehler
                             DisplayErrors.error = e;
                             e.printStackTrace();
                         }
@@ -607,6 +608,19 @@ public abstract class Block implements VisibleObjects {
 
     private void findnewindex() {
         this.index = ProjectManager.getActProjectVar().blocks.indexOf(this);
+    }
+
+
+    /***
+     * Updates all Block Behaviors
+     */
+    public void update() {
+
+
+        hoverd = CheckKollision.checkmousewithblock(this); //Wird der Block von der Mouse gehovert?
+        if(hoverd&& Gdx.input.isButtonJustPressed(0)) this.onClick();
+
+
     }
 
     /**
@@ -995,5 +1009,11 @@ public abstract class Block implements VisibleObjects {
 
     public void setExtendedBlocks(ArrayList<Block> extendedBlocks) {
         this.extendedBlocks = extendedBlocks;
+    }
+
+    public void onClick() {
+
+        Program.logger.config("Clicked: "+ blocktype.getName());
+
     }
 }
