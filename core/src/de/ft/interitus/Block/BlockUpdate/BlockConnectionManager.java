@@ -11,6 +11,8 @@ import de.ft.interitus.UI.UIElements.check.CheckCollision;
 import de.ft.interitus.projecttypes.ProgrammArea.ProgrammArea;
 import de.ft.interitus.projecttypes.ProjectManager;
 
+import java.util.Properties;
+
 public class BlockConnectionManager {
 
     public static void startMovingBlock(Block block) {
@@ -21,15 +23,9 @@ public class BlockConnectionManager {
 
     public static void placeBlock(Block block) {
 
-        for(Block visibleBlock:ProjectManager.getActProjectVar().visible_blocks) {
-            if(CheckCollision.checkblockwithduplicate(block,visibleBlock,0)) {
-
-                Program.logger.config("Pair found");
-
-                break;
-
-            }
-        }
+      if(BlockJumpingManager.biggestIntersectionBlock(block)!=null) {
+          Program.logger.config("Pair found");
+      }
 
     }
 

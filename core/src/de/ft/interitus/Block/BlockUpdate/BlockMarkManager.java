@@ -13,7 +13,6 @@ import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.Var;
 import de.ft.interitus.projecttypes.ProjectManager;
 
-import java.awt.*;
 
 public class BlockMarkManager {
 

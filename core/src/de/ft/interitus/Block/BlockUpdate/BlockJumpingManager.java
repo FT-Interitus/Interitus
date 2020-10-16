@@ -15,6 +15,8 @@ public class BlockJumpingManager {
     private static final Rectangle rectangle = new Rectangle();
     private static final Rectangle rectangleDuplicate = new Rectangle();
 
+
+    // FIXME: 16.10.20
     public static Block biggestIntersectionBlock(Block block) {
 
         assert ProjectManager.getActProjectVar()!=null;
