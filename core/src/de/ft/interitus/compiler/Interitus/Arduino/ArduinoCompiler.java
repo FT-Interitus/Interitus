@@ -25,7 +25,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
-import java.util.Arrays;
 import java.util.concurrent.*;
 
 public class ArduinoCompiler implements Compiler {
@@ -91,11 +90,11 @@ public class ArduinoCompiler implements Compiler {
                     if (!parameter.getParameterType().isOutput()) {
                         continue;
                     }
-                    if (parameter.getDatawire() == null) {
+                    if (parameter.getDataWires() == null) {
                         continue;
                     }
 
-                    if (parameter.getDatawire().size() < 1) {
+                    if (parameter.getDataWires().size() < 1) {
                         continue;
                     }
 

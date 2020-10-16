@@ -20,6 +20,6 @@ public class InitRaspberryPI {
 
         platformSpecificBlocks.add(new Wait(null,null));
 
-        return new ProjectType(ProgramingSpace.nativ, "RaspberryPi-Projekt", platformSpecificBlocks, new DefaultBlockGenerator(), new DefaultBlockUpdateGenerator(), new DefaultWireGenerator(), new DefaultWireNodeGenerator(), new DefaultSaveBlockGenerator(), new DefaultBlockVarGenerator(), new RaspberryPiFunktions(), null);
+        return new ProjectType(ProgramingSpace.nativ, "RaspberryPi-Projekt", platformSpecificBlocks, new DefaultBlockGenerator(), new DefaultBlockUpdateGenerator(), new DefaultSaveBlockGenerator(), new DefaultBlockVarGenerator(), new RaspberryPiFunktions(), null);
     }
 }

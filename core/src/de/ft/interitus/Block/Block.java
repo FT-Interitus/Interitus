@@ -18,7 +18,7 @@ import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Program;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.UIElements.BlockDropDownMenue.BlockDropDownMenue;
-import de.ft.interitus.UI.UIElements.check.CheckKollision;
+import de.ft.interitus.UI.UIElements.check.CheckCollision;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.Viewport;
 import de.ft.interitus.UI.popup.PopupMenue;
@@ -38,7 +38,6 @@ import de.ft.interitus.utils.Unproject;
 import de.ft.interitus.utils.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.Objects;
-import java.util.logging.Logger;
 
 /***
  *
@@ -49,8 +48,9 @@ import java.util.logging.Logger;
  *
  */
 
-public abstract class Block implements VisibleObjects {
+public abstract class Block {
     private final Vector2 wireconnector_right = new Vector2(0, 0); //Die rechte wire-Anschluss Position
+    private final Vector2 pos = new Vector2(0, 0); //Block pos
     private final Vector2 wireconnector_left = new Vector2(0, 0); //Die linke wire-Anschluss Position
     private final RightClickEventListener rightClickEventListener;
     private final BlockUpdateGenerator blockUpdateGenerator;
@@ -58,32 +58,31 @@ public abstract class Block implements VisibleObjects {
     private final GlyphLayout glyphLayout = new GlyphLayout();
     public boolean seted = true; //Ob der Block losgelassen wurde bzw ob der Block eine statische Position hat
     public boolean moved = false; // Ob der Block gerade mit der Maus bewegt wird
-    private boolean marked = false; //Ob der Block gerade makiert ist
-    private int x; //Die x Koordinate des Blocks
-    private int y; //Die Y Koordinate des Blocks
+
     private int h; //Die Höhe des Blocks
     private int index; //Der Index des Blocks (Der Gleiche wie im Array BlckVar.blocks)o
     private boolean showdupulicate_rechts; //Ob das Duplicat rechts angezeigt werden soll d.h. ob der Block der gerade bewegt wird hier hin springen wird
     private boolean showdupulicate_links; //Ob das Duplicat links ...
+    private Wire wire_left;
+    private Wire wire_right;
 
     //Die Y Position des Duplicates  //Die Weite und Höhe ergeben sich aus der Block weite und Höhe
-    private boolean moving = false; //Ob der Block gerade durch den Nutzer bewegt wird
     private BlockUpdate blockupdate; // Die Block update methode hier werden user actionen engegengenommen und verarbeitet
     private Block left = null; //Der rechte verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
     private Block right = null; //Der linke verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
-    private Wire wire_left = null; //linke verbundene Wire
-    private Wire wire_right = null; //rechte verbunde Wire
+
     private PlatformSpecificBlock blocktype;
     private final BlockDropDownMenue BlockModiSelection = new BlockDropDownMenue(0, 0, 0, 0, this);
     private ArrayList<Block> extendedBlocks = null;
     private boolean hoverd;
+    private final Block INSTANCE;
 
 
     public Block(final int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock, BlockUpdateGenerator update, BlocktoSaveGenerator blocktoSaveGenerator, boolean isSubBlock) { //Initzialisieren des Blocks
         this.blocktype = platformSpecificBlock;
         EventVar.blockEventManager.createBlock(new BlockCreateEvent(this, this));
-        this.x = x;
-        this.y = y;
+        this.pos.x = x;
+        this.pos.y = y;
 
         this.h = h;
 
@@ -93,6 +92,7 @@ public abstract class Block implements VisibleObjects {
         this.blockUpdateGenerator = update;
         this.blockupdate = update.generate(this); //BlockUpdate Klasse wird initzilisieren
         this.blocktoSaveGenerator = blocktoSaveGenerator;
+        this.INSTANCE = this;
 
 
         if(!isSubBlock) {
@@ -111,7 +111,7 @@ public abstract class Block implements VisibleObjects {
             public PopupMenue openrequest(RightClickOpenRequestEvent e, float Pos_X, float Pos_Y) {
 
 
-                if (CheckKollision.object(getX(), getY(), getW(), getW(), Unproject.unproject(Pos_X, Pos_Y).x, Unproject.unproject(Pos_X, Pos_Y).y, 1, 1)) {
+                if (CheckCollision.object(getX(), getY(), getW(), getW(), Unproject.unproject(Pos_X, Pos_Y).x, Unproject.unproject(Pos_X, Pos_Y).y, 1, 1)) {
 
                     return null;
                 } else {
@@ -136,7 +136,7 @@ public abstract class Block implements VisibleObjects {
      * @return if the Block is visible
      */
 
-    @Override
+
     public boolean isVisible() {
 
 
@@ -145,118 +145,7 @@ public abstract class Block implements VisibleObjects {
 
     }
 
-    /***
-     *
-     * @return is the
-     *  @see VisibleObjects child a block
-     */
 
-    @Override
-    public boolean amiablock() {
-        return true;
-    }
-
-    /***
-     *
-     * @return is the
-     * @see VisibleObjects
-     * child a WireNode
-     */
-    @Override
-    public boolean amiwirenode() {
-        return false;
-    }
-
-    /**
-     * @return the block variable it's need to set the block left und rights if you use wires
-     */
-    @Override
-    public Block getblock() {
-        return this;
-    }
-
-    /***
-     *
-     * @return the Node variable it's need to set the block left und rights if you use wires
-     */
-
-    @Override
-    public WireNode getwirenode() {
-        return null;
-    }
-
-    /***
-     *
-     * @return the entrace point of the Block is visible if you create a wire
-     */
-    @Override
-    public float getX_entrance() {
-        return getWireconnector_left().x;
-    }
-
-    /***
-     *
-     * @return the entrace point of the Block is visible if you create a wire
-     */
-
-    @Override
-    public float getY_entrance() {
-        return getWireconnector_left().y;
-    }
-
-    /***
-     *
-     * @return the entrace point of the Block is visible if you create a wire
-     */
-    @Override
-    public float getW_entrance() {
-        return 20;
-    }
-
-    /***
-     *
-     * @return the entrace point of the Block is visible if you create a wire
-     */
-    @Override
-    public float getH_entrance() {
-        return 20;
-    }
-
-    /***
-     *
-     * @return the exit point of the Block is visible if their are no neighbours
-     */
-    @Override
-    public float getX_exit() {
-        return (int) this.getwireconnector_right().x;
-    }
-
-    /***
-     *
-     * @return the exit point of the Block is visible if their are no neighbours
-     */
-    @Override
-    public float getY_exit() {
-        return (int) this.getwireconnector_right().y;
-    }
-
-    /***
-     *
-     * @return the exit point of the Block is visible if their are no neighbours
-     */
-    @Override
-    public float getW_exit() {
-        return 0;
-    }
-
-    /***
-     *
-     * @return the exit point of the Block is visible if their are no neighbours
-     */
-    @Override
-    public float getH_exit() {
-        return 0;
-    }
 
     /***
      *
@@ -273,7 +162,7 @@ public abstract class Block implements VisibleObjects {
      */
 
     public int getX_dup_rechts() {
-        return this.x + blocktype.getWidth(); //Gibt die X Position des rechten duplicates zurück
+        return (int) (this.pos.x + blocktype.getWidth()); //Gibt die X Position des rechten duplicates zurück
     }
 
 
@@ -284,7 +173,7 @@ public abstract class Block implements VisibleObjects {
      * @see de.ft.interitus.events.block.BlockEventListener
      */
     public boolean isMoving() {
-        return moving; //Gibt zurück ob der Block gerade in Bewegung ist
+        return ProjectManager.getActProjectVar().moving_block==this; //Gibt zurück ob der Block gerade in Bewegung ist
     }
 
     /***
@@ -294,8 +183,10 @@ public abstract class Block implements VisibleObjects {
     public void setMoving(boolean moving) {
         if (moving) {
             ProjectManager.getActProjectVar().changes = true;
+            ProjectManager.getActProjectVar().moving_block = this;
         }
-        this.moving = moving; //Gibt an das der Block gerade in Bewegung ist
+
+
     }
 
     /***
@@ -330,39 +221,12 @@ public abstract class Block implements VisibleObjects {
      */
 
     public boolean isMarked() {
-        return marked; //Ist der Block von User makiert worden?
+        return ProjectManager.getActProjectVar().marked_block == this; //Ist der Block von User makiert worden?
     }
 
 
-    public void setMarked(boolean marked) {
-
-        this.marked = marked; //Soll der Block makiert sein?
-    }
-
-    public Wire getWire_left() {
-        return wire_left;
-    }
-
-    /**
-     * @param wire_left set the wire connection to the Block
-     *                  Attention to run the Programm you need to set the neighbours from the Block
-     *                  It's not only the wire which is used to find the Blocks order
-     */
-
-    @Override
-    public void setWire_left(Wire wire_left) {
-        this.wire_left = wire_left;
-    }
 
 
-    public Wire getWire_right() {
-        return wire_right;
-    }
-
-    @Override
-    public void setWire_right(Wire wire_right) {
-        this.wire_right = wire_right;
-    }
 
     public Block getLeft() {
         return left; //Gibt den linken VERBUNDENEN Nachbar zurück
@@ -436,19 +300,19 @@ public abstract class Block implements VisibleObjects {
      * @return Set and get the Block Positions
      */
     public int getX() {
-        return x; //Rückgabe der X Position des eigenen Blockes
+        return (int) this.pos.x; //Rückgabe der X Position des eigenen Blockes
     }
 
     public void setX(int x) {
-        this.x = x; //Die X Position wird geupdated
+        this.pos.x = x; //Die X Position wird geupdated
     }
 
     public int getY() {
-        return y; //Rückgabe der Y Position des eigenen Blockes
+        return (int) this.pos.y; //Rückgabe der Y Position des eigenen Blockes
     }
 
     public void setY(int y) {
-        this.y = y; //Setzen der Y Position
+        this.pos.y = y; //Setzen der Y Position
 
         //Hinweis die Y Position der Duplikate muss nicht gesetzt werden da die die geleichen wie der Block selbst haben
 
@@ -463,8 +327,8 @@ public abstract class Block implements VisibleObjects {
     }
 
     public void setPosition(int x, int y) { //X und Y werden aufeinmal gesetzt
-        this.x = x;
-        this.y = y;
+        this.pos.x = x;
+        this.pos.y = y;
 
 
     }
@@ -497,12 +361,12 @@ public abstract class Block implements VisibleObjects {
 
         if (blocktype.getBlockParameter() != null) {
             for (Parameter parameter : blocktype.getBlockParameter()) {
-                if (parameter.getDatawire() == null) {
+                if (parameter.getDataWires() == null) {
                     continue;
                 }
 
-                while (parameter.getDatawire().size() > 0) {
-                    parameter.getDatawire().get(0).delete();
+                while (parameter.getDataWires().size() > 0) {
+                    parameter.getDataWires().get(0).delete();
                 }
 
             }
@@ -516,26 +380,15 @@ public abstract class Block implements VisibleObjects {
         EventVar.rightClickEventManager.removeListener(this.rightClickEventListener);
         EventVar.blockEventManager.deleteBlock(new BlockDeleteEvent(this, this)); //Fire Delete Event
         ProjectManager.getActProjectVar().marked_block = null; //Der Makierte Block wird auf null gesetzt da nur ein makierter block gelöscht werden kann //Anmerkung falls das ganze Programm gelöscht wird spielt das sowieso keine Rolle
-        ProjectManager.getActProjectVar().ismoving = false; // Ob ein Block bewegt wird, wird auf false gesetzt da wenn ein Block bewegt und gelöscht wird kann es nur der bewegte Block sein
+        ProjectManager.getActProjectVar().moving_block = null; // Ob ein Block bewegt wird, wird auf false gesetzt da wenn ein Block bewegt und gelöscht wird kann es nur der bewegte Block sein
 
 
-        if (this.getWire_left() != null) {
-            this.getWire_left().setRight_connection(null);
-        }
-
-        if (this.getWire_right() != null) {
-            this.getWire_right().setLeft_connection(null);
-        }
 
         this.setIndex(-1); //Der Index wird auf -1 gesetzt dann merkt der BlockUpdater das der laufenden Timer beendet werden soll
         if (left != null) { //Wenn ein linker Nachbar exsistiert
             left.setRight(null); //wird dem linken Nachbar gesagt das er keinen Rechten Nachbar mehr hat
 
-            try {
-                left.setWire_right(null); //Die Wire des nachbar block wird gelöscht damit die Wire kein zweites mal gelöscht wird (passiert nur bei ganz vielen wire nodes)
-            } catch (NullPointerException e) {
-                //Falls es gar keine Wire gab
-            }
+
         }
 
         if (right != null) { // wenn ein Rechter nachbar exsitiert
@@ -545,13 +398,7 @@ public abstract class Block implements VisibleObjects {
 
 
             }
-            try {
-                right.setWire_left(null); //Die Wire des nachbar block wird gelöscht damit die Wire kein zweites mal gelöscht wird (passiert nur bei ganz vielen wire nodes)
-            } catch (NullPointerException e) {
-                //Falls es gar keine Wire gab
-            } catch (IndexOutOfBoundsException e) {
 
-            }
         }
 
 
@@ -587,7 +434,7 @@ public abstract class Block implements VisibleObjects {
                 public void run() {
                     for (int i = 0; i < ProjectManager.getActProjectVar().visible_blocks.size(); i++) { //Durch alle Indexe des Block Arrays wird durchgegangen alle die einen größeren Index haben //Durch die Temp variable kann der alte Index des Blocks hier wieder verwendet werden
                         try {
-                            if (ProjectManager.getActProjectVar().visible_blocks.get(i) != getblock()) {
+                            if (ProjectManager.getActProjectVar().visible_blocks.get(i) != INSTANCE) {
                                 ProjectManager.getActProjectVar().visible_blocks.get(i).findnewindex(); //Alle anderen Blöcke werden um einen Index verschoben
                             }
                         } catch (Exception e) { //Wenn man bei Hunderten von Blöcken der erste und der zweite gelöscht werden gibt es hier fehler
@@ -617,7 +464,7 @@ public abstract class Block implements VisibleObjects {
     public void update() {
 
 
-        hoverd = CheckKollision.checkmousewithblock(this); //Wird der Block von der Mouse gehovert?
+        hoverd = CheckCollision.checkmousewithblock(this); //Wird der Block von der Mouse gehovert?
         if(hoverd&& Gdx.input.isButtonJustPressed(0)) this.onClick();
 
 
@@ -647,7 +494,7 @@ public abstract class Block implements VisibleObjects {
 
         if (this.getBlocktype().getBlockParameter() != null) {
             for (Parameter parameter : this.getBlocktype().getBlockParameter()) {
-                for (DataWire dataWire : parameter.getDatawire()) {
+                for (DataWire dataWire : parameter.getDataWires()) {
 
                     if (dataWire.getParam_input().getBlock() == this) continue;
                     if (!dataWire.getParam_input().getBlock().getBlockupdate().isrunning) dataWire.draw();
@@ -661,13 +508,13 @@ public abstract class Block implements VisibleObjects {
         if (ProjectManager.getActProjectVar().biggestblock == this) {
             if (this.isShowdupulicate_rechts() && this.getBlocktype().canhasrightconnector()) {
                 batch.setColor(1, 1, 1, 0.5f);
-                batch.draw(AssetLoader.block_middle, this.getX_dup_rechts(), this.y, ProjectManager.getActProjectVar().marked_block.getW(), this.getH()); //Wenn der Block die größte überlappung hat wird er als show duplicat angezigt
+                batch.draw(AssetLoader.block_middle, this.getX_dup_rechts(), this.getY(), ProjectManager.getActProjectVar().marked_block.getW(), this.getH()); //Wenn der Block die größte überlappung hat wird er als show duplicat angezigt
                 batch.setColor(1, 1, 1, 1);
             }
 
             if (this.isShowdupulicate_links() && this.getBlocktype().canhasleftconnector()&&ProjectManager.getActProjectVar().marked_block !=null) {
                 batch.setColor(1, 1, 1, 0.5f);
-                batch.draw(AssetLoader.block_middle, this.x - ProjectManager.getActProjectVar().marked_block.getW(), this.y, ProjectManager.getActProjectVar().marked_block.getW(), this.getH()); //das gleiche für links
+                batch.draw(AssetLoader.block_middle, this.getX() - ProjectManager.getActProjectVar().marked_block.getW(), this.getY(), ProjectManager.getActProjectVar().marked_block.getW(), this.getH()); //das gleiche für links
                 batch.setColor(1, 1, 1, 1);
             }
         }
@@ -795,10 +642,10 @@ public abstract class Block implements VisibleObjects {
 
 
             if (!this.blockupdate.isIsconnectorclicked() && ProjectManager.getActProjectVar().showleftdocker && this.getLeft() == null && this.getBlocktype().canhasleftconnector()) {
-                batch.draw(AssetLoader.connector_offerd, getWireconnector_left().x, getWireconnector_left().y, 20, 20);
-            }
+            batch.draw(AssetLoader.connector_offerd, getWireconnector_left().x, getWireconnector_left().y, 20, 20);
+           }
 
-            if (this.getRight() == null && this.getBlocktype().canhasrightconnector()) {
+           if (this.getRight() == null && this.getBlocktype().canhasrightconnector()) {
                 batch.draw(AssetLoader.connector, getwireconnector_right().x, getwireconnector_right().y, 20, 20);
             }
             //font.draw(batch, "index:  " + this.getIndex() + " Block: " + this.getBlocktype().getName(), this.getX() + 5, this.getY() + 30); //DEBUG Block Index auf dem Block anzeigen
@@ -827,8 +674,8 @@ public abstract class Block implements VisibleObjects {
                         this.getBlocktype().getBlockParameter().get(i).setY(this.getY());
                         font.getData().setScale(0.9f);
                         glyphLayout.setText(font, "" + this.getBlocktype().getBlockParameter().get(i).getParameter());
-                        if (this.getBlocktype().getBlockParameter().get(i).getDatawire().size() < 1) {
-                            font.draw(batch, glyphLayout, aktualX + 15 - glyphLayout.width / 2, y + glyphLayout.height * 1.5f);
+                        if (this.getBlocktype().getBlockParameter().get(i).getDataWires().size() < 1) {
+                            font.draw(batch, glyphLayout, aktualX + 15 - glyphLayout.width / 2, getY() + glyphLayout.height * 1.5f);
                         }
                     }
                     aktualX += 30;
@@ -843,7 +690,7 @@ public abstract class Block implements VisibleObjects {
             batch.end();
 
 
-            BlockModiSelection.setBounds(this.x + 11, this.y + 2, 20, 20);
+            BlockModiSelection.setBounds(this.getX() + 11, this.getY() + 2, 20, 20);
             if (this.getBlocktype().getBlockModis().size() > 1) {
                 BlockModiSelection.draw(this);
             }
@@ -852,8 +699,8 @@ public abstract class Block implements VisibleObjects {
             try {
                 if (this.getBlocktype() != null && this.getBlocktype().getBlockParameter() != null) {
                     for (Parameter parameter : this.getBlocktype().getBlockParameter()) {
-                        if (parameter.getDatawire() != null) {
-                            for (DataWire dataWire : parameter.getDatawire()) {
+                        if (parameter.getDataWires() != null) {
+                            for (DataWire dataWire : parameter.getDataWires()) {
                                 if (dataWire.getParam_input() == parameter) {
                                     dataWire.draw();
                                 }
@@ -882,7 +729,7 @@ public abstract class Block implements VisibleObjects {
      */
 
     public Vector2 getwireconnector_right() {
-        wireconnector_right.set(x + blocktype.getWidth() - 7, y + h / 3 + 12);
+        wireconnector_right.set(this.getX() + blocktype.getWidth() - 7, this.getY() + h / 3 + 12);
         return wireconnector_right;
     }
 
@@ -890,7 +737,7 @@ public abstract class Block implements VisibleObjects {
      * @return the position of the two connectors
      */
     public Vector2 getWireconnector_left() {
-        wireconnector_left.set(x + 2, y + h / 3 + 9);
+        wireconnector_left.set(this.getX() + 2, this.getY() + h / 3 + 9);
         return wireconnector_left;
     }
 
@@ -907,7 +754,7 @@ public abstract class Block implements VisibleObjects {
 
             try {
 
-                flaeche = (CheckKollision.flache(this.getX_dup_rechts(), this.getY(), this.getW(), this.getH(), ProjectManager.getActProjectVar().marked_block.getX(), ProjectManager.getActProjectVar().marked_block.getY())); //Fläsche mit der die Blöcke überlappen um zu brechenen an welchen Block der Block springen wird
+                flaeche = (CheckCollision.flache(this.getX_dup_rechts(), this.getY(), this.getW(), this.getH(), ProjectManager.getActProjectVar().marked_block.getX(), ProjectManager.getActProjectVar().marked_block.getY())); //Fläsche mit der die Blöcke überlappen um zu brechenen an welchen Block der Block springen wird
 
             } catch (NullPointerException ignored) {
 
@@ -920,7 +767,7 @@ public abstract class Block implements VisibleObjects {
         if (this.isShowdupulicate_links()) { //Für links
             try {
 
-                flaeche = (CheckKollision.flache(this.x - ProjectManager.getActProjectVar().marked_block.getW(), this.getY(), this.getW(), this.getH(), ProjectManager.getActProjectVar().marked_block.getX(), ProjectManager.getActProjectVar().marked_block.getY()));//Fläsche mit der die Blöcke überlappen um zu brechenen an welchen Block der Block springen wird
+                flaeche = (CheckCollision.flache(this.getX() - ProjectManager.getActProjectVar().marked_block.getW(), this.getY(), this.getW(), this.getH(), ProjectManager.getActProjectVar().marked_block.getX(), ProjectManager.getActProjectVar().marked_block.getY()));//Fläsche mit der die Blöcke überlappen um zu brechenen an welchen Block der Block springen wird
 
             } catch (NullPointerException ignored) {
 
@@ -933,7 +780,7 @@ public abstract class Block implements VisibleObjects {
     public int getBlockMarkedblockuberlappungsflache() {
         int flaeche = 0;
         try {
-            flaeche = CheckKollision.flache(this.getX(), this.getY(), this.getW(), this.getH(), ProjectManager.getActProjectVar().marked_block.getX(), ProjectManager.getActProjectVar().marked_block.getY()); //Fläche des Markierten Blocks
+            flaeche = CheckCollision.flache(this.getX(), this.getY(), this.getW(), this.getH(), ProjectManager.getActProjectVar().marked_block.getX(), ProjectManager.getActProjectVar().marked_block.getY()); //Fläche des Markierten Blocks
         } catch (NullPointerException e) {
         }
         return flaeche;
@@ -973,15 +820,14 @@ public abstract class Block implements VisibleObjects {
      * When the Size of the Block will be changed
      * @param widthdiff
      */
+    //TODO
     public void changesize(int widthdiff) {
 
         ArrayList<Block> blocks = new ArrayList<>();
 
         Block nextblock = this.getRight();
 
-        if(this.getWire_right()!=null&&this.getWire_right().isSpace_between_blocks()) {
-            return;
-        }
+
         while(nextblock!=null) {
 
             if(blocks.contains(blocks)) {
@@ -989,10 +835,6 @@ public abstract class Block implements VisibleObjects {
                 break;
             }
             blocks.add(nextblock);
-            if(nextblock!=null&&nextblock.getWire_right()!=null&&nextblock.getWire_right().isSpace_between_blocks()) {
-                blocks.clear();
-                break;
-            }
 
 
             nextblock.setX(nextblock.getX()+widthdiff);
@@ -1011,9 +853,37 @@ public abstract class Block implements VisibleObjects {
         this.extendedBlocks = extendedBlocks;
     }
 
+    public Wire getWire_left() {
+        return wire_left;
+    }
+
+    public Wire getWire_right() {
+        return wire_right;
+    }
+
+
+    public void setWire_left(Wire wire_left) {
+        this.wire_left = wire_left;
+    }
+
+    public void setWire_right(Wire wire_right) {
+        this.wire_right = wire_right;
+    }
+
+
+    public Vector2 getPos() {
+        return pos;
+    }
+
+
     public void onClick() {
 
+        ProjectManager.getActProjectVar().marked_block =this;
+
+
         Program.logger.config("Clicked: "+ blocktype.getName());
+
+
 
     }
 }

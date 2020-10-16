@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.Block.ParameterType;
 import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.projecttypes.BlockTypes.BlockMode;
 import de.ft.interitus.projecttypes.BlockTypes.BlockSettings;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.InitArduino;
@@ -70,7 +69,7 @@ public class MapModeDefault extends ArduinoBlock {
     @Override
     public String getCode() {
 
-        if(parameters.get(5).getDatawire().size()>0)  {
+        if(parameters.get(5).getDataWires().size()>0)  {
 
            return parameters.get(5).getVarName() +" = "+ "map("+parameters.get(0).getParameter()+","+parameters.get(1).getParameter()+","+parameters.get(2).getParameter()+","+parameters.get(3).getParameter()+","+parameters.get(4).getParameter()+");";
 

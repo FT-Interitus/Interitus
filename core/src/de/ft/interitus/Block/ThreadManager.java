@@ -86,27 +86,7 @@ public class ThreadManager {
                             }
 
 
-                            for (int i = 0; i < projectVar.wires.size(); i++) {
-                                if (projectVar.wires.get(i).isvisible()) {
-                                    if (!projectVar.visible_wires.contains(projectVar.wires.get(i))) {
-                                        projectVar.visible_wires.add(projectVar.wires.get(i));
-                                    }
-                                } else {
-                                    projectVar.visible_wires.remove(projectVar.wires.get(i));
-                                }
-                            }
-
-                            for (int i = 0; i < projectVar.wireNodes.size(); i++) {
-                                if (projectVar.wireNodes.get(i).isVisible()) {
-                                    if (!projectVar.visibleWireNodes.contains(projectVar.wireNodes.get(i))) {
-                                        projectVar.visibleWireNodes.add(projectVar.wireNodes.get(i));
-                                    }
-                                } else {
-                                    projectVar.visibleWireNodes.remove(projectVar.wireNodes.get(i));
-                                }
-                            }
-
-                            projectVar.wires_allowed = !projectVar.ismoving;
+                           // projectVar.wires_allowed = !projectVar.ismoving;
 
                         } catch (Exception e) {
                             e.printStackTrace(); //for debug to find errors

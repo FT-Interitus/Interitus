@@ -123,13 +123,13 @@ public abstract class PlatformSpecificBlock {
             for (Parameter parameter : this.getBlockParameter()) {
 
 
-                if (parameter.getDatawire() == null) {
+                if (parameter.getDataWires() == null) {
                     continue;
                 }
 
-                while (parameter.getDatawire().size() > 0) {
+                while (parameter.getDataWires().size() > 0) {
 
-                    parameter.getDatawire().get(0).delete();
+                    parameter.getDataWires().get(0).delete();
 
                 }
 

@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.Block.ParameterType;
 import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.projecttypes.BlockTypes.BlockMode;
 import de.ft.interitus.projecttypes.BlockTypes.BlockSettings;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.InitArduino;
@@ -59,7 +58,7 @@ public class LogicOperationIntagerOperation extends  ArduinoBlock {
 
     @Override
     public String getCode() {
-        if(parameter.get(3).getDatawire().size()>0)  {
+        if(parameter.get(3).getDataWires().size()>0)  {
 
             return parameter.get(3).getParameter() + " = " + "("+parameter.get(0).getParameter()+parameter.get(1).getParameter()+parameter.get(2).getParameter()+");";
 

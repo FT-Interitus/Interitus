@@ -23,20 +23,18 @@ public class ProjectType {
     ArrayList<PlatformSpecificBlock> projectblocks;
     BlockUpdateGenerator blockUpdateGenerator = null;
     BlockGenerator blockGenerator = null;
-    private WireGenerator wireGenerator;
-    private WireNodeGenerator wireNodeGenerator;
+
     private BlocktoSaveGenerator blocktoSaveGenerator;
     private boolean codeshowable = true;
 
 
-    public ProjectType(Plugin pluginRegister, String name, ArrayList<PlatformSpecificBlock> blocks, BlockGenerator blockgenerator, BlockUpdateGenerator updategenerator, WireGenerator wireGenerator, WireNodeGenerator wireNodeGenerator, BlocktoSaveGenerator blocktoSaveGenerator, BlockVarGenerator blockVarGenerator, ProjectFunktions projectFunktions, Compiler compiler) {
+    public ProjectType(Plugin pluginRegister, String name, ArrayList<PlatformSpecificBlock> blocks, BlockGenerator blockgenerator, BlockUpdateGenerator updategenerator,  BlocktoSaveGenerator blocktoSaveGenerator, BlockVarGenerator blockVarGenerator, ProjectFunktions projectFunktions, Compiler compiler) {
         this.projectblocks = blocks;
 
         this.name = name;
         this.blockGenerator = blockgenerator;
         this.blockUpdateGenerator = updategenerator;
-        this.wireGenerator = wireGenerator;
-        this.wireNodeGenerator = wireNodeGenerator;
+
         this.blocktoSaveGenerator = blocktoSaveGenerator;
         this.pluginRegister = pluginRegister;
         this.blockVarGenerator = blockVarGenerator;
@@ -77,21 +75,7 @@ public class ProjectType {
         this.blockUpdateGenerator = blockUpdateGenerator;
     }
 
-    public WireGenerator getWireGenerator() {
-        return wireGenerator;
-    }
 
-    public void setWireGenerator(WireGenerator wireGenerator) {
-        this.wireGenerator = wireGenerator;
-    }
-
-    public WireNodeGenerator getWireNodeGenerator() {
-        return wireNodeGenerator;
-    }
-
-    public void setWireNodeGenerator(WireNodeGenerator wireNodeGenerator) {
-        this.wireNodeGenerator = wireNodeGenerator;
-    }
 
     public BlocktoSaveGenerator getBlocktoSaveGenerator() {
         return blocktoSaveGenerator;

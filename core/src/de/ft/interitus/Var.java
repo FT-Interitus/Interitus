@@ -57,11 +57,10 @@ public class Var {
     public static boolean keeplog = false;
 
 
-    public static final Vector2 mousepressedold = new Vector2(1, 1); //Wo war die Maus als das letzte mal eine Taste gedrückt wurde
+    public static final Vector2 mouseDownPos = new Vector2(1, 1); //Wo war die Maus als das letzte mal eine Taste gedrückt wurde
 
     public static final Vector2 mousepressedoldwihoutunproject = new Vector2(1, 1); //Wo war die Maus als das letzte mal eine Taste gedrückt wurde
 
-public static boolean restart_necessary = false;
 
     public static ArrayList<Window> extendsWindows = new ArrayList<>();
     public static Window splashscreen = null;

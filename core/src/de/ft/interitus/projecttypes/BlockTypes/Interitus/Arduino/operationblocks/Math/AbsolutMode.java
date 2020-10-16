@@ -9,7 +9,6 @@ import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.Block.ParameterType;
 import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.projecttypes.BlockTypes.BlockMode;
 import de.ft.interitus.projecttypes.BlockTypes.BlockSettings;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.InitArduino;
@@ -56,7 +55,7 @@ public class AbsolutMode extends ArduinoBlock  {
 
     @Override
     public String getCode() {
-        if( parameters.get(1).getDatawire().size()>0){
+        if( parameters.get(1).getDataWires().size()>0){
             return parameters.get(1).getVarName()+ " = "+"abs("+parameters.get(0).getParameter()+")"+";";
 
         }else {

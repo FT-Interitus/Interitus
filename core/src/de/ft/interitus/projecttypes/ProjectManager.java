@@ -183,7 +183,6 @@ public class ProjectManager {
                 return Var.openprojects.get(Var.openprojectindex);
             }catch (IndexOutOfBoundsException e) {
                 Program.logger.severe("Program-Error: Restart is necessary");
-                Var.restart_necessary = true;
                 return null;
 
             }

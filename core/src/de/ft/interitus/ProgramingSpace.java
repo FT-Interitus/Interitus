@@ -14,6 +14,8 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.BlockDrawer;
+import de.ft.interitus.Block.BlockUpdate.BlockMarkManager;
+import de.ft.interitus.Block.BlockUpdate.BlockUpdateManager;
 import de.ft.interitus.Block.ThreadManager;
 import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.ProgramGrid;
@@ -125,9 +127,12 @@ public class ProgramingSpace extends ScreenAdapter {
 
             ProgramGrid.draw(WindowManager.shapeRenderer, ProgramingSpace.cam);
 
-            for (Block block : ProjectManager.getActProjectVar().blocks) {
-                block.update();
-            }
+
+
+            /***
+             * do not separate this to avoid Marking issues
+             */
+            BlockUpdateManager.updateBlocks();
             BlockDrawer.Draw(delta);
 
 

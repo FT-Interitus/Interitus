@@ -10,7 +10,6 @@ import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.Block.ParameterType;
 import de.ft.interitus.projecttypes.ProgrammArea.ProgrammArea;
 import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.projecttypes.BlockTypes.BlockMode;
 import de.ft.interitus.projecttypes.BlockTypes.BlockSettings;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.InitArduino;
@@ -54,7 +53,7 @@ public class ForDefaultBlockMode extends ArduinoBlock {
     @Override
     public String getCode() {
         String generatedString = RandomStringUtils.randomAlphabetic(4);
-        if( parameters.get(1).getDatawire().size()>0) {
+        if( parameters.get(1).getDataWires().size()>0) {
             return "for(int " + generatedString + "=0;" + generatedString + "<" + parameters.get(0).getParameter() + ";" + generatedString + "++) {\n"+
                     parameters.get(1).getVarName() +" = "+ generatedString+";"
 

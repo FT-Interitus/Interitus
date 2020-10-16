@@ -28,7 +28,6 @@ import de.ft.interitus.UI.Notification.Notification;
 import de.ft.interitus.UI.Notification.NotificationManager;
 import de.ft.interitus.UI.UIElements.UIElementBar;
 import de.ft.interitus.UI.UIElements.UIElements.Button;
-import de.ft.interitus.UI.UIElements.UIElements.TabBar.Tab;
 import de.ft.interitus.UI.UIElements.UIElements.TabBar.TabBar;
 import de.ft.interitus.UI.UIElements.UIElements.quickinfo.QuickInfo;
 import de.ft.interitus.UI.UIElements.dropdownmenue.DropDownMenue;
@@ -249,7 +248,7 @@ public class UI {
                         }
 
 
-                        if (markedblock.getBlocktype().getBlockParameter().get(i).getParameterType().isDropdown() && !(markedblock.getBlocktype().getBlockParameter().get(i).getDatawire().size() > 0)) {
+                        if (markedblock.getBlocktype().getBlockParameter().get(i).getParameterType().isDropdown() && !(markedblock.getBlocktype().getBlockParameter().get(i).getDataWires().size() > 0)) {
                             VisSelectBox<String> selectBox = new VisSelectBox<>();
                             selectBox.setItems(markedblock.getBlocktype().getBlockParameter().get(i).getParameterType().getSelectables());
 
@@ -275,7 +274,7 @@ public class UI {
 
                         } else {
 
-                            if (markedblock.getBlocktype().getBlockParameter().get(i).getDatawire().size() > 0) {
+                            if (markedblock.getBlocktype().getBlockParameter().get(i).getDataWires().size() > 0) {
                                 textFielder.add(new VisTextField("Per Leitung Übertragen")); //TODO design
                                 ((VisTextField) textFielder.getLastObject()).setDisabled(true);
 

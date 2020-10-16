@@ -41,7 +41,7 @@ public class Parameter {
         if(!varname) {
             return Parameter;
         }
-        if(getDatawire().size()>0) {
+        if(getDataWires().size()>0) {
             return Datawire.get(0).getParam_input().getVarName();
         }else {
             return Parameter;
@@ -98,7 +98,7 @@ public class Parameter {
 
 
 
-    public ArrayList<DataWire> getDatawire() {
+    public ArrayList<DataWire> getDataWires() {
         return Datawire;
     }
 
@@ -129,7 +129,7 @@ public class Parameter {
         if(!varname) {
             return Parameter.toString();
         }
-        if(getDatawire().size()>0) {
+        if(getDataWires().size()>0) {
             return Datawire.get(0).getParam_input().getVarName();
         }else {
             return Parameter.toString();

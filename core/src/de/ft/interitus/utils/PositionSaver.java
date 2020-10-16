@@ -18,7 +18,7 @@ public class PositionSaver {
 
     public static void save() {
         if (Gdx.input.isButtonJustPressed(0)) {
-            Var.mousepressedold.set(ProgramingSpace.viewport.unproject(pos.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, ProgramingSpace.viewport.unproject(pos2.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y);
+            Var.mouseDownPos.set(ProgramingSpace.viewport.unproject(pos.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, ProgramingSpace.viewport.unproject(pos2.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y);
             Var.mousepressedoldwihoutunproject.set(Gdx.input.getX(), Gdx.input.getY());
         }
     }

@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.*;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.ProgramingSpace;
 
-public class CheckKollision {
+public class CheckCollision {
 
     private static final int MOUSESIZE = 1;
     private final static Vector3 temp3 = new Vector3();

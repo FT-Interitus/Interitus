@@ -9,7 +9,6 @@ import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.DataWire;
 import de.ft.interitus.Block.Generators.BlocktoSaveGenerator;
 import de.ft.interitus.Block.Saving.SaveBlockV1;
-import de.ft.interitus.Block.Wire;
 import de.ft.interitus.projecttypes.ProjectVar;
 import de.ft.interitus.utils.ArrayList;
 
@@ -26,46 +25,6 @@ public class DefaultSaveBlockGenerator implements BlocktoSaveGenerator {
     public SaveBlockV1 generate(Block block, ProjectVar projectVar) {
         nodes = new ArrayList<>();
 
-        if (block.getWire_right() != null) {
-
-
-            boolean goout = false;
-            int nodecounter = 0;
-            ArrayList<Integer> actnode = new ArrayList<>();
-            Wire gofrom = block.getWire_right();
-            while (!goout) {
-                try {
-                    if (!gofrom.getRight_connectionObject().amiablock()) {
-
-                        actnode.clear();
-                        nodecounter++;
-                        actnode.add(gofrom.getRight_connectionObject().getwirenode().getX());
-                        actnode.add(gofrom.getRight_connectionObject().getwirenode().getY());
-                        actnode.add(gofrom.getRight_connectionObject().getwirenode().getW());
-                        actnode.add(gofrom.getRight_connectionObject().getwirenode().getH());
-                        gofrom = gofrom.getRight_connectionObject().getwirenode().getWire_right();
-
-                        nodes.add((ArrayList<Integer>) actnode.clone());
-
-                    } else {
-                        goout = true;
-
-                    }
-
-                } catch (NullPointerException e) {
-                    goout = true;
-                    break;
-                }
-
-
-            }
-
-            if (nodes.size() == 0) {
-                nodes = null;
-            }
-
-
-        }
 
         datawires.clear();
         datawiresindex.clear();
@@ -102,13 +61,13 @@ public class DefaultSaveBlockGenerator implements BlocktoSaveGenerator {
                         continue;
                     }
 
-                    if (block.getBlocktype().getBlockParameter().get(i).getDatawire().size()==0) {
+                    if (block.getBlocktype().getBlockParameter().get(i).getDataWires().size()==0) {
                         datawires.get(i).add(-1);
                         datawiresindex.get(i).add(-1);
                         continue;
                     }
                     int counter = 0;
-                    for(DataWire dataWire:block.getBlocktype().getBlockParameter().get(i).getDatawire()) {
+                    for(DataWire dataWire:block.getBlocktype().getBlockParameter().get(i).getDataWires()) {
                         if(dataWire== projectVar.moveingdatawire) {
                             //Ignore moving DataWires while saving
                             continue;
@@ -152,7 +111,9 @@ public class DefaultSaveBlockGenerator implements BlocktoSaveGenerator {
 
             if(block.getExtendedBlocks()==null) {
                 if (block.getRight() != null) {
-                    if (block.getWire_right().isSpace_between_blocks()) {
+
+                 //todo   if (block.getWire_right().isSpace_between_blocks()) {
+                    if (false) {
 
 
                         if (block.getLeft() == null && block.getRight() != null) {
@@ -212,7 +173,7 @@ public class DefaultSaveBlockGenerator implements BlocktoSaveGenerator {
 
             }else{
                 if (block.getRight() != null) {
-                    if (block.getWire_right().isSpace_between_blocks()) {
+                    if (false) {
 
 
                         if (block.getLeft() == null && block.getRight() != null) {

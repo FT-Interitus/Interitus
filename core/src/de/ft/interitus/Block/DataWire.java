@@ -13,7 +13,7 @@ import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.WindowManager;
 import de.ft.interitus.Program;
 import de.ft.interitus.ProgramingSpace;
-import de.ft.interitus.UI.UIElements.check.CheckKollision;
+import de.ft.interitus.UI.UIElements.check.CheckCollision;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.projecttypes.ProjectManager;
@@ -65,8 +65,8 @@ public class DataWire {
         this.param_output = param_output;
         this.param_input = param_input;
 
-        param_output.getDatawire().add(this);
-        param_input.getDatawire().add(this);
+        param_output.getDataWires().add(this);
+        param_input.getDataWires().add(this);
     }
 
 
@@ -184,14 +184,14 @@ public class DataWire {
                    continue;
                }
                for(Parameter parameter:block.getBlocktype().getBlockParameter()) {
-                   if(parameter!=this.getParam_input()&&!parameter.getParameterType().isOutput()&&parameter.getDatawire().size()!=1&&parameter.getParameterType().typ.iscompatible(this.getParam_input().getParameterType().typ)&&parameter.getBlock()!=this.getParam_input().getBlock()) {
+                   if(parameter!=this.getParam_input()&&!parameter.getParameterType().isOutput()&&parameter.getDataWires().size()!=1&&parameter.getParameterType().typ.iscompatible(this.getParam_input().getParameterType().typ)&&parameter.getBlock()!=this.getParam_input().getBlock()) {
 
 
-                       if(CheckKollision.checkpointwithobject(parameter.getX(),parameter.getY(), UIVar.parameter_width,UIVar.parameter_height,Unproject.unproject())&&Gdx.input.isButtonPressed(0)) {
+                       if(CheckCollision.checkpointwithobject(parameter.getX(),parameter.getY(), UIVar.parameter_width,UIVar.parameter_height,Unproject.unproject())&&Gdx.input.isButtonPressed(0)) {
                            ProjectManager.getActProjectVar().moveingdatawire=null;
                            param_output=parameter;
-                           parameter.getDatawire().clear();
-                           parameter.getDatawire().add(this);
+                           parameter.getDataWires().clear();
+                           parameter.getDataWires().add(this);
                        }
 
                    }
@@ -277,7 +277,7 @@ public class DataWire {
                 for (int i = 0; i < ProjectManager.getActProjectVar().visible_blocks.size(); i++) {
 
 
-                    if (CheckKollision.object(ProjectManager.getActProjectVar().visible_blocks.get(i).getX(), ProjectManager.getActProjectVar().visible_blocks.get(i).getY(), ProjectManager.getActProjectVar().visible_blocks.get(i).getW(), ProjectManager.getActProjectVar().visible_blocks.get(i).getH(), (int) ProgramingSpace.viewport.unproject(tempvector.set(Gdx.input.getX()*ProgramingSpace.cam.zoom, Gdx.input.getY()*ProgramingSpace.cam.zoom, 0)).x, (int) ProgramingSpace.viewport.unproject(tempvector1.set(Gdx.input.getX()*ProgramingSpace.cam.zoom, Gdx.input.getY()*ProgramingSpace.cam.zoom*ProgramingSpace.cam.zoom, 0)).y, 1, 1)) {
+                    if(CheckCollision.checkmousewithblock(ProjectManager.getActProjectVar().visible_blocks.get(i)))  {
                         counter++;
                     }
 
@@ -314,13 +314,13 @@ public class DataWire {
     public void delete() {
 
         try {
-            param_input.getDatawire().remove(this);
+            param_input.getDataWires().remove(this);
         }catch (NullPointerException e){
 
         }
 
         try {
-            param_output.getDatawire().clear();
+            param_output.getDataWires().clear();
         }catch (NullPointerException e) {
 
         }

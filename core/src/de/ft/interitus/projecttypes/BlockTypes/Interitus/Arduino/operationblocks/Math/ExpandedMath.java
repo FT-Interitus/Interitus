@@ -10,7 +10,6 @@ import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.Block.ParameterType;
 import de.ft.interitus.Program;
 import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.projecttypes.BlockTypes.BlockMode;
 import de.ft.interitus.projecttypes.BlockTypes.BlockSettings;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.InitArduino;
@@ -77,7 +76,7 @@ public class ExpandedMath extends ArduinoBlock {
 
         Program.logger.config(tempstring);
 
-        if (parameters.get(4).getDatawire().size() > 0) {
+        if (parameters.get(4).getDataWires().size() > 0) {
             return parameters.get(4).getVarName() + " = " + "("  +tempstring+ ");";
 
         } else {

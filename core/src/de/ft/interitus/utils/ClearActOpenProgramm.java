@@ -76,26 +76,19 @@ public class ClearActOpenProgramm {
 
         ProjectManager.getProjectVar(index).biggestblock = null;
         ProjectManager.getProjectVar(index).marked_block = null;
-        ProjectManager.getProjectVar(index).ismoving = false;
-        ProjectManager.getProjectVar(index).showduplicat.clear();
 
 
-        ProjectManager.getProjectVar(index).marked_block_overlapping.clear();
-        ProjectManager.getProjectVar(index).jumping_block = null;
+
+
 
         // DataManager.saved();
         ProjectManager.getProjectVar(index).setFilename("New File");
         ProjectManager.getProjectVar(index).path = "";
 
 
-        ProjectManager.getProjectVar(index).wireNodes.clear();
         ProjectManager.getProjectVar(index).showleftdocker = false;
         ProjectManager.getProjectVar(index).connetor_offerd_hoverd_block = null;
-        ProjectManager.getProjectVar(index).wires.clear();
-        ProjectManager.getProjectVar(index).moving_wires = null;
-        ProjectManager.getProjectVar(index).visible_wires.clear();
-        ProjectManager.getProjectVar(index).visibleWireNodes.clear();
-        ProjectManager.getProjectVar(index).wire_beginn = null;
+
 
 
         //clear.start();

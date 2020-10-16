@@ -65,14 +65,7 @@ public class BlockDrawer {
             }
 
 
-            for (int i = 0; i < ProjectManager.getActProjectVar().visible_wires.size(); i++) {
-                if (!Var.isloading) {
-                    ProjectManager.getActProjectVar().visible_wires.get(i).draw();
-                }
-            }
-            for (int i = 0; i < ProjectManager.getActProjectVar().visibleWireNodes.size(); i++) {
-                ProjectManager.getActProjectVar().visibleWireNodes.get(i).draw();
-            }
+
 
             UI.updatedragui(WindowManager.shapeRenderer, false, WindowManager.batch,delta);
             BlockTappedBar.tb.setX(UIVar.BlockBarX + UIVar.BlockBarW / 2);

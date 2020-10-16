@@ -46,7 +46,6 @@ public class TapBarBlockItem implements TapItem {
                 ProjectManager.getActProjectVar().blocks.add(tempblock);
 
 
-                tempblock.setMarked(true);
                 tempblock.setMoving(true);
 
                 ProjectManager.getActProjectVar().diff_save.set(psb.getWidth() / 2, UIVar.BlockHeight / 2);

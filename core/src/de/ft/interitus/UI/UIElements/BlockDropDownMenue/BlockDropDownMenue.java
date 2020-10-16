@@ -11,7 +11,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.WindowManager;
 import de.ft.interitus.UI.UI;
-import de.ft.interitus.UI.UIElements.check.CheckKollision;
+import de.ft.interitus.UI.UIElements.check.CheckCollision;
 import de.ft.interitus.projecttypes.BlockTypes.BlockMode;
 import de.ft.interitus.utils.Unproject;
 
@@ -85,7 +85,7 @@ public class BlockDropDownMenue {
         WindowManager.batch.draw(block.getBlocktype().getBlockModis().get(block.getBlocktype().actBlockModiIndex).getModiImage(),this.x,this.y,this.w,this.h);
         WindowManager.batch.end();
 
-        if(CheckKollision.checkpointwithobject(this.x,this.y,this.w,this.h, Unproject.unproject().x,Unproject.unproject().y)&&Gdx.input.isButtonJustPressed(0)){
+        if(CheckCollision.checkpointwithobject(this.x,this.y,this.w,this.h, Unproject.unproject().x,Unproject.unproject().y)&&Gdx.input.isButtonJustPressed(0)){
             dropped=!dropped;
         }
         if(dropped) {
@@ -97,7 +97,7 @@ public class BlockDropDownMenue {
         for (int i = 0; i < block.getBlocktype().getBlockModis().size(); i++) {
                 aktualy += 21;
 
-            if(CheckKollision.checkpointwithobject(this.x, this.y- aktualy, this.longestText+this.w+5+margin*2,this.h, Unproject.unproject().x,Unproject.unproject().y)){
+            if(CheckCollision.checkpointwithobject(this.x, this.y- aktualy, this.longestText+this.w+5+margin*2,this.h, Unproject.unproject().x,Unproject.unproject().y)){
                 WindowManager.BlockshapeRenderer.setColor(0f/255f, 101f/255f, 168f/255f,1);
 
                 if(Gdx.input.isButtonPressed(0)){
@@ -130,7 +130,7 @@ public class BlockDropDownMenue {
 
 
 
-if(Gdx.input.isButtonPressed(0) && !CheckKollision.checkpointwithobject(this.x,this.y,this.w,this.h, Unproject.unproject().x,Unproject.unproject().y)){
+if(Gdx.input.isButtonPressed(0) && !CheckCollision.checkpointwithobject(this.x,this.y,this.w,this.h, Unproject.unproject().x,Unproject.unproject().y)){
     dropped=false;
 }
 
