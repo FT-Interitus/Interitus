@@ -36,7 +36,7 @@ public class BlockConnectionManager {
      */
     private static void disconnectWireLeft(Block block) {
         if(block.getWire_left()==null) return;
-        if(!block.getWire_left().isVisible()) return;
+        if(block.getWire_left().isVisible()) return;
         block.getWire_left().delete();
 
     }
@@ -47,7 +47,7 @@ public class BlockConnectionManager {
      */
     private static void disconnectWireRight(Block block) {
         if(block.getWire_right()==null) return;
-        if(!block.getWire_right().isVisible()) return;
+        if(block.getWire_right().isVisible()) return;
         block.getWire_right().delete();
 
 
