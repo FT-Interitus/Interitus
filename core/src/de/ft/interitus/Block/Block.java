@@ -63,8 +63,8 @@ public abstract class Block {
     private Wire wire_left;
     private Wire wire_right;
     //Die Y Position des Duplicates  //Die Weite und Höhe ergeben sich aus der Block weite und Höhe
-    private Block left = null; //Der rechte verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
-    private Block right = null; //Der linke verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
+    public Block left = null; //Der rechte verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
+    public Block right = null; //Der linke verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
     private PlatformSpecificBlock blocktype;
     private ArrayList<Block> extendedBlocks = null;
     private boolean hoverd;
@@ -180,8 +180,8 @@ public abstract class Block {
 
         if (left == null) {
             if (this.left != null) {
-                if (this.left.getRight() == null) {
-                    this.left.setRight(null);
+                if (this.left.getRight() != null) {
+                    this.left.right =null;
                 }
             }
         }
@@ -213,8 +213,8 @@ public abstract class Block {
 
         if (right == null) {
             if (this.right != null) {
-                if (this.right.getLeft() == null) {
-                    this.right.setLeft(null);
+                if (this.right.getLeft() != null) {
+                    this.right.left = null;
                 }
             }
         }

@@ -31,11 +31,13 @@ public class BlockMovingManager {
         if (isBlockMoving(block)) {
 
             projectVar.moving_block = block;
+            projectVar.changes = true;
 
             BlockJumpingManager.updateBlockDuplicate(block);
             block.getPos().set(Unproject.unproject().sub(projectVar.diff_save));
 
-            if (ProgramGrid.block_active_snapping)  blockSnapping(block);
+           if (ProgramGrid.block_active_snapping)
+                blockSnapping(block);
 
 
         } else {
@@ -51,7 +53,6 @@ public class BlockMovingManager {
 
 
         }
-
 
 
 

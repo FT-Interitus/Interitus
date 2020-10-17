@@ -7,6 +7,7 @@ package de.ft.interitus.network.bettertogether;
 
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.SaveBlock;
+import de.ft.interitus.Block.Saving.SaveBlockV1;
 import de.ft.interitus.Program;
 import de.ft.interitus.Var;
 import de.ft.interitus.datamanager.BlockCalculator;
@@ -73,10 +74,10 @@ public class Client {
 
                     ObjectInputStream objectInput = new ObjectInputStream(socket.getInputStream());
                     try {
-                        ArrayList<SaveBlock> titleList;
+                        ArrayList<SaveBlockV1> titleList;
                         Object object = objectInput.readObject();
-                        titleList = (ArrayList<SaveBlock>) object;
-                        BlockCalculator.extract(titleList);
+                        titleList = (ArrayList<SaveBlockV1>) object;
+                        BlockCalculator.extractV1(titleList);
                     } catch (ClassNotFoundException e) {
                         Program.logger.config("The title list has not come from the server");
                         e.printStackTrace();

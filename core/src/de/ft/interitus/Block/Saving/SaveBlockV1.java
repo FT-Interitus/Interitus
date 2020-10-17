@@ -22,7 +22,6 @@ public class SaveBlockV1 implements Serializable {
     private static final long serialVersionUID = 2637840000002L;
 
 
-    private final ArrayList<ArrayList<Integer>> nodes;
     private final ArrayList<String> parameters;
     private final int x;
     private final int y;
@@ -48,7 +47,6 @@ public class SaveBlockV1 implements Serializable {
      * @param index_links
      * @param index_rechts
      * @param isspacebetweenrightblock
-     * @param nodes
      * @param platformspecificblockid
      * @param parameters
      * @param datawires
@@ -58,14 +56,13 @@ public class SaveBlockV1 implements Serializable {
      * @param blocksettings
      * @param datawiresmoveing
      */
-    public SaveBlockV1(int x, int y, int index, int index_links, int index_rechts, boolean isspacebetweenrightblock, ArrayList<ArrayList<Integer>> nodes, int platformspecificblockid, ArrayList<String> parameters, ArrayList<ArrayList<Integer>> datawires, ArrayList<ArrayList<Integer>> datawireindex, int BlockModus, String addon, String blocksettings, ArrayList<ArrayList<ArrayList<Integer>>> datawiresmoveing) {
+    public SaveBlockV1(int x, int y, int index, int index_links, int index_rechts, boolean isspacebetweenrightblock, int platformspecificblockid, ArrayList<String> parameters, ArrayList<ArrayList<Integer>> datawires, ArrayList<ArrayList<Integer>> datawireindex, int BlockModus, String addon, String blocksettings, ArrayList<ArrayList<ArrayList<Integer>>> datawiresmoveing) {
         this.x = x;
         this.y = y;
         this.index = index;
         this.index_links = index_links;
         this.index_rechts = index_rechts;
         this.isspacebetweenrightblock = isspacebetweenrightblock;
-        this.nodes = nodes;
         this.platformspecificblockid = platformspecificblockid;
         this.parameters = parameters;
         this.datawires = datawires;
@@ -87,7 +84,6 @@ public class SaveBlockV1 implements Serializable {
      * @param index_links
      * @param index_rechts
      * @param isspacebetweenrightblock
-     * @param nodes
      * @param platformspecificblockid
      * @param parameters
      * @param datawires
@@ -98,14 +94,13 @@ public class SaveBlockV1 implements Serializable {
      * @param datawiresmoveing
      * @param includedBlocks
      */
-    public SaveBlockV1(int x, int y, int index, int index_links, int index_rechts, boolean isspacebetweenrightblock, ArrayList<ArrayList<Integer>> nodes, int platformspecificblockid, ArrayList<String> parameters, ArrayList<ArrayList<Integer>> datawires, ArrayList<ArrayList<Integer>> datawireindex, int BlockModus, String addon, String blocksettings, ArrayList<ArrayList<ArrayList<Integer>>> datawiresmoveing, ArrayList<SaveBlockV1> includedBlocks) {
+    public SaveBlockV1(int x, int y, int index, int index_links, int index_rechts, boolean isspacebetweenrightblock, int platformspecificblockid, ArrayList<String> parameters, ArrayList<ArrayList<Integer>> datawires, ArrayList<ArrayList<Integer>> datawireindex, int BlockModus, String addon, String blocksettings, ArrayList<ArrayList<ArrayList<Integer>>> datawiresmoveing, ArrayList<SaveBlockV1> includedBlocks) {
         this.x = x;
         this.y = y;
         this.index = index;
         this.index_links = index_links;
         this.index_rechts = index_rechts;
         this.isspacebetweenrightblock = isspacebetweenrightblock;
-        this.nodes = nodes;
         this.platformspecificblockid = platformspecificblockid;
         this.parameters = parameters;
         this.datawires = datawires;
@@ -143,9 +138,7 @@ public class SaveBlockV1 implements Serializable {
         return isspacebetweenrightblock;
     }
 
-    public ArrayList<ArrayList<Integer>> getNodes() {
-        return nodes;
-    }
+
 
     public int getPlatformspecificblockid() {
         return platformspecificblockid;

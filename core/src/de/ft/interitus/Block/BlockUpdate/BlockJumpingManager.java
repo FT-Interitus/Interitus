@@ -73,15 +73,12 @@ public class BlockJumpingManager {
         float leftIntersection = getBlockDuplicateLeft(movingBlock);
         if (ProjectManager.getActProjectVar().duplicate_block_left != null && ProjectManager.getActProjectVar().duplicate_block_right != null) {
 
-
             if (leftIntersection > rightIntersection) {
                 ProjectManager.getActProjectVar().duplicate_block_right = null;
             } else {
                 ProjectManager.getActProjectVar().duplicate_block_left = null;
-
             }
 
-            Program.logger.config("right: " + rightIntersection + " left: " + leftIntersection);
         }
 
 

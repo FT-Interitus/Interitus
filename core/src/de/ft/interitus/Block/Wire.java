@@ -12,11 +12,31 @@ public class Wire {
 
     public Wire() {
 
+
     }
 
     public Wire(Block leftConnection) {
         this.leftConnection = leftConnection;
         if(leftConnection!=null) leftConnection.setWire_right(this);
+
+    }
+
+    public Wire(Block leftConnection,Block rightConnection) {
+
+        this.leftConnection = leftConnection;
+        this.rightConnection = rightConnection;
+        if(leftConnection!=null) leftConnection.setWire_right(this);
+        if(rightConnection!=null) rightConnection.setWire_left(this);
+
+    }
+
+    public Wire(Block leftConnection,Block rightConnection,boolean visibility) {
+
+        this.leftConnection = leftConnection;
+        this.rightConnection = rightConnection;
+        if(leftConnection!=null) leftConnection.setWire_right(this);
+        if(rightConnection!=null) rightConnection.setWire_left(this);
+        this.visible = visibility;
 
     }
 
