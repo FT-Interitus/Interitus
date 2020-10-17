@@ -6,49 +6,111 @@
 package de.ft.interitus.Block.BlockUpdate;
 
 import de.ft.interitus.Block.Block;
+import de.ft.interitus.Program;
 import de.ft.interitus.UI.UIElements.check.CheckCollision;
 import de.ft.interitus.projecttypes.ProjectManager;
 
-import java.awt.Rectangle;
+import java.awt.*;
 
 public class BlockJumpingManager {
     private static final Rectangle rectangle = new Rectangle();
     private static final Rectangle rectangleDuplicate = new Rectangle();
+    private static float lastIntersection = 0;
 
+    /***
+     *
+     * @param block
+     * @param rl 0 = right 1=left
+     * @return
+     */
+    protected static Block biggestIntersectionBlock(Block block, int rl, boolean useIntersectionBlock, float testedWidth) {
 
-    // FIXME: 16.10.20
-    public static Block biggestIntersectionBlock(Block block) {
-
-        assert ProjectManager.getActProjectVar()!=null;
+        assert ProjectManager.getActProjectVar() != null;
 
         Block maxBlockValue = null;
         float maxValue = 0f;
 
-        for(Block visible_block:ProjectManager.getActProjectVar().visible_blocks) {
+        for (Block visible_block : ProjectManager.getActProjectVar().visible_blocks) {
 
-            if(!CheckCollision.checkblockwithduplicate(block,visible_block,0)) continue;
+            float width;
+            if (visible_block == block) continue;
+            if (!CheckCollision.checkblockwithduplicate(block, visible_block, rl)) continue;
 
-            rectangleDuplicate.width = (int) (visible_block.getW() / 1.5f);
-            rectangleDuplicate.height =visible_block.getH();
-            rectangleDuplicate.x = visible_block.getX();
-            rectangleDuplicate.y = visible_block.getY();
+            if (!useIntersectionBlock)
+                if (testedWidth != 0)
+                    width = (int) (visible_block.getW() / testedWidth);
+                else
+                    width = (int) (visible_block.getW() / 1.5f);
 
-            rectangle.width = block.getW();
-            rectangle.height = block.getH();
-            rectangle.x = block.getX();
-            rectangle.y = block.getY();
+            else if (testedWidth != 0)
+                width = (int) (block.getW() / testedWidth);
+            else
+                width = (int) (block.getW() / 1.5f);
+            float size;
+
+            if (rl == 0)
+                size = CheckCollision.flache(visible_block.getX_dup_rechts(), visible_block.getY(), (int) width, visible_block.getH(), block.getX(), block.getY());
+            else
+                size = CheckCollision.flache(visible_block.getX()-block.getW(), visible_block.getY(), (int) width, visible_block.getH(), block.getX(), block.getY());
 
 
-            float size = (float) (rectangle.intersection(rectangleDuplicate).getHeight()*rectangle.intersection(rectangleDuplicate).getWidth());
-
-            if(size>maxValue) {
+            if (size > maxValue) {
                 maxValue = size;
-                maxBlockValue = block;
+                maxBlockValue = visible_block;
             }
 
         }
 
+        lastIntersection = maxValue;
+
         return maxBlockValue;
+
+    }
+
+    protected static void updateBlockDuplicate(Block movingBlock) {
+
+        float rightIntersection = getBlockDuplicateRight(movingBlock);
+        float leftIntersection = getBlockDuplicateLeft(movingBlock);
+        if (ProjectManager.getActProjectVar().duplicate_block_left != null && ProjectManager.getActProjectVar().duplicate_block_right != null) {
+
+
+            if (leftIntersection > rightIntersection) {
+                ProjectManager.getActProjectVar().duplicate_block_right = null;
+            } else {
+                ProjectManager.getActProjectVar().duplicate_block_left = null;
+
+            }
+
+            Program.logger.config("right: " + rightIntersection + " left: " + leftIntersection);
+        }
+
+
+    }
+
+    private static float getBlockDuplicateRight(Block movingBlock) {
+
+        Block intersectingBlock = biggestIntersectionBlock(movingBlock, 0, true, 1);
+        if (intersectingBlock != ProjectManager.getActProjectVar().duplicate_block_right)
+            ProjectManager.getActProjectVar().duplicate_block_right = intersectingBlock;
+        return lastIntersection;
+
+    }
+
+
+    private static float getBlockDuplicateLeft(Block movingBlock) {
+
+        Block intersectingBlock = biggestIntersectionBlock(movingBlock, 1, true, 1);
+        if (intersectingBlock != ProjectManager.getActProjectVar().duplicate_block_left)
+            ProjectManager.getActProjectVar().duplicate_block_left = intersectingBlock;
+        return lastIntersection;
+
+
+    }
+
+    protected static void unMarkBlock() {
+
+        ProjectManager.getActProjectVar().duplicate_block_left = null;
+        ProjectManager.getActProjectVar().duplicate_block_right = null;
 
     }
 

@@ -31,10 +31,10 @@ import de.ft.interitus.events.rightclick.RightClickPerformActionEvent;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.ProjectManager;
+import de.ft.interitus.utils.ArrayList;
 import de.ft.interitus.utils.ShapeRenderer;
 import de.ft.interitus.utils.Unproject;
 
-import de.ft.interitus.utils.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.Objects;
 
@@ -54,28 +54,23 @@ public abstract class Block {
     private final RightClickEventListener rightClickEventListener;
     private final BlocktoSaveGenerator blocktoSaveGenerator;
     private final GlyphLayout glyphLayout = new GlyphLayout();
+    private final BlockDropDownMenue BlockModiSelection = new BlockDropDownMenue(0, 0, 0, 0, this);
+    private final Block INSTANCE;
     public boolean seted = true; //Ob der Block losgelassen wurde bzw ob der Block eine statische Position hat
     public boolean moved = false; // Ob der Block gerade mit der Maus bewegt wird
-
-    private int h; //Die Höhe des Blocks
+    private final int h; //Die Höhe des Blocks
     private int index; //Der Index des Blocks (Der Gleiche wie im Array BlckVar.blocks)o
-    private boolean showdupulicate_rechts; //Ob das Duplicat rechts angezeigt werden soll d.h. ob der Block der gerade bewegt wird hier hin springen wird
-    private boolean showdupulicate_links; //Ob das Duplicat links ...
     private Wire wire_left;
     private Wire wire_right;
-
     //Die Y Position des Duplicates  //Die Weite und Höhe ergeben sich aus der Block weite und Höhe
     private Block left = null; //Der rechte verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
     private Block right = null; //Der linke verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
-
     private PlatformSpecificBlock blocktype;
-    private final BlockDropDownMenue BlockModiSelection = new BlockDropDownMenue(0, 0, 0, 0, this);
     private ArrayList<Block> extendedBlocks = null;
     private boolean hoverd;
-    private final Block INSTANCE;
 
 
-    public Block(final int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock,  BlocktoSaveGenerator blocktoSaveGenerator, boolean isSubBlock) { //Initzialisieren des Blocks
+    public Block(final int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock, BlocktoSaveGenerator blocktoSaveGenerator, boolean isSubBlock) { //Initzialisieren des Blocks
         this.blocktype = platformSpecificBlock;
         EventVar.blockEventManager.createBlock(new BlockCreateEvent(this, this));
         this.pos.x = x;
@@ -91,10 +86,9 @@ public abstract class Block {
         this.INSTANCE = this;
 
 
-        if(!isSubBlock)
+        if (!isSubBlock)
             if (this.isVisible())  //Wenn der Block sichtbar ist...  //Das passiert deshalb weil nicht für nicht sichbare Blöcke ein Thread laufen muss
                 Objects.requireNonNull(ProjectManager.getActProjectVar()).visible_blocks.add(this); //und wird zum Array der sichtbaren Blöcke hinzugefüt
-
 
 
         rightClickEventListener = new RightClickEventListener() {
@@ -138,8 +132,6 @@ public abstract class Block {
     }
 
 
-
-
     /***
      *
      * @return the duplication is visible if a block offers the neighbours place
@@ -157,47 +149,10 @@ public abstract class Block {
      * @see de.ft.interitus.events.block.BlockEventListener
      */
     public boolean isMoving() {
-        return ProjectManager.getActProjectVar().moving_block==this; //Gibt zurück ob der Block gerade in Bewegung ist
-    }
-
-    /***
-     *
-     * @param moving set if the Block is moved by the user
-     */
-    public void setMoving(boolean moving) {
-        if (moving) {
-            ProjectManager.getActProjectVar().changes = true;
-            ProjectManager.getActProjectVar().moving_block = this;
-        }
-
-
-    }
-
-    /***
-     *
-     * @return is the right duplicate shown
-     */
-    public boolean isShowdupulicate_rechts() {
-        return showdupulicate_rechts; //Wird das rechte duplicat angezeigt?
+        return ProjectManager.getActProjectVar().moving_block == this; //Gibt zurück ob der Block gerade in Bewegung ist
     }
 
 
-    public void setShowdupulicate_rechts(boolean showdupulicate_rechts) {
-        this.showdupulicate_rechts = showdupulicate_rechts; //Das Rechte duplicat wird angzeigt oder nicht
-    }
-
-    /***
-     *
-     * @return is the left duplicate shown
-     */
-
-    public boolean isShowdupulicate_links() {
-        return showdupulicate_links; //Wird das linke duplicat angezeigt?
-    }
-
-    public void setShowdupulicate_links(boolean showdupulicate_links) {
-        this.showdupulicate_links = showdupulicate_links; //Das linke Duplicat Status soll geändert werden
-    }
 
     /***
      *
@@ -207,9 +162,6 @@ public abstract class Block {
     public boolean isMarked() {
         return ProjectManager.getActProjectVar().marked_block == this; //Ist der Block von User makiert worden?
     }
-
-
-
 
 
     public Block getLeft() {
@@ -318,8 +270,6 @@ public abstract class Block {
     }
 
 
-
-
     /**
      * Getter and Setter for the Index of the Block
      * Must be the same as in the ProjectManager.getactProjectVar().blocks array
@@ -356,7 +306,7 @@ public abstract class Block {
             }
         }
 
-        assert ProjectManager.getActProjectVar()==null;
+        assert ProjectManager.getActProjectVar() == null;
         if (ProjectManager.getActProjectVar().Blockswitherrors.contains(this.getIndex())) {
             ProjectManager.getActProjectVar().Blockswitherrors.remove((Object) this.getIndex());
         }
@@ -365,7 +315,6 @@ public abstract class Block {
         EventVar.blockEventManager.deleteBlock(new BlockDeleteEvent(this, this)); //Fire Delete Event
         ProjectManager.getActProjectVar().marked_block = null; //Der Makierte Block wird auf null gesetzt da nur ein makierter block gelöscht werden kann //Anmerkung falls das ganze Programm gelöscht wird spielt das sowieso keine Rolle
         ProjectManager.getActProjectVar().moving_block = null; // Ob ein Block bewegt wird, wird auf false gesetzt da wenn ein Block bewegt und gelöscht wird kann es nur der bewegte Block sein
-
 
 
         this.setIndex(-1); //Der Index wird auf -1 gesetzt dann merkt der BlockUpdater das der laufenden Timer beendet werden soll
@@ -435,11 +384,10 @@ public abstract class Block {
 
 
         hoverd = CheckCollision.checkmousewithblock(this); //Wird der Block von der Mouse gehovert?
-        if(hoverd&& Gdx.input.isButtonJustPressed(0)) this.onClick();
+        if (hoverd && Gdx.input.isButtonJustPressed(0)) this.onClick();
 
 
     }
-
 
 
     /**
@@ -461,33 +409,29 @@ public abstract class Block {
                 for (DataWire dataWire : parameter.getDataWires()) {
 
                     if (dataWire.getParam_input().getBlock() == this) continue;
-                    if (!ProjectManager.getActProjectVar().visible_blocks.contains(dataWire.getParam_input().getBlock())) dataWire.draw();
+                    if (!ProjectManager.getActProjectVar().visible_blocks.contains(dataWire.getParam_input().getBlock()))
+                        dataWire.draw();
                 }
             }
         }
 
-        WindowManager.BlockshapeRenderer.begin(com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType.Filled);
-        WindowManager.BlockshapeRenderer.setColor(1,0,0,1);
-        WindowManager.BlockshapeRenderer.rect(this.getX_dup_rechts(), this.getY(), this.getW() / 1.5f, this.getH());
-        WindowManager.BlockshapeRenderer.end();
 
 
         batch.begin();
 
 
-        if (ProjectManager.getActProjectVar().biggestblock == this) {
-            if (this.isShowdupulicate_rechts() && this.getBlocktype().canhasrightconnector()) {
+            if (ProjectManager.getActProjectVar().duplicate_block_right==this&& this.getBlocktype().canhasrightconnector()) {
                 batch.setColor(1, 1, 1, 0.5f);
                 batch.draw(AssetLoader.block_middle, this.getX_dup_rechts(), this.getY(), ProjectManager.getActProjectVar().marked_block.getW(), this.getH()); //Wenn der Block die größte überlappung hat wird er als show duplicat angezigt
                 batch.setColor(1, 1, 1, 1);
             }
 
-            if (this.isShowdupulicate_links() && this.getBlocktype().canhasleftconnector()&&ProjectManager.getActProjectVar().marked_block !=null) {
+            if (ProjectManager.getActProjectVar().duplicate_block_left==this && this.getBlocktype().canhasleftconnector() && ProjectManager.getActProjectVar().marked_block != null) {
                 batch.setColor(1, 1, 1, 0.5f);
                 batch.draw(AssetLoader.block_middle, this.getX() - ProjectManager.getActProjectVar().marked_block.getW(), this.getY(), ProjectManager.getActProjectVar().marked_block.getW(), this.getH()); //das gleiche für links
                 batch.setColor(1, 1, 1, 1);
             }
-        }
+
 
 
         try {
@@ -496,7 +440,6 @@ public abstract class Block {
             } else {
                 batch.setColor(1, 1, 1, 1);
             }
-
 
 
             if (!Settings.disableblockgrayout) {
@@ -563,10 +506,10 @@ public abstract class Block {
 
                 }
 
-            }else{
-                batch.draw(AssetLoader.orange_bar_middle, this.getX() + 6, this.getY()-1+this.getH()-13, this.getW() - 12, 13); // Block ohne das er makiert ist
-                batch.draw(AssetLoader.orange_bar_left, this.getX()+1, this.getY()-1+this.getH()-13, 6,13);
-                batch.draw(AssetLoader.orange_bar_right, this.getX() + this.getW() - 7, this.getY()-1+this.getH()-13, 6, 13);
+            } else {
+                batch.draw(AssetLoader.orange_bar_middle, this.getX() + 6, this.getY() - 1 + this.getH() - 13, this.getW() - 12, 13); // Block ohne das er makiert ist
+                batch.draw(AssetLoader.orange_bar_left, this.getX() + 1, this.getY() - 1 + this.getH() - 13, 6, 13);
+                batch.draw(AssetLoader.orange_bar_right, this.getX() + this.getW() - 7, this.getY() - 1 + this.getH() - 13, 6, 13);
 
             }
 
@@ -612,10 +555,10 @@ public abstract class Block {
 
 //TODO
             //if (!this.blockupdate.isIsconnectorclicked() && ProjectManager.getActProjectVar().showleftdocker && this.getLeft() == null && this.getBlocktype().canhasleftconnector()) {
-           // batch.draw(AssetLoader.connector_offerd, getWireconnector_left().x, getWireconnector_left().y, 20, 20);
-          // }
+            // batch.draw(AssetLoader.connector_offerd, getWireconnector_left().x, getWireconnector_left().y, 20, 20);
+            // }
 
-           if (this.getRight() == null && this.getBlocktype().canhasrightconnector()) {
+            if (this.getRight() == null && this.getBlocktype().canhasrightconnector()) {
                 batch.draw(AssetLoader.connector, getwireconnector_right().x, getwireconnector_right().y, 20, 20);
             }
             //font.draw(batch, "index:  " + this.getIndex() + " Block: " + this.getBlocktype().getName(), this.getX() + 5, this.getY() + 30); //DEBUG Block Index auf dem Block anzeigen
@@ -650,9 +593,9 @@ public abstract class Block {
                     }
                     aktualX += 30;
                 }
-            }else if(this.getBlocktype().getDescriptionImage()!=null) {
+            } else if (this.getBlocktype().getDescriptionImage() != null) {
 
-                batch.draw(this.getBlocktype().getDescriptionImage(), this.getX()+((this.getW()-50f)/2f), this.getY() + this.getH()  - 17-50, 50, 50);
+                batch.draw(this.getBlocktype().getDescriptionImage(), this.getX() + ((this.getW() - 50f) / 2f), this.getY() + this.getH() - 17 - 50, 50, 50);
 
             }
 
@@ -712,7 +655,6 @@ public abstract class Block {
     }
 
 
-
     /***
      *
      * @return the Block Type from this Block
@@ -731,6 +673,7 @@ public abstract class Block {
 
     /**
      * When the Size of the Block will be changed
+     *
      * @param widthdiff
      */
     //TODO
@@ -741,16 +684,16 @@ public abstract class Block {
         Block nextblock = this.getRight();
 
 
-        while(nextblock!=null) {
+        while (nextblock != null) {
 
-            if(blocks.contains(blocks)) {
+            if (blocks.contains(blocks)) {
                 blocks.clear();
                 break;
             }
             blocks.add(nextblock);
 
 
-            nextblock.setX(nextblock.getX()+widthdiff);
+            nextblock.setX(nextblock.getX() + widthdiff);
             nextblock = nextblock.getRight();
 
         }
@@ -770,13 +713,12 @@ public abstract class Block {
         return wire_left;
     }
 
-    public Wire getWire_right() {
-        return wire_right;
-    }
-
-
     public void setWire_left(Wire wire_left) {
         this.wire_left = wire_left;
+    }
+
+    public Wire getWire_right() {
+        return wire_right;
     }
 
     public void setWire_right(Wire wire_right) {
@@ -792,10 +734,7 @@ public abstract class Block {
     public void onClick() {
 
 
-
-
-        Program.logger.config("Clicked: "+ blocktype.getName());
-
+        Program.logger.config("Clicked: " + blocktype.getName());
 
 
     }

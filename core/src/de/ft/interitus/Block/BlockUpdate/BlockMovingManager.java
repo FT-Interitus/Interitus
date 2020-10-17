@@ -32,6 +32,12 @@ public class BlockMovingManager {
 
             projectVar.moving_block = block;
 
+            BlockJumpingManager.updateBlockDuplicate(block);
+            block.getPos().set(Unproject.unproject().sub(projectVar.diff_save));
+
+            if (ProgramGrid.block_active_snapping)  blockSnapping(block);
+
+
         } else {
 
             if (projectVar.moving_block == block) {
@@ -43,13 +49,10 @@ public class BlockMovingManager {
                 BlockConnectionManager.placeBlock(block);
             }
 
-            return;
 
         }
 
-        block.getPos().set(Unproject.unproject().sub(projectVar.diff_save));
 
-        if (ProgramGrid.block_active_snapping)  blockSnapping(block);
 
 
     }
@@ -59,8 +62,8 @@ public class BlockMovingManager {
 
         if (!Gdx.input.isButtonPressed(0)) return false;
         if (!block.isMarked()) return false;
-        if (Var.mouseDownPos.dst(Unproject.unproject()) <= tolerance) return false;
         if (projectVar.moving_block == block) return true;
+        if (Var.mouseDownPos.dst(Unproject.unproject()) <= tolerance) return false;
         if (!CheckCollision.checkmousewithblock(block)) return false;
         if (projectVar.moveingdatawire!=null) return false;
 

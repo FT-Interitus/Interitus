@@ -26,9 +26,10 @@ public abstract class ProjectVar {
     public Vector2 cam_pos = new Vector2();
     public float zoom = 1;
     public Block marked_block = null; // Welcher Block ist makiert ?
+    public Block duplicate_block_right = null; // Which Block shows the duplicate
+    public Block duplicate_block_left = null; // Which Block shows the duplicate
     public Vector2 diff_save = new Vector2(); //Unterschied zwischen Blöckem die scih überllappen
     public Block moving_block = null; //Wird ein Block bewegt
-    public Block biggestblock = null; // Welcher ist der Block der die größten überlappungen mit dem bewegten Block hat
     public boolean showleftdocker = false; //Wenn ein connector ausgewählt wird bieten sich die anderen Blöcke zum verbinden an
     public Block connetor_offerd_hoverd_block = null; //Der Block über den man fährt welcher gehovert wird
     public int vcs = VCS.NONE;

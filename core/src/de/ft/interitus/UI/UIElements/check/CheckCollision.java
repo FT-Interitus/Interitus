@@ -23,7 +23,7 @@ public class CheckCollision {
 
 
         rec1.set(obj1_x, obj1_y, obj1_w, obj1_h);
-        rec2.set(obj2_x, obj2_y, obj2_h, obj2_w);
+        rec2.set(obj2_x, obj2_y, obj2_w,obj2_h);
 
         return rec1.overlaps(rec2);
 
@@ -77,7 +77,7 @@ public class CheckCollision {
 
     public static boolean checkblockwithduplicate(Block normal, Block duplicate, int rl) {
         if (rl == 0) { //0=Right
-            return object(normal.getX(), normal.getY(), normal.getW(), normal.getH(), duplicate.getX_dup_rechts(), duplicate.getY(), duplicate.getW() / 1.5f, duplicate.getH());
+            return object(normal.getX(), normal.getY(), normal.getW(), normal.getH(), duplicate.getX_dup_rechts(), duplicate.getY(), normal.getW() / 1.5f, duplicate.getH());
         } else {
             return object(normal.getX(), normal.getY(), normal.getW(), normal.getH(), duplicate.getX() - normal.getW() / 1.5f, duplicate.getY(), normal.getW() / 1.5f, duplicate.getH());
         }
