@@ -6,14 +6,30 @@
 package de.ft.interitus.events;
 
 
+import de.ft.interitus.Block.Block;
+import de.ft.interitus.Program;
 import de.ft.interitus.events.UI.UIEventManager;
+import de.ft.interitus.events.block.BlockCreateEvent;
+import de.ft.interitus.events.block.BlockEventListener;
 import de.ft.interitus.events.block.BlockEventManager;
 import de.ft.interitus.events.global.GlobalEventManager;
 import de.ft.interitus.events.plugin.PluginEventManager;
 import de.ft.interitus.events.plugin.store.PluginStoreEventManager;
 import de.ft.interitus.events.rightclick.RightClickEventManager;
 
+
 public class EventVar {
+
+
+    //@EventHandler(ListeningEvent=BlockCreateEvent.class)
+    @EventHandler(ListeningEvent={BlockCreateEvent.class,BlockCreateEvent.class})
+   public static void test(BlockCreateEvent block) {
+        Program.logger.config("Listing to: "+block.block);
+
+
+   }
+
+
     public static BlockEventManager blockEventManager = new BlockEventManager();
     public static RightClickEventManager rightClickEventManager = new RightClickEventManager();
     public static GlobalEventManager globalEventManager = new GlobalEventManager();

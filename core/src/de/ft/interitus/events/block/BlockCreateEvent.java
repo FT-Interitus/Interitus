@@ -6,28 +6,26 @@
 package de.ft.interitus.events.block;
 
 import de.ft.interitus.Block.Block;
+import de.ft.interitus.events.Event;
+import de.ft.interitus.events.EventManager;
 
-import java.util.EventObject;
+public class BlockCreateEvent implements Event {
+      public   Block block;
 
-public class BlockCreateEvent extends EventObject {
+
+    public BlockCreateEvent() {
+        super();
+    }
 
 
-    Block block;
 
-    /**
-     * Constructs a prototypical Event.
-     *
-     * @param source the object on which the Event initially occurred
-     * @throws IllegalArgumentException if source is null
-     */
-    public BlockCreateEvent(Object source, Block block) {
-
-        super(source);
+    public BlockCreateEvent(Block block) {
         this.block = block;
     }
 
 
-    public Block getBlock() {
-        return block;
-    }
+
+
+
+
 }

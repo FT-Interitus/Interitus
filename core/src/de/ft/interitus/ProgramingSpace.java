@@ -25,6 +25,8 @@ import de.ft.interitus.UI.UIElements.PressedKeys;
 import de.ft.interitus.UI.codehovering.CodeHovering;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.datamanager.programmdata.Updater;
+import de.ft.interitus.events.EventManager;
+import de.ft.interitus.events.EventVar;
 import de.ft.interitus.plugin.Native;
 import de.ft.interitus.plugin.Plugin;
 import de.ft.interitus.plugin.PluginDrawer;
@@ -87,6 +89,8 @@ public class ProgramingSpace extends ScreenAdapter {
         System.gc(); //Clean RAM after Loading
 
         Updater.initprogress();
+        EventManager.addListenerClass(EventVar.class);
+
 
     }
 

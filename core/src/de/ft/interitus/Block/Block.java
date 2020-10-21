@@ -21,6 +21,7 @@ import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.Viewport;
 import de.ft.interitus.UI.popup.PopupMenue;
 import de.ft.interitus.WindowManager;
+import de.ft.interitus.events.EventManager;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.block.BlockCreateEvent;
 import de.ft.interitus.events.block.BlockDeleteEvent;
@@ -72,7 +73,8 @@ public abstract class Block {
 
     public Block(final int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock, BlocktoSaveGenerator blocktoSaveGenerator, boolean isSubBlock) { //Initzialisieren des Blocks
         this.blocktype = platformSpecificBlock;
-        EventVar.blockEventManager.createBlock(new BlockCreateEvent(this, this));
+      //  EventVar.blockEventManager.createBlock(new BlockCreateEvent(this, this));
+        EventManager.fireEvent(this,new BlockCreateEvent(this));
         this.pos.x = x;
         this.pos.y = y;
 
