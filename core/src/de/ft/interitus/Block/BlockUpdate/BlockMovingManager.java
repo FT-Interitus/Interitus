@@ -43,12 +43,12 @@ public class BlockMovingManager {
         } else {
 
             if (projectVar.moving_block == block) {
-                projectVar.moving_block = null;
-
                 if (ProgramGrid.block_snapping && !ProgramGrid.block_active_snapping)
                     blockSnapping(block);
 
                 BlockConnectionManager.placeBlock(block);
+
+                stopMovingBlock();
             }
 
 
@@ -95,6 +95,12 @@ public class BlockMovingManager {
         int newY = (int) ((block.getY()) / ProgramGrid.margin);
         block.setX((int) (newX * ProgramGrid.margin));
         block.setY((int) (newY * ProgramGrid.margin));
+    }
+
+    private static void stopMovingBlock() {
+        projectVar.moving_block = null;
+        ProjectManager.getActProjectVar().duplicate_block_left = null;
+        ProjectManager.getActProjectVar().duplicate_block_right = null;
     }
 
 }

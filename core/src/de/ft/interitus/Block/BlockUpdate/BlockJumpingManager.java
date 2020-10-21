@@ -104,11 +104,4 @@ public class BlockJumpingManager {
 
     }
 
-    protected static void unMarkBlock() {
-
-        ProjectManager.getActProjectVar().duplicate_block_left = null;
-        ProjectManager.getActProjectVar().duplicate_block_right = null;
-
-    }
-
 }

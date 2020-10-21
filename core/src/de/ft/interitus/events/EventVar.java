@@ -21,10 +21,9 @@ import de.ft.interitus.events.rightclick.RightClickEventManager;
 public class EventVar {
 
 
-    //@EventHandler(ListeningEvent=BlockCreateEvent.class)
-    @EventHandler(ListeningEvent={BlockCreateEvent.class,BlockCreateEvent.class})
+    @EventHandler(ListeningEvent={BlockCreateEvent.class})
    public static void test(BlockCreateEvent block) {
-        Program.logger.config("Listing to: "+block.block);
+        Program.logger.config("Listing to: "+block.block.getBlocktype().getName());
 
 
    }

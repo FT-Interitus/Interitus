@@ -37,7 +37,7 @@ public class ForDefaultBlockMode extends ArduinoBlock {
 
     @Override
     public int getWidth() {
-        return 100;
+        return 120;
     }
 
     @Override

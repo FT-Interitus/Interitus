@@ -35,9 +35,6 @@ public class BlockMarkManager {
                 ProjectManager.getActProjectVar().marked_block =block;
         }
 
-        if(ProjectManager.getActProjectVar().marked_block==null) {
-            BlockJumpingManager.unMarkBlock();
-        }
 
     }
 
