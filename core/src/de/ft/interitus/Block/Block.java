@@ -678,7 +678,6 @@ public abstract class Block {
      *
      * @param widthdiff
      */
-    //TODO
     public void changesize(int widthdiff) {
 
         ArrayList<Block> blocks = new ArrayList<>();

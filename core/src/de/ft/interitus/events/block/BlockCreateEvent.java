@@ -10,22 +10,14 @@ import de.ft.interitus.events.Event;
 import de.ft.interitus.events.EventManager;
 
 public class BlockCreateEvent implements Event {
-      public   Block block;
-
-
-    public BlockCreateEvent() {
-        super();
-    }
-
-
+      private final Block block;
 
     public BlockCreateEvent(Block block) {
         this.block = block;
     }
 
 
-
-
-
-
+    public Block getBlock() {
+        return block;
+    }
 }

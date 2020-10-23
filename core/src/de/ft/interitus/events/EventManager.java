@@ -6,6 +6,7 @@
 package de.ft.interitus.events;
 
 import de.ft.interitus.Block.Block;
+import de.ft.interitus.events.block.BlockCreateEvent;
 import de.ft.interitus.utils.ArrayList;
 
 import java.lang.reflect.Field;
@@ -35,7 +36,6 @@ public class EventManager {
         }
 
     }
-
     public static void addListenerClass(Class clazz) {
         for (Method method : clazz.getMethods()) {
             if (!method.isAnnotationPresent(EventHandler.class)) continue;
