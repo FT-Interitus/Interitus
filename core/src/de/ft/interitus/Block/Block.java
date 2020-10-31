@@ -147,7 +147,6 @@ public abstract class Block {
     /***
      *
      * @return is the Block moved by the user
-     * You can also check this state with a Listener //TODO Create Moving Listener (with start and Stop position)
      * @see de.ft.interitus.events.block.BlockEventListener
      */
     public boolean isMoving() {

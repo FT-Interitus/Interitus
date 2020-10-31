@@ -31,6 +31,8 @@ import de.ft.interitus.projecttypes.Importer.Importer;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.FolderUtils;
 import de.ft.interitus.utils.UserNameGetter;
+import org.lwjgl.openal.AL;
+import org.lwjgl.openal.ALC;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -180,7 +182,7 @@ public class Program extends Game {
         Thread pluginloadingthread = new Thread() {
             @Override
             public void run() {
-                while(loadplugins.isAlive());
+                while(loadplugins.isInterrupted());
 
                 ProgramRegistry.addProjectTypes();
                 ProgramRegistry.addMenuBarItems();
@@ -211,8 +213,8 @@ public class Program extends Game {
             }
         }
 
-
         //ALC.destroy();//Destroy Sound System todo lwjgl3 if we want to use sound
+
 
 
         System.exit(0);

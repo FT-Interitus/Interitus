@@ -124,6 +124,7 @@ public class VersionControll {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
+                ProjectManager.getActProjectVar().changes = true;
                 if (none.isChecked()) {
                     if (ProjectManager.getActProjectVar().vcs == VCS.ITEV) {
                         String[] möglichkeiten = {"OK", "Abbrechen"};

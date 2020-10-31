@@ -122,13 +122,7 @@ public class PluginManagerHandler {
 
 
             try {
-
-
-                int finalI = i;
-                Thread thread = new Thread(() -> loadedplugins.get(finalI).register(registry));
-                thread.start();
-
-
+                 loadedplugins.get(i).register(registry);
             } catch (Throwable e) {
                 e.printStackTrace();
                 loadedplugins.remove(loadedplugins.get(i));

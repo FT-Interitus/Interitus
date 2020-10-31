@@ -62,11 +62,9 @@ public class ProgramRegistry {
 
     @SuppressWarnings("unused")
     public  boolean addMenuEntry(Menu menuentry, Plugin requestedplugin) {
-        Program.logger.config("successful request: "+PluginManagerHandler.getPluginArgs(requestedplugin,"name"));
         if (PluginManagerHandler.loadedplugins.contains(requestedplugin)) {
             pluginMenubar.add(menuentry);
             pluginMenubarplugins.add(requestedplugin);
-            Program.logger.config("successful added: "+PluginManagerHandler.getPluginArgs(requestedplugin,"name"));
 
             return true;
         } else {

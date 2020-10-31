@@ -48,10 +48,8 @@ public class DataWire {
      * @param param_input
      */
     public DataWire(Parameter param_input) {
+        ProjectManager.getActProjectVar().changes = true;
         this.param_input = param_input;
-
-
-
 
         ProjectManager.getActProjectVar().moveingdatawire = this;
         Program.logger.config("New Output");
@@ -77,6 +75,7 @@ public class DataWire {
             setCorsoronlyonce=true;
             if(Gdx.input.isButtonJustPressed(0)) {
                 moving[0] = true;
+                ProjectManager.getActProjectVar().changes = true;
             }
             if(Gdx.input.isButtonPressed(0) && moving[0]){
                 if(UIVar.doonce) {
@@ -93,6 +92,8 @@ public class DataWire {
             setCorsoronlyonce=true;
             if(Gdx.input.isButtonJustPressed(0)) {
                 moving[1] = true;
+                ProjectManager.getActProjectVar().changes = true;
+
             }
             if(Gdx.input.isButtonPressed(0)  && moving[1]){
                 if(UIVar.doonce) {
@@ -110,6 +111,7 @@ public class DataWire {
 
             if(Gdx.input.isButtonJustPressed(0)) {
                 moving[2] = true;
+                ProjectManager.getActProjectVar().changes = true;
             }
             if(Gdx.input.isButtonPressed(0)  && moving[2]){
                 if(UIVar.doonce) {
@@ -127,6 +129,8 @@ public class DataWire {
 
             if(Gdx.input.isButtonJustPressed(0)) {
                 moving[3] = true;
+                ProjectManager.getActProjectVar().changes = true;
+
             }
             if(Gdx.input.isButtonPressed(0)  && moving[3]){
                 if(UIVar.doonce) {
@@ -144,6 +148,8 @@ public class DataWire {
 
             if(Gdx.input.isButtonJustPressed(0)) {
                 moving[4] = true;
+                ProjectManager.getActProjectVar().changes = true;
+
             }
             if(Gdx.input.isButtonPressed(0)  && moving[4]){
                 if(UIVar.doonce) {

@@ -57,6 +57,7 @@ public class AddonSettings {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 try {
+                    ProjectManager.getActProjectVar().changes = true;
 
                     ProjectManager.getActProjectVar().enabledAddons.clear();
                     for (VisCheckBox checkBox : checkBoxArrayList) {
