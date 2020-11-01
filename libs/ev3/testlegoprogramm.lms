@@ -1,0 +1,13 @@
+
+vmthread Main
+{
+  OBJECT_START(BackgroundTask)
+  Loop:
+  JR(Loop)
+}
+
+vmthread BackgroundTask
+{
+  SOUND(TONE,100,500,3000)
+}
+

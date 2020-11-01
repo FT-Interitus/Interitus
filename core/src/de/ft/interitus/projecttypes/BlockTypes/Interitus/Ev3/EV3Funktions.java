@@ -122,7 +122,7 @@ public class EV3Funktions implements ProjectFunktions {
 
     @Override
     public boolean isblockconnected(Block block) {
-        return false;
+        return true;
     }
 
     @Override
