@@ -8,14 +8,11 @@ package de.ft.interitus.compiler.Interitus.EV3;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Program;
 import de.ft.interitus.compiler.Compiler;
-import de.ft.interitus.compiler.Interitus.Arduino.EV3Thread;
-import de.ft.interitus.projecttypes.BlockTypes.BlockMode;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Ev3.Ev3Block;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Ev3.programmsequence.Thread.ThreadBlock;
 import de.ft.interitus.projecttypes.ProjectManager;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 public class EV3compiler implements Compiler {
     private int userthreadcounter=0;

@@ -3,7 +3,7 @@
  * Copyright by Tim and Felix
  */
 
-package de.ft.interitus.compiler.Interitus.Arduino;
+package de.ft.interitus.compiler.Interitus.EV3;
 
 import java.util.ArrayList;
 import java.util.Arrays;
