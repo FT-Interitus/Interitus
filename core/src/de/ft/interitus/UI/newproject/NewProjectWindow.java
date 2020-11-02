@@ -80,7 +80,7 @@ public class NewProjectWindow {
         }
 
         nameinput.setText("");
-
+        Button_next.setDisabled(true);
         UIVar.isdialogeopend = true;
 
         UI.stage.addActor(setupBuilder);
