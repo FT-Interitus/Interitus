@@ -8,6 +8,7 @@ package de.ft.interitus.compiler.Interitus.EV3;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.scenes.scene2d.ui.Tree;
+import com.badlogic.gdx.utils.Array;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Program;
 import de.ft.interitus.UI.Notification.Notification;
@@ -174,10 +175,13 @@ public class EV3compiler implements Compiler {
             e.printStackTrace();
         }
 
+    ArrayList<Byte> playsound = new ArrayList<>();
+        playsound.addAll(Operations.playSound("./ui/DownloadSucces",100,false));
+        ((Device) UI.runselection.getSelectedElement().getIdentifier()).getConnectionHandle().sendData(ev3.makeDirectCmd(playsound,0,0), ((Device) UI.runselection.getSelectedElement().getIdentifier()));
 
         ArrayList<Byte> command = new ArrayList<>();
-        command.addAll(Operations.loadProgrammFiles(1,"/home/root/lms2012/prjs/"+ProjectManager.getActProjectVar().getFilename()+"/"+ProjectManager.getActProjectVar().getFilename()+".rbf",0,1));
-         command.addAll(Operations.startProgramm(1,0,1,false));
+        command.addAll(Operations.loadProgrammFiles(1,"../prjs/"+ProjectManager.getActProjectVar().getFilename()+"/"+ProjectManager.getActProjectVar().getFilename()+".rbf",0,4));
+         command.addAll(Operations.startProgramm(1,0,4,false));
         ((Device) UI.runselection.getSelectedElement().getIdentifier()).getConnectionHandle().sendData(ev3.makeDirectCmd(command,8,0), (Device) UI.runselection.getSelectedElement().getIdentifier());
 
 
