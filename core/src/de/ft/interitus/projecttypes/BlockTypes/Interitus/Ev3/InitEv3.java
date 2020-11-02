@@ -11,6 +11,7 @@ import de.ft.interitus.Block.Interitus.save.DefaultSaveBlockGenerator;
 import de.ft.interitus.ProgramingSpace;
 import de.ft.interitus.compiler.Interitus.EV3.EV3compiler;
 import de.ft.interitus.loading.AssetLoader;
+import de.ft.interitus.projecttypes.BlockTypes.Interitus.Ev3.actionBlocks.light.StatusLightBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Ev3.programmsequence.Thread.ThreadBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Ev3.programmsequence.Wait.Wait;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
@@ -31,6 +32,7 @@ public class InitEv3 {
         stringvar = new ParameterVariableType("String", AssetLoader.Plug_StringParameter,new Color(156f/255f,19f/255f,19f/255f,1f),"char[]");
         booleanvar = new ParameterVariableType("boolean", AssetLoader.Plug_BooleanParameter,new Color(245f/255f,169f/255f,56f/255f,1f));
 
+        platformSpecificBlocks.add(new StatusLightBlock(projectType, null));
         platformSpecificBlocks.add(new ThreadBlock(projectType, null));
         platformSpecificBlocks.add(new Wait(projectType, null));
         return projectType;

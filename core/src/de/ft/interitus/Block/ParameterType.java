@@ -48,7 +48,7 @@ public class ParameterType {
         return selectables;
     }
 
-    public ParameterType setSelectables(String[] selectables) {
+    public ParameterType setSelectables(String... selectables) {
         this.selectables = selectables;
         return this;
     }
