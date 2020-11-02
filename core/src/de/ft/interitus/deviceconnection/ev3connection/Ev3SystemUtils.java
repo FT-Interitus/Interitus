@@ -150,7 +150,13 @@ public class Ev3SystemUtils {
             Ev3ErrorAnalyser.analyze(payload[6]);
         }
     }
+    /**
+     * Create a Dir relative to lms2012
+     * @param path path to the new dir
+     * @param device device to be send to
+     */
     public static void Delete_File(String path, Device device) throws Exception {
+
         Byte[] payload =  device.getConnectionHandle().sendData(ev3.makeSystemCommand(SystemOperations.Delete_File(path.getBytes())),device);
         ev3.printHex("recv",payload);
         Ev3ErrorAnalyser.analyze(payload[6]);
