@@ -107,6 +107,13 @@ public class EV3Funktions implements ProjectFunktions {
 
     @Override
     public void switchedto() {
+        for(Device device:ev3devices) {
+
+            if(device instanceof USBDevice) {
+                ((USBDevice) device).getDevice().close();
+            }
+
+        }
         ev3devices.clear();
     }
 

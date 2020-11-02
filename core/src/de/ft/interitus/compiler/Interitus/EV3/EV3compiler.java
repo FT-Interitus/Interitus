@@ -155,6 +155,7 @@ public class EV3compiler implements Compiler {
         try {
             Ev3SystemUtils.Delete_File("/home/root/lms2012/prjs/"+ProjectManager.getActProjectVar().getFilename(), ((Device) UI.runselection.getSelectedElement().getIdentifier()));
         } catch (Exception e) {
+            e.printStackTrace();
             Program.logger.config("First Time Deploy");
         }
         notification.setProgressbarvalue(80);
