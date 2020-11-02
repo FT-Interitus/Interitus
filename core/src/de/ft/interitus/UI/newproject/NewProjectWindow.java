@@ -41,7 +41,6 @@ public class NewProjectWindow {
     public final static CharSequence text = "Name: ";
     public final static VisLabel namelable = new VisLabel(text);
     public final static CharSequence pfadtext = "Pfad: ";
-    public final static VisLabel pfadlable = new VisLabel(pfadtext);
     public final static CharSequence auftragtext = "Bitte gebe hier einen Name für das neue Projekt ein.";
     public final static VisLabel auftrag = new VisLabel(auftragtext);
     public static VisSelectBox<String> selectProjectType;
@@ -79,6 +78,8 @@ public class NewProjectWindow {
         } else {
             setupBuilder.pack();
         }
+
+        nameinput.setText("");
 
         UIVar.isdialogeopend = true;
 
