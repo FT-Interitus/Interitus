@@ -24,7 +24,7 @@ public class WaitSeconds extends Ev3Block {
 
     @Override
     public String getCode() {
-        return "WaitSeconds";
+        return "\nLoop:\n  JR(Loop)";
     }
 
     @Override

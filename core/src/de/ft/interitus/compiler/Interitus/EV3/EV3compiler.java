@@ -7,6 +7,7 @@ package de.ft.interitus.compiler.Interitus.EV3;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.scenes.scene2d.ui.Tree;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Program;
 import de.ft.interitus.UI.Notification.Notification;
@@ -14,17 +15,15 @@ import de.ft.interitus.UI.Notification.NotificationManager;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.compiler.Compiler;
 import de.ft.interitus.datamanager.programmdata.Data;
-import de.ft.interitus.deviceconnection.ev3connection.Device;
-import de.ft.interitus.deviceconnection.ev3connection.Ev3SystemUtils;
-import de.ft.interitus.deviceconnection.ev3connection.SystemOperations;
+import de.ft.interitus.deviceconnection.ev3connection.*;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Ev3.Ev3Block;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Ev3.programmsequence.Thread.ThreadBlock;
 import de.ft.interitus.projecttypes.ProjectManager;
+import de.ft.interitus.utils.ArrayList;
 import de.ft.interitus.utils.OSChecker;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.UUID;
 
 public class EV3compiler implements Compiler {
@@ -58,12 +57,12 @@ public class EV3compiler implements Compiler {
                 EV3Thread tempThread = null;
                 if (neighbour != null) {
                     tempThread = new EV3Thread("UserThreadNr" + (userthreads.size() + 1));
-                    MainThread.addLine("OBJECT_START(UserThreadNr" + (userthreads.size() + 1) + ")");
+                    MainThread.addLine("\nOBJECT_START(UserThreadNr" + (userthreads.size() + 1) + ")");
 
 
                     while (neighbour != null) {
                         //Program.logger.config(((Ev3Block) neighbour.getBlocktype().getBlockModis().get(neighbour.getBlocktype().getActBlockModiIndex())).getCode());
-                        tempThread.addLine(((Ev3Block) neighbour.getBlocktype().getBlockModis().get(neighbour.getBlocktype().getActBlockModiIndex())).getCode());
+                        tempThread.addLine("\n"+((Ev3Block) neighbour.getBlocktype().getBlockModis().get(neighbour.getBlocktype().getActBlockModiIndex())).getCode());
                         neighbour = neighbour.getRight();
                     }
                     userthreads.add(tempThread);
@@ -74,7 +73,7 @@ public class EV3compiler implements Compiler {
 
         Programm.append(MainThread.getThread());
         for (EV3Thread thread : userthreads) {
-            Programm.append(thread.getThread());
+            Programm.append("\n"+thread.getThread());
         }
 
         Program.logger.config("\n" + Programm.toString());
@@ -171,6 +170,11 @@ public class EV3compiler implements Compiler {
             e.printStackTrace();
         }
 
+
+        ArrayList<Byte> command = new ArrayList<>();
+        command.addAll(Operations.loadProgrammFiles(1,"../prjs/"+ProjectManager.getActProjectVar().getFilename()+"/"+ProjectManager.getActProjectVar().getFilename()+".rbf",0,1));
+         command.addAll(Operations.startProgramm(1,0,1,false));
+        ((Device) UI.runselection.getSelectedElement().getIdentifier()).getConnectionHandle().sendData(ev3.makeDirectCmd(command,8,0), (Device) UI.runselection.getSelectedElement().getIdentifier());
 
 
         notification.close();
