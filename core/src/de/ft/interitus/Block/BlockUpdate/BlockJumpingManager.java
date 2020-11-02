@@ -83,9 +83,14 @@ public class BlockJumpingManager {
     }
 
     private static float getBlockDuplicateRight(Block movingBlock) {
+        if(movingBlock.left!=null) return -1;
+
         if(!movingBlock.getBlocktype().canhasleftconnector()) return -1;
         Block intersectingBlock = biggestIntersectionBlock(movingBlock, 0, true, 1);
+
         if(intersectingBlock!=null&&!intersectingBlock.getBlocktype().canhasrightconnector()) return -1;
+        if(intersectingBlock!=null&&intersectingBlock.right!=null) return -1;
+
         if (intersectingBlock != ProjectManager.getActProjectVar().duplicate_block_right)
             ProjectManager.getActProjectVar().duplicate_block_right = intersectingBlock;
         return lastIntersection;
@@ -94,10 +99,14 @@ public class BlockJumpingManager {
 
 
     private static float getBlockDuplicateLeft(Block movingBlock) {
+        if(movingBlock.right!=null) return -1;
 
         if(!movingBlock.getBlocktype().canhasrightconnector()) return -1;
         Block intersectingBlock = biggestIntersectionBlock(movingBlock, 1, true, 1);
+
         if(intersectingBlock!=null&&!intersectingBlock.getBlocktype().canhasleftconnector()) return -1;
+        if(intersectingBlock!=null&&intersectingBlock.left!=null) return -1;
+
         if (intersectingBlock != ProjectManager.getActProjectVar().duplicate_block_left)
             ProjectManager.getActProjectVar().duplicate_block_left = intersectingBlock;
         return lastIntersection;
