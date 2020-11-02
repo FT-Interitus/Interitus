@@ -13,8 +13,6 @@ import de.ft.interitus.projecttypes.ProjectManager;
 import java.awt.*;
 
 public class BlockJumpingManager {
-    private static final Rectangle rectangle = new Rectangle();
-    private static final Rectangle rectangleDuplicate = new Rectangle();
     private static float lastIntersection = 0;
 
     /***
@@ -23,7 +21,7 @@ public class BlockJumpingManager {
      * @param rl 0 = right 1=left
      * @return
      */
-    protected static Block biggestIntersectionBlock(Block block, int rl, boolean useIntersectionBlock, float testedWidth) {
+    private static Block biggestIntersectionBlock(Block block, int rl, boolean useIntersectionBlock, float testedWidth) {
 
         assert ProjectManager.getActProjectVar() != null;
 
@@ -87,6 +85,7 @@ public class BlockJumpingManager {
     private static float getBlockDuplicateRight(Block movingBlock) {
 
         Block intersectingBlock = biggestIntersectionBlock(movingBlock, 0, true, 1);
+        if(intersectingBlock!=null&&!intersectingBlock.getBlocktype().canhasrightconnector()) return -1;
         if (intersectingBlock != ProjectManager.getActProjectVar().duplicate_block_right)
             ProjectManager.getActProjectVar().duplicate_block_right = intersectingBlock;
         return lastIntersection;
@@ -97,6 +96,7 @@ public class BlockJumpingManager {
     private static float getBlockDuplicateLeft(Block movingBlock) {
 
         Block intersectingBlock = biggestIntersectionBlock(movingBlock, 1, true, 1);
+        if(intersectingBlock!=null&&!intersectingBlock.getBlocktype().canhasleftconnector()) return -1;
         if (intersectingBlock != ProjectManager.getActProjectVar().duplicate_block_left)
             ProjectManager.getActProjectVar().duplicate_block_left = intersectingBlock;
         return lastIntersection;
