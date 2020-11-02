@@ -9,7 +9,7 @@
         <option name="distributionType" value="LOCAL" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="gradleHome" value="$PROJECT_DIR$/../../gradle-6.4" />
-        <option name="gradleJvm" value="14" />
+        <option name="gradleJvm" value="15" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />

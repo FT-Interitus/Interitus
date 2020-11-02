@@ -1,13 +1,16 @@
 
 vmthread Main
 {
+
   OBJECT_START(BackgroundTask)
   Loop:
+  UI_WRITE(LED,0x02)
+  UI_WRITE(LED,0x01)
   JR(Loop)
 }
 
 vmthread BackgroundTask
 {
-  SOUND(TONE,100,500,3000)
+  SOUND(TONE,10,500,1000)
 }
 
