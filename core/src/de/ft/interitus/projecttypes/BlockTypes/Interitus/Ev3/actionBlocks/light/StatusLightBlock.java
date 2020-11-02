@@ -38,7 +38,7 @@ public class StatusLightBlock extends PlatformSpecificBlock {
 
     @Override
     public Texture getDescriptionImage() {
-        return AssetLoader.Parameter_randomdice;
+        return AssetLoader.StatusLight_description;
     }
 
     @Override

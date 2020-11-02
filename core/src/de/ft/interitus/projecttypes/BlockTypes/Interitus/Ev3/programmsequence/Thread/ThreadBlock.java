@@ -37,7 +37,7 @@ public class ThreadBlock extends PlatformSpecificBlock {
 
     @Override
     public Texture getDescriptionImage() {
-        return AssetLoader.Parameter_plus;
+        return AssetLoader.Start_description;
     }
 
     @Override

@@ -149,6 +149,9 @@ public class AssetLoader {
     public static Texture zufall_description;
     public static Texture vergleich_description;
     public static Texture bereich_description;
+    public static Texture Start_description;
+    public static Texture StatusLight_description;
+
 
 
 
@@ -390,6 +393,10 @@ public class AssetLoader {
             manager.load(workingdirectory + "Block/description_image/zufall_description.png", Texture.class);
             manager.load(workingdirectory + "Block/description_image/vergleich_description.png", Texture.class);
             manager.load(workingdirectory + "Block/description_image/bereich_description.png", Texture.class);
+            manager.load(workingdirectory + "Block/description_image/Start_description.png", Texture.class);
+            manager.load(workingdirectory + "Block/description_image/StatusLight_description.png", Texture.class);
+
+
 
 
 
@@ -574,6 +581,10 @@ public class AssetLoader {
             zufall_description = manager.get(workingdirectory + "Block/description_image/zufall_description.png", Texture.class);
             vergleich_description = manager.get(workingdirectory + "Block/description_image/vergleich_description.png", Texture.class);
             bereich_description = manager.get(workingdirectory + "Block/description_image/bereich_description.png", Texture.class);
+            Start_description = manager.get(workingdirectory + "Block/description_image/Start_description.png", Texture.class);
+            StatusLight_description = manager.get(workingdirectory + "Block/description_image/StatusLight_description.png", Texture.class);
+
+
 
 
 

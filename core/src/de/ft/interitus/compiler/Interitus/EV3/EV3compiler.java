@@ -15,21 +15,9 @@ import de.ft.interitus.projecttypes.ProjectManager;
 import java.util.ArrayList;
 
 public class EV3compiler implements Compiler {
-    private int userthreadcounter=0;
 
-    public void vmthread(StringBuilder sb, String threadName,String... insert){
-        sb.append("\nvmthread "+threadName+"\n{\n");
-        for(int i=0;i<insert.length;i++){
-            sb.append("  "+insert[i]+"\n");
-        }
-        sb.append("\n}");
-    }
-    public void userthread(StringBuilder sb,String... insert){
-        vmthread(sb, "userthread"+userthreadcounter, insert);
-        userthreadcounter++;
-    }
+
     public StringBuilder compileSketch(){
-        userthreadcounter=0;
         Program.logger.config("Compile ev3");
         StringBuilder Programm = new StringBuilder();
 
@@ -40,18 +28,19 @@ public class EV3compiler implements Compiler {
             if(block.getBlocktype() instanceof ThreadBlock){
                 Block neighbour=block.getRight();
                 EV3Thread tempThread = null;
-                if(neighbour!=null) {
-                    tempThread = new EV3Thread("UserThreadNr" + (userthreads.size() + 1));
-                }
-                while(neighbour!=null){
+                if(neighbour!=null){
+                tempThread = new EV3Thread("UserThreadNr" + (userthreads.size() + 1));
+                while(neighbour!=null) {
                     //Program.logger.config(((Ev3Block) neighbour.getBlocktype().getBlockModis().get(neighbour.getBlocktype().getActBlockModiIndex())).getCode());
-                    MainThread.addLine("OBJECT_START(UserThreadNr"+(userthreads.size() + 1)+")");
                     tempThread.addLine(((Ev3Block) neighbour.getBlocktype().getBlockModis().get(neighbour.getBlocktype().getActBlockModiIndex())).getCode());
-                    userthreads.add(tempThread);
-                    neighbour=neighbour.getRight();
+                    neighbour = neighbour.getRight();
                 }
+                    MainThread.addLine("OBJECT_START(UserThreadNr" + (userthreads.size() + 1) + ")");
+                    userthreads.add(tempThread);
+
+
             }
-        }
+        }}
 
         Programm.append(MainThread.getThread());
         for(EV3Thread thread:userthreads){
