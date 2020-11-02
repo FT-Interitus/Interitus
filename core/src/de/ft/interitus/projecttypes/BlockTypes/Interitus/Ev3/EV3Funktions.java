@@ -12,12 +12,15 @@ import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.dropdownmenue.DropDownElement;
 import de.ft.interitus.deviceconnection.ev3connection.ConnectionHandle;
 import de.ft.interitus.deviceconnection.ev3connection.Device;
+import de.ft.interitus.deviceconnection.ev3connection.Operations;
+import de.ft.interitus.deviceconnection.ev3connection.ev3;
 import de.ft.interitus.deviceconnection.ev3connection.usb.USBConnectionHandle;
 import de.ft.interitus.deviceconnection.ev3connection.usb.USBDevice;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.ProjectFunktions;
 import de.ft.interitus.projecttypes.Tool;
 import de.ft.interitus.utils.ArrayList;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 public class EV3Funktions implements ProjectFunktions {
     public com.badlogic.gdx.utils.DelayedRemovalArray<Device> ev3devices = new com.badlogic.gdx.utils.DelayedRemovalArray<>();
@@ -58,6 +61,9 @@ public class EV3Funktions implements ProjectFunktions {
         String name = device.getName();
         UI.runselection.addelement(new DropDownElement(AssetLoader.DigitalWrite_description_image, name, device));
 
+        ArrayList<Byte> connected = new ArrayList<>();
+        connected.addAll(Operations.playSound("../tools/Bluetooth/Connect",100,false));
+        device.getConnectionHandle().sendData(ev3.makeDirectCmd(connected,0,0),device);
 
     }
 

@@ -51,7 +51,6 @@ import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.ArrayList;
 import de.ft.interitus.utils.ShapeRenderer;
 
-import java.awt.*;
 import java.io.File;
 import java.util.Arrays;
 import java.util.Timer;
@@ -631,7 +630,7 @@ public class UI {
             }
 
             if (UI.button_stop.isjustPressednormal()) {
-                ProjectManager.getActProjectVar().projectType.getCompiler().interupt();
+                ProjectManager.getActProjectVar().projectType.getCompiler().Interrupt();
             }
 
             if (UI.button_addrunconfig.isjustPressednormal()) {

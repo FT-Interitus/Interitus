@@ -12,5 +12,5 @@ public interface Compiler {
 
     String getCompilerVersion();
 
-    void interupt();
+    void Interrupt();
 }

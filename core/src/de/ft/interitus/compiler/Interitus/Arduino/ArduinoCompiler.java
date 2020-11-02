@@ -317,7 +317,7 @@ public class ArduinoCompiler implements Compiler {
     }
 
     @Override
-    public void interupt() {
+    public void Interrupt() {
 
     }
 

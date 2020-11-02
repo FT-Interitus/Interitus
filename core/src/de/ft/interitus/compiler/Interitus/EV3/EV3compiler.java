@@ -196,7 +196,15 @@ public class EV3compiler implements Compiler {
     }
 
     @Override
-    public void interupt() {
+    public void Interrupt() {
+
+        if(UI.runselection.getSelectedElement()==null) return;
+
+        ArrayList<Byte> stopProgram = new ArrayList<>();
+
+        stopProgram.addAll(Operations.stopProgramm(1));
+
+        ((Device) UI.runselection.getSelectedElement().getIdentifier()).getConnectionHandle().sendData(ev3.makeDirectCmd(stopProgram,0,0), ((Device) UI.runselection.getSelectedElement().getIdentifier()));
 
     }
 }
