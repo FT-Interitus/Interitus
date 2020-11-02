@@ -32,8 +32,13 @@ public class InitEv3 {
         stringvar = new ParameterVariableType("String", AssetLoader.Plug_StringParameter,new Color(156f/255f,19f/255f,19f/255f,1f),"char[]");
         booleanvar = new ParameterVariableType("boolean", AssetLoader.Plug_BooleanParameter,new Color(245f/255f,169f/255f,56f/255f,1f));
 
-        platformSpecificBlocks.add(new StatusLightBlock(projectType, null));
+        /**
+         * Need to be the first one
+         * @see EV3Funktions
+         */
         platformSpecificBlocks.add(new ThreadBlock(projectType, null));
+
+        platformSpecificBlocks.add(new StatusLightBlock(projectType, null));
         platformSpecificBlocks.add(new Wait(projectType, null));
         return projectType;
     }

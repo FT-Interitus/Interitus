@@ -5,17 +5,20 @@
 
 package de.ft.interitus.projecttypes.BlockTypes.Interitus.Ev3;
 
+import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import com.kotcrab.vis.ui.widget.VisTable;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Program;
 import de.ft.interitus.UI.ManualConfig.DeviceConfiguration;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.dropdownmenue.DropDownElement;
+import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.deviceconnection.ev3connection.*;
 import de.ft.interitus.deviceconnection.ev3connection.usb.USBConnectionHandle;
 import de.ft.interitus.deviceconnection.ev3connection.usb.USBDevice;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.ProjectFunktions;
+import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.Tool;
 import de.ft.interitus.utils.ArrayList;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -26,9 +29,13 @@ public class EV3Funktions implements ProjectFunktions {
     public com.badlogic.gdx.utils.DelayedRemovalArray<Device> ev3devices = new com.badlogic.gdx.utils.DelayedRemovalArray<>();
     public ConnectionHandle usbConnectionHandle = new USBConnectionHandle();
     private int counter = 0;
+    private boolean displayedError = false;
 
     @Override
     public void create() {
+
+        ProjectManager.getActProjectVar().blocks.add(ProjectManager.getActProjectVar().projectType.getBlockGenerator().generateBlock(0, UIVar.abstandvonRand + 20, 630, ProjectManager.getActProjectVar().projectType.getProjectblocks().get(0).getWidth(), UIVar.BlockHeight, ProjectManager.getActProjectVar().projectType.getProjectblocks().get(0), ProjectManager.getActProjectVar().projectType.getBlocktoSaveGenerator(), false));
+
 
     }
 
@@ -55,7 +62,17 @@ public class EV3Funktions implements ProjectFunktions {
     public void addEv3(Device device) {
         if(device instanceof USBDevice&&!((USBDevice) device).getDevice().isOpen()) {
 
-            ((USBDevice) device).getDevice().open();
+
+            if(!((USBDevice) device).getDevice().open()) {
+
+               if(!displayedError) Dialogs.showErrorDialog(UI.stage,"\nMit dem EV3-Stein kann nicht kommuniziert werden!\nFolgende Dinge kannst du jetzt unternehmen:\n    -Die USB-Verbindung trennen und neu verbinden\n    -Interitus und/oder den EV3 Stein neustarten\n    -Andere EV3 Anwendungen schließen\n    -Den PC neustarten\n");
+
+               displayedError = true;
+                ev3devices.removeValue(device,false);
+                return;
+            }
+            displayedError = false;
+
 
         }
         String name = device.getName();

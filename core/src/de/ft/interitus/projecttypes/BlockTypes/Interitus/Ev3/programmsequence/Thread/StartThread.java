@@ -30,7 +30,7 @@ public class StartThread extends Ev3Block {
 
     @Override
     public int getWidth() {
-        return 100;
+        return 75;
     }
 
     @Override
