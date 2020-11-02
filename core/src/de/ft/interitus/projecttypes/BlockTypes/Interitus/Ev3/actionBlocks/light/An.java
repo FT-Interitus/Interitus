@@ -14,7 +14,7 @@ import de.ft.interitus.projecttypes.BlockTypes.Interitus.Ev3.Ev3Block;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Ev3.InitEv3;
 import de.ft.interitus.utils.ArrayList;
 
-import java.lang.reflect.ParameterizedType;
+
 
 
 public class An extends Ev3Block {
@@ -31,7 +31,36 @@ public class An extends Ev3Block {
 
     @Override
     public String getCode() {
-        return null;
+        byte mode=0x00;
+        switch ((String) Farbe.getParameter()){
+            case "Rot":{
+                mode+=0x02;
+                break;
+            }
+            case "Grün":{
+                mode+=0x01;
+                break;
+            }
+            case "Orange":{
+                mode+=0x03;
+                break;
+            }
+        }
+        switch ((String)Mode.getParameter()){
+            case "Leuchten":{
+                mode+=0x00;
+                break;
+            }
+            case "Pulsierend":{
+                mode+=0x06;
+                break;
+            }
+            case "Blinkend":{
+                mode+=0x03;
+                break;
+            }
+        }
+        return "UI_WRITE(LED,"+mode+")";
     }
 
     @Override

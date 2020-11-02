@@ -15,7 +15,7 @@ import de.ft.interitus.utils.ArrayList;
 public class Zuruecksetzen extends Ev3Block {
     @Override
     public String getCode() {
-        return "StatusLicht zurücksetzen";
+        return "UI_WRITE(LED,0x04)";
     }
 
     @Override
