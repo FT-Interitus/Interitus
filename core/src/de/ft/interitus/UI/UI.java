@@ -554,9 +554,9 @@ public class UI {
     public static void update(float delta) {
 
 
-       // System.out.println("Pos:" + (Gdx.graphics.getHeight()-menuBar.getTable().getHeight()-20-(UIVar.abstandvonRand*2)));
+       // Program.logger.config("Pos:" + (Gdx.graphics.getHeight()-menuBar.getTable().getHeight()-20-(UIVar.abstandvonRand*2)));
 
-       // System.out.println((UIVar.programmflaeche_h + UIVar.programmflaeche_y));
+       // Program.logger.config((UIVar.programmflaeche_h + UIVar.programmflaeche_y));
         tabbar.setBounds(UIVar.abstandvonRand, (int) (Gdx.graphics.getHeight()-menuBar.getTable().getHeight()-20-(UIVar.abstandvonRand*2)), 300, 20);
         tabbar.draw();
 

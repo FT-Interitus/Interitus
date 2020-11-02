@@ -5,6 +5,7 @@
 
 package de.ft.interitus.deviceconnection.ev3connection;
 
+import de.ft.interitus.Program;
 import de.ft.interitus.deviceconnection.ev3connection.Exception.Ev3EndOfFileException;
 import de.ft.interitus.deviceconnection.ev3connection.Exception.Ev3ErrorAnalyser;
 
@@ -13,63 +14,68 @@ import de.ft.interitus.utils.ArrayList;
 public class Ev3SystemUtils {
     static Byte[] returnvalue;
    static byte[] sendArray;
+   public static void downloadFile(String name,byte[] content,Device device) throws Exception {
+       returnvalue = null;
+       sendArray = null;
+       int counter =0;
+       int chucksize = 1000;
+       byte[] contentbytes =content;
+
+       ArrayList<Byte> beginningbytes = SystemOperations.beginDownload(content.length,name);
+
+       byte[] bytes = new byte[beginningbytes.size()];
+
+       for(int i=0;i<bytes.length;i++) {
+
+           bytes[i] = beginningbytes.get(i);
+
+       }
+
+
+       Byte[] filehandle =  device.getConnectionHandle().sendData(ev3.makeSystemCommand(bytes),device);
+       ev3.printHex("recv",filehandle);
+       Program.logger.config("SIZE: "+contentbytes.length);
+       if(filehandle[6]==(byte)0x00) {
+
+
+           while(counter<contentbytes.length) {
+
+               sendArray = new byte[Math.min(chucksize, contentbytes.length - counter)];
+               for (int i = 0; i < sendArray.length; i++) {
+
+                   sendArray[i] = contentbytes[counter++];
+
+               }
+
+
+               returnvalue = device.getConnectionHandle().sendData(ev3.makeSystemCommand(SystemOperations.continueDownload(filehandle[7], sendArray)), device);
+
+               Program.logger.config(filehandle[7]+"");
+               ev3.printHex("recv", returnvalue);
+
+               if (returnvalue[6] != (byte) 0x00) {
+                   Ev3ErrorAnalyser.analyze(returnvalue[6]);
+
+
+               }
+
+           }
+
+
+
+
+       }else {
+           Ev3ErrorAnalyser.analyze(filehandle[6]);
+       }
+
+       Program.logger.config("Filehandle: "+filehandle[7]);
+       close_FileHandle(filehandle[7],device);
+
+   }
+
     public static void downloadFile(String name,String content,Device device) throws Exception {
 
-        returnvalue = null;
-        sendArray = null;
-        int counter =0;
-        int chucksize = 1000;
-        byte[] contentbytes =content.getBytes();
-
-        ArrayList<Byte> beginningbytes = SystemOperations.beginDownload(content.length(),name);
-
-        byte[] bytes = new byte[beginningbytes.size()];
-
-        for(int i=0;i<bytes.length;i++) {
-
-            bytes[i] = beginningbytes.get(i);
-
-        }
-
-
-      Byte[] filehandle =  device.getConnectionHandle().sendData(ev3.makeSystemCommand(bytes),device);
-        ev3.printHex("recv",filehandle);
-        System.out.println("SIZE: "+contentbytes.length);
-        if(filehandle[6]==(byte)0x00) {
-
-
-            while(counter<contentbytes.length) {
-
-                sendArray = new byte[Math.min(chucksize, contentbytes.length - counter)];
-                for (int i = 0; i < sendArray.length; i++) {
-
-                    sendArray[i] = contentbytes[counter++];
-
-                }
-
-
-                returnvalue = device.getConnectionHandle().sendData(ev3.makeSystemCommand(SystemOperations.continueDownload(filehandle[7], sendArray)), device);
-
-                System.out.println(filehandle[7]);
-                ev3.printHex("recv", returnvalue);
-
-                if (returnvalue[6] != (byte) 0x00) {
-                    Ev3ErrorAnalyser.analyze(returnvalue[6]);
-
-
-                }
-
-            }
-
-
-
-
-        }else {
-            Ev3ErrorAnalyser.analyze(filehandle[6]);
-        }
-
-        System.out.println("Filehandle: "+filehandle[7]);
-        close_FileHandle(filehandle[7],device);
+       downloadFile(name,content.getBytes(),device);
     }
 
     public static String uploadFile(String path, Device device) throws Exception {
@@ -95,7 +101,7 @@ public class Ev3SystemUtils {
                         ((payload[10] & 0xFF) << 24);
 
         int counter=0;
-        System.out.println("filesize: "+size);
+        Program.logger.config("filesize: "+size);
         if(maxbytetoread>=size){
             byte[] data = new byte[(int) size];
             for(int i=0;i<size; i++){

@@ -24,6 +24,8 @@ import de.ft.interitus.utils.ArrayList;
 import de.ft.interitus.utils.OSChecker;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.UUID;
 
 public class EV3compiler implements Compiler {
@@ -164,8 +166,10 @@ public class EV3compiler implements Compiler {
 
         notification.setProgressbarvalue(100);
 
+
+
         try {
-            Ev3SystemUtils.downloadFile("/home/root/lms2012/prjs/"+ProjectManager.getActProjectVar().getFilename()+"/"+ProjectManager.getActProjectVar().getFilename()+".rbf",Gdx.files.absolute(Data.tempfolder.getAbsolutePath() + "/" + filename.replace(".lms", ".rbf")).readString(), ((Device) UI.runselection.getSelectedElement().getIdentifier()));
+            Ev3SystemUtils.downloadFile("/home/root/lms2012/prjs/"+ProjectManager.getActProjectVar().getFilename()+"/"+ProjectManager.getActProjectVar().getFilename()+".rbf", Files.readAllBytes(Path.of(Data.tempfolder.getAbsolutePath() + "/" + filename.replace(".lms", ".rbf"))), ((Device) UI.runselection.getSelectedElement().getIdentifier()));
         } catch (Exception e) {
             e.printStackTrace();
         }

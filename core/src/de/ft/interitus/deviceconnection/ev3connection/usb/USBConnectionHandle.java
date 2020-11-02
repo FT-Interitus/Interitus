@@ -46,7 +46,7 @@ public static HidServices hidServices = HidManager.getHidServices();
 //
                // readed = legodevice.read(sizeofcontent,1000);
 
-                //System.out.println(readed.length);
+                //Program.logger.config(readed.length);
 
 
 

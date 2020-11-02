@@ -5,6 +5,7 @@
 
 package de.ft.interitus.deviceconnection.ev3connection;
 
+import de.ft.interitus.Program;
 import de.ft.interitus.deviceconnection.ev3connection.Exception.Ev3ErrorAnalyser;
 import de.ft.interitus.deviceconnection.ev3connection.usb.USBConnectionHandle;
 import org.hid4java.HidDevice;
@@ -37,15 +38,15 @@ public class FirmwareUpdater {
 
         HidDevice hidDevice = searchforFWDevice();
 
-        System.out.println("Start Erasing");
+        Program.logger.config("Start Erasing");
         eraseDevice(hidDevice);
-        System.out.println("End Erasing");
-        System.out.println("Tell Ev3 Start Download");
+        Program.logger.config("End Erasing");
+        Program.logger.config("Tell Ev3 Start Download");
         startFirmwareUpdate(data.length,hidDevice);
-        System.out.println("Finished Telling");
-        System.out.println("Start Sending Firmware");
+        Program.logger.config("Finished Telling");
+        Program.logger.config("Start Sending Firmware");
         sendFirmware(data,hidDevice);
-        System.out.println("End Sending");
+        Program.logger.config("End Sending");
 
 
 
@@ -55,7 +56,7 @@ public class FirmwareUpdater {
     }
 
     public static void update(File file) throws IOException {
-System.out.println("Update");
+Program.logger.config("Update");
         FileInputStream fileInputStream = null;
         try {
             fileInputStream = new FileInputStream(file);
@@ -67,17 +68,17 @@ System.out.println("Update");
 
 
         HidDevice hidDevice = searchforFWDevice();
-      //  System.out.println("Start Erasing");
+      //  Program.logger.config("Start Erasing");
       //  eraseDevice(hidDevice);
-       // System.out.println("End Erasing");
-       // System.out.println("Tell Ev3 Start Download");
+       // Program.logger.config("End Erasing");
+       // Program.logger.config("Tell Ev3 Start Download");
       //  startFirmwareUpdate(data.length,hidDevice);
-      //  System.out.println("Finished Telling");
-      //  System.out.println("Start Sending Firmware");
+      //  Program.logger.config("Finished Telling");
+      //  Program.logger.config("Start Sending Firmware");
       //  new Thread(() -> sendFirmware(data,hidDevice)).start();
        // while(getFirmwareUpdateProgress()!=100);
 
-        System.out.println("End Sending");
+        Program.logger.config("End Sending");
 
         restartToLinux(hidDevice);
 
@@ -92,7 +93,7 @@ System.out.println("Update");
 
             if(counter>=updatewaittimeout) {
                 //ERROR
-                System.out.println("error");
+                Program.logger.config("error");
                 return null;
             }
             //USBConnectionHandle.hidServices.scan();
@@ -100,7 +101,7 @@ System.out.println("Update");
 
 
             if(updatedevice==null) {
-                System.out.println("Searching Device...");
+                Program.logger.config("Searching Device...");
             }
 
             try {
@@ -112,7 +113,7 @@ System.out.println("Update");
 
         }
 
-        System.out.println("Get Device");
+        Program.logger.config("Get Device");
         return updatedevice;
 
     }
@@ -144,7 +145,7 @@ System.out.println("Update");
         long time = System.currentTimeMillis()/1000;
         while(recv==null) {
 
-            System.out.println("Waiting for finish took: "+(System.currentTimeMillis()/1000-time));
+            Program.logger.config("Waiting for finish took: "+(System.currentTimeMillis()/1000-time));
 
             recv =  device.read(1000,2000);
             ev3.printHex("recv",recv);
@@ -168,7 +169,7 @@ System.out.println("Update");
     public static void startFirmwareUpdate(long lenght,HidDevice device) {
 
 
-        System.out.println(lenght);
+        Program.logger.config(""+lenght);
         byte[] bytes = new byte[1+8+8];
         bytes[0] = (byte) 0xF1;
         bytes[1] = (byte) 0x00;
@@ -179,7 +180,7 @@ System.out.println("Update");
         bytes[6] = (byte) (lenght>>8);
         bytes[7] = (byte) (lenght>>16);
         bytes[8] = (byte) (lenght>>24);
-        System.out.println(lenght);
+        Program.logger.config(lenght+"");
         byte[] sendingbytes = ev3.makeSystemCommand(bytes);
         device.write(sendingbytes,sendingbytes.length,(byte)0x00);
         Byte[] returnbytes = null;
@@ -225,11 +226,11 @@ while(returnbytes==null) {
 
 
 
-            System.out.println("Writing: "+(((float) ((float) pointer / (float) length)*100))+"%");
-           // System.out.println("TOOK: "+(System.currentTimeMillis()-time1));
+            Program.logger.config("Writing: "+(((float) ((float) pointer / (float) length)*100))+"%");
+           // Program.logger.config("TOOK: "+(System.currentTimeMillis()-time1));
         }
 
-            System.out.println("Write Finish");
+            Program.logger.config("Write Finish");
 
 
     }

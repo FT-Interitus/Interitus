@@ -5,6 +5,7 @@
 
 package de.ft.interitus.deviceconnection.ev3connection;
 
+import de.ft.interitus.Program;
 import de.ft.interitus.utils.ArrayList;
 import org.lwjgl.system.CallbackI;
 
@@ -373,7 +374,7 @@ public class ev3 {
             System.out.printf("%02X:", buffer.get(i));
         }
         System.out.printf("%02X|", buffer.get(buffer.position() - 1));
-        System.out.println();
+
     }
 
     public static void printHex(String desc, Byte[] buffer) {
@@ -382,7 +383,7 @@ public class ev3 {
             System.out.printf("%02X:", buffer[i]);
         }
        // System.out.printf("%02X|", buffer.get(buffer.position() - 1));
-        System.out.println();
+
     }
     public static void printHex(String desc, byte[] buffer) {
         System.out.print(desc + " 0x|");
@@ -390,7 +391,7 @@ public class ev3 {
             System.out.printf("%02X:", buffer[i]);
         }
        // System.out.printf("%02X|", buffer.get(buffer.position() - 1));
-        System.out.println();
+
     }
 
 

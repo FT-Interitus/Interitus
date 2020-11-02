@@ -46,7 +46,7 @@ public class USBConnection {
             command.addAll(Operations.fillwindow(false, 1, 1));
 
 
-            System.out.println(i);
+            Program.logger.config(i);
 
 
             try {
@@ -97,7 +97,7 @@ public class USBConnection {
         }*/
 
         try {
-           // System.out.println("test:   "+Integer.toBinaryString(ev3.LC2((byte)0x01,(byte)12)));
+           // Program.logger.config("test:   "+Integer.toBinaryString(ev3.LC2((byte)0x01,(byte)12)));
            // command.addAll(Operations.playSound("./ui/DownloadSucces",100,false));
             //command.addAll(Operations.showTextBox(0,0,100,100,"o",(byte)0x00));
           //  command.addAll(Operations.drawline(false, 100,0,100,100));
@@ -110,7 +110,7 @@ public class USBConnection {
           // ArrayList<ArrayList<Byte>> bytes = Ev3SystemUtils.ListFilesinPath("/home/root/lms2012/prjs/",device);
           // for(String string: Ev3SystemUtils.listedfilestoStrings(bytes)) {
 
-              // System.out.println(string);
+              // Program.logger.config(string);
 
           // }
 
@@ -146,7 +146,7 @@ public class USBConnection {
               message[8] = (byte) 0x09;
               message[9] = (byte) 0x0A;
               device1.write(message,message.length,(byte)0x00);
-              System.out.println("ausgabe");
+              Program.logger.config("ausgabe");
             ev3.printHex("recv",test);
 
               TimeUnit.SECONDS.sleep(1);
@@ -163,9 +163,9 @@ public class USBConnection {
 
        //Utils.Delete_File("../apps/data123.txt", device);
         //Utils.Close_FileHandle((byte)0x01,device);
-       //System.out.println("data: "+Utils.uploadFile("../apps/data123.txt",device));
+       //Program.logger.config("data: "+Utils.uploadFile("../apps/data123.txt",device));
 
-      //  System.out.println(device.getDevice().getPath());
+      //  Program.logger.config(device.getDevice().getPath());
 
       // command.addAll(Operations.fillwindow(true,0,40));
       // command.addAll(Operations.updateev3screen());

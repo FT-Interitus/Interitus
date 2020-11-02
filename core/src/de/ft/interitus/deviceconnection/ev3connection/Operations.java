@@ -5,6 +5,7 @@
 
 package de.ft.interitus.deviceconnection.ev3connection;
 
+import de.ft.interitus.Program;
 import de.ft.interitus.utils.ArrayList;
 
 import java.util.Arrays;
@@ -341,7 +342,7 @@ public class Operations {
             b.add(temp3[i]);
         }
 
-        System.out.println("Test" + b);
+        Program.logger.config("Test" + b);
 
         return b;
 
