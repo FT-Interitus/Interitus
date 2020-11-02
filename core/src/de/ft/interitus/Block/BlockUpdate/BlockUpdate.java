@@ -18,37 +18,8 @@ import de.ft.interitus.utils.ArrayList;
 
 
 public abstract class BlockUpdate  {
-    public Block block; //Der zugehörige Block den die Klasse updated
-
+    public Block block;
     private boolean openwindow = false;
-
-    public BlockUpdate(Block block) {
-
-
-    }
-
-
-
-/*
-                    if ( block.isMoving()&&CheckMouse.isMouseover(UIVar.BlockBarX, UIVar.BlockBarY, UIVar.BlockBarW, UIVar.BlockBarH, false) && block.getBlocktype().canbedeleted()) {
-
-
-                        if (willbedelete) {
-                            Gdx.graphics.setCursor(Gdx.graphics.newCursor(AssetLoader.backcursor, 0, 0));
-                            ProjectManager.getActProjectVar().removeblock = true;
-                        } else {
-                            Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Arrow);
-                            ProjectManager.getActProjectVar().removeblock = false;
-                        }
-                        ProjectManager.getActProjectVar().removeblock = false;
-                        Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Arrow);
-                        block.delete(false);
-                        this.cancel();
-                    }
-
- */
-
-
 
 
     private void block_moveingengine() {

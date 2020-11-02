@@ -20,10 +20,16 @@ public class BlockUpdateManager {
 
         BlockMarkManager.update();
 
+        for(int i=0;i<projectVar.blocks.size();i++) {
+            Block block = projectVar.blocks.get(i);
 
-        for (Block block : projectVar.blocks) {
             BlockMovingManager.update(block);
             BlockDataWireManager.update(block);
+
+            //If Block gets deleted the block before will be used
+            if(!projectVar.blocks.contains(block)) i--;
+
+
         }
 
     }

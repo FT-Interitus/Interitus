@@ -10,6 +10,8 @@ import com.badlogic.gdx.math.Vector2;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.UI.ProgramGrid;
 import de.ft.interitus.UI.UIElements.check.CheckCollision;
+import de.ft.interitus.UI.UIElements.check.CheckMouse;
+import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.Var;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.ProjectVar;
@@ -36,7 +38,7 @@ public class BlockMovingManager {
             BlockJumpingManager.updateBlockDuplicate(block);
             block.getPos().set(Unproject.unproject().sub(projectVar.diff_save));
 
-           if (ProgramGrid.block_active_snapping)
+            if (ProgramGrid.block_active_snapping)
                 blockSnapping(block);
 
 
@@ -55,10 +57,14 @@ public class BlockMovingManager {
         }
 
 
-
     }
 
-
+    /***
+     * Checks all Information if Block is Moving e. g. Mouse is pressed
+     *
+     * @param block
+     * @return
+     */
     private static boolean isBlockMoving(Block block) {
 
         if (!Gdx.input.isButtonPressed(0)) return false;
@@ -66,7 +72,7 @@ public class BlockMovingManager {
         if (projectVar.moving_block == block) return true;
         if (Var.mouseDownPos.dst(Unproject.unproject()) <= tolerance) return false;
         if (!CheckCollision.checkmousewithblock(block)) return false;
-        if (projectVar.moveingdatawire!=null) return false;
+        if (projectVar.moveingdatawire != null) return false;
 
         projectVar.diff_save = generateDiff(block, Unproject.unproject());
         BlockConnectionManager.startMovingBlock(block);
@@ -97,10 +103,29 @@ public class BlockMovingManager {
         block.setY((int) (newY * ProgramGrid.margin));
     }
 
+    /**
+     * Check if the Block was droped in the BlockBar -> delete
+     *
+     * Than remove the Block from the MovingBlock Var
+     *
+     */
     private static void stopMovingBlock() {
+
+        if (isOnBlockBar() && projectVar.moving_block.getBlocktype().canbedeleted())
+            projectVar.moving_block.delete(false);
+
         projectVar.moving_block = null;
         ProjectManager.getActProjectVar().duplicate_block_left = null;
         ProjectManager.getActProjectVar().duplicate_block_right = null;
+    }
+
+    /**
+     * Checks if Mouse is on the Block Bar
+     * @see UIVar,CheckMouse
+     * @return result from check
+     */
+    private static boolean isOnBlockBar() {
+        return CheckMouse.isMouseover(UIVar.BlockBarX, UIVar.BlockBarY, UIVar.BlockBarW, UIVar.BlockBarH, false);
     }
 
 }
