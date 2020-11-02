@@ -21,6 +21,7 @@ import de.ft.interitus.projecttypes.ProjectFunktions;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.Tool;
 import de.ft.interitus.utils.ArrayList;
+import org.json.JSONObject;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.util.UUID;
@@ -35,7 +36,6 @@ public class EV3Funktions implements ProjectFunktions {
     public void create() {
 
         ProjectManager.getActProjectVar().blocks.add(ProjectManager.getActProjectVar().projectType.getBlockGenerator().generateBlock(0, UIVar.abstandvonRand + 20, 630, ProjectManager.getActProjectVar().projectType.getProjectblocks().get(0).getWidth(), UIVar.BlockHeight, ProjectManager.getActProjectVar().projectType.getProjectblocks().get(0), ProjectManager.getActProjectVar().projectType.getBlocktoSaveGenerator(), false));
-
 
     }
 
@@ -188,10 +188,16 @@ public class EV3Funktions implements ProjectFunktions {
 
 
             boolean existsUUID = false;
+            boolean existsSettings = false;
             for(String string:Ev3SystemUtils.listedfilestoStrings(Ev3SystemUtils.ListFilesinPath("/home/root/lms2012/apps/IR Control/Interitus/",device))) {
                 if (string.contentEquals("uuid")) {
 
                     existsUUID = true;
+
+                }
+                if (string.contentEquals("settings")) {
+
+                    existsSettings = true;
 
                 }
 
@@ -202,6 +208,11 @@ public class EV3Funktions implements ProjectFunktions {
             if(!existsUUID) {
 
                 Ev3SystemUtils.downloadFile("/home/root/lms2012/apps/IR Control/Interitus/uuid", UUID.randomUUID().toString(),device);
+
+            }
+
+            if(!existsSettings) {
+                Ev3SystemUtils.downloadFile("/home/root/lms2012/apps/IR Control/Interitus/settings", new JSONObject().toString(),device);
 
             }
 
