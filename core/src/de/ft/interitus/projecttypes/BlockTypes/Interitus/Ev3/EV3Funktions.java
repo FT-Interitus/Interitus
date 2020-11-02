@@ -7,13 +7,11 @@ package de.ft.interitus.projecttypes.BlockTypes.Interitus.Ev3;
 
 import com.kotcrab.vis.ui.widget.VisTable;
 import de.ft.interitus.Block.Block;
+import de.ft.interitus.Program;
 import de.ft.interitus.UI.ManualConfig.DeviceConfiguration;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.dropdownmenue.DropDownElement;
-import de.ft.interitus.deviceconnection.ev3connection.ConnectionHandle;
-import de.ft.interitus.deviceconnection.ev3connection.Device;
-import de.ft.interitus.deviceconnection.ev3connection.Operations;
-import de.ft.interitus.deviceconnection.ev3connection.ev3;
+import de.ft.interitus.deviceconnection.ev3connection.*;
 import de.ft.interitus.deviceconnection.ev3connection.usb.USBConnectionHandle;
 import de.ft.interitus.deviceconnection.ev3connection.usb.USBDevice;
 import de.ft.interitus.loading.AssetLoader;
@@ -21,6 +19,8 @@ import de.ft.interitus.projecttypes.ProjectFunktions;
 import de.ft.interitus.projecttypes.Tool;
 import de.ft.interitus.utils.ArrayList;
 import org.springframework.web.filter.OncePerRequestFilter;
+
+import java.util.UUID;
 
 public class EV3Funktions implements ProjectFunktions {
     public com.badlogic.gdx.utils.DelayedRemovalArray<Device> ev3devices = new com.badlogic.gdx.utils.DelayedRemovalArray<>();
@@ -65,7 +65,12 @@ public class EV3Funktions implements ProjectFunktions {
         connected.addAll(Operations.playSound("../tools/Bluetooth/Connect",100,false));
         device.getConnectionHandle().sendData(ev3.makeDirectCmd(connected,0,0),device);
 
+        registernewEv3(device);
+
+
     }
+
+
 
     @Override
     public void update() {
@@ -148,5 +153,45 @@ public class EV3Funktions implements ProjectFunktions {
         return null;
     }
 
+    private void registernewEv3(Device device) {
+        try {
+            boolean existsfolder = false;
+            for(String string:Ev3SystemUtils.listedfilestoStrings(Ev3SystemUtils.ListFilesinPath("/home/root/lms2012/apps/IR Control/",device))) {
+                if(string.contentEquals("Interitus/")) {
+                    existsfolder = true;
+                    break;
+                }
+            }
 
+            if(!existsfolder) {
+                Ev3SystemUtils.create_Dir("/home/root/lms2012/apps/IR Control/Interitus/",device);
+
+            }
+
+
+
+            boolean existsUUID = false;
+            for(String string:Ev3SystemUtils.listedfilestoStrings(Ev3SystemUtils.ListFilesinPath("/home/root/lms2012/apps/IR Control/Interitus/",device))) {
+                if (string.contentEquals("uuid")) {
+
+                    existsUUID = true;
+
+                }
+
+                //TODO Check others
+            }
+
+
+            if(!existsUUID) {
+
+                Ev3SystemUtils.downloadFile("/home/root/lms2012/apps/IR Control/Interitus/uuid", UUID.randomUUID().toString(),device);
+
+            }
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
