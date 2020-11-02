@@ -23,7 +23,7 @@ public class An extends Ev3Block {
     Parameter Mode;
 
     public An() {
-        Farbe=new Parameter("", AssetLoader.Parameter_wait, "Farbe", "description", "", new ParameterType(InitEv3.floatvar,false,true).setSelectables("Rot","Grün","Orange"), true);
+        Farbe=new Parameter("", AssetLoader.Parameter_farbe, "Farbe", "description", "", new ParameterType(InitEv3.floatvar,false,true).setSelectables("Rot","Grün","Orange"), true);
         Mode=new Parameter("", AssetLoader.Parameter_wait, "Mode", "description", "", new ParameterType(InitEv3.floatvar,false,true).setSelectables("Leuchten","Pulsierend","Blinkend"), true);
         parameters.add(Farbe);
         parameters.add(Mode);

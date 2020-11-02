@@ -3,55 +3,51 @@
  * Copyright by Tim and Felix
  */
 
-package de.ft.interitus.projecttypes.BlockTypes.Interitus.Ev3.programmsequence.Wait;
+package de.ft.interitus.projecttypes.BlockTypes.Interitus.Ev3.actionBlocks.sound;
 
 import com.badlogic.gdx.graphics.Texture;
-import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.BlockTypes.BlockCategories;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.ProjectType;
 
-public class Wait extends PlatformSpecificBlock {
-
-    public Wait(ProjectType projectType, Addon addon) {
+public class SoundBlock extends PlatformSpecificBlock {
+    public SoundBlock(ProjectType projectType, Addon addon) {
         super(projectType, addon);
-        super.actBlockModiIndex=0;
-        super.blockModis.add(new WaitSeconds());
     }
 
     @Override
     public String getName() {
-        return "Wait Block";
+        return null;
     }
 
     @Override
     public String getdescription() {
-        return "Dieser Block blockiert den programm ablauf";
+        return null;
     }
 
     @Override
     public BlockCategories getBlockCategorie() {
-        return BlockCategories.Programm_Sequence;
+        return null;
     }
 
     @Override
     public Texture getDescriptionImage() {
-        return AssetLoader.WaitBlock_description_image;
+        return null;
     }
 
     @Override
     public boolean canbedeleted() {
-        return true;
+        return false;
     }
 
     @Override
     public boolean canhasrightconnector() {
-        return true;
+        return false;
     }
 
     @Override
     public boolean canhasleftconnector() {
-        return true;
+        return false;
     }
 }

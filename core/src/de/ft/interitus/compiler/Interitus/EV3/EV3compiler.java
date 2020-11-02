@@ -172,7 +172,7 @@ public class EV3compiler implements Compiler {
 
 
         ArrayList<Byte> command = new ArrayList<>();
-        command.addAll(Operations.loadProgrammFiles(1,"../prjs/"+ProjectManager.getActProjectVar().getFilename()+"/"+ProjectManager.getActProjectVar().getFilename()+".rbf",0,1));
+        command.addAll(Operations.loadProgrammFiles(1,"/home/root/lms2012/prjs/"+ProjectManager.getActProjectVar().getFilename()+"/"+ProjectManager.getActProjectVar().getFilename()+".rbf",0,1));
          command.addAll(Operations.startProgramm(1,0,1,false));
         ((Device) UI.runselection.getSelectedElement().getIdentifier()).getConnectionHandle().sendData(ev3.makeDirectCmd(command,8,0), (Device) UI.runselection.getSelectedElement().getIdentifier());
 
