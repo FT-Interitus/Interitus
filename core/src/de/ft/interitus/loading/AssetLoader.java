@@ -182,6 +182,7 @@ public class AssetLoader {
     public static Texture Parameter_upperlimit;
     public static Texture Parameter_digital;
     public static Texture Parameter_analog;
+    public static Texture Parameter_farbe;
 
 
 
@@ -247,6 +248,8 @@ public class AssetLoader {
             manager.load(workingdirectory + "Block/Parameter/upperlimit.png", Texture.class);
             manager.load(workingdirectory + "Block/Parameter/digital.png", Texture.class);
             manager.load(workingdirectory + "Block/Parameter/analog.png", Texture.class);
+            manager.load(workingdirectory + "Block/Parameter/farb_parameter.png", Texture.class);
+
 
 
 
@@ -474,6 +477,8 @@ public class AssetLoader {
             Parameter_upperlimit = manager.get(workingdirectory + "Block/Parameter/upperlimit.png", Texture.class);
             Parameter_digital = manager.get(workingdirectory + "Block/Parameter/digital.png", Texture.class);
             Parameter_analog = manager.get(workingdirectory + "Block/Parameter/analog.png", Texture.class);
+            Parameter_farbe = manager.get(workingdirectory + "Block/Parameter/farb_parameter.png", Texture.class);
+
 
 
 

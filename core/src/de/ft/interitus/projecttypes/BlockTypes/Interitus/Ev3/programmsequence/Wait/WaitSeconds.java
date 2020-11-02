@@ -19,12 +19,12 @@ public class WaitSeconds extends Ev3Block {
     ArrayList<Parameter>parameters=new ArrayList<>();
 
     public WaitSeconds() {
-        parameters.add(new Parameter("", AssetLoader.Parameter_analog, "Wartezeit", "description", "s", new ParameterType(InitEv3.floatvar,false,false), true));
+        parameters.add(new Parameter("", AssetLoader.Parameter_wait, "Wartezeit", "description", "s", new ParameterType(InitEv3.floatvar,false,false), true));
     }
 
     @Override
     public String getCode() {
-        return "\nLoop:\n  JR(Loop)";
+        return "\nLoop:\nJR(Loop)";
     }
 
     @Override
@@ -49,6 +49,6 @@ public class WaitSeconds extends Ev3Block {
 
     @Override
     public Texture getModiImage() {
-        return AssetLoader.img_debugstart_pressed;
+        return AssetLoader.WaitBlock_description_image;
     }
 }
