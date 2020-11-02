@@ -58,20 +58,19 @@ public class EV3compiler implements Compiler {
                 EV3Thread tempThread = null;
                 if (neighbour != null) {
                     tempThread = new EV3Thread("UserThreadNr" + (userthreads.size() + 1));
-                }
-                while (neighbour != null) {
-                    //Program.logger.config(((Ev3Block) neighbour.getBlocktype().getBlockModis().get(neighbour.getBlocktype().getActBlockModiIndex())).getCode());
                     MainThread.addLine("OBJECT_START(UserThreadNr" + (userthreads.size() + 1) + ")");
-                    tempThread.addLine(((Ev3Block) neighbour.getBlocktype().getBlockModis().get(neighbour.getBlocktype().getActBlockModiIndex())).getCode());
-                    userthreads.add(tempThread);
-                    neighbour = neighbour.getRight();
-                }
-                    MainThread.addLine("OBJECT_START(UserThreadNr" + (userthreads.size() + 1) + ")");
-                    userthreads.add(tempThread);
 
 
+                    while (neighbour != null) {
+                        //Program.logger.config(((Ev3Block) neighbour.getBlocktype().getBlockModis().get(neighbour.getBlocktype().getActBlockModiIndex())).getCode());
+                        tempThread.addLine(((Ev3Block) neighbour.getBlocktype().getBlockModis().get(neighbour.getBlocktype().getActBlockModiIndex())).getCode());
+                        neighbour = neighbour.getRight();
+                    }
+                    userthreads.add(tempThread);
+
+                }
             }
-        }}
+        }
 
         Programm.append(MainThread.getThread());
         for (EV3Thread thread : userthreads) {
