@@ -38,14 +38,7 @@ public class Parameter {
     }
 
     public Object getParameter() {
-        if(!varname) {
-            return Parameter;
-        }
-        if(getDataWires().size()>0) {
-            return Datawire.get(0).getParam_input().getVarName();
-        }else {
-            return Parameter;
-        }
+       return this.toString();
     }
 
     public void setParameter(Object parameter) {

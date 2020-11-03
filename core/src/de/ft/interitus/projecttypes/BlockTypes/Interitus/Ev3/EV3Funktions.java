@@ -8,6 +8,7 @@ package de.ft.interitus.projecttypes.BlockTypes.Interitus.Ev3;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import com.kotcrab.vis.ui.widget.VisTable;
 import de.ft.interitus.Block.Block;
+import de.ft.interitus.Program;
 import de.ft.interitus.UI.ManualConfig.DeviceConfiguration;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.dropdownmenue.DropDownElement;
@@ -40,7 +41,11 @@ public class EV3Funktions implements ProjectFunktions {
     public void removeEv3(Device device) {
 
         if (device instanceof USBDevice && ((USBDevice) device).getDevice().isOpen()) {
-            ((USBDevice) device).getDevice().close();
+            try {
+                ((USBDevice) device).getDevice().close();
+            }catch (Exception e) {
+
+            }
 
         }
 
@@ -75,6 +80,7 @@ public class EV3Funktions implements ProjectFunktions {
 
         }
         String name = device.getName();
+        Program.logger.config(name);
         UI.runselection.addelement(new DropDownElement(AssetLoader.DigitalWrite_description_image, name, device));
 
         ArrayList<Byte> connected = new ArrayList<>();
@@ -190,17 +196,21 @@ public class EV3Funktions implements ProjectFunktions {
 
             boolean existsUUID = false;
             boolean existsSettings = false;
-            for (String string : Ev3SystemUtils.listedfilestoStrings(Ev3SystemUtils.ListFilesinPath("/home/root/lms2012/apps/IR Control/Interitus/", device))) {
-                if (string.contentEquals("uuid")) {
+            try {
+                for (String string : Ev3SystemUtils.listedfilestoStrings(Ev3SystemUtils.ListFilesinPath("/home/root/lms2012/apps/IR Control/Interitus/", device))) {
+                    if (string.contentEquals("uuid")) {
 
-                    existsUUID = true;
+                        existsUUID = true;
+
+                    }
+                    if (string.contentEquals("settings")) {
+
+                        existsSettings = true;
+
+                    }
 
                 }
-                if (string.contentEquals("settings")) {
-
-                    existsSettings = true;
-
-                }
+            }catch (Exception e) {
 
             }
 

@@ -15,16 +15,25 @@ import de.ft.interitus.projecttypes.BlockTypes.Interitus.Ev3.Ev3Block;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Ev3.InitEv3;
 import de.ft.interitus.utils.ArrayList;
 
+import java.util.UUID;
+
 public class WaitSeconds extends Ev3Block {
     ArrayList<Parameter>parameters=new ArrayList<>();
 
     public WaitSeconds() {
-        parameters.add(new Parameter("", AssetLoader.Parameter_wait, "Wartezeit", "description", "s", new ParameterType(InitEv3.floatvar,false,false), true));
+        parameters.add(new Parameter("0", AssetLoader.Parameter_wait, "Wartezeit", "", "ms", new ParameterType(InitEv3.floatvar,false,false), true));
     }
+
+
 
     @Override
     public String getCode() {
-        return "\nLoop:\nJR(Loop)";
+
+        String name = UUID.randomUUID().toString().replace("-","");
+
+        return "DATA32 "+name+"\n" +
+                "TIMER_WAIT("+parameters.get(0)+","+name+")\n" +
+                "TIMER_READY("+name+")";
     }
 
     @Override
@@ -39,7 +48,7 @@ public class WaitSeconds extends Ev3Block {
 
     @Override
     public int getWidth() {
-        return 100;
+        return 90;
     }
 
     @Override
