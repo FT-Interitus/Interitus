@@ -40,6 +40,7 @@ public class ev3 {
 
     static final byte opProgram_Start = (byte) 0x03;
     static final byte opProgram_Stop = (byte) 0x02;
+    static final byte opSystem = (byte) 0x60;
 
 
     static final byte SET_BRICKNAME = (byte) 0x08;
