@@ -8,7 +8,6 @@ package de.ft.interitus.projecttypes.BlockTypes.Interitus.Ev3;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import com.kotcrab.vis.ui.widget.VisTable;
 import de.ft.interitus.Block.Block;
-import de.ft.interitus.Program;
 import de.ft.interitus.UI.ManualConfig.DeviceConfiguration;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.dropdownmenue.DropDownElement;
@@ -22,7 +21,6 @@ import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.Tool;
 import de.ft.interitus.utils.ArrayList;
 import org.json.JSONObject;
-import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.util.UUID;
 
@@ -41,7 +39,7 @@ public class EV3Funktions implements ProjectFunktions {
 
     public void removeEv3(Device device) {
 
-        if(device instanceof USBDevice&&((USBDevice) device).getDevice().isOpen()) {
+        if (device instanceof USBDevice && ((USBDevice) device).getDevice().isOpen()) {
             ((USBDevice) device).getDevice().close();
 
         }
@@ -60,15 +58,16 @@ public class EV3Funktions implements ProjectFunktions {
     }
 
     public void addEv3(Device device) {
-        if(device instanceof USBDevice&&!((USBDevice) device).getDevice().isOpen()) {
+        if (device instanceof USBDevice && !((USBDevice) device).getDevice().isOpen()) {
 
 
-            if(!((USBDevice) device).getDevice().open()) {
+            if (!((USBDevice) device).getDevice().open()) {
 
-               if(!displayedError) Dialogs.showErrorDialog(UI.stage,"\nMit dem EV3-Stein kann nicht kommuniziert werden!\nFolgende Dinge kannst du jetzt unternehmen:\n    -Die USB-Verbindung trennen und neu verbinden\n    -Interitus und/oder den EV3 Stein neustarten\n    -Andere EV3 Anwendungen schließen\n    -Den PC neustarten\n");
+                if (!displayedError)
+                    Dialogs.showErrorDialog(UI.stage, "\nMit dem EV3-Stein kann nicht kommuniziert werden!\nFolgende Dinge kannst du jetzt unternehmen:\n    -Die USB-Verbindung trennen und neu verbinden\n    -Interitus und/oder den EV3 Stein neustarten\n    -Andere EV3 Anwendungen schließen\n    -Den PC neustarten\n");
 
-               displayedError = true;
-                ev3devices.removeValue(device,false);
+                displayedError = true;
+                ev3devices.removeValue(device, false);
                 return;
             }
             displayedError = false;
@@ -79,8 +78,8 @@ public class EV3Funktions implements ProjectFunktions {
         UI.runselection.addelement(new DropDownElement(AssetLoader.DigitalWrite_description_image, name, device));
 
         ArrayList<Byte> connected = new ArrayList<>();
-        connected.addAll(Operations.playSound("../tools/Bluetooth/Connect",100,false));
-        device.getConnectionHandle().sendData(ev3.makeDirectCmd(connected,0,0),device);
+        connected.addAll(Operations.playSound("../tools/Bluetooth/Connect", 100, false));
+        device.getConnectionHandle().sendData(ev3.makeDirectCmd(connected, 0, 0), device);
 
         registernewEv3(device);
 
@@ -88,12 +87,10 @@ public class EV3Funktions implements ProjectFunktions {
     }
 
 
-
     @Override
     public void update() {
         counter++;
         usbConnectionHandle.update();
-
 
 
         if (UI.runselection.getSelectedElement() == null && UI.runselection.getElements().size() > 0) {
@@ -129,9 +126,9 @@ public class EV3Funktions implements ProjectFunktions {
 
     @Override
     public void switchedto() {
-        for(Device device:ev3devices) {
+        for (Device device : ev3devices) {
 
-            if(device instanceof USBDevice) {
+            if (device instanceof USBDevice) {
                 ((USBDevice) device).getDevice().close();
             }
 
@@ -173,23 +170,27 @@ public class EV3Funktions implements ProjectFunktions {
     private void registernewEv3(Device device) {
         try {
             boolean existsfolder = false;
-            for(String string:Ev3SystemUtils.listedfilestoStrings(Ev3SystemUtils.ListFilesinPath("/home/root/lms2012/apps/IR Control/",device))) {
-                if(string.contentEquals("Interitus/")) {
+            for (String string : Ev3SystemUtils.listedfilestoStrings(Ev3SystemUtils.ListFilesinPath("/home/root/lms2012/apps/IR Control/", device))) {
+                if (string.contentEquals("Interitus/")) {
                     existsfolder = true;
                     break;
                 }
             }
 
-            if(!existsfolder) {
-                Ev3SystemUtils.create_Dir("/home/root/lms2012/apps/IR Control/Interitus/",device);
+            if (!existsfolder) {
+
+                try {
+                    Ev3SystemUtils.create_Dir("/home/root/lms2012/apps/IR Control/Interitus/", device);
+                } catch (Exception e) {
+
+                }
 
             }
 
 
-
             boolean existsUUID = false;
             boolean existsSettings = false;
-            for(String string:Ev3SystemUtils.listedfilestoStrings(Ev3SystemUtils.ListFilesinPath("/home/root/lms2012/apps/IR Control/Interitus/",device))) {
+            for (String string : Ev3SystemUtils.listedfilestoStrings(Ev3SystemUtils.ListFilesinPath("/home/root/lms2012/apps/IR Control/Interitus/", device))) {
                 if (string.contentEquals("uuid")) {
 
                     existsUUID = true;
@@ -201,21 +202,21 @@ public class EV3Funktions implements ProjectFunktions {
 
                 }
 
-                //TODO Check others
             }
 
 
-            if(!existsUUID) {
+            if (!existsUUID) {
+                try {
+                    Ev3SystemUtils.downloadFile("/home/root/lms2012/apps/IR Control/Interitus/uuid", UUID.randomUUID().toString(), device);
+                } catch (Exception e) {
 
-                Ev3SystemUtils.downloadFile("/home/root/lms2012/apps/IR Control/Interitus/uuid", UUID.randomUUID().toString(),device);
-
+                }
             }
 
-            if(!existsSettings) {
-                Ev3SystemUtils.downloadFile("/home/root/lms2012/apps/IR Control/Interitus/settings", new JSONObject().toString(),device);
+            if (!existsSettings) {
+                Ev3SystemUtils.downloadFile("/home/root/lms2012/apps/IR Control/Interitus/settings", new JSONObject().toString(), device);
 
             }
-
 
 
         } catch (Exception e) {
