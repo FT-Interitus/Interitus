@@ -73,7 +73,7 @@ public class USBConnection {
         //command.addAll(Operations.setbrickname("Tim"));
 //command.addAll(Operations.setbrickname("Hallo"));
 
-       // command.addAll(Operations.setbrickname("Hallo"));
+        command.addAll(Operations.runCommand("echo hi > /home/root/lms2012/prjs/testesetestestes"));
         USBDevice device = new USBDevice(USBConnectionHandle.hidServices.getHidDevice(ev3.ID_VENDOR_LEGO, ev3.ID_PRODUCT_EV3, null),usbConnectionHandle,"");
 
 //String a1000 = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
@@ -85,7 +85,7 @@ public class USBConnection {
         try {
            // Ev3SystemUtils.downloadFile("../apps/data123.txt", a1000, device);
             //FirmwareUpdater.update(new File("/home/tim/test.bin"));
-            FirmwareUpdater.update(new File("C:\\Users\\Felix\\ev3.bin"),device);
+           // FirmwareUpdater.update(new File("C:\\Users\\Felix\\ev3.bin"),device);
            // FirmwareUpdater.update(null);
         }catch (Exception e) {
         e.printStackTrace();
@@ -102,8 +102,8 @@ public class USBConnection {
             //command.addAll(Operations.showTextBox(0,0,100,100,"o",(byte)0x00));
           //  command.addAll(Operations.drawline(false, 100,0,100,100));
           //  command.addAll(Operations.updateev3screen());
-           //Byte[] bytes = device.getConnectionHandle().sendData(ev3.makeDirectCmd(command,10,10),device);
-           // ev3.printHex("recv",bytes);
+           Byte[] bytes = device.getConnectionHandle().sendData(ev3.makeDirectCmd(command,10,10),device);
+            ev3.printHex("recv",bytes);
         } catch (Exception e) {
             e.printStackTrace();
         }

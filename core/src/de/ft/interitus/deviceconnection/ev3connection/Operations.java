@@ -581,5 +581,30 @@ public class Operations {
 
     }
 
+    public static ArrayList<Byte> runCommand(String command) {
+
+        ArrayList<Byte> operations = new ArrayList<>();
+
+
+        operations.add(ev3.opSystem);
+
+        Byte[] temp = ev3.LCS(command);
+
+        for (int i = 0; i < temp.length; i++) {
+           operations.add(temp[i]);
+       }
+
+        Byte[] temp2 = ev3.GVX(32);
+        for(int i=0;i<temp2.length;i++) {
+            operations.add(temp2[i]);
+
+        }
+
+
+        return operations;
+
+
+    }
+
 
 }
