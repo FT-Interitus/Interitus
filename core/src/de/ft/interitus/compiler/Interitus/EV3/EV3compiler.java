@@ -153,7 +153,7 @@ public class EV3compiler implements Compiler {
         notification.setProgressbarvalue(70);
 
         try {
-            Ev3SystemUtils.Delete_File("/home/root/lms2012/prjs/"+ProjectManager.getActProjectVar().getFilename(), ((Device) UI.runselection.getSelectedElement().getIdentifier()));
+            Ev3SystemUtils.Delete_File("/home/root/lms2012/prjs/"+ProjectManager.getActProjectVar().getFilename()+"/", ((Device) UI.runselection.getSelectedElement().getIdentifier()));
         } catch (Exception e) {
             Program.logger.config("First Time Deploy");
         }
@@ -176,6 +176,7 @@ public class EV3compiler implements Compiler {
 
     ArrayList<Byte> playsound = new ArrayList<>();
         playsound.addAll(Operations.playSound("./ui/DownloadSucces",100,false));
+       playsound.addAll(Operations.waitforTone());
         ((Device) UI.runselection.getSelectedElement().getIdentifier()).getConnectionHandle().sendData(ev3.makeDirectCmd(playsound,0,0), ((Device) UI.runselection.getSelectedElement().getIdentifier()));
 
         ArrayList<Byte> command = new ArrayList<>();

@@ -508,6 +508,7 @@ public class Operations {
         return b;
     }
 
+
     public static ArrayList<Byte> waitforTone() {
         ArrayList<Byte> temp = new ArrayList<>();
         temp.add(ev3.opSound_Ready);
