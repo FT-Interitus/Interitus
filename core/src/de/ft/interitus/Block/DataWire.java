@@ -19,7 +19,6 @@ import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.Unproject;
 
-//TODO when moving Wire ProjectVar:changes should be true
 public class DataWire {
 
 

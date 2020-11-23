@@ -25,7 +25,5 @@ public interface Theme {
 
     Color PopUpColor();
 
-    boolean isdark();
-
     String getName();
 }

@@ -34,7 +34,7 @@ public class Data {
     public static ArrayList<String> filename = new ArrayList<String>(); //Die Namen der Dateien die zuletzt geöffnet wurden
     public static File tempfolder; //Der Ordner in dem alle Programm daten liegen
     public static String foldername = ".itd";
-    private static File folder; //Der Ordner in dem alle Programm daten liegen
+    public static File folder; //Der Ordner in dem alle Programm daten liegen
 
     /**
      * load the Programm data from the UserFolder/"+foldername+"

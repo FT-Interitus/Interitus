@@ -58,11 +58,6 @@ public class DarkMode implements Theme {
     }
 
     @Override
-    public boolean isdark() {
-        return true;
-    }
-
-    @Override
     public String getName() {
         return "Dark Mode";
     }

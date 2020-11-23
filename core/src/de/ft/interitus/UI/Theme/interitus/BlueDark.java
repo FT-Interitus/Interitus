@@ -57,11 +57,6 @@ public class BlueDark implements Theme {
         return popups;
     }
 
-    @Override
-    public boolean isdark() {
-        return true;
-    }
-
 
     @Override
     public String getName() {

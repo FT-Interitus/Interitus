@@ -38,7 +38,6 @@ public static HidServices hidServices = HidManager.getHidServices();
             try {
 
                 size = legodevice.read(1048,3000);
-            //TODO experimentell
 
                 //int sizeofcontent =
                    //     ((size[0] & (byte)0xFF) <<  0) |

@@ -120,7 +120,7 @@ public class ProjectSettingsUI extends VisWindow {
                         case 2 -> VersionControll.add(container);
                         case 1 -> ProjectManager.getActProjectVar().projectType.getProjectFunktions().projectsettings(container,ProjectManager.getActProjectVar().projectSettings);
                         case 3 -> AddonSettings.add(container);
-                        default -> ProjectManager.getActProjectVar().enabledAddons.get(SelectedItem-4).getAddonSettings(container); // FIXME: 23.11.20 Crash!!!
+                        default -> ProjectManager.getActProjectVar().enabledAddons.get(SelectedItem-4).getAddonSettings(container);
                     }
 
                 }
