@@ -14,6 +14,7 @@ import com.kotcrab.vis.ui.widget.VisCheckBox;
 import com.kotcrab.vis.ui.widget.VisTable;
 import com.kotcrab.vis.ui.widget.VisTextButton;
 import de.ft.interitus.Block.Block;
+import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
@@ -87,6 +88,7 @@ public class AddonSettings {
                     }
                     BlockTappedBar.init();
                     Tools.update();
+                    UI.proset.rebuildTree();
 
                 }catch (Exception e) {
                     e.printStackTrace();

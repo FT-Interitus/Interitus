@@ -18,10 +18,11 @@ import com.kotcrab.vis.ui.building.utilities.CellWidget;
 import com.kotcrab.vis.ui.building.utilities.Padding;
 import com.kotcrab.vis.ui.building.utilities.layouts.ActorLayout;
 import com.kotcrab.vis.ui.widget.*;
+import de.ft.interitus.Program;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.projectsettings.subitems.AddonSettings;
-import de.ft.interitus.UI.projectsettings.subitems.Informations;
+import de.ft.interitus.UI.projectsettings.subitems.Information;
 import de.ft.interitus.UI.projectsettings.subitems.VersionControll;
 import de.ft.interitus.Var;
 import de.ft.interitus.projecttypes.Addons.Addon;
@@ -36,7 +37,6 @@ public class ProjectSettingsUI extends VisWindow {
     public static int SelectedItem = 0;
     private final VisTable container = new VisTable();
     private final Padding padding = new Padding(2, 3);
-    ChangeListener listener = null;
     private VisTree tree;
 
     public ProjectSettingsUI() {
@@ -61,7 +61,7 @@ public class ProjectSettingsUI extends VisWindow {
     public void show() {
 
         container.clearChildren();
-        Informations.add(container);
+        Information.add(container);
 
         testBuilder = new TestBuilder("Projekt-Einstellungen", new StandardTableBuilder(padding));
         UIVar.isdialogeopend = true;
@@ -96,61 +96,17 @@ public class ProjectSettingsUI extends VisWindow {
             closeOnEscape();
             addCloseButton();
 
-
-            ActorLayout layout = new ActorLayout() {
-                @Override
-                public Actor convertToActor(Actor... widgets) {
-                    return null;
-                }
-
-                @Override
-                public Actor convertToActor(CellWidget<?>... widgets) {
-                    return null;
-                }
-            };
-
-
-            //    layout.convertToActor(new CreateTab());
-
-
-            builder.setTablePadding(new Padding(20, 30, 20, 30));
-
             tree = new VisTree();
-
-            TestNode item1 = new TestNode(new VisLabel(" Informationen "), 0);
-            TestNode item2 = new TestNode(new VisLabel(" Einstellungen "),1);
-            TestNode item3 = new TestNode(new VisLabel(" VCS "), 2);
-            TestNode item4 = new TestNode(new VisLabel(" Addons "), 3);
-
-
-
-            //ADD Advanced Settings to ITM if Device is connect
-
-
-            item1.setExpanded(true);
-            item2.setExpanded(true);
-            item3.setExpanded(true);
-
-
-            tree.add(item1);
-            tree.add(item2);
-            tree.add(item3);
-            tree.add(item4);
-
-
-            int counter = 0;
-            for(Addon addon: ProjectManager.getActProjectVar().enabledAddons) {
-                counter++;
-                tree.add(new TestNode(new VisLabel(" " + addon.getName() + " "),counter+3));
-            }
-
+            rebuildTree();
 
             tree.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
 
+                    if(tree.getSelectedNode()==null) return;
 
-                    SelectedItem = ((TestNode) tree.getSelectedNode()).Mode;
+
+                        SelectedItem = ((TestNode) tree.getSelectedNode()).Mode;
 
 
                     container.clearChildren();
@@ -160,18 +116,28 @@ public class ProjectSettingsUI extends VisWindow {
                     }
 
                     switch (SelectedItem) {
-                        case 0 -> Informations.add(container);
+                        case 0 -> Information.add(container);
                         case 2 -> VersionControll.add(container);
                         case 1 -> ProjectManager.getActProjectVar().projectType.getProjectFunktions().projectsettings(container,ProjectManager.getActProjectVar().projectSettings);
                         case 3 -> AddonSettings.add(container);
-                        default -> ProjectManager.getActProjectVar().enabledAddons.get(SelectedItem-4).getAddonSettings(container);
+                        default -> ProjectManager.getActProjectVar().enabledAddons.get(SelectedItem-4).getAddonSettings(container); // FIXME: 23.11.20 Crash!!!
                     }
 
                 }
             });
 
 
+            //    layout.convertToActor(new CreateTab());
+
+
+            builder.setTablePadding(new Padding(20, 30, 20, 30));
+
+
             add(tree).expand().fill().padTop(15).padLeft(15).width(-10);
+
+
+
+
             //  builder.append(CellWidget.of(tree).padding(new Padding(15,15,0,0)).wrap());
 
             builder.append(CellWidget.of(new Separator()).fillY().padding(new Padding(0, -17, 0, 0)).wrap());
@@ -213,7 +179,6 @@ public class ProjectSettingsUI extends VisWindow {
             if (!super.getParent().isVisible()) {
                 UIVar.isdialogeopend = false;
                 Var.disableshortcuts = false;
-                this.removeListener(listener);
             }
             return super.getParent().isVisible();
 
@@ -257,5 +222,42 @@ public class ProjectSettingsUI extends VisWindow {
 
             return builder.build();
         }
+    }
+
+    public void rebuildTree() {
+
+
+       tree.clearChildren();
+
+        TestNode item1 = new TestNode(new VisLabel(" Informationen "), 0);
+        TestNode item2 = new TestNode(new VisLabel(" Einstellungen "),1);
+        TestNode item3 = new TestNode(new VisLabel(" VCS "), 2);
+        TestNode item4 = new TestNode(new VisLabel(" Addons "), 3);
+
+
+
+        //ADD Advanced Settings to ITM if Device is connect
+
+
+        item1.setExpanded(true);
+        item2.setExpanded(true);
+        item3.setExpanded(true);
+
+
+        tree.add(item1);
+        tree.add(item2);
+        tree.add(item3);
+        tree.add(item4);
+
+
+        int counter = 0;
+        for(Addon addon: ProjectManager.getActProjectVar().enabledAddons) {
+            counter++;
+            tree.add(new TestNode(new VisLabel(" " + addon.getName() + " "),counter+3));
+        }
+
+
+
+
     }
 }

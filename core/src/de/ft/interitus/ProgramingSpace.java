@@ -54,13 +54,8 @@ public class ProgramingSpace extends ScreenAdapter {
 
     public static PressedKeys pressedKeys;
     public static Plugin nativ = new Native();
-    public boolean loadimagesfromplugin = true;
-
 
     public void open() {
-
-
-        pressedKeys = new PressedKeys();
 
 
         cam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -153,9 +148,6 @@ public class ProgramingSpace extends ScreenAdapter {
         }
 
 
-        if (!loadimagesfromplugin) {
-            PluginDrawer.draw();
-        }
 
 
         if (ProjectManager.getActProjectVar() != null && ProjectManager.getActProjectVar().projectType.isCodeshowable()) {
@@ -169,7 +161,7 @@ public class ProgramingSpace extends ScreenAdapter {
         WindowManager.drawer(delta);
 
 
-        loader(); //Load Images in OpenGL context
+
 
         Gdx.graphics.requestRendering();
         de.ft.interitus.UI.Viewport.limitfps();
@@ -195,24 +187,7 @@ public class ProgramingSpace extends ScreenAdapter {
     }
 
 
-    public void loader() {
 
-
-        //Um alle shortcuts für das Programm zu überprüfen
-        CheckShortcuts.check();
-
-
-        //Import all Plugin Images
-        if (loadimagesfromplugin) { //Import all
-
-            PluginDrawer.loadimages();
-
-            loadimagesfromplugin = false; //
-
-            PluginManagerHandler.init();
-
-        }
-    }
 
 
 }

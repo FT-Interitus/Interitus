@@ -9,13 +9,17 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.InputManager;
 import de.ft.interitus.UI.Notification.Notification;
 import de.ft.interitus.UI.Notification.NotificationManager;
 import de.ft.interitus.UI.UI;
+import de.ft.interitus.UI.UIElements.PressedKeys;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.popup.PopupHandler;
 import de.ft.interitus.loading.AssetLoader;
+import de.ft.interitus.plugin.PluginDrawer;
+import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.utils.ShapeRenderer;
 
 
@@ -72,6 +76,10 @@ public class WindowManager {
     public static void drawer(float delta) {
 
 
+        if(loaded) {
+            PluginDrawer.draw();
+        }
+
         if (!Var.inProgram) {
             UIVar.programmflaeche_y = 0;
         }
@@ -110,7 +118,7 @@ public class WindowManager {
             e.printStackTrace();
 
         }
-
+    loader();
 
     }
 
@@ -120,7 +128,7 @@ public class WindowManager {
         shapeRenderer = new ShapeRenderer();
         BlockshapeRenderer = new ShapeRenderer();
         UI.UIcam.position.set(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f, 0);
-
+        ProgramingSpace.pressedKeys = new PressedKeys();
 
 
     }
@@ -158,4 +166,25 @@ public class WindowManager {
         programingspace, welcome
 
     }
+
+    private static boolean loaded = false;
+    public static void loader() {
+
+
+        //Um alle shortcuts für das Programm zu überprüfen
+        CheckShortcuts.check();
+
+
+        //Import all Plugin Images
+        if (!loaded) { //Import all
+
+            PluginDrawer.loadimages();
+
+            loaded = true; //
+
+            PluginManagerHandler.init();
+
+        }
+    }
+
 }

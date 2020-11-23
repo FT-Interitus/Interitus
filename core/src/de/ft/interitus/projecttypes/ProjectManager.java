@@ -79,6 +79,19 @@ public class ProjectManager {
             }
         });
 
+
+        time = new Timer();
+        time.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                if (ProjectManager.getActProjectVar() != null) {
+                    ProjectManager.getActProjectVar().projectType.update();
+                }
+
+
+            }
+        }, 0, 1700);
+
     }
 
     public static void change(int index) {
@@ -94,67 +107,19 @@ public class ProjectManager {
         Var.openprojectindex = index;
         getActProjectVar().currentstarttime = System.currentTimeMillis();
 
-        time.cancel();
-        time.purge();
-
-
         BlockTappedBar.init();
 
-        UIVar.isdialogeopend = true;
+        /***
+         * Remove Marked Block if it doesn't exist in the Block ArrayList
+         */
+        if(ProjectManager.getActProjectVar()!=null) {
+            if(!ProjectManager.getActProjectVar().blocks.contains(ProjectManager.getActProjectVar().marked_block)) {
+                ProjectManager.getActProjectVar().marked_block = null;
 
-        final Notification waitforprojectnotification = new Notification(AssetLoader.information, "Bitte Warten...", "Das Projekt wird aktiviert").setCloseable(false).setProgressbarvalue(0).rollin(false);
-        NotificationManager.sendNotification(waitforprojectnotification);
-
+            }
+        }
         UI.runselection.clear();
 
-        Timer Timer = new Timer();
-        Timer.scheduleAtFixedRate(new TimerTask() {
-            int counter = 0;
-
-
-            @Override
-            public void run() {
-
-
-                if (counter <= 100) {
-                    waitforprojectnotification.setProgressbarvalue(counter);
-                }
-
-
-                if (counter == 110) {
-
-                    waitforprojectnotification.close();
-                    UIVar.isdialogeopend = false;
-                    /***
-                     * Remove Marked Block if it doesn't exist in the Block ArrayList
-                     */
-                    if(ProjectManager.getActProjectVar()!=null) {
-                        if(!ProjectManager.getActProjectVar().blocks.contains(ProjectManager.getActProjectVar().marked_block)) {
-                            ProjectManager.getActProjectVar().marked_block = null;
-
-                        }
-                    }
-                    UI.runselection.clear();
-                    Program.logger.config("clear");
-                    this.cancel();
-                }
-
-                counter++;
-
-            }
-        }, 0, 15);
-
-        time = new Timer();
-        time.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                if (ProjectManager.getActProjectVar() != null) {
-                    ProjectManager.getActProjectVar().projectType.update();
-                }
-
-
-            }
-        }, 1700, 1000);
 
 
         ProjectManager.getActProjectVar().projectType.getProjectFunktions().switchedto();
