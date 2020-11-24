@@ -169,7 +169,7 @@ public class NotificationManager {
                 WindowManager.shapeRenderer.roundendrect(Gdx.graphics.getWidth() - DISTANCE_RIGHT+IMAGE_MARGIN_RIGHT+notifications.get(i).getRollin(), UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i))+PROGRESSBAR_MARGIN_BOTTOM, DISTANCE_RIGHT - MARGIN_RIGHT-IMAGE_MARGIN_RIGHT*2, 3, 2);
 
                 WindowManager.shapeRenderer.setColor(Settings.theme.ClearColor().r+0.3f,Settings.theme.ClearColor().g+0.3f,Settings.theme.ClearColor().b+0.3f,notifications.get(i).getFadeout());
-                WindowManager.shapeRenderer.roundendrect(Gdx.graphics.getWidth() - DISTANCE_RIGHT+IMAGE_MARGIN_RIGHT+notifications.get(i).getRollin(), UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i))+PROGRESSBAR_MARGIN_BOTTOM, ((int) ((float) (DISTANCE_RIGHT - MARGIN_RIGHT - IMAGE_MARGIN_RIGHT * 2) / 100f * notifications.get(i).getProgressbarvalueis())), 3, 2);
+                WindowManager.shapeRenderer.roundendrect(Gdx.graphics.getWidth() - DISTANCE_RIGHT+IMAGE_MARGIN_RIGHT+notifications.get(i).getRollin(), UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i))+PROGRESSBAR_MARGIN_BOTTOM, ((int) ((float) (DISTANCE_RIGHT - MARGIN_RIGHT - IMAGE_MARGIN_RIGHT * 2) / 100f * notifications.get(i).getDisplayedProgressbarValue())), 3, 2);
 
                 WindowManager.shapeRenderer.end();
 
@@ -202,11 +202,11 @@ public class NotificationManager {
                 notifications.get(i).setRollin(notifications.get(i).getRollin()-MOVE_IN_SPEED);
             }
 
-            if(notifications.get(i).getProgressbarvalueis()>notifications.get(i).getProgressbarvalue()) {
-                notifications.get(i).setProgressbarvalueis(notifications.get(i).getProgressbarvalueis()-1);
+            if(notifications.get(i).getDisplayedProgressbarValue()>notifications.get(i).getProgressbarvalue()) {
+                notifications.get(i).setProgressbarvalueis(notifications.get(i).getDisplayedProgressbarValue()-1);
             }
-            if(notifications.get(i).getProgressbarvalueis()<notifications.get(i).getProgressbarvalue()) {
-                notifications.get(i).setProgressbarvalueis(notifications.get(i).getProgressbarvalueis()+1);
+            if(notifications.get(i).getDisplayedProgressbarValue()<notifications.get(i).getProgressbarvalue()) {
+                notifications.get(i).setProgressbarvalueis(notifications.get(i).getDisplayedProgressbarValue()+1);
             }
 
 

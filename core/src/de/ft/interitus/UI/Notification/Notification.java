@@ -61,6 +61,9 @@ public class Notification {
         }
         this.progressbarvalue = progressbarvalue;
 
+        if(progressbarvalue==-1) {
+            progressbarvalueis = -1;
+        }
         return this;
     }
 
@@ -240,7 +243,7 @@ public class Notification {
     }
 
 
-    protected  int getProgressbarvalueis() {
+    public  int getDisplayedProgressbarValue() {
         return progressbarvalueis;
     }
 

@@ -20,6 +20,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 @RestController
 public class StorePluginInstallManager {
@@ -34,20 +37,7 @@ public class StorePluginInstallManager {
     @RequestMapping(value = "/install")
     public String installer(@RequestParam String url,@RequestParam String jsoninformation) throws IOException {
 
-        Program.logger.config(url);
-
-        JSONObject jsonObject = new JSONObject(jsoninformation);
-        Program.logger.config(jsonObject.getString("name"));
-        //TODO check
-        //installRequest(jsonObject.getString("name"),jsonObject.getString("version"),jsonObject.getString("description"),jsonObject.getString("author"),jsonObject.getString("detailed_description"));
-        Program.logger.config("path generatiing...");
-        File newplugin = new File(Data.folder.getAbsolutePath()+"/plugins/"+jsonObject.getString("name")+".itpl");
-        Program.logger.config("downloading...");
-        FileOutputStream fileOutputStream = new FileOutputStream(newplugin);
-        Program.logger.config("starting...");
-        fileOutputStream.write(DownloadFile.downloadBytes(url));
-        Program.logger.config("restarting...");
-        Restart.restart();
+       PluginInstallManager.startInstallPlugin(url,jsoninformation);
             return "";
 
     }
