@@ -3,11 +3,15 @@
  * Copyright by Tim and Felix
  */
 
-package de.ft.interitus.plugin.store;
+package de.ft.interitus.plugin;
 
 import de.ft.interitus.Program;
 import de.ft.interitus.UI.Notification.Notification;
 import de.ft.interitus.datamanager.programmdata.Data;
+import de.ft.interitus.events.plugin.store.PluginStoreEventManager;
+import de.ft.interitus.plugin.PluginLoader;
+import de.ft.interitus.plugin.PluginManagerHandler;
+import de.ft.interitus.plugin.ProgramRegistry;
 import de.ft.interitus.utils.CountingInputStream;
 import de.ft.interitus.utils.DownloadFile;
 
@@ -74,11 +78,19 @@ public class PluginDownloader {
         }
         fileOutputStream.write(downloadedFile);
         notification.setTitle("Plugin Installiert");
-        notification.setMessage("Das wars schon...\nInteritus jetzt neustarten!");
+        notification.setMessage("Das wars schon...\nInteritus läd das Plugin!");
         notification.setProgressbarvalue(-1);
         notification.setCloseable(true);
         notification.setStayalive(true);
 
+        if(PluginLoader.loadPlugin(newPlugin)) {
+
+            PluginManagerHandler.loadedplugins.getLastObject().register(PluginManagerHandler.registry);
+            ProgramRegistry.loadPluginAfterInitialize();
+
+        }else{
+            notification.setMessage("Das wars schon...\nInteritus bitte neustarten!");
+        }
 
 
     }

@@ -3,7 +3,7 @@
  * Copyright by Tim and Felix
  */
 
-package de.ft.interitus.plugin.store;
+package de.ft.interitus.plugin;
 
 
 

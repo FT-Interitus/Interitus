@@ -7,10 +7,11 @@ package de.ft.interitus.plugin;
 
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.ui.Cell;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.kotcrab.vis.ui.widget.Menu;
 import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisTable;
-import de.ft.interitus.Program;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.Theme.RegisteredThemes;
@@ -42,6 +43,12 @@ public class ProgramRegistry {
     protected static final ArrayList<Pixmap> pluginpixmaps = new ArrayList<>();
     protected static final ArrayList<Texture> pluginTextures = new ArrayList<>();
     protected static final ArrayList<PluginRenderer> pluginRenderer = new ArrayList<>();
+
+
+
+    /**
+     * @deprecated ?
+     */
     private static final ArrayList<Plugin> pluginprojekttypesplugins = new ArrayList<>();
     private static final ArrayList<Plugin> pluginsettingsplugins = new ArrayList<>();
     private static final ArrayList<Plugin> pluginMenubarplugins = new ArrayList<>();
@@ -280,6 +287,7 @@ public class ProgramRegistry {
     public static void addMenuBarItems() {
         for (int i = 0; i < ProgramRegistry.pluginMenubar.size(); i++) { //Alle Plugins MenuBar werden der MenuBar
             UI.menuBar.addMenu(ProgramRegistry.pluginMenubar.get(i));
+
         }
     }
 
@@ -299,5 +307,40 @@ public class ProgramRegistry {
         container.add(ProgramRegistry.pluginsettings.get(id));
 
     }
+
+     public static void loadPluginAfterInitialize() {
+
+        //Add unadded ProjectTypes
+        for(ProjectType projectType:ProgramRegistry.pluginprojekttypes) {
+            if(ProjectTypesVar.projectTypes.contains(projectType)) continue;
+            ProjectTypesVar.projectTypes.add(projectType);
+        }
+         //Add unadded shortCuts
+         for(ShortCut shortcut:ProgramRegistry.pluginshortCuts) {
+             if(CheckShortcuts.shortCuts.contains(shortcut)) continue;
+             CheckShortcuts.shortCuts.add(shortcut);
+         }
+         //Add unadded shortCuts checker
+
+         for(ShortCutChecker shortCutChecker:ProgramRegistry.pluginshortCutsChecker) {
+             if(CheckShortcuts.shortCutsChecker.contains(shortCutChecker)) continue;
+             CheckShortcuts.shortCutsChecker.add(shortCutChecker);
+         }
+
+         //Add unadded PluginMenubaritems
+         for (int i = 0; i < ProgramRegistry.pluginMenubar.size(); i++) { //Alle Plugins MenuBar werden der MenuBar entfernt
+             UI.menuBar.removeMenu(ProgramRegistry.pluginMenubar.get(i));
+
+         }
+         for (int i = 0; i < ProgramRegistry.pluginMenubar.size(); i++) { //Alle Plugins MenuBar werden der MenuBar
+             UI.menuBar.addMenu(ProgramRegistry.pluginMenubar.get(i));
+
+         }
+
+     }
+
+
+
+
 
 }

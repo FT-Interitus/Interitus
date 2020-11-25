@@ -21,8 +21,8 @@ import java.util.TimerTask;
 public class PluginManagerHandler {
 
 
-    protected static List<Plugin> loadedplugins = new ArrayList<>();
-    private static final ProgramRegistry registry = new ProgramRegistry();
+    protected static ArrayList<Plugin> loadedplugins = new ArrayList<>();
+    protected static final ProgramRegistry registry = new ProgramRegistry();
     private static final PluginAssetManager assetManager = new PluginAssetManager();
 
     static Exception error = null;

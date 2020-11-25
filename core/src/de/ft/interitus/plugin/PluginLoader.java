@@ -17,7 +17,7 @@ import java.util.jar.Manifest;
 
 public class PluginLoader {
 
-    public static void loadPlugin(File filetest) throws IOException {
+    public static boolean loadPlugin(File filetest) throws IOException {
 
         //Erzeugen des JAR-Objekts
 
@@ -60,7 +60,7 @@ public class PluginLoader {
 
                if(!PluginManagerHandler.pluginvalidator(new String(cl.getResourceAsStream("plugin.json").readAllBytes()))) {
                    Program.logger.warning("Plugin loading error");
-                   return;
+                   return false;
                }
 
            }catch (Throwable e) {
@@ -68,7 +68,7 @@ public class PluginLoader {
 
                Program.logger.warning("Plugin doesn't provide plugin.json");
 
-               return;
+               return false;
            }
 
         } catch (ClassNotFoundException e) {
@@ -94,10 +94,10 @@ public class PluginLoader {
                     plugin = (Plugin) cl.getDeclaredConstructor().newInstance();
                 } catch (InvocationTargetException e) {
                     PluginManagerHandler.error = e;
-                    return;
+                    return false;
                 } catch (NoSuchMethodException e) {
                     PluginManagerHandler.error = e;
-                    return;
+                    return false;
                 }
                 Program.logger.config("Loaded " + filetest.getName());
                 PluginManagerHandler.loadedplugins.add(plugin);
@@ -108,9 +108,10 @@ public class PluginLoader {
                 PluginManagerHandler.error = e;
                 e.printStackTrace();
             }
-
+        return true;
         } else {
             Program.logger.severe("Fehlerhaftes Plugin");
+            return false;
         }
 
 
