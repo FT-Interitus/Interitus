@@ -61,7 +61,11 @@ public class PluginInstallManager {
 
                         if (result == yes) {
                             Thread installPlugin = new Thread(() -> {
-                                proceedInstallation(url, jsonInformation);
+                                try {
+                                    proceedInstallation(url, jsonInformation);
+                                }catch (Exception e)  {
+                                    e.printStackTrace();
+                                }
                             });
                             installPlugin.start();
 

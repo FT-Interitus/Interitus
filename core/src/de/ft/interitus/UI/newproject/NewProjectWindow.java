@@ -185,7 +185,7 @@ public class NewProjectWindow {
             nameinput.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent changeEvent, Actor actor) {
-                    if(nameinput.getText().length()<35&&nameinput.getText().length()>2&&!nameinput.getText().startsWith(" ")&&!nameinput.getText().endsWith(" ")) {
+                    if(nameinput.getText().length()<35&&nameinput.getText().length()>2&&!nameinput.getText().startsWith(" ")&&!nameinput.getText().endsWith(" ")&&!nameinput.getText().contains("ä")&&!nameinput.getText().contains("ü")&&!nameinput.getText().contains("ö")) {
                     Button_next.setDisabled(false);
                     errorLabel.setText("");
                     }else{
