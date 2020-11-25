@@ -38,8 +38,14 @@ public class PluginInstallManager {
 
         try {
             PluginDownloader.downloadPlugin(url,jsonObject.getString("name"),notification);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+            e.printStackTrace();
+            notification.setTitle("Fehler");
+            notification.setProgressbarvalue(-1);
+            notification.setCloseable(true);
+            notification.setStayalive(false);
+            notification.setMessage("Fehler beim Herunterladen");
         }
 
     }

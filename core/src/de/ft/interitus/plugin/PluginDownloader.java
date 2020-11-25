@@ -63,6 +63,16 @@ public class PluginDownloader {
         assert connection != null;
 
         long totalSize = connection.getContentLengthLong();
+
+        if(totalSize<0) {
+            notification.setTitle("Fehler");
+            notification.setProgressbarvalue(-1);
+            notification.setCloseable(true);
+            notification.setStayalive(false);
+            notification.setMessage("Fehler beim Herunterladen");
+            return;
+        }
+
         CountingInputStream countingInputStream = new CountingInputStream(connection.getInputStream());
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
@@ -86,7 +96,7 @@ public class PluginDownloader {
         }
         fileOutputStream.write(downloadedFile);
         notification.setTitle("Plugin Installiert");
-        notification.setMessage("Das wars schon...\nInteritus läd das Plugin!");
+        notification.setMessage("Das wars schon...\nInteritus lädt das Plugin!");
         notification.setProgressbarvalue(-1);
         notification.setCloseable(true);
         notification.setStayalive(true);
