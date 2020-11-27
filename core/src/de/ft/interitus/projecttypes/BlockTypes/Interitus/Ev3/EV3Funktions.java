@@ -131,7 +131,7 @@ public class EV3Funktions implements ProjectFunktions {
     }
 
     @Override
-    public void switchedto() {
+    public void switchedto() { //TODO why?
         for (Device device : ev3devices) {
 
             if (device instanceof USBDevice) {

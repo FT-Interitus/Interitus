@@ -81,9 +81,9 @@ public class BlockDropDownMenue {
 
     public void draw(Block block) {
         longestText();
-        WindowManager.batch.begin();
-        WindowManager.batch.draw(block.getBlocktype().getBlockModis().get(block.getBlocktype().actBlockModiIndex).getModiImage(),this.x,this.y,this.w,this.h);
-        WindowManager.batch.end();
+        WindowManager.blockBatch.begin();
+        WindowManager.blockBatch.draw(block.getBlocktype().getBlockModis().get(block.getBlocktype().actBlockModiIndex).getModiImage(),this.x,this.y,this.w,this.h);
+        WindowManager.blockBatch.end();
 
         if(CheckCollision.checkpointwithobject(this.x,this.y,this.w,this.h, Unproject.unproject().x,Unproject.unproject().y)&&Gdx.input.isButtonJustPressed(0)){
             dropped=!dropped;
@@ -111,14 +111,14 @@ public class BlockDropDownMenue {
             }
 
 
-                WindowManager.batch.begin();
-            WindowManager.batch.draw(block.getBlocktype().getBlockModis().get(i).getModiImage(), this.x, this.y- aktualy, this.w,this.h);
-            WindowManager.batch.end();
+                WindowManager.blockBatch.begin();
+            WindowManager.blockBatch.draw(block.getBlocktype().getBlockModis().get(i).getModiImage(), this.x, this.y- aktualy, this.w,this.h);
+            WindowManager.blockBatch.end();
 
-                WindowManager.batch.begin();
+                WindowManager.blockBatch.begin();
                 glyphLayout.setText(WindowManager.font, block.getBlocktype().getBlockModis().get(i).getname());
-            WindowManager.font.draw(WindowManager.batch, glyphLayout, this.x+this.w+5,this.y-aktualy+glyphLayout.height  + this.h/2- glyphLayout.height/2);
-                WindowManager.batch.end();
+            WindowManager.font.draw(WindowManager.blockBatch, glyphLayout, this.x+this.w+5,this.y-aktualy+glyphLayout.height  + this.h/2- glyphLayout.height/2);
+                WindowManager.blockBatch.end();
 
 
 

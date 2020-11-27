@@ -10,16 +10,11 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.utils.GdxBuild;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.BlockDrawer;
-import de.ft.interitus.Block.BlockUpdate.BlockMarkManager;
 import de.ft.interitus.Block.BlockUpdate.BlockUpdateManager;
 import de.ft.interitus.Block.ThreadManager;
-import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.ProgramGrid;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.PressedKeys;
@@ -30,8 +25,6 @@ import de.ft.interitus.events.EventManager;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.plugin.Native;
 import de.ft.interitus.plugin.Plugin;
-import de.ft.interitus.plugin.PluginDrawer;
-import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.PositionSaver;
 
@@ -71,7 +64,7 @@ public class ProgramingSpace extends ScreenAdapter {
 
     public void init() {
 
-        UI.updatedragui(WindowManager.shapeRenderer, true, WindowManager.batch,1);
+        UI.updatedragui(WindowManager.shapeRenderer, true, WindowManager.blockBatch,1);
         //ProjectManager.getActProjectVar().projectType.initProject();
 
         BlockTappedBar.init();
@@ -119,12 +112,12 @@ public class ProgramingSpace extends ScreenAdapter {
 
             Gdx.gl.glClearColor(Settings.theme.ClearColor().r, Settings.theme.ClearColor().g, Settings.theme.ClearColor().b, Settings.theme.ClearColor().a);
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-            WindowManager.batch.setProjectionMatrix(cam.combined);
+            WindowManager.blockBatch.setProjectionMatrix(cam.combined);
             WindowManager.BlockshapeRenderer.setProjectionMatrix(cam.combined);
             WindowManager.update();
 
 
-            UI.updatedragui(WindowManager.shapeRenderer, true, WindowManager.batch,delta);
+            UI.updatedragui(WindowManager.shapeRenderer, true, WindowManager.blockBatch,delta);
 
             ProgramGrid.draw(WindowManager.shapeRenderer, ProgramingSpace.cam);
 

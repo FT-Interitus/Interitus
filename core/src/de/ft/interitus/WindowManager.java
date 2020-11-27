@@ -26,9 +26,12 @@ import de.ft.interitus.utils.ShapeRenderer;
 
 public class WindowManager {
     public static ShapeRenderer shapeRenderer;
+
+
+    public static SpriteBatch blockBatch;
     public static ShapeRenderer BlockshapeRenderer;
+
     public static BitmapFont font;
-    public static SpriteBatch batch;
     private static boolean initalProgramingSpace = true;
     private static boolean switchtoprogramm = false;
     private static boolean switchtowelcome = false;
@@ -124,7 +127,7 @@ public class WindowManager {
 
     public static void init() {
         font = new BitmapFont();
-        WindowManager.batch = new SpriteBatch();
+        WindowManager.blockBatch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
         BlockshapeRenderer = new ShapeRenderer();
         UI.UIcam.position.set(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f, 0);

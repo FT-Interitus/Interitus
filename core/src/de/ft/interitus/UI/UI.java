@@ -276,7 +276,7 @@ public class UI {
                         } else {
 
                             if (markedblock.getBlocktype().getBlockParameter().get(i).getDataWires().size() > 0) {
-                                textFielder.add(new VisTextField("Per Leitung Übertragen")); //TODO design
+                                textFielder.add(new VisTextField("Leitung verbunden"));
                                 ((VisTextField) textFielder.getLastObject()).setDisabled(true);
 
                             } else {

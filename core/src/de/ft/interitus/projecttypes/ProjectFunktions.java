@@ -16,6 +16,9 @@ public interface ProjectFunktions {
 
     void update();
 
+    /**
+     * If the user Switched to a Project with this Type
+     */
     void switchedto();
 
     void runconfigsettings(VisTable builder, DeviceConfiguration configuration);

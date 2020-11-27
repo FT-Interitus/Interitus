@@ -14,7 +14,7 @@ public class PluginDrawer {
 
 
         for(PluginRenderer renderer: ProgramRegistry.pluginRenderer) {
-            renderer.render(WindowManager.batch, UI.UIbatch, WindowManager.BlockshapeRenderer, WindowManager.shapeRenderer);
+            renderer.render(WindowManager.blockBatch, UI.UIbatch, WindowManager.BlockshapeRenderer, WindowManager.shapeRenderer);
         }
 
 

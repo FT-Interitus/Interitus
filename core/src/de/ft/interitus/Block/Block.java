@@ -56,15 +56,15 @@ public abstract class Block {
     private final GlyphLayout glyphLayout = new GlyphLayout();
     private final BlockDropDownMenue BlockModiSelection = new BlockDropDownMenue(0, 0, 0, 0, this);
     private final Block INSTANCE;
+    private final int h; //Die Höhe des Blocks
     public boolean seted = true; //Ob der Block losgelassen wurde bzw ob der Block eine statische Position hat
     public boolean moved = false; // Ob der Block gerade mit der Maus bewegt wird
-    private final int h; //Die Höhe des Blocks
-    private int index; //Der Index des Blocks (Der Gleiche wie im Array BlckVar.blocks)o
-    private Wire wire_left;
-    private Wire wire_right;
     //Die Y Position des Duplicates  //Die Weite und Höhe ergeben sich aus der Block weite und Höhe
     public Block left = null; //Der rechte verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
     public Block right = null; //Der linke verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
+    private int index; //Der Index des Blocks (Der Gleiche wie im Array BlckVar.blocks)o
+    private Wire wire_left;
+    private Wire wire_right;
     private PlatformSpecificBlock blocktype;
     private ArrayList<Block> extendedBlocks = null;
     private boolean hoverd;
@@ -72,8 +72,8 @@ public abstract class Block {
 
     public Block(final int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock, BlocktoSaveGenerator blocktoSaveGenerator, boolean isSubBlock) { //Initzialisieren des Blocks
         this.blocktype = platformSpecificBlock;
-      //  EventVar.blockEventManager.createBlock(new BlockCreateEvent(this, this));
-        EventManager.fireEvent(this,new BlockCreateEvent(this));
+        //  EventVar.blockEventManager.createBlock(new BlockCreateEvent(this, this));
+        EventManager.fireEvent(this, new BlockCreateEvent(this));
         this.pos.x = x;
         this.pos.y = y;
 
@@ -153,7 +153,6 @@ public abstract class Block {
     }
 
 
-
     /***
      *
      * @return is the Block marked with the mouse
@@ -181,7 +180,7 @@ public abstract class Block {
         if (left == null) {
             if (this.left != null) {
                 if (this.left.getRight() != null) {
-                    this.left.right =null;
+                    this.left.right = null;
                 }
             }
         }
@@ -409,6 +408,7 @@ public abstract class Block {
                 for (DataWire dataWire : parameter.getDataWires()) {
 
                     if (dataWire.getParam_input().getBlock() == this) continue;
+                    if (dataWire == ProjectManager.getActProjectVar().moveingdatawire) continue;
                     if (!ProjectManager.getActProjectVar().visible_blocks.contains(dataWire.getParam_input().getBlock()))
                         dataWire.draw();
                 }
@@ -416,22 +416,20 @@ public abstract class Block {
         }
 
 
-
         batch.begin();
 
 
-            if (ProjectManager.getActProjectVar().duplicate_block_right==this&& this.getBlocktype().canhasrightconnector()) {
-                batch.setColor(1, 1, 1, 0.5f);
-                batch.draw(AssetLoader.block_middle, this.getX_dup_rechts(), this.getY(), ProjectManager.getActProjectVar().marked_block.getW(), this.getH()); //Wenn der Block die größte überlappung hat wird er als show duplicat angezigt
-                batch.setColor(1, 1, 1, 1);
-            }
+        if (ProjectManager.getActProjectVar().duplicate_block_right == this && this.getBlocktype().canhasrightconnector()) {
+            batch.setColor(1, 1, 1, 0.5f);
+            batch.draw(AssetLoader.block_middle, this.getX_dup_rechts(), this.getY(), ProjectManager.getActProjectVar().marked_block.getW(), this.getH()); //Wenn der Block die größte überlappung hat wird er als show duplicat angezigt
+            batch.setColor(1, 1, 1, 1);
+        }
 
-            if (ProjectManager.getActProjectVar().duplicate_block_left==this && this.getBlocktype().canhasleftconnector() && ProjectManager.getActProjectVar().marked_block != null) {
-                batch.setColor(1, 1, 1, 0.5f);
-                batch.draw(AssetLoader.block_middle, this.getX() - ProjectManager.getActProjectVar().marked_block.getW(), this.getY(), ProjectManager.getActProjectVar().marked_block.getW(), this.getH()); //das gleiche für links
-                batch.setColor(1, 1, 1, 1);
-            }
-
+        if (ProjectManager.getActProjectVar().duplicate_block_left == this && this.getBlocktype().canhasleftconnector() && ProjectManager.getActProjectVar().marked_block != null) {
+            batch.setColor(1, 1, 1, 0.5f);
+            batch.draw(AssetLoader.block_middle, this.getX() - ProjectManager.getActProjectVar().marked_block.getW(), this.getY(), ProjectManager.getActProjectVar().marked_block.getW(), this.getH()); //das gleiche für links
+            batch.setColor(1, 1, 1, 1);
+        }
 
 
         try {
@@ -440,7 +438,9 @@ public abstract class Block {
             } else {
                 batch.setColor(1, 1, 1, 1);
             }
-        float alpha = 1;
+
+
+            float alpha = 1;
 
             if (!Settings.disableblockgrayout) {
                 if (!ProjectManager.getActProjectVar().projectType.getProjectFunktions().isblockconnected(this)) {
@@ -530,9 +530,6 @@ public abstract class Block {
             }
 
 
-
-
-
 //TODO
             //if (!this.blockupdate.isIsconnectorclicked() && ProjectManager.getActProjectVar().showleftdocker && this.getLeft() == null && this.getBlocktype().canhasleftconnector()) {
             // batch.draw(AssetLoader.connector_offerd, getWireconnector_left().x, getWireconnector_left().y, 20, 20);
@@ -557,12 +554,13 @@ public abstract class Block {
                 for (int i = 0; i < this.getBlocktype().getBlockParameter().size(); i++) {
                     batch.draw(this.getBlocktype().getBlockParameter().get(i).getParameterTexture(), aktualX + 5, this.getY() + 33, 20, 20);
 
-                    if(ProjectManager.getActProjectVar().moveingdatawire!=null) {
-                        if(CheckCollision.checkpointwithobject(this.getBlocktype().getBlockParameter().get(i).getX(),this.getBlocktype().getBlockParameter().get(i).getY(), UIVar.parameter_width, UIVar.parameter_height,Unproject.unproject())&&!this.getBlocktype().getBlockParameter().get(i).getParameterType().isOutput()&&this.getBlocktype().getBlockParameter().get(i).getDataWires().size()==0) {
-                            if(!this.getBlocktype().getBlockParameter().get(i).getParameterType().getVariableType().iscompatible(ProjectManager.getActProjectVar().moveingdatawire.getParam_input().getParameterType().getVariableType())||ProjectManager.getActProjectVar().moveingdatawire.getParam_input().getBlock()==this) {
-                                batch.setColor(1,0.6f,0.6f,alpha);
-                            }else{
-                                batch.setColor(0.6f,1,0.6f,alpha);
+                    //DataWire Compatibility Color Check
+                    if (ProjectManager.getActProjectVar().moveingdatawire != null) {
+                        if (CheckCollision.checkpointwithobject(this.getBlocktype().getBlockParameter().get(i).getX(), this.getBlocktype().getBlockParameter().get(i).getY(), UIVar.parameter_width, UIVar.parameter_height, Unproject.unproject()) && !this.getBlocktype().getBlockParameter().get(i).getParameterType().isOutput() && this.getBlocktype().getBlockParameter().get(i).getDataWires().size() == 0) {
+                            if (!this.getBlocktype().getBlockParameter().get(i).getParameterType().getVariableType().iscompatible(ProjectManager.getActProjectVar().moveingdatawire.getParam_input().getParameterType().getVariableType()) || ProjectManager.getActProjectVar().moveingdatawire.getParam_input().getBlock() == this) {
+                                batch.setColor(1, 0.6f, 0.6f, alpha);
+                            } else {
+                                batch.setColor(0.6f, 1, 0.6f, alpha);
 
                             }
                         }
@@ -584,7 +582,7 @@ public abstract class Block {
                     }
                     aktualX += UIVar.parameter_width;
 
-                        batch.setColor(1,1f,1f,alpha);
+                    batch.setColor(1, 1f, 1f, alpha);
 
 
                 }
@@ -609,6 +607,7 @@ public abstract class Block {
                     for (Parameter parameter : this.getBlocktype().getBlockParameter()) {
                         if (parameter.getDataWires() != null) {
                             for (DataWire dataWire : parameter.getDataWires()) {
+                                if (dataWire == ProjectManager.getActProjectVar().moveingdatawire) continue;
                                 if (dataWire.getParam_input() == parameter) {
                                     dataWire.draw();
                                 }

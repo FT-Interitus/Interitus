@@ -73,7 +73,7 @@ public class MenuBar {
                     fullscreen = true;
                 } else {
                     Gdx.graphics.setWindowedMode(Var.w, Var.h);
-                    WindowManager.batch.getProjectionMatrix().setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                    WindowManager.blockBatch.getProjectionMatrix().setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
                     Gdx.gl.glViewport(0, 0, Gdx.graphics.getBackBufferWidth(), Gdx.graphics.getBackBufferHeight());
                     fullscreen = false;
                 }

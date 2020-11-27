@@ -15,18 +15,18 @@ import de.ft.interitus.projecttypes.ProjectType;
 public class LogicOperation extends PlatformSpecificBlock {
     public LogicOperation(ProjectType projectType, Addon addon) {
         super(projectType, addon);
-        super.blockModis.add(new LogicOperationIntagerOperation());
+        super.blockModis.add(new LogicOperationIntegerOperation());
         super.actBlockModiIndex=0;
     }
 
     @Override
     public String getName() {
-        return "IntagerOperationen";
+        return "Vergleichs Block";
     }
 
     @Override
     public String getdescription() {
-        return "Dieser Block vergleicht Intager";
+        return "Dieser Block vergleicht Integer";
     }
 
 

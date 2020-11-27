@@ -16,28 +16,28 @@ import de.ft.interitus.projecttypes.ProjectManager;
 public class BlockDrawer {
     public static void Draw(float delta) {
         if (!Var.isloading) {
-            Block Temp = null;
-            Block Temp2 = null;
+            Block markedBlock = null;
+            Block movingBlock = null;
             for (int i = 0; i < ProjectManager.getActProjectVar().visible_blocks.size(); i = i + 1) {
                 Block block = ProjectManager.getActProjectVar().visible_blocks.get(i);
 
                 try {
-                    WindowManager.batch.begin();
-                    WindowManager.batch.end();
+                    WindowManager.blockBatch.begin();
+                    WindowManager.blockBatch.end();
 
                 } catch (IllegalStateException e) {
-                    WindowManager.batch.end();
+                    WindowManager.blockBatch.end();
                 }
 
                 try {
                     if (block.isMarked()) {
                         if (block.isMoving()) {
-                            Temp2 = block;
+                            movingBlock = block;
                         } else {
-                            Temp = block;
+                            markedBlock = block;
                         }
                     } else {
-                        block.draw(WindowManager.batch, WindowManager.BlockshapeRenderer, WindowManager.font);
+                        block.draw(WindowManager.blockBatch, WindowManager.BlockshapeRenderer, WindowManager.font);
                     }
 
                     if (block.isMarked()) {
@@ -55,10 +55,10 @@ public class BlockDrawer {
                     e.printStackTrace();
                 }
             }
-            if (Temp != null) {
+            if (markedBlock != null) {
 
                 try {
-                    Temp.draw(WindowManager.batch, WindowManager.BlockshapeRenderer, WindowManager.font);
+                    markedBlock.draw(WindowManager.blockBatch, WindowManager.BlockshapeRenderer, WindowManager.font);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -67,20 +67,24 @@ public class BlockDrawer {
 
 
 
-            UI.updatedragui(WindowManager.shapeRenderer, false, WindowManager.batch,delta);
+            UI.updatedragui(WindowManager.shapeRenderer, false, WindowManager.blockBatch,delta);
             BlockTappedBar.tb.setX(UIVar.BlockBarX + UIVar.BlockBarW / 2);
             BlockTappedBar.tb.setY(UIVar.BlockBarY + UIVar.BlockBarH / 2 - (BlockTappedBar.tb.getHeight() + UIVar.abstandvonRand * 2) / 2);
             BlockTappedBar.tb.draw();
 
-            if (Temp2 != null) {
+            if (movingBlock != null) {
 
                 try {
-                    Temp2.draw(WindowManager.batch, WindowManager.BlockshapeRenderer, WindowManager.font);
+                    movingBlock.draw(WindowManager.blockBatch, WindowManager.BlockshapeRenderer, WindowManager.font);
 
 
                 } catch (Exception ignored) {
 
                 }
+            }
+
+            if(ProjectManager.getActProjectVar().moveingdatawire!=null) {
+                ProjectManager.getActProjectVar().moveingdatawire.draw();
             }
 
 

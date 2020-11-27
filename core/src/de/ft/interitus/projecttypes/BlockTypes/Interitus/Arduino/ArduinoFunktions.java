@@ -136,11 +136,11 @@ private VisSelectBox<ParameterVariableType> stringVisSelectBox;
 
     @Override
     public void update() {
+        UI.runselection.setDefaultText("Bitte Gerät verbinden");
 
         counter++;
         if(counter==6) {
             counter = 0;
-            UI.runselection.setDefaultText("Bitte Gerät verbinden");
 
             JSONArray array = ((ArduinoCompiler) ProjectManager.getActProjectVar().projectType.getCompiler()).getBoards();
             if (array == null) {
@@ -209,13 +209,9 @@ private VisSelectBox<ParameterVariableType> stringVisSelectBox;
                     }
                 }
 
-                if (UI.runselection.getSelectedElement() == null) {
-                    UI.runselection.setDefaultText("Bitte Gerät verbinden");
-                }
+
 
             }
-
-            array = null;
 
         }
     }

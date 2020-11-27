@@ -10,6 +10,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Cursor.SystemCursor;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
+import de.ft.interitus.UI.window.Window;
 import de.ft.interitus.Var;
 import de.ft.interitus.WindowManager;
 import de.ft.interitus.Program;
@@ -17,6 +18,7 @@ import de.ft.interitus.ProgramingSpace;
 import de.ft.interitus.UI.UIElements.check.CheckCollision;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
 import de.ft.interitus.UI.UIVar;
+import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.Unproject;
 
@@ -30,8 +32,7 @@ public class DataWire {
     private Parameter param_input;
     private Parameter param_output;
     private boolean setCorsoronlyonce=false;
-    private final Vector3 tempvector = new Vector3();
-    private final Vector3 tempvector1 = new Vector3();
+
 
     private boolean[] moving=new boolean[10];
 
@@ -181,7 +182,7 @@ public class DataWire {
         if(ProjectManager.getActProjectVar().moveingdatawire==this) {
 
             output_x = ((int) Unproject.unproject().x);
-            output_y = ((int) Unproject.unproject().y);
+            output_y = ((int) Unproject.unproject().y)-this.getParam_input().getParameterType().getVariableType().getTextureconnector().getHeight()/2;
 
 
 
@@ -282,7 +283,17 @@ public class DataWire {
         WindowManager.BlockshapeRenderer.rectLine(UIVar.DataWire[5][0], UIVar.DataWire[5][1], UIVar.DataWire[6][0], UIVar.DataWire[6][1], UIVar.thickness);//output horizontal verlängerung
         WindowManager.BlockshapeRenderer.rectLine(UIVar.DataWire[6][0], UIVar.DataWire[6][1], UIVar.DataWire[7][0], UIVar.DataWire[7][1], UIVar.thickness);//Verlängerung an output
 
+
+
         WindowManager.BlockshapeRenderer.end();
+
+        if(ProjectManager.getActProjectVar().moveingdatawire==this) {
+
+            WindowManager.blockBatch.begin();
+            WindowManager.blockBatch.setColor(1,1,1,1);
+            WindowManager.blockBatch.draw(this.getParam_input().getParameterType().getVariableType().getTextureconnector(),Unproject.unproject().x-this.getParam_input().getParameterType().getVariableType().getTextureconnector().getWidth()/2,Unproject.unproject().y-this.getParam_input().getParameterType().getVariableType().getTextureconnector().getHeight()/2);
+            WindowManager.blockBatch.end();
+        }
         userLayoutMovment();
 
         if(ProjectManager.getActProjectVar().moveingdatawire==this) {
