@@ -555,6 +555,7 @@ public abstract class Block {
 
                 aktualX += 35;
                 for (int i = 0; i < this.getBlocktype().getBlockParameter().size(); i++) {
+                    batch.draw(this.getBlocktype().getBlockParameter().get(i).getParameterTexture(), aktualX + 5, this.getY() + 33, 20, 20);
 
                     if(ProjectManager.getActProjectVar().moveingdatawire!=null) {
                         if(CheckCollision.checkpointwithobject(this.getBlocktype().getBlockParameter().get(i).getX(),this.getBlocktype().getBlockParameter().get(i).getY(), UIVar.parameter_width, UIVar.parameter_height,Unproject.unproject())&&!this.getBlocktype().getBlockParameter().get(i).getParameterType().isOutput()&&this.getBlocktype().getBlockParameter().get(i).getDataWires().size()==0) {
@@ -566,7 +567,6 @@ public abstract class Block {
                             }
                         }
                     }
-                    batch.draw(this.getBlocktype().getBlockParameter().get(i).getParameterTexture(), aktualX + 5, this.getY() + 33, 20, 20);
                     if (this.getBlocktype().getBlockParameter().get(i).getParameterType().isOutput()) {
                         batch.draw(this.getBlocktype().getBlockParameter().get(i).getParameterType().getVariableType().getTextureconnector(), (int) aktualX, this.getY() - 7, UIVar.parameter_width, UIVar.parameter_height, 0, 0, AssetLoader.Plug_IntParameter.getWidth(), AssetLoader.Plug_IntParameter.getHeight(), false, true);
                         this.getBlocktype().getBlockParameter().get(i).setX((int) aktualX);
