@@ -20,7 +20,6 @@ import de.ft.interitus.UI.UIElements.check.CheckCollision;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.Viewport;
 import de.ft.interitus.UI.popup.PopupMenue;
-import de.ft.interitus.WindowManager;
 import de.ft.interitus.events.EventManager;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.block.BlockCreateEvent;
@@ -441,11 +440,12 @@ public abstract class Block {
             } else {
                 batch.setColor(1, 1, 1, 1);
             }
-
+        float alpha = 1;
 
             if (!Settings.disableblockgrayout) {
                 if (!ProjectManager.getActProjectVar().projectType.getProjectFunktions().isblockconnected(this)) {
                     batch.setColor(batch.getColor().r, batch.getColor().g, batch.getColor().b, 0.4f);
+                    alpha = 0.4f;
                 }
             }
             batch.draw(AssetLoader.block_middle, this.getX() + 6, this.getY(), this.getW() - 12, this.getH()); // Block ohne das er makiert ist
@@ -532,27 +532,6 @@ public abstract class Block {
 
 
 
-/*
-        if (this.getLeft() != null) { //Verbindungs marke ob der Nachbar verbunden ist
-            batch.end();
-            shape.begin(ShapeRenderer.ShapeType.Filled);
-            shape.setColor(1f, 0.4f, 0.4f, 0.4f);
-            shape.ellipse(this.getX() - 6, this.getY() + this.getH() / 2 - 6, 12, 12);
-            shape.end();
-            batch.begin();
-        }
-
-        if (this.getRight() != null) {//Verbindungs marke ob der Nachbar verbunden ist
-            batch.end();
-            shape.begin(ShapeRenderer.ShapeType.Filled);
-            shape.setColor(1f, 0.4f, 0.4f, 0.4f);
-            shape.ellipse(this.getX() - 6 + this.getW(), this.getY() + this.getH() / 2 - 6, 12, 12);
-            shape.end();
-            batch.begin();
-        }
-
- */
-
 
 //TODO
             //if (!this.blockupdate.isIsconnectorclicked() && ProjectManager.getActProjectVar().showleftdocker && this.getLeft() == null && this.getBlocktype().canhasleftconnector()) {
@@ -576,14 +555,25 @@ public abstract class Block {
 
                 aktualX += 35;
                 for (int i = 0; i < this.getBlocktype().getBlockParameter().size(); i++) {
+
+                    if(ProjectManager.getActProjectVar().moveingdatawire!=null) {
+                        if(CheckCollision.checkpointwithobject(this.getBlocktype().getBlockParameter().get(i).getX(),this.getBlocktype().getBlockParameter().get(i).getY(), UIVar.parameter_width, UIVar.parameter_height,Unproject.unproject())&&!this.getBlocktype().getBlockParameter().get(i).getParameterType().isOutput()&&this.getBlocktype().getBlockParameter().get(i).getDataWires().size()==0) {
+                            if(!this.getBlocktype().getBlockParameter().get(i).getParameterType().getVariableType().iscompatible(ProjectManager.getActProjectVar().moveingdatawire.getParam_input().getParameterType().getVariableType())||ProjectManager.getActProjectVar().moveingdatawire.getParam_input().getBlock()==this) {
+                                batch.setColor(1,0.6f,0.6f,alpha);
+                            }else{
+                                batch.setColor(0.6f,1,0.6f,alpha);
+
+                            }
+                        }
+                    }
                     batch.draw(this.getBlocktype().getBlockParameter().get(i).getParameterTexture(), aktualX + 5, this.getY() + 33, 20, 20);
                     if (this.getBlocktype().getBlockParameter().get(i).getParameterType().isOutput()) {
-                        batch.draw(this.getBlocktype().getBlockParameter().get(i).getParameterType().getTyp().getTextureconnector(), (int) aktualX, this.getY() - 7, UIVar.parameter_width, UIVar.parameter_height, 0, 0, AssetLoader.Plug_IntParameter.getWidth(), AssetLoader.Plug_IntParameter.getHeight(), false, true);
+                        batch.draw(this.getBlocktype().getBlockParameter().get(i).getParameterType().getVariableType().getTextureconnector(), (int) aktualX, this.getY() - 7, UIVar.parameter_width, UIVar.parameter_height, 0, 0, AssetLoader.Plug_IntParameter.getWidth(), AssetLoader.Plug_IntParameter.getHeight(), false, true);
                         this.getBlocktype().getBlockParameter().get(i).setX((int) aktualX);
                         this.getBlocktype().getBlockParameter().get(i).setY(this.getY() - 7);
 
                     } else {
-                        batch.draw(this.getBlocktype().getBlockParameter().get(i).getParameterType().getTyp().getTextureconnector(), aktualX, this.getY(), UIVar.parameter_width, UIVar.parameter_height);
+                        batch.draw(this.getBlocktype().getBlockParameter().get(i).getParameterType().getVariableType().getTextureconnector(), aktualX, this.getY(), UIVar.parameter_width, UIVar.parameter_height);
                         this.getBlocktype().getBlockParameter().get(i).setX((int) aktualX);
                         this.getBlocktype().getBlockParameter().get(i).setY(this.getY());
                         font.getData().setScale(0.9f);
@@ -592,7 +582,11 @@ public abstract class Block {
                             font.draw(batch, glyphLayout, aktualX + 15 - glyphLayout.width / 2, getY() + glyphLayout.height * 1.5f);
                         }
                     }
-                    aktualX += 30;
+                    aktualX += UIVar.parameter_width;
+
+                        batch.setColor(1,1f,1f,alpha);
+
+
                 }
             } else if (this.getBlocktype().getDescriptionImage() != null) {
 

@@ -8,6 +8,7 @@ package de.ft.interitus.Block.BlockUpdate;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import de.ft.interitus.Block.Block;
+import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.UI.ProgramGrid;
 import de.ft.interitus.UI.UIElements.check.CheckCollision;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
@@ -73,6 +74,8 @@ public class BlockMovingManager {
         if (Var.mouseDownPos.dst(Unproject.unproject()) <= tolerance) return false;
         if (!CheckCollision.checkmousewithblock(block)) return false;
         if (projectVar.moveingdatawire != null) return false;
+        if(BlockDataWireManager.checkParameterEject(block)) return false;
+
 
         projectVar.diff_save = generateDiff(block, Unproject.unproject());
         BlockConnectionManager.startMovingBlock(block);

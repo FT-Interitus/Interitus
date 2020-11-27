@@ -61,6 +61,10 @@ public class Var {
 
     public static final Vector2 mousepressedoldwihoutunproject = new Vector2(1, 1); //Wo war die Maus als das letzte mal eine Taste gedrückt wurde
 
+    public static final Vector2 mouseReleasePos = new Vector2(1, 1); //Wo war die Maus als das letzte mal eine Taste gedrückt wurde
+
+    public static final Vector2 mouseReleasePosWithoutUnproject = new Vector2(1, 1); //Wo war die Maus als das letzte mal eine Taste gedrückt wurde
+
 
     public static ArrayList<Window> extendsWindows = new ArrayList<>();
     public static Window splashscreen = null;

@@ -9,23 +9,23 @@ import de.ft.interitus.projecttypes.ParameterVariableType;
 
 public class ParameterType {
 
-    ParameterVariableType typ;
+    ParameterVariableType variableType;
     boolean output;
     boolean dropdown;
     String[] selectables;
 
-    public ParameterType(ParameterVariableType typ, boolean output, boolean dropdown) {
-        this.typ = typ;
+    public ParameterType(ParameterVariableType variableType, boolean output, boolean dropdown) {
+        this.variableType = variableType;
         this.output = output;
         this.dropdown = dropdown;
     }
 
-    public ParameterVariableType getTyp() {
-        return typ;
+    public ParameterVariableType getVariableType() {
+        return variableType;
     }
 
-    public void setTyp(ParameterVariableType typ) {
-        this.typ = typ;
+    public void setVariableType(ParameterVariableType variableType) {
+        this.variableType = variableType;
     }
 
     public boolean isOutput() {

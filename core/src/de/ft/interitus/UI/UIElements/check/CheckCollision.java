@@ -53,10 +53,10 @@ public class CheckCollision {
     }
 
 
-    public static boolean checkpointwithobject(int obj1_x, int obj1_y, int obj1_w, int obj1_h, Vector2 mousepos) {
+    public static boolean checkpointwithobject(int obj1_x, int obj1_y, int obj1_w, int obj1_h, Vector2 position) {
 
 
-        return object(obj1_x, obj1_y, obj1_w, obj1_h, (int) mousepos.x, (int) mousepos.y, MOUSESIZE, MOUSESIZE);
+        return object(obj1_x, obj1_y, obj1_w, obj1_h, (int) position.x, (int) position.y, MOUSESIZE, MOUSESIZE);
 
     }
 

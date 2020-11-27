@@ -10,6 +10,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Cursor.SystemCursor;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector3;
+import de.ft.interitus.Var;
 import de.ft.interitus.WindowManager;
 import de.ft.interitus.Program;
 import de.ft.interitus.ProgramingSpace;
@@ -184,20 +185,29 @@ public class DataWire {
 
 
 
+            if(Gdx.input.isButtonJustPressed(0)||!Gdx.input.isButtonPressed(0))
            for(Block block: ProjectManager.getActProjectVar().blocks) {
                if(block.getBlocktype().getBlockParameter()==null) {
                    continue;
                }
                for(Parameter parameter:block.getBlocktype().getBlockParameter()) {
-                   if(parameter!=this.getParam_input()&&!parameter.getParameterType().isOutput()&&parameter.getDataWires().size()!=1&&parameter.getParameterType().typ.iscompatible(this.getParam_input().getParameterType().typ)&&parameter.getBlock()!=this.getParam_input().getBlock()) {
+                   if(parameter!=this.getParam_input()&&!parameter.getParameterType().isOutput()&&parameter.getDataWires().size()!=1&&parameter.getParameterType().variableType.iscompatible(this.getParam_input().getParameterType().variableType)&&parameter.getBlock()!=this.getParam_input().getBlock()) {
 
-
-                       if(CheckCollision.checkpointwithobject(parameter.getX(),parameter.getY(), UIVar.parameter_width,UIVar.parameter_height,Unproject.unproject())&&Gdx.input.isButtonPressed(0)) {
-                           ProjectManager.getActProjectVar().moveingdatawire=null;
-                           param_output=parameter;
-                           parameter.getDataWires().clear();
-                           parameter.getDataWires().add(this);
-                       }
+                    if(Gdx.input.isButtonJustPressed(0)) {
+                        if (CheckCollision.checkpointwithobject(parameter.getX(), parameter.getY(), UIVar.parameter_width, UIVar.parameter_height, Unproject.unproject())) {
+                            ProjectManager.getActProjectVar().moveingdatawire = null;
+                            param_output = parameter;
+                            parameter.getDataWires().clear();
+                            parameter.getDataWires().add(this);
+                        }
+                    }else {
+                        if (CheckCollision.checkpointwithobject(parameter.getX(), parameter.getY(), UIVar.parameter_width, UIVar.parameter_height, Var.mouseReleasePos)) {
+                            ProjectManager.getActProjectVar().moveingdatawire = null;
+                            param_output = parameter;
+                            parameter.getDataWires().clear();
+                            parameter.getDataWires().add(this);
+                        }
+                    }
 
                    }
                }
@@ -220,7 +230,7 @@ public class DataWire {
 
 
         WindowManager.BlockshapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        WindowManager.BlockshapeRenderer.setColor(this.getParam_input().getParameterType().getTyp().getWirecolor());
+        WindowManager.BlockshapeRenderer.setColor(this.getParam_input().getParameterType().getVariableType().getWirecolor());
 
         int parameter_middle_x=input_x+UIVar.parameter_width/2;
         int parameter_middle_output_x;

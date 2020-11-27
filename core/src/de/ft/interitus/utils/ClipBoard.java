@@ -1,15 +1,17 @@
+/*
+ * Copyright (c) 2020.
+ * Copyright by Tim and Felix
+ */
+
 package de.ft.interitus.utils;
 
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
-import de.ft.interitus.projecttypes.ProjectManager;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
-import java.awt.datatransfer.Transferable;
 
 public class ClipBoard {
     public static StringSelection stringSelection;
@@ -30,7 +32,7 @@ public class ClipBoard {
         JSONArray blockParameter = new JSONArray();
         for(int i=0;i<psb.getBlockParameter().size();i++){
             JSONArray a=new JSONArray();
-            a.put(new JSONObject().put("typ",psb.getBlockParameter().get(i).getParameterType().getTyp().getType()));
+            a.put(new JSONObject().put("typ",psb.getBlockParameter().get(i).getParameterType().getVariableType().getType()));
             a.put(new JSONObject().put("wert",psb.getBlockParameter().get(i).getParameter()));
 
             blockParameter.put(a);

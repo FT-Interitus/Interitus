@@ -99,7 +99,7 @@ public class ArduinoCompiler implements Compiler {
                     }
 
                     parameter.setVarName(prefix + i);
-                    Programm.append(parameter.getParameterType().getTyp().getType()).append(" ").append(parameter.getVarName()).append(";\n");
+                    Programm.append(parameter.getParameterType().getVariableType().getType()).append(" ").append(parameter.getVarName()).append(";\n");
                     i++;
                 }
 

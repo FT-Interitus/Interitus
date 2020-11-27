@@ -11,7 +11,9 @@ import de.ft.interitus.Block.DataWire;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.UI.UIElements.check.CheckCollision;
 import de.ft.interitus.UI.UIVar;
+import de.ft.interitus.Var;
 import de.ft.interitus.projecttypes.ProjectManager;
+import de.ft.interitus.utils.PositionSaver;
 import de.ft.interitus.utils.Unproject;
 
 public class BlockDataWireManager {
@@ -37,9 +39,31 @@ public class BlockDataWireManager {
 
     }
 
-    private static boolean pressedOnParameterSpace(Parameter parameter) {
+    protected static boolean pressedOnParameterSpace(Parameter parameter) {
         boolean collisionCheck = CheckCollision.checkpointwithobject(parameter.getX(), parameter.getY(), UIVar.parameter_width, UIVar.parameter_height, Unproject.unproject());
         return collisionCheck && Gdx.input.isButtonJustPressed(0);
+    }
+
+
+    protected static boolean checkParameterEject(Block block) {
+        if(block.getBlocktype().getBlockParameter()!=null) {
+
+            for(Parameter parameter:block.getBlocktype().getBlockParameter())
+                if(CheckCollision.checkpointwithobject(parameter.getX(), parameter.getY(), UIVar.parameter_width, UIVar.parameter_height, Unproject.unproject())&&parameter.getDataWires().size()!=0&&!parameter.getParameterType().isOutput()) {
+                    ejectDataWire(parameter.getDataWires().get(0));
+                    parameter.getDataWires().clear(); //TODO wierd jumps back
+                    return true;
+                }
+
+        }
+
+        return false;
+    }
+
+    private static void ejectDataWire(DataWire dataWire) {
+        dataWire.setParam_output(null);
+        ProjectManager.getActProjectVar().moveingdatawire = dataWire;
+
     }
 
 }
