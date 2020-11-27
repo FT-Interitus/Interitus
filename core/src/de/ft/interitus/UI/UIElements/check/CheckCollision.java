@@ -29,6 +29,29 @@ public class CheckCollision {
 
     }
 
+    public static boolean rectCollision(java.awt.Rectangle rect1, java.awt.Rectangle rect2){
+        java.awt.Rectangle checkrect=new java.awt.Rectangle(rect1);
+        if(rect1.getWidth()>=0 && rect1.getHeight()>=0){
+            return checkrect.intersects(rect2);
+        }else if(rect1.getWidth()<0 && rect1.getHeight()>=0){
+            checkrect.setLocation((int)(rect1.getX()+rect1.getWidth()),(int)(rect1.getY()));
+            checkrect.setSize((int)Math.abs(rect1.getWidth()),(int)Math.abs(rect1.getHeight()));
+            return checkrect.intersects(rect2);
+        }else if(rect1.getWidth()>=0 && rect1.getHeight()<0){
+            checkrect.setLocation((int)(rect1.getX()),(int)(rect1.getY()+rect1.getHeight()));
+            checkrect.setSize((int)Math.abs(rect1.getWidth()),(int)Math.abs(rect1.getHeight()));
+            return checkrect.intersects(rect2);
+        }else if(rect1.getWidth()<0 && rect1.getHeight()<0){
+            checkrect.setLocation((int)(rect1.getX()+rect1.getWidth()),(int)(rect1.getY()+rect1.getHeight()));
+            checkrect.setSize((int)(Math.abs(rect1.getWidth())),(int)(Math.abs(rect1.getHeight())));
+            return checkrect.intersects(rect2);
+        }else{
+            return false;
+        }
+
+
+    }
+
     public static boolean objectwithrotation(float obj1_x, float obj1_y, float obj1_w, float obj1_h, float obj1_angle, float obj2_x, float obj2_y, int obj2_h, int obj2_w, float obj2_angle) {
 
 
