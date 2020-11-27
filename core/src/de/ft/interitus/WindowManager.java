@@ -45,7 +45,6 @@ public class WindowManager {
             Var.openprojectindex = -1; //-1 is home section
             Program.INSTANCE.setScreen(Var.welcome);
         }
-
         if (switchtoprogramm) {
             if (initalProgramingSpace) {
                 initalProgramingSpace = false;

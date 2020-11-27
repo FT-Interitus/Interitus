@@ -24,11 +24,10 @@ public abstract class ProjectVar {
     public ArrayList<Block> visible_blocks = new ArrayList<>(); //Liste aller Blöcke die sich im sichtbereich der Camera befinden
 
     public Vector2 cam_pos = new Vector2();
-    public float zoom = 1;
-    public Block marked_block = null; // Welcher Block ist makiert ?
+    public float zoom = 1;//イースターエッグであるカウパワームー
+    public ArrayList<Block> marked_block = new ArrayList<>(); // Welcher Block ist makiert ?
     public Block duplicate_block_right = null; // Which Block shows the duplicate
     public Block duplicate_block_left = null; // Which Block shows the duplicate
-    public Vector2 diff_save = new Vector2(); //Unterschied zwischen Blöckem die scih überllappen
     public Block moving_block = null; //Wird ein Block bewegt
     public boolean showleftdocker = false; //Wenn ein connector ausgewählt wird bieten sich die anderen Blöcke zum verbinden an
     public Block connetor_offerd_hoverd_block = null; //Der Block über den man fährt welcher gehovert wird

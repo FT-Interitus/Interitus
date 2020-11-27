@@ -114,7 +114,7 @@ public class ProjectManager {
          */
         if(ProjectManager.getActProjectVar()!=null) {
             if(!ProjectManager.getActProjectVar().blocks.contains(ProjectManager.getActProjectVar().marked_block)) {
-                ProjectManager.getActProjectVar().marked_block = null;
+                ProjectManager.getActProjectVar().marked_block.clear();
 
             }
         }

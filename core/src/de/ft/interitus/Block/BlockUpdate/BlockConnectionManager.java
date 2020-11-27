@@ -13,11 +13,10 @@ import de.ft.interitus.projecttypes.ProjectVar;
 public class BlockConnectionManager {
 
     public static void startMovingBlock(Block block) {
+
+
         disconnectLeft(block);
         disconnectRight(block);
-
-
-
     }
 
     public static void placeBlock(Block block) {
@@ -40,6 +39,7 @@ public class BlockConnectionManager {
         }
 
 
+
     }
 
 
@@ -51,6 +51,7 @@ public class BlockConnectionManager {
     private static void disconnectLeft(Block block) {
         if (block.getWire_left() == null) return;
         if (block.getWire_left().isVisible()) return;
+        if(ProjectManager.getActProjectVar().marked_block.contains(block.getLeft())) return;
         block.getWire_left().delete();
         block.setLeft(null);
 
@@ -65,9 +66,19 @@ public class BlockConnectionManager {
     private static void disconnectRight(Block block) {
         if (block.getWire_right() == null) return;
         if (block.getWire_right().isVisible()) return;
+        if(ProjectManager.getActProjectVar().marked_block.contains(block.getRight())) return;
         block.getWire_right().delete();
         block.setRight(null);
 
+
+    }
+
+    protected static void connectedBlockJumping(Block block) {
+        Block neighbor = block.getRight();
+        while(neighbor!=null&&!neighbor.getWire_left().isVisible()) {
+            neighbor.setPosition(neighbor.getLeft().getX_dup_rechts() , neighbor.getLeft().getY());
+            neighbor = neighbor.getRight();
+        }
 
     }
 

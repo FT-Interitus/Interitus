@@ -37,8 +37,13 @@ public class BlockMovingManager {
             projectVar.changes = true;
 
             BlockJumpingManager.updateBlockDuplicate(block);
-            block.getPos().set(Unproject.unproject().sub(projectVar.diff_save));
+            block.getPos().set(Unproject.unproject().sub(block.getMovementDiff()));
+            for (Block markedBlock : ProjectManager.getActProjectVar().marked_block) {
+                if (markedBlock == block) continue;
 
+                markedBlock.getPos().set(Unproject.unproject().sub(markedBlock.getMovementDiff()));
+
+            }
             if (ProgramGrid.block_active_snapping)
                 blockSnapping(block);
 
@@ -46,10 +51,12 @@ public class BlockMovingManager {
         } else {
 
             if (projectVar.moving_block == block) {
-                if (ProgramGrid.block_snapping && !ProgramGrid.block_active_snapping)
-                    blockSnapping(block);
+               //if (ProgramGrid.block_snapping && !ProgramGrid.block_active_snapping)
+                   // for(Block marked:ProjectManager.getActProjectVar().marked_block)
+                        //blockSnapping(marked);
 
                 BlockConnectionManager.placeBlock(block);
+                BlockConnectionManager.connectedBlockJumping(block);
 
                 stopMovingBlock();
             }
@@ -74,11 +81,13 @@ public class BlockMovingManager {
         if (Var.mouseDownPos.dst(Unproject.unproject()) <= tolerance) return false;
         if (!CheckCollision.checkmousewithblock(block)) return false;
         if (projectVar.moveingdatawire != null) return false;
-        if(BlockDataWireManager.checkParameterEject(block)) return false;
+        if (BlockDataWireManager.checkParameterEject(block)) return false;
 
+        for(Block m:ProjectManager.getActProjectVar().marked_block) {
+            m.getMovementDiff().set(generateDiff(m, Unproject.unproject()));
+            BlockConnectionManager.startMovingBlock(m);
+        }
 
-        projectVar.diff_save = generateDiff(block, Unproject.unproject());
-        BlockConnectionManager.startMovingBlock(block);
 
         return true;
 
@@ -108,14 +117,18 @@ public class BlockMovingManager {
 
     /**
      * Check if the Block was droped in the BlockBar -> delete
-     *
+     * <p>
      * Than remove the Block from the MovingBlock Var
-     *
      */
     private static void stopMovingBlock() {
 
-        if (isOnBlockBar() && projectVar.moving_block.getBlocktype().canbedeleted())
-            projectVar.moving_block.delete(false);
+        if (isOnBlockBar())
+            for(int i=0;i<ProjectManager.getActProjectVar().marked_block.size();i++) {
+                Block marked =ProjectManager.getActProjectVar().marked_block.get(i);
+                if(marked.getBlocktype().canbedeleted())
+                    marked.delete(false);
+            }
+
 
         projectVar.moving_block = null;
         ProjectManager.getActProjectVar().duplicate_block_left = null;
@@ -124,8 +137,9 @@ public class BlockMovingManager {
 
     /**
      * Checks if Mouse is on the Block Bar
-     * @see UIVar,CheckMouse
+     *
      * @return result from check
+     * @see UIVar,CheckMouse
      */
     private static boolean isOnBlockBar() {
         return CheckMouse.isMouseover(UIVar.BlockBarX, UIVar.BlockBarY, UIVar.BlockBarW, UIVar.BlockBarH, false);

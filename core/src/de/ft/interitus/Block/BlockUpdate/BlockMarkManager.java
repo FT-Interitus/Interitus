@@ -6,6 +6,7 @@
 package de.ft.interitus.Block.BlockUpdate;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.UI.UIElements.check.CheckCollision;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
@@ -25,18 +26,19 @@ public class BlockMarkManager {
         if(!Gdx.input.isButtonPressed(0)) return;
         if(wasMouseDownOnBlockSettings()) return;
 
-        if(Gdx.input.isButtonJustPressed(0))  {
-            ProjectManager.getActProjectVar().marked_block = null;
+        if(Gdx.input.isButtonJustPressed(0) && !Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT))  {
+            ProjectManager.getActProjectVar().marked_block.clear();
         }
 
         if(ProjectManager.getActProjectVar().moving_block!=null) return; //Do not allow to select an other Block while anyone is moving
         for(Block block:ProjectManager.getActProjectVar().blocks) {
             if(CheckCollision.checkmousewithblock(block, Var.mouseDownPos))
-                ProjectManager.getActProjectVar().marked_block =block;
+                ProjectManager.getActProjectVar().marked_block.add(block);
         }
 
 
     }
+
 
     private static boolean wasMouseDownOnBlockSettings() {
        return CheckMouse.wasMousePressed(UIVar.blockeinstellungen_x, UIVar.blockeinstellungen_y, UIVar.blockeinstellungen_w, UIVar.blockeinstellungen_h);

@@ -97,11 +97,11 @@ public class UI {
     private static Thread compile_thread;
     //private static final Animation animation = new Animation();
 
-    public static void updatedragui(ShapeRenderer renderer, boolean flaeche, SpriteBatch batch,float delta) {
+    public static void updatedragui(ShapeRenderer renderer, boolean flaeche, SpriteBatch batch, float delta) {
 
         if (!UIVar.uilocked) {
 
-                BlockTappedBar.userresize();
+            BlockTappedBar.userresize();
 
         }
         // Var.w=Gdx.graphics.getWidth();
@@ -132,8 +132,8 @@ public class UI {
         }
         renderer.end();
 
-
-        if (markedblock != ProjectManager.getActProjectVar().marked_block) {
+        // markedblock != ProjectManager.getActProjectVar().marked_block
+        if ((markedblock != null && ProjectManager.getActProjectVar().marked_block.size() == 0) || (ProjectManager.getActProjectVar().marked_block.size() > 0 && markedblock != ProjectManager.getActProjectVar().marked_block.get(0))) {
             UIVar.isBlockSettingsopen = false;
             for (int i = 0; i < textFielder.size(); i++) {
                 try {
@@ -165,7 +165,7 @@ public class UI {
         UIVar.moveprogrammlock = lock;
 
 
-        if (markedblock != null && markedblock.getBlocktype().getBlockParameter() != null && markedblock == ProjectManager.getActProjectVar().marked_block) {
+        if (markedblock != null && markedblock.getBlocktype().getBlockParameter() != null && ((markedblock == null && ProjectManager.getActProjectVar().marked_block.size() == 0) || (ProjectManager.getActProjectVar().marked_block.size() > 0 && markedblock == ProjectManager.getActProjectVar().marked_block.get(0)))) {
 
 
             UIVar.blockeinstellungen_w = 170;
@@ -174,7 +174,7 @@ public class UI {
             UIVar.blockeinstellungen_y = UIVar.programmflaeche_y + UIVar.abstandvonRand;
 
             if (wishaniposition < 0) {
-                wishaniposition += ((0 - wishaniposition) * delta*6);
+                wishaniposition += ((0 - wishaniposition) * delta * 6);
             }
 
 
@@ -266,7 +266,7 @@ public class UI {
                                 @Override
                                 public void changed(ChangeEvent event, Actor actor) {
 
-                                    ProjectManager.getActProjectVar().marked_block.getBlocktype().getBlockParameter().get(textFielder.indexOf(actor)).setParameter(((VisSelectBox<String>) actor).getSelected());
+                                    ProjectManager.getActProjectVar().marked_block.get(0).getBlocktype().getBlockParameter().get(textFielder.indexOf(actor)).setParameter(((VisSelectBox<String>) actor).getSelected());
 
                                 }
                             });
@@ -286,7 +286,7 @@ public class UI {
                             textFielder.get(textFielder.size() - 1).addListener(new ChangeListener() {
                                 @Override
                                 public void changed(ChangeEvent event, Actor actor) {
-                                    ProjectManager.getActProjectVar().marked_block.getBlocktype().getBlockParameter().get(textFielder.indexOf(actor)).setParameter(((VisTextField) actor).getText());
+                                    ProjectManager.getActProjectVar().marked_block.get(0).getBlocktype().getBlockParameter().get(textFielder.indexOf(actor)).setParameter(((VisTextField) actor).getText());
                                 }
                             });
 
@@ -317,7 +317,11 @@ public class UI {
             UIbatch.end();
 
         } else {
-            markedblock = ProjectManager.getActProjectVar().marked_block;
+            if (ProjectManager.getActProjectVar().marked_block.size() == 0) {
+                markedblock = null;
+            } else {
+                markedblock = ProjectManager.getActProjectVar().marked_block.get(0);
+            }
             wishaniposition = -UIVar.blockeinstellungen_w - UIVar.abstandvonRand;
 
             if (settingstextfield != null) {
@@ -553,21 +557,21 @@ public class UI {
     public static void update(float delta) {
 
 
-       // Program.logger.config("Pos:" + (Gdx.graphics.getHeight()-menuBar.getTable().getHeight()-20-(UIVar.abstandvonRand*2)));
+        // Program.logger.config("Pos:" + (Gdx.graphics.getHeight()-menuBar.getTable().getHeight()-20-(UIVar.abstandvonRand*2)));
 
-       // Program.logger.config((UIVar.programmflaeche_h + UIVar.programmflaeche_y));
-        tabbar.setBounds(UIVar.abstandvonRand, (int) (Gdx.graphics.getHeight()-menuBar.getTable().getHeight()-20-(UIVar.abstandvonRand*2)), 300, 20);
+        // Program.logger.config((UIVar.programmflaeche_h + UIVar.programmflaeche_y));
+        tabbar.setBounds(UIVar.abstandvonRand, (int) (Gdx.graphics.getHeight() - menuBar.getTable().getHeight() - 20 - (UIVar.abstandvonRand * 2)), 300, 20);
         tabbar.draw();
 
         if (UIVar.uilocked != isuilock) {
             isuilock = UIVar.uilocked;
 
             if (UIVar.uilocked) {
-                if ( WindowManager.inputManager.contains(stage)) {
+                if (WindowManager.inputManager.contains(stage)) {
                     WindowManager.inputManager.remove(stage);
                 }
             } else {
-                if (! WindowManager.inputManager.contains(stage)) {
+                if (!WindowManager.inputManager.contains(stage)) {
                     WindowManager.inputManager.addProcessor(stage);
                 }
             }
@@ -587,12 +591,9 @@ public class UI {
         //root.setPosition(0,0);
         if (Var.inProgram) {
             buttonbar.setX(Gdx.graphics.getWidth() - 10);
-            buttonbar.setY((int) (Gdx.graphics.getHeight()-menuBar.getTable().getHeight()-20-(UIVar.abstandvonRand*1)));
+            buttonbar.setY((int) (Gdx.graphics.getHeight() - menuBar.getTable().getHeight() - 20 - (UIVar.abstandvonRand * 1)));
 
             buttonbar.draw();
-
-
-
 
 
             if (button_projectstructus.isjustPressednormal()) {

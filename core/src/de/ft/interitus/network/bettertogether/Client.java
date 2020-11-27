@@ -89,7 +89,7 @@ public class Client {
                         @Override
                         public void run() {
                             if (ProjectManager.getActProjectVar().marked_block != null) {
-                                sendinglist.add("!BM!" + ProjectManager.getActProjectVar().marked_block.getIndex() + "t" + ProjectManager.getActProjectVar().marked_block.getX() + "t" + ProjectManager.getActProjectVar().marked_block.getY() + "\n");
+                                //sendinglist.add("!BM!" + ProjectManager.getActProjectVar().marked_block.getIndex() + "t" + ProjectManager.getActProjectVar().marked_block.getX() + "t" + ProjectManager.getActProjectVar().marked_block.getY() + "\n");
 
                             }
 

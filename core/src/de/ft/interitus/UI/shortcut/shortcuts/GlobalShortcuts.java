@@ -73,7 +73,7 @@ public class GlobalShortcuts implements ShortCutChecker {
 
         if(shortCut_Copy.isPressed()){
 
-                ClipBoard.CopyBlocktoClipboard(ProjectManager.getActProjectVar().marked_block.getBlocktype());
+                //TODO ClipBoard.CopyBlocktoClipboard(ProjectManager.getActProjectVar().marked_block.getBlocktype());
 
         }
 

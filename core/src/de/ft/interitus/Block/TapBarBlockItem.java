@@ -40,13 +40,13 @@ public class TapBarBlockItem implements TapItem {
 
                 Block tempblock = ProjectManager.getActProjectVar().projectType.getBlockGenerator().generateBlock(ProjectManager.getActProjectVar().blocks.size(), (int) ProgramingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgramingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y, psb.getWidth(), UIVar.BlockHeight, psb,  ProjectManager.getActProjectVar().projectType.getBlocktoSaveGenerator(), false);
 
-                ProjectManager.getActProjectVar().marked_block = tempblock;
+                ProjectManager.getActProjectVar().marked_block.add(tempblock);
                 ProjectManager.getActProjectVar().moving_block = tempblock;
 
 
                 ProjectManager.getActProjectVar().blocks.add(tempblock);
 
-                ProjectManager.getActProjectVar().diff_save.set(psb.getWidth() / 2, UIVar.BlockHeight / 2);
+                tempblock.getMovementDiff().set(psb.getWidth() / 2, UIVar.BlockHeight / 2);
             }
         }
 
