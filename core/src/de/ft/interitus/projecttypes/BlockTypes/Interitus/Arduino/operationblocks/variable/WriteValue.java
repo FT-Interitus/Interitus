@@ -8,16 +8,21 @@ package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.operationblock
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.Block.ParameterType;
+import de.ft.interitus.UI.ChangeListener;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.BlockTypes.BlockMode;
 import de.ft.interitus.projecttypes.BlockTypes.BlockSettings;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
+import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoVariable;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.InitArduino;
+import de.ft.interitus.projecttypes.ProjectManager;
+import de.ft.interitus.projecttypes.ProjectVariable;
 import de.ft.interitus.utils.ArrayList;
 
 public class WriteValue extends ArduinoBlock {
 
 
+    private ArduinoVariable currentVariable;
     ArrayList<Parameter> parameterArrayList = new ArrayList<>();
     BlockSettings blockSettings = new BlockSettings();
 
@@ -31,6 +36,21 @@ public class WriteValue extends ArduinoBlock {
         parameterArrayList.add(value);
 
         blockSettings.setSettings("");
+
+        blockSettings.setListener(() -> {
+            try {
+                value.getParameterType().setVariableType(ProjectManager.getActProjectVar().projectVariables.get(Integer.parseInt(blockSettings.getSettings())).getType());
+
+                currentVariable = (ArduinoVariable) ProjectManager.getActProjectVar().projectVariables.get(Integer.parseInt(blockSettings.getSettings()));
+                for (int i = 0; i < value.getDataWires().size(); i++) {
+                    value.getDataWires().get(i).delete();
+                    i--;
+                }
+            }catch (Exception e) {
+
+            }
+        });
+
 
     }
 
@@ -63,7 +83,7 @@ public class WriteValue extends ArduinoBlock {
 
     @Override
     public String getCode() {
-        return blockSettings.getSettings() + " = "+ value.getParameter()+";";
+        return ((ArduinoVariable) ProjectManager.getActProjectVar().projectVariables.get(Integer.parseInt(blockSettings.getSettings()))).getName() + " = "+value.getParameter()+";";
     }
 
 

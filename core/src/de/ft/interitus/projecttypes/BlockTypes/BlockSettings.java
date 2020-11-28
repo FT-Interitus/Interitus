@@ -5,8 +5,13 @@
 
 package de.ft.interitus.projecttypes.BlockTypes;
 
+import de.ft.interitus.UI.ChangeListener;
+
 public class BlockSettings {
 
+
+
+     private ChangeListener listener;
 
     String settings = "";
 
@@ -25,6 +30,13 @@ public class BlockSettings {
 
 
     public void setSettings(String settings) {
+        if(listener!=null) {
+            listener.change();
+        }
         this.settings = settings;
+    }
+
+    public void setListener(ChangeListener listener) {
+        this.listener = listener;
     }
 }

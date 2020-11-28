@@ -7,10 +7,15 @@ package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.operationblock
 
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
+import de.ft.interitus.Block.ParameterType;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.BlockTypes.BlockMode;
 import de.ft.interitus.projecttypes.BlockTypes.BlockSettings;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
+import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoVariable;
+import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.InitArduino;
+import de.ft.interitus.projecttypes.ProjectManager;
+import de.ft.interitus.projecttypes.ProjectVar;
 import de.ft.interitus.utils.ArrayList;
 
 public class ReadValue extends ArduinoBlock {
@@ -19,14 +24,31 @@ public class ReadValue extends ArduinoBlock {
     ArrayList<Parameter> parameterArrayList = new ArrayList<>();
     BlockSettings blockSettings = new BlockSettings();
 
-    Parameter initialValue;
+    Parameter value;
+
+    ArduinoVariable currentVariable = null;
 
 
     public ReadValue() {
 
-        //initialValue = new Parameter("", AssetLoader.Parameter_first,"Wert",);
+        value = new Parameter("", AssetLoader.Parameter_first,"Wert","","", new ParameterType(InitArduino.floatvar,true),true);
+        blockSettings.setSettings("0");
+        parameterArrayList.add(value);
 
-blockSettings.setSettings("float");
+        blockSettings.setListener(() -> {
+            try {
+                value.getParameterType().setVariableType(ProjectManager.getActProjectVar().projectVariables.get(Integer.parseInt(blockSettings.getSettings())).getType());
+
+                currentVariable = (ArduinoVariable) ProjectManager.getActProjectVar().projectVariables.get(Integer.parseInt(blockSettings.getSettings()));
+                for (int i = 0; i < value.getDataWires().size(); i++) {
+                    value.getDataWires().get(i).delete();
+                    i--;
+                }
+            }catch (Exception e) {
+
+            }
+        }
+            );
 
     }
 
@@ -57,7 +79,13 @@ blockSettings.setSettings("float");
 
     @Override
     public String getCode() {
-        return null;
+        if(currentVariable==null) return "";
+        if( value.getDataWires().size()>0){
+            return value.getVarName()+ " = "+currentVariable.getName()+";";
+
+        }else {
+            return "";
+        }
     }
 
 
