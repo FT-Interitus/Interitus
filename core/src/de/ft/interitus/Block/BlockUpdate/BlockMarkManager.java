@@ -20,43 +20,38 @@ import java.awt.*;
 
 
 public class BlockMarkManager {
-    static Rectangle selectionRect=new Rectangle();
+    static Rectangle selectionRect = new Rectangle();
     private static boolean selecting = false;
 
     protected static void update() {
 
+        if (ProjectManager.getActProjectVar().moveingdatawire == null)
+            selectingRect();
 
-        if(Gdx.input.isButtonPressed(0)&&ProjectManager.getActProjectVar().moving_block==null) {
-            selectionRect.setLocation((int)Var.mouseDownPos.x,(int)Var.mouseDownPos.y);
-            selectionRect.setSize((int)(Unproject.unproject().x-Var.mouseDownPos.x),(int)(Unproject.unproject().y-Var.mouseDownPos.y));
-            SelectionRectDrawer.draw(selectionRect);
-            selecting = true;
-        }
+        assert ProjectManager.getActProjectVar() != null;
 
-        if(!Gdx.input.isButtonPressed(0)&&selecting)  {
+        if (!Gdx.input.isButtonPressed(0)) return;
+        if (wasMouseDownOnBlockSettings()) return;
 
-            for(Block checkblock:ProjectManager.getActProjectVar().visible_blocks){
-                if(CheckCollision.rectCollision(selectionRect,new Rectangle(checkblock.getX(),checkblock.getY(),checkblock.getW(),checkblock.getH()))) {
-                   ProjectManager.getActProjectVar().marked_block.add(checkblock);
-
-               }
+        if (Gdx.input.isButtonJustPressed(0) && !isMultiSelect()) {
+            if (ProjectManager.getActProjectVar().marked_block.size() == 1) {
+                ProjectManager.getActProjectVar().marked_block.clear();
+            } else if (!clickedOnSelectedBlock()) {
+                ProjectManager.getActProjectVar().marked_block.clear();
             }
-
         }
 
-        assert ProjectManager.getActProjectVar() !=null;
+        if (!Gdx.input.isButtonJustPressed(0)) return;
+        if (ProjectManager.getActProjectVar().moving_block != null)
+            return; //Do not allow to select an other Block while anyone is moving
+        for (Block block : ProjectManager.getActProjectVar().blocks) {
 
-        if(!Gdx.input.isButtonPressed(0)) return;
-        if(wasMouseDownOnBlockSettings()) return;
-
-        if(Gdx.input.isButtonJustPressed(0) && !Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT))  {
-            ProjectManager.getActProjectVar().marked_block.clear();
-        }
-
-        if(ProjectManager.getActProjectVar().moving_block!=null) return; //Do not allow to select an other Block while anyone is moving
-        for(Block block:ProjectManager.getActProjectVar().blocks) {
-            if(CheckCollision.checkmousewithblock(block, Var.mouseDownPos))
+            if (CheckCollision.checkmousewithblock(block, Var.mouseDownPos)) {
+                if (!isMultiSelect() && CheckCollision.checkmousewithblock(block, Var.mouseReleasePos))
+                    ProjectManager.getActProjectVar().marked_block.clear();
+                if (ProjectManager.getActProjectVar().marked_block.contains(block)) continue;
                 ProjectManager.getActProjectVar().marked_block.add(block);
+            }
         }
 
 
@@ -64,7 +59,43 @@ public class BlockMarkManager {
 
 
     private static boolean wasMouseDownOnBlockSettings() {
-       return CheckMouse.wasMousePressed(UIVar.blockeinstellungen_x, UIVar.blockeinstellungen_y, UIVar.blockeinstellungen_w, UIVar.blockeinstellungen_h);
+        return CheckMouse.wasMousePressed(UIVar.blockeinstellungen_x, UIVar.blockeinstellungen_y, UIVar.blockeinstellungen_w, UIVar.blockeinstellungen_h);
+    }
+
+    private static boolean clickedOnSelectedBlock() {
+
+        for (Block block : ProjectManager.getActProjectVar().visible_blocks) {
+            if (CheckCollision.checkmousewithblock(block)&&ProjectManager.getActProjectVar().marked_block.contains(block)) return true;
+        }
+
+        return false;
+
+    }
+
+    private static boolean isMultiSelect() {
+
+        return Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT) || Gdx.input.isKeyPressed(Input.Keys.CONTROL_RIGHT);
+
+    }
+
+    private static void selectingRect() {
+        if (Gdx.input.isButtonPressed(0) && ProjectManager.getActProjectVar().moving_block == null) {
+            selectionRect.setLocation((int) Var.mouseDownPos.x, (int) Var.mouseDownPos.y);
+            selectionRect.setSize((int) (Unproject.unproject().x - Var.mouseDownPos.x), (int) (Unproject.unproject().y - Var.mouseDownPos.y));
+            SelectionRectDrawer.draw(selectionRect);
+            selecting = true;
+        }
+
+        if (!Gdx.input.isButtonPressed(0) && selecting) {
+
+            for (Block checkblock : ProjectManager.getActProjectVar().visible_blocks) {
+                if (CheckCollision.rectCollision(selectionRect, new Rectangle(checkblock.getX(), checkblock.getY(), checkblock.getW(), checkblock.getH()))) {
+                    ProjectManager.getActProjectVar().marked_block.add(checkblock);
+                }
+            }
+
+        }
+
     }
 
 
