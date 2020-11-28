@@ -67,8 +67,8 @@ public class BlockJumpingManager {
 
     protected static void updateBlockDuplicate(Block movingBlock) {
 
-        float rightIntersection = getBlockDuplicateRight(movingBlock);
-        float leftIntersection = getBlockDuplicateLeft(movingBlock);
+        float rightIntersection = getBlockDuplicateRight(getEndingLeftBlockSelection(movingBlock));
+        float leftIntersection = getBlockDuplicateLeft(getEndingRightBlockSelection(movingBlock));
         if (ProjectManager.getActProjectVar().duplicate_block_left != null && ProjectManager.getActProjectVar().duplicate_block_right != null) {
 
             if (leftIntersection > rightIntersection) {
@@ -79,6 +79,35 @@ public class BlockJumpingManager {
 
         }
 
+
+    }
+
+
+    /**
+     * gets the leftest neighbour from a Block
+     * @param block
+     * @return
+     */
+    protected static Block getEndingLeftBlockSelection(Block block) {
+        Block neighbor = block;
+        while(neighbor.getLeft()!=null&&!neighbor.getWire_left().isVisible()) {
+            neighbor = neighbor.getLeft();
+        }
+        return neighbor;
+
+    }
+
+    /**
+     * gets the rightest neighbour from a Block
+     * @param block
+     * @return
+     */
+    protected static Block getEndingRightBlockSelection(Block block) {
+        Block neighbor = block;
+        while(neighbor.getRight()!=null&&!neighbor.getWire_right().isVisible()) {
+            neighbor = neighbor.getRight();
+        }
+        return neighbor;
 
     }
 

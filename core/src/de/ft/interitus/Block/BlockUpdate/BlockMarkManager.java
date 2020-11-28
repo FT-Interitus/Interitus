@@ -47,8 +47,7 @@ public class BlockMarkManager {
         for (Block block : ProjectManager.getActProjectVar().blocks) {
 
             if (CheckCollision.checkmousewithblock(block, Var.mouseDownPos)) {
-                if (!isMultiSelect() && CheckCollision.checkmousewithblock(block, Var.mouseReleasePos))
-                    ProjectManager.getActProjectVar().marked_block.clear();
+
                 if (ProjectManager.getActProjectVar().marked_block.contains(block)) continue;
                 ProjectManager.getActProjectVar().marked_block.add(block);
             }

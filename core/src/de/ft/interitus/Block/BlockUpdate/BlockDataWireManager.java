@@ -51,7 +51,7 @@ public class BlockDataWireManager {
             for(Parameter parameter:block.getBlocktype().getBlockParameter())
                 if(CheckCollision.checkpointwithobject(parameter.getX(), parameter.getY(), UIVar.parameter_width, UIVar.parameter_height, Unproject.unproject())&&parameter.getDataWires().size()!=0&&!parameter.getParameterType().isOutput()) {
                     ejectDataWire(parameter.getDataWires().get(0));
-                    parameter.getDataWires().clear(); //TODO wierd jumps back
+                    parameter.getDataWires().clear();
                     return true;
                 }
 

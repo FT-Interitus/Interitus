@@ -26,16 +26,24 @@ public class BlockConnectionManager {
         if (projectVar.duplicate_block_left == null && projectVar.duplicate_block_right == null) return;
 
         if (projectVar.duplicate_block_right != null) {
-            block.setPosition(projectVar.duplicate_block_right.getX_dup_rechts() , projectVar.duplicate_block_right.getY());
-            new Wire(projectVar.duplicate_block_right,block,false);
-            block.setLeft(projectVar.duplicate_block_right);
+
+            Block connection = BlockJumpingManager.getEndingLeftBlockSelection(block);
+
+            connection.setPosition(projectVar.duplicate_block_right.getX_dup_rechts() , projectVar.duplicate_block_right.getY());
+            new Wire(projectVar.duplicate_block_right,connection,false);
+            connection.setLeft(projectVar.duplicate_block_right);
+            connectedBlockJumpingtoLeft(BlockJumpingManager.getEndingLeftBlockSelection(block));
             return;
         }
 
         if(projectVar.duplicate_block_left != null) {
-            block.setPosition(projectVar.duplicate_block_left.getX()-block.getW(),projectVar.duplicate_block_left.getY());
-            new Wire(block,projectVar.duplicate_block_left,false);
-            block.setRight(projectVar.duplicate_block_left);
+
+            Block connection = BlockJumpingManager.getEndingRightBlockSelection(block);
+
+            connection.setPosition(projectVar.duplicate_block_left.getX()-connection.getW(),projectVar.duplicate_block_left.getY());
+            new Wire(connection,projectVar.duplicate_block_left,false);
+            connection.setRight(projectVar.duplicate_block_left);
+            connectedBlockJumpingtoRight(BlockJumpingManager.getEndingRightBlockSelection(block));
         }
 
 
@@ -73,11 +81,20 @@ public class BlockConnectionManager {
 
     }
 
-    protected static void connectedBlockJumping(Block block) {
+    protected static void connectedBlockJumpingtoLeft(Block block) {
         Block neighbor = block.getRight();
         while(neighbor!=null&&!neighbor.getWire_left().isVisible()) {
             neighbor.setPosition(neighbor.getLeft().getX_dup_rechts() , neighbor.getLeft().getY());
             neighbor = neighbor.getRight();
+        }
+
+    }
+
+    protected static void connectedBlockJumpingtoRight(Block block) {
+        Block neighbor = block.getLeft();
+        while(neighbor!=null&&!neighbor.getWire_right().isVisible()) {
+            neighbor.setPosition(neighbor.getRight().getX()-neighbor.getW() , neighbor.getRight().getY());
+            neighbor = neighbor.getLeft();
         }
 
     }
