@@ -13,7 +13,7 @@ import de.ft.interitus.utils.ArrayList;
 public class Parameter {
     private String varName;
     private final String Unit;
-    private Object Parameter;
+    private String Parameter;
     private Texture ParameterTexture;
     private String ParameterName;
     private String ParameterDescription;
@@ -24,7 +24,7 @@ public class Parameter {
     private int y=0;
     private final boolean varname;
 
-    public Parameter(Object parameter, Texture ParameterTexture, String ParameterName, String ParameterDescription, String Unit, ParameterType parameterType, boolean varname) {
+    public Parameter(String parameter, Texture ParameterTexture, String ParameterName, String ParameterDescription, String Unit, ParameterType parameterType, boolean varname) {
         this.ParameterTexture = ParameterTexture;
         this.Parameter = parameter;
         this.ParameterName = ParameterName;
@@ -41,7 +41,18 @@ public class Parameter {
        return this.toString();
     }
 
-    public void setParameter(Object parameter) {
+    public String getBlockParameterContent(){
+        if(this.getParameterType().isDropdown()) {
+
+            return this.getParameterType().getSelected().getBlockText();
+
+        }
+        return this.toString();
+    }
+
+
+
+    public void setParameter(String parameter) {
         Parameter = parameter;
     }
 
@@ -122,6 +133,7 @@ public class Parameter {
         if(!varname) {
             return Parameter.toString();
         }
+
         if(getDataWires().size()>0) {
             return Datawire.get(0).getParam_input().getVarName();
         }else {

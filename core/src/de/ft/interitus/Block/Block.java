@@ -583,8 +583,8 @@ public abstract class Block {
                         batch.draw(this.getBlocktype().getBlockParameter().get(i).getParameterType().getVariableType().getTextureconnector(), aktualX, this.getY(), UIVar.parameter_width, UIVar.parameter_height);
                         this.getBlocktype().getBlockParameter().get(i).setX((int) aktualX);
                         this.getBlocktype().getBlockParameter().get(i).setY(this.getY());
-                        WindowManager.ParameterFont.getData().setScale(0.9f,1f);
-                        glyphLayout.setText(WindowManager.ParameterFont, "" + this.getBlocktype().getBlockParameter().get(i).getParameter());
+                        WindowManager.ParameterFont.getData().setScale(1f,1f);
+                        glyphLayout.setText(WindowManager.ParameterFont, "" + this.getBlocktype().getBlockParameter().get(i).getBlockParameterContent());
                         if (this.getBlocktype().getBlockParameter().get(i).getDataWires().size() < 1) {
                             WindowManager.ParameterFont.draw(batch, glyphLayout, aktualX + 15 - glyphLayout.width / 2, getY() + glyphLayout.height/2 +10);
                         }

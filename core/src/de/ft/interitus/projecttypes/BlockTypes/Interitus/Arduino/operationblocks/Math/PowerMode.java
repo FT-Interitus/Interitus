@@ -21,9 +21,9 @@ public class PowerMode extends ArduinoBlock {
     Parameter Ergebnis;
 
     public PowerMode(){
-        Basis =new Parameter("", AssetLoader.Parameter_first,"Basis", "", "", new ParameterType(InitArduino.floatvar, false, false), true);
-        Exponent =new Parameter("",AssetLoader.Parameter_second,"Exponent", "", "", new ParameterType(InitArduino.floatvar, false, false), true);
-        Ergebnis=new Parameter("",AssetLoader.Parameter_isequal,"Ergebnis", "", "", new ParameterType(InitArduino.floatvar, true, false), true);
+        Basis =new Parameter("", AssetLoader.Parameter_first,"Basis", "", "", new ParameterType(InitArduino.floatvar, false), true);
+        Exponent =new Parameter("",AssetLoader.Parameter_second,"Exponent", "", "", new ParameterType(InitArduino.floatvar, false), true);
+        Ergebnis=new Parameter("",AssetLoader.Parameter_isequal,"Ergebnis", "", "", new ParameterType(InitArduino.floatvar, true), true);
         parameters.add(Basis);
         parameters.add(Exponent);
         parameters.add(Ergebnis);

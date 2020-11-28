@@ -22,6 +22,7 @@ import com.kotcrab.vis.ui.widget.MenuBar;
 import com.kotcrab.vis.ui.widget.*;
 import com.kotcrab.vis.ui.widget.MenuItem;
 import de.ft.interitus.Block.Block;
+import de.ft.interitus.Block.Selectable;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.ManualConfig.ManualConfigUI;
@@ -250,12 +251,14 @@ public class UI {
 
 
                         if (markedblock.getBlocktype().getBlockParameter().get(i).getParameterType().isDropdown() && !(markedblock.getBlocktype().getBlockParameter().get(i).getDataWires().size() > 0)) {
-                            VisSelectBox<String> selectBox = new VisSelectBox<>();
-                            selectBox.setItems(markedblock.getBlocktype().getBlockParameter().get(i).getParameterType().getSelectables());
+                            VisSelectBox<Selectable> selectBox = new VisSelectBox<>();
+                            Selectable[] selectables = new Selectable[markedblock.getBlocktype().getBlockParameter().get(i).getParameterType().getSelectables().size()];
+                            markedblock.getBlocktype().getBlockParameter().get(i).getParameterType().getSelectables().toArray(selectables);
+                            selectBox.setItems(selectables);
 
                             if (Arrays.asList(markedblock.getBlocktype().getBlockParameter().get(i).getParameterType().getSelectables()).contains(markedblock.getBlocktype().getBlockParameter().get(i).getParameter())) {
 
-                                selectBox.setSelected(((String) markedblock.getBlocktype().getBlockParameter().get(i).getParameter()));
+                                selectBox.setSelected(( markedblock.getBlocktype().getBlockParameter().get(i).getParameterType().getSelected()));
 
                             } else {
                                 selectBox.setSelected(selectBox.getItems().get(0));
@@ -265,8 +268,8 @@ public class UI {
                             selectBox.addListener(new ChangeListener() {
                                 @Override
                                 public void changed(ChangeEvent event, Actor actor) {
-
-                                    ProjectManager.getActProjectVar().marked_block.get(0).getBlocktype().getBlockParameter().get(textFielder.indexOf(actor)).setParameter(((VisSelectBox<String>) actor).getSelected());
+                                    ProjectManager.getActProjectVar().marked_block.get(0).getBlocktype().getBlockParameter().get(textFielder.indexOf(actor)).getParameterType().setSelected(((VisSelectBox<Selectable>) actor).getSelected());
+                                    ProjectManager.getActProjectVar().marked_block.get(0).getBlocktype().getBlockParameter().get(textFielder.indexOf(actor)).setParameter(((VisSelectBox<Selectable>) actor).getSelected().toString());
 
                                 }
                             });

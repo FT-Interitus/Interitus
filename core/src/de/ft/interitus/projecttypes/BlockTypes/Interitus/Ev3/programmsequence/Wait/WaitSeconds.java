@@ -21,7 +21,7 @@ public class WaitSeconds extends Ev3Block {
     ArrayList<Parameter>parameters=new ArrayList<>();
 
     public WaitSeconds() {
-        parameters.add(new Parameter("0", AssetLoader.Parameter_wait, "Wartezeit", "", "ms", new ParameterType(InitEv3.floatvar,false,false), true));
+        parameters.add(new Parameter("0", AssetLoader.Parameter_wait, "Wartezeit", "", "ms", new ParameterType(InitEv3.floatvar,false), true));
     }
 
 

@@ -25,8 +25,8 @@ public class DigitalReadDefault extends  ArduinoBlock {
 
 
     public DigitalReadDefault(){
-        Pin=new Parameter("", AssetLoader.Parameter_first,"Pin", "Auszulesender Pin", "", new ParameterType(InitArduino.floatvar, false, false), true);
-        Output=new Parameter("",AssetLoader.Parameter_isequal,"Output", "Output", "", new ParameterType(InitArduino.booleanvar, true, false), true);
+        Pin=new Parameter("", AssetLoader.Parameter_first,"Pin", "Auszulesender Pin", "", new ParameterType(InitArduino.floatvar, false), true);
+        Output=new Parameter("",AssetLoader.Parameter_isequal,"Output", "Output", "", new ParameterType(InitArduino.booleanvar, true), true);
         parameters.add(Pin);
         parameters.add(Output);
 

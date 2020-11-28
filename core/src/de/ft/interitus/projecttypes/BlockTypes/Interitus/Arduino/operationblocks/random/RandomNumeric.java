@@ -20,9 +20,9 @@ public class RandomNumeric extends ArduinoBlock {
     Parameter max;
     Parameter output;
     public RandomNumeric() {
-        min = new Parameter("", AssetLoader.Parameter_lowerlimit,"Minimum","","",new ParameterType(InitArduino.floatvar,false,false),true);
-        max = new Parameter("", AssetLoader.Parameter_upperlimit,"Maximum","","",new ParameterType(InitArduino.floatvar,false,false),true);
-        output = new Parameter("", AssetLoader.Parameter_randomdice,"Output","","",new ParameterType(InitArduino.floatvar,true,false),true);
+        min = new Parameter("", AssetLoader.Parameter_lowerlimit,"Minimum","","",new ParameterType(InitArduino.floatvar,false),true);
+        max = new Parameter("", AssetLoader.Parameter_upperlimit,"Maximum","","",new ParameterType(InitArduino.floatvar,false),true);
+        output = new Parameter("", AssetLoader.Parameter_randomdice,"Output","","",new ParameterType(InitArduino.floatvar,true),true);
 
 
 parameters.add(min);

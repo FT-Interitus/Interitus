@@ -20,8 +20,8 @@ public class ForDefaultBlockMode extends ArduinoBlock {
     ArrayList<Parameter> parameters = new ArrayList<>();
     public ForDefaultBlockMode() {
 
-        parameters.add(new Parameter("",AssetLoader.Parameter_first,"Counter","","int",new ParameterType(InitArduino.floatvar,false,false),true));
-        parameters.add(new Parameter("",AssetLoader.Parameter_isequal,"Output","","int",new ParameterType(InitArduino.floatvar,true,false),true));
+        parameters.add(new Parameter("",AssetLoader.Parameter_first,"Counter","","int",new ParameterType(InitArduino.floatvar,false),true));
+        parameters.add(new Parameter("",AssetLoader.Parameter_isequal,"Output","","int",new ParameterType(InitArduino.floatvar,true),true));
 
     }
 

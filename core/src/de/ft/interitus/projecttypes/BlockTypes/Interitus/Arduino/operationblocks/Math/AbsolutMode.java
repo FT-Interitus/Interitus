@@ -21,8 +21,8 @@ public class AbsolutMode extends ArduinoBlock  {
     Parameter Ergebnis;
 
     public AbsolutMode(){
-        value =new Parameter("", AssetLoader.Parameter_first,"Wert", "", "", new ParameterType(InitArduino.floatvar, false, false), true);
-        Ergebnis=new Parameter("",AssetLoader.Parameter_isequal,"Ergebnis", "Das Ergebnis der Multiplikation (Produkt)", "", new ParameterType(InitArduino.floatvar, true, false), true);
+        value =new Parameter("", AssetLoader.Parameter_first,"Wert", "", "", new ParameterType(InitArduino.floatvar, false), true);
+        Ergebnis=new Parameter("",AssetLoader.Parameter_isequal,"Ergebnis", "Das Ergebnis der Multiplikation (Produkt)", "", new ParameterType(InitArduino.floatvar, true), true);
         parameters.add(value);
 
         parameters.add(Ergebnis);

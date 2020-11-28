@@ -21,9 +21,9 @@ public class AdditionalMode extends ArduinoBlock {
     Parameter Ergebnis;
 
     public AdditionalMode(){
-        Summand_1=new Parameter("", AssetLoader.Parameter_first,"1. Summand", "erster Summand", "", new ParameterType(InitArduino.floatvar, false, false), true);
-        Summand_2=new Parameter("",AssetLoader.Parameter_second,"2. Summand", "zweiter Summand", "", new ParameterType(InitArduino.floatvar, false, false), true);
-        Ergebnis=new Parameter("",AssetLoader.Parameter_isequal,"Ergebnis", "Das Ergebnis der Summe (Wert der Summe)", "", new ParameterType(InitArduino.floatvar, true, false), true);
+        Summand_1=new Parameter("", AssetLoader.Parameter_first,"1. Summand", "erster Summand", "", new ParameterType(InitArduino.floatvar, false), true);
+        Summand_2=new Parameter("",AssetLoader.Parameter_second,"2. Summand", "zweiter Summand", "", new ParameterType(InitArduino.floatvar, false), true);
+        Ergebnis=new Parameter("",AssetLoader.Parameter_isequal,"Ergebnis", "Das Ergebnis der Summe (Wert der Summe)", "", new ParameterType(InitArduino.floatvar, true), true);
         parameters.add(Summand_1);
         parameters.add(Summand_2);
         parameters.add(Ergebnis);

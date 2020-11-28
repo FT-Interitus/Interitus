@@ -26,7 +26,7 @@ public class WriteValue extends ArduinoBlock {
 
     public WriteValue() {
 
-        value = new Parameter("", AssetLoader.Parameter_first,"Wert","","", new ParameterType(InitArduino.floatvar,false,false),true);
+        value = new Parameter("", AssetLoader.Parameter_first,"Wert","","", new ParameterType(InitArduino.floatvar,false),true);
 
         parameterArrayList.add(value);
 

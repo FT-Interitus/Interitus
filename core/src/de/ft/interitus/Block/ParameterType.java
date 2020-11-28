@@ -7,17 +7,19 @@ package de.ft.interitus.Block;
 
 import de.ft.interitus.projecttypes.ParameterVariableType;
 
+import java.util.ArrayList;
+
 public class ParameterType {
 
     ParameterVariableType variableType;
-    boolean output;
-    boolean dropdown;
-    String[] selectables;
+    private boolean output;
+    private boolean dropdown = false;
+    private Selectable selected = null;
+    ArrayList<Selectable> selectables = new ArrayList<>();
 
-    public ParameterType(ParameterVariableType variableType, boolean output, boolean dropdown) {
+    public ParameterType(ParameterVariableType variableType, boolean output) {
         this.variableType = variableType;
         this.output = output;
-        this.dropdown = dropdown;
     }
 
     public ParameterVariableType getVariableType() {
@@ -44,12 +46,33 @@ public class ParameterType {
         this.dropdown = dropdown;
     }
 
-    public String[] getSelectables() {
+    public ArrayList<Selectable> getSelectables() {
         return selectables;
     }
 
-    public ParameterType setSelectables(String... selectables) {
-        this.selectables = selectables;
+    public ParameterType setSelectables(Selectable... selectables) {
+        for (int i = 0; i < selectables.length; i++) {
+            this.dropdown = true;
+            this.selectables.add(selectables[i]);
+        }
         return this;
+    }
+
+    public String[] getDropDownList() {
+        String export[] = new String[selectables.size()];
+        for (int i = 0; i < selectables.size(); i++) {
+            export[i] = selectables.get(i).getDropDownText();
+        }
+        return export;
+    }
+
+    public Selectable getSelected() {
+        if (selected == null)
+            selected = selectables.get(0);
+        return selected;
+    }
+
+    public void setSelected(Selectable selected) {
+        this.selected = selected;
     }
 }

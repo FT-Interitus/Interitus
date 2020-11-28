@@ -19,7 +19,7 @@ public class DefaultWait extends ArduinoBlock {
     final ArrayList<Parameter> parameter = new ArrayList<>();
     public DefaultWait() {
 
-        parameter.add(new Parameter(0, AssetLoader.Parameter_wait, "Warte-Zeit", "Die Zeit die abgewartet werden soll", "ms",new ParameterType(InitArduino.floatvar,false,false), true));
+        parameter.add(new Parameter("0", AssetLoader.Parameter_wait, "Warte-Zeit", "Die Zeit die abgewartet werden soll", "ms",new ParameterType(InitArduino.floatvar,false), true));
 
     }
     @Override

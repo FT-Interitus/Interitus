@@ -8,8 +8,8 @@ package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.actionblocks.s
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.Block.ParameterType;
+import de.ft.interitus.Block.Selectable;
 import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.projecttypes.BlockTypes.BlockMode;
 import de.ft.interitus.projecttypes.BlockTypes.BlockSettings;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.InitArduino;
@@ -20,11 +20,11 @@ public class DefaultSetPinMode extends  ArduinoBlock {
     Parameter pin;
     Parameter mode;
     public DefaultSetPinMode(){
-        pin = new Parameter("", AssetLoader.Parameter_Pin, "Pin", "", null,new ParameterType(InitArduino.floatvar,false,false), true);
-        String[] selecteables = new String[2];
-        selecteables[0] = "INPUT";
-        selecteables[1] = "OUTPUT";
-        mode = new Parameter(selecteables[1], AssetLoader.Parameter_IO, "Mode(I/O)", "", null,new ParameterType(InitArduino.floatvar,false,true).setSelectables(selecteables), true);
+        pin = new Parameter("", AssetLoader.Parameter_Pin, "Pin", "", null,new ParameterType(InitArduino.floatvar,false), true);
+        Selectable[] selecteables = new Selectable[2];
+        selecteables[0] = new Selectable("OUTPUT","OUT");
+        selecteables[1] = new Selectable("INPUT","IN");
+        mode = new Parameter(selecteables[0].getDropDownText(), AssetLoader.Parameter_IO, "Mode(I/O)", "", null,new ParameterType(InitArduino.floatvar,false).setSelectables(selecteables), true);
 
 
         parameters.add(pin);

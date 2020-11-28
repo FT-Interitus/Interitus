@@ -21,9 +21,9 @@ public class MultiplicationMode extends ArduinoBlock {
     Parameter Ergebnis;
 
     public MultiplicationMode(){
-        Faktor_1 =new Parameter("", AssetLoader.Parameter_first,"1. Faktor", "Faktor eins", "", new ParameterType(InitArduino.floatvar, false, false), true);
-        Faktor_2 =new Parameter("",AssetLoader.Parameter_second,"2. Faktor", "Faktor zwei", "", new ParameterType(InitArduino.floatvar, false, false), true);
-        Ergebnis=new Parameter("",AssetLoader.Parameter_isequal,"Ergebnis", "Das Ergebnis der Multiplikation (Produkt)", "", new ParameterType(InitArduino.floatvar, true, false), true);
+        Faktor_1 =new Parameter("", AssetLoader.Parameter_first,"1. Faktor", "Faktor eins", "", new ParameterType(InitArduino.floatvar, false), true);
+        Faktor_2 =new Parameter("",AssetLoader.Parameter_second,"2. Faktor", "Faktor zwei", "", new ParameterType(InitArduino.floatvar, false), true);
+        Ergebnis=new Parameter("",AssetLoader.Parameter_isequal,"Ergebnis", "Das Ergebnis der Multiplikation (Produkt)", "", new ParameterType(InitArduino.floatvar, true), true);
         parameters.add(Faktor_1);
         parameters.add(Faktor_2);
         parameters.add(Ergebnis);

@@ -21,9 +21,9 @@ public class DivisionMode extends ArduinoBlock {
     Parameter Ergebnis;
 
     public DivisionMode(){
-        Divident =new Parameter("", AssetLoader.Parameter_first,"1. Divident", "Der Divident (Die erste zahl)", "", new ParameterType(InitArduino.floatvar, false, false), true);
-        Divisor =new Parameter("",AssetLoader.Parameter_second,"2. Divisor", "Der Divisor (Die zweite Zahl)", "", new ParameterType(InitArduino.floatvar, false, false), true);
-        Ergebnis=new Parameter("",AssetLoader.Parameter_isequal,"Ergebnis", "Der Quotient (Das Ergebnis)", "", new ParameterType(InitArduino.floatvar, true, false), true);
+        Divident =new Parameter("", AssetLoader.Parameter_first,"1. Divident", "Der Divident (Die erste zahl)", "", new ParameterType(InitArduino.floatvar, false), true);
+        Divisor =new Parameter("",AssetLoader.Parameter_second,"2. Divisor", "Der Divisor (Die zweite Zahl)", "", new ParameterType(InitArduino.floatvar, false), true);
+        Ergebnis=new Parameter("",AssetLoader.Parameter_isequal,"Ergebnis", "Der Quotient (Das Ergebnis)", "", new ParameterType(InitArduino.floatvar, true), true);
         parameters.add(Divident);
         parameters.add(Divisor);
         parameters.add(Ergebnis);

@@ -21,8 +21,8 @@ public class SquareRootMode extends ArduinoBlock {
     Parameter Ergebnis;
 
     public SquareRootMode(){
-        Summand_1=new Parameter("", AssetLoader.Parameter_first,"Wurzel", "Wurzel", "", new ParameterType(InitArduino.floatvar, false, false), true);
-        Ergebnis=new Parameter("",AssetLoader.Parameter_isequal,"Ergebnis", "Unterschied von zwei zahlen", "", new ParameterType(InitArduino.floatvar, true, false), true);
+        Summand_1=new Parameter("", AssetLoader.Parameter_first,"Wurzel", "Wurzel", "", new ParameterType(InitArduino.floatvar, false), true);
+        Ergebnis=new Parameter("",AssetLoader.Parameter_isequal,"Ergebnis", "Unterschied von zwei zahlen", "", new ParameterType(InitArduino.floatvar, true), true);
         parameters.add(Summand_1);
 
         parameters.add(Ergebnis);

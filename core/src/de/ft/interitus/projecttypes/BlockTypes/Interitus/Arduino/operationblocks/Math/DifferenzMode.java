@@ -21,9 +21,9 @@ public class DifferenzMode extends ArduinoBlock {
     Parameter Ergebnis;
 
     public DifferenzMode(){
-        Summand_1=new Parameter("", AssetLoader.Parameter_first,"Minuend", "Minuend", "", new ParameterType(InitArduino.floatvar, false, false), true);
-        Summand_2=new Parameter("",AssetLoader.Parameter_second,"Subtraend", "Subtraend", "", new ParameterType(InitArduino.floatvar, false, false), true);
-        Ergebnis=new Parameter("",AssetLoader.Parameter_isequal,"Ergebnis", "Unterschied von zwei zahlen", "", new ParameterType(InitArduino.floatvar, true, false), true);
+        Summand_1=new Parameter("", AssetLoader.Parameter_first,"Minuend", "Minuend", "", new ParameterType(InitArduino.floatvar, false), true);
+        Summand_2=new Parameter("",AssetLoader.Parameter_second,"Subtraend", "Subtraend", "", new ParameterType(InitArduino.floatvar, false), true);
+        Ergebnis=new Parameter("",AssetLoader.Parameter_isequal,"Ergebnis", "Unterschied von zwei zahlen", "", new ParameterType(InitArduino.floatvar, true), true);
         parameters.add(Summand_1);
         parameters.add(Summand_2);
         parameters.add(Ergebnis);

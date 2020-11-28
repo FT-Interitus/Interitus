@@ -8,6 +8,7 @@ package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.operationblock
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.Block.ParameterType;
+import de.ft.interitus.Block.Selectable;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.BlockTypes.BlockSettings;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
@@ -20,10 +21,19 @@ public class LogicOperationIntegerOperation extends  ArduinoBlock {
     Parameter value2;
     Parameter output;
     public LogicOperationIntegerOperation(){
-        value1 =new Parameter("", AssetLoader.Parameter_first,"Value 1", "", "", new ParameterType(InitArduino.floatvar, false, false), true);
-        operation=new Parameter("<", AssetLoader.Parameter_IO, "Operation","", "",new ParameterType(InitArduino.stringvar, false, true).setSelectables(new String[]{"<",">","==","<=",">=","!="}),true);
-        value2=new Parameter("", AssetLoader.Parameter_second,"Value 2", "", "", new ParameterType(InitArduino.floatvar, false, false), true);
-        output=new Parameter("",AssetLoader.Parameter_isequal,"Output", "Output", "", new ParameterType(InitArduino.booleanvar, true, false), true);
+        Selectable[] selecteables = new Selectable[6];
+        selecteables[0]=new Selectable("<");
+        selecteables[1]=new Selectable(">");
+        selecteables[2]=new Selectable("==");
+        selecteables[3]=new Selectable("<=");
+        selecteables[4]=new Selectable(">=");
+        selecteables[5]=new Selectable("!=");
+
+
+        value1 =new Parameter("", AssetLoader.Parameter_first,"Value 1", "", "", new ParameterType(InitArduino.floatvar, false), true);
+        operation=new Parameter(selecteables[0].getDropDownText(), AssetLoader.Parameter_IO, "Operation","", "",new ParameterType(InitArduino.stringvar, false).setSelectables(selecteables),true);
+        value2=new Parameter("", AssetLoader.Parameter_second,"Value 2", "", "", new ParameterType(InitArduino.floatvar, false), true);
+        output=new Parameter("",AssetLoader.Parameter_isequal,"Output", "Output", "", new ParameterType(InitArduino.booleanvar, true), true);
 
         parameter.add(value1);
         parameter.add(operation);

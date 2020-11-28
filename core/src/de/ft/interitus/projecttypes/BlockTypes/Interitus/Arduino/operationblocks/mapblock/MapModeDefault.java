@@ -25,12 +25,12 @@ public class MapModeDefault extends ArduinoBlock {
     public MapModeDefault(){
 
 
-        bereich1minimum =new Parameter("", AssetLoader.Parameter_first,"Input-Bereich Minimum", "", "", new ParameterType(InitArduino.floatvar, false, false), true);
-        bereich1maximum =new Parameter("", AssetLoader.Parameter_second,"Input-Bereich Maximum", "", "", new ParameterType(InitArduino.floatvar, false, false), true);
-        bereich2minimum =new Parameter("", AssetLoader.Parameter_third,"Output-Bereich Minimum", "", "", new ParameterType(InitArduino.floatvar, false, false), true);
-        bereich2maximum =new Parameter("", AssetLoader.Parameter_fourth,"Output-Bereich Maximum", "", "", new ParameterType(InitArduino.floatvar, false, false), true);
-        map =new Parameter("", AssetLoader.Parameter_IO,"Input", "", "", new ParameterType(InitArduino.floatvar, false, false), true);
-        value=new Parameter("",AssetLoader.Parameter_isequal,"output", "Das Ergebnis der Multiplikation (Produkt)", "", new ParameterType(InitArduino.floatvar, true, false), true);
+        bereich1minimum =new Parameter("", AssetLoader.Parameter_first,"Input-Bereich Minimum", "", "", new ParameterType(InitArduino.floatvar, false), true);
+        bereich1maximum =new Parameter("", AssetLoader.Parameter_second,"Input-Bereich Maximum", "", "", new ParameterType(InitArduino.floatvar, false), true);
+        bereich2minimum =new Parameter("", AssetLoader.Parameter_third,"Output-Bereich Minimum", "", "", new ParameterType(InitArduino.floatvar, false), true);
+        bereich2maximum =new Parameter("", AssetLoader.Parameter_fourth,"Output-Bereich Maximum", "", "", new ParameterType(InitArduino.floatvar, false), true);
+        map =new Parameter("", AssetLoader.Parameter_IO,"Input", "", "", new ParameterType(InitArduino.floatvar, false), true);
+        value=new Parameter("",AssetLoader.Parameter_isequal,"output", "Das Ergebnis der Multiplikation (Produkt)", "", new ParameterType(InitArduino.floatvar, true), true);
 
         parameters.add(map);
         parameters.add(bereich1minimum);

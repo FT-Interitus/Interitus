@@ -8,6 +8,7 @@ package de.ft.interitus.projecttypes.BlockTypes.Interitus.Ev3.actionBlocks.light
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.Block.ParameterType;
+import de.ft.interitus.Block.Selectable;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.BlockTypes.BlockSettings;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Ev3.Ev3Block;
@@ -23,8 +24,8 @@ public class An extends Ev3Block {
     Parameter Mode;
 
     public An() {
-        Farbe=new Parameter("Rot", AssetLoader.Parameter_farbe, "Farbe", "description", "", new ParameterType(InitEv3.floatvar,false,true).setSelectables("Rot","Grün","Orange"), true);
-        Mode=new Parameter("Leuchten", AssetLoader.Parameter_wait, "Mode", "description", "", new ParameterType(InitEv3.floatvar,false,true).setSelectables("Leuchten","Pulsierend","Blinkend"), true);
+        Farbe=new Parameter("Rot", AssetLoader.Parameter_farbe, "Farbe", "description", "", new ParameterType(InitEv3.floatvar,false).setSelectables(new Selectable("Rot"),new Selectable("Grün"),new Selectable("Orange")), true);
+        Mode=new Parameter("Leuchten", AssetLoader.Parameter_wait, "Mode", "description", "", new ParameterType(InitEv3.floatvar,false).setSelectables(new Selectable("Leuchten"),new Selectable("Pulsierend"),new Selectable("Blinkend")), true);
         parameters.add(Farbe);
         parameters.add(Mode);
     }

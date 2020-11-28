@@ -8,9 +8,9 @@ package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.Block.ParameterType;
+import de.ft.interitus.Block.Selectable;
 import de.ft.interitus.projecttypes.ProgrammArea.ProgrammArea;
 import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.projecttypes.BlockTypes.BlockMode;
 import de.ft.interitus.projecttypes.BlockTypes.BlockSettings;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.InitArduino;
@@ -20,7 +20,7 @@ public class IfDefaultBlockMode extends ArduinoBlock {
     ArrayList<Parameter> parameters = new ArrayList<>();
     public IfDefaultBlockMode() {
 
-        parameters.add(new Parameter("",AssetLoader.Parameter_first,"Bedingung","","boolean",new ParameterType(InitArduino.booleanvar,false,true).setSelectables(new String[]{"true","false"}),true));
+        parameters.add(new Parameter("",AssetLoader.Parameter_first,"Bedingung","","boolean",new ParameterType(InitArduino.booleanvar,false).setSelectables(new Selectable("true"),new Selectable("false")),true));
 
     }
 

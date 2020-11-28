@@ -8,8 +8,8 @@ package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.actionblocks.d
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.Block.ParameterType;
+import de.ft.interitus.Block.Selectable;
 import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.projecttypes.BlockTypes.BlockMode;
 import de.ft.interitus.projecttypes.BlockTypes.BlockSettings;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.InitArduino;
@@ -22,11 +22,11 @@ public class digitalWriteNormal extends ArduinoBlock {
     Parameter mode;
 
     public digitalWriteNormal(){
-        pin = new Parameter("", AssetLoader.Parameter_Pin, "Pin", "", null,new ParameterType(InitArduino.floatvar,false,false), true);
-        String[] selectables = new String[2];
-        selectables[0] = "HIGH";
-        selectables[1] = "LOW";
-        mode = new Parameter(selectables[1], AssetLoader.Parameter_High_Low, "Mode", "", null,new ParameterType(InitArduino.booleanvar,false,true).setSelectables(selectables), true);
+        pin = new Parameter("", AssetLoader.Parameter_Pin, "Pin", "", null,new ParameterType(InitArduino.floatvar,false), true);
+        Selectable[] selectables = new Selectable[2];
+        selectables[0] =new Selectable("LOW");
+        selectables[1] = new Selectable("HIGH");
+        mode = new Parameter(selectables[0].getDropDownText(), AssetLoader.Parameter_High_Low, "Mode", "", null,new ParameterType(InitArduino.booleanvar,false).setSelectables(selectables), true);
 
 
         parameters.add(pin);

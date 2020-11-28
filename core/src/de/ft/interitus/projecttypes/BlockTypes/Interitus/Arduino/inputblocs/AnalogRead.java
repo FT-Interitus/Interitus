@@ -25,8 +25,8 @@ public class AnalogRead extends  ArduinoBlock {
 
 
     public AnalogRead(){
-        Pin=new Parameter("", AssetLoader.Parameter_first,"Pin", "Auszulesender Pin", "", new ParameterType(InitArduino.floatvar, false, false), true);
-        Output=new Parameter("",AssetLoader.Parameter_isequal,"Output", "Output", "", new ParameterType(InitArduino.floatvar, true, false), true);
+        Pin=new Parameter("", AssetLoader.Parameter_first,"Pin", "Auszulesender Pin", "", new ParameterType(InitArduino.floatvar, false), true);
+        Output=new Parameter("",AssetLoader.Parameter_isequal,"Output", "Output", "", new ParameterType(InitArduino.floatvar, true), true);
         parameters.add(Pin);
         parameters.add(Output);
 
