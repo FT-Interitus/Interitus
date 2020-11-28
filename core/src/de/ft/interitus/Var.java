@@ -28,6 +28,7 @@ public class Var {
     public static final String PROGRAMM_VERSION = "0.0.1";
 
 
+
     public static boolean isloading = false;
     public static boolean isclearing = false;
     public static boolean nointernetconnection = false;

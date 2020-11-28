@@ -188,7 +188,6 @@ public class Program extends Game {
         };
         pluginloadingthread.start();
 
-
         setScreen(new Loading());
 
     }
