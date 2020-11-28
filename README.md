@@ -7,7 +7,6 @@ to make the leap into a "real" programming language.
 <br/>
 
 [![CodeFactor](https://www.codefactor.io/repository/github/ft-interitus/interitus/badge)](https://www.codefactor.io/repository/github/ft-interitus/interitus)
-[![TODOs](https://www.badgen.net/https/api.tickgit.com/badgen/github.com/ft-interitus/interitus)](https://www.tickgit.com/browse?repo=github.com/ft-interitus/interitus)
 [![Build Status](https://travis-ci.com/FT-Interitus/Interitus.svg?branch=master)](https://travis-ci.com/FT-Interitus/Interitus)
 ![GitHub contributors](https://img.shields.io/github/contributors/ft-interitus/interitus)
 ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/ft-interitus/interitus?include_prereleases)
@@ -25,7 +24,7 @@ to make the leap into a "real" programming language.
 
 - Windows:
   <br/>
-  Download installer soon <a href="#">here</a>
+  Download installer <a href="https://github.com/FT-Interitus/Installation/raw/master/Setup.exe">here</a>
 
 <br/>
 
