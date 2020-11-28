@@ -81,6 +81,8 @@ public class BlockMovingManager {
         if (!CheckCollision.checkmousewithblock(block)) return false;
         if (projectVar.moveingdatawire != null) return false;
         if (BlockDataWireManager.checkParameterEject(block)) return false;
+        if (isOnBlockBar()) return false;
+        if(isMouseOnBlockSettings()) return false;
 
         for(Block m:ProjectManager.getActProjectVar().marked_block) {
             m.getMovementDiff().set(generateDiff(m, Unproject.unproject()));
@@ -142,6 +144,9 @@ public class BlockMovingManager {
      */
     private static boolean isOnBlockBar() {
         return CheckMouse.isMouseover(UIVar.BlockBarX, UIVar.BlockBarY, UIVar.BlockBarW, UIVar.BlockBarH, false);
+    }
+    private static boolean isMouseOnBlockSettings() {
+        return CheckMouse.isMouseover(UIVar.blockeinstellungen_x, UIVar.blockeinstellungen_y, UIVar.blockeinstellungen_w, UIVar.blockeinstellungen_h,false)&&UIVar.isBlockSettingsopen;
     }
 
 }

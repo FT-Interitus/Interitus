@@ -7,6 +7,7 @@ package de.ft.interitus.Block.BlockUpdate;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.sun.security.auth.UnixPrincipal;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.UI.SelectionRectDrawer;
 import de.ft.interitus.UI.UIElements.check.CheckCollision;
@@ -31,7 +32,7 @@ public class BlockMarkManager {
         assert ProjectManager.getActProjectVar() != null;
 
         if (!Gdx.input.isButtonPressed(0)) return;
-        if (wasMouseDownOnBlockSettings()) return;
+        if (wasMouseDownOnBlockSettings()&& UIVar.isBlockSettingsopen) return;
 
         if (Gdx.input.isButtonJustPressed(0) && !isMultiSelect()) {
             if (ProjectManager.getActProjectVar().marked_block.size() == 1) {
@@ -79,6 +80,7 @@ public class BlockMarkManager {
 
     private static void selectingRect() {
         if (Gdx.input.isButtonPressed(0) && ProjectManager.getActProjectVar().moving_block == null) {
+            if(!selecting&&!CheckMouse.wasMousePressed(UIVar.abstandvonRand,UIVar.programmflaeche_y,Gdx.graphics.getWidth()-(2* UIVar.abstandvonRand), UIVar.programmflaeche_h)) return;
             selectionRect.setLocation((int) Var.mouseDownPos.x, (int) Var.mouseDownPos.y);
             selectionRect.setSize((int) (Unproject.unproject().x - Var.mouseDownPos.x), (int) (Unproject.unproject().y - Var.mouseDownPos.y));
             SelectionRectDrawer.draw(selectionRect);
@@ -92,6 +94,7 @@ public class BlockMarkManager {
                     ProjectManager.getActProjectVar().marked_block.add(checkblock);
                 }
             }
+            selecting=false;
 
         }
 
