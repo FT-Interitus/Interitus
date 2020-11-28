@@ -24,7 +24,7 @@ public abstract class ProjectVar {
     public ArrayList<Block> visible_blocks = new ArrayList<>(); //Liste aller Blöcke die sich im sichtbereich der Camera befinden
 
     public Vector2 cam_pos = new Vector2();
-    public float zoom = 1;//イースターエッグであるカウパワームー
+    public float zoom = 1;
     public ArrayList<Block> marked_block = new ArrayList<>(); // Welcher Block ist makiert ?
     public Block duplicate_block_right = null; // Which Block shows the duplicate
     public Block duplicate_block_left = null; // Which Block shows the duplicate

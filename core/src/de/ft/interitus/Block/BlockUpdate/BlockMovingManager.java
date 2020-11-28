@@ -56,7 +56,6 @@ public class BlockMovingManager {
                         //blockSnapping(marked);
 
                 BlockConnectionManager.placeBlock(block);
-                BlockConnectionManager.connectedBlockJumping(block);
 
                 stopMovingBlock();
             }

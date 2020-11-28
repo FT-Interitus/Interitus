@@ -15,6 +15,7 @@ import de.ft.interitus.UI.tappedbar.TapItem;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.ProjectManager;
+import de.ft.interitus.utils.Unproject;
 
 
 public class TapBarBlockItem implements TapItem {
@@ -38,7 +39,7 @@ public class TapBarBlockItem implements TapItem {
         if (!UIVar.isdialogeopend) {
             if (CheckMouse.isJustPressedNormal(x, y, w, h, false)) {
 
-                Block tempblock = ProjectManager.getActProjectVar().projectType.getBlockGenerator().generateBlock(ProjectManager.getActProjectVar().blocks.size(), (int) ProgramingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgramingSpace.viewport.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)).y, psb.getWidth(), UIVar.BlockHeight, psb,  ProjectManager.getActProjectVar().projectType.getBlocktoSaveGenerator(), false);
+                Block tempblock = ProjectManager.getActProjectVar().projectType.getBlockGenerator().generateBlock(ProjectManager.getActProjectVar().blocks.size(), (int) (Unproject.unproject().x-psb.getWidth() / 2), (int) (Unproject.unproject().y-UIVar.BlockHeight / 2), psb.getWidth(), UIVar.BlockHeight, psb,  ProjectManager.getActProjectVar().projectType.getBlocktoSaveGenerator(), false);
 
                 ProjectManager.getActProjectVar().marked_block.add(tempblock);
                 ProjectManager.getActProjectVar().moving_block = tempblock;
