@@ -165,7 +165,7 @@ public class UI {
         UIVar.moveprogrammlock = lock;
 
 
-        if (markedblock != null && markedblock.getBlocktype().getBlockParameter() != null && ((markedblock == null && ProjectManager.getActProjectVar().marked_block.size() == 0) || (ProjectManager.getActProjectVar().marked_block.size() > 0 && markedblock == ProjectManager.getActProjectVar().marked_block.get(0)))) {
+        if (ProjectManager.getActProjectVar().marked_block.size()==1&&markedblock != null && markedblock.getBlocktype().getBlockParameter() != null && ((markedblock == null && ProjectManager.getActProjectVar().marked_block.size() == 0) || (ProjectManager.getActProjectVar().marked_block.size() > 0 && markedblock == ProjectManager.getActProjectVar().marked_block.get(0)))) {
 
 
             UIVar.blockeinstellungen_w = 170;

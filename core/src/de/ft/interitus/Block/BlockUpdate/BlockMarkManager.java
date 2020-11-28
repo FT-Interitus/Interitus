@@ -85,6 +85,7 @@ public class BlockMarkManager {
             selectionRect.setSize((int) (Unproject.unproject().x - Var.mouseDownPos.x), (int) (Unproject.unproject().y - Var.mouseDownPos.y));
             SelectionRectDrawer.draw(selectionRect);
             selecting = true;
+
         }
 
         if (!Gdx.input.isButtonPressed(0) && selecting) {
