@@ -77,7 +77,6 @@ public class Program extends Game {
         if (Var.savemode) {
             logger.warning("Programm is running in savemode");
         }
-       // ((Lwjgl3Graphics) Gdx.graphics).getWindow().iconifyWindow();
         Var.splashscreen = SplashScreen.create();
         if(Var.window==null) {
 
