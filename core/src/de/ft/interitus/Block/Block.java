@@ -631,7 +631,6 @@ public abstract class Block {
         } catch (Exception e) {
 
             e.printStackTrace();
-            //If the Block was deleted while drawing
 
             if (batch.isDrawing()) {
                 batch.end();
