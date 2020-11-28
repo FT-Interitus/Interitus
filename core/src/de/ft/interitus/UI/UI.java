@@ -28,9 +28,11 @@ import de.ft.interitus.Settings;
 import de.ft.interitus.UI.ManualConfig.ManualConfigUI;
 import de.ft.interitus.UI.Notification.Notification;
 import de.ft.interitus.UI.Notification.NotificationManager;
+import de.ft.interitus.UI.UIElements.Grid;
 import de.ft.interitus.UI.UIElements.UIElementBar;
 import de.ft.interitus.UI.UIElements.UIElements.Button;
 import de.ft.interitus.UI.UIElements.UIElements.TabBar.TabBar;
+import de.ft.interitus.UI.UIElements.UIElements.UIElement;
 import de.ft.interitus.UI.UIElements.UIElements.quickinfo.QuickInfo;
 import de.ft.interitus.UI.UIElements.dropdownmenue.DropDownMenue;
 import de.ft.interitus.UI.editor.Editor;
@@ -60,6 +62,7 @@ import java.util.TimerTask;
 import static de.ft.interitus.UI.MenuBar.createProjectsSubMenu;
 
 public class UI {
+    public static Grid testGrid=new Grid(100,100,200,200);
     public static final ManualConfigUI MANUALCONFIG = new ManualConfigUI();
     public final static GlyphLayout glyphLayout = new GlyphLayout();
     public final static BitmapFont font = new BitmapFont();
@@ -360,6 +363,11 @@ public class UI {
         }
         runselection.draw();
 
+
+
+
+        testGrid.draw();
+
     }
 
     public static void init() {
@@ -554,6 +562,29 @@ public class UI {
                 blockbarquickinfo.disableall();
             }
         });
+
+
+        Button testbutton1=new Button();
+        testbutton1.setW(30);
+        testbutton1.setH(100);
+        testbutton1.setImage(AssetLoader.arduinonanoimage);
+        Button testbutton2=new Button();
+        testbutton2.setW(70);
+        testbutton2.setH(50);
+        Button testbutton3=new Button();
+        testbutton3.setW(50);
+        testbutton3.setH(50);
+        testGrid.setPosition(500,500);
+        testGrid.addElement(testbutton1);
+        testGrid.addElement(testbutton2);
+        testGrid.addElement(testbutton2);
+        testGrid.addElement(testbutton2);
+        testGrid.addElement(testbutton2);
+
+        testGrid.row();
+        testGrid.addElement(testbutton3);
+        testGrid.addElement(testbutton1);
+
 
     }
 

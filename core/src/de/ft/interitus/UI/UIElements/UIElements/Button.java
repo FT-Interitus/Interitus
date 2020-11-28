@@ -224,24 +224,38 @@ public class Button implements UIElement {
         return x;
     }
 
-    public void setX(int x) {
+    public Object setX(int x) {
         this.x = x;
+        return null;
+
     }
 
     public int getY() {
         return y;
     }
 
-    public void setY(int y) {
+    public Object setY(int y) {
         this.y = y;
+        return null;
+
     }
 
     public int getH() {
         return h;
     }
 
-    public void setH(int h) {
+    public Object setH(int h) {
         this.h = h;
+        return null;
+
+    }
+
+    @Override
+    public Object setPosition(int x, int y) {
+        this.x=x;
+        this.y=y;
+        return null;
+
     }
 
     public int getW() {

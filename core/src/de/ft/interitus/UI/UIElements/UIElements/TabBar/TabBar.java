@@ -73,6 +73,37 @@ public class TabBar implements UIElement {
         return h;
     }
 
+    @Override
+    public Object setX(int x) {
+        this.x=x;
+        return null;
+    }
+
+    @Override
+    public Object setY(int y) {
+        this.y=y;
+        return null;
+    }
+
+    @Override
+    public Object setW(int w) {
+        this.w=w;
+        return null;
+    }
+
+    @Override
+    public Object setH(int h) {
+        this.h=h;
+        return null;
+    }
+
+    @Override
+    public Object setPosition(int x, int y) {
+        this.x=x;
+        this.y=y;
+        return null;
+    }
+
     public void setBounds(int x, int y, int w, int h) {
         this.x = x;
         this.y = y;

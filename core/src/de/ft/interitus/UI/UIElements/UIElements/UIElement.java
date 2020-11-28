@@ -6,6 +6,14 @@
 package de.ft.interitus.UI.UIElements.UIElements;
 
 public interface UIElement {
+
+
+    void setBounds(int x, int y, int w, int h);
+
+    void draw();
+
+    void setAlpha(float alpha);
+
     int getX();
 
     int getY();
@@ -14,10 +22,13 @@ public interface UIElement {
 
     int getH();
 
-    void setBounds(int x, int y, int w, int h);
+    Object setX(int x);
 
-    void draw();
+    Object setY(int y);
 
-    void setAlpha(float alpha);
+    Object setW(int w);
 
+    Object setH(int h);
+
+    Object setPosition(int x, int y);
 }
