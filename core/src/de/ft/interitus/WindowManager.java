@@ -32,6 +32,7 @@ public class WindowManager {
     public static ShapeRenderer BlockshapeRenderer;
 
     public static BitmapFont font;
+    public static BitmapFont ParameterFont;
     private static boolean initalProgramingSpace = true;
     private static boolean switchtoprogramm = false;
     private static boolean switchtowelcome = false;
@@ -125,7 +126,9 @@ public class WindowManager {
     }
 
     public static void init() {
-        font = new BitmapFont();
+        font = AssetLoader.defaultfont;
+        ParameterFont=AssetLoader.ParameterFont;
+
         WindowManager.blockBatch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
         BlockshapeRenderer = new ShapeRenderer();

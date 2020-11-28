@@ -7,6 +7,7 @@ package de.ft.interitus.loading;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -210,7 +211,7 @@ public class AssetLoader {
 
     public static AssetManager manager = new AssetManager();
 
-
+    public static BitmapFont ParameterFont;
 
     public static Object save(String file, Class Type) {
         return manager.get(workingdirectory + file, Type);
@@ -267,21 +268,29 @@ public class AssetLoader {
             group = "Schriftarten";
             try {
                 //schriftart
-                FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("comicsans.ttf"));
+                FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal("Fonts/comicsans.ttf"));
                 FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
                 parameter.size = 50;
                 welcomefont = generator.generateFont(parameter); // font size 12 pixels
 
-                FreeTypeFontGenerator generator1 = new FreeTypeFontGenerator(Gdx.files.internal("defaultfont.ttf"));
+                FreeTypeFontGenerator generator1 = new FreeTypeFontGenerator(Gdx.files.internal("Fonts/defaultfont.ttf"));
                 FreeTypeFontGenerator.FreeTypeFontParameter parameter1 = new FreeTypeFontGenerator.FreeTypeFontParameter();
                 parameter1.size = 15;
 
                 defaultfont = generator1.generateFont(parameter1);
 
+                FreeTypeFontGenerator generator2 = new FreeTypeFontGenerator(Gdx.files.internal("Fonts/agency_fb.ttf"));
+                FreeTypeFontGenerator.FreeTypeFontParameter parameter2 = new FreeTypeFontGenerator.FreeTypeFontParameter();
+                parameter2.color=new Color(0f,0f,0f,1f);
+                parameter2.size = 16;
+
+                ParameterFont = generator2.generateFont(parameter2);
+
                 generator.dispose(); // don't forget to dispose to avoid memory leaks!
             } catch (Exception e) {
                 Program.logger.severe("Error while loading Font");
             }
+
 
             group = "Plugs";
             manager.load(workingdirectory + "Block/ParameterStecker/ZahlParameterStecker.png", Texture.class);
