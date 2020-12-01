@@ -5,12 +5,12 @@
 
 package de.ft.interitus.Block;
 
-import de.ft.interitus.WindowManager;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.shortcut.shortcuts.BlockShortcuts;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.Var;
+import de.ft.interitus.WindowManager;
 import de.ft.interitus.projecttypes.ProjectManager;
 
 public class BlockDrawer {
@@ -21,36 +21,26 @@ public class BlockDrawer {
                 Block block = ProjectManager.getActProjectVar().visible_blocks.get(i);
 
 
-
-
-
-
-                if(block.isMarked()) continue;
-                block.draw(WindowManager.blockBatch,WindowManager.BlockshapeRenderer,WindowManager.font);
-
-
-
-
-
-
+                if (block.isMarked()) continue;
+                block.draw(WindowManager.blockBatch, WindowManager.BlockshapeRenderer, WindowManager.font);
 
 
             }
 
 
-                for(int i=0;i<ProjectManager.getActProjectVar().marked_block.size();i++) {
-                    Block block = ProjectManager.getActProjectVar().marked_block.get(i);
-                    if(block.isMoving()) continue;
-                    block.draw(WindowManager.blockBatch,WindowManager.BlockshapeRenderer,WindowManager.font);
+            for (int i = 0; i < ProjectManager.getActProjectVar().marked_block.size(); i++) {
+                Block block = ProjectManager.getActProjectVar().marked_block.get(i);
+                if (block.isMoving()) continue;
+                block.draw(WindowManager.blockBatch, WindowManager.BlockshapeRenderer, WindowManager.font);
 
-                    if (BlockShortcuts.shortCut_deleteBlock.isPressed() && block.getBlocktype().canbedeleted()) {
-                        block.delete(false);
-                        i--;
-                    }
+                if (BlockShortcuts.shortCut_deleteBlock.isPressed() && block.getBlocktype().canbedeleted()) {
+                    block.delete(false);
+                    i--;
                 }
+            }
 
 
-            UI.updatedragui(WindowManager.shapeRenderer, false, WindowManager.blockBatch,delta);
+            UI.updatedragui(WindowManager.shapeRenderer, false, WindowManager.blockBatch, delta);
             BlockTappedBar.tb.setX(UIVar.BlockBarX + UIVar.BlockBarW / 2);
             BlockTappedBar.tb.setY(UIVar.BlockBarY + UIVar.BlockBarH / 2 - (BlockTappedBar.tb.getHeight() + UIVar.abstandvonRand * 2) / 2);
             BlockTappedBar.tb.draw();
@@ -66,7 +56,7 @@ public class BlockDrawer {
                 }
             }
 
-            if(ProjectManager.getActProjectVar().moveingdatawire!=null) {
+            if (ProjectManager.getActProjectVar().moveingdatawire != null) {
                 ProjectManager.getActProjectVar().moveingdatawire.draw();
             }
 

@@ -366,7 +366,7 @@ public class UI {
 
 
 
-        testGrid.draw();
+       // testGrid.draw();
 
     }
 

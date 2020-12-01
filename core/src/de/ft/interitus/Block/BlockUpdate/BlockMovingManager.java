@@ -51,9 +51,8 @@ public class BlockMovingManager {
         } else {
 
             if (projectVar.moving_block == block) {
-               //if (ProgramGrid.block_snapping && !ProgramGrid.block_active_snapping)
-                   // for(Block marked:ProjectManager.getActProjectVar().marked_block)
-                        //blockSnapping(marked);
+               if (ProgramGrid.block_snapping && !ProgramGrid.block_active_snapping)
+                        blockSnapping(projectVar.moving_block);
 
                 BlockConnectionManager.placeBlock(block);
 
@@ -114,6 +113,8 @@ public class BlockMovingManager {
         int newY = (int) ((block.getY()) / ProgramGrid.margin);
         block.setX((int) (newX * ProgramGrid.margin));
         block.setY((int) (newY * ProgramGrid.margin));
+        BlockConnectionManager.connectedBlockJumpingtoLeft(block);
+        BlockConnectionManager.connectedBlockJumpingtoRight(block);
     }
 
     /**
@@ -128,6 +129,7 @@ public class BlockMovingManager {
                 Block marked =ProjectManager.getActProjectVar().marked_block.get(i);
                 if(marked.getBlocktype().canbedeleted())
                     marked.delete(false);
+                    i--;
             }
 
 
