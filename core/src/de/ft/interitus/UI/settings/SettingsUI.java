@@ -166,7 +166,7 @@ public class SettingsUI extends VisWindow {
 
             item2.add(new TestNode(new VisLabel(" Tastenkombinationen"), 5));
             item2.add(new TestNode(new VisLabel(" Tipps"), 6));
-            item2.add(new TestNode(new VisLabel(" item 2.3"), 7));
+            item2.add(new TestNode(new VisLabel(" Blöcke"), 7));
 
             item3.add(new TestNode(new VisLabel(" Daten"), 9));
             item3.add(new TestNode(new VisLabel(" Performance"), 10));

@@ -235,6 +235,8 @@ public class Data {
                     Settings.personalhits = obj.getBoolean("personalhints");
                     Settings.betaupdates = obj.getBoolean("betaupdates");
                     Settings.disableblockgrayout = obj.getBoolean("disableblockgrayout");
+                    Settings.blockSnapping = obj.getBoolean("blocksnapping");
+                    Settings.blockActiveSnapping = obj.getBoolean("blockactivesnapping");
                     // weitere einstellugen Laden
 
                 } catch (Exception e) {
@@ -399,6 +401,9 @@ public class Data {
         settings_obj.put("personalhints", Settings.personalhits);
         settings_obj.put("betaupdates",Settings.betaupdates);
         settings_obj.put("disableblockgrayout",Settings.disableblockgrayout);
+        settings_obj.put("blocksnapping",Settings.blockSnapping);
+        settings_obj.put("blockactivesnapping", Settings.blockActiveSnapping);
+
 
         //hier weitere Einstellugen speichern
         settings.writeString(settings_obj.toString(), false); //Datei wird geschrieben

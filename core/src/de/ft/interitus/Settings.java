@@ -14,6 +14,8 @@ public class Settings {
     public static int limitfps = 0;
     public static boolean personalhits = true;
     public static boolean hints = true;
+    public static boolean blockSnapping = true;
+    public static boolean blockActiveSnapping = false;
     public static boolean betaupdates = false;
     public static boolean disableblockgrayout = false;
 }

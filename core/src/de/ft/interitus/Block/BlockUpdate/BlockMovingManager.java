@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.Parameter;
+import de.ft.interitus.Settings;
 import de.ft.interitus.UI.ProgramGrid;
 import de.ft.interitus.UI.UIElements.check.CheckCollision;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
@@ -44,14 +45,14 @@ public class BlockMovingManager {
                 markedBlock.getPos().set(Unproject.unproject().sub(markedBlock.getMovementDiff()));
 
             }
-            if (ProgramGrid.block_active_snapping)
+            if (Settings.blockActiveSnapping)
                 blockSnapping(block);
 
 
         } else {
 
             if (projectVar.moving_block == block) {
-               if (ProgramGrid.block_snapping && !ProgramGrid.block_active_snapping)
+               if (Settings.blockSnapping && !Settings.blockActiveSnapping)
                         blockSnapping(projectVar.moving_block);
 
                 BlockConnectionManager.placeBlock(block);

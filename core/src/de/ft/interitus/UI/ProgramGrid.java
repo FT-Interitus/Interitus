@@ -23,8 +23,7 @@ public class ProgramGrid {
     public static float margin = 17.5f;
     public static boolean points = false;
     public static boolean enable = true;
-    public static boolean block_snapping = true;
-    public static boolean block_active_snapping = false;
+
 
 
     public static void draw(ShapeRenderer shapeRenderer, OrthographicCamera cam) {
