@@ -57,10 +57,10 @@ public class MultiplicationMode extends ArduinoBlock {
     @Override
     public String getCode() {
         if( parameters.get(2).getDataWires().size()>0){
-            return parameters.get(2).getVarName()+ " = "+parameters.get(0).getParameter()+" * "+parameters.get(1).getParameter()+";";
+            return parameters.get(2).getVarName()+ " = ("+parameters.get(0).getParameter()+") * ("+parameters.get(1).getParameter()+");";
 
         }else {
-            return parameters.get(0).getParameter()+" * "+parameters.get(1).getParameter()+";";
+            return "("+parameters.get(0).getParameter()+") * ("+parameters.get(1).getParameter()+");";
         }
     }
 

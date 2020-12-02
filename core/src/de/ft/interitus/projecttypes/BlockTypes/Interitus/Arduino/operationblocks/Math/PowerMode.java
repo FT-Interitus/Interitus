@@ -57,7 +57,7 @@ public class PowerMode extends ArduinoBlock {
     @Override
     public String getCode() {
         if( parameters.get(2).getDataWires().size()>0){
-            return parameters.get(2).getVarName()+ " = "+"pow("+parameters.get(0).getParameter()+","+parameters.get(1).getParameter()+");";
+            return parameters.get(2).getVarName()+ " = "+"pow(/"+parameters.get(0).getParameter()+"),("+parameters.get(1).getParameter()+"));";
 
         }else {
             return "pow("+parameters.get(0).getParameter()+","+parameters.get(1).getParameter()+");";
