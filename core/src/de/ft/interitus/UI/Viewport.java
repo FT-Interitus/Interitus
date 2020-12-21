@@ -46,6 +46,7 @@ public class Viewport {
 
         inputManager.addProcessor(new InputAdapter() {
 
+            Vector3 tp = new Vector3();
 
             @Override
             public boolean scrolled(int amount) {
@@ -53,16 +54,16 @@ public class Viewport {
                 if (!UIVar.isdialogeopend) {
 
                     if (input.isKeyPressed(Input.Keys.CONTROL_LEFT) || input.isKeyPressed(Input.Keys.CONTROL_RIGHT)) {
-                        if (amount == -1) {
-                            if (cam.zoom > 0.4f) {
-                                cam.zoom = cam.zoom - 0.1f;
-                            }
+                        cam.unproject(tp.set(Gdx.input.getX(), Gdx.input.getY(), 0 ));
+                        float px = tp.x;
+                        float py = tp.y;
+                        cam.zoom += amount * cam.zoom * 0.1f;
+                        cam.update();
 
-                        } else {
-                            if (cam.zoom <= 2.0f) {
-                                cam.zoom = cam.zoom + 0.1f;
-                            }
-                        }
+                        cam.unproject(tp.set(Gdx.input.getX(), Gdx.input.getY(), 0 ));
+                        cam.position.add(px - tp.x, py- tp.y, 0);
+                        cam.update();
+
 
                         if (cam == ProgramingSpace.cam) {
                             Program.logger.config("is cam");
@@ -74,7 +75,7 @@ public class Viewport {
                     }
 
                 }
-                return false;
+                return true;
 
 
             }
