@@ -18,7 +18,7 @@ import de.ft.interitus.utils.ShapeRenderer;
 
 import de.ft.interitus.utils.ArrayList;
 
-import javax.websocket.server.ServerEndpoint;
+
 
 public class DropDownMenue implements UIElement {
     private final ArrayList<DropDownElementInterface> elements = new ArrayList<>();

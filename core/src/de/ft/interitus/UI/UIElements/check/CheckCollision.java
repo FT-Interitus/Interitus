@@ -91,7 +91,7 @@ public class CheckCollision {
     }
 
 
-    public static boolean checkmousewithblock(Block block, Vector2 mousepos) {
+    public static boolean checkVectorWithBlock(Block block, Vector2 mousepos) {
 
 
         return object(block.getX(), block.getY(), block.getW(), block.getH(), (int) mousepos.x, (int) mousepos.y, MOUSESIZE, MOUSESIZE);

@@ -69,14 +69,10 @@ project(":core") {
 
     dependencies {
         implementation 'com.google.code.gson:gson:2.8.6'
-        compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.3.3.RELEASE'
-        api group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.3.3.RELEASE'
-        compile group: 'org.springframework', name: 'spring-web', version: '5.2.8.RELEASE'
-        compile group: 'org.springframework', name: 'spring-context', version: '5.2.8.RELEASE'
         api 'com.jcraft:jsch:0.1.54'
         api 'com.fazecast:jSerialComm:[2.0.0,3.0.0)'
         api "com.kotcrab.vis:vis-ui:$visuiVersion"
-        api 'org.json:json:20171018'
+        implementation group: 'org.json', name: 'json', version: '20201115'
         compile group: 'org.hid4java', name: 'hid4java', version: '0.7.0'
         compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.11'
         api group: 'org.scream3r', name: 'jssc', version: '2.8.0'

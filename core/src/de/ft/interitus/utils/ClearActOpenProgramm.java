@@ -75,7 +75,7 @@ public class ClearActOpenProgramm {
         ProjectManager.getProjectVar(index).blocks.clear();
 
 
-        ProjectManager.getProjectVar(index).marked_block.clear();
+        ProjectManager.getProjectVar(index).marked_blocks.clear();
 
 
 

@@ -28,8 +28,8 @@ public class BlockDrawer {
             }
 
 
-            for (int i = 0; i < ProjectManager.getActProjectVar().marked_block.size(); i++) {
-                Block block = ProjectManager.getActProjectVar().marked_block.get(i);
+            for (int i = 0; i < ProjectManager.getActProjectVar().marked_blocks.size(); i++) {
+                Block block = ProjectManager.getActProjectVar().marked_blocks.get(i);
                 if (block.isMoving()) continue;
                 block.draw(WindowManager.blockBatch, WindowManager.BlockshapeRenderer, WindowManager.font);
 

@@ -5,9 +5,6 @@
 
 package de.ft.interitus.Block;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector3;
-import de.ft.interitus.ProgramingSpace;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
 import de.ft.interitus.UI.UIVar;
@@ -41,7 +38,7 @@ public class TapBarBlockItem implements TapItem {
 
                 Block tempblock = ProjectManager.getActProjectVar().projectType.getBlockGenerator().generateBlock(ProjectManager.getActProjectVar().blocks.size(), (int) (Unproject.unproject().x-psb.getWidth() / 2), (int) (Unproject.unproject().y-UIVar.BlockHeight / 2), psb.getWidth(), UIVar.BlockHeight, psb,  ProjectManager.getActProjectVar().projectType.getBlocktoSaveGenerator(), false);
 
-                ProjectManager.getActProjectVar().marked_block.add(tempblock);
+                ProjectManager.getActProjectVar().marked_blocks.add(tempblock);
                 ProjectManager.getActProjectVar().moving_block = tempblock;
 
 

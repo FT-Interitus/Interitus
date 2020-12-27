@@ -13,7 +13,6 @@ import de.ft.interitus.UI.Notification.Notification;
 import de.ft.interitus.UI.Notification.NotificationManager;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.UIElements.TabBar.Tab;
-import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.Var;
 import de.ft.interitus.datamanager.programmdata.experience.ExperienceVar;
@@ -113,8 +112,8 @@ public class ProjectManager {
          * Remove Marked Block if it doesn't exist in the Block ArrayList
          */
         if(ProjectManager.getActProjectVar()!=null) {
-            if(!ProjectManager.getActProjectVar().blocks.contains(ProjectManager.getActProjectVar().marked_block)) {
-                ProjectManager.getActProjectVar().marked_block.clear();
+            if(!ProjectManager.getActProjectVar().blocks.contains(ProjectManager.getActProjectVar().marked_blocks)) {
+                ProjectManager.getActProjectVar().marked_blocks.clear();
 
             }
         }

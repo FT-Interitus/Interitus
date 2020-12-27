@@ -38,7 +38,6 @@ import de.ft.interitus.utils.Unproject;
 
 import java.util.ConcurrentModificationException;
 import java.util.Objects;
-import java.util.Vector;
 
 /***
  *
@@ -162,7 +161,7 @@ public abstract class Block {
      */
 
     public boolean isMarked() {
-        return ProjectManager.getActProjectVar().marked_block.contains(this); //Ist der Block von User makiert worden?
+        return ProjectManager.getActProjectVar().marked_blocks.contains(this); //Ist der Block von User makiert worden?
     }
 
 
@@ -315,7 +314,7 @@ public abstract class Block {
 
         EventVar.rightClickEventManager.removeListener(this.rightClickEventListener);
         EventVar.blockEventManager.deleteBlock(new BlockDeleteEvent(this, this)); //Fire Delete Event
-        ProjectManager.getActProjectVar().marked_block.remove(this); //Der Makierte Block wird auf null gesetzt da nur ein makierter block gelöscht werden kann //Anmerkung falls das ganze Programm gelöscht wird spielt das sowieso keine Rolle
+        ProjectManager.getActProjectVar().marked_blocks.remove(this); //Der Makierte Block wird auf null gesetzt da nur ein makierter block gelöscht werden kann //Anmerkung falls das ganze Programm gelöscht wird spielt das sowieso keine Rolle
         ProjectManager.getActProjectVar().moving_block = null; // Ob ein Block bewegt wird, wird auf false gesetzt da wenn ein Block bewegt und gelöscht wird kann es nur der bewegte Block sein
 
 
@@ -512,7 +511,7 @@ public abstract class Block {
             batch.setColor(1, 1, 1, 1);
         }
 
-        if (ProjectManager.getActProjectVar().duplicate_block_left == this && this.getBlocktype().canhasleftconnector() && ProjectManager.getActProjectVar().marked_block != null) {
+        if (ProjectManager.getActProjectVar().duplicate_block_left == this && this.getBlocktype().canhasleftconnector() && ProjectManager.getActProjectVar().marked_blocks != null) {
             batch.setColor(1, 1, 1, 0.5f);
             batch.draw(AssetLoader.block_middle, this.getX() - ProjectManager.getActProjectVar().moving_block.getW(), this.getY(), ProjectManager.getActProjectVar().moving_block.getW(), this.getH()); //das gleiche für links
             batch.setColor(1, 1, 1, 1);

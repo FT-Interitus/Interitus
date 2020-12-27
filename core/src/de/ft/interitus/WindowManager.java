@@ -101,11 +101,7 @@ public class WindowManager {
         }
 
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.C)) {
-            Notification notification = new Notification(AssetLoader.information, "Wichtige Information", "\nEs steht kein Update bereit!");
-            //notification.setButtonBar(new UIElementBar().addButton(new Button().setText("Test")));
-            NotificationManager.sendNotification(notification);
-        }
+
 
 
 
@@ -134,11 +130,6 @@ public class WindowManager {
         BlockshapeRenderer = new ShapeRenderer();
         UI.UIcam.position.set(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f, 0);
         ProgramingSpace.pressedKeys = new PressedKeys();
-
-        //TODO Alpha info text
-        Notification notification = new Notification(AssetLoader.information,"Danke für das Testen","Achtung: Das ist eine Alpha Version\nEs können Fehler entstehen!").setStayalive(false);
-        NotificationManager.sendNotification(notification);
-
 
     }
 

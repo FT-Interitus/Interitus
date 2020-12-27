@@ -59,7 +59,7 @@ public class BlockConnectionManager {
     private static void disconnectLeft(Block block) {
         if (block.getWire_left() == null) return;
         if (block.getWire_left().isVisible()) return;
-        if(ProjectManager.getActProjectVar().marked_block.contains(block.getLeft())) return;
+        if(ProjectManager.getActProjectVar().marked_blocks.contains(block.getLeft())) return;
         block.getWire_left().delete();
         block.setLeft(null);
 
@@ -74,7 +74,7 @@ public class BlockConnectionManager {
     private static void disconnectRight(Block block) {
         if (block.getWire_right() == null) return;
         if (block.getWire_right().isVisible()) return;
-        if(ProjectManager.getActProjectVar().marked_block.contains(block.getRight())) return;
+        if(ProjectManager.getActProjectVar().marked_blocks.contains(block.getRight())) return;
         block.getWire_right().delete();
         block.setRight(null);
 

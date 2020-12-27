@@ -53,24 +53,23 @@ public class Viewport {
 
                 if (!UIVar.isdialogeopend) {
 
+                    if(amount==-1) {
+                        if (cam.zoom <= 0.4f) return false;
+                    }else{
+                        if (cam.zoom > 2.0f) return false;
+                    }
+
                     if (input.isKeyPressed(Input.Keys.CONTROL_LEFT) || input.isKeyPressed(Input.Keys.CONTROL_RIGHT)) {
                         cam.unproject(tp.set(Gdx.input.getX(), Gdx.input.getY(), 0 ));
                         float px = tp.x;
                         float py = tp.y;
+
                         cam.zoom += amount * cam.zoom * 0.1f;
                         cam.update();
 
                         cam.unproject(tp.set(Gdx.input.getX(), Gdx.input.getY(), 0 ));
                         cam.position.add(px - tp.x, py- tp.y, 0);
                         cam.update();
-
-
-                        if (cam == ProgramingSpace.cam) {
-                            Program.logger.config("is cam");
-                            ProjectManager.getActProjectVar().zoom = cam.zoom;
-                        }else{
-                            Program.logger.config("is not cam");
-                        }
 
                     }
 

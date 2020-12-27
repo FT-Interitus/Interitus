@@ -6,7 +6,6 @@
 package de.ft.interitus.network.bettertogether;
 
 import de.ft.interitus.Block.Block;
-import de.ft.interitus.Block.SaveBlock;
 import de.ft.interitus.Block.Saving.SaveBlockV1;
 import de.ft.interitus.Program;
 import de.ft.interitus.Var;
@@ -88,7 +87,7 @@ public class Client {
                     blockmovingtimer.scheduleAtFixedRate(new TimerTask() {
                         @Override
                         public void run() {
-                            if (ProjectManager.getActProjectVar().marked_block != null) {
+                            if (ProjectManager.getActProjectVar().marked_blocks != null) {
                                 //sendinglist.add("!BM!" + ProjectManager.getActProjectVar().marked_block.getIndex() + "t" + ProjectManager.getActProjectVar().marked_block.getX() + "t" + ProjectManager.getActProjectVar().marked_block.getY() + "\n");
 
                             }
