@@ -32,6 +32,8 @@ public class SplashScreen {
             public void render() {
                 Gdx.gl.glClearColor(Settings.theme.ClearColor().r, Settings.theme.ClearColor().g, Settings.theme.ClearColor().b, Settings.theme.ClearColor().a);
                 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+
             }
 
             @Override

@@ -24,7 +24,7 @@ public class BlockMarkManager {
     private static boolean selecting = false;
 
     protected static void update() {
-
+        assert ProjectManager.getActProjectVar() != null;
         if (ProjectManager.getActProjectVar().moveingdatawire == null)
             selectingRect();
 
@@ -74,7 +74,7 @@ public class BlockMarkManager {
     }
 
     private static boolean clickedOnSelectedBlock() {
-
+        assert ProjectManager.getActProjectVar() != null;
         for (Block block : ProjectManager.getActProjectVar().visible_blocks) {
             if (CheckCollision.checkmousewithblock(block)&&ProjectManager.getActProjectVar().marked_blocks.contains(block)) return true;
         }
@@ -90,6 +90,7 @@ public class BlockMarkManager {
     }
 
     private static void selectingRect() {
+        assert ProjectManager.getActProjectVar() != null;
         if (Gdx.input.isButtonPressed(0) && ProjectManager.getActProjectVar().moving_block == null) {
             if(!selecting&&!CheckMouse.wasMousePressed(UIVar.abstandvonRand,UIVar.programmflaeche_y,Gdx.graphics.getWidth()-(2* UIVar.abstandvonRand), UIVar.programmflaeche_h)) return;
             selectionRect.setLocation((int) Var.mouseDownPos.x, (int) Var.mouseDownPos.y);
@@ -101,9 +102,9 @@ public class BlockMarkManager {
 
         if (!Gdx.input.isButtonPressed(0) && selecting) {
 
-            for (Block checkblock : ProjectManager.getActProjectVar().visible_blocks) {
-                if (CheckCollision.rectCollision(selectionRect, new Rectangle(checkblock.getX(), checkblock.getY(), checkblock.getW(), checkblock.getH()))) {
-                    ProjectManager.getActProjectVar().marked_blocks.add(checkblock);
+            for (Block checkBlock : ProjectManager.getActProjectVar().visible_blocks) {
+                if (CheckCollision.rectCollision(selectionRect, new Rectangle(checkBlock.getX(), checkBlock.getY(), checkBlock.getW(), checkBlock.getH()))) {
+                    ProjectManager.getActProjectVar().marked_blocks.add(checkBlock);
                 }
             }
             selecting=false;

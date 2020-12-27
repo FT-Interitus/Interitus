@@ -18,6 +18,7 @@ import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.ProjectVar;
 import de.ft.interitus.utils.Unproject;
 
+
 public class BlockMovingManager {
 
     public static final int movingTolerance = 2;
@@ -29,7 +30,7 @@ public class BlockMovingManager {
 
 
         projectVar = ProjectManager.getActProjectVar();
-        assert projectVar != null;
+        assert ProjectManager.getActProjectVar() != null;
 
         if (isBlockMoving(block)) {
 
@@ -68,11 +69,11 @@ public class BlockMovingManager {
     /***
      * Checks all Information if Block is Moving e. g. Mouse is pressed
      *
-     * @param block
-     * @return
+     * @param block affected Block
+     * @return if the Block is able to be moved
      */
     private static boolean isBlockMoving(Block block) {
-
+        assert ProjectManager.getActProjectVar() != null;
         if (!Gdx.input.isButtonPressed(0)) return false;
         if (!block.isMarked()) return false;
         if (projectVar.moving_block == block) return true;
@@ -113,17 +114,17 @@ public class BlockMovingManager {
         int newY = (int) ((block.getY()) / ProgramGrid.margin);
         block.setX((int) (newX * ProgramGrid.margin));
         block.setY((int) (newY * ProgramGrid.margin));
-        BlockConnectionManager.connectedBlockJumpingtoLeft(block);
-        BlockConnectionManager.connectedBlockJumpingtoRight(block);
+        BlockConnectionManager.connectedBlockJumpingToLeft(block);
+        BlockConnectionManager.connectedBlockJumpingToRight(block);
     }
 
     /**
-     * Check if the Block was droped in the BlockBar -> delete
+     * Check if the Block was dropped in the BlockBar -> delete
      * <p>
      * Than remove the Block from the MovingBlock Var
      */
     private static void stopMovingBlock() {
-
+        assert ProjectManager.getActProjectVar() != null;
         if (isOnBlockBar())
             for(int i = 0; i<ProjectManager.getActProjectVar().marked_blocks.size(); i++) {
                 Block marked =ProjectManager.getActProjectVar().marked_blocks.get(i);

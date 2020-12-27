@@ -11,7 +11,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import de.ft.interitus.Block.Generators.BlocktoSaveGenerator;
+import de.ft.interitus.Block.Generators.BlockToSaveGenerator;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Program;
 import de.ft.interitus.Settings;
@@ -54,7 +54,7 @@ public abstract class Block {
     private final Vector2 pos = new Vector2(0, 0); //Block pos
     private final Vector2 wireconnector_left = new Vector2(0, 0); //Die linke wire-Anschluss Position
     private final RightClickEventListener rightClickEventListener;
-    private final BlocktoSaveGenerator blocktoSaveGenerator;
+    private final BlockToSaveGenerator blocktoSaveGenerator;
     private final GlyphLayout glyphLayout = new GlyphLayout();
     private final BlockDropDownMenue BlockModiSelection = new BlockDropDownMenue(0, 0, 0, 0, this);
     private final Block INSTANCE;
@@ -72,7 +72,7 @@ public abstract class Block {
     private boolean hoverd;
 
 
-    public Block(final int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock, BlocktoSaveGenerator blocktoSaveGenerator, boolean isSubBlock) { //Initzialisieren des Blocks
+    public Block(final int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock, BlockToSaveGenerator blocktoSaveGenerator, boolean isSubBlock) { //Initzialisieren des Blocks
         this.blocktype = platformSpecificBlock;
         //  EventVar.blockEventManager.createBlock(new BlockCreateEvent(this, this));
         EventManager.fireEvent(this, new BlockCreateEvent(this));
@@ -668,7 +668,7 @@ public abstract class Block {
         this.blocktype = blocktype;
     }
 
-    public BlocktoSaveGenerator getBlocktoSaveGenerator() {
+    public BlockToSaveGenerator getBlocktoSaveGenerator() {
         return blocktoSaveGenerator;
     }
 

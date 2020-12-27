@@ -14,7 +14,6 @@ public class BlockConnectionManager {
 
     public static void startMovingBlock(Block block) {
 
-
         disconnectLeft(block);
         disconnectRight(block);
     }
@@ -32,20 +31,18 @@ public class BlockConnectionManager {
             connection.setPosition(projectVar.duplicate_block_right.getX_dup_rechts() , projectVar.duplicate_block_right.getY());
             new Wire(projectVar.duplicate_block_right,connection,false);
             connection.setLeft(projectVar.duplicate_block_right);
-            connectedBlockJumpingtoLeft(BlockJumpingManager.getEndingLeftBlockSelection(block));
+            connectedBlockJumpingToLeft(BlockJumpingManager.getEndingLeftBlockSelection(block));
             return;
         }
 
-        if(projectVar.duplicate_block_left != null) {
+        //Do the same for left
 
-            Block connection = BlockJumpingManager.getEndingRightBlockSelection(block);
+        Block connection = BlockJumpingManager.getEndingRightBlockSelection(block);
 
-            connection.setPosition(projectVar.duplicate_block_left.getX()-connection.getW(),projectVar.duplicate_block_left.getY());
-            new Wire(connection,projectVar.duplicate_block_left,false);
-            connection.setRight(projectVar.duplicate_block_left);
-            connectedBlockJumpingtoRight(BlockJumpingManager.getEndingRightBlockSelection(block));
-        }
-
+        connection.setPosition(projectVar.duplicate_block_left.getX()-connection.getW(),projectVar.duplicate_block_left.getY());
+        new Wire(connection,projectVar.duplicate_block_left,false);
+        connection.setRight(projectVar.duplicate_block_left);
+        connectedBlockJumpingToRight(BlockJumpingManager.getEndingRightBlockSelection(block));
 
 
     }
@@ -57,6 +54,7 @@ public class BlockConnectionManager {
      * @param block the specific block the changes should be applied to
      */
     private static void disconnectLeft(Block block) {
+        assert ProjectManager.getActProjectVar() != null;
         if (block.getWire_left() == null) return;
         if (block.getWire_left().isVisible()) return;
         if(ProjectManager.getActProjectVar().marked_blocks.contains(block.getLeft())) return;
@@ -72,6 +70,7 @@ public class BlockConnectionManager {
      * @param block the specific block the changes should be applied to
      */
     private static void disconnectRight(Block block) {
+        assert ProjectManager.getActProjectVar() != null;
         if (block.getWire_right() == null) return;
         if (block.getWire_right().isVisible()) return;
         if(ProjectManager.getActProjectVar().marked_blocks.contains(block.getRight())) return;
@@ -81,7 +80,7 @@ public class BlockConnectionManager {
 
     }
 
-    protected static void connectedBlockJumpingtoLeft(Block block) {
+    protected static void connectedBlockJumpingToLeft(Block block) {
         Block neighbor = block.getRight();
         while(neighbor!=null&&!neighbor.getWire_left().isVisible()) {
             neighbor.setPosition(neighbor.getLeft().getX_dup_rechts() , neighbor.getLeft().getY());
@@ -90,7 +89,7 @@ public class BlockConnectionManager {
 
     }
 
-    protected static void connectedBlockJumpingtoRight(Block block) {
+    protected static void connectedBlockJumpingToRight(Block block) {
         Block neighbor = block.getLeft();
         while(neighbor!=null&&!neighbor.getWire_right().isVisible()) {
             neighbor.setPosition(neighbor.getRight().getX()-neighbor.getW() , neighbor.getRight().getY());

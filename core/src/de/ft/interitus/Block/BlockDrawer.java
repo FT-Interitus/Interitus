@@ -16,7 +16,7 @@ import de.ft.interitus.projecttypes.ProjectManager;
 public class BlockDrawer {
     public static void Draw(float delta) {
         if (!Var.isloading) {
-
+            assert ProjectManager.getActProjectVar() != null;
             for (int i = 0; i < ProjectManager.getActProjectVar().visible_blocks.size(); i = i + 1) {
                 Block block = ProjectManager.getActProjectVar().visible_blocks.get(i);
 

@@ -23,11 +23,11 @@ public class ProjectType {
     ArrayList<PlatformSpecificBlock> projectblocks;
     BlockGenerator blockGenerator = null;
 
-    private BlocktoSaveGenerator blocktoSaveGenerator;
+    private BlockToSaveGenerator blocktoSaveGenerator;
     private boolean codeshowable = true;
 
 
-    public ProjectType(Plugin pluginRegister, String name, ArrayList<PlatformSpecificBlock> blocks, BlockGenerator blockgenerator,  BlocktoSaveGenerator blocktoSaveGenerator, BlockVarGenerator blockVarGenerator, ProjectFunktions projectFunktions, Compiler compiler) {
+    public ProjectType(Plugin pluginRegister, String name, ArrayList<PlatformSpecificBlock> blocks, BlockGenerator blockgenerator, BlockToSaveGenerator blocktoSaveGenerator, BlockVarGenerator blockVarGenerator, ProjectFunktions projectFunktions, Compiler compiler) {
         this.projectblocks = blocks;
 
         this.name = name;
@@ -69,11 +69,11 @@ public class ProjectType {
 
 
 
-    public BlocktoSaveGenerator getBlocktoSaveGenerator() {
+    public BlockToSaveGenerator getBlocktoSaveGenerator() {
         return blocktoSaveGenerator;
     }
 
-    public void setBlocktoSaveGenerator(BlocktoSaveGenerator blocktoSaveGenerator) {
+    public void setBlocktoSaveGenerator(BlockToSaveGenerator blocktoSaveGenerator) {
         this.blocktoSaveGenerator = blocktoSaveGenerator;
     }
 
