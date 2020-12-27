@@ -31,7 +31,7 @@ public class BlockMarkManager {
         assert ProjectManager.getActProjectVar() != null;
 
         //Unselect Other Blocks if you released mouse on a selected Block
-        if(Var.mouseDownPos.dst(Unproject.unproject()) < BlockMovingManager.movingTolerance&&!Gdx.input.isButtonPressed(0)) {
+        if(Var.mouseDownPos.dst(Unproject.unproject()) < BlockMovingManager.movingTolerance&&!Gdx.input.isButtonPressed(0)&&!isMultiSelectMode()) {
             for(Block block:ProjectManager.getActProjectVar().marked_blocks) {
                 if(!CheckCollision.checkVectorWithBlock(block,Var.mouseReleasePos)) continue;
                 ProjectManager.getActProjectVar().marked_blocks.clear();
