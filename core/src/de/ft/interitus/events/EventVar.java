@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -31,7 +31,6 @@ public class EventVar {
     public static GlobalEventManager globalEventManager = new GlobalEventManager();
     public static PluginEventManager pluginEventManager = new PluginEventManager();
     public static PluginStoreEventManager pluginStoreEventManager = new PluginStoreEventManager();
-    public static UIEventManager uiEventManager = new UIEventManager();
 
 
 }

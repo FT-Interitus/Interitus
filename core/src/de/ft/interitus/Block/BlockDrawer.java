@@ -56,8 +56,8 @@ public class BlockDrawer {
                 }
             }
 
-            if (ProjectManager.getActProjectVar().moveingdatawire != null) {
-                ProjectManager.getActProjectVar().moveingdatawire.draw();
+            if (ProjectManager.getActProjectVar().movingDataWire != null) {
+                ProjectManager.getActProjectVar().movingDataWire.draw();
             }
 
 

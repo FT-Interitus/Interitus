@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -159,7 +159,7 @@ public class MenuBar {
         menuItem_einstellungen = new MenuItem("Einstellungen", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                EventVar.uiEventManager.UIOpenSettingsEvent(new UIOpenSettingsEvent(this));
+                UI.set.show();
             }
         }).setShortcut("Strg+Alt+S");
         menuItem_beenden = new MenuItem("Beenden", new ChangeListener() {

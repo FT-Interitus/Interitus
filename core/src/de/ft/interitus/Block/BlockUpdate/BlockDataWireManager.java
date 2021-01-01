@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -19,7 +19,7 @@ public class BlockDataWireManager {
         if (block.getBlocktype() == null) return;
         if (block.getBlocktype().getBlockParameter() == null) return;
         assert ProjectManager.getActProjectVar() != null;
-        if (ProjectManager.getActProjectVar().moveingdatawire != null) return;
+        if (ProjectManager.getActProjectVar().movingDataWire != null) return;
 
         for (Parameter parameter : block.getBlocktype().getBlockParameter()) {
 
@@ -28,7 +28,7 @@ public class BlockDataWireManager {
             if (pressedOnParameterSpace(parameter)) {
                 DataWire instance = new DataWire(parameter);
                 parameter.getDataWires().add(instance);
-                ProjectManager.getActProjectVar().moveingdatawire = instance;
+                ProjectManager.getActProjectVar().movingDataWire = instance;
             }
 
 
@@ -61,7 +61,7 @@ public class BlockDataWireManager {
     private static void ejectDataWire(DataWire dataWire) {
         assert ProjectManager.getActProjectVar() != null;
         dataWire.setParam_output(null);
-        ProjectManager.getActProjectVar().moveingdatawire = dataWire;
+        ProjectManager.getActProjectVar().movingDataWire = dataWire;
 
     }
 

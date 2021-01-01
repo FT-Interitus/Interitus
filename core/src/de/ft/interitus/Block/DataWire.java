@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -49,7 +49,7 @@ public class DataWire {
         ProjectManager.getActProjectVar().changes = true;
         this.param_input = param_input;
 
-        ProjectManager.getActProjectVar().moveingdatawire = this;
+        ProjectManager.getActProjectVar().movingDataWire = this;
         Program.logger.config("New Output");
     }
 
@@ -176,7 +176,7 @@ public class DataWire {
        input_x = param_input.getX();
        input_y = param_input.getY();
 
-        if(ProjectManager.getActProjectVar().moveingdatawire==this) {
+        if(ProjectManager.getActProjectVar().movingDataWire ==this) {
 
             output_x = ((int) Unproject.unproject().x);
             output_y = ((int) Unproject.unproject().y)-this.getParam_input().getParameterType().getVariableType().getTextureconnector().getHeight()/2;
@@ -193,14 +193,14 @@ public class DataWire {
 
                     if(Gdx.input.isButtonJustPressed(0)) {
                         if (CheckCollision.checkpointwithobject(parameter.getX(), parameter.getY(), UIVar.parameter_width, UIVar.parameter_height, Unproject.unproject())) {
-                            ProjectManager.getActProjectVar().moveingdatawire = null;
+                            ProjectManager.getActProjectVar().movingDataWire = null;
                             param_output = parameter;
                             parameter.getDataWires().clear();
                             parameter.getDataWires().add(this);
                         }
                     }else {
                         if (CheckCollision.checkpointwithobject(parameter.getX(), parameter.getY(), UIVar.parameter_width, UIVar.parameter_height, Var.mouseReleasePos)) {
-                            ProjectManager.getActProjectVar().moveingdatawire = null;
+                            ProjectManager.getActProjectVar().movingDataWire = null;
                             param_output = parameter;
                             parameter.getDataWires().clear();
                             parameter.getDataWires().add(this);
@@ -214,14 +214,14 @@ public class DataWire {
         }
 
         if(param_output==null)  {
-            if(this!=ProjectManager.getActProjectVar().moveingdatawire) {
-                ProjectManager.getActProjectVar().moveingdatawire = this;
+            if(this!=ProjectManager.getActProjectVar().movingDataWire) {
+                ProjectManager.getActProjectVar().movingDataWire = this;
             }
         }else{
             output_x=param_output.getX();
             output_y=param_output.getY();
-            if(ProjectManager.getActProjectVar().moveingdatawire==this) {
-                ProjectManager.getActProjectVar().moveingdatawire = null;
+            if(ProjectManager.getActProjectVar().movingDataWire ==this) {
+                ProjectManager.getActProjectVar().movingDataWire = null;
             }
         }
 
@@ -284,7 +284,7 @@ public class DataWire {
 
         WindowManager.BlockshapeRenderer.end();
 
-        if(ProjectManager.getActProjectVar().moveingdatawire==this) {
+        if(ProjectManager.getActProjectVar().movingDataWire ==this) {
 
             WindowManager.blockBatch.begin();
             WindowManager.blockBatch.setColor(1,1,1,1);
@@ -293,7 +293,7 @@ public class DataWire {
         }
         userLayoutMovment();
 
-        if(ProjectManager.getActProjectVar().moveingdatawire==this) {
+        if(ProjectManager.getActProjectVar().movingDataWire ==this) {
 
             if(Gdx.input.isButtonJustPressed(0)) {
                 int counter = 0;
@@ -350,8 +350,8 @@ public class DataWire {
         param_output =null;
         param_input = null;
 
-        if(ProjectManager.getActProjectVar().moveingdatawire==this) {
-            ProjectManager.getActProjectVar().moveingdatawire=null;
+        if(ProjectManager.getActProjectVar().movingDataWire ==this) {
+            ProjectManager.getActProjectVar().movingDataWire =null;
         }
 
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.DataWire;
+import de.ft.interitus.Block.Wire;
 import de.ft.interitus.UI.ManualConfig.DeviceConfiguration;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.Var;
@@ -37,7 +38,8 @@ public abstract class ProjectVar {
     private String filename = ""; //Der Name der aktuell geöffneten Datei
     public volatile String path = ""; // Wo ist die aktuell geöffnete Datei gespeichert
     public ArrayList<Thread> threads = new ArrayList<>();
-    public DataWire moveingdatawire = null;
+    public DataWire movingDataWire = null;
+    public Wire movingWire = null;
     public ArrayList<Addon> enabledAddons = new ArrayList<>();
     public Object projectSettings = null;
     public ArrayList<ProjectVariable> projectVariables = new ArrayList<>();

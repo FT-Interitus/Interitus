@@ -11,12 +11,12 @@ import de.ft.interitus.events.UI.UIZoomEvent;
 public class ZoomUI {
     public ZoomUI(){
 
-        Viewport.zoomEvent.addListener(new UIZoomEvent() {
-            @Override
-            public void zoomStart() {
-                fadeIn();
-            }
-        });
+       // Viewport.zoomEvent.addListener(new UIZoomEvent() {
+         //   @Override
+          //  public void zoomStart() {
+           //     fadeIn();
+            //}
+        //});
 
     }
 

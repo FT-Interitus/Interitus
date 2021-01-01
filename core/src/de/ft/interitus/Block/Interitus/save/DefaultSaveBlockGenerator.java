@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -66,7 +66,7 @@ public class DefaultSaveBlockGenerator implements BlockToSaveGenerator {
                 }
                 int counter = 0;
                 for (DataWire dataWire : block.getBlocktype().getBlockParameter().get(i).getDataWires()) {
-                    if (dataWire == projectVar.moveingdatawire) {
+                    if (dataWire == projectVar.movingDataWire) {
                         //Ignore moving DataWires while saving
                         continue;
                     }

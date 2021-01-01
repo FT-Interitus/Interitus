@@ -487,12 +487,20 @@ public abstract class Block {
                 for (DataWire dataWire : parameter.getDataWires()) {
 
                     if (dataWire.getParam_input().getBlock() == this) continue;
-                    if (dataWire == ProjectManager.getActProjectVar().moveingdatawire) continue;
+                    if (dataWire == ProjectManager.getActProjectVar().movingDataWire) continue;
                     if (!ProjectManager.getActProjectVar().visible_blocks.contains(dataWire.getParam_input().getBlock()))
                         dataWire.draw();
                 }
             }
         }
+
+
+        if(this.getLeft()!=null&&!ProjectManager.getActProjectVar().visible_blocks.contains(this.getLeft())) {
+            if(this.getWire_left()!=ProjectManager.getActProjectVar().movingWire) {
+                this.getWire_left().draw();
+            }
+        }
+
 
 
         batch.begin();
@@ -556,9 +564,9 @@ public abstract class Block {
                     batch.draw(this.getBlocktype().getBlockParameter().get(i).getParameterTexture(), aktualX + 5, this.getY() + 33, 20, 20);
 
                     //DataWire Compatibility Color Check
-                    if (ProjectManager.getActProjectVar().moveingdatawire != null) {
+                    if (ProjectManager.getActProjectVar().movingDataWire != null) {
                         if (CheckCollision.checkpointwithobject(this.getBlocktype().getBlockParameter().get(i).getX(), this.getBlocktype().getBlockParameter().get(i).getY(), UIVar.parameter_width, UIVar.parameter_height, Unproject.unproject()) && !this.getBlocktype().getBlockParameter().get(i).getParameterType().isOutput() && this.getBlocktype().getBlockParameter().get(i).getDataWires().size() == 0) {
-                            if (!this.getBlocktype().getBlockParameter().get(i).getParameterType().getVariableType().iscompatible(ProjectManager.getActProjectVar().moveingdatawire.getParam_input().getParameterType().getVariableType()) || ProjectManager.getActProjectVar().moveingdatawire.getParam_input().getBlock() == this) {
+                            if (!this.getBlocktype().getBlockParameter().get(i).getParameterType().getVariableType().iscompatible(ProjectManager.getActProjectVar().movingDataWire.getParam_input().getParameterType().getVariableType()) || ProjectManager.getActProjectVar().movingDataWire.getParam_input().getBlock() == this) {
                                 batch.setColor(1, 0.6f, 0.6f, alpha);
                             } else {
                                 batch.setColor(0.6f, 1, 0.6f, alpha);
@@ -603,12 +611,18 @@ public abstract class Block {
             }
 
 
+            if(this.getWire_right()!=null) {
+                if(ProjectManager.getActProjectVar().movingWire!=this.getWire_right()) {
+                        this.getWire_right().draw();
+                }
+            }
+
             try {
                 if (this.getBlocktype() != null && this.getBlocktype().getBlockParameter() != null) {
                     for (Parameter parameter : this.getBlocktype().getBlockParameter()) {
                         if (parameter.getDataWires() != null) {
                             for (DataWire dataWire : parameter.getDataWires()) {
-                                if (dataWire == ProjectManager.getActProjectVar().moveingdatawire) continue;
+                                if (dataWire == ProjectManager.getActProjectVar().movingDataWire) continue;
                                 if (dataWire.getParam_input() == parameter) {
                                     dataWire.draw();
                                 }

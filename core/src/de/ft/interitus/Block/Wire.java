@@ -1,9 +1,13 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
 package de.ft.interitus.Block;
+
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import de.ft.interitus.WindowManager;
 
 public class Wire {
     private Block leftConnection = null;
@@ -62,6 +66,10 @@ public class Wire {
 
     public void draw() {
         if(!visible) return;
+        WindowManager.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        WindowManager.shapeRenderer.setColor(1f,0f,0f,0f);
+        WindowManager.shapeRenderer.line(this.leftConnection.getwireconnector_right(),this.rightConnection.getWireConnector_left());
+        WindowManager.shapeRenderer.end();
 
 
     }

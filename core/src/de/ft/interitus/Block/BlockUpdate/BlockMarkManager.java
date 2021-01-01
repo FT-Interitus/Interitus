@@ -25,7 +25,7 @@ public class BlockMarkManager {
 
     protected static void update() {
         assert ProjectManager.getActProjectVar() != null;
-        if (ProjectManager.getActProjectVar().moveingdatawire == null)
+        if (ProjectManager.getActProjectVar().movingDataWire == null)
             selectingRect();
 
         assert ProjectManager.getActProjectVar() != null;

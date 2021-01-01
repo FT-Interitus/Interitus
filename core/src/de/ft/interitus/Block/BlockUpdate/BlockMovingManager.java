@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -79,7 +79,7 @@ public class BlockMovingManager {
         if (projectVar.moving_block == block) return true;
         if (Var.mouseDownPos.dst(Unproject.unproject()) <= movingTolerance) return false;
         if (!CheckCollision.checkmousewithblock(block)) return false;
-        if (projectVar.moveingdatawire != null) return false;
+        if (projectVar.movingDataWire != null) return false;
         if (BlockDataWireManager.checkParameterEject(block)) return false;
         if (isOnBlockBar()) return false;
         if(isMouseOnBlockSettings()) return false;

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -76,7 +76,7 @@ public class GlobalShortcuts implements ShortCutChecker {
         }
 
         if (shortCut_einstellungen.isPressed() && !SettingsUI.isopend()) {
-            EventVar.uiEventManager.UIOpenSettingsEvent(new UIOpenSettingsEvent(this));
+            UI.set.show();
         }
 
         if (shortCut_vollbild.isReleased()) {
