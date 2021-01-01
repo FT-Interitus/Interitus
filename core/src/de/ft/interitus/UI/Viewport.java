@@ -15,6 +15,8 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.*;
 import de.ft.interitus.events.EventVar;
+import de.ft.interitus.events.UI.EventManager;
+import de.ft.interitus.events.UI.UIZoomEvent;
 import de.ft.interitus.events.block.BlockKillMovingWiresEvent;
 import de.ft.interitus.events.global.GlobalEventAdapter;
 import de.ft.interitus.events.global.GlobalFocusLostEvent;
@@ -41,6 +43,11 @@ public class Viewport {
     private static final Matrix4 combined = new Matrix4();
     private static final Matrix4 invProjectionView = new Matrix4();
 
+    public static EventManager<UIZoomEvent> zoomEvent;
+
+    public Viewport() {
+        zoomEvent = new EventManager<>();
+    }
     public static void init(OrthographicCamera cam, InputManager inputManager) {
         Gdx.graphics.setVSync(Settings.Vsync);
 
@@ -60,6 +67,9 @@ public class Viewport {
                     }
 
                     if (input.isKeyPressed(Input.Keys.CONTROL_LEFT) || input.isKeyPressed(Input.Keys.CONTROL_RIGHT)) {
+
+                        zoomEvent.fireForEach(UIZoomEvent::zoomStart);
+
                         cam.unproject(tp.set(Gdx.input.getX(), Gdx.input.getY(), 0 ));
                         float px = tp.x;
                         float py = tp.y;

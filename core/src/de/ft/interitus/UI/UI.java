@@ -34,6 +34,7 @@ import de.ft.interitus.UI.UIElements.UIElements.Button;
 import de.ft.interitus.UI.UIElements.UIElements.TabBar.TabBar;
 import de.ft.interitus.UI.UIElements.UIElements.quickinfo.QuickInfo;
 import de.ft.interitus.UI.UIElements.dropdownmenue.DropDownMenue;
+import de.ft.interitus.UI.ZoomUi.ZoomUI;
 import de.ft.interitus.UI.editor.Editor;
 import de.ft.interitus.UI.projectsettings.ProjectSettingsUI;
 import de.ft.interitus.UI.settings.SettingsUI;
@@ -44,8 +45,6 @@ import de.ft.interitus.WindowManager;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.datamanager.programmdata.experience.ExperienceManager;
 import de.ft.interitus.events.EventVar;
-import de.ft.interitus.events.UI.UIOpenSettingsEvent;
-import de.ft.interitus.events.UI.UiEventAdapter;
 import de.ft.interitus.events.global.GlobalCompilingStartEvent;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.network.bettertogether.SharedVar;
@@ -98,6 +97,7 @@ public class UI {
     private static Block markedblock;
     private static int wishaniposition = -170 - UIVar.abstandvonRand;
     private static Thread compile_thread;
+    private static ZoomUI zoomUI=new ZoomUI();
     //private static final Animation animation = new Animation();
 
     public static void updatedragui(ShapeRenderer renderer, boolean flaeche, SpriteBatch batch, float delta) {

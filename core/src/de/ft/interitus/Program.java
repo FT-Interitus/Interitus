@@ -18,8 +18,6 @@ import de.ft.interitus.UI.UI;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.datamanager.programmdata.experience.ExperienceManager;
 import de.ft.interitus.datamanager.userdata.UserDataInit;
-import de.ft.interitus.events.EventVar;
-import de.ft.interitus.events.UI.UILoadEvent;
 import de.ft.interitus.loading.Loading;
 import de.ft.interitus.loading.SplashScreen;
 import de.ft.interitus.plugin.PluginManagerHandler;
@@ -33,7 +31,6 @@ import de.ft.interitus.utils.UserNameGetter;
 
 import java.nio.file.Path;
 import java.security.Policy;
-import java.util.Collections;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Logger;
@@ -108,7 +105,6 @@ public class Program extends Game {
         } catch (Exception e) {
         }
 
-        EventVar.uiEventManager.UILoadEvent(new UILoadEvent(this));
 
     /*
      * Wait until all Plugins are registred

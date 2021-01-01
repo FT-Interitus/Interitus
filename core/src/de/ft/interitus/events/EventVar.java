@@ -7,7 +7,6 @@ package de.ft.interitus.events;
 
 
 import de.ft.interitus.Program;
-import de.ft.interitus.events.UI.UIEventManager;
 import de.ft.interitus.events.block.BlockCreateEvent;
 import de.ft.interitus.events.block.BlockEventManager;
 import de.ft.interitus.events.global.GlobalEventManager;

@@ -23,11 +23,9 @@ import de.ft.interitus.Var;
 import de.ft.interitus.datamanager.userdata.UserInteractDataManagerDialog;
 import de.ft.interitus.datamanager.userdata.save.DataSaver;
 import de.ft.interitus.events.EventVar;
-import de.ft.interitus.events.UI.UIOpenSettingsEvent;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.VCS;
 import de.ft.interitus.utils.ArrayList;
-import de.ft.interitus.utils.ClipBoard;
 
 public class GlobalShortcuts implements ShortCutChecker {
     public static ShortCut shortCut_newprojektwindow = new ShortCut("Neues Projekt", MenuBar.menuItem_newproject, SpecialKeys.dualStrg, Input.Keys.N);
