@@ -9,6 +9,7 @@ package de.ft.interitus.Block.Saving;
 import de.ft.interitus.utils.ArrayList;
 import org.lwjgl.system.CallbackI;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 
@@ -19,6 +20,7 @@ public class SaveBlockV1 implements Serializable {
     /***
      * @deprecated because we are using gson
      */
+    @Serial
     private static final long serialVersionUID = 2637840000002L;
 
 

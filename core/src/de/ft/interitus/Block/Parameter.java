@@ -19,7 +19,7 @@ public class Parameter {
     private String ParameterDescription;
     private Block block;
     private ParameterType parameterType;
-    private ArrayList<DataWire> Datawire = new ArrayList<>();
+    private ArrayList<DataWire> DataWire = new ArrayList<>();
     private int x =0;
     private int y=0;
     private final boolean varname;
@@ -103,11 +103,11 @@ public class Parameter {
 
 
     public ArrayList<DataWire> getDataWires() {
-        return Datawire;
+        return DataWire;
     }
 
-    protected void setDatawire(ArrayList<DataWire> datawire) {
-        Datawire = datawire;
+    protected void setDataWire(ArrayList<DataWire> dataWire) {
+        DataWire = dataWire;
     }
 
     public void setY(int y) {
@@ -135,7 +135,7 @@ public class Parameter {
         }
 
         if(getDataWires().size()>0) {
-            return Datawire.get(0).getParam_input().getVarName();
+            return DataWire.get(0).getParam_input().getVarName();
         }else {
             return Parameter.toString();
         }

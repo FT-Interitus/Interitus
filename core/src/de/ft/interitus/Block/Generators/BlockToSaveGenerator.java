@@ -10,6 +10,6 @@ import de.ft.interitus.Block.Saving.SaveBlockV1;
 import de.ft.interitus.projecttypes.ProjectVar;
 
 
-public interface BlocktoSaveGenerator {
+public interface BlockToSaveGenerator {
     SaveBlockV1 generate(Block block, ProjectVar projectVar);
 }

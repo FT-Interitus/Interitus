@@ -16,15 +16,13 @@ import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.ArrayList;
 
-import java.util.function.Consumer;
-
 
 public abstract class BlockUpdate  {
     public Block block;
-    private boolean openwindow = false;
+    private boolean openWindow = false;
 
-
-    private void block_moveingengine() {
+//TODO SubFunctions
+    private void block_movingEngine() {
 
         if (block.isMarked()) {
 
@@ -35,8 +33,8 @@ public abstract class BlockUpdate  {
             }
 
 
-            if (Gdx.input.isKeyPressed(Input.Keys.D) && !openwindow) {
-                openwindow = true;
+            if (Gdx.input.isKeyPressed(Input.Keys.D) && !openWindow) {
+                openWindow = true;
                 if (block.getExtendedBlocks() != null) {
 
                     Window window = CreateWindow.addWindow(block.getBlocktype().getName(), new ExtendedBlocksApplicationListener());
@@ -52,8 +50,8 @@ public abstract class BlockUpdate  {
         }
 
 
-        if (openwindow && !Gdx.input.isKeyPressed(Input.Keys.D)) {
-            openwindow = false;
+        if (openWindow && !Gdx.input.isKeyPressed(Input.Keys.D)) {
+            openWindow = false;
         }
 
 

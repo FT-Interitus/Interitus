@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -31,7 +31,7 @@ public class ThreadManager {
 
 
         //Program.logger.config("Test"+i);
-        //                            Program.logger.config(camfr.boundsInFrustum(BlockVar.blocks.get(10).getX(), BlockVar.blocks.get(10).getY(), 0, BlockVar.blocks.get(10).getW(), BlockVar.blocks.get(10).getH(),0));
+        //Program.logger.config(camfr.boundsInFrustum(BlockVar.blocks.get(10).getX(), BlockVar.blocks.get(10).getY(), 0, BlockVar.blocks.get(10).getW(), BlockVar.blocks.get(10).getH(),0));
         Thread init = new Thread(() -> {
             Timer timer = new Timer();
             timer.scheduleAtFixedRate(new TimerTask() {

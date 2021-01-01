@@ -20,12 +20,12 @@ public class Animation {
     Texture imganimation;
     Sprite animation;
     int frame = 0;
-    int framecount;
+    int frameCount;
     Timer time = new Timer(speed, new ActionListener() {
         public void actionPerformed(ActionEvent evt) {
 
             frame++;
-            if (frame > framecount) {
+            if (frame > frameCount) {
                 frame = 0;
             }
 
@@ -33,11 +33,11 @@ public class Animation {
         }
     });
 
-    public Animation(Texture imganimation, int speed, int tileWidth, int tileHeight, int framecount) {
+    public Animation(Texture imganimation, int speed, int tileWidth, int tileHeight, int frameCount) {
         this.speed = speed;
         regions = TextureRegion.split(imganimation, tileWidth, tileHeight);
         animation = new Sprite(regions[0][0]);
-        this.framecount = framecount;
+        this.frameCount = frameCount;
     }
 
     public void startAnimation() {

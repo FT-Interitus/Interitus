@@ -25,7 +25,7 @@ public abstract class ProjectVar {
 
     public Vector2 cam_pos = new Vector2();
     public float zoom = 1;
-    public ArrayList<Block> marked_block = new ArrayList<>(); // Welcher Block ist makiert ?
+    public ArrayList<Block> marked_blocks = new ArrayList<>(); // Welcher Block ist makiert ?
     public Block duplicate_block_right = null; // Which Block shows the duplicate
     public Block duplicate_block_left = null; // Which Block shows the duplicate
     public Block moving_block = null; //Wird ein Block bewegt

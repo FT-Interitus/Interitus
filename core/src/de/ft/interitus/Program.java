@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -25,13 +25,11 @@ import de.ft.interitus.loading.SplashScreen;
 import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.plugin.PluginSandboxSecurityPolicy;
 import de.ft.interitus.plugin.ProgramRegistry;
-import de.ft.interitus.plugin.PluginInstallerServer;
 import de.ft.interitus.projecttypes.Importer.Importer;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.FolderUtils;
 import de.ft.interitus.utils.UserNameGetter;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.context.ConfigurableApplicationContext;
+
 
 import java.nio.file.Path;
 import java.security.Policy;
@@ -84,7 +82,6 @@ public class Program extends Game {
             System.exit(-1);
         }
         Var.window.setVisible(false);
-        //GLFW.glfwHideWindow(Var.window.getWindowHandle());
 
         WindowManager.inputManager = new InputManager();
 
@@ -104,25 +101,11 @@ public class Program extends Game {
 
 
         try {
-            if (!Var.disablePluginSubSystem && !Var.nointernetconnection) {
+            if (!Var.disablePluginSubSystem) {
                 loadplugins.start(); //Plugins laden
-                Thread springthread = new Thread(() -> {
-
-                    SpringApplicationBuilder builder = new SpringApplicationBuilder(PluginInstallerServer.class);
-
-                    builder.headless(false);
-                    builder.properties(Collections.singletonMap("server.port","8459"));
-
-                    ConfigurableApplicationContext context = builder.run();
-
-
-                });
-                springthread.start();
 
             }
         } catch (Exception e) {
-            Program.logger.warning("No Internet Connection!");
-            Var.nointernetconnection = true;
         }
 
         EventVar.uiEventManager.UILoadEvent(new UILoadEvent(this));
@@ -130,7 +113,6 @@ public class Program extends Game {
     /*
      * Wait until all Plugins are registred
      */
-
 
 
 

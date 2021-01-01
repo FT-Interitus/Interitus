@@ -11,9 +11,7 @@ import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisSelectBox;
 import com.kotcrab.vis.ui.widget.VisTable;
 import com.kotcrab.vis.ui.widget.VisTextButton;
-import de.ft.interitus.Block.Devices;
 import de.ft.interitus.Program;
-import de.ft.interitus.UI.setup.SetupWindow;
 import de.ft.interitus.deviceconnection.arduino.BurnProgramm;
 import de.ft.interitus.deviceconnection.arduino.SerialConnection;
 
@@ -44,10 +42,8 @@ public class Step3 {
                 isBurning = true;
                 try {
 
-                    if(true ) {                          BurnProgramm.burn(Devices.ARDUINO_MEGA, getrennt[0], "sketch_mega.hex");
-                    }
 
-                    if(true ) {                          BurnProgramm.burn(Devices.ARDUINO_UNO, getrennt[0], "sketch_uno.hex");
+                    if(true ) {                          BurnProgramm.burn(0, getrennt[0], "sketch_uno.hex");
                     }
 
                 } catch (Exception e) {

@@ -1,13 +1,10 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
 package de.ft.interitus.Block;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector3;
-import de.ft.interitus.ProgramingSpace;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
 import de.ft.interitus.UI.UIVar;
@@ -25,8 +22,6 @@ public class TapBarBlockItem implements TapItem {
     private int y;
     private int w = 50;
     private int h = 60;
-    private boolean doonce=false;
-    private long zeitstempel;
 
     public TapBarBlockItem(PlatformSpecificBlock psb) {
 
@@ -35,19 +30,19 @@ public class TapBarBlockItem implements TapItem {
 
     @Override
     public void draw() {
-
+    assert ProjectManager.getActProjectVar() !=null;
         if (!UIVar.isdialogeopend) {
             if (CheckMouse.isJustPressedNormal(x, y, w, h, false)) {
 
-                Block tempblock = ProjectManager.getActProjectVar().projectType.getBlockGenerator().generateBlock(ProjectManager.getActProjectVar().blocks.size(), (int) (Unproject.unproject().x-psb.getWidth() / 2), (int) (Unproject.unproject().y-UIVar.BlockHeight / 2), psb.getWidth(), UIVar.BlockHeight, psb,  ProjectManager.getActProjectVar().projectType.getBlocktoSaveGenerator(), false);
+                Block tempBlock = ProjectManager.getActProjectVar().projectType.getBlockGenerator().generateBlock(ProjectManager.getActProjectVar().blocks.size(), (int) (Unproject.unproject().x-psb.getWidth() / 2), (int) (Unproject.unproject().y-UIVar.BlockHeight / 2), psb.getWidth(), UIVar.BlockHeight, psb,  ProjectManager.getActProjectVar().projectType.getBlocktoSaveGenerator(), false);
 
-                ProjectManager.getActProjectVar().marked_block.add(tempblock);
-                ProjectManager.getActProjectVar().moving_block = tempblock;
+                ProjectManager.getActProjectVar().marked_blocks.add(tempBlock);
+                ProjectManager.getActProjectVar().moving_block = tempBlock;
 
 
-                ProjectManager.getActProjectVar().blocks.add(tempblock);
+                ProjectManager.getActProjectVar().blocks.add(tempBlock);
 
-                tempblock.getMovementDiff().set(psb.getWidth() / 2, UIVar.BlockHeight / 2);
+                tempBlock.getMovementDiff().set(psb.getWidth() / 2, UIVar.BlockHeight / 2);
             }
         }
 

@@ -6,20 +6,17 @@
 package de.ft.interitus.Block.BlockUpdate;
 
 import de.ft.interitus.Block.Block;
-import de.ft.interitus.Program;
 import de.ft.interitus.UI.UIElements.check.CheckCollision;
 import de.ft.interitus.projecttypes.ProjectManager;
-
-import java.awt.*;
 
 public class BlockJumpingManager {
     private static float lastIntersection = 0;
 
     /***
      *
-     * @param block
+     * @param block the affected Block
      * @param rl 0 = right 1=left
-     * @return
+     *
      */
     private static Block biggestIntersectionBlock(Block block, int rl, boolean useIntersectionBlock, float testedWidth) {
 
@@ -49,7 +46,7 @@ public class BlockJumpingManager {
             if (rl == 0)
                 size = CheckCollision.flache(visible_block.getX_dup_rechts(), visible_block.getY(), (int) width, visible_block.getH(), block.getX(), block.getY());
             else
-                size = CheckCollision.flache(visible_block.getX()-block.getW(), visible_block.getY(), (int) width, visible_block.getH(), block.getX(), block.getY());
+                size = CheckCollision.flache(visible_block.getX() - block.getW(), visible_block.getY(), (int) width, visible_block.getH(), block.getX(), block.getY());
 
 
             if (size > maxValue) {
@@ -66,6 +63,7 @@ public class BlockJumpingManager {
     }
 
     protected static void updateBlockDuplicate(Block movingBlock) {
+        assert ProjectManager.getActProjectVar() != null;
 
         float rightIntersection = getBlockDuplicateRight(getEndingLeftBlockSelection(movingBlock));
         float leftIntersection = getBlockDuplicateLeft(getEndingRightBlockSelection(movingBlock));
@@ -85,12 +83,12 @@ public class BlockJumpingManager {
 
     /**
      * gets the leftest neighbour from a Block
-     * @param block
-     * @return
+     *
+     * @param block affected Block
      */
     protected static Block getEndingLeftBlockSelection(Block block) {
         Block neighbor = block;
-        while(neighbor.getLeft()!=null&&!neighbor.getWire_left().isVisible()) {
+        while (neighbor.getLeft() != null && !neighbor.getWire_left().isVisible()) {
             neighbor = neighbor.getLeft();
         }
         return neighbor;
@@ -99,12 +97,12 @@ public class BlockJumpingManager {
 
     /**
      * gets the rightest neighbour from a Block
-     * @param block
-     * @return
+     *
+     * @param block affected Block
      */
     protected static Block getEndingRightBlockSelection(Block block) {
         Block neighbor = block;
-        while(neighbor.getRight()!=null&&!neighbor.getWire_right().isVisible()) {
+        while (neighbor.getRight() != null && !neighbor.getWire_right().isVisible()) {
             neighbor = neighbor.getRight();
         }
         return neighbor;
@@ -112,13 +110,14 @@ public class BlockJumpingManager {
     }
 
     private static float getBlockDuplicateRight(Block movingBlock) {
-        if(movingBlock.left!=null) return -1;
+        assert ProjectManager.getActProjectVar() != null;
+        if (movingBlock.left != null) return -1;
 
-        if(!movingBlock.getBlocktype().canhasleftconnector()) return -1;
+        if (!movingBlock.getBlocktype().canhasleftconnector()) return -1;
         Block intersectingBlock = biggestIntersectionBlock(movingBlock, 0, true, 1);
 
-        if(intersectingBlock!=null&&!intersectingBlock.getBlocktype().canhasrightconnector()) return -1;
-        if(intersectingBlock!=null&&intersectingBlock.right!=null) return -1;
+        if (intersectingBlock != null && !intersectingBlock.getBlocktype().canhasrightconnector()) return -1;
+        if (intersectingBlock != null && intersectingBlock.right != null) return -1;
 
         if (intersectingBlock != ProjectManager.getActProjectVar().duplicate_block_right)
             ProjectManager.getActProjectVar().duplicate_block_right = intersectingBlock;
@@ -128,13 +127,14 @@ public class BlockJumpingManager {
 
 
     private static float getBlockDuplicateLeft(Block movingBlock) {
-        if(movingBlock.right!=null) return -1;
+        assert ProjectManager.getActProjectVar() != null;
+        if (movingBlock.right != null) return -1;
 
-        if(!movingBlock.getBlocktype().canhasrightconnector()) return -1;
+        if (!movingBlock.getBlocktype().canhasrightconnector()) return -1;
         Block intersectingBlock = biggestIntersectionBlock(movingBlock, 1, true, 1);
 
-        if(intersectingBlock!=null&&!intersectingBlock.getBlocktype().canhasleftconnector()) return -1;
-        if(intersectingBlock!=null&&intersectingBlock.left!=null) return -1;
+        if (intersectingBlock != null && !intersectingBlock.getBlocktype().canhasleftconnector()) return -1;
+        if (intersectingBlock != null && intersectingBlock.left != null) return -1;
 
         if (intersectingBlock != ProjectManager.getActProjectVar().duplicate_block_left)
             ProjectManager.getActProjectVar().duplicate_block_left = intersectingBlock;

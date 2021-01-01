@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -7,11 +7,10 @@ package de.ft.interitus.Block;
 
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import de.ft.interitus.Block.Generators.BlocktoSaveGenerator;
+import de.ft.interitus.Block.Generators.BlockToSaveGenerator;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Program;
 import de.ft.interitus.Settings;
@@ -33,35 +32,31 @@ import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.ArrayList;
-import de.ft.interitus.utils.ShapeRenderer;
 import de.ft.interitus.utils.Unproject;
 
 import java.util.ConcurrentModificationException;
 import java.util.Objects;
-import java.util.Vector;
 
 /***
  *
  *
  *
- *Hier werden die Blöcke erstellt die für die Programmmierung zuständig sind.
- * Nähere Informationen stehen in den Kommentaren oder im Github Wiki.
+ *
  *
  */
 
 public abstract class Block {
     private final Vector2 movementDiff=new Vector2();
-    private final Vector2 wireconnector_right = new Vector2(0, 0); //Die rechte wire-Anschluss Position
+    private final Vector2 wireConnector_right = new Vector2(0, 0); //The right wire connection
     private final Vector2 pos = new Vector2(0, 0); //Block pos
-    private final Vector2 wireconnector_left = new Vector2(0, 0); //Die linke wire-Anschluss Position
+    private final Vector2 wireConnector_left = new Vector2(0, 0); //Die linke wire-Anschluss Position
     private final RightClickEventListener rightClickEventListener;
-    private final BlocktoSaveGenerator blocktoSaveGenerator;
+    private final BlockToSaveGenerator blocktoSaveGenerator;
     private final GlyphLayout glyphLayout = new GlyphLayout();
-    private final BlockDropDownMenue BlockModiSelection = new BlockDropDownMenue(0, 0, 0, 0, this);
+    private final BlockDropDownMenue BlockModusSelection = new BlockDropDownMenue(0, 0, 0, 0, this);
     private final Block INSTANCE;
     private final int h; //Die Höhe des Blocks
-    public boolean seted = true; //Ob der Block losgelassen wurde bzw ob der Block eine statische Position hat
-    public boolean moved = false; // Ob der Block gerade mit der Maus bewegt wird
+    public boolean set = true; //Ob der Block losgelassen wurde bzw ob der Block eine statische Position hat
     //Die Y Position des Duplicates  //Die Weite und Höhe ergeben sich aus der Block weite und Höhe
     public Block left = null; //Der rechte verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
     public Block right = null; //Der linke verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
@@ -70,10 +65,9 @@ public abstract class Block {
     private Wire wire_right;
     private PlatformSpecificBlock blocktype;
     private ArrayList<Block> extendedBlocks = null;
-    private boolean hoverd;
 
 
-    public Block(final int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock, BlocktoSaveGenerator blocktoSaveGenerator, boolean isSubBlock) { //Initzialisieren des Blocks
+    public Block(final int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock, BlockToSaveGenerator blocktoSaveGenerator, boolean isSubBlock) { //Initzialisieren des Blocks
         this.blocktype = platformSpecificBlock;
         //  EventVar.blockEventManager.createBlock(new BlockCreateEvent(this, this));
         EventManager.fireEvent(this, new BlockCreateEvent(this));
@@ -83,7 +77,7 @@ public abstract class Block {
         this.h = h;
 
 
-        wireconnector_right.set(x + w, y + h / 3f);
+        wireConnector_right.set(x + w, y + h / 3f);
         this.index = index;
 
         this.blocktoSaveGenerator = blocktoSaveGenerator;
@@ -102,11 +96,9 @@ public abstract class Block {
 
 
                 if (CheckCollision.object(getX(), getY(), getW(), getW(), Unproject.unproject(Pos_X, Pos_Y).x, Unproject.unproject(Pos_X, Pos_Y).y, 1, 1)) {
-
-                    return null;
-                } else {
                     return null;
                 }
+                return null;
             }
 
             @Override
@@ -152,6 +144,7 @@ public abstract class Block {
      * @see de.ft.interitus.events.block.BlockEventListener
      */
     public boolean isMoving() {
+        assert ProjectManager.getActProjectVar() != null;
         return ProjectManager.getActProjectVar().moving_block == this; //Gibt zurück ob der Block gerade in Bewegung ist
     }
 
@@ -162,7 +155,9 @@ public abstract class Block {
      */
 
     public boolean isMarked() {
-        return ProjectManager.getActProjectVar().marked_block.contains(this); //Ist der Block von User makiert worden?
+        assert ProjectManager.getActProjectVar() != null;
+        assert ProjectManager.getActProjectVar() != null;
+        return ProjectManager.getActProjectVar().marked_blocks.contains(this); //Ist der Block von User makiert worden?
     }
 
 
@@ -308,14 +303,14 @@ public abstract class Block {
             }
         }
 
-        assert ProjectManager.getActProjectVar() == null;
+        assert ProjectManager.getActProjectVar() != null;
         if (ProjectManager.getActProjectVar().Blockswitherrors.contains(this.getIndex())) {
             ProjectManager.getActProjectVar().Blockswitherrors.remove((Object) this.getIndex());
         }
 
         EventVar.rightClickEventManager.removeListener(this.rightClickEventListener);
         EventVar.blockEventManager.deleteBlock(new BlockDeleteEvent(this, this)); //Fire Delete Event
-        ProjectManager.getActProjectVar().marked_block.remove(this); //Der Makierte Block wird auf null gesetzt da nur ein makierter block gelöscht werden kann //Anmerkung falls das ganze Programm gelöscht wird spielt das sowieso keine Rolle
+        ProjectManager.getActProjectVar().marked_blocks.remove(this); //Der Makierte Block wird auf null gesetzt da nur ein makierter block gelöscht werden kann //Anmerkung falls das ganze Programm gelöscht wird spielt das sowieso keine Rolle
         ProjectManager.getActProjectVar().moving_block = null; // Ob ein Block bewegt wird, wird auf false gesetzt da wenn ein Block bewegt und gelöscht wird kann es nur der bewegte Block sein
 
 
@@ -329,7 +324,7 @@ public abstract class Block {
         if (right != null) { // wenn ein Rechter nachbar exsitiert
             try {
                 right.setLeft(null); // wird dem rechten Nachbar gesagt das er keinen linken nachbar mehr hat
-            } catch (IndexOutOfBoundsException e) {
+            } catch (IndexOutOfBoundsException ignored) {
 
 
             }
@@ -346,26 +341,24 @@ public abstract class Block {
 
             try {
                 ProjectManager.getActProjectVar().blocks.remove(this); //Der Block entfernet sich selbst aus dem Blocks Array
-            } catch (Exception e) {
+            } catch (Exception ignored) {
 
             }
 
-            Thread calcnew = new Thread() { //Da dies relativ lange dauert dauert in einem eigenen Thread
-                @Override
-                public void run() {
-                    for (int i = 0; i < ProjectManager.getActProjectVar().visible_blocks.size(); i++) { //Durch alle Indexe des Block Arrays wird durchgegangen alle die einen größeren Index haben //Durch die Temp variable kann der alte Index des Blocks hier wieder verwendet werden
-                        try {
-                            if (ProjectManager.getActProjectVar().visible_blocks.get(i) != INSTANCE) {
-                                ProjectManager.getActProjectVar().visible_blocks.get(i).findnewindex(); //Alle anderen Blöcke werden um einen Index verschoben
-                            }
-                        } catch (Exception e) { //Wenn man bei Hunderten von Blöcken der erste und der zweite gelöscht werden gibt es hier fehler
-                            DisplayErrors.error = e;
-                            e.printStackTrace();
+            //Da dies relativ lange dauert dauert in einem eigenen Thread
+            Thread calcnew = new Thread(() -> {
+                for (int i = 0; i < ProjectManager.getActProjectVar().visible_blocks.size(); i++) { //Durch alle Indexe des Block Arrays wird durchgegangen alle die einen größeren Index haben //Durch die Temp variable kann der alte Index des Blocks hier wieder verwendet werden
+                    try {
+                        if (ProjectManager.getActProjectVar().visible_blocks.get(i) != INSTANCE) {
+                            ProjectManager.getActProjectVar().visible_blocks.get(i).findnewindex(); //Alle anderen Blöcke werden um einen Index verschoben
                         }
-
+                    } catch (Exception e) { //Wenn man bei Hunderten von Blöcken der erste und der zweite gelöscht werden gibt es hier fehler
+                        DisplayErrors.error = e;
+                        e.printStackTrace();
                     }
+
                 }
-            };
+            });
 
             calcnew.start(); //Der Thread wird gestarted
 
@@ -375,6 +368,7 @@ public abstract class Block {
     }
 
     private void findnewindex() {
+        assert ProjectManager.getActProjectVar() != null;
         this.index = ProjectManager.getActProjectVar().blocks.indexOf(this);
     }
 
@@ -385,7 +379,7 @@ public abstract class Block {
     public void update() {
 
 
-        hoverd = CheckCollision.checkmousewithblock(this); //Wird der Block von der Mouse gehovert?
+        boolean hoverd = CheckCollision.checkmousewithblock(this); //Wird der Block von der Mouse gehovert?
         if (hoverd && Gdx.input.isButtonJustPressed(0)) this.onClick();
 
 
@@ -480,16 +474,14 @@ public abstract class Block {
      * Draw the Block and the connectors
      *
      * @param batch to draw the Block
-     * @param shape the connectors
-     * @param font  the debug index
      */
 
-    public void draw(SpriteBatch batch, ShapeRenderer shape, BitmapFont font) {
+    public void draw(SpriteBatch batch) {
 
-        /***
-         * Draw Wire with the Output Block if the Input Block is invisible
+        /*
+         Draw Wire with the Output Block if the Input Block is invisible
          */
-
+        assert ProjectManager.getActProjectVar()!=null;
         if (this.getBlocktype().getBlockParameter() != null) {
             for (Parameter parameter : this.getBlocktype().getBlockParameter()) {
                 for (DataWire dataWire : parameter.getDataWires()) {
@@ -512,7 +504,7 @@ public abstract class Block {
             batch.setColor(1, 1, 1, 1);
         }
 
-        if (ProjectManager.getActProjectVar().duplicate_block_left == this && this.getBlocktype().canhasleftconnector() && ProjectManager.getActProjectVar().marked_block != null) {
+        if (ProjectManager.getActProjectVar().duplicate_block_left == this && this.getBlocktype().canhasleftconnector() && ProjectManager.getActProjectVar().marked_blocks != null) {
             batch.setColor(1, 1, 1, 0.5f);
             batch.draw(AssetLoader.block_middle, this.getX() - ProjectManager.getActProjectVar().moving_block.getW(), this.getY(), ProjectManager.getActProjectVar().moving_block.getW(), this.getH()); //das gleiche für links
             batch.setColor(1, 1, 1, 1);
@@ -605,9 +597,9 @@ public abstract class Block {
             batch.end();
 
 
-            BlockModiSelection.setBounds(this.getX() + 11, this.getY() + 2, 20, 20);
+            BlockModusSelection.setBounds(this.getX() + 11, this.getY() + 2, 20, 20);
             if (this.getBlocktype().getBlockModis().size() > 1) {
-                BlockModiSelection.draw(this);
+                BlockModusSelection.draw(this);
             }
 
 
@@ -644,16 +636,18 @@ public abstract class Block {
      */
 
     public Vector2 getwireconnector_right() {
-        wireconnector_right.set(this.getX() + blocktype.getWidth() - 7, this.getY() + h / 3 + 12);
-        return wireconnector_right;
+        wireConnector_right.set(this.getX() + blocktype.getWidth() - 7, this.getY() + h / 3f + 12);
+        return wireConnector_right;
     }
 
     /**
      * @return the position of the two connectors
+     *
      */
-    public Vector2 getWireconnector_left() {
-        wireconnector_left.set(this.getX() + 2, this.getY() + h / 3 + 9);
-        return wireconnector_left;
+    @SuppressWarnings("unused")
+    public Vector2 getWireConnector_left() {
+        wireConnector_left.set(this.getX() + 2, this.getY() + h / 3f + 9);
+        return wireConnector_left;
     }
 
 
@@ -669,16 +663,14 @@ public abstract class Block {
         this.blocktype = blocktype;
     }
 
-    public BlocktoSaveGenerator getBlocktoSaveGenerator() {
+    public BlockToSaveGenerator getBlocktoSaveGenerator() {
         return blocktoSaveGenerator;
     }
 
     /**
      * When the Size of the Block will be changed
-     *
-     * @param widthdiff
      */
-    public void changesize(int widthdiff) {
+    public void changeSize(int widthDiff) {
 
         ArrayList<Block> blocks = new ArrayList<>();
 
@@ -687,14 +679,14 @@ public abstract class Block {
 
         while (nextblock != null) {
 
-            if (blocks.contains(blocks)) {
+            if (blocks.contains(nextblock)) {
                 blocks.clear();
                 break;
             }
             blocks.add(nextblock);
 
 
-            nextblock.setX(nextblock.getX() + widthdiff);
+            nextblock.setX(nextblock.getX() + widthDiff);
             nextblock = nextblock.getRight();
 
         }

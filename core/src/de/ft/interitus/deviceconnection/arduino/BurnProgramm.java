@@ -5,7 +5,6 @@
 
 package de.ft.interitus.deviceconnection.arduino;
 
-import de.ft.interitus.Block.Devices;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Program;
 
@@ -25,15 +24,15 @@ public class BurnProgramm {
     public static void burn(int arduino, String port, String file) {
 
         String methode = null;
-        if (arduino == Devices.ARDUINO_UNO) {
+
             platform = "atmega328p";
             methode = "arduino";
-        }
 
-        if (arduino == Devices.ARDUINO_MEGA) {
+
+
             platform = "atmega2560";
             methode = "wiring";
-        }
+
 
 
         if (isWindows()) {

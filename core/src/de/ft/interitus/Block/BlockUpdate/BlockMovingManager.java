@@ -8,7 +8,6 @@ package de.ft.interitus.Block.BlockUpdate;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import de.ft.interitus.Block.Block;
-import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.ProgramGrid;
 import de.ft.interitus.UI.UIElements.check.CheckCollision;
@@ -19,9 +18,10 @@ import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.ProjectVar;
 import de.ft.interitus.utils.Unproject;
 
+
 public class BlockMovingManager {
 
-    private static final int tolerance = 2;
+    public static final int movingTolerance = 2;
     private static final Vector2 tempVector = new Vector2();
     private static ProjectVar projectVar;
 
@@ -30,7 +30,7 @@ public class BlockMovingManager {
 
 
         projectVar = ProjectManager.getActProjectVar();
-        assert projectVar != null;
+        assert ProjectManager.getActProjectVar() != null;
 
         if (isBlockMoving(block)) {
 
@@ -39,7 +39,7 @@ public class BlockMovingManager {
 
             BlockJumpingManager.updateBlockDuplicate(block);
             block.getPos().set(Unproject.unproject().sub(block.getMovementDiff()));
-            for (Block markedBlock : ProjectManager.getActProjectVar().marked_block) {
+            for (Block markedBlock : ProjectManager.getActProjectVar().marked_blocks) {
                 if (markedBlock == block) continue;
 
                 markedBlock.getPos().set(Unproject.unproject().sub(markedBlock.getMovementDiff()));
@@ -69,22 +69,22 @@ public class BlockMovingManager {
     /***
      * Checks all Information if Block is Moving e. g. Mouse is pressed
      *
-     * @param block
-     * @return
+     * @param block affected Block
+     * @return if the Block is able to be moved
      */
     private static boolean isBlockMoving(Block block) {
-
+        assert ProjectManager.getActProjectVar() != null;
         if (!Gdx.input.isButtonPressed(0)) return false;
         if (!block.isMarked()) return false;
         if (projectVar.moving_block == block) return true;
-        if (Var.mouseDownPos.dst(Unproject.unproject()) <= tolerance) return false;
+        if (Var.mouseDownPos.dst(Unproject.unproject()) <= movingTolerance) return false;
         if (!CheckCollision.checkmousewithblock(block)) return false;
         if (projectVar.moveingdatawire != null) return false;
         if (BlockDataWireManager.checkParameterEject(block)) return false;
         if (isOnBlockBar()) return false;
         if(isMouseOnBlockSettings()) return false;
 
-        for(Block m:ProjectManager.getActProjectVar().marked_block) {
+        for(Block m:ProjectManager.getActProjectVar().marked_blocks) {
             m.getMovementDiff().set(generateDiff(m, Unproject.unproject()));
             BlockConnectionManager.startMovingBlock(m);
         }
@@ -114,20 +114,20 @@ public class BlockMovingManager {
         int newY = (int) ((block.getY()) / ProgramGrid.margin);
         block.setX((int) (newX * ProgramGrid.margin));
         block.setY((int) (newY * ProgramGrid.margin));
-        BlockConnectionManager.connectedBlockJumpingtoLeft(block);
-        BlockConnectionManager.connectedBlockJumpingtoRight(block);
+        BlockConnectionManager.connectedBlockJumpingToLeft(block);
+        BlockConnectionManager.connectedBlockJumpingToRight(block);
     }
 
     /**
-     * Check if the Block was droped in the BlockBar -> delete
+     * Check if the Block was dropped in the BlockBar -> delete
      * <p>
      * Than remove the Block from the MovingBlock Var
      */
     private static void stopMovingBlock() {
-
+        assert ProjectManager.getActProjectVar() != null;
         if (isOnBlockBar())
-            for(int i=0;i<ProjectManager.getActProjectVar().marked_block.size();i++) {
-                Block marked =ProjectManager.getActProjectVar().marked_block.get(i);
+            for(int i = 0; i<ProjectManager.getActProjectVar().marked_blocks.size(); i++) {
+                Block marked =ProjectManager.getActProjectVar().marked_blocks.get(i);
                 if(marked.getBlocktype().canbedeleted())
                     marked.delete(false);
                     i--;

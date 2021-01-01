@@ -31,7 +31,7 @@ public class Var {
 
     public static boolean isloading = false;
     public static boolean isclearing = false;
-    public static boolean nointernetconnection = false;
+    public static boolean nointernetconnection = false; //TODO use
 
     public static boolean showreleasenotes = false;
 

@@ -7,25 +7,21 @@ package de.ft.interitus.plugin;
 
 
 import de.ft.interitus.Program;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+
 
 import java.io.IOException;
 
-@RestController
+
 public class StorePluginInstallManager {
 
-    @CrossOrigin()
-    @RequestMapping(value ="/")
+
     public String getURLValue(){
        return "";
     }
 
-    @CrossOrigin() //TODO define Origins
-    @RequestMapping(value = "/install")
-    public String installer(@RequestParam String url,@RequestParam String jsoninformation) throws IOException {
+ //TODO define Origins
+
+    public String installer( String url, String jsoninformation) throws IOException {
 
        PluginInstallManager.startInstallPlugin(url,jsoninformation);
             return "";
@@ -37,9 +33,8 @@ public class StorePluginInstallManager {
         return true;
     }
 
-    @CrossOrigin() //TODO define Origins
-    @RequestMapping(value = "/isInstalled")
-    public String isInstalled(@RequestParam String name) {
+
+    public String isInstalled( String name) {
 
         Program.logger.config(name);
 

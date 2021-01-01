@@ -7,13 +7,10 @@ package de.ft.interitus.UI.setup.steps.generalSteps;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.kotcrab.vis.ui.widget.VisImage;
 import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisSelectBox;
 import com.kotcrab.vis.ui.widget.VisTable;
-import de.ft.interitus.Block.Devices;
 import de.ft.interitus.UI.setup.SetupWindow;
-import de.ft.interitus.loading.AssetLoader;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -16,22 +16,22 @@ import de.ft.interitus.projecttypes.ProjectManager;
 public class BlockDrawer {
     public static void Draw(float delta) {
         if (!Var.isloading) {
-
+            assert ProjectManager.getActProjectVar() != null;
             for (int i = 0; i < ProjectManager.getActProjectVar().visible_blocks.size(); i = i + 1) {
                 Block block = ProjectManager.getActProjectVar().visible_blocks.get(i);
 
 
                 if (block.isMarked()) continue;
-                block.draw(WindowManager.blockBatch, WindowManager.BlockshapeRenderer, WindowManager.font);
+                block.draw(WindowManager.blockBatch);
 
 
             }
 
 
-            for (int i = 0; i < ProjectManager.getActProjectVar().marked_block.size(); i++) {
-                Block block = ProjectManager.getActProjectVar().marked_block.get(i);
+            for (int i = 0; i < ProjectManager.getActProjectVar().marked_blocks.size(); i++) {
+                Block block = ProjectManager.getActProjectVar().marked_blocks.get(i);
                 if (block.isMoving()) continue;
-                block.draw(WindowManager.blockBatch, WindowManager.BlockshapeRenderer, WindowManager.font);
+                block.draw(WindowManager.blockBatch);
 
                 if (BlockShortcuts.shortCut_deleteBlock.isPressed() && block.getBlocktype().canbedeleted()) {
                     block.delete(false);
@@ -48,7 +48,7 @@ public class BlockDrawer {
             if (ProjectManager.getActProjectVar().moving_block != null) {
 
                 try {
-                    ProjectManager.getActProjectVar().moving_block.draw(WindowManager.blockBatch, WindowManager.BlockshapeRenderer, WindowManager.font);
+                    ProjectManager.getActProjectVar().moving_block.draw(WindowManager.blockBatch);
 
 
                 } catch (Exception ignored) {

@@ -32,7 +32,6 @@ import de.ft.interitus.UI.UIElements.Grid;
 import de.ft.interitus.UI.UIElements.UIElementBar;
 import de.ft.interitus.UI.UIElements.UIElements.Button;
 import de.ft.interitus.UI.UIElements.UIElements.TabBar.TabBar;
-import de.ft.interitus.UI.UIElements.UIElements.UIElement;
 import de.ft.interitus.UI.UIElements.UIElements.quickinfo.QuickInfo;
 import de.ft.interitus.UI.UIElements.dropdownmenue.DropDownMenue;
 import de.ft.interitus.UI.editor.Editor;
@@ -137,7 +136,7 @@ public class UI {
         renderer.end();
 
         // markedblock != ProjectManager.getActProjectVar().marked_block
-        if ((markedblock != null && ProjectManager.getActProjectVar().marked_block.size() == 0) || (ProjectManager.getActProjectVar().marked_block.size() > 0 && markedblock != ProjectManager.getActProjectVar().marked_block.get(0))) {
+        if ((markedblock != null && ProjectManager.getActProjectVar().marked_blocks.size() == 0) || (ProjectManager.getActProjectVar().marked_blocks.size() > 0 && markedblock != ProjectManager.getActProjectVar().marked_blocks.get(0))) {
             UIVar.isBlockSettingsopen = false;
             for (int i = 0; i < textFielder.size(); i++) {
                 try {
@@ -169,7 +168,7 @@ public class UI {
         UIVar.moveprogrammlock = lock;
 
 
-        if (ProjectManager.getActProjectVar().marked_block.size()==1&&markedblock != null && markedblock.getBlocktype().getBlockParameter() != null && ((markedblock == null && ProjectManager.getActProjectVar().marked_block.size() == 0) || (ProjectManager.getActProjectVar().marked_block.size() > 0 && markedblock == ProjectManager.getActProjectVar().marked_block.get(0)))) {
+        if (ProjectManager.getActProjectVar().marked_blocks.size()==1&&markedblock != null && markedblock.getBlocktype().getBlockParameter() != null && ((markedblock == null && ProjectManager.getActProjectVar().marked_blocks.size() == 0) || (ProjectManager.getActProjectVar().marked_blocks.size() > 0 && markedblock == ProjectManager.getActProjectVar().marked_blocks.get(0)))) {
 
 
             UIVar.blockeinstellungen_w = 170;
@@ -271,8 +270,8 @@ public class UI {
                             selectBox.addListener(new ChangeListener() {
                                 @Override
                                 public void changed(ChangeEvent event, Actor actor) {
-                                    ProjectManager.getActProjectVar().marked_block.get(0).getBlocktype().getBlockParameter().get(textFielder.indexOf(actor)).getParameterType().setSelected(((VisSelectBox<Selectable>) actor).getSelected());
-                                    ProjectManager.getActProjectVar().marked_block.get(0).getBlocktype().getBlockParameter().get(textFielder.indexOf(actor)).setParameter(((VisSelectBox<Selectable>) actor).getSelected().toString());
+                                    ProjectManager.getActProjectVar().marked_blocks.get(0).getBlocktype().getBlockParameter().get(textFielder.indexOf(actor)).getParameterType().setSelected(((VisSelectBox<Selectable>) actor).getSelected());
+                                    ProjectManager.getActProjectVar().marked_blocks.get(0).getBlocktype().getBlockParameter().get(textFielder.indexOf(actor)).setParameter(((VisSelectBox<Selectable>) actor).getSelected().toString());
 
                                 }
                             });
@@ -292,7 +291,7 @@ public class UI {
                             textFielder.get(textFielder.size() - 1).addListener(new ChangeListener() {
                                 @Override
                                 public void changed(ChangeEvent event, Actor actor) {
-                                    ProjectManager.getActProjectVar().marked_block.get(0).getBlocktype().getBlockParameter().get(textFielder.indexOf(actor)).setParameter(((VisTextField) actor).getText());
+                                    ProjectManager.getActProjectVar().marked_blocks.get(0).getBlocktype().getBlockParameter().get(textFielder.indexOf(actor)).setParameter(((VisTextField) actor).getText());
                                 }
                             });
 
@@ -323,10 +322,10 @@ public class UI {
             UIbatch.end();
 
         } else {
-            if (ProjectManager.getActProjectVar().marked_block.size() == 0) {
+            if (ProjectManager.getActProjectVar().marked_blocks.size() == 0) {
                 markedblock = null;
             } else {
-                markedblock = ProjectManager.getActProjectVar().marked_block.get(0);
+                markedblock = ProjectManager.getActProjectVar().marked_blocks.get(0);
             }
             wishaniposition = -UIVar.blockeinstellungen_w - UIVar.abstandvonRand;
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -147,7 +147,7 @@ public abstract class PlatformSpecificBlock {
         widthdiff = this.getWidth()-widthdiff;
 
         if(!loading) {
-            block.changesize(widthdiff);
+            block.changeSize(widthdiff);
         }
 
     }

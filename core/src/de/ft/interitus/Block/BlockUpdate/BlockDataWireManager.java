@@ -11,9 +11,7 @@ import de.ft.interitus.Block.DataWire;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.UI.UIElements.check.CheckCollision;
 import de.ft.interitus.UI.UIVar;
-import de.ft.interitus.Var;
 import de.ft.interitus.projecttypes.ProjectManager;
-import de.ft.interitus.utils.PositionSaver;
 import de.ft.interitus.utils.Unproject;
 
 public class BlockDataWireManager {
@@ -46,10 +44,10 @@ public class BlockDataWireManager {
 
 
     protected static boolean checkParameterEject(Block block) {
-        if(block.getBlocktype().getBlockParameter()!=null) {
+        if (block.getBlocktype().getBlockParameter() != null) {
 
-            for(Parameter parameter:block.getBlocktype().getBlockParameter())
-                if(CheckCollision.checkpointwithobject(parameter.getX(), parameter.getY(), UIVar.parameter_width, UIVar.parameter_height, Unproject.unproject())&&parameter.getDataWires().size()!=0&&!parameter.getParameterType().isOutput()) {
+            for (Parameter parameter : block.getBlocktype().getBlockParameter())
+                if (CheckCollision.checkpointwithobject(parameter.getX(), parameter.getY(), UIVar.parameter_width, UIVar.parameter_height, Unproject.unproject()) && parameter.getDataWires().size() != 0 && !parameter.getParameterType().isOutput()) {
                     ejectDataWire(parameter.getDataWires().get(0));
                     parameter.getDataWires().clear();
                     return true;
@@ -61,6 +59,7 @@ public class BlockDataWireManager {
     }
 
     private static void ejectDataWire(DataWire dataWire) {
+        assert ProjectManager.getActProjectVar() != null;
         dataWire.setParam_output(null);
         ProjectManager.getActProjectVar().moveingdatawire = dataWire;
 
