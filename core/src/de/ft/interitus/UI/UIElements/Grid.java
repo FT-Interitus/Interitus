@@ -101,8 +101,17 @@ public class Grid implements UIElement {
         for(int row = 0; row < content.size(); row++){
             int tempheight=0;
             int widthsprung=0;
-            for(int column=0;column<content.get(row).size();column++){
-                if(content.get(row).get(column).getH()>tempheight){
+
+
+                for(int column=0;column<content.get(row).size();column++){
+                    int tempwidth=0;
+                    for(int roww = 0; roww < content.size(); roww++){
+                        if(content.get(row).get(column).getW()>tempwidth){
+                            tempwidth=content.get(row).get(column).getW();
+                        }
+                    }
+
+                        if(content.get(row).get(column).getH()>tempheight){
                     tempheight=content.get(row).get(column).getH();
                 }
                 content.get(row).get(column).setX(this.x+widthsprung);
