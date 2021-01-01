@@ -56,8 +56,6 @@ public abstract class Block {
     private final BlockDropDownMenue BlockModusSelection = new BlockDropDownMenue(0, 0, 0, 0, this);
     private final Block INSTANCE;
     private final int h; //Die Höhe des Blocks
-    public boolean set = true; //Ob der Block losgelassen wurde bzw ob der Block eine statische Position hat
-    //Die Y Position des Duplicates  //Die Weite und Höhe ergeben sich aus der Block weite und Höhe
     public Block left = null; //Der rechte verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
     public Block right = null; //Der linke verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
     private int index; //Der Index des Blocks (Der Gleiche wie im Array BlckVar.blocks)o
@@ -393,8 +391,8 @@ public abstract class Block {
         batch.draw(AssetLoader.block_right, this.getX() + this.getW() - 6, this.getY(), 6, this.getH());
 
 
-        if (blocktype.getBlockCategorie() != null) {
-            switch (blocktype.getBlockCategorie()) {
+        if (blocktype.getBlockCategory() != null) {
+            switch (blocktype.getBlockCategory()) {
 
                 case ActionBlocks -> {
 
@@ -506,13 +504,13 @@ public abstract class Block {
         batch.begin();
 
 
-        if (ProjectManager.getActProjectVar().duplicate_block_right == this && this.getBlocktype().canhasrightconnector()) {
+        if (ProjectManager.getActProjectVar().duplicate_block_right == this && this.getBlocktype().canHasRightConnector()) {
             batch.setColor(1, 1, 1, 0.5f);
             batch.draw(AssetLoader.block_middle, this.getX_dup_rechts(), this.getY(), ProjectManager.getActProjectVar().moving_block.getW(), this.getH()); //Wenn der Block die größte überlappung hat wird er als show duplicat angezigt
             batch.setColor(1, 1, 1, 1);
         }
 
-        if (ProjectManager.getActProjectVar().duplicate_block_left == this && this.getBlocktype().canhasleftconnector() && ProjectManager.getActProjectVar().marked_blocks != null) {
+        if (ProjectManager.getActProjectVar().duplicate_block_left == this && this.getBlocktype().canHasLeftConnector() && ProjectManager.getActProjectVar().marked_blocks != null) {
             batch.setColor(1, 1, 1, 0.5f);
             batch.draw(AssetLoader.block_middle, this.getX() - ProjectManager.getActProjectVar().moving_block.getW(), this.getY(), ProjectManager.getActProjectVar().moving_block.getW(), this.getH()); //das gleiche für links
             batch.setColor(1, 1, 1, 1);
@@ -539,16 +537,14 @@ public abstract class Block {
             drawBlock(batch);
 
 
-//TODO
-            //if (!this.blockupdate.isIsconnectorclicked() && ProjectManager.getActProjectVar().showleftdocker && this.getLeft() == null && this.getBlocktype().canhasleftconnector()) {
-            // batch.draw(AssetLoader.connector_offerd, getWireconnector_left().x, getWireconnector_left().y, 20, 20);
-            // }
 
-            if (this.getRight() == null && this.getBlocktype().canhasrightconnector()) {
+            if (this.getWire_right()==null && ProjectManager.getActProjectVar().showLeftDocker && this.getLeft() == null && this.getBlocktype().canHasLeftConnector()) {
+             batch.draw(AssetLoader.connector_offerd, getWireConnector_left().x, getWireConnector_left().y, 20, 20);
+             }
+
+            if (this.getRight() == null && this.getBlocktype().canHasRightConnector()) {
                 batch.draw(AssetLoader.connector, getwireconnector_right().x, getwireconnector_right().y, 20, 20);
             }
-            //font.draw(batch, "index:  " + this.getIndex() + " Block: " + this.getBlocktype().getName(), this.getX() + 5, this.getY() + 30); //DEBUG Block Index auf dem Block anzeigen
-            //font.draw(batch,this.getBlocktype().getName(), this.getX() + 5, this.getY() + this.getH() - 10); //DEBUG Block Index auf dem Block anzeigen
 
 
             ///////////////////////////////PARAMETER//ANZEIGE/////////////////////////////////////////////////
@@ -606,7 +602,7 @@ public abstract class Block {
 
 
             BlockModusSelection.setBounds(this.getX() + 11, this.getY() + 2, 20, 20);
-            if (this.getBlocktype().getBlockModis().size() > 1) {
+            if (this.getBlocktype().getBlockModes().size() > 1) {
                 BlockModusSelection.draw(this);
             }
 

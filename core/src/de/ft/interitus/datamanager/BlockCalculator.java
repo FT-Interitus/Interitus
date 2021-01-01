@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -8,7 +8,6 @@ package de.ft.interitus.datamanager;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.DataWire;
-import de.ft.interitus.Block.SaveBlock;
 import de.ft.interitus.Block.Saving.SaveBlockV1;
 import de.ft.interitus.Block.Wire;
 import de.ft.interitus.UI.UI;
@@ -89,7 +88,7 @@ public class BlockCalculator {
                     }
 
 
-                    extractedBlocks.get(i).getBlocktype().changeBlockModus(saveBlocks.get(i).getBlockmodus(), extractedBlocks.get(i), true);
+                    extractedBlocks.get(i).getBlocktype().changeBlockMode(saveBlocks.get(i).getBlockmodus(), extractedBlocks.get(i), true);
                 }catch (Exception e) {
                     e.printStackTrace();
                     error = true;

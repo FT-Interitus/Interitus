@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -79,6 +79,7 @@ public class ProgramingSpace extends ScreenAdapter {
 
         Updater.initprogress();
         EventManager.addListenerClass(EventVar.class);
+        BlockUpdateManager.init();
 
 
     }

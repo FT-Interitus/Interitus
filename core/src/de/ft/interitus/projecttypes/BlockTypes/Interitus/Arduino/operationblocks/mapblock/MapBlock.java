@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -28,14 +28,14 @@ public class MapBlock extends PlatformSpecificBlock {
     }
 
     @Override
-    public String getdescription() {
+    public String getDescription() {
         return "Dieser Block Mappt";
     }
 
 
 
     @Override
-    public BlockCategories getBlockCategorie() {
+    public BlockCategories getBlockCategory() {
         return BlockCategories.Data_Operation;
     }
 
@@ -45,17 +45,17 @@ public class MapBlock extends PlatformSpecificBlock {
     }
 
     @Override
-    public boolean canbedeleted() {
+    public boolean isDeletable() {
         return true;
     }
 
     @Override
-    public boolean canhasrightconnector() {
+    public boolean canHasRightConnector() {
         return true;
     }
 
     @Override
-    public boolean canhasleftconnector() {
+    public boolean canHasLeftConnector() {
         return true;
     }
 }

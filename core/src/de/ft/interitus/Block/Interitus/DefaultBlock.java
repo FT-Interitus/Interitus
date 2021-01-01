@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -19,7 +19,7 @@ public class DefaultBlock extends Block {
 
 
 
-            for(BlockMode blockMode :platformSpecificBlock.getBlockModis()) {
+            for(BlockMode blockMode :platformSpecificBlock.getBlockModes()) {
 
                 if(blockMode.getBlockParameter()==null) {
                     continue;

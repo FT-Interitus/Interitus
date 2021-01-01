@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -113,10 +113,10 @@ public class BlockJumpingManager {
         assert ProjectManager.getActProjectVar() != null;
         if (movingBlock.left != null) return -1;
 
-        if (!movingBlock.getBlocktype().canhasleftconnector()) return -1;
+        if (!movingBlock.getBlocktype().canHasLeftConnector()) return -1;
         Block intersectingBlock = biggestIntersectionBlock(movingBlock, 0, true, 1);
 
-        if (intersectingBlock != null && !intersectingBlock.getBlocktype().canhasrightconnector()) return -1;
+        if (intersectingBlock != null && !intersectingBlock.getBlocktype().canHasRightConnector()) return -1;
         if (intersectingBlock != null && intersectingBlock.right != null) return -1;
 
         if (intersectingBlock != ProjectManager.getActProjectVar().duplicate_block_right)
@@ -130,10 +130,10 @@ public class BlockJumpingManager {
         assert ProjectManager.getActProjectVar() != null;
         if (movingBlock.right != null) return -1;
 
-        if (!movingBlock.getBlocktype().canhasrightconnector()) return -1;
+        if (!movingBlock.getBlocktype().canHasRightConnector()) return -1;
         Block intersectingBlock = biggestIntersectionBlock(movingBlock, 1, true, 1);
 
-        if (intersectingBlock != null && !intersectingBlock.getBlocktype().canhasleftconnector()) return -1;
+        if (intersectingBlock != null && !intersectingBlock.getBlocktype().canHasLeftConnector()) return -1;
         if (intersectingBlock != null && intersectingBlock.left != null) return -1;
 
         if (intersectingBlock != ProjectManager.getActProjectVar().duplicate_block_left)

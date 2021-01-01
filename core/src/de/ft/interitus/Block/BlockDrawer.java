@@ -33,7 +33,7 @@ public class BlockDrawer {
                 if (block.isMoving()) continue;
                 block.draw(WindowManager.blockBatch);
 
-                if (BlockShortcuts.shortCut_deleteBlock.isPressed() && block.getBlocktype().canbedeleted()) {
+                if (BlockShortcuts.shortCut_deleteBlock.isPressed() && block.getBlocktype().isDeletable()) {
                     block.delete(false);
                     i--;
                 }
@@ -58,6 +58,9 @@ public class BlockDrawer {
 
             if (ProjectManager.getActProjectVar().movingDataWire != null) {
                 ProjectManager.getActProjectVar().movingDataWire.draw();
+            }
+            if (ProjectManager.getActProjectVar().movingWire != null) {
+                ProjectManager.getActProjectVar().movingWire.draw();
             }
 
 

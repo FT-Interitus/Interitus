@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -86,7 +86,7 @@ public class ClearActOpenProgramm {
         ProjectManager.getProjectVar(index).path = "";
 
 
-        ProjectManager.getProjectVar(index).showleftdocker = false;
+        ProjectManager.getProjectVar(index).showLeftDocker = false;
         ProjectManager.getProjectVar(index).connetor_offerd_hoverd_block = null;
 
 

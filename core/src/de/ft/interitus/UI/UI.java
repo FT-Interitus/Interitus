@@ -189,7 +189,7 @@ public class UI {
 
 
             if (!UIVar.isBlockSettingsopen) {
-                blocknamelabel = new VisLabel(markedblock.getBlocktype().getBlockModis().get(markedblock.getBlocktype().actBlockModiIndex).getname());
+                blocknamelabel = new VisLabel(markedblock.getBlocktype().getBlockModes().get(markedblock.getBlocktype().actBlockModiIndex).getname());
                 UI.stage.addActor(blocknamelabel);
             }
 

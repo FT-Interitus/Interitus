@@ -14,7 +14,7 @@ import de.ft.interitus.utils.ArrayList;
 
 public abstract class PlatformSpecificBlock {
     public final ArrayList<BlockMode> blockModis = new ArrayList<>();
-    private final Addon adddon;
+    private final Addon addon;
     public int actBlockModiIndex = -1;
     private ProjectType projectType = null;
 
@@ -22,18 +22,18 @@ public abstract class PlatformSpecificBlock {
     public PlatformSpecificBlock(ProjectType projectType, Addon addon) {
 
         this.projectType = projectType;
-        this.adddon = addon;
+        this.addon = addon;
 
     }
 
     public abstract String getName();
 
 
-    public abstract String getdescription();
+    public abstract String getDescription();
 
 
 
-    public abstract BlockCategories getBlockCategorie();
+    public abstract BlockCategories getBlockCategory();
 
 
 
@@ -41,7 +41,7 @@ public abstract class PlatformSpecificBlock {
 
 
     final public int getID() {
-        if (adddon == null) {
+        if (addon == null) {
             for (int i = 0; i < ProjectTypesVar.projectTypes.get(ProjectTypesVar.projectTypes.indexOf(projectType)).getProjectblocks().size(); i++) {
 
                 if (ProjectTypesVar.projectTypes.get(ProjectTypesVar.projectTypes.indexOf(projectType)).getProjectblocks().get(i).getClass() == this.getClass()) {
@@ -53,9 +53,9 @@ public abstract class PlatformSpecificBlock {
         } else {
 
 
-            for (int i = 0; i < adddon.getaddBlocks().size(); i++) {
+            for (int i = 0; i < addon.getaddBlocks().size(); i++) {
 
-                if (adddon.getaddBlocks().get(i).getClass() == this.getClass()) {
+                if (addon.getaddBlocks().get(i).getClass() == this.getClass()) {
 
                     return i;
                 }
@@ -69,14 +69,14 @@ public abstract class PlatformSpecificBlock {
         return -1;
     }
 
-    public final boolean isaddonblock() {
-        return adddon != null;
+    public final boolean isAddonBlock() {
+        return addon != null;
     }
 
-    public final String addonname() {
+    public final String getAddonName() {
 
-        if (adddon != null) {
-            return adddon.getName();
+        if (addon != null) {
+            return addon.getName();
         } else {
 
             return "";
@@ -88,21 +88,21 @@ public abstract class PlatformSpecificBlock {
         return projectType;
     }
 
-    public final Addon getAdddon() {
-        return adddon;
+    public final Addon getAddon() {
+        return addon;
     }
 
-    public abstract boolean canbedeleted();
+    public abstract boolean isDeletable();
 
-    public abstract boolean canhasrightconnector();
+    public abstract boolean canHasRightConnector();
 
-    public abstract boolean canhasleftconnector();
+    public abstract boolean canHasLeftConnector();
 
-    public final ArrayList<BlockMode> getBlockModis() {
+    public final ArrayList<BlockMode> getBlockModes() {
         return blockModis;
     }
 
-    public final int getActBlockModiIndex() {
+    public final int getActBlockModeIndex() {
         return actBlockModiIndex;
     }
 
@@ -114,7 +114,7 @@ public abstract class PlatformSpecificBlock {
         return blockModis.get(actBlockModiIndex).getWidth();
     }
 
-    public final void changeBlockModus(int index, Block block, boolean loading) {
+    public final void changeBlockMode(int index, Block block, boolean loading) {
         if (index == actBlockModiIndex) {
             return;
         }

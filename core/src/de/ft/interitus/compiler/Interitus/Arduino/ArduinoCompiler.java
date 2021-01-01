@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -108,14 +108,14 @@ public class ArduinoCompiler implements Compiler {
 
             Block a = ProjectManager.getActProjectVar().blocks.get(0);
 
-            Programm.append(((ArduinoBlock) a.getBlocktype().getBlockModis().get(a.getBlocktype().getActBlockModiIndex())).getCode()).append("\n");
+            Programm.append(((ArduinoBlock) a.getBlocktype().getBlockModes().get(a.getBlocktype().getActBlockModeIndex())).getCode()).append("\n");
             while (a.getRight() != null) {
 
                 //block.getRight().setX(block.getRight().getX() + block.getW());
                 a = a.getRight();
 
 
-                Programm.append(((ArduinoBlock) a.getBlocktype().getBlockModis().get(a.getBlocktype().getActBlockModiIndex())).getCode()).append("//").append(a.getIndex()).append(" \n");
+                Programm.append(((ArduinoBlock) a.getBlocktype().getBlockModes().get(a.getBlocktype().getActBlockModeIndex())).getCode()).append("//").append(a.getIndex()).append(" \n");
 
 
             }
@@ -127,14 +127,14 @@ public class ArduinoCompiler implements Compiler {
 
             a = ProjectManager.getActProjectVar().blocks.get(1);
 
-            Programm.append(((ArduinoBlock) a.getBlocktype().getBlockModis().get(a.getBlocktype().getActBlockModiIndex())).getCode()).append("\n");
+            Programm.append(((ArduinoBlock) a.getBlocktype().getBlockModes().get(a.getBlocktype().getActBlockModeIndex())).getCode()).append("\n");
             while (a.getRight() != null) {
 
                 //block.getRight().setX(block.getRight().getX() + block.getW());
                 a = a.getRight();
 
 
-                Programm.append(((ArduinoBlock) a.getBlocktype().getBlockModis().get(a.getBlocktype().getActBlockModiIndex())).getCode()).append("//").append(a.getIndex()).append(" \n");
+                Programm.append(((ArduinoBlock) a.getBlocktype().getBlockModes().get(a.getBlocktype().getActBlockModeIndex())).getCode()).append("//").append(a.getIndex()).append(" \n");
 
 
             }

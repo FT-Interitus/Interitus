@@ -53,8 +53,8 @@ public class TapBarBlockItem implements TapItem {
         UI.UIbatch.draw(AssetLoader.block_left,this.x,this.y,6,this.h);
         UI.UIbatch.draw(AssetLoader.block_right,this.x+6+this.getW()-(6*2),this.y,6,this.h);
 
-        if (psb.getBlockCategorie() != null) {
-            switch (psb.getBlockCategorie()) {
+        if (psb.getBlockCategory() != null) {
+            switch (psb.getBlockCategory()) {
 
                 case ActionBlocks -> {
 

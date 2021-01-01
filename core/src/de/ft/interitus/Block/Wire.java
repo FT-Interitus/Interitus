@@ -8,6 +8,9 @@ package de.ft.interitus.Block;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import de.ft.interitus.WindowManager;
+import de.ft.interitus.projecttypes.ProjectManager;
+import de.ft.interitus.utils.Unproject;
+
 
 public class Wire {
     private Block leftConnection = null;
@@ -16,12 +19,18 @@ public class Wire {
 
     public Wire() {
 
+        visible = true;
 
     }
 
     public Wire(Block leftConnection) {
         this.leftConnection = leftConnection;
-        if(leftConnection!=null) leftConnection.setWire_right(this);
+        if(leftConnection!=null) {
+            leftConnection.setWire_right(this);
+            this.visible = true;
+            assert ProjectManager.getActProjectVar()!=null;
+            ProjectManager.getActProjectVar().movingWire = this;
+        }
 
     }
 
@@ -44,15 +53,26 @@ public class Wire {
 
     }
 
-
+    /**
+     * @deprecated Use Constructor
+     * @param leftConnection
+     */
     public void setLeftConnection(Block leftConnection) {
         if(leftConnection!=null) leftConnection.setWire_right(this);
         this.leftConnection = leftConnection;
     }
 
     public void setRightConnection(Block rightConnection) {
-        if(rightConnection!=null) rightConnection.setWire_left(this);
+        assert ProjectManager.getActProjectVar() != null;
+        if(rightConnection!=null) {
+            rightConnection.setWire_left(this);
+            this.visible = true;
+        }else{
+            this.visible = false;
+        }
         this.rightConnection = rightConnection;
+        if(ProjectManager.getActProjectVar().movingWire==this) ProjectManager.getActProjectVar().movingWire = null;
+
     }
 
     public Block getLeftConnection() {
@@ -66,14 +86,19 @@ public class Wire {
 
     public void draw() {
 
-
-        WindowManager.BlockshapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        WindowManager.BlockshapeRenderer.setColor(1f,0f,0f,0f);
-        WindowManager.BlockshapeRenderer.line(this.leftConnection.getwireconnector_right(),this.rightConnection.getWireConnector_left());
-        WindowManager.BlockshapeRenderer.end();
         if(!visible) return;
-
-
+        assert ProjectManager.getActProjectVar()!=null;
+        if(ProjectManager.getActProjectVar().movingWire!=this) {
+            WindowManager.BlockshapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+            WindowManager.BlockshapeRenderer.setColor(1f, 0f, 0f, 0f);
+            WindowManager.BlockshapeRenderer.line(this.leftConnection.getwireconnector_right(), this.rightConnection.getWireConnector_left());
+            WindowManager.BlockshapeRenderer.end();
+        }else{
+            WindowManager.BlockshapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+            WindowManager.BlockshapeRenderer.setColor(1f, 0f, 0f, 0f);
+            WindowManager.BlockshapeRenderer.line(this.leftConnection.getwireconnector_right(), Unproject.unproject());
+            WindowManager.BlockshapeRenderer.end();
+        }
 
 
     }
@@ -82,9 +107,6 @@ public class Wire {
         return visible;
     }
 
-    public void setVisible(boolean visible) {
-        this.visible = visible;
-    }
 
     public void delete() {
 
@@ -93,7 +115,9 @@ public class Wire {
 
         this.rightConnection = null;
         this.leftConnection = null;
-
+        assert ProjectManager.getActProjectVar()!=null;
+        if(ProjectManager.getActProjectVar().movingWire==this) ProjectManager.getActProjectVar().movingWire = null;
+        ProjectManager.getActProjectVar().showLeftDocker=false;
 
     }
 }

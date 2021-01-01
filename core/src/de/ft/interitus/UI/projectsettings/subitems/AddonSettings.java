@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -71,7 +71,7 @@ public class AddonSettings {
 
                             ArrayList<Block> deleteblocks = new ArrayList<>();
                             for (Block block : ProjectManager.getActProjectVar().blocks) {
-                                if (ProjectTypesVar.addons.get(checkBoxArrayList.indexOf(checkBox)) == block.getBlocktype().getAdddon()) {
+                                if (ProjectTypesVar.addons.get(checkBoxArrayList.indexOf(checkBox)) == block.getBlocktype().getAddon()) {
                                     deleteblocks.add(block);
 
                                 }

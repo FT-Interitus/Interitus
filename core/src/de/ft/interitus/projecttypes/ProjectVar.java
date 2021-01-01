@@ -30,7 +30,7 @@ public abstract class ProjectVar {
     public Block duplicate_block_right = null; // Which Block shows the duplicate
     public Block duplicate_block_left = null; // Which Block shows the duplicate
     public Block moving_block = null; //Wird ein Block bewegt
-    public boolean showleftdocker = false; //Wenn ein connector ausgewählt wird bieten sich die anderen Blöcke zum verbinden an
+    public boolean showLeftDocker = false; //Wenn ein connector ausgewählt wird bieten sich die anderen Blöcke zum verbinden an
     public Block connetor_offerd_hoverd_block = null; //Der Block über den man fährt welcher gehovert wird
     public int vcs = VCS.NONE;
     public ProjectType projectType = null;

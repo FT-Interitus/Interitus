@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -47,8 +47,8 @@ public class BlockTappedBar {
         UI.blockbarquickinfo.getSelfCheckList().clear();
         for (int i = 0; i < ProjectManager.getActProjectVar().projectType.getProjectblocks().size(); i++) {
             try {
-                if (ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i).getBlockCategorie() != null) {
-                    switch (ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i).getBlockCategorie()) {
+                if (ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i).getBlockCategory() != null) {
+                    switch (ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i).getBlockCategory()) {
                         case ActionBlocks:
                             ActionBlocks.addItem(new TapBarBlockItem(ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i)));
                             break;
@@ -84,8 +84,8 @@ public class BlockTappedBar {
         for (Addon addon:ProjectManager.getActProjectVar().enabledAddons) {
             for (PlatformSpecificBlock psb : addon.getaddBlocks()) {
                 try {
-                    if (psb.getBlockCategorie() != null) {
-                        switch (psb.getBlockCategorie()) {
+                    if (psb.getBlockCategory() != null) {
+                        switch (psb.getBlockCategory()) {
                             case ActionBlocks:
                                 ActionBlocks.addItem(new TapBarBlockItem(psb));
                                 break;

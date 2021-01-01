@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -70,7 +70,7 @@ public class BlockDropDownMenue {
 
     private void longestText() {
 
-        for (BlockMode modi : block.getBlocktype().getBlockModis()) {
+        for (BlockMode modi : block.getBlocktype().getBlockModes()) {
             glyphLayout.setText(UI.font, modi.getname());
             if (glyphLayout.width > this.longestText) {
                 this.longestText = (int) glyphLayout.width;
@@ -82,7 +82,7 @@ public class BlockDropDownMenue {
     public void draw(Block block) {
         longestText();
         WindowManager.blockBatch.begin();
-        WindowManager.blockBatch.draw(block.getBlocktype().getBlockModis().get(block.getBlocktype().actBlockModiIndex).getModiImage(),this.x,this.y,this.w,this.h);
+        WindowManager.blockBatch.draw(block.getBlocktype().getBlockModes().get(block.getBlocktype().actBlockModiIndex).getModiImage(),this.x,this.y,this.w,this.h);
         WindowManager.blockBatch.end();
 
         if(CheckCollision.checkpointwithobject(this.x,this.y,this.w,this.h, Unproject.unproject().x,Unproject.unproject().y)&&Gdx.input.isButtonJustPressed(0)){
@@ -92,9 +92,9 @@ public class BlockDropDownMenue {
             int aktualy = +10;
             WindowManager.BlockshapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
             WindowManager.BlockshapeRenderer.setColor(0.3f,0.3f,0.3f,1);
-            WindowManager.BlockshapeRenderer.roundendrect(this.x-margin,this.y-21*block.getBlocktype().getBlockModis().size()-10-margin,this.longestText+this.w+5+margin*2, 21*block.getBlocktype().getBlockModis().size()+margin*2, 2);
+            WindowManager.BlockshapeRenderer.roundendrect(this.x-margin,this.y-21*block.getBlocktype().getBlockModes().size()-10-margin,this.longestText+this.w+5+margin*2, 21*block.getBlocktype().getBlockModes().size()+margin*2, 2);
             WindowManager.BlockshapeRenderer.end();
-        for (int i = 0; i < block.getBlocktype().getBlockModis().size(); i++) {
+        for (int i = 0; i < block.getBlocktype().getBlockModes().size(); i++) {
                 aktualy += 21;
 
             if(CheckCollision.checkpointwithobject(this.x, this.y- aktualy, this.longestText+this.w+5+margin*2,this.h, Unproject.unproject().x,Unproject.unproject().y)){
@@ -102,7 +102,7 @@ public class BlockDropDownMenue {
 
                 if(Gdx.input.isButtonPressed(0)){
                     WindowManager.BlockshapeRenderer.setColor(0f/255f, 101f/255f, 100f/255f,1);
-                    block.getBlocktype().changeBlockModus(i,block, false);
+                    block.getBlocktype().changeBlockMode(i,block, false);
 
                 }
                 WindowManager.BlockshapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
@@ -112,11 +112,11 @@ public class BlockDropDownMenue {
 
 
                 WindowManager.blockBatch.begin();
-            WindowManager.blockBatch.draw(block.getBlocktype().getBlockModis().get(i).getModiImage(), this.x, this.y- aktualy, this.w,this.h);
+            WindowManager.blockBatch.draw(block.getBlocktype().getBlockModes().get(i).getModiImage(), this.x, this.y- aktualy, this.w,this.h);
             WindowManager.blockBatch.end();
 
                 WindowManager.blockBatch.begin();
-                glyphLayout.setText(WindowManager.font, block.getBlocktype().getBlockModis().get(i).getname());
+                glyphLayout.setText(WindowManager.font, block.getBlocktype().getBlockModes().get(i).getname());
             WindowManager.font.draw(WindowManager.blockBatch, glyphLayout, this.x+this.w+5,this.y-aktualy+glyphLayout.height  + this.h/2- glyphLayout.height/2);
                 WindowManager.blockBatch.end();
 

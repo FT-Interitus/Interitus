@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -95,6 +95,12 @@ public class CheckCollision {
 
 
         return object(block.getX(), block.getY(), block.getW(), block.getH(), (int) mousepos.x, (int) mousepos.y, MOUSESIZE, MOUSESIZE);
+
+    }
+
+    public static boolean checkVectors(Vector2 vector1,int w,int h,Vector2 vector2, int w2, int h2) {
+
+        return object(vector1.x,vector1.y,w,h,vector2.x,vector2.y,w2,h2);
 
     }
 

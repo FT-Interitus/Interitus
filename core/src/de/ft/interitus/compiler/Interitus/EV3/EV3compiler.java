@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -7,8 +7,6 @@ package de.ft.interitus.compiler.Interitus.EV3;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.scenes.scene2d.ui.Tree;
-import com.badlogic.gdx.utils.Array;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Program;
 import de.ft.interitus.UI.Notification.Notification;
@@ -65,7 +63,7 @@ public class EV3compiler implements Compiler {
 
                     while (neighbour != null) {
                         //Program.logger.config(((Ev3Block) neighbour.getBlocktype().getBlockModis().get(neighbour.getBlocktype().getActBlockModiIndex())).getCode());
-                        tempThread.addLine("\n"+((Ev3Block) neighbour.getBlocktype().getBlockModis().get(neighbour.getBlocktype().getActBlockModiIndex())).getCode());
+                        tempThread.addLine("\n"+((Ev3Block) neighbour.getBlocktype().getBlockModes().get(neighbour.getBlocktype().getActBlockModeIndex())).getCode());
                         neighbour = neighbour.getRight();
                     }
                     userthreads.add(tempThread);
