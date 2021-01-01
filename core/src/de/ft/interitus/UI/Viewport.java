@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -45,12 +45,10 @@ public class Viewport {
 
     public static EventManager<UIZoomEvent> zoomEvent;
 
-    public Viewport() {
-        zoomEvent = new EventManager<>();
-    }
+
     public static void init(OrthographicCamera cam, InputManager inputManager) {
         Gdx.graphics.setVSync(Settings.Vsync);
-
+        zoomEvent = new EventManager<>();
         inputManager.addProcessor(new InputAdapter() {
 
             Vector3 tp = new Vector3();
@@ -68,7 +66,7 @@ public class Viewport {
 
                     if (input.isKeyPressed(Input.Keys.CONTROL_LEFT) || input.isKeyPressed(Input.Keys.CONTROL_RIGHT)) {
 
-                        zoomEvent.fireForEach(UIZoomEvent::zoomStart);
+                        zoomEvent.fireForEach(n->n.zoomStart());
 
                         cam.unproject(tp.set(Gdx.input.getX(), Gdx.input.getY(), 0 ));
                         float px = tp.x;

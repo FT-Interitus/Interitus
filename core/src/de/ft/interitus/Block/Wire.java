@@ -65,11 +65,15 @@ public class Wire {
     }
 
     public void draw() {
+
+
+        WindowManager.BlockshapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+        WindowManager.BlockshapeRenderer.setColor(1f,0f,0f,0f);
+        WindowManager.BlockshapeRenderer.line(this.leftConnection.getwireconnector_right(),this.rightConnection.getWireConnector_left());
+        WindowManager.BlockshapeRenderer.end();
         if(!visible) return;
-        WindowManager.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        WindowManager.shapeRenderer.setColor(1f,0f,0f,0f);
-        WindowManager.shapeRenderer.line(this.leftConnection.getwireconnector_right(),this.rightConnection.getWireConnector_left());
-        WindowManager.shapeRenderer.end();
+
+
 
 
     }

@@ -26,7 +26,11 @@ public void addListener(T listener) {
         listerens.add(listener);
 }
 public void fireForEach(Consumer<T> action){
-    for(T listener:listerens) action.accept(listener);
+    for(T listener:listerens) {
+        if(listener==null) continue;
+        action.accept(listener);
+
+    }
 
 }
 
