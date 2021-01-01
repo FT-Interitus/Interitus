@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -38,8 +38,6 @@ public class BlockMarkManager {
                 ProjectManager.getActProjectVar().marked_blocks.add(block);
                 break;
             }
-
-
         }
 
         if (!Gdx.input.isButtonPressed(0)) return;

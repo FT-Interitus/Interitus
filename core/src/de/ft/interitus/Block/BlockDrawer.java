@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -22,7 +22,7 @@ public class BlockDrawer {
 
 
                 if (block.isMarked()) continue;
-                block.draw(WindowManager.blockBatch, WindowManager.BlockshapeRenderer, WindowManager.font);
+                block.draw(WindowManager.blockBatch);
 
 
             }
@@ -31,7 +31,7 @@ public class BlockDrawer {
             for (int i = 0; i < ProjectManager.getActProjectVar().marked_blocks.size(); i++) {
                 Block block = ProjectManager.getActProjectVar().marked_blocks.get(i);
                 if (block.isMoving()) continue;
-                block.draw(WindowManager.blockBatch, WindowManager.BlockshapeRenderer, WindowManager.font);
+                block.draw(WindowManager.blockBatch);
 
                 if (BlockShortcuts.shortCut_deleteBlock.isPressed() && block.getBlocktype().canbedeleted()) {
                     block.delete(false);
@@ -48,7 +48,7 @@ public class BlockDrawer {
             if (ProjectManager.getActProjectVar().moving_block != null) {
 
                 try {
-                    ProjectManager.getActProjectVar().moving_block.draw(WindowManager.blockBatch, WindowManager.BlockshapeRenderer, WindowManager.font);
+                    ProjectManager.getActProjectVar().moving_block.draw(WindowManager.blockBatch);
 
 
                 } catch (Exception ignored) {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -113,7 +113,6 @@ public class Program extends Game {
     /*
      * Wait until all Plugins are registred
      */
-
 
 
 
