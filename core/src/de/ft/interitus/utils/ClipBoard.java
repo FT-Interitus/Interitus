@@ -1,17 +1,27 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
 package de.ft.interitus.utils;
 
+import com.google.gson.Gson;
+import de.ft.interitus.Block.Block;
+import de.ft.interitus.Block.Generators.BlockToSaveGenerator;
+import de.ft.interitus.Block.Interitus.save.DefaultSaveBlockGenerator;
+import de.ft.interitus.datamanager.BlockCalculator;
+import de.ft.interitus.datamanager.userdata.save.DataSaver;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
+import de.ft.interitus.projecttypes.ProjectManager;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.io.IOException;
 
 public class ClipBoard {
     public static StringSelection stringSelection;
@@ -27,19 +37,30 @@ public class ClipBoard {
         clipboard.setContents(stringSelection, null);
 
     }
-    public static void CopyBlocktoClipboard(PlatformSpecificBlock psb){
+    public static void CopyBlocktoClipboard(ArrayList<Block> blocks){
         JSONObject jsonblock = new JSONObject();
-        JSONArray blockParameter = new JSONArray();
-        for(int i=0;i<psb.getBlockParameter().size();i++){
-            JSONArray a=new JSONArray();
-            a.put(new JSONObject().put("typ",psb.getBlockParameter().get(i).getParameterType().getVariableType().getType()));
-            a.put(new JSONObject().put("wert",psb.getBlockParameter().get(i).getParameter()));
+        JSONArray jsonblocks = new JSONArray();
 
-            blockParameter.put(a);
+        assert ProjectManager.getActProjectVar()!=null;
+
+        Gson gson =new Gson();
+
+
+        for(Block block:blocks) {
+
+
+            jsonblocks.put(gson.toJson(ProjectManager.getActProjectVar().projectType.getBlocktoSaveGenerator().generate(block,ProjectManager.getActProjectVar()).setIndex(blocks.indexOf(block))));
         }
-        jsonblock.put("Parameter", blockParameter);
+
+        jsonblock.put("blocks",jsonblocks);
 
         copyStringtoClipboard(jsonblock.toString());
+
+    }
+
+    public static void PasteBlocks() throws Exception {
+
+        clipboard.getData(DataFlavor.stringFlavor).toString();
 
     }
 }

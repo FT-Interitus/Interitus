@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -18,12 +18,12 @@ public class BlueDark implements Theme {
     private final static Color popups = new Color(61f / 255f, 66f / 255f, 75f / 255f, 1);
 
     @Override
-    public Theme gettheme() {
+    public Theme getTheme() {
         return this;
     }
 
     @Override
-    public Color ProgrammSpaceColor() {
+    public Color ProgramSpaceColor() {
         return ProgrammSpace;
     }
 

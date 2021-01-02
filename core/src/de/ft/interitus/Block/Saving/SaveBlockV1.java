@@ -27,7 +27,7 @@ public class SaveBlockV1 implements Serializable {
     private final ArrayList<String> parameters;
     private final int x;
     private final int y;
-    private final int index;
+    private  int index;
     private final int index_left;
     private final int index_right;
     private final boolean isspacebetweenrightblock;
@@ -138,5 +138,10 @@ public class SaveBlockV1 implements Serializable {
 
     public ArrayList<SaveBlockV1> getIncludedBlocks() {
         return includedBlocks;
+    }
+
+    public SaveBlockV1 setIndex(int index) {
+        this.index = index;
+        return this;
     }
 }

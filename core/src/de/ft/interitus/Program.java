@@ -20,6 +20,7 @@ import de.ft.interitus.datamanager.programmdata.experience.ExperienceManager;
 import de.ft.interitus.datamanager.userdata.UserDataInit;
 import de.ft.interitus.loading.Loading;
 import de.ft.interitus.loading.SplashScreen;
+import de.ft.interitus.plugin.server.PluginInstallServer;
 import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.plugin.PluginSandboxSecurityPolicy;
 import de.ft.interitus.plugin.ProgramRegistry;
@@ -159,6 +160,8 @@ public class Program extends Game {
                 ProgramRegistry.addProjectTypes();
                 ProgramRegistry.addMenuBarItems();
                 ProgramRegistry.addShortCuts();
+
+                PluginInstallServer.start();
 
                 logger.config("Plugin Registering done");
 
