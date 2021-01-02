@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -9,9 +9,9 @@ import com.badlogic.gdx.graphics.Color;
 
 public interface Theme {
 
-    Theme gettheme();
+    Theme getTheme();
 
-    Color ProgrammSpaceColor();
+    Color ProgramSpaceColor();
 
     Color BlocksColor();
 
@@ -19,7 +19,7 @@ public interface Theme {
 
     Color ClearColor();
 
-    Color WelcomeScreenBackgroundColor(); //TODO wird erstezt durch Bild
+    Color WelcomeScreenBackgroundColor(); //TODO replace with Picture
 
     Color WelcomeScreenFontColor();
 

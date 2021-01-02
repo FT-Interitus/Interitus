@@ -112,7 +112,7 @@ public class UI {
         renderer.begin(ShapeRenderer.ShapeType.Filled);
 
 
-        renderer.setColor(Settings.theme.ProgrammSpaceColor());
+        renderer.setColor(Settings.theme.ProgramSpaceColor());
 
 
         if (flaeche == true) {/////////////   \/  \/  \/  \/  die programmierfläche wird gedrawd

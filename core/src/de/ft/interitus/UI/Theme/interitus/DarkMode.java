@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -18,12 +18,12 @@ public class DarkMode implements Theme {
     private final static Color popups = new Color(49f / 255f, 52f / 255f, 53f / 255f, 1);
 
     @Override
-    public Theme gettheme() {
+    public Theme getTheme() {
         return this;
     }
 
     @Override
-    public Color ProgrammSpaceColor() {
+    public Color ProgramSpaceColor() {
         return ProgrammSpace;
     }
 

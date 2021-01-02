@@ -26,6 +26,7 @@ import de.ft.interitus.events.EventVar;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.VCS;
 import de.ft.interitus.utils.ArrayList;
+import de.ft.interitus.utils.ClipBoard;
 
 public class GlobalShortcuts implements ShortCutChecker {
     public static ShortCut shortCut_newprojektwindow = new ShortCut("Neues Projekt", MenuBar.menuItem_newproject, SpecialKeys.dualStrg, Input.Keys.N);
@@ -71,7 +72,7 @@ public class GlobalShortcuts implements ShortCutChecker {
 
         if(shortCut_Copy.isPressed()){
 
-                //TODO ClipBoard.CopyBlocktoClipboard(ProjectManager.getActProjectVar().marked_block.getBlocktype());
+                ClipBoard.CopyBlocktoClipboard(ProjectManager.getActProjectVar().marked_blocks);
 
         }
 
