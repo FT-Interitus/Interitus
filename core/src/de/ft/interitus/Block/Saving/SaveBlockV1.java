@@ -1,11 +1,12 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
 package de.ft.interitus.Block.Saving;
 
 
+import de.ft.interitus.Block.Block;
 import de.ft.interitus.utils.ArrayList;
 import org.lwjgl.system.CallbackI;
 
@@ -58,63 +59,36 @@ public class SaveBlockV1 implements Serializable {
      * @param blocksettings
      * @param datawiresmoveing
      */
-    public SaveBlockV1(int x, int y, int index, int index_links, int index_rechts, boolean isspacebetweenrightblock, int platformspecificblockid, ArrayList<String> parameters, ArrayList<ArrayList<Integer>> datawires, ArrayList<ArrayList<Integer>> datawireindex, int BlockModus, String addon, String blocksettings, ArrayList<ArrayList<ArrayList<Integer>>> datawiresmoveing) {
-        this.x = x;
-        this.y = y;
-        this.index = index;
-        this.index_links = index_links;
-        this.index_rechts = index_rechts;
-        this.isspacebetweenrightblock = isspacebetweenrightblock;
-        this.platformspecificblockid = platformspecificblockid;
+    public SaveBlockV1(Block block, Block links, Block rechts, ArrayList<String> parameters, ArrayList<ArrayList<Integer>> datawires, ArrayList<ArrayList<Integer>> datawireindex, ArrayList<ArrayList<ArrayList<Integer>>> datawiresmoveing,ArrayList<SaveBlockV1> includedBlocks) {
+        this.x = block.getX();
+        this.y = block.getY();
+        this.index = block.getIndex();
+
+        if(links!=null)
+            this.index_links = links.getIndex();
+        else
+            this.index_links = -1;
+
+        if(rechts!=null) {
+            this.index_rechts = rechts.getIndex();
+        }else{
+            this.index_rechts = -1;
+        }
+
+        this.isspacebetweenrightblock = block.getWire_right() != null && block.getWire_right().isVisible();
+        this.platformspecificblockid = block.getBlocktype().getID();
         this.parameters = parameters;
         this.datawires = datawires;
         this.datawiresindex = datawireindex;
         this.datawiresmoveing = datawiresmoveing;
-        this.blockmodus = BlockModus;
-        this.addon = addon;
-        this.blocksettings = blocksettings;
-        this.includedBlocks =null;
-
-
-    }
-
-    /**
-     * Do not change Constructor because GSON can't create the object with extendable Blocks
-     * @param x
-     * @param y
-     * @param index
-     * @param index_links
-     * @param index_rechts
-     * @param isspacebetweenrightblock
-     * @param platformspecificblockid
-     * @param parameters
-     * @param datawires
-     * @param datawireindex
-     * @param BlockModus
-     * @param addon
-     * @param blocksettings
-     * @param datawiresmoveing
-     * @param includedBlocks
-     */
-    public SaveBlockV1(int x, int y, int index, int index_links, int index_rechts, boolean isspacebetweenrightblock, int platformspecificblockid, ArrayList<String> parameters, ArrayList<ArrayList<Integer>> datawires, ArrayList<ArrayList<Integer>> datawireindex, int BlockModus, String addon, String blocksettings, ArrayList<ArrayList<ArrayList<Integer>>> datawiresmoveing, ArrayList<SaveBlockV1> includedBlocks) {
-        this.x = x;
-        this.y = y;
-        this.index = index;
-        this.index_links = index_links;
-        this.index_rechts = index_rechts;
-        this.isspacebetweenrightblock = isspacebetweenrightblock;
-        this.platformspecificblockid = platformspecificblockid;
-        this.parameters = parameters;
-        this.datawires = datawires;
-        this.datawiresindex = datawireindex;
-        this.datawiresmoveing = datawiresmoveing;
-        this.blockmodus = BlockModus;
-        this.addon = addon;
-        this.blocksettings = blocksettings;
+        this.blockmodus = block.getBlocktype().getActBlockModeIndex();
+        this.addon = block.getBlocktype().getAddonName();
+        this.blocksettings = block.getBlocktype().blockModis.get(block.getBlocktype().getActBlockModeIndex()).getblocksettings()!=null?block.getBlocktype().blockModis.get(block.getBlocktype().actBlockModiIndex).getblocksettings().getSettings():null;
         this.includedBlocks =includedBlocks;
 
 
     }
+
 
     public int getY() {
         return y;
