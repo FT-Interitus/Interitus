@@ -11,7 +11,6 @@ import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import de.ft.interitus.Block.Generators.BlockToSaveGenerator;
-import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Program;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.UIElements.BlockDropDownMenue.BlockDropDownMenue;
@@ -55,17 +54,17 @@ public abstract class Block {
     private final GlyphLayout glyphLayout = new GlyphLayout();
     private final BlockDropDownMenue BlockModusSelection = new BlockDropDownMenue(0, 0, 0, 0, this);
     private final Block INSTANCE;
-    private final int h; //Die Höhe des Blocks
-    public Block left = null; //Der rechte verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
-    public Block right = null; //Der linke verbundene Block hier auf Null gesetzt, da zum erstell zeitpunkt noch kein Nachbar exsistiert
-    private int index; //Der Index des Blocks (Der Gleiche wie im Array BlckVar.blocks)o
+    private final int h;
+    public Block left = null;
+    public Block right = null;
+
     private Wire wire_left;
     private Wire wire_right;
     private PlatformSpecificBlock blocktype;
     private ArrayList<Block> extendedBlocks = null;
 
 
-    public Block(final int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock, BlockToSaveGenerator blocktoSaveGenerator, boolean isSubBlock) { //Initzialisieren des Blocks
+    public Block(int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock, BlockToSaveGenerator blocktoSaveGenerator, boolean isSubBlock) { //Initzialisieren des Blocks
         this.blocktype = platformSpecificBlock;
         //  EventVar.blockEventManager.createBlock(new BlockCreateEvent(this, this));
         EventManager.fireEvent(this, new BlockCreateEvent(this));
@@ -76,15 +75,15 @@ public abstract class Block {
 
 
         wireConnector_right.set(x + w, y + h / 3f);
-        this.index = index;
+
 
         this.blocktoSaveGenerator = blocktoSaveGenerator;
         this.INSTANCE = this;
 
 
         if (!isSubBlock)
-            if (this.isVisible())  //Wenn der Block sichtbar ist...  //Das passiert deshalb weil nicht für nicht sichbare Blöcke ein Thread laufen muss
-                Objects.requireNonNull(ProjectManager.getActProjectVar()).visible_blocks.add(this); //und wird zum Array der sichtbaren Blöcke hinzugefüt
+            if (this.isVisible())
+                Objects.requireNonNull(ProjectManager.getActProjectVar()).visible_blocks.add(this);
 
 
         rightClickEventListener = new RightClickEventListener() {
@@ -270,12 +269,9 @@ public abstract class Block {
      * @return the index from this Block
      */
     public int getIndex() { //Der Index wird ausgegeben
-        return index;
+        return ProjectManager.getActProjectVar().blocks.indexOf(this);
     }
 
-    public void setIndex(int index) { //Der Index wird gesetzt WARNUNG nur aufrufen in Kombination mit einer ProjectManager.getactProjectVar().blocks Array aktion
-        this.index = index;
-    }
 
     /**
      * Deletes the Block a change the Index of the other Blocks in the Array depending on complete
@@ -310,7 +306,7 @@ public abstract class Block {
         ProjectManager.getActProjectVar().moving_block = null; // Ob ein Block bewegt wird, wird auf false gesetzt da wenn ein Block bewegt und gelöscht wird kann es nur der bewegte Block sein
 
 
-        this.setIndex(-1); //Der Index wird auf -1 gesetzt dann merkt der BlockUpdater das der laufenden Timer beendet werden soll
+
         if (left != null) { //Wenn ein linker Nachbar exsistiert
             left.setRight(null); //wird dem linken Nachbar gesagt das er keinen Rechten Nachbar mehr hat
 
@@ -346,33 +342,12 @@ public abstract class Block {
 
             }
 
-            //Da dies relativ lange dauert dauert in einem eigenen Thread
-            Thread calcnew = new Thread(() -> {
-                for (int i = 0; i < ProjectManager.getActProjectVar().visible_blocks.size(); i++) { //Durch alle Indexe des Block Arrays wird durchgegangen alle die einen größeren Index haben //Durch die Temp variable kann der alte Index des Blocks hier wieder verwendet werden
-                    try {
-                        if (ProjectManager.getActProjectVar().visible_blocks.get(i) != INSTANCE) {
-                            ProjectManager.getActProjectVar().visible_blocks.get(i).findnewindex(); //Alle anderen Blöcke werden um einen Index verschoben
-                        }
-                    } catch (Exception e) { //Wenn man bei Hunderten von Blöcken der erste und der zweite gelöscht werden gibt es hier fehler
-                        DisplayErrors.error = e;
-                        e.printStackTrace();
-                    }
 
-                }
-            });
-
-            calcnew.start(); //Der Thread wird gestarted
 
 
         }
 
     }
-
-    private void findnewindex() {
-        assert ProjectManager.getActProjectVar() != null;
-        this.index = ProjectManager.getActProjectVar().blocks.indexOf(this);
-    }
-
 
     /***
      * Updates all Block Behaviors

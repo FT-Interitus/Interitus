@@ -15,7 +15,7 @@ public class DefaultBlock extends Block {
 
 
     public DefaultBlock(int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock, BlockToSaveGenerator blocktoSaveGenerator, boolean isSubBlock) {
-        super(index, x, y, w, h, platformSpecificBlock, blocktoSaveGenerator, isSubBlock);
+        super(x, y, w, h, platformSpecificBlock, blocktoSaveGenerator, isSubBlock);
 
 
 
