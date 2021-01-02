@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -88,6 +88,7 @@ public class SettingsUI extends VisWindow {
         } catch (Exception e) {
             return false;
         }
+
     }
 
     public void show() {

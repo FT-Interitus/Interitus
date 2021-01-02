@@ -42,6 +42,7 @@ public class Viewport {
     private static final Vector3 tmp = new Vector3();
     private static final Matrix4 combined = new Matrix4();
     private static final Matrix4 invProjectionView = new Matrix4();
+    private static int zoomPercentage = 100;
 
     public static EventManager<UIZoomEvent> zoomEvent = new EventManager<>();
 
@@ -71,7 +72,8 @@ public class Viewport {
                         float px = tp.x;
                         float py = tp.y;
 
-                        cam.zoom += amount * cam.zoom * 0.1f;
+                        cam.zoom += amount  * 0.1f;
+                        zoomPercentage -= amount*10;
                         cam.update();
 
                         cam.unproject(tp.set(Gdx.input.getX(), Gdx.input.getY(), 0 ));
@@ -186,12 +188,7 @@ public class Viewport {
             }
 
 
-            if (input.isKeyJustPressed(Input.Keys.PLUS)) {
-                cam.zoom = cam.zoom - 0.2f;
-            }
-            if (input.isKeyJustPressed(Input.Keys.MINUS)) {
-                cam.zoom = cam.zoom + 0.2f;
-            }
+
 
 
             ProjectManager.getActProjectVar().cam_pos.set(cam.position.x, cam.position.y);
@@ -230,15 +227,22 @@ public class Viewport {
     }
     public static void increaseZoom(OrthographicCamera cam) {
         if (cam.zoom <= 0.4f) return;
-        cam.zoom += -1 * cam.zoom * 0.1f;
+        cam.zoom += -1 * 0.1f;
+        zoomPercentage+=10;
     }
     public static void decreaseZoom(OrthographicCamera cam) {
 
         if (cam.zoom > 2.0f) return;
-        cam.zoom += 1 * cam.zoom * 0.1f;
+        cam.zoom += 1  * 0.1f;
+        zoomPercentage-=10;
     }
 
     public static void resetZoom(OrthographicCamera cam) {
         cam.zoom = 1;
+        zoomPercentage=100;
+    }
+
+    public static int getZoomPercentage() {
+        return zoomPercentage;
     }
 }

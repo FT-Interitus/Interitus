@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -11,9 +11,8 @@ import de.ft.interitus.UI.UIElements.UIElements.UIElement;
 
 import de.ft.interitus.utils.ArrayList;
 
-public class Table implements UIElement {
-    private int x;
-    private int y;
+public class Table extends UIElement {
+
     private int columnCount;
     private int rowCount;
     //private ArrayList<ArrayList<Element>> elements = new ArrayList<>();
@@ -96,65 +95,4 @@ public class Table implements UIElement {
 
     }
 
-    @Override
-    public int getX() {
-        return x;
-    }
-
-    @Override
-    public int getY() {
-        return y;
-    }
-
-    @Override
-    public int getW() {
-        return 100;
-    }
-
-    @Override
-    public int getH() {
-        return 100;
-    }
-
-    @Override
-    public Object setX(int x) {
-        this.x=x;
-        return null;
-    }
-
-    @Override
-    public Object setY(int y) {
-        this.y=y;
-        return null;
-    }
-
-    @Override
-    public Object setW(int w) {
-        return null;
-    }
-
-    @Override
-    public Object setH(int h) {
-        return null;
-    }
-
-    @Override
-    public Object setPosition(int x, int y) {
-        this.x=x;
-        this.y=y;
-        return null;
-    }
-
-    @Override
-    public void setBounds(int x, int y, int w, int h) {
-        this.x = x;
-        this.y = y;
-    }
-
-
-
-    @Override
-    public void setAlpha(float alpha) {
-
-    }
 }

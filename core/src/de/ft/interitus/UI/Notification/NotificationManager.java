@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -148,7 +148,7 @@ public class NotificationManager {
            AssetLoader.defaultfont.draw(UI.UIbatch,notifications.get(i).getMessage(),Gdx.graphics.getWidth() - DISTANCE_RIGHT+IMAGE_MARGIN_RIGHT/2f+23+notifications.get(i).getRollin(),UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i))+HEIGHT-HEIGHT/3.2f);
             UI.UIbatch.end();
             if(notifications.get(i).isCloseable()) {
-                notifications.get(i).getCloseButton().setTransparency(notifications.get(i).getFadeout());
+                notifications.get(i).getCloseButton().setAlpha(notifications.get(i).getFadeout());
                 notifications.get(i).getCloseButton().setBounds(Gdx.graphics.getWidth() - IMAGE_MARGIN_RIGHT - MARGIN_RIGHT+notifications.get(i).getRollin(), UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i))+HEIGHT-IMAGE_MARGIN_TOP,10,10);
 
                 notifications.get(i).getCloseButton().draw();

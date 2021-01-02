@@ -15,7 +15,7 @@ import de.ft.interitus.UI.UIElements.check.CheckMouse;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.utils.ShapeRenderer;
 
-public class Button implements UIElement {
+public class Button extends UIElement {
     public static boolean disablepresscolorchange = false;
     public final int widthoverTextleftrandabstand = 5;
     private final GlyphLayout glyphLayout = new GlyphLayout();
@@ -24,10 +24,7 @@ public class Button implements UIElement {
     public boolean heightoverText=false;
     private boolean isworking = false;
     private boolean ignore_uilock = false;
-    private int x;
-    private int y;
-    private int w;
-    private int h;
+
     private String text;
     private Texture image = null;
     private Texture image_mouseover = null;
@@ -37,16 +34,17 @@ public class Button implements UIElement {
     private boolean disable = false;
     private boolean flipX = false;
     private boolean flipY = false;
-    private float transparency = 1.0f;
+
     private int text_pos_change_x = 0;
     private int text_pos_change_y = 0;
 
 
     public Button(int x, int y, int w, int h) {
-        this.x = x;
-        this.y = y;
-        this.w = w;
-        this.h = h;
+        super.setX(x);
+        super.setY(y);
+        super.setW(w);
+        super.setH(h);
+
 
     }
 
@@ -56,13 +54,6 @@ public class Button implements UIElement {
     }
 
 
-    public void setBounds(int x, int y, int w, int h) {
-        this.x = x;
-        this.y = y;
-        this.w = w;
-        this.h = h;
-
-    }
 
 
     public boolean isjustPressed() {
@@ -70,7 +61,7 @@ public class Button implements UIElement {
 
         if (!disable && !UIVar.isdialogeopend) {
 
-            pressed = CheckMouse.isjustPressed(x, y, w, h, false);
+            pressed = CheckMouse.isjustPressed(super.y, super.y, super.w, super.h, false);
             return pressed;
 
         } else {
@@ -158,10 +149,10 @@ public class Button implements UIElement {
                 if (isMouseover()) {
                     UI.UIbatch.setColor(1, 1, 1, hovertransparancy);
                 } else {
-                    UI.UIbatch.setColor(1, 1, 1, transparency);
+                    UI.UIbatch.setColor(1, 1, 1, alpha);
                 }
                 if (isMouseover() && Gdx.input.isButtonPressed(0) && !disablepresscolorchange) {
-                    UI.UIbatch.setColor(1, 0.5f, 0.5f, transparency);
+                    UI.UIbatch.setColor(1, 0.5f, 0.5f, alpha);
                 }
                 if (isDisable()) {
                     UI.UIbatch.setColor(1, 1, 1, 0.2f);
@@ -171,7 +162,7 @@ public class Button implements UIElement {
                 UI.UIbatch.end();
             } else if (image_pressed == null) {
                 UI.UIbatch.begin();
-                UI.UIbatch.setColor(1, 1, 1, transparency);
+                UI.UIbatch.setColor(1, 1, 1, alpha);
 
                 if (isMouseover()) {
                     UI.UIbatch.draw(image_mouseover, this.x, this.y, this.w, this.h, 0, 0, image.getWidth(), image.getHeight(), this.flipX, this.flipY);
@@ -188,7 +179,7 @@ public class Button implements UIElement {
                     if (isDisable()) {
                         UI.UIbatch.setColor(1, 1, 1, 0.3f);
                     } else {
-                        UI.UIbatch.setColor(1, 1, 1, transparency);
+                        UI.UIbatch.setColor(1, 1, 1, alpha);
                     }
 
 
@@ -201,15 +192,15 @@ public class Button implements UIElement {
                         UI.UIbatch.draw(image_pressed, this.x, this.y, this.w, this.h, 0, 0, image.getWidth(), image.getHeight(), this.flipX, this.flipY);
                     }
                 } else {
-                    UI.UIbatch.setColor(1, 1, 1, transparency);
+                    UI.UIbatch.setColor(1, 1, 1, alpha);
                     UI.UIbatch.draw(this.working_animation.getAnimation(), x, y, w, h);
                 }
                 UI.UIbatch.end();
             }
             if (text != null) {
                 UI.UIbatch.begin();
-                UI.UIbatch.setColor(1, 1, 1, transparency);
-                WindowManager.font.setColor(1,1,1,transparency);
+                UI.UIbatch.setColor(1, 1, 1, alpha);
+                WindowManager.font.setColor(1,1,1,alpha);
                 WindowManager.font.draw(UI.UIbatch, glyphLayout, x + widthoverTextleftrandabstand+text_pos_change_x, y + glyphLayout.height + h / 2 - glyphLayout.height / 2+text_pos_change_y);
 
 
@@ -219,57 +210,8 @@ public class Button implements UIElement {
 
     }
 
-    @Override
-    public void setAlpha(float alpha) {
-        this.transparency = alpha;
-    }
 
-    public int getX() {
-        return x;
-    }
 
-    public Object setX(int x) {
-        this.x = x;
-        return null;
-
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public Object setY(int y) {
-        this.y = y;
-        return null;
-
-    }
-
-    public int getH() {
-        return h;
-    }
-
-    public Object setH(int h) {
-        this.h = h;
-        return null;
-
-    }
-
-    @Override
-    public Object setPosition(int x, int y) {
-        this.x=x;
-        this.y=y;
-        return null;
-
-    }
-
-    public int getW() {
-        return w;
-    }
-
-    public Button setW(int w) {
-        this.w = w;
-        return this;
-    }
 
     public String getText() {
         return text;
@@ -352,13 +294,7 @@ public class Button implements UIElement {
         this.ignore_uilock = ignore_uilock;
     }
 
-    public float getTransparency() {
-        return transparency;
-    }
 
-    public void setTransparency(float transparency) {
-        this.transparency = transparency;
-    }
 
     public int getText_pos_change_x() {
         return text_pos_change_x;

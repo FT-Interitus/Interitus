@@ -55,10 +55,11 @@ public class ZoomUI extends UI {
 
     @Override
     protected void draw() {
+
         grid.setVerticalVermitteln(true);
-        grid.setPosition(500, UIVar.programmflaeche_y+UIVar.programmflaeche_h);
-        Program.logger.config(String.valueOf(plus.getW()));
+        grid.setPosition(500, UIVar.programmflaeche_y+UIVar.programmflaeche_h+grid.getH());
         grid.draw();
+        textLabel.setText(Viewport.getZoomPercentage()+"%");
         if(plus.isjustPressednormal())  Viewport.increaseZoom(ProgramingSpace.cam);
         if(minus.isjustPressednormal()) Viewport.decreaseZoom(ProgramingSpace.cam);
         if(reset.isjustPressednormal()) Viewport.resetZoom(ProgramingSpace.cam);

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -11,11 +11,8 @@ import de.ft.interitus.WindowManager;
 
 import java.util.ArrayList;
 
-public class Grid implements UIElement {
-    private int x;
-    private int y;
-    private int width;
-    private int height;
+public class Grid extends UIElement {
+
     private int rows = 0;
     private boolean VerticalVermitteln = false;
     private ArrayList<ArrayList<UIElement>> content = new ArrayList<>();
@@ -23,8 +20,8 @@ public class Grid implements UIElement {
     public Grid(int x, int y, int width, int height) {
         this.x = x;
         this.y = y;
-        this.width = width;
-        this.height = height;
+        this.w = width;
+        this.h = height;
         this.content.add(new ArrayList<>());
     }
 
@@ -35,68 +32,6 @@ public class Grid implements UIElement {
     public void row() {
         this.content.add(new ArrayList<>());
         rows++;
-    }
-
-    @Override
-    public int getX() {
-        return this.x;
-    }
-
-    @Override
-    public int getY() {
-        return this.y;
-    }
-
-    @Override
-    public int getW() {
-        return this.width;
-    }
-
-    @Override
-    public int getH() {
-        return this.height;
-    }
-
-    @Override
-    public Object setX(int x) {
-        this.x = x;
-        return null;
-    }
-
-    @Override
-    public Object setY(int y) {
-        this.y = y;
-        return null;
-
-    }
-
-    @Override
-    public Object setW(int w) {
-        this.width = w;
-        return null;
-
-    }
-
-    @Override
-    public Object setH(int h) {
-        this.height = h;
-        return null;
-    }
-
-    @Override
-    public Object setPosition(int x, int y) {
-        this.x = x;
-        this.y = y;
-        return null;
-
-    }
-
-    @Override
-    public void setBounds(int x, int y, int w, int h) {
-        this.x = x;
-        this.y = y;
-        this.width = w;
-        this.height = h;
     }
 
     @Override
@@ -125,17 +60,15 @@ public class Grid implements UIElement {
                 } else {
                     content.get(row).get(column).setY(this.y - content.get(row).get(column).getH() - height);
                 }
-                content.get(row).get(column).draw();
+                if(this.h!=0) content.get(row).get(column).draw();
                 widthsprung += content.get(row).get(column).getW();
             }
             height += tempheight;
         }
+        this.h = height;
     }
 
-    @Override
-    public void setAlpha(float alpha) {
 
-    }
 
     public void setVerticalVermitteln(boolean verticalVermitteln) {
         VerticalVermitteln = verticalVermitteln;

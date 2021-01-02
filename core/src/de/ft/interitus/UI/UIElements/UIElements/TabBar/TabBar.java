@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -25,11 +25,8 @@ import de.ft.interitus.projecttypes.VCS;
 import de.ft.interitus.utils.ArrayList;
 
 
-public class TabBar implements UIElement {
-    private int x = 0;
-    private int y = 0;
-    private int w = 50;
-    private int h = 25;
+public class TabBar extends UIElement {
+
     private int selectedTabindex = 0;
     private final ArrayList<Tab> tabbs = new ArrayList<>();
     private Vector2 mousemerkpos = new Vector2();
@@ -39,10 +36,10 @@ public class TabBar implements UIElement {
     private Tab add;
 
     public TabBar(int x, int y, int w, int h) {
-        this.x = x;
-        this.y = y;
-        this.w = w;
-        this.h = h;
+        super.y = y;
+        super.w = w;
+        super.x = x;
+        super.h = h;
     }
 
     public TabBar() {
@@ -53,64 +50,6 @@ public class TabBar implements UIElement {
     }
 
 
-    @Override
-    public int getX() {
-        return x;
-    }
-
-    @Override
-    public int getY() {
-        return y;
-    }
-
-    @Override
-    public int getW() {
-        return 0;
-    }
-
-    @Override
-    public int getH() {
-        return h;
-    }
-
-    @Override
-    public Object setX(int x) {
-        this.x=x;
-        return null;
-    }
-
-    @Override
-    public Object setY(int y) {
-        this.y=y;
-        return null;
-    }
-
-    @Override
-    public Object setW(int w) {
-        this.w=w;
-        return null;
-    }
-
-    @Override
-    public Object setH(int h) {
-        this.h=h;
-        return null;
-    }
-
-    @Override
-    public Object setPosition(int x, int y) {
-        this.x=x;
-        this.y=y;
-        return null;
-    }
-
-    public void setBounds(int x, int y, int w, int h) {
-        this.x = x;
-        this.y = y;
-        this.w = w;
-        this.h = h;
-
-    }
 
     public void setTabs(Tab... tabbs) {
         this.tabbs.clear();
@@ -258,10 +197,6 @@ public class TabBar implements UIElement {
 
     }
 
-    @Override
-    public void setAlpha(float alpha) {
-
-    }
 
 
     public void setSelectedTabindex(int selectedTabindex) {

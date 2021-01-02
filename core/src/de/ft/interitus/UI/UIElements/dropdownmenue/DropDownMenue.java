@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -20,16 +20,13 @@ import de.ft.interitus.utils.ArrayList;
 
 
 
-public class DropDownMenue implements UIElement {
+public class DropDownMenue extends UIElement {
     private final ArrayList<DropDownElementInterface> elements = new ArrayList<>();
     private final int RADIUS = 5;
     private final Color bordercolor;
     private final GlyphLayout glyphLayout = new GlyphLayout();
     private final Button popupbutton = new Button();
-    private int x;
-    private int y;
-    private int w = 100;
-    private int h = 20;
+
     private boolean opened = false;
     private DropDownElementInterface selectedElement = null;
     private String defaultText;
@@ -59,63 +56,7 @@ public class DropDownMenue implements UIElement {
         elements.add(e);
     }
 
-    @Override
-    public int getX() {
-        return x;
-    }
 
-    @Override
-    public int getY() {
-        return y;
-    }
-
-    @Override
-    public int getW() {
-        return w;
-    }
-
-    @Override
-    public int getH() {
-        return h;
-    }
-
-    @Override
-    public Object setX(int x) {
-        this.x=x;
-        return null;
-    }
-
-    @Override
-    public Object setY(int y) {
-        this.y=y;
-        return null;
-    }
-
-    @Override
-    public Object setW(int w) {
-        this.w=w;
-        return null;
-    }
-
-    @Override
-    public Object setH(int h) {
-        this.h=h;
-        return null;
-    }
-
-    @Override
-    public Object setPosition(int x, int y) {
-        this.x=x;
-        this.y=y;
-        return null;
-    }
-
-    @Override
-    public void setBounds(int x, int y, int w, int h) {
-        this.x = x;
-        this.y = y;
-        this.h = h;
-    }
 
     public DropDownElementInterface getSelectedElement() {
         return selectedElement;
@@ -188,10 +129,7 @@ public class DropDownMenue implements UIElement {
 
     }
 
-    @Override
-    public void setAlpha(float alpha) {
-    //TODO @Felix
-    }
+
 
     public ArrayList<DropDownElementInterface> getElements() {
         return elements;
