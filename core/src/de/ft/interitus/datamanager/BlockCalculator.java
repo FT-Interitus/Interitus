@@ -23,7 +23,7 @@ public class BlockCalculator {
         ArrayList<SaveBlockV1> saveBlocks = new ArrayList<>();
 
         for (int i = 0; i < projectVar.blocks.size(); i++) {
-            saveBlocks.add(projectVar.blocks.get(i).getBlocktoSaveGenerator().generate(projectVar.blocks.get(i), ProjectManager.getActProjectVar()));
+            saveBlocks.add(projectVar.blocks.get(i).getBlockToSaveGenerator().generate(projectVar.blocks.get(i), ProjectManager.getActProjectVar()));
         }
         return saveBlocks;
     }
@@ -88,7 +88,7 @@ public class BlockCalculator {
                     }
 
 
-                    extractedBlocks.get(i).getBlocktype().changeBlockMode(saveBlocks.get(i).getBlockmodus(), extractedBlocks.get(i), true);
+                    extractedBlocks.get(i).getBlockType().changeBlockMode(saveBlocks.get(i).getBlockmodus(), extractedBlocks.get(i), true);
                 }catch (Exception e) {
                     e.printStackTrace();
                     error = true;
@@ -99,14 +99,14 @@ public class BlockCalculator {
                 try {
                     //Load BlockSettings
                     try {
-                        extractedBlocks.get(i).getBlocktype().blockModis.get(extractedBlocks.get(i).getBlocktype().actBlockModiIndex).getblocksettings().setSettings(saveBlocks.get(i).getBlocksettings());
+                        extractedBlocks.get(i).getBlockType().blockModis.get(extractedBlocks.get(i).getBlockType().actBlockModiIndex).getblocksettings().setSettings(saveBlocks.get(i).getBlocksettings());
                     } catch (NullPointerException e) {
 
                     }
                     //Load Parameters
-                    if (extractedBlocks.get(i).getBlocktype().getBlockParameter() != null) {
+                    if (extractedBlocks.get(i).getBlockType().getBlockParameter() != null) {
                         for (int j = 0; j < saveBlocks.get(i).getParameters().size(); j++) {
-                            extractedBlocks.get(i).getBlocktype().getBlockParameter().get(j).setParameter(saveBlocks.get(i).getParameters().get(j));
+                            extractedBlocks.get(i).getBlockType().getBlockParameter().get(j).setParameter(saveBlocks.get(i).getParameters().get(j));
 
                             for (int k = 0; k < saveBlocks.get(i).getDatawires().get(j).size(); k++) {
                                 if (saveBlocks.get(i).getDatawires().get(j).get(k) == -1) {
@@ -115,7 +115,7 @@ public class BlockCalculator {
                                 if (saveBlocks.get(i).getDatawiresindex().get(j).get(k) == -1) {
                                     continue;
                                 }
-                                DataWire tempwire = new DataWire(extractedBlocks.get(i).getBlocktype().getBlockParameter().get(j), extractedBlocks.get(saveBlocks.get(i).getDatawires().get(j).get(k)).getBlocktype().getBlockParameter().get(saveBlocks.get(i).getDatawiresindex().get(j).get(k)));
+                                DataWire tempwire = new DataWire(extractedBlocks.get(i).getBlockType().getBlockParameter().get(j), extractedBlocks.get(saveBlocks.get(i).getDatawires().get(j).get(k)).getBlockType().getBlockParameter().get(saveBlocks.get(i).getDatawiresindex().get(j).get(k)));
 
                                 try {
                                     tempwire.setVerschiebung_1_Horizontale(saveBlocks.get(i).getDatawiresmoveing().get(j).get(k).get(0));

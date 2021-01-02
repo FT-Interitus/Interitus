@@ -25,8 +25,8 @@ public class BlockWireManager {
 
         if(ProjectManager.getActProjectVar().showLeftDocker) {
             if(ProjectManager.getActProjectVar().movingWire.getLeftConnection()!=block) {
-                if(isWireConnectionActivated(block.getWireConnector_left(),false)) {
-                    if(block.getBlocktype().canHasLeftConnector()) {
+                if(isWireConnectionActivated(block.getWireConnectorLeft(),false)) {
+                    if(block.getBlockType().canHasLeftConnector()) {
                         block.setLeft(ProjectManager.getActProjectVar().movingWire.getLeftConnection());
                         ProjectManager.getActProjectVar().movingWire.setRightConnection(block);
                     }
@@ -36,8 +36,8 @@ public class BlockWireManager {
 
 
 
-        if(block.getWire_right()==null&&block.getBlocktype().canHasRightConnector()) {
-            if (!isWireConnectionActivated(block.getwireconnector_right(), true)) return;
+        if(block.getWire_right()==null&&block.getBlockType().canHasRightConnector()) {
+            if (!isWireConnectionActivated(block.getWireConnectorRight(), true)) return;
             if (ProjectManager.getActProjectVar().movingWire != null)
                 ProjectManager.getActProjectVar().movingWire.delete();
             new Wire(block);

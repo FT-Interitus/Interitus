@@ -28,7 +28,7 @@ public class BlockConnectionManager {
 
             Block connection = BlockJumpingManager.getEndingLeftBlockSelection(block);
 
-            connection.setPosition(projectVar.duplicate_block_right.getX_dup_right() , projectVar.duplicate_block_right.getY());
+            connection.setPosition(projectVar.duplicate_block_right.getRightDuplicatePosition() , projectVar.duplicate_block_right.getY());
             new Wire(projectVar.duplicate_block_right,connection,false);
             connection.setLeft(projectVar.duplicate_block_right);
             connectedBlockJumpingToLeft(BlockJumpingManager.getEndingLeftBlockSelection(block));
@@ -83,7 +83,7 @@ public class BlockConnectionManager {
     protected static void connectedBlockJumpingToLeft(Block block) {
         Block neighbor = block.getRight();
         while(neighbor!=null&&!neighbor.getWire_left().isVisible()) {
-            neighbor.setPosition(neighbor.getLeft().getX_dup_right() , neighbor.getLeft().getY());
+            neighbor.setPosition(neighbor.getLeft().getRightDuplicatePosition() , neighbor.getLeft().getY());
             neighbor = neighbor.getRight();
         }
 

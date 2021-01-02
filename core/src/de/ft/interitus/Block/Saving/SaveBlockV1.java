@@ -8,7 +8,6 @@ package de.ft.interitus.Block.Saving;
 
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.utils.ArrayList;
-import org.lwjgl.system.CallbackI;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -66,14 +65,14 @@ public class SaveBlockV1 implements Serializable {
         }
 
         this.isspacebetweenrightblock = block.getWire_right() != null && block.getWire_right().isVisible();
-        this.platformspecificblockid = block.getBlocktype().getID();
+        this.platformspecificblockid = block.getBlockType().getID();
         this.parameters = parameters;
         this.datawires = datawires;
         this.datawiresindex = datawireindex;
         this.datawiresmoveing = datawiresmoveing;
-        this.blockmodus = block.getBlocktype().getActBlockModeIndex();
-        this.addon = block.getBlocktype().getAddonName();
-        this.blocksettings = block.getBlocktype().blockModis.get(block.getBlocktype().getActBlockModeIndex()).getblocksettings()!=null?block.getBlocktype().blockModis.get(block.getBlocktype().actBlockModiIndex).getblocksettings().getSettings():null;
+        this.blockmodus = block.getBlockType().getActBlockModeIndex();
+        this.addon = block.getBlockType().getAddonName();
+        this.blocksettings = block.getBlockType().blockModis.get(block.getBlockType().getActBlockModeIndex()).getblocksettings()!=null?block.getBlockType().blockModis.get(block.getBlockType().actBlockModiIndex).getblocksettings().getSettings():null;
         this.includedBlocks =includedBlocks;
 
     }

@@ -106,7 +106,7 @@ public class CheckCollision {
 
     public static boolean checkblockwithduplicate(Block normal, Block duplicate, int rl) {
         if (rl == 0) { //0=Right
-            return object(normal.getX(), normal.getY(), normal.getW(), normal.getH(), duplicate.getX_dup_right(), duplicate.getY(), normal.getW() / 1.5f, duplicate.getH());
+            return object(normal.getX(), normal.getY(), normal.getW(), normal.getH(), duplicate.getRightDuplicatePosition(), duplicate.getY(), normal.getW() / 1.5f, duplicate.getH());
         } else {
             return object(normal.getX(), normal.getY(), normal.getW(), normal.getH(), duplicate.getX() - normal.getW() / 1.5f, duplicate.getY(), normal.getW() / 1.5f, duplicate.getH());
         }

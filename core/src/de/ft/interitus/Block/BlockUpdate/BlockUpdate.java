@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -37,7 +37,7 @@ public abstract class BlockUpdate  {
                 openWindow = true;
                 if (block.getExtendedBlocks() != null) {
 
-                    Window window = CreateWindow.addWindow(block.getBlocktype().getName(), new ExtendedBlocksApplicationListener());
+                    Window window = CreateWindow.addWindow(block.getBlockType().getName(), new ExtendedBlocksApplicationListener());
                     window.create();
 
                     Program.logger.config("Open Window");

@@ -28,10 +28,10 @@ public class DefaultSaveBlockGenerator implements BlockToSaveGenerator {
         parameters.clear();
 
 
-        if (block.getBlocktype().getBlockParameter() != null) {
-            for (int i = 0; i < block.getBlocktype().getBlockParameter().size(); i++) {
+        if (block.getBlockType().getBlockParameter() != null) {
+            for (int i = 0; i < block.getBlockType().getBlockParameter().size(); i++) {
                 try {
-                    parameters.add(block.getBlocktype().getBlockParameter().get(i).getParameter().toString());
+                    parameters.add(block.getBlockType().getBlockParameter().get(i).getParameter().toString());
                 } catch (NullPointerException e) {
 
                     parameters.add("param");
@@ -41,31 +41,31 @@ public class DefaultSaveBlockGenerator implements BlockToSaveGenerator {
 
         }
 
-        if (block.getBlocktype().getBlockParameter() != null) {
+        if (block.getBlockType().getBlockParameter() != null) {
 
-            for (int i = 0; i < block.getBlocktype().getBlockParameter().size(); i++) {
+            for (int i = 0; i < block.getBlockType().getBlockParameter().size(); i++) {
                 dataWires.add(new ArrayList<>());
                 dataWiresIndex.add(new ArrayList<>());
                 dataWireMoving.add(new ArrayList<>());
-                if (!block.getBlocktype().getBlockParameter().get(i).getParameterType().isOutput()) {
+                if (!block.getBlockType().getBlockParameter().get(i).getParameterType().isOutput()) {
                     dataWires.get(i).add(-1);
                     dataWiresIndex.get(i).add(-1);
                     continue;
                 }
 
-                if (block.getBlocktype().getBlockParameter().get(i).getDataWires().size() == 0) {
+                if (block.getBlockType().getBlockParameter().get(i).getDataWires().size() == 0) {
                     dataWires.get(i).add(-1);
                     dataWiresIndex.get(i).add(-1);
                     continue;
                 }
                 int counter = 0;
-                for (DataWire dataWire : block.getBlocktype().getBlockParameter().get(i).getDataWires()) {
+                for (DataWire dataWire : block.getBlockType().getBlockParameter().get(i).getDataWires()) {
                     if (dataWire == projectVar.movingDataWire) {
                         //Ignore moving DataWires while saving
                         continue;
                     }
                     dataWires.get(i).add(dataWire.getParam_output().getBlock().getIndex());
-                    dataWiresIndex.get(i).add(dataWire.getParam_output().getBlock().getBlocktype().getBlockParameter().indexOf(dataWire.getParam_output()));
+                    dataWiresIndex.get(i).add(dataWire.getParam_output().getBlock().getBlockType().getBlockParameter().indexOf(dataWire.getParam_output()));
 
                     dataWireMoving.get(i).add(new ArrayList<>());
 

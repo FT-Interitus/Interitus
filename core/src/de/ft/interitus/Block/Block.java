@@ -36,36 +36,29 @@ import de.ft.interitus.utils.Unproject;
 import java.util.ConcurrentModificationException;
 import java.util.Objects;
 
-/***
- *
- *
- *
- *
- *
- */
+
 
 public abstract class Block {
     private final Vector2 movementDiff=new Vector2();
-    private final Vector2 wireConnector_right = new Vector2(0, 0); //The right wire connection
+    private final Vector2 wireConnector_right = new Vector2(0, 0);
     private final Vector2 pos = new Vector2(0, 0); //Block pos
-    private final Vector2 wireConnector_left = new Vector2(0, 0); //Die linke wire-Anschluss Position
+    private final Vector2 wireConnector_left = new Vector2(0, 0);
     private final RightClickEventListener rightClickEventListener;
     private final BlockToSaveGenerator blocktoSaveGenerator;
     private final GlyphLayout glyphLayout = new GlyphLayout();
-    private final BlockDropDownMenue BlockModusSelection = new BlockDropDownMenue(0, 0, 0, 0, this);
-    private final Block INSTANCE;
+    private final BlockDropDownMenue BlockModeSelection = new BlockDropDownMenue(0, 0, 0, 0, this);
     private final int h;
     public Block left = null;
     public Block right = null;
 
     private Wire wire_left;
     private Wire wire_right;
-    private PlatformSpecificBlock blocktype;
+    private PlatformSpecificBlock blockType;
     private ArrayList<Block> extendedBlocks = null;
 
 
-    public Block(int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock, BlockToSaveGenerator blocktoSaveGenerator, boolean isSubBlock) { //Initzialisieren des Blocks
-        this.blocktype = platformSpecificBlock;
+    public Block(int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock, BlockToSaveGenerator blocktoSaveGenerator, boolean isSubBlock) {
+        this.blockType = platformSpecificBlock;
         //  EventVar.blockEventManager.createBlock(new BlockCreateEvent(this, this));
         EventManager.fireEvent(this, new BlockCreateEvent(this));
         this.pos.x = x;
@@ -78,7 +71,6 @@ public abstract class Block {
 
 
         this.blocktoSaveGenerator = blocktoSaveGenerator;
-        this.INSTANCE = this;
 
 
         if (!isSubBlock)
@@ -128,8 +120,8 @@ public abstract class Block {
      * @return the duplication is visible if a block offers the neighbours place
      */
 
-    public int getX_dup_right() {
-        return (int) (this.pos.x + blocktype.getWidth()); //Gibt die X Position des rechten duplicates zurück
+    public int getRightDuplicatePosition() {
+        return (int) (this.pos.x + blockType.getWidth());
     }
 
 
@@ -140,7 +132,7 @@ public abstract class Block {
      */
     public boolean isMoving() {
         assert ProjectManager.getActProjectVar() != null;
-        return ProjectManager.getActProjectVar().moving_block == this; //Gibt zurück ob der Block gerade in Bewegung ist
+        return ProjectManager.getActProjectVar().moving_block == this;
     }
 
 
@@ -152,12 +144,12 @@ public abstract class Block {
     public boolean isMarked() {
         assert ProjectManager.getActProjectVar() != null;
         assert ProjectManager.getActProjectVar() != null;
-        return ProjectManager.getActProjectVar().marked_blocks.contains(this); //Ist der Block von User makiert worden?
+        return ProjectManager.getActProjectVar().marked_blocks.contains(this);
     }
 
 
     public Block getLeft() {
-        return left; //Gibt den linken VERBUNDENEN Nachbar zurück
+        return left;
     }
 
     /***
@@ -167,7 +159,7 @@ public abstract class Block {
      *
      */
 
-    public void setLeft(Block left) { //Setzt einen neuen linken nachbar
+    public void setLeft(Block left) {
 
 
         if (left == null) {
@@ -178,12 +170,12 @@ public abstract class Block {
             }
         }
 
-        if (this.left != left) { //Wenn der linke Nachbar nicht der schon der Gleiche Block ist (Sonst tritt hier ein OverFlow auf siehe set Right)
-            this.left = left;      //Block wird als Nachbar aufgenommen
+        if (this.left != left) {
+            this.left = left;
         }
-        if (left != null) { //Wenn der Block nicht null ist...
-            if (left.getRight() != this) { //Und der wenn der Rechte Nachbar vom linken Block nicht man selbst ist
-                left.setRight(this); //Wird auch diese Verbindung neu gesetzt (Um Nachbarsetzten zu erleichtern (Aus der Schlussfolgerung das der Rechte Nachbar vom linken Nachbar man selbst ist) )
+        if (left != null) {
+            if (left.getRight() != this) {
+                left.setRight(this);
             }
         }
 
@@ -198,7 +190,7 @@ public abstract class Block {
      */
 
     public Block getRight() {
-        return right; //Rück gabe des right VERBUNDENEN Nachbars
+        return right;
     }
 
     public void setRight(Block right) {
@@ -211,12 +203,12 @@ public abstract class Block {
             }
         }
 
-        if (this.right != right) { //Wenn der rechte Nachbar nicht der schon der Gleiche Block ist (Sonst tritt hier ein OverFlow auf siehe set Left)
-            this.right = right;//Block wird als Nachbar aufgenommen
+        if (this.right != right) {
+            this.right = right;
         }
-        if (right != null) {//Wenn der Block nicht null ist..
-            if (right.getLeft() != this) {//Und der wenn der linke Nachbar vom rechten Block nicht man selbst ist
-                right.setLeft(this);//Wird auch diese Verbindung neu gesetzt (Um Nachbarsetzten zu erleichtern (Aus der Schlussfolgerung das der linke Nachbar vom rechten Nachbar man selbst ist))
+        if (right != null) {
+            if (right.getLeft() != this) {
+                right.setLeft(this);
             }
         }
 
@@ -228,47 +220,43 @@ public abstract class Block {
      * @return Set and get the Block Positions
      */
     public int getX() {
-        return (int) this.pos.x; //Rückgabe der X Position des eigenen Blockes
+        return (int) this.pos.x;
     }
 
     public void setX(int x) {
-        this.pos.x = x; //Die X Position wird geupdated
+        this.pos.x = x;
     }
 
     public int getY() {
-        return (int) this.pos.y; //Rückgabe der Y Position des eigenen Blockes
+        return (int) this.pos.y;
     }
 
     public void setY(int y) {
-        this.pos.y = y; //Setzen der Y Position
-
-        //Hinweis die Y Position der Duplikate muss nicht gesetzt werden da die die geleichen wie der Block selbst haben
-
+        this.pos.y = y;
     }
 
     public int getH() {
-        return h; //Die höhe wird ausgegeben
+        return h;
     }
 
     public int getW() {
-        return blocktype.getWidth(); //Die Weite wird ausgegeben
+        return blockType.getWidth();
     }
 
-    public void setPosition(int x, int y) { //X und Y werden aufeinmal gesetzt
+    public void setPosition(int x, int y) {
         this.pos.x = x;
         this.pos.y = y;
-
-
     }
 
 
     /**
      * Getter and Setter for the Index of the Block
-     * Must be the same as in the ProjectManager.getactProjectVar().blocks array
+     * Must be the same as in the ProjectManager.getActProjectVar().blocks array
      *
      * @return the index from this Block
      */
-    public int getIndex() { //Der Index wird ausgegeben
+    public int getIndex() {
+        assert ProjectManager.getActProjectVar()!=null;
         return ProjectManager.getActProjectVar().blocks.indexOf(this);
     }
 
@@ -276,14 +264,14 @@ public abstract class Block {
     /**
      * Deletes the Block a change the Index of the other Blocks in the Array depending on complete
      *
-     * @param complete means that the whole Programm is clearing for example if you open a new Project
+     * @param complete means that the whole Program is clearing for example if you open a new Project
      */
 
-    public void delete(boolean complete) { //Der Block soll gelöscht werden (complete beduetet das alle Blöcke gelöscht werden sollen)
+    public void delete(boolean complete) {
 
 
-        if (blocktype.getBlockParameter() != null) {
-            for (Parameter parameter : blocktype.getBlockParameter()) {
+        if (blockType.getBlockParameter() != null) {
+            for (Parameter parameter : blockType.getBlockParameter()) {
                 if (parameter.getDataWires() == null) {
                     continue;
                 }
@@ -302,23 +290,18 @@ public abstract class Block {
 
         EventVar.rightClickEventManager.removeListener(this.rightClickEventListener);
         EventVar.blockEventManager.deleteBlock(new BlockDeleteEvent(this, this)); //Fire Delete Event
-        ProjectManager.getActProjectVar().marked_blocks.remove(this); //Der Makierte Block wird auf null gesetzt da nur ein makierter block gelöscht werden kann //Anmerkung falls das ganze Programm gelöscht wird spielt das sowieso keine Rolle
-        ProjectManager.getActProjectVar().moving_block = null; // Ob ein Block bewegt wird, wird auf false gesetzt da wenn ein Block bewegt und gelöscht wird kann es nur der bewegte Block sein
+        ProjectManager.getActProjectVar().marked_blocks.remove(this);
+        ProjectManager.getActProjectVar().moving_block = null;
 
 
+        //Clear all neighbours and wires
 
-        if (left != null) { //Wenn ein linker Nachbar exsistiert
-            left.setRight(null); //wird dem linken Nachbar gesagt das er keinen Rechten Nachbar mehr hat
-
-
+        if (left != null) {
+            left.setRight(null);
         }
 
-        if (right != null) { // wenn ein Rechter nachbar exsitiert
-            try {
-                right.setLeft(null); // wird dem rechten Nachbar gesagt das er keinen linken nachbar mehr hat
-            } catch (IndexOutOfBoundsException ignored) {
-
-            }
+        if (right != null) {
+                right.setLeft(null);
         }
 
         if(wire_left!=null) {
@@ -328,22 +311,17 @@ public abstract class Block {
             wire_right.delete();
         }
 
+        left = null;
+        right = null;
 
-        left = null; //Die Referenzierung zum linken Nachbar wird gelöscht
-        right = null; //Die Referenzierung zum rechten Nachbar wird gelöscht
 
-
-        if (!complete) { //das trifft nur nicht zu wenn das ganze programm gecleart wird
-            ProjectManager.getActProjectVar().visible_blocks.remove(this); //Der block wird aus dem Visible Blocks Array entfernt
-
+        if (!complete) {
+            ProjectManager.getActProjectVar().visible_blocks.remove(this);
             try {
-                ProjectManager.getActProjectVar().blocks.remove(this); //Der Block entfernet sich selbst aus dem Blocks Array
+                ProjectManager.getActProjectVar().blocks.remove(this);
             } catch (Exception ignored) {
 
             }
-
-
-
 
         }
 
@@ -354,27 +332,25 @@ public abstract class Block {
      */
     public void update() {
 
-
-        boolean hoverd = CheckCollision.checkmousewithblock(this); //Wird der Block von der Mouse gehovert?
-        if (hoverd && Gdx.input.isButtonJustPressed(0)) this.onClick();
-
+        boolean hovered = CheckCollision.checkmousewithblock(this);
+        if (hovered && Gdx.input.isButtonJustPressed(0)) this.onClick();
 
     }
 
 
 
     public void drawBlock(SpriteBatch batch){
-        batch.draw(AssetLoader.block_middle, this.getX() + 6, this.getY(), this.getW() - 12, this.getH()); // Block ohne das er makiert ist
+        batch.draw(AssetLoader.block_middle, this.getX() + 6, this.getY(), this.getW() - 12, this.getH());
         batch.draw(AssetLoader.block_left, this.getX(), this.getY(), 6, this.getH());
         batch.draw(AssetLoader.block_right, this.getX() + this.getW() - 6, this.getY(), 6, this.getH());
 
 
-        if (blocktype.getBlockCategory() != null) {
-            switch (blocktype.getBlockCategory()) {
+        if (blockType.getBlockCategory() != null) {
+            switch (blockType.getBlockCategory()) {
 
                 case ActionBlocks -> {
 
-                    batch.draw(AssetLoader.green_bar_middle, this.getX() + 6, this.getY() - 1 + this.getH() - 13, this.getW() - 12, 13); // Block ohne das er makiert ist
+                    batch.draw(AssetLoader.green_bar_middle, this.getX() + 6, this.getY() - 1 + this.getH() - 13, this.getW() - 12, 13);
                     batch.draw(AssetLoader.green_bar_left, this.getX() + 1, this.getY() - 1 + this.getH() - 13, 6, 13);
                     batch.draw(AssetLoader.green_bar_right, this.getX() + this.getW() - 7, this.getY() - 1 + this.getH() - 13, 6, 13);
 
@@ -383,21 +359,21 @@ public abstract class Block {
 
 
                 case Programm_Sequence -> {
-                    batch.draw(AssetLoader.orange_bar_middle, this.getX() + 6, this.getY() - 1 + this.getH() - 13, this.getW() - 12, 13); // Block ohne das er makiert ist
+                    batch.draw(AssetLoader.orange_bar_middle, this.getX() + 6, this.getY() - 1 + this.getH() - 13, this.getW() - 12, 13);
                     batch.draw(AssetLoader.orange_bar_left, this.getX() + 1, this.getY() - 1 + this.getH() - 13, 6, 13);
                     batch.draw(AssetLoader.orange_bar_right, this.getX() + this.getW() - 7, this.getY() - 1 + this.getH() - 13, 6, 13);
 
                 }
 
                 case Sensors -> {
-                    batch.draw(AssetLoader.yellow_bar_middle, this.getX() + 6, this.getY() - 1 + this.getH() - 13, this.getW() - 12, 13); // Block ohne das er makiert ist
+                    batch.draw(AssetLoader.yellow_bar_middle, this.getX() + 6, this.getY() - 1 + this.getH() - 13, this.getW() - 12, 13);
                     batch.draw(AssetLoader.yellow_bar_left, this.getX() + 1, this.getY() - 1 + this.getH() - 13, 6, 13);
                     batch.draw(AssetLoader.yellow_bar_right, this.getX() + this.getW() - 7, this.getY() - 1 + this.getH() - 13, 6, 13);
 
                 }
 
                 case Data_Operation -> {
-                    batch.draw(AssetLoader.red_bar_middle, this.getX() + 6, this.getY() - 1 + this.getH() - 13, this.getW() - 12, 13); // Block ohne das er makiert ist
+                    batch.draw(AssetLoader.red_bar_middle, this.getX() + 6, this.getY() - 1 + this.getH() - 13, this.getW() - 12, 13);
                     batch.draw(AssetLoader.red_bar_left, this.getX() + 1, this.getY() - 1 + this.getH() - 13, 6, 13);
                     batch.draw(AssetLoader.red_bar_right, this.getX() + this.getW() - 7, this.getY() - 1 + this.getH() - 13, 6, 13);
 
@@ -406,14 +382,14 @@ public abstract class Block {
 
 
                 case Specials -> {
-                    batch.draw(AssetLoader.blue_bar_middle, this.getX() + 6, this.getY() - 1 + this.getH() - 13, this.getW() - 12, 13); // Block ohne das er makiert ist
+                    batch.draw(AssetLoader.blue_bar_middle, this.getX() + 6, this.getY() - 1 + this.getH() - 13, this.getW() - 12, 13);
                     batch.draw(AssetLoader.blue_bar_left, this.getX() + 1, this.getY() - 1 + this.getH() - 13, 6, 13);
                     batch.draw(AssetLoader.blue_bar_right, this.getX() + this.getW() - 7, this.getY() - 1 + this.getH() - 13, 6, 13);
 
                 }
 
                 case OwnBlocks -> {
-                    batch.draw(AssetLoader.turquoise_bar_middle, this.getX() + 6, this.getY() - 1 + this.getH() - 13, this.getW() - 12, 13); // Block ohne das er makiert ist
+                    batch.draw(AssetLoader.turquoise_bar_middle, this.getX() + 6, this.getY() - 1 + this.getH() - 13, this.getW() - 12, 13);
                     batch.draw(AssetLoader.turquoise_bar_left, this.getX() + 1, this.getY() - 1 + this.getH() - 13, 6, 13);
                     batch.draw(AssetLoader.turquoise_bar_right, this.getX() + this.getW() - 7, this.getY() - 1 + this.getH() - 13, 6, 13);
 
@@ -424,7 +400,7 @@ public abstract class Block {
             }
 
         } else {
-            batch.draw(AssetLoader.orange_bar_middle, this.getX() + 6, this.getY() - 1 + this.getH() - 13, this.getW() - 12, 13); // Block ohne das er makiert ist
+            batch.draw(AssetLoader.orange_bar_middle, this.getX() + 6, this.getY() - 1 + this.getH() - 13, this.getW() - 12, 13);
             batch.draw(AssetLoader.orange_bar_left, this.getX() + 1, this.getY() - 1 + this.getH() - 13, 6, 13);
             batch.draw(AssetLoader.orange_bar_right, this.getX() + this.getW() - 7, this.getY() - 1 + this.getH() - 13, 6, 13);
 
@@ -433,14 +409,14 @@ public abstract class Block {
 
         if (CheckCollision.checkmousewithblock(this)) {
 
-            batch.draw(AssetLoader.mouse_over_mitte, this.getX() + 6, this.getY(), this.getW() - 12, this.getH()); // Block ohne das er makiert ist
+            batch.draw(AssetLoader.mouse_over_mitte, this.getX() + 6, this.getY(), this.getW() - 12, this.getH());
             batch.draw(AssetLoader.mouseover_left, this.getX(), this.getY(), 6, this.getH());
             batch.draw(AssetLoader.mouse_over_right, this.getX() + this.getW() - 6, this.getY(), 6, this.getH());
         }
 
         if (this.isMarked()) {
 
-            batch.draw(AssetLoader.marked_mitte, this.getX() + 6, this.getY(), this.getW() - 12, this.getH()); // Block ohne das er makiert ist
+            batch.draw(AssetLoader.marked_mitte, this.getX() + 6, this.getY(), this.getW() - 12, this.getH());
             batch.draw(AssetLoader.marked_left, this.getX(), this.getY(), 6, this.getH());
             batch.draw(AssetLoader.marked_right, this.getX() + this.getW() - 6, this.getY(), 6, this.getH());
         }
@@ -458,8 +434,8 @@ public abstract class Block {
          Draw Wire with the Output Block if the Input Block is invisible
          */
         assert ProjectManager.getActProjectVar()!=null;
-        if (this.getBlocktype().getBlockParameter() != null) {
-            for (Parameter parameter : this.getBlocktype().getBlockParameter()) {
+        if (this.getBlockType().getBlockParameter() != null) {
+            for (Parameter parameter : this.getBlockType().getBlockParameter()) {
                 for (DataWire dataWire : parameter.getDataWires()) {
 
                     if (dataWire.getParam_input().getBlock() == this) continue;
@@ -482,15 +458,15 @@ public abstract class Block {
         batch.begin();
 
 
-        if (ProjectManager.getActProjectVar().duplicate_block_right == this && this.getBlocktype().canHasRightConnector()) {
+        if (ProjectManager.getActProjectVar().duplicate_block_right == this && this.getBlockType().canHasRightConnector()) {
             batch.setColor(1, 1, 1, 0.5f);
-            batch.draw(AssetLoader.block_middle, this.getX_dup_right(), this.getY(), ProjectManager.getActProjectVar().moving_block.getW(), this.getH()); //Wenn der Block die größte überlappung hat wird er als show duplicat angezigt
+            batch.draw(AssetLoader.block_middle, this.getRightDuplicatePosition(), this.getY(), ProjectManager.getActProjectVar().moving_block.getW(), this.getH());
             batch.setColor(1, 1, 1, 1);
         }
 
-        if (ProjectManager.getActProjectVar().duplicate_block_left == this && this.getBlocktype().canHasLeftConnector() && ProjectManager.getActProjectVar().marked_blocks != null) {
+        if (ProjectManager.getActProjectVar().duplicate_block_left == this && this.getBlockType().canHasLeftConnector() && ProjectManager.getActProjectVar().marked_blocks != null) {
             batch.setColor(1, 1, 1, 0.5f);
-            batch.draw(AssetLoader.block_middle, this.getX() - ProjectManager.getActProjectVar().moving_block.getW(), this.getY(), ProjectManager.getActProjectVar().moving_block.getW(), this.getH()); //das gleiche für left
+            batch.draw(AssetLoader.block_middle, this.getX() - ProjectManager.getActProjectVar().moving_block.getW(), this.getY(), ProjectManager.getActProjectVar().moving_block.getW(), this.getH());
             batch.setColor(1, 1, 1, 1);
         }
 
@@ -516,31 +492,33 @@ public abstract class Block {
 
 
 
-            if (this.getWire_right()==null && ProjectManager.getActProjectVar().showLeftDocker && this.getLeft() == null && this.getBlocktype().canHasLeftConnector()) {
-             batch.draw(AssetLoader.connector_offerd, getWireConnector_left().x, getWireConnector_left().y, 20, 20);
+            if (this.getWire_right()==null && ProjectManager.getActProjectVar().showLeftDocker && this.getLeft() == null && this.getBlockType().canHasLeftConnector()) {
+             batch.draw(AssetLoader.connector_offerd, getWireConnectorLeft().x, getWireConnectorLeft().y, 20, 20);
              }
 
-            if (this.getRight() == null && this.getBlocktype().canHasRightConnector()) {
-                batch.draw(AssetLoader.connector, getwireconnector_right().x, getwireconnector_right().y, 20, 20);
+            if (this.getRight() == null && this.getBlockType().canHasRightConnector()) {
+                batch.draw(AssetLoader.connector, getWireConnectorRight().x, getWireConnectorRight().y, 20, 20);
             }
 
 
-            ///////////////////////////////PARAMETER//ANZEIGE/////////////////////////////////////////////////
+            /*
+             * Show Parameters
+             */
 
-            if (this.getBlocktype().getBlockParameter() != null && this.getBlocktype().getBlockParameter().size() > 0) {
-                float aktualX = this.getX();
+            if (this.getBlockType().getBlockParameter() != null && this.getBlockType().getBlockParameter().size() > 0) {
+                float actualX = this.getX();
 
-                aktualX += 5;
-                batch.draw(this.getBlocktype().getDescriptionImage(), aktualX, this.getY() + this.getH() - 30 - 17, 30, 30);
+                actualX += 5;
+                batch.draw(this.getBlockType().getDescriptionImage(), actualX, this.getY() + this.getH() - 30 - 17, 30, 30);
 
-                aktualX += 35;
-                for (int i = 0; i < this.getBlocktype().getBlockParameter().size(); i++) {
-                    batch.draw(this.getBlocktype().getBlockParameter().get(i).getParameterTexture(), aktualX + 5, this.getY() + 33, 20, 20);
+                actualX += 35;
+                for (int i = 0; i < this.getBlockType().getBlockParameter().size(); i++) {
+                    batch.draw(this.getBlockType().getBlockParameter().get(i).getParameterTexture(), actualX + 5, this.getY() + 33, 20, 20);
 
                     //DataWire Compatibility Color Check
                     if (ProjectManager.getActProjectVar().movingDataWire != null) {
-                        if (CheckCollision.checkpointwithobject(this.getBlocktype().getBlockParameter().get(i).getX(), this.getBlocktype().getBlockParameter().get(i).getY(), UIVar.parameter_width, UIVar.parameter_height, Unproject.unproject()) && !this.getBlocktype().getBlockParameter().get(i).getParameterType().isOutput() && this.getBlocktype().getBlockParameter().get(i).getDataWires().size() == 0) {
-                            if (!this.getBlocktype().getBlockParameter().get(i).getParameterType().getVariableType().iscompatible(ProjectManager.getActProjectVar().movingDataWire.getParam_input().getParameterType().getVariableType()) || ProjectManager.getActProjectVar().movingDataWire.getParam_input().getBlock() == this) {
+                        if (CheckCollision.checkpointwithobject(this.getBlockType().getBlockParameter().get(i).getX(), this.getBlockType().getBlockParameter().get(i).getY(), UIVar.parameter_width, UIVar.parameter_height, Unproject.unproject()) && !this.getBlockType().getBlockParameter().get(i).getParameterType().isOutput() && this.getBlockType().getBlockParameter().get(i).getDataWires().size() == 0) {
+                            if (!this.getBlockType().getBlockParameter().get(i).getParameterType().getVariableType().iscompatible(ProjectManager.getActProjectVar().movingDataWire.getParam_input().getParameterType().getVariableType()) || ProjectManager.getActProjectVar().movingDataWire.getParam_input().getBlock() == this) {
                                 batch.setColor(1, 0.6f, 0.6f, alpha);
                             } else {
                                 batch.setColor(0.6f, 1, 0.6f, alpha);
@@ -548,30 +526,30 @@ public abstract class Block {
                             }
                         }
                     }
-                    if (this.getBlocktype().getBlockParameter().get(i).getParameterType().isOutput()) {
-                        batch.draw(this.getBlocktype().getBlockParameter().get(i).getParameterType().getVariableType().getTextureconnector(), (int) aktualX, this.getY() - 7, UIVar.parameter_width, UIVar.parameter_height, 0, 0, AssetLoader.Plug_IntParameter.getWidth(), AssetLoader.Plug_IntParameter.getHeight(), false, true);
-                        this.getBlocktype().getBlockParameter().get(i).setX((int) aktualX);
-                        this.getBlocktype().getBlockParameter().get(i).setY(this.getY() - 7);
+                    if (this.getBlockType().getBlockParameter().get(i).getParameterType().isOutput()) {
+                        batch.draw(this.getBlockType().getBlockParameter().get(i).getParameterType().getVariableType().getTextureconnector(), (int) actualX, this.getY() - 7, UIVar.parameter_width, UIVar.parameter_height, 0, 0, AssetLoader.Plug_IntParameter.getWidth(), AssetLoader.Plug_IntParameter.getHeight(), false, true);
+                        this.getBlockType().getBlockParameter().get(i).setX((int) actualX);
+                        this.getBlockType().getBlockParameter().get(i).setY(this.getY() - 7);
 
                     } else {
-                        batch.draw(this.getBlocktype().getBlockParameter().get(i).getParameterType().getVariableType().getTextureconnector(), aktualX, this.getY(), UIVar.parameter_width, UIVar.parameter_height);
-                        this.getBlocktype().getBlockParameter().get(i).setX((int) aktualX);
-                        this.getBlocktype().getBlockParameter().get(i).setY(this.getY());
+                        batch.draw(this.getBlockType().getBlockParameter().get(i).getParameterType().getVariableType().getTextureconnector(), actualX, this.getY(), UIVar.parameter_width, UIVar.parameter_height);
+                        this.getBlockType().getBlockParameter().get(i).setX((int) actualX);
+                        this.getBlockType().getBlockParameter().get(i).setY(this.getY());
                         WindowManager.ParameterFont.getData().setScale(1f,1f);
-                        glyphLayout.setText(WindowManager.ParameterFont, "" + this.getBlocktype().getBlockParameter().get(i).getBlockParameterContent());
-                        if (this.getBlocktype().getBlockParameter().get(i).getDataWires().size() < 1) {
-                            WindowManager.ParameterFont.draw(batch, glyphLayout, aktualX + 15 - glyphLayout.width / 2, getY() + glyphLayout.height/2 +10);
+                        glyphLayout.setText(WindowManager.ParameterFont, "" + this.getBlockType().getBlockParameter().get(i).getBlockParameterContent());
+                        if (this.getBlockType().getBlockParameter().get(i).getDataWires().size() < 1) {
+                            WindowManager.ParameterFont.draw(batch, glyphLayout, actualX + 15 - glyphLayout.width / 2, getY() + glyphLayout.height/2 +10);
                         }
                     }
-                    aktualX += UIVar.parameter_width;
+                    actualX += UIVar.parameter_width;
 
                     batch.setColor(1, 1f, 1f, alpha);
 
 
                 }
-            } else if (this.getBlocktype().getDescriptionImage() != null) {
+            } else if (this.getBlockType().getDescriptionImage() != null) {
 
-                batch.draw(this.getBlocktype().getDescriptionImage(), this.getX() + ((this.getW() - 50f) / 2f), this.getY() + this.getH() - 17 - 50, 50, 50);
+                batch.draw(this.getBlockType().getDescriptionImage(), this.getX() + ((this.getW() - 50f) / 2f), this.getY() + this.getH() - 17 - 50, 50, 50);
 
             }
 
@@ -579,9 +557,9 @@ public abstract class Block {
             batch.end();
 
 
-            BlockModusSelection.setBounds(this.getX() + 11, this.getY() + 2, 20, 20);
-            if (this.getBlocktype().getBlockModes().size() > 1) {
-                BlockModusSelection.draw(this);
+            BlockModeSelection.setBounds(this.getX() + 11, this.getY() + 2, 20, 20);
+            if (this.getBlockType().getBlockModes().size() > 1) {
+                BlockModeSelection.draw(this);
             }
 
 
@@ -592,8 +570,8 @@ public abstract class Block {
             }
 
             try {
-                if (this.getBlocktype() != null && this.getBlocktype().getBlockParameter() != null) {
-                    for (Parameter parameter : this.getBlocktype().getBlockParameter()) {
+                if (this.getBlockType() != null && this.getBlockType().getBlockParameter() != null) {
+                    for (Parameter parameter : this.getBlockType().getBlockParameter()) {
                         if (parameter.getDataWires() != null) {
                             for (DataWire dataWire : parameter.getDataWires()) {
                                 if (dataWire == ProjectManager.getActProjectVar().movingDataWire) continue;
@@ -623,8 +601,8 @@ public abstract class Block {
      * @return the position of the two connectors
      */
 
-    public Vector2 getwireconnector_right() {
-        wireConnector_right.set(this.getX() + blocktype.getWidth() - 7, this.getY() + h / 3f + 12);
+    public Vector2 getWireConnectorRight() {
+        wireConnector_right.set(this.getX() + blockType.getWidth() - 7, this.getY() + h / 3f + 12);
         return wireConnector_right;
     }
 
@@ -632,26 +610,24 @@ public abstract class Block {
      * @return the position of the two connectors
      *
      */
-    @SuppressWarnings("unused")
-    public Vector2 getWireConnector_left() {
+    public Vector2 getWireConnectorLeft() {
         wireConnector_left.set(this.getX() + 2, this.getY() + h / 3f + 9);
         return wireConnector_left;
     }
 
 
     /***
-     *
      * @return the Block Type from this Block
      */
-    public PlatformSpecificBlock getBlocktype() {
-        return blocktype;
+    public PlatformSpecificBlock getBlockType() {
+        return blockType;
     }
 
-    public void setBlocktype(PlatformSpecificBlock blocktype) {
-        this.blocktype = blocktype;
+    public void setBlockType(PlatformSpecificBlock blockType) {
+        this.blockType = blockType;
     }
 
-    public BlockToSaveGenerator getBlocktoSaveGenerator() {
+    public BlockToSaveGenerator getBlockToSaveGenerator() {
         return blocktoSaveGenerator;
     }
 
@@ -662,20 +638,20 @@ public abstract class Block {
 
         ArrayList<Block> blocks = new ArrayList<>();
 
-        Block nextblock = this.getRight();
+        Block nextBlock = this.getRight();
 
 
-        while (nextblock != null) {
+        while (nextBlock != null) {
 
-            if (blocks.contains(nextblock)) {
+            if (blocks.contains(nextBlock)) {
                 blocks.clear();
                 break;
             }
-            blocks.add(nextblock);
+            blocks.add(nextBlock);
 
 
-            nextblock.setX(nextblock.getX() + widthDiff);
-            nextblock = nextblock.getRight();
+            nextBlock.setX(nextBlock.getX() + widthDiff);
+            nextBlock = nextBlock.getRight();
 
         }
 
@@ -715,7 +691,7 @@ public abstract class Block {
     public void onClick() {
 
 
-        Program.logger.config("Clicked: " + blocktype.getName());
+        Program.logger.config("Clicked: " + blockType.getName());
 
 
     }

@@ -56,9 +56,9 @@ public class ArduinoCompiler implements Compiler {
                     continue;
                 }
 
-                if (((ArduinoBlock) block.getBlocktype().blockModis.get(block.getBlocktype().actBlockModiIndex)).getHeaderCode(false) != null) {
+                if (((ArduinoBlock) block.getBlockType().blockModis.get(block.getBlockType().actBlockModiIndex)).getHeaderCode(false) != null) {
 
-                    Programm.append(((ArduinoBlock) block.getBlocktype().blockModis.get(block.getBlocktype().actBlockModiIndex)).getHeaderCode(true));
+                    Programm.append(((ArduinoBlock) block.getBlockType().blockModis.get(block.getBlockType().actBlockModiIndex)).getHeaderCode(true));
                     Programm.append("\n");
 
 
@@ -75,7 +75,7 @@ public class ArduinoCompiler implements Compiler {
 
 
             for (Block block : ProjectManager.getActProjectVar().blocks) {
-                if (block.getBlocktype().getBlockParameter() == null) {
+                if (block.getBlockType().getBlockParameter() == null) {
                     continue;
                 }
 
@@ -84,7 +84,7 @@ public class ArduinoCompiler implements Compiler {
                 }
 
 
-                for (Parameter parameter : block.getBlocktype().getBlockParameter()) {
+                for (Parameter parameter : block.getBlockType().getBlockParameter()) {
 
 
                     if (!parameter.getParameterType().isOutput()) {
@@ -108,14 +108,14 @@ public class ArduinoCompiler implements Compiler {
 
             Block a = ProjectManager.getActProjectVar().blocks.get(0);
 
-            Programm.append(((ArduinoBlock) a.getBlocktype().getBlockModes().get(a.getBlocktype().getActBlockModeIndex())).getCode()).append("\n");
+            Programm.append(((ArduinoBlock) a.getBlockType().getBlockModes().get(a.getBlockType().getActBlockModeIndex())).getCode()).append("\n");
             while (a.getRight() != null) {
 
                 //block.getRight().setX(block.getRight().getX() + block.getW());
                 a = a.getRight();
 
 
-                Programm.append(((ArduinoBlock) a.getBlocktype().getBlockModes().get(a.getBlocktype().getActBlockModeIndex())).getCode()).append("//").append(a.getIndex()).append(" \n");
+                Programm.append(((ArduinoBlock) a.getBlockType().getBlockModes().get(a.getBlockType().getActBlockModeIndex())).getCode()).append("//").append(a.getIndex()).append(" \n");
 
 
             }
@@ -127,14 +127,14 @@ public class ArduinoCompiler implements Compiler {
 
             a = ProjectManager.getActProjectVar().blocks.get(1);
 
-            Programm.append(((ArduinoBlock) a.getBlocktype().getBlockModes().get(a.getBlocktype().getActBlockModeIndex())).getCode()).append("\n");
+            Programm.append(((ArduinoBlock) a.getBlockType().getBlockModes().get(a.getBlockType().getActBlockModeIndex())).getCode()).append("\n");
             while (a.getRight() != null) {
 
                 //block.getRight().setX(block.getRight().getX() + block.getW());
                 a = a.getRight();
 
 
-                Programm.append(((ArduinoBlock) a.getBlocktype().getBlockModes().get(a.getBlocktype().getActBlockModeIndex())).getCode()).append("//").append(a.getIndex()).append(" \n");
+                Programm.append(((ArduinoBlock) a.getBlockType().getBlockModes().get(a.getBlockType().getActBlockModeIndex())).getCode()).append("//").append(a.getIndex()).append(" \n");
 
 
             }

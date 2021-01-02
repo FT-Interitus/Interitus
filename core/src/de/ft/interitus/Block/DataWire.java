@@ -185,10 +185,10 @@ public class DataWire {
 
             if(Gdx.input.isButtonJustPressed(0)||!Gdx.input.isButtonPressed(0))
            for(Block block: ProjectManager.getActProjectVar().blocks) {
-               if(block.getBlocktype().getBlockParameter()==null) {
+               if(block.getBlockType().getBlockParameter()==null) {
                    continue;
                }
-               for(Parameter parameter:block.getBlocktype().getBlockParameter()) {
+               for(Parameter parameter:block.getBlockType().getBlockParameter()) {
                    if(parameter!=this.getParam_input()&&!parameter.getParameterType().isOutput()&&parameter.getDataWires().size()!=1&&parameter.getParameterType().variableType.iscompatible(this.getParam_input().getParameterType().variableType)&&parameter.getBlock()!=this.getParam_input().getBlock()) {
 
                     if(Gdx.input.isButtonJustPressed(0)) {
@@ -338,13 +338,13 @@ public class DataWire {
 
         try {
             param_input.getDataWires().remove(this);
-        }catch (NullPointerException e){
+        }catch (NullPointerException ignored){
 
         }
 
         try {
             param_output.getDataWires().clear();
-        }catch (NullPointerException e) {
+        }catch (NullPointerException ignored) {
 
         }
         param_output =null;

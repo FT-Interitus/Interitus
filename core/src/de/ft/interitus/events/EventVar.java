@@ -20,7 +20,7 @@ public class EventVar {
 
     @EventHandler(ListeningEvent={BlockCreateEvent.class})
    public static void test(BlockCreateEvent block) {
-        Program.logger.config("Listing to: "+block.getBlock().getBlocktype().getName());
+        Program.logger.config("Listing to: "+block.getBlock().getBlockType().getName());
 
 
    }

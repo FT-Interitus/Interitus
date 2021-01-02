@@ -16,12 +16,12 @@ import de.ft.interitus.utils.Unproject;
 
 public class BlockDataWireManager {
     public static void update(Block block) {
-        if (block.getBlocktype() == null) return;
-        if (block.getBlocktype().getBlockParameter() == null) return;
+        if (block.getBlockType() == null) return;
+        if (block.getBlockType().getBlockParameter() == null) return;
         assert ProjectManager.getActProjectVar() != null;
         if (ProjectManager.getActProjectVar().movingDataWire != null) return;
 
-        for (Parameter parameter : block.getBlocktype().getBlockParameter()) {
+        for (Parameter parameter : block.getBlockType().getBlockParameter()) {
 
             if (!parameter.getParameterType().isOutput()) continue;
 
@@ -44,9 +44,9 @@ public class BlockDataWireManager {
 
 
     protected static boolean checkParameterEject(Block block) {
-        if (block.getBlocktype().getBlockParameter() != null) {
+        if (block.getBlockType().getBlockParameter() != null) {
 
-            for (Parameter parameter : block.getBlocktype().getBlockParameter())
+            for (Parameter parameter : block.getBlockType().getBlockParameter())
                 if (CheckCollision.checkpointwithobject(parameter.getX(), parameter.getY(), UIVar.parameter_width, UIVar.parameter_height, Unproject.unproject()) && parameter.getDataWires().size() != 0 && !parameter.getParameterType().isOutput()) {
                     ejectDataWire(parameter.getDataWires().get(0));
                     parameter.getDataWires().clear();

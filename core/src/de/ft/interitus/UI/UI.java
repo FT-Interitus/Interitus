@@ -168,7 +168,7 @@ public class UI {
         UIVar.moveprogrammlock = lock;
 
 
-        if (ProjectManager.getActProjectVar().marked_blocks.size()==1&&markedblock != null && markedblock.getBlocktype().getBlockParameter() != null && ((markedblock == null && ProjectManager.getActProjectVar().marked_blocks.size() == 0) || (ProjectManager.getActProjectVar().marked_blocks.size() > 0 && markedblock == ProjectManager.getActProjectVar().marked_blocks.get(0)))) {
+        if (ProjectManager.getActProjectVar().marked_blocks.size()==1&&markedblock != null && markedblock.getBlockType().getBlockParameter() != null && ((markedblock == null && ProjectManager.getActProjectVar().marked_blocks.size() == 0) || (ProjectManager.getActProjectVar().marked_blocks.size() > 0 && markedblock == ProjectManager.getActProjectVar().marked_blocks.get(0)))) {
 
 
             UIVar.blockeinstellungen_w = 170;
@@ -189,11 +189,11 @@ public class UI {
 
 
             if (!UIVar.isBlockSettingsopen) {
-                blocknamelabel = new VisLabel(markedblock.getBlocktype().getBlockModes().get(markedblock.getBlocktype().actBlockModiIndex).getname());
+                blocknamelabel = new VisLabel(markedblock.getBlockType().getBlockModes().get(markedblock.getBlockType().actBlockModiIndex).getname());
                 UI.stage.addActor(blocknamelabel);
             }
 
-            if (!UIVar.isBlockSettingsopen && markedblock.getBlocktype().blockModis.get(markedblock.getBlocktype().actBlockModiIndex).getblocksettings() != null) {
+            if (!UIVar.isBlockSettingsopen && markedblock.getBlockType().blockModis.get(markedblock.getBlockType().actBlockModiIndex).getblocksettings() != null) {
                 blocksettingslabel = new VisLabel("Einstellungen");
                 UI.stage.addActor(blocksettingslabel);
 
@@ -210,10 +210,10 @@ public class UI {
 
             int nachuntenrutscher = 10;
             try {
-                if (markedblock.getBlocktype().blockModis.get(markedblock.getBlocktype().actBlockModiIndex).getblocksettings() != null) {
+                if (markedblock.getBlockType().blockModis.get(markedblock.getBlockType().actBlockModiIndex).getblocksettings() != null) {
 
                     if (!UIVar.isBlockSettingsopen) {
-                        settingstextfield = new VisTextField(markedblock.getBlocktype().blockModis.get(markedblock.getBlocktype().actBlockModiIndex).getblocksettings().getSettings());
+                        settingstextfield = new VisTextField(markedblock.getBlockType().blockModis.get(markedblock.getBlockType().actBlockModiIndex).getblocksettings().getSettings());
 
                         settingstextfield.setWidth(UIVar.blockeinstellungen_w - 40);
 
@@ -221,7 +221,7 @@ public class UI {
                             @Override
                             public void changed(ChangeEvent event, Actor actor) {
 
-                                markedblock.getBlocktype().blockModis.get(markedblock.getBlocktype().actBlockModiIndex).getblocksettings().setSettings(settingstextfield.getText());
+                                markedblock.getBlockType().blockModis.get(markedblock.getBlockType().actBlockModiIndex).getblocksettings().setSettings(settingstextfield.getText());
 
                             }
                         });
@@ -241,26 +241,26 @@ public class UI {
             }
 
 
-            for (int i = 0; i < markedblock.getBlocktype().getBlockParameter().size(); i++) {
+            for (int i = 0; i < markedblock.getBlockType().getBlockParameter().size(); i++) {
                 try {
                     if (!UIVar.isBlockSettingsopen) {
 
-                        if (markedblock.getBlocktype().getBlockParameter().get(i).getParameterType().isOutput()) {
+                        if (markedblock.getBlockType().getBlockParameter().get(i).getParameterType().isOutput()) {
 
 
                             continue;
                         }
 
 
-                        if (markedblock.getBlocktype().getBlockParameter().get(i).getParameterType().isDropdown() && !(markedblock.getBlocktype().getBlockParameter().get(i).getDataWires().size() > 0)) {
+                        if (markedblock.getBlockType().getBlockParameter().get(i).getParameterType().isDropdown() && !(markedblock.getBlockType().getBlockParameter().get(i).getDataWires().size() > 0)) {
                             VisSelectBox<Selectable> selectBox = new VisSelectBox<>();
-                            Selectable[] selectables = new Selectable[markedblock.getBlocktype().getBlockParameter().get(i).getParameterType().getSelectables().size()];
-                            markedblock.getBlocktype().getBlockParameter().get(i).getParameterType().getSelectables().toArray(selectables);
+                            Selectable[] selectables = new Selectable[markedblock.getBlockType().getBlockParameter().get(i).getParameterType().getSelectables().size()];
+                            markedblock.getBlockType().getBlockParameter().get(i).getParameterType().getSelectables().toArray(selectables);
                             selectBox.setItems(selectables);
 
-                            if (Arrays.asList(markedblock.getBlocktype().getBlockParameter().get(i).getParameterType().getSelectables()).contains(markedblock.getBlocktype().getBlockParameter().get(i).getParameter())) {
+                            if (Arrays.asList(markedblock.getBlockType().getBlockParameter().get(i).getParameterType().getSelectables()).contains(markedblock.getBlockType().getBlockParameter().get(i).getParameter())) {
 
-                                selectBox.setSelected(( markedblock.getBlocktype().getBlockParameter().get(i).getParameterType().getSelected()));
+                                selectBox.setSelected(( markedblock.getBlockType().getBlockParameter().get(i).getParameterType().getSelected()));
 
                             } else {
                                 selectBox.setSelected(selectBox.getItems().get(0));
@@ -270,8 +270,8 @@ public class UI {
                             selectBox.addListener(new ChangeListener() {
                                 @Override
                                 public void changed(ChangeEvent event, Actor actor) {
-                                    ProjectManager.getActProjectVar().marked_blocks.get(0).getBlocktype().getBlockParameter().get(textFielder.indexOf(actor)).getParameterType().setSelected(((VisSelectBox<Selectable>) actor).getSelected());
-                                    ProjectManager.getActProjectVar().marked_blocks.get(0).getBlocktype().getBlockParameter().get(textFielder.indexOf(actor)).setParameter(((VisSelectBox<Selectable>) actor).getSelected().toString());
+                                    ProjectManager.getActProjectVar().marked_blocks.get(0).getBlockType().getBlockParameter().get(textFielder.indexOf(actor)).getParameterType().setSelected(((VisSelectBox<Selectable>) actor).getSelected());
+                                    ProjectManager.getActProjectVar().marked_blocks.get(0).getBlockType().getBlockParameter().get(textFielder.indexOf(actor)).setParameter(((VisSelectBox<Selectable>) actor).getSelected().toString());
 
                                 }
                             });
@@ -280,18 +280,18 @@ public class UI {
 
                         } else {
 
-                            if (markedblock.getBlocktype().getBlockParameter().get(i).getDataWires().size() > 0) {
+                            if (markedblock.getBlockType().getBlockParameter().get(i).getDataWires().size() > 0) {
                                 textFielder.add(new VisTextField("Leitung verbunden"));
                                 ((VisTextField) textFielder.getLastObject()).setDisabled(true);
 
                             } else {
-                                textFielder.add(new VisTextField(markedblock.getBlocktype().getBlockParameter().get(i).getParameter().toString()));
+                                textFielder.add(new VisTextField(markedblock.getBlockType().getBlockParameter().get(i).getParameter().toString()));
 
                             }
                             textFielder.get(textFielder.size() - 1).addListener(new ChangeListener() {
                                 @Override
                                 public void changed(ChangeEvent event, Actor actor) {
-                                    ProjectManager.getActProjectVar().marked_blocks.get(0).getBlocktype().getBlockParameter().get(textFielder.indexOf(actor)).setParameter(((VisTextField) actor).getText());
+                                    ProjectManager.getActProjectVar().marked_blocks.get(0).getBlockType().getBlockParameter().get(textFielder.indexOf(actor)).setParameter(((VisTextField) actor).getText());
                                 }
                             });
 
@@ -302,12 +302,12 @@ public class UI {
 
                     textFielder.get(i).setWidth(UIVar.blockeinstellungen_w - 40);
                     textFielder.get(i).setPosition(UIVar.blockeinstellungen_x + 5, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - UIVar.abstandText - glyphLayout.height - (i * (glyphLayout.height + UIVar.abstandzwischenparametern + UIVar.abstandText + textFielder.get(i).getHeight()) + 3) - textFielder.get(i).getHeight() - nachuntenrutscher);
-                    glyphLayout.setText(font, markedblock.getBlocktype().getBlockParameter().get(i).getParameterName());
+                    glyphLayout.setText(font, markedblock.getBlockType().getBlockParameter().get(i).getParameterName());
 
                     font.draw(UIbatch, glyphLayout, UIVar.blockeinstellungen_x + 5, UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - (i * (glyphLayout.height + textFielder.get(i).getHeight() + UIVar.abstandzwischenparametern + UIVar.abstandText) + 3) - nachuntenrutscher);
 
-                    if (markedblock.getBlocktype().getBlockParameter().get(i).getUnit() != null) {
-                        glyphLayout.setText(font, markedblock.getBlocktype().getBlockParameter().get(i).getUnit());
+                    if (markedblock.getBlockType().getBlockParameter().get(i).getUnit() != null) {
+                        glyphLayout.setText(font, markedblock.getBlockType().getBlockParameter().get(i).getUnit());
                         font.draw(UIbatch, glyphLayout, UIVar.blockeinstellungen_x + 5 + UIVar.blockeinstellungen_w - 30, (UIVar.blockeinstellungen_y + UIVar.blockeinstellungen_h - 20 - UIVar.abstandText - glyphLayout.height - (i * (glyphLayout.height + UIVar.abstandzwischenparametern + UIVar.abstandText + textFielder.get(i).getHeight()) + 3) - textFielder.get(i).getHeight() / 3f) - nachuntenrutscher);
 
                     }

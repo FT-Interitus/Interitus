@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -12,10 +12,10 @@ import de.ft.interitus.utils.ArrayList;
 
 public class ProgrammAreaManager {
     public static void update(){
-        Program.logger.config(ProjectManager.getActProjectVar().blocks.getLastObject().getBlocktype().blockModis.get(ProjectManager.getActProjectVar().blocks.get(0).getBlocktype().actBlockModiIndex).getProgrammArea().toString());
+        Program.logger.config(ProjectManager.getActProjectVar().blocks.getLastObject().getBlockType().blockModis.get(ProjectManager.getActProjectVar().blocks.get(0).getBlockType().actBlockModiIndex).getProgrammArea().toString());
     }
     public static ProgrammArea getDirectProgrammAreaOfBlock(int i){
-        return ProjectManager.getActProjectVar().blocks.get(i).getBlocktype().blockModis.get(ProjectManager.getActProjectVar().blocks.get(i).getBlocktype().actBlockModiIndex).getProgrammArea();
+        return ProjectManager.getActProjectVar().blocks.get(i).getBlockType().blockModis.get(ProjectManager.getActProjectVar().blocks.get(i).getBlockType().actBlockModiIndex).getProgrammArea();
     }
     public static int getProgrammArea(int index){
         int PA=0;

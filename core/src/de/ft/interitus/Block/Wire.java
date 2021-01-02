@@ -5,7 +5,6 @@
 
 package de.ft.interitus.Block;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import de.ft.interitus.WindowManager;
 import de.ft.interitus.projecttypes.ProjectManager;
@@ -91,12 +90,12 @@ public class Wire {
         if(ProjectManager.getActProjectVar().movingWire!=this) {
             WindowManager.BlockshapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
             WindowManager.BlockshapeRenderer.setColor(1f, 0f, 0f, 0f);
-            WindowManager.BlockshapeRenderer.line(this.leftConnection.getwireconnector_right(), this.rightConnection.getWireConnector_left());
+            WindowManager.BlockshapeRenderer.line(this.leftConnection.getWireConnectorRight(), this.rightConnection.getWireConnectorLeft());
             WindowManager.BlockshapeRenderer.end();
         }else{
             WindowManager.BlockshapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
             WindowManager.BlockshapeRenderer.setColor(1f, 0f, 0f, 0f);
-            WindowManager.BlockshapeRenderer.line(this.leftConnection.getwireconnector_right(), Unproject.unproject());
+            WindowManager.BlockshapeRenderer.line(this.leftConnection.getWireConnectorRight(), Unproject.unproject());
             WindowManager.BlockshapeRenderer.end();
         }
 

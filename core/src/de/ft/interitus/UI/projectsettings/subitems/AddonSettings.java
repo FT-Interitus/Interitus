@@ -71,7 +71,7 @@ public class AddonSettings {
 
                             ArrayList<Block> deleteblocks = new ArrayList<>();
                             for (Block block : ProjectManager.getActProjectVar().blocks) {
-                                if (ProjectTypesVar.addons.get(checkBoxArrayList.indexOf(checkBox)) == block.getBlocktype().getAddon()) {
+                                if (ProjectTypesVar.addons.get(checkBoxArrayList.indexOf(checkBox)) == block.getBlockType().getAddon()) {
                                     deleteblocks.add(block);
 
                                 }

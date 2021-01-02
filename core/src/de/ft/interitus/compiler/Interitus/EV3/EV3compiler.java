@@ -53,7 +53,7 @@ public class EV3compiler implements Compiler {
         ArrayList<EV3Thread> userthreads = new ArrayList<>();
 
         for (Block block : ProjectManager.getActProjectVar().blocks) {
-            if (block.getBlocktype() instanceof ThreadBlock) {
+            if (block.getBlockType() instanceof ThreadBlock) {
                 Block neighbour = block.getRight();
                 EV3Thread tempThread = null;
                 if (neighbour != null) {
@@ -63,7 +63,7 @@ public class EV3compiler implements Compiler {
 
                     while (neighbour != null) {
                         //Program.logger.config(((Ev3Block) neighbour.getBlocktype().getBlockModis().get(neighbour.getBlocktype().getActBlockModiIndex())).getCode());
-                        tempThread.addLine("\n"+((Ev3Block) neighbour.getBlocktype().getBlockModes().get(neighbour.getBlocktype().getActBlockModeIndex())).getCode());
+                        tempThread.addLine("\n"+((Ev3Block) neighbour.getBlockType().getBlockModes().get(neighbour.getBlockType().getActBlockModeIndex())).getCode());
                         neighbour = neighbour.getRight();
                     }
                     userthreads.add(tempThread);

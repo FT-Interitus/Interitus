@@ -44,7 +44,7 @@ public class BlockJumpingManager {
             float size;
 
             if (rl == 0)
-                size = CheckCollision.flache(visible_block.getX_dup_right(), visible_block.getY(), (int) width, visible_block.getH(), block.getX(), block.getY());
+                size = CheckCollision.flache(visible_block.getRightDuplicatePosition(), visible_block.getY(), (int) width, visible_block.getH(), block.getX(), block.getY());
             else
                 size = CheckCollision.flache(visible_block.getX() - block.getW(), visible_block.getY(), (int) width, visible_block.getH(), block.getX(), block.getY());
 
@@ -113,10 +113,10 @@ public class BlockJumpingManager {
         assert ProjectManager.getActProjectVar() != null;
         if (movingBlock.left != null) return -1;
 
-        if (!movingBlock.getBlocktype().canHasLeftConnector()) return -1;
+        if (!movingBlock.getBlockType().canHasLeftConnector()) return -1;
         Block intersectingBlock = biggestIntersectionBlock(movingBlock, 0, true, 1);
 
-        if (intersectingBlock != null && !intersectingBlock.getBlocktype().canHasRightConnector()) return -1;
+        if (intersectingBlock != null && !intersectingBlock.getBlockType().canHasRightConnector()) return -1;
         if (intersectingBlock != null && intersectingBlock.right != null) return -1;
 
         if (intersectingBlock != ProjectManager.getActProjectVar().duplicate_block_right)
@@ -130,10 +130,10 @@ public class BlockJumpingManager {
         assert ProjectManager.getActProjectVar() != null;
         if (movingBlock.right != null) return -1;
 
-        if (!movingBlock.getBlocktype().canHasRightConnector()) return -1;
+        if (!movingBlock.getBlockType().canHasRightConnector()) return -1;
         Block intersectingBlock = biggestIntersectionBlock(movingBlock, 1, true, 1);
 
-        if (intersectingBlock != null && !intersectingBlock.getBlocktype().canHasLeftConnector()) return -1;
+        if (intersectingBlock != null && !intersectingBlock.getBlockType().canHasLeftConnector()) return -1;
         if (intersectingBlock != null && intersectingBlock.left != null) return -1;
 
         if (intersectingBlock != ProjectManager.getActProjectVar().duplicate_block_left)

@@ -33,7 +33,7 @@ public class BlockDrawer {
                 if (block.isMoving()) continue;
                 block.draw(WindowManager.blockBatch);
 
-                if (BlockShortcuts.shortCut_deleteBlock.isPressed() && block.getBlocktype().isDeletable()) {
+                if (BlockShortcuts.shortCut_deleteBlock.isPressed() && block.getBlockType().isDeletable()) {
                     block.delete(false);
                     i--;
                 }
