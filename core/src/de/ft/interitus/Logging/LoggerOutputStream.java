@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -54,7 +54,7 @@ public class LoggerOutputStream extends OutputStream {
         if (level == Level.INFO) {
 
 
-            //logger.log(level, mem + "\n");
+            logger.log(level, mem + "\n");
             mem = "";
 
 
