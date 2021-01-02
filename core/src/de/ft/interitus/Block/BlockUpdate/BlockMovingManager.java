@@ -128,9 +128,10 @@ public class BlockMovingManager {
         if (isOnBlockBar())
             for(int i = 0; i<ProjectManager.getActProjectVar().marked_blocks.size(); i++) {
                 Block marked =ProjectManager.getActProjectVar().marked_blocks.get(i);
-                if(marked.getBlockType().isDeletable())
+                if(marked.getBlockType().isDeletable()) {
                     marked.delete(false);
                     i--;
+                }
             }
 
 

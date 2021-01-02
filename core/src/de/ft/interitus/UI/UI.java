@@ -676,7 +676,7 @@ public class UI {
         UIManager.draw();
 
         testGrid.setVerticalVermitteln(true);
-        testGrid.draw();
+        //testGrid.draw();
     }
 
 

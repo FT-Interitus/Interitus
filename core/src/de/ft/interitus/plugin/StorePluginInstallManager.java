@@ -61,14 +61,17 @@ public class StorePluginInstallManager implements HttpHandler {
         String found_url = null;
         String found_jsoninformation = null;
 
+        System.out.println(exchange.getRequestURI().getQuery());
 
-        for(int i=0;i<exchange.getRequestURI().getPath().split("\\?",2)[1].split("&").length;i++) {
-            String key = exchange.getRequestURI().getPath().split("\\?",2)[1].split("&")[i].split("=")[0].replace("=","");
-            String content = exchange.getRequestURI().getPath().split("\\?",2)[1].split("&")[i].split("=")[1];
-            System.out.println(content);
+        for(int i=0;i<exchange.getRequestURI().getQuery().split("&").length;i++) {
+            try {
+                String key = exchange.getRequestURI().getQuery().split("&")[i].split("=", 2)[0].replace("=", "");
+                String content = exchange.getRequestURI().getQuery().split("&")[i].split("=", 2)[1];
 
-            if(key.contentEquals("url")) found_url = content;
-            if(key.contentEquals("jsoninformation")) found_jsoninformation = content; //TODO extracting doesnt work
+
+                if (key.trim().contentEquals("url")) found_url = content;
+                if (key.trim().contentEquals("jsoninformation")) found_jsoninformation = content;
+            }catch (Exception ignored) { }
         }
         if(found_jsoninformation==null||found_url==null) return;
         PluginInstallManager.startInstallPlugin(found_url,found_jsoninformation);
