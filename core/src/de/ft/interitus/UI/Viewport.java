@@ -92,7 +92,7 @@ public class Viewport {
             public boolean pan(float x, float y, float deltaX, float deltaY) {
                 if (!UIVar.isdialogeopend) {
 
-                    if (input.isButtonPressed(Input.Buttons.MIDDLE)) {
+                    if (input.isButtonPressed(Input.Buttons.MIDDLE)||input.isButtonPressed(Input.Buttons.RIGHT)) {
                         cam.position.x -= deltaX * cam.zoom;
                         cam.position.y += deltaY * cam.zoom;
                         cam.update();
@@ -227,5 +227,18 @@ public class Viewport {
             } catch (InterruptedException e) {
             }
         }
+    }
+    public static void increaseZoom(OrthographicCamera cam) {
+        if (cam.zoom <= 0.4f) return;
+        cam.zoom += -1 * cam.zoom * 0.1f;
+    }
+    public static void decreaseZoom(OrthographicCamera cam) {
+
+        if (cam.zoom > 2.0f) return;
+        cam.zoom += 1 * cam.zoom * 0.1f;
+    }
+
+    public static void resetZoom(OrthographicCamera cam) {
+        cam.zoom = 1;
     }
 }

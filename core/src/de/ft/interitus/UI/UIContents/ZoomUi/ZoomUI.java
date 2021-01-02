@@ -6,6 +6,7 @@
 package de.ft.interitus.UI.UIContents.ZoomUi;
 
 import de.ft.interitus.Program;
+import de.ft.interitus.ProgramingSpace;
 import de.ft.interitus.UI.UIElements.Grid;
 import de.ft.interitus.UI.UIElements.UIElements.Button;
 import de.ft.interitus.UI.UIElements.UIElements.labels.TextLabel;
@@ -20,7 +21,7 @@ public class ZoomUI extends UI {
     TextLabel textLabel=new TextLabel("TextLabel");
     Button plus=new Button();
     Button minus=new Button();
-    Button zurücksetzen=new Button();
+    Button reset =new Button();
     public ZoomUI(){
         plus.setImage(AssetLoader.PlusButton);
         plus.setBounds(0,0,16,16);
@@ -32,16 +33,16 @@ public class ZoomUI extends UI {
         minus.setWidthoverText(true);
         minus.setHeightoverText(true);
 
-        zurücksetzen.setImage(AssetLoader.ResetButton);
-        zurücksetzen.setBounds(0,0,80,30);
-        zurücksetzen.setWidthoverText(true);
-        zurücksetzen.setHeightoverText(true);
+        reset.setImage(AssetLoader.ResetButton);
+        reset.setBounds(0,0,80,30);
+        reset.setWidthoverText(true);
+        reset.setHeightoverText(true);
 
 
         grid.addElement(textLabel);
         grid.addElement(plus);
         grid.addElement(minus);
-        grid.addElement(zurücksetzen);
+        grid.addElement(reset);
 
         Viewport.zoomEvent.addListener(new UIZoomEvent() {
              @Override
@@ -58,6 +59,9 @@ public class ZoomUI extends UI {
         grid.setPosition(500, UIVar.programmflaeche_y+UIVar.programmflaeche_h);
         Program.logger.config(String.valueOf(plus.getW()));
         grid.draw();
+        if(plus.isjustPressednormal())  Viewport.increaseZoom(ProgramingSpace.cam);
+        if(minus.isjustPressednormal()) Viewport.decreaseZoom(ProgramingSpace.cam);
+        if(reset.isjustPressednormal()) Viewport.resetZoom(ProgramingSpace.cam);
 
     }
 
