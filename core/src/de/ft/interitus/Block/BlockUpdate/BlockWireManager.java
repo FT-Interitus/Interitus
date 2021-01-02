@@ -21,7 +21,7 @@ import java.util.Properties;
 public class BlockWireManager {
 
     private static final Vector2 tempVector = new Vector2();
-    protected static final int movingTolerance = 2;
+    protected static final int movingTolerance = 1;
     protected static void update(Block block) {
         assert ProjectManager.getActProjectVar()!=null;
 

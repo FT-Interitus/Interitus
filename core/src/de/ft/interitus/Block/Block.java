@@ -328,6 +328,12 @@ public abstract class Block {
             }
 
         }
+        if(wire_left!=null) {
+            wire_left.delete();
+        }
+        if(wire_right!=null) {
+            wire_right.delete();
+        }
 
 
         left = null; //Die Referenzierung zum linken Nachbar wird gelöscht
