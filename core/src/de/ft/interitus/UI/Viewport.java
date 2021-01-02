@@ -43,12 +43,11 @@ public class Viewport {
     private static final Matrix4 combined = new Matrix4();
     private static final Matrix4 invProjectionView = new Matrix4();
 
-    public static EventManager<UIZoomEvent> zoomEvent;
+    public static EventManager<UIZoomEvent> zoomEvent = new EventManager<>();
 
 
     public static void init(OrthographicCamera cam, InputManager inputManager) {
         Gdx.graphics.setVSync(Settings.Vsync);
-        zoomEvent = new EventManager<>();
         inputManager.addProcessor(new InputAdapter() {
 
             Vector3 tp = new Vector3();

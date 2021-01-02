@@ -34,12 +34,13 @@ import de.ft.interitus.UI.UIElements.UIElements.Button;
 import de.ft.interitus.UI.UIElements.UIElements.TabBar.TabBar;
 import de.ft.interitus.UI.UIElements.UIElements.quickinfo.QuickInfo;
 import de.ft.interitus.UI.UIElements.dropdownmenue.DropDownMenue;
-import de.ft.interitus.UI.ZoomUi.ZoomUI;
+import de.ft.interitus.UI.UIContents.ZoomUi.ZoomUI;
 import de.ft.interitus.UI.editor.Editor;
 import de.ft.interitus.UI.projectsettings.ProjectSettingsUI;
 import de.ft.interitus.UI.settings.SettingsUI;
 import de.ft.interitus.UI.setup.SetupWindow;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
+import de.ft.interitus.UI.uiManagement.UIManager;
 import de.ft.interitus.Var;
 import de.ft.interitus.WindowManager;
 import de.ft.interitus.datamanager.programmdata.Data;
@@ -60,7 +61,6 @@ import java.util.TimerTask;
 import static de.ft.interitus.UI.MenuBar.createProjectsSubMenu;
 
 public class UI {
-    public static Grid testGrid=new Grid(100,100,200,200);
     public static final ManualConfigUI MANUALCONFIG = new ManualConfigUI();
     public final static GlyphLayout glyphLayout = new GlyphLayout();
     public final static BitmapFont font = new BitmapFont();
@@ -97,10 +97,10 @@ public class UI {
     private static Block markedblock;
     private static int wishaniposition = -170 - UIVar.abstandvonRand;
     private static Thread compile_thread;
-    private static ZoomUI zoomUI=new ZoomUI();
+    private static Grid testGrid=new Grid(500,500,0,0);
     //private static final Animation animation = new Animation();
 
-    public static void updatedragui(ShapeRenderer renderer, boolean flaeche, SpriteBatch batch, float delta) {
+    public static void UpdateDragUI(ShapeRenderer renderer, boolean flaeche, SpriteBatch batch, float delta) {
 
         if (!UIVar.uilocked) {
 
@@ -362,11 +362,6 @@ public class UI {
         }
         runselection.draw();
 
-
-
-
-        testGrid.draw();
-
     }
 
     public static void init() {
@@ -489,7 +484,9 @@ public class UI {
     }
 
     public static void InitAssets() {
-        /////////////////Button Bar zusammensetzung//////////////////////
+        UIManager.uiRegestry.init();//Initializes the UIs of the UIManagement system
+        /////////////////
+        /////////Button bar composition//////////////////////
         button_debugstart = new Button();
         button_debugstart.setImage(AssetLoader.img_debugstart);
         button_debugstart.setImage_mouseover(AssetLoader.img_debugstart_mouseover);
@@ -549,6 +546,9 @@ public class UI {
         tabbar = new TabBar();
 
 
+
+
+
         blockbarquickinfo = new QuickInfo(0, 0, "").setAttachedToMouse(true).setSelfCheck(true);
         BlockTappedBar.tb.setListener(new de.ft.interitus.UI.ChangeListener() {
             @Override
@@ -568,6 +568,9 @@ public class UI {
         Button testbutton3=new Button();
         testbutton3.setW(50);
         testbutton3.setH(50);
+
+
+
         testGrid.setPosition(500,500);
         testGrid.addElement(testbutton1);
         testGrid.addElement(testbutton2);
@@ -578,7 +581,6 @@ public class UI {
         testGrid.row();
         testGrid.addElement(testbutton3);
         testGrid.addElement(testbutton1);
-
 
     }
 
@@ -670,6 +672,11 @@ public class UI {
             blockbarquickinfo.update();
 
         }
+
+        UIManager.draw();
+
+        testGrid.setVerticalVermitteln(true);
+        testGrid.draw();
     }
 
 

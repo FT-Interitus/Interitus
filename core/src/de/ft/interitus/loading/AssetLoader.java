@@ -208,6 +208,10 @@ public class AssetLoader {
 
     public static Texture Tabbarhomeicon;
 
+    public static Texture PlusButton;
+    public static Texture MinusButton;
+    public static Texture ResetButton;
+
 
     public static AssetManager manager = new AssetManager();
 
@@ -222,6 +226,11 @@ public class AssetLoader {
 
 
         try {
+            manager.load(workingdirectory + "Plus.png", Texture.class);
+            manager.load(workingdirectory + "Minus.png", Texture.class);
+            manager.load(workingdirectory + "Zurücksetzen.png", Texture.class);
+
+
             group = "ParameterBilder";
             manager.load(workingdirectory + "Block/Parameter/WaitParameter.png", Texture.class);
             manager.load(workingdirectory + "Block/Parameter/Parameter_Pin.png", Texture.class);
@@ -457,6 +466,10 @@ public class AssetLoader {
 
         try {
             group = "";
+            PlusButton = manager.get(workingdirectory + "Plus.png", Texture.class);
+            MinusButton = manager.get(workingdirectory + "Minus.png", Texture.class);
+            ResetButton = manager.get(workingdirectory + "Zurücksetzen.png", Texture.class);
+
 
             //ParameterBilder
             group = "ParameterBilder";

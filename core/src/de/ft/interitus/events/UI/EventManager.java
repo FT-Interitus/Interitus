@@ -13,7 +13,6 @@ import java.util.function.Consumer;
 public class EventManager<T> {
 ArrayList<T> listerens = new ArrayList<>();
 
-    T template ;
 public EventManager() {
 
 
@@ -22,7 +21,7 @@ public EventManager() {
 
 
 public void addListener(T listener) {
-   if(listener.getClass().isAssignableFrom(template.getClass()))
+
         listerens.add(listener);
 }
 public void fireForEach(Consumer<T> action){

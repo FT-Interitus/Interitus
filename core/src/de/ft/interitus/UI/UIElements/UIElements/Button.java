@@ -20,7 +20,8 @@ public class Button implements UIElement {
     public final int widthoverTextleftrandabstand = 5;
     private final GlyphLayout glyphLayout = new GlyphLayout();
     public float hovertransparancy = 0.8f;
-    public boolean widthoverText = false;
+    public boolean widthoverText = true;
+    public boolean heightoverText=false;
     private boolean isworking = false;
     private boolean ignore_uilock = false;
     private int x;
@@ -137,6 +138,9 @@ public class Button implements UIElement {
             glyphLayout.setText(WindowManager.font, this.text);
             if (widthoverText) {
                 this.w = (int) glyphLayout.width + 2 * widthoverTextleftrandabstand;
+            }
+            if(heightoverText){
+                this.h = (int) glyphLayout.height;
             }
         }
 
@@ -370,6 +374,18 @@ public class Button implements UIElement {
 
     public void setText_pos_change_y(int text_pos_change_y) {
         this.text_pos_change_y = text_pos_change_y;
+    }
+
+    public void setWidthoverText(boolean widthoverText) {
+        this.widthoverText = widthoverText;
+    }
+
+    public void setHeightoverText(boolean heightoverText) {
+        this.heightoverText = heightoverText;
+    }
+
+    public boolean isHeightoverText() {
+        return heightoverText;
     }
 }
 

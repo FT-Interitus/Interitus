@@ -40,7 +40,7 @@ public class BlockDrawer {
             }
 
 
-            UI.updatedragui(WindowManager.shapeRenderer, false, WindowManager.blockBatch, delta);
+            UI.UpdateDragUI(WindowManager.shapeRenderer, false, WindowManager.blockBatch, delta);
             BlockTappedBar.tb.setX(UIVar.BlockBarX + UIVar.BlockBarW / 2);
             BlockTappedBar.tb.setY(UIVar.BlockBarY + UIVar.BlockBarH / 2 - (BlockTappedBar.tb.getHeight() + UIVar.abstandvonRand * 2) / 2);
             BlockTappedBar.tb.draw();

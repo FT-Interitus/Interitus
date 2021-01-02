@@ -16,22 +16,27 @@ public class Grid implements UIElement {
     private int y;
     private int width;
     private int height;
-    private int rows=0;
-    private ArrayList<ArrayList<UIElement>>content=new ArrayList<>();
-    public Grid(int x,int y,int width,int height){
-        this.x=x;
-        this.y=y;
-        this.width=width;
-        this.height=height;
+    private int rows = 0;
+    private boolean VerticalVermitteln = false;
+    private ArrayList<ArrayList<UIElement>> content = new ArrayList<>();
+
+    public Grid(int x, int y, int width, int height) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
         this.content.add(new ArrayList<>());
     }
-    public void addElement(UIElement element){
+
+    public void addElement(UIElement element) {
         this.content.get(rows).add(element);
     }
-    public void row(){
+
+    public void row() {
         this.content.add(new ArrayList<>());
         rows++;
     }
+
     @Override
     public int getX() {
         return this.x;
@@ -54,77 +59,89 @@ public class Grid implements UIElement {
 
     @Override
     public Object setX(int x) {
-        this.x=x;
+        this.x = x;
         return null;
     }
 
     @Override
     public Object setY(int y) {
-        this.y=y;
+        this.y = y;
         return null;
 
     }
 
     @Override
     public Object setW(int w) {
-        this.width=w;
+        this.width = w;
         return null;
 
     }
 
     @Override
     public Object setH(int h) {
-        this.height=h;
+        this.height = h;
         return null;
     }
 
     @Override
     public Object setPosition(int x, int y) {
-        this.x=x;
-        this.y=y;
+        this.x = x;
+        this.y = y;
         return null;
 
     }
 
     @Override
     public void setBounds(int x, int y, int w, int h) {
-        this.x=x;
-        this.y=y;
-        this.width=w;
-        this.height=h;
+        this.x = x;
+        this.y = y;
+        this.width = w;
+        this.height = h;
     }
 
     @Override
     public void draw() {
 
-        int height=0;
-        for(int row = 0; row < content.size(); row++){
-            int tempheight=0;
-            int widthsprung=0;
+        int height = 0;
+        for (int row = 0; row < content.size(); row++) {
+            int tempheight = 0;
+            int widthsprung = 0;
 
-
-                for(int column=0;column<content.get(row).size();column++){
-                    int tempwidth=0;
-                    for(int roww = 0; roww < content.size(); roww++){
-                        if(content.get(row).get(column).getW()>tempwidth){
-                            tempwidth=content.get(row).get(column).getW();
-                        }
-                    }
-
-                        if(content.get(row).get(column).getH()>tempheight){
-                    tempheight=content.get(row).get(column).getH();
+            for(int column = 0;column < content.get(row).size(); column++){
+                if (content.get(row).get(column).getH() > tempheight) {
+                    tempheight = content.get(row).get(column).getH();
                 }
-                content.get(row).get(column).setX(this.x+widthsprung);
-                content.get(row).get(column).setY(this.y-content.get(row).get(column).getH()-height);
-                content.get(row).get(column).draw();
-                widthsprung+=content.get(row).get(column).getW();
             }
-            height+=tempheight;
+            for (int column = 0; column < content.get(row).size(); column++) {
+                int tempwidth = 0;
+                for (int roww = 0; roww < content.size(); roww++) {
+                    if (content.get(row).get(column).getW() > tempwidth) {
+                        tempwidth = content.get(row).get(column).getW();
+                    }
+                }
+                content.get(row).get(column).setX(this.x + widthsprung);
+                if (VerticalVermitteln) {
+                    content.get(row).get(column).setY(this.y - tempheight/2 - content.get(row).get(column).getH() / 2 - height);
+                } else {
+                    content.get(row).get(column).setY(this.y - content.get(row).get(column).getH() - height);
+                }
+                content.get(row).get(column).draw();
+                widthsprung += content.get(row).get(column).getW();
+            }
+            height += tempheight;
         }
     }
 
     @Override
     public void setAlpha(float alpha) {
 
+    }
+
+    public void setVerticalVermitteln(boolean verticalVermitteln) {
+        VerticalVermitteln = verticalVermitteln;
+    }
+
+    public boolean isVerticalVermitteln() {
+        return VerticalVermitteln;
     }
 }

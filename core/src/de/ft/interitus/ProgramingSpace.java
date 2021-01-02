@@ -64,7 +64,7 @@ public class ProgramingSpace extends ScreenAdapter {
 
     public void init() {
 
-        UI.updatedragui(WindowManager.shapeRenderer, true, WindowManager.blockBatch,1);
+        UI.UpdateDragUI(WindowManager.shapeRenderer, true, WindowManager.blockBatch,1);
         //ProjectManager.getActProjectVar().projectType.initProject();
 
         BlockTappedBar.init();
@@ -118,7 +118,7 @@ public class ProgramingSpace extends ScreenAdapter {
             WindowManager.update();
 
 
-            UI.updatedragui(WindowManager.shapeRenderer, true, WindowManager.blockBatch,delta);
+            UI.UpdateDragUI(WindowManager.shapeRenderer, true, WindowManager.blockBatch,delta);
 
             ProgramGrid.draw(WindowManager.shapeRenderer, ProgramingSpace.cam);
 
