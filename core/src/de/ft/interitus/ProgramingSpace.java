@@ -99,7 +99,7 @@ public class ProgramingSpace extends ScreenAdapter {
         renderstarttime = System.currentTimeMillis();
 
 
-        //RechtsKlick.Rechtsklickupdate();
+        //rightKlick.rightklickupdate();
 
         try {
 

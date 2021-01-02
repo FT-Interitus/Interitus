@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -19,7 +19,7 @@ public interface ProjectFunktions {
     /**
      * If the user Switched to a Project with this Type
      */
-    void switchedto();
+    void switchedTo();
 
     void runconfigsettings(VisTable builder, DeviceConfiguration configuration);
 

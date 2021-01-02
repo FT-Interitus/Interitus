@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -20,8 +20,8 @@ public abstract class SaveBlock implements Serializable {
     private int x = 0;
     private int y = 0;
     private int index = -1;
-    private int index_links = -1;
-    private int index_rechts = -1;
+    private int index_left = -1;
+    private int index_right = -1;
     private boolean isspacebetweenrightblock = false;
     private int platformspecificblockid = 0;
     private final ArrayList<ArrayList<Integer>> datawires;
@@ -32,12 +32,12 @@ public abstract class SaveBlock implements Serializable {
 
 
 
-    public SaveBlock(int x, int y, int index, int index_links, int index_rechts, boolean isspacebetweenrightblock, ArrayList<ArrayList<Integer>> nodes, int platformspecificblockid, ArrayList<String> parameters, ArrayList<ArrayList<Integer>> datawires,ArrayList<ArrayList<Integer>> datawireindex,int BlockModus,String addon,String blocksettings) {
+    public SaveBlock(int x, int y, int index, int index_left, int index_right, boolean isspacebetweenrightblock, ArrayList<ArrayList<Integer>> nodes, int platformspecificblockid, ArrayList<String> parameters, ArrayList<ArrayList<Integer>> datawires,ArrayList<ArrayList<Integer>> datawireindex,int BlockModus,String addon,String blocksettings) {
         this.x = x;
         this.y = y;
         this.index = index;
-        this.index_links = index_links;
-        this.index_rechts = index_rechts;
+        this.index_left = index_left;
+        this.index_right = index_right;
         this.isspacebetweenrightblock = isspacebetweenrightblock;
         this.nodes = nodes;
         this.platformspecificblockid = platformspecificblockid;
@@ -63,12 +63,12 @@ public abstract class SaveBlock implements Serializable {
         return index;
     }
 
-    public int getIndex_links() {
-        return index_links;
+    public int getIndex_left() {
+        return index_left;
     }
 
-    public int getIndex_rechts() {
-        return index_rechts;
+    public int getIndex_right() {
+        return index_right;
     }
 
     public boolean isIsspacebetweenrightblock() {

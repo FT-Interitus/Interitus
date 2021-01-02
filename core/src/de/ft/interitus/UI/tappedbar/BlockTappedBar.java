@@ -157,8 +157,8 @@ public class BlockTappedBar {
             if (Gdx.graphics.getWidth() - UIVar.unteneinteilung < BlockTappedBar.tb.getTaps().size() * BlockTappedBar.tb.getTaps().get(0).getTab_button().getW() + BlockTappedBar.tb.getButtonabstand() * BlockTappedBar.tb.getTaps().size() + 20) {
                 UIVar.unteneinteilung = Gdx.graphics.getWidth() - (BlockTappedBar.tb.getTaps().size() * BlockTappedBar.tb.getTaps().get(0).getTab_button().getW() + BlockTappedBar.tb.getButtonabstand() * BlockTappedBar.tb.getTaps().size() + 20);
             }
-            if (Gdx.graphics.getWidth() - UIVar.unteneinteilung > Gdx.graphics.getWidth() - UIVar.rechtseinraste) {
-                UIVar.unteneinteilung = UIVar.rechtseinraste;
+            if (Gdx.graphics.getWidth() - UIVar.unteneinteilung > Gdx.graphics.getWidth() - UIVar.righteinraste) {
+                UIVar.unteneinteilung = UIVar.righteinraste;
 
             }
 

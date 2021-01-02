@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -17,7 +17,7 @@ import de.ft.interitus.utils.ShapeRenderer;
 
 public class Button implements UIElement {
     public static boolean disablepresscolorchange = false;
-    public final int widthoverTextlinksrandabstand = 5;
+    public final int widthoverTextleftrandabstand = 5;
     private final GlyphLayout glyphLayout = new GlyphLayout();
     public float hovertransparancy = 0.8f;
     public boolean widthoverText = false;
@@ -136,7 +136,7 @@ public class Button implements UIElement {
         if (text != null) {
             glyphLayout.setText(WindowManager.font, this.text);
             if (widthoverText) {
-                this.w = (int) glyphLayout.width + 2 * widthoverTextlinksrandabstand;
+                this.w = (int) glyphLayout.width + 2 * widthoverTextleftrandabstand;
             }
         }
 
@@ -206,7 +206,7 @@ public class Button implements UIElement {
                 UI.UIbatch.begin();
                 UI.UIbatch.setColor(1, 1, 1, transparency);
                 WindowManager.font.setColor(1,1,1,transparency);
-                WindowManager.font.draw(UI.UIbatch, glyphLayout, x + widthoverTextlinksrandabstand+text_pos_change_x, y + glyphLayout.height + h / 2 - glyphLayout.height / 2+text_pos_change_y);
+                WindowManager.font.draw(UI.UIbatch, glyphLayout, x + widthoverTextleftrandabstand+text_pos_change_x, y + glyphLayout.height + h / 2 - glyphLayout.height / 2+text_pos_change_y);
 
 
                 UI.UIbatch.end();

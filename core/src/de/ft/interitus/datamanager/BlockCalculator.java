@@ -69,18 +69,18 @@ public class BlockCalculator {
                 try {
 
 
-                    if (saveBlocks.get(i).getIndex_rechts() != -1) {
-                        extractedBlocks.get(i).setRight(extractedBlocks.get(saveBlocks.get(i).getIndex_rechts())); //Set Nachbar rechts
+                    if (saveBlocks.get(i).getIndex_right() != -1) {
+                        extractedBlocks.get(i).setRight(extractedBlocks.get(saveBlocks.get(i).getIndex_right())); //Set Nachbar right
 
-                        new Wire(extractedBlocks.get(i),extractedBlocks.get(saveBlocks.get(i).getIndex_rechts()),saveBlocks.get(i).isIsspacebetweenrightblock());
+                        new Wire(extractedBlocks.get(i),extractedBlocks.get(saveBlocks.get(i).getIndex_right()),saveBlocks.get(i).isIsspacebetweenrightblock());
 
                     }
-                    if (saveBlocks.get(i).getIndex_links() != -1) {
-                        extractedBlocks.get(i).setLeft(extractedBlocks.get(saveBlocks.get(i).getIndex_links())); //set Nachbar links
+                    if (saveBlocks.get(i).getIndex_left() != -1) {
+                        extractedBlocks.get(i).setLeft(extractedBlocks.get(saveBlocks.get(i).getIndex_left())); //set Nachbar left
                     }
 
 
-                    if (saveBlocks.get(i).getIndex_rechts() != -1) { //Wenn der Block einen Rechten Nachbar hat
+                    if (saveBlocks.get(i).getIndex_right() != -1) { //Wenn der Block einen Rechten Nachbar hat
 
 
 

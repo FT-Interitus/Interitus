@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -131,7 +131,7 @@ public class EV3Funktions implements ProjectFunktions {
     }
 
     @Override
-    public void switchedto() { //TODO why?
+    public void switchedTo() {
         for (Device device : ev3devices) {
 
             if (device instanceof USBDevice) {

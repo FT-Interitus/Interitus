@@ -44,7 +44,7 @@ public class BlockJumpingManager {
             float size;
 
             if (rl == 0)
-                size = CheckCollision.flache(visible_block.getX_dup_rechts(), visible_block.getY(), (int) width, visible_block.getH(), block.getX(), block.getY());
+                size = CheckCollision.flache(visible_block.getX_dup_right(), visible_block.getY(), (int) width, visible_block.getH(), block.getX(), block.getY());
             else
                 size = CheckCollision.flache(visible_block.getX() - block.getW(), visible_block.getY(), (int) width, visible_block.getH(), block.getX(), block.getY());
 

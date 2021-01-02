@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -30,15 +30,15 @@ public class RightClickEventManager  {
         requests.clear();
 
         for (int i = 0; i < listener.size(); i++)
-            requests.add(((RightClickEventListener) listener.elementAt(i)).openrequest(e, Pos_X, Pos_Y));
+            requests.add(((RightClickEventListener) listener.elementAt(i)).openRequest(e, Pos_X, Pos_Y));
 
         return requests;
     }
 
     
-    public void performAction(RightClickPerformActionEvent e, PopupMenue popupMenue, int Buttonindex) {
+    public void performAction(RightClickPerformActionEvent e, PopupMenue popupMenue, int ButtonIndex) {
 
         for (int i = 0; i < listener.size(); i++)
-           ((RightClickEventListener) listener.elementAt(i)).performAction(e, popupMenue, Buttonindex);
+           ((RightClickEventListener) listener.elementAt(i)).performAction(e, popupMenue, ButtonIndex);
     }
 }

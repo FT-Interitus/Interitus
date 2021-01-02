@@ -9,7 +9,6 @@ import de.ft.interitus.Block.Block;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.global.GlobalEventAdapter;
-import de.ft.interitus.events.global.GlobalEventManager;
 import de.ft.interitus.events.global.GlobalFocusLostEvent;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.ProjectVar;
@@ -18,7 +17,7 @@ public class BlockUpdateManager {
     public static void init() {
         EventVar.globalEventManager.addListener(new GlobalEventAdapter() {
             @Override
-            public void focuslost(GlobalFocusLostEvent e) {
+            public void focusLost(GlobalFocusLostEvent e) {
                 if(ProjectManager.getActProjectVar()!=null) {
                     if(ProjectManager.getActProjectVar().movingWire!=null) ProjectManager.getActProjectVar().movingWire.delete();
                     if(ProjectManager.getActProjectVar().movingDataWire!=null) ProjectManager.getActProjectVar().movingDataWire.delete();

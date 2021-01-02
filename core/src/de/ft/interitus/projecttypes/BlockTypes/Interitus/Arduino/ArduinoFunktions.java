@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -219,7 +219,7 @@ private VisSelectBox<ParameterVariableType> stringVisSelectBox;
     }
 
     @Override
-    public void switchedto() {
+    public void switchedTo() {
 
     }
 

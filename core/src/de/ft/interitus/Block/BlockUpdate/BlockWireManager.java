@@ -9,14 +9,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.Wire;
-import de.ft.interitus.Program;
 import de.ft.interitus.UI.UIElements.check.CheckCollision;
-import de.ft.interitus.UI.UIElements.check.CheckMouse;
 import de.ft.interitus.Var;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.Unproject;
-
-import java.util.Properties;
 
 public class BlockWireManager {
 

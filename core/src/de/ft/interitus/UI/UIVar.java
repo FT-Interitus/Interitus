@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 
 public class UIVar {
-    public static final int rechtseinraste = 300;
+    public static final int righteinraste = 300;
     public static final int untenkante = 125;
     public static final int BlockHeight = 70;
     public static int abstandvonRand = 5;

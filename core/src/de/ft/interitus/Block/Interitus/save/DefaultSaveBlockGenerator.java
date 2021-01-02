@@ -88,12 +88,8 @@ public class DefaultSaveBlockGenerator implements BlockToSaveGenerator {
         ArrayList<SaveBlockV1> extendedBlocks = null;
         if (block.getExtendedBlocks() != null) {
             extendedBlocks = new ArrayList<>();
-
             for (Block extendedBlock : block.getExtendedBlocks()) {
-
                 extendedBlocks.add(projectVar.projectType.getBlocktoSaveGenerator().generate(extendedBlock, projectVar));
-
-
             }
 
 

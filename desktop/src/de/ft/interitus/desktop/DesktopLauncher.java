@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -79,7 +79,7 @@ public class DesktopLauncher {
 				@Override
 				public void focusLost() {
 
-					EventVar.globalEventManager.focuslost(new GlobalFocusLostEvent(this));
+					EventVar.globalEventManager.focusLost(new GlobalFocusLostEvent(this));
 				}
 
 				@Override

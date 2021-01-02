@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -121,7 +121,7 @@ public class ProjectManager {
 
 
 
-        ProjectManager.getActProjectVar().projectType.getProjectFunktions().switchedto();
+        ProjectManager.getActProjectVar().projectType.getProjectFunktions().switchedTo();
         UI.tabbar.setSelectedTabindex(index);
         Program.logger.config("changed tab");
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -20,7 +20,7 @@ public interface RightClickEventListener extends EventListener {
      * @param Pos_Y Have to be unprojected if you need
      * @return the Menu which you want to open
      */
-    PopupMenue openrequest(RightClickOpenRequestEvent e,float Pos_X,float Pos_Y);
+    PopupMenue openRequest(RightClickOpenRequestEvent e, float Pos_X, float Pos_Y);
 
     void performAction(RightClickPerformActionEvent e,PopupMenue popupMenue,int Buttonindex);
 

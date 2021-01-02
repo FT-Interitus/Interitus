@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -187,12 +187,12 @@ public class AssetLoader {
 
 
 
-    public static Texture mouseover_links;
-    public static Texture mouse_over_rechts;
+    public static Texture mouseover_left;
+    public static Texture mouse_over_right;
     public static Texture mouse_over_mitte;
 
-    public static Texture marked_links;
-    public static Texture marked_rechts;
+    public static Texture marked_left;
+    public static Texture marked_right;
     public static Texture marked_mitte;
 
     public static Texture Plug_IntParameter;
@@ -574,12 +574,12 @@ public class AssetLoader {
 
 
 
-            mouse_over_rechts = manager.get(workingdirectory + "Block/blockmask/mouseover_rechts.png", Texture.class);
-            mouseover_links = manager.get(workingdirectory + "Block/blockmask/mouseover_links.png", Texture.class);
+            mouse_over_right = manager.get(workingdirectory + "Block/blockmask/mouseover_rechts.png", Texture.class);
+            mouseover_left = manager.get(workingdirectory + "Block/blockmask/mouseover_links.png", Texture.class);
             mouse_over_mitte = manager.get(workingdirectory + "Block/blockmask/mouseover_mitte.png", Texture.class);
 
-            marked_rechts = manager.get(workingdirectory + "Block/blockmask/market_rechts.png", Texture.class);
-            marked_links = manager.get(workingdirectory + "Block/blockmask/market_links.png", Texture.class);
+            marked_right = manager.get(workingdirectory + "Block/blockmask/market_rechts.png", Texture.class);
+            marked_left = manager.get(workingdirectory + "Block/blockmask/market_links.png", Texture.class);
             marked_mitte = manager.get(workingdirectory + "Block/blockmask/market_mitte.png", Texture.class);
 
             WaitBlock_description_image = manager.get(workingdirectory + "Block/Block_Wait/beschreibungsbild.png", Texture.class);

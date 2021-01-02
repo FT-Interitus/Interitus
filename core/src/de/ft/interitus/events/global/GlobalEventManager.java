@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -81,10 +81,10 @@ public class GlobalEventManager implements GlobalEventListener {
     }
 
     @Override
-    public void focuslost(GlobalFocusLostEvent e) {
+    public void focusLost(GlobalFocusLostEvent e) {
         for (int i = 0; i < listener.size(); i++)
             ((GlobalEventListener) listener.elementAt(i)).
-                    focuslost(e);
+                    focusLost(e);
     }
 
     @Override

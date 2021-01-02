@@ -90,17 +90,15 @@ public abstract class Block {
         rightClickEventListener = new RightClickEventListener() {
 
             @Override
-            public PopupMenue openrequest(RightClickOpenRequestEvent e, float Pos_X, float Pos_Y) {
+            public PopupMenue openRequest(RightClickOpenRequestEvent e, float Pos_X, float Pos_Y) {
 
 
-                if (CheckCollision.object(getX(), getY(), getW(), getW(), Unproject.unproject(Pos_X, Pos_Y).x, Unproject.unproject(Pos_X, Pos_Y).y, 1, 1)) {
-                    return null;
-                }
+                CheckCollision.object(getX(), getY(), getW(), getW(), Unproject.unproject(Pos_X, Pos_Y).x, Unproject.unproject(Pos_X, Pos_Y).y, 1, 1);
                 return null;
             }
 
             @Override
-            public void performAction(RightClickPerformActionEvent e, PopupMenue popupMenue, int Buttonindex) {
+            public void performAction(RightClickPerformActionEvent e, PopupMenue popupMenue, int ButtonIndex) {
 
 
             }
@@ -120,7 +118,7 @@ public abstract class Block {
     public boolean isVisible() {
 
 
-        return Viewport.extendedfrustum.boundsInFrustum(this.getX(), this.getY(), 0, this.getW(), this.getH(), 0); //Ist der Block im Camera bereich?
+        return Viewport.extendedfrustum.boundsInFrustum(this.getX(), this.getY(), 0, this.getW(), this.getH(), 0); //Is Block Visible
 
 
     }
@@ -131,7 +129,7 @@ public abstract class Block {
      * @return the duplication is visible if a block offers the neighbours place
      */
 
-    public int getX_dup_rechts() {
+    public int getX_dup_right() {
         return (int) (this.pos.x + blocktype.getWidth()); //Gibt die X Position des rechten duplicates zurück
     }
 
@@ -201,7 +199,7 @@ public abstract class Block {
      */
 
     public Block getRight() {
-        return right; //Rück gabe des rechts VERBUNDENEN Nachbars
+        return right; //Rück gabe des right VERBUNDENEN Nachbars
     }
 
     public void setRight(Block right) {
@@ -324,10 +322,9 @@ public abstract class Block {
                 right.setLeft(null); // wird dem rechten Nachbar gesagt das er keinen linken nachbar mehr hat
             } catch (IndexOutOfBoundsException ignored) {
 
-
             }
-
         }
+
         if(wire_left!=null) {
             wire_left.delete();
         }
@@ -462,15 +459,15 @@ public abstract class Block {
         if (CheckCollision.checkmousewithblock(this)) {
 
             batch.draw(AssetLoader.mouse_over_mitte, this.getX() + 6, this.getY(), this.getW() - 12, this.getH()); // Block ohne das er makiert ist
-            batch.draw(AssetLoader.mouseover_links, this.getX(), this.getY(), 6, this.getH());
-            batch.draw(AssetLoader.mouse_over_rechts, this.getX() + this.getW() - 6, this.getY(), 6, this.getH());
+            batch.draw(AssetLoader.mouseover_left, this.getX(), this.getY(), 6, this.getH());
+            batch.draw(AssetLoader.mouse_over_right, this.getX() + this.getW() - 6, this.getY(), 6, this.getH());
         }
 
         if (this.isMarked()) {
 
             batch.draw(AssetLoader.marked_mitte, this.getX() + 6, this.getY(), this.getW() - 12, this.getH()); // Block ohne das er makiert ist
-            batch.draw(AssetLoader.marked_links, this.getX(), this.getY(), 6, this.getH());
-            batch.draw(AssetLoader.marked_rechts, this.getX() + this.getW() - 6, this.getY(), 6, this.getH());
+            batch.draw(AssetLoader.marked_left, this.getX(), this.getY(), 6, this.getH());
+            batch.draw(AssetLoader.marked_right, this.getX() + this.getW() - 6, this.getY(), 6, this.getH());
         }
     }
 
@@ -512,13 +509,13 @@ public abstract class Block {
 
         if (ProjectManager.getActProjectVar().duplicate_block_right == this && this.getBlocktype().canHasRightConnector()) {
             batch.setColor(1, 1, 1, 0.5f);
-            batch.draw(AssetLoader.block_middle, this.getX_dup_rechts(), this.getY(), ProjectManager.getActProjectVar().moving_block.getW(), this.getH()); //Wenn der Block die größte überlappung hat wird er als show duplicat angezigt
+            batch.draw(AssetLoader.block_middle, this.getX_dup_right(), this.getY(), ProjectManager.getActProjectVar().moving_block.getW(), this.getH()); //Wenn der Block die größte überlappung hat wird er als show duplicat angezigt
             batch.setColor(1, 1, 1, 1);
         }
 
         if (ProjectManager.getActProjectVar().duplicate_block_left == this && this.getBlocktype().canHasLeftConnector() && ProjectManager.getActProjectVar().marked_blocks != null) {
             batch.setColor(1, 1, 1, 0.5f);
-            batch.draw(AssetLoader.block_middle, this.getX() - ProjectManager.getActProjectVar().moving_block.getW(), this.getY(), ProjectManager.getActProjectVar().moving_block.getW(), this.getH()); //das gleiche für links
+            batch.draw(AssetLoader.block_middle, this.getX() - ProjectManager.getActProjectVar().moving_block.getW(), this.getY(), ProjectManager.getActProjectVar().moving_block.getW(), this.getH()); //das gleiche für left
             batch.setColor(1, 1, 1, 1);
         }
 

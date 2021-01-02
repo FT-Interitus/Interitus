@@ -110,7 +110,7 @@ public class Viewport {
 
         EventVar.globalEventManager.addListener(new GlobalEventAdapter() {
             @Override
-            public void focuslost(GlobalFocusLostEvent e) {
+            public void focusLost(GlobalFocusLostEvent e) {
                 if (ProjectManager.getActProjectVar() != null && Var.inProgram) {
                     EventVar.blockEventManager.killmovingwires(new BlockKillMovingWiresEvent(this));
                 }

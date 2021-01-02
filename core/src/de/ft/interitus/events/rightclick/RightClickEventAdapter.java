@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -10,7 +10,7 @@ import de.ft.interitus.UI.popup.PopupMenue;
 public class RightClickEventAdapter implements RightClickEventListener {
 
     @Override
-    public PopupMenue openrequest(RightClickOpenRequestEvent e, float Pos_X, float Pos_Y) {
+    public PopupMenue openRequest(RightClickOpenRequestEvent e, float Pos_X, float Pos_Y) {
         return null;
     }
 

@@ -29,8 +29,8 @@ public class SaveBlockV1 implements Serializable {
     private final int x;
     private final int y;
     private final int index;
-    private final int index_links;
-    private final int index_rechts;
+    private final int index_left;
+    private final int index_right;
     private final boolean isspacebetweenrightblock;
     private final int platformspecificblockid;
     private final ArrayList<ArrayList<Integer>> datawires;
@@ -44,35 +44,25 @@ public class SaveBlockV1 implements Serializable {
 
     /***
      * Do not change Constructor because GSON can't create the object
-     * @param x
-     * @param y
-     * @param index
-     * @param index_links
-     * @param index_rechts
-     * @param isspacebetweenrightblock
-     * @param platformspecificblockid
      * @param parameters
      * @param datawires
      * @param datawireindex
-     * @param BlockModus
-     * @param addon
-     * @param blocksettings
      * @param datawiresmoveing
      */
-    public SaveBlockV1(Block block, Block links, Block rechts, ArrayList<String> parameters, ArrayList<ArrayList<Integer>> datawires, ArrayList<ArrayList<Integer>> datawireindex, ArrayList<ArrayList<ArrayList<Integer>>> datawiresmoveing,ArrayList<SaveBlockV1> includedBlocks) {
+    public SaveBlockV1(Block block, Block left, Block right, ArrayList<String> parameters, ArrayList<ArrayList<Integer>> datawires, ArrayList<ArrayList<Integer>> datawireindex, ArrayList<ArrayList<ArrayList<Integer>>> datawiresmoveing,ArrayList<SaveBlockV1> includedBlocks) {
         this.x = block.getX();
         this.y = block.getY();
         this.index = block.getIndex();
 
-        if(links!=null)
-            this.index_links = links.getIndex();
+        if(left!=null)
+            this.index_left = left.getIndex();
         else
-            this.index_links = -1;
+            this.index_left = -1;
 
-        if(rechts!=null) {
-            this.index_rechts = rechts.getIndex();
+        if(right!=null) {
+            this.index_right = right.getIndex();
         }else{
-            this.index_rechts = -1;
+            this.index_right = -1;
         }
 
         this.isspacebetweenrightblock = block.getWire_right() != null && block.getWire_right().isVisible();
@@ -85,7 +75,6 @@ public class SaveBlockV1 implements Serializable {
         this.addon = block.getBlocktype().getAddonName();
         this.blocksettings = block.getBlocktype().blockModis.get(block.getBlocktype().getActBlockModeIndex()).getblocksettings()!=null?block.getBlocktype().blockModis.get(block.getBlocktype().actBlockModiIndex).getblocksettings().getSettings():null;
         this.includedBlocks =includedBlocks;
-
 
     }
 
@@ -102,12 +91,12 @@ public class SaveBlockV1 implements Serializable {
         return index;
     }
 
-    public int getIndex_links() {
-        return index_links;
+    public int getIndex_left() {
+        return index_left;
     }
 
-    public int getIndex_rechts() {
-        return index_rechts;
+    public int getIndex_right() {
+        return index_right;
     }
 
     public boolean isIsspacebetweenrightblock() {

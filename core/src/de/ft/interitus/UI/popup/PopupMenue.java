@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -44,7 +44,7 @@ public class PopupMenue {
         this.y = y;
     }
 
-    private void rechtsKlickControlle() {
+    private void rightKlickControlle() {
 
 
         if (Gdx.input.isButtonJustPressed(0) && !CheckMouse.isMouseover(this.x + ausgleichX, this.y - (buttonheight * buttons.size()), WIDTH, buttonheight * buttons.size(), false)) {
@@ -55,7 +55,7 @@ public class PopupMenue {
 
     public void draw() {
         if (show) {
-            rechtsKlickControlle();
+            rightKlickControlle();
 
             this.ausgleichX = 0;
             this.ausgleichY =0;
