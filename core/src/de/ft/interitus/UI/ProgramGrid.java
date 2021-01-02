@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -8,11 +8,8 @@ package de.ft.interitus.UI;
 import com.badlogic.gdx.Gdx;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import de.ft.interitus.Program;
 import de.ft.interitus.Settings;
-import de.ft.interitus.UI.window.Window;
-import de.ft.interitus.WindowManager;
-import de.ft.interitus.ProgramingSpace;
+
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 
@@ -23,6 +20,7 @@ public class ProgramGrid {
     public static float margin = 17.5f;
     public static boolean points = false;
     public static boolean enable = true;
+    public static int marginBottom = 0;
 
 
 
@@ -42,11 +40,6 @@ public class ProgramGrid {
        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setColor(Settings.theme.ClearColor());
 
-        //   margin=20;
-        //   ma=max-min;
-        //    x=(ProgrammingSpace.cam.zoom-min)/ma;
-        //    Program.logger.config("margin: ");
-        //    margin=margin*(1-x);
 
         int move_x;
 
@@ -69,19 +62,14 @@ public class ProgramGrid {
         }
 
 
-        //  move_y = (int) (move_y*ProgrammingSpace.cam.zoom*ProgrammingSpace.cam.viewportHeight/2);
-        // move_x = (int) (move_x*ProgrammingSpace.cam.zoom);
-        //radius = origin_radius;
-        //   radius = (int) (radius*ProgrammingSpace.cam.zoom);
-
 
         if (points) {
 
             for (int x = move_x; x < Gdx.graphics.getWidth() - (UIVar.abstandvonRand * 2); ) {
 
-                for (int y = move_y; y < UIVar.programmflaeche_h; ) {
+                for (int y = move_y; y < UIVar.programmflaeche_h+(UIVar.programmflaeche_y-marginBottom); ) {
 
-                    shapeRenderer.circle(x + UIVar.abstandvonRand, y + UIVar.programmflaeche_y, radius);
+                    shapeRenderer.circle(x + UIVar.abstandvonRand, y + marginBottom, radius);
 
 
                     y += margin;
@@ -96,21 +84,16 @@ public class ProgramGrid {
             for (int x = move_x; x < Gdx.graphics.getWidth() - (UIVar.abstandvonRand * 2); ) {
 
 
-                shapeRenderer.rectLine(x+UIVar.abstandvonRand,UIVar.programmflaeche_y,x+UIVar.abstandvonRand,UIVar.programmflaeche_y+UIVar.programmflaeche_h, line_width);
-
-
-
+                shapeRenderer.rectLine(x+UIVar.abstandvonRand, marginBottom,x+UIVar.abstandvonRand, marginBottom +UIVar.programmflaeche_h+(UIVar.programmflaeche_y-marginBottom), line_width);
 
                 x += margin;
 
             }
 
-            for (int y = move_y; y < UIVar.programmflaeche_h; ) {
+            for (int y = move_y; y < UIVar.programmflaeche_h+(UIVar.programmflaeche_y-marginBottom); ) {
 
-                shapeRenderer.rectLine((float)UIVar.abstandvonRand,(float)y+UIVar.programmflaeche_y,(float)Gdx.graphics.getWidth()-UIVar.abstandvonRand,(float)y+UIVar.programmflaeche_y, line_width);
-
-
-
+                shapeRenderer.rectLine((float)UIVar.abstandvonRand,(float)y+ marginBottom,(float)Gdx.graphics.getWidth()-UIVar.abstandvonRand,(float)y+ marginBottom, line_width);
+                
                 y += margin;
             }
 

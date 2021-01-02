@@ -67,7 +67,8 @@ public class DataWire {
 
 
 
-    private void userLayoutMovment(){
+    private void userLayoutMovement(){
+        assert ProjectManager.getActProjectVar()!=null;
         if((UIVar.DataWire[1][0]<=UIVar.DataWire[2][0] && (moving[0] || CheckMouse.isMouseover(UIVar.DataWire[1][0],UIVar.DataWire[1][1]-UIVar.DataWireMouseKollisionsFeld,UIVar.DataWire[2][0]-UIVar.DataWire[1][0],UIVar.DataWireMouseKollisionsFeld*2, true))) || (UIVar.DataWire[1][0]>UIVar.DataWire[2][0] && (moving[0] || CheckMouse.isMouseover(UIVar.DataWire[2][0],UIVar.DataWire[1][1]-UIVar.DataWireMouseKollisionsFeld,UIVar.DataWire[1][0]-UIVar.DataWire[2][0],UIVar.DataWireMouseKollisionsFeld*2, true)))){
             Gdx.graphics.setSystemCursor(SystemCursor.VerticalResize);
             setCorsorOnlyOnce =true;
@@ -172,7 +173,7 @@ public class DataWire {
      * draws and renders the Data Wire
      */
     public void draw() {
-
+        assert ProjectManager.getActProjectVar()!=null;
        input_x = param_input.getX();
        input_y = param_input.getY();
 
@@ -291,7 +292,7 @@ public class DataWire {
             WindowManager.blockBatch.draw(this.getParam_input().getParameterType().getVariableType().getTextureconnector(),Unproject.unproject().x-this.getParam_input().getParameterType().getVariableType().getTextureconnector().getWidth()/2,Unproject.unproject().y-this.getParam_input().getParameterType().getVariableType().getTextureconnector().getHeight()/2);
             WindowManager.blockBatch.end();
         }
-        userLayoutMovment();
+        userLayoutMovement();
 
         if(ProjectManager.getActProjectVar().movingDataWire ==this) {
 
