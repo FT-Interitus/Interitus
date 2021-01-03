@@ -8,7 +8,9 @@ package de.ft.interitus.UI.UIContents.ZoomUi;
 import de.ft.interitus.Program;
 import de.ft.interitus.ProgramingSpace;
 import de.ft.interitus.UI.UIElements.Grid;
+import de.ft.interitus.UI.UIElements.PlaceHolder;
 import de.ft.interitus.UI.UIElements.UIElements.Button;
+import de.ft.interitus.UI.UIElements.UIElements.UIElement;
 import de.ft.interitus.UI.UIElements.UIElements.labels.TextLabel;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.Viewport;
@@ -40,8 +42,11 @@ public class ZoomUI extends UI {
 
 
         grid.addElement(textLabel);
+        grid.addElement((UIElement) new PlaceHolder().setW(10));
         grid.addElement(plus);
+        grid.addElement((UIElement) new PlaceHolder().setW(10));
         grid.addElement(minus);
+        grid.addElement((UIElement) new PlaceHolder().setW(10));
         grid.addElement(reset);
 
         Viewport.zoomEvent.addListener(new UIZoomEvent() {
