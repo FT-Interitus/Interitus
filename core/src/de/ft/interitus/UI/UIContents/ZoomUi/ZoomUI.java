@@ -5,6 +5,7 @@
 
 package de.ft.interitus.UI.UIContents.ZoomUi;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import de.ft.interitus.Program;
 import de.ft.interitus.ProgramingSpace;
@@ -66,7 +67,7 @@ public class ZoomUI extends UI {
             }
         });
 
-        formattingFrame.setBorderThickness(5);
+        formattingFrame.setBorderThickness(2);
         formattingFrame.setBorderRadius(5);
         formattingFrame.setFillColor(new Color(41f/255f,42f/255,45f/255f,1f));
         formattingFrame.setBorderColor(new Color(112f/255f,112f/255,112f/255f,1f));
@@ -79,7 +80,7 @@ public class ZoomUI extends UI {
         if(minus.isjustPressednormal()) Viewport.decreaseZoom(ProgramingSpace.cam);
         if(reset.isjustPressednormal()) Viewport.resetZoom(ProgramingSpace.cam);
 
-        formattingFrame.setPosition(500, UIVar.programmflaeche_y+UIVar.programmflaeche_h);
+        formattingFrame.setPosition(Gdx.graphics.getWidth()-UIVar.abstandvonRand-formattingFrame.w-5, UIVar.programmflaeche_y+UIVar.programmflaeche_h-formattingFrame.h-5);
         formattingFrame.draw();
 
 
