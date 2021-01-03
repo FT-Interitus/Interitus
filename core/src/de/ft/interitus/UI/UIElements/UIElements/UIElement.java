@@ -25,7 +25,7 @@ public abstract class UIElement {
         return alpha;
     }
 
-    public final Object setAlpha(float alpha) {
+    public final UIElement setAlpha(float alpha) {
         this.alpha = alpha;
         return this;
     }
@@ -34,7 +34,7 @@ public abstract class UIElement {
         return h;
     }
 
-    public final Object setH(int h) {
+    public final UIElement setH(int h) {
         this.h = h;
         return this;
     }
@@ -43,7 +43,7 @@ public abstract class UIElement {
         return w;
     }
 
-    public final Object setW(int w) {
+    public final UIElement setW(int w) {
         this.w = w;
         return this;
     }
@@ -52,7 +52,7 @@ public abstract class UIElement {
         return x;
     }
 
-    public final Object setX(int x) {
+    public final UIElement setX(int x) {
         this.x = x;
         return this;
     }
@@ -61,19 +61,19 @@ public abstract class UIElement {
         return y;
     }
 
-    public final Object setY(int y) {
+    public final UIElement setY(int y) {
         this.y = y;
         return this;
     }
 
-    public final Object setPosition(int x, int y) {
+    public final UIElement setPosition(int x, int y) {
         this.x = x;
         this.y = y;
         return this;
     }
 
 
-    public final Object setMargin(int margin) {
+    public final UIElement setMargin(int margin) {
         this.marginBottom = margin;
         this.marginLeft = margin;
         this.marginRight = margin;
@@ -86,7 +86,7 @@ public abstract class UIElement {
         return marginRight;
     }
 
-    public final Object setMarginRight(int marginRight) {
+    public final UIElement setMarginRight(int marginRight) {
         this.marginRight = marginRight;
         return this;
     }
@@ -95,7 +95,7 @@ public abstract class UIElement {
         return marginBottom;
     }
 
-    public final Object setMarginBottom(int marginBottom) {
+    public final UIElement setMarginBottom(int marginBottom) {
         this.marginBottom = marginBottom;
         return this;
     }
@@ -104,7 +104,7 @@ public abstract class UIElement {
         return marginLeft;
     }
 
-    public final Object setMarginLeft(int marginLeft) {
+    public final UIElement setMarginLeft(int marginLeft) {
         this.marginLeft = marginLeft;
         return this;
     }
@@ -113,7 +113,7 @@ public abstract class UIElement {
         return marginTop;
     }
 
-    public final Object setMarginTop(int marginTop) {
+    public final UIElement setMarginTop(int marginTop) {
         this.marginTop = marginTop;
         return this;
     }
