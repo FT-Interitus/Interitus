@@ -7,14 +7,11 @@ package de.ft.interitus.UI.UIContents.ZoomUi;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
-import de.ft.interitus.Program;
 import de.ft.interitus.ProgramingSpace;
-import de.ft.interitus.UI.UIElements.Container;
 import de.ft.interitus.UI.UIElements.FormattingFrame;
 import de.ft.interitus.UI.UIElements.Grid;
 import de.ft.interitus.UI.UIElements.PlaceHolder;
 import de.ft.interitus.UI.UIElements.UIElements.Button;
-import de.ft.interitus.UI.UIElements.UIElements.UIElement;
 import de.ft.interitus.UI.UIElements.UIElements.labels.TextLabel;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.Viewport;
@@ -23,13 +20,13 @@ import de.ft.interitus.events.UI.UIZoomEvent;
 import de.ft.interitus.loading.AssetLoader;
 
 public class ZoomUI extends UI {
-    Grid grid=new Grid(0,0,0,0);
-    TextLabel textLabel=new TextLabel("TextLabel");
-    Button plus=new Button();
-    Button minus=new Button();
-    Button reset =new Button();
+    private final Grid grid=new Grid(0,0,0,0);
+    private final TextLabel textLabel=new TextLabel("TextLabel");
+   private final Button plus=new Button();
+   private final Button minus=new Button();
+   private final Button reset =new Button();
 
-    FormattingFrame formattingFrame=new FormattingFrame(grid);
+    private final FormattingFrame formattingFrame=new FormattingFrame(grid);
 
     public ZoomUI(){
         plus.setImage(AssetLoader.PlusButton);
@@ -57,7 +54,7 @@ public class ZoomUI extends UI {
         grid.addElement(reset);
 
 
-        grid.setVerticalVermitteln(true);
+        grid.setVerticalArrangement(true);
 
 
         Viewport.zoomEvent.addListener(new UIZoomEvent() {
@@ -86,6 +83,7 @@ public class ZoomUI extends UI {
 
     }
 
-
-
+    public FormattingFrame getFormattingFrame() {
+        return formattingFrame;
+    }
 }

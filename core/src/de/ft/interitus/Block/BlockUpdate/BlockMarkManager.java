@@ -9,9 +9,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.UI.SelectionRectDrawer;
+import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.check.CheckCollision;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
 import de.ft.interitus.UI.UIVar;
+import de.ft.interitus.UI.uiManagement.UIManager;
+import de.ft.interitus.UI.uiManagement.UIRegistry;
 import de.ft.interitus.Var;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.Unproject;
@@ -91,6 +94,7 @@ public class BlockMarkManager {
         assert ProjectManager.getActProjectVar() != null;
         if (Gdx.input.isButtonPressed(0) && ProjectManager.getActProjectVar().moving_block == null) {
             if(!selecting&&!CheckMouse.wasMousePressed(UIVar.abstandvonRand,UIVar.programmflaeche_y,Gdx.graphics.getWidth()-(2* UIVar.abstandvonRand), UIVar.programmflaeche_h)) return;
+            if(UIManager.uiRegistry.zoomUi.enabled&&CheckMouse.wasMousePressed(UIManager.uiRegistry.zoomUi.getFormattingFrame().x,UIManager.uiRegistry.zoomUi.getFormattingFrame().y,UIManager.uiRegistry.zoomUi.getFormattingFrame().w,UIManager.uiRegistry.zoomUi.getFormattingFrame().h)) return;
             selectionRect.setLocation((int) Var.mouseDownPos.x, (int) Var.mouseDownPos.y);
             selectionRect.setSize((int) (Unproject.unproject().x - Var.mouseDownPos.x), (int) (Unproject.unproject().y - Var.mouseDownPos.y));
             SelectionRectDrawer.draw(selectionRect);

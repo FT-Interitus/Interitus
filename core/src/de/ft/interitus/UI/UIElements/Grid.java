@@ -5,17 +5,15 @@
 
 package de.ft.interitus.UI.UIElements;
 
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import de.ft.interitus.UI.UIElements.UIElements.UIElement;
-import de.ft.interitus.WindowManager;
 
 import java.util.ArrayList;
 
 public class Grid extends UIElement {
 
     private int rows = 0;
-    private boolean VerticalVermitteln = false;
-    private ArrayList<ArrayList<UIElement>> content = new ArrayList<>();
+    private boolean VerticalArrangement = false;
+    private final ArrayList<ArrayList<UIElement>> content = new ArrayList<>();
 
     public Grid(int x, int y, int width, int height) {
         this.x = x;
@@ -38,45 +36,45 @@ public class Grid extends UIElement {
     public void draw() {
 
         int height = 0;
-        int widthsprung=0;
+        int widthJumping=0;
         for (int row = 0; row < content.size(); row++) {
-            int tempheight = 0;
-            widthsprung = 0;
+            int tempHeight = 0;
+            widthJumping = 0;
 
             for(int column = 0;column < content.get(row).size(); column++){
-                if (content.get(row).get(column).getH() > tempheight) {
-                    tempheight = content.get(row).get(column).getH();
+                if (content.get(row).get(column).getH() > tempHeight) {
+                    tempHeight = content.get(row).get(column).getH();
                 }
             }
             for (int column = 0; column < content.get(row).size(); column++) {
-                int tempwidth = 0;
-                for (int roww = 0; roww < content.size(); roww++) {
-                    if (content.get(row).get(column).getW() > tempwidth) {
-                        tempwidth = content.get(row).get(column).getW();
+                int tempWidth = 0;
+                for (int rowWidth = 0; rowWidth < content.size(); rowWidth++) {
+                    if (content.get(row).get(column).getW() > tempWidth) {
+                        break;
                     }
                 }
-                content.get(row).get(column).setX(this.x + widthsprung);
-                if (VerticalVermitteln) {
-                    content.get(row).get(column).setY(this.y - tempheight/2 - content.get(row).get(column).getH() / 2 + tempheight);
+                content.get(row).get(column).setX(this.x + widthJumping);
+                if (VerticalArrangement) {
+                    content.get(row).get(column).setY(this.y - tempHeight/2 - content.get(row).get(column).getH() / 2 + tempHeight);
                 } else {
-                    content.get(row).get(column).setY(this.y - content.get(row).get(column).getH() + tempheight);
+                    content.get(row).get(column).setY(this.y - content.get(row).get(column).getH() + tempHeight);
                 }
                 if(this.h!=0) content.get(row).get(column).draw();
-                widthsprung += content.get(row).get(column).getW();
+                widthJumping += content.get(row).get(column).getW();
             }
-            height += tempheight;
+            height += tempHeight;
         }
         this.h = height;
-        this.w=widthsprung;
+        this.w=widthJumping;
     }
 
 
 
-    public void setVerticalVermitteln(boolean verticalVermitteln) {
-        VerticalVermitteln = verticalVermitteln;
+    public void setVerticalArrangement(boolean verticalArrangement) {
+        VerticalArrangement = verticalArrangement;
     }
-
-    public boolean isVerticalVermitteln() {
-        return VerticalVermitteln;
+    @SuppressWarnings("unused")
+    public boolean isVerticalArrangement() {
+        return VerticalArrangement;
     }
 }

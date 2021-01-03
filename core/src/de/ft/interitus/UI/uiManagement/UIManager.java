@@ -8,7 +8,7 @@ package de.ft.interitus.UI.uiManagement;
 import de.ft.interitus.utils.ArrayList;
 
 public class UIManager {
-    public static UIRegestry uiRegestry=new UIRegestry();
+    public static UIRegistry uiRegistry =new UIRegistry();
     public static ArrayList<UI> UIs=new ArrayList<>();
 
     public static void draw(){

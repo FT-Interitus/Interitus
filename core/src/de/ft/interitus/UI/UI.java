@@ -34,7 +34,6 @@ import de.ft.interitus.UI.UIElements.UIElements.Button;
 import de.ft.interitus.UI.UIElements.UIElements.TabBar.TabBar;
 import de.ft.interitus.UI.UIElements.UIElements.quickinfo.QuickInfo;
 import de.ft.interitus.UI.UIElements.dropdownmenue.DropDownMenue;
-import de.ft.interitus.UI.UIContents.ZoomUi.ZoomUI;
 import de.ft.interitus.UI.editor.Editor;
 import de.ft.interitus.UI.projectsettings.ProjectSettingsUI;
 import de.ft.interitus.UI.settings.SettingsUI;
@@ -484,7 +483,7 @@ public class UI {
     }
 
     public static void InitAssets() {
-        UIManager.uiRegestry.init();//Initializes the UIs of the UIManagement system
+        UIManager.uiRegistry.init();//Initializes the UIs of the UIManagement system
         /////////////////
         /////////Button bar composition//////////////////////
         button_debugstart = new Button();
@@ -675,7 +674,7 @@ public class UI {
 
         UIManager.draw();
 
-        testGrid.setVerticalVermitteln(true);
+        testGrid.setVerticalArrangement(true);
        // testGrid.draw();
     }
 
