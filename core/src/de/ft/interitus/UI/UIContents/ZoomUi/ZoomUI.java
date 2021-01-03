@@ -42,11 +42,11 @@ public class ZoomUI extends UI {
 
 
         grid.addElement(textLabel);
-        grid.addElement((UIElement) new PlaceHolder().setW(10));
+        grid.addElement(new PlaceHolder().setW(10));
         grid.addElement(plus);
-        grid.addElement((UIElement) new PlaceHolder().setW(10));
+        grid.addElement(new PlaceHolder().setW(10));
         grid.addElement(minus);
-        grid.addElement((UIElement) new PlaceHolder().setW(10));
+        grid.addElement(new PlaceHolder().setW(10));
         grid.addElement(reset);
 
         Viewport.zoomEvent.addListener(new UIZoomEvent() {
