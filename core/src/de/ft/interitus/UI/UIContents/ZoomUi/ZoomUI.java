@@ -73,7 +73,7 @@ public class ZoomUI extends UI {
         if(minus.isjustPressednormal()) Viewport.decreaseZoom(ProgramingSpace.cam);
         if(reset.isjustPressednormal()) Viewport.resetZoom(ProgramingSpace.cam);
 
-        container.setPosition(500, 0);
+        container.setPosition(500, UIVar.programmflaeche_y+UIVar.programmflaeche_h+grid.getH());
         container.draw();
 
 
