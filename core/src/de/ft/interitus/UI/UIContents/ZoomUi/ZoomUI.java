@@ -7,6 +7,7 @@ package de.ft.interitus.UI.UIContents.ZoomUi;
 
 import de.ft.interitus.Program;
 import de.ft.interitus.ProgramingSpace;
+import de.ft.interitus.UI.UIElements.Container;
 import de.ft.interitus.UI.UIElements.Grid;
 import de.ft.interitus.UI.UIElements.PlaceHolder;
 import de.ft.interitus.UI.UIElements.UIElements.Button;
@@ -24,6 +25,8 @@ public class ZoomUI extends UI {
     Button plus=new Button();
     Button minus=new Button();
     Button reset =new Button();
+
+    Container container=new Container();
     public ZoomUI(){
         plus.setImage(AssetLoader.PlusButton);
         plus.setBounds(0,0,16,16);
@@ -49,6 +52,11 @@ public class ZoomUI extends UI {
         grid.addElement(new PlaceHolder().setW(10));
         grid.addElement(reset);
 
+
+        grid.setVerticalVermitteln(true);
+
+        container.addElement(grid);
+
         Viewport.zoomEvent.addListener(new UIZoomEvent() {
              @Override
            public void zoomStart() {
@@ -60,14 +68,14 @@ public class ZoomUI extends UI {
 
     @Override
     protected void draw() {
-
-        grid.setVerticalVermitteln(true);
-        grid.setPosition(500, UIVar.programmflaeche_y+UIVar.programmflaeche_h+grid.getH());
-        grid.draw();
         textLabel.setText(Viewport.getZoomPercentage()+"%");
         if(plus.isjustPressednormal())  Viewport.increaseZoom(ProgramingSpace.cam);
         if(minus.isjustPressednormal()) Viewport.decreaseZoom(ProgramingSpace.cam);
         if(reset.isjustPressednormal()) Viewport.resetZoom(ProgramingSpace.cam);
+
+        container.setPosition(500, 0);
+        container.draw();
+
 
     }
 
