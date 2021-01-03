@@ -38,9 +38,10 @@ public class Grid extends UIElement {
     public void draw() {
 
         int height = 0;
+        int widthsprung=0;
         for (int row = 0; row < content.size(); row++) {
             int tempheight = 0;
-            int widthsprung = 0;
+            widthsprung = 0;
 
             for(int column = 0;column < content.get(row).size(); column++){
                 if (content.get(row).get(column).getH() > tempheight) {
@@ -56,9 +57,9 @@ public class Grid extends UIElement {
                 }
                 content.get(row).get(column).setX(this.x + widthsprung);
                 if (VerticalVermitteln) {
-                    content.get(row).get(column).setY(this.y - tempheight/2 - content.get(row).get(column).getH() / 2 - height);
+                    content.get(row).get(column).setY(this.y - tempheight/2 - content.get(row).get(column).getH() / 2 + tempheight);
                 } else {
-                    content.get(row).get(column).setY(this.y - content.get(row).get(column).getH() - height);
+                    content.get(row).get(column).setY(this.y - content.get(row).get(column).getH() + tempheight);
                 }
                 if(this.h!=0) content.get(row).get(column).draw();
                 widthsprung += content.get(row).get(column).getW();
@@ -66,6 +67,7 @@ public class Grid extends UIElement {
             height += tempheight;
         }
         this.h = height;
+        this.w=widthsprung;
     }
 
 

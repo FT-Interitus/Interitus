@@ -5,9 +5,11 @@
 
 package de.ft.interitus.UI.UIContents.ZoomUi;
 
+import com.badlogic.gdx.graphics.Color;
 import de.ft.interitus.Program;
 import de.ft.interitus.ProgramingSpace;
 import de.ft.interitus.UI.UIElements.Container;
+import de.ft.interitus.UI.UIElements.FormattingFrame;
 import de.ft.interitus.UI.UIElements.Grid;
 import de.ft.interitus.UI.UIElements.PlaceHolder;
 import de.ft.interitus.UI.UIElements.UIElements.Button;
@@ -26,7 +28,8 @@ public class ZoomUI extends UI {
     Button minus=new Button();
     Button reset =new Button();
 
-    Container container=new Container();
+    FormattingFrame formattingFrame=new FormattingFrame(grid);
+
     public ZoomUI(){
         plus.setImage(AssetLoader.PlusButton);
         plus.setBounds(0,0,16,16);
@@ -55,7 +58,6 @@ public class ZoomUI extends UI {
 
         grid.setVerticalVermitteln(true);
 
-        container.addElement(grid);
 
         Viewport.zoomEvent.addListener(new UIZoomEvent() {
              @Override
@@ -64,6 +66,10 @@ public class ZoomUI extends UI {
             }
         });
 
+        formattingFrame.setBorderThickness(5);
+        formattingFrame.setBorderRadius(5);
+        formattingFrame.setFillColor(new Color(41f/255f,42f/255,45f/255f,1f));
+        formattingFrame.setBorderColor(new Color(112f/255f,112f/255,112f/255f,1f));
     }
 
     @Override
@@ -73,8 +79,8 @@ public class ZoomUI extends UI {
         if(minus.isjustPressednormal()) Viewport.decreaseZoom(ProgramingSpace.cam);
         if(reset.isjustPressednormal()) Viewport.resetZoom(ProgramingSpace.cam);
 
-        container.setPosition(500, UIVar.programmflaeche_y+UIVar.programmflaeche_h+grid.getH());
-        container.draw();
+        formattingFrame.setPosition(500, UIVar.programmflaeche_y+UIVar.programmflaeche_h);
+        formattingFrame.draw();
 
 
     }
