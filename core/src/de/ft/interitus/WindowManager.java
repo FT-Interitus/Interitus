@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -11,7 +11,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.InputManager;
-import de.ft.interitus.UI.Notification.Notification;
 import de.ft.interitus.UI.Notification.NotificationManager;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.PressedKeys;
@@ -21,7 +20,6 @@ import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.plugin.PluginDrawer;
 import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.utils.ShapeRenderer;
-import org.lwjgl.system.CallbackI;
 
 
 public class WindowManager {
@@ -178,7 +176,7 @@ public class WindowManager {
         //Import all Plugin Images
         if (!loaded) { //Import all
 
-            PluginDrawer.loadimages();
+            PluginDrawer.loadImages();
 
             loaded = true; //
 

@@ -1,20 +1,17 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
 package de.ft.interitus.plugin;
 
 
-import com.kotcrab.vis.ui.util.dialog.ConfirmDialogListener;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import de.ft.interitus.UI.Notification.Notification;
 import de.ft.interitus.UI.Notification.NotificationManager;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.loading.AssetLoader;
 import org.json.JSONObject;
-
-import java.io.IOException;
 
 public class PluginInstallManager {
 
@@ -54,30 +51,27 @@ public class PluginInstallManager {
     private static void CheckInstallPermission(final String url, final String jsonInformation) {
         JSONObject jsonObject = new JSONObject(jsonInformation);
 
-        String[] möglichkeiten = {"Ja", "Nein"};
+        String[] obligations = {"Ja", "Nein"};
         final int yes = 1;
         final int no = 2;
 
 
         Dialogs.showConfirmDialog(UI.stage, "Plugin installieren?", "\nSicher, dass du das Plugin "+jsonObject.getString("name")+" installieren möchtest?\nEin Third-Party-Plugin kann unter Umständen Sicherheitsrisiken mit sich bringen!\n",
-                möglichkeiten, new Integer[]{yes, no},
-                new ConfirmDialogListener<Integer>() {
-                    @Override
-                    public void result(Integer result) {
+                obligations, new Integer[]{yes, no},
+                result -> {
 
-                        if (result == yes) {
-                            Thread installPlugin = new Thread(() -> {
-                                try {
-                                    proceedInstallation(url, jsonInformation);
-                                }catch (Exception e)  {
-                                    e.printStackTrace();
-                                }
-                            });
-                            installPlugin.start();
-
-                        }
+                    if (result == yes) {
+                        Thread installPlugin = new Thread(() -> {
+                            try {
+                                proceedInstallation(url, jsonInformation);
+                            }catch (Exception e)  {
+                                e.printStackTrace();
+                            }
+                        });
+                        installPlugin.start();
 
                     }
+
                 });
     }
 

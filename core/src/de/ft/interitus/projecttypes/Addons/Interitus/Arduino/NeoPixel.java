@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -13,6 +13,7 @@ import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.InitArduino;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.WhileLoopEnd;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
+import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
 import de.ft.interitus.projecttypes.Tool;
 
 import java.io.Serializable;
@@ -48,7 +49,7 @@ public class NeoPixel implements Addon {
 
     @Override
     public Plugin getPlugin() {
-        return ProgramingSpace.nativ;
+        return ProjectTypesVar.nativ;
     }
 
     @Override

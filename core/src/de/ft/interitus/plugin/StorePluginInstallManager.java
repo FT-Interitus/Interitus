@@ -23,31 +23,6 @@ import java.util.Map;
 public class StorePluginInstallManager implements HttpHandler {
 
 
-    public String getURLValue(){
-       return "";
-    }
-
- //TODO define Origins
-
-
-    private boolean installRequest(String name, String version, String description, String author, String detailed_description) {
-        //TODO UI
-        return true;
-    }
-
-
-    public String isInstalled( String name) {
-
-        Program.logger.config(name);
-
-
-        //TODO check
-
-        return "false";
-
-    }
-
-
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         PluginInstallServer.allowCors(exchange);

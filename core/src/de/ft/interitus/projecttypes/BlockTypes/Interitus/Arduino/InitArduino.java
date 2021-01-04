@@ -1,17 +1,16 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
-package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino;
-
-import com.badlogic.gdx.graphics.Color;
+package de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino;import com.badlogic.gdx.graphics.Color;
 import de.ft.interitus.Block.Interitus.*;
 
 import de.ft.interitus.Block.Interitus.save.DefaultSaveBlockGenerator;
 import de.ft.interitus.ProgramingSpace;
 import de.ft.interitus.compiler.Interitus.Arduino.ArduinoCompiler;
 import de.ft.interitus.loading.AssetLoader;
+import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.ArduinoFunktions;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.actionblocks.setpinmode.SetPinMode;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.actionblocks.digitalwrite.digitalWrite;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.inputblocs.ReadPin;
@@ -26,13 +25,16 @@ import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmablauf.
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmaufbau.LoopBlock.LoopBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Arduino.programmaufbau.SetupBlock.SetupBlock;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
+import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
 import de.ft.interitus.projecttypes.ParameterVariableType;
 import de.ft.interitus.projecttypes.ProjectType;
+import de.ft.interitus.projecttypes.ProjectVar;
 import de.ft.interitus.utils.ArrayList;
+
 
 public class InitArduino {
     static ArrayList<PlatformSpecificBlock> blocks = new ArrayList<>();
-   public static ProjectType arduino = new ProjectType(ProgramingSpace.nativ, "Arduino-Projekt", blocks, new DefaultBlockGenerator(), new DefaultSaveBlockGenerator(), new DefaultBlockVarGenerator(), new ArduinoFunktions(), new ArduinoCompiler());
+   public static ProjectType arduino = new ProjectType(ProjectTypesVar.nativ, "Arduino-Projekt", blocks, new DefaultBlockGenerator(), new DefaultSaveBlockGenerator(), new DefaultBlockVarGenerator(), new ArduinoFunktions(), new ArduinoCompiler());
 
 
 

@@ -1,11 +1,10 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
 package de.ft.interitus.plugin;
 
-import de.ft.interitus.Program;
 import de.ft.interitus.UI.Notification.Notification;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.utils.CountingInputStream;
@@ -60,7 +59,6 @@ public class PluginDownloader {
             notification.setMessage("Fehler beim Herunterladen");
             return;
         }
-        assert connection != null;
 
         long totalSize = connection.getContentLengthLong();
 

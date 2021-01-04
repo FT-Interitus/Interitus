@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -17,7 +17,7 @@ import java.util.jar.Manifest;
 
 public class PluginLoader {
 
-    public static boolean loadPlugin(File filetest) throws IOException {
+    public static boolean loadPlugin(File filetest) {
 
         //Erzeugen des JAR-Objekts
 
@@ -52,9 +52,9 @@ public class PluginLoader {
 // holen der Mainclass aus den Attributen
         String main = attrib.getValue(Attributes.Name.MAIN_CLASS);
 // laden der Klasse mit dem File als URL und der Mainclass
-        Class cl = null;
+        Class<Plugin> cl = null;
         try {
-            cl = new PluginClassLoader(new File(filetest.getAbsolutePath()).toURI().toURL()).loadClass(main);
+            cl = (Class<Plugin>) new PluginClassLoader(new File(filetest.getAbsolutePath()).toURI().toURL()).loadClass(main);
 
            try {
 
@@ -71,48 +71,34 @@ public class PluginLoader {
                return false;
            }
 
-        } catch (ClassNotFoundException e) {
-            PluginManagerHandler.error = e;
-            e.printStackTrace();
-        } catch (MalformedURLException e) {
+        } catch (ClassNotFoundException | MalformedURLException e) {
             PluginManagerHandler.error = e;
             e.printStackTrace();
         }
 
 
 // holen der Interfaces die die Klasse impementiert
+        assert cl != null;
         Class[] interfaces = cl.getInterfaces();
-// Durchlaufen durch die Interfaces der Klasse und nachsehn ob es das passende Plugin implementiert
-        boolean isplugin = false;
-        for (int y = 0; y < interfaces.length && !isplugin; y++)
-            if (interfaces[y].getName().equals("de.ft.interitus.plugin.Plugin"))
-                isplugin = true;
-        if (isplugin) {
-            Plugin plugin = null;
-            try {
-                try {
-                    plugin = (Plugin) cl.getDeclaredConstructor().newInstance();
-                } catch (InvocationTargetException e) {
-                    PluginManagerHandler.error = e;
-                    return false;
-                } catch (NoSuchMethodException e) {
-                    PluginManagerHandler.error = e;
-                    return false;
-                }
-                Program.logger.config("Loaded " + filetest.getName());
-                PluginManagerHandler.loadedplugins.add(plugin);
-            } catch (InstantiationException e) {
-                PluginManagerHandler.error = e;
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                PluginManagerHandler.error = e;
-                e.printStackTrace();
+        for (int y = 0; y < interfaces.length; y++)
+            if (interfaces[y].getName().equals("de.ft.interitus.plugin.Plugin")) {
+                break;
             }
-        return true;
-        } else {
-            Program.logger.severe("Fehlerhaftes Plugin");
-            return false;
+        Plugin plugin;
+        try {
+            try {
+                plugin = cl.getDeclaredConstructor().newInstance();
+            } catch (InvocationTargetException | NoSuchMethodException e) {
+                PluginManagerHandler.error = e;
+                return false;
+            }
+            Program.logger.config("Loaded " + filetest.getName());
+            PluginManagerHandler.loadedplugins.add(plugin);
+        } catch (InstantiationException | IllegalAccessException e) {
+            PluginManagerHandler.error = e;
+            e.printStackTrace();
         }
+        return true;
 
 
     }

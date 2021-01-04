@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -9,7 +9,7 @@ import java.net.URL;
 import java.net.URLClassLoader;
 
 public class PluginClassLoader extends URLClassLoader {
-    public PluginClassLoader(URL Fileurl) {
-        super(new URL[]{Fileurl});
+    public PluginClassLoader(URL fileURL) {
+        super(new URL[]{fileURL});
     }
 }

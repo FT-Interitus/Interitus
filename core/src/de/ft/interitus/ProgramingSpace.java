@@ -23,7 +23,6 @@ import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.datamanager.programmdata.Updater;
 import de.ft.interitus.events.EventManager;
 import de.ft.interitus.events.EventVar;
-import de.ft.interitus.plugin.Native;
 import de.ft.interitus.plugin.Plugin;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.PositionSaver;
@@ -46,7 +45,6 @@ public class ProgramingSpace extends ScreenAdapter {
 
 
     public static PressedKeys pressedKeys;
-    public static Plugin nativ = new Native();
 
     public void open() {
 

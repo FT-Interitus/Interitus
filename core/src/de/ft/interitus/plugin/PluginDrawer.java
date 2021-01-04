@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -21,7 +21,7 @@ public class PluginDrawer {
 
     }
 
-    public static void loadimages() {
+    public static void loadImages() {
         for (int i = 0; i < ProgramRegistry.pluginpixmaps.size(); i++) {
             ProgramRegistry.pluginTextures.add(new Texture(ProgramRegistry.pluginpixmaps.get(i)));
         }

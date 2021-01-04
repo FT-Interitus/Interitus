@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -14,7 +14,7 @@ public class PluginSandboxSecurityPolicy extends Policy {
     @Override
     public PermissionCollection getPermissions(ProtectionDomain domain) {
         if(isPlugin(domain)) {
-            return applicationPermissions();
+            return pluginPermissions();
         }else{
             return applicationPermissions();
         }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -15,6 +15,7 @@ import de.ft.interitus.projecttypes.BlockTypes.Interitus.Ev3.actionBlocks.light.
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Ev3.programmsequence.Thread.ThreadBlock;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Ev3.programmsequence.Wait.Wait;
 import de.ft.interitus.projecttypes.BlockTypes.PlatformSpecificBlock;
+import de.ft.interitus.projecttypes.BlockTypes.ProjectTypesVar;
 import de.ft.interitus.projecttypes.ParameterVariableType;
 import de.ft.interitus.projecttypes.ProjectType;
 import de.ft.interitus.utils.ArrayList;
@@ -26,7 +27,7 @@ public class InitEv3 {
     public static ParameterVariableType booleanvar;
 
     public static ProjectType init() {
-        ProjectType projectType = new ProjectType(ProgramingSpace.nativ, "Ev3-Projekt", platformSpecificBlocks, new DefaultBlockGenerator(), new DefaultSaveBlockGenerator(), new DefaultBlockVarGenerator(), new EV3Funktions(), new EV3compiler());
+        ProjectType projectType = new ProjectType(ProjectTypesVar.nativ, "Ev3-Projekt", platformSpecificBlocks, new DefaultBlockGenerator(), new DefaultSaveBlockGenerator(), new DefaultBlockVarGenerator(), new EV3Funktions(), new EV3compiler());
 
         floatvar = new ParameterVariableType("float", AssetLoader.Plug_IntParameter,new Color(23f/255f,141f/255f,209f/255f,1f),"int");
         stringvar = new ParameterVariableType("String", AssetLoader.Plug_StringParameter,new Color(156f/255f,19f/255f,19f/255f,1f),"char[]");
