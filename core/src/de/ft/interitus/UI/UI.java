@@ -31,6 +31,8 @@ import de.ft.interitus.UI.Notification.NotificationManager;
 import de.ft.interitus.UI.UIElements.Grid;
 import de.ft.interitus.UI.UIElements.UIElementBar;
 import de.ft.interitus.UI.UIElements.UIElements.Button;
+import de.ft.interitus.UI.UIElements.UIElements.RadioButton;
+import de.ft.interitus.UI.UIElements.UIElements.RadioButtonGroup;
 import de.ft.interitus.UI.UIElements.UIElements.TabBar.TabBar;
 import de.ft.interitus.UI.UIElements.UIElements.TextInput;
 import de.ft.interitus.UI.UIElements.UIElements.quickinfo.QuickInfo;
@@ -100,6 +102,15 @@ public class UI {
     private static TextInput testtextInput= (TextInput) new TextInput("Das ist ein TestTextInput").setPosition(500,500);
     private static TextInput testtextInput2= (TextInput) new TextInput("Das ist ein TestTextInput2").setPosition(500,400);
 
+    private static RadioButton radioButton = (RadioButton) new RadioButton().setPosition(100,100);
+    private static RadioButton radioButton1 = (RadioButton) new RadioButton().setPosition(100,140);
+    private static RadioButton radioButton2 = (RadioButton) new RadioButton().setPosition(100,180);
+    private static RadioButtonGroup group = new RadioButtonGroup();
+    static  {
+        group.add(radioButton);
+        group.add(radioButton1);
+        group.add(radioButton2);
+    }
 
     //private static final Animation animation = new Animation();
 
@@ -668,6 +679,10 @@ public class UI {
 
         testtextInput.draw();
         testtextInput2.draw();
+
+        radioButton.draw();
+        radioButton1.draw();
+        radioButton2.draw();
 
     }
 

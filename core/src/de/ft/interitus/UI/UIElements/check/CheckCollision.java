@@ -15,6 +15,7 @@ public class CheckCollision {
     private static final int MOUSESIZE = 1;
     private final static Vector3 temp3 = new Vector3();
     private final static Vector3 temp4 = new Vector3();
+    private final static Vector2 tempVec = new Vector2();
     private final static Rectangle rec1 = new Rectangle();
     private final static Rectangle rec2 = new Rectangle();
 
@@ -128,6 +129,12 @@ public class CheckCollision {
         //Program.logger.config("y: " + yy + "x: " + xx + "flache: "+ yy*xx);
         flache = xx * yy;
         return flache;
+    }
+
+    public static boolean checkCircleWithVector(int radius, int x, int y, Vector2 vector2) {
+
+        return Vector2.dst(vector2.x,Gdx.graphics.getHeight()-vector2.y,x,y)<radius;
+
     }
 
 

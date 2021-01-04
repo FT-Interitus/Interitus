@@ -103,7 +103,7 @@ public class ProgramingSpace extends ScreenAdapter {
 
             //logger.finest("Blöcke "+BlockVar.blocks.size()+" Sichtbare "+ BlockVar.visibleblocks.size());
 
-            PositionSaver.save();
+
 
 
             cam.update();

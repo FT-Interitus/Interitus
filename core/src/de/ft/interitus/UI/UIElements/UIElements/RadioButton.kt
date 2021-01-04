@@ -1,0 +1,109 @@
+/*
+ * Copyright (c) 2021.
+ * Copyright by Tim and Felix
+ */
+package de.ft.interitus.UI.UIElements.UIElements
+
+import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer
+import de.ft.interitus.UI.UIElements.UIElements.labels.TextLabel
+import de.ft.interitus.UI.UIElements.check.CheckCollision
+import de.ft.interitus.Var
+import de.ft.interitus.WindowManager
+import de.ft.interitus.events.UI.EventManager
+import de.ft.interitus.events.UI.UIToggleEvent
+
+class RadioButton : UIElement {
+
+    private var toggleState: Boolean
+    private var pressed: Boolean = false
+    private val radius = 8f
+    private val segments = 40
+    private var text = ""
+    private val label = TextLabel(text)
+    private val labelMargin = 10
+    val toggleEvent = EventManager<UIToggleEvent>()
+
+    constructor() {
+        this.toggleState = false
+        init()
+    }
+
+    constructor(text: String) {
+        this.text = text
+        this.toggleState = false
+        init()
+    }
+
+    constructor(text: String, toggleState: Boolean) {
+        this.toggleState = toggleState
+        this.text = text
+        init()
+    }
+
+    private fun init() {
+        label.setText(this.text)
+
+    }
+
+    override fun draw() {
+
+
+        WindowManager.shapeRenderer.begin(ShapeRenderer.ShapeType.Line)
+        WindowManager.shapeRenderer.setAutoShapeType(true)
+
+
+        Gdx.gl.glLineWidth(2F)
+        if (!super.disabled) {
+            WindowManager.shapeRenderer.setColor(0f / 255f, 150f / 255f, 136f / 255f, 1f)
+        } else {
+            WindowManager.shapeRenderer.setColor(221f / 255f, 221f / 255f, 221f / 255f, 1f)
+        }
+        WindowManager.shapeRenderer.circle(this.x.toFloat(), this.y.toFloat(), radius, segments)
+
+        if (toggleState) {
+            WindowManager.shapeRenderer.set(ShapeRenderer.ShapeType.Filled)
+            WindowManager.shapeRenderer.circle(this.x.toFloat(), this.y.toFloat(), radius - 3, segments)
+        }
+        if (!this.disabled) {
+            if (Gdx.input.isButtonPressed(0)) {
+                pressed = true
+            }
+
+            if (pressed && !Gdx.input.isButtonPressed(0)) {
+                pressed = false
+                if (CheckCollision.checkCircleWithVector(radius.toInt(), this.x, this.y, Var.mouseReleasePosWithoutUnproject)) {
+                    toggleState = !toggleState
+                    toggleEvent.fireForEach {
+                        it.toggled(toggleState,this)
+
+                    }
+                }
+
+            }
+        }
+
+        WindowManager.shapeRenderer.end()
+
+        if (label.getX() != (this.x + this.radius / 2 + this.labelMargin).toInt() || label.getY() != (this.y - this.radius / 2).toInt()) {
+            label.setPosition((this.x + this.radius / 2 + this.labelMargin).toInt(), (this.y - this.radius / 2).toInt())
+        }
+
+        label.draw()
+
+        this.w = (this.label.w + this.radius + this.labelMargin).toInt()
+        this.h = this.radius.toInt()
+
+
+    }
+
+    fun setToggleState(state: Boolean) {
+        this.toggleState = state
+    }
+
+    fun getToggleState(): Boolean {
+        return this.toggleState
+    }
+
+
+}

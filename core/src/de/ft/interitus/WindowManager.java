@@ -19,6 +19,7 @@ import de.ft.interitus.UI.popup.PopupHandler;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.plugin.PluginDrawer;
 import de.ft.interitus.plugin.PluginManagerHandler;
+import de.ft.interitus.utils.PositionSaver;
 import de.ft.interitus.utils.ShapeRenderer;
 
 
@@ -66,6 +67,7 @@ public class WindowManager {
             switchto(Windows.welcome);
 
         }
+        PositionSaver.save();
 
         UI.UIcam.update();
         UI.UIbatch.setProjectionMatrix(UI.UIcam.combined);

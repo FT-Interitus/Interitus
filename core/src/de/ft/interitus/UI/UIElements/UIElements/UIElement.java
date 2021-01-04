@@ -11,6 +11,7 @@ public abstract class UIElement {
     public int marginLeft, marginTop, marginRight, marginBottom;
     public int margin;
     public float alpha=1.0f;
+    public boolean disabled = false;
 
     public  void setBounds(int x, int y, int w, int h) {
         this.x = x;
@@ -115,6 +116,10 @@ public abstract class UIElement {
 
     public  UIElement setMarginTop(int marginTop) {
         this.marginTop = marginTop;
+        return this;
+    }
+    public UIElement disableUIElement(boolean disabled) {
+        this.disabled = disabled;
         return this;
     }
 }

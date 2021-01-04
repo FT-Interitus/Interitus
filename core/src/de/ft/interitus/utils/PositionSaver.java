@@ -1,12 +1,11 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
 package de.ft.interitus.utils;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.ProgramingSpace;
 import de.ft.interitus.Var;
@@ -19,14 +18,16 @@ public class PositionSaver {
     public static void save() {
         if (Gdx.input.isButtonJustPressed(0)) {
             isPressed = true;
-            Var.mouseDownPos.set(Unproject.unproject());
+            if (ProgramingSpace.cam != null)
+                Var.mouseDownPos.set(Unproject.unproject());
             Var.mousepressedoldwihoutunproject.set(Gdx.input.getX(), Gdx.input.getY());
         }
 
-        if(!Gdx.input.isButtonPressed(0)&&isPressed) {
+        if (!Gdx.input.isButtonPressed(0) && isPressed) {
             isPressed = false;
-            Var.mouseReleasePos.set(Unproject.unproject());
-            Var.mouseReleasePosWithoutUnproject.set(Unproject.projected());
+            if (ProgramingSpace.cam != null)
+                Var.mouseReleasePos.set(Unproject.unproject());
+            Var.mouseReleasePosWithoutUnproject.set(Gdx.input.getX(), Gdx.input.getY());
         }
     }
 }
