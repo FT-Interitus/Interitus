@@ -19,6 +19,7 @@ public class PressedKeys {
 
 
         WindowManager.inputManager.addProcessor(new InputAdapter() {
+
             @Override
             public boolean keyDown(int keycode) {
 

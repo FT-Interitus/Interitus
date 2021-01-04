@@ -18,14 +18,18 @@ public class FormattingFrame extends UIElement {
     private Color BorderColor=new Color(0,0,0,1);
     private int BorderRadius=0;
     private int BorderThickness=0;
+    private boolean drawInnerUIElement = true;
     public FormattingFrame(UIElement element){
         this.element=element;
     }
+
     @Override
     public void draw() {
         super.w=this.element.w+BorderThickness*2;
         super.h=this.element.h+BorderThickness*2;
-        element.setPosition(super.x+BorderThickness,super.y+BorderThickness);
+        element.x=super.x+BorderThickness;
+        element.y=super.y+BorderThickness;
+
 
         WindowManager.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 
@@ -35,7 +39,8 @@ public class FormattingFrame extends UIElement {
         WindowManager.shapeRenderer.setColor(fillColor);
         WindowManager.shapeRenderer.roundendrect(this.element.x,this.element.y,this.element.w,this.element.h,this.BorderRadius);
         WindowManager.shapeRenderer.end();
-        element.draw();
+        if(drawInnerUIElement)
+            element.draw();
     }
 
     public void setElement(UIElement element) {
@@ -76,5 +81,10 @@ public class FormattingFrame extends UIElement {
 
     public int getBorderThickness() {
         return BorderThickness;
+    }
+
+    public UIElement setDrawInnerUIElement(boolean drawInnerUIElement) {
+        this.drawInnerUIElement = drawInnerUIElement;
+        return this;
     }
 }

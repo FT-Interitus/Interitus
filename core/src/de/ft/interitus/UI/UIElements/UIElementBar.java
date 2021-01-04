@@ -10,9 +10,9 @@ import de.ft.interitus.utils.ArrayList;
 
 import java.util.Arrays;
 
-public class UIElementBar {
+public class UIElementBar extends UIElement{
     private final ArrayList<UIElement> buttons = new ArrayList<>();
-    private int x, y, button_h;
+    private int  button_h;
     private int button_distance = 4;
 
     public UIElementBar() {
@@ -75,22 +75,6 @@ public class UIElementBar {
 
     public void setButton_distance(int button_distance) {
         this.button_distance = button_distance;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
     }
 
     public int getButton_h() {

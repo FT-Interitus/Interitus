@@ -32,6 +32,7 @@ import de.ft.interitus.UI.UIElements.Grid;
 import de.ft.interitus.UI.UIElements.UIElementBar;
 import de.ft.interitus.UI.UIElements.UIElements.Button;
 import de.ft.interitus.UI.UIElements.UIElements.TabBar.TabBar;
+import de.ft.interitus.UI.UIElements.UIElements.TextInput;
 import de.ft.interitus.UI.UIElements.UIElements.quickinfo.QuickInfo;
 import de.ft.interitus.UI.UIElements.dropdownmenue.DropDownMenue;
 import de.ft.interitus.UI.editor.Editor;
@@ -96,7 +97,10 @@ public class UI {
     private static Block markedblock;
     private static int wishaniposition = -170 - UIVar.abstandvonRand;
     private static Thread compile_thread;
-    private static Grid testGrid=new Grid(500,500,0,0);
+    private static TextInput testtextInput= (TextInput) new TextInput("Das ist ein TestTextInput").setPosition(500,500);
+    private static TextInput testtextInput2= (TextInput) new TextInput("Das ist ein TestTextInput2").setPosition(500,400);
+
+
     //private static final Animation animation = new Animation();
 
     public static void UpdateDragUI(ShapeRenderer renderer, boolean flaeche, SpriteBatch batch, float delta) {
@@ -569,18 +573,6 @@ public class UI {
         testbutton3.setH(50);
 
 
-
-        testGrid.setPosition(500,500);
-        testGrid.addElement(testbutton1);
-        testGrid.addElement(testbutton2);
-        testGrid.addElement(testbutton2);
-        testGrid.addElement(testbutton2);
-        testGrid.addElement(testbutton2);
-
-        testGrid.row();
-        testGrid.addElement(testbutton3);
-        testGrid.addElement(testbutton1);
-
     }
 
     public static void update(float delta) {
@@ -674,8 +666,9 @@ public class UI {
 
         UIManager.draw();
 
-        testGrid.setVerticalArrangement(true);
-       // testGrid.draw();
+        testtextInput.draw();
+        testtextInput2.draw();
+
     }
 
 

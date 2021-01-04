@@ -12,7 +12,7 @@ public abstract class UIElement {
     public int margin;
     public float alpha=1.0f;
 
-    public final void setBounds(int x, int y, int w, int h) {
+    public  void setBounds(int x, int y, int w, int h) {
         this.x = x;
         this.y = y;
         this.w = w;
@@ -21,59 +21,59 @@ public abstract class UIElement {
 
     public abstract void draw();
 
-    public final float getAlpha() {
+    public  float getAlpha() {
         return alpha;
     }
 
-    public final UIElement setAlpha(float alpha) {
+    public  UIElement setAlpha(float alpha) {
         this.alpha = alpha;
         return this;
     }
 
-    public final int getH() {
+    public  int getH() {
         return h;
     }
 
-    public final UIElement setH(int h) {
+    public  UIElement setH(int h) {
         this.h = h;
         return this;
     }
 
-    public final int getW() {
+    public  int getW() {
         return w;
     }
 
-    public final UIElement setW(int w) {
+    public  UIElement setW(int w) {
         this.w = w;
         return this;
     }
 
-    public final int getX() {
+    public  int getX() {
         return x;
     }
 
-    public final UIElement setX(int x) {
+    public  UIElement setX(int x) {
         this.x = x;
         return this;
     }
 
-    public final int getY() {
+    public  int getY() {
         return y;
     }
 
-    public final UIElement setY(int y) {
+    public  UIElement setY(int y) {
         this.y = y;
         return this;
     }
 
-    public final UIElement setPosition(int x, int y) {
+    public  UIElement setPosition(int x, int y) {
         this.x = x;
         this.y = y;
         return this;
     }
 
 
-    public final UIElement setMargin(int margin) {
+    public  UIElement setMargin(int margin) {
         this.marginBottom = margin;
         this.marginLeft = margin;
         this.marginRight = margin;
@@ -82,38 +82,38 @@ public abstract class UIElement {
         return this;
     }
 
-    public final int getMarginRight() {
+    public  int getMarginRight() {
         return marginRight;
     }
 
-    public final UIElement setMarginRight(int marginRight) {
+    public  UIElement setMarginRight(int marginRight) {
         this.marginRight = marginRight;
         return this;
     }
 
-    public final int getMarginBottom() {
+    public  int getMarginBottom() {
         return marginBottom;
     }
 
-    public final UIElement setMarginBottom(int marginBottom) {
+    public  UIElement setMarginBottom(int marginBottom) {
         this.marginBottom = marginBottom;
         return this;
     }
 
-    public final int getMarginLeft() {
+    public  int getMarginLeft() {
         return marginLeft;
     }
 
-    public final UIElement setMarginLeft(int marginLeft) {
+    public  UIElement setMarginLeft(int marginLeft) {
         this.marginLeft = marginLeft;
         return this;
     }
 
-    public final int getMarginTop() {
+    public  int getMarginTop() {
         return marginTop;
     }
 
-    public final UIElement setMarginTop(int marginTop) {
+    public  UIElement setMarginTop(int marginTop) {
         this.marginTop = marginTop;
         return this;
     }
