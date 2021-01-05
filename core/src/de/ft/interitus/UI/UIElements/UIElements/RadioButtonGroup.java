@@ -20,7 +20,11 @@ public class RadioButtonGroup {
             public void toggled(boolean enabled, UIElement sender) {
 
                 for(RadioButton radioButton1:radioButtons) {
-                    if(radioButton1==sender) continue;
+                    if(radioButton1==sender) {
+                        radioButton1.setToggleState(true);
+                        continue;
+
+                    }
                     radioButton1.setToggleState(false);
                 }
 

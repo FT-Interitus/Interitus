@@ -17,11 +17,12 @@ class RadioButton : UIElement {
 
     private var toggleState: Boolean
     private var pressed: Boolean = false
-    private val radius = 8f
+    private var radius = 7f
     private val segments = 40
     private var text = ""
     private val label = TextLabel(text)
     private val labelMargin = 10
+    private var popOutAnimation:Boolean = true;
     val toggleEvent = EventManager<UIToggleEvent>()
 
     constructor() {
@@ -59,10 +60,18 @@ class RadioButton : UIElement {
         } else {
             WindowManager.shapeRenderer.setColor(221f / 255f, 221f / 255f, 221f / 255f, 1f)
         }
+
+
+
         WindowManager.shapeRenderer.circle(this.x.toFloat(), this.y.toFloat(), radius, segments)
+        WindowManager.shapeRenderer.set(ShapeRenderer.ShapeType.Filled)
+
+        if (popOutAnimation&&Gdx.input.isButtonPressed(0)&&CheckCollision.checkCircleWithVector(radius.toInt(), this.x, this.y, Var.mousepressedoldwihoutunproject)) {
+            WindowManager.shapeRenderer.circle(this.x.toFloat(), this.y.toFloat(), radius+3, segments)
+
+        }
 
         if (toggleState) {
-            WindowManager.shapeRenderer.set(ShapeRenderer.ShapeType.Filled)
             WindowManager.shapeRenderer.circle(this.x.toFloat(), this.y.toFloat(), radius - 3, segments)
         }
         if (!this.disabled) {
