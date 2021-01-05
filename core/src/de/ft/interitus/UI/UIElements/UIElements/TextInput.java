@@ -7,34 +7,57 @@ package de.ft.interitus.UI.UIElements.UIElements;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.FormattingFrame;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
 import de.ft.interitus.WindowManager;
+import de.ft.interitus.loading.AssetLoader;
+
+import static com.badlogic.gdx.Gdx.input;
 
 public class TextInput extends UIElement{
-    private String text="";
+    private StringBuilder text;
+    private String drawingText;
     private String defaultText = "";
     private boolean active=false;
     private final FormattingFrame formattingFrame = new FormattingFrame(this);
     private final GlyphLayout glyphLayout=new GlyphLayout();
-    private BitmapFont bitmapFont;
-    private int CurserPosition=1;
+    private BitmapFont bitmapFont ;
+    private int CurserPosition=0;
     private boolean CursorVisible=true;
     private long timer=0;
+    private boolean isPassword = false;
+
+    static protected final char ENTER= '\r';
+    static private final char TAB = '\t';
+    static private final char DELETE = 127;
+    static private final char BULLET = 8226;
+
+    private boolean run_left = false;
+    private boolean run_right = false;
+    private double time_pressed_left = 0;
+    private double time_pressed_right = 0;
+
+    private float cursorPercentHeight = 0.8f;
+
+    public static final long movedelay = 580;
+    public static final long firstmovedelay = 600;
 
     public TextInput(String text) {
         this();
-        this.text=text;
+        this.text = new StringBuilder(text);
     }
     public TextInput(String text, BitmapFont bitmapFont){
-        this();
-        this.text=text;
+        this(text);
         this.bitmapFont=bitmapFont;
     }
 
@@ -68,9 +91,9 @@ public class TextInput extends UIElement{
         formattingFrame.setFillColor(new Color(0.2f,0.2f,0.2f,0.2f));
         formattingFrame.setBorderColor(new Color(1f,0f,0f,1f));
         formattingFrame.setBorderThickness(2);
-        this.bitmapFont=new BitmapFont();
         super.h=20;
         super.w=200;
+        this.bitmapFont = new BitmapFont();
 
 
 
@@ -88,11 +111,24 @@ public class TextInput extends UIElement{
 
             @Override
             public boolean keyTyped(char key) {
-                if(active)if(key!=8) {
-                    text += key;
-                }else if(text.length()>0){
-                    text=text.substring(0,text.length()-1);
-                    System.out.println("del");
+
+                if(key==BULLET||key==ENTER||key==TAB)  return false;
+                if(active) {
+                    if (key != 8 && key != 127) {
+                        text.insert(CurserPosition, key);
+                        CurserPosition++;
+                        resetBlink();
+
+                    } else if (key == 8 && text.length() > 0&&text.length()>=CurserPosition) {
+                        text.deleteCharAt(CurserPosition - 1);
+                        CurserPosition--;
+                        resetBlink();
+
+                    } else if (key == 127 && text.length() > CurserPosition) {
+                        text.deleteCharAt(CurserPosition);
+                        resetBlink();
+
+                    }
                 }
                 return false;
             }
@@ -114,7 +150,16 @@ public class TextInput extends UIElement{
         }
         formattingFrame.draw();
 
-        this.glyphLayout.setText(this.bitmapFont, this.text);
+
+        cursorMovement();
+
+        this.drawingText = text.toString();
+
+        if(this.isPassword) {
+           this.drawingText = "*".repeat(this.drawingText.length());
+        }
+
+        this.glyphLayout.setText(this.bitmapFont, this.drawingText);
         UI.UIbatch.begin();
         this.bitmapFont.draw(UI.UIbatch, glyphLayout, this.x+2, this.y+this.h/2+glyphLayout.height/2);
         UI.UIbatch.end();
@@ -122,11 +167,10 @@ public class TextInput extends UIElement{
             WindowManager.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
             WindowManager.shapeRenderer.setColor(1f,1f,1f,1f);
             try {
-                if (CursorVisible) if (CurserPosition == -1 || this.CurserPosition==1) {
+                if (CursorVisible) {
+                    glyphLayout.setText(this.bitmapFont, this.drawingText.substring(0, this.CurserPosition));
                     int pos = (int) (this.x + this.glyphLayout.width + formattingFrame.getBorderThickness() + 2);
-                    WindowManager.shapeRenderer.rectLine(pos, this.y + this.formattingFrame.getBorderThickness() + 1, pos, this.y - this.formattingFrame.getBorderThickness() + this.h - 1 * 2, 2);
-                } else if (this.CurserPosition > 0) {
-                    glyphLayout.setText(this.bitmapFont, this.text.substring(0, this.CurserPosition));
+                    WindowManager.shapeRenderer.rectLine(pos, this.y + this.formattingFrame.getBorderThickness() , pos, this.y - this.formattingFrame.getBorderThickness() + this.h - 1, 2);
                 }
             }catch (Exception e){
                 e.printStackTrace();
@@ -156,7 +200,7 @@ public class TextInput extends UIElement{
     }
 
     public String getText() {
-        return text;
+        return text.toString();
     }
 
     public String getDefaultText() {
@@ -172,10 +216,76 @@ public class TextInput extends UIElement{
     }
 
     public void setText(String text) {
-        this.text = text;
+        this.text = new StringBuilder(text);
     }
 
     public FormattingFrame getFormattingFrame() {
         return formattingFrame;
     }
+
+
+    public void cursorMovement() {
+
+        if (input.isKeyPressed(Input.Keys.LEFT)) {
+            if (!run_left) {
+                time_pressed_left = System.currentTimeMillis();
+                run_left = true;
+                if(CurserPosition>0) {
+                    CurserPosition--;
+                    resetBlink();
+                }
+            } else {
+                if (System.currentTimeMillis() - time_pressed_left > firstmovedelay) {
+                    time_pressed_left = System.currentTimeMillis() - movedelay;
+                    if(CurserPosition>0) {
+                        CurserPosition--;
+                        resetBlink();
+
+                    }
+                }
+            }
+        } else {
+            run_left = false;
+        }
+
+
+        if (input.isKeyPressed(Input.Keys.RIGHT)) {
+            if (!run_right) {
+                time_pressed_right = System.currentTimeMillis();
+                run_right = true;
+                if(CurserPosition<this.text.length()) {
+                    CurserPosition++;
+                    resetBlink();
+
+                }
+            } else {
+                if (System.currentTimeMillis() - time_pressed_right > firstmovedelay) {
+                    time_pressed_right = System.currentTimeMillis() - movedelay;
+                    if(CurserPosition<this.text.length()) {
+                        CurserPosition++;
+
+                        resetBlink();
+                    }
+                }
+            }
+        } else {
+            run_right = false;
+        }
+    }
+    private void resetBlink() {
+        this.timer=System.currentTimeMillis()+500;
+        this.CursorVisible = true;
+    }
+
+   /* protected void drawCursor (Drawable cursorPatch, Batch batch, BitmapFont font, float x, float y) {
+        float cursorHeight = this.h * cursorPercentHeight;
+        float cursorYPadding = (textHeight - cursorHeight) / 2;
+        cursorPatch.draw(batch,
+                x + textOffset + glyphPositions.get(cursor) - glyphPositions.get(visibleTextStart) + fontOffset + font.getData().cursorX,
+                y - textHeight - font.getDescent() + cursorYPadding, cursorPatch.getMinWidth(), cursorHeight);
+    }
+
+    */
+
+
 }

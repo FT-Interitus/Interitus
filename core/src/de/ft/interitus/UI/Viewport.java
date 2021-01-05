@@ -26,8 +26,8 @@ import static com.badlogic.gdx.Gdx.input;
 
 public class Viewport {
     public static final float ADDITIONAL_FRUSTRUM_SIZE = 0.7f;
-    public static long movedelay = 580;
-    public static long firstmovedelay = 600;
+    public static final long movedelay = 580;
+    public static final long firstmovedelay = 600;
     public static Frustum extendedfrustum = new Frustum();
     private static boolean run_left = false;
     private static boolean run_right = false;
