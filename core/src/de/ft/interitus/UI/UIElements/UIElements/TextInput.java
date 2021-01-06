@@ -59,6 +59,7 @@ public class TextInput extends UIElement{
     public TextInput(String text, BitmapFont bitmapFont){
         this(text);
         this.bitmapFont=bitmapFont;
+
     }
 
     @Override

@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import de.ft.interitus.UI.UIElements.UIElements.labels.TextLabel
 import de.ft.interitus.UI.UIElements.check.CheckCollision
+import de.ft.interitus.UI.uiManagement.UIManager
 import de.ft.interitus.Var
 import de.ft.interitus.WindowManager
 import de.ft.interitus.events.UI.EventManager
@@ -36,6 +37,11 @@ class RadioButton : UIElement {
         init()
     }
 
+    constructor(toggleState: Boolean) {
+        this.toggleState = toggleState
+        init()
+    }
+
     constructor(text: String, toggleState: Boolean) {
         this.toggleState = toggleState
         this.text = text
@@ -56,9 +62,9 @@ class RadioButton : UIElement {
 
         Gdx.gl.glLineWidth(2F)
         if (!super.disabled) {
-            WindowManager.shapeRenderer.setColor(0f / 255f, 150f / 255f, 136f / 255f, 1f)
+            WindowManager.shapeRenderer.color = UIManager.primaryColor
         } else {
-            WindowManager.shapeRenderer.setColor(221f / 255f, 221f / 255f, 221f / 255f, 1f)
+            WindowManager.shapeRenderer.color = UIManager.disabledColor
         }
 
 
@@ -67,7 +73,7 @@ class RadioButton : UIElement {
         WindowManager.shapeRenderer.set(ShapeRenderer.ShapeType.Filled)
 
         if (popOutAnimation&&Gdx.input.isButtonPressed(0)&&CheckCollision.checkCircleWithVector(radius.toInt(), this.x, this.y, Var.mousepressedoldwihoutunproject)) {
-            WindowManager.shapeRenderer.circle(this.x.toFloat(), this.y.toFloat(), radius+3, segments)
+            WindowManager.shapeRenderer.circle(this.x.toFloat(), this.y.toFloat(), radius+2, segments)
 
         }
 

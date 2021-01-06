@@ -30,11 +30,8 @@ import de.ft.interitus.UI.Notification.Notification;
 import de.ft.interitus.UI.Notification.NotificationManager;
 import de.ft.interitus.UI.UIElements.Grid;
 import de.ft.interitus.UI.UIElements.UIElementBar;
-import de.ft.interitus.UI.UIElements.UIElements.Button;
-import de.ft.interitus.UI.UIElements.UIElements.RadioButton;
-import de.ft.interitus.UI.UIElements.UIElements.RadioButtonGroup;
+import de.ft.interitus.UI.UIElements.UIElements.*;
 import de.ft.interitus.UI.UIElements.UIElements.TabBar.TabBar;
-import de.ft.interitus.UI.UIElements.UIElements.TextInput;
 import de.ft.interitus.UI.UIElements.UIElements.quickinfo.QuickInfo;
 import de.ft.interitus.UI.UIElements.dropdownmenue.DropDownMenue;
 import de.ft.interitus.UI.editor.Editor;
@@ -105,6 +102,7 @@ public class UI {
     private static RadioButton radioButton = (RadioButton) new RadioButton().setPosition(100,100);
     private static RadioButton radioButton1 = (RadioButton) new RadioButton().setPosition(100,140);
     private static RadioButton radioButton2 = (RadioButton) new RadioButton().setPosition(100,180);
+    private static CheckBox checkBox = (CheckBox) new CheckBox(true,"Hallo").setPosition(100,200);
     private static RadioButtonGroup group = new RadioButtonGroup();
     static  {
         group.add(radioButton);
@@ -684,6 +682,8 @@ public class UI {
         radioButton1.draw();
         radioButton2.draw();
 
+
+        checkBox.draw();
     }
 
 
