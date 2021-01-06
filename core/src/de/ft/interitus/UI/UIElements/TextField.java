@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -13,7 +13,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
-import de.ft.interitus.UI.InputManager;
 import de.ft.interitus.WindowManager;
 
 public class TextField {
@@ -27,7 +26,7 @@ public class TextField {
     BitmapFont font = new BitmapFont();
     Texture background;
     Texture Backgroundactive;
-
+    private final CheckMouse checkMouse = new CheckMouse();
     Texture curser;
     private boolean active = false;
     private String input = "default";
@@ -77,7 +76,7 @@ public class TextField {
 
 
     private void active() {
-        if (CheckMouse.isjustPressed(x, y, w, h, false)) {
+        if (checkMouse.isJustPressed(x, y, w, h, false)) {
             active = !active;
         }
         if (!CheckMouse.isMouseover(x, y, w, h, false) && Gdx.input.isButtonPressed(0)) {

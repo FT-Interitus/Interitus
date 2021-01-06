@@ -123,7 +123,7 @@ public class PopupMenue {
     private int getPressed() {
         int p = -1;
         for (int i = 0; i < buttons.size(); i++) {
-            if (buttons.get(i).isjustPressednormal()) {
+            if (buttons.get(i).isjustPressed()) {
                 p = i;
             }
         }

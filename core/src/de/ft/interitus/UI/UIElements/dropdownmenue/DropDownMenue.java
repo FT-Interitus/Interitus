@@ -90,7 +90,7 @@ public class DropDownMenue extends UIElement {
         UI.UIbatch.end();
 
         popupbutton.setBounds(this.x, this.y, this.w, this.h);
-        if (popupbutton.isjustPressednormal()) {
+        if (popupbutton.isjustPressed()) {
             opened = !opened;
         }
 

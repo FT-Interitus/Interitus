@@ -24,7 +24,7 @@ public class Button extends UIElement {
     public boolean heightoverText=false;
     private boolean isworking = false;
     private boolean ignore_uilock = false;
-
+    private final CheckMouse checkMouse = new CheckMouse();
     private String text;
     private Texture image = null;
     private Texture image_mouseover = null;
@@ -57,17 +57,21 @@ public class Button extends UIElement {
 
 
     public boolean isjustPressed() {
-        boolean pressed = false;
+        if (!UIVar.uilocked || this.isIgnore_uilock()) {
 
-        if (!disable && !UIVar.isdialogeopend) {
 
-            pressed = CheckMouse.isjustPressed(super.y, super.y, super.w, super.h, false);
-            return pressed;
+            if (!disable && !UIVar.isdialogeopend) {
 
-        } else {
+               return checkMouse.isJustPressed(super.x, super.y, super.w, super.h, false);
 
+
+            } else {
+
+                return false;
+
+            }
+        }else{
             return false;
-
         }
 
 

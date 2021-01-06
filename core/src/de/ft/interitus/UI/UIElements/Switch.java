@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -19,7 +19,7 @@ public class Switch {
     private final int multiplikatorecht = 3;
     private final float[] farbehebel = {1, 1, 1, 1};
     private final Vector2 mousesave = new Vector2();
-
+    private CheckMouse checkMouse = new CheckMouse();
     Texture background;
     SpriteBatch b = new SpriteBatch();
     Random random = new Random();
@@ -78,22 +78,18 @@ public class Switch {
     }
 
     public boolean isjustPressed() {
-        boolean pressed = false;
         if (!disable) {
-
-            pressed = CheckMouse.isjustPressed(x, y, w, h, false);
-
+            return checkMouse.isJustPressed(x, y, w, h, false);
         } else {
             return false;
         }
 
-        return pressed;
 
     }
 
     private void update() {
         if (isjustPressed()) {
-            if (disable == false) {
+            if (!disable) {
                 state = !state;
             } else {
                 wwwave = System.currentTimeMillis() + 500;

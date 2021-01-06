@@ -70,7 +70,7 @@ public class TabBar extends UIElement {
         home.getTabButton().setW(20);
         home.setH(this.h);
 
-        if (home.getTabButton().isjustPressednormal()) {
+        if (home.getTabButton().isjustPressed()) {
             WindowManager.switchto(WindowManager.Windows.welcome);
 
         }
@@ -100,7 +100,7 @@ public class TabBar extends UIElement {
             }
 
 
-            if (tabbs.get(i).getTabButton().isjustPressednormal()) {
+            if (tabbs.get(i).getTabButton().isjustPressed()) {
                 EventVar.globalEventManager.tabclicked(new GlobalTabClickEvent(this), tabbs.get(i));
 
                 selectedTabindex = i;
@@ -124,13 +124,13 @@ public class TabBar extends UIElement {
                 aktualxpluspos = aktualxpluspos + tabbs.get(i).getTabButton().getW() + 7;
 
             }
-            if (tabbs.get(i).getTabButton().isjustPressednormal()) {
+            if (tabbs.get(i).getTabButton().isjustPressed()) {
                 mousemerkpos.set(Gdx.input.getX(), Gdx.input.getY());
 
                 EventVar.globalEventManager.tabclicked(new GlobalTabClickEvent(this), tabbs.get(i));
             }
 
-            if (tabbs.get(i).getCloseButton().isjustPressednormal() && tabbs.get(i).isCloseable()) {
+            if (tabbs.get(i).getCloseButton().isjustPressed() && tabbs.get(i).isCloseable()) {
                 if (Var.openprojects.get(i).changes) {
 
                     String[] möglichkeiten = {"Verwerfen", "Speichern", "Abbrechen"};
@@ -189,7 +189,7 @@ public class TabBar extends UIElement {
         add.getTabButton().setW(20);
         add.setH(this.h);
 
-        if (add.getTabButton().isjustPressednormal()) {
+        if (add.getTabButton().isjustPressed()) {
             NewProjectWindow NPW = new NewProjectWindow();
             NPW.show();
         }

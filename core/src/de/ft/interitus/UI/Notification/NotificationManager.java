@@ -152,7 +152,7 @@ public class NotificationManager {
                 notifications.get(i).getCloseButton().setBounds(Gdx.graphics.getWidth() - IMAGE_MARGIN_RIGHT - MARGIN_RIGHT+notifications.get(i).getRollin(), UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i))+HEIGHT-IMAGE_MARGIN_TOP,10,10);
 
                 notifications.get(i).getCloseButton().draw();
-                if( notifications.get(i).getCloseButton().isjustPressednormal()) {
+                if( notifications.get(i).getCloseButton().isjustPressed()) {
                     notifications.get(i).setFadingout(true);
                     notifications.get(i).setClosedbyuser(true);
                     notifications.get(i).setFadeout(0.5f);

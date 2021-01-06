@@ -36,7 +36,7 @@ public class TextInput extends UIElement{
     private boolean CursorVisible=true;
     private long timer=0;
     private boolean isPassword = false;
-
+    private final CheckMouse checkMouse = new CheckMouse();
     static protected final char ENTER= '\r';
     static private final char TAB = '\t';
     static private final char DELETE = 127;
@@ -141,7 +141,7 @@ public class TextInput extends UIElement{
 
     @Override
     public void draw() {
-        if(CheckMouse.isJustPressedNormal(super.x,super.y,super.w,super.h, false))active=true;
+        if(checkMouse.isJustPressed(super.x,super.y,super.w,super.h, false))active=true;
         if(!CheckMouse.isMouseover(super.x,super.y,super.w,super.h, false) && Gdx.input.isButtonPressed(0))active=false;
 
         if(active){

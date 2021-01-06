@@ -1,74 +1,58 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
 package de.ft.interitus.UI.UIElements.check;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import de.ft.interitus.Var;
+import de.ft.interitus.WindowManager;
+import de.ft.interitus.WindowManager.Windows;
 import de.ft.interitus.utils.Unproject;
 
+import javax.imageio.event.IIOWriteWarningListener;
+
 public class CheckMouse {
-    private static final Vector2 mousesave = new Vector2();
-    private static boolean touched;
+    private  final Vector2 mousesave = new Vector2();
+    private  boolean touched;
 
-    //TODO unprojected Version doesn't work!!
-    public static boolean isjustPressed(int x, int y, int w, int h, boolean unproject) {
-        boolean pressed = false;
-
-        if (Gdx.input.isButtonPressed(0)) {
-            if(!unproject) {
-                if (Gdx.input.getX() > x && Gdx.input.getX() < x + w && Gdx.input.getY() > Gdx.graphics.getHeight() - y - h && Gdx.input.getY() < Gdx.graphics.getHeight() - y) {
-                    if (touched == false) {
-                        mousesave.set(Gdx.input.getX(), Gdx.input.getY());
-                        touched = true;
-                    }
-                }
-            }else{
-                if (Unproject.unproject().x > x && Unproject.unproject().x < x + w && Unproject.unproject().y > Gdx.graphics.getHeight() - y - h && Unproject.unproject().y < Gdx.graphics.getHeight() - y) {
-                    if (touched == false) {
-                        mousesave.set(Unproject.unproject().x, Unproject.unproject().y);
-                        touched = true;
-                    }
-                }
-            }
-
-        }
+    public boolean isJustPressed(int x, int y, int w, int h, boolean unproject) {
         if(!unproject) {
-            if (!Gdx.input.isButtonPressed(0) && Math.abs(Gdx.input.getX() - mousesave.x) < 1 && Math.abs(Gdx.input.getY() - mousesave.y) < 1 && touched) {
 
-                pressed = true;
-                touched = false;
-            } else {
-                pressed = false;
-            }
-            if (Math.abs(Gdx.input.getX() - mousesave.x) > 1 && Math.abs(Gdx.input.getY() - mousesave.y) > 1 && touched && !Gdx.input.isButtonPressed(0)) {
-                pressed = false;
-                touched = false;
-            }
-        }else {
-            if (!Gdx.input.isButtonPressed(0) && Math.abs(Unproject.unproject().x - mousesave.x) < 1 && Math.abs(Unproject.unproject().x - mousesave.y) < 1 && touched) {
 
-                pressed = true;
-                touched = false;
-            } else {
-                pressed = false;
+            if (!touched && Gdx.input.isButtonPressed(0) && CheckCollision.checkpointwithobject(x, y, w, h, Unproject.projected().x,Gdx.graphics.getHeight()-Unproject.projected().y)) {
+
+
+                touched = true;
+                System.out.println("first step done");
             }
-            if (Math.abs(Unproject.unproject().x - mousesave.x) > 1 && Math.abs(Unproject.unproject().y - mousesave.y) > 1 && touched && !Gdx.input.isButtonPressed(0)) {
-                pressed = false;
+            if(touched&&!Gdx.input.isButtonPressed(0)&&CheckCollision.checkpointwithobject(x,y,w,h,Var.mouseReleasePosWithoutUnproject.x,Gdx.graphics.getHeight()-Var.mouseReleasePosWithoutUnproject.y)) {
                 touched = false;
+                return true;
             }
+        }else{
+            if (!touched && Gdx.input.isButtonPressed(0) && CheckCollision.checkpointwithobject(x, y, w, h, Var.mouseDownPos)) {
+                touched = true;
+            }
+            if(touched&&!Gdx.input.isButtonPressed(0)&&CheckCollision.checkpointwithobject(x,y,w,h,Var.mouseReleasePos)) {
+                touched = false;
+                return true;
+            }
+
         }
 
 
-        return pressed;
+        return false;
+
 
     }
 
     public static boolean isJustPressedNormal(int x, int y, int w, int h, boolean unproject) {
+
       if(!unproject) {
           return Gdx.input.getX() > x && Gdx.input.getX() < x + w && Gdx.input.getY() > Gdx.graphics.getHeight() - y - h && Gdx.input.getY() < Gdx.graphics.getHeight() - y && Gdx.input.isButtonJustPressed(0);
       }else{

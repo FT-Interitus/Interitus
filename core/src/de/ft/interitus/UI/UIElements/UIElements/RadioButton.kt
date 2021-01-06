@@ -23,7 +23,9 @@ class RadioButton : UIElement {
     private var text = ""
     private val label = TextLabel(text)
     private val labelMargin = 10
-    private var popOutAnimation:Boolean = true;
+    private  var xMove = 0
+    private var yMove = 0;
+    private var movement = 1;
     val toggleEvent = EventManager<UIToggleEvent>()
 
     constructor() {
@@ -59,6 +61,14 @@ class RadioButton : UIElement {
         WindowManager.shapeRenderer.begin(ShapeRenderer.ShapeType.Line)
         WindowManager.shapeRenderer.setAutoShapeType(true)
 
+        if (!disabled&&Gdx.input.isButtonPressed(0)&&CheckCollision.checkCircleWithVector(radius.toInt(), this.x, this.y, Var.mousepressedoldwihoutunproject)) {
+           xMove = movement;
+            yMove = movement;
+
+        }else{
+            xMove = 0
+            yMove = 0
+        }
 
         Gdx.gl.glLineWidth(2F)
         if (!super.disabled) {
@@ -69,16 +79,13 @@ class RadioButton : UIElement {
 
 
 
-        WindowManager.shapeRenderer.circle(this.x.toFloat(), this.y.toFloat(), radius, segments)
+        WindowManager.shapeRenderer.circle(this.x.toFloat()+xMove, this.y.toFloat()-yMove, radius, segments)
         WindowManager.shapeRenderer.set(ShapeRenderer.ShapeType.Filled)
 
-        if (popOutAnimation&&Gdx.input.isButtonPressed(0)&&CheckCollision.checkCircleWithVector(radius.toInt(), this.x, this.y, Var.mousepressedoldwihoutunproject)) {
-            WindowManager.shapeRenderer.circle(this.x.toFloat(), this.y.toFloat(), radius+2, segments)
 
-        }
 
         if (toggleState) {
-            WindowManager.shapeRenderer.circle(this.x.toFloat(), this.y.toFloat(), radius - 3, segments)
+            WindowManager.shapeRenderer.circle(this.x.toFloat()+xMove, this.y.toFloat()-yMove, radius - 3, segments)
         }
         if (!this.disabled) {
             if (Gdx.input.isButtonPressed(0)) {

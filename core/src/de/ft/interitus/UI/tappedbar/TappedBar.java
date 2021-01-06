@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -51,7 +51,7 @@ public class TappedBar {
             tb.getTab_button().setW(48);
             tb.getTab_button().setH(17);
 
-            if (tb.getTab_button().isjustPressednormal()) {
+            if (tb.getTab_button().isjustPressed()) {
                 selectetContent = tb;
                 listener.change();
             }

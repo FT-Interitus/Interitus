@@ -626,14 +626,14 @@ public class UI {
             buttonbar.draw();
 
 
-            if (button_projectstructus.isjustPressednormal()) {
+            if (button_projectstructus.isjustPressed()) {
 
                 proset.show();
 
             }
 
 
-            if (UI.button_start.isjustPressednormal() && runselection.getSelectedElement() != null) {
+            if (UI.button_start.isjustPressed() && runselection.getSelectedElement() != null) {
                 //  UI.button_start.setDisable(true);
 
 
@@ -654,17 +654,17 @@ public class UI {
             }
 
 
-            if (UI.button_editor.isjustPressednormal()) {
+            if (UI.button_editor.isjustPressed()) {
 
                 // UI.button_editor.setIsworking(true); // TODO: 02.08.20 Build Project
                 Editor.open();
             }
 
-            if (UI.button_stop.isjustPressednormal()) {
+            if (UI.button_stop.isjustPressed()) {
                 ProjectManager.getActProjectVar().projectType.getCompiler().Interrupt();
             }
 
-            if (UI.button_addrunconfig.isjustPressednormal()) {
+            if (UI.button_addrunconfig.isjustPressed()) {
                 MANUALCONFIG.show();
             }
 

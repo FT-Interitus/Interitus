@@ -80,9 +80,9 @@ public class ZoomUI extends UI {
     @Override
     protected void draw() {
         textLabel.setText(Viewport.getZoomPercentage() + "%");
-        if (plus.isjustPressednormal()) Viewport.increaseZoom(ProgramingSpace.cam);
-        if (minus.isjustPressednormal()) Viewport.decreaseZoom(ProgramingSpace.cam);
-        if (reset.isjustPressednormal()) Viewport.resetZoom(ProgramingSpace.cam);
+        if (plus.isjustPressed()) Viewport.increaseZoom(ProgramingSpace.cam);
+        if (minus.isjustPressed()) Viewport.decreaseZoom(ProgramingSpace.cam);
+        if (reset.isjustPressed()) Viewport.resetZoom(ProgramingSpace.cam);
 
         formattingFrame.setPosition(Gdx.graphics.getWidth() - UIVar.abstandvonRand - formattingFrame.w - 5, UIVar.programmflaeche_y + UIVar.programmflaeche_h - formattingFrame.h - 5);
         formattingFrame.draw();
