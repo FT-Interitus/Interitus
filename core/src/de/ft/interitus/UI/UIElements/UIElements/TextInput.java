@@ -22,7 +22,6 @@ import de.ft.interitus.UI.UIElements.check.CheckMouse;
 import de.ft.interitus.WindowManager;
 import de.ft.interitus.loading.AssetLoader;
 
-import static com.badlogic.gdx.Gdx.input;
 
 public class TextInput extends UIElement{
     private StringBuilder text;
@@ -120,7 +119,7 @@ public class TextInput extends UIElement{
                         CurserPosition++;
                         resetBlink();
 
-                    } else if (key == 8 && text.length() > 0&&text.length()>=CurserPosition) {
+                    } else if (key == 8 && text.length() > 0&&text.length()>=CurserPosition&&CurserPosition!=0) {
                         text.deleteCharAt(CurserPosition - 1);
                         CurserPosition--;
                         resetBlink();
@@ -141,7 +140,24 @@ public class TextInput extends UIElement{
 
     @Override
     public void draw() {
-        if(checkMouse.isJustPressed(super.x,super.y,super.w,super.h, false))active=true;
+        if(checkMouse.isJustPressed(super.x,super.y,super.w,super.h, false)) {
+            active = true;
+        }
+
+        if(CheckMouse.isJustPressedNormal(super.x,super.y,super.w,super.h, false)) {
+            int near = 999999999;
+            int nearestValue = -1;
+
+            for(int i=0;i<text.length();i++) {
+                glyphLayout.setText(this.bitmapFont,this.text.substring(0,i));
+                if(Math.abs((glyphLayout.width+this.x)- Gdx.input.getX())<near) {
+                    nearestValue = i;
+                    near = (int) Math.abs((glyphLayout.width+this.x)- Gdx.input.getX());
+                }
+
+            }
+            CurserPosition = nearestValue;
+        }
         if(!CheckMouse.isMouseover(super.x,super.y,super.w,super.h, false) && Gdx.input.isButtonPressed(0))active=false;
 
         if(active){
@@ -227,7 +243,7 @@ public class TextInput extends UIElement{
 
     public void cursorMovement() {
 
-        if (input.isKeyPressed(Input.Keys.LEFT)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
             if (!run_left) {
                 time_pressed_left = System.currentTimeMillis();
                 run_left = true;
@@ -250,7 +266,7 @@ public class TextInput extends UIElement{
         }
 
 
-        if (input.isKeyPressed(Input.Keys.RIGHT)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             if (!run_right) {
                 time_pressed_right = System.currentTimeMillis();
                 run_right = true;

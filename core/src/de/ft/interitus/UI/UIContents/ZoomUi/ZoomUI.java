@@ -59,6 +59,9 @@ public class ZoomUI extends UI {
         grid.addElement(minus);
         grid.addElement(new PlaceHolder().setW(10));
         grid.addElement(reset);
+        grid.row();
+        grid.addElement(new PlaceHolder().setW(-100).setH(1));
+
 
 
         grid.setVerticalArrangement(true);

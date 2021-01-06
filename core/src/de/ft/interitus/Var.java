@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -60,7 +60,7 @@ public class Var {
 
     public static final Vector2 mouseDownPos = new Vector2(1, 1); //Wo war die Maus als das letzte mal eine Taste gedrückt wurde
 
-    public static final Vector2 mousepressedoldwihoutunproject = new Vector2(1, 1); //Wo war die Maus als das letzte mal eine Taste gedrückt wurde
+    public static final Vector2 mouseDownPosWithoutUnproject = new Vector2(1, 1); //Wo war die Maus als das letzte mal eine Taste gedrückt wurde
 
     public static final Vector2 mouseReleasePos = new Vector2(1, 1); //Wo war die Maus als das letzte mal eine Taste gedrückt wurde
 
@@ -70,7 +70,6 @@ public class Var {
     public static ArrayList<Window> extendsWindows = new ArrayList<>();
     public static Window splashscreen = null;
 
-    public static boolean updatepermissionlock = false;
     public static Lwjgl3Window window = null;
     public static ProgramingSpace programingSpace;
     public static Welcome welcome;

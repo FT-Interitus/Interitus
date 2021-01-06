@@ -6,15 +6,10 @@
 package de.ft.interitus.UI.UIElements.check;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import de.ft.interitus.Var;
-import de.ft.interitus.WindowManager;
-import de.ft.interitus.WindowManager.Windows;
 import de.ft.interitus.utils.Unproject;
-
-import javax.imageio.event.IIOWriteWarningListener;
 
 public class CheckMouse {
     private  final Vector2 mousesave = new Vector2();
@@ -88,7 +83,7 @@ public class CheckMouse {
     }
 
     public static boolean wasMousePressed(int x, int y, int w, int h) {
-        return Var.mousepressedoldwihoutunproject.x > x && Var.mousepressedoldwihoutunproject.x < x + w && Var.mousepressedoldwihoutunproject.y > Gdx.graphics.getHeight() - y - h && Var.mousepressedoldwihoutunproject.y < Gdx.graphics.getHeight() - y && Gdx.input.isButtonPressed(0);
+        return Var.mouseDownPosWithoutUnproject.x > x && Var.mouseDownPosWithoutUnproject.x < x + w && Var.mouseDownPosWithoutUnproject.y > Gdx.graphics.getHeight() - y - h && Var.mouseDownPosWithoutUnproject.y < Gdx.graphics.getHeight() - y && Gdx.input.isButtonPressed(0);
     }
 
 

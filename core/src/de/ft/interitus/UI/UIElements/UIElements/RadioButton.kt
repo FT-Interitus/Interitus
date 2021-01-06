@@ -61,7 +61,7 @@ class RadioButton : UIElement {
         WindowManager.shapeRenderer.begin(ShapeRenderer.ShapeType.Line)
         WindowManager.shapeRenderer.setAutoShapeType(true)
 
-        if (!disabled&&Gdx.input.isButtonPressed(0)&&CheckCollision.checkCircleWithVector(radius.toInt(), this.x, this.y, Var.mousepressedoldwihoutunproject)) {
+        if (!disabled&&Gdx.input.isButtonPressed(0)&&CheckCollision.checkCircleWithVector(radius.toInt(), this.x, this.y, Var.mouseDownPosWithoutUnproject)) {
            xMove = movement;
             yMove = movement;
 

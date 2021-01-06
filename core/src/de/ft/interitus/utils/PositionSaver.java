@@ -20,7 +20,7 @@ public class PositionSaver {
             isPressed = true;
             if (ProgramingSpace.cam != null)
                 Var.mouseDownPos.set(Unproject.unproject());
-            Var.mousepressedoldwihoutunproject.set(Gdx.input.getX(), Gdx.input.getY());
+            Var.mouseDownPosWithoutUnproject.set(Gdx.input.getX(), Gdx.input.getY());
         }
 
         if (!Gdx.input.isButtonPressed(0) && isPressed) {

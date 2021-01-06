@@ -14,7 +14,6 @@ import de.ft.interitus.Var
 import de.ft.interitus.WindowManager
 import de.ft.interitus.events.UI.EventManager
 import de.ft.interitus.events.UI.UIToggleEvent
-import de.ft.interitus.utils.Unproject
 
 class CheckBox : UIElement{
 
@@ -42,7 +41,7 @@ class CheckBox : UIElement{
 
     override fun draw() {
 
-        if(!disabled&&Gdx.input.isButtonPressed(0)&& CheckCollision.checkpointwithobject(x,y,size,size, Var.mousepressedoldwihoutunproject.x,Gdx.graphics.height-Var.mousepressedoldwihoutunproject.y)) {
+        if(!disabled&&Gdx.input.isButtonPressed(0)&& CheckCollision.checkpointwithobject(x,y,size,size, Var.mouseDownPosWithoutUnproject.x,Gdx.graphics.height-Var.mouseDownPosWithoutUnproject.y)) {
         xMove = movement
         yMove = movement;
             clickedOn = true;
