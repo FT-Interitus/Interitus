@@ -10,6 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.Wire;
 import de.ft.interitus.UI.UIElements.check.CheckCollision;
+import de.ft.interitus.UI.WindowAPI;
 import de.ft.interitus.Var;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.Unproject;
@@ -53,9 +54,9 @@ public class BlockWireManager {
         boolean mousedown = CheckCollision.checkVectors(connector, 20, 20, Var.mouseDownPos, 1, 1);
         if(tolerance) {
             tempVector.set(Var.mouseDownPos);
-            return Gdx.input.isButtonPressed(0) && mousedown && tempVector.dst(Unproject.unproject()) > movingTolerance;
+            return WindowAPI.isButtonPressed(0) && mousedown && tempVector.dst(Unproject.unproject()) > movingTolerance;
         }else{
-            return  Gdx.input.isButtonJustPressed(0)&&mousedown;
+            return  WindowAPI.isButtonJustPressed(0)&&mousedown;
         }
     }
 
@@ -71,7 +72,7 @@ public class BlockWireManager {
 
     protected static void updateMovingWire() {
         assert ProjectManager.getActProjectVar()!=null;
-        if(Gdx.input.isButtonJustPressed(0)) {
+        if(WindowAPI.isButtonJustPressed(0)) {
             if(!clickedOnBlock()) {
                 ProjectManager.getActProjectVar().movingWire.delete();
             }

@@ -13,6 +13,7 @@ import de.ft.interitus.UI.ProgramGrid;
 import de.ft.interitus.UI.UIElements.check.CheckCollision;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
 import de.ft.interitus.UI.UIVar;
+import de.ft.interitus.UI.WindowAPI;
 import de.ft.interitus.Var;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.ProjectVar;
@@ -74,7 +75,7 @@ public class BlockMovingManager {
      */
     private static boolean isBlockMoving(Block block) {
         assert ProjectManager.getActProjectVar() != null;
-        if (!Gdx.input.isButtonPressed(0)) return false;
+        if (!WindowAPI.isButtonPressed(0)) return false;
         if (!block.isMarked()) return false;
         if (projectVar.moving_block == block) return true;
         if (Var.mouseDownPos.dst(Unproject.unproject()) <= movingTolerance) return false;

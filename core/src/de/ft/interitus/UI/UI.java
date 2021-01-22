@@ -119,8 +119,8 @@ public class UI {
             BlockTappedBar.userresize();
 
         }
-        // Var.w=Gdx.graphics.getWidth();
-        //Var.h=Gdx.graphics.getHeight();
+        // Var.w=WindowAPI.getWidth();
+        //Var.h=WindowAPI.getHeight();
         renderer.begin(ShapeRenderer.ShapeType.Filled);
 
 
@@ -128,22 +128,22 @@ public class UI {
 
 
         if (flaeche == true) {/////////////   \/  \/  \/  \/  die programmierfläche wird gedrawd
-            UIVar.programmflaeche_h = Gdx.graphics.getHeight() - (UIVar.untenhohe + UIVar.abstandvonRand) - UIVar.abstandvonRand - (int) menuBar.getTable().getHeight() - UIVar.buttonbarzeile_h - UIVar.abstandvonRand;
+            UIVar.programmflaeche_h = WindowAPI.getHeight() - (UIVar.untenhohe + UIVar.abstandvonRand) - UIVar.abstandvonRand - (int) menuBar.getTable().getHeight() - UIVar.buttonbarzeile_h - UIVar.abstandvonRand;
             UIVar.programmflaeche_y = UIVar.untenhohe + UIVar.abstandvonRand;
-            renderer.roundendrect(UIVar.abstandvonRand, UIVar.programmflaeche_y, Gdx.graphics.getWidth() - UIVar.abstandvonRand * 2, UIVar.programmflaeche_h, UIVar.radius);
+            renderer.roundendrect(UIVar.abstandvonRand, UIVar.programmflaeche_y, WindowAPI.getWidth() - UIVar.abstandvonRand * 2, UIVar.programmflaeche_h, UIVar.radius);
         } else {
 
             renderer.setColor(Settings.theme.BlocksColor());
 
             UIVar.BlockBarX = UIVar.abstandvonRand;
             UIVar.BlockBarY = UIVar.abstandvonRand;
-            UIVar.BlockBarW = Gdx.graphics.getWidth() - UIVar.abstandvonRand * 2 - UIVar.unteneinteilung;
+            UIVar.BlockBarW = WindowAPI.getWidth() - UIVar.abstandvonRand * 2 - UIVar.unteneinteilung;
             UIVar.BlockBarH = UIVar.untenhohe - UIVar.abstandvonRand;//  \/  \/ blockbar wird gedrawed
             renderer.roundendrect(UIVar.abstandvonRand, UIVar.abstandvonRand, UIVar.BlockBarW, UIVar.BlockBarH, UIVar.radius);
 
             renderer.setColor(Settings.theme.DeviceConnectionColor());
 
-            renderer.roundendrect(Gdx.graphics.getWidth() - UIVar.unteneinteilung, UIVar.abstandvonRand, UIVar.unteneinteilung - UIVar.abstandvonRand, UIVar.untenhohe - UIVar.abstandvonRand, UIVar.radius);
+            renderer.roundendrect(WindowAPI.getWidth() - UIVar.unteneinteilung, UIVar.abstandvonRand, UIVar.unteneinteilung - UIVar.abstandvonRand, UIVar.untenhohe - UIVar.abstandvonRand, UIVar.radius);
         }
         renderer.end();
 
@@ -185,7 +185,7 @@ public class UI {
 
             UIVar.blockeinstellungen_w = 170;
             UIVar.blockeinstellungen_h = UIVar.programmflaeche_h - UIVar.abstandvonRand * 2;
-            UIVar.blockeinstellungen_x = Gdx.graphics.getWidth() - UIVar.abstandvonRand * 2 - UIVar.blockeinstellungen_w - wishaniposition;
+            UIVar.blockeinstellungen_x = WindowAPI.getWidth() - UIVar.abstandvonRand * 2 - UIVar.blockeinstellungen_w - wishaniposition;
             UIVar.blockeinstellungen_y = UIVar.programmflaeche_y + UIVar.abstandvonRand;
 
             if (wishaniposition < 0) {
@@ -380,7 +380,7 @@ public class UI {
 
 
         UI.UIbatch = new SpriteBatch();
-        UI.UIcam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        UI.UIcam = new OrthographicCamera(WindowAPI.getWidth(), WindowAPI.getHeight());
         UI.UIviewport = new ScreenViewport(UI.UIcam);
 
         stage = new Stage(UIviewport, UIbatch);
@@ -587,10 +587,10 @@ public class UI {
     public static void update(float delta) {
 
 
-        // Program.logger.config("Pos:" + (Gdx.graphics.getHeight()-menuBar.getTable().getHeight()-20-(UIVar.abstandvonRand*2)));
+        // Program.logger.config("Pos:" + (WindowAPI.getHeight()-menuBar.getTable().getHeight()-20-(UIVar.abstandvonRand*2)));
 
         // Program.logger.config((UIVar.programmflaeche_h + UIVar.programmflaeche_y));
-        tabbar.setBounds(UIVar.abstandvonRand, (int) (Gdx.graphics.getHeight() - menuBar.getTable().getHeight() - 20 - (UIVar.abstandvonRand * 2)), 300, 20);
+        tabbar.setBounds(UIVar.abstandvonRand, (int) (WindowAPI.getHeight() - menuBar.getTable().getHeight() - 20 - (UIVar.abstandvonRand * 2)), 300, 20);
         tabbar.draw();
 
         if (UIVar.uilocked != isuilock) {
@@ -613,15 +613,15 @@ public class UI {
             stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 60f));
         }
 
-        root.setPosition(UIcam.position.x - ((float) Gdx.graphics.getWidth()) / 2, UIcam.position.y - ((float) Gdx.graphics.getHeight()) / 2);
+        root.setPosition(UIcam.position.x - ((float) WindowAPI.getWidth()) / 2, UIcam.position.y - ((float) WindowAPI.getHeight()) / 2);
         stage.draw();
 
         recent.setSubMenu(createProjectsSubMenu(Data.filename.size(), GetStringArray(Data.filename)));
 
         //root.setPosition(0,0);
         if (Var.inProgram) {
-            buttonbar.setX(Gdx.graphics.getWidth() - 10);
-            buttonbar.setY((int) (Gdx.graphics.getHeight() - menuBar.getTable().getHeight() - 20 - (UIVar.abstandvonRand * 1)));
+            buttonbar.setX(WindowAPI.getWidth() - 10);
+            buttonbar.setY((int) (WindowAPI.getHeight() - menuBar.getTable().getHeight() - 20 - (UIVar.abstandvonRand * 1)));
 
             buttonbar.draw();
 

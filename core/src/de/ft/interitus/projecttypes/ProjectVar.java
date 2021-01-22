@@ -12,6 +12,7 @@ import de.ft.interitus.Block.DataWire;
 import de.ft.interitus.Block.Wire;
 import de.ft.interitus.UI.ManualConfig.DeviceConfiguration;
 import de.ft.interitus.UI.UI;
+import de.ft.interitus.UI.WindowAPI;
 import de.ft.interitus.Var;
 import de.ft.interitus.projecttypes.Addons.Addon;
 import de.ft.interitus.utils.ArrayList;
@@ -53,7 +54,7 @@ public abstract class ProjectVar {
 
     public ProjectVar() {
         currentstarttime = System.currentTimeMillis();
-        cam_pos.set(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f);
+        cam_pos.set(WindowAPI.getWidth() / 2f, WindowAPI.getHeight() / 2f);
 
     }
 

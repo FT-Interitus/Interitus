@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -10,6 +10,7 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import de.ft.interitus.UI.UI;
+import de.ft.interitus.UI.WindowAPI;
 import de.ft.interitus.loading.AssetLoader;
 
 
@@ -68,7 +69,7 @@ public class Welcome extends ScreenAdapter {
 
 
         UI.UIbatch.begin();
-        AssetLoader.welcomefont.draw(UI.UIbatch, "Hallo " + Var.username, 30, Gdx.graphics.getHeight() - 80);
+        AssetLoader.welcomefont.draw(UI.UIbatch, "Hallo " + Var.username, 30, WindowAPI.getHeight() - 80);
         UI.UIbatch.end();
 
         WindowManager.drawer(delta);

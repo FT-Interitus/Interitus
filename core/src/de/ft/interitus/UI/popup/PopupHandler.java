@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import de.ft.interitus.Program;
 import de.ft.interitus.UI.UIVar;
+import de.ft.interitus.UI.WindowAPI;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.rightclick.RightClickOpenRequestEvent;
 import de.ft.interitus.events.rightclick.RightClickPerformActionEvent;
@@ -24,10 +25,10 @@ public class PopupHandler {
 
         if (!UIVar.isdialogeopend) {
 
-            if (Gdx.input.isButtonJustPressed(Input.Buttons.RIGHT)) {
+            if (WindowAPI.isButtonJustPressed(Input.Buttons.RIGHT)) {
 
                     highestPriority = null;
-                    ArrayList<PopupMenue> requestedMenues = EventVar.rightClickEventManager.openrequest(new RightClickOpenRequestEvent(Program.INSTANCE), Gdx.input.getX(), Gdx.input.getY());
+                    ArrayList<PopupMenue> requestedMenues = EventVar.rightClickEventManager.openrequest(new RightClickOpenRequestEvent(Program.INSTANCE), WindowAPI.getX(), WindowAPI.getY());
 
                     for (PopupMenue popupMenu : requestedMenues) {
                         if (popupMenu != null) {
@@ -47,7 +48,7 @@ public class PopupHandler {
 
                     if(highestPriority!=null){
                         highestPriority.setShow(true);
-                        highestPriority.setBounds(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY());
+                        highestPriority.setBounds(WindowAPI.getX(), WindowAPI.getHeight() - WindowAPI.getY());
                     }
 
             }

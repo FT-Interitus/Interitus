@@ -18,14 +18,13 @@ import de.ft.interitus.Block.ThreadManager;
 import de.ft.interitus.UI.ProgramGrid;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.PressedKeys;
+import de.ft.interitus.UI.WindowAPI;
 import de.ft.interitus.UI.codehovering.CodeHovering;
 import de.ft.interitus.UI.tappedbar.BlockTappedBar;
 import de.ft.interitus.datamanager.programmdata.Updater;
 import de.ft.interitus.events.EventManager;
 import de.ft.interitus.events.EventVar;
-import de.ft.interitus.plugin.Plugin;
 import de.ft.interitus.projecttypes.ProjectManager;
-import de.ft.interitus.utils.PositionSaver;
 
 import java.awt.*;
 
@@ -49,13 +48,13 @@ public class ProgramingSpace extends ScreenAdapter {
     public void open() {
 
 
-        cam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        cam = new OrthographicCamera(WindowAPI.getWidth(), WindowAPI.getHeight());
 
         viewport = new ScreenViewport(cam);
 
 
-        cam.position.set(Gdx.graphics.getWidth() / 2f + 50, Gdx.graphics.getHeight() / 2f, 0);
-        UI.UIcam.position.set(Gdx.graphics.getWidth() / 2f + 50, Gdx.graphics.getHeight() / 2f, 0);
+        cam.position.set(WindowAPI.getWidth() / 2f + 50, WindowAPI.getHeight() / 2f, 0);
+        UI.UIcam.position.set(WindowAPI.getWidth() / 2f + 50, WindowAPI.getHeight() / 2f, 0);
 
 
     }
@@ -90,7 +89,7 @@ public class ProgramingSpace extends ScreenAdapter {
         WindowManager.updateWindow();
 
         if (Var.openprojects.size() == 0) {
-            WindowManager.switchto(WindowManager.Windows.welcome);
+            WindowManager.switchTo(WindowManager.Windows.welcome);
         }
 
 

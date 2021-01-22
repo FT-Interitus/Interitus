@@ -13,6 +13,7 @@ import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import de.ft.interitus.Program;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.UIElements.UIElement;
+import de.ft.interitus.UI.WindowAPI;
 import de.ft.interitus.UI.newproject.NewProjectWindow;
 import de.ft.interitus.Var;
 import de.ft.interitus.WindowManager;
@@ -71,7 +72,7 @@ public class TabBar extends UIElement {
         home.setH(this.h);
 
         if (home.getTabButton().isjustPressed()) {
-            WindowManager.switchto(WindowManager.Windows.welcome);
+            WindowManager.switchTo(WindowManager.Windows.welcome);
 
         }
 
@@ -90,7 +91,7 @@ public class TabBar extends UIElement {
 
             if (doonce == false) {
                 //Program.logger.config("moving");
-                tabbs.get(selectedTabindex).setX(tabbs.get(selectedTabindex).getX() + (int) (Gdx.input.getX() - mousemerkpos.x));
+                tabbs.get(selectedTabindex).setX(tabbs.get(selectedTabindex).getX() + (int) (WindowAPI.getX() - mousemerkpos.x));
                 //int half=(tabbs.get(selectedTabindex).getTabButton().getW()+tabbs.get(selectedTabindex).getCloseButton().getW()+7)/2;
                 //if(tabbs.get(selectedTabindex+1)!=null){
                 //if(tabbs.get(selectedTabindex+1).getTabButton().getX()+tabbs.get(selectedTabindex+1).getTabButton().getW()-half < tabbs.get(selectedTabindex).getTabButton().getX()+half){
@@ -107,10 +108,10 @@ public class TabBar extends UIElement {
                 if (doonce = true) {
                     doonce = false;
                     Program.logger.config("doonce");
-                    mousemerkpos.set(Gdx.input.getX(), Gdx.input.getY());
+                    mousemerkpos.set(WindowAPI.getX(), WindowAPI.getY());
                 }
             }
-            if (!Gdx.input.isButtonPressed(0) && !doonce) {
+            if (!WindowAPI.isButtonPressed(0) && !doonce) {
                 doonce = true;
             }
 
@@ -125,7 +126,7 @@ public class TabBar extends UIElement {
 
             }
             if (tabbs.get(i).getTabButton().isjustPressed()) {
-                mousemerkpos.set(Gdx.input.getX(), Gdx.input.getY());
+                mousemerkpos.set(WindowAPI.getX(), WindowAPI.getY());
 
                 EventVar.globalEventManager.tabclicked(new GlobalTabClickEvent(this), tabbs.get(i));
             }

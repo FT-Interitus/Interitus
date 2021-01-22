@@ -8,6 +8,7 @@ package de.ft.interitus.utils;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.ProgramingSpace;
+import de.ft.interitus.UI.WindowAPI;
 import de.ft.interitus.Var;
 
 public class PositionSaver {
@@ -16,18 +17,18 @@ public class PositionSaver {
     private static boolean isPressed = false;
 
     public static void save() {
-        if (Gdx.input.isButtonJustPressed(0)) {
+        if (WindowAPI.isButtonJustPressed(0)) {
             isPressed = true;
             if (ProgramingSpace.cam != null)
                 Var.mouseDownPos.set(Unproject.unproject());
-            Var.mouseDownPosWithoutUnproject.set(Gdx.input.getX(), Gdx.input.getY());
+            Var.mouseDownPosWithoutUnproject.set(WindowAPI.getX(), WindowAPI.getY());
         }
 
-        if (!Gdx.input.isButtonPressed(0) && isPressed) {
+        if (!WindowAPI.isButtonPressed(0) && isPressed) {
             isPressed = false;
             if (ProgramingSpace.cam != null)
                 Var.mouseReleasePos.set(Unproject.unproject());
-            Var.mouseReleasePosWithoutUnproject.set(Gdx.input.getX(), Gdx.input.getY());
+            Var.mouseReleasePosWithoutUnproject.set(WindowAPI.getX(), WindowAPI.getY());
         }
     }
 }

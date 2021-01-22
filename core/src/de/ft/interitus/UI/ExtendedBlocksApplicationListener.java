@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -29,16 +29,16 @@ public class ExtendedBlocksApplicationListener implements ApplicationListener {
 
     @Override
     public void create() {
-        cam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        cam = new OrthographicCamera(WindowAPI.getWidth(), WindowAPI.getHeight());
 
         viewport = new ScreenViewport(cam);
 
         UIbatch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
 
-        cam.position.set(Gdx.graphics.getWidth() / 2f + 50, Gdx.graphics.getHeight() / 2f, 0);
-        UIcam = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        UIcam.position.set(Gdx.graphics.getWidth() / 2f + 50, Gdx.graphics.getHeight() / 2f, 0);
+        cam.position.set(WindowAPI.getWidth() / 2f + 50, WindowAPI.getHeight() / 2f, 0);
+        UIcam = new OrthographicCamera(WindowAPI.getWidth(), WindowAPI.getHeight());
+        UIcam.position.set(WindowAPI.getWidth() / 2f + 50, WindowAPI.getHeight() / 2f, 0);
 
         inputManager = new InputManager();
 

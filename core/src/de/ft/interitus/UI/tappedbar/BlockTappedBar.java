@@ -13,6 +13,7 @@ import de.ft.interitus.Program;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.UIElements.quickinfo.QuickInfoContent;
 import de.ft.interitus.UI.UIVar;
+import de.ft.interitus.UI.WindowAPI;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.projecttypes.Addons.Addon;
@@ -126,13 +127,13 @@ public class BlockTappedBar {
 
     public static void userresize() {
         if (!curserveränderungsblockade) {
-            if (Gdx.input.getX() > UIVar.BlockBarW + UIVar.abstandvonRand && Gdx.input.getX() < UIVar.BlockBarW + UIVar.abstandvonRand * 2 && Gdx.graphics.getHeight() - Gdx.input.getY() > UIVar.abstandvonRand && Gdx.graphics.getHeight() - Gdx.input.getY() < UIVar.abstandvonRand + UIVar.BlockBarH) {
+            if (WindowAPI.getX() > UIVar.BlockBarW + UIVar.abstandvonRand && WindowAPI.getX() < UIVar.BlockBarW + UIVar.abstandvonRand * 2 && WindowAPI.getHeight() - WindowAPI.getY() > UIVar.abstandvonRand && WindowAPI.getHeight() - WindowAPI.getY() < UIVar.abstandvonRand + UIVar.BlockBarH) {
                 if (curserstate != 0) {
                     Gdx.graphics.setSystemCursor(Cursor.SystemCursor.HorizontalResize);
                     curserstate = 0;
                 }
 
-            } else if (Gdx.graphics.getHeight() - Gdx.input.getY() > UIVar.abstandvonRand + UIVar.BlockBarH && Gdx.graphics.getHeight() - Gdx.input.getY() < UIVar.abstandvonRand * 2 + UIVar.BlockBarH) {
+            } else if (WindowAPI.getHeight() - WindowAPI.getY() > UIVar.abstandvonRand + UIVar.BlockBarH && WindowAPI.getHeight() - WindowAPI.getY() < UIVar.abstandvonRand * 2 + UIVar.BlockBarH) {
                 if (curserstate != 2) {
                     Gdx.graphics.setSystemCursor(Cursor.SystemCursor.VerticalResize);
                     curserstate = 2;
@@ -144,20 +145,20 @@ public class BlockTappedBar {
             }
         }
 
-        if (curserstate == 0 && Gdx.input.isButtonJustPressed(0)) {
+        if (curserstate == 0 && WindowAPI.isButtonJustPressed(0)) {
             verticalrezising = true;
             curserveränderungsblockade = true;
         }
-        if (!Gdx.input.isButtonPressed(0)) {
+        if (!WindowAPI.isButtonPressed(0)) {
             verticalrezising = false;
             curserveränderungsblockade = false;
         }
         if (verticalrezising) {
-            UIVar.unteneinteilung = Gdx.graphics.getWidth() - Gdx.input.getX() - UIVar.abstandvonRand / 2;
-            if (Gdx.graphics.getWidth() - UIVar.unteneinteilung < BlockTappedBar.tb.getTaps().size() * BlockTappedBar.tb.getTaps().get(0).getTab_button().getW() + BlockTappedBar.tb.getButtonabstand() * BlockTappedBar.tb.getTaps().size() + 20) {
-                UIVar.unteneinteilung = Gdx.graphics.getWidth() - (BlockTappedBar.tb.getTaps().size() * BlockTappedBar.tb.getTaps().get(0).getTab_button().getW() + BlockTappedBar.tb.getButtonabstand() * BlockTappedBar.tb.getTaps().size() + 20);
+            UIVar.unteneinteilung = WindowAPI.getWidth() - WindowAPI.getX() - UIVar.abstandvonRand / 2;
+            if (WindowAPI.getWidth() - UIVar.unteneinteilung < BlockTappedBar.tb.getTaps().size() * BlockTappedBar.tb.getTaps().get(0).getTab_button().getW() + BlockTappedBar.tb.getButtonabstand() * BlockTappedBar.tb.getTaps().size() + 20) {
+                UIVar.unteneinteilung = WindowAPI.getWidth() - (BlockTappedBar.tb.getTaps().size() * BlockTappedBar.tb.getTaps().get(0).getTab_button().getW() + BlockTappedBar.tb.getButtonabstand() * BlockTappedBar.tb.getTaps().size() + 20);
             }
-            if (Gdx.graphics.getWidth() - UIVar.unteneinteilung > Gdx.graphics.getWidth() - UIVar.righteinraste) {
+            if (WindowAPI.getWidth() - UIVar.unteneinteilung > WindowAPI.getWidth() - UIVar.righteinraste) {
                 UIVar.unteneinteilung = UIVar.righteinraste;
 
             }
@@ -165,21 +166,21 @@ public class BlockTappedBar {
         }
 
 
-        if (curserstate == 2 && Gdx.input.isButtonJustPressed(0)) {
+        if (curserstate == 2 && WindowAPI.isButtonJustPressed(0)) {
             horizontalrezising = true;
             curserveränderungsblockade = true;
         }
-        if (!Gdx.input.isButtonPressed(0)) {
+        if (!WindowAPI.isButtonPressed(0)) {
             horizontalrezising = false;
             curserveränderungsblockade = false;
         }
         if (horizontalrezising) {
-            UIVar.untenhohe = Gdx.graphics.getHeight() - Gdx.input.getY() - UIVar.abstandvonRand / 2;
+            UIVar.untenhohe = WindowAPI.getHeight() - WindowAPI.getY() - UIVar.abstandvonRand / 2;
             if (UIVar.untenhohe < UIVar.untenkante) {
                 UIVar.untenhohe = UIVar.untenkante;
             }
-            if (UIVar.untenhohe > Gdx.graphics.getHeight() / 2) {
-                UIVar.untenhohe = Gdx.graphics.getHeight() / 2;
+            if (UIVar.untenhohe > WindowAPI.getHeight() / 2) {
+                UIVar.untenhohe = WindowAPI.getHeight() / 2;
             }
         }
 

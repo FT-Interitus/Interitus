@@ -13,6 +13,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
+import de.ft.interitus.UI.WindowAPI;
 import de.ft.interitus.WindowManager;
 
 public class TextField {
@@ -79,7 +80,7 @@ public class TextField {
         if (checkMouse.isJustPressed(x, y, w, h, false)) {
             active = !active;
         }
-        if (!CheckMouse.isMouseover(x, y, w, h, false) && Gdx.input.isButtonPressed(0)) {
+        if (!CheckMouse.isMouseover(x, y, w, h, false) && WindowAPI.isButtonPressed(0)) {
             active = false;
         }
     }

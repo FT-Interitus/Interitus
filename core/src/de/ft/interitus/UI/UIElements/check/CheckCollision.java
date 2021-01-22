@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.*;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.ProgramingSpace;
+import de.ft.interitus.UI.WindowAPI;
 
 public class CheckCollision {
 
@@ -72,7 +73,7 @@ public class CheckCollision {
     public static boolean checkmousewithblock(Block block) {
 
 
-        return object(block.getX(), block.getY(), block.getW(), block.getH(), (int) ProgramingSpace.viewport.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, (int) ProgramingSpace.viewport.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y, MOUSESIZE, MOUSESIZE);
+        return object(block.getX(), block.getY(), block.getW(), block.getH(), (int) ProgramingSpace.viewport.unproject(temp3.set(WindowAPI.getX(), WindowAPI.getY(), 0)).x, (int) ProgramingSpace.viewport.unproject(temp4.set(WindowAPI.getX(), WindowAPI.getY(), 0)).y, MOUSESIZE, MOUSESIZE);
 
     }
 
@@ -133,7 +134,7 @@ public class CheckCollision {
 
     public static boolean checkCircleWithVector(int radius, int x, int y, Vector2 vector2) {
 
-        return Vector2.dst(vector2.x,Gdx.graphics.getHeight()-vector2.y,x,y)<radius;
+        return Vector2.dst(vector2.x,WindowAPI.getHeight()-vector2.y,x,y)<radius;
 
     }
 

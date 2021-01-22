@@ -19,6 +19,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.FormattingFrame;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
+import de.ft.interitus.UI.WindowAPI;
 import de.ft.interitus.WindowManager;
 import de.ft.interitus.loading.AssetLoader;
 
@@ -150,15 +151,15 @@ public class TextInput extends UIElement{
 
             for(int i=0;i<text.length();i++) {
                 glyphLayout.setText(this.bitmapFont,this.text.substring(0,i));
-                if(Math.abs((glyphLayout.width+this.x)- Gdx.input.getX())<near) {
+                if(Math.abs((glyphLayout.width+this.x)- WindowAPI.getX())<near) {
                     nearestValue = i;
-                    near = (int) Math.abs((glyphLayout.width+this.x)- Gdx.input.getX());
+                    near = (int) Math.abs((glyphLayout.width+this.x)- WindowAPI.getX());
                 }
 
             }
             CurserPosition = nearestValue;
         }
-        if(!CheckMouse.isMouseover(super.x,super.y,super.w,super.h, false) && Gdx.input.isButtonPressed(0))active=false;
+        if(!CheckMouse.isMouseover(super.x,super.y,super.w,super.h, false) && WindowAPI.isButtonPressed(0))active=false;
 
         if(active){
             formattingFrame.setFillColor(new Color(0.4f,0.4f,0.4f,1f));

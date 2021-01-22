@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Cursor.SystemCursor;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import de.ft.interitus.UI.WindowAPI;
 import de.ft.interitus.Var;
 import de.ft.interitus.WindowManager;
 import de.ft.interitus.Program;
@@ -72,35 +73,35 @@ public class DataWire {
         if((UIVar.DataWire[1][0]<=UIVar.DataWire[2][0] && (moving[0] || CheckMouse.isMouseover(UIVar.DataWire[1][0],UIVar.DataWire[1][1]-UIVar.DataWireMouseKollisionsFeld,UIVar.DataWire[2][0]-UIVar.DataWire[1][0],UIVar.DataWireMouseKollisionsFeld*2, true))) || (UIVar.DataWire[1][0]>UIVar.DataWire[2][0] && (moving[0] || CheckMouse.isMouseover(UIVar.DataWire[2][0],UIVar.DataWire[1][1]-UIVar.DataWireMouseKollisionsFeld,UIVar.DataWire[1][0]-UIVar.DataWire[2][0],UIVar.DataWireMouseKollisionsFeld*2, true)))){
             Gdx.graphics.setSystemCursor(SystemCursor.VerticalResize);
             setCorsorOnlyOnce =true;
-            if(Gdx.input.isButtonJustPressed(0)) {
+            if(WindowAPI.isButtonJustPressed(0)) {
                 moving[0] = true;
                 ProjectManager.getActProjectVar().changes = true;
             }
-            if(Gdx.input.isButtonPressed(0) && moving[0]){
+            if(WindowAPI.isButtonPressed(0) && moving[0]){
                 if(UIVar.doonce) {
-                    UIVar.merkpos.set(Gdx.input.getX()*ProgramingSpace.cam.zoom, Gdx.input.getY()*ProgramingSpace.cam.zoom, verschiebung_4_VertikaleInput);
+                    UIVar.merkpos.set(WindowAPI.getX()*ProgramingSpace.cam.zoom, WindowAPI.getY()*ProgramingSpace.cam.zoom, verschiebung_4_VertikaleInput);
                     UIVar.doonce=false;
                 }
-                verschiebung_4_VertikaleInput= (int) ((int)UIVar.merkpos.y-Gdx.input.getY()*ProgramingSpace.cam.zoom+(int)UIVar.merkpos.z);
-            }else if(!Gdx.input.isButtonPressed(0)){
+                verschiebung_4_VertikaleInput= (int) ((int)UIVar.merkpos.y-WindowAPI.getY()*ProgramingSpace.cam.zoom+(int)UIVar.merkpos.z);
+            }else if(!WindowAPI.isButtonPressed(0)){
                 UIVar.doonce=true;
                 moving[0]=false;
             }
         }else if((UIVar.DataWire[2][1]>UIVar.DataWire[3][1]  && (moving[1] || CheckMouse.isMouseover(UIVar.DataWire[2][0]-UIVar.DataWireMouseKollisionsFeld,UIVar.DataWire[3][1],UIVar.DataWireMouseKollisionsFeld*2, UIVar.DataWire[2][1]-UIVar.DataWire[3][1], true))) || (UIVar.DataWire[2][1]<=UIVar.DataWire[3][1]  && (moving[1] || CheckMouse.isMouseover(UIVar.DataWire[2][0]-UIVar.DataWireMouseKollisionsFeld,UIVar.DataWire[2][1],UIVar.DataWireMouseKollisionsFeld*2, UIVar.DataWire[3][1]-UIVar.DataWire[2][1], true)))){
             Gdx.graphics.setSystemCursor(SystemCursor.HorizontalResize);
             setCorsorOnlyOnce =true;
-            if(Gdx.input.isButtonJustPressed(0)) {
+            if(WindowAPI.isButtonJustPressed(0)) {
                 moving[1] = true;
                 ProjectManager.getActProjectVar().changes = true;
 
             }
-            if(Gdx.input.isButtonPressed(0)  && moving[1]){
+            if(WindowAPI.isButtonPressed(0)  && moving[1]){
                 if(UIVar.doonce) {
-                    UIVar.merkpos.set(Gdx.input.getX()*ProgramingSpace.cam.zoom, Gdx.input.getY()*ProgramingSpace.cam.zoom, verschiebung_2_HorizontaleInput);
+                    UIVar.merkpos.set(WindowAPI.getX()*ProgramingSpace.cam.zoom, WindowAPI.getY()*ProgramingSpace.cam.zoom, verschiebung_2_HorizontaleInput);
                     UIVar.doonce=false;
                 }
-                verschiebung_2_HorizontaleInput= (int) (Gdx.input.getX()*ProgramingSpace.cam.zoom-(int)UIVar.merkpos.x+(int)UIVar.merkpos.z);
-            }else if(!Gdx.input.isButtonPressed(0)){
+                verschiebung_2_HorizontaleInput= (int) (WindowAPI.getX()*ProgramingSpace.cam.zoom-(int)UIVar.merkpos.x+(int)UIVar.merkpos.z);
+            }else if(!WindowAPI.isButtonPressed(0)){
                 UIVar.doonce=true;
                 moving[1]=false;
             }
@@ -108,17 +109,17 @@ public class DataWire {
             Gdx.graphics.setSystemCursor(SystemCursor.VerticalResize);
             setCorsorOnlyOnce =true;
 
-            if(Gdx.input.isButtonJustPressed(0)) {
+            if(WindowAPI.isButtonJustPressed(0)) {
                 moving[2] = true;
                 ProjectManager.getActProjectVar().changes = true;
             }
-            if(Gdx.input.isButtonPressed(0)  && moving[2]){
+            if(WindowAPI.isButtonPressed(0)  && moving[2]){
                 if(UIVar.doonce) {
-                    UIVar.merkpos.set(Gdx.input.getX()*ProgramingSpace.cam.zoom, Gdx.input.getY()*ProgramingSpace.cam.zoom, verschiebung_1_Horizontale);
+                    UIVar.merkpos.set(WindowAPI.getX()*ProgramingSpace.cam.zoom, WindowAPI.getY()*ProgramingSpace.cam.zoom, verschiebung_1_Horizontale);
                     UIVar.doonce=false;
                 }
-                verschiebung_1_Horizontale= (int) ((int)UIVar.merkpos.y-Gdx.input.getY()*ProgramingSpace.cam.zoom+(int)UIVar.merkpos.z);
-            }else if(!Gdx.input.isButtonPressed(0)){
+                verschiebung_1_Horizontale= (int) ((int)UIVar.merkpos.y-WindowAPI.getY()*ProgramingSpace.cam.zoom+(int)UIVar.merkpos.z);
+            }else if(!WindowAPI.isButtonPressed(0)){
                 UIVar.doonce=true;
                 moving[2]=false;
             }
@@ -126,18 +127,18 @@ public class DataWire {
             Gdx.graphics.setSystemCursor(SystemCursor.HorizontalResize);
             setCorsorOnlyOnce =true;
 
-            if(Gdx.input.isButtonJustPressed(0)) {
+            if(WindowAPI.isButtonJustPressed(0)) {
                 moving[3] = true;
                 ProjectManager.getActProjectVar().changes = true;
 
             }
-            if(Gdx.input.isButtonPressed(0)  && moving[3]){
+            if(WindowAPI.isButtonPressed(0)  && moving[3]){
                 if(UIVar.doonce) {
-                    UIVar.merkpos.set(Gdx.input.getX()*ProgramingSpace.cam.zoom, Gdx.input.getY()*ProgramingSpace.cam.zoom, verschiebung_3_HorizontaleOutput);
+                    UIVar.merkpos.set(WindowAPI.getX()*ProgramingSpace.cam.zoom, WindowAPI.getY()*ProgramingSpace.cam.zoom, verschiebung_3_HorizontaleOutput);
                     UIVar.doonce=false;
                 }
-                verschiebung_3_HorizontaleOutput= (int) (Gdx.input.getX()*ProgramingSpace.cam.zoom-(int)UIVar.merkpos.x+(int)UIVar.merkpos.z);
-            }else if(!Gdx.input.isButtonPressed(0)){
+                verschiebung_3_HorizontaleOutput= (int) (WindowAPI.getX()*ProgramingSpace.cam.zoom-(int)UIVar.merkpos.x+(int)UIVar.merkpos.z);
+            }else if(!WindowAPI.isButtonPressed(0)){
                 UIVar.doonce=true;
                 moving[3]=false;
             }
@@ -145,18 +146,18 @@ public class DataWire {
             Gdx.graphics.setSystemCursor(SystemCursor.VerticalResize);
             setCorsorOnlyOnce =true;
 
-            if(Gdx.input.isButtonJustPressed(0)) {
+            if(WindowAPI.isButtonJustPressed(0)) {
                 moving[4] = true;
                 ProjectManager.getActProjectVar().changes = true;
 
             }
-            if(Gdx.input.isButtonPressed(0)  && moving[4]){
+            if(WindowAPI.isButtonPressed(0)  && moving[4]){
                 if(UIVar.doonce) {
-                    UIVar.merkpos.set(Gdx.input.getX()*ProgramingSpace.cam.zoom, Gdx.input.getY()*ProgramingSpace.cam.zoom, verschiebung_5_VertikaleInput);
+                    UIVar.merkpos.set(WindowAPI.getX()*ProgramingSpace.cam.zoom, WindowAPI.getY()*ProgramingSpace.cam.zoom, verschiebung_5_VertikaleInput);
                     UIVar.doonce=false;
                 }
-                verschiebung_5_VertikaleInput= (int) ((int)UIVar.merkpos.y-Gdx.input.getY()*ProgramingSpace.cam.zoom+(int)UIVar.merkpos.z);
-            }else if(!Gdx.input.isButtonPressed(0)){
+                verschiebung_5_VertikaleInput= (int) ((int)UIVar.merkpos.y-WindowAPI.getY()*ProgramingSpace.cam.zoom+(int)UIVar.merkpos.z);
+            }else if(!WindowAPI.isButtonPressed(0)){
                 UIVar.doonce=true;
                 moving[4]=false;
             }
@@ -184,7 +185,7 @@ public class DataWire {
 
 
 
-            if(Gdx.input.isButtonJustPressed(0)||!Gdx.input.isButtonPressed(0))
+            if(WindowAPI.isButtonJustPressed(0)||!WindowAPI.isButtonPressed(0))
            for(Block block: ProjectManager.getActProjectVar().blocks) {
                if(block.getBlockType().getBlockParameter()==null) {
                    continue;
@@ -192,7 +193,7 @@ public class DataWire {
                for(Parameter parameter:block.getBlockType().getBlockParameter()) {
                    if(parameter!=this.getParam_input()&&!parameter.getParameterType().isOutput()&&parameter.getDataWires().size()!=1&&parameter.getParameterType().variableType.iscompatible(this.getParam_input().getParameterType().variableType)&&parameter.getBlock()!=this.getParam_input().getBlock()) {
 
-                    if(Gdx.input.isButtonJustPressed(0)) {
+                    if(WindowAPI.isButtonJustPressed(0)) {
                         if (CheckCollision.checkpointwithobject(parameter.getX(), parameter.getY(), UIVar.parameter_width, UIVar.parameter_height, Unproject.unproject())) {
                             ProjectManager.getActProjectVar().movingDataWire = null;
                             param_output = parameter;
@@ -296,7 +297,7 @@ public class DataWire {
 
         if(ProjectManager.getActProjectVar().movingDataWire ==this) {
 
-            if(Gdx.input.isButtonJustPressed(0)) {
+            if(WindowAPI.isButtonJustPressed(0)) {
                 int counter = 0;
                 for (int i = 0; i < ProjectManager.getActProjectVar().visible_blocks.size(); i++) {
 

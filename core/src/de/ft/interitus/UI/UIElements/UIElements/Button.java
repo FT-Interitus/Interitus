@@ -8,6 +8,7 @@ package de.ft.interitus.UI.UIElements.UIElements;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import de.ft.interitus.UI.WindowAPI;
 import de.ft.interitus.WindowManager;
 import de.ft.interitus.UI.Animation;
 import de.ft.interitus.UI.UI;
@@ -155,7 +156,7 @@ public class Button extends UIElement {
                 } else {
                     UI.UIbatch.setColor(1, 1, 1, alpha);
                 }
-                if (isMouseover() && Gdx.input.isButtonPressed(0) && !disablepresscolorchange) {
+                if (isMouseover() && WindowAPI.isButtonPressed(0) && !disablepresscolorchange) {
                     UI.UIbatch.setColor(1, 0.5f, 0.5f, alpha);
                 }
                 if (isDisable()) {
@@ -192,7 +193,7 @@ public class Button extends UIElement {
                     } else {
                         UI.UIbatch.draw(image, this.x, this.y, this.w, this.h, 0, 0, image.getWidth(), image.getHeight(), this.flipX, this.flipY);
                     }
-                    if (isMouseover() && Gdx.input.isButtonPressed(0)) {
+                    if (isMouseover() && WindowAPI.isButtonPressed(0)) {
                         UI.UIbatch.draw(image_pressed, this.x, this.y, this.w, this.h, 0, 0, image.getWidth(), image.getHeight(), this.flipX, this.flipY);
                     }
                 } else {

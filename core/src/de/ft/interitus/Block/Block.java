@@ -17,6 +17,7 @@ import de.ft.interitus.UI.UIElements.BlockDropDownMenue.BlockDropDownMenue;
 import de.ft.interitus.UI.UIElements.check.CheckCollision;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.Viewport;
+import de.ft.interitus.UI.WindowAPI;
 import de.ft.interitus.UI.popup.PopupMenue;
 import de.ft.interitus.WindowManager;
 import de.ft.interitus.events.EventManager;
@@ -333,7 +334,7 @@ public abstract class Block {
     public void update() {
 
         boolean hovered = CheckCollision.checkmousewithblock(this);
-        if (hovered && Gdx.input.isButtonJustPressed(0)) this.onClick();
+        if (hovered && WindowAPI.isButtonJustPressed(0)) this.onClick();
 
     }
 

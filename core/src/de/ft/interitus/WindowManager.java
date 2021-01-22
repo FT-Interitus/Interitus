@@ -9,12 +9,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import de.ft.interitus.UI.CheckShortcuts;
-import de.ft.interitus.UI.InputManager;
+import de.ft.interitus.UI.*;
 import de.ft.interitus.UI.Notification.NotificationManager;
-import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.PressedKeys;
-import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.popup.PopupHandler;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.plugin.PluginDrawer;
@@ -64,7 +61,7 @@ public class WindowManager {
         if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)&&Gdx.input.isKeyPressed(Input.Keys.H)) {
             UI.tabbar.setSelectedTabindex(-1);
             Var.openprojectindex = -1; //-1 is home section
-            switchto(Windows.welcome);
+            switchTo(Windows.welcome);
 
         }
         PositionSaver.save();
@@ -128,12 +125,12 @@ public class WindowManager {
         WindowManager.blockBatch = new SpriteBatch();
         shapeRenderer = new ShapeRenderer();
         BlockshapeRenderer = new ShapeRenderer();
-        UI.UIcam.position.set(Gdx.graphics.getWidth() / 2f, Gdx.graphics.getHeight() / 2f, 0);
+        UI.UIcam.position.set(WindowAPI.getWidth() / 2f, WindowAPI.getHeight() / 2f, 0);
         ProgramingSpace.pressedKeys = new PressedKeys();
 
     }
 
-    public static void switchto(Windows window) {
+    public static void switchTo(Windows window) {
 
 
         if (window == Windows.programingspace) {

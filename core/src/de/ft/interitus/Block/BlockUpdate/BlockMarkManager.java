@@ -13,6 +13,7 @@ import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.check.CheckCollision;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
 import de.ft.interitus.UI.UIVar;
+import de.ft.interitus.UI.WindowAPI;
 import de.ft.interitus.UI.uiManagement.UIManager;
 import de.ft.interitus.UI.uiManagement.UIRegistry;
 import de.ft.interitus.Var;
@@ -34,7 +35,7 @@ public class BlockMarkManager {
         assert ProjectManager.getActProjectVar() != null;
 
         //Unselect Other Blocks if you released mouse on a selected Block
-        if(Var.mouseDownPos.dst(Unproject.unproject()) < BlockMovingManager.movingTolerance&&!Gdx.input.isButtonPressed(0)&&!isMultiSelectMode()) {
+        if(Var.mouseDownPos.dst(Unproject.unproject()) < BlockMovingManager.movingTolerance&&!WindowAPI.isButtonPressed(0)&&!isMultiSelectMode()) {
             for(Block block:ProjectManager.getActProjectVar().marked_blocks) {
                 if(!CheckCollision.checkVectorWithBlock(block,Var.mouseReleasePos)) continue;
                 ProjectManager.getActProjectVar().marked_blocks.clear();
@@ -43,10 +44,10 @@ public class BlockMarkManager {
             }
         }
 
-        if (!Gdx.input.isButtonPressed(0)) return;
+        if (!WindowAPI.isButtonPressed(0)) return;
         if (wasMouseDownOnBlockSettings()&& UIVar.isBlockSettingsopen) return;
 
-        if (Gdx.input.isButtonJustPressed(0) && !isMultiSelectMode()) {
+        if (WindowAPI.isButtonJustPressed(0) && !isMultiSelectMode()) {
             if (ProjectManager.getActProjectVar().marked_blocks.size() == 1) {
                 ProjectManager.getActProjectVar().marked_blocks.clear();
             } else if (!clickedOnSelectedBlock()) {
@@ -54,7 +55,7 @@ public class BlockMarkManager {
             }
         }
 
-        if (!Gdx.input.isButtonJustPressed(0)) return;
+        if (!WindowAPI.isButtonJustPressed(0)) return;
         if (ProjectManager.getActProjectVar().moving_block != null)
             return; //Do not allow to select an other Block while anyone is moving
         for (Block block : ProjectManager.getActProjectVar().blocks) {
@@ -92,8 +93,8 @@ public class BlockMarkManager {
 
     private static void selectingRect() {
         assert ProjectManager.getActProjectVar() != null;
-        if (Gdx.input.isButtonPressed(0) && ProjectManager.getActProjectVar().moving_block == null) {
-            if(!selecting&&!CheckMouse.wasMousePressed(UIVar.abstandvonRand,UIVar.programmflaeche_y,Gdx.graphics.getWidth()-(2* UIVar.abstandvonRand), UIVar.programmflaeche_h)) return;
+        if (WindowAPI.isButtonPressed(0) && ProjectManager.getActProjectVar().moving_block == null) {
+            if(!selecting&&!CheckMouse.wasMousePressed(UIVar.abstandvonRand,UIVar.programmflaeche_y, WindowAPI.getWidth()-(2* UIVar.abstandvonRand), UIVar.programmflaeche_h)) return;
             if(UIManager.uiRegistry.zoomUi.enabled&&CheckMouse.wasMousePressed(UIManager.uiRegistry.zoomUi.getFormattingFrame().x,UIManager.uiRegistry.zoomUi.getFormattingFrame().y,UIManager.uiRegistry.zoomUi.getFormattingFrame().w,UIManager.uiRegistry.zoomUi.getFormattingFrame().h)) return;
             selectionRect.setLocation((int) Var.mouseDownPos.x, (int) Var.mouseDownPos.y);
             selectionRect.setSize((int) (Unproject.unproject().x - Var.mouseDownPos.x), (int) (Unproject.unproject().y - Var.mouseDownPos.y));
@@ -102,7 +103,7 @@ public class BlockMarkManager {
 
         }
 
-        if (!Gdx.input.isButtonPressed(0) && selecting) {
+        if (!WindowAPI.isButtonPressed(0) && selecting) {
 
             for (Block checkBlock : ProjectManager.getActProjectVar().visible_blocks) {
                 if (CheckCollision.rectCollision(selectionRect, new Rectangle(checkBlock.getX(), checkBlock.getY(), checkBlock.getW(), checkBlock.getH()))) {

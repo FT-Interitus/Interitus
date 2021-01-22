@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
+import de.ft.interitus.UI.WindowAPI;
 import de.ft.interitus.WindowManager;
 import de.ft.interitus.UI.UI;
 
@@ -94,8 +95,8 @@ public class QuickInfo {
                 doonce = false;
             }
             if (zeitstempel < System.currentTimeMillis()) {
-                setX(Gdx.input.getX());
-                setY(Gdx.graphics.getHeight()-Gdx.input.getY());
+                setX(WindowAPI.getX());
+                setY(WindowAPI.getHeight()-WindowAPI.getY());
                 fadeIn();
             }
         } else {
@@ -115,8 +116,8 @@ public class QuickInfo {
         if(selfCheck)RectangleSelfCheck();
 
         if(attachedToMouse){
-            this.x=Gdx.input.getX();
-            this.y=Gdx.graphics.getHeight()-Gdx.input.getY();
+            this.x= WindowAPI.getX();
+            this.y=WindowAPI.getHeight()-WindowAPI.getY();
         }
 
         if(shown){

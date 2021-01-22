@@ -68,7 +68,7 @@ public class Viewport {
 
                         zoomEvent.fireForEach(n->n.zoomStart());
 
-                        cam.unproject(tp.set(Gdx.input.getX(), Gdx.input.getY(), 0 ));
+                        cam.unproject(tp.set(WindowAPI.getX(), WindowAPI.getY(), 0 ));
                         float px = tp.x;
                         float py = tp.y;
 
@@ -76,7 +76,7 @@ public class Viewport {
                         zoomPercentage -= amount*10;
                         cam.update();
 
-                        cam.unproject(tp.set(Gdx.input.getX(), Gdx.input.getY(), 0 ));
+                        cam.unproject(tp.set(WindowAPI.getX(), WindowAPI.getY(), 0 ));
                         cam.position.add(px - tp.x, py- tp.y, 0);
                         cam.update();
 

@@ -95,7 +95,7 @@ public class ProjectManager {
 
     public static void change(int index) {
 
-        WindowManager.switchto(WindowManager.Windows.programingspace);
+        WindowManager.switchTo(WindowManager.Windows.programingspace);
         if(getActProjectVar()!=null)
         getActProjectVar().programmingtime = (System.currentTimeMillis() - getActProjectVar().currentstarttime) + getActProjectVar().programmingtime;
 
@@ -134,7 +134,7 @@ public class ProjectManager {
         if (Var.openprojects.size() == 0) {
 
 
-            WindowManager.switchto(WindowManager.Windows.welcome);
+            WindowManager.switchTo(WindowManager.Windows.welcome);
 
 
             return null;
@@ -172,7 +172,7 @@ public class ProjectManager {
         tab.setIndex(Var.openprojects.size() - 1);
         UI.tabbar.addTab(tab);
 
-        WindowManager.switchto(WindowManager.Windows.programingspace);
+        WindowManager.switchTo(WindowManager.Windows.programingspace);
     }
 
     public static ProjectVar getProjectVar(int index) {
@@ -201,7 +201,7 @@ public class ProjectManager {
             if (Var.openprojectindex - 1 == -1) {
 
 
-                WindowManager.switchto(WindowManager.Windows.welcome);
+                WindowManager.switchTo(WindowManager.Windows.welcome);
 
 
             } else {

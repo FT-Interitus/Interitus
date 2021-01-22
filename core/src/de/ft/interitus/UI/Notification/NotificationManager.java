@@ -8,6 +8,7 @@ package de.ft.interitus.UI.Notification;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import de.ft.interitus.UI.WindowAPI;
 import de.ft.interitus.WindowManager;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.UI;
@@ -115,7 +116,7 @@ public class NotificationManager {
             WindowManager.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
             WindowManager.shapeRenderer.setColor(Settings.theme.ClearColor().r,Settings.theme.ClearColor().g,Settings.theme.ClearColor().b,notifications.get(i).getFadeout());
 
-            if(CheckMouse.isMouseover(Gdx.graphics.getWidth() - DISTANCE_RIGHT+notifications.get(i).getRollin(), UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i)), DISTANCE_RIGHT - MARGIN_RIGHT, HEIGHT, false)&&!notifications.get(i).isClosedbyuser()) {
+            if(CheckMouse.isMouseover(WindowAPI.getWidth() - DISTANCE_RIGHT+notifications.get(i).getRollin(), UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i)), DISTANCE_RIGHT - MARGIN_RIGHT, HEIGHT, false)&&!notifications.get(i).isClosedbyuser()) {
 
 
                 for(int j=notifications.size()-1;j>=i;j--)  {
@@ -131,25 +132,25 @@ public class NotificationManager {
             }
 
 
-            WindowManager.shapeRenderer.roundendrect(Gdx.graphics.getWidth() - DISTANCE_RIGHT+notifications.get(i).getRollin(), UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i)), DISTANCE_RIGHT - MARGIN_RIGHT, HEIGHT, 5);
+            WindowManager.shapeRenderer.roundendrect(WindowAPI.getWidth() - DISTANCE_RIGHT+notifications.get(i).getRollin(), UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i)), DISTANCE_RIGHT - MARGIN_RIGHT, HEIGHT, 5);
             WindowManager.shapeRenderer.end();
 
 
             UI.UIbatch.begin();
             UI.UIbatch.setColor(1,1,1,notifications.get(i).getFadeout());
-            UI.UIbatch.draw(notifications.get(i).getIcon(),Gdx.graphics.getWidth() - DISTANCE_RIGHT+IMAGE_MARGIN_RIGHT/2f+notifications.get(i).getRollin(),UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i))+HEIGHT-IMAGE_MARGIN_TOP,10,10);
+            UI.UIbatch.draw(notifications.get(i).getIcon(),WindowAPI.getWidth() - DISTANCE_RIGHT+IMAGE_MARGIN_RIGHT/2f+notifications.get(i).getRollin(),UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i))+HEIGHT-IMAGE_MARGIN_TOP,10,10);
            glyphLayout.setText(  AssetLoader.defaultfont,notifications.get(i).getTitle());
 
             AssetLoader.defaultfont.setColor(0.9f,0.9f,0.9f,notifications.get(i).getFadeout());
-          AssetLoader.defaultfont.draw(UI.UIbatch,notifications.get(i).getTitle(),Gdx.graphics.getWidth() - DISTANCE_RIGHT+IMAGE_MARGIN_RIGHT/2f+20+notifications.get(i).getRollin(),UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i))+HEIGHT- glyphLayout.height /1.2f);
+          AssetLoader.defaultfont.draw(UI.UIbatch,notifications.get(i).getTitle(),WindowAPI.getWidth() - DISTANCE_RIGHT+IMAGE_MARGIN_RIGHT/2f+20+notifications.get(i).getRollin(),UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i))+HEIGHT- glyphLayout.height /1.2f);
             AssetLoader.defaultfont.setColor(0.6f,0.6f,0.6f,notifications.get(i).getFadeout());
 
             glyphLayout.setText(AssetLoader.defaultfont,notifications.get(i).getMessage());
-           AssetLoader.defaultfont.draw(UI.UIbatch,notifications.get(i).getMessage(),Gdx.graphics.getWidth() - DISTANCE_RIGHT+IMAGE_MARGIN_RIGHT/2f+23+notifications.get(i).getRollin(),UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i))+HEIGHT-HEIGHT/3.2f);
+           AssetLoader.defaultfont.draw(UI.UIbatch,notifications.get(i).getMessage(),WindowAPI.getWidth() - DISTANCE_RIGHT+IMAGE_MARGIN_RIGHT/2f+23+notifications.get(i).getRollin(),UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i))+HEIGHT-HEIGHT/3.2f);
             UI.UIbatch.end();
             if(notifications.get(i).isCloseable()) {
                 notifications.get(i).getCloseButton().setAlpha(notifications.get(i).getFadeout());
-                notifications.get(i).getCloseButton().setBounds(Gdx.graphics.getWidth() - IMAGE_MARGIN_RIGHT - MARGIN_RIGHT+notifications.get(i).getRollin(), UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i))+HEIGHT-IMAGE_MARGIN_TOP,10,10);
+                notifications.get(i).getCloseButton().setBounds(WindowAPI.getWidth() - IMAGE_MARGIN_RIGHT - MARGIN_RIGHT+notifications.get(i).getRollin(), UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i))+HEIGHT-IMAGE_MARGIN_TOP,10,10);
 
                 notifications.get(i).getCloseButton().draw();
                 if( notifications.get(i).getCloseButton().isjustPressed()) {
@@ -166,10 +167,10 @@ public class NotificationManager {
                 WindowManager.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 
                 WindowManager.shapeRenderer.setColor(Settings.theme.ClearColor().r+0.1f,Settings.theme.ClearColor().g+0.1f,Settings.theme.ClearColor().b+0.1f,notifications.get(i).getFadeout());
-                WindowManager.shapeRenderer.roundendrect(Gdx.graphics.getWidth() - DISTANCE_RIGHT+IMAGE_MARGIN_RIGHT+notifications.get(i).getRollin(), UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i))+PROGRESSBAR_MARGIN_BOTTOM, DISTANCE_RIGHT - MARGIN_RIGHT-IMAGE_MARGIN_RIGHT*2, 3, 2);
+                WindowManager.shapeRenderer.roundendrect(WindowAPI.getWidth() - DISTANCE_RIGHT+IMAGE_MARGIN_RIGHT+notifications.get(i).getRollin(), UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i))+PROGRESSBAR_MARGIN_BOTTOM, DISTANCE_RIGHT - MARGIN_RIGHT-IMAGE_MARGIN_RIGHT*2, 3, 2);
 
                 WindowManager.shapeRenderer.setColor(Settings.theme.ClearColor().r+0.3f,Settings.theme.ClearColor().g+0.3f,Settings.theme.ClearColor().b+0.3f,notifications.get(i).getFadeout());
-                WindowManager.shapeRenderer.roundendrect(Gdx.graphics.getWidth() - DISTANCE_RIGHT+IMAGE_MARGIN_RIGHT+notifications.get(i).getRollin(), UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i))+PROGRESSBAR_MARGIN_BOTTOM, ((int) ((float) (DISTANCE_RIGHT - MARGIN_RIGHT - IMAGE_MARGIN_RIGHT * 2) / 100f * notifications.get(i).getDisplayedProgressbarValue())), 3, 2);
+                WindowManager.shapeRenderer.roundendrect(WindowAPI.getWidth() - DISTANCE_RIGHT+IMAGE_MARGIN_RIGHT+notifications.get(i).getRollin(), UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i))+PROGRESSBAR_MARGIN_BOTTOM, ((int) ((float) (DISTANCE_RIGHT - MARGIN_RIGHT - IMAGE_MARGIN_RIGHT * 2) / 100f * notifications.get(i).getDisplayedProgressbarValue())), 3, 2);
 
                 WindowManager.shapeRenderer.end();
 
@@ -177,7 +178,7 @@ public class NotificationManager {
 
                if(notifications.get(i).getButtonbar()!=null) {
 
-                   notifications.get(i).getButtonbar().setX(Gdx.graphics.getWidth() - IMAGE_MARGIN_RIGHT - MARGIN_RIGHT+notifications.get(i).getRollin());
+                   notifications.get(i).getButtonbar().setX(WindowAPI.getWidth() - IMAGE_MARGIN_RIGHT - MARGIN_RIGHT+notifications.get(i).getRollin());
                    notifications.get(i).getButtonbar().setY(UIVar.programmflaeche_y + MARGIN_RIGHT + ((NOTIFICATION_MARGIN + HEIGHT) * (notifications.size() - 1 - i))+PROGRESSBAR_MARGIN_BOTTOM);
                    notifications.get(i).getButtonbar().setButton_h(10);
                    notifications.get(i).getButtonbar().draw(notifications.get(i).getFadeout());

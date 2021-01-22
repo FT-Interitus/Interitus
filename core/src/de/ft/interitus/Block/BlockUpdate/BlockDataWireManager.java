@@ -11,6 +11,7 @@ import de.ft.interitus.Block.DataWire;
 import de.ft.interitus.Block.Parameter;
 import de.ft.interitus.UI.UIElements.check.CheckCollision;
 import de.ft.interitus.UI.UIVar;
+import de.ft.interitus.UI.WindowAPI;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.Unproject;
 
@@ -39,7 +40,7 @@ public class BlockDataWireManager {
 
     protected static boolean pressedOnParameterSpace(Parameter parameter) {
         boolean collisionCheck = CheckCollision.checkpointwithobject(parameter.getX(), parameter.getY(), UIVar.parameter_width, UIVar.parameter_height, Unproject.unproject());
-        return collisionCheck && Gdx.input.isButtonJustPressed(0);
+        return collisionCheck && WindowAPI.isButtonJustPressed(0);
     }
 
 

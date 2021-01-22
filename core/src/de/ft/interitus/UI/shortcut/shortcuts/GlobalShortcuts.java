@@ -10,6 +10,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.files.FileHandle;
 import com.kotcrab.vis.ui.util.dialog.ConfirmDialogListener;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
+import de.ft.interitus.UI.WindowAPI;
 import de.ft.interitus.WindowManager;
 import de.ft.interitus.UI.MenuBar;
 import de.ft.interitus.UI.UI;
@@ -86,7 +87,7 @@ public class GlobalShortcuts implements ShortCutChecker {
                 MenuBar.fullscreen = true;
             } else {
                 Gdx.graphics.setWindowedMode(Var.w, Var.h);
-                WindowManager.blockBatch.getProjectionMatrix().setToOrtho2D(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+                WindowManager.blockBatch.getProjectionMatrix().setToOrtho2D(0, 0, WindowAPI.getWidth(), WindowAPI.getHeight());
                 Gdx.gl.glViewport(0, 0, Gdx.graphics.getBackBufferWidth(), Gdx.graphics.getBackBufferHeight());
                 MenuBar.fullscreen = false;
             }

@@ -8,6 +8,7 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import de.ft.interitus.UI.UIElements.UIElements.labels.TextLabel
 import de.ft.interitus.UI.UIElements.check.CheckCollision
+import de.ft.interitus.UI.WindowAPI
 import de.ft.interitus.UI.uiManagement.UIManager
 import de.ft.interitus.Var
 import de.ft.interitus.WindowManager
@@ -61,7 +62,7 @@ class RadioButton : UIElement {
         WindowManager.shapeRenderer.begin(ShapeRenderer.ShapeType.Line)
         WindowManager.shapeRenderer.setAutoShapeType(true)
 
-        if (!disabled&&Gdx.input.isButtonPressed(0)&&CheckCollision.checkCircleWithVector(radius.toInt(), this.x, this.y, Var.mouseDownPosWithoutUnproject)) {
+        if (!disabled&& WindowAPI.isButtonPressed(0)&&CheckCollision.checkCircleWithVector(radius.toInt(), this.x, this.y, Var.mouseDownPosWithoutUnproject)) {
            xMove = movement;
             yMove = movement;
 
@@ -88,11 +89,11 @@ class RadioButton : UIElement {
             WindowManager.shapeRenderer.circle(this.x.toFloat()+xMove, this.y.toFloat()-yMove, radius - 3, segments)
         }
         if (!this.disabled) {
-            if (Gdx.input.isButtonPressed(0)) {
+            if (WindowAPI.isButtonPressed(0)) {
                 pressed = true
             }
 
-            if (pressed && !Gdx.input.isButtonPressed(0)) {
+            if (pressed && !WindowAPI.isButtonPressed(0)) {
                 pressed = false
                 if (CheckCollision.checkCircleWithVector(radius.toInt(), this.x, this.y, Var.mouseReleasePosWithoutUnproject)) {
                     toggleState = !toggleState

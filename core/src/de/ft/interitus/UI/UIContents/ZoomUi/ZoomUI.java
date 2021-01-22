@@ -17,6 +17,7 @@ import de.ft.interitus.UI.UIElements.UIElements.labels.TextLabel;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.Viewport;
+import de.ft.interitus.UI.WindowAPI;
 import de.ft.interitus.UI.uiManagement.UI;
 import de.ft.interitus.UI.uiManagement.UIManager;
 import de.ft.interitus.Var;
@@ -87,10 +88,10 @@ public class ZoomUI extends UI {
         if (minus.isjustPressed()) Viewport.decreaseZoom(ProgramingSpace.cam);
         if (reset.isjustPressed()) Viewport.resetZoom(ProgramingSpace.cam);
 
-        formattingFrame.setPosition(Gdx.graphics.getWidth() - UIVar.abstandvonRand - formattingFrame.w - 5, UIVar.programmflaeche_y + UIVar.programmflaeche_h - formattingFrame.h - 5);
+        formattingFrame.setPosition(WindowAPI.getWidth() - UIVar.abstandvonRand - formattingFrame.w - 5, UIVar.programmflaeche_y + UIVar.programmflaeche_h - formattingFrame.h - 5);
         formattingFrame.draw();
 
-        if(Gdx.input.isButtonJustPressed(0)&&!CheckMouse.wasMousePressed(UIManager.uiRegistry.zoomUi.getFormattingFrame().x,UIManager.uiRegistry.zoomUi.getFormattingFrame().y,UIManager.uiRegistry.zoomUi.getFormattingFrame().w,UIManager.uiRegistry.zoomUi.getFormattingFrame().h)) {
+        if(WindowAPI.isButtonJustPressed(0)&&!CheckMouse.wasMousePressed(UIManager.uiRegistry.zoomUi.getFormattingFrame().x,UIManager.uiRegistry.zoomUi.getFormattingFrame().y,UIManager.uiRegistry.zoomUi.getFormattingFrame().w,UIManager.uiRegistry.zoomUi.getFormattingFrame().h)) {
             super.enabled = false;
         }
 

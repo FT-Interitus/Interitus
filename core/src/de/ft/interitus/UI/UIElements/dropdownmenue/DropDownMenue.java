@@ -8,6 +8,7 @@ package de.ft.interitus.UI.UIElements.dropdownmenue;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
+import de.ft.interitus.UI.WindowAPI;
 import de.ft.interitus.WindowManager;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.UI;
@@ -123,7 +124,7 @@ public class DropDownMenue extends UIElement {
         }
 
 
-        if (Gdx.input.isButtonPressed(0) && !popupbutton.isPresseded()) {
+        if (WindowAPI.isButtonPressed(0) && !popupbutton.isPresseded()) {
             opened = false;
         }
 

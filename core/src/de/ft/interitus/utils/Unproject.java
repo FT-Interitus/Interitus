@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.ProgramingSpace;
+import de.ft.interitus.UI.WindowAPI;
 
 public class Unproject {
 
@@ -18,7 +19,7 @@ public class Unproject {
     static Vector2 temp5 = new Vector2();
 
     public static Vector2 unproject() {
-        return temp1.set(ProgramingSpace.cam.unproject(temp3.set(Gdx.input.getX(), Gdx.input.getY(), 0)).x, ProgramingSpace.cam.unproject(temp4.set(Gdx.input.getX(), Gdx.input.getY(), 0)).y);
+        return temp1.set(ProgramingSpace.cam.unproject(temp3.set(WindowAPI.getX(), WindowAPI.getY(), 0)).x, ProgramingSpace.cam.unproject(temp4.set(WindowAPI.getX(), WindowAPI.getY(), 0)).y);
 
     }
     public static Vector2 unproject(float X,float Y) {
@@ -26,7 +27,7 @@ public class Unproject {
     }
 
     public static Vector2 projected() {
-        return temp5.set(Gdx.input.getX(), Gdx.input.getY());
+        return temp5.set(WindowAPI.getX(), WindowAPI.getY());
     }
 
 }

@@ -65,7 +65,7 @@ public class ProgramGrid {
 
         if (points) {
 
-            for (int x = move_x; x < Gdx.graphics.getWidth() - (UIVar.abstandvonRand * 2); ) {
+            for (int x = move_x; x < WindowAPI.getWidth() - (UIVar.abstandvonRand * 2); ) {
 
                 for (int y = move_y; y < UIVar.programmflaeche_h+(UIVar.programmflaeche_y-marginBottom); ) {
 
@@ -81,7 +81,7 @@ public class ProgramGrid {
         } else {
 
 
-            for (int x = move_x; x < Gdx.graphics.getWidth() - (UIVar.abstandvonRand * 2); ) {
+            for (int x = move_x; x < WindowAPI.getWidth() - (UIVar.abstandvonRand * 2); ) {
 
 
                 shapeRenderer.rectLine(x+UIVar.abstandvonRand, marginBottom,x+UIVar.abstandvonRand, marginBottom +UIVar.programmflaeche_h+(UIVar.programmflaeche_y-marginBottom), line_width);
@@ -92,7 +92,7 @@ public class ProgramGrid {
 
             for (int y = move_y; y < UIVar.programmflaeche_h+(UIVar.programmflaeche_y-marginBottom); ) {
 
-                shapeRenderer.rectLine((float)UIVar.abstandvonRand,(float)y+ marginBottom,(float)Gdx.graphics.getWidth()-UIVar.abstandvonRand,(float)y+ marginBottom, line_width);
+                shapeRenderer.rectLine((float)UIVar.abstandvonRand,(float)y+ marginBottom,(float)WindowAPI.getWidth()-UIVar.abstandvonRand,(float)y+ marginBottom, line_width);
                 
                 y += margin;
             }

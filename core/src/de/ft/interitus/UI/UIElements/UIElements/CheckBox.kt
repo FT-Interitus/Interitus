@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer
 import de.ft.interitus.UI.UIElements.UIElements.labels.TextLabel
 import de.ft.interitus.UI.UIElements.check.CheckCollision
+import de.ft.interitus.UI.WindowAPI
 import de.ft.interitus.UI.uiManagement.UIManager
 import de.ft.interitus.Var
 import de.ft.interitus.WindowManager
@@ -41,7 +42,7 @@ class CheckBox : UIElement{
 
     override fun draw() {
 
-        if(!disabled&&Gdx.input.isButtonPressed(0)&& CheckCollision.checkpointwithobject(x,y,size,size, Var.mouseDownPosWithoutUnproject.x,Gdx.graphics.height-Var.mouseDownPosWithoutUnproject.y)) {
+        if(!disabled&& WindowAPI.isButtonPressed(0)&& CheckCollision.checkpointwithobject(x,y,size,size, Var.mouseDownPosWithoutUnproject.x,Gdx.graphics.height-Var.mouseDownPosWithoutUnproject.y)) {
         xMove = movement
         yMove = movement;
             clickedOn = true;
@@ -50,7 +51,7 @@ class CheckBox : UIElement{
             yMove = 0
         }
 
-        if(clickedOn&&!disabled&&!Gdx.input.isButtonPressed(0)&&CheckCollision.checkpointwithobject(x,y,size,size,Var.mouseReleasePosWithoutUnproject.x,Gdx.graphics.height-Var.mouseReleasePosWithoutUnproject.y)) {
+        if(clickedOn&&!disabled&&!WindowAPI.isButtonPressed(0)&&CheckCollision.checkpointwithobject(x,y,size,size,Var.mouseReleasePosWithoutUnproject.x,WindowAPI.getHeight()-Var.mouseReleasePosWithoutUnproject.y)) {
             clickedOn = false
             toggleState = !toggleState
 

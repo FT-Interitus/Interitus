@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import de.ft.interitus.Block.Block;
+import de.ft.interitus.UI.WindowAPI;
 import de.ft.interitus.WindowManager;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.check.CheckCollision;
@@ -85,7 +86,7 @@ public class BlockDropDownMenue {
         WindowManager.blockBatch.draw(block.getBlockType().getBlockModes().get(block.getBlockType().actBlockModiIndex).getModiImage(),this.x,this.y,this.w,this.h);
         WindowManager.blockBatch.end();
 
-        if(CheckCollision.checkpointwithobject(this.x,this.y,this.w,this.h, Unproject.unproject().x,Unproject.unproject().y)&&Gdx.input.isButtonJustPressed(0)){
+        if(CheckCollision.checkpointwithobject(this.x,this.y,this.w,this.h, Unproject.unproject().x,Unproject.unproject().y)&& WindowAPI.isButtonJustPressed(0)){
             dropped=!dropped;
         }
         if(dropped) {
@@ -100,7 +101,7 @@ public class BlockDropDownMenue {
             if(CheckCollision.checkpointwithobject(this.x, this.y- aktualy, this.longestText+this.w+5+margin*2,this.h, Unproject.unproject().x,Unproject.unproject().y)){
                 WindowManager.BlockshapeRenderer.setColor(0f/255f, 101f/255f, 168f/255f,1);
 
-                if(Gdx.input.isButtonPressed(0)){
+                if(WindowAPI.isButtonPressed(0)){
                     WindowManager.BlockshapeRenderer.setColor(0f/255f, 101f/255f, 100f/255f,1);
                     block.getBlockType().changeBlockMode(i,block, false);
 
@@ -130,7 +131,7 @@ public class BlockDropDownMenue {
 
 
 
-if(Gdx.input.isButtonPressed(0) && !CheckCollision.checkpointwithobject(this.x,this.y,this.w,this.h, Unproject.unproject().x,Unproject.unproject().y)){
+if(WindowAPI.isButtonPressed(0) && !CheckCollision.checkpointwithobject(this.x,this.y,this.w,this.h, Unproject.unproject().x,Unproject.unproject().y)){
     dropped=false;
 }
 
