@@ -78,9 +78,6 @@ public class ClearActOpenProgramm {
         ProjectManager.getProjectVar(index).marked_blocks.clear();
 
 
-
-
-
         // DataManager.saved();
         ProjectManager.getProjectVar(index).setFilename("New File");
         ProjectManager.getProjectVar(index).path = "";
@@ -88,7 +85,6 @@ public class ClearActOpenProgramm {
 
         ProjectManager.getProjectVar(index).showLeftDocker = false;
         ProjectManager.getProjectVar(index).connetor_offerd_hoverd_block = null;
-
 
 
         //clear.start();

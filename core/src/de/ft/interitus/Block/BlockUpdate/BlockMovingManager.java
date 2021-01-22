@@ -5,7 +5,6 @@
 
 package de.ft.interitus.Block.BlockUpdate;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Settings;
@@ -53,8 +52,8 @@ public class BlockMovingManager {
         } else {
 
             if (projectVar.moving_block == block) {
-               if (Settings.blockSnapping && !Settings.blockActiveSnapping)
-                        blockSnapping(projectVar.moving_block);
+                if (Settings.blockSnapping && !Settings.blockActiveSnapping)
+                    blockSnapping(projectVar.moving_block);
 
                 BlockConnectionManager.placeBlock(block);
 
@@ -83,9 +82,9 @@ public class BlockMovingManager {
         if (projectVar.movingDataWire != null) return false;
         if (BlockDataWireManager.checkParameterEject(block)) return false;
         if (isOnBlockBar()) return false;
-        if(isMouseOnBlockSettings()) return false;
+        if (isMouseOnBlockSettings()) return false;
 
-        for(Block m:ProjectManager.getActProjectVar().marked_blocks) {
+        for (Block m : ProjectManager.getActProjectVar().marked_blocks) {
             m.getMovementDiff().set(generateDiff(m, Unproject.unproject()));
             BlockConnectionManager.startMovingBlock(m);
         }
@@ -127,9 +126,9 @@ public class BlockMovingManager {
     private static void stopMovingBlock() {
         assert ProjectManager.getActProjectVar() != null;
         if (isOnBlockBar())
-            for(int i = 0; i<ProjectManager.getActProjectVar().marked_blocks.size(); i++) {
-                Block marked =ProjectManager.getActProjectVar().marked_blocks.get(i);
-                if(marked.getBlockType().isDeletable()) {
+            for (int i = 0; i < ProjectManager.getActProjectVar().marked_blocks.size(); i++) {
+                Block marked = ProjectManager.getActProjectVar().marked_blocks.get(i);
+                if (marked.getBlockType().isDeletable()) {
                     marked.delete(false);
                     i--;
                 }
@@ -150,8 +149,9 @@ public class BlockMovingManager {
     private static boolean isOnBlockBar() {
         return CheckMouse.isMouseover(UIVar.BlockBarX, UIVar.BlockBarY, UIVar.BlockBarW, UIVar.BlockBarH, false);
     }
+
     private static boolean isMouseOnBlockSettings() {
-        return CheckMouse.isMouseover(UIVar.blockeinstellungen_x, UIVar.blockeinstellungen_y, UIVar.blockeinstellungen_w, UIVar.blockeinstellungen_h,false)&&UIVar.isBlockSettingsopen;
+        return CheckMouse.isMouseover(UIVar.blockeinstellungen_x, UIVar.blockeinstellungen_y, UIVar.blockeinstellungen_w, UIVar.blockeinstellungen_h, false) && UIVar.isBlockSettingsopen;
     }
 
 }

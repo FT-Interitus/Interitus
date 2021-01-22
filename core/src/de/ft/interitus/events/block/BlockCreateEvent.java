@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -7,10 +7,9 @@ package de.ft.interitus.events.block;
 
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.events.Event;
-import de.ft.interitus.events.EventManager;
 
 public class BlockCreateEvent implements Event {
-      private final Block block;
+    private final Block block;
 
     public BlockCreateEvent(Block block) {
         this.block = block;

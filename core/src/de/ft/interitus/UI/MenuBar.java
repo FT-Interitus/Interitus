@@ -14,16 +14,15 @@ import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import com.kotcrab.vis.ui.widget.Menu;
 import com.kotcrab.vis.ui.widget.MenuItem;
 import com.kotcrab.vis.ui.widget.PopupMenu;
-import de.ft.interitus.WindowManager;
 import de.ft.interitus.UI.newproject.ImportProject;
 import de.ft.interitus.UI.newproject.NewProjectWindow;
 import de.ft.interitus.Var;
+import de.ft.interitus.WindowManager;
 import de.ft.interitus.datamanager.programmdata.Data;
 import de.ft.interitus.datamanager.programmdata.Updater;
 import de.ft.interitus.datamanager.userdata.UserInteractDataManagerDialog;
 import de.ft.interitus.datamanager.userdata.load.DataLoader;
 import de.ft.interitus.datamanager.userdata.save.DataSaver;
-import de.ft.interitus.events.EventVar;
 import de.ft.interitus.network.bettertogether.Manager;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.VCS;
@@ -33,7 +32,7 @@ public class MenuBar {
     public static boolean fullscreen = false;
     public static MenuItem menuItem_vollbild;
     public static MenuItem menuItem_newproject;
-   // public static MenuItem menuItem_reloadproject;
+    // public static MenuItem menuItem_reloadproject;
     public static MenuItem menuItem_import;
     public static MenuItem menuItem_new;
     public static MenuItem menuItem_oeffnen;
@@ -93,13 +92,13 @@ public class MenuBar {
         //    @Override
         //    public void changed(ChangeEvent event, Actor actor) {
         //        ProjectManager.reloadProject(Var.openprojectindex);
-         //   }
-       // });
+        //   }
+        // });
 
         menuItem_import = new MenuItem("Import Projekt", new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-               new ImportProject().show();
+                new ImportProject().show();
             }
         }).setShortcut("Strg+I");
         menuItem_new = new MenuItem("Neu");
@@ -301,7 +300,7 @@ public class MenuBar {
         }).setShortcut("Strg+V"));
 
 
-       helpMenu.addItem(menuItem_update);
+        helpMenu.addItem(menuItem_update);
         helpMenu.addItem(menuItem_showruntimeinfo);
         helpMenu.addItem(menuItem_clearram);
 
@@ -319,7 +318,7 @@ public class MenuBar {
         UI.menuBar.addMenu(helpMenu);
 
 
-     //   ProgramRegistry.addMenuBarItems();
+        //   ProgramRegistry.addMenuBarItems();
 
 
     }

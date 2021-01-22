@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -15,11 +15,15 @@ public interface Import {
 
     /**
      * You need to show a Error in case the user selected a no compatible File
+     *
      * @param file
      */
     void importproject(File file);
+
     String getName();
+
     Plugin getPlugin();
+
     ProjectType getTargetProjectType();
 
 }

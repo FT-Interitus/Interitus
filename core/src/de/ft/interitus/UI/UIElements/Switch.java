@@ -19,10 +19,10 @@ public class Switch {
     private final int multiplikatorecht = 3;
     private final float[] farbehebel = {1, 1, 1, 1};
     private final Vector2 mousesave = new Vector2();
-    private CheckMouse checkMouse = new CheckMouse();
     Texture background;
     SpriteBatch b = new SpriteBatch();
     Random random = new Random();
+    private final CheckMouse checkMouse = new CheckMouse();
     private int x;
     private int y;
     private int w = 50;

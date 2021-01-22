@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -36,7 +36,7 @@ public class subitem3 {
         stringArray.add("120");
         stringArray.add("240");
         stringArray.add("Unlimited");
-        if (Gdx.input.isKeyPressed(Input.Keys.E) || Settings.limitfps <= 5 && Settings.limitfps != 0) { //Easteregg
+        if (WindowAPI.isKeyPressed(Input.Keys.E) || Settings.limitfps <= 5 && Settings.limitfps != 0) { //Easteregg
             stringArray.add("5");
         }
 

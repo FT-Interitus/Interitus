@@ -5,18 +5,16 @@
 
 package de.ft.interitus.Block;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Cursor.SystemCursor;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import de.ft.interitus.UI.WindowAPI;
-import de.ft.interitus.Var;
-import de.ft.interitus.WindowManager;
 import de.ft.interitus.Program;
 import de.ft.interitus.ProgramingSpace;
 import de.ft.interitus.UI.UIElements.check.CheckCollision;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
 import de.ft.interitus.UI.UIVar;
+import de.ft.interitus.UI.WindowAPI;
+import de.ft.interitus.Var;
+import de.ft.interitus.WindowManager;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.Unproject;
 
@@ -29,18 +27,18 @@ public class DataWire {
     int output_y = 0;
     private Parameter param_input;
     private Parameter param_output;
-    private boolean setCorsorOnlyOnce =false;
+    private boolean setCorsorOnlyOnce = false;
 
 
-    private final boolean[] moving=new boolean[10];
+    private final boolean[] moving = new boolean[10];
 
 
     /////Layout
-    private int verschiebung_1_Horizontale =0;
-    private int verschiebung_2_HorizontaleInput=0;
-    private int verschiebung_3_HorizontaleOutput =0;
-    private int verschiebung_4_VertikaleInput =0;
-    private int verschiebung_5_VertikaleInput =0;
+    private int verschiebung_1_Horizontale = 0;
+    private int verschiebung_2_HorizontaleInput = 0;
+    private int verschiebung_3_HorizontaleOutput = 0;
+    private int verschiebung_4_VertikaleInput = 0;
+    private int verschiebung_5_VertikaleInput = 0;
 
 
     /**
@@ -58,7 +56,7 @@ public class DataWire {
      * @param param_input
      * @param param_output
      */
-    public DataWire(Parameter param_input,Parameter param_output) {
+    public DataWire(Parameter param_input, Parameter param_output) {
         this.param_output = param_output;
         this.param_input = param_input;
 
@@ -67,104 +65,103 @@ public class DataWire {
     }
 
 
-
-    private void userLayoutMovement(){
-        assert ProjectManager.getActProjectVar()!=null;
-        if((UIVar.DataWire[1][0]<=UIVar.DataWire[2][0] && (moving[0] || CheckMouse.isMouseover(UIVar.DataWire[1][0],UIVar.DataWire[1][1]-UIVar.DataWireMouseKollisionsFeld,UIVar.DataWire[2][0]-UIVar.DataWire[1][0],UIVar.DataWireMouseKollisionsFeld*2, true))) || (UIVar.DataWire[1][0]>UIVar.DataWire[2][0] && (moving[0] || CheckMouse.isMouseover(UIVar.DataWire[2][0],UIVar.DataWire[1][1]-UIVar.DataWireMouseKollisionsFeld,UIVar.DataWire[1][0]-UIVar.DataWire[2][0],UIVar.DataWireMouseKollisionsFeld*2, true)))){
-            Gdx.graphics.setSystemCursor(SystemCursor.VerticalResize);
-            setCorsorOnlyOnce =true;
-            if(WindowAPI.isButtonJustPressed(0)) {
+    private void userLayoutMovement() {
+        assert ProjectManager.getActProjectVar() != null;
+        if ((UIVar.DataWire[1][0] <= UIVar.DataWire[2][0] && (moving[0] || CheckMouse.isMouseover(UIVar.DataWire[1][0], UIVar.DataWire[1][1] - UIVar.DataWireMouseKollisionsFeld, UIVar.DataWire[2][0] - UIVar.DataWire[1][0], UIVar.DataWireMouseKollisionsFeld * 2, true))) || (UIVar.DataWire[1][0] > UIVar.DataWire[2][0] && (moving[0] || CheckMouse.isMouseover(UIVar.DataWire[2][0], UIVar.DataWire[1][1] - UIVar.DataWireMouseKollisionsFeld, UIVar.DataWire[1][0] - UIVar.DataWire[2][0], UIVar.DataWireMouseKollisionsFeld * 2, true)))) {
+            WindowAPI.setSystemCursor(WindowAPI.SystemCursors.VerticalResize);
+            setCorsorOnlyOnce = true;
+            if (WindowAPI.isButtonJustPressed(0)) {
                 moving[0] = true;
                 ProjectManager.getActProjectVar().changes = true;
             }
-            if(WindowAPI.isButtonPressed(0) && moving[0]){
-                if(UIVar.doonce) {
-                    UIVar.merkpos.set(WindowAPI.getX()*ProgramingSpace.cam.zoom, WindowAPI.getY()*ProgramingSpace.cam.zoom, verschiebung_4_VertikaleInput);
-                    UIVar.doonce=false;
+            if (WindowAPI.isButtonPressed(0) && moving[0]) {
+                if (UIVar.doonce) {
+                    UIVar.merkpos.set(WindowAPI.getX() * ProgramingSpace.cam.zoom, WindowAPI.getY() * ProgramingSpace.cam.zoom, verschiebung_4_VertikaleInput);
+                    UIVar.doonce = false;
                 }
-                verschiebung_4_VertikaleInput= (int) ((int)UIVar.merkpos.y-WindowAPI.getY()*ProgramingSpace.cam.zoom+(int)UIVar.merkpos.z);
-            }else if(!WindowAPI.isButtonPressed(0)){
-                UIVar.doonce=true;
-                moving[0]=false;
+                verschiebung_4_VertikaleInput = (int) ((int) UIVar.merkpos.y - WindowAPI.getY() * ProgramingSpace.cam.zoom + (int) UIVar.merkpos.z);
+            } else if (!WindowAPI.isButtonPressed(0)) {
+                UIVar.doonce = true;
+                moving[0] = false;
             }
-        }else if((UIVar.DataWire[2][1]>UIVar.DataWire[3][1]  && (moving[1] || CheckMouse.isMouseover(UIVar.DataWire[2][0]-UIVar.DataWireMouseKollisionsFeld,UIVar.DataWire[3][1],UIVar.DataWireMouseKollisionsFeld*2, UIVar.DataWire[2][1]-UIVar.DataWire[3][1], true))) || (UIVar.DataWire[2][1]<=UIVar.DataWire[3][1]  && (moving[1] || CheckMouse.isMouseover(UIVar.DataWire[2][0]-UIVar.DataWireMouseKollisionsFeld,UIVar.DataWire[2][1],UIVar.DataWireMouseKollisionsFeld*2, UIVar.DataWire[3][1]-UIVar.DataWire[2][1], true)))){
-            Gdx.graphics.setSystemCursor(SystemCursor.HorizontalResize);
-            setCorsorOnlyOnce =true;
-            if(WindowAPI.isButtonJustPressed(0)) {
+        } else if ((UIVar.DataWire[2][1] > UIVar.DataWire[3][1] && (moving[1] || CheckMouse.isMouseover(UIVar.DataWire[2][0] - UIVar.DataWireMouseKollisionsFeld, UIVar.DataWire[3][1], UIVar.DataWireMouseKollisionsFeld * 2, UIVar.DataWire[2][1] - UIVar.DataWire[3][1], true))) || (UIVar.DataWire[2][1] <= UIVar.DataWire[3][1] && (moving[1] || CheckMouse.isMouseover(UIVar.DataWire[2][0] - UIVar.DataWireMouseKollisionsFeld, UIVar.DataWire[2][1], UIVar.DataWireMouseKollisionsFeld * 2, UIVar.DataWire[3][1] - UIVar.DataWire[2][1], true)))) {
+            WindowAPI.setSystemCursor(WindowAPI.SystemCursors.HorizontalResize);
+            setCorsorOnlyOnce = true;
+            if (WindowAPI.isButtonJustPressed(0)) {
                 moving[1] = true;
                 ProjectManager.getActProjectVar().changes = true;
 
             }
-            if(WindowAPI.isButtonPressed(0)  && moving[1]){
-                if(UIVar.doonce) {
-                    UIVar.merkpos.set(WindowAPI.getX()*ProgramingSpace.cam.zoom, WindowAPI.getY()*ProgramingSpace.cam.zoom, verschiebung_2_HorizontaleInput);
-                    UIVar.doonce=false;
+            if (WindowAPI.isButtonPressed(0) && moving[1]) {
+                if (UIVar.doonce) {
+                    UIVar.merkpos.set(WindowAPI.getX() * ProgramingSpace.cam.zoom, WindowAPI.getY() * ProgramingSpace.cam.zoom, verschiebung_2_HorizontaleInput);
+                    UIVar.doonce = false;
                 }
-                verschiebung_2_HorizontaleInput= (int) (WindowAPI.getX()*ProgramingSpace.cam.zoom-(int)UIVar.merkpos.x+(int)UIVar.merkpos.z);
-            }else if(!WindowAPI.isButtonPressed(0)){
-                UIVar.doonce=true;
-                moving[1]=false;
+                verschiebung_2_HorizontaleInput = (int) (WindowAPI.getX() * ProgramingSpace.cam.zoom - (int) UIVar.merkpos.x + (int) UIVar.merkpos.z);
+            } else if (!WindowAPI.isButtonPressed(0)) {
+                UIVar.doonce = true;
+                moving[1] = false;
             }
-        }else if((UIVar.DataWire[3][0]<=UIVar.DataWire[4][0] && (moving[2] || CheckMouse.isMouseover(UIVar.DataWire[3][0], UIVar.DataWire[3][1]-UIVar.DataWireMouseKollisionsFeld,UIVar.DataWire[4][0]-UIVar.DataWire[3][0],UIVar.DataWireMouseKollisionsFeld*2, true)))   ||  (UIVar.DataWire[3][0]>UIVar.DataWire[4][0] && (moving[2] || CheckMouse.isMouseover(UIVar.DataWire[4][0], UIVar.DataWire[3][1]-UIVar.DataWireMouseKollisionsFeld,UIVar.DataWire[3][0]-UIVar.DataWire[4][0],UIVar.DataWireMouseKollisionsFeld*2, true)))){
-            Gdx.graphics.setSystemCursor(SystemCursor.VerticalResize);
-            setCorsorOnlyOnce =true;
+        } else if ((UIVar.DataWire[3][0] <= UIVar.DataWire[4][0] && (moving[2] || CheckMouse.isMouseover(UIVar.DataWire[3][0], UIVar.DataWire[3][1] - UIVar.DataWireMouseKollisionsFeld, UIVar.DataWire[4][0] - UIVar.DataWire[3][0], UIVar.DataWireMouseKollisionsFeld * 2, true))) || (UIVar.DataWire[3][0] > UIVar.DataWire[4][0] && (moving[2] || CheckMouse.isMouseover(UIVar.DataWire[4][0], UIVar.DataWire[3][1] - UIVar.DataWireMouseKollisionsFeld, UIVar.DataWire[3][0] - UIVar.DataWire[4][0], UIVar.DataWireMouseKollisionsFeld * 2, true)))) {
+            WindowAPI.setSystemCursor(WindowAPI.SystemCursors.VerticalResize);
+            setCorsorOnlyOnce = true;
 
-            if(WindowAPI.isButtonJustPressed(0)) {
+            if (WindowAPI.isButtonJustPressed(0)) {
                 moving[2] = true;
                 ProjectManager.getActProjectVar().changes = true;
             }
-            if(WindowAPI.isButtonPressed(0)  && moving[2]){
-                if(UIVar.doonce) {
-                    UIVar.merkpos.set(WindowAPI.getX()*ProgramingSpace.cam.zoom, WindowAPI.getY()*ProgramingSpace.cam.zoom, verschiebung_1_Horizontale);
-                    UIVar.doonce=false;
+            if (WindowAPI.isButtonPressed(0) && moving[2]) {
+                if (UIVar.doonce) {
+                    UIVar.merkpos.set(WindowAPI.getX() * ProgramingSpace.cam.zoom, WindowAPI.getY() * ProgramingSpace.cam.zoom, verschiebung_1_Horizontale);
+                    UIVar.doonce = false;
                 }
-                verschiebung_1_Horizontale= (int) ((int)UIVar.merkpos.y-WindowAPI.getY()*ProgramingSpace.cam.zoom+(int)UIVar.merkpos.z);
-            }else if(!WindowAPI.isButtonPressed(0)){
-                UIVar.doonce=true;
-                moving[2]=false;
+                verschiebung_1_Horizontale = (int) ((int) UIVar.merkpos.y - WindowAPI.getY() * ProgramingSpace.cam.zoom + (int) UIVar.merkpos.z);
+            } else if (!WindowAPI.isButtonPressed(0)) {
+                UIVar.doonce = true;
+                moving[2] = false;
             }
-        }else if((UIVar.DataWire[4][1]<=UIVar.DataWire[5][1] && (moving[3] || CheckMouse.isMouseover(UIVar.DataWire[4][0]-UIVar.DataWireMouseKollisionsFeld, UIVar.DataWire[4][1], UIVar.DataWireMouseKollisionsFeld*2,UIVar.DataWire[5][1]-UIVar.DataWire[4][1], true))) || (UIVar.DataWire[4][1]>UIVar.DataWire[5][1] && (moving[3] || CheckMouse.isMouseover(UIVar.DataWire[4][0]-UIVar.DataWireMouseKollisionsFeld, UIVar.DataWire[5][1], UIVar.DataWireMouseKollisionsFeld*2,UIVar.DataWire[4][1]-UIVar.DataWire[5][1], true)))){
-            Gdx.graphics.setSystemCursor(SystemCursor.HorizontalResize);
-            setCorsorOnlyOnce =true;
+        } else if ((UIVar.DataWire[4][1] <= UIVar.DataWire[5][1] && (moving[3] || CheckMouse.isMouseover(UIVar.DataWire[4][0] - UIVar.DataWireMouseKollisionsFeld, UIVar.DataWire[4][1], UIVar.DataWireMouseKollisionsFeld * 2, UIVar.DataWire[5][1] - UIVar.DataWire[4][1], true))) || (UIVar.DataWire[4][1] > UIVar.DataWire[5][1] && (moving[3] || CheckMouse.isMouseover(UIVar.DataWire[4][0] - UIVar.DataWireMouseKollisionsFeld, UIVar.DataWire[5][1], UIVar.DataWireMouseKollisionsFeld * 2, UIVar.DataWire[4][1] - UIVar.DataWire[5][1], true)))) {
+            WindowAPI.setSystemCursor(WindowAPI.SystemCursors.HorizontalResize);
+            setCorsorOnlyOnce = true;
 
-            if(WindowAPI.isButtonJustPressed(0)) {
+            if (WindowAPI.isButtonJustPressed(0)) {
                 moving[3] = true;
                 ProjectManager.getActProjectVar().changes = true;
 
             }
-            if(WindowAPI.isButtonPressed(0)  && moving[3]){
-                if(UIVar.doonce) {
-                    UIVar.merkpos.set(WindowAPI.getX()*ProgramingSpace.cam.zoom, WindowAPI.getY()*ProgramingSpace.cam.zoom, verschiebung_3_HorizontaleOutput);
-                    UIVar.doonce=false;
+            if (WindowAPI.isButtonPressed(0) && moving[3]) {
+                if (UIVar.doonce) {
+                    UIVar.merkpos.set(WindowAPI.getX() * ProgramingSpace.cam.zoom, WindowAPI.getY() * ProgramingSpace.cam.zoom, verschiebung_3_HorizontaleOutput);
+                    UIVar.doonce = false;
                 }
-                verschiebung_3_HorizontaleOutput= (int) (WindowAPI.getX()*ProgramingSpace.cam.zoom-(int)UIVar.merkpos.x+(int)UIVar.merkpos.z);
-            }else if(!WindowAPI.isButtonPressed(0)){
-                UIVar.doonce=true;
-                moving[3]=false;
+                verschiebung_3_HorizontaleOutput = (int) (WindowAPI.getX() * ProgramingSpace.cam.zoom - (int) UIVar.merkpos.x + (int) UIVar.merkpos.z);
+            } else if (!WindowAPI.isButtonPressed(0)) {
+                UIVar.doonce = true;
+                moving[3] = false;
             }
-        }else if((UIVar.DataWire[5][0]<=UIVar.DataWire[6][0] && (moving[4] || CheckMouse.isMouseover(UIVar.DataWire[5][0], UIVar.DataWire[5][1]-UIVar.DataWireMouseKollisionsFeld, UIVar.DataWire[6][0]-UIVar.DataWire[5][0], UIVar.DataWireMouseKollisionsFeld*2, true)))  ||  (UIVar.DataWire[5][0]>UIVar.DataWire[6][0] && (moving[4] || CheckMouse.isMouseover(UIVar.DataWire[6][0], UIVar.DataWire[5][1]-UIVar.DataWireMouseKollisionsFeld, UIVar.DataWire[5][0]-UIVar.DataWire[6][0], UIVar.DataWireMouseKollisionsFeld*2, true)))){
-            Gdx.graphics.setSystemCursor(SystemCursor.VerticalResize);
-            setCorsorOnlyOnce =true;
+        } else if ((UIVar.DataWire[5][0] <= UIVar.DataWire[6][0] && (moving[4] || CheckMouse.isMouseover(UIVar.DataWire[5][0], UIVar.DataWire[5][1] - UIVar.DataWireMouseKollisionsFeld, UIVar.DataWire[6][0] - UIVar.DataWire[5][0], UIVar.DataWireMouseKollisionsFeld * 2, true))) || (UIVar.DataWire[5][0] > UIVar.DataWire[6][0] && (moving[4] || CheckMouse.isMouseover(UIVar.DataWire[6][0], UIVar.DataWire[5][1] - UIVar.DataWireMouseKollisionsFeld, UIVar.DataWire[5][0] - UIVar.DataWire[6][0], UIVar.DataWireMouseKollisionsFeld * 2, true)))) {
+            WindowAPI.setSystemCursor(WindowAPI.SystemCursors.VerticalResize);
+            setCorsorOnlyOnce = true;
 
-            if(WindowAPI.isButtonJustPressed(0)) {
+            if (WindowAPI.isButtonJustPressed(0)) {
                 moving[4] = true;
                 ProjectManager.getActProjectVar().changes = true;
 
             }
-            if(WindowAPI.isButtonPressed(0)  && moving[4]){
-                if(UIVar.doonce) {
-                    UIVar.merkpos.set(WindowAPI.getX()*ProgramingSpace.cam.zoom, WindowAPI.getY()*ProgramingSpace.cam.zoom, verschiebung_5_VertikaleInput);
-                    UIVar.doonce=false;
+            if (WindowAPI.isButtonPressed(0) && moving[4]) {
+                if (UIVar.doonce) {
+                    UIVar.merkpos.set(WindowAPI.getX() * ProgramingSpace.cam.zoom, WindowAPI.getY() * ProgramingSpace.cam.zoom, verschiebung_5_VertikaleInput);
+                    UIVar.doonce = false;
                 }
-                verschiebung_5_VertikaleInput= (int) ((int)UIVar.merkpos.y-WindowAPI.getY()*ProgramingSpace.cam.zoom+(int)UIVar.merkpos.z);
-            }else if(!WindowAPI.isButtonPressed(0)){
-                UIVar.doonce=true;
-                moving[4]=false;
+                verschiebung_5_VertikaleInput = (int) ((int) UIVar.merkpos.y - WindowAPI.getY() * ProgramingSpace.cam.zoom + (int) UIVar.merkpos.z);
+            } else if (!WindowAPI.isButtonPressed(0)) {
+                UIVar.doonce = true;
+                moving[4] = false;
             }
-        }else{
-            if(setCorsorOnlyOnce) {
-                Gdx.graphics.setSystemCursor(SystemCursor.Arrow);
-                setCorsorOnlyOnce =false;
+        } else {
+            if (setCorsorOnlyOnce) {
+                WindowAPI.setSystemCursor(WindowAPI.SystemCursors.Arrow);
+                setCorsorOnlyOnce = false;
             }
 
         }
@@ -174,108 +171,106 @@ public class DataWire {
      * draws and renders the Data Wire
      */
     public void draw() {
-        assert ProjectManager.getActProjectVar()!=null;
-       input_x = param_input.getX();
-       input_y = param_input.getY();
+        assert ProjectManager.getActProjectVar() != null;
+        input_x = param_input.getX();
+        input_y = param_input.getY();
 
-        if(ProjectManager.getActProjectVar().movingDataWire ==this) {
+        if (ProjectManager.getActProjectVar().movingDataWire == this) {
 
             output_x = ((int) Unproject.unproject().x);
-            output_y = ((int) Unproject.unproject().y)-this.getParam_input().getParameterType().getVariableType().getTextureconnector().getHeight()/2;
+            output_y = ((int) Unproject.unproject().y) - this.getParam_input().getParameterType().getVariableType().getTextureconnector().getHeight() / 2;
 
 
+            if (WindowAPI.isButtonJustPressed(0) || !WindowAPI.isButtonPressed(0))
+                for (Block block : ProjectManager.getActProjectVar().blocks) {
+                    if (block.getBlockType().getBlockParameter() == null) {
+                        continue;
+                    }
+                    for (Parameter parameter : block.getBlockType().getBlockParameter()) {
+                        if (parameter != this.getParam_input() && !parameter.getParameterType().isOutput() && parameter.getDataWires().size() != 1 && parameter.getParameterType().variableType.iscompatible(this.getParam_input().getParameterType().variableType) && parameter.getBlock() != this.getParam_input().getBlock()) {
 
-            if(WindowAPI.isButtonJustPressed(0)||!WindowAPI.isButtonPressed(0))
-           for(Block block: ProjectManager.getActProjectVar().blocks) {
-               if(block.getBlockType().getBlockParameter()==null) {
-                   continue;
-               }
-               for(Parameter parameter:block.getBlockType().getBlockParameter()) {
-                   if(parameter!=this.getParam_input()&&!parameter.getParameterType().isOutput()&&parameter.getDataWires().size()!=1&&parameter.getParameterType().variableType.iscompatible(this.getParam_input().getParameterType().variableType)&&parameter.getBlock()!=this.getParam_input().getBlock()) {
+                            if (WindowAPI.isButtonJustPressed(0)) {
+                                if (CheckCollision.checkpointwithobject(parameter.getX(), parameter.getY(), UIVar.parameter_width, UIVar.parameter_height, Unproject.unproject())) {
+                                    ProjectManager.getActProjectVar().movingDataWire = null;
+                                    param_output = parameter;
+                                    parameter.getDataWires().clear();
+                                    parameter.getDataWires().add(this);
+                                }
+                            } else {
+                                if (CheckCollision.checkpointwithobject(parameter.getX(), parameter.getY(), UIVar.parameter_width, UIVar.parameter_height, Var.mouseReleasePos)) {
+                                    ProjectManager.getActProjectVar().movingDataWire = null;
+                                    param_output = parameter;
+                                    parameter.getDataWires().clear();
+                                    parameter.getDataWires().add(this);
+                                }
+                            }
 
-                    if(WindowAPI.isButtonJustPressed(0)) {
-                        if (CheckCollision.checkpointwithobject(parameter.getX(), parameter.getY(), UIVar.parameter_width, UIVar.parameter_height, Unproject.unproject())) {
-                            ProjectManager.getActProjectVar().movingDataWire = null;
-                            param_output = parameter;
-                            parameter.getDataWires().clear();
-                            parameter.getDataWires().add(this);
-                        }
-                    }else {
-                        if (CheckCollision.checkpointwithobject(parameter.getX(), parameter.getY(), UIVar.parameter_width, UIVar.parameter_height, Var.mouseReleasePos)) {
-                            ProjectManager.getActProjectVar().movingDataWire = null;
-                            param_output = parameter;
-                            parameter.getDataWires().clear();
-                            parameter.getDataWires().add(this);
                         }
                     }
-
-                   }
-               }
-           }
+                }
 
         }
 
-        if(param_output==null)  {
-            if(this!=ProjectManager.getActProjectVar().movingDataWire) {
+        if (param_output == null) {
+            if (this != ProjectManager.getActProjectVar().movingDataWire) {
                 ProjectManager.getActProjectVar().movingDataWire = this;
             }
-        }else{
-            output_x=param_output.getX();
-            output_y=param_output.getY();
-            if(ProjectManager.getActProjectVar().movingDataWire ==this) {
+        } else {
+            output_x = param_output.getX();
+            output_y = param_output.getY();
+            if (ProjectManager.getActProjectVar().movingDataWire == this) {
                 ProjectManager.getActProjectVar().movingDataWire = null;
             }
         }
 
 
-
         WindowManager.BlockshapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         WindowManager.BlockshapeRenderer.setColor(this.getParam_input().getParameterType().getVariableType().getWirecolor());
 
-        int parameter_middle_x=input_x+UIVar.parameter_width/2;
+        int parameter_middle_x = input_x + UIVar.parameter_width / 2;
         int parameter_middle_output_x;
 
-        if(param_output==null){
+        if (param_output == null) {
             parameter_middle_output_x = output_x;
-        }else {
+        } else {
             parameter_middle_output_x = output_x + UIVar.parameter_width / 2;
         }
-        if(output_y > input_y || UIVar.DataWire_OutputHorizontale_Y==0) {
-            UIVar.DataWire_horizontal_Y=input_y - UIVar.first_curve_margin+ verschiebung_1_Horizontale;
-        }else {
-            UIVar.DataWire_horizontal_Y=output_y - UIVar.first_curve_margin+ verschiebung_1_Horizontale;
+        if (output_y > input_y || UIVar.DataWire_OutputHorizontale_Y == 0) {
+            UIVar.DataWire_horizontal_Y = input_y - UIVar.first_curve_margin + verschiebung_1_Horizontale;
+        } else {
+            UIVar.DataWire_horizontal_Y = output_y - UIVar.first_curve_margin + verschiebung_1_Horizontale;
         }
-        UIVar.DataWire_InputVertikale_X=parameter_middle_x+verschiebung_2_HorizontaleInput;
-        UIVar.DataWire_OutputVertikale_X=parameter_middle_output_x+ verschiebung_3_HorizontaleOutput;
-        UIVar.DataWire_InputHorizontale_Y=input_y-UIVar.first_curve_margin+ verschiebung_4_VertikaleInput;
-        UIVar.DataWire_OutputHorizontale_Y=output_y-UIVar.first_curve_margin+ verschiebung_5_VertikaleInput;
+        UIVar.DataWire_InputVertikale_X = parameter_middle_x + verschiebung_2_HorizontaleInput;
+        UIVar.DataWire_OutputVertikale_X = parameter_middle_output_x + verschiebung_3_HorizontaleOutput;
+        UIVar.DataWire_InputHorizontale_Y = input_y - UIVar.first_curve_margin + verschiebung_4_VertikaleInput;
+        UIVar.DataWire_OutputHorizontale_Y = output_y - UIVar.first_curve_margin + verschiebung_5_VertikaleInput;
 
-        UIVar.DataWire[0][0]=parameter_middle_x;
-        UIVar.DataWire[0][1]=input_y;
+        UIVar.DataWire[0][0] = parameter_middle_x;
+        UIVar.DataWire[0][1] = input_y;
 
-        UIVar.DataWire[1][0]=parameter_middle_x;
-        UIVar.DataWire[1][1]=UIVar.DataWire_InputHorizontale_Y;
+        UIVar.DataWire[1][0] = parameter_middle_x;
+        UIVar.DataWire[1][1] = UIVar.DataWire_InputHorizontale_Y;
 
-        UIVar.DataWire[2][0]=UIVar.DataWire_InputVertikale_X;
-        UIVar.DataWire[2][1]=UIVar.DataWire_InputHorizontale_Y;
+        UIVar.DataWire[2][0] = UIVar.DataWire_InputVertikale_X;
+        UIVar.DataWire[2][1] = UIVar.DataWire_InputHorizontale_Y;
 
-        UIVar.DataWire[3][0]=UIVar.DataWire_InputVertikale_X;
-        UIVar.DataWire[3][1]=UIVar.DataWire_horizontal_Y;
+        UIVar.DataWire[3][0] = UIVar.DataWire_InputVertikale_X;
+        UIVar.DataWire[3][1] = UIVar.DataWire_horizontal_Y;
 
-        UIVar.DataWire[4][0]=UIVar.DataWire_OutputVertikale_X;
-        UIVar.DataWire[4][1]=UIVar.DataWire_horizontal_Y;
+        UIVar.DataWire[4][0] = UIVar.DataWire_OutputVertikale_X;
+        UIVar.DataWire[4][1] = UIVar.DataWire_horizontal_Y;
 
-        UIVar.DataWire[5][0]=UIVar.DataWire_OutputVertikale_X;
-        UIVar.DataWire[5][1]=UIVar.DataWire_OutputHorizontale_Y;
+        UIVar.DataWire[5][0] = UIVar.DataWire_OutputVertikale_X;
+        UIVar.DataWire[5][1] = UIVar.DataWire_OutputHorizontale_Y;
 
-        UIVar.DataWire[6][0]=parameter_middle_output_x;
-        UIVar.DataWire[6][1]=UIVar.DataWire_OutputHorizontale_Y;
+        UIVar.DataWire[6][0] = parameter_middle_output_x;
+        UIVar.DataWire[6][1] = UIVar.DataWire_OutputHorizontale_Y;
 
-        UIVar.DataWire[7][0]=parameter_middle_output_x;
-        UIVar.DataWire[7][1]=output_y;
+        UIVar.DataWire[7][0] = parameter_middle_output_x;
+        UIVar.DataWire[7][1] = output_y;
 
-        WindowManager.BlockshapeRenderer.rectLine(UIVar.DataWire[0][0], UIVar.DataWire[0][1], UIVar.DataWire[1][0], UIVar.DataWire[1][1],UIVar.thickness);//Verlängerung an input
-        WindowManager.BlockshapeRenderer.rectLine(UIVar.DataWire[1][0], UIVar.DataWire[1][1], UIVar.DataWire[2][0], UIVar.DataWire[2][1],UIVar.thickness);//input horizontal verlängerung
+        WindowManager.BlockshapeRenderer.rectLine(UIVar.DataWire[0][0], UIVar.DataWire[0][1], UIVar.DataWire[1][0], UIVar.DataWire[1][1], UIVar.thickness);//Verlängerung an input
+        WindowManager.BlockshapeRenderer.rectLine(UIVar.DataWire[1][0], UIVar.DataWire[1][1], UIVar.DataWire[2][0], UIVar.DataWire[2][1], UIVar.thickness);//input horizontal verlängerung
         WindowManager.BlockshapeRenderer.rectLine(UIVar.DataWire[2][0], UIVar.DataWire[2][1], UIVar.DataWire[3][0], UIVar.DataWire[3][1], UIVar.thickness);//vertikale an input
         WindowManager.BlockshapeRenderer.rectLine(UIVar.DataWire[3][0], UIVar.DataWire[3][1], UIVar.DataWire[4][0], UIVar.DataWire[4][1], UIVar.thickness);//Horizontale
         WindowManager.BlockshapeRenderer.rectLine(UIVar.DataWire[4][0], UIVar.DataWire[4][1], UIVar.DataWire[5][0], UIVar.DataWire[5][1], UIVar.thickness);//Vertikale an output
@@ -283,38 +278,36 @@ public class DataWire {
         WindowManager.BlockshapeRenderer.rectLine(UIVar.DataWire[6][0], UIVar.DataWire[6][1], UIVar.DataWire[7][0], UIVar.DataWire[7][1], UIVar.thickness);//Verlängerung an output
 
 
-
         WindowManager.BlockshapeRenderer.end();
 
-        if(ProjectManager.getActProjectVar().movingDataWire ==this) {
+        if (ProjectManager.getActProjectVar().movingDataWire == this) {
 
             WindowManager.blockBatch.begin();
-            WindowManager.blockBatch.setColor(1,1,1,1);
-            WindowManager.blockBatch.draw(this.getParam_input().getParameterType().getVariableType().getTextureconnector(),Unproject.unproject().x-this.getParam_input().getParameterType().getVariableType().getTextureconnector().getWidth()/2,Unproject.unproject().y-this.getParam_input().getParameterType().getVariableType().getTextureconnector().getHeight()/2);
+            WindowManager.blockBatch.setColor(1, 1, 1, 1);
+            WindowManager.blockBatch.draw(this.getParam_input().getParameterType().getVariableType().getTextureconnector(), Unproject.unproject().x - this.getParam_input().getParameterType().getVariableType().getTextureconnector().getWidth() / 2, Unproject.unproject().y - this.getParam_input().getParameterType().getVariableType().getTextureconnector().getHeight() / 2);
             WindowManager.blockBatch.end();
         }
         userLayoutMovement();
 
-        if(ProjectManager.getActProjectVar().movingDataWire ==this) {
+        if (ProjectManager.getActProjectVar().movingDataWire == this) {
 
-            if(WindowAPI.isButtonJustPressed(0)) {
+            if (WindowAPI.isButtonJustPressed(0)) {
                 int counter = 0;
                 for (int i = 0; i < ProjectManager.getActProjectVar().visible_blocks.size(); i++) {
 
 
-                    if(CheckCollision.checkmousewithblock(ProjectManager.getActProjectVar().visible_blocks.get(i)))  {
+                    if (CheckCollision.checkmousewithblock(ProjectManager.getActProjectVar().visible_blocks.get(i))) {
                         counter++;
                     }
 
 
-
                 }
 
-                if(counter==0) {
+                if (counter == 0) {
                     this.delete();
                 }
             }
-            if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
+            if (WindowAPI.isKeyJustPressed(Input.Keys.ESCAPE)) {
                 this.delete();
             }
         }
@@ -340,20 +333,20 @@ public class DataWire {
 
         try {
             param_input.getDataWires().remove(this);
-        }catch (NullPointerException ignored){
+        } catch (NullPointerException ignored) {
 
         }
 
         try {
             param_output.getDataWires().clear();
-        }catch (NullPointerException ignored) {
+        } catch (NullPointerException ignored) {
 
         }
-        param_output =null;
+        param_output = null;
         param_input = null;
 
-        if(ProjectManager.getActProjectVar().movingDataWire ==this) {
-            ProjectManager.getActProjectVar().movingDataWire =null;
+        if (ProjectManager.getActProjectVar().movingDataWire == this) {
+            ProjectManager.getActProjectVar().movingDataWire = null;
         }
 
     }

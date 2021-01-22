@@ -91,14 +91,14 @@ public class GlobalEventManager implements GlobalEventListener {
     public void tabclicked(GlobalTabClickEvent e, Tab tab) {
         for (int i = 0; i < listener.size(); i++)
             ((GlobalEventListener) listener.elementAt(i)).
-                    tabclicked(e,tab);
+                    tabclicked(e, tab);
     }
 
     @Override
     public void compilingstarted(GlobalCompilingStartEvent e, Compiler compiler) {
         for (int i = 0; i < listener.size(); i++)
             ((GlobalEventListener) listener.elementAt(i)).
-                    compilingstarted(e,compiler);
+                    compilingstarted(e, compiler);
     }
 
 

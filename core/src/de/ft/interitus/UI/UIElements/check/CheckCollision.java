@@ -5,7 +5,6 @@
 
 package de.ft.interitus.UI.UIElements.check;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.*;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.ProgramingSpace;
@@ -25,29 +24,29 @@ public class CheckCollision {
 
 
         rec1.set(obj1_x, obj1_y, obj1_w, obj1_h);
-        rec2.set(obj2_x, obj2_y, obj2_w,obj2_h);
+        rec2.set(obj2_x, obj2_y, obj2_w, obj2_h);
 
         return rec1.overlaps(rec2);
 
     }
 
-    public static boolean rectCollision(java.awt.Rectangle rect1, java.awt.Rectangle rect2){
-        java.awt.Rectangle checkrect=new java.awt.Rectangle(rect1);
-        if(rect1.getWidth()>=0 && rect1.getHeight()>=0){
+    public static boolean rectCollision(java.awt.Rectangle rect1, java.awt.Rectangle rect2) {
+        java.awt.Rectangle checkrect = new java.awt.Rectangle(rect1);
+        if (rect1.getWidth() >= 0 && rect1.getHeight() >= 0) {
             return checkrect.intersects(rect2);
-        }else if(rect1.getWidth()<0 && rect1.getHeight()>=0){
-            checkrect.setLocation((int)(rect1.getX()+rect1.getWidth()),(int)(rect1.getY()));
-            checkrect.setSize((int)Math.abs(rect1.getWidth()),(int)Math.abs(rect1.getHeight()));
+        } else if (rect1.getWidth() < 0 && rect1.getHeight() >= 0) {
+            checkrect.setLocation((int) (rect1.getX() + rect1.getWidth()), (int) (rect1.getY()));
+            checkrect.setSize((int) Math.abs(rect1.getWidth()), (int) Math.abs(rect1.getHeight()));
             return checkrect.intersects(rect2);
-        }else if(rect1.getWidth()>=0 && rect1.getHeight()<0){
-            checkrect.setLocation((int)(rect1.getX()),(int)(rect1.getY()+rect1.getHeight()));
-            checkrect.setSize((int)Math.abs(rect1.getWidth()),(int)Math.abs(rect1.getHeight()));
+        } else if (rect1.getWidth() >= 0 && rect1.getHeight() < 0) {
+            checkrect.setLocation((int) (rect1.getX()), (int) (rect1.getY() + rect1.getHeight()));
+            checkrect.setSize((int) Math.abs(rect1.getWidth()), (int) Math.abs(rect1.getHeight()));
             return checkrect.intersects(rect2);
-        }else if(rect1.getWidth()<0 && rect1.getHeight()<0){
-            checkrect.setLocation((int)(rect1.getX()+rect1.getWidth()),(int)(rect1.getY()+rect1.getHeight()));
-            checkrect.setSize((int)(Math.abs(rect1.getWidth())),(int)(Math.abs(rect1.getHeight())));
+        } else if (rect1.getWidth() < 0 && rect1.getHeight() < 0) {
+            checkrect.setLocation((int) (rect1.getX() + rect1.getWidth()), (int) (rect1.getY() + rect1.getHeight()));
+            checkrect.setSize((int) (Math.abs(rect1.getWidth())), (int) (Math.abs(rect1.getHeight())));
             return checkrect.intersects(rect2);
-        }else{
+        } else {
             return false;
         }
 
@@ -100,9 +99,9 @@ public class CheckCollision {
 
     }
 
-    public static boolean checkVectors(Vector2 vector1,int w,int h,Vector2 vector2, int w2, int h2) {
+    public static boolean checkVectors(Vector2 vector1, int w, int h, Vector2 vector2, int w2, int h2) {
 
-        return object(vector1.x,vector1.y,w,h,vector2.x,vector2.y,w2,h2);
+        return object(vector1.x, vector1.y, w, h, vector2.x, vector2.y, w2, h2);
 
     }
 
@@ -134,7 +133,7 @@ public class CheckCollision {
 
     public static boolean checkCircleWithVector(int radius, int x, int y, Vector2 vector2) {
 
-        return Vector2.dst(vector2.x,WindowAPI.getHeight()-vector2.y,x,y)<radius;
+        return Vector2.dst(vector2.x, WindowAPI.getHeight() - vector2.y, x, y) < radius;
 
     }
 

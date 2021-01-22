@@ -5,7 +5,6 @@
 
 package de.ft.interitus.utils;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.ProgramingSpace;
@@ -22,8 +21,9 @@ public class Unproject {
         return temp1.set(ProgramingSpace.cam.unproject(temp3.set(WindowAPI.getX(), WindowAPI.getY(), 0)).x, ProgramingSpace.cam.unproject(temp4.set(WindowAPI.getX(), WindowAPI.getY(), 0)).y);
 
     }
-    public static Vector2 unproject(float X,float Y) {
-        return temp1.set(ProgramingSpace.viewport.unproject(temp1.set(X,Y)));
+
+    public static Vector2 unproject(float X, float Y) {
+        return temp1.set(ProgramingSpace.viewport.unproject(temp1.set(X, Y)));
     }
 
     public static Vector2 projected() {

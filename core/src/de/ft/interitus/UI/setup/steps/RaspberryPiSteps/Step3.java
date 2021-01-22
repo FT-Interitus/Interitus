@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -23,7 +23,6 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 /**
- *
  * @deprecated
  */
 public class Step3 {
@@ -54,7 +53,7 @@ public class Step3 {
 
         try {
 
-            if(true ) {
+            if (true) {
                 ipadresse = new VisValidatableTextField("");
                 try {
                     if (!InetAddress.getByName(ipadresse.getText()).isReachable(50)) {

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -14,7 +14,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 /**
- *@deprecated  Platform Specific Code!!!!
+ * @deprecated Platform Specific Code!!!!
  */
 public class NetworkScan {
     public static ArrayList<InetAddress> device = new ArrayList<>();

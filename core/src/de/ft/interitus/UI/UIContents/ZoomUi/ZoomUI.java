@@ -5,14 +5,12 @@
 
 package de.ft.interitus.UI.UIContents.ZoomUi;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import de.ft.interitus.ProgramingSpace;
 import de.ft.interitus.UI.UIElements.FormattingFrame;
 import de.ft.interitus.UI.UIElements.Grid;
 import de.ft.interitus.UI.UIElements.PlaceHolder;
 import de.ft.interitus.UI.UIElements.UIElements.Button;
-import de.ft.interitus.UI.UIElements.UIElements.TabBar.Tab;
 import de.ft.interitus.UI.UIElements.UIElements.labels.TextLabel;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
 import de.ft.interitus.UI.UIVar;
@@ -20,11 +18,7 @@ import de.ft.interitus.UI.Viewport;
 import de.ft.interitus.UI.WindowAPI;
 import de.ft.interitus.UI.uiManagement.UI;
 import de.ft.interitus.UI.uiManagement.UIManager;
-import de.ft.interitus.Var;
-import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.UI.UIZoomEvent;
-import de.ft.interitus.events.global.GlobalEventAdapter;
-import de.ft.interitus.events.global.GlobalTabClickEvent;
 import de.ft.interitus.loading.AssetLoader;
 
 public class ZoomUI extends UI {
@@ -64,7 +58,6 @@ public class ZoomUI extends UI {
         grid.addElement(new PlaceHolder().setW(-100).setH(1));
 
 
-
         grid.setVerticalArrangement(true);
 
 
@@ -91,7 +84,7 @@ public class ZoomUI extends UI {
         formattingFrame.setPosition(WindowAPI.getWidth() - UIVar.abstandvonRand - formattingFrame.w - 5, UIVar.programmflaeche_y + UIVar.programmflaeche_h - formattingFrame.h - 5);
         formattingFrame.draw();
 
-        if(WindowAPI.isButtonJustPressed(0)&&!CheckMouse.wasMousePressed(UIManager.uiRegistry.zoomUi.getFormattingFrame().x,UIManager.uiRegistry.zoomUi.getFormattingFrame().y,UIManager.uiRegistry.zoomUi.getFormattingFrame().w,UIManager.uiRegistry.zoomUi.getFormattingFrame().h)) {
+        if (WindowAPI.isButtonJustPressed(0) && !CheckMouse.wasMousePressed(UIManager.uiRegistry.zoomUi.getFormattingFrame().x, UIManager.uiRegistry.zoomUi.getFormattingFrame().y, UIManager.uiRegistry.zoomUi.getFormattingFrame().w, UIManager.uiRegistry.zoomUi.getFormattingFrame().h)) {
             super.enabled = false;
         }
 

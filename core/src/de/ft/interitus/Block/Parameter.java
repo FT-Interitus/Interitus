@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -7,7 +7,6 @@ package de.ft.interitus.Block;
 
 
 import com.badlogic.gdx.graphics.Texture;
-
 import de.ft.interitus.utils.ArrayList;
 
 public class Parameter {
@@ -20,8 +19,8 @@ public class Parameter {
     private Block block;
     private ParameterType parameterType;
     private ArrayList<DataWire> DataWire = new ArrayList<>();
-    private int x =0;
-    private int y=0;
+    private int x = 0;
+    private int y = 0;
     private final boolean varname;
 
     public Parameter(String parameter, Texture ParameterTexture, String ParameterName, String ParameterDescription, String Unit, ParameterType parameterType, boolean varname) {
@@ -38,18 +37,17 @@ public class Parameter {
     }
 
     public Object getParameter() {
-       return this.toString();
+        return this.toString();
     }
 
-    public String getBlockParameterContent(){
-        if(this.getParameterType().isDropdown()) {
+    public String getBlockParameterContent() {
+        if (this.getParameterType().isDropdown()) {
 
             return this.getParameterType().getSelected().getBlockText();
 
         }
         return this.toString();
     }
-
 
 
     public void setParameter(String parameter) {
@@ -101,7 +99,6 @@ public class Parameter {
     }
 
 
-
     public ArrayList<DataWire> getDataWires() {
         return DataWire;
     }
@@ -127,16 +124,15 @@ public class Parameter {
     }
 
 
-
     @Override
     public String toString() {
-        if(!varname) {
+        if (!varname) {
             return Parameter.toString();
         }
 
-        if(getDataWires().size()>0) {
+        if (getDataWires().size() > 0) {
             return DataWire.get(0).getParam_input().getVarName();
-        }else {
+        } else {
             return Parameter.toString();
         }
     }
@@ -148,9 +144,6 @@ public class Parameter {
     public void setVarName(String varName) {
         this.varName = varName;
     }
-
-
-
 
 
 }

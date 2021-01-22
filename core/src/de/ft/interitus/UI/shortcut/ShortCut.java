@@ -1,11 +1,10 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
 package de.ft.interitus.UI.shortcut;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.kotcrab.vis.ui.widget.MenuItem;
 import de.ft.interitus.ProgramingSpace;
@@ -16,8 +15,8 @@ public class ShortCut {
     private String name = null;
     private boolean disable = false;
     private MenuItem menuItem;
-    private ArrayList<Integer> combination = new ArrayList<>();
-    private boolean releasecheckervar=false;
+    private final ArrayList<Integer> combination = new ArrayList<>();
+    private boolean releasecheckervar = false;
 
     public ShortCut(String name, int... combination) {
         this.name = name;
@@ -133,18 +132,20 @@ public class ShortCut {
         }
 
     }
-    public boolean isReleased(){
-        boolean isrealeased=false;
-        if(isPressed()){
-            releasecheckervar=true;
-        }else{
-            if(releasecheckervar==true){
-                isrealeased=true;
-                releasecheckervar=false;
+
+    public boolean isReleased() {
+        boolean isrealeased = false;
+        if (isPressed()) {
+            releasecheckervar = true;
+        } else {
+            if (releasecheckervar == true) {
+                isrealeased = true;
+                releasecheckervar = false;
             }
         }
         return isrealeased;
     }
+
     public boolean isPressed() {
         boolean pressed = true;
 
@@ -164,12 +165,12 @@ public class ShortCut {
                     } else {
                         switch (combination.get(i)) {
                             case 600:
-                                if (!Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT) && !Gdx.input.isKeyPressed(Input.Keys.CONTROL_RIGHT)) {
+                                if (!WindowAPI.isKeyPressed(Input.Keys.CONTROL_LEFT) && !WindowAPI.isKeyPressed(Input.Keys.CONTROL_RIGHT)) {
                                     pressed = false;
                                 }
                                 break;
                             case 601:
-                                if (!Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) && !Gdx.input.isKeyPressed(Input.Keys.SHIFT_RIGHT)) {
+                                if (!WindowAPI.isKeyPressed(Input.Keys.SHIFT_LEFT) && !WindowAPI.isKeyPressed(Input.Keys.SHIFT_RIGHT)) {
                                     pressed = false;
                                 }
                                 break;

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -12,7 +12,6 @@ import com.kotcrab.vis.ui.widget.VisTable;
 import com.kotcrab.vis.ui.widget.VisTextButton;
 import com.kotcrab.vis.ui.widget.VisTextField;
 import de.ft.interitus.UI.setup.SetupWindow;
-import de.ft.interitus.deviceconnection.raspberrypi.SSHConnection;
 
 public class Step4 {
     public static VisTextField username = new VisTextField("pi");
@@ -62,7 +61,8 @@ public class Step4 {
                             password.setDisabled(true);
                             SetupWindow.Button_next.setDisabled(true);
 
-                            if(true ) {                                  SetupWindow.errorLabel.setColor(0, 1, 0, 1);
+                            if (true) {
+                                SetupWindow.errorLabel.setColor(0, 1, 0, 1);
                                 SetupWindow.errorLabel.setText("Verbindung erfolgreich");
                                 SetupWindow.Button_next.setDisabled(false);
                                 trytoconnect.setDisabled(true);

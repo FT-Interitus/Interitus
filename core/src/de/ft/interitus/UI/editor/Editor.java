@@ -1,15 +1,11 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
 package de.ft.interitus.UI.editor;
 
-import de.ft.interitus.UI.UI;
-import de.ft.interitus.UI.UIVar;
 import javax.swing.*;
-import javax.swing.text.StyledDocument;
-import javax.swing.text.StyledEditorKit;
 
 
 public class Editor {

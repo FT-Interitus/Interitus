@@ -23,7 +23,6 @@ import de.ft.interitus.UI.setup.steps.ArduinoSteps.Step3;
 import de.ft.interitus.UI.setup.steps.generalSteps.Step1;
 import de.ft.interitus.UI.setup.steps.generalSteps.Step2;
 
-
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -229,7 +228,7 @@ public class SetupWindow {
 
 
                     if (currentStep > 1) {
-if(true) {
+                        if (true) {
 
                         } else if (currentStep != 5) {
                             Button_previouse.setDisabled(false);
@@ -256,7 +255,8 @@ if(true) {
                     }
 
                     if (currentStep > 2) {
-if(true) {                            switch (currentStep) {
+                        if (true) {
+                            switch (currentStep) {
                                 case 3:
                                     Step3.close();
                                     break;
@@ -264,7 +264,8 @@ if(true) {                            switch (currentStep) {
                             }
                         }
 
-if(true ) {                            switch (currentStep) {
+                        if (true) {
+                            switch (currentStep) {
                                 case 3:
                                     de.ft.interitus.UI.setup.steps.RaspberryPiSteps.Step3.close();
                                     break;
@@ -294,14 +295,15 @@ if(true ) {                            switch (currentStep) {
                     }
 
                     if (currentStep > 2) {
-                        if(true ) {                              switch (currentStep) {
+                        if (true) {
+                            switch (currentStep) {
                                 case 3:
                                     Step3.step3(content);
                                     break;
 
                             }
                         }
-                        if(true ) {
+                        if (true) {
                             switch (currentStep) {
                                 case 3:
                                     de.ft.interitus.UI.setup.steps.RaspberryPiSteps.Step3.step3(content);

@@ -5,8 +5,6 @@
 
 package de.ft.interitus.Block;
 
-import de.ft.interitus.Block.BlockUpdate.BlockUpdate;
-import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Program;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.Var;
@@ -21,7 +19,7 @@ public class ThreadManager {
 
     public static void stopAll() {
 
-        assert ProjectManager.getActProjectVar()!=null;
+        assert ProjectManager.getActProjectVar() != null;
         ProjectManager.getActProjectVar().visible_blocks.clear();
 
     }

@@ -83,8 +83,6 @@ public class DefaultSaveBlockGenerator implements BlockToSaveGenerator {
         }
 
 
-
-
         ArrayList<SaveBlockV1> extendedBlocks = null;
         if (block.getExtendedBlocks() != null) {
             extendedBlocks = new ArrayList<>();
@@ -96,7 +94,7 @@ public class DefaultSaveBlockGenerator implements BlockToSaveGenerator {
         }
 
 
-        return new SaveBlockV1(block,block.getLeft(),block.getRight(),(ArrayList<String>) parameters.clone(),(ArrayList<ArrayList<Integer>>) dataWires.clone(),(ArrayList<ArrayList<Integer>>) dataWiresIndex.clone(),(ArrayList<ArrayList<ArrayList<Integer>>>) dataWireMoving.clone(),extendedBlocks!=null?(ArrayList<SaveBlockV1>) extendedBlocks.clone():null);
+        return new SaveBlockV1(block, block.getLeft(), block.getRight(), (ArrayList<String>) parameters.clone(), (ArrayList<ArrayList<Integer>>) dataWires.clone(), (ArrayList<ArrayList<Integer>>) dataWiresIndex.clone(), (ArrayList<ArrayList<ArrayList<Integer>>>) dataWireMoving.clone(), extendedBlocks != null ? (ArrayList<SaveBlockV1>) extendedBlocks.clone() : null);
         //It isn't possible that it will return null!
     }
 }

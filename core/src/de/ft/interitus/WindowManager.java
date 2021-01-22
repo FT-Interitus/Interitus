@@ -58,7 +58,7 @@ public class WindowManager {
     public static void update() {
 
 
-        if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)&&Gdx.input.isKeyPressed(Input.Keys.H)) {
+        if (WindowAPI.isKeyPressed(Input.Keys.CONTROL_LEFT)&&WindowAPI.isKeyPressed(Input.Keys.H)) {
             UI.tabbar.setSelectedTabindex(-1);
             Var.openprojectindex = -1; //-1 is home section
             switchTo(Windows.welcome);

@@ -5,7 +5,6 @@
 
 package de.ft.interitus.Logging;
 
-import de.ft.interitus.Program;
 import de.ft.interitus.utils.ArrayList;
 
 import java.io.OutputStream;
@@ -49,8 +48,6 @@ public class LoggerOutputStream extends OutputStream {
     public void flush() {
 
 
-
-
         if (level == Level.INFO) {
 
 
@@ -62,7 +59,6 @@ public class LoggerOutputStream extends OutputStream {
             logger.log(level, mem + "");
             mem = "";
         }
-
 
 
     }

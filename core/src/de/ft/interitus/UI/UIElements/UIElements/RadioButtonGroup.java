@@ -9,7 +9,7 @@ import de.ft.interitus.events.UI.UIToggleEvent;
 import de.ft.interitus.utils.ArrayList;
 
 public class RadioButtonGroup {
-   private final ArrayList<RadioButton> radioButtons = new ArrayList<>();
+    private final ArrayList<RadioButton> radioButtons = new ArrayList<>();
 
     public void add(RadioButton radioButton) {
 
@@ -19,8 +19,8 @@ public class RadioButtonGroup {
             @Override
             public void toggled(boolean enabled, UIElement sender) {
 
-                for(RadioButton radioButton1:radioButtons) {
-                    if(radioButton1==sender) {
+                for (RadioButton radioButton1 : radioButtons) {
+                    if (radioButton1 == sender) {
                         radioButton1.setToggleState(true);
                         continue;
 

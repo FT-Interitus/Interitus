@@ -5,7 +5,6 @@
 
 package de.ft.interitus.UI.UIElements;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.Texture;
@@ -91,7 +90,7 @@ public class TextField {
 
         if (active) {
 
-            if (Gdx.input.isKeyPressed(Input.Keys.DEL) && input.length() > 0) {
+            if (WindowAPI.isKeyPressed(Input.Keys.DEL) && input.length() > 0) {
 
                 input = input.substring(0, input.length() - 1);
             }

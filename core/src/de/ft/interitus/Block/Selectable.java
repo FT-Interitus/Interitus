@@ -1,25 +1,28 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
 package de.ft.interitus.Block;
 
 public class Selectable {
-    private String DropDownText ="";
-    private String CodeReplacemetText="";
-    private String BlockParamText="";
-    public Selectable(String text){
+    private String DropDownText = "";
+    private String CodeReplacemetText = "";
+    private String BlockParamText = "";
+
+    public Selectable(String text) {
         this.DropDownText = text;
         this.CodeReplacemetText = text;
         this.BlockParamText = text;
     }
-    public Selectable(String DropDownText,String BlockParamText){
-        this.DropDownText=DropDownText;
-        this.BlockParamText=BlockParamText;
+
+    public Selectable(String DropDownText, String BlockParamText) {
+        this.DropDownText = DropDownText;
+        this.BlockParamText = BlockParamText;
     }
-    public Selectable setCodeReplacement(String replacement){
-        this.CodeReplacemetText=replacement;
+
+    public Selectable setCodeReplacement(String replacement) {
+        this.CodeReplacemetText = replacement;
         return this;
     }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -10,10 +10,16 @@ import de.ft.interitus.UI.UIElements.UIElements.Button;
 
 public interface DropDownElementInterface {
     String getText();
-    Texture getElementImage();
-    Button getButton();
-    DropDownElement getSelectedElement();
+
     void setText(String text);
-    void setIdentifier(Object identifier);
+
+    Texture getElementImage();
+
+    Button getButton();
+
+    DropDownElement getSelectedElement();
+
     Object getIdentifier();
+
+    void setIdentifier(Object identifier);
 }

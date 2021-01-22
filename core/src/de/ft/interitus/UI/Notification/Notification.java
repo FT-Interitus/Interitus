@@ -1,12 +1,11 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
 package de.ft.interitus.UI.Notification;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.kotcrab.vis.ui.widget.ButtonBar;
 import de.ft.interitus.UI.ChangeListener;
 import de.ft.interitus.UI.UIElements.UIElementBar;
 import de.ft.interitus.UI.UIElements.UIElements.Button;
@@ -15,18 +14,18 @@ import de.ft.interitus.UI.UIElements.UIElements.Button;
 public class Notification {
 
 
-    private  Texture icon;
-    private  String message;
+    private Texture icon;
+    private String message;
     private boolean stayalive = false;
     private boolean closeable = true;
     private int alivetime = 5000;
-    private long starttime =0;
+    private long starttime = 0;
     private float fadeout = 1.0f;
     private boolean fadingout = false;
-    private  String title;
+    private String title;
     private final Button closeButton = new Button();
-    private  int progressbarvalue = -1;
-    private  int progressbarvalueis = -1;
+    private int progressbarvalue = -1;
+    private int progressbarvalueis = -1;
     private boolean displayed = false;
     private int rollin = 0;
     private boolean inrollin = true;
@@ -42,7 +41,7 @@ public class Notification {
      * @param message The Message of the Notification
      */
 
-    public Notification(Texture icon,String title, String message) {
+    public Notification(Texture icon, String title, String message) {
         this.icon = icon;
         this.message = message;
         this.title = title;
@@ -52,26 +51,27 @@ public class Notification {
      * Set the value of the ProgressBar in the Notification
      * If the value is -1 (default) the ProgressBar will be hidden
      * Note that the Notification will automatically expire if StayAlive is false (default)
+     *
      * @param progressbarvalue set Value for Progressbar
      * @throws IllegalArgumentException with the Values are less than -1 and more than 100
      */
     public Notification setProgressbarvalue(int progressbarvalue) {
-        if(progressbarvalue>100||progressbarvalue<-1) {
+        if (progressbarvalue > 100 || progressbarvalue < -1) {
             throw new IllegalArgumentException("Expected Value between -1 and 100");
         }
         this.progressbarvalue = progressbarvalue;
 
-        if(progressbarvalue==-1) {
+        if (progressbarvalue == -1) {
             progressbarvalueis = -1;
         }
         return this;
     }
 
 
-
     /**
      * Tells the NotificationManager if the Notification will removed after the Notification expired
      * If the Notification doesn't fit on the screen it will disappear though
+     *
      * @param stayalive if true the Notification can expired
      * @return
      */
@@ -92,6 +92,7 @@ public class Notification {
     /**
      * If false the Notification can't be closed by the user and after expiring.
      * it will be ignored if the notification doesnt fit on the screen
+     *
      * @param closeable says if the Notification can disappear
      * @return
      */
@@ -101,7 +102,6 @@ public class Notification {
     }
 
     /**
-     *
      * @param alivetime the time after the Notification will expire and disappear
      * @return
      */
@@ -113,6 +113,7 @@ public class Notification {
 
     /**
      * Get the current ProgressBar Value if ProgressBar is hidden -1 will be returned
+     *
      * @return
      */
     public int getProgressbarvalue() {
@@ -120,11 +121,12 @@ public class Notification {
     }
 
     /**
-     *   DOESN'T WORK
-     *
-     *
+     * DOESN'T WORK
+     * <p>
+     * <p>
      * Set Buttons which will be displayed under the text
      * Note that this will be ignored if ProgressBar Value is not -1
+     *
      * @param buttonBar
      * @return
      */
@@ -155,8 +157,7 @@ public class Notification {
 
     /**
      * Will fade out Message and than delete it
-     *it only needs to be used if the Message isn't Closeable or the Message stays alive
-     *
+     * it only needs to be used if the Message isn't Closeable or the Message stays alive
      */
 
     public void close() {
@@ -167,6 +168,7 @@ public class Notification {
 
     /**
      * If true the Notification Swipes in
+     *
      * @param animate
      */
 
@@ -232,8 +234,6 @@ public class Notification {
     }
 
 
-
-
     protected boolean isDisplayed() {
         return displayed;
     }
@@ -243,11 +243,11 @@ public class Notification {
     }
 
 
-    public  int getDisplayedProgressbarValue() {
+    public int getDisplayedProgressbarValue() {
         return progressbarvalueis;
     }
 
-    protected  void setProgressbarvalueis(int progressbarvalueis) {
+    protected void setProgressbarvalueis(int progressbarvalueis) {
         this.progressbarvalueis = progressbarvalueis;
     }
 

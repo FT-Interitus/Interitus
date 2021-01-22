@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -7,8 +7,8 @@ package de.ft.interitus.UI.UIElements.UIElements.TabBar;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import de.ft.interitus.WindowManager;
 import de.ft.interitus.UI.UIElements.UIElements.Button;
+import de.ft.interitus.WindowManager;
 
 
 public class Tab {
@@ -19,7 +19,7 @@ public class Tab {
     private Color tabcolor = new Color(100f / 255, 100f / 255f, 100f / 255f, 1f);
     private Color mouseovertabcolor = new Color(140f / 255, 140f / 255f, 140f / 255f, 1f);
     private Color selected = new Color(163f / 255f, 163f / 255f, 163f / 255f, 1);
-    private int CloseButtonDiameter = 10;
+    private final int CloseButtonDiameter = 10;
 
     public Tab() {
         TabButton = new Button();
@@ -46,7 +46,7 @@ public class Tab {
 
         if (isCloseable()) {
             getCloseButton().setX((int) (getTabButton().getX() + getTabButton().getW() + 1f));
-            getCloseButton().setY((int) (getTabButton().getY() + (getTabButton().getH() / 2 - CloseButtonDiameter / 2)));
+            getCloseButton().setY(getTabButton().getY() + (getTabButton().getH() / 2 - CloseButtonDiameter / 2));
             getCloseButton().setH(CloseButtonDiameter);
             getCloseButton().setW(CloseButtonDiameter);
         } else {
@@ -83,20 +83,20 @@ public class Tab {
         this.index = index;
     }
 
-    public void setTabcolor(Color tabcolor) {
-        this.tabcolor = tabcolor;
-    }
-
     public Color getTabcolor() {
         return tabcolor;
     }
 
-    public void setMouseovertabcolor(Color mouseovertabcolor) {
-        this.mouseovertabcolor = mouseovertabcolor;
+    public void setTabcolor(Color tabcolor) {
+        this.tabcolor = tabcolor;
     }
 
     public Color getMouseovertabcolor() {
         return mouseovertabcolor;
+    }
+
+    public void setMouseovertabcolor(Color mouseovertabcolor) {
+        this.mouseovertabcolor = mouseovertabcolor;
     }
 
     public Color getSelected() {
@@ -115,27 +115,27 @@ public class Tab {
         return TabButton.getX();
     }
 
-    public void setH(int h) {
-        TabButton.setH(h);
-        //CloseButton.setH(h);
-    }
-
     public void setX(int x) {
         TabButton.setX(x);
         CloseButton.setX(TabButton.getW() + TabButton.getX());
+    }
+
+    public void setH(int h) {
+        TabButton.setH(h);
+        //CloseButton.setH(h);
     }
 
     public void setY(int y) {
         TabButton.setY(y);
     }
 
+    public boolean isCloseable() {
+        return closeable;
+    }
+
     public Tab setCloseable(boolean closeable) {
         this.closeable = closeable;
         return this;
-    }
-
-    public boolean isCloseable() {
-        return closeable;
     }
 }
 

@@ -9,7 +9,6 @@ package de.ft.interitus.Block;
 import de.ft.interitus.utils.ArrayList;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 
 public abstract class SaveBlock implements Serializable {
 
@@ -31,8 +30,7 @@ public abstract class SaveBlock implements Serializable {
     private final String blocksettings;
 
 
-
-    public SaveBlock(int x, int y, int index, int index_left, int index_right, boolean isspacebetweenrightblock, ArrayList<ArrayList<Integer>> nodes, int platformspecificblockid, ArrayList<String> parameters, ArrayList<ArrayList<Integer>> datawires,ArrayList<ArrayList<Integer>> datawireindex,int BlockModus,String addon,String blocksettings) {
+    public SaveBlock(int x, int y, int index, int index_left, int index_right, boolean isspacebetweenrightblock, ArrayList<ArrayList<Integer>> nodes, int platformspecificblockid, ArrayList<String> parameters, ArrayList<ArrayList<Integer>> datawires, ArrayList<ArrayList<Integer>> datawireindex, int BlockModus, String addon, String blocksettings) {
         this.x = x;
         this.y = y;
         this.index = index;

@@ -13,9 +13,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import de.ft.interitus.Settings;
-import de.ft.interitus.UI.InputManager;
-import de.ft.interitus.UI.ProgramGrid;
-import de.ft.interitus.WindowManager;
 import de.ft.interitus.utils.ShapeRenderer;
 
 public class ExtendedBlocksApplicationListener implements ApplicationListener {

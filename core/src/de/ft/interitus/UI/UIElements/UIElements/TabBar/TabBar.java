@@ -28,11 +28,11 @@ import de.ft.interitus.utils.ArrayList;
 
 public class TabBar extends UIElement {
 
-    private int selectedTabindex = 0;
     private final ArrayList<Tab> tabbs = new ArrayList<>();
-    private Vector2 mousemerkpos = new Vector2();
+    private int selectedTabindex = 0;
+    private final Vector2 mousemerkpos = new Vector2();
     private boolean doonce = false;
-    private boolean ismoving = false;
+    private final boolean ismoving = false;
     private Tab home;
     private Tab add;
 
@@ -49,7 +49,6 @@ public class TabBar extends UIElement {
         home.getTabButton().setText("H");
         add.getTabButton().setText("+");
     }
-
 
 
     public void setTabs(Tab... tabbs) {
@@ -77,9 +76,8 @@ public class TabBar extends UIElement {
         }
 
 
-
-            aktualxpluspos+=home.getW();
-        home.draw(Var.openprojectindex==-1,this.y);
+        aktualxpluspos += home.getW();
+        home.draw(Var.openprojectindex == -1, this.y);
 
 
         for (int i = 0; i < this.tabbs.size(); i++) {
@@ -194,19 +192,16 @@ public class TabBar extends UIElement {
             NewProjectWindow NPW = new NewProjectWindow();
             NPW.show();
         }
-        add.draw(false,this.y);
+        add.draw(false, this.y);
 
     }
-
-
-
-    public void setSelectedTabindex(int selectedTabindex) {
-        this.selectedTabindex = selectedTabindex;
-    }
-
 
     public int getSelectedTabindex() {
         return selectedTabindex;
+    }
+
+    public void setSelectedTabindex(int selectedTabindex) {
+        this.selectedTabindex = selectedTabindex;
     }
 
     public ArrayList<Tab> getTabbs() {

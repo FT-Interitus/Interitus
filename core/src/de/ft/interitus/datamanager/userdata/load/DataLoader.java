@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -31,7 +31,7 @@ import de.ft.interitus.utils.ArrayList;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.*;
+import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Arrays;
@@ -40,7 +40,7 @@ import java.util.List;
 public class DataLoader {
     private static final ArrayList<Addon> enabledAddons = new ArrayList<>();
     private static boolean wascreated = false;
-   private static Gson gson = new Gson();
+    private static Gson gson = new Gson();
 
     public static void load(final FileHandle handle, final String name, final String path) {
 
@@ -86,9 +86,9 @@ public class DataLoader {
                                     FileHandle addonconfig = new FileHandle(Data.tempfolder.getAbsolutePath() + "/" + "" + addon.getName() + ".ita");
 
                                     try {
-                                        addon.setAddonSettings(gson.fromJson(Files.readString(addonconfig.file().toPath(),StandardCharsets.UTF_8),Object.class));
+                                        addon.setAddonSettings(gson.fromJson(Files.readString(addonconfig.file().toPath(), StandardCharsets.UTF_8), Object.class));
 
-                                    }catch (Exception e) {
+                                    } catch (Exception e) {
                                         addon.setAddonSettings(null);
                                     }
 
@@ -130,10 +130,10 @@ public class DataLoader {
                         ProjectManager.getActProjectVar().path = path;
                         try {
 
-                          //  FileInputStream projectsettings_fis = new FileInputStream(projectsettingsfile.file());
+                            //  FileInputStream projectsettings_fis = new FileInputStream(projectsettingsfile.file());
 
 
-                                ProjectManager.getActProjectVar().projectSettings = gson.fromJson(Files.readString(projectsettingsfile.file().toPath(),StandardCharsets.UTF_8), Object.class);
+                            ProjectManager.getActProjectVar().projectSettings = gson.fromJson(Files.readString(projectsettingsfile.file().toPath(), StandardCharsets.UTF_8), Object.class);
 
                         } catch (Exception ignored) {
                             Program.logger.warning("ProjectType has no saveable Settings");
@@ -157,25 +157,22 @@ public class DataLoader {
                         }
 
 
-
-
                         List<SaveBlockV1> readedblocks = null;
 
 
-
-
                         try {
-                            readedblocks =  stringToArray( Files.readString(file.file().toPath(),StandardCharsets.UTF_8),SaveBlockV1[].class);
+                            readedblocks = stringToArray(Files.readString(file.file().toPath(), StandardCharsets.UTF_8), SaveBlockV1[].class);
                         } catch (Exception f) {
                             f.printStackTrace();
 
-                                Dialogs.showErrorDialog(UI.stage, "Das Projekt kann in dieser Interitus Version nicht geöffnet werden!");
+                            Dialogs.showErrorDialog(UI.stage, "Das Projekt kann in dieser Interitus Version nicht geöffnet werden!");
 
 
                         }
-                      ProjectManager.getActProjectVar().blocks=BlockCalculator.extractV1(new ArrayList<SaveBlockV1>(readedblocks));
+                        ProjectManager.getActProjectVar().blocks = BlockCalculator.extractV1(new ArrayList<SaveBlockV1>(readedblocks));
 
-                        ProjectManager.getActProjectVar().deviceConfigurations =  gson.fromJson(Files.readString(runconfig.file().toPath(),StandardCharsets.UTF_8),new ArrayList<DeviceConfiguration>().getClass());;
+                        ProjectManager.getActProjectVar().deviceConfigurations = gson.fromJson(Files.readString(runconfig.file().toPath(), StandardCharsets.UTF_8), new ArrayList<DeviceConfiguration>().getClass());
+                        ;
 
                     }
                 } catch (JSONException g) {
@@ -183,26 +180,25 @@ public class DataLoader {
                     try {
                         if (wascreated) {
 
-                            ProjectManager.closeProject(Var.openprojects.size()-1);
+                            ProjectManager.closeProject(Var.openprojects.size() - 1);
 
                         }
                         Dialogs.showErrorDialog(UI.stage, "Fehler beim Laden des Projekts\nDie Projekt Datei ist womöglich beschädigt!");
-                    }catch (Exception f) {
+                    } catch (Exception f) {
                         f.printStackTrace();
                     }
                 } catch (Throwable e) {
                     e.printStackTrace();
                     try {
                         if (wascreated) {
-                            ProjectManager.closeProject(Var.openprojects.size()-1);
+                            ProjectManager.closeProject(Var.openprojects.size() - 1);
                         }
                         Dialogs.showErrorDialog(UI.stage, "Fehler beim Laden des Projekts\nDie Projekt Datei ist womöglich beschädigt!");
-                    }catch (Exception f) {
+                    } catch (Exception f) {
                         f.printStackTrace();
                     }
 
                 }
-
 
 
                 File tempblockfile = new File(Data.tempfolder + "/" + "Program.itid");

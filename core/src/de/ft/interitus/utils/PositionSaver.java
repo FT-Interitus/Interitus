@@ -5,7 +5,6 @@
 
 package de.ft.interitus.utils;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector3;
 import de.ft.interitus.ProgramingSpace;
 import de.ft.interitus.UI.WindowAPI;

@@ -24,13 +24,13 @@ public class PluginInstallServer {
         }
         server.createContext("/", new PluginInstallServerRootDirectory());
         server.createContext("/install", new StorePluginInstallManager());
-       // server.createContext("/echoGet", new EchoGetHandler());
+        // server.createContext("/echoGet", new EchoGetHandler());
         //server.createContext("/echoPost", new EchoPostHandler());
         server.setExecutor(null);
         server.start();
 
     }
-    
+
     public static void allowCors(HttpExchange exchange) {
         exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
 

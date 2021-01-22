@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -52,8 +52,6 @@ public class subitem10 {
                                 }
 
                                 if (result == everything) {
-
-
 
 
                                 }

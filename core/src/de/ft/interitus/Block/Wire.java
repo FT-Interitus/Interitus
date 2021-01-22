@@ -24,53 +24,53 @@ public class Wire {
 
     public Wire(Block leftConnection) {
         this.leftConnection = leftConnection;
-        if(leftConnection!=null) {
+        if (leftConnection != null) {
             leftConnection.setWire_right(this);
             this.visible = true;
-            assert ProjectManager.getActProjectVar()!=null;
+            assert ProjectManager.getActProjectVar() != null;
             ProjectManager.getActProjectVar().movingWire = this;
         }
 
     }
 
-    public Wire(Block leftConnection,Block rightConnection) {
+    public Wire(Block leftConnection, Block rightConnection) {
 
         this.leftConnection = leftConnection;
         this.rightConnection = rightConnection;
-        if(leftConnection!=null) leftConnection.setWire_right(this);
-        if(rightConnection!=null) rightConnection.setWire_left(this);
+        if (leftConnection != null) leftConnection.setWire_right(this);
+        if (rightConnection != null) rightConnection.setWire_left(this);
 
     }
 
-    public Wire(Block leftConnection,Block rightConnection,boolean visibility) {
+    public Wire(Block leftConnection, Block rightConnection, boolean visibility) {
 
         this.leftConnection = leftConnection;
         this.rightConnection = rightConnection;
-        if(leftConnection!=null) leftConnection.setWire_right(this);
-        if(rightConnection!=null) rightConnection.setWire_left(this);
+        if (leftConnection != null) leftConnection.setWire_right(this);
+        if (rightConnection != null) rightConnection.setWire_left(this);
         this.visible = visibility;
 
     }
 
     /**
-     * @deprecated Use Constructor
      * @param leftConnection
+     * @deprecated Use Constructor
      */
     public void setLeftConnection(Block leftConnection) {
-        if(leftConnection!=null) leftConnection.setWire_right(this);
+        if (leftConnection != null) leftConnection.setWire_right(this);
         this.leftConnection = leftConnection;
     }
 
     public void setRightConnection(Block rightConnection) {
         assert ProjectManager.getActProjectVar() != null;
-        if(rightConnection!=null) {
+        if (rightConnection != null) {
             rightConnection.setWire_left(this);
             this.visible = true;
-        }else{
+        } else {
             this.visible = false;
         }
         this.rightConnection = rightConnection;
-        if(ProjectManager.getActProjectVar().movingWire==this) ProjectManager.getActProjectVar().movingWire = null;
+        if (ProjectManager.getActProjectVar().movingWire == this) ProjectManager.getActProjectVar().movingWire = null;
 
     }
 
@@ -85,14 +85,14 @@ public class Wire {
 
     public void draw() {
 
-        if(!visible) return;
-        assert ProjectManager.getActProjectVar()!=null;
-        if(ProjectManager.getActProjectVar().movingWire!=this) {
+        if (!visible) return;
+        assert ProjectManager.getActProjectVar() != null;
+        if (ProjectManager.getActProjectVar().movingWire != this) {
             WindowManager.BlockshapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
             WindowManager.BlockshapeRenderer.setColor(1f, 0f, 0f, 0f);
             WindowManager.BlockshapeRenderer.line(this.leftConnection.getWireConnectorRight(), this.rightConnection.getWireConnectorLeft());
             WindowManager.BlockshapeRenderer.end();
-        }else{
+        } else {
             WindowManager.BlockshapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
             WindowManager.BlockshapeRenderer.setColor(1f, 0f, 0f, 0f);
             WindowManager.BlockshapeRenderer.line(this.leftConnection.getWireConnectorRight(), Unproject.unproject());
@@ -109,14 +109,14 @@ public class Wire {
 
     public void delete() {
 
-        if(this.rightConnection!=null) rightConnection.setWire_left(null);
-        if(this.leftConnection!=null) leftConnection.setWire_right(null);
+        if (this.rightConnection != null) rightConnection.setWire_left(null);
+        if (this.leftConnection != null) leftConnection.setWire_right(null);
 
         this.rightConnection = null;
         this.leftConnection = null;
-        assert ProjectManager.getActProjectVar()!=null;
-        if(ProjectManager.getActProjectVar().movingWire==this) ProjectManager.getActProjectVar().movingWire = null;
-        ProjectManager.getActProjectVar().showLeftDocker=false;
+        assert ProjectManager.getActProjectVar() != null;
+        if (ProjectManager.getActProjectVar().movingWire == this) ProjectManager.getActProjectVar().movingWire = null;
+        ProjectManager.getActProjectVar().showLeftDocker = false;
 
     }
 }

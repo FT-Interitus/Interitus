@@ -18,7 +18,6 @@ public class Var {
     public static final int PLUGIN_SUBSYSTEM_VERSION = 1;
 
 
-
     /**
      * Erklärung
      * Änderung an der letzen Zahl bei kleineren Änderungen (Bugfixes, Typos, ...)
@@ -26,7 +25,6 @@ public class Var {
      * an der Erste Zahl bei größern Update Packeten
      */
     public static final String PROGRAMM_VERSION = "0.0.1";
-
 
 
     public static boolean isloading = false;

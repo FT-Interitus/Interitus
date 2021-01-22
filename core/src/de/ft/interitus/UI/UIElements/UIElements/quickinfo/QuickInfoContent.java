@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -9,36 +9,37 @@ import com.badlogic.gdx.math.Rectangle;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
 
 public class QuickInfoContent {
-    private Rectangle mouseoverRect=new Rectangle();
-    private String text;
-    private String Key;
-    protected boolean doonce=false;
+    protected boolean doonce = false;
     protected long zeitstempel;
-    private boolean disabled=true;
-    public QuickInfoContent(int x,int y,int w,int h,String text, String Key){
-        this.mouseoverRect.set(x,y,w,h);
-        this.text=text;
-        this.Key=Key;
-    }
+    private final Rectangle mouseoverRect = new Rectangle();
+    private String text;
+    private final String Key;
+    private boolean disabled = true;
 
-    public void setMouseoverRect(int x,int y,int w,int h) {
-        this.mouseoverRect.set(x,y,w,h);
-    }
-
-    public void setText(String text) {
+    public QuickInfoContent(int x, int y, int w, int h, String text, String Key) {
+        this.mouseoverRect.set(x, y, w, h);
         this.text = text;
+        this.Key = Key;
+    }
+
+    public void setMouseoverRect(int x, int y, int w, int h) {
+        this.mouseoverRect.set(x, y, w, h);
     }
 
     public String getText() {
         return text;
     }
 
+    public void setText(String text) {
+        this.text = text;
+    }
+
     public String getKey() {
         return Key;
     }
 
-    protected boolean check(){
-        boolean blub=false;
+    protected boolean check() {
+        boolean blub = false;
         if (CheckMouse.isMouseover(mouseoverRect, false)) {
 
             if (doonce) {
@@ -46,12 +47,12 @@ public class QuickInfoContent {
                 doonce = false;
             }
             if (zeitstempel < System.currentTimeMillis()) {
-                blub=true;
+                blub = true;
             }
         } else {
             if (!doonce) {
                 doonce = true;
-                blub=false;
+                blub = false;
 
             }
 
@@ -60,12 +61,12 @@ public class QuickInfoContent {
 
     }
 
-    public void setDisabled(boolean disabled) {
-        this.disabled = disabled;
-    }
-
     protected boolean isDisabled() {
         return disabled;
+    }
+
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
     }
 }
 

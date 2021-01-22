@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -21,8 +21,8 @@ import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.Var;
 import de.ft.interitus.projecttypes.ProjectManager;
-
 import de.ft.interitus.utils.ArrayList;
+
 import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;

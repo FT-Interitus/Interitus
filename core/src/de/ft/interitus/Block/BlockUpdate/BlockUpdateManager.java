@@ -18,9 +18,11 @@ public class BlockUpdateManager {
         EventVar.globalEventManager.addListener(new GlobalEventAdapter() {
             @Override
             public void focusLost(GlobalFocusLostEvent e) {
-                if(ProjectManager.getActProjectVar()!=null) {
-                    if(ProjectManager.getActProjectVar().movingWire!=null) ProjectManager.getActProjectVar().movingWire.delete();
-                    if(ProjectManager.getActProjectVar().movingDataWire!=null) ProjectManager.getActProjectVar().movingDataWire.delete();
+                if (ProjectManager.getActProjectVar() != null) {
+                    if (ProjectManager.getActProjectVar().movingWire != null)
+                        ProjectManager.getActProjectVar().movingWire.delete();
+                    if (ProjectManager.getActProjectVar().movingDataWire != null)
+                        ProjectManager.getActProjectVar().movingDataWire.delete();
                 }
 
             }
@@ -36,7 +38,7 @@ public class BlockUpdateManager {
 
         BlockMarkManager.update();
 
-        for(int i=0;i<projectVar.blocks.size();i++) {
+        for (int i = 0; i < projectVar.blocks.size(); i++) {
             Block block = projectVar.blocks.get(i);
 
             BlockMovingManager.update(block);
@@ -44,12 +46,12 @@ public class BlockUpdateManager {
             BlockWireManager.update(block);
 
             //If Block gets deleted the block before will be used
-            if(!projectVar.blocks.contains(block)) i--;
+            if (!projectVar.blocks.contains(block)) i--;
 
 
         }
 
-        if(ProjectManager.getActProjectVar().movingWire!=null) {
+        if (ProjectManager.getActProjectVar().movingWire != null) {
             BlockWireManager.updateMovingWire();
         }
 

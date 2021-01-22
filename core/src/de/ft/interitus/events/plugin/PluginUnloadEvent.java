@@ -1,16 +1,13 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
 package de.ft.interitus.events.plugin;
 
-import de.ft.interitus.plugin.Plugin;
-
 import java.util.EventObject;
 
 public class PluginUnloadEvent extends EventObject {
-
 
 
     /**

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -32,7 +32,7 @@ public class CheckShortcuts {
         // ...
 
         //plugins
-      //  ProgramRegistry.addShortCuts();
+        //  ProgramRegistry.addShortCuts();
 
         Program.logger.config("Shortcuts loaded");
     }
@@ -43,8 +43,6 @@ public class CheckShortcuts {
         for (int i = 0; i < shortCutsChecker.size(); i++) {
             shortCutsChecker.get(i).check();
         }
-
-
 
 
     }

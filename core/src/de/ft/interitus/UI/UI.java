@@ -20,7 +20,6 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.kotcrab.vis.ui.widget.MenuBar;
 import com.kotcrab.vis.ui.widget.*;
-import com.kotcrab.vis.ui.widget.MenuItem;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.Selectable;
 import de.ft.interitus.DisplayErrors;
@@ -28,7 +27,6 @@ import de.ft.interitus.Settings;
 import de.ft.interitus.UI.ManualConfig.ManualConfigUI;
 import de.ft.interitus.UI.Notification.Notification;
 import de.ft.interitus.UI.Notification.NotificationManager;
-import de.ft.interitus.UI.UIElements.Grid;
 import de.ft.interitus.UI.UIElements.UIElementBar;
 import de.ft.interitus.UI.UIElements.UIElements.*;
 import de.ft.interitus.UI.UIElements.UIElements.TabBar.TabBar;
@@ -96,15 +94,16 @@ public class UI {
     private static Block markedblock;
     private static int wishaniposition = -170 - UIVar.abstandvonRand;
     private static Thread compile_thread;
-    private static TextInput testtextInput= (TextInput) new TextInput("Das ist ein TestTextInput").setPosition(500,500);
-    private static TextInput testtextInput2= (TextInput) new TextInput("Das ist ein TestTextInput2").setPosition(500,400);
+    private static final TextInput testtextInput = (TextInput) new TextInput("Das ist ein TestTextInput").setPosition(500, 500);
+    private static final TextInput testtextInput2 = (TextInput) new TextInput("Das ist ein TestTextInput2").setPosition(500, 400);
 
-    private static RadioButton radioButton = (RadioButton) new RadioButton().setPosition(100,100);
-    private static RadioButton radioButton1 = (RadioButton) new RadioButton().setPosition(100,140);
-    private static RadioButton radioButton2 = (RadioButton) new RadioButton().setPosition(100,180);
-    private static CheckBox checkBox = (CheckBox) new CheckBox(true,"Hallo").setPosition(100,200);
-    private static RadioButtonGroup group = new RadioButtonGroup();
-    static  {
+    private static final RadioButton radioButton = (RadioButton) new RadioButton().setPosition(100, 100);
+    private static final RadioButton radioButton1 = (RadioButton) new RadioButton().setPosition(100, 140);
+    private static final RadioButton radioButton2 = (RadioButton) new RadioButton().setPosition(100, 180);
+    private static final CheckBox checkBox = (CheckBox) new CheckBox(true, "Hallo").setPosition(100, 200);
+    private static final RadioButtonGroup group = new RadioButtonGroup();
+
+    static {
         group.add(radioButton);
         group.add(radioButton1);
         group.add(radioButton2);
@@ -180,7 +179,7 @@ public class UI {
         UIVar.moveprogrammlock = lock;
 
 
-        if (ProjectManager.getActProjectVar().marked_blocks.size()==1&&markedblock != null && markedblock.getBlockType().getBlockParameter() != null && ((markedblock == null && ProjectManager.getActProjectVar().marked_blocks.size() == 0) || (ProjectManager.getActProjectVar().marked_blocks.size() > 0 && markedblock == ProjectManager.getActProjectVar().marked_blocks.get(0)))) {
+        if (ProjectManager.getActProjectVar().marked_blocks.size() == 1 && markedblock != null && markedblock.getBlockType().getBlockParameter() != null && ((markedblock == null && ProjectManager.getActProjectVar().marked_blocks.size() == 0) || (ProjectManager.getActProjectVar().marked_blocks.size() > 0 && markedblock == ProjectManager.getActProjectVar().marked_blocks.get(0)))) {
 
 
             UIVar.blockeinstellungen_w = 170;
@@ -272,7 +271,7 @@ public class UI {
 
                             if (Arrays.asList(markedblock.getBlockType().getBlockParameter().get(i).getParameterType().getSelectables()).contains(markedblock.getBlockType().getBlockParameter().get(i).getParameter())) {
 
-                                selectBox.setSelected(( markedblock.getBlockType().getBlockParameter().get(i).getParameterType().getSelected()));
+                                selectBox.setSelected((markedblock.getBlockType().getBlockParameter().get(i).getParameterType().getSelected()));
 
                             } else {
                                 selectBox.setSelected(selectBox.getItems().get(0));
@@ -402,9 +401,6 @@ public class UI {
 
 
         de.ft.interitus.UI.MenuBar.createMenus();
-
-
-
 
 
         Thread UIthread = new Thread() {
@@ -558,9 +554,6 @@ public class UI {
         tabbar = new TabBar();
 
 
-
-
-
         blockbarquickinfo = new QuickInfo(0, 0, "").setAttachedToMouse(true).setSelfCheck(true);
         BlockTappedBar.tb.setListener(new de.ft.interitus.UI.ChangeListener() {
             @Override
@@ -570,14 +563,14 @@ public class UI {
         });
 
 
-        Button testbutton1=new Button();
+        Button testbutton1 = new Button();
         testbutton1.setW(30);
         testbutton1.setH(100);
         testbutton1.setImage(AssetLoader.arduinonanoimage);
-        Button testbutton2=new Button();
+        Button testbutton2 = new Button();
         testbutton2.setW(70);
         testbutton2.setH(50);
-        Button testbutton3=new Button();
+        Button testbutton3 = new Button();
         testbutton3.setW(50);
         testbutton3.setH(50);
 
@@ -610,7 +603,7 @@ public class UI {
 
 
         if (!UIVar.uilocked) {
-            stage.act(Math.min(Gdx.graphics.getDeltaTime(), 1 / 60f));
+            stage.act(Math.min(WindowAPI.getDeltaTime(), 1 / 60f));
         }
 
         root.setPosition(UIcam.position.x - ((float) WindowAPI.getWidth()) / 2, UIcam.position.y - ((float) WindowAPI.getHeight()) / 2);
@@ -621,7 +614,7 @@ public class UI {
         //root.setPosition(0,0);
         if (Var.inProgram) {
             buttonbar.setX(WindowAPI.getWidth() - 10);
-            buttonbar.setY((int) (WindowAPI.getHeight() - menuBar.getTable().getHeight() - 20 - (UIVar.abstandvonRand * 1)));
+            buttonbar.setY((int) (WindowAPI.getHeight() - menuBar.getTable().getHeight() - 20 - (UIVar.abstandvonRand)));
 
             buttonbar.draw();
 

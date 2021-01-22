@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -41,7 +41,7 @@ public class ImportProject {
     public final static CharSequence text = "Name: ";
     public final static VisLabel namelable = new VisLabel(text);
     public final static VisLabel importerselectlabel = new VisLabel("Importer: ");
-    private  static File selectedfile;
+    private static File selectedfile;
 
     public final static CharSequence auftragtext = "Bitte gebe hier einen Name für das zu importierende Project ein.";
     public final static VisLabel auftrag = new VisLabel(auftragtext);
@@ -113,8 +113,8 @@ public class ImportProject {
                     JFileChooser fileChooser = new JFileChooser();
                     int result = fileChooser.showOpenDialog(ProgramingSpace.saver);
                     if (result == JFileChooser.APPROVE_OPTION) {
-                         selectedfile = fileChooser.getSelectedFile();
-                        if( nameinput.getText().length()>3&&!nameinput.getText().startsWith(" ")&&!nameinput.getText().endsWith(" ")) {
+                        selectedfile = fileChooser.getSelectedFile();
+                        if (nameinput.getText().length() > 3 && !nameinput.getText().startsWith(" ") && !nameinput.getText().endsWith(" ")) {
                             Button_next.setDisabled(false);
                             errorLabel.setText("");
                         }
@@ -182,14 +182,13 @@ public class ImportProject {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
 
-                    if(items.indexOf(selectimporter.getSelected())==-1) {
+                    if (items.indexOf(selectimporter.getSelected()) == -1) {
                         return;
                     }
                     Importer.importer.get(items.indexOf(selectimporter.getSelected())).importproject(selectedfile);
 
                     UIVar.isdialogeopend = false;
                     // ClearActOpenProgramm.clear();
-
 
 
                     setupBuilder.close();
@@ -200,15 +199,15 @@ public class ImportProject {
             nameinput.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent changeEvent, Actor actor) {
-                    if( nameinput.getText().length()>3&&!nameinput.getText().startsWith(" ")&&!nameinput.getText().endsWith(" ")) {
-                        if(selectedfile!=null) {
+                    if (nameinput.getText().length() > 3 && !nameinput.getText().startsWith(" ") && !nameinput.getText().endsWith(" ")) {
+                        if (selectedfile != null) {
                             Button_next.setDisabled(false);
                             errorLabel.setText("");
-                        }else{
+                        } else {
                             Button_next.setDisabled(true);
                             errorLabel.setText("Bitte wähle eine Datei aus");
                         }
-                    }else{
+                    } else {
                         Button_next.setDisabled(true);
                         errorLabel.setText("Bitte gib einen gültigen Namen an");
                     }

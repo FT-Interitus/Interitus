@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -9,7 +9,6 @@ import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisTable;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.UI.setup.SetupWindow;
-import de.ft.interitus.deviceconnection.raspberrypi.SSHConnection;
 
 public class Step5 {
 
@@ -24,10 +23,10 @@ public class Step5 {
             public void run() {
                 SetupWindow.errorLabel.setColor(1, 0, 0, 1);
                 SetupWindow.errorLabel.setText("Vorgang gestartet...");
-              //  SSHConnection.update(SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().ip, SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().username, SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().password);
+                //  SSHConnection.update(SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().ip, SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().username, SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().password);
 
                 installationprogress.setText("System-Update abgeschlossen\n\nPython installieren...\n\n \n\n \n\n ");
-            //    SSHConnection.installpython(SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().ip, SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().username, SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().password);
+                //    SSHConnection.installpython(SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().ip, SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().username, SetupWindow.tempverbindungsspeicher.getRaspberrypispeicher().password);
                 installationprogress.setText("System-Update abgeschlossen\n\nPython installieren abgeschlossen\n\n Weitere Aktion...\n\n \n\n ");
 
                 try {

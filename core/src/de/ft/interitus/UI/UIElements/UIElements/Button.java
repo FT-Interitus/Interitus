@@ -5,27 +5,26 @@
 
 package de.ft.interitus.UI.UIElements.UIElements;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
-import de.ft.interitus.UI.WindowAPI;
-import de.ft.interitus.WindowManager;
 import de.ft.interitus.UI.Animation;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
 import de.ft.interitus.UI.UIVar;
+import de.ft.interitus.UI.WindowAPI;
+import de.ft.interitus.WindowManager;
 import de.ft.interitus.utils.ShapeRenderer;
 
 public class Button extends UIElement {
     public static boolean disablepresscolorchange = false;
     public final int widthoverTextleftrandabstand = 5;
     private final GlyphLayout glyphLayout = new GlyphLayout();
+    private final CheckMouse checkMouse = new CheckMouse();
     public float hovertransparancy = 0.8f;
     public boolean widthoverText = true;
-    public boolean heightoverText=false;
+    public boolean heightoverText = false;
     private boolean isworking = false;
     private boolean ignore_uilock = false;
-    private final CheckMouse checkMouse = new CheckMouse();
     private String text;
     private Texture image = null;
     private Texture image_mouseover = null;
@@ -55,15 +54,13 @@ public class Button extends UIElement {
     }
 
 
-
-
     public boolean isjustPressed() {
         if (!UIVar.uilocked || this.isIgnore_uilock()) {
 
 
             if (!disable && !UIVar.isdialogeopend) {
 
-               return checkMouse.isJustPressed(super.x, super.y, super.w, super.h, false);
+                return checkMouse.isJustPressed(super.x, super.y, super.w, super.h, false);
 
 
             } else {
@@ -71,7 +68,7 @@ public class Button extends UIElement {
                 return false;
 
             }
-        }else{
+        } else {
             return false;
         }
 
@@ -135,7 +132,7 @@ public class Button extends UIElement {
             if (widthoverText) {
                 this.w = (int) glyphLayout.width + 2 * widthoverTextleftrandabstand;
             }
-            if(heightoverText){
+            if (heightoverText) {
                 this.h = (int) glyphLayout.height;
             }
         }
@@ -205,8 +202,8 @@ public class Button extends UIElement {
             if (text != null) {
                 UI.UIbatch.begin();
                 UI.UIbatch.setColor(1, 1, 1, alpha);
-                WindowManager.font.setColor(1,1,1,alpha);
-                WindowManager.font.draw(UI.UIbatch, glyphLayout, x + widthoverTextleftrandabstand+text_pos_change_x, y + glyphLayout.height + h / 2 - glyphLayout.height / 2+text_pos_change_y);
+                WindowManager.font.setColor(1, 1, 1, alpha);
+                WindowManager.font.draw(UI.UIbatch, glyphLayout, x + widthoverTextleftrandabstand + text_pos_change_x, y + glyphLayout.height + h / 2 - glyphLayout.height / 2 + text_pos_change_y);
 
 
                 UI.UIbatch.end();
@@ -214,8 +211,6 @@ public class Button extends UIElement {
         }
 
     }
-
-
 
 
     public String getText() {
@@ -300,17 +295,16 @@ public class Button extends UIElement {
     }
 
 
-
     public int getText_pos_change_x() {
         return text_pos_change_x;
     }
 
-    public int getText_pos_change_y() {
-        return text_pos_change_y;
-    }
-
     public void setText_pos_change_x(int text_pos_change_x) {
         this.text_pos_change_x = text_pos_change_x;
+    }
+
+    public int getText_pos_change_y() {
+        return text_pos_change_y;
     }
 
     public void setText_pos_change_y(int text_pos_change_y) {
@@ -321,12 +315,12 @@ public class Button extends UIElement {
         this.widthoverText = widthoverText;
     }
 
-    public void setHeightoverText(boolean heightoverText) {
-        this.heightoverText = heightoverText;
-    }
-
     public boolean isHeightoverText() {
         return heightoverText;
+    }
+
+    public void setHeightoverText(boolean heightoverText) {
+        this.heightoverText = heightoverText;
     }
 }
 

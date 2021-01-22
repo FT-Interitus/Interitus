@@ -11,9 +11,9 @@ import java.util.ArrayList;
 
 public class Grid extends UIElement {
 
+    private final ArrayList<ArrayList<UIElement>> content = new ArrayList<>();
     private int rows = 0;
     private boolean VerticalArrangement = false;
-    private final ArrayList<ArrayList<UIElement>> content = new ArrayList<>();
 
     public Grid(int x, int y, int width, int height) {
         this.x = x;
@@ -36,12 +36,12 @@ public class Grid extends UIElement {
     public void draw() {
 
         int height = 0;
-        int widthJumping=0;
+        int widthJumping = 0;
         for (int row = 0; row < content.size(); row++) {
             int tempHeight = 0;
             widthJumping = 0;
 
-            for(int column = 0;column < content.get(row).size(); column++){
+            for (int column = 0; column < content.get(row).size(); column++) {
                 if (content.get(row).get(column).getH() > tempHeight) {
                     tempHeight = content.get(row).get(column).getH();
                 }
@@ -55,26 +55,25 @@ public class Grid extends UIElement {
                 }
                 content.get(row).get(column).setX(this.x + widthJumping);
                 if (VerticalArrangement) {
-                    content.get(row).get(column).setY(this.y - tempHeight/2 - content.get(row).get(column).getH() / 2 + tempHeight);
+                    content.get(row).get(column).setY(this.y - tempHeight / 2 - content.get(row).get(column).getH() / 2 + tempHeight);
                 } else {
                     content.get(row).get(column).setY(this.y - content.get(row).get(column).getH() + tempHeight);
                 }
-                if(this.h!=0) content.get(row).get(column).draw();
+                if (this.h != 0) content.get(row).get(column).draw();
                 widthJumping += content.get(row).get(column).getW();
             }
             height += tempHeight;
         }
         this.h = height;
-        this.w=widthJumping;
+        this.w = widthJumping;
     }
 
-
-
-    public void setVerticalArrangement(boolean verticalArrangement) {
-        VerticalArrangement = verticalArrangement;
-    }
     @SuppressWarnings("unused")
     public boolean isVerticalArrangement() {
         return VerticalArrangement;
+    }
+
+    public void setVerticalArrangement(boolean verticalArrangement) {
+        VerticalArrangement = verticalArrangement;
     }
 }

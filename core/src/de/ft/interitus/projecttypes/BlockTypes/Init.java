@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -23,7 +23,7 @@ public class Init {
         ProjectTypesVar.projectTypes.add(InitRaspberryPI.init());
         ProjectTypesVar.projectTypes.add(InitEv3.init());
 
-       // ProgramRegistry.addProjectTypes();
+        // ProgramRegistry.addProjectTypes();
 
 
         InitNativAddons.init();

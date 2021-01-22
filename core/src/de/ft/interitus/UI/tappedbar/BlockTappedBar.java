@@ -5,8 +5,6 @@
 
 package de.ft.interitus.UI.tappedbar;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Cursor;
 import de.ft.interitus.Block.TapBarBlockItem;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Program;
@@ -66,11 +64,11 @@ public class BlockTappedBar {
                             Specials.addItem(new TapBarBlockItem(ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i)));
                             break;
                         case OwnBlocks:
-                            Program.logger.severe("Unallowed Block was registered from Plugin " + PluginManagerHandler.getPluginArgs(ProjectManager.getActProjectVar().projectType.getPluginRegister(),"name"));
+                            Program.logger.severe("Unallowed Block was registered from Plugin " + PluginManagerHandler.getPluginArgs(ProjectManager.getActProjectVar().projectType.getPluginRegister(), "name"));
                             break;
 
                     }
-                    UI.blockbarquickinfo.addSelfCheckField(new QuickInfoContent(0,0,500,500,ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i).getName(),ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i).getName()));
+                    UI.blockbarquickinfo.addSelfCheckField(new QuickInfoContent(0, 0, 500, 500, ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i).getName(), ProjectManager.getActProjectVar().projectType.getProjectblocks().get(i).getName()));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -80,9 +78,7 @@ public class BlockTappedBar {
         }
 
 
-
-
-        for (Addon addon:ProjectManager.getActProjectVar().enabledAddons) {
+        for (Addon addon : ProjectManager.getActProjectVar().enabledAddons) {
             for (PlatformSpecificBlock psb : addon.getaddBlocks()) {
                 try {
                     if (psb.getBlockCategory() != null) {
@@ -118,9 +114,6 @@ public class BlockTappedBar {
         }
 
 
-
-
-
         tb.setContent(ActionBlocks, Programm_Sequence, Sensors, Data_Operation, Specials, OwnBlocks);
     }
 
@@ -129,17 +122,17 @@ public class BlockTappedBar {
         if (!curserveränderungsblockade) {
             if (WindowAPI.getX() > UIVar.BlockBarW + UIVar.abstandvonRand && WindowAPI.getX() < UIVar.BlockBarW + UIVar.abstandvonRand * 2 && WindowAPI.getHeight() - WindowAPI.getY() > UIVar.abstandvonRand && WindowAPI.getHeight() - WindowAPI.getY() < UIVar.abstandvonRand + UIVar.BlockBarH) {
                 if (curserstate != 0) {
-                    Gdx.graphics.setSystemCursor(Cursor.SystemCursor.HorizontalResize);
+                    WindowAPI.setSystemCursor(WindowAPI.SystemCursors.HorizontalResize);
                     curserstate = 0;
                 }
 
             } else if (WindowAPI.getHeight() - WindowAPI.getY() > UIVar.abstandvonRand + UIVar.BlockBarH && WindowAPI.getHeight() - WindowAPI.getY() < UIVar.abstandvonRand * 2 + UIVar.BlockBarH) {
                 if (curserstate != 2) {
-                    Gdx.graphics.setSystemCursor(Cursor.SystemCursor.VerticalResize);
+                    WindowAPI.setSystemCursor(WindowAPI.SystemCursors.VerticalResize);
                     curserstate = 2;
                 }
             } else if (curserstate != 1) {
-                    Gdx.graphics.setSystemCursor(Cursor.SystemCursor.Arrow);
+                WindowAPI.setSystemCursor(WindowAPI.SystemCursors.Arrow);
 
                 curserstate = 1;
             }

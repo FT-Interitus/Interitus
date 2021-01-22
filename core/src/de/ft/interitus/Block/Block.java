@@ -6,7 +6,6 @@
 package de.ft.interitus.Block;
 
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -38,9 +37,8 @@ import java.util.ConcurrentModificationException;
 import java.util.Objects;
 
 
-
 public abstract class Block {
-    private final Vector2 movementDiff=new Vector2();
+    private final Vector2 movementDiff = new Vector2();
     private final Vector2 wireConnector_right = new Vector2(0, 0);
     private final Vector2 pos = new Vector2(0, 0); //Block pos
     private final Vector2 wireConnector_left = new Vector2(0, 0);
@@ -257,7 +255,7 @@ public abstract class Block {
      * @return the index from this Block
      */
     public int getIndex() {
-        assert ProjectManager.getActProjectVar()!=null;
+        assert ProjectManager.getActProjectVar() != null;
         return ProjectManager.getActProjectVar().blocks.indexOf(this);
     }
 
@@ -302,13 +300,13 @@ public abstract class Block {
         }
 
         if (right != null) {
-                right.setLeft(null);
+            right.setLeft(null);
         }
 
-        if(wire_left!=null) {
+        if (wire_left != null) {
             wire_left.delete();
         }
-        if(wire_right!=null) {
+        if (wire_right != null) {
             wire_right.delete();
         }
 
@@ -339,8 +337,7 @@ public abstract class Block {
     }
 
 
-
-    public void drawBlock(SpriteBatch batch){
+    public void drawBlock(SpriteBatch batch) {
         batch.draw(AssetLoader.block_middle, this.getX() + 6, this.getY(), this.getW() - 12, this.getH());
         batch.draw(AssetLoader.block_left, this.getX(), this.getY(), 6, this.getH());
         batch.draw(AssetLoader.block_right, this.getX() + this.getW() - 6, this.getY(), 6, this.getH());
@@ -434,7 +431,7 @@ public abstract class Block {
         /*
          Draw Wire with the Output Block if the Input Block is invisible
          */
-        assert ProjectManager.getActProjectVar()!=null;
+        assert ProjectManager.getActProjectVar() != null;
         if (this.getBlockType().getBlockParameter() != null) {
             for (Parameter parameter : this.getBlockType().getBlockParameter()) {
                 for (DataWire dataWire : parameter.getDataWires()) {
@@ -448,12 +445,11 @@ public abstract class Block {
         }
 
 
-        if(this.getLeft()!=null&&!ProjectManager.getActProjectVar().visible_blocks.contains(this.getLeft())) {
-            if(this.getWire_left()!=ProjectManager.getActProjectVar().movingWire) {
+        if (this.getLeft() != null && !ProjectManager.getActProjectVar().visible_blocks.contains(this.getLeft())) {
+            if (this.getWire_left() != ProjectManager.getActProjectVar().movingWire) {
                 this.getWire_left().draw();
             }
         }
-
 
 
         batch.begin();
@@ -492,10 +488,9 @@ public abstract class Block {
             drawBlock(batch);
 
 
-
-            if (this.getWire_right()==null && ProjectManager.getActProjectVar().showLeftDocker && this.getLeft() == null && this.getBlockType().canHasLeftConnector()) {
-             batch.draw(AssetLoader.connector_offerd, getWireConnectorLeft().x, getWireConnectorLeft().y, 20, 20);
-             }
+            if (this.getWire_right() == null && ProjectManager.getActProjectVar().showLeftDocker && this.getLeft() == null && this.getBlockType().canHasLeftConnector()) {
+                batch.draw(AssetLoader.connector_offerd, getWireConnectorLeft().x, getWireConnectorLeft().y, 20, 20);
+            }
 
             if (this.getRight() == null && this.getBlockType().canHasRightConnector()) {
                 batch.draw(AssetLoader.connector, getWireConnectorRight().x, getWireConnectorRight().y, 20, 20);
@@ -536,10 +531,10 @@ public abstract class Block {
                         batch.draw(this.getBlockType().getBlockParameter().get(i).getParameterType().getVariableType().getTextureconnector(), actualX, this.getY(), UIVar.parameter_width, UIVar.parameter_height);
                         this.getBlockType().getBlockParameter().get(i).setX((int) actualX);
                         this.getBlockType().getBlockParameter().get(i).setY(this.getY());
-                        WindowManager.ParameterFont.getData().setScale(1f,1f);
+                        WindowManager.ParameterFont.getData().setScale(1f, 1f);
                         glyphLayout.setText(WindowManager.ParameterFont, "" + this.getBlockType().getBlockParameter().get(i).getBlockParameterContent());
                         if (this.getBlockType().getBlockParameter().get(i).getDataWires().size() < 1) {
-                            WindowManager.ParameterFont.draw(batch, glyphLayout, actualX + 15 - glyphLayout.width / 2, getY() + glyphLayout.height/2 +10);
+                            WindowManager.ParameterFont.draw(batch, glyphLayout, actualX + 15 - glyphLayout.width / 2, getY() + glyphLayout.height / 2 + 10);
                         }
                     }
                     actualX += UIVar.parameter_width;
@@ -564,9 +559,9 @@ public abstract class Block {
             }
 
 
-            if(this.getWire_right()!=null) {
-                if(ProjectManager.getActProjectVar().movingWire!=this.getWire_right()) {
-                        this.getWire_right().draw();
+            if (this.getWire_right() != null) {
+                if (ProjectManager.getActProjectVar().movingWire != this.getWire_right()) {
+                    this.getWire_right().draw();
                 }
             }
 
@@ -609,7 +604,6 @@ public abstract class Block {
 
     /**
      * @return the position of the two connectors
-     *
      */
     public Vector2 getWireConnectorLeft() {
         wireConnector_left.set(this.getX() + 2, this.getY() + h / 3f + 9);

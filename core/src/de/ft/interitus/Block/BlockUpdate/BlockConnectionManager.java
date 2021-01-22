@@ -28,8 +28,8 @@ public class BlockConnectionManager {
 
             Block connection = BlockJumpingManager.getEndingLeftBlockSelection(block);
 
-            connection.setPosition(projectVar.duplicate_block_right.getRightDuplicatePosition() , projectVar.duplicate_block_right.getY());
-            new Wire(projectVar.duplicate_block_right,connection,false);
+            connection.setPosition(projectVar.duplicate_block_right.getRightDuplicatePosition(), projectVar.duplicate_block_right.getY());
+            new Wire(projectVar.duplicate_block_right, connection, false);
             connection.setLeft(projectVar.duplicate_block_right);
             connectedBlockJumpingToLeft(BlockJumpingManager.getEndingLeftBlockSelection(block));
             return;
@@ -39,8 +39,8 @@ public class BlockConnectionManager {
 
         Block connection = BlockJumpingManager.getEndingRightBlockSelection(block);
 
-        connection.setPosition(projectVar.duplicate_block_left.getX()-connection.getW(),projectVar.duplicate_block_left.getY());
-        new Wire(connection,projectVar.duplicate_block_left,false);
+        connection.setPosition(projectVar.duplicate_block_left.getX() - connection.getW(), projectVar.duplicate_block_left.getY());
+        new Wire(connection, projectVar.duplicate_block_left, false);
         connection.setRight(projectVar.duplicate_block_left);
         connectedBlockJumpingToRight(BlockJumpingManager.getEndingRightBlockSelection(block));
 
@@ -57,7 +57,7 @@ public class BlockConnectionManager {
         assert ProjectManager.getActProjectVar() != null;
         if (block.getWire_left() == null) return;
         if (block.getWire_left().isVisible()) return;
-        if(ProjectManager.getActProjectVar().marked_blocks.contains(block.getLeft())) return;
+        if (ProjectManager.getActProjectVar().marked_blocks.contains(block.getLeft())) return;
         block.getWire_left().delete();
         block.setLeft(null);
 
@@ -73,7 +73,7 @@ public class BlockConnectionManager {
         assert ProjectManager.getActProjectVar() != null;
         if (block.getWire_right() == null) return;
         if (block.getWire_right().isVisible()) return;
-        if(ProjectManager.getActProjectVar().marked_blocks.contains(block.getRight())) return;
+        if (ProjectManager.getActProjectVar().marked_blocks.contains(block.getRight())) return;
         block.getWire_right().delete();
         block.setRight(null);
 
@@ -82,8 +82,8 @@ public class BlockConnectionManager {
 
     protected static void connectedBlockJumpingToLeft(Block block) {
         Block neighbor = block.getRight();
-        while(neighbor!=null&&!neighbor.getWire_left().isVisible()) {
-            neighbor.setPosition(neighbor.getLeft().getRightDuplicatePosition() , neighbor.getLeft().getY());
+        while (neighbor != null && !neighbor.getWire_left().isVisible()) {
+            neighbor.setPosition(neighbor.getLeft().getRightDuplicatePosition(), neighbor.getLeft().getY());
             neighbor = neighbor.getRight();
         }
 
@@ -91,8 +91,8 @@ public class BlockConnectionManager {
 
     protected static void connectedBlockJumpingToRight(Block block) {
         Block neighbor = block.getLeft();
-        while(neighbor!=null&&!neighbor.getWire_right().isVisible()) {
-            neighbor.setPosition(neighbor.getRight().getX()-neighbor.getW() , neighbor.getRight().getY());
+        while (neighbor != null && !neighbor.getWire_right().isVisible()) {
+            neighbor.setPosition(neighbor.getRight().getX() - neighbor.getW(), neighbor.getRight().getY());
             neighbor = neighbor.getLeft();
         }
 

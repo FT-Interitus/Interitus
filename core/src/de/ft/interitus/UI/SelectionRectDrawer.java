@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -18,8 +18,8 @@ public class SelectionRectDrawer {
         Gdx.gl.glEnable(GL20.GL_BLEND);
         Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA); //Enable Alpha Rendering
         WindowManager.BlockshapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        WindowManager.BlockshapeRenderer.setColor(Settings.theme.ClearColor().r,Settings.theme.ClearColor().g,Settings.theme.ClearColor().b,0.6f);
-        WindowManager.BlockshapeRenderer.rect(rect.x,rect.y,rect.width,rect.height);
+        WindowManager.BlockshapeRenderer.setColor(Settings.theme.ClearColor().r, Settings.theme.ClearColor().g, Settings.theme.ClearColor().b, 0.6f);
+        WindowManager.BlockshapeRenderer.rect(rect.x, rect.y, rect.width, rect.height);
         WindowManager.BlockshapeRenderer.end();
         Gdx.gl.glDisable(GL20.GL_BLEND);
     }

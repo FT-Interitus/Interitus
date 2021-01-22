@@ -5,7 +5,6 @@
 
 package de.ft.interitus.UI.popup;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.UI.UIElements.UIElements.Button;
 import de.ft.interitus.UI.UIElements.check.CheckMouse;
@@ -59,7 +58,7 @@ public class PopupMenue {
             rightKlickControlle();
 
             this.ausgleichX = 0;
-            this.ausgleichY =0;
+            this.ausgleichY = 0;
             mouseunderpopup = false;
             mouserightpopup = false;
 
@@ -70,24 +69,24 @@ public class PopupMenue {
             }
 
 
-            if((this.x +WIDTH)+DISTANCE> WindowAPI.getWidth()) {
+            if ((this.x + WIDTH) + DISTANCE > WindowAPI.getWidth()) {
 
                 mouserightpopup = true;
             }
 
 
-            if(mouserightpopup) {
+            if (mouserightpopup) {
 
-                this.ausgleichX= (-WIDTH);
+                this.ausgleichX = (-WIDTH);
             }
 
-            if(mouseunderpopup) {
+            if (mouseunderpopup) {
 
-                this.ausgleichY = buttons.size()*buttonheight;
+                this.ausgleichY = buttons.size() * buttonheight;
             }
 
             for (int i = buttons.size() - 1; i >= 0; i--) {
-                buttons.get(i).setBounds(this.x + ausgleichX, this.y - (buttonheight * buttons.size())+(buttonheight*i) + ausgleichY, WIDTH, buttonheight);
+                buttons.get(i).setBounds(this.x + ausgleichX, this.y - (buttonheight * buttons.size()) + (buttonheight * i) + ausgleichY, WIDTH, buttonheight);
                 buttons.get(i).setImage(popupButtonimage);
                 buttons.get(i).draw();
             }

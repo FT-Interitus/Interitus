@@ -1,17 +1,12 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
 package de.ft.interitus.projecttypes.tools.arduinotools;
 
-import com.badlogic.gdx.Files;
-import com.bulenkov.darcula.DarculaLaf;
-import de.ft.interitus.loading.AssetLoader;
-
 import javax.swing.*;
 import java.awt.*;
-import java.util.concurrent.ExecutionException;
 
 public class SerialMonitorJFrame extends JFrame {
     private JPanel panel1;
@@ -19,7 +14,7 @@ public class SerialMonitorJFrame extends JFrame {
     private JTextField sendStringInput;
     private JButton sendButton;
 
-    public JScrollPane CommunicationAreaGenerate(){
+    public JScrollPane CommunicationAreaGenerate() {
         CommunicationArea = new JTextArea(32, 80);
         CommunicationArea.setEditable(false);
         CommunicationArea.setText("Hier steht irgendwann mal der vom Arduino Empfangene Text");
@@ -37,28 +32,27 @@ public class SerialMonitorJFrame extends JFrame {
             super.setIconImage(img.getImage());
             //this.getRootPane().setWindowDecorationStyle(JRootPane.FRAME);
             this.setResizable(false);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         //try {
-            //UIManager.setLookAndFeel(new DarculaLaf());
+        //UIManager.setLookAndFeel(new DarculaLaf());
         //} catch (UnsupportedLookAndFeelException e) {
-         //   e.printStackTrace();
+        //   e.printStackTrace();
         //}
 
         panel1 = new JPanel(new BorderLayout());
 
         panel1.add(CommunicationAreaGenerate(), BorderLayout.PAGE_START);
 
-        sendStringInput= new JTextField("Der Text Der zum Arduino Gesendet Werden kann",30);
+        sendStringInput = new JTextField("Der Text Der zum Arduino Gesendet Werden kann", 30);
         panel1.add(sendStringInput, BorderLayout.CENTER);
-        sendButton=new JButton("send");
-        panel1.add(sendButton,BorderLayout.EAST);
+        sendButton = new JButton("send");
+        panel1.add(sendButton, BorderLayout.EAST);
 
         this.setContentPane(panel1);
         this.pack();
     }
-
 
 
 }

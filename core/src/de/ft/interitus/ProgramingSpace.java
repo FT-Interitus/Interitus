@@ -142,7 +142,7 @@ public class ProgramingSpace extends ScreenAdapter {
 
 
         if (ProjectManager.getActProjectVar() != null && ProjectManager.getActProjectVar().projectType.isCodeshowable()) {
-            if (Gdx.input.isKeyPressed(Input.Keys.TAB)) {
+            if (WindowAPI.isKeyPressed(Input.Keys.TAB)) {
                 CodeHovering.drawHovering();
             }
 

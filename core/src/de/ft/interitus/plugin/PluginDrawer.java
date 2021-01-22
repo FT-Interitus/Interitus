@@ -6,17 +6,16 @@
 package de.ft.interitus.plugin;
 
 import com.badlogic.gdx.graphics.Texture;
-import de.ft.interitus.WindowManager;
 import de.ft.interitus.UI.UI;
+import de.ft.interitus.WindowManager;
 
 public class PluginDrawer {
     public static void draw() {
 
 
-        for(PluginRenderer renderer: ProgramRegistry.pluginRenderer) {
+        for (PluginRenderer renderer : ProgramRegistry.pluginRenderer) {
             renderer.render(WindowManager.blockBatch, UI.UIbatch, WindowManager.BlockshapeRenderer, WindowManager.shapeRenderer);
         }
-
 
 
     }

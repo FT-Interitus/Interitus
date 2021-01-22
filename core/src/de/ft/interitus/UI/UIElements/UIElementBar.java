@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -10,9 +10,9 @@ import de.ft.interitus.utils.ArrayList;
 
 import java.util.Arrays;
 
-public class UIElementBar extends UIElement{
+public class UIElementBar extends UIElement {
     private final ArrayList<UIElement> buttons = new ArrayList<>();
-    private int  button_h;
+    private int button_h;
     private int button_distance = 4;
 
     public UIElementBar() {

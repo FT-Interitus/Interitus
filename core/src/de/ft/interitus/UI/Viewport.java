@@ -13,7 +13,9 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Frustum;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
-import de.ft.interitus.*;
+import de.ft.interitus.ProgramingSpace;
+import de.ft.interitus.Settings;
+import de.ft.interitus.Var;
 import de.ft.interitus.events.EventVar;
 import de.ft.interitus.events.UI.EventManager;
 import de.ft.interitus.events.UI.UIZoomEvent;
@@ -58,26 +60,26 @@ public class Viewport {
 
                 if (!UIVar.isdialogeopend) {
 
-                    if(amount==-1) {
+                    if (amount == -1) {
                         if (cam.zoom <= 0.4f) return false;
-                    }else{
+                    } else {
                         if (cam.zoom > 2.0f) return false;
                     }
 
                     if (input.isKeyPressed(Input.Keys.CONTROL_LEFT) || input.isKeyPressed(Input.Keys.CONTROL_RIGHT)) {
 
-                        zoomEvent.fireForEach(n->n.zoomStart());
+                        zoomEvent.fireForEach(n -> n.zoomStart());
 
-                        cam.unproject(tp.set(WindowAPI.getX(), WindowAPI.getY(), 0 ));
+                        cam.unproject(tp.set(WindowAPI.getX(), WindowAPI.getY(), 0));
                         float px = tp.x;
                         float py = tp.y;
 
-                        cam.zoom += amount  * 0.1f;
-                        zoomPercentage -= amount*10;
+                        cam.zoom += amount * 0.1f;
+                        zoomPercentage -= amount * 10;
                         cam.update();
 
-                        cam.unproject(tp.set(WindowAPI.getX(), WindowAPI.getY(), 0 ));
-                        cam.position.add(px - tp.x, py- tp.y, 0);
+                        cam.unproject(tp.set(WindowAPI.getX(), WindowAPI.getY(), 0));
+                        cam.position.add(px - tp.x, py - tp.y, 0);
                         cam.update();
 
                     }
@@ -94,7 +96,7 @@ public class Viewport {
             public boolean pan(float x, float y, float deltaX, float deltaY) {
                 if (!UIVar.isdialogeopend) {
 
-                    if (input.isButtonPressed(Input.Buttons.MIDDLE)||input.isButtonPressed(Input.Buttons.RIGHT)) {
+                    if (input.isButtonPressed(Input.Buttons.MIDDLE) || input.isButtonPressed(Input.Buttons.RIGHT)) {
                         cam.position.x -= deltaX * cam.zoom;
                         cam.position.y += deltaY * cam.zoom;
                         cam.update();
@@ -188,9 +190,6 @@ public class Viewport {
             }
 
 
-
-
-
             ProjectManager.getActProjectVar().cam_pos.set(cam.position.x, cam.position.y);
 
         }
@@ -225,21 +224,23 @@ public class Viewport {
             }
         }
     }
+
     public static void increaseZoom(OrthographicCamera cam) {
         if (cam.zoom <= 0.4f) return;
         cam.zoom += -1 * 0.1f;
-        zoomPercentage+=10;
+        zoomPercentage += 10;
     }
+
     public static void decreaseZoom(OrthographicCamera cam) {
 
         if (cam.zoom > 2.0f) return;
-        cam.zoom += 1  * 0.1f;
-        zoomPercentage-=10;
+        cam.zoom += 1 * 0.1f;
+        zoomPercentage -= 10;
     }
 
     public static void resetZoom(OrthographicCamera cam) {
         cam.zoom = 1;
-        zoomPercentage=100;
+        zoomPercentage = 100;
     }
 
     public static int getZoomPercentage() {

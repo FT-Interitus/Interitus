@@ -7,7 +7,6 @@ package de.ft.interitus;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.kotcrab.vis.ui.VisUI;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
 import de.ft.interitus.Logging.DebugPrinter;
@@ -21,15 +20,14 @@ import de.ft.interitus.datamanager.programmdata.experience.ExperienceManager;
 import de.ft.interitus.datamanager.userdata.UserDataInit;
 import de.ft.interitus.loading.Loading;
 import de.ft.interitus.loading.SplashScreen;
-import de.ft.interitus.plugin.server.PluginInstallServer;
 import de.ft.interitus.plugin.PluginManagerHandler;
 import de.ft.interitus.plugin.PluginSandboxSecurityPolicy;
 import de.ft.interitus.plugin.ProgramRegistry;
+import de.ft.interitus.plugin.server.PluginInstallServer;
 import de.ft.interitus.projecttypes.Importer.Importer;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.FolderUtils;
 import de.ft.interitus.utils.UserNameGetter;
-
 
 import java.nio.file.Path;
 import java.security.Policy;
@@ -54,10 +52,9 @@ public class Program extends Game {
     public void create() {
 
 
-
         Gdx.graphics.setTitle("Interitus - Home Version");
         Var.programingSpace = new ProgramingSpace();
-        Var.welcome = new  Welcome();
+        Var.welcome = new Welcome();
 
 
         Policy.setPolicy(new PluginSandboxSecurityPolicy());
@@ -69,13 +66,11 @@ public class Program extends Game {
         DebugPrinter.detect();
 
 
-
-
         if (Var.savemode) {
             logger.warning("Programm is running in savemode");
         }
         Var.splashscreen = SplashScreen.create();
-        if(Var.window==null) {
+        if (Var.window == null) {
 
             logger.severe("Window not found... Exiting");
             System.exit(-1);
@@ -108,10 +103,9 @@ public class Program extends Game {
         }
 
 
-    /*
-     * Wait until all Plugins are registred
-     */
-
+        /*
+         * Wait until all Plugins are registred
+         */
 
 
         UI.init();
@@ -121,8 +115,6 @@ public class Program extends Game {
         if (!Var.savemode) {
             CheckShortcuts.loadArrayList();//bevor CheckShortcuts.loatArraylist muss die ui schon die menuebar eleente erstellt haben!!!!!!!!!
         }
-
-
 
 
         if (!Var.savemode) {
@@ -144,7 +136,6 @@ public class Program extends Game {
         Gdx.graphics.setVSync(Settings.Vsync);
 
 
-
         Timer saveprogrammdatatimer = new Timer();
         saveprogrammdatatimer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -156,7 +147,7 @@ public class Program extends Game {
         Thread pluginloadingthread = new Thread() {
             @Override
             public void run() {
-                while(loadplugins.isInterrupted());
+                while (loadplugins.isInterrupted()) ;
 
                 ProgramRegistry.addProjectTypes();
                 ProgramRegistry.addMenuBarItems();
@@ -191,13 +182,9 @@ public class Program extends Game {
         //ALC.destroy();//Destroy Sound System todo lwjgl3 if we want to use sound
 
 
-
         System.exit(0);
 
     }
-
-
-
 
 
 }

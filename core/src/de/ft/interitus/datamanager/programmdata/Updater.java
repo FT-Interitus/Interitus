@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -182,7 +182,7 @@ public class Updater {
 
             return !jsonObject.getString("tag_name").contentEquals(Var.PROGRAMM_VERSION);
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             return false;
         }
     }
@@ -202,7 +202,7 @@ public class Updater {
             }
 
 
-        }else{
+        } else {
             Program.logger.warning("Update Canceled");
         }
     }

@@ -24,9 +24,9 @@ class RadioButton : UIElement {
     private var text = ""
     private val label = TextLabel(text)
     private val labelMargin = 10
-    private  var xMove = 0
-    private var yMove = 0;
-    private var movement = 1;
+    private var xMove = 0
+    private var yMove = 0
+    private var movement = 1
     val toggleEvent = EventManager<UIToggleEvent>()
 
     constructor() {
@@ -62,11 +62,17 @@ class RadioButton : UIElement {
         WindowManager.shapeRenderer.begin(ShapeRenderer.ShapeType.Line)
         WindowManager.shapeRenderer.setAutoShapeType(true)
 
-        if (!disabled&& WindowAPI.isButtonPressed(0)&&CheckCollision.checkCircleWithVector(radius.toInt(), this.x, this.y, Var.mouseDownPosWithoutUnproject)) {
-           xMove = movement;
-            yMove = movement;
+        if (!disabled && WindowAPI.isButtonPressed(0) && CheckCollision.checkCircleWithVector(
+                radius.toInt(),
+                this.x,
+                this.y,
+                Var.mouseDownPosWithoutUnproject
+            )
+        ) {
+            xMove = movement
+            yMove = movement
 
-        }else{
+        } else {
             xMove = 0
             yMove = 0
         }
@@ -80,13 +86,13 @@ class RadioButton : UIElement {
 
 
 
-        WindowManager.shapeRenderer.circle(this.x.toFloat()+xMove, this.y.toFloat()-yMove, radius, segments)
+        WindowManager.shapeRenderer.circle(this.x.toFloat() + xMove, this.y.toFloat() - yMove, radius, segments)
         WindowManager.shapeRenderer.set(ShapeRenderer.ShapeType.Filled)
 
 
 
         if (toggleState) {
-            WindowManager.shapeRenderer.circle(this.x.toFloat()+xMove, this.y.toFloat()-yMove, radius - 3, segments)
+            WindowManager.shapeRenderer.circle(this.x.toFloat() + xMove, this.y.toFloat() - yMove, radius - 3, segments)
         }
         if (!this.disabled) {
             if (WindowAPI.isButtonPressed(0)) {
@@ -95,10 +101,16 @@ class RadioButton : UIElement {
 
             if (pressed && !WindowAPI.isButtonPressed(0)) {
                 pressed = false
-                if (CheckCollision.checkCircleWithVector(radius.toInt(), this.x, this.y, Var.mouseReleasePosWithoutUnproject)) {
+                if (CheckCollision.checkCircleWithVector(
+                        radius.toInt(),
+                        this.x,
+                        this.y,
+                        Var.mouseReleasePosWithoutUnproject
+                    )
+                ) {
                     toggleState = !toggleState
                     toggleEvent.fireForEach {
-                        it.toggled(toggleState,this)
+                        it.toggled(toggleState, this)
 
                     }
                 }

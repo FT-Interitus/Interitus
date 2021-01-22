@@ -14,7 +14,10 @@ import de.ft.interitus.UI.Notification.NotificationManager;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.compiler.Compiler;
 import de.ft.interitus.datamanager.programmdata.Data;
-import de.ft.interitus.deviceconnection.ev3connection.*;
+import de.ft.interitus.deviceconnection.ev3connection.Device;
+import de.ft.interitus.deviceconnection.ev3connection.Ev3SystemUtils;
+import de.ft.interitus.deviceconnection.ev3connection.Operations;
+import de.ft.interitus.deviceconnection.ev3connection.ev3;
 import de.ft.interitus.loading.AssetLoader;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Ev3.Ev3Block;
 import de.ft.interitus.projecttypes.BlockTypes.Interitus.Ev3.programmsequence.Thread.ThreadBlock;
@@ -22,7 +25,10 @@ import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.utils.ArrayList;
 import de.ft.interitus.utils.OSChecker;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.UUID;
@@ -63,7 +69,7 @@ public class EV3compiler implements Compiler {
 
                     while (neighbour != null) {
                         //Program.logger.config(((Ev3Block) neighbour.getBlocktype().getBlockModis().get(neighbour.getBlocktype().getActBlockModiIndex())).getCode());
-                        tempThread.addLine("\n"+((Ev3Block) neighbour.getBlockType().getBlockModes().get(neighbour.getBlockType().getActBlockModeIndex())).getCode());
+                        tempThread.addLine("\n" + ((Ev3Block) neighbour.getBlockType().getBlockModes().get(neighbour.getBlockType().getActBlockModeIndex())).getCode());
                         neighbour = neighbour.getRight();
                     }
                     userthreads.add(tempThread);
@@ -74,7 +80,7 @@ public class EV3compiler implements Compiler {
 
         Programm.append(MainThread.getThread());
         for (EV3Thread thread : userthreads) {
-            Programm.append("\n"+thread.getThread());
+            Programm.append("\n" + thread.getThread());
         }
 
         Program.logger.config("\n" + Programm.toString());
@@ -124,7 +130,7 @@ public class EV3compiler implements Compiler {
 
         try {
 
-            ProcessBuilder pb = new ProcessBuilder(java, "-jar","assembler.jar", Data.tempfolder.getAbsolutePath() + "/" + filename.replace(".lms", ""));
+            ProcessBuilder pb = new ProcessBuilder(java, "-jar", "assembler.jar", Data.tempfolder.getAbsolutePath() + "/" + filename.replace(".lms", ""));
             pb.directory(new File(System.getProperty("user.dir") + "/" + "libs/ev3/"));
 
 
@@ -132,12 +138,12 @@ public class EV3compiler implements Compiler {
 
             BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line = null;
-            while((line = in.readLine()) != null) {
+            while ((line = in.readLine()) != null) {
                 Program.logger.config(line);
             }
             BufferedReader in1 = new BufferedReader(new InputStreamReader(process.getErrorStream()));
             String line1 = null;
-            while((line1 = in1.readLine()) != null) {
+            while ((line1 = in1.readLine()) != null) {
                 Program.logger.config(line1);
             }
 
@@ -151,36 +157,35 @@ public class EV3compiler implements Compiler {
         notification.setProgressbarvalue(70);
 
         try {
-            Ev3SystemUtils.Delete_File("/home/root/lms2012/prjs/"+ProjectManager.getActProjectVar().getFilename()+"/", ((Device) UI.runselection.getSelectedElement().getIdentifier()));
+            Ev3SystemUtils.Delete_File("/home/root/lms2012/prjs/" + ProjectManager.getActProjectVar().getFilename() + "/", ((Device) UI.runselection.getSelectedElement().getIdentifier()));
         } catch (Exception e) {
             Program.logger.config("First Time Deploy");
         }
         notification.setProgressbarvalue(80);
 
         try {
-            Ev3SystemUtils.create_Dir("/home/root/lms2012/prjs/"+ProjectManager.getActProjectVar().getFilename(), ((Device) UI.runselection.getSelectedElement().getIdentifier()));
+            Ev3SystemUtils.create_Dir("/home/root/lms2012/prjs/" + ProjectManager.getActProjectVar().getFilename(), ((Device) UI.runselection.getSelectedElement().getIdentifier()));
         } catch (Exception e) {
         }
 
         notification.setProgressbarvalue(100);
 
 
-
         try {
-            Ev3SystemUtils.downloadFile("/home/root/lms2012/prjs/"+ProjectManager.getActProjectVar().getFilename()+"/"+ProjectManager.getActProjectVar().getFilename()+".rbf", Files.readAllBytes(Path.of(Data.tempfolder.getAbsolutePath() + "/" + filename.replace(".lms", ".rbf"))), ((Device) UI.runselection.getSelectedElement().getIdentifier()));
+            Ev3SystemUtils.downloadFile("/home/root/lms2012/prjs/" + ProjectManager.getActProjectVar().getFilename() + "/" + ProjectManager.getActProjectVar().getFilename() + ".rbf", Files.readAllBytes(Path.of(Data.tempfolder.getAbsolutePath() + "/" + filename.replace(".lms", ".rbf"))), ((Device) UI.runselection.getSelectedElement().getIdentifier()));
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-    ArrayList<Byte> playsound = new ArrayList<>();
-        playsound.addAll(Operations.playSound("./ui/DownloadSucces",100,false));
-       playsound.addAll(Operations.waitforTone());
-        ((Device) UI.runselection.getSelectedElement().getIdentifier()).getConnectionHandle().sendData(ev3.makeDirectCmd(playsound,0,0), ((Device) UI.runselection.getSelectedElement().getIdentifier()));
+        ArrayList<Byte> playsound = new ArrayList<>();
+        playsound.addAll(Operations.playSound("./ui/DownloadSucces", 100, false));
+        playsound.addAll(Operations.waitforTone());
+        ((Device) UI.runselection.getSelectedElement().getIdentifier()).getConnectionHandle().sendData(ev3.makeDirectCmd(playsound, 0, 0), ((Device) UI.runselection.getSelectedElement().getIdentifier()));
 
         ArrayList<Byte> command = new ArrayList<>();
-        command.addAll(Operations.loadProgrammFiles(1,"../prjs/"+ProjectManager.getActProjectVar().getFilename()+"/"+ProjectManager.getActProjectVar().getFilename()+".rbf",0,4));
-         command.addAll(Operations.startProgramm(1,0,4,false));
-        ((Device) UI.runselection.getSelectedElement().getIdentifier()).getConnectionHandle().sendData(ev3.makeDirectCmd(command,8,0), (Device) UI.runselection.getSelectedElement().getIdentifier());
+        command.addAll(Operations.loadProgrammFiles(1, "../prjs/" + ProjectManager.getActProjectVar().getFilename() + "/" + ProjectManager.getActProjectVar().getFilename() + ".rbf", 0, 4));
+        command.addAll(Operations.startProgramm(1, 0, 4, false));
+        ((Device) UI.runselection.getSelectedElement().getIdentifier()).getConnectionHandle().sendData(ev3.makeDirectCmd(command, 8, 0), (Device) UI.runselection.getSelectedElement().getIdentifier());
 
 
         notification.close();
@@ -196,13 +201,13 @@ public class EV3compiler implements Compiler {
     @Override
     public void Interrupt() {
 
-        if(UI.runselection.getSelectedElement()==null) return;
+        if (UI.runselection.getSelectedElement() == null) return;
 
         ArrayList<Byte> stopProgram = new ArrayList<>();
 
         stopProgram.addAll(Operations.stopProgramm(1));
 
-        ((Device) UI.runselection.getSelectedElement().getIdentifier()).getConnectionHandle().sendData(ev3.makeDirectCmd(stopProgram,0,0), ((Device) UI.runselection.getSelectedElement().getIdentifier()));
+        ((Device) UI.runselection.getSelectedElement().getIdentifier()).getConnectionHandle().sendData(ev3.makeDirectCmd(stopProgram, 0, 0), ((Device) UI.runselection.getSelectedElement().getIdentifier()));
 
     }
 }

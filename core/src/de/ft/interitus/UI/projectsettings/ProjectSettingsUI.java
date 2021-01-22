@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -18,7 +18,6 @@ import com.kotcrab.vis.ui.building.utilities.CellWidget;
 import com.kotcrab.vis.ui.building.utilities.Padding;
 import com.kotcrab.vis.ui.building.utilities.layouts.ActorLayout;
 import com.kotcrab.vis.ui.widget.*;
-import de.ft.interitus.Program;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIVar;
 import de.ft.interitus.UI.projectsettings.subitems.AddonSettings;
@@ -103,10 +102,10 @@ public class ProjectSettingsUI extends VisWindow {
                 @Override
                 public void changed(ChangeEvent event, Actor actor) {
 
-                    if(tree.getSelectedNode()==null) return;
+                    if (tree.getSelectedNode() == null) return;
 
 
-                        SelectedItem = ((TestNode) tree.getSelectedNode()).Mode;
+                    SelectedItem = ((TestNode) tree.getSelectedNode()).Mode;
 
 
                     container.clearChildren();
@@ -118,9 +117,9 @@ public class ProjectSettingsUI extends VisWindow {
                     switch (SelectedItem) {
                         case 0 -> Information.add(container);
                         case 2 -> VersionControll.add(container);
-                        case 1 -> ProjectManager.getActProjectVar().projectType.getProjectFunktions().projectsettings(container,ProjectManager.getActProjectVar().projectSettings);
+                        case 1 -> ProjectManager.getActProjectVar().projectType.getProjectFunktions().projectsettings(container, ProjectManager.getActProjectVar().projectSettings);
                         case 3 -> AddonSettings.add(container);
-                        default -> ProjectManager.getActProjectVar().enabledAddons.get(SelectedItem-4).getAddonSettings(container);
+                        default -> ProjectManager.getActProjectVar().enabledAddons.get(SelectedItem - 4).getAddonSettings(container);
                     }
 
                 }
@@ -134,8 +133,6 @@ public class ProjectSettingsUI extends VisWindow {
 
 
             add(tree).expand().fill().padTop(15).padLeft(15).width(-10);
-
-
 
 
             //  builder.append(CellWidget.of(tree).padding(new Padding(15,15,0,0)).wrap());
@@ -227,13 +224,12 @@ public class ProjectSettingsUI extends VisWindow {
     public void rebuildTree() {
 
 
-       tree.clearChildren();
+        tree.clearChildren();
 
         TestNode item1 = new TestNode(new VisLabel(" Informationen "), 0);
-        TestNode item2 = new TestNode(new VisLabel(" Einstellungen "),1);
+        TestNode item2 = new TestNode(new VisLabel(" Einstellungen "), 1);
         TestNode item3 = new TestNode(new VisLabel(" VCS "), 2);
         TestNode item4 = new TestNode(new VisLabel(" Addons "), 3);
-
 
 
         //ADD Advanced Settings to ITM if Device is connect
@@ -251,12 +247,10 @@ public class ProjectSettingsUI extends VisWindow {
 
 
         int counter = 0;
-        for(Addon addon: ProjectManager.getActProjectVar().enabledAddons) {
+        for (Addon addon : ProjectManager.getActProjectVar().enabledAddons) {
             counter++;
-            tree.add(new TestNode(new VisLabel(" " + addon.getName() + " "),counter+3));
+            tree.add(new TestNode(new VisLabel(" " + addon.getName() + " "), counter + 3));
         }
-
-
 
 
     }

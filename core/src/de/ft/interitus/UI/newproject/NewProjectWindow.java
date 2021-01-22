@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -132,8 +132,8 @@ public class NewProjectWindow {
             content.add(namelable).expandX().padLeft(-400).padBottom(-50);
             content.add(nameinput).expandX().width(400).padLeft(-500).padBottom(-50).row();
 
-           // content.add(pfadlable).expandX().padLeft(-400).padBottom(-150);
-           // content.add(pfadinput).expandX().width(400).padLeft(-500).padBottom(-150).row();
+            // content.add(pfadlable).expandX().padLeft(-400).padBottom(-150);
+            // content.add(pfadinput).expandX().width(400).padLeft(-500).padBottom(-150).row();
             content.add(selectProjectType).expandX().padBottom(-250).row();
 
 
@@ -162,7 +162,6 @@ public class NewProjectWindow {
                     ProjectManager.addProject(ProjectTypesVar.projectTypes.get(items.indexOf(selectProjectType.getSelected())).init());
 
 
-
                     ProjectManager.change(Var.openprojects.size() - 1);
                     ProjectManager.getActProjectVar().setFilename(nameinput.getText());
 
@@ -185,10 +184,10 @@ public class NewProjectWindow {
             nameinput.addListener(new ChangeListener() {
                 @Override
                 public void changed(ChangeEvent changeEvent, Actor actor) {
-                    if(nameinput.getText().length()<35&&nameinput.getText().length()>2&&!nameinput.getText().startsWith(" ")&&!nameinput.getText().endsWith(" ")&&!nameinput.getText().contains("ä")&&!nameinput.getText().contains("ü")&&!nameinput.getText().contains("ö")) {
-                    Button_next.setDisabled(false);
-                    errorLabel.setText("");
-                    }else{
+                    if (nameinput.getText().length() < 35 && nameinput.getText().length() > 2 && !nameinput.getText().startsWith(" ") && !nameinput.getText().endsWith(" ") && !nameinput.getText().contains("ä") && !nameinput.getText().contains("ü") && !nameinput.getText().contains("ö")) {
+                        Button_next.setDisabled(false);
+                        errorLabel.setText("");
+                    } else {
                         Button_next.setDisabled(true);
                         errorLabel.setText("Bitte gib einen gültigen Namen an");
                     }

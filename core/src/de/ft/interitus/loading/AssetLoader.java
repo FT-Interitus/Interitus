@@ -15,8 +15,6 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import de.ft.interitus.DisplayErrors;
 import de.ft.interitus.Program;
 
-import java.lang.reflect.ParameterizedType;
-
 
 public class AssetLoader {
 
@@ -75,7 +73,6 @@ public class AssetLoader {
     public static Texture switch_background_green_white;
 
 
-
     //Wire
     public static Texture wire;
     //Wire Nod
@@ -83,9 +80,6 @@ public class AssetLoader {
 
     //Plugin Warte Bild
     public static Texture pluginwait;
-
-
-
 
 
     public static Texture img_mappe1;
@@ -132,7 +126,6 @@ public class AssetLoader {
     public static Texture img_Tab;
 
 
-
     public static Texture WaitBlock_description_image;
 
 
@@ -152,8 +145,6 @@ public class AssetLoader {
     public static Texture bereich_description;
     public static Texture Start_description;
     public static Texture StatusLight_description;
-
-
 
 
     ////ParameterBilder :
@@ -184,7 +175,6 @@ public class AssetLoader {
     public static Texture Parameter_digital;
     public static Texture Parameter_analog;
     public static Texture Parameter_farbe;
-
 
 
     public static Texture mouseover_left;
@@ -261,17 +251,10 @@ public class AssetLoader {
             manager.load(workingdirectory + "Block/Parameter/farb_parameter.png", Texture.class);
 
 
-
-
             // manager.load(new AssetDescriptor(Objects.requireNonNull(Programm.INSTANCE.getClass().getClassLoader().getResource("../statistics/test.png")).getFile(),Texture.class));
 
 
             //Programm.INSTANCE.getClass().getResource()
-
-
-
-
-
 
 
             group = "Schriftarten";
@@ -290,7 +273,7 @@ public class AssetLoader {
 
                 FreeTypeFontGenerator generator2 = new FreeTypeFontGenerator(Gdx.files.internal("Fonts/agency_fb.ttf"));
                 FreeTypeFontGenerator.FreeTypeFontParameter parameter2 = new FreeTypeFontGenerator.FreeTypeFontParameter();
-                parameter2.color=new Color(0f,0f,0f,1f);
+                parameter2.color = new Color(0f, 0f, 0f, 1f);
                 parameter2.size = 16;
 
                 ParameterFont = generator2.generateFont(parameter2);
@@ -390,7 +373,6 @@ public class AssetLoader {
             manager.load(workingdirectory + "Block/color_bar/turquoise_right.png", Texture.class);
 
 
-
             manager.load(workingdirectory + "connector.png", Texture.class);
             manager.load(workingdirectory + "connector_offerd.png", Texture.class);
             //////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -418,10 +400,6 @@ public class AssetLoader {
             manager.load(workingdirectory + "Block/description_image/StatusLight_description.png", Texture.class);
 
 
-
-
-
-
             manager.load(workingdirectory + "aufklapppfeil.png", Texture.class);
 
 
@@ -445,12 +423,12 @@ public class AssetLoader {
             group = "Plugin";
             manager.load(workingdirectory + "pluginwaiting.png", Texture.class);
             group = "UI";
-            manager.load(workingdirectory+"UI/close_notification.png",Texture.class);
-            manager.load(workingdirectory+"UI/close_notification_mouseover.png",Texture.class);
+            manager.load(workingdirectory + "UI/close_notification.png", Texture.class);
+            manager.load(workingdirectory + "UI/close_notification_mouseover.png", Texture.class);
 
-            manager.load(workingdirectory+"UI/information.png",Texture.class);
+            manager.load(workingdirectory + "UI/information.png", Texture.class);
 
-            manager.load(workingdirectory+"Icon/TabBar.png",Texture.class);
+            manager.load(workingdirectory + "Icon/TabBar.png", Texture.class);
 
 
         } catch (Exception e) {
@@ -489,20 +467,17 @@ public class AssetLoader {
             Parameter_Mal = manager.get(workingdirectory + "Block/Parameter/MalKreuz.png", Texture.class);
             Parameter_Geteilt = manager.get(workingdirectory + "Block/Parameter/Geteilt.png", Texture.class);
             Parameter_abs = manager.get(workingdirectory + "Block/Parameter/absolutevalue.png", Texture.class);
-           Parameter_fkt = manager.get(workingdirectory + "Block/Parameter/advancedFunktion.png", Texture.class);
-            Parameter_a= manager.get(workingdirectory + "Block/Parameter/a.png", Texture.class);
-            Parameter_b= manager.get(workingdirectory + "Block/Parameter/b.png", Texture.class);
-            Parameter_c= manager.get(workingdirectory + "Block/Parameter/c.png", Texture.class);
-            Parameter_d= manager.get(workingdirectory + "Block/Parameter/d.png", Texture.class);
-            Parameter_randomdice= manager.get(workingdirectory + "Block/Parameter/randomdice.png", Texture.class);
-           Parameter_lowerlimit = manager.get(workingdirectory + "Block/Parameter/lowerlimit.png", Texture.class);
+            Parameter_fkt = manager.get(workingdirectory + "Block/Parameter/advancedFunktion.png", Texture.class);
+            Parameter_a = manager.get(workingdirectory + "Block/Parameter/a.png", Texture.class);
+            Parameter_b = manager.get(workingdirectory + "Block/Parameter/b.png", Texture.class);
+            Parameter_c = manager.get(workingdirectory + "Block/Parameter/c.png", Texture.class);
+            Parameter_d = manager.get(workingdirectory + "Block/Parameter/d.png", Texture.class);
+            Parameter_randomdice = manager.get(workingdirectory + "Block/Parameter/randomdice.png", Texture.class);
+            Parameter_lowerlimit = manager.get(workingdirectory + "Block/Parameter/lowerlimit.png", Texture.class);
             Parameter_upperlimit = manager.get(workingdirectory + "Block/Parameter/upperlimit.png", Texture.class);
             Parameter_digital = manager.get(workingdirectory + "Block/Parameter/digital.png", Texture.class);
             Parameter_analog = manager.get(workingdirectory + "Block/Parameter/analog.png", Texture.class);
             Parameter_farbe = manager.get(workingdirectory + "Block/Parameter/farb_parameter.png", Texture.class);
-
-
-
 
 
             Plug_IntParameter = manager.get(workingdirectory + "Block/ParameterStecker/ZahlParameterStecker.png", Texture.class);
@@ -553,17 +528,16 @@ public class AssetLoader {
             img_mappe6 = manager.get(workingdirectory + "Bar/Mappe6.png", Texture.class);
 
 
-
             connector = manager.get(workingdirectory + "connector.png", Texture.class);
             connector_offerd = manager.get(workingdirectory + "connector_offerd.png", Texture.class);
 
-          block_right =  manager.get(workingdirectory + "Block/blockmask/block_right.png", Texture.class);
-           block_middle = manager.get(workingdirectory + "Block/blockmask/block_middle.png", Texture.class);
-          block_left = manager.get(workingdirectory + "Block/blockmask/block_left.png", Texture.class);
+            block_right = manager.get(workingdirectory + "Block/blockmask/block_right.png", Texture.class);
+            block_middle = manager.get(workingdirectory + "Block/blockmask/block_middle.png", Texture.class);
+            block_left = manager.get(workingdirectory + "Block/blockmask/block_left.png", Texture.class);
 
-          green_bar_left =  manager.get(workingdirectory + "Block/color_bar/green_left.png", Texture.class);
-            green_bar_middle =  manager.get(workingdirectory + "Block/color_bar/green_middle.png", Texture.class);
-            green_bar_right =  manager.get(workingdirectory + "Block/color_bar/green_right.png", Texture.class);
+            green_bar_left = manager.get(workingdirectory + "Block/color_bar/green_left.png", Texture.class);
+            green_bar_middle = manager.get(workingdirectory + "Block/color_bar/green_middle.png", Texture.class);
+            green_bar_right = manager.get(workingdirectory + "Block/color_bar/green_right.png", Texture.class);
 
             orange_bar_left = manager.get(workingdirectory + "Block/color_bar/orange_left.png", Texture.class);
             orange_bar_middle = manager.get(workingdirectory + "Block/color_bar/orange_middle.png", Texture.class);
@@ -584,7 +558,6 @@ public class AssetLoader {
             turquoise_bar_left = manager.get(workingdirectory + "Block/color_bar/turquoise_left.png", Texture.class);
             turquoise_bar_middle = manager.get(workingdirectory + "Block/color_bar/turquoise_middle.png", Texture.class);
             turquoise_bar_right = manager.get(workingdirectory + "Block/color_bar/turquoise_right.png", Texture.class);
-
 
 
             mouse_over_right = manager.get(workingdirectory + "Block/blockmask/mouseover_rechts.png", Texture.class);
@@ -612,12 +585,6 @@ public class AssetLoader {
             StatusLight_description = manager.get(workingdirectory + "Block/description_image/StatusLight_description.png", Texture.class);
 
 
-
-
-
-
-
-
             aufklapppfeil = manager.get(workingdirectory + "aufklapppfeil.png", Texture.class);
 
 
@@ -637,12 +604,12 @@ public class AssetLoader {
             //Plugin
             pluginwait = manager.get(workingdirectory + "pluginwaiting.png", Texture.class);
             //UI
-           close_notification =  manager.get(workingdirectory+"UI/close_notification.png",Texture.class);
-            close_notification_mouseover =  manager.get(workingdirectory+"UI/close_notification_mouseover.png",Texture.class);
+            close_notification = manager.get(workingdirectory + "UI/close_notification.png", Texture.class);
+            close_notification_mouseover = manager.get(workingdirectory + "UI/close_notification_mouseover.png", Texture.class);
 
-            information =  manager.get(workingdirectory+"UI/information.png",Texture.class);
+            information = manager.get(workingdirectory + "UI/information.png", Texture.class);
 
-            Tabbarhomeicon=manager.get(workingdirectory+"Icon/TabBar.png",Texture.class);
+            Tabbarhomeicon = manager.get(workingdirectory + "Icon/TabBar.png", Texture.class);
         } catch (Exception e) {
             e.printStackTrace();
             DisplayErrors.error = e;

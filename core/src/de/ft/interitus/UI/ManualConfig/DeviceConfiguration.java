@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -8,9 +8,9 @@ package de.ft.interitus.UI.ManualConfig;
 
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.projecttypes.ProjectManager;
+import de.ft.interitus.utils.ArrayList;
 
 import java.io.Serializable;
-import de.ft.interitus.utils.ArrayList;
 
 public class DeviceConfiguration implements Serializable {
 
@@ -58,7 +58,7 @@ public class DeviceConfiguration implements Serializable {
      * @return true if the operation was successful
      */
     public boolean updateEntry() {
-        if(DeviceConfigListIndex!=-1) {
+        if (DeviceConfigListIndex != -1) {
             UI.runselection.getElements().get(DeviceConfigListIndex).setText(this.name);
 
         }
@@ -73,7 +73,6 @@ public class DeviceConfiguration implements Serializable {
         }
 
 
-
     }
 
     /**
@@ -82,7 +81,7 @@ public class DeviceConfiguration implements Serializable {
      * @return true if the operation was successful
      */
     public boolean updateEntry(Object identifier) {
-        if(DeviceConfigListIndex!=-1) {
+        if (DeviceConfigListIndex != -1) {
             UI.runselection.getElements().get(DeviceConfigListIndex).setText(this.name);
             UI.runselection.getElements().get(DeviceConfigListIndex).setIdentifier(identifier);
 

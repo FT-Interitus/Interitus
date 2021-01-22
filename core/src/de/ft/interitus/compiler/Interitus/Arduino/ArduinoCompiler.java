@@ -42,7 +42,7 @@ public class ArduinoCompiler implements Compiler {
             StringBuilder Programm = new StringBuilder();
             for (String include : installlibery) {
 
-                installlibary(  include.replace(" ","҈"));
+                installlibary(include.replace(" ", "҈"));
 
             }
 
@@ -144,7 +144,7 @@ public class ArduinoCompiler implements Compiler {
             Program.logger.warning("\n" + Programm.toString());
 
             return Programm.toString();
-        }catch (Exception e) {
+        } catch (Exception e) {
             notification.setTitle("Fehler beim  Compilieren");
             notification.setMessage("Öffne das Projekt neu!");
             notification.setStayalive(true);
@@ -164,16 +164,13 @@ public class ArduinoCompiler implements Compiler {
         try {
 
 
+            String[] commandArray = command.split(" ");
+            for (int i = 0; i < commandArray.length; i++) {
 
-           String[] commandArray = command.split(" ");
-            for(int i=0;i< commandArray.length;i++) {
-
-                commandArray[i] = commandArray[i].replace("҈"," ");
-
+                commandArray[i] = commandArray[i].replace("҈", " ");
 
 
             }
-
 
 
             pr = rt.exec(commandArray);

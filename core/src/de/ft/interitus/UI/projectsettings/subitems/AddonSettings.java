@@ -90,7 +90,7 @@ public class AddonSettings {
                     Tools.update();
                     UI.proset.rebuildTree();
 
-                }catch (Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }

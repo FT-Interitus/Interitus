@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -95,7 +95,6 @@ public class Data {
             }
 
 
-
             try {
                 userexperience.createNewFile();//Die datei für die bekannten Geräte wird erstellt
 
@@ -147,7 +146,7 @@ public class Data {
 
             if (!recent.exists()) { //Wenn die Datei der letzten Projekte noch nicht exsisiert
                 Program.logger.config("Recent not found");
-
+                //TODO NO Gdx Code
                 try {
                     recent.createNewFile();
                     Gdx.files.absolute(recent.getAbsolutePath()).writeString("{}", false); //Wird in das Verzeichnis mit {} als JSON indikator geschrieben
@@ -247,9 +246,6 @@ public class Data {
             }
 
 
-
-
-
             if (!userexperience.exists()) { //siehe recent
                 try {
                     Program.logger.config("userexperience not found");
@@ -275,8 +271,6 @@ public class Data {
                     ExperienceVar.settingstimeinhoures = obj.getDouble("settingstime");
                     ExperienceVar.setuptimeinhoures = obj.getDouble("setuptime");
                     ExperienceVar.starttimes = obj.getInt("starttimes");
-
-
 
 
                 } catch (JSONException e) {
@@ -399,17 +393,14 @@ public class Data {
         settings_obj.put("limitfps", Settings.limitfps);
         settings_obj.put("hints", Settings.hints);
         settings_obj.put("personalhints", Settings.personalhits);
-        settings_obj.put("betaupdates",Settings.betaupdates);
-        settings_obj.put("disableblockgrayout",Settings.disableblockgrayout);
-        settings_obj.put("blocksnapping",Settings.blockSnapping);
+        settings_obj.put("betaupdates", Settings.betaupdates);
+        settings_obj.put("disableblockgrayout", Settings.disableblockgrayout);
+        settings_obj.put("blocksnapping", Settings.blockSnapping);
         settings_obj.put("blockactivesnapping", Settings.blockActiveSnapping);
 
 
         //hier weitere Einstellugen speichern
         settings.writeString(settings_obj.toString(), false); //Datei wird geschrieben
-
-
-
 
 
         ///////////////////////////////////////////////////////////////
@@ -429,7 +420,7 @@ public class Data {
 
 ///////////////////////////////////////////////////////////////////////
 
-        if(closeprogramm) {
+        if (closeprogramm) {
             new File(System.getProperty("user.home") + "/" + foldername + "/it.lock").delete();
             if (!Var.keeplog) {
                 LoggerInit.fh.close();
@@ -442,7 +433,7 @@ public class Data {
         }
 
         try {
-            if(closeprogramm) {
+            if (closeprogramm) {
                 FolderUtils.deleteFileOrFolder(Path.of(System.getProperty("user.home") + "/" + foldername + "/temp/"));
             }
         } catch (Exception e) {
@@ -464,8 +455,6 @@ public class Data {
         return length;
 
     }
-
-
 
 
     public static void init(String s) {

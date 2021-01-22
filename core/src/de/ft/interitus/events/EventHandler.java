@@ -1,11 +1,9 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
 package de.ft.interitus.events;
-
-import de.ft.interitus.events.block.BlockCreateEvent;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

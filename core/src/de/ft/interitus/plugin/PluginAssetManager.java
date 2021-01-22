@@ -12,7 +12,7 @@ public class PluginAssetManager {
     public Texture collectTextureAsset(int id) {
         try {
             return ProgramRegistry.pluginTextures.get(id);
-        }catch (IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             return null;
         }
     }

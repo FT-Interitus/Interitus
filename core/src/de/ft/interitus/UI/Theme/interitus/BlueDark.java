@@ -12,8 +12,8 @@ public class BlueDark implements Theme {
     private final static Color clearColor = new Color(50f / 255f, 56f / 255f, 68f / 255f, 1);
     private final static Color welcomeFont = new Color(1, 1, 1, 1);
     private final static Color welcomeBackground = new Color(43f / 255f, 43f / 255f, 43f / 255f, 1);
-    private final static Color ProgrammSpace =new Color(40f / 255f, 44f / 255f, 52f / 255f, 1);
-    private final static Color darkmode_blockbar =new Color(40f / 255f, 44f / 255f, 52f / 255f, 1);
+    private final static Color ProgrammSpace = new Color(40f / 255f, 44f / 255f, 52f / 255f, 1);
+    private final static Color darkmode_blockbar = new Color(40f / 255f, 44f / 255f, 52f / 255f, 1);
     private final static Color connections = new Color(61f / 255f, 66f / 255f, 75f / 255f, 1);
     private final static Color popups = new Color(61f / 255f, 66f / 255f, 75f / 255f, 1);
 

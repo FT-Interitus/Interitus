@@ -87,7 +87,7 @@ public class PluginManagerHandler {
                     try {
                         loadedplugins.get(i).run();
                     } catch (Throwable e) {
-                        DisplayErrors.customErrorstring = "Im Plugin " + getPluginArgs(loadedplugins.get(i),"name") + " ist ein Fehler aufgetreten und es wurde deaktiviert";
+                        DisplayErrors.customErrorstring = "Im Plugin " + getPluginArgs(loadedplugins.get(i), "name") + " ist ein Fehler aufgetreten und es wurde deaktiviert";
                         DisplayErrors.error = e;
 
                         //ProgramRegistry.removepluginregisters(loadedplugins.get(i));
@@ -100,7 +100,7 @@ public class PluginManagerHandler {
                     //Disable Plugin if it is too slow
                     if (after - before > 80) {
                         Program.logger.warning((after - before) + "");
-                        Program.logger.warning("Das Plugin " + getPluginArgs(loadedplugins.get(i),"name") + " ist zu langsam und wurde deshalb deaktiviert");
+                        Program.logger.warning("Das Plugin " + getPluginArgs(loadedplugins.get(i), "name") + " ist zu langsam und wurde deshalb deaktiviert");
 
                         //ProgramRegistry.removepluginregisters(loadedplugins.get(i));
                         loadedplugins.remove(loadedplugins.get(i));
@@ -121,7 +121,7 @@ public class PluginManagerHandler {
 
 
             try {
-                 loadedplugins.get(i).register(registry);
+                loadedplugins.get(i).register(registry);
             } catch (Throwable e) {
                 e.printStackTrace();
                 loadedplugins.remove(loadedplugins.get(i));
@@ -158,20 +158,20 @@ public class PluginManagerHandler {
 
     }
 
-    public static Object getPluginArgs(Plugin plugin,String attribute)  {
+    public static Object getPluginArgs(Plugin plugin, String attribute) {
 
 
-        if(plugin.getClass().getSimpleName().contentEquals("Native")) {
-            if(attribute.contentEquals("name")) {
+        if (plugin.getClass().getSimpleName().contentEquals("Native")) {
+            if (attribute.contentEquals("name")) {
                 return "Native";
-            }else if(attribute.contentEquals("version")) {
+            } else if (attribute.contentEquals("version")) {
                 return Var.PROGRAMM_VERSION_ID;
             }
         }
 
         try {
-           return new JSONObject(new String(plugin.getClass().getResourceAsStream("plugin.json").readAllBytes())).get(attribute);
-        }catch (IOException e) {
+            return new JSONObject(new String(plugin.getClass().getResourceAsStream("plugin.json").readAllBytes())).get(attribute);
+        } catch (IOException e) {
             return null;
         }
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -12,7 +12,7 @@ import de.ft.interitus.projecttypes.ProjectManager;
 public class Information {
     public static void add(VisTable builder) {
         builder.add(new VisLabel(ProjectManager.getActProjectVar().projectType.getName())).expandX().fillY().row();
-        builder.add(new VisLabel("Compiler-Version: "+ProjectManager.getActProjectVar().projectType.getCompiler().getCompilerVersion())).expandX().fillY().padTop(10);
+        builder.add(new VisLabel("Compiler-Version: " + ProjectManager.getActProjectVar().projectType.getCompiler().getCompilerVersion())).expandX().fillY().padTop(10);
 
         builder.row();
 

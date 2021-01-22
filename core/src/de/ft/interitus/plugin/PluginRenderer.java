@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -9,5 +9,5 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import de.ft.interitus.utils.ShapeRenderer;
 
 public interface PluginRenderer {
-    void render(SpriteBatch ProgramBatch, SpriteBatch UIBatch, ShapeRenderer ProgramShapeRenderer,ShapeRenderer UIShapeRenderer);
+    void render(SpriteBatch ProgramBatch, SpriteBatch UIBatch, ShapeRenderer ProgramShapeRenderer, ShapeRenderer UIShapeRenderer);
 }

@@ -5,20 +5,17 @@
 
 package de.ft.interitus.UI.UIElements.dropdownmenue;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;
-import de.ft.interitus.UI.WindowAPI;
-import de.ft.interitus.WindowManager;
 import de.ft.interitus.Settings;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.UI.UIElements.UIElements.Button;
 import de.ft.interitus.UI.UIElements.UIElements.UIElement;
+import de.ft.interitus.UI.WindowAPI;
+import de.ft.interitus.WindowManager;
 import de.ft.interitus.loading.AssetLoader;
-import de.ft.interitus.utils.ShapeRenderer;
-
 import de.ft.interitus.utils.ArrayList;
-
+import de.ft.interitus.utils.ShapeRenderer;
 
 
 public class DropDownMenue extends UIElement {
@@ -58,7 +55,6 @@ public class DropDownMenue extends UIElement {
     }
 
 
-
     public DropDownElementInterface getSelectedElement() {
         return selectedElement;
     }
@@ -66,6 +62,7 @@ public class DropDownMenue extends UIElement {
     public void setSelectedElement(DropDownElementInterface selectedElement) {
         this.selectedElement = selectedElement;
     }
+
     @Override
     public void draw() {
         WindowManager.shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
@@ -131,7 +128,6 @@ public class DropDownMenue extends UIElement {
     }
 
 
-
     public ArrayList<DropDownElementInterface> getElements() {
         return elements;
     }
@@ -140,8 +136,6 @@ public class DropDownMenue extends UIElement {
         selectedElement = null;
         elements.clear();
     }
-
-
 
 
     public String getDefaultText() {

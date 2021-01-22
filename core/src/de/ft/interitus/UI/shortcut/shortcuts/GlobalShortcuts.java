@@ -10,10 +10,9 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.files.FileHandle;
 import com.kotcrab.vis.ui.util.dialog.ConfirmDialogListener;
 import com.kotcrab.vis.ui.util.dialog.Dialogs;
-import de.ft.interitus.UI.WindowAPI;
-import de.ft.interitus.WindowManager;
 import de.ft.interitus.UI.MenuBar;
 import de.ft.interitus.UI.UI;
+import de.ft.interitus.UI.WindowAPI;
 import de.ft.interitus.UI.newproject.ImportProject;
 import de.ft.interitus.UI.newproject.NewProjectWindow;
 import de.ft.interitus.UI.settings.SettingsUI;
@@ -21,9 +20,9 @@ import de.ft.interitus.UI.shortcut.ShortCut;
 import de.ft.interitus.UI.shortcut.ShortCutChecker;
 import de.ft.interitus.UI.shortcut.SpecialKeys;
 import de.ft.interitus.Var;
+import de.ft.interitus.WindowManager;
 import de.ft.interitus.datamanager.userdata.UserInteractDataManagerDialog;
 import de.ft.interitus.datamanager.userdata.save.DataSaver;
-import de.ft.interitus.events.EventVar;
 import de.ft.interitus.projecttypes.ProjectManager;
 import de.ft.interitus.projecttypes.VCS;
 import de.ft.interitus.utils.ArrayList;
@@ -67,13 +66,13 @@ public class GlobalShortcuts implements ShortCutChecker {
     @Override
     public void check() {
 
-        if(shortCut_importprojektwindow.isPressed()) {
+        if (shortCut_importprojektwindow.isPressed()) {
             new ImportProject().show();
         }
 
-        if(shortCut_Copy.isPressed()){
+        if (shortCut_Copy.isPressed()) {
 
-                ClipBoard.CopyBlocktoClipboard(ProjectManager.getActProjectVar().marked_blocks);
+            ClipBoard.CopyBlocktoClipboard(ProjectManager.getActProjectVar().marked_blocks);
 
         }
 

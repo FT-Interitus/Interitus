@@ -1,14 +1,12 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
 package de.ft.interitus.UI.UIElements;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
-import de.ft.interitus.UI.InputManager;
 import de.ft.interitus.WindowManager;
 import de.ft.interitus.utils.ArrayList;
 
@@ -52,7 +50,7 @@ public class PressedKeys {
     }
 
     public ArrayList<Integer> getPressedkeys() {
-        if (!Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
+        if (!WindowAPI.isKeyPressed(Input.Keys.ANY_KEY)) {
             pressedkeys.clear();
         }
         return pressedkeys;

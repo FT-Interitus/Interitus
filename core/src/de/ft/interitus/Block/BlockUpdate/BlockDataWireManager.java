@@ -5,7 +5,6 @@
 
 package de.ft.interitus.Block.BlockUpdate;
 
-import com.badlogic.gdx.Gdx;
 import de.ft.interitus.Block.Block;
 import de.ft.interitus.Block.DataWire;
 import de.ft.interitus.Block.Parameter;

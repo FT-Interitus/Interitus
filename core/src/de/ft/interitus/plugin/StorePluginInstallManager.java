@@ -8,9 +8,7 @@ package de.ft.interitus.plugin;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
-import de.ft.interitus.Program;
 import de.ft.interitus.plugin.server.PluginInstallServer;
-
 
 import java.io.*;
 import java.net.URLDecoder;
@@ -38,7 +36,7 @@ public class StorePluginInstallManager implements HttpHandler {
 
         System.out.println(exchange.getRequestURI().getQuery());
 
-        for(int i=0;i<exchange.getRequestURI().getQuery().split("&").length;i++) {
+        for (int i = 0; i < exchange.getRequestURI().getQuery().split("&").length; i++) {
             try {
                 String key = exchange.getRequestURI().getQuery().split("&")[i].split("=", 2)[0].replace("=", "");
                 String content = exchange.getRequestURI().getQuery().split("&")[i].split("=", 2)[1];
@@ -46,10 +44,11 @@ public class StorePluginInstallManager implements HttpHandler {
 
                 if (key.trim().contentEquals("url")) found_url = content;
                 if (key.trim().contentEquals("jsoninformation")) found_jsoninformation = content;
-            }catch (Exception ignored) { }
+            } catch (Exception ignored) {
+            }
         }
-        if(found_jsoninformation==null||found_url==null) return;
-        PluginInstallManager.startInstallPlugin(found_url,found_jsoninformation);
+        if (found_jsoninformation == null || found_url == null) return;
+        PluginInstallManager.startInstallPlugin(found_url, found_jsoninformation);
 
         String response = "<h1>Install Plugin...</h1>";
         exchange.sendResponseHeaders(200, response.length());
@@ -60,7 +59,7 @@ public class StorePluginInstallManager implements HttpHandler {
     }
 
     public static void parseQuery(String query, Map<String,
-                Object> parameters) throws UnsupportedEncodingException {
+            Object> parameters) throws UnsupportedEncodingException {
 
         if (query != null) {
             String pairs[] = query.split("[&]");

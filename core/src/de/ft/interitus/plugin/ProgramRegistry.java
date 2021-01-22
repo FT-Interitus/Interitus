@@ -10,7 +10,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.kotcrab.vis.ui.widget.Menu;
 import com.kotcrab.vis.ui.widget.VisLabel;
 import com.kotcrab.vis.ui.widget.VisTable;
-import de.ft.interitus.Settings;
 import de.ft.interitus.UI.CheckShortcuts;
 import de.ft.interitus.UI.Theme.RegisteredThemes;
 import de.ft.interitus.UI.Theme.Theme;
@@ -43,11 +42,8 @@ public class ProgramRegistry {
     protected static final ArrayList<PluginRenderer> pluginRenderer = new ArrayList<>();
 
 
-
-
-
     @SuppressWarnings("unused")
-    public  boolean addsettings(VisTable settingsclass, Plugin requestedplugin) {
+    public boolean addsettings(VisTable settingsclass, Plugin requestedplugin) {
         if (PluginManagerHandler.loadedplugins.contains(requestedplugin)) {
             pluginsettings.add(settingsclass);
             return true;
@@ -57,7 +53,7 @@ public class ProgramRegistry {
     }
 
     @SuppressWarnings("unused")
-    public  boolean addMenuEntry(Menu menuentry, Plugin requestedplugin) {
+    public boolean addMenuEntry(Menu menuentry, Plugin requestedplugin) {
         if (PluginManagerHandler.loadedplugins.contains(requestedplugin)) {
             pluginMenubar.add(menuentry);
 
@@ -68,7 +64,7 @@ public class ProgramRegistry {
     }
 
     @SuppressWarnings("unused")
-    public  boolean addProjectType(ProjectType PT, Plugin requestedplugin) {
+    public boolean addProjectType(ProjectType PT, Plugin requestedplugin) {
         if (PluginManagerHandler.loadedplugins.contains(requestedplugin)) {
             //Do not allow two ProjectTypes with the same Name
             for (ProjectType projectType : ProjectTypesVar.projectTypes) {
@@ -84,7 +80,7 @@ public class ProgramRegistry {
     }
 
     @SuppressWarnings("unused")
-    public  boolean addShortcut(Plugin requestedplugin, ShortCut shortCut) {
+    public boolean addShortcut(Plugin requestedplugin, ShortCut shortCut) {
         if (PluginManagerHandler.loadedplugins.contains(requestedplugin)) {
             pluginshortCuts.add(shortCut);
             return true;
@@ -94,17 +90,17 @@ public class ProgramRegistry {
     }
 
     @SuppressWarnings("unused")
-    public  boolean addShortcutChecker(ShortCutChecker shortCutChecker, Plugin requestedplugin) {
+    public boolean addShortcutChecker(ShortCutChecker shortCutChecker, Plugin requestedplugin) {
         if (PluginManagerHandler.loadedplugins.contains(requestedplugin)) {
             pluginshortCutsChecker.add(shortCutChecker);
-                        return true;
+            return true;
         } else {
             return false;
         }
     }
 
     @SuppressWarnings("unused")
-    public  boolean registerTheme(Theme theme, Plugin requestedplugin) {
+    public boolean registerTheme(Theme theme, Plugin requestedplugin) {
         if (PluginManagerHandler.loadedplugins.contains(requestedplugin)) {
             RegisteredThemes.themes.add(theme);
             return true;
@@ -114,7 +110,7 @@ public class ProgramRegistry {
     }
 
     @SuppressWarnings("unused")
-    public  boolean registerAddon(Addon addon, Plugin requestedplugin) {
+    public boolean registerAddon(Addon addon, Plugin requestedplugin) {
         if (PluginManagerHandler.loadedplugins.contains(requestedplugin)) {
             ProjectTypesVar.addons.add(addon);
 
@@ -125,7 +121,7 @@ public class ProgramRegistry {
     }
 
     @SuppressWarnings("unused")
-    public  boolean registerImporter(Import importer, Plugin requestedplugin) {
+    public boolean registerImporter(Import importer, Plugin requestedplugin) {
         if (PluginManagerHandler.loadedplugins.contains(requestedplugin)) {
             Importer.importer.add(importer);
 
@@ -136,13 +132,13 @@ public class ProgramRegistry {
     }
 
     @SuppressWarnings("unused")
-    public  int loadAsset(String internalPath, Plugin requestedplugin) {
+    public int loadAsset(String internalPath, Plugin requestedplugin) {
         if (PluginManagerHandler.loadedplugins.contains(requestedplugin)) {
 
 
             try {
 
-                byte[] imagesbytes = requestedplugin.getClass().getResourceAsStream("/"+internalPath).readAllBytes();
+                byte[] imagesbytes = requestedplugin.getClass().getResourceAsStream("/" + internalPath).readAllBytes();
 
 
                 pluginpixmaps.add(new Pixmap(imagesbytes, 0, imagesbytes.length));
@@ -159,7 +155,7 @@ public class ProgramRegistry {
     }
 
     @SuppressWarnings("unused")
-    public  boolean addPluginRender(Plugin requestedplugin, PluginRenderer renderer) {
+    public boolean addPluginRender(Plugin requestedplugin, PluginRenderer renderer) {
         if (PluginManagerHandler.loadedplugins.contains(requestedplugin)) {
 
             pluginRenderer.add(renderer);
@@ -196,50 +192,48 @@ public class ProgramRegistry {
      */
     public static void addSettings(SettingsUI.TestNode node) {
         for (int i = 0; i < ProgramRegistry.pluginsettings.size(); i++) {
-            node.add(new SettingsUI.TestNode(new VisLabel(" " +  PluginManagerHandler.getPluginArgs(PluginManagerHandler.loadedplugins.get(i),"name")+ " "), 17 + i));
+            node.add(new SettingsUI.TestNode(new VisLabel(" " + PluginManagerHandler.getPluginArgs(PluginManagerHandler.loadedplugins.get(i), "name") + " "), 17 + i));
         }
     }
+
     /***
      * Will be loaded in Runtime because the settings window does not appear at program start
      */
-    public static void getSettingsContainer(VisTable container,int id) {
+    public static void getSettingsContainer(VisTable container, int id) {
         container.add(ProgramRegistry.pluginsettings.get(id));
 
     }
 
-     public static void loadPluginAfterInitialize() {
+    public static void loadPluginAfterInitialize() {
 
         //Add unadded ProjectTypes
-        for(ProjectType projectType:ProgramRegistry.pluginprojekttypes) {
-            if(ProjectTypesVar.projectTypes.contains(projectType)) continue;
+        for (ProjectType projectType : ProgramRegistry.pluginprojekttypes) {
+            if (ProjectTypesVar.projectTypes.contains(projectType)) continue;
             ProjectTypesVar.projectTypes.add(projectType);
         }
-         //Add unadded shortCuts
-         for(ShortCut shortcut:ProgramRegistry.pluginshortCuts) {
-             if(CheckShortcuts.shortCuts.contains(shortcut)) continue;
-             CheckShortcuts.shortCuts.add(shortcut);
-         }
-         //Add unadded shortCuts checker
+        //Add unadded shortCuts
+        for (ShortCut shortcut : ProgramRegistry.pluginshortCuts) {
+            if (CheckShortcuts.shortCuts.contains(shortcut)) continue;
+            CheckShortcuts.shortCuts.add(shortcut);
+        }
+        //Add unadded shortCuts checker
 
-         for(ShortCutChecker shortCutChecker:ProgramRegistry.pluginshortCutsChecker) {
-             if(CheckShortcuts.shortCutsChecker.contains(shortCutChecker)) continue;
-             CheckShortcuts.shortCutsChecker.add(shortCutChecker);
-         }
+        for (ShortCutChecker shortCutChecker : ProgramRegistry.pluginshortCutsChecker) {
+            if (CheckShortcuts.shortCutsChecker.contains(shortCutChecker)) continue;
+            CheckShortcuts.shortCutsChecker.add(shortCutChecker);
+        }
 
-         //Add unadded PluginMenubaritems
-         for (int i = 0; i < ProgramRegistry.pluginMenubar.size(); i++) { //Alle Plugins MenuBar werden der MenuBar entfernt
-             UI.menuBar.removeMenu(ProgramRegistry.pluginMenubar.get(i));
+        //Add unadded PluginMenubaritems
+        for (int i = 0; i < ProgramRegistry.pluginMenubar.size(); i++) { //Alle Plugins MenuBar werden der MenuBar entfernt
+            UI.menuBar.removeMenu(ProgramRegistry.pluginMenubar.get(i));
 
-         }
-         for (int i = 0; i < ProgramRegistry.pluginMenubar.size(); i++) { //Alle Plugins MenuBar werden der MenuBar
-             UI.menuBar.addMenu(ProgramRegistry.pluginMenubar.get(i));
+        }
+        for (int i = 0; i < ProgramRegistry.pluginMenubar.size(); i++) { //Alle Plugins MenuBar werden der MenuBar
+            UI.menuBar.addMenu(ProgramRegistry.pluginMenubar.get(i));
 
-         }
+        }
 
-     }
-
-
-
+    }
 
 
 }

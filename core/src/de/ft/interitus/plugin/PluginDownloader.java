@@ -27,14 +27,14 @@ public class PluginDownloader {
         httpConn.setUseCaches(false);
         httpConn.setDefaultUseCaches(false);
         httpConn.setIfModifiedSince(-1);
-       // int responseCode = httpConn.getResponseCode();
+        // int responseCode = httpConn.getResponseCode();
 
         // always check HTTP response code first
-       // if (responseCode == HttpURLConnection.HTTP_OK) {
+        // if (responseCode == HttpURLConnection.HTTP_OK) {
 
-            return httpConn;
+        return httpConn;
 
-       // } else {
+        // } else {
         //    Program.logger.config("No file to download. Server replied HTTP code: " + responseCode);
         //    return null;
         //}
@@ -62,7 +62,7 @@ public class PluginDownloader {
 
         long totalSize = connection.getContentLengthLong();
 
-        if(totalSize<0) {
+        if (totalSize < 0) {
             notification.setTitle("Fehler");
             notification.setProgressbarvalue(-1);
             notification.setCloseable(true);
@@ -76,7 +76,7 @@ public class PluginDownloader {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                notification.setProgressbarvalue((int) (((float)countingInputStream.getBytesRead()/(float)totalSize)*100f));
+                notification.setProgressbarvalue((int) (((float) countingInputStream.getBytesRead() / (float) totalSize) * 100f));
 
             }
         }, 0, 10);

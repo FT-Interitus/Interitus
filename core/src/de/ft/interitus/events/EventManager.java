@@ -1,15 +1,12 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
 package de.ft.interitus.events;
 
-import de.ft.interitus.Block.Block;
-import de.ft.interitus.events.block.BlockCreateEvent;
 import de.ft.interitus.utils.ArrayList;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
@@ -21,9 +18,10 @@ public class EventManager {
 
         for (Method method : listeners) {
             if (!method.isAnnotationPresent(EventHandler.class)) continue;
-            if (!Arrays.asList(method.getAnnotation(EventHandler.class).ListeningEvent()).contains(event.getClass())) continue;
-            if(method.getParameterTypes().length!=1) continue;
-            if(!Arrays.asList(method.getParameterTypes()[0].getInterfaces()).contains(Event.class)) continue;
+            if (!Arrays.asList(method.getAnnotation(EventHandler.class).ListeningEvent()).contains(event.getClass()))
+                continue;
+            if (method.getParameterTypes().length != 1) continue;
+            if (!Arrays.asList(method.getParameterTypes()[0].getInterfaces()).contains(Event.class)) continue;
 
             try {
 
@@ -36,6 +34,7 @@ public class EventManager {
         }
 
     }
+
     public static void addListenerClass(Class clazz) {
         for (Method method : clazz.getMethods()) {
             if (!method.isAnnotationPresent(EventHandler.class)) continue;

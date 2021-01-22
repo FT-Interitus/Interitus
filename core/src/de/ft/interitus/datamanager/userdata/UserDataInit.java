@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -30,7 +30,7 @@ public class UserDataInit {
                 if (i > p) {
                     extension = filepaths.substring(i + 1);
                 }
-            File file =  new File(filepaths);
+                File file = new File(filepaths);
 
                 if (extension != "") {
                     if (extension.contains("itp")) {

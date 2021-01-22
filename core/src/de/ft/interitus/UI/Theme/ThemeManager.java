@@ -1,13 +1,13 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
 package de.ft.interitus.UI.Theme;
 
 import de.ft.interitus.Program;
-import de.ft.interitus.UI.Theme.interitus.DarkMode;
 import de.ft.interitus.UI.Theme.interitus.BlueDark;
+import de.ft.interitus.UI.Theme.interitus.DarkMode;
 
 public class ThemeManager {
     public static void register() {

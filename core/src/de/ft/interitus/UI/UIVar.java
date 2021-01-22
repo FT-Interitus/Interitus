@@ -5,7 +5,6 @@
 
 package de.ft.interitus.UI;
 
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 
 public class UIVar {
@@ -42,15 +41,15 @@ public class UIVar {
     public static boolean moveprogrammlock = false; //To not move the Programm when you Move the Cursor in a Textfield
 
     //////DataWires///
-    public static final int first_curve_margin=30;
-    public static final int thickness=3;
-    public static int DataWire_horizontal_Y=0;
-    public static int DataWire_InputVertikale_X=0;
-    public static int DataWire_OutputVertikale_X=0;
-    public static int DataWire_InputHorizontale_Y=0;
-    public static int DataWire_OutputHorizontale_Y=0;
+    public static final int first_curve_margin = 30;
+    public static final int thickness = 3;
+    public static int DataWire_horizontal_Y = 0;
+    public static int DataWire_InputVertikale_X = 0;
+    public static int DataWire_OutputVertikale_X = 0;
+    public static int DataWire_InputHorizontale_Y = 0;
+    public static int DataWire_OutputHorizontale_Y = 0;
     public static int[][] DataWire = new int[8][2];
-    public static final int DataWireMouseKollisionsFeld=3;
-    public static Vector3 merkpos=new Vector3();
-    public static boolean doonce=true;
+    public static final int DataWireMouseKollisionsFeld = 3;
+    public static Vector3 merkpos = new Vector3();
+    public static boolean doonce = true;
 }

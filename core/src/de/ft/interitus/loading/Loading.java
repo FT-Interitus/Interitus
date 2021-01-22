@@ -1,12 +1,11 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
 package de.ft.interitus.loading;
 
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.assets.AssetManager;
 import de.ft.interitus.Program;
 import de.ft.interitus.UI.UI;
 import de.ft.interitus.Var;
@@ -26,9 +25,8 @@ public class Loading extends ScreenAdapter {
         EventVar.globalEventManager.loadingstart(new GlobalLoadingStartEvent(this));
 
 
-
         AssetLoader.load();
-        Program.logger.config( "Loading "+AssetLoader.manager.getQueuedAssets()+" Assets");
+        Program.logger.config("Loading " + AssetLoader.manager.getQueuedAssets() + " Assets");
     }
 
 
@@ -38,10 +36,7 @@ public class Loading extends ScreenAdapter {
         try {
 
 
-
             if (AssetLoader.manager.update()) {
-
-
 
 
                 try {
@@ -51,7 +46,7 @@ public class Loading extends ScreenAdapter {
                     Program.logger.severe("Error while saving Assets");
                 }
                 if (Program.inLoading == true) {
-                    Program.logger.config((System.currentTimeMillis()-merk)+"");
+                    Program.logger.config((System.currentTimeMillis() - merk) + "");
 
                     Program.inLoading = false;
                     this.dispose();
@@ -75,9 +70,6 @@ public class Loading extends ScreenAdapter {
         }
 
     }
-
-
-
 
 
 }

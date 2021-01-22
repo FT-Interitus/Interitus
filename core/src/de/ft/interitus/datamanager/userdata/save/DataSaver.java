@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -29,7 +29,7 @@ import java.nio.file.Paths;
 public class DataSaver {
 
     static public void save(final FileHandle handle) {
-        save(handle,ProjectManager.getActProjectVar());
+        save(handle, ProjectManager.getActProjectVar());
 
     }
 

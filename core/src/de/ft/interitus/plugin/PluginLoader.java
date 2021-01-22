@@ -56,20 +56,20 @@ public class PluginLoader {
         try {
             cl = (Class<Plugin>) new PluginClassLoader(new File(filetest.getAbsolutePath()).toURI().toURL()).loadClass(main);
 
-           try {
+            try {
 
-               if(!PluginManagerHandler.pluginvalidator(new String(cl.getResourceAsStream("plugin.json").readAllBytes()))) {
-                   Program.logger.warning("Plugin loading error");
-                   return false;
-               }
+                if (!PluginManagerHandler.pluginvalidator(new String(cl.getResourceAsStream("plugin.json").readAllBytes()))) {
+                    Program.logger.warning("Plugin loading error");
+                    return false;
+                }
 
-           }catch (Throwable e) {
-               e.printStackTrace();
+            } catch (Throwable e) {
+                e.printStackTrace();
 
-               Program.logger.warning("Plugin doesn't provide plugin.json");
+                Program.logger.warning("Plugin doesn't provide plugin.json");
 
-               return false;
-           }
+                return false;
+            }
 
         } catch (ClassNotFoundException | MalformedURLException e) {
             PluginManagerHandler.error = e;

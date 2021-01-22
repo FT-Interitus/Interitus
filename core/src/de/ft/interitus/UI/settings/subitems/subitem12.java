@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -18,10 +18,10 @@ public class subitem12 {
         VisRadioButton betatoggle = new VisRadioButton("Beta-Channel");
         VisRadioButton stabletoggle = new VisRadioButton("Stable-Channel");
 
-        if(Settings.betaupdates) {
+        if (Settings.betaupdates) {
             betatoggle.setChecked(true);
             stabletoggle.setChecked(false);
-        }else{
+        } else {
             betatoggle.setChecked(false);
             stabletoggle.setChecked(true);
         }
@@ -30,12 +30,12 @@ public class subitem12 {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
-                if(betatoggle.isChecked()) {
+                if (betatoggle.isChecked()) {
                     stabletoggle.setChecked(false);
                     Settings.betaupdates = true;
                 }
 
-                if(!betatoggle.isChecked()&&!stabletoggle.isChecked()) {
+                if (!betatoggle.isChecked() && !stabletoggle.isChecked()) {
                     betatoggle.setChecked(true);
                 }
 
@@ -48,12 +48,12 @@ public class subitem12 {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
 
-                if(stabletoggle.isChecked()) {
+                if (stabletoggle.isChecked()) {
                     betatoggle.setChecked(false);
                     Settings.betaupdates = false;
                 }
 
-                if(!stabletoggle.isChecked()&&!betatoggle.isChecked()) {
+                if (!stabletoggle.isChecked() && !betatoggle.isChecked()) {
                     stabletoggle.setChecked(true);
                 }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -175,38 +175,45 @@ public class Step2 {
         selectBoardArt.setColor(1, 0, 0, 1);
 
 
-        if(true ) {              selectPlatform.setSelected("Arduino");
+        if (true) {
+            selectPlatform.setSelected("Arduino");
             update1();
             selectBoardArt.setSelected("Arduino UNO");
             update2();
 
         }
-        if(true ) {              selectPlatform.setSelected("Arduino");
+        if (true) {
+            selectPlatform.setSelected("Arduino");
             update1();
             selectBoardArt.setSelected("Arduino MEGA");
             update2();
         }
-        if(true ) {              selectPlatform.setSelected("Raspberry Pi");
+        if (true) {
+            selectPlatform.setSelected("Raspberry Pi");
             update1();
             selectBoardArt.setSelected("Raspberry Pi 4b");
             update2();
         }
-        if(true ) {              selectPlatform.setSelected("Raspberry Pi");
+        if (true) {
+            selectPlatform.setSelected("Raspberry Pi");
             update1();
             selectBoardArt.setSelected("Raspberry pi 3b/3b+");
             update2();
         }
-        if(true ) {              selectPlatform.setSelected("Raspberry Pi");
+        if (true) {
+            selectPlatform.setSelected("Raspberry Pi");
             update1();
             selectBoardArt.setSelected("Raspberry Pi Zero W");
             update2();
         }
-        if(true ) {              selectPlatform.setSelected("EV3");
+        if (true) {
+            selectPlatform.setSelected("EV3");
             update1();
             selectBoardArt.setSelected("Normal");
             update2();
         }
-        if(true ) {              selectPlatform.setSelected("EV3");
+        if (true) {
+            selectPlatform.setSelected("EV3");
             update1();
             selectBoardArt.setSelected("EV3-DEV");
             update2();

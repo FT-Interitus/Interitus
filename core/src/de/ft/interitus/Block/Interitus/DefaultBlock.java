@@ -18,20 +18,17 @@ public class DefaultBlock extends Block {
         super(x, y, w, h, platformSpecificBlock, blocktoSaveGenerator, isSubBlock);
 
 
+        for (BlockMode blockMode : platformSpecificBlock.getBlockModes()) {
 
-            for(BlockMode blockMode :platformSpecificBlock.getBlockModes()) {
-
-                if(blockMode.getBlockParameter()==null) {
-                    continue;
-                }
-                for (Parameter parameter: blockMode.getBlockParameter()) {
-                    parameter.setBlock(this);
-                }
-
-
+            if (blockMode.getBlockParameter() == null) {
+                continue;
+            }
+            for (Parameter parameter : blockMode.getBlockParameter()) {
+                parameter.setBlock(this);
             }
 
 
+        }
 
 
     }

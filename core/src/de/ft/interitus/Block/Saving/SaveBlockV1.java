@@ -13,7 +13,6 @@ import java.io.Serial;
 import java.io.Serializable;
 
 
-
 public class SaveBlockV1 implements Serializable {
 
 
@@ -27,7 +26,7 @@ public class SaveBlockV1 implements Serializable {
     private final ArrayList<String> parameters;
     private final int x;
     private final int y;
-    private  int index;
+    private int index;
     private final int index_left;
     private final int index_right;
     private final boolean isspacebetweenrightblock;
@@ -48,19 +47,19 @@ public class SaveBlockV1 implements Serializable {
      * @param datawireindex
      * @param datawiresmoveing
      */
-    public SaveBlockV1(Block block, Block left, Block right, ArrayList<String> parameters, ArrayList<ArrayList<Integer>> datawires, ArrayList<ArrayList<Integer>> datawireindex, ArrayList<ArrayList<ArrayList<Integer>>> datawiresmoveing,ArrayList<SaveBlockV1> includedBlocks) {
+    public SaveBlockV1(Block block, Block left, Block right, ArrayList<String> parameters, ArrayList<ArrayList<Integer>> datawires, ArrayList<ArrayList<Integer>> datawireindex, ArrayList<ArrayList<ArrayList<Integer>>> datawiresmoveing, ArrayList<SaveBlockV1> includedBlocks) {
         this.x = block.getX();
         this.y = block.getY();
         this.index = block.getIndex();
 
-        if(left!=null)
+        if (left != null)
             this.index_left = left.getIndex();
         else
             this.index_left = -1;
 
-        if(right!=null) {
+        if (right != null) {
             this.index_right = right.getIndex();
-        }else{
+        } else {
             this.index_right = -1;
         }
 
@@ -72,8 +71,8 @@ public class SaveBlockV1 implements Serializable {
         this.datawiresmoveing = datawiresmoveing;
         this.blockmodus = block.getBlockType().getActBlockModeIndex();
         this.addon = block.getBlockType().getAddonName();
-        this.blocksettings = block.getBlockType().blockModis.get(block.getBlockType().getActBlockModeIndex()).getblocksettings()!=null?block.getBlockType().blockModis.get(block.getBlockType().actBlockModiIndex).getblocksettings().getSettings():null;
-        this.includedBlocks =includedBlocks;
+        this.blocksettings = block.getBlockType().blockModis.get(block.getBlockType().getActBlockModeIndex()).getblocksettings() != null ? block.getBlockType().blockModis.get(block.getBlockType().actBlockModiIndex).getblocksettings().getSettings() : null;
+        this.includedBlocks = includedBlocks;
 
     }
 
@@ -101,7 +100,6 @@ public class SaveBlockV1 implements Serializable {
     public boolean isIsspacebetweenrightblock() {
         return isspacebetweenrightblock;
     }
-
 
 
     public int getPlatformspecificblockid() {

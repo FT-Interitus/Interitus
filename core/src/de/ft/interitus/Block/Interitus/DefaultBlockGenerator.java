@@ -21,7 +21,7 @@ public class DefaultBlockGenerator implements BlockGenerator {
     public Block generateBlock(int index, int x, int y, int w, int h, PlatformSpecificBlock platformSpecificBlock, BlockToSaveGenerator blocktoSaveGenerator, boolean isSubBlock) {
         try {
 
-            return new DefaultBlock(index, x, y, w, h, platformSpecificBlock.getClass().getDeclaredConstructor(ProjectType.class, Addon.class).newInstance(Objects.requireNonNull(ProjectManager.getActProjectVar()).projectType,platformSpecificBlock.getAddon()), blocktoSaveGenerator, isSubBlock);
+            return new DefaultBlock(index, x, y, w, h, platformSpecificBlock.getClass().getDeclaredConstructor(ProjectType.class, Addon.class).newInstance(Objects.requireNonNull(ProjectManager.getActProjectVar()).projectType, platformSpecificBlock.getAddon()), blocktoSaveGenerator, isSubBlock);
         } catch (Exception e) {
             e.printStackTrace();
             return null;

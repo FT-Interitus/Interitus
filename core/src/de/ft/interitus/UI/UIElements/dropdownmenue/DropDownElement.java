@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -8,7 +8,7 @@ package de.ft.interitus.UI.UIElements.dropdownmenue;
 import com.badlogic.gdx.graphics.Texture;
 import de.ft.interitus.UI.UIElements.UIElements.Button;
 
-public class DropDownElement implements DropDownElementInterface{
+public class DropDownElement implements DropDownElementInterface {
     Button button;
     private Texture ElementImage;
     private String Text;
@@ -55,8 +55,6 @@ public class DropDownElement implements DropDownElementInterface{
     public DropDownElement getSelectedElement() {
         return this;
     }
-
-
 
 
 }

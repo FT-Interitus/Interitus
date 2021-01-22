@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -43,7 +43,8 @@ public class Step3 {
                 try {
 
 
-                    if(true ) {                          BurnProgramm.burn(0, getrennt[0], "sketch_uno.hex");
+                    if (true) {
+                        BurnProgramm.burn(0, getrennt[0], "sketch_uno.hex");
                     }
 
                 } catch (Exception e) {

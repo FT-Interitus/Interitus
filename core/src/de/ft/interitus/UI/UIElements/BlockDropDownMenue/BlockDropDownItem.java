@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020.
+ * Copyright (c) 2021.
  * Copyright by Tim and Felix
  */
 
@@ -11,8 +11,8 @@ public class BlockDropDownItem {
     private Texture image;
     private String text;
 
-    public BlockDropDownItem(Texture image, String text){
-        this.image=image;
+    public BlockDropDownItem(Texture image, String text) {
+        this.image = image;
         this.text = text;
     }
 

@@ -18,7 +18,7 @@ public class PluginInstallManager {
     protected static void startInstallPlugin(final String url, final String jsonInformation) {
 
 
-        CheckInstallPermission(url,jsonInformation);
+        CheckInstallPermission(url, jsonInformation);
 
     }
 
@@ -27,14 +27,13 @@ public class PluginInstallManager {
         JSONObject jsonObject = new JSONObject(jsonInformation);
 
 
-
-        Notification notification = new Notification(AssetLoader.information, "Plugin herunterladen..", "Das Plugin "+jsonObject.getString("name")+"\nwird heruntergeladen");
+        Notification notification = new Notification(AssetLoader.information, "Plugin herunterladen..", "Das Plugin " + jsonObject.getString("name") + "\nwird heruntergeladen");
         notification.setCloseable(false);
         notification.setProgressbarvalue(0);
         NotificationManager.sendNotification(notification);
 
         try {
-            PluginDownloader.downloadPlugin(url,jsonObject.getString("name"),notification);
+            PluginDownloader.downloadPlugin(url, jsonObject.getString("name"), notification);
         } catch (Exception e) {
             e.printStackTrace();
             e.printStackTrace();
@@ -56,7 +55,7 @@ public class PluginInstallManager {
         final int no = 2;
 
 
-        Dialogs.showConfirmDialog(UI.stage, "Plugin installieren?", "\nSicher, dass du das Plugin "+jsonObject.getString("name")+" installieren möchtest?\nEin Third-Party-Plugin kann unter Umständen Sicherheitsrisiken mit sich bringen!\n",
+        Dialogs.showConfirmDialog(UI.stage, "Plugin installieren?", "\nSicher, dass du das Plugin " + jsonObject.getString("name") + " installieren möchtest?\nEin Third-Party-Plugin kann unter Umständen Sicherheitsrisiken mit sich bringen!\n",
                 obligations, new Integer[]{yes, no},
                 result -> {
 
@@ -64,7 +63,7 @@ public class PluginInstallManager {
                         Thread installPlugin = new Thread(() -> {
                             try {
                                 proceedInstallation(url, jsonInformation);
-                            }catch (Exception e)  {
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
                         });
