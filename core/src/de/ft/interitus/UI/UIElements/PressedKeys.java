@@ -7,6 +7,7 @@ package de.ft.interitus.UI.UIElements;
 
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
+import de.ft.interitus.UI.WindowAPI;
 import de.ft.interitus.WindowManager;
 import de.ft.interitus.utils.ArrayList;
 

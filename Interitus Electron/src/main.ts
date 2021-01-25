@@ -1,28 +1,36 @@
-import { app, BrowserWindow } from "electron";
+import {app, BrowserWindow, nativeImage, Notification} from "electron";
 import * as path from "path";
+import {initMenuBar} from "./MenuBar/MenuBarManager";
 
+export let mainWindow: BrowserWindow;
 function createWindow() {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     height: 600,
-    webPreferences: {
-      preload: path.join(__dirname, "preload.js"),
-    },
     width: 800,
-  });
+    hasShadow: true,
+    icon: path.join(__dirname,"../interitus.png"),
+    webPreferences: {
+      enableRemoteModule: true,
+      nodeIntegration: true
+    },
 
+  });
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, "../index.html"));
 
-  // Open the DevTools.
-  mainWindow.webContents.openDevTools();
 }
+
+
+
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on("ready", () => {
+
   createWindow();
+  initMenuBar();
 
   app.on("activate", function () {
     // On macOS it's common to re-create a window in the app when the
