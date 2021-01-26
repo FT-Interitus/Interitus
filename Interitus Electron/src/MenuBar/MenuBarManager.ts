@@ -98,6 +98,9 @@ export function initMenuBar() {
     const dev_tools = new MenuItem({label: 'Dev Tools',click: ()=>{mainWindow.webContents.toggleDevTools()}});
     help_submenu.append(dev_tools);
 
+    const reload = new MenuItem({label: 'Ansicht Neuladen',click: () =>{mainWindow.webContents.reloadIgnoringCache()}});
+    help_submenu.append(reload);
+
 
     menu.append(file)
     menu.append(edit)

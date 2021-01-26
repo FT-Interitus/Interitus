@@ -1,6 +1,7 @@
 import {app, BrowserWindow, nativeImage, Notification} from "electron";
 import * as path from "path";
 import {initMenuBar} from "./MenuBar/MenuBarManager";
+import {InitTabBarController} from "./TabBarController";
 
 export let mainWindow: BrowserWindow;
 function createWindow() {
@@ -31,6 +32,9 @@ app.on("ready", () => {
 
   createWindow();
   initMenuBar();
+  InitTabBarController();
+
+
 
   app.on("activate", function () {
     // On macOS it's common to re-create a window in the app when the

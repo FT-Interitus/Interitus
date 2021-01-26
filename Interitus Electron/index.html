@@ -8,6 +8,7 @@
       http-equiv="Content-Security-Policy"
       content="default-src 'self'; script-src 'self'"
     />
+    <link rel="stylesheet" href="tabbar.css">
     <meta
       http-equiv="X-Content-Security-Policy"
       content="default-src 'self'; script-src 'self'"
@@ -15,8 +16,17 @@
   </head>
   <body>
 
+  <div id="tabBar">
+    <ul class="tab-container">
 
-  
+      <li class="active"><a href="#home-tab">🏠</a></li>
+      <li><a href="#tab2">Tab #2</a></li>
+      <li><a href="#tab3">Tab #3</a></li>
+      <li><a href="#tab4">Tab #4</a></li>
+      <li id="cnp-button"><a href="#cnp">+</a></li>
+    </ul>
+  </div>
+
 
     <!-- You can also require other files to run in this process -->
     <script src="dist/renderer.js"></script>
