@@ -13,20 +13,19 @@ body,html {
 }
 
 #tabBar {
-
     margin: 0 !important;
     background-color: darkolivegreen;
-    min-height: auto;
+
+
 }
+
 
 .tabs {
     width:100%;
-    display:inline-block;
 }
  ul {
     padding: 0;
-
-}
+ }
 
 .tab-container:after {
     display:block;
@@ -36,44 +35,70 @@ body,html {
 .tab-container li {
     margin-left: 7px;
     margin-top: 6px;
+    margin-bottom: 5px;
     float: left;
     list-style:none;
 
 }
+.tab-container {
+    margin-bottom: 0;
+}
 
 .tab-container li:not(.active) {
     margin-top: 7px;
+    margin-bottom: 5px;
 
 
 }
 
-li#cnp-button a {
+li.cnp-button div {
 
     border-radius: 3px 3px 3px 3px;
 
 }
 
-.tab-container a {
-    padding:7px 15px;
+.projectTabContainer {
+    padding:7px 7px;
     display:inline-block;
-    border-radius:3px 3px 0px 0px;
+    border-radius:3px 3px 0 0;
     background:#7FB5DA;
     font-size:16px;
     font-weight:400;
     color:#4c4c4c;
-    transition:all linear 0.15s;
-    text-decoration:none;
+    transition:background-color linear 0.15s;
+
 }
 
 
 
-.tab-container a:hover {
+.projectTabContainer:hover {
     background:#a7cce5;
 }
 
-li.active a, li.active a:hover {
+li.active {
+
+    margin-bottom: 0;
+}
+
+.projectTabContainer a {
+    text-decoration:none;
+    color:#4c4c4c;
+
+    border-radius:3px 3px 0 0;
+    padding:7px 5px;
+    min-height: 31%;
+
+
+
+}
+
+li.active div, li.active div:hover {
     background:#fff;
     color:#4c4c4c;
+    padding-bottom: 16px;
+    margin-bottom: 0;
+
+
 }
 
 /*----- Content of Tabs -----*/
@@ -90,4 +115,5 @@ li.active a, li.active a:hover {
 
 .tab.active {
     display:block;
+
 }

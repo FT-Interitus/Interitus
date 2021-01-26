@@ -4,10 +4,8 @@
     <meta charset="UTF-8" />
     <title>Interitus</title>
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'"
-    />
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://platform.linkedin.com "/>
+
     <link rel="stylesheet" href="tabbar.css">
     <meta
       http-equiv="X-Content-Security-Policy"
@@ -19,16 +17,19 @@
   <div id="tabBar">
     <ul class="tab-container">
 
-      <li class="active"><a href="#home-tab">🏠</a></li>
-      <li><a href="#tab2">Tab #2</a></li>
-      <li><a href="#tab3">Tab #3</a></li>
-      <li><a href="#tab4">Tab #4</a></li>
-      <li id="cnp-button"><a href="#cnp">+</a></li>
+      <li class="active" ><div class="projectTabContainer"><a  href="#home-tab">Home</a></div></li>
+
+      <div id="project-tabs">
+
+      </div>
+      <li class="cnp-button"><div class="projectTabContainer"><a class="cnp-button" href="#cnp">+</a></div></li>
     </ul>
   </div>
 
 
     <!-- You can also require other files to run in this process -->
-    <script src="dist/renderer.js"></script>
+
+  <script>require("./dist/renderer.js")</script>
+
   </body>
 </html>
