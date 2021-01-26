@@ -1,7 +1,6 @@
 import {app, BrowserWindow, nativeImage, Notification} from "electron";
 import * as path from "path";
 import {initMenuBar} from "./MenuBar/MenuBarManager";
-import {InitTabBarController} from "./TabBarController";
 
 export let mainWindow: BrowserWindow;
 function createWindow() {
@@ -32,7 +31,6 @@ app.on("ready", () => {
 
   createWindow();
   initMenuBar();
-  InitTabBarController();
 
 
 
