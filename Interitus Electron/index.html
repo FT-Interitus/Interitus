@@ -6,6 +6,7 @@
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://platform.linkedin.com "/>
 
+    <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="tabbar.css">
     <meta
       http-equiv="X-Content-Security-Policy"
@@ -14,14 +15,14 @@
   </head>
   <body>
 
-  <div id="tabBar">
-    <ul class="tab-container">
+  <div id="project-tab-bar">
+    <ul class="project-list">
 
-      <li class="active" id="project-home-link" ><div class="projectTabContainer project-fixed-container"><a  href="#home-tab">Home</a></div></li>
+      <li class="project-active" id="project-home-link" ><div class="project-tab-container project-fixed-container"><p style="display: inline;">Home</p></div></li>
 
       <div id="project-tabs">
       </div>
-      <li class="cnp-button"><div class="projectTabContainer project-fixed-container"><a class="cnp-button" href="#cnp">+</a></div></li>
+      <li class="project-cnp-button"><div class="project-tab-container project-fixed-container"><p style="display:inline;" class="project-cnp-button" >+</p></div></li>
     </ul>
   </div>
 

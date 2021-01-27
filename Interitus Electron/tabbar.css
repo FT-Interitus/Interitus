@@ -13,9 +13,9 @@ body,html {
 
 }
 
-#tabBar {
+#project-tab-bar {
     margin: 0 !important;
-    background-color: darkolivegreen;
+    background-color: var(--alabaster);
 
 
 }
@@ -24,16 +24,16 @@ body,html {
 .tabs {
     width:100%;
 }
- ul {
+ ul.project-list {
     padding: 0;
  }
 
-.tab-container:after {
+.project-list:after {
     display:block;
     clear:both;
     content:'';
 }
-.tab-container li {
+.project-list li {
     margin-left: 4px;
     margin-top: 6px;
     margin-bottom: 5px;
@@ -41,11 +41,11 @@ body,html {
     list-style:none;
 
 }
-.tab-container {
+.project-list {
     margin-bottom: 0;
 }
 
-.tab-container li:not(.active) {
+.project-list li:not(.project-active) {
     margin-top: 7px;
     margin-bottom: 5px;
 
@@ -58,11 +58,11 @@ li.cnp-button div {
 
 }
 
-.projectTabContainer {
+.project-tab-container {
     padding:7px 7px;
     display:inline-block;
     border-radius:3px 3px 0 0;
-    background:#7FB5DA;
+    background:var(--primaryBlue);
     font-size:16px;
     font-weight:400;
     color:#4c4c4c;
@@ -74,33 +74,33 @@ li.cnp-button div {
 
 
 
-.projectTabContainer:hover {
-    background:#a7cce5;
+.project-tab-container:hover {
+    background:var(--secoundaryBlue);
 }
 
-.projectTabContainer.over{
+.project-tab-container.over{
     border: 3px dotted #666;
 }
 
-li.active {
+
+
+li.project-active {
 
     margin-bottom: 0;
 }
 
-.projectTabContainer a {
+.project-tab-container a,.project-tab-container p {
     text-decoration:none;
     color:#4c4c4c;
-
     border-radius:3px 3px 0 0;
     padding:7px 5px;
-    min-height: 31%;
 
     cursor: pointer !important;
 
 }
 
-li.active div, li.active div:hover {
-    background:#fff;
+li.project-active div, li.project-active div:hover {
+    background: var(--hoverBlue);
     color:#4c4c4c;
     padding-bottom: 16px;
     margin-bottom: 0;
@@ -108,22 +108,6 @@ li.active div, li.active div:hover {
 
 }
 
-/*----- Content of Tabs -----*/
-.tab-content {
-    padding:15px;
-    border-radius:3px;
-    box-shadow:-1px 1px 1px rgba(0,0,0,0.15);
-    background:#fff;
-}
-
-.tab {
-    display:none;
-}
-
-.tab.active {
-    display:block;
-
-}
 
 *:not(div):not(p){
     -webkit-user-select: none;

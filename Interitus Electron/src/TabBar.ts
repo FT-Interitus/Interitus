@@ -3,7 +3,7 @@ import * as $ from "jquery";
 export function InitTabBar() {
     var projectcounter = 0;
     const project_tabs = document.getElementById("project-tabs");
-    const project_tab_container = document.querySelector(".tab-container");
+    const project_tab_container = document.querySelector(".project-list");
 
     function handleDragStart(e:any) {
         this.style.cursor = "move";
@@ -15,13 +15,12 @@ export function InitTabBar() {
         this.style.opacity = '1';
     }
 
-    $(document).on('click','.projectTabContainer a.project-close', function (e) {
+    $(document).on('click','.project-tab-container a.project-close', function (e) {
 
 
 
-        if ($(this).parent().parent().hasClass("active")) {
-            console.log("active state")
-            $('#project-home-link').addClass("active");
+        if ($(this).parent().parent().hasClass("project-active")) {
+            $('#project-home-link').addClass("project-active");
         }
 
         $(this).parent().parent().remove();
@@ -29,26 +28,26 @@ export function InitTabBar() {
 
     });
 
-    $(document).on('click', 'div.projectTabContainer', function (e) {
+    $(document).on('click', 'div.project-tab-container', function (e) {
         const currentAttrValue = $(this).children("a,p").attr('href');
 
 
             // Show/Hide Tabs
-            if (!$(this).children("a,p").hasClass("cnp-button")) {
+            if (!$(this).children("a,p").hasClass("project-cnp-button")) {
                 if(e.target.nodeName!="A") {
                     $('.tabs ' + currentAttrValue).show().siblings().hide();
 
-                    $('li.active').removeClass('active');
+                    $('li.project-active').removeClass('project-active');
 
                     // Change/remove current tab to active
-                    $(this).parent('li').addClass('active');
+                    $(this).parent('li').addClass('project-active');
                 }
 
             } else {
                 projectcounter++;
                 const newtab = document.createElement("li")
                 const projectTabContainer = document.createElement("div");
-                projectTabContainer.className = "projectTabContainer";
+                projectTabContainer.className = "project-tab-container";
                 projectTabContainer.draggable = true;
                 projectTabContainer.addEventListener('dragstart', handleDragStart, false);
                 projectTabContainer.addEventListener('dragend', handleDragEnd, false);
