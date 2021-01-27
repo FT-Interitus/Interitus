@@ -78,6 +78,10 @@ li.cnp-button div {
     background:#a7cce5;
 }
 
+.projectTabContainer.over{
+    border: 3px dotted #666;
+}
+
 li.active {
 
     margin-bottom: 0;
