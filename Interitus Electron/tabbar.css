@@ -3,6 +3,7 @@
     margin: 0;
 }
 
+
 body,html {
 
     margin: 0px;
@@ -33,7 +34,7 @@ body,html {
     content:'';
 }
 .tab-container li {
-    margin-left: 7px;
+    margin-left: 4px;
     margin-top: 6px;
     margin-bottom: 5px;
     float: left;
@@ -66,8 +67,10 @@ li.cnp-button div {
     font-weight:400;
     color:#4c4c4c;
     transition:background-color linear 0.15s;
+    cursor: pointer;
 
 }
+
 
 
 
@@ -88,7 +91,7 @@ li.active {
     padding:7px 5px;
     min-height: 31%;
 
-
+    cursor: pointer !important;
 
 }
 
@@ -116,4 +119,10 @@ li.active div, li.active div:hover {
 .tab.active {
     display:block;
 
+}
+
+*:not(div):not(p){
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    cursor: default;
 }
