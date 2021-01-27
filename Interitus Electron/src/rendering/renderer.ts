@@ -6,5 +6,4 @@
 import * as $ from "jquery"
 import {InitTabBar} from "./TabBar";
 
-
 InitTabBar();

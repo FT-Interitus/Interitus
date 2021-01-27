@@ -1,6 +1,7 @@
 import {app, BrowserWindow, nativeImage, Notification} from "electron";
 import * as path from "path";
 import {initMenuBar} from "./MenuBar/MenuBarManager";
+import {InitProjectManager} from "./ProjectManager";
 
 export let mainWindow: BrowserWindow;
 function createWindow() {
@@ -28,9 +29,10 @@ function createWindow() {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on("ready", () => {
-
+  InitProjectManager();
   createWindow();
   initMenuBar();
+
 
 
 
