@@ -1,17 +1,4 @@
-* {
 
-    margin: 0;
-}
-
-
-body,html {
-
-    margin: 0px;
-    padding: 0px;
-    margin-top: 0 !important;
-
-
-}
 
 #project-tab-bar::-webkit-scrollbar {
     display: none;
@@ -20,7 +7,7 @@ body,html {
 
 #project-tab-bar {
     margin: 0 !important;
-    background-color: var(--alabaster);
+    background-color: var(--background);
     max-width: 100vw;
     min-width: 100vw;
     white-space: nowrap;
@@ -35,7 +22,6 @@ body,html {
 
  ul.project-list {
     padding: 0;
-     /*TEMP*/
      list-style: none;
 
      display: block;
@@ -78,7 +64,7 @@ body,html {
 
 }
 
-li.cnp-button div {
+li.project-cnp-button div {
 
     border-radius: 3px 3px 3px 3px;
 

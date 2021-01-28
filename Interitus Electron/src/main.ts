@@ -2,13 +2,14 @@ import {app, BrowserWindow, nativeImage, Notification} from "electron";
 import * as path from "path";
 import {initMenuBar} from "./MenuBar/MenuBarManager";
 import {InitProjectManager} from "./ProjectManager";
-
 export let mainWindow: BrowserWindow;
+
+
 function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    height: 600,
-    width: 800,
+    height: 1000,
+    width: 1300,
     hasShadow: true,
     icon: path.join(__dirname,"../interitus.png"),
     webPreferences: {
@@ -18,6 +19,7 @@ function createWindow() {
 
   });
   // and load the index.html of the app.
+  mainWindow.maximize()
   mainWindow.loadFile(path.join(__dirname, "../index.html"));
 
 }

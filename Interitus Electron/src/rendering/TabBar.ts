@@ -1,6 +1,7 @@
 import * as $ from "jquery";
 import Project from "../Project";
 import {addProject, getProjets, removeProject} from "../ProjectManager";
+import { openNewProjectWindow } from "./NewProjectWindow";
 
 export function InitTabBar() {
     const project_tabs = document.getElementById("project-tabs");
@@ -10,6 +11,8 @@ export function InitTabBar() {
         generateProjectTab(project.name);
 
     }
+
+
 
 
     $(document).on('click','.project-tab-container a.project-close', function (e) {
@@ -47,8 +50,8 @@ export function InitTabBar() {
 
             } else {
 
-                generateProjectTab( addProject("Neues Projekt "+(getProjets().length+1)).name);
-
+               // generateProjectTab( addProject("Neues Projekt "+(getProjets().length+1)).name);
+                openNewProjectWindow();
             }
 
         e.preventDefault();
