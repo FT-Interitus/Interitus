@@ -1,22 +1,27 @@
 import * as electron from "electron";
+import {mainWindow} from "../main";
+import {dialog} from "electron";
 
+export let win: Electron.BrowserWindow;
 
 export function openNewProjectWindow() {
 
-    const win = new electron.remote.BrowserWindow(
-        { width: 800, height: 600, webPreferences: {
+    win = new electron.remote.BrowserWindow(
+        {
+            width: 800, height: 600, webPreferences: {
 
-        nodeIntegration: true,
-        enableRemoteModule: true
+                nodeIntegration: true,
+                enableRemoteModule: true
 
             },
-            resizable: false
+            resizable: false,
+            parent: electron.remote.getGlobal('mainWindow'),
+            modal: true
         }
-
-    )
-    console.log( electron.remote.getGlobal('newProjectWindowFile'))
+    );
     win.loadFile( electron.remote.getGlobal('newProjectWindowFile'))
     win.setMenu(null);
-    win.show()
+
+
 
 }

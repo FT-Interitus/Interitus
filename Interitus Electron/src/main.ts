@@ -2,6 +2,7 @@ import {app, BrowserWindow, nativeImage, Notification} from "electron";
 import * as path from "path";
 import {initMenuBar} from "./MenuBar/MenuBarManager";
 import {InitProjectManager} from "./ProjectManager";
+import {win} from "./rendering/NewProjectWindow";
 export let mainWindow: BrowserWindow;
 
 
@@ -21,6 +22,8 @@ function createWindow() {
   // and load the index.html of the app.
   mainWindow.maximize()
   mainWindow.loadFile(path.join(__dirname, "../index.html"));
+
+  (<any>global).mainWindow = mainWindow;
 
 }
 
