@@ -24,6 +24,7 @@ function createWindow() {
   mainWindow.loadFile(path.join(__dirname, "../index.html"));
 
   (<any>global).mainWindow = mainWindow;
+  (<any>global).newprojectwindow = {window: undefined,generateProject: undefined};
 
 }
 
