@@ -32,6 +32,7 @@ public class BlockConnectionManager {
             new Wire(projectVar.duplicate_block_right, connection, false);
             connection.setLeft(projectVar.duplicate_block_right);
             connectedBlockJumpingToLeft(BlockJumpingManager.getEndingLeftBlockSelection(block));
+           if(projectVar.movingWire!=null) projectVar.movingWire.delete();
             return;
         }
 
@@ -43,6 +44,7 @@ public class BlockConnectionManager {
         new Wire(connection, projectVar.duplicate_block_left, false);
         connection.setRight(projectVar.duplicate_block_left);
         connectedBlockJumpingToRight(BlockJumpingManager.getEndingRightBlockSelection(block));
+        if(projectVar.movingWire!=null) projectVar.movingWire.delete();
 
 
     }
