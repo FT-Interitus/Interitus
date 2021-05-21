@@ -73,14 +73,14 @@ project(":core") {
         api 'com.fazecast:jSerialComm:[2.0.0,3.0.0)'
         api "com.kotcrab.vis:vis-ui:$visuiVersion"
         implementation group: 'org.json', name: 'json', version: '20201115'
-        compile group: 'org.hid4java', name: 'hid4java', version: '0.7.0'
-        compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.11'
+        api group: 'org.hid4java', name: 'hid4java', version: '0.7.0'
+        api group: 'org.apache.commons', name: 'commons-lang3', version: '3.11'
         api group: 'org.scream3r', name: 'jssc', version: '2.8.0'
         api "com.badlogicgames.gdx:gdx:$gdxVersion"
         api "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         api "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         api "com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion"
-        compile group: 'com.bulenkov', name: 'darcula', version: '2018.2'
+        api group: 'com.bulenkov', name: 'darcula', version: '2018.2'
 
 
     }

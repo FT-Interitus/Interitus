@@ -6,6 +6,7 @@
         <language minSize="67" name="Java" />
       </Languages>
     </inspection_tool>
+    <inspection_tool class="Eslint" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="IfStatementWithIdenticalBranches" enabled="true" level="WEAK WARNING" enabled_by_default="true">
       <option name="myHighlightWhenLastStatementIsCall" value="false" />
     </inspection_tool>

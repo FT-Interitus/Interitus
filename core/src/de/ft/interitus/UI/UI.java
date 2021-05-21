@@ -668,15 +668,15 @@ public class UI {
 
         UIManager.draw();
 
-        testtextInput.draw();
-        testtextInput2.draw();
+        //testtextInput.draw();
+        //testtextInput2.draw();
 
-        radioButton.draw();
-        radioButton1.draw();
-        radioButton2.draw();
+       // radioButton.draw();
+        //radioButton1.draw();
+        //radioButton2.draw();
 
 
-        checkBox.draw();
+     //   checkBox.draw();
     }
 
 
